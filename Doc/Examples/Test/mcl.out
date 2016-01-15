@@ -1,0 +1,228 @@
+gap> SizeScreen([76, ]);;
+gap> SetInfoLevel(InfoFpGroup,2);
+gap> F := FreeGroup( 10 );
+<free group on the generators [ f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 ]>
+gap> relsG := [
+>   F.1^2, F.2^2, F.3^2, F.4^2, F.5^2, F.6^2, F.7^2, F.8^2, F.9^2,
+>   (F.1*F.2)^4, (F.1*F.3)^5, (F.1*F.4)^3, (F.1*F.5)^2, (F.1*F.6)^2*F.8,
+>   (F.1*F.7)^2*F.9, (F.1*F.8)^2, (F.1*F.9)^2, (F.2*F.3)^2*F.4*F.7,
+>   (F.2*F.4)^2, (F.2*F.5)^2, (F.2*F.6)^2*F.4, (F.2*F.7)^2, (F.2*F.8)^3,
+>   (F.2*F.9)^2*F.5, (F.3*F.4)^2, (F.3*F.5)^2*F.4, (F.3*F.6)^2,
+>   (F.3*F.7)^2, (F.3*F.8)^2*F.7, (F.3*F.9)^2*F.6*F.7,
+>   (F.4*F.5)^2, (F.4*F.6)^2, (F.4*F.7)^2, (F.4*F.8)^2*F.6,
+>   (F.4*F.9)^2*F.7, (F.5*F.6)^2*F.7, (F.5*F.7)^2, (F.5*F.8)^2*F.9,
+>   (F.5*F.9)^2, (F.6*F.7)^2, (F.6*F.8)^2, (F.6*F.9)^2, (F.7*F.8)^2,
+>   (F.7*F.9)^2, (F.8*F.9)^2,
+>   F.10^2, (F.4*F.10)^2*F.5, Comm(F.10,F.1*F.4),
+>   (F.3*F.10)^3, (F.10*F.6)^2*F.7*F.9,
+>   (F.10*F.2)^2*F.5*F.7 ];;
+gap> G := F / relsG;;
+gap> relsM := [ (F.1*F.3*F.2)^8, (F.10*F.3*F.1)^7 ];
+[ f1*f3*f2*f1*f3*f2*f1*f3*f2*f1*f3*f2*f1*f3*f2*f1*f3*f2*f1*f3*f2*f1*f3*f2,
+  f10*f3*f1*f10*f3*f1*f10*f3*f1*f10*f3*f1*f10*f3*f1*f10*f3*f1*f10*f3*f1 ]
+gap> relsM:=Concatenation(relsM,relsG);;
+gap> M := F / relsM;;
+gap> UM:=[M.2,M.3,M.4,M.5,M.6,M.7,M.8,M.9,M.10, M.1*M.4*(M.3*M.1)^2 ];;
+gap> UM := Subgroup( M, UM);
+Group([ f2, f3, f4, f5, f6, f7, f8, f9, f10, f1*f4*f3*f1*f3*f1 ])
+gap> tab:=CosetTable(M,UM);;
+#I  CosetTableFromGensAndRels called:
+#I  	167748	167473	275	128000
+gap> Length(tab[1]);
+275
+gap> perm:=List(tab{[1,3..Length(tab)-1]},PermList);;
+gap> mcl:=Group(perm);
+<permutation group with 10 generators>
+gap> Size(mcl);
+898128000
+gap> DisplayCompositionSeries(mcl);
+G (10 gens, size 898128000)
+ | Mc
+1 (0 gens, size 1)
+gap> hom:=GroupHomomorphismByImages(G,mcl,GeneratorsOfGroup(G),perm);
+#I  CosetTableFromGensAndRels called:
+#I  	2	1	1	2
+#I  CosetTableFromGensAndRels called:
+#I  	2	1	1	2
+[ f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 ] -> 
+[ (1,2)(3,6)(4,9)(7,14)(10,17)(12,20)(15,27)(18,25)(19,26)(21,32)(22,
+    24)(23,35)(28,44)(29,41)(30,46)(33,51)(36,60)(37,58)(38,63)(42,65)(43,
+    67)(45,72)(47,75)(48,78)(50,54)(52,84)(53,59)(56,87)(57,92)(61,71)(62,
+    102)(66,80)(68,79)(69,107)(70,83)(73,119)(74,82)(76,77)(81,127)(85,
+    96)(86,106)(88,134)(89,90)(91,141)(93,130)(94,113)(95,137)(97,145)(98,
+               [ ... 123 lines deleted ... ]
+gap> s:=PreImage(hom,Stabilizer(mcl,1));
+Group(<fp, no generators known>)
+gap> Index(G,s);
+275
+gap> hom2:=IsomorphismFpGroup(s);
+#I  RRS defined 12 primary and 1447 secondary subgroup generators
+#I  Presentation with 800 generators
+#I  eliminating y45 = y18
+#I  eliminating y63 = y44
+               [ ... 692 lines deleted ... ]
+#I  there are 4 generators and 49 relators of total length 1490
+[ <[ [ 8, -1, 6, -1, 5, 1 ] ]|f1*f2*f1*f8^-1*f2^-1*f1^-1*f8^-1*f6>, 
+  <[ [ 6, -1, 5, 1 ], [ 8, -1, 4, -1, 13, 1, 4, 1, 13, -1 ] ]|f1*f2*f1*f8^
+    -1*f2^-1*f1^-1*f5^-1*f8^-1*f6*f5*f6^-1*f8>, 
+               [ ... 41 lines deleted ... ]
+          11, 1, 15, -1, 33, 1, 34, 1, 25, 1, 25, 1, 12, 1 ] ]> ] -> 
+[ F1, F2, F3, F4 ]
+gap> q:=Range(hom2);
+<fp group on the generators [ F1, F2, F3, F4 ]>
+gap> gens:=List(GeneratorsOfGroup(q),
+> i->Image(hom,PreImagesRepresentative(hom2,i)));
+[ (2,8,6)(3,13,5)(4,7,18)(9,10,12)(11,15,21)(16,19,29)(20,31,22)(23,36,
+    52)(24,25,39)(28,33,47)(32,49,40)(34,41,55)(35,108,89)(38,48,61)(42,
+               [ ... 43 lines deleted ... ]
+    264,66)(69,139,198,118)(71,221,231,78)(72,196,189,76)(73,207,180,
+    141)(74,163,150,95)( [...] ) ]
+gap> h3:=GroupHomomorphismByImages(q,Subgroup(mcl,gens),
+> GeneratorsOfGroup(q),gens);
+#I  CosetTableFromGensAndRels called:
+#I  	2	1	1	2
+#I  CosetTableFromGensAndRels called:
+#I  	2	1	1	2
+[ F1, F2, F3, F4 ] -> 
+[ (2,8,6)(3,13,5)(4,7,18)(9,10,12)(11,15,21)(16,19,29)(20,31,22)(23,36,
+    52)(24,25,39)(28,33,47)(32,49,40)(34,41,55)(35,108,89)(38,48,61)(42,
+               [ ... 43 lines deleted ... ]
+    264,66)(69,139,198,118)(71,221,231,78)(72,196,189,76)(73,207,180,
+    141)(74,163,150,95)( [...] ) ]
+gap> o:=Orbits(Range(h3),[1..275]);;
+gap> o:=First(o,i->Length(i)=112);;
+gap> t:=Stabilizer(Image(h3),o[1]);
+<permutation group of size 29160 with 5 generators>
+gap> DisplayCompositionSeries(t);
+G (5 gens, size 29160)
+ | A(6) ~ A(1,9) = L(2,9) ~ B(1,9) = O(3,9) ~ C(1,9) = S(2,9) ~ 2A(1,9) = \
+U(2,9)
+S (5 gens, size 81)
+ | Z(3)
+S (4 gens, size 27)
+ | Z(3)
+S (2 gens, size 9)
+ | Z(3)
+S (1 gens, size 3)
+ | Z(3)
+1 (0 gens, size 1)
+gap> tp:=PreImage(h3,t);
+Group(<fp, no generators known>)
+gap> Index(q,tp);
+112
+gap> maxab:=MaximalAbelianQuotient(tp);
+#I  RRS defined 10 primary and 3514 secondary subgroup generators
+#I  Presentation with 264 generators
+#I  eliminating y13 = y2
+               [ ... 895 lines deleted ... ]
+#I  there are 10 generators and 925 relators of total length 115239
+               [ ... 6 lines deleted ... ]
+[ <[ [ 2, 1 ] ]|F2^-2>, <[ [ 5, 1 ] ]|F2*F3*F2^-1>, 
+  <[ [ 2, -1, 1, -1, 5, 1, 1, 1 ] ]|F2^2*F1^-1*F2*F3*F2^-1*F1>, 
+               [ ... 707 lines deleted ... ]
+          -1, 59, -1, 327, -1, 325, 1, 271, 1, 234, 1, 18, -1, 320, -1 ] 
+     ]> ] -> [ <identity> of ..., <identity> of ..., <identity> of ..., 
+  <identity> of ..., f1^2, <identity> of ..., <identity> of ..., f1^2, 
+  f1^2, <identity> of ... ]
+gap> Size(Image(maxab));
+3
+gap> U:=PreImage(hom2,tp);
+Group(<fp, no generators known>)
+gap> Index(G,U);
+30800
+gap> Ugens:=GeneratorsOfGroup(U);;
+#I  RRS defined 30 primary and 126892 secondary subgroup generators
+gap> Length(Ugens);
+30
+gap> Umax:=RestrictedMapping(hom2,U)*maxab;
+[ f7*f5^-1, f9*f5^-1, f1*f6*f5^-1*f1^-1, f2*f4*f5^-1, 
+  f1*f2*f1*f4*f8^-1*f2^-1*f1^-1, f1*f3*f1*f3*f4^-1*f8^-1*f1^-1, 
+               [ ... 30 lines deleted ... ]
+  f3*f10*f1*f3*f1*f2*f1*f3*f1*f2*f1*f9^-1*f8^-1*f2^-1*f1^-1*f3^-1*f1^
+    -1*f3^-1*f2^-1*f10^-1*f1^-1*f3^-1 ] -> 
+[ <identity> of ..., <identity> of ..., <identity> of ..., 
+               [ ... 7 lines deleted ... ]
+  <identity> of ..., f1, <identity> of ..., <identity> of ..., 
+  <identity> of ... ]
+gap> Ucosrep:=DefiningQuotientHomomorphism(U);
+[ f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 ] -> 
+[ (1,113)(2,114)(3,115)(4,116)(5,117)(6,118)(7,119)(8,120)(9,121)(10,
+    122)(11,123)(12,124)(13,125)(14,126)(15,127)(16,128)(17,129)(18,
+               [ ... 125 lines deleted ... ]
+    217)(225,303)(226,336)(227,302)(228,309)( [...] ) ]
+gap> perms:=KuKGenerators(G,Ucosrep,Umax);
+[ (1,337)(2,338)(3,339)(4,340)(5,341)(6,342)(7,343)(8,344)(9,345)(10,
+    346)(11,347)(12,348)(13,349)(14,350)(15,351)(16,352)(17,353)(18,
+               [ ... 124 lines deleted ... ]
+    251)(126,252)(130,172)( [...] ) ]
+gap> NrMovedPoints(perms);
+92400
+gap> IsomorphismSimplifiedFpGroup(G);
+#I  there are 10 generators and 51 relators of total length 220
+               [ ... 41 lines deleted ... ]
+#I  there are 5 generators and 25 relators of total length 193
+[ f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 ] -> 
+[ f1, f2, f3, f2*f6*f2*f6, f10*f2*f6*f2*f6*f10*f2*f6*f2*f6, f6, 
+  f3*f6*f2*f6*f3*f2, f1*f6*f1*f6, 
+  f1*f3*f6*f2*f6*f3*f2*f1*f3*f6*f2*f6*f3*f2, f10 ]
+gap> p2:=perms{[1,2,3,6,10]};;
+gap> p3:=StraightLineProgGens(p2);
+[ <[ [ 5, 1 ] ]|(1,337)(2,338)(3,339)(4,340)(5,341)(6,342)(7,343)(8,
+    344)(9,345)(10,346)(11,347)(12,348)(13,349)(14,350)(15,351)(16,
+               [ ... 61 lines deleted ... ]
+    170)(123,171)(124,250)(125,251)(126,252)(130,172)( [...] )> ]
+gap> P:=Group(p3);
+<permutation group with 5 generators>
+gap> StabChainOptions(P).random:=1;;
+gap> Size(P);                      
+37492873537139989690410295685885170095161272386096844368000
+gap> last/Size(mcl);
+41745579179292917813953351511015323088870709282081
+gap> Collected(Factors(last));
+[ [ 3, 104 ] ]
+gap> bas:=BaseStabChain(StabChainMutable(P));
+[ 1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 46, 52, 55, 58, 
+               [ ... 6 lines deleted ... ]
+  1732, 2026, 2029, 2032, 2035, 2038, 2041, 2044, 2068 ]
+gap> Length(bas);
+104
+gap> p3:=StraightLineProgGens(p2,bas);;
+gap> P:=Group(p3);
+<permutation group with 5 generators>
+gap> SetSize(P,Size(mcl)*3^104);
+gap> elm:=(P.5*P.3*P.1)^7; 
+<[ [ 4, 1, 3, 1, 5, 1 ], [ 6, 7 ] ]|(679,681,680)(682,684,683)(685,686,
+               [ ... 11 lines deleted ... ]
+948,947)(952,954,953)(955,957,956)(964,965,966)( [...] )>
+gap> Order(elm);
+3
+gap> S:=SubgroupNC(P,[elm]);
+<permutation group with 1 generators>
+gap> N:=SolvableNormalClosurePermGroup(P,S);
+<permutation group with 104 generators>
+gap> Collected(Factors(Size(N)));
+[ [ 3, 104 ] ]
+gap> IsElementaryAbelian(N);
+true
+gap> pcgs:=Pcgs(N);
+Pcgs([ <[ [ 93, 1 ] ]|(1,2,3)(43,45,44)(64,66,65)(67,69,68)(70,72,71)(73,
+    75,74)(76,78,77)(82,84,83)(97,99,98)(100,102,101)(103,104,105)(106,
+               [ ... 1561 lines deleted ... ]
+    936)(943,944,945)(946,948,947)(952,954,953)(955,957,956)(964,965,
+    966)( [...] )> ])
+gap> mats:=LinearActionLayer(P,pcgs);
+[ < immutable compressed matrix 104x104 over GF(3) >, 
+  < immutable compressed matrix 104x104 over GF(3) >, 
+  < immutable compressed matrix 104x104 over GF(3) >, 
+  < immutable compressed matrix 104x104 over GF(3) >, 
+  < immutable compressed matrix 104x104 over GF(3) > ]
+gap> module:=GModuleByMats(mats,GF(3));
+rec( field := GF(3), isMTXModule := true, dimension := 104, 
+  generators := [ < immutable compressed matrix 104x104 over GF(3) >, 
+      < immutable compressed matrix 104x104 over GF(3) >, 
+      < immutable compressed matrix 104x104 over GF(3) >, 
+      < immutable compressed matrix 104x104 over GF(3) >, 
+      < immutable compressed matrix 104x104 over GF(3) > ] )
+gap> MTX.IsIrreducible(module);
+true
+gap> quit;

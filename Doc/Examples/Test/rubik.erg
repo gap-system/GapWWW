@@ -1,0 +1,137 @@
+gap> cube := Group(
+> ( 1, 3, 8, 6)( 2, 5, 7, 4)( 9,33,25,17)(10,34,26,18)(11,35,27,19),
+> ( 9,11,16,14)(10,13,15,12)( 1,17,41,40)( 4,20,44,37)( 6,22,46,35),
+> (17,19,24,22)(18,21,23,20)( 6,25,43,16)( 7,28,42,13)( 8,30,41,11),
+> (25,27,32,30)(26,29,31,28)( 3,38,43,19)( 5,36,45,21)( 8,33,48,24),
+> (33,35,40,38)(34,37,39,36)( 3, 9,46,32)( 2,12,47,29)( 1,14,48,27),
+> (41,43,48,46)(42,45,47,44)(14,22,30,38)(15,23,31,39)(16,24,32,40) );
+<permutation group with 6 generators>
+gap> Size( cube );
+43252003274489856000
+gap> Collected( Factors( last ) );
+[ [ 2, 27 ], [ 3, 14 ], [ 5, 3 ], [ 7, 2 ], [ 11, 1 ] ]
+gap> SizeScreen( [71, ] );;
+gap> orbits := Orbits( cube, [1..48] );
+[ [ 1, 3, 17, 14, 8, 38, 9, 41, 19, 48, 22, 6, 30, 33, 43, 11, 46, 
+      40, 24, 27, 25, 35, 16, 32 ], 
+  [ 2, 5, 12, 7, 36, 10, 47, 4, 28, 45, 34, 13, 29, 44, 20, 42, 26, 
+      21, 37, 15, 31, 18, 23, 39 ] ]
+gap> cube1 := Action( cube, orbits[1] );
+<permutation group with 6 generators>
+gap> NrMovedPoints( cube1 );
+24
+gap> Size( cube1 );
+88179840
+gap> corners := Blocks( cube1, MovedPoints( cube1 ) );
+[ [ 1, 7, 22 ], [ 2, 14, 20 ], [ 3, 12, 16 ], [ 4, 17, 18 ], 
+  [ 5, 9, 21 ], [ 6, 10, 24 ], [ 8, 11, 23 ], [ 13, 15, 19 ] ]
+gap> blockhom1 := ActionHomomorphism( cube1, corners, OnSets );
+<action homomorphism>
+gap> cube1b := Image( blockhom1 );
+Group([ (1,2,4,3), (1,3,6,5), (1,5,8,2), (3,4,7,6), (5,6,7,8), 
+  (2,8,7,4) ])
+gap> Size( cube1b );
+40320
+gap> Factors( Size( Kernel( blockhom1 ) ) );
+[ 3, 3, 3, 3, 3, 3, 3 ]
+gap> IsElementaryAbelian( Kernel( blockhom1 ) );
+true
+gap> cmpl1 := Complementclasses( cube1, Kernel( blockhom1 ) );
+[ Group([ (1,3,4,2)(7,16,17,14)(12,18,20,22), 
+      (1,2,3,4,5,6,13)(7,14,16,17,21,10,15)(9,24,19,22,20,12,18), 
+      (1,2,3,4,5,8,13)(7,14,16,17,21,23,15)(9,11,19,22,20,12,18) ]) ]
+gap> cmpl1 := cmpl1[1];;
+gap> Size( cmpl1 );
+40320
+gap> Size( Intersection( cmpl1, Kernel( blockhom1 ) ) );
+1
+gap> ClosureGroup( cmpl1, Kernel( blockhom1 ) ) = cube1;
+true
+gap> IsBijective( RestrictedMapping( blockhom1, cmpl1 ) );
+true
+gap> (1,7,22) in cube1;
+false
+gap> (1,7,22)(2,20,14) in cube1;
+true
+gap> cube2 := Action( cube, orbits[2] );;
+gap> Size( cube2 );
+980995276800
+gap> edges := Blocks( cube2, MovedPoints( cube2 ) );
+[ [ 1, 11 ], [ 2, 17 ], [ 3, 19 ], [ 4, 22 ], [ 5, 13 ], [ 6, 8 ], 
+  [ 7, 24 ], [ 9, 18 ], [ 10, 21 ], [ 12, 15 ], [ 14, 20 ], 
+  [ 16, 23 ] ]
+gap> blockhom2 := ActionHomomorphism( cube2, edges, OnSets );;
+gap> cube2b := Image( blockhom2 );;
+gap> Size( cube2b );
+479001600
+gap> Factors( Size( Kernel( blockhom2 ) ) );
+[ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ]
+gap> IsElementaryAbelian( Kernel( blockhom2 ) );
+true
+gap> cmpl2 := Complementclasses( cube2, Kernel( blockhom2 ) );;
+gap> Length( cmpl2 );
+4
+gap> (1,11) in cube2;
+false
+gap> (1,11)(2,17) in cube2;
+true
+gap> Size( cube );
+43252003274489856000
+gap> Size( cube1 ) * Size( cube2 );
+86504006548979712000
+gap> (17,19)(11,8)(6,25) in cube;
+false
+gap> (7,28)(18,21) in cube;
+false
+gap> (17,19)(11,8)(6,25)(7,28)(18,21) in cube;
+true
+gap> z := Centre( cube );
+Group(
+[ (2,34)(4,10)(5,26)(7,18)(12,37)(13,20)(15,44)(21,28)(23,42)(29,
+    36)(31,45)(39,47) ])
+gap> f := FreeGroup("t","l","f","r","e","b");
+<free group on the generators [ t, l, f, r, e, b ]>
+gap> hom := GroupHomomorphismByImages( f, cube, GeneratorsOfGroup(f),
+> GeneratorsOfGroup(cube) );
+[ t, l, f, r, e, b ] -> 
+[ (1,3,8,6)(2,5,7,4)(9,33,25,17)(10,34,26,18)(11,35,27,19), 
+  (1,17,41,40)(4,20,44,37)(6,22,46,35)(9,11,16,14)(10,13,15,12), 
+  (6,25,43,16)(7,28,42,13)(8,30,41,11)(17,19,24,22)(18,21,23,20), 
+  (3,38,43,19)(5,36,45,21)(8,33,48,24)(25,27,32,30)(26,29,31,28), 
+  (1,14,48,27)(2,12,47,29)(3,9,46,32)(33,35,40,38)(34,37,39,36), 
+  (14,22,30,38)(15,23,31,39)(16,24,32,40)(41,43,48,46)(42,45,47,44) ]
+gap> PreImagesRepresentative( hom, z.1 );
+l^-1*t^-1*e^-1*t^2*e*l*f*r*t^-1*r^-1*f^-1*t*f*r*t*r^-1*t^-1*f^-1*t^
+-1*f*t*l*t*l^-1*f^-1*l*t^-1*l^-1*f*r*t^-1*r^-1*f^-1*l*t*f*t^-1*f^
+-1*l^-1*t*f^-1*l^-1*t^-1*l*t*f*t^-2*f*t*f^-1*t^-1*l^-1*t^-1*l*t^-1*l^
+-1*t*e^-1*t*e*l*t*l*t*e*l^-1*e^-1*t^-1*l^-3*b*f*b^-1*l^-1*f^-1*t*l^
+-1*f*t*f*l^-1*t^-1*b*r^-1*b^-1*t^-2*e^-1*r*e*r*f^-1*e*t^-1*e^-1*r^
+-2*t^-2*l^-1*b^-1*r^-1*e^-1
+gap> Length( last );
+106
+gap> PreImagesRepresentative( hom, (17,19)(11,8)(6,25)(7,28)(18,21) );
+l^-1*t^-1*l*f*r*t*r^-1*f^-1*l*t*f*t^-1*f^-1*l^-1*t^2*f*t*l*t*l^-1*f^
+-1*l*t^-1*l^-1*f*t^-1*f^-1*l*t*l^-1*t*l*t^-2*l^-1*f*t*r*t^-1*r^
+-1*t*r*t^-1*r^-1*f^-1*t*l*f^-1*l^-1*f*l^-1*t^-1*l*t^-2*f*t*f^-1*l^
+-1*f^-1*l^-2*f*l*e^-1*t*e*l*t^-1*e^-1*t^-1*e*l*b*f^-1*b^-1
+gap> Length( last );
+77
+gap> r := Random( cube );
+(1,43,6,27,32,46)(2,4,13,34,10,20)(3,38,40,9,24,17)(5,15,45,23,29,47,
+26,44,31,42,36,39)(7,18)(8,22)(11,33,48,14,35,30)(12,21,37,28)(16,
+19)(25,41)
+gap> pre := PreImagesRepresentative( hom, r );
+e^-1*r*f^-1*t^-1*r*l*e*b^-1*e^-1*t^-1*b^-1*e^-1*b*l^-1*f^-1*l*f^
+-1*l*t^-1*f*b*f^2*b^-1*t*f^-1*l*f*l*t*l^-1*t^2*l^-1*f^-1*l*f*l*f*t^
+-1*f^-1*l^-1*t^-1*l*t^2*l^-1*t*l*f^-1*l*f*l^-1*t^-2*l^-1*t^-1*l^
+-1*e*l*e^-1*t*l*t^-3*l*t*f*t^-1*f^-2*l^-1*f*t*f*t^-1*f^2*l*f*l^-1*t^
+-1*l^-1*t*l*t*f*r*t*r^-1*t^-1*f^-1*t^-1*l^-1*t^-1*e^-1*t*e*l
+gap> Length( last );
+100
+gap> Image( hom, pre );
+(1,43,6,27,32,46)(2,4,13,34,10,20)(3,38,40,9,24,17)(5,15,45,23,29,47,
+26,44,31,42,36,39)(7,18)(8,22)(11,33,48,14,35,30)(12,21,37,28)(16,
+19)(25,41)
+gap> last = r;
+true
+gap> quit;

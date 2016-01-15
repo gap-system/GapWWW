@@ -1,0 +1,33 @@
+f := FreeGroup(2); a:=f.1;; b:=f.2;;
+h := f/[a*b*a^-2*b*a*b^-1,(b^-1*a^3*b^-1*a^-3)^1*a];
+s := Subgroup(h,[h.1]);
+SetInfoLevel(InfoFpGroup,3);
+Index(h,s);
+hom := FactorCosetAction(h,s);
+p := Image(hom);
+Size(p);
+Index(h,TrivialSubgroup(h));
+AbelianInvariants(h);
+g := f/[a*b*a^-2*b*a*b^-1,(b^-1*a^3*b^-1*a^-3)^2*a];
+# The following call is commented out because it causes a break loop
+# It is demonstrated only in the interactive example
+# Index(g,Subgroup(g,[g.1]));
+SetInfoLevel(InfoFpGroup,0);
+AbelianInvariants(g);
+u := LowIndexSubgroupsFpGroup(g,TrivialSubgroup(g),15);;
+u := Filtered(u,i->Index(g,i)>1);;
+list := List(u,i->Image(FactorCosetAction(g,i)));;
+Length(list);
+id := List([1..24],
+i->[Index(g,u[i]),Size(list[i]),TransitiveIdentification(list[i])]);;
+Collected(id);
+Collected(List(list,i->IsSimple(i)));
+cores := List(u,i->Core(g,i));;
+kernel := Intersection(cores);
+hom := NaturalHomomorphismByNormalSubgroup(g,kernel);;
+image := Image(hom);;
+IsPermGroup(image);
+NrMovedPoints(image);
+Size(image);
+List(u,i->AbelianInvariants(i));
+quit;

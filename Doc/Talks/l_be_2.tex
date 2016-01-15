@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% this is a latex-file
+\documentclass{slides}
+\usepackage{fancyheadings}
+\usepackage{german}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% setze Seiten-outfit
+\parindent 0cm
+\setlength{\topmargin}{0cm}
+\setlength{\headheight}{1cm}
+\setlength{\headsep}{0cm}
+\setlength{\topskip}{0cm}
+\setlength{\textheight}{23cm}
+\setlength{\textwidth}{19cm}
+\setlength{\oddsidemargin}{-1.5cm}
+\setlength{\evensidemargin}{-1.5cm}
+\pagestyle{fancy}
+
+\lhead{{\tiny \it The AutPGrp share package - Bettina Eick}}
+\rhead{{\tiny \it \thepage}}
+\chead{}
+\cfoot{}
+\lfoot{}
+\rfoot{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Unterdr"ucke Underfull h-boxes
+\let\nwline=\newline
+\renewcommand{\newline}{\nwline\mbox{}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% start of document
+\begin{document}
+
+Creating new objects: 
+
+\begin{itemize}
+\item[$\bullet$] Natural way to represent automorphisms:\\
+                 GroupHomomorphismByImages
+\item[$\bullet$] Problem: Creation and multiplication is too slow for
+                 these purposes
+\item[$\bullet$] Solution: Use special features of $p$-groups, \\
+                 i.e. pcgs is highly redundant
+\item[$\bullet$] Create new objects using these features: \\
+                 PGAutomorphisms
+\item[$\bullet$] These are mappings with a special creation and 
+                 multiplication routine
+\end{itemize}
+\newpage
+
+New Definitions contained in the  .gd file:
+
+A Representation:
+{\tiny
+\begin{verbatim}
+DeclareRepresentation( "IsPGAutomorphismRep",
+                       IsGroupGeneralMappingByImages,
+                       [ "pcgs", "pcgsimgs", "base", "baseimgs" ] );
+
+
+\end{verbatim}}
+
+A Filter:
+{\tiny
+\begin{verbatim}
+IsPGAutomorphism := IsMapping and IsPGAutomorphismRep;
+
+
+\end{verbatim}}
+
+An operation to create the new objects:
+{\tiny
+\begin{verbatim}
+DeclareOperation( "PGAutomorphism", [IsGroup, IsList, IsList] );
+
+
+\end{verbatim}}
+\newpage
+
+The methods that we need to install in the .gi file:
+
+\begin{itemize}
+\item[$\bullet$] The creation is self-defined
+\item[$\bullet$] For multiplication etc. we use the general definition
+                 for mappings
+\end{itemize}
+
+{\tiny
+\begin{verbatim}
+
+InstallMethod( PGAutomorphism,               # creation 
+
+InstallMethod( \=,                           # comparison 
+InstallMethod( CompositionMapping2,          # multiplication
+InstallMethod( InverseGeneralMapping,        # inversion
+
+InstallMethod( PrintObj,                     # print
+InstallMethod( ViewObj,                      # view
+
+InstallMethod( ImagesRepresentative,         # natural action
+\end{verbatim}}
+
+\newpage
+
+{\tiny
+\begin{verbatim}
+
+#########################################################################
+##
+#F PGAutomorphism( G, pcgs, imgs )
+##
+InstallMethod( PGAutomorphism,
+   "create PGAutomorphism",
+   true,
+   [IsGroup, IsPcgs, IsList ],
+   0,
+function( G, gens, imgs )
+   local filter, type, pcgs, pcgsimgs, base, baseimgs, hom;
+
+   # get filter and type
+   filter := IsPGAutomorphism and IsBijective;
+   type   := TypeOfDefaultGeneralMapping( G, G, filter );
+
+   # compute information on baseimgs and pcgsimgs
+   ...
+
+   # return new object
+   return    Objectify( type, 
+                        rec( pcgs := pcgs, pcgsimgs := pcgsimgs,
+                             base := base, baseimgs := baseimgs ) );
+end);
+\end{verbatim}}
+\newpage
+
+{\tiny
+\begin{verbatim}
+#########################################################################
+##
+#F PrintObj(auto)
+##
+InstallMethod( PrintObj,
+               "for group automorphisms",
+               true,
+               [IsPGAutomorphism],
+               SUM_FLAGS,
+function( auto )
+    Print("PGAutomorphism : ",auto!.base," -> ",auto!.baseimgs);
+end);
+
+
+
+
+#########################################################################
+##
+#F \=
+##
+InstallMethod( \=,
+               "for group automorphisms",
+               IsIdenticalObj,
+               [IsPGAutomorphism, IsPGAutomorphism],
+               0,
+function( auto1, auto2 )
+    return auto1!.base = auto2!.base and 
+           auto1!.baseimgs = auto2!.baseimgs;
+end);
+\end{verbatim}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% end of document
+\end{document}
+                          

@@ -1,0 +1,19 @@
+#!/bin/sh
+# (C) Frank Luebeck 
+export SOURCE=/gap/PackageAdmin/webftp/Packages
+export WWW2Dir=/gap/GapWWW
+
+cd $WWW2Dir/Manuals
+
+echo "Dry run:"
+rsync -av -c -n $SOURCE/pkg .
+echo "Shall I copy? (y/n)"
+read -n 1 ANSWER
+echo
+
+if [ $ANSWER = "y" ]; then
+  echo "Ok, I'll copy ..."
+  rsync -av -c $SOURCE/pkg .
+else
+  echo "Don't copy, bye."
+fi

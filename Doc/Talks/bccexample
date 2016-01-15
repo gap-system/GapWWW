@@ -1,0 +1,63 @@
+# basic arithmetic
+29*(5+(3/17));
+# Lists, records (arbitrary nesting)
+[[1,2],[3,4]];rec(a:=1,b:=2);
+# Pascal-like programming language
+f:=function(a) return a^2+a;end;
+f(2);f(3);
+# list manipulation commands
+Filtered(Combinations([1..5],3),i->Sum(i)=9);
+
+x:=Indeterminate(GF(2));x.name:="x";
+RecFields(x);
+f:=x^23-1;
+Factors(f);
+f:=First(Factors(f),i->Degree(i)>1);
+
+RequirePackage("guava");
+cod:=GeneratorPolCode(f,23,GF(2));
+IsPerfectCode(cod);
+ext:=ExtendedCode(cod);
+WeightDistribution(ext);
+m24:=AutomorphismGroup(ext);
+Size(m24);
+m22a:=Stabilizer(m24,[23,24],OnSets);
+m22a:=Operation(m22a,[1..22]);
+s:=SylowSubgroup(m22a,2);;
+a:=AgGroup(s);
+n:=Filtered(NormalSubgroups(a),i->Size(i)=16 and IsElementaryAbelian(i));;
+n:=List(n,i->Image(a.bijection,i));
+u:=First(n,i->IsRegular(i,PermGroupOps.MovedPoints(i)));
+un:=Normalizer(m22a,u);;
+# mop:=Operation(m22a,RightCosets(m22a,un),OnRight); quicker:
+mop:=Operation(m22a,CanonicalRightTransversal(m22a,un),
+	OnCanonicalCosetElements(m22a,un));
+
+ophom:=OperationHomomorphism(m22a,mop);
+dp:=DirectProduct(m22a,mop);
+emb1:=Embedding(m22a,dp,1);;
+emb2:=Embedding(mop,dp,2);;
+diag:=List(m22a.generators,i->Image(emb1,i)*Image(emb2,Image(ophom,i)));
+diag:=Group(diag,());;
+diag.name:="M22.2-diag";
+
+RequirePackage("grape");
+gamma:=NullGraph(diag,100);
+AddEdgeOrbit(gamma,[1,100]);AddEdgeOrbit(gamma,[100,1]);
+hexad:=First(Orbits(un,[1..22]),i->Length(i)=6);
+hexad:=Set(hexad);
+for i in hexad do AddEdgeOrbit(gamma,[i,23]); AddEdgeOrbit(gamma,[23,i]); od;
+# two points in second orbit are joined, if the hexads are disjoint
+stab:=Stabilizer(diag,23);
+storbrep:=List(Orbits(stab,[23..99]),i->i[1]);
+reps:=List(storbrep,i->RepresentativeOperation(diag,23,i));
+repi:=List(reps,i->Intersection(hexad,OnSets(hexad,i)));
+pos:=First([1..3],i->Length(repi[i])=0);
+AddEdgeOrbit(gamma,[23,storbrep[pos]]);AddEdgeOrbit(gamma,[storbrep[pos],23]);
+IsSimpleGraph(gamma);
+Adjacency(gamma,1);
+IsDistanceRegular(gamma);
+
+aug:=AutGroupGraph(gamma);
+DisplayCompositionSeries(aug);
+

@@ -1,0 +1,115 @@
+gap> LoadPackage( "ctbllib" );
+true
+gap> ct := CharacterTable( "Fi23" );;
+gap> permchar := Sum( Irr( ct ){[1,2,6]} );;
+gap> permchar[1];
+31671
+gap> nccl := NrConjugacyClasses( ct );;
+gap> ord3 := Filtered( [ 1 .. nccl ],
+>      i -> OrdersClassRepresentatives( ct )[i] = 3 );
+[ 5, 6, 7, 8 ]
+gap> permchar{ ord3 };
+[ 351, 324, 135, 27 ]
+gap> roots := [ 6 ];;
+gap> for i in [ 1 .. nccl ] do
+>      if ForAny( Set( Factors( Size( ct ) ) ),
+>          p -> PowerMap( ct, p )[i] in roots ) then
+>        AddSet( roots, i );
+>      fi;
+>    od;
+gap> roots;
+[ 6, 15, 17, 19, 21, 33, 34, 35, 36, 43, 45, 46, 47, 52, 66, 67, 68, 69, 70, 
+  71, 72, 83, 87, 93, 94 ]
+gap> prop := Sum( roots, i -> 1 / SizesCentralizers( ct )[i] );
+257647/1594323
+gap> Int( 100 * prop );
+16
+gap> LoadPackage( "atlasrep" );
+true
+gap> gens := OneAtlasGeneratingSet( "Fi23", NrMovedPoints, 31671 );;
+gap> Fi23 := Group( gens.generators );;
+gap> SetSize( Fi23, Size( ct ) );
+gap> opdom := MovedPoints( Fi23 );;
+gap> found := false;;
+gap> repeat
+>      g := Random( Fi23 );
+>      ord := Order( g );
+>      if ord mod 3 = 0 then
+>        h := g^( ord / 3 );
+>        if Number( opdom, i -> i^h = i ) = 324 then
+>          found := true;
+>        fi;
+>      fi;
+>    until found;
+gap> N := Normalizer( Fi23, SubgroupNC( Fi23, [ h ] ) );;
+gap> Size( N );
+3265173504
+gap> orb := Orbits( N, opdom );;
+gap> List( orb, Length );
+[ 19683, 11664, 324 ]
+gap> P := Action( N, orb[2] );;
+gap> Size( P ) = Size( N );
+true
+gap> A := Image( IsomorphismPcGroup( P ) );;
+gap> Size( A ) = Size( N );
+true
+gap> ds := DerivedSeries( A );;
+gap> Length( ds );
+11
+gap> List( ds, i -> Collected( Factors( Size( i ) ) ) );
+[ [ [ 2, 11 ], [ 3, 13 ] ], [ [ 2, 10 ], [ 3, 13 ] ], 
+  [ [ 2, 10 ], [ 3, 12 ] ], [ [ 2, 8 ], [ 3, 12 ] ], [ [ 2, 7 ], [ 3, 12 ] ], 
+  [ [ 2, 7 ], [ 3, 10 ] ], [ [ 2, 7 ], [ 3, 9 ] ], [ [ 2, 1 ], [ 3, 9 ] ], 
+  [ [ 3, 9 ] ], [ [ 3, 1 ] ], [ [ 1, 1 ] ] ]
+gap> compcl := List( [1..8],
+>     i-> Complementclasses( ds[i], ds[9] ) );;
+gap> List( compcl, Length );
+[ 3, 3, 1, 1, 9, 3, 1, 1 ]
+gap> conjcl := ConjugacyClasses( A );;
+gap> Length( conjcl );
+181
+gap> sct := CharacterTable( A );;
+gap> Irr( sct );;
+gap> Maximum( List( Irr( sct ), i -> i[1] ) );
+18432
+gap> irrat := Filtered( Union( Irr( sct ) ), i -> not IsRat( i) );
+[ -4*E(8)-4*E(8)^3, -2*E(8)-2*E(8)^3, -E(8)-E(8)^3, E(8)+E(8)^3, 
+  2*E(8)+2*E(8)^3, 4*E(8)+4*E(8)^3 ]
+gap> alpha := irrat[4];
+E(8)+E(8)^3
+gap> MinimalPolynomial( Rationals, alpha );
+x_1^2+2
+gap> MinimalPolynomial( Rationals, E( 8 ) );
+x_1^4+1
+gap> char144 := First( Irr( sct ), i -> i[1] = 144 );;
+gap> ker := KernelOfCharacter( char144 );
+<pc group with 10 generators>
+gap> Size( ker );
+39366
+gap> ker = ds[8]; 
+true
+gap> fus := PossibleClassFusions( sct, ct );;
+gap> Length( fus );
+6
+gap> Length( RepresentativesFusions( AutomorphismsOfTable( sct ), fus,
+>                AutomorphismsOfTable( ct ) ) );
+1
+gap> ind := Set( List( fus,
+>       map -> Induced( sct, ct, [ TrivialCharacter( sct ) ], map )[1] ) );
+[ Character( CharacterTable( "Fi23" ), [ 1252451200, 12812800, 98560, 44160, 
+      167440, 35761, 5170, 904, 1120, 112, 320, 80, 0, 3640, 3217, 280, 145, 
+      472, 561, 120, 177, 528, 166, 10, 66, 24, 30, 48, 0, 20, 12, 4, 121, 
+      13, 49, 13, 1, 0, 0, 0, 0, 40, 25, 28, 13, 13, 17, 4, 10, 8, 4, 5, 8, 
+      4, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 1, 7, 9, 9, 1, 1, 3, 1, 0, 0, 0, 0, 
+      0, 0, 0, 0, 6, 1, 2, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 ] ) ]
+gap> MatScalarProducts( ct, Irr( ct ), ind );
+[ [ 1, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      0, 1, 1, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 
+      0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0 ] ]
+gap> PermCharInfo( ct, ind ).ATLAS;
+[ "1a+30888aa+106743aa+812889a+5533110a+7468032a+8783424a+12077208aaa+20322225\
+a+26838240a+37573536aa+58708650a+73531392a+216154575a+216770400aa+289103904a" 
+ ]
+gap> quit;

@@ -1,0 +1,342 @@
+\documentclass[11pt]{article}
+\usepackage{lslide}
+\usepackage{path}
+\addtolength{\textheight}{0.66truein} % A4
+\addtolength{\textwidth}{0.27truein} % A4
+\vertgroup
+\parskip 1ex plus 1ex minus 0.2ex
+\def\bs{\begin{slide}}
+\def\es{\end{slide}}
+\def\bi{\begin{itemize}}
+\def\ei{\end{itemize}}
+\def\GAP{\textsf{GAP}}
+\begin{document}
+\title[Computational Algebra]{The State of the Art in Computational Algebra}
+\author{Steve Linton}
+\organization{Division of Computer Science, St.~Andrews}
+\titlepage
+\bs
+\subsection{Overview}
+
+\bi
+\item Computation and algebra -- generalities
+\item A brief survey of what can be done
+\item Systems -- GAP and MAGMA
+\item Current hot topics
+\item An Example -- Recognizing $SL_n(q)$ \textit{or} transformation semigroups
+\ei
+\es
+\section{Generalities}
+\bs
+\subsection{Why Compute?}
+\bi
+\item Exploration -- to form or dismiss conjectures or gain insight
+\item Resolve finite problems -- sporadic structures, small cases left
+over by general theorems
+\item Teaching -- allow students to work out non-trivial examples
+\item As a research area in its own right -- algorithms, algorithmics
+\item As a testbed for Computer Science -- type systems, languages,
+database concepts
+\ei
+\es
+\bs
+\subsection{Approaching Problems in Computational Algebra}
+
+\bi
+\item Charlie Sims, some years ago, divided problems into three
+classes
+\begin{description}
+\item[I] Problems where many group elements fit into memory
+\item[II] Problems where just a few group elements fit
+\item[III] Problems where only a fraction of one element fits
+\end{description}
+\item I would generalise this and speak of:
+\begin{description}
+\item[I] Problems that can be solved quickly by entirely automatic
+means
+\item[II] Problems that can be solved using standard
+low-level tools and some mathematical ingenuity
+\item[III] Problems that require special-purpose programming
+\end{description}
+\item These boundaries are both fuzzy and moving
+\item Frustration arises when you tackle a problem in one class using
+tools suitable for another
+\ei
+\es
+\section{What can be Done}
+\bs
+\subsection{The Reds and the Greens}
+\bi
+\item Two schools in CGT (especially pre 1991)
+\item Green school (Sims, Europeans, Australians, mainly mathematicians)
+\bi
+\item Pragmatists
+\item Implementation is important
+\item ``Good'' algorithm performs well on standard or big examples
+\ei
+\item Red school (North America, mainly computer scientists)
+\bi
+\item Complexity theorists -- started from Graph Isomorphism problem
+\item Precise complexity calculation important
+\item ``Good'' algorithm has low asymptotic complexity
+\ei
+\item Some fusion since 1991 -- Seress, Cooperman
+\item Result -- better theory and better implementations
+\ei
+\es
+\bs
+\subsection{Finitely Presented Groups}
+\bi
+\item  Most problems unsolvable in general
+\item  Coset enumeration can prove finiteness, 
+or that a subgroup has finite index,
+up to index 100000 in class I in many cases
+
+Gives permutation representation on cosets and presentation (large)
+for subgroup
+\item Examine quotients -- abelian, $p$, finite, nilpotent, polycyclic,
+isomorphic to given finite group -- \texttt{quotpic}
+\item Can seek confluent rewriting system or automatic structure
+\item Collection of tricks for proving infiniteness (class II)
+\ei
+\es
+\bs
+\subsection{Permutation Groups}
+\bi
+\item Very efficient powerful (and complicated) methods
+\item Many methods are random, Monte Carlo or Las Vegas
+\item In nearly-linear Monte Carlo time, given generators, can determine:
+\bi
+\item Size of a permutation group
+\item membership test
+\item elements uniformly at random
+\item composition series
+\item Sylow subgroups
+\ei
+\item Good performance in practice is achieved for
+\bi
+\item Centralizer
+\item Conjugacy of elements
+\item Set stabilizer
+\item Intersection of subgroups
+\item Normalizer
+\item Conjugacy of subgroups
+\ei
+\item Still hard:  double cosets, conjugacy classes
+\ei
+\es
+\bs
+\subsection{Base and Strong Generating Set}
+\bi
+\item C.C. Sims
+\item Given $G\le S_n$, let $\Omega = \{1,\ldots,n\}$
+\item Let $B = [ b_1, \ldots, b_k ]$ be a sequence of elements of
+$\Omega$
+\item Define $G_0  = G$, $G_i = Stab_{G_{i-1}}(b_i)$
+\item $B$ is a \emph{base} for $G$ if $G_k = \{()\}$
+\item $g\in G$ is characterised by $$B^g = [b_1^g,\ldots,b_k^g]$$ 
+\item $$|G| = \Pi_{i=1}^k | G_{i-1} : G_i| = \Pi_{i = 1}^k
+|b_i^{G_{i-1}}|$$
+\item $S\subseteq G$ is a strong generating set for $G$ w.r.t. $B$ if
+$$\left\langle S \cap G_i \right\rangle  = G_i$$
+\item Can write any $g\in G$ efficiently as a reasonably short word in
+a SGS
+\ei
+\es
+\bs
+\subsection{Random Algorithms}
+\bi
+\item Some algorithms make random choices as they run
+\item Las Vegas algorithms may (if unlucky) fail, but never give a
+wrong answer
+\item Monte Carlo algorithms give the wrong answer with some probability $\epsilon
+< 1/2$. Repeated runs will reduce $\epsilon$ as required
+\item To make a MC algorithm LV simply need a check on the final
+answer
+\item MC algorithms for permutation groups are mostly LV once
+a Base and Strong Generating Set has been found
+\ei
+\es
+\bs
+\subsection{Finite Soluble Groups}
+\bi
+\item Basic tool here is a power-commutator presentation:
+$$G = \left\langle a_1,\ldots a_k | a_i^{m_i} = w_i, [a_i,a_j] =
+w_{ij} \right\rangle$$
+where each $w$ is in normal form $a_1^{e_1}\ldots a_k^{e_k}$
+\item With one of these, any word can be put into normal form
+\item If the presentation is nice, then the normal form is unique
+\item Can get such a presentation from permutation representation, or
+from another finite presentation (sometimes)
+\item Some choice of pc-generators, ``special'' systems are extra nice
+(Eick, Leedham-Green)
+\item Many questions about such groups can be answered by working down
+(or up) a normal or characteristic series and doing linear algebra in
+each factor
+\item These and related techniques have also been used to list all groups of order
+up to 1000 (except 512, 768).
+\item nilpotent groups (esp. $p$-groups) are extra nice -- very large
+groups can be studied (Newman, Vaughan-Lee, Sims) -- motivated by the
+Burnside problem
+\ei
+\es
+\bs
+\subsection{Matrix Representations}
+
+\bi
+\item Input: generating matrices for an algebra acting over a finite
+field
+\item Questions about irreducibility, indecomposability, submodule
+structure, etc. can be answered efficiently (Parker, Holt/Rees, Lux)
+\item For invertible matrices, basic group operations are easy enough
+\item But obtaining group theoretic information is very hard in
+general
+\ei
+\es
+\section{Systems}
+\bs
+\subsection{Integrated Systems}
+\bi
+\item Both GAP and MAGMA are ``integrated'' systems for computational
+algebra. They provide:
+\bi
+\item implementations of a wide range of algorithms
+\item ``glue'' to allow algebraic data to be passed between them
+\item support features like memory management, large integer
+arithmetic, finite field arithmetic, lists, records, etc.
+\item a programming language with which the user can extend the
+system, drawing freely on all the existing features
+\ei
+\item Why use such a system?
+\bi
+\item The techniques you need may be built in -- use as a
+``desk calculator'' -- no user programming at all
+\item Interpreted language and interactive debugging make it easier to
+program in GAP or MAGMA than in (say) C, especially small programs
+\item Many modern algorithms draw on a huge range of known techniques
+-- avoid the need to reimplement them all
+\item Existing system capabilities are there to prepare input and
+analyse output from your new algorithm
+\item Easy for others to build on your work
+\ei
+\item Why not?
+\bi
+\item Performance penalty -- 3 to 10 times for most things
+\ei
+\ei
+\es
+\bs
+\subsection{GAP}
+\bi
+\item Groups, Algorithms, Programming
+\item Free software
+\item Runs under UNIX, MSDOS and MacOS (at least) -- easy to port
+\item Developed over 11 years in Lehrstuhl D f\"ur Mathematik, RWTH
+Aachen, Germany
+\bi
+\item Prof Joachim Neub\"user
+\item Martin Sch\"onert
+\item Cast of thousands, mainly in Aachen, some elsewhere
+\ei
+\item Headquarters moving to St Andrews in the next few weeks
+\item Current version 3.4.4. Version 4 about to enter $\beta$-test
+\item System is mostly written in the GAP language
+\item Strongest areas 
+\bi
+\item Permutation groups (esp in v4)
+\item Finite Soluble groups
+\item Character tables
+\item Programmability
+\item A number of powerful contributed share packages
+\ei
+\item More info \path|http://www-gap.dcs.st-and.ac.uk/~gap/|
+\ei
+\es
+\bs
+\subsection{MAGMA}
+\bi
+\item Not free (\$1000 -- \$2000 for a 3 year license?)
+\item Successor to Cayley
+\item Produced by John Cannon in Sydney
+\item Available for UNIX, DOS, maybe MacOS
+\item Current version 2.2
+\item Strong in number theory, representation theory,
+finitely-presented groups
+\item Mostly written in C -- incorporated many stand-alone C programs
+\item High performance within the C modules
+\item Less popular with programmers and extenders
+\ei
+\es
+\section{Hot Topics}
+\bs
+\subsection{Matrix Group Recognition}
+\bi
+\item Unlike permutation groups, there is no convenient chain of
+subgroups in a matrix group, and more sophisticated methods are needed
+\item Goal is to identify the group $G$ generated by given matrices, and,
+for example, give its order. 
+\item Main target area $n,q < 100$
+\item Key is Aschbacher's theorem, classifying maximal subgroups of
+$SL_n(q)$
+\item First decide which one(s) $G$ is in
+\item Use their structure to approach a composition series for $G$
+\item Recognise the composition factors against a database
+\item Substantial progress made -- Leedham-Green, O'Brien, Holt/Rees,
+Pye, Celler \textit{et al}
+\item GAP share package \texttt{matrix}
+\ei
+\es
+\bs
+\subsection{Black Box Recognition}
+\bi
+\item First mention is Benson 1982.
+\item Given ``opaque'' strings for generating group elements and a way of
+multiplying, inverting and comparing to the identity
+\item Problem 1: recognise the group
+\item Problem 2: find an explicit isomorphism between the group given
+and some standard version
+\item Elementary abelian groups are very hard
+\item Progress with $S_n$, classical matrix groups.
+\item Good results here would make the Monte Carlo permutation group
+algorithms Las Vegas
+\ei
+\es
+\bs
+\subsection{Infinite Polycyclic Groups}
+\bi
+\item Algorithms for constructing and computing in finite soluble groups
+are being extended to the infinite polycyclic case
+\item Eddie Lo, Gretchen Ostheimer, Werner Nickel
+\ei
+\es
+\bs
+\subsection{Other algebraic Structures}
+\bi
+\item Group theoretic algorithms are now far more sophisticated than
+those for other structures
+\item Can we apply the same ideas, or at least some of the general
+lessons in other contexts?
+\item Recent progress with
+\bi
+\item Lie Algebra (Willem de Graaf)
+\item Finitely-presented semigroups (Robertson, Thomas, Ruskuc,
+\textit{et al})
+\item Transformation Semigroups (SL, Pfeiffer, Ruskuc, Robertson)
+\item Finitely-presented associative algebras (SL)
+\ei
+\item Interest in
+\bi
+\item Matrix rings and algebras
+\item Groupoids
+\item Quantum groups
+\ei
+\item So far, examples support the general thesis
+\item GAP 4 is designed to support this work much better than GAP 3
+\ei
+\es
+\end{document}
+
+
+
+
+

@@ -1,0 +1,414 @@
+\documentclass[11pt]{article}
+\usepackage{lslide}
+\usepackage{html}
+\usepackage{epsf}
+\usepackage{amsfonts}
+\def\bs{\begin{slide}}
+\def\es{\end{slide}}
+\def\bi{\begin{itemize}}
+\def\ei{\end{itemize}}
+\sloppy
+\let\iso=\cong
+\parskip=\medskipamount 
+\title[GAP4 Types]{
+The GAP4 Type System\\
+Organising Algebraic Algorithms}
+\author{ Stephen Linton}
+\organization{St.~Andrews University}
+\vertgroup
+\landscape
+\begin{document}
+\titlepage
+\bs
+\subsection{About GAP}
+\bi
+\item GAP is a system for computational discrete algebra.
+\item Originally specialized in group theory 
+\item Structured like Maple: 
+\bi
+\item A C kernel -- basic arithmetics, language interpreter/compiler,
+user and system interface, garbage collector
+\item A GAP library -- most algorithms
+\ei
+\item Also includes large databases and contributed ``share packages''
+\item Free software -- Gnu-like ``copyleft''
+\item Programmability/extendibility is a key goal -- including
+programming by people with limited contact
+\ei
+\es
+\bs
+\subsection{Method Selection -- The Problem}
+\bi
+\item Many different algorithms may be used to ``multiply'' two
+algebraic objects, or to compute a property such as ``Size'' or
+``Derived Subgroup'', depending on what the objects are
+\item How do we represent all these, and make the correct decisions,
+while retaining modularity and efficiency?
+\ei
+\es
+\bs
+\subsection{Some Terminology}
+\begin{description}
+\item[Overloading] Use of one name to refer to multiple functions (or
+objects) 
+\bi
+\item The `+' operation in most programming languages
+\item In mathematics, the Centre of a group and the Centre of a Lie
+algebra are defined differently
+\ei
+\item[Polymorphism] Use of the same code to compute with different
+types of data 
+\bi
+\item a function to reverse a list of objects of any type
+\item a function to test whether a group (given by generators) is
+abelian -- relies on overloading of `*' (and perhaps `=')
+\ei
+\end{description}
+
+\es
+\bs
+\subsection{Method Selection 1 -- Dodge the Problem}
+\bi
+\item One option is to give each algorithm a separate name:
+\texttt{IntMult}, \texttt{RatMult}, \texttt{FPGroupWithRWSMult},
+\texttt{PermutationMult}, etc.
+\item Programmer then chooses method
+\item Prevents polymorphic programming -- need a version of 
+ ``power by repeated squaring'' for every type of object
+\item Also prevents nice syntax -- can't write \verb|a := b*c|
+\ei
+\es
+\bs
+\subsection{Method Selection 2 -- Monster Case Statements }
+\bi
+\item A single function \texttt{Multiply} which ``knows about'' every
+form of multiplication in the system
+\item Can easily be invoked by infix `*'
+\item Allows polymorphic programming
+\item Makes the system hard to extend/maintain -- every new kind of
+multipliable object required changes to this one procedure (and
+probably also procedures for `=', `+', etc.
+\item Possible performance problems
+\ei
+\es
+\bs
+\subsection{Method Selection 3 -- The Object Oriented Approach }
+\bi
+\item Every object (actually or implicitly) carries with it the
+functions (methods) that apply to it
+\item The operations (actually or implicitly) look inside the object
+for methods
+\item Gather objects into ``classes'' -- objects in a class have the
+same methods
+\item Establish relationships between classes -- inheritance
+\item Polymorphism is fine -- abstract classes make it safe(r)
+\item Overloading is OK if you are careful
+\item This is done in C++, Java, GAP3, Magma, Axiom, $\ldots$
+\ei
+\es
+\bs
+\subsection{Limitations of Object Orientation 1 }
+
+GAP3 experience found two main limitations.
+\bi
+\item[1] Operations may have more than one argument
+\bi
+\item which object gets to supply the method
+\item that method has to choose an algorithm based on the other
+argument(s)
+\item Risk of infinite recursion
+\ei
+\ei
+\es
+\bs
+\subsection{Limitations of Object Orientation 2}
+\bi
+\item[2] We may learn or compute new information about an object during
+its life, which we would like to use effectively
+
+In GAP3, we had a choice between 
+\bi
+\item Forcing computation of the information
+\item Ignoring the information, even when it was, in fact, already
+there 
+\item Messy non-polymorphic \textit{ad hoc} tests for the presence of information
+\item Messily changing the class of an object when information is discovered
+\ei
+\ei
+\es
+\bs
+\subsection{The GAP4 Method Selection Concept }
+\bi
+\item An \emph{Operation} is a mathematically well-defined function
+for arguments from some domain(s)
+\item A \emph{Method} is a GAP function capable of computing the
+result of an operation, for some (but possibly not all) relevant
+argument objects
+\item In GAP4 Methods are associated to Operations, not Objects
+\item Two Methods for an Operation should agree, where they are both
+valid -- one may be much faster
+\item An Operation is created once, and then any number of Methods may 
+be installed for it -- each installation specifies the domain of
+validity of the Method 
+\item These domain specifications can include ``non-mathematical
+issues'' -- representation of an object, what is already known about
+it, etc.
+\item When the Operation is invoked with particular arguments, the
+most specialised applicable Method is determined and applied
+\ei
+\es
+\bs
+\subsection{Example}
+\begin{verbatim}
+MyExponent := NewOperation("MyExponent",[IsGroup]);
+
+InstallMethod(MyExponent, "Abelian method based on generators",
+        true, [HasGeneratorsOfGroup and IsAbelian and IsGroup], 0,
+        function(g)
+    return Lcm(List(GeneratorsOfGroup(g),Order));
+end);
+    
+InstallMethod(MyExponent, "Default method",
+        true, [IsGroup], 0, 
+        function(g)
+    local e,x; e := 1;
+    for x in g do e := Lcm(e,Order(x)); od;
+    return e;
+end);
+\end{verbatim}           
+\es
+\bs
+\subsection{Example Continued}
+\begin{verbatim}
+gap> gps := [SmallGroup(7,1),SmallGroup(9,1),SmallGroup(9,2)];
+[ Group( [ f1 ], ... ), Group( [ f1, f2 ], ... ), 
+Group( [ f1, f2 ], ... ) ]
+gap> TraceMethods(MyExponent);
+gap> List(gps,MyExponent);
+#I  MyExponent: Abelian method based on generators
+#I  MyExponent: Default method
+#I  MyExponent: Default method
+[ 7, 9, 3 ]
+gap> HasIsAbelian(gps[2]);
+false
+gap> IsAbelian(gps[2]);
+true
+gap> MyExponent(gps[2]);;
+#I  MyExponent: Abelian method based on generators\end{verbatim}
+\es
+\bs
+\subsection{Method Installation in More Detail }
+\bi
+\item The general format of \texttt{NewOperation} is 
+\begin{center}\texttt{NewOperation( $\langle$name$\rangle$, 
+$\langle$requirements$\rangle$)}\end{center}
+\item The general format of \texttt{InstallMethod} is 
+\begin{center}\texttt{InstallMethod( $\langle$operation$\rangle$, 
+[$\langle$description$\rangle$,]
+$\langle$fampred$\rangle$, $\langle$requirements$\rangle$,
+$\langle$rank$\rangle$, $\langle$method$\rangle$)}\end{center}
+\item Requirements for a method and an operation are expressed in
+terms of \emph{filters}
+\ei
+\es
+\bs
+\subsection{Filters and Flag lists}
+\bi
+\item A filter is a Boolean quality of an object such as:
+\begin{description}
+\item[IsMagmaWithInverses] The object represents a set whose elements
+can be combined with * and which support \verb|^0| and \verb|^-1|
+providing an identity and inverse
+\item[HasSize] The result of the \verb|Size| operation for the object
+is stored (or otherwise very quickly available)
+\item[IsListHashTable] The object is a hash table represented in a
+particular way
+\item[HasIsAbelian] The object knows whether or not it is abelian
+\item[IsAbelian] The object knows that it is abelian
+\end{description}
+\item Filters are combined with \verb|and| to produce flag lists --
+\verb|IsGroup| is constructed as \texttt{IsMagmaWithInverses and IsAssociative}. 
+\item Certain (combinations of) filters automatically imply certain other
+filters. When an object acquires one, the others are filled in.
+\ei
+\es
+\bs
+\subsection{Method Selection}
+\bi
+\item Every method has a rank (total number of filters required, plus
+the \emph{rank} parameter)
+\item Every object carries a flags list (sometimes implicitly)
+\item When an operation is invoked on actual arguments, the 
+highest rank method whose requirements they meet is called
+\item A method can exit with \verb|TryNextMethod()| 
+\ei
+\es
+\bs
+\subsection{Attributes and Properties }
+\bi
+\item An Attribute is unary Operations with no side-effects (eg \verb|Exponent|)
+\item It has an associated filter (tester) usually called \verb|HasXxx| (eg
+\verb|HasSize|) and another operation (setter) usually called \verb|SetXxx|
+\item Methods for setters may store the attribute value in the object
+and set the tester
+\item A high-rank method requiring the tester is installed to recover
+the stored object
+\item A Boolean attribute is a Property (eg \verb|IsAbelian|). 
+\item A Property is a filter in its own right
+\ei
+\es
+\bs
+\subsection{Types of Filter }
+
+These distinctions have no effect on method selection, but alter the
+way filters are created and set
+
+\begin{description}
+\item[Categories] These are fixed when an object is created, and
+control what basic operations are defined for the object (a bit like
+abstract classes in C++) (eg \verb|IsAdditiveElement| implies that a + 
+is defined)
+\item[Representations] Fixed when an object is created, describe how
+the object is stored, used to select low-level access methods
+\item[Attribute testers] Set when an attribute value is stored 
+(eg \verb|HasIsAbelian|)
+\item[Properties] Set when a property is known to hold (eg \verb|IsAssociative|)
+\item[Others] A small number of special filters
+( eg \verb|CanEasilyComputePcgs|)
+\end{description}
+\es
+\bs
+\subsection{Relations between Objects}
+\bi
+\item The filters are essentially static -- the complete set of filters is 
+created when the libraries are read
+\item This does not allow relationships between objects to be captured
+\item For example
+\begin{verbatim}
+InstallMethod(Comm, "generic method", true,
+        [IsMultiplicativeElementWithInverse,
+         IsMultiplicativeElementWithInverse],
+	0, function(x,y) return x^-1*y^-1*x*y; end);
+\end{verbatim}
+might get called with a permutation $x$ and a free group element $y$
+\item To handle this in the method would add the kind of tedious
+checking that we are trying to avoid
+\item There are infinitely many different kinds of group elements --
+for example elements of different fp groups
+\ei
+\es
+\bs
+\subsection{Families }
+\bi
+\item These relationships are captured by the \emph{family}
+\item Every object has a family (equal objects are in the same family)
+\item Families can be created dynamically -- for example the elements
+of each fp group form a family
+\item The \emph{fampred} argument of \verb|InstallMethod| is passed
+the families of the arguments. If it returns \verb|true| then the
+method is applicable
+\item Potential performance problem, but common cases (like family
+equality) are optimized
+\item The flags lists and family of an object together make up its
+\emph{Type}, which determines the methods that will be applied to it
+\ei
+\es
+\bs
+\subsection{True Overloading}
+\bi
+\item Where a name is used for mathematically different meanings (eg
+Centre of a group $\{ x\in G : xg = gx \forall g\in G\}$, Centre of a
+Lie Algebra $\{x\in L : xl = 0 \forall l\in L\}$
+\item Have two Attributes: \verb|CentreOfGroup| and \verb|CentreOfLieAlgebra|
+\item For the user supply an Operation \verb|Centre|, with methods
+that call the appropriate Attribute
+\item If there is ever an object which both a group and a LA, there
+\emph{must} be a method to decide (or object)
+\item This doesn't happen too often
+\ei
+\es
+\bs
+\subsection{Other Features 1}
+\begin{description}
+\item[Kernel objects] Objects like permutations have an implicit
+type, which cannot change. For basic operations (`+', `*',
+\verb|PrintObj|, etc.) the kernel selects the method. Other operations 
+see the implicit type. 
+\item[Constructors] A few functions, like \verb|AbelianGroup| take a
+flags list as first argument. The method selected is one that will
+return an object with at least those flags (contravariant)
+\item[OperationArgs] No method selection for functions of variable
+numbers of arguments -- just one method allowed
+
+Often these functions can call an underlying method with fixed number
+of args -- \verb|Print|, \verb|PrintObj|
+\end{description}
+\es
+\bs
+\subsection{Other Features 2}
+\begin{description}
+\item[Mutability] Attribute and Property information cannot always be kept
+for objects with mutable subobjects, because they may change without
+notice.
+
+Our philosophy in GAP4 is to make as much as possible
+immutable. Immutable objects can acquire information, or even change
+representation, but their behaviour under `=' never changes
+\item[Caching and Hashing] A hash table of types is used to ensure
+that two equal types or families 
+are always identical (same memory location).  This costs time when
+they are created but saves time and space later.
+
+Each operation caches the three most recent (sets of) types it was
+called with and the method selected. Most calls hit this cache.
+
+Also cache the result of \verb|and| for flags lists and a few other
+things
+\end{description}
+\es
+\bs
+\subsection{Other Features 3}
+\begin{description}
+\item[Immediate Methods] These one-argument methods are run
+\emph{whenever} an object acquires the required filters. They are used 
+to ``fill in'' cheap consequences of new information
+\item[Virtual Lists and Records] The list access and assignment
+operators \verb|\[\]|, \verb|\[\]\:\=| and related things are
+Operations. An object can have the IsList filter and methods installed 
+for these operations and be a ``virtual'' list (possibly infinite).
+\item[Iterators] In a similar way, the \verb|for| statement will call
+the \verb|Iterator| operation to obtain a way fo running through an
+object.
+\end{description}
+\es
+\bs
+\subsection{Results and Experience }
+\bi
+\item Used in current GAP 4 library --
+
+\item 2000+ operations, 7000+ methods, 1100+ filters, 200K + lines of code
+\item Basically seems to work well -- more natural than the GAP3 system
+\item Individual methods are small and (more) independent
+\item Some problems with ``wrong'' methods being called, but manageable
+\item Tedious input checking and case dividing code largely removed
+\item Setting up a new kind of object is a bit more complicated, but
+more powerful
+\item Definition and specification (\verb|NewOperation|,
+\verb|NewCategory|) separated from implementation
+(\verb|InstallMethod|, \verb|NewRepresentation|) (we use \verb|.gd|
+and \verb|.gi| files).
+\ei
+\es
+\bs
+\subsection{Comparison to Other Type Systems}
+\bi
+\item Purely dynamic -- no useful type information for objects 
+is available before run-time
+\item Although operations and methods effectively specify their
+argument types, there is no indication of the return type
+\item Objects can change type during their lifetimes
+\item The system can be used well for run-time method selection, the
+compiler makes almost no use of it.
+\ei
+\es
+\end{document}

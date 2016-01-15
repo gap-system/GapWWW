@@ -1,0 +1,346 @@
+\input amssym.def
+\input amssym.tex
+\title{
+Enumerating Finite Index Subgroups of Polycyclic Groups }  
+
+%% preamble
+
+\documentclass[12 pt]{article}
+
+\mathchardef\snake="326F
+
+\def\bfZ{{\bf Z}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+
+%%\documentclass[12pt]{article}
+
+%% packages
+
+%% macros
+
+\begin{document}
+
+%% title
+
+\author{Eddie H. Lo\\ Department of Defense\\ Fort Meade, Maryland\\
+        ehlo@afterlife.ncsc.mil}
+\date{\today}
+\maketitle
+
+%% pagestyle
+
+%% abstract
+
+\begin{abstract}
+In this report, an efficient algorithm to generate coset tables for
+finite index subgroups of polycyclic groups is presented.
+\end{abstract}
+
+\section{Introduction}
+
+In this report, an efficient algorithm to enumerate finite index
+subgroups of polycyclic groups is presented. This algorithm
+makes use of the wreath-product ordering of coset tables
+studied in Section 5.6 of \cite{Sims94}, instead of the
+usual length-plus-lexicographic ordering. This approach seems
+to work well when the polycyclic group is given by a consistent
+polycyclic presentation. In such a case, the algorithm enumerates
+all the subgroups of finite index less than or equal to $n$ using
+$O(n)$ memory, and it seems to be reasonable
+in terms of time.
+
+The following proposition gives a bound for the number of subgroups
+of index $n$ in a polycyclic group.
+
+\begin{proposition}
+Let $G$ be a polycyclic group of Hirsch length $h$. Suppose that
+in a consistent polycyclic presentation of $G$,
+the exponents of the power relations are $k_1,k_2,\ldots,
+k_m$.
+%Let $H$ be
+%the abelian group $\bfZ^h\oplus\bfZ_{k_1}\oplus\bfZ_{k_2}\oplus\cdots\oplus
+%\bfZ_{k_m}$. Then the number of subgroups of $G$ of index $n$ is
+%at most the number of subgroups of $H$ of index $n$. In particular,
+The number of subgroups of index $n$ in $G$ has a polynomial
+bound $n^{h+m}$.
+\end{proposition}
+
+\section{Wreath-Product Ordering}
+
+%Let $X,Y$ be a set and $X^*,Y^*$ be the set of all words on $X,Y$
+%respectively. Suppose
+%that $<_X$ and $<_Y$ are well-orderings on $X$ and $Y$ respectively. Then
+%the wreath product ordering $<$
+%on $(X\cup Y)^*$ is defined as follows.
+%This ordering is denoted by $<_X\snake<_Y$.
+
+\begin{table}
+\centering
+\caption{Example of a coset table under wreath-product ordering}
+\vskip 0.1 in
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+coset & number & $a_3$ & $a_2$ & $a_1$\\
+\hline
+$H$ & 1 & 2 & 4 & 7 \\
+$Ha_3$ & 2 & 3 & 5 & 9 \\
+$Ha_3^2$ & 3 & 1 & 6 & 11 \\
+$Ha_2$ & 4 & 5 & 1 & 10 \\
+$Ha_2a_3$ & 5 & 6 & 2 & 12 \\
+$Ha_2a_3^2$ & 6 & 4 & 3 & 8 \\
+$Ha_1$ & 7 & 8 & 8 & 6 \\
+$Ha_1a_3$ & 8 & 9 & 9 & 1 \\
+$Ha_1a_3^2$ & 9 & 10 & 10 & 5 \\
+$Ha_1a_3^3$ & 10 & 11 & 11 & 3 \\
+$Ha_1a_3^4$ & 11 & 12 & 12 & 4 \\
+$Ha_1a_3^5$ & 12 & 7 & 7 & 2 \\
+\hline
+\end{tabular}
+\end{table}
+
+Let $G$ be a polycyclic group and $\{a_1,a_2,\ldots,a_n\}$ be a
+polycyclic generating sequence of $G$. Every element of $G$ is
+of the form $a_1^{x_1}a_2^{x_2}\ldots a_n^{x_n}$ for some integers
+$x_1,x_2,\ldots,x_n$.
+Suppose that $H$ is a subgroup of $G$ of finite index. Any coset of
+$H$ is of the form $Ha_1^{x_1}a_2^{x_2}\ldots a_n^{x_n}$. In particular,
+since $H$ is of finite index in $G$, we may assume that $x_1,x_2,\ldots,
+x_n$ are all nonnegative integers.
+Given a coset $Hg$, we may associate
+a sequence $(x_1,x_2,\ldots,x_n)$ such that
+$x_1,x_2,\ldots,x_n$ are positive integers,
+$a_1^{x_1}a_2^{x_2}\ldots
+a_n^{x_n}$ is contained in the coset $Hg$ and
+$(x_1,x_2,\ldots,x_n)$ is smallest among all such sequences
+in $\ll$, the lexicographic ordering
+on sequences of length $n$ from left to right.
+This gives an ordering on the cosets of $H$.
+It is exactly the wreath-product ordering defined
+in \cite{Sims94} for polycyclic groups. If $Hy_1$ is smaller than
+$Hy_2$ in the wreath-product ordering, then we write
+$Hy_1\ll Hy_2$.
+
+For example, let $G$ be the polycylic group
+$$\langle a_1,a_2,a_3\,|\,a_2^{a_1}=a_2^2a_3, a_3^{a_1}=a_2a_3,a_3^{a_2}=a_3
+  \rangle.$$
+Let $H$ be the subgroup $\langle a_1^2a_2a_3,a_2^2,a_3^3\rangle$, which
+has index 12 in $G$.
+The cosets of $H$ are $H$,$Ha_3$,$Ha_3^2$,$Ha_2$,$Ha_2a_3$,$Ha_2a_3^2$,$Ha_1$,
+$Ha_1a_3$,$Ha_1a_3^2$,$Ha_1a_3^3$,$Ha_1a_3^4$ and $Ha_1a_3^5$.
+A coset table is {\it standard} with respect to an ordering
+if the cosets are ordered with respect
+to the ordering.
+The standard coset
+table for $H$ with respect to $\ll$ is given in Table 1. Notice that the
+generators are arranged in the order $a_3,a_2,a_1$.
+
+\section{The Structure of Coset Tables}
+
+Let $G = G_1\triangleright G_2\triangleright G_3\triangleright\ldots
+\triangleright G_{n+1} = 1$ be the polycyclic series of $G$ corresponding
+to the polycyclic generating sequence $a_1,a_2,\ldots,a_n$.
+For $i = 1,2,\ldots,n$, let $H_i=H\cap G_i$. Since $[G:H]$ is finite,
+$[G_2:H_2]$ is finite. Suppose that $H_2y_1,H_2y_2,\ldots,H_2y_k$ be the
+cosets of $H_2$ in $G_2$ and that $m = {[G:H]\over[G_2:H_2]}$. Then
+the cosets of $H$ in $G$ are $Hy_ia_1^j$, where $1\le i\le k$ and
+$0\le j< m$. Under the wreath-product ordering, $Hy_{i_1}a_1^{j_1}\ll
+Hy_{i_2}a_1^{j_2}$ whenever $j_1<j_2$.
+
+Suppose, by induction, that the coset table for the subgroup $H_2$ in $G_2$ has
+been found. By the remark above, in the coset table for $H$ in $G$, the cosets
+of the form $Hy_i$ are small under the wreath-product ordering,
+followed by the cosets of the form $Hy_ia_1$, etc. In fact, a coset
+table for $H$ looks like the one in
+Table 2. Again, notice that the generators are
+arranged as $a_n,a_{n-1},\ldots,a_1$.
+\\
+\vskip 0.2 in
+\begin{table}
+\centering
+\caption{The structure of a coset table under wreath-product ordering}
+\vskip 0.1 in
+\begin{tabular}{|c|c|c c c|c|}
+\hline
+coset & number & $a_n$ & $\ldots$ & $a_2$ & $a_1$ \\
+\hline
+$Hy_1$ & 1 & & & & $k+1$ \\
+$\vdots$ & $\vdots$ & & $H_2$ & & $\vdots$ \\
+$Hy_k$ & $k$ & & & & $2k$ \\
+\hline
+$Hy_1a_1$ & $k+1$ & & & & $2k+1$ \\
+$\vdots$ & $\vdots$ & & $H_2^{a_1}$ & & $\vdots$ \\
+$Hy_ka_1$ & $2k$ & & & & $3k$ \\
+\hline
+& & & & & \\
+$\vdots$ & $\vdots$ & & $\vdots$ & & $\vdots$ \\
+& & & & & \\
+\hline
+$Hy_1a_1^{m-1}$ & $(m-1)k+1$ & & & & ? \\
+$\vdots$ & $\vdots$ & & $H_2^{a_1^{m-1}}$ & & $\vdots$ \\
+$Hy_ka_1^{m-1}$ & $mk$ & & & & ? \\
+\hline
+\end{tabular}
+\end{table}
+\vskip 0.3 in
+
+The coset table in Table 2 may not be a standard coset table.
+It is not true in general that $Hy_1\ll Hy_2$ implies
+$Hy_1a_1\ll Hy_2a_1$.
+
+It is clear that the subtable with columns indexed by
+$a_n,a_{n-1},\ldots,a_2$ and rows indexed by $Hy_1,Hy_2,\ldots
+Hy_k$ is the coset table for $H_2$. Now that subtable with the
+same columns but rows indexed by $Hy_1a_1,Hy_2a_1,\ldots,Hy_ka_1$
+is the coset table for $H_2^{a_1}$, with $Hy_ia_1$ corresponding
+to the coset $H_2^{a_1}y_i^{a_1}$. Similarly, it can be seen
+that the subtable with the same columns but rows indexed by
+$Hy_1a_1^l,Hy_2a_1^l,\ldots,Hy_ka_1^l$ gives the coset table
+for $H_2^{a_1^l}$.
+
+Given a coset table for $H_2$, it is not hard to find a coset
+table for $H_2^{a_1}$. Suppose that
+$H_2^{a_1}y_i^{a_1}a_l = H_2^{a_1}y_j^{a_1}$. Then
+$H_2y_ia_l^{a_1^{-1}} = H_2y_j$, which is the coset found by
+tracing the word $a_l^{a_1^{-1}}$ in the coset table for $H_2$
+starting from the coset $H_2y_i$. In the case when the
+polycyclic group is given by a consistent polycyclic
+presentation is given, the word $a_l^{a_1^{-1}}$ is known.
+Therefore constructing the coset table for $H_2^{a_1^l}$ can be
+reduced to tracing words in the coset table for $H_2^{a_1^{l-1}}$.
+
+Suppose that the coset given by $(Hy_1a_1^{m-1})a_1$ is known. Then
+it is possible to fill up the rest of the column in the coset table
+marked by ?. This is because by the above paragraph, if we have
+constructed a coset table for $H_2^{a_1^{m-1}}$, then we can find
+a coset table for $H_2^{a_1^m}$. Up to permutation of rows, this
+coset table can be transformed into the coset table for $H_2$. By
+keeping track of the permutation, the entries marked ? can be filled.
+
+%\begin{tabbing}
+%Output: \=\kill
+%Procedure Standardize\\
+%Input:  \>A coset table $T$ for a subgroup $H$;\\
+%Output: \>The coset table $T$ is standardized;\\
+%Begin\\
+%\quad\=\quad\=\quad\=\kill
+%\>(* Suppose that $n$ is the number of generators. *)\\
+%\>For $i$ from 1 to $n$ do $r$[i] := 1;\\
+%\>(* \>Here $c$ is the current coset number
+%       $g$ is the generator number. *)\\
+%\>$c$ := 2; $g$ := $n$;\\
+%\>While ($c\le n$) do\\
+%\>\>(* Here $c'$ denotes the next coset to be defined. *)\\
+%\>\>$c'$ := entry of $T$ at row $r$[$g$], column $g$;\\
+%\>\>$r$[$g$] := $c$;\\
+%\>\>(* Check whether $H\cap G_g$ has been standardized. *)\\
+%\>\>If ($c'\le c-1$) then $g$ := $g-1$;\\
+%\>\>else \\
+%\>\>\>If ($c'\neq c$) then swap rows $c$ with $c'$ in $T$;\\
+%\>\>\>$c$ := $c+1$;\\
+%\>\>\>$g$ := $n$;\\
+%\>\>end if\\
+%\>end while\\
+%End\\
+%\end{tabbing}
+
+\section{An algorithm and an implementation}
+
+Here an algorithm to enumerate finite index subgroups of
+index smaller than $M$ of a polycyclic
+group is presented in Table 3.
+The notation here follows that in the previous section.
+
+\begin{table}
+\caption{An algorithm to enumerate coset tables for low index subgroups in
+polycyclic groups}
+\vskip 0.1 in
+\begin{tabbing}
+Output: \=\kill
+Algorithm Enumerate\\
+Input:  \>A consistent polycyclic presentation for $G$;\\
+        \>An integer $M$;\\
+Output: \>Coset tables for subgroups of $G$ of index smaller than $M$;\\
+Begin\\
+\quad\=\quad\=\quad\=\quad\=\kill
+\>Recursively find coset tables for subgroups
+of $G_2$ with index
+$\le M$;\\
+\>For each subgroup $H_2$ of $G_2$ found do\\
+\>\>Find the minimal number $s$ such that $H_2^{a_1^s}$ is a conjugate
+of $H_2$ in $G_2$;\\
+\>\>Take $i$ := 1;\\
+\>\>While $i\cdot s\cdot[G_2:H_2]\le M$ do\\
+\>\>\>Fill in the standardized coset tables for $H_2^{a_1^l}$,\\
+\>\>\>\>$l=
+(i-1)\cdot s,(i-1)\cdot s+1,\ldots,i\cdot s-1$;\\
+\>\>\>Fill in the known part of the last column;\\
+\>\>\>For $j$ from 1 to $[G_2:H_2]$ do\\
+\>\>\>\>Fill the first ? in the last column by $j$;\\
+\>\>\>\>Determine the other ?'s as suggested in Section 3;\\
+\>\>\>\>Test the power relation corresponding to $a_1$ if applicable;\\
+\>\>\>\>If test passes then output the coset table;\\
+\>\>\>end for\\
+\>\>end while\\
+\>end for\\
+End.\\
+\end{tabbing}
+\end{table}
+
+Although this algorithm is written as a recursive procedure, it can
+be turned into a nonrecursive procedure. The depth of recursion is $n$.
+
+An implementation of the algorithm has been developed in the language C.
+An interface with \cite{GAP}
+has also been written. Some experiments of the
+program have been performed to test its efficiency. The results are
+described here.
+
+The experiments are performed on a PC with a Pentium 75 MHz running
+Linux 2.0. Time is given as CPU time.
+
+Let $G_1$ be the free nilpotent group of rank
+2 and class 3. The group has 5 polycyclic generators.
+The program generates all 445 conjugacy classes
+of 1885 subgroups of index 27 in about 7.87 seconds and all 2099 conjugacy
+classes of 8627 subgroups of index 32 in 31.48 second.
+
+Let $G_2$ be the free nilpotent group of rank 3 and class 2. The group has
+6 polycyclic generators.
+The program generates all 10336 conjugacy classes of 27886 subgroups
+of index 27 in 197.56 seconds and
+all 63091 conjugacy classes of 196371 subgroups of index 32
+in 906.09 seconds.
+
+Let
+\begin{eqnarray*}
+  G_3 = \langle a_1,a_2,a_3,a_4 & | & a_2^{a_1}=a_2^{-1},
+  a_3^{a_1}=a_3, a_4^{a_1}=a_4^{-1},\\
+                                &   & a_3^{a_2}=a_3^2a_4,
+  a_4^{a_2}=a_3^3a_4^2, a_4^{a_3}=a_4\rangle.\end{eqnarray*}
+The program generates all 646 conjugacy classes of 5292 subgroups of index 
+60 in 3.51 seconds. It takes 23.45 seconds for
+the program to generate all 2894 conjugacy classes of 24487 subgroups
+of index 96 in $G_3$.
+
+A variant of this algorithm seems to find low index normal subgroups
+rather efficiently. The program generates all 49 normal subgroups of
+$G_1$ of index 27 in 3.15 seconds and all 139 normal subgroups of
+index 32 in 10.38 seconds. For $G_2$, the program generates all
+1561 normal subgroups of index 27 in 88.93 seconds and all
+5075 normal subgroups of index 32 in 348.73 seconds.
+For $G_3$, the program generates all 36 normal subgroups of index 60
+in 0.91 second and all 115 normal subgroups of index 96 in 3.53 seconds.
+
+The amount of memory used in all of these examples is less than
+1 megabyte.
+
+I would like to thank my thesis advisor Prof. Charles Sims
+for suggesting and discussing the problem.
+
+\bibliographystyle{alpha}
+\bibliography{all}
+
+\end{document}
+

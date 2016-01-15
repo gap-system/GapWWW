@@ -1,0 +1,83 @@
+gap> f := FreeGroup(2); a:=f.1;; b:=f.2;;
+<free group on the generators [ f1, f2 ]>
+gap> h := f/[a*b*a^-2*b*a*b^-1,(b^-1*a^3*b^-1*a^-3)^1*a];
+<fp group on the generators [ f1, f2 ]>
+gap> s := Subgroup(h,[h.1]);
+Group([ f1 ])
+gap> SetInfoLevel(InfoFpGroup,3);
+gap> Index(h,s);
+#I  CosetTableFromGensAndRels called:
+#I      defined deleted alive   maximal
+#I  	13	1	12	13
+12
+gap> hom := FactorCosetAction(h,s);
+[ f1, f2 ] -> [ (2,4,3,7,5)(6,8,10,11,9), (1,2,6,8,3)(5,9,12,10,7) ]
+gap> p := Image(hom);
+Group([ (2,4,3,7,5)(6,8,10,11,9), (1,2,6,8,3)(5,9,12,10,7) ])
+gap> Size(p);
+60
+gap> Index(h,TrivialSubgroup(h));
+#I  CosetTableFromGensAndRels called:
+#I      defined deleted alive   maximal
+#I  	133	13	120	133
+120
+gap> AbelianInvariants(h);
+[  ]
+gap> g := f/[a*b*a^-2*b*a*b^-1,(b^-1*a^3*b^-1*a^-3)^2*a];
+<fp group on the generators [ f1, f2 ]>
+gap> Index(g,Subgroup(g,[g.1]));
+#I  CosetTableFromGensAndRels called:
+#I      defined deleted alive   maximal
+#I  	999	1	998	999
+#I  	1997	3	1994	1996
+<b>. . .</b>
+#I  	254815  185	254630  254693
+#I  	255812  188	255624  255690
+Error, the coset enumeration has defined more than 256000 cosets
+ called from
+TCENUM.CosetTableFromGensAndRels( fgens, grels, fsgens ) called from
+CosetTableFromGensAndRels( fgens, grels, fsgens ) called from
+TryCosetTableInWholeGroup( H ) called from
+CosetTableInWholeGroup( H ) called from
+IndexInWholeGroup( H ) called from
+...
+Entering break read-eval-print loop ...
+type 'return;' if you want to continue with a new limit of 512000 cosets,
+type 'quit;' if you want to quit the coset enumeration,
+type 'maxlimit := 0; return;' in order to continue without a limit
+brk> quit;
+gap> SetInfoLevel(InfoFpGroup,0);
+gap> AbelianInvariants(g);
+[  ]
+gap> u := LowIndexSubgroupsFpGroup(g,TrivialSubgroup(g),15);;
+gap> u := Filtered(u,i->Index(g,i)>1);;
+gap> list := List(u,i->Image(FactorCosetAction(g,i)));;
+gap> Length(list);
+24
+gap> id := List([1..24],
+> i->[Index(g,u[i]),Size(list[i]),TransitiveIdentification(list[i])]);;
+gap> Collected(id);
+[ [ [ 11, 660, 5 ], 2 ], [ [ 11, 19958400, 7 ], 8 ], [ [ 12, 660, 179 ], 1 ], 
+  [ [ 12, 95040, 295 ], 4 ], [ [ 12, 239500800, 300 ], 3 ], 
+  [ [ 13, 3113510400, 8 ], 6 ] ]
+gap> Collected(List(list,i->IsSimple(i)));
+[ [ true, 24 ] ]
+gap> cores := List(u,i->Core(g,i));;
+gap> kernel := Intersection(cores);
+Group(<fp, no generators known>)
+gap> hom := NaturalHomomorphismByNormalSubgroup(g,kernel);;
+gap> image := Image(hom);;
+gap> IsPermGroup(image);
+true
+gap> NrMovedPoints(image);
+237
+gap> Size(image);
+187838840781137083803280175646550961040094223793955611966199644315614527534543\
+5097975617726355751505731109984424427520000000000000000000000000000000000000
+gap> List(u,i->AbelianInvariants(i));
+[ [ 11, 13 ], [ 2, 3, 9 ], [ 11, 13 ], [ 11, 13 ], [ 11, 13 ], [ 0, 0, 2 ], 
+  [ 2, 2, 8 ], [ 2, 3, 9 ], [ 11, 13 ], [ 2, 2, 8 ], [ 11, 13 ], [ 2, 2, 8 ], 
+  [ 2, 2, 8 ], [ 2, 2, 8 ], [ 2, 2, 3 ], [ 2, 2, 3 ], [ 2, 2, 3 ], 
+  [ 2, 2, 3 ], [ 2, 2, 3 ], [ 2, 2, 3 ], [ 2, 2, 3 ], [ 2, 2, 3 ], 
+  [ 2, 2, 3 ], [ 2, 2, 3 ] ]
+gap> quit;

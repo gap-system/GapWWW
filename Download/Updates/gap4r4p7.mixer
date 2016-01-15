@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<mixer template="gw.tmpl">
+<mixertitle><mixer var="GAP"/> 4.4 Update 7 (March 2006)</mixertitle>
+
+<!-- descriptions of fixes: -->
+<h3>New or improved functionality</h3>
+<ol>
+
+<li>
+The <mixer manual="Reference: Display"><span class="code">Display</span>
+</mixer> functionality for character tables has been extended by addition 
+of an option to show power maps and centralizer orders in a format
+similar to that used in the ATLAS.
+Furthermore the options handling is now hierarchical,
+in order to admit more flexible overloading.
+</li>
+
+<li>
+For the function <mixer manual="Reference: LowIndexSubgroupsFpGroup">
+<span class="code">LowIndexSubgroupsFpGroup</span></mixer>,
+there is now an <mixer manual="Reference: Iterators">iterator</mixer> variant
+<span class="code">LowIndexSubgroupsFpGroupIterator</span>.
+[Suggested (and based on code contributed) by Michael Hartley]
+</li>
+
+<li>
+Semigroup functionality in <span class="code">GAP</span> has been improved 
+and extended. Green's relations are now stored differently, making the system 
+more amenable to new methods for computing these relations in special cases. 
+It is now possible to calculate 
+Green's classes etc. without computing the entire semigroup or necessarily 
+loading the package <span class="pkgname">MONOID</span>. 
+Furthermore, the Froidure-Pin algorithm has now been implemented in 
+<span class="code">GAP</span>. 
+</li>
+
+<li>
+Functionality for creating free products of any list of groups for which 
+a finite presentation can be determined had been added. This
+function returns a finitely presented group. This functionality includes
+the <span class="code">Embedding</span> operation.
+
+As an application of this new code a specialized direct product 
+operation has been added for finitely presented groups which 
+returns a finitely presented group. This application includes 
+<span class="code">Embedding</span> and <span class="code">Projection</span> functionality.
+</li>
+
+<li>
+Some new Straight Line Program (SLP) functionality has been added. 
+The new functions take given SLPs and create new ones by restricting
+to a subset of the results, or to an intermediate result or by calculating
+the product of the results of two SLPs.
+</li>
+
+<li>
+New code has been added to allow group elements with memory;
+that is, they store
+automatically how they were derived from some given set of generators.
+Note that there is not yet documentation for this functionality,
+but some packages already use it.
+</li>
+
+<li>
+New code has been added to handle matrices and vectors in such a way that 
+they do not change their representation in a generic manner.
+</li>
+
+<li>
+The <mixer manual="Reference: Irr"><span class="code">Irr</span></mixer>
+method for p-solvable p-modular Brauer tables now keeps the order of the
+irreducibles in the ordinary table.
+</li>
+
+<li>
+<span class="pkgname">GAP</span> can now handle any finite field for which the 
+Conway polynomial is known or can be computed. 
+</li>
+
+<li>
+New Conway polynomials provided by John Bray and Kate Minola have been added.
+</li>
+
+<li>
+The <mixer manual="Reference: ReadTest"><span class="code">ReadTest</span>
+</mixer> methods for strings (filenames) and streams now automatically set
+the screen width (see <mixer manual="Reference: SizeScreen">
+<span class="code">SizeScreen</span></mixer>) to 80 before the tests,
+and reset it afterwards.
+</li>
+
+<li>
+Now a few more checks are done during the <span class="code">configure</span>
+phase of compiling for future use of some I/O functions of the C-library
+in a package. Also the path to the <span class="pkgname">GAP</span> binaries for the <span class="pkgname">GAP</span> compiler is 
+now handled via autoconf. Finally, now <span class="code">autoconf</span>
+version 2.59 is used.
+</li>
+
+</ol>
+
+<h3>Fixed bugs which could produce wrong results</h3>
+<ol>
+
+<li>
+Some technical errors in the functions for compressed vectors and matrices
+which could lead to corruption of internal data structures and so to crashes
+or conceivably to wrong results. [Reported by Roman Schmied]
+</li>
+
+<li>
+A potential problem in the generic method for the undocumented operation
+<span class="code">DirectFactorsOfGroup</span>:
+It was silently assumed that
+<mixer manual="Reference: NormalSubgroups">
+<span class="code">NormalSubgroups</span></mixer>
+delivers the trivial subgroup as first and
+the whole group as last entry of the resulting list.
+</li>
+
+<li>
+The code for sublists of compressed vectors created by <span class="code">vec{range}</span> may write 
+one byte beyond the space allocated for the new vector, overwriting part of the next
+object in the workspace. Thanks to Jack Schmidt for narrowing down the problem.
+</li>
+
+<li>
+Given a class function object of value zero, an 
+<mixer manual="Reference: Arithmetic Operations for Class Functions">
+<span class="code">InverseOp</span></mixer> method for a class function
+erroneously did not return <span class="code">fail</span>. 
+[Reported by Jack Schmidt]
+</li>
+
+<li>
+The <mixer manual="Reference: Arithmetic Operations for Class Functions">
+<span class="code">Order</span></mixer> method for a class function
+erroneously returned a finite number if one of the values
+was nonreal, not a cyclotomic integer, and had norm 1.
+</li>
+
+<li>
+Two missing perfect groups were added, and the permutation degree lowered on
+the perfect groups with the largest degrees. [Reported by Jack Schmidt]
+</li>
+
+<li>
+When a character table was displayed with
+<mixer manual="Reference: Printing Character Tables">
+<span class="code">Display</span></mixer>,
+the centralizer order displayed for the first class shown
+was not correct if it did not involve
+all prime divisors of the group. [Reported by Jack Schmidt]
+</li>
+
+<li>
+The first argument of the function <mixer manual="Reference: VectorSpace">
+<span class="code">VectorSpace</span></mixer> must be a field.
+This is checked from now on. [Reported by Laurent Bartholdi]
+</li>
+
+<li>
+Up to now, it was possible to create a group object from a semigroup of
+cyclotomics using <mixer manual="Reference: AsGroup">
+<span class="code">AsGroup</span></mixer>,
+although groups of cyclotomics are not admissible. [Reported by Alexander Konovalov]
+</li>
+
+<li>
+The documentation of 
+<span class="code">CharacteristicPolynomial(F,mat)</span> 
+was ambiguous if
+<span class="code">FieldOfMatrix(mat) &le; F &lt; 
+DefaultFieldOfMatrix(mat)</span>.
+In particular, the
+result was representation dependent. This was fixed by introducing a second
+field which specifies the vector space which mat acts upon.  [Reported by Jack Schmidt]
+</li>
+
+<li>
+<span class="code">AssociatedReesMatrixSemigroupOfDClass</span> produced an incorrect 
+sandwich matrix for the semigroup created. This matrix is an
+attribute set when creating the Rees matrix semigroup but is 
+not used for creating the semigroup. The incorrect result was returned
+when <span class="code">SandwichMatrix</span> was called. [Reported by Nelson Silva and Joao Araujo]
+</li>
+
+<li>
+The literal <span class="code">"compiled"</span> was given an incorrect length. The 
+kernel was then unable to find compiled library code as the search
+path was incorrect. Also the documentation example had an error in 
+the path used to invoke the gac compiler.
+</li>
+
+<li>
+The twisting group in a generic wreath product might have had intransitive action. [Reported by Laurent Bartholdi]
+</li>
+
+<li>
+There was an arithmetic bug in the polynomial reduction code.
+</li>
+</ol>
+
+
+<h3>Fixed bugs which could lead to crashes</h3>
+<ul>
+
+<li>
+Bug 1 in the list of fixed bugs which could lead to wrong results
+could also potentially lead to crashes.
+</li>
+
+</ul>
+
+
+<h3>Other fixed bugs</h3>
+<ol>
+
+<li>
+The matrices of invariant forms stored as values of the attributes
+<mixer manual="Reference: InvariantBilinearForm"><span
+class="code">InvariantBilinearForm</span></mixer>,
+<mixer manual="Reference: InvariantQuadraticForm"><span
+class="code">InvariantQuadraticForm</span></mixer>, and
+<mixer manual="Reference: InvariantSesquilinearForm"><span
+class="code">InvariantSesquilinearForm</span></mixer>,
+for matrix groups over finite fields,
+are now in the (compressed) format returned by
+<mixer manual="Reference: ImmutableMatrix"><span
+class="code">ImmutableMatrix</span></mixer>.
+</li>
+
+<li>
+<span class="code">String</span> now returns an immutable string, 
+by making a copy before changing the argument. 
+</li>
+
+<li>
+Permutation ^0 and permutation ^1 were not handled with special code in
+the kernel, hence were very slow for big permutations.
+[Reported by Max Neunhoeffer]
+</li>
+
+<li>
+Added code to cache the induced pcgs for an arbitrary parent pcgs. (This code
+was formerly part of the <span class="pkgname">CRISP</span> package.)
+</li>
+
+<li>
+This fix consists of numerous changes to improve support for 
+direct products, including:
+- new methods for <span class="code">PcgsElementaryAbelianSeries</span>,
+<span class="code">PcgsChiefSeries</span>,
+<span class="code">ExponentsOfPcElement</span>, 
+<span class="code">DepthOfPcElement</span> for direct products
+- fixed <span class="code">EnumeratorOfPcgs</span> to test for membership first
+- new methods for membership test in groups which have an induced pcgs
+- added <span class="code">GroupOfPcgs</span> attribute to pcgs in various methods
+- fixed declarations of <span class="code">PcgsElementaryAbelianSeries</span>, 
+<span class="code">PcgsChiefSeries</span>
+(the declared argument was a pcgs, not a group) [Reported by Roman Schmied]
+</li>
+
+<li>
+Corrected a term ordering problem encountered by the basis construction
+code for finite dimensional vector spaces of multivariate rational functions. [Reported by Jan Draisma]
+</li>
+
+<li>
+When the factor of a finite dimensional group ring by an ideal was formed,
+a method intended for free algebras modulo relations was used,
+and the returned factor algebra could be used for (almost) nothing. [Reported by Heiko Dietrich]
+</li>
+
+<li>
+Up to now, <mixer manual="Reference: PowerMap"><span class="code">
+PowerMap</span></mixer> ran into an error
+when one asked for the n-th power map where n was not a small integer.
+This happened in some <span class="pkgname">GAP</span> library functions
+if the exponent of the character table in question was not a small integer.
+</li>
+
+<li>
+Up to now, the test whether a finite field element was contained in a group
+of finite field elements ran into an error if the element was not in the
+field generated by the group elements. [Reported by Heiko Dietrich]
+</li>
+
+<li>
+Conjugacy classes of natural (special) linear groups are now always returned
+with trivial class first.
+</li>
+
+<li>
+Up to now, it could happen that <mixer manual="Reference: CheckFixedPoints">
+<span class="code">CheckFixedPoints</span></mixer> reduced an entry in its
+second argument to a list containing only one integer
+but did not replace the list by that integer;
+according to the conventions, this replacement should be done.
+</li>
+
+<li> 
+The functions <span class="code">PrintTo</span> and 
+<span class="code">AppendTo</span> did not work correctly for streams.
+[Reported by Marco Costantini]
+</li>
+
+<li>
+The function <span class="code">Basis</span> did not return a value
+when it was called with the argument <span class="code">Rationals</span>.
+[Reported by Klaus Lux]
+</li>
+
+<li>
+For certain matrix groups, the function
+<span class="code">StructureDescription</span> raised an error message.
+The reason for this was that a trivial method for
+<span class="code">IsGeneralLinearGroup</span> for matrix groups in
+<span class="code">lib/grpmat.gi</span> which is ranked higher than
+the nontrivial method for generic groups in
+<span class="code">lib/grpnames.gi</span> called the operation
+<span class="code">IsNaturalGL</span>, for which there was no nontrivial
+method available. [Reported by Nilo de Roock]
+</li>
+
+<li> 
+Action on sets of length 1 was not correctly handled. [Reported by Mathieu Dutour]
+</li>
+
+<li>
+Now <span class="code">WriteByte</span> admits writing zero characters to
+all streams. [Reported by Marco Costantini]
+</li>
+
+<li>
+The conjugacy test for subgroups tests for elementary abelian regular normal subgroup (EARNS) conjugacy. The fix will 
+catch this in the case that the second group has no EARNS. 
+[Reported by Andrew Johnson]
+</li>
+
+<li>
+So far, the UNIX installation didn't result in a correct gap.sh if the 
+installation path contained space characters. Now it should handle this 
+case correctly, as well as other unusual characters in path names 
+(except for double quotes).
+</li>
+
+</ol>
+
+
+</mixer>

@@ -1,0 +1,752 @@
+\documentclass[11pt]{article}
+\usepackage{lslide}
+\usepackage{path}
+\addtolength{\textheight}{0.66truein} % A4
+\addtolength{\textwidth}{0.27truein} % A4
+\vertgroup
+\parskip 1ex plus 1ex minus 0.2ex
+\def\bs{\begin{slide}}
+\def\es{\end{slide}}
+\def\bi{\begin{itemize}}
+\def\ei{\end{itemize}}
+\def\GAP{\textsf{GAP}}
+\begin{document}
+\title[Computational Algebra]{An Introduction to GAP}
+\author{Steve Linton}
+\organization{Division of Computer Science, St.~Andrews}
+\titlepage
+\bs
+\subsection{Overview}
+
+\bi 
+\item Part I
+\bi
+\item Computation and algebra -- generalities
+\item Getting Started with GAP
+\item Simple Calculations with numbers and groups
+\item Getting help, reading files, logging and saving
+\item Lists and records -- useful functions for lists
+\ei
+\item Part II
+\bi
+\item Conditionals and Loops
+\item Writing functions
+\item A little about Soluble Groups in GAP
+\ei
+\ei
+\es
+\section{Generalities}
+\bs
+\subsection{Why Compute?}
+\bi
+\item Exploration -- to form or dismiss conjectures or gain insight
+\item Resolve finite problems -- sporadic structures, small cases left
+over by general theorems
+\item Teaching -- allow students to work out non-trivial examples
+\item As a research area in its own right -- algorithms, algorithmics
+\item As a testbed for Computer Science -- type systems, languages,
+database concepts
+\ei
+\es
+\bs
+\subsection{Approaching Problems in Computational Algebra}
+
+\bi
+\item Charlie Sims, some years ago, divided problems into three
+classes
+\begin{description}
+\item[I] Problems where many group elements fit into memory
+\item[II] Problems where just a few group elements fit
+\item[III] Problems where only a fraction of one element fits
+\end{description}
+\item I would generalise this and speak of:
+\begin{description}
+\item[I] Problems that can be solved quickly by entirely automatic
+means
+\item[II] Problems that can be solved using standard
+low-level tools and some mathematical ingenuity
+\item[III] Problems that require special-purpose programming
+\end{description}
+\item These boundaries are both fuzzy and moving
+\item Frustration arises when you tackle a problem in one class using
+tools suitable for another
+\ei
+\es
+\bs
+\subsection{The Reds and the Greens}
+\bi
+\item Two schools in CGT (especially pre 1991)
+\item Green school (Sims, Europeans, Australians, mainly mathematicians)
+\bi
+\item Pragmatists
+\item Implementation is important
+\item ``Good'' algorithm performs well on standard or big examples
+\ei
+\item Red school (North America, mainly computer scientists)
+\bi
+\item Complexity theorists -- started from Graph Isomorphism problem
+\item Precise complexity calculation important
+\item ``Good'' algorithm has low asymptotic complexity
+\ei
+\item Some fusion since 1991 -- Seress, Cooperman
+\item Result -- better theory and better implementations
+\ei
+\es
+\section{Getting Started with GAP}
+\bs
+\subsection{GAP}
+\bi
+\item Groups, Algorithms, Programming
+\item Free software
+\item Runs under UNIX, MSDOS and MacOS (at least) -- easy to port
+\item Developed over 11 years in Lehrstuhl D f\"ur Mathematik, RWTH
+Aachen, Germany
+\bi
+\item Prof Joachim Neub\"user
+\item Martin Sch\"onert
+\item Cast of thousands, mainly in Aachen, some elsewhere
+\ei
+\item Headquarters moving to St Andrews in the next few weeks
+\item Current version 3.4.4. Version 4 about to enter $\beta$-test
+\item More info \path|http://www-gap.dcs.st-and.ac.uk/~gap/|
+\item Download the system from
+\path|ftp://ftp-gap.dcs.st-and.ac.uk/pub/gap|
+\ei
+\es
+\bs
+\subsection{First Steps}
+
+\begingroup
+\large
+\begin{verbatim}
+{caolila:106} gap -b
+                                                                             
+                 ########            Lehrstuhl D fuer Mathematik             
+               ###    ####           RWTH Aachen                             
+              ##         ##                                                  
+             ##          #             #######            #########          
+            ##                        #      ##          ## #     ##         
+            ##           #           #       ##             #      ##        
+            ####        ##           ##       #             #      ##        
+             #####     ###           ##      ##             ##    ##         
+               ######### #            #########             #######          
+                         #                                  #                
+                        ##           Version 3              #                
+                       ###           Release 4.4            #                
+                      ## #           18 Apr 97              #                
+                     ##  #                                                   
+                    ##   #  Alice Niemeyer, Werner Nickel,  Martin Schoenert 
+                   ##    #  Johannes Meier, Alex Wegner,    Thomas Bischops  
+                  ##     #  Frank Celler,   Juergen Mnich,  Udo Polis        
+                  ###   ##  Thomas Breuer,  Goetz Pfeiffer, Hans U. Besche   
+                   ######   Volkmar Felsch, Heiko Theissen, Alexander Hulpke 
+                            Ansgar Kaup,    Akos Seress,    Erzsebet Horvath 
+                            Bettina Eick                                     
+                            For help enter: ?<return>                        
+gap> 
+\end{verbatim}
+\endgroup
+\es
+\bs
+\subsection{The GAP Prompt}
+\bi
+\item What GAP displays \verb|gap> | it is waiting for you to tell it
+what to do
+\item If you type an expression, followed by a \verb|;|
+ GAP will print its value:
+\begin{verbatim}
+gap> 1+1;
+2
+gap> 2^70;
+1180591620717411303424
+gap> Factorial(11);
+39916800
+gap> 
+\end{verbatim}
+\item As well as integers, GAP can compute with other things
+\begin{verbatim}
+gap> (1,2,3,4)^2;
+(1,3)(2,4)
+gap> Size(GF(5));
+5
+gap> Elements(SymmetricGroup(3));
+[ (), (2,3), (1,2), (1,2,3), (1,3,2), (1,3) ]
+gap> Z(4)^2 = Z(2);
+false
+gap> Z(4)^3 = Z(2);
+true
+gap> true and false;
+false
+gap> 
+\end{verbatim}
+\ei
+\es
+\bs
+\subsection{Variables}
+\bi
+\item To remember computed values for later, you can assign them to
+variables
+\begin{verbatim}
+gap> a := 2*3;
+6
+gap> a+1;
+7
+gap> b := a;
+6
+gap> a := a+1;
+7
+gap> a; b;
+7
+6
+\end{verbatim}
+\item \verb|last| is a special variable (and \verb|last2| and
+\verb|last3|)
+\begin{verbatim}
+gap> 5/7;
+5/7
+gap> last;
+5/7
+gap> 7/5; last;
+7/5
+7/5
+gap> last+1;
+12/5
+\end{verbatim}
+\item It is best always to use lower-case for your variables
+\ei
+\es
+\bs
+\subsection{Supressing Printing}
+\bi
+\item If you are assigning a complicated value to a variable, you
+may not want to print it
+\item Using \verb|;;| at the end of the line prevents printing
+\begin{verbatim}
+gap> e  := Elements(SymmetricGroup(4));;
+gap> Length(e);
+24
+gap> Number(e,p->OrderPerm(p) = 3);
+8
+\end{verbatim}
+\item Just using the built-in functions and assignment, you can do a
+lot of calculations
+\ei
+\es
+\section{Help, Reading Files, Saving}
+\bs
+\subsection{Getting Help}
+\bi
+\item The GAP manual (all 1600 pages) can be read in four ways:
+\bi
+\item Via GAP itself, as on-line help
+\item As a \verb|dvi| or \verb|ps| file, with a previewer or on paper
+\item From the HTML files in the distribution, using a Web  browser
+\item On one of the GAP Web sites -- St Andrews, Aachen, Northeastern
+U or ANU
+\ei
+\item The On-line help is accessed using \verb|?|
+\begingroup
+\large
+\begin{verbatim}
+gap> ?
+    Welcome to GAP ___________________________________________ Welcome to GAP
+
+    Welcome to GAP.
+
+    GAP is a system for computational group theory.
+
+    Enter '?About GAP'    for a step by step introduction to GAP.
+    Enter '?Help'         for information how to use the GAP help system.
+    Enter '?Chapters'     for a list of the chapters of the GAP help system.
+    Enter '?Copyright'    for the terms under which you can use and copy GAP.
+
+    In each case do *not* enter the single quotes(') , they are  used in help
+    sections only to delimit text that you actually enter.
+
+gap> 
+\end{verbatim}
+\endgroup
+\ei
+\es
+\bs
+\subsection{On-line help continued}
+\bi
+\item You can search the chapter and section headings using \verb|??|
+\begingroup
+\Smallsize
+\begin{verbatim}
+gap> ??dihedral
+    dihedral ______________________________ Index
+    The Basic Groups Library (DihedralGroup)
+    TomDihedral
+\end{verbatim}
+\endgroup
+\item The St Andrews Web pages provide a search facility for the whole
+text
+\item Note also \verb|?>| to see the next section
+\ei
+\es
+\bs
+\subsection{Reading from Files}
+\bi
+\item When you do more complicated calculations, you want to be able
+to develop, debug and reuse them, without having to remember or retype
+what you did before
+\item You can create a file (usually called \textit{file}\verb|.g|)
+containing GAP commands and then
+\verb|Read("|\textit{file}\verb|.g");|
+will cause GAP to execute those commands
+\item The results of commands in the file are \emph{not} printed
+\begin{verbatim}
+{caolila:114} cat > test.g
+1+3;
+a := 17;
+Print(a^3,"\n");
+b := 11;
+^D
+{caolila:115} gap -b
+gap> Read("test.g");
+4913
+gap> a;
+17
+gap> b;
+11
+\end{verbatim}
+\item Note the \verb|Print| command to directly print something
+\ei
+\es
+\bs
+\subsection{Logging}
+\bi
+\item If you are ``exploring'' some problem interactively, but want a
+record
+in case you make a discovery, you can use ``logging''
+\begingroup
+\large
+\begin{verbatim}
+gap> LogTo("test.log");
+gap> s := SymmetricGroup(AgWords,4);
+Group( g1, g2, g3, g4 )
+gap> ccs := ConjugacyClasses(s);
+[ ConjugacyClass( Group( g1, g2, g3, g4 ), IdAgWord ), 
+  ConjugacyClass( Group( g1, g2, g3, g4 ), g4 ), 
+  ConjugacyClass( Group( g1, g2, g3, g4 ), g2 ), 
+  ConjugacyClass( Group( g1, g2, g3, g4 ), g1 ), 
+  ConjugacyClass( Group( g1, g2, g3, g4 ), g1*g3 ) ]
+gap> List(ccs,c -> Order(s,c.representative));
+[ 1, 2, 3, 2, 4 ]
+gap> 
+{caolila:117} cat test.log
+gap> s := SymmetricGroup(AgWords,4);
+Group( g1, g2, g3, g4 )
+gap> ccs := ConjugacyClasses(s);
+[ ConjugacyClass( Group( g1, g2, g3, g4 ), IdAgWord ), 
+  ConjugacyClass( Group( g1, g2, g3, g4 ), g4 ), 
+  ConjugacyClass( Group( g1, g2, g3, g4 ), g2 ), 
+  ConjugacyClass( Group( g1, g2, g3, g4 ), g1 ), 
+  ConjugacyClass( Group( g1, g2, g3, g4 ), g1*g3 ) ]
+gap> List(ccs,c -> Order(s,c.representative));
+[ 1, 2, 3, 2, 4 ]
+\end{verbatim}
+\endgroup
+\item If you believe you have proved something by calculation, it is good practice to
+try and prepare a file which repeats the proof in as short and direct
+a way as possible. A log file is a good place to start from.
+\ei
+\es
+\bs
+\subsection{Saving Single Objects}
+\bi
+\item Sometimes you just want to store an object that you have
+computed.
+\item This can usually be done using the \verb|PrintTo| command
+\begingroup
+\large
+\begin{verbatim}
+gap> s := SymmetricGroup(10);
+Group( ( 1,10), ( 2,10), ( 3,10), ( 4,10), ( 5,10), ( 6,10), ( 7,10), 
+( 8,10), ( 9,10) )
+gap> c := Normalizer(s,Subgroup(s,[(1,2,3)(4,5,6,7,8)(9,10)]));
+Subgroup( Group( ( 1,10), ( 2,10), ( 3,10), ( 4,10), ( 5,10), ( 6,10), 
+( 7,10), ( 8,10), ( 9,10) ), [ ( 1, 2, 3)( 4, 5, 6, 7, 8)( 9,10), 
+  ( 4, 6, 8, 5, 7), ( 1, 2, 3)( 4, 7, 5, 8, 6), ( 5, 6, 8, 7), ( 2, 3) ] )
+gap> Size(last);
+240
+gap> PrintTo("cent.g","c := ",c,";\n");
+gap> Unbind(c);
+gap> Read("cent.g");
+gap> Size(c);
+240
+\end{verbatim}
+\endgroup
+\item Note also \verb|Unbind|. There is also \verb|IsBound|.
+\item Not every object prints in a form that can be read (AG groups
+don't)
+\ei
+\es
+\bs
+\subsection{Command Line Editing}
+\bi
+\item Can use \verb|emacs| like keys to edit the command you are
+typing
+\item Ctrl-B to move back, Ctrl-F forward, Ctrl-P to get the previous
+line again, etc.
+\item See \verb|?Line Editing|
+\ei
+\es
+\section{Lists and Records}
+\bs
+\subsection{Lists}
+\bi
+\item Data can be combined in GAP in two ways
+\item To talk about a lot of different things, we usually use a list
+\item For example \verb|ConjugacyClasses| returns a list of classes
+\item We manipulate a list using \verb|[ ]|.
+\begin{verbatim}
+gap> l := [2,3,5];
+[ 2, 3, 5 ]
+gap> l[1];
+2
+gap> l[3];
+5
+gap> l[7];
+Error, List Element: <list>[7] must have a value
+gap> l[7] := 17;
+17
+gap> l;
+[ 2, 3, 5,,,, 17 ]
+gap> Unbind(l[3]);
+gap> l;
+[ 2, 3,,,,, 17 ]
+\end{verbatim}
+\ei
+\es
+\bs
+\subsection{Records}
+\bi
+\item To talk about different aspects of the same thing, it is often
+better to use a record -- groups are actually stored as records
+\item Manipulate using \verb|rec| and \verb|.|
+\begin{verbatim}
+gap> r := rec(age := 17, name := "fred", parents := ["bill","mary"]);
+rec(
+  age := 17,
+  name := "fred",
+  parents := [ "bill", "mary" ] )
+gap> r.age;
+17
+gap> r.name;
+"fred"
+gap> r.pets;
+Error, Record: element 'pets' must have an assigned value
+gap> r.pets := ["rover"];
+[ "rover" ]
+gap> Unbind(r.age);
+gap> r;
+rec(
+  name := "fred",
+  parents := [ "bill", "mary" ],
+  pets := [ "rover" ] )
+\end{verbatim}
+\ei
+\es
+\bs
+\subsection{Useful Functions for Lists}
+\bi
+\item There are lots of useful functions for manipulating lists
+\bi
+\item \verb|Length(l)| -- last bound position
+\item \verb|Number(l)| -- number of bound positions
+\item \verb|el in l| -- is an element in the list
+\item \verb|Position(l,el)| -- returns \verb|false| is \verb|l| is not there
+\ei
+\begin{verbatim}
+gap> l;
+[ 2, 3,,,,, 17 ]
+gap> 3 in l;
+true
+gap> 5 in l;
+false
+gap> Length(l);
+7
+gap> Number(l);
+3
+gap> Position(l,3);
+2
+gap> Position(l,5);
+false
+\end{verbatim}
+\ei
+\es
+\bs
+\subsection{Functions for Lists 2}
+\bi
+\item Also functions that apply other functions to lists
+\bi
+\item \verb|List(l,func)| -- The list of images
+\item \verb|ForAll(l,bfunc)| -- does \verb|bfunc| return true every
+time
+\item \verb|ForAny(l,bfunc)| -- or any time
+\item \verb|Number(l,bfunc)| -- how many times?
+\item \verb|First(l,bfunc)| -- return the first element where it does
+\item \verb|Filtered(l,bfunc)| -- make the list of all the places
+where it does
+\ei
+\begin{verbatim}
+gap> l := [1..5];  
+[ 1 .. 5 ]
+gap> List(l,x->CyclicGroup(x));
+[ Group( () ), Group( (1,2) ), Group( (1,2,3) ), Group( (1,2,3,4) ), 
+  Group( (1,2,3,4,5) ) ]
+gap> ForAll(l,IsPrimeInt);
+false
+gap> ForAny(l,IsPrimeInt);
+true
+gap> First(l,IsPrimeInt);
+2
+gap> Filtered(l,IsPrimeInt);
+[ 2, 3, 5 ]
+gap> Number(l,IsPrimeInt);
+3
+\end{verbatim}
+\item \verb|[1..5]| is a special kind of list called a range. Also \verb|[1,3..11]|
+\item See also \verb|Sum|, \verb|Product|, \verb|Collected|
+\ei
+\es
+\bs
+\subsection{Identical Lists}
+\bi
+\item Two variables may refer to the \emph{same} list
+\item Then changes to it are visible by either name
+\item To make a different list (with the same elements), use
+\verb|ShallowCopy|
+\begin{verbatim}
+gap> l := [1,2,4];;
+gap> m := l;;
+gap> l[2] := 7;;
+gap> m;
+[ 1, 7, 4 ]
+gap> m := ShallowCopy(l);
+[ 1, 7, 4 ]
+gap> l[2] := 11;;
+gap> m;
+[ 1, 7, 4 ]
+\end{verbatim}
+ \ei \es
+\section{Programming}
+\bs
+\subsection{Statements}
+\bi
+\item As well as giving GAP expressions to evaluate, one can 
+instruct it to do various things
+\item We have seen some examples of this already 
+\bi
+\item assignments
+\item system commands like \verb|LogTo|
+\item \verb|Unbind|
+\ei
+\item Sometimes these print a value, sometimes not
+\item One can also give conditional instructions
+\begin{verbatim}
+gap> g := OnePrimitiveGroup(DegreeOperation,50);
+PSL(2,49)
+gap> if IsSimple(g) then Print("simple\n");    
+> elif IsNilpotent(g) then print("nilpotent\n");
+> else Print(List(CompositionSeries(g),Size));
+> fi;
+simple
+\end{verbatim}
+\item Must have \verb|if|, \verb|then| and \verb|fi|, \verb|elif| and
+\verb|else| optional
+\item Can combine conditions with \verb|and|, \verb|or| and \verb|not|
+\ei
+\es
+\bs
+\subsection{Loops}
+\bi
+\item The most common is the \verb|for| loop
+\begin{verbatim}
+gap> for i in [1..10] do                              
+> if IsPrime(i) then Print(i," "); else Print(i^2," "); fi;
+> od; Print("\n");
+1 2 3 16 5 36 7 64 81 100 
+\end{verbatim}
+\item You can use this to loop over any list:
+\begin{verbatim}
+gap> s := SymmetricGroup(5);; pi := ();;   
+gap> for class in ConjugacyClasses(s) do
+> pi := pi*class.representative; od;
+gap> pi;
+(1,5,2,3)
+\end{verbatim}
+\item There are also \verb|while| and \verb|repeat| loops
+\ei
+\es
+\bs
+\subsection{Functions}
+\bi
+\item Although they can be useful on the command line, the main 
+purpose of all these constructions is to write functions
+\item An example function:
+\begin{verbatim}
+gap> repeats := function(x,n)
+> local l,i;
+> l := [];
+> for i in [1..n] do
+> Add(l,x);
+> od; 
+> return l;
+> end;
+function ( x, n ) ... end
+\end{verbatim}
+\item A function is an object like any other. You can assign it, pass
+it to a function, or return it from a function.
+\begin{verbatim}
+gap> copies := repeats;;
+gap> copies(5,5);
+[ 5, 5, 5, 5, 5 ]
+gap> addx := function(x) return y->x+y; end;
+function ( x ) ... end
+gap> add3 := addx(3);
+function ( y ) ... end
+gap> add3(4);
+7
+gap> List([1..3],add3);
+[ 4, 5, 6 ]
+gap> l := List([1..3],addx);
+[ function ( y ) ... end, function ( y ) ... end, function ( y ) ... end ]
+gap> List(l,f -> f(5));
+[ 6, 7, 8 ]
+\end{verbatim}
+\item Note the \verb|->| shorthand for simple functions
+\item Nearly always write functions in a file
+\ei
+\section{Basics of AgGroups}
+\bi
+\item AG is for ``aufl\"osbare Gruppen'' -- soluble groups
+\item In GAP4 we use Pc for polycyclic instead (and can handle
+infinite groups)
+\item Elements are represented by \verb|AgWords| -- multiplication
+uses collection
+\item To make an AG Group:
+\bi
+\item Convert an existing finite soluble group (eg from permutations),
+using \verb|AgGroup|
+\item Create a basic group from the library with \verb|AgWords| as
+first argument
+\item Convert a FP group which actually is a \emph{consistent}
+pc-presentation, using \verb|AgGroupFpGroup|
+\item Compute a p- or soluble quotient of an FP group
+\item Form subgroups of other Ag Groups
+\item Extract groups from the libraries of groups of small order
+\ei
+\ei
+\es
+\bs
+\subsection{Making AgGroups 1}
+\bi
+\item From existing soluble groups:
+\begin{verbatim}
+gap> s := SymmetricGroup(8);
+Group( (1,8), (2,8), (3,8), (4,8), (5,8), (6,8), (7,8) )
+gap> s1 := Stabilizer(s,[[1,2],[3,4],[5,6],[7,8]],OnSetSets);;
+gap> Size(s1);
+384
+gap> a := AgGroup(s1);         
+Group( g1, g2, g3, g4, g5, g6, g7, g8 )
+gap> List(a.generators,RelativeOrderAgWord);
+[ 2, 3, 2, 2, 2, 2, 2, 2 ]
+gap> List(a.generators,x->Image(a.bijection,x));   
+[ (1,3)(2,4), (1,6,3,2,5,4), (1,5)(2,6)(3,8)(4,7), (1,4)(2,3)(5,8)(6,7), 
+  (1,2), (3,4), (5,6), (7,8) ]
+\end{verbatim}
+\ei
+\es
+\bs
+\subsection{Making AgGroups 2}
+\bi
+\item From the library
+\begin{verbatim}
+gap> SymmetricGroup(AgWords,4);
+Group( g1, g2, g3, g4 )
+\end{verbatim}
+\item From a FP group
+\begin{verbatim}
+gap> f := FreeGroup(4);
+Group( f.1, f.2, f.3, f.4 )
+gap> $= f.4;;                                                                
+Group( a, b, c, d )
+gap> f/[a^2,b^3,c^2,d^2, Comm(a,b)/b^-1, Comm(a,c)/d,Comm(a,d), Comm(b,c)/d, 
+> Comm(b,d)/(c*d), Comm(c,d)];
+Group( a, b, c, d )
+gap> AgGroupFpGroup(last);
+Group( a, b, c, d )
+gap> Size(last);
+24
+\end{verbatim}
+\item Note that the presentation must be a consistent pc-presentation
+\ei
+\es
+\bs
+\subsection{Making Ag Groups 3}
+\bi
+\item There is a p-quotient procedure in GAP \verb|pQuotient|
+\item Also a solvable quotient \verb|SolvableQuotient|
+\item There are also links to the ANU p and soluble quotient programs
+\item See the manual pages for details
+\item Some small work is needed to turn the output into an AgGroup
+\ei
+\es
+\bs
+\subsection{Making Ag Groups 4}
+\bi
+\item GAP contains a library of all groups of order up to 1000, except
+orders 512 and 768
+\item Most are solvable, and stored as AgGroups
+\begin{verbatim}
+gap> g := SmallGroup(384,1001);      
+384_1001
+gap> List(CompositionSeries(g),Size);
+[ 384, 192, 96, 48, 24, 12, 6, 3, 1 ]
+gap> Size(Centre(g));
+4
+gap> IdGroup(g);
+[ 384, 1001 ]
+\end{verbatim}
+\item \verb|IdGroup| identifies the isomorphism class of a group
+\ei
+\es
+\bs
+\subsection{Special Ag Groups}
+\bi
+\item Ideas due to Charles Leedham-Green and Bettina Eick
+\item A specially nice choice of Ag generators for a group
+\item Once you have this many operations become much quicker
+\item Compute it using \verb|SpecialAgGroup|
+\ei
+\es
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

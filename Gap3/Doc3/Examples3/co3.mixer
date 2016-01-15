@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<mixer template="gwgap3.tmpl">
+<mixertitle>Constructing Co3 in <mixer var="GAP3"/></mixertitle>
+
+<p>
+  See also the <a href="/Doc/Examples/co3.html">
+  corresponding&nbsp;<mixer var="GAP4"/>&nbsp;page</a>.
+</p>
+
+<hr />
+This is an extended version of the last example in the paper
+"<em>Construction of Co3. An example of the use of an integrated system
+for Computational Group Theory</em>", Groups St Andrews 1997 in Bath,
+by <mixer person="Alexander Hulpke" data="name_link"/> and
+<mixer person="Steve Linton" data="name_link"/>.
+<p />
+The <a href="http://www.math.colostate.edu/~hulpke/paper/bathexample.html">
+original&nbsp;example&nbsp;page</a> provides links to a <mixer var="GAP3"/>
+version and to an early <mixer var="GAP4"/> version.
+The present page contains just a <mixer var="GAP3"/> version.
+The associated  <mixer var="GAP3"/> <a href="co3.in">input&nbsp;file</a>
+is also available.
+<hr />
+
+<pre>
+  gap&gt; x:=Indeterminate(GF(2));
+  X(GF(2))
+  gap&gt; x.name:="x";;
+  gap&gt; f:=x^23-1;
+  Z(2)^0*(x^23 + 1)
+  gap&gt; Factors(f);
+  [ Z(2)^0*(x + 1), Z(2)^0*(x^11 + x^10 + x^6 + x^5 + x^4 + x^2 + 1), 
+    Z(2)^0*(x^11 + x^9 + x^7 + x^6 + x^5 + x + 1) ]
+  gap&gt; f:=First(Factors(f),i-&gt;Degree(i)&gt;1);
+  Z(2)^0*(x^11 + x^10 + x^6 + x^5 + x^4 + x^2 + 1)
+  gap&gt; RequirePackage("guava");
+  
+                ___________                   |                  
+               /            \           /   --+--  Version 1.3   
+              /      |    | |\\        //|    |                  
+             |    _  |    | | \\      // |                        
+             |     \ |    | |--\\    //--|     Jasper Cramwinckel  
+              \     ||    | |   \\  //   |     Erik Roijackers     
+               \___/  \___/ |    \\//    |     Reinald Baart       
+                                               Eric Minkes       
+  gap&gt; cod:=GeneratorPolCode(f,23,GF(2));
+  a cyclic [23,12,1..7]3 code defined by generator polynomial over GF(2)
+  gap&gt; IsPerfectCode(cod);
+  true
+  gap&gt; ext:=ExtendedCode(cod);
+  a linear [24,12,8]4 extended code
+  gap&gt; WeightDistribution(ext);
+  [ 1, 0, 0, 0, 0, 0, 0, 0, 759, 0, 0, 0, 2576, 0, 0, 0, 759, 0, 0, 0, 0, 0, 0, 
+    0, 1 ]
+  gap&gt; m24:=AutomorphismGroup(ext); m24.name:="m24";
+  Group( ( 1, 2)( 6,15,24,18)( 7,14,12,19)( 9,17,16,20)(10,21,23,22)(11,13), 
+  ( 2, 3)( 6,10)( 7,24)( 9,17)(11,13)(12,18)(14,21)(15,23), ( 3, 4)( 7,19)
+  (10,22)(11,13)(12,14)(15,18)(17,20)(21,23), ( 4, 5)( 6,23,21,16)( 7, 9,20,10)
+  (11,13)(12,15,17,19)(14,22,18,24), ( 5, 9,11,17)( 6,19,24,21)( 7,23)
+  ( 8,20,13,16)(10,12)(14,15,22,18), ( 5, 8)( 7,23)( 9,16)(10,12)(11,13)(14,22)
+  (17,20)(19,21), ( 6,10,19)( 7,14,18)( 8,11,13)( 9,17,16)(12,21,24)(15,23,22), 
+  ( 6,19)( 7, 9)(10,20)(12,16)(14,24)(15,21)(17,23)(18,22), ( 6, 7)( 9,19)
+  (10,15)(12,24)(14,16)(17,22)(18,23)(20,21), ( 6,18)( 7,23)( 9,17)(10,12)
+  (14,21)(15,24)(16,20)(19,22), ( 6,15)( 7,10)( 9,20)(12,23)(14,22)(16,17)
+  (18,24)(19,21) )
+  "m24"
+  gap&gt; Size(m24);
+  244823040
+  gap&gt; Transitivity(m24,[1..24]);
+  5
+  gap&gt; m22a:=Stabilizer(m24,[23,24],OnSets);
+  Subgroup( m24, [ ( 1, 2)( 5,14)( 6,18)( 7,12)( 8,19)( 9,20)(11,21)(13,22), 
+    ( 1, 3)( 4,13, 7,21)( 5,14)( 6, 9,22,11)( 8,16,15,19)(10,18,12,20), 
+    ( 4,13)( 6,19)( 7,21)( 8,11)( 9,15)(10,20)(12,18)(16,22), 
+    ( 3, 4,14,22)( 5,16,17,13)( 6, 7)( 8,15,11,10)( 9,12,20,18)(19,21), 
+    ( 3,17)( 4,16)( 5,14)( 6, 7)( 8,11)(12,18)(13,22)(19,21), 
+    ( 4,22,16)( 5,17,14)( 6, 8,10)( 7,11,15)( 9,19,12)(18,20,21), 
+    ( 4,21)( 6,16)( 7,13)( 8, 9)(10,18)(11,15)(12,20)(19,22), 
+    ( 4,11)( 6,10)( 7, 9)( 8,13)(12,22)(15,21)(16,18)(19,20), 
+    ( 4,22)( 6, 7)( 8,18)( 9,10)(11,12)(13,16)(15,20)(19,21), 
+    ( 2,14, 5, 3)( 4, 7, 9,10)( 6,22,12,11)( 8,16,20,21)(15,18)(23,24) ] )
+  gap&gt; Size(m22a);
+  887040
+  gap&gt; m22a:=Operation(m22a,[1..22]);m22a.name:="m22a";;
+  Group( ( 1, 2)( 5,14)( 6,18)( 7,12)( 8,19)( 9,20)(11,21)(13,22), ( 1, 3)
+  ( 4,13, 7,21)( 5,14)( 6, 9,22,11)( 8,16,15,19)(10,18,12,20), ( 4,13)( 6,19)
+  ( 7,21)( 8,11)( 9,15)(10,20)(12,18)(16,22), ( 3, 4,14,22)( 5,16,17,13)( 6, 7)
+  ( 8,15,11,10)( 9,12,20,18)(19,21), ( 3,17)( 4,16)( 5,14)( 6, 7)( 8,11)(12,18)
+  (13,22)(19,21), ( 4,22,16)( 5,17,14)( 6, 8,10)( 7,11,15)( 9,19,12)(18,20,21), 
+  ( 4,21)( 6,16)( 7,13)( 8, 9)(10,18)(11,15)(12,20)(19,22), ( 4,11)( 6,10)
+  ( 7, 9)( 8,13)(12,22)(15,21)(16,18)(19,20), ( 4,22)( 6, 7)( 8,18)( 9,10)
+  (11,12)(13,16)(15,20)(19,21), ( 2,14, 5, 3)( 4, 7, 9,10)( 6,22,12,11)
+  ( 8,16,20,21)(15,18) )
+  gap&gt; Size(m22a);
+  887040
+  gap&gt; s:=SylowSubgroup(m22a,2);;
+  gap&gt; a:=AgGroup(s);
+  Group( g1, g2, g3, g4, g5, g6, g7, g8 )
+  gap&gt; n:=Filtered(NormalSubgroups(a),i-&gt;Size(i)=16
+  &gt;         and IsElementaryAbelian(i));
+  [ Subgroup( Group( g1, g2, g3, g4, g5, g6, g7, g8 ), [ g4, g5*g6, g7, g8 ] ), 
+    Subgroup( Group( g1, g2, g3, g4, g5, g6, g7, g8 ), 
+      [ g1*g7, g2*g3*g7, g5*g6, g8 ] ), Subgroup( Group( g1, g2, g3, g4, g5, 
+      g6, g7, g8 ), [ g2*g3, g5*g6, g7, g8 ] ), 
+    Subgroup( Group( g1, g2, g3, g4, g5, g6, g7, g8 ), [ g4*g7, g5, g6, g8 ] ), 
+    Subgroup( Group( g1, g2, g3, g4, g5, g6, g7, g8 ), 
+      [ g4*g7, g5*g7, g6*g7, g8 ] ) ]
+  gap&gt; n:=List(n,i-&gt;Image(a.bijection,i));;
+  gap&gt; e:=Filtered(n,i-&gt;IsRegular(i,PermGroupOps.MovedPoints(i)));;
+  gap&gt; Length(e);
+  1
+  gap&gt; e:=e[1];;
+  gap&gt; h:=Normalizer(m22a,e);;
+  gap&gt; mop:=Operation(m22a,RightCosets(m22a,h),OnRight);;
+  gap&gt; DegreeOperation(mop,[1..100]);
+  77
+  gap&gt; ophom:=OperationHomomorphism(m22a,mop);;
+  gap&gt; dp:=DirectProduct(m22a,mop);;
+  gap&gt; emb1:=Embedding(m22a,dp,1);;
+  gap&gt; emb2:=Embedding(mop,dp,2);;
+  gap&gt; diag:=List(m22a.generators,
+  &gt;            i-&gt;Image(emb1,i)*Image(emb2,Image(ophom,i)));;
+  gap&gt; diag:=Group(diag,());;
+  gap&gt; diag.name:="M22.2-99";
+  "M22.2-99"
+  gap&gt; RequirePackage("grape");
+  
+  Loading  GRAPE 2.31  (GRaph Algorithms using PErmutation groups),
+  by L.H.Soicher@qmw.ac.uk.
+  
+  gap&gt; gamma:=NullGraph(diag,100);
+  rec(
+    isGraph := true,
+    order := 100,
+    group := M22.2-99,
+    schreierVector := [ -1, 1, 2, 4, 1, 7, 10, 8, 8, 4, 8, 8, 2, 10, 2, 5, 5, 
+        8, 7, 10, 7, 4, -2, 10, 6, 6, 1, 10, 8, 2, 1, 4, 4, 10, 10, 1, 4, 2, 4, 
+        5, 4, 4, 1, 8, 2, 7, 4, 4, 8, 4, 2, 10, 10, 2, 3, 10, 6, 9, 10, 10, 4, 
+        4, 2, 4, 5, 5, 2, 10, 4, 6, 3, 9, 2, 5, 2, 5, 2, 5, 1, 1, 6, 4, 7, 9, 
+        8, 4, 3, 3, 6, 3, 5, 10, 5, 2, 2, 8, 10, 2, 4, -3 ],
+    adjacencies := [ [  ], [  ], [  ] ],
+    representatives := [ 1, 23, 100 ],
+    isSimple := true )
+  gap&gt; AddEdgeOrbit(gamma,[1,100]);AddEdgeOrbit(gamma,[100,1]);
+  gap&gt; hexad:=First(Orbits(h,[1..22]),i-&gt;Length(i)=6);
+  [ 2, 8, 17, 15, 22, 6 ]
+  gap&gt; for i in hexad do AddEdgeOrbit(gamma,[i,23]);
+  &gt; AddEdgeOrbit(gamma,[23,i]); od;
+  gap&gt; Adjacency(gamma,23);
+  [ 2, 6, 8, 15, 17, 22 ]
+  gap&gt; stab:=Stabilizer(diag,23);;
+  gap&gt; orbs:=Orbits(stab,[24..99]);;
+  gap&gt; orbreps:=List(orbs,i-&gt;i[1]);
+  [ 24, 39 ]
+  gap&gt; Intersection(hexad,Adjacency(gamma,24));
+  [ 15, 17 ]
+  gap&gt; Intersection(hexad,Adjacency(gamma,39));
+  [  ]
+  gap&gt; AddEdgeOrbit(gamma,[23,39]); AddEdgeOrbit(gamma,[39,23]);
+  gap&gt; IsSimpleGraph(gamma);
+  true
+  gap&gt; Adjacency(gamma,23);
+  [ 2, 6, 8, 15, 17, 22, 39, 42, 46, 49, 52, 56, 63, 68, 70, 76, 80, 81, 86, 
+    90, 93, 94 ]
+  gap&gt; IsDistanceRegular(gamma);
+  true
+  gap&gt; aug:=AutGroupGraph(gamma);;
+  gap&gt; Size(aug);
+  88704000
+  gap&gt; DisplayCompositionSeries(aug);
+  &lt;G&gt; (3 gens, size 88704000)
+   | Z(2)
+  &lt;S&gt; (2 gens, size 44352000)
+   | HS
+  &lt;1&gt; (0 gens)
+  gap&gt; hs:=DerivedSubgroup(aug);;
+  gap&gt; ct:=CharTable("U3(5)");;ct2:=CharTable("U3(5).2");;
+  gap&gt; cths:=CharTable("hs");;
+  gap&gt; ct.orders;ct2.orders;cths.orders;
+  [ 1, 2, 3, 4, 5, 5, 5, 5, 6, 7, 7, 8, 8, 10 ]
+  [ 1, 2, 3, 4, 5, 5, 5, 6, 7, 8, 10, 2, 4, 6, 8, 10, 12, 20, 20 ]
+  [ 1, 2, 2, 3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 8, 8, 8, 10, 10, 11, 11, 12, 15, 20, 
+    20 ]
+  gap&gt; repeat e1:=Random(hs);until OrderPerm(e1)=12;
+  gap&gt; e2:=e1^6;;
+  gap&gt; ct2.classes[2];
+  525
+  gap&gt; cths.orders[21];
+  12
+  gap&gt; cths.powermap[3][cths.powermap[2][21]];
+  2
+  gap&gt; cths.classes[2];
+  5775
+  gap&gt; cnt:=0;;repeat u:=Subgroup(aug,[e1,e2^Random(hs)]);cnt:=cnt+1;
+  &gt; until Index(hs,u)=176;cnt;
+  26
+  gap&gt; hsop:=Operation(hs,CanonicalRightTransversal(hs,u),
+  &gt; OnCanonicalCosetElements(hs,u));;
+  gap&gt; IsPrimitive(hsop,[1..176]);
+  true
+  gap&gt; ophom:=OperationHomomorphism(hs,hsop);;
+  gap&gt; dp:=DirectProduct(hs,hsop);;
+  gap&gt; emb1:=Embedding(hs,dp,1);;
+  gap&gt; emb2:=Embedding(hsop,dp,2);;
+  gap&gt; diag:=List(hs.generators,i-&gt;Image(emb1,i)*Image(emb2,Image(ophom,i)));;
+  gap&gt; diag:=Group(diag,());;diag.name:="hs-276";;
+  gap&gt; adj:=Adjacency(gamma,1);
+  [ 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 
+    98, 99, 100 ]
+  gap&gt; t:=Stabilizer(diag,[1,adj[1]],OnSets);;
+  gap&gt; cnt:=0;;repeat s:=Subgroup(diag,[Random(t),Random(t)]);cnt:=cnt+1;
+  &gt; until Size(s)=Size(t);cnt;t:=s;;
+  1
+  gap&gt; aus:=t.operations.AutomorphismGroup(t);;
+  gap&gt; Size(aus);
+  241920
+  gap&gt; inner:=Subgroup(aus,aus.innerAutomorphisms);;
+  gap&gt; Index(aus,inner);
+  6
+  gap&gt; rt:=RightTransversal(aus,inner);;
+  gap&gt; automs:=Filtered(rt,i-&gt;i^2 in inner and not i in inner);;
+  gap&gt; Length(automs);
+  3
+  gap&gt; List(automs,i-&gt;Order(aus,i));
+  [ 2, 2, 2 ]
+  gap&gt; ot:=Orbits(t,[1..276]);;
+  gap&gt; List(ot,Length);
+  [ 2, 56, 42, 56, 120 ]
+  gap&gt; PermutationByAutomorphism := function(grp,aut,dom)
+  &gt; local op,oh,p,s,sim,simp,rt,rtim,extelm,l1,l2;
+  &gt;   # We compute the action on the given domain and transfer the
+  &gt;   # automorphism to this permutation action
+  &gt;   op:=Operation(grp,dom);
+  &gt;   oh:=OperationHomomorphism(grp,op);
+  &gt;   aut:=GroupHomomorphismByImages(op,op,op.generators,List(op.generators,
+  &gt;          i-&gt;Image(oh,Image(aut,PreImagesRepresentative(oh,i)))));
+  &gt;   aut.isMapping:=true; # just to save time (otherwise GAP will test that
+  &gt;                  # it is indeed a homomorphism, but we know this already)
+  &gt; 
+  &gt;   # compute stabilizer and images
+  &gt;   s:=Stabilizer(op,1);
+  &gt;   sim:=Image(aut,s);
+  &gt; 
+  &gt;   # is the image a stabilizer? It is if it has an orbit of length 1
+  &gt;   simp:=Filtered(Orbits(sim,[1..Length(dom)]),i-&gt;Length(i)=1);
+  &gt;   if Length(simp)=0 then
+  &gt;     return false; # it cannot be induced by a permutation action
+  &gt;   fi;
+  &gt; 
+  &gt;   # the permutation can be obtained by the induced action on the right
+  &gt;   # cosets.
+  &gt;   simp:=simp[1][1]; #image base point
+  &gt;   rt:=RightTransversal(op,s);
+  &gt;   rtim:=List(rt,i-&gt;Image(aut,i));
+  &gt;   l1:=List(rt,i-&gt;1^i);l2:=List(rtim,i-&gt;simp^i);
+  &gt; 
+  &gt;   # we got the images, make a permutation from them.
+  &gt;   if Length(Orbits(grp,dom))=1 then
+  &gt;     extelm:=MappingPermListList(l1,l2);
+  &gt;   else
+  &gt;     # if we have two orbits, we have to ensure they get swapped
+  &gt;     extelm:=MappingPermListList(Concatenation(l1,l2),Concatenation(l2,l1));
+  &gt;   fi;
+  &gt; 
+  &gt;   # test whether the computed element indeed fulfills the specifictions
+  &gt;   # (This is a safety test only)
+  &gt;   if ForAny(op.generators,i-&gt;i^extelm&lt;&gt;i^aut) then
+  &gt;     Error("something went wrong");
+  &gt;   fi;
+  &gt; 
+  &gt;   # finally move the points acted on to the original domain.
+  &gt;   return extelm^MappingPermListList([1..Length(dom)],dom);
+  &gt; end;
+  function ( grp, aut, dom ) ... end
+  gap&gt; 
+  gap&gt; lo:=First(ot,i-&gt;Length(i)=120);;
+  gap&gt; automs:=Filtered(automs,i-&gt;PermutationByAutomorphism(t,i,lo)&lt;&gt;false);;
+  gap&gt; Length(automs);
+  1
+  gap&gt; autom:=automs[1];;
+  gap&gt; pos:=Filtered([1..Length(ot)],i-&gt;Length(ot[i])=56);
+  [ 2, 4 ]
+  gap&gt; perms:=List(ot{Difference([1..5],pos)},
+  &gt;              i-&gt;PermutationByAutomorphism(t,autom,i));;
+  gap&gt; element:=Product(perms)*PermutationByAutomorphism(t,
+  &gt;                            autom,Concatenation(ot{pos}));;
+  gap&gt; ot[1];
+  [ 1, 79 ]
+  gap&gt; 1^element;
+  1
+  gap&gt; element:=element*(1,79);;
+  gap&gt; co3:=Group(Concatenation(diag.generators,[element]),());;
+  gap&gt; Size(co3);
+  495766656000
+  gap&gt; DisplayCompositionSeries(co3);
+  &lt;G&gt; (3 gens, size 495766656000)
+   | Co(3)
+  &lt;1&gt; (0 gens)
+  gap&gt; quit;
+</pre>
+
+<hr />
+
+<mixer person="Alexander Hulpke" data="contact"/>
+
+</mixer>

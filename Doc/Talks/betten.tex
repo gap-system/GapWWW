@@ -1,0 +1,204 @@
+% this is latex2e !
+%
+% abstract for a 10 min talk in Oberwolfach, Mai 1997
+%
+%
+
+
+\documentclass[]{article}
+%12pt,titlepage
+%\usepackage{fancyheadings}
+%\usepackage{amstex}
+%\usepackage{amssymb}
+%\usepackage{multicol}
+\usepackage{epsf}
+%\usepackage{supertabular}
+%\usepackage{wrapfig}
+%\usepackage{blackbrd}
+%\usepackage{epic,eepic}
+%\usepackage{rotating}
+%\usepackage{concmath}
+%\usepackage{beton}
+
+
+%\documentstyle[12pt,epsf]{article}
+%\pagestyle{headings}
+%\pagestyle{empty}
+%\thispagestyle{empty}
+
+%\oddsidemargin=-2cm
+%\evensidemargin=0pt
+
+\newfont{\mytt}{cmtt10 scaled 700}
+
+%\input dina4.sty
+
+
+%This is documentsubstyle DINA4 for DIN A4 pagesize. GMD Z1.BN  12.06.85
+ 
+%\evensidemargin 0in
+%\oddsidemargin 0in
+%\marginparwidth 0pt
+%\marginparsep 0pt
+ 
+%\topmargin -1in
+%\headheight 0.7cm
+%\headsep 1.8cm
+%%\footheight 0.7cm
+%\footskip 2cm
+%\textheight 22cm
+%\textwidth 6.2in
+ 
+\marginparpush 0pt
+ 
+
+
+
+
+\title{Construction of Solvable Groups}
+\author{{\sc Anton Betten}\\
+Department of Mathematics\\
+University of Bayreuth, Germany\\
+{\tt Anton.Betten\symbol{64}uni-bayreuth.de}}
+\date{}
+
+\begin{document}
+
+\pagestyle{empty}
+\thispagestyle{empty}
+
+\maketitle
+
+We use the situation of {\sc Huppert}, Endliche Gruppen I, 14.8, 
+for the construction of finite solvable groups. 
+This works as follows. Assume $G$ is a finite solvable group. 
+Then $G$ posesses a normal subgroup $N$ of prime index $p$. 
+With $g$ an element of $G$ outside of $N$ we have the decomposition 
+of $G$ into right cosets of $N$: 
+$G = N \cup Ng \cup \ldots  Ng^{p-1}$. 
+The element $g$ defines an automorphism $\alpha_g$ of $N$ 
+via conjugation in $G$: 
+$\alpha_g: N \rightarrow N, n \mapsto n^{\alpha_g} := n^g$. 
+We note the following two facts: 
+\begin{enumerate}
+\item
+$g^p = h \in N \cap \langle g \rangle$, so $h^{\alpha_g} = h$. 
+\item
+$\forall n \in N:  \, n^h = n^{g^p} = (n^{\alpha_g})^p = n' = n^{{\rm inn}_h}$, 
+so $\alpha_g^p = {\rm inn}_h \in {\rm Inn}(N)$. 
+\end {enumerate}
+The other way round, 
+we can define a group $G$ when knowing $N$ and $p$ 
+and the automorphism group of $N$. 
+Call a pair $(\alpha, h) \in ({\rm Aut}(N) \times N)$ 
+{\em admissible} if 
+$h^\alpha = h$ and $\alpha^p = {\rm inn}_h$ hold.
+
+Introducing an new element $g$ and defining $g^p = h$ and 
+$n^g := n^\alpha$ for all $n \in N$ we get $G = \langle N, g \rangle$. 
+Each solvable group $G$ can be obtained by a finite number of such 
+extensions. 
+
+To make things more clear, let us introduce the {\em extension matrix} 
+$E_{N,p}$ for a group $N$ and a prime $p$ to be the 
+$|{\rm Aut}(N)| \times |N|$ matrix 
+with entries $e_{\alpha,h}$ equal to 1 if and only if the 
+indexing pair $(\alpha,h)$ is admissible, 0 otherwise. 
+
+The possible extensions $G$ with normal subgroup $N$ of index $p$ 
+can be obtained by defining all the extensions for all 
+admissible pairs. 
+As the number of automorphisms of a group can be quite large, 
+we have to reduce the amount of work by reducing the 
+size of the matrix $E_{N,p}$. 
+
+Therefore, we note that ${\rm Aut}(N)$ acts on the entries of 
+$E_{N,p}$  via 
+$e_{\alpha,h} \mapsto e_{\alpha^\beta, h^\beta}$ for 
+$\beta \in {\rm Aut}(N)$.
+Thus by reordering rows and columns according to 
+${\rm Aut}(N)$-orbits  we get a tactical decomposition of $E_{N,p}$. 
+Moreover, the ${\rm Aut}(N)$-action respects the property of admissability 
+of a pair $(\alpha,h)$.
+The important fact is that we need to do the extension process 
+only once for each ${\rm Aut}(N)$-orbit on admissable pairs. 
+Therefore, knowing the conjugacy classes of ${\rm Aut}(N)$ 
+and the corresponding centralizers of the representing elements 
+is a handy tool for reducing the amount of computation. 
+There is also the action of ${\rm Aut}(G/N)$ which maps  
+$g$ to $g^i$ with $1 \le i < p$. 
+This gives a further reduction of the cases to consider. 
+
+In the end, one will get a lot of possible candidate groups 
+$G_1, \ldots , G_l$. A priori, it is not clear, 
+whether or not this list contains isomorphic copies of the same group. 
+Therefore, one has to do isomorphism checking among these groups. 
+A first step is the use of invariants -- 
+which means to look at properties 
+of the groups which are preserved under group isomorphism. 
+One can use conjugacy classes, class orders, $p$-power maps, 
+characteristic series and so on for this step. 
+Clearly, in most cases this will distinguish quite well. 
+Nevertheless, in the end one may still have 
+lists of groups where isomorphism is not yet fully decided. 
+In that case, another technique comes into play, namely the use 
+of {\em canonical forms}. 
+
+In the case of solvable groups 
+one may work with canonical presentations, which 
+should be a refinement of the special presentations 
+going through characteristic (and canonical) series. 
+The canonical form can be described as a map $\varphi$ 
+which takes any pc-presentation and maps it onto its canonical 
+pc-presentation, thereby obtaining a permutation $\psi$ of the 
+group elements. 
+If two candidate groups $G_i$ and $G_j$ have the same canonical 
+presentation with respect to a permutation of elements $\pi$ 
+and $\psi$ respectively, then $\pi \psi^{-1}$ is an isomorphism 
+between the two groups. 
+Moreover, the routine to compute the canonical presentation 
+will be able to determine a base (consisting of the generators 
+in the pc-presentation) and strong generating set for 
+the automorphism group -- with no extra cost. 
+
+The author was able to construct all solvable groups up to order 242 
+(including orders 128 and 192). 
+The computation gave the possibility to check 
+results of Eick and O' Brien. 
+The computation included (for order $\le 127$) the computation 
+of all automorphism groups together with their conjugacy classes. 
+The subgroup lattice was computed with respect to the 
+action of both the inner and the full group of automorphisms. 
+The table of marks and the Burnside matrices are easy to derive 
+from this information and there are routines to do this.
+A function was implemented to identify any arbitrary permutation 
+group (of order $\le 242$) in the list of groups. 
+Applications are the (automatical) identification 
+of automorphism groups arising 
+for example in the study of linear codes or finite 
+incidence geometries like linear spaces on small sets of points.
+
+The actual implementation was extended to a parallel version 
+where group extensions were done simultaneously on several machines. 
+For example, the computation of all groups of order 128 was 
+done in parallel on 3 DEC alpha machines.
+
+
+
+
+%\epsfxsize=11cm
+
+%\epsffile{fg8.ps}
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+

@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<mixer template="gw.tmpl">
+<mixertitle>
+Lifting a quotient of type McL of a finitely presented group
+</mixertitle>
+
+<hr />
+
+<p>
+This is an example from a 
+<a href="http://www.math.colostate.edu/~hulpke/paper/quotcp.html">paper</a>
+by <mixer person="Alexander Hulpke" data="name_link"/>. The example
+was triggered by a question of D.&nbsp;Pasechnik in the GAP Forum of
+January 1998. It demonstrates how a known (non-solvable) quotient of a
+finitely presented group can be extended with solvable normal subgroups. 
+So the example can be seen as enriching the family of methods such as the
+p-quotient, nilpotent quotient, and soluble quotient methods for finitely 
+presented groups. A main tool in the example is the representation of 
+subgroups of finitely presented groups as preimages of subgroups of
+quotients. 
+
+</p><p>
+
+The <a href="mcl.in">input&nbsp;file</a> and the
+<a href="http://www.math.colostate.edu/~hulpke/paper/quot_gap.html">
+original&nbsp;example&nbsp;page</a> are also available.
+
+</p><p>
+
+The following is a slightly edited and truncated transcript of a
+<mixer var="GAP44"/> session in which we find the first quotient
+described in the paper. In the following listing we have suppressed some 
+lines because they are not interesting, but marked where this has
+happened.
+
+</p> <hr /><p>
+
+We set the info level for fp groups higher, so <mixer var="GAP"/>
+will print some information as it goes. 
+</p>
+
+<pre class="gapexample">
+gap> SizeScreen([76, ]);;
+gap> SetInfoLevel(InfoFpGroup,2);
+</pre>
+
+<p>
+We start by creating a certain finitely presented group G from generators
+and relations. 
+</p>
+
+<pre class="gapexample">
+gap> F := FreeGroup( 10 );
+&lt;free group on the generators [ f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 ]>
+gap> relsG := [
+>   F.1^2, F.2^2, F.3^2, F.4^2, F.5^2, F.6^2, F.7^2, F.8^2, F.9^2,
+>   (F.1*F.2)^4, (F.1*F.3)^5, (F.1*F.4)^3, (F.1*F.5)^2, (F.1*F.6)^2*F.8,
+>   (F.1*F.7)^2*F.9, (F.1*F.8)^2, (F.1*F.9)^2, (F.2*F.3)^2*F.4*F.7,
+>   (F.2*F.4)^2, (F.2*F.5)^2, (F.2*F.6)^2*F.4, (F.2*F.7)^2, (F.2*F.8)^3,
+>   (F.2*F.9)^2*F.5, (F.3*F.4)^2, (F.3*F.5)^2*F.4, (F.3*F.6)^2,
+>   (F.3*F.7)^2, (F.3*F.8)^2*F.7, (F.3*F.9)^2*F.6*F.7,
+>   (F.4*F.5)^2, (F.4*F.6)^2, (F.4*F.7)^2, (F.4*F.8)^2*F.6,
+>   (F.4*F.9)^2*F.7, (F.5*F.6)^2*F.7, (F.5*F.7)^2, (F.5*F.8)^2*F.9,
+>   (F.5*F.9)^2, (F.6*F.7)^2, (F.6*F.8)^2, (F.6*F.9)^2, (F.7*F.8)^2,
+>   (F.7*F.9)^2, (F.8*F.9)^2,
+>   F.10^2, (F.4*F.10)^2*F.5, Comm(F.10,F.1*F.4),
+>   (F.3*F.10)^3, (F.10*F.6)^2*F.7*F.9,
+>   (F.10*F.2)^2*F.5*F.7 ];;
+gap> G := F / relsG;;
+</pre>
+
+<p>
+Next, we create a quotient M of F, given by extra relators, which was 
+known to be isomorphic to McL.
+</p>
+
+<pre class="gapexample">
+gap> relsM := [ (F.1*F.3*F.2)^8, (F.10*F.3*F.1)^7 ];
+[ f1*f3*f2*f1*f3*f2*f1*f3*f2*f1*f3*f2*f1*f3*f2*f1*f3*f2*f1*f3*f2*f1*f3*f2,
+  f10*f3*f1*f10*f3*f1*f10*f3*f1*f10*f3*f1*f10*f3*f1*f10*f3*f1*f10*f3*f1 ]
+gap> relsM:=Concatenation(relsM,relsG);;
+gap> M := F / relsM;;
+</pre>
+
+<p>
+We also know subgroup generators for a subgroup of index 275 of M.
+</p>
+
+<pre class="gapexample">
+gap> UM:=[M.2,M.3,M.4,M.5,M.6,M.7,M.8,M.9,M.10, M.1*M.4*(M.3*M.1)^2 ];;
+gap> UM := Subgroup( M, UM);
+Group([ f2, f3, f4, f5, f6, f7, f8, f9, f10, f1*f4*f3*f1*f3*f1 ])
+</pre>
+
+<p>
+We compute a coset table for this subgroup and convert the columns
+corresponding to the generators (the even numbered columns represent inverses)
+into permutations. These generate McL, acting on 275 points.
+</p>
+
+<pre class="gapexample">
+gap> tab:=CosetTable(M,UM);;
+#I  CosetTableFromGensAndRels called:
+#I  	167748	167473	275	128000
+gap> Length(tab[1]);
+275
+gap> perm:=List(tab{[1,3..Length(tab)-1]},PermList);;
+gap> mcl:=Group(perm);
+&lt;permutation group with 10 generators>
+gap> Size(mcl);
+898128000
+gap> DisplayCompositionSeries(mcl);
+G (10 gens, size 898128000)
+ | Mc
+1 (0 gens, size 1)
+</pre>
+ 
+<p>
+Finally we define the corresponding quotient 
+<span class="cour"><tt>hom</tt></span> from the finitely presented 
+group <span class="cour"><tt>G</tt></span> onto McL. This is the 
+quotient we want to lift.
+</p>
+
+<pre class="gapexample">
+gap> hom:=GroupHomomorphismByImages(G,mcl,GeneratorsOfGroup(G),perm);
+#I  CosetTableFromGensAndRels called:
+#I  	2	1	1	2
+#I  CosetTableFromGensAndRels called:
+#I  	2	1	1	2
+[ f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 ] -> 
+[ (1,2)(3,6)(4,9)(7,14)(10,17)(12,20)(15,27)(18,25)(19,26)(21,32)(22,
+    24)(23,35)(28,44)(29,41)(30,46)(33,51)(36,60)(37,58)(38,63)(42,65)(43,
+    67)(45,72)(47,75)(48,78)(50,54)(52,84)(53,59)(56,87)(57,92)(61,71)(62,
+    102)(66,80)(68,79)(69,107)(70,83)(73,119)(74,82)(76,77)(81,127)(85,
+    96)(86,106)(88,134)(89,90)(91,141)(93,130)(94,113)(95,137)(97,145)(98,
+               [ ... 123 lines deleted ... ]
+</pre>
+
+<p>
+We let <span class="cour"><tt>s</tt></span> be the subgroup which is the
+preimage of a point stabilizer and (by
+<span class="cour"><tt>IsomorphismFpGroup</tt></span>) compute a
+presentation for it. Since rewriting alone produces too many generators,
+Tietze transformations are applied automatically by
+<mixer var="GAP"/>. The resulting group has
+4 generators. <span class="cour"><tt>IsomorphismFpGroup</tt></span>
+returns an isomorphism to this new group, given by the preimages of the
+new generators. <br />
+(These preimages are represented as <i>Straight line program
+elements</i>. This way, they require less storage, than if we
+would multiply out the words. As we rarely have to refer to these
+preimages in a calculation this different storage does not come
+at a performance cost.)
+</p>
+
+<pre class="gapexample">
+gap> s:=PreImage(hom,Stabilizer(mcl,1));
+Group(&lt;fp, no generators known>)
+gap> Index(G,s);
+275
+gap> hom2:=IsomorphismFpGroup(s);
+#I  RRS defined 12 primary and 1447 secondary subgroup generators
+#I  Presentation with 800 generators
+#I  eliminating y45 = y18
+#I  eliminating y63 = y44
+               [ ... 692 lines deleted ... ]
+#I  there are 4 generators and 49 relators of total length 1490
+[ &lt;[ [ 8, -1, 6, -1, 5, 1 ] ]|f1*f2*f1*f8^-1*f2^-1*f1^-1*f8^-1*f6>, 
+  &lt;[ [ 6, -1, 5, 1 ], [ 8, -1, 4, -1, 13, 1, 4, 1, 13, -1 ] ]|f1*f2*f1*f8^
+    -1*f2^-1*f1^-1*f5^-1*f8^-1*f6*f5*f6^-1*f8>, 
+               [ ... 41 lines deleted ... ]
+          11, 1, 15, -1, 33, 1, 34, 1, 25, 1, 25, 1, 12, 1 ] ]> ] -> 
+[ F1, F2, F3, F4 ]
+gap> q:=Range(hom2);
+&lt;fp group on the generators [ F1, F2, F3, F4 ]>
+</pre>
+
+<p>
+Next, we compute the permutation images of the (new) generator
+preimages under the epimorphism onto McL and construct the corresponding
+epimorphism from the new fp group onto the point stabilizer in
+McL.
+</p>
+
+<pre class="gapexample">
+gap> gens:=List(GeneratorsOfGroup(q),
+> i->Image(hom,PreImagesRepresentative(hom2,i)));
+[ (2,8,6)(3,13,5)(4,7,18)(9,10,12)(11,15,21)(16,19,29)(20,31,22)(23,36,
+    52)(24,25,39)(28,33,47)(32,49,40)(34,41,55)(35,108,89)(38,48,61)(42,
+               [ ... 43 lines deleted ... ]
+    264,66)(69,139,198,118)(71,221,231,78)(72,196,189,76)(73,207,180,
+    141)(74,163,150,95)( [...] ) ]
+gap> h3:=GroupHomomorphismByImages(q,Subgroup(mcl,gens),
+> GeneratorsOfGroup(q),gens);
+#I  CosetTableFromGensAndRels called:
+#I  	2	1	1	2
+#I  CosetTableFromGensAndRels called:
+#I  	2	1	1	2
+[ F1, F2, F3, F4 ] -> 
+[ (2,8,6)(3,13,5)(4,7,18)(9,10,12)(11,15,21)(16,19,29)(20,31,22)(23,36,
+    52)(24,25,39)(28,33,47)(32,49,40)(34,41,55)(35,108,89)(38,48,61)(42,
+               [ ... 43 lines deleted ... ]
+    264,66)(69,139,198,118)(71,221,231,78)(72,196,189,76)(73,207,180,
+    141)(74,163,150,95)( [...] ) ]
+</pre>
+
+<p>
+It turns out that the point stabilizer has exactly one orbit of length 112.
+A stabilizer of a point in this orbit thus gives a subgroup of index 112
+(and structure 3<sup>4</sup>.A<sub>6</sub>). Again we take the preimage,
+obtaining a subgroup <span class="cour"><tt>tp</tt></span> of index 112
+in the new finitely presented group.
+</p>
+
+<pre class="gapexample">
+gap> o:=Orbits(Range(h3),[1..275]);;
+gap> o:=First(o,i->Length(i)=112);;
+gap> t:=Stabilizer(Image(h3),o[1]);
+&lt;permutation group of size 29160 with 5 generators>
+gap> DisplayCompositionSeries(t);
+G (5 gens, size 29160)
+ | A(6) ~ A(1,9) = L(2,9) ~ B(1,9) = O(3,9) ~ C(1,9) = S(2,9) ~ 2A(1,9) = \
+U(2,9)
+S (5 gens, size 81)
+ | Z(3)
+S (4 gens, size 27)
+ | Z(3)
+S (2 gens, size 9)
+ | Z(3)
+S (1 gens, size 3)
+ | Z(3)
+1 (0 gens, size 1)
+gap> tp:=PreImage(h3,t);
+Group(&lt;fp, no generators known>)
+gap> Index(q,tp);
+112
+</pre>
+
+<p>
+We now compute the epimorphism from <span class="cour"><tt>tp</tt></span>
+onto its commutator factor group. <mixer var="GAP"/> does this by first
+rewriting the presentation to one of <span class="cour"><tt>tp</tt></span>
+and then abelianizing the presentation. The resulting abelian
+quotient of size 3 is represented as a pc group.
+</p>
+
+<pre class="gapexample">
+gap> maxab:=MaximalAbelianQuotient(tp);
+#I  RRS defined 10 primary and 3514 secondary subgroup generators
+#I  Presentation with 264 generators
+#I  eliminating y13 = y2
+               [ ... 895 lines deleted ... ]
+#I  there are 10 generators and 925 relators of total length 115239
+               [ ... 6 lines deleted ... ]
+[ &lt;[ [ 2, 1 ] ]|F2^-2>, &lt;[ [ 5, 1 ] ]|F2*F3*F2^-1>, 
+  &lt;[ [ 2, -1, 1, -1, 5, 1, 1, 1 ] ]|F2^2*F1^-1*F2*F3*F2^-1*F1>, 
+               [ ... 707 lines deleted ... ]
+          -1, 59, -1, 327, -1, 325, 1, 271, 1, 234, 1, 18, -1, 320, -1 ] 
+     ]> ] -> [ &lt;identity> of ..., &lt;identity> of ..., &lt;identity> of ..., 
+  &lt;identity> of ..., f1^2, &lt;identity> of ..., &lt;identity> of ..., f1^2, 
+  f1^2, &lt;identity> of ... ]
+gap> Size(Image(maxab));
+3
+</pre>
+
+<p>
+We now pull this quotient back to a subgroup of the original
+finitely presented group (of index 30800). For this we need a
+generating set for this subgroup (which is obtained by taking
+the primary generators of an augmented coset table.)
+</p>
+
+<pre class="gapexample">
+gap> U:=PreImage(hom2,tp);
+Group(&lt;fp, no generators known>)
+gap> Index(G,U);
+30800
+gap> Ugens:=GeneratorsOfGroup(U);;
+#I  RRS defined 30 primary and 126892 secondary subgroup generators
+gap> Length(Ugens);
+30
+gap> Umax:=RestrictedMapping(hom2,U)*maxab;
+[ f7*f5^-1, f9*f5^-1, f1*f6*f5^-1*f1^-1, f2*f4*f5^-1, 
+  f1*f2*f1*f4*f8^-1*f2^-1*f1^-1, f1*f3*f1*f3*f4^-1*f8^-1*f1^-1, 
+               [ ... 30 lines deleted ... ]
+  f3*f10*f1*f3*f1*f2*f1*f3*f1*f2*f1*f9^-1*f8^-1*f2^-1*f1^-1*f3^-1*f1^
+    -1*f3^-1*f2^-1*f10^-1*f1^-1*f3^-1 ] -> 
+[ &lt;identity> of ..., &lt;identity> of ..., &lt;identity> of ..., 
+               [ ... 7 lines deleted ... ]
+  &lt;identity> of ..., f1, &lt;identity> of ..., &lt;identity> of ..., 
+  &lt;identity> of ... ]
+</pre>
+
+<p>
+We want to induce this representation to
+<span class="cour"><tt>G</tt></span>. In principle, <mixer var="GAP"/>
+will do this automatically, if we would compute the kernel of 
+<span class="cour"><tt>Umax</tt></span>.
+However - as it will automatically compute a stabilizer chain
+for the permutation image - this would take too much memory.
+</p>
+<p>
+Instead, we induce the permutation representation ourselves:<br />
+By the Krasner-Kaloujnine embedding theorem, the induced permutation
+representation goes in a wreath product of the images of the
+original representation with the permutation representation on
+the cosets.<br />
+We obtain permutation images for the generators of
+<span class="cour"><tt>G</tt></span> on 92400 points.
+</p>
+<p>
+(Note that the
+<span class="cour"><tt>DefiningQuotientHomomorphism</tt></span> of a
+subgroup is not necessarily the action on the cosets, but only
+some homomorphism whose kernel is contained in the subgroup.
+In this particular case, knowing what algorithms are used, it
+is this particular homomorphism.)
+</p>
+
+<pre class="gapexample">
+gap> Ucosrep:=DefiningQuotientHomomorphism(U);
+[ f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 ] -> 
+[ (1,113)(2,114)(3,115)(4,116)(5,117)(6,118)(7,119)(8,120)(9,121)(10,
+    122)(11,123)(12,124)(13,125)(14,126)(15,127)(16,128)(17,129)(18,
+               [ ... 125 lines deleted ... ]
+    217)(225,303)(226,336)(227,302)(228,309)( [...] ) ]
+gap> perms:=KuKGenerators(G,Ucosrep,Umax);
+[ (1,337)(2,338)(3,339)(4,340)(5,341)(6,342)(7,343)(8,344)(9,345)(10,
+    346)(11,347)(12,348)(13,349)(14,350)(15,351)(16,352)(17,353)(18,
+               [ ... 124 lines deleted ... ]
+    251)(126,252)(130,172)( [...] ) ]
+gap> NrMovedPoints(perms);
+92400
+</pre>
+
+<p>
+We now want to see how big the permutation image is. To save some runtime,
+we first want to reduce the number of generators. We do this by reducing
+the presentation of <span class="cour"><tt>G</tt></span> to find
+redundant generators.
+</p>
+
+<pre class="gapexample">
+gap> IsomorphismSimplifiedFpGroup(G);
+#I  there are 10 generators and 51 relators of total length 220
+               [ ... 41 lines deleted ... ]
+#I  there are 5 generators and 25 relators of total length 193
+[ f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 ] -> 
+[ f1, f2, f3, f2*f6*f2*f6, f10*f2*f6*f2*f6*f10*f2*f6*f2*f6, f6, 
+  f3*f6*f2*f6*f3*f2, f1*f6*f1*f6, 
+  f1*f3*f6*f2*f6*f3*f2*f1*f3*f6*f2*f6*f3*f2, f10 ]
+</pre>
+
+<p>
+It turns out, only the generators 1,2,3,6, and 10 are required.
+However creating a stabilizer chain for a permutation group of
+this size is very memory consuming. Because of this, we create
+straight line program elements from the permutations and form
+a group from them.
+</p>
+<p>
+(Note: If we knew a base for the resulting group, the calculations
+would be much faster since we could set this base for the straight
+line program elements.)
+</p>
+
+<pre class="gapexample">
+gap> p2:=perms{[1,2,3,6,10]};;
+gap> p3:=StraightLineProgGens(p2);
+[ &lt;[ [ 5, 1 ] ]|(1,337)(2,338)(3,339)(4,340)(5,341)(6,342)(7,343)(8,
+    344)(9,345)(10,346)(11,347)(12,348)(13,349)(14,350)(15,351)(16,
+               [ ... 61 lines deleted ... ]
+    170)(123,171)(124,250)(125,251)(126,252)(130,172)( [...] )> ]
+gap> P:=Group(p3);
+&lt;permutation group with 5 generators>
+</pre>
+
+<p>
+To save time, we enforce a randomized (non-guaranteed) stabilizer
+chain calculation. (Of course, to prove the result, we could
+not have done this - my initial calculation did not use this
+shortcut.)
+</p>
+<p>
+We find out that the permutation image has size
+3<sup>104</sup>.<span class="symb">|</span>McL<span class="symb">|</span>
+</p>
+<p>
+This stabilizer chain calculation is by far the hardest part
+of the whole calculation and can take a few hours.
+</p>
+
+<pre class="gapexample">
+gap> StabChainOptions(P).random:=1;;
+gap> Size(P);                      
+37492873537139989690410295685885170095161272386096844368000
+gap> last/Size(mcl);
+41745579179292917813953351511015323088870709282081
+gap> Collected(Factors(last));
+[ [ 3, 104 ] ]
+</pre>
+
+<p>
+The computed stabilizer chain provides us with a base for
+the group. Knowledge of this base will speed up comparisons of
+straight line program elements enormously (we only have to test
+equality on the 104 points of the base instead of 92400 points
+of the domain).
+</p>
+
+<p>
+For the further calculations we therefore create the straight line program
+generators anew, this time with a base. We also create the permutation
+group <span class="cour"><tt>P</tt></span> anew and store its size
+(in case another stabilizer chain calculation will be needed).
+</p>
+
+<pre class="gapexample">
+gap> bas:=BaseStabChain(StabChainMutable(P));
+[ 1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 46, 52, 55, 58, 
+               [ ... 6 lines deleted ... ]
+  1732, 2026, 2029, 2032, 2035, 2038, 2041, 2044, 2068 ]
+gap> Length(bas);
+104
+gap> p3:=StraightLineProgGens(p2,bas);;
+gap> P:=Group(p3);
+&lt;permutation group with 5 generators>
+gap> SetSize(P,Size(mcl)*3^104);
+</pre>
+
+<p>
+Finally we want to investigate the structure of the lift kernel
+3<sup>104</sup>. We construct it as a normal closure of elements.
+For this we first need a kernel element:
+</p>
+<p>
+The second relation for <span class="cour"><tt>M</tt></span> above
+(<span class="cour"><tt> (F.10*F.3*F.1)^7 </tt></span>) gives us a kernel
+element (indices shift to 5,3,1 since we only used 5 of the 10 generators).
+</p>
+
+<pre class="gapexample">
+gap> elm:=(P.5*P.3*P.1)^7; 
+&lt;[ [ 4, 1, 3, 1, 5, 1 ], [ 6, 7 ] ]|(679,681,680)(682,684,683)(685,686,
+               [ ... 11 lines deleted ... ]
+948,947)(952,954,953)(955,957,956)(964,965,966)( [...] )>
+gap> Order(elm);
+3
+gap> S:=SubgroupNC(P,[elm]);
+&lt;permutation group with 1 generators>
+</pre>
+
+<p>
+Since we know that the normal closure of this element must be a subgroup
+of the lift kernel, we know that it will be solvable. Using
+<span class="cour"><tt>SolvableNormalClosurePermGroup</tt></span> then
+is preferrable, as it will produce (as a side effect) also a Pcgs for this
+closure (we need for investigating the module structure).
+</p>
+<p>
+We are lucky that <span class="cour"><tt>N</tt></span> is indeed the
+whole kernel - otherwise we would have had to add further elements. We also
+note that <span class="cour"><tt>N</tt></span> is elementary abelian and
+thus an GF(3)-McL module
+</p>
+
+<pre class="gapexample">
+gap> N:=SolvableNormalClosurePermGroup(P,S);
+&lt;permutation group with 104 generators>
+gap> Collected(Factors(Size(N)));
+[ [ 3, 104 ] ]
+gap> IsElementaryAbelian(N);
+true
+</pre>
+
+<p>
+We now take a Pcgs for the normal closure. (This is an object
+that permits us to decompose elements of the group as normal
+form words in the generators. For an elementary abelian group,
+a Pcgs is a basis and the coefficients we get are basis coefficients.)
+</p>
+<p>
+Using this Pcgs, we can compute matrices for the conjugation
+action of the group generators (respectively the factor McL)
+on the normal subgroup.<br />
+(Again, this calculation takes a bit, since we have to compute
+the coefficients for 5*104 conjugates.)
+</p>
+
+<pre class="gapexample">
+gap> pcgs:=Pcgs(N);
+Pcgs([ &lt;[ [ 93, 1 ] ]|(1,2,3)(43,45,44)(64,66,65)(67,69,68)(70,72,71)(73,
+    75,74)(76,78,77)(82,84,83)(97,99,98)(100,102,101)(103,104,105)(106,
+               [ ... 1561 lines deleted ... ]
+    936)(943,944,945)(946,948,947)(952,954,953)(955,957,956)(964,965,
+    966)( [...] )> ])
+gap> mats:=LinearActionLayer(P,pcgs);
+[ &lt; immutable compressed matrix 104x104 over GF(3) >, 
+  &lt; immutable compressed matrix 104x104 over GF(3) >, 
+  &lt; immutable compressed matrix 104x104 over GF(3) >, 
+  &lt; immutable compressed matrix 104x104 over GF(3) >, 
+  &lt; immutable compressed matrix 104x104 over GF(3) > ]
+</pre>
+
+<p>
+We now use the MeatAxe to investigate the module structure. We
+form a GModule from the matrices.<br />
+An irreducibility test then shows, that this module is indeed
+irreducible.
+</p>
+
+<pre class="gapexample">
+gap> module:=GModuleByMats(mats,GF(3));
+rec( field := GF(3), isMTXModule := true, dimension := 104, 
+  generators := [ &lt; immutable compressed matrix 104x104 over GF(3) >, 
+      &lt; immutable compressed matrix 104x104 over GF(3) >, 
+      &lt; immutable compressed matrix 104x104 over GF(3) >, 
+      &lt; immutable compressed matrix 104x104 over GF(3) >, 
+      &lt; immutable compressed matrix 104x104 over GF(3) > ] )
+gap> MTX.IsIrreducible(module);
+true
+</pre>
+
+<p>
+As described in the paper, a second
+lift calculation for another subgroup yields overall a quotient
+(3<sup>104</sup>.3.3<sup>21</sup>.3 &times;3<sup>104</sup>).McL
+of the finitely presented group.<br /><br />
+</p>
+
+<hr />
+1-Nov-2001 <br /><br />
+
+<mixer person="Alexander Hulpke" data="contact"/>
+
+</mixer>

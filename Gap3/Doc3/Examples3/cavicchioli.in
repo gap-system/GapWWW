@@ -1,0 +1,30 @@
+f := FreeGroup(2); a:=f.1;; b:=f.2;;
+h := f/[a*b*a^-2*b*a*b^-1,(b^-1*a^3*b^-1*a^-3)^1*a];
+s := Subgroup(h,[h.1]);
+InfoFpGroup1:=Print;; InfoFpGroup2:=Print;;
+Index(h,s);
+p := OperationCosetsFpGroup(h,s);
+Size(p);
+Index(h,TrivialSubgroup(h));
+AbelianInvariants(h);
+g := f/[a*b*a^-2*b*a*b^-1,(b^-1*a^3*b^-1*a^-3)^2*a];
+Index(g,Subgroup(g,[g.1]));
+InfoFpGroup1:=Ignore;; InfoFpGroup2:=Ignore;;
+AbelianInvariants(g);
+u := LowIndexSubgroupsFpGroup(g,TrivialSubgroup(g),15);;
+u := Filtered(u,i->Index(g,i)>1);;
+list := List(u,i->OperationCosetsFpGroup(g,i));;
+Length(list);
+id := List([1..24],
+i->[Index(g,u[i]),Size(list[i]),TransitiveIdentification(list[i])]);;
+Collected(id);
+Collected(List(list,i->IsSimple(i)));
+d := DirectProduct(list);;
+Sum(id,i->i[1]);
+sd := Subgroup(d,[
+Product([1..24],i->d.generators[2*i-1]),
+Product([1..24],i->d.generators[2*i])]);;
+List(g.relators,i->MappedWord(i,g.generators,sd.generators));
+Size(sd);
+List(u,i->AbelianInvariants(i));
+quit;

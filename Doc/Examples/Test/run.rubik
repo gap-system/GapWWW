@@ -1,0 +1,31 @@
+touch in out erg dif
+rm in out erg dif
+
+grep '^  ' ../rubik.mixer > out
+ed - out << \%
+  1,$s/^  //
+  1,$s/\&gt;/>/g
+  1,$s/\&lt;/</g
+  w
+%
+echo 'gap> quit;' >> out
+
+echo 'LogTo("erg");' > in
+fgrep '>' out >> in
+ed - in << \%
+  2,$g/^    /d
+  2,$g/^\[/d
+  2,$g/^</d
+  2,$s/^> //
+  2,$s/^gap> //
+  w
+%
+
+gap < in
+diff out erg > dif
+ed - in << \%
+  1d
+  w
+%
+
+./compare rubik

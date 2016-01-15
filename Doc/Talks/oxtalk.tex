@@ -1,0 +1,336 @@
+\documentclass[12pt]{article}
+\usepackage{lslide}
+\usepackage{a4wide}
+\vertgroup
+\parskip 1ex plus 1ex minus 0.2ex
+\def\bs{\begin{slide}}
+\def\es{\end{slide}}
+\def\bi{\begin{itemize}}
+\def\ei{\end{itemize}}
+\def\GAP{\textsf{GAP}}
+\begin{document}
+\title[GAP]{GAP}
+\author{Steve Linton}
+\organization{Division of Computer Science, St.~Andrews}
+\titlepage
+\section{Introduction}
+\bs
+\subsection{Overview}
+
+\bi
+\item What is \GAP? -- history, purpose, availability, etc.
+\item Capabilities, practical limits
+\item Structure, organization
+\item Comparison with ``typical'' CA systems
+\item Future Directions
+\ei
+\es
+\bs
+\subsection{What is \GAP?}
+
+\bi
+\item Groups, Algorithms, Programming
+\item Integrated system for computational group theory, spreading to
+combinatorics, algebra and discrete mathematics
+\item Free software, covered by FSF-like Copyleft
+\item Runs on UNIX, MS-DOS, MacOS, TOS, easy to port
+\item Developed since 1984 at Lehrstuhl D f\"ur Mathematik,
+RWTH-Aachen
+\item J. Neub\"user, M. Sch\"onert plus cast of thousands
+\item Increasing external involvement
+\item Centre of development transferring to St.~Andrews in 1997
+\ei
+\es
+\bs
+\subsection{Structure of \GAP}
+
+Inspired by that of Maple
+\begin{description}
+\item[kernel] written in C (70K lines), implements 
+\bi
+\item the \GAP\ language; 
+\item system functions;
+\item ``arithmetic'' for built-in types; 
+\item some accelerators
+\item user interface
+\ei
+\item[library] written in \GAP\ (140K lines), 
+\bi
+\item implements most functions
+\item centrally supported
+\item ``object-oriented'' structure -- property of library, not the
+language
+\ei
+\item[databases] character tables, groups of order dividing 256 or
+729, primitive groups of small degree, crystallographic groups, $\ldots$
+\item[share packages] user-supported additions, some pure \GAP, some
+links to external programs, one graphical user interface (XGAP)
+\end{description}
+\es
+\section[Capabilities]{Capabilities of \GAP}
+\bs
+\subsection{Permutation Groups}
+
+\bi
+\item Orbits, primitivity, ``can we map this to that?'' 
+\item Group order,  centralizer, normalizer, composition series, 
+conjugacy classes, Sylow subgroups, $\ldots$
+\item Conversion to finitely presented groups, $p$-groups, matrix
+groups
+\item database of small degree primitive groups
+\item some functions good up to degree 1 million or more
+\ei
+\es
+\bs
+\subsection{Finitely-presented Groups}
+
+\bi
+\item Coset enumeration, Reidermeister-Schreier, Low index, etc.
+\item Abelian, nilpotent and soluble quotients
+\item Tietze transformations simplifying presentations
+\ei
+\es
+\bs
+\subsection{Finite Polycyclic (Soluble) Groups}
+
+
+\bi
+\item Usually constructed from FP or permutation groups -- stored as
+power-commutator presentation, manipulated using commutator collection.
+\item Group order,  centralizer, normalizer, composition series,
+conjugacy classes, Sylow subgroups, Hall subgroups, maximal subgroups,
+$\ldots$
+\item database of groups of order dividing 256 or 729
+\ei
+\es
+\bs
+\subsection{Character Theory}
+
+\bi
+\item Database of all ATLAS 1 and 2 character tables
+\item Many functions to compute with them -- restriction, fusion,
+inner products, structure constants, embeddings, monomiality, etc.
+\item \GAP\ much used in determining ATLAS 2 tables. Powerful
+methods for ordinary and modular tables.
+\ei
+\es
+\bs
+\subsection{Share Packages}
+\bi
+\item ANU p-Quotient -- E. O'Brien
+\item ANU soluble-Quotient -- A. Niemeyer
+\item GRAPE -- functions for graphs, studied via groups of
+automorphisms -- Len Soicher
+\item GUAVA -- functions for coding theory -- Delft university of
+Technology
+\item Meat-axe -- matrix groups, representation theory --stand-alone by R. Parker, link-up by T. Breuer
+\item Sisyphos -- group rings of $p$-groups 
+\item Smash -- new methods for decomposition of matrix representations
+-- S. Rees, D. Holt, C.R. Leedham-Green, E. O'Brien
+\item Vector enumeration -- linear Todd-Coxeter (SL)
+\item Weyl -- Weyl groups and Hecke algebras -- G. Malle, M. Geck
+\item DCE -- double coset enumeration -- SL
+\item KBMAG -- Knuth-Bendix and Automatic Groups -- D. Holt
+\item XGAP -- Windowing user interface --  F. Celler
+\ei
+\es
+\section{CS aspects of  \GAP}
+\bs
+\subsection{The \GAP\ language}
+\bi
+\item Interpreted language
+\item ``Standard'' modern imperative language, 
+\item functions are first class objects
+\item Untyped 
+\item Built-in arithmetic for:
+\bi
+\item integers
+\item rationals
+\item cyclotomic integers and rationals
+\item finite field elements
+\item permutations
+\item words in abstract generators
+\ei
+\item Built-in data structure:
+\bi
+\item lists (really flexible arrays)
+\item records 
+\item vectors 
+\item sets (stored as lists)
+\ei
+\ei
+\es
+
+\bs
+\subsection{Domains and Categories}
+
+The \GAP\ language provides (almost) no type system and no
+explicit support for object-oriented methods. There is no overloading
+of function names, for example.
+
+Nevertheless the \GAP\ library is almost entirely object-oriented.
+
+One computes with:
+
+\begin{description}
+\item Elements -- such as integers, permutations, words or
+user-defined things
+\item Domains -- structured sets such as groups, cosets, rings, fields
+etc.
+\item Categories -- sets of domains such as ``all groups'' --
+organized in a hierarchy of sub and super categories eg
+\verb|SymmetricGroups| in \verb|PermutationGroups| in \verb|Groups|.
+\end{description}
+
+Most ``high-level'' computation goes on with domains, reduced by the
+library to computations with elements.
+
+Most algorithms are written for a category
+
+\es
+\bs
+\subsection{Dispatchers and Operations Records}
+
+Each domain (and many elements) are represented as records, containing
+a component \verb|operations| which is itself a record, containing
+methods applicable to that object.
+
+Many globally defined functions then refer to the methods contained in
+their arguments.
+
+For example, in:
+\begin{verbatim}
+gap> a5 := AlternatingGroup(5);
+Group( (1,2,5), (2,3,5), (3,4,5) )
+gap> Size(a5);
+60
+\end{verbatim}
+
+\bi
+\item \verb|a5| is a record. 
+\item Global function \verb|Size|:
+\bi 
+\item checks if the field \verb|a5.size| is present, 
+\item  if not calls \verb|a5.operations.Size(a5)| to compute
+it (and sets \verb|a5.size|).
+\ei
+\item Such functions are called dispatchers.
+\ei
+
+\es
+\bs
+\subsection{Operations Records and Categories}
+
+In principle every domain has its own operations record, but in
+practice, these are shared between domains in the same (smallest)
+category.
+
+There is a global record \verb|SymmetricGroupOps| and all symmetric
+groups contain a pointer to it.
+
+\verb|SymmetricGroupOps| is created in the library by taking a copy of
+\verb|PermGroupOps|, so there is effective \emph{inheritance} of all
+permutation group methods by symmetric groups.
+
+A member of \verb|SymmetricGroupOps| can also handle some cases
+specially for symmetric groups, but otherwise call the equivalent
+member of \verb|PermGroupOps|. A process called \emph{delegation}.
+\es
+\bs
+\subsection{\GAP\ vs. a Truly O-O System}
+
+\bi
+\item \GAP\ is more flexible (with attendant risks of confusion)
+\item Kernel remains small and simple
+\item Method selection cannot be done until run time
+\item Certain operations \verb|()|, \verb|:=|, etc. not programmable
+\item No data hiding in \GAP\ (except by convention)
+\item No automatic checking of O-O conventions
+\item Categories and classes are used rather differently
+\item Some run-time overhead
+\ei
+\es
+\section{\GAP\ as a Computer Algebra System}
+\bs
+\subsection{\GAP\ as a Computer Algebra System}
+
+In comparison with ``typical'' CAS's \GAP:
+
+\bi
+\item  emphasises different areas of mathematics -- algebra,
+combinatorics, number theory vs analysis (calculus), algebraic
+geometry
+\item lacks the very general ``expression'' type that most CAS's
+have, but has (for example) polynomials
+\item has more of a type system that Maple or Mathematica, but less of
+one that Axiom
+\item (in most areas) emphasises performance for the serious research
+user over simplicity for casual use (when these cannot be reconciled)
+\item has remarkably few bugs
+\ei
+\es
+\section{Future Directions}
+\bs
+\GAP\ 4 is under development now in Aachen. The system is being
+reengineered from the ground up:
+\bi
+\item New memory manager
+\item New long integer arithmetic
+\item Faster function calling 
+\item More modular kernel
+\item Possible compiler (\GAP $->$ C, converting library functions into kernel functions)
+\item Dispatchers moved into the kernel
+\item New library loading scheme -- quicker and more memory efficient
+\item More even-handed treatment of different algebraic structures -- less of a special role for groups
+\item iterators and enumerators
+\ei
+\es
+\bs
+\subsection{Compiler}
+
+\GAP\ programs that don't use large-scale kernel functions (like
+multiplying large permutations) tend to run about 10 times slower than their C equivalents. This is roughly:
+\bi
+\item a factor of 3 due to the interpreter 
+\item a factor of 3 due to the memory management (no real pointers)
+\ei
+
+The compiler removes the first delay by converting \GAP\ into C which
+can then be linked with the running kernel. Some additional
+optimisation may be possible.
+
+The new memory manager should reduce the second delay somewhat.
+\es
+\bs
+\subsection{Method Selection}
+
+\bi
+\item The system of dispatchers and inheritance will be replaced by a system
+based on \emph{property lists}.
+
+\item Each object has a list of properties such as \verb|IsGroup|,
+\verb|IsSoluble|, \verb|IsFinite|, \verb|IsNilpotent|, which may be
+true, false or unknown. Setting some properties automatically sets others.
+
+\item Each operation has a number of methods installed, each of which
+requires that its arguments have certain properties.
+
+\item This allows method selection based on more than one argument, and
+other combinations not available in a standard O-O model.
+
+\item \verb|[]|, \verb|.|, \verb|:=|, etc. now programmable
+\ei
+\es
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<mixer template="gwgap3.tmpl">
+<mixertitle><mixer var="GAP3"/> Share Package "arep"</mixertitle>
+
+<h3>
+  AREP: Abstract REPresentations
+</h3>
+<p>
+  Share package since August 1998, communicated by
+  <mixer person="Herbert Pahlings" data="name_city"/>.<br />
+  This package has not yet been transferred to or replaced in
+  <mixer var="GAP4"/>. You can use it only in <mixer var="GAP3"/>.
+</p>
+
+<h3>
+  Authors
+</h3>
+<p>
+  <mixer person="Sebastian Egner" data="name"/> and
+  <mixer person="Markus Pueschel" data="name"/>.
+</p>
+
+<h3>
+  Implementation
+</h3>
+<p>
+  <b>Language:</b> <mixer var="GAP3"/> (includes a C program which speeds
+    up some computations)<br />
+  <b>Operating system:</b> Any <br />
+  <b>Current version:</b>
+    1.0 (available from <a href="{{gapftpdir}}share/arep-1.0.tar.gz">here</a>)
+</p>
+
+<h3>
+  Description
+</h3>
+<p>
+  The package AREP was developed to create data structures and
+  functions for the efficient calculation with group representations
+  with special attention to permutation and monomial representations.
+  The idea is to calculate with representations up to equality not
+  only up to equivalence as it is usually done in representation theory.
+  Furthermore we wanted to be able to create highly structured
+  representations in <mixer var="GAP3"/> as you do it on a piece of paper
+  by writing e.g.
+</p>
+  <pre>  R = (R1 innerTensorProduct R2) induction G, </pre>
+<p>
+  where R1, R2 are representations and G is a group. The representation
+  R constructed this way should be kept this way; it should not be
+  evaluated until you ask for it.
+  In this sense we have implemented an infrastructure for representations.
+  The more advanced part is given by functions which allow to transform
+  a given representation. These functions are mostly decompositions in
+  a certain sense. E.g. it is well known that every transitive monomial
+  representation of a group G is equivalent to an induction of a
+  onedimensional representation of a subgroup H &lt;= G. But how do
+  you choose the subgroup, the transversal and the conjugation to obtain
+  equality? This problem is solved by the function
+
+  <code>TransitiveToInductionMonRep</code>   (in <code>lib/arepfcts.g</code>)
+
+  which transforms a given transitive monomial rep R into the form
+</p>
+  <pre>  R = (L induction_By_T G)^D, </pre>
+<p>
+  where L is a onedimensional rep of a subgroup. A more sophisticated
+  function for constructively decomposing a given representation
+  is the function
+
+  <code>DecompositionMonRep</code>  (in <code>lib/arepfcts.g</code>)
+
+  which decomposes a monomial rep R into a conjugated direct sum
+  of irreducibles of the form
+</p>
+  <pre>R = (R1 directSum R2 ... Rk)^A</pre>
+<p>
+  where <code>Ri, i = 1..k</code> are irreducible and the (inverted)
+  decomposition matrix A is explicitly given, even in a highly structured
+  form!
+</p>
+<p>
+  A striking application of constructive representation theory
+  is the decomposition of matrices with symmetry. This technique
+  allows to explain and generate a lot of classical fast signal
+  transforms.
+  The original idea is due to Minkwitz  and was further
+  developed by the authors.
+</p>
+<p>
+  Abstractly, a symmetry of a given matrix M is given by a pair (R1, R2)
+  of representations of the same group G, such that
+</p>
+  <pre>  R1(g) * M = M * R2(g) for all g in G. </pre>
+<p>
+  If R1 and R2 both are permutation representations we call
+  the symmetry Perm-Perm-Symmetry. Mon-Mon-Symmetry is defined
+  analogous. Functions to determine the symmetry of a given matrix
+  can be found in <code>lib/symmetry.g</code>.
+  If a matrix possesses symmetry of the types above, it can be
+  decomposed into a product of sparse matrices (see [2], [3]).
+  Functions implementing this idea can be found in algogen.g
+  allowing to generate wellknown fast signal
+  transforms such as Cooley-Tukey-FFT, Rader-FFT,
+  Fast Cosine Transforms, and others in an automatic way.
+
+  In order for you to get a better impression of what
+  AREP can do and can not do we have prepared some
+  examples for you (see: Documentation and Examples).
+  These examples are ordered according to the library files.
+
+  Every <mixer var="GAP3"/> file in the library lib/ contains a short
+  documentation including the specification of all important functions.
+  This documentation can be accessed by extracting all lines beginning
+  with: <code>#F</code>.
+  For example, on a UNIX system
+</p>
+  <pre>
+  cd lib/
+  grep #F complex.g
+  </pre>
+<p>
+  tells you about the functions in 'complex.g'.
+  We recommend to extract these documentations before you
+  proceed with the examples below.
+</p>
+
+<h3>
+  Manual
+</h3>
+<p>
+  An AREP manual is available as
+  <a href="/Gap3/Doc3/arep.dvi">dvi</a>, or
+  <a href="/Gap3/Doc3/arep.pdf">pdf</a>, or
+  <a href="/Gap3/Doc3/arep.ps">postscript</a> file.
+</p>
+
+<h3>
+  Contact addresses
+</h3>
+<p>
+  <mixer person="Sebastian Egner" data="contact"/> <br/>
+  <mixer person="Markus Pueschel" data="contact"/> <br/>
+  <mixer person="Steve Linton" data="contact"/>
+</p>
+
+</mixer>

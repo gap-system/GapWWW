@@ -1,0 +1,414 @@
+\documentclass[12pt]{article}
+\usepackage{lslide}
+\usepackage{path}
+\addtolength{\textheight}{0.66truein} % A4
+\addtolength{\textwidth}{0.27truein} % A4
+\vertgroup
+\parskip 1ex plus 1ex minus 0.2ex
+\def\bs{\begin{slide}}
+\def\es{\end{slide}}
+\def\bi{\begin{itemize}}
+\def\ei{\end{itemize}}
+\def\GAP{\textsf{GAP}}
+\def\D{\mathcal{D}}
+\def\L{\mathcal{L}}
+\def\R{\mathcal{R}}
+\def\H{\mathcal{H}}
+\def\Im{\mathop{\mbox{Im}}}
+\def\Ker{\mathop{\mbox{Ker}}}
+\def\Stab{\mathop{\mbox{Stab}}}
+\def\gen<#1>{\left\langle #1 \right\rangle}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\title[Computing with Semigroups]{Computing with Semigroups and Monoids}
+\author{Steve Linton}
+\organization{Division of Computer Science, St.~Andrews}
+\titlepage
+\bs
+\subsection{Overview}
+
+\begin{enumerate}
+\item Transformation Monoids 
+\bi
+\item  with G\"otz Pfeiffer, Ed Robertson, Nik Ru\v skuc
+\item Computer investigations 
+\item Theoretical results inspired by investigations
+\item Improved algorithms justified by new theory
+\ei
+\item Computation in Algebra
+\bi
+\item Roles of Computation
+\item Capabilities of Modern Software
+\item Theoretical questions arising
+\ei
+\end{enumerate}
+\es
+\section{Transformation Monoids}
+\bs
+\subsection{The Basic Problem}
+\begin{description}
+\item[Input:] A finite set of generating transformations $A$ given by
+ images $i^a$ for $1\le i\le n$ and $a\in A$.
+\item[Output:] Some or all of:
+\bi
+\item $|M| = \left|\gen<A>\right|$
+\item $\D$, $\L$ and $\R$ class representatives, a
+parameterization of the $\H$ classes
+\item Fast membership test for $M$ 
+\item Fast tests for  $\D$, $\L$, $\R$ or $\H$ 
+\ei
+\end{description}
+\es
+\bs
+\subsection{Previous Work}
+\bi
+\item Basic algorithm: lists all the elements of $M$, standard
+algorithms for directed graphs will find the Green's classes
+\item Lallement-McFadden: work down $\D$ classes. 
+\bi
+\item regular classes: represent a group $\H$ class as a permutation
+group on few points, this controls the rest of the $\D$ class
+\item non-regular classes: some control is exerted by $\D$ classes
+above, but the algorithms still list all elements for some purposes
+\ei
+\ei
+\es
+\bs
+\subsection{Our First Experiments}
+\bi
+\item We re-implemented L-McF in \GAP
+\item A lot easier than their original implementation -- lists and 
+permutations built in 
+\item We found many suspiciously composite numbers -- of $\L$ and $\R$
+classes in a $\D$ class, for example.
+\item This suggested that 
+\bi
+\item The groups that control the non-regular $\D$
+classes might also be small degree permutation groups
+\item There might be larger groups controlling the regular
+$\D$ classes than we knew about
+\ei
+\item We arrived eventually at the theory in our paper ``Groups and
+actions in transformation semigroups'' to appear in Math Zeitschrift
+\ei
+\es
+\bs
+\subsection{Actions and Orbits}
+\bi
+\item Let a monoid $M$ act on a set $\Omega$ such that $$(\omega
+m)m' = \omega(mm')$$
+\item Define the \textit{cone} $C(\omega)$ of $\omega\in\Omega$ 
+to be $\{\omega m : m\in M\}$
+\item Define the \textit{strong orbit} $O(\omega)$ of $\omega \in
+\Omega$ to be $\{\omega m : m \in M, \omega\in C(\omega m)\}$
+\item Strong orbits are equivalence classes
+\item Note that an $\R$ class is a strong orbit in the regular action
+\item Define an action on subsets of $\Omega$ by $\Delta m = \{\delta
+m : \delta \in \Delta\}$
+\item Define the stabilizer $\Stab_M(\Delta) = \{m\in M : \Delta
+m = \Delta )$ (\emph{not} $\Delta m \subseteq \Delta$)
+\item Observe that $G(\Delta)= \Stab_M(\Delta) |_\Delta$ is a group of
+permutations of $\Delta$.
+\item This is called the ``Generalised Sch\"utzenberger Group of
+$\Delta$''
+\ei
+\es
+\bs
+\subsection{Computing  Generalized Sch\"utzenberger Groups}
+
+\begin{theorem} Let $M = \gen< A>$ be a monoid acting on a
+set $\Omega$. Let $\Delta \le \Omega$ and let $$O(\Delta) = \{ \Delta =
+\Delta_1, \Delta_2, \ldots, \Delta_m\}.$$ Let $r_1,\ldots, r_m$ and
+$r_1',\ldots,r_m'$ be elements of $M$ such that $\Delta r_i =
+\Delta_i$ and $\Delta_i r_i' = \Delta$. Then
+$$G(\Delta) = \gen<(r_iar_k')|_{\Delta} : a\in A, \Delta_i a =
+\Delta_k>$$
+\end{theorem}
+\bi
+\item This is a version of the Schreier Generator Theorem from group theory
+\item It is easy to modify the strongly connected components algorithm
+to compute, simultaneously:
+\bi
+\item $O(\Delta)$
+\item $r_1,\ldots,r_k$ and $r_1',\ldots,r_k'$
+\item the generators of $G(\Delta)$
+\ei
+\ei
+\es
+\bs
+\subsection{$\R$ Classes}
+\bi
+\item For $t$ a transformation, we call $G(\Im t)$ the ``right
+Generalised Sch\"utzenberger Group of $t$'' and write $G_R(t)$
+\item It is easy to show that: $$\{\Im s : s\mathbin{\R} t\} = O(\Im
+t)$$
+\item Furthermore, $\{ s : s \mathbin{\R} t, \Im s = \Im t \}$ is in
+natural bijection with $G_R(t)$
+\item In fact, the whole $\R$-class $t \R$ can be placed in bijection with
+$O(\Im t) \times G_R(t)$
+\item This bijection is computationally nice. After doing the
+computation of $G_R(t)$ above, we have a constructive numbering of
+$t\R$ and so know:
+\bi
+\item  $|t\R|$
+\item how to test an element for membership of $t\R$
+\item how to run through the  elements of $t\R$
+\ei
+These depend on fast algorithms for permutation groups
+\ei
+\es
+\bs
+\subsection{Studying Whole Monoids}
+\bi
+\item $\R$ classes are a left congruence
+\item We can find them all quite efficiently as the ``left cone'' of
+$1\R$
+\item If $\Im s = \Im t$ then  $G_R(s) = G_R(t')$ and
+$O(\Im s) = O(\Im t)$, so $s\R$ and $t\R$ can be described by almost
+the same data structure, which need only be constructed once
+\item This is the method used by the \texttt{Size} function in our
+package
+\ei
+\es
+\bs
+\subsection{Duality, $\L$ classes, $\D$ classes}
+
+\bi
+\item We can also define and compute the ``left generalised Sch\"utzenberger
+group'' $G_L(s)$ by working with kernels instead of images
+\item This controls $\L$-class structure 
+\item Further we can view $G_L(s)$ as a permutation group on $\Im s$
+\item $G_L(s) \cap G_R(s)$ is isomorphic to the Sch\"utzenberger group
+$\Gamma(s\H)$
+\item The whole of $t\D$  has a rectangular structure:
+\bi
+\item each block is in bijection to the group product $G_L(t)G_R(t)$
+\item the blocks are parameterized by $$\{\Im(s) : s \R t\} \times
+\{\Ker(s) : s \L t\}$$
+\ei
+\ei
+\es
+
+\bs
+\subsection{The Monoid Package}
+
+\bi
+\item \texttt{Monoid} is a contributed package extending \GAP\ 3
+\item Basic data structures and functions for semigroups, monoids,
+Green classes, etc.
+\item Data structures for transformations and binary relations
+\item Algorithms for transformation monoids, and other monoids acting
+on sets, based on new theory
+\ei
+
+\es
+
+\section{Computational Algebra in General}
+
+\bs
+\subsection{History -- Computational Group Theory}
+
+\bi
+\item Algorithmic methods in group theory date back to the 1930s
+\item Electronic computers were used in the 1950s
+\item Computational results played a part in the Classification of
+Finite Simple Groups, and in the subsequent analysis of the sporadic
+groups
+\item Since the 1970s, integrated systems have been developed for
+areas, and then for the whole, of group theory
+\item They provide a way to store groups, elements and other
+structures, a range of standard algorithms to work with them, and a
+programming language for combining these
+\item In the 1990s, more sophisticated algorithms have been developed,
+relying on sophisticated mathematics and on much prior art. This has:
+\bi
+\item pushed development of integrated systems -- without such a
+system many new algorithms cannot be implemented within a single PhD
+\item forced the systems to broaden beyond group theory --
+polynomials, algebras, ...
+\ei
+\ei
+\es
+
+\bs
+\subsection{The Reds and the Greens}
+\bi
+\item Two schools in CGT (especially pre 1991)
+\item Green school (Sims, Europeans, Australians, mainly mathematicians)
+\bi
+\item Pragmatists
+\item Implementation is important
+\item ``Good'' algorithm performs well on standard or big examples
+\ei
+\item Red school (North America, mainly computer scientists)
+\bi
+\item Complexity theorists -- started from Graph Isomorphism problem
+\item Precise complexity calculation important
+\item ``Good'' algorithm has low asymptotic complexity
+\ei
+\item Some fusion since 1991 -- Seress, Cooperman
+\item Result -- better theory and better implementations
+\ei
+\es
+\bs
+\subsection{Random Algorithms}
+\bi
+\item Some algorithms make random choices as they run
+\item Las Vegas algorithms may (if unlucky) fail, but never give a
+wrong answer
+\item Monte Carlo algorithms give the wrong answer with some probability $\epsilon
+< 1/2$. Repeated runs will reduce $\epsilon$ as required
+\item To make a MC algorithm LV simply need a check on the final
+answer
+\ei
+\es
+\bs
+\subsection{What can be done}
+\bi
+\item Finitely-presented groups:
+\bi
+\item Coset enumeration up to  c $10^6$ cosets 
+\item Study quotients: abelian, $p$, finite, nilpotent, polycyclic
+\item Seek confluent rewriting systems or automatic structures
+\ei
+\item Permutation groups:
+\bi
+\item Most structural questions can be answered for reasonable groups
+up to degree $10^6$ (sometimes Monte Carlo)
+\item Search problems within the groups can be harder
+\ei
+\item Finite Soluble groups:
+\bi
+\item Almost any question can be answered for quite large groups
+\item Work up and down the group and reduce problems to linear algebra
+\ei
+\ei
+\es
+
+\bs
+\subsection{Integrated Systems}
+\bi
+\item \GAP, MAGMA. Both provide:
+\bi
+\item implementations of a wide range of algorithms
+\item ``glue'' to allow algebraic data to be passed between them
+\item support features like memory management, large integer
+arithmetic, finite field arithmetic, lists, records, etc.
+\item a programming language with which the user can extend the
+system, drawing freely on all the existing features
+\ei
+\ei
+\es
+
+\bs
+\subsection{Integrated Systems 2}
+\bi
+\item Why use such a system?
+\bi
+\item The techniques you need may be built in -- use as a
+``desk calculator'' -- no user programming at all
+\item Interpreted language and interactive debugging make it easier to
+program in GAP or MAGMA than in (say) C, especially small programs
+\item Many modern algorithms draw on a huge range of known techniques
+-- avoid the need to reimplement them all
+\item Existing system capabilities are there to prepare input and
+analyse output from your new algorithm
+\item Easy for others to build on your work
+\ei
+\item Why not?
+\bi
+\item Performance penalty -- 3 to 10 times for most things
+\ei
+\ei
+\es
+\bs
+\subsection{GAP}
+\bi
+\item Groups, Algorithms, Programming
+\item Free software
+\item Runs under UNIX, MSDOS and MacOS (at least) -- easy to port
+\item Developed over 11 years in Lehrstuhl D f\"ur Mathematik, RWTH
+Aachen, Germany
+\bi
+\item Prof Joachim Neub\"user
+\item Martin Sch\"onert
+\item Cast of thousands, mainly in Aachen, some elsewhere
+\ei
+\item Headquarters moving to St Andrews in the next few weeks
+\item Current version 3.4.4. Version 4 about to enter $\beta$-test
+\item System is mostly written in the GAP language
+\ei
+\es
+\bs
+\subsection{GAP Contd}
+\bi
+\item Strongest areas 
+\bi
+\item Permutation groups (esp in v4)
+\item Finite Soluble groups
+\item Character tables
+\item Programmability
+\item A number of powerful contributed share packages
+\ei
+\item More info \path|http://www-gap.dcs.st-and.ac.uk/~gap/|
+\ei
+\es
+\bs
+\subsection{MAGMA}
+\bi
+\item Not free (\$1000 -- \$2000 for a 3 year license?)
+\item Successor to Cayley
+\item Produced by John Cannon in Sydney
+\item Available for UNIX, DOS, maybe MacOS
+\item Current version 2.2
+\item Strong in number theory, representation theory,
+finitely-presented groups
+\item Mostly written in C -- incorporated many stand-alone C programs
+\item High performance within the C modules
+\item Less popular with programmers and extenders
+\ei
+\es
+\bs
+\subsection{Theory from Computation}
+\bi
+\item As well as suggesting answers, computation has led to
+interesting new questions
+\item To prove (worst-case) complexity results requires ``extremal''
+group theory -- eg if it is not one of these special cases, how large
+can a permutation group of given degree be
+\item To prove probabilities for random algorithms requires
+statistical information about groups -- for example finding provably
+random elements of a group from the generators is surprisingly hard
+\ei
+\es
+\bs
+\subsection{Diversification}
+\bi
+\item Group theoretic algorithms are now far more sophisticated than
+those for other structures
+\item Can we apply the same ideas, or at least some of the general
+lessons in other contexts?
+\item Recent progress with
+\bi
+\item Lie Algebra (Willem de Graaf)
+\item Finitely-presented semigroups (Robertson, Thomas, Ruskuc,
+\textit{et al})
+\item Transformation Semigroups (SL, Pfeiffer, Ruskuc, Robertson)
+\item Finitely-presented associative algebras (SL)
+\ei
+\item Interest in
+\bi
+\item Matrix rings and algebras
+\item Groupoids
+\item Quantum groups
+\ei
+\item So far, examples support the general thesis
+\item GAP 4 is designed to support this work much better than GAP 3
+\ei
+\es
+\end{document}
+
+
+
+
+
