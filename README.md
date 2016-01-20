@@ -10,6 +10,12 @@ the website and its improved look.
 
 For small improvements (e.g. correcting details and fixing typos), the 
 procedure is as simple as just submitting an issue or pull request here.
+Please take into account that some files, in particular package overview 
+pages in `Packages/<pkgname>.mixer` are generated automatically from the
+meta-date in `PackageInfo.g` files. Incorrect information there should 
+not be changed via pull requests, but reported to package authors instead.
+In doubt, please submit an issue before making a pull request, and we 
+will be able to advise on further steps.
 
 For larger changes, it will be useful to build a local version of the GAP
 website first. The GAP website uses the the Python script called **Mixer**
