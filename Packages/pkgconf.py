@@ -19,7 +19,7 @@ PKG_OverviewLink_alnuth = r'''<a href="{{pkgmixerpath}}/alnuth.html">Alnuth</a>&
 
 '''
 
-PKG_OverviewLink_anupq = r'''<a href="{{pkgmixerpath}}/anupq.html">ANUPQ</a>&nbsp;&nbsp;3.1.1 (19/11/2013) by G. Gamble, W. Nickel, E. O'Brien, M. Horn
+PKG_OverviewLink_anupq = r'''<a href="{{pkgmixerpath}}/anupq.html">ANUPQ</a>&nbsp;&nbsp;3.1.3 (10/01/2016) by G. Gamble, W. Nickel, E. O'Brien, M. Horn
 <br />ANU p-Quotient
 
 '''
@@ -29,7 +29,7 @@ PKG_OverviewLink_atlasrep = r'''<a href="{{pkgmixerpath}}/atlasrep.html">AtlasRe
 
 '''
 
-PKG_OverviewLink_autodoc = r'''<a href="{{pkgmixerpath}}/autodoc.html">AutoDoc</a>&nbsp;&nbsp;2015.09.30 (30/09/2015) by S. Gutsche, M. Horn
+PKG_OverviewLink_autodoc = r'''<a href="{{pkgmixerpath}}/autodoc.html">AutoDoc</a>&nbsp;&nbsp;2016.02.16 (16/02/2016) by S. Gutsche, M. Horn
 <br />Generate documentation from GAP source code
 
 '''
@@ -54,7 +54,7 @@ PKG_OverviewLink_browse = r'''<a href="{{pkgmixerpath}}/browse.html">Browse</a>&
 
 '''
 
-PKG_OverviewLink_cap = r'''<a href="{{pkgmixerpath}}/cap.html">CAP</a>&nbsp;&nbsp;2015.11.27 (27/11/2015) by S. Gutsche, S. Posur, Ø. Skartsæterhagen
+PKG_OverviewLink_cap = r'''<a href="{{pkgmixerpath}}/cap.html">CAP</a>&nbsp;&nbsp;2016.02.19 (19/02/2016) by S. Gutsche, S. Posur, Ø. Skartsæterhagen
 <br />Categories, Algorithms, Programming
 
 '''
@@ -64,12 +64,12 @@ PKG_OverviewLink_carat = r'''<a href="{{pkgmixerpath}}/carat.html">Carat</a>&nbs
 
 '''
 
-PKG_OverviewLink_circle = r'''<a href="{{pkgmixerpath}}/circle.html">Circle</a>&nbsp;&nbsp;1.5.3 (13/02/2015) by A. Konovalov, P. Soules
+PKG_OverviewLink_circle = r'''<a href="{{pkgmixerpath}}/circle.html">Circle</a>&nbsp;&nbsp;1.5.4 (08/01/2016) by A. Konovalov, P. Soules
 <br />Adjoint groups of finite rings
 
 '''
 
-PKG_OverviewLink_cohomolo = r'''<a href="{{pkgmixerpath}}/cohomolo.html">cohomolo</a>&nbsp;&nbsp;1.6 (23/06/2008) by D. Holt
+PKG_OverviewLink_cohomolo = r'''<a href="{{pkgmixerpath}}/cohomolo.html">cohomolo</a>&nbsp;&nbsp;1.6.4 (20/01/2016) by D. Holt, M. Horn, M. Pfeiffer
 <br />Cohomology groups of finite groups on finite modules
 
 '''
@@ -79,7 +79,7 @@ PKG_OverviewLink_congruence = r'''<a href="{{pkgmixerpath}}/congruence.html">Con
 
 '''
 
-PKG_OverviewLink_convex = r'''<a href="{{pkgmixerpath}}/convex.html">Convex</a>&nbsp;&nbsp;2012.11.15 (15/11/2012) by S. Gutsche
+PKG_OverviewLink_convex = r'''<a href="{{pkgmixerpath}}/convex.html">Convex</a>&nbsp;&nbsp;2013.12.05 (05/12/2013) by S. Gutsche
 <br />A package for fan combinatorics
 
 '''
@@ -94,7 +94,7 @@ PKG_OverviewLink_crime = r'''<a href="{{pkgmixerpath}}/crime.html">Crime</a>&nbs
 
 '''
 
-PKG_OverviewLink_crisp = r'''<a href="{{pkgmixerpath}}/crisp.html">CRISP</a>&nbsp;&nbsp;1.3.9 (10/10/2015) by B. Höfling
+PKG_OverviewLink_crisp = r'''<a href="{{pkgmixerpath}}/crisp.html">CRISP</a>&nbsp;&nbsp;1.4.1 (21/12/2015) by B. Höfling
 <br />Computing with Radicals, Injectors, Schunck classes and Projectors
 
 '''
@@ -114,18 +114,23 @@ PKG_OverviewLink_ctbllib = r'''<a href="{{pkgmixerpath}}/ctbllib.html">CTblLib</
 
 '''
 
-PKG_OverviewLink_cubefree = r'''<a href="{{pkgmixerpath}}/cubefree.html">Cubefree</a>&nbsp;&nbsp;1.13 (10/12/2012) by H. Dietrich
+PKG_OverviewLink_cubefree = r'''<a href="{{pkgmixerpath}}/cubefree.html">Cubefree</a>&nbsp;&nbsp;1.15 (19/12/2015) by H. Dietrich
 <br />Constructing the Groups of a Given Cubefree Order
 
 '''
 
-PKG_OverviewLink_cvec = r'''<a href="{{pkgmixerpath}}/cvec.html">cvec</a>&nbsp;&nbsp;2.5.3 (08/11/2014) by M. Neunhöffer, M. Horn
+PKG_OverviewLink_cvec = r'''<a href="{{pkgmixerpath}}/cvec.html">cvec</a>&nbsp;&nbsp;2.5.4 (18/12/2015) by M. Neunhöffer, M. Horn
 <br />Compact vectors over finite fields
 
 '''
 
 PKG_OverviewLink_design = r'''<a href="{{pkgmixerpath}}/design.html">DESIGN</a>&nbsp;&nbsp;1.6 (23/11/2011) by L. H. Soicher
 <br />The Design Package for GAP
+
+'''
+
+PKG_OverviewLink_digraphs = r'''<a href="{{pkgmixerpath}}/digraphs.html">Digraphs</a>&nbsp;&nbsp;0.4.2 (28/01/2016) by J. De Beule, J. Jonusas, J. D. Mitchell, M. Torpey, W. Wilson
+<br />
 
 '''
 
@@ -154,7 +159,7 @@ PKG_OverviewLink_fga = r'''<a href="{{pkgmixerpath}}/fga.html">FGA</a>&nbsp;&nbs
 
 '''
 
-PKG_OverviewLink_fining = r'''<a href="{{pkgmixerpath}}/fining.html">FinInG</a>&nbsp;&nbsp;1.3 (30/11/2015) by J. Bamberg, A. Betten, J. De Beule, P. Cara, M. Lavrauw, M. Neunhoeffer
+PKG_OverviewLink_fining = r'''<a href="{{pkgmixerpath}}/fining.html">FinInG</a>&nbsp;&nbsp;1.3.3 (16/02/2016) by J. Bamberg, A. Betten, J. De Beule, P. Cara, M. Lavrauw, M. Neunhoeffer
 <br />Finite Incidence Geometry
 
 '''
@@ -209,37 +214,37 @@ PKG_OverviewLink_gbnp = r'''<a href="{{pkgmixerpath}}/gbnp.html">GBNP</a>&nbsp;&
 
 '''
 
-PKG_OverviewLink_generalizedmorphismsforcap = r'''<a href="{{pkgmixerpath}}/generalizedmorphismsforcap.html">GeneralizedMorphismsForCAP</a>&nbsp;&nbsp;2015.11.27 (27/11/2015) by S. Posur, S. Gutsche
+PKG_OverviewLink_generalizedmorphismsforcap = r'''<a href="{{pkgmixerpath}}/generalizedmorphismsforcap.html">GeneralizedMorphismsForCAP</a>&nbsp;&nbsp;2015.12.09 (09/12/2015) by S. Posur, S. Gutsche
 <br />Implementations of generalized morphisms for the CAP project
 
 '''
 
-PKG_OverviewLink_genss = r'''<a href="{{pkgmixerpath}}/genss.html">genss</a>&nbsp;&nbsp;1.6.2 (24/09/2014) by M. Neunhöffer, F. Noeske, M. Horn
+PKG_OverviewLink_genss = r'''<a href="{{pkgmixerpath}}/genss.html">genss</a>&nbsp;&nbsp;1.6.3 (07/01/2016) by M. Neunhöffer, F. Noeske, M. Horn
 <br />Generic Schreier-Sims
 
 '''
 
-PKG_OverviewLink_gpd = r'''<a href="{{pkgmixerpath}}/gpd.html">gpd</a>&nbsp;&nbsp;1.34 (05/06/2015) by E. J. Moore, C. D. Wensley
+PKG_OverviewLink_gpd = r'''<a href="{{pkgmixerpath}}/gpd.html">gpd</a>&nbsp;&nbsp;1.42 (15/02/2016) by E. J. Moore, C. D. Wensley
 <br />Groupoids, graphs of groups, and graphs of groupoids
 
 '''
 
-PKG_OverviewLink_gradedmodules = r'''<a href="{{pkgmixerpath}}/gradedmodules.html">GradedModules</a>&nbsp;&nbsp;2015.11.06 (06/11/2015) by M. Barakat, S. Gutsche, S. Jambor, M. Lange-Hegermann, A. Lorenz, O. Motsak
+PKG_OverviewLink_gradedmodules = r'''<a href="{{pkgmixerpath}}/gradedmodules.html">GradedModules</a>&nbsp;&nbsp;2015.12.04 (04/12/2015) by M. Barakat, S. Gutsche, S. Jambor, M. Lange-Hegermann, A. Lorenz, O. Motsak
 <br />A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
 
 '''
 
-PKG_OverviewLink_gradedringforhomalg = r'''<a href="{{pkgmixerpath}}/gradedringforhomalg.html">GradedRingForHomalg</a>&nbsp;&nbsp;2015.11.06 (06/11/2015) by M. Barakat, S. Gutsche, M. Kirschmer, S. Jambor, M. Lange-Hegermann, D. Robertz
+PKG_OverviewLink_gradedringforhomalg = r'''<a href="{{pkgmixerpath}}/gradedringforhomalg.html">GradedRingForHomalg</a>&nbsp;&nbsp;2015.12.04 (04/12/2015) by M. Barakat, S. Gutsche, M. Kirschmer, S. Jambor, M. Lange-Hegermann, D. Robertz
 <br />Endow Commutative Rings with an Abelian Grading
 
 '''
 
-PKG_OverviewLink_grape = r'''<a href="{{pkgmixerpath}}/grape.html">GRAPE</a>&nbsp;&nbsp;4.6.1 (17/05/2012) by L. H. Soicher
+PKG_OverviewLink_grape = r'''<a href="{{pkgmixerpath}}/grape.html">GRAPE</a>&nbsp;&nbsp;4.7 (08/01/2016) by L. H. Soicher
 <br />GRaph Algorithms using PErmutation groups
 
 '''
 
-PKG_OverviewLink_grpconst = r'''<a href="{{pkgmixerpath}}/grpconst.html">GrpConst</a>&nbsp;&nbsp;2.3 (29/05/2012) by H. U. Besche, B. Eick
+PKG_OverviewLink_grpconst = r'''<a href="{{pkgmixerpath}}/grpconst.html">GrpConst</a>&nbsp;&nbsp;2.5 (07/12/2015) by H. U. Besche, B. Eick
 <br />Constructing the Groups of a Given Order
 
 '''
@@ -254,7 +259,7 @@ PKG_OverviewLink_guava = r'''<a href="{{pkgmixerpath}}/guava.html">GUAVA</a>&nbs
 
 '''
 
-PKG_OverviewLink_hap = r'''<a href="{{pkgmixerpath}}/hap.html">HAP</a>&nbsp;&nbsp;1.11.12 (11/11/2015) by G. Ellis
+PKG_OverviewLink_hap = r'''<a href="{{pkgmixerpath}}/hap.html">HAP</a>&nbsp;&nbsp;1.11.13 (03/11/2015) by G. Ellis
 <br />Homological Algebra Programming
 
 '''
@@ -274,12 +279,17 @@ PKG_OverviewLink_hecke = r'''<a href="{{pkgmixerpath}}/hecke.html">hecke</a>&nbs
 
 '''
 
+PKG_OverviewLink_help = r'''<a href="{{pkgmixerpath}}/help.html">HeLP</a>&nbsp;&nbsp;2.2 (23/12/2015) by A. Bächle, L. Margolis
+<br />Hertweck-Luthar-Passi method.
+
+'''
+
 PKG_OverviewLink_homalg = r'''<a href="{{pkgmixerpath}}/homalg.html">homalg</a>&nbsp;&nbsp;2015.11.05 (05/11/2015) by M. Barakat, S. Gutsche, M. Lange-Hegermann
 <br />A homological algebra meta-package for computable Abelian categories
 
 '''
 
-PKG_OverviewLink_homalgtocas = r'''<a href="{{pkgmixerpath}}/homalgtocas.html">HomalgToCAS</a>&nbsp;&nbsp;2015.11.06 (06/11/2015) by T. Bächler, M. Barakat, T. Breuer, S. Görtzen, S. Gutsche, F. Lübeck, V. Wagh
+PKG_OverviewLink_homalgtocas = r'''<a href="{{pkgmixerpath}}/homalgtocas.html">HomalgToCAS</a>&nbsp;&nbsp;2015.12.08 (08/12/2015) by T. Bächler, M. Barakat, T. Breuer, S. Görtzen, S. Gutsche, F. Lübeck, V. Wagh
 <br />A window to the outer world
 
 '''
@@ -294,7 +304,7 @@ PKG_OverviewLink_intpic = r'''<a href="{{pkgmixerpath}}/intpic.html">IntPic</a>&
 
 '''
 
-PKG_OverviewLink_io = r'''<a href="{{pkgmixerpath}}/io.html">IO</a>&nbsp;&nbsp;4.4.4 (10/11/2014) by M. Neunhöffer, M. Horn
+PKG_OverviewLink_io = r'''<a href="{{pkgmixerpath}}/io.html">IO</a>&nbsp;&nbsp;4.4.5 (07/01/2016) by M. Neunhöffer, M. Horn
 <br />Bindings for low level C library I/O routines
 
 '''
@@ -314,17 +324,17 @@ PKG_OverviewLink_itc = r'''<a href="{{pkgmixerpath}}/itc.html">ITC</a>&nbsp;&nbs
 
 '''
 
-PKG_OverviewLink_json = r'''<a href="{{pkgmixerpath}}/json.html">json</a>&nbsp;&nbsp;0.8.2 (08/02/2015) by C. Jefferson
+PKG_OverviewLink_json = r'''<a href="{{pkgmixerpath}}/json.html">json</a>&nbsp;&nbsp;1.0.1 (15/02/2016) by C. Jefferson
 <br />Reading and Writing JSON
 
 '''
 
-PKG_OverviewLink_kan = r'''<a href="{{pkgmixerpath}}/kan.html">kan</a>&nbsp;&nbsp;1.21 (02/06/2015) by A. Heyworth, C. D. Wensley
+PKG_OverviewLink_kan = r'''<a href="{{pkgmixerpath}}/kan.html">kan</a>&nbsp;&nbsp;1.25 (18/02/2016) by A. Heyworth, C. D. Wensley
 <br />including double coset rewriting systems
 
 '''
 
-PKG_OverviewLink_kbmag = r'''<a href="{{pkgmixerpath}}/kbmag.html">kbmag</a>&nbsp;&nbsp;1.5 (06/01/2009) by D. Holt
+PKG_OverviewLink_kbmag = r'''<a href="{{pkgmixerpath}}/kbmag.html">kbmag</a>&nbsp;&nbsp;1.5.3 (16/01/2016) by D. Holt, M. Horn, M. Pfeiffer
 <br />Knuth-Bendix on Monoids and Automatic Groups
 
 '''
@@ -354,7 +364,7 @@ PKG_OverviewLink_linboxing = r'''<a href="{{pkgmixerpath}}/linboxing.html">linbo
 
 '''
 
-PKG_OverviewLink_linearalgebraforcap = r'''<a href="{{pkgmixerpath}}/linearalgebraforcap.html">LinearAlgebraForCAP</a>&nbsp;&nbsp;2015.11.05 (05/11/2015) by S. Gutsche, S. Posur
+PKG_OverviewLink_linearalgebraforcap = r'''<a href="{{pkgmixerpath}}/linearalgebraforcap.html">LinearAlgebraForCAP</a>&nbsp;&nbsp;2015.12.03 (03/12/2015) by S. Gutsche, S. Posur
 <br />Category of Matrices over a Field for CAP
 
 '''
@@ -384,17 +394,17 @@ PKG_OverviewLink_matricesforhomalg = r'''<a href="{{pkgmixerpath}}/matricesforho
 
 '''
 
-PKG_OverviewLink_modisom = r'''<a href="{{pkgmixerpath}}/modisom.html">ModIsom</a>&nbsp;&nbsp;2.3.2 (04/07/2014) by B. Eick, A. Konovalov
+PKG_OverviewLink_modisom = r'''<a href="{{pkgmixerpath}}/modisom.html">ModIsom</a>&nbsp;&nbsp;2.3.3 (08/01/2016) by B. Eick, A. Konovalov
 <br />Computing automorphisms and checking isomorphisms for modular group algebras of finite p-groups
 
 '''
 
-PKG_OverviewLink_modulepresentationsforcap = r'''<a href="{{pkgmixerpath}}/modulepresentationsforcap.html">ModulePresentationsForCAP</a>&nbsp;&nbsp;2015.11.05 (05/11/2015) by S. Gutsche, S. Posur
+PKG_OverviewLink_modulepresentationsforcap = r'''<a href="{{pkgmixerpath}}/modulepresentationsforcap.html">ModulePresentationsForCAP</a>&nbsp;&nbsp;2015.12.09 (09/12/2015) by S. Gutsche, S. Posur
 <br />Category R-pres for CAP
 
 '''
 
-PKG_OverviewLink_modules = r'''<a href="{{pkgmixerpath}}/modules.html">Modules</a>&nbsp;&nbsp;2015.11.06 (06/11/2015) by T. Bächler, M. Barakat, F. Diebold, S. Gutsche, M. Lange-Hegermann
+PKG_OverviewLink_modules = r'''<a href="{{pkgmixerpath}}/modules.html">Modules</a>&nbsp;&nbsp;2016.01.20 (20/01/2016) by T. Bächler, M. Barakat, F. Diebold, S. Gutsche, M. Lange-Hegermann
 <br />A homalg based package for the Abelian category of finitely presented modules over computable rings
 
 '''
@@ -404,7 +414,12 @@ PKG_OverviewLink_nilmat = r'''<a href="{{pkgmixerpath}}/nilmat.html">Nilmat</a>&
 
 '''
 
-PKG_OverviewLink_nq = r'''<a href="{{pkgmixerpath}}/nq.html">nq</a>&nbsp;&nbsp;2.5.1 (02/04/2014) by M. Horn, W. Nickel
+PKG_OverviewLink_normalizinterface = r'''<a href="{{pkgmixerpath}}/normalizinterface.html">NormalizInterface</a>&nbsp;&nbsp;0.9.5 (01/02/2016) by S. Gutsche, M. Horn, C. Söger
+<br />GAP wrapper for Normaliz
+
+'''
+
+PKG_OverviewLink_nq = r'''<a href="{{pkgmixerpath}}/nq.html">nq</a>&nbsp;&nbsp;2.5.2 (07/01/2016) by M. Horn, W. Nickel
 <br />Nilpotent Quotients of Finitely Presented Groups
 
 '''
@@ -414,12 +429,12 @@ PKG_OverviewLink_numericalsgps = r'''<a href="{{pkgmixerpath}}/numericalsgps.htm
 
 '''
 
-PKG_OverviewLink_openmath = r'''<a href="{{pkgmixerpath}}/openmath.html">OpenMath</a>&nbsp;&nbsp;11.2.0 (16/11/2013) by M. Costantini, A. Konovalov, M. Nicosia, A. Solomon
+PKG_OverviewLink_openmath = r'''<a href="{{pkgmixerpath}}/openmath.html">OpenMath</a>&nbsp;&nbsp;11.3.1 (08/01/2016) by M. Costantini, A. Konovalov, M. Nicosia, A. Solomon
 <br />OpenMath functionality in GAP
 
 '''
 
-PKG_OverviewLink_orb = r'''<a href="{{pkgmixerpath}}/orb.html">orb</a>&nbsp;&nbsp;4.7.3 (08/11/2014) by J. Mueller, M. Neunhöffer, F. Noeske, M. Horn
+PKG_OverviewLink_orb = r'''<a href="{{pkgmixerpath}}/orb.html">orb</a>&nbsp;&nbsp;4.7.5 (20/01/2016) by J. Mueller, M. Neunhöffer, F. Noeske, M. Horn
 <br />Methods to enumerate Orbits
 
 '''
@@ -439,7 +454,7 @@ PKG_OverviewLink_permut = r'''<a href="{{pkgmixerpath}}/permut.html">permut</a>&
 
 '''
 
-PKG_OverviewLink_polenta = r'''<a href="{{pkgmixerpath}}/polenta.html">Polenta</a>&nbsp;&nbsp;1.3.2 (01/04/2014) by B. Assmann, M. Horn
+PKG_OverviewLink_polenta = r'''<a href="{{pkgmixerpath}}/polenta.html">Polenta</a>&nbsp;&nbsp;1.3.5 (14/02/2016) by B. Assmann, M. Horn
 <br />Polycyclic presentations for matrix groups
 
 '''
@@ -459,7 +474,7 @@ PKG_OverviewLink_polymaking = r'''<a href="{{pkgmixerpath}}/polymaking.html">pol
 
 '''
 
-PKG_OverviewLink_profiling = r'''<a href="{{pkgmixerpath}}/profiling.html">profiling</a>&nbsp;&nbsp;0.3.0 (30/10/2015) by C. Jefferson
+PKG_OverviewLink_profiling = r'''<a href="{{pkgmixerpath}}/profiling.html">profiling</a>&nbsp;&nbsp;0.5.0 (03/02/2016) by C. Jefferson
 <br />Line by line profiling and code coverage for GAP
 
 '''
@@ -484,7 +499,7 @@ PKG_OverviewLink_radiroot = r'''<a href="{{pkgmixerpath}}/radiroot.html">RadiRoo
 
 '''
 
-PKG_OverviewLink_rcwa = r'''<a href="{{pkgmixerpath}}/rcwa.html">RCWA</a>&nbsp;&nbsp;3.7.0 (21/07/2014) by S. Kohl
+PKG_OverviewLink_rcwa = r'''<a href="{{pkgmixerpath}}/rcwa.html">RCWA</a>&nbsp;&nbsp;4.0.0 (25/01/2016) by S. Kohl
 <br />Residue-Class-Wise Affine Groups
 
 '''
@@ -494,12 +509,12 @@ PKG_OverviewLink_rds = r'''<a href="{{pkgmixerpath}}/rds.html">RDS</a>&nbsp;&nbs
 
 '''
 
-PKG_OverviewLink_recog = r'''<a href="{{pkgmixerpath}}/recog.html">recog</a>&nbsp;&nbsp;1.2.3 (24/09/2014) by M. Neunhöffer, Á. Seress, N. Ankaralioglu, P. Brooksbank, F. Celler, S. Howe, M. Law, S. Linton, G. Malle, A. Niemeyer, E. O'Brien, C. M. Roney-Dougal, M. Horn
+PKG_OverviewLink_recog = r'''<a href="{{pkgmixerpath}}/recog.html">recog</a>&nbsp;&nbsp;1.2.4 (07/01/2016) by M. Neunhöffer, Á. Seress, N. Ankaralioglu, P. Brooksbank, F. Celler, S. Howe, M. Law, S. Linton, G. Malle, A. Niemeyer, E. O'Brien, C. M. Roney-Dougal, M. Horn
 <br />A collection of group recognition methods
 
 '''
 
-PKG_OverviewLink_recogbase = r'''<a href="{{pkgmixerpath}}/recogbase.html">recogbase</a>&nbsp;&nbsp;1.2.3 (24/09/2014) by M. Neunhöffer, Á. Seress, M. Horn
+PKG_OverviewLink_recogbase = r'''<a href="{{pkgmixerpath}}/recogbase.html">recogbase</a>&nbsp;&nbsp;1.2.4 (07/01/2016) by M. Neunhöffer, Á. Seress, M. Horn
 <br />A framework for group recognition
 
 '''
@@ -509,12 +524,12 @@ PKG_OverviewLink_repsn = r'''<a href="{{pkgmixerpath}}/repsn.html">Repsn</a>&nbs
 
 '''
 
-PKG_OverviewLink_resclasses = r'''<a href="{{pkgmixerpath}}/resclasses.html">ResClasses</a>&nbsp;&nbsp;3.4.0 (21/07/2014) by S. Kohl
+PKG_OverviewLink_resclasses = r'''<a href="{{pkgmixerpath}}/resclasses.html">ResClasses</a>&nbsp;&nbsp;4.1.2 (10/02/2016) by S. Kohl
 <br />Set-Theoretic Computations with Residue Classes
 
 '''
 
-PKG_OverviewLink_ringsforhomalg = r'''<a href="{{pkgmixerpath}}/ringsforhomalg.html">RingsForHomalg</a>&nbsp;&nbsp;2015.11.06 (06/11/2015) by M. Barakat, S. Goertzen, M. Kirschmer, M. Lange-Hegermann, O. Motsak, M. Neunhöffer, D. Robertz, H. Schönemann, A. Steenpaß, V. Wagh
+PKG_OverviewLink_ringsforhomalg = r'''<a href="{{pkgmixerpath}}/ringsforhomalg.html">RingsForHomalg</a>&nbsp;&nbsp;2016.01.20 (20/01/2016) by M. Barakat, S. Goertzen, M. Kirschmer, M. Lange-Hegermann, O. Motsak, M. Neunhöffer, D. Robertz, H. Schönemann, A. Steenpaß, V. Wagh
 <br />Dictionaries of external rings
 
 '''
@@ -529,12 +544,12 @@ PKG_OverviewLink_scscp = r'''<a href="{{pkgmixerpath}}/scscp.html">SCSCP</a>&nbs
 
 '''
 
-PKG_OverviewLink_semigroups = r'''<a href="{{pkgmixerpath}}/semigroups.html">Semigroups</a>&nbsp;&nbsp;2.5 (01/06/2015) by J. D. Mitchell, M. Delgado, J. East, A. Egri-Nagy, J. Jonusas, M. Pfeiffer, B. Steinberg, J. Smith, M. Torpey, W. Wilson
-<br />Methods for Semigroups
+PKG_OverviewLink_semigroups = r'''<a href="{{pkgmixerpath}}/semigroups.html">Semigroups</a>&nbsp;&nbsp;2.7.3 (15/02/2016) by J. D. Mitchell, M. Delgado, J. East, A. Egri-Nagy, J. Jonusas, M. Pfeiffer, B. Steinberg, J. Smith, M. Torpey, W. Wilson
+<br />
 
 '''
 
-PKG_OverviewLink_sglppow = r'''<a href="{{pkgmixerpath}}/sglppow.html">SglPPow</a>&nbsp;&nbsp;1.0 (21/11/2014) by M. Vaughan-Lee, B. Eick
+PKG_OverviewLink_sglppow = r'''<a href="{{pkgmixerpath}}/sglppow.html">SglPPow</a>&nbsp;&nbsp;1.1 (21/11/2014) by M. Vaughan-Lee, B. Eick
 <br />Database of groups of prime-power order for some prime-powers
 
 '''
@@ -544,7 +559,7 @@ PKG_OverviewLink_sgpviz = r'''<a href="{{pkgmixerpath}}/sgpviz.html">SgpViz</a>&
 
 '''
 
-PKG_OverviewLink_simpcomp = r'''<a href="{{pkgmixerpath}}/simpcomp.html">simpcomp</a>&nbsp;&nbsp;2.1.1 (04/06/2015) by F. Effenberger, J. Spreer
+PKG_OverviewLink_simpcomp = r'''<a href="{{pkgmixerpath}}/simpcomp.html">simpcomp</a>&nbsp;&nbsp;2.1.6 (01/02/2016) by F. Effenberger, J. Spreer
 <br />A GAP toolbox for simplicial complexes
 
 '''
@@ -554,12 +569,12 @@ PKG_OverviewLink_singular = r'''<a href="{{pkgmixerpath}}/singular.html">singula
 
 '''
 
-PKG_OverviewLink_sla = r'''<a href="{{pkgmixerpath}}/sla.html">SLA</a>&nbsp;&nbsp;0.14 (22/11/2013) by W. A. de Graaf
+PKG_OverviewLink_sla = r'''<a href="{{pkgmixerpath}}/sla.html">SLA</a>&nbsp;&nbsp;1.1 (29/12/2016) by W. A. de Graaf
 <br />a package for doing computations with simple Lie algebras
 
 '''
 
-PKG_OverviewLink_smallsemi = r'''<a href="{{pkgmixerpath}}/smallsemi.html">Smallsemi</a>&nbsp;&nbsp;0.6.8 (24/02/2014) by A. Distler, J. Mitchell
+PKG_OverviewLink_smallsemi = r'''<a href="{{pkgmixerpath}}/smallsemi.html">Smallsemi</a>&nbsp;&nbsp;0.6.10 (13/01/2015) by A. Distler, J. Mitchell
 <br />A library of small semigroups
 
 '''
@@ -589,7 +604,7 @@ PKG_OverviewLink_tomlib = r'''<a href="{{pkgmixerpath}}/tomlib.html">TomLib</a>&
 
 '''
 
-PKG_OverviewLink_toolsforhomalg = r'''<a href="{{pkgmixerpath}}/toolsforhomalg.html">ToolsForHomalg</a>&nbsp;&nbsp;2015.11.23 (23/11/2015) by M. Barakat, S. Gutsche, M. Lange-Hegermann
+PKG_OverviewLink_toolsforhomalg = r'''<a href="{{pkgmixerpath}}/toolsforhomalg.html">ToolsForHomalg</a>&nbsp;&nbsp;2016.02.17 (17/02/2016) by M. Barakat, S. Gutsche, M. Lange-Hegermann
 <br />Special methods and knowledge propagation tools
 
 '''
@@ -614,6 +629,11 @@ PKG_OverviewLink_unitlib = r'''<a href="{{pkgmixerpath}}/unitlib.html">UnitLib</
 
 '''
 
+PKG_OverviewLink_utils = r'''<a href="{{pkgmixerpath}}/utils.html">Utils</a>&nbsp;&nbsp;0.25 (11/02/2016) by S. Gutsche, S. Kohl, C. D. Wensley
+<br />Utility functions in GAP
+
+'''
+
 PKG_OverviewLink_wedderga = r'''<a href="{{pkgmixerpath}}/wedderga.html">Wedderga</a>&nbsp;&nbsp;4.7.3 (18/09/2015) by O. Broche Cristo, A. Herman, A. Konovalov, G. Olteanu, A. Olivieri, A. del Rio, I. Van Gelder
 <br />Wedderburn Decomposition of Group Algebras
 
@@ -624,8 +644,13 @@ PKG_OverviewLink_xgap = r'''<a href="{{pkgmixerpath}}/xgap.html">XGAP</a>&nbsp;&
 
 '''
 
-PKG_OverviewLink_xmod = r'''<a href="{{pkgmixerpath}}/xmod.html">XMod</a>&nbsp;&nbsp;2.44 (13/11/2015) by C. D. Wensley, M. Alp, A. Odabas, E. O. Uslu
+PKG_OverviewLink_xmod = r'''<a href="{{pkgmixerpath}}/xmod.html">XMod</a>&nbsp;&nbsp;2.51 (09/02/2016) by C. D. Wensley, M. Alp, A. Odabas, E. O. Uslu
 <br />Crossed Modules and Cat1-Groups
+
+'''
+
+PKG_OverviewLink_xmodalg = r'''<a href="{{pkgmixerpath}}/xmodalg.html">XModAlg</a>&nbsp;&nbsp;1.12 (14/11/2015) by Z. Arvasi, A. Odabas
+<br />Crossed Modules and Cat1-Algebras
 
 '''
 
@@ -641,13 +666,13 @@ PKG_ManualLink_aclib = r'''<tr><td><a href="{{GAPManualLink}}/pkg/aclib/htm/chap
 PKG_ManualLink_alnuth = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Alnuth-3.0.0/htm/chapters.htm">Alnuth</a></td><td>[<a href="{{GAPManualLink}}/pkg/Alnuth-3.0.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Algebraic number theory and an interface to PARI/GP</td></tr>
 '''
 
-PKG_ManualLink_anupq = r'''<tr><td><a href="{{GAPManualLink}}/pkg/anupq-3.1.1/htm/chapters.htm">ANUPQ</a></td><td>[<a href="{{GAPManualLink}}/pkg/anupq-3.1.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ANU p-Quotient</td></tr>
+PKG_ManualLink_anupq = r'''<tr><td><a href="{{GAPManualLink}}/pkg/anupq-3.1.3/doc/chap0.html">ANUPQ</a></td><td>[<a href="{{GAPManualLink}}/pkg/anupq-3.1.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ANU p-Quotient</td></tr>
 '''
 
 PKG_ManualLink_atlasrep = r'''<tr><td><a href="{{GAPManualLink}}/pkg/atlasrep/doc/chap0.html">AtlasRep</a></td><td>[<a href="{{GAPManualLink}}/pkg/atlasrep/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>An Atlas of Group Representations</td></tr>
 '''
 
-PKG_ManualLink_autodoc = r'''<tr><td><a href="{{GAPManualLink}}/pkg/AutoDoc/doc/chap0.html">AutoDoc</a></td><td>[<a href="{{GAPManualLink}}/pkg/AutoDoc/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Generate documentation from GAP source code</td></tr>
+PKG_ManualLink_autodoc = r'''<tr><td><a href="{{GAPManualLink}}/pkg/AutoDoc-2016.02.16/doc/chap0.html">AutoDoc</a></td><td>[<a href="{{GAPManualLink}}/pkg/AutoDoc-2016.02.16/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Generate documentation from GAP source code</td></tr>
 '''
 
 PKG_ManualLink_automata = r'''<tr><td><a href="{{GAPManualLink}}/pkg/automata/doc/chap0.html">Automata</a></td><td>[<a href="{{GAPManualLink}}/pkg/automata/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td></tr>
@@ -662,7 +687,7 @@ PKG_ManualLink_autpgrp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/autpgrp/htm/
 PKG_ManualLink_browse = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Browse/doc/chap0.html">Browse</a></td><td>[<a href="{{GAPManualLink}}/pkg/Browse/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ncurses interface and browsing applications</td></tr>
 '''
 
-PKG_ManualLink_cap = r'''<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">CAP</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Categories, Algorithms, Programming</td></tr>
+PKG_ManualLink_cap = r'''<tr><td><a href="{{GAPManualLink}}/pkg/CAP-2016.02.19/doc/chap0.html">CAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/CAP-2016.02.19/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Categories, Algorithms, Programming</td></tr>
 '''
 
 PKG_ManualLink_carat = r'''<tr><td><a href="{{GAPManualLink}}/pkg/carat/htm/chapters.htm">Carat</a></td><td>[<a href="{{GAPManualLink}}/pkg/carat/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Interface to CARAT, a crystallographic groups package</td></tr>
@@ -671,7 +696,7 @@ PKG_ManualLink_carat = r'''<tr><td><a href="{{GAPManualLink}}/pkg/carat/htm/chap
 PKG_ManualLink_circle = r'''<tr><td><a href="{{GAPManualLink}}/pkg/circle/doc/chap0.html">Circle</a></td><td>[<a href="{{GAPManualLink}}/pkg/circle/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Adjoint groups of finite rings</td></tr>
 '''
 
-PKG_ManualLink_cohomolo = r'''<tr><td>cohomolo</td><td>[<a href="{{GAPManualLink}}/pkg/cohomolo/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing Cohomology groups and Schur Multipliers</td></tr>
+PKG_ManualLink_cohomolo = r'''<tr><td><a href="{{GAPManualLink}}/pkg/cohomolo-1.6.4/htm/chapters.htm">cohomolo</a></td><td>[<a href="{{GAPManualLink}}/pkg/cohomolo-1.6.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing Cohomology groups and Schur Multipliers</td></tr>
 '''
 
 PKG_ManualLink_congruence = r'''<tr><td><a href="{{GAPManualLink}}/pkg/congruence/doc/chap0.html">Congruence</a></td><td>[<a href="{{GAPManualLink}}/pkg/congruence/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Congruence subgroups of SL(2,Integers)</td></tr>
@@ -701,10 +726,13 @@ PKG_ManualLink_ctbllib = r'''<tr><td><a href="{{GAPManualLink}}/pkg/ctbllib/doc/
 PKG_ManualLink_cubefree = r'''<tr><td><a href="{{GAPManualLink}}/pkg/cubefree/htm/chapters.htm">Cubefree</a></td><td>[<a href="{{GAPManualLink}}/pkg/cubefree/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Constructing the groups of a given cubefree order</td></tr>
 '''
 
-PKG_ManualLink_cvec = r'''<tr><td><a href="{{GAPManualLink}}/pkg/cvec-2.5.3/doc/chap0.html">cvec</a></td><td>[<a href="{{GAPManualLink}}/pkg/cvec-2.5.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Compact vectors over finite fields</td></tr>
+PKG_ManualLink_cvec = r'''<tr><td><a href="{{GAPManualLink}}/pkg/cvec-2.5.4/doc/chap0.html">cvec</a></td><td>[<a href="{{GAPManualLink}}/pkg/cvec-2.5.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Compact vectors over finite fields</td></tr>
 '''
 
 PKG_ManualLink_design = r'''<tr><td><a href="{{GAPManualLink}}/pkg/design/htm/chapters.htm">DESIGN</a></td><td>[<a href="{{GAPManualLink}}/pkg/design/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The Design Package for GAP</td></tr>
+'''
+
+PKG_ManualLink_digraphs = r'''<tr><td><a href="{{GAPManualLink}}/pkg/digraphs-0.4.2/doc/chap0.html">Digraphs</a></td><td>[<a href="{{GAPManualLink}}/pkg/digraphs-0.4.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Digraphs - Methods for digraphs</td></tr>
 '''
 
 PKG_ManualLink_edim = r'''<tr><td><a href="{{GAPManualLink}}/pkg/edim/doc/chap0.html">EDIM</a></td><td>[<a href="{{GAPManualLink}}/pkg/edim/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Elementary Divisors of Integer Matrices</td></tr>
@@ -722,7 +750,7 @@ PKG_ManualLink_factint = r'''<tr><td><a href="{{GAPManualLink}}/pkg/factint/doc/
 PKG_ManualLink_fga = r'''<tr><td><a href="{{GAPManualLink}}/pkg/fga/htm/chapters.htm">FGA</a></td><td>[<a href="{{GAPManualLink}}/pkg/fga/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Free Group Algorithms</td></tr>
 '''
 
-PKG_ManualLink_fining = r'''<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">FinInG</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>FinInG - Finite Incidence Geometry</td></tr>
+PKG_ManualLink_fining = r'''<tr><td><a href="{{GAPManualLink}}/pkg/fining/doc/chap0.html">FinInG</a></td><td>[<a href="{{GAPManualLink}}/pkg/fining/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>FinInG - Finite Incidence Geometry</td></tr>
 '''
 
 PKG_ManualLink_float = r'''<tr><td><a href="{{GAPManualLink}}/pkg/float-0.6.2/doc/chap0.html">Float</a></td><td>[<a href="{{GAPManualLink}}/pkg/float-0.6.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Floating-point numbers</td></tr>
@@ -756,13 +784,13 @@ PKG_ManualLink_gaussforhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Gauss
 PKG_ManualLink_gbnp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/gbnp/doc/chap0.htm">GBNP</a></td><td>[<a href="{{GAPManualLink}}/pkg/gbnp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Non-commutative Gröbner bases</td></tr>
 '''
 
-PKG_ManualLink_generalizedmorphismsforcap = r'''<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">GeneralizedMorphismsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Implementations of generalized morphisms for the CAP project</td></tr>
+PKG_ManualLink_generalizedmorphismsforcap = r'''<tr><td><a href="{{GAPManualLink}}/pkg/GeneralizedMorphismsForCAP/doc/chap0.html">GeneralizedMorphismsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/GeneralizedMorphismsForCAP/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Implementations of generalized morphisms for the CAP project</td></tr>
 '''
 
-PKG_ManualLink_genss = r'''<tr><td><a href="{{GAPManualLink}}/pkg/genss-1.6.2/doc/chap0.html">genss</a></td><td>[<a href="{{GAPManualLink}}/pkg/genss-1.6.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Generic Schreier-Sims</td></tr>
+PKG_ManualLink_genss = r'''<tr><td><a href="{{GAPManualLink}}/pkg/genss-1.6.3/doc/chap0.html">genss</a></td><td>[<a href="{{GAPManualLink}}/pkg/genss-1.6.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Generic Schreier-Sims</td></tr>
 '''
 
-PKG_ManualLink_gpd = r'''<tr><td><a href="{{GAPManualLink}}/pkg/gpd-1.34/doc/chap0.html">Gpd</a></td><td>[<a href="{{GAPManualLink}}/pkg/gpd-1.34/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Finite Groupoids and Graphs of Groups</td></tr>
+PKG_ManualLink_gpd = r'''<tr><td><a href="{{GAPManualLink}}/pkg/gpd-1.42/doc/chap0.html">Gpd</a></td><td>[<a href="{{GAPManualLink}}/pkg/gpd-1.42/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Finite Groupoids and Graphs of Groups</td></tr>
 '''
 
 PKG_ManualLink_gradedmodules = r'''<tr><td><a href="{{GAPManualLink}}/pkg/GradedModules/doc/chap0.html">GradedModules</a></td><td>[<a href="{{GAPManualLink}}/pkg/GradedModules/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings</td></tr>
@@ -797,6 +825,9 @@ PKG_ManualLink_happrime = r'''<tr><td><a href="{{GAPManualLink}}/pkg/happrime/do
 PKG_ManualLink_hecke = r'''<tr><td><a href="{{GAPManualLink}}/pkg/hecke/doc/chap0.html">hecke</a></td><td>[<a href="{{GAPManualLink}}/pkg/hecke/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Hecke - Specht 2.4 ported to GAP 4</td></tr>
 '''
 
+PKG_ManualLink_help = r'''<tr><td><a href="{{GAPManualLink}}/pkg/help/doc/chap0.html">HeLP</a></td><td>[<a href="{{GAPManualLink}}/pkg/help/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Hertweck-Luthar-Passi method.</td></tr>
+'''
+
 PKG_ManualLink_homalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/homalg/doc/chap0.html">homalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/homalg/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A homological algebra meta-package for computable Abelian categories</td></tr>
 '''
 
@@ -809,7 +840,7 @@ PKG_ManualLink_idrel = r'''<tr><td><a href="{{GAPManualLink}}/pkg/idrel-2.31/doc
 PKG_ManualLink_intpic = r'''<tr><td><a href="{{GAPManualLink}}/pkg/intpic/doc/chap0.html">IntPic</a></td><td>[<a href="{{GAPManualLink}}/pkg/intpic/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>IntPic, a GAP package for drawing integers</td></tr>
 '''
 
-PKG_ManualLink_io = r'''<tr><td><a href="{{GAPManualLink}}/pkg/io-4.4.4/doc/chap0.html">IO</a></td><td>[<a href="{{GAPManualLink}}/pkg/io-4.4.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Bindings for low level C library I/O routines</td></tr>
+PKG_ManualLink_io = r'''<tr><td><a href="{{GAPManualLink}}/pkg/io-4.4.5/doc/chap0.html">IO</a></td><td>[<a href="{{GAPManualLink}}/pkg/io-4.4.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Bindings for low level C library I/O routines</td></tr>
 '''
 
 PKG_ManualLink_io_forhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/IO_ForHomalg/doc/chap0.html">IO_ForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/IO_ForHomalg/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>IO capabilities for the homalg project</td></tr>
@@ -821,13 +852,13 @@ PKG_ManualLink_irredsol = r'''<tr><td><a href="{{GAPManualLink}}/pkg/irredsol/ht
 PKG_ManualLink_itc = r'''<tr><td><a href="{{GAPManualLink}}/pkg/itc/htm/chapters.htm">ITC</a></td><td>[<a href="{{GAPManualLink}}/pkg/itc/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Interactive Todd-Coxeter computations</td></tr>
 '''
 
-PKG_ManualLink_json = r'''<tr><td><a href="{{GAPManualLink}}/pkg/json-0.8.2/doc/chap0.html">json</a></td><td>[<a href="{{GAPManualLink}}/pkg/json-0.8.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Reading and Writing JSON</td></tr>
+PKG_ManualLink_json = r'''<tr><td><a href="{{GAPManualLink}}/pkg/json-1.0.1/doc/chap0.html">json</a></td><td>[<a href="{{GAPManualLink}}/pkg/json-1.0.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Reading and Writing JSON</td></tr>
 '''
 
-PKG_ManualLink_kan = r'''<tr><td><a href="{{GAPManualLink}}/pkg/kan-1.21/doc/chap0.html">Kan</a></td><td>[<a href="{{GAPManualLink}}/pkg/kan-1.21/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with Kan extensions</td></tr>
+PKG_ManualLink_kan = r'''<tr><td><a href="{{GAPManualLink}}/pkg/kan-1.25/doc/chap0.html">Kan</a></td><td>[<a href="{{GAPManualLink}}/pkg/kan-1.25/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with Kan extensions</td></tr>
 '''
 
-PKG_ManualLink_kbmag = r'''<tr><td>kbmag</td><td>[<a href="{{GAPManualLink}}/pkg/kbmag/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Knuth-Bendix on Monoids and Automatic Groups</td></tr>
+PKG_ManualLink_kbmag = r'''<tr><td><a href="{{GAPManualLink}}/pkg/kbmag-1.5.3/htm/chapters.htm">kbmag</a></td><td>[<a href="{{GAPManualLink}}/pkg/kbmag-1.5.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Knuth-Bendix on Monoids and Automatic Groups</td></tr>
 '''
 
 PKG_ManualLink_laguna = r'''<tr><td><a href="{{GAPManualLink}}/pkg/laguna/doc/chap0.html">LAGUNA</a></td><td>[<a href="{{GAPManualLink}}/pkg/laguna/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Lie AlGebras and UNits of group Algebras</td></tr>
@@ -845,7 +876,7 @@ PKG_ManualLink_liering = r'''<tr><td><a href="{{GAPManualLink}}/pkg/liering/doc/
 PKG_ManualLink_linboxing = r'''<tr><td><a href="{{GAPManualLink}}/pkg/linboxing/doc/chap0.html">linboxing</a></td><td>[<a href="{{GAPManualLink}}/pkg/linboxing/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Kernel-level access to LinBox linear algebra</td></tr>
 '''
 
-PKG_ManualLink_linearalgebraforcap = r'''<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">LinearAlgebraForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Category of Matrices over a Field for CAP</td></tr>
+PKG_ManualLink_linearalgebraforcap = r'''<tr><td><a href="{{GAPManualLink}}/pkg/LinearAlgebraForCAP/doc/chap0.html">LinearAlgebraForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/LinearAlgebraForCAP/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Category of Matrices over a Field for CAP</td></tr>
 '''
 
 PKG_ManualLink_localizeringforhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/LocalizeRingForHomalg/doc/chap0.html">LocalizeRingForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/LocalizeRingForHomalg/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A Package for Localization of Polynomial Rings</td></tr>
@@ -866,7 +897,7 @@ PKG_ManualLink_matricesforhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Ma
 PKG_ManualLink_modisom = r'''<tr><td><a href="{{GAPManualLink}}/pkg/modisom/htm/chapters.htm">ModIsom</a></td><td>[<a href="{{GAPManualLink}}/pkg/modisom/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with nilpotent associative algebras</td></tr>
 '''
 
-PKG_ManualLink_modulepresentationsforcap = r'''<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">ModulePresentationsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Category R-pres for CAP</td></tr>
+PKG_ManualLink_modulepresentationsforcap = r'''<tr><td><a href="{{GAPManualLink}}/pkg/ModulePresentationsForCAP/doc/chap0.html">ModulePresentationsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/ModulePresentationsForCAP/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Category R-pres for CAP</td></tr>
 '''
 
 PKG_ManualLink_modules = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Modules/doc/chap0.html">Modules</a></td><td>[<a href="{{GAPManualLink}}/pkg/Modules/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A homalg based package for the Abelian category of finitely presented modules over computable rings</td></tr>
@@ -875,7 +906,10 @@ PKG_ManualLink_modules = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Modules/doc/
 PKG_ManualLink_nilmat = r'''<tr><td><a href="{{GAPManualLink}}/pkg/nilmat/htm/chapters.htm">Nilmat</a></td><td>[<a href="{{GAPManualLink}}/pkg/nilmat/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computation with nilpotent matrix groups</td></tr>
 '''
 
-PKG_ManualLink_nq = r'''<tr><td><a href="{{GAPManualLink}}/pkg/nq-2.5.1/doc/chap0.html">nq</a></td><td>[<a href="{{GAPManualLink}}/pkg/nq-2.5.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Nilpotent Quotient Algorithm</td></tr>
+PKG_ManualLink_normalizinterface = r'''<tr><td><a href="{{GAPManualLink}}/pkg/NormalizInterface-0.9.5/doc/chap0_mj.html">NormalizInterface</a></td><td>[<a href="{{GAPManualLink}}/pkg/NormalizInterface-0.9.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>GAP wrapper for Normaliz</td></tr>
+'''
+
+PKG_ManualLink_nq = r'''<tr><td><a href="{{GAPManualLink}}/pkg/nq-2.5.2/doc/chap0.html">nq</a></td><td>[<a href="{{GAPManualLink}}/pkg/nq-2.5.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Nilpotent Quotient Algorithm</td></tr>
 '''
 
 PKG_ManualLink_numericalsgps = r'''<tr><td><a href="{{GAPManualLink}}/pkg/numericalsgps/doc/chap0.html">NumericalSgps</a></td><td>[<a href="{{GAPManualLink}}/pkg/numericalsgps/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>NumericalSgps, a GAP package for numerical semigroups</td></tr>
@@ -884,7 +918,7 @@ PKG_ManualLink_numericalsgps = r'''<tr><td><a href="{{GAPManualLink}}/pkg/numeri
 PKG_ManualLink_openmath = r'''<tr><td><a href="{{GAPManualLink}}/pkg/openmath/doc/chap0.html">OpenMath</a></td><td>[<a href="{{GAPManualLink}}/pkg/openmath/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>OpenMath functionality in GAP</td></tr>
 '''
 
-PKG_ManualLink_orb = r'''<tr><td><a href="{{GAPManualLink}}/pkg/orb-4.7.3/doc/chap0.html">orb</a></td><td>[<a href="{{GAPManualLink}}/pkg/orb-4.7.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Methods to enumerate orbits</td></tr>
+PKG_ManualLink_orb = r'''<tr><td><a href="{{GAPManualLink}}/pkg/orb-4.7.5/doc/chap0.html">orb</a></td><td>[<a href="{{GAPManualLink}}/pkg/orb-4.7.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Methods to enumerate orbits</td></tr>
 '''
 
 PKG_ManualLink_pargap = r'''<tr><td><a href="{{GAPManualLink}}/pkg/pargap/htm/chapters.htm">ParGAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/pargap/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Parallel GAP</td></tr>
@@ -896,7 +930,7 @@ PKG_ManualLink_patternclass = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Pattern
 PKG_ManualLink_permut = r'''<tr><td><a href="{{GAPManualLink}}/pkg/permut/doc/chap0.html">PERMUT</a></td><td>[<a href="{{GAPManualLink}}/pkg/permut/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>PERMUT: A package to deal with permutability in finite groups</td></tr>
 '''
 
-PKG_ManualLink_polenta = r'''<tr><td><a href="{{GAPManualLink}}/pkg/polenta-1.3.2/doc/chap0.html">polenta</a></td><td>[<a href="{{GAPManualLink}}/pkg/polenta-1.3.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Polycyclic presentations for matrix groups</td></tr>
+PKG_ManualLink_polenta = r'''<tr><td><a href="{{GAPManualLink}}/pkg/polenta-1.3.5/doc/chap0.html">Polenta</a></td><td>[<a href="{{GAPManualLink}}/pkg/polenta-1.3.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Polycyclic presentations for matrix groups</td></tr>
 '''
 
 PKG_ManualLink_polycyclic = r'''<tr><td><a href="{{GAPManualLink}}/pkg/polycyclic-2.11/doc/chap0.html">polycyclic</a></td><td>[<a href="{{GAPManualLink}}/pkg/polycyclic-2.11/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computation with polycyclic groups</td></tr>
@@ -908,7 +942,7 @@ PKG_ManualLink_polymakeinterface = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Po
 PKG_ManualLink_polymaking = r'''<tr><td><a href="{{GAPManualLink}}/pkg/polymaking/doc/chap0.html">polymaking</a></td><td>[<a href="{{GAPManualLink}}/pkg/polymaking/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A package for using polymake in GAP</td></tr>
 '''
 
-PKG_ManualLink_profiling = r'''<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">profiling</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Line by line profiling and code coverage for GAP</td></tr>
+PKG_ManualLink_profiling = r'''<tr><td><a href="{{GAPManualLink}}/pkg/profiling-0.5.0/doc/chap0.html">profiling</a></td><td>[<a href="{{GAPManualLink}}/pkg/profiling-0.5.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Line by line profiling and code coverage for GAP</td></tr>
 '''
 
 PKG_ManualLink_qaos = r'''<tr><td><a href="{{GAPManualLink}}/pkg/qaos/doc/qaos.html">QaoS</a></td><td>[<a href="{{GAPManualLink}}/pkg/qaos/doc/qaos.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>QaoS - Querying Algebraic Objects System</td></tr>
@@ -929,10 +963,10 @@ PKG_ManualLink_rcwa = r'''<tr><td><a href="{{GAPManualLink}}/pkg/rcwa/doc/chap0.
 PKG_ManualLink_rds = r'''<tr><td><a href="{{GAPManualLink}}/pkg/rds/htm/chapters.htm">RDS</a></td><td>[<a href="{{GAPManualLink}}/pkg/rds/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Relative Difference Sets</td></tr>
 '''
 
-PKG_ManualLink_recog = r'''<tr><td><a href="{{GAPManualLink}}/pkg/recog-1.2.3/doc/chap0.html">recog</a></td><td>[<a href="{{GAPManualLink}}/pkg/recog-1.2.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A collection of group recognition methods</td></tr>
+PKG_ManualLink_recog = r'''<tr><td><a href="{{GAPManualLink}}/pkg/recog-1.2.4/doc/chap0.html">recog</a></td><td>[<a href="{{GAPManualLink}}/pkg/recog-1.2.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A collection of group recognition methods</td></tr>
 '''
 
-PKG_ManualLink_recogbase = r'''<tr><td><a href="{{GAPManualLink}}/pkg/recogbase-1.2.3/doc/chap0.html">recogbase</a></td><td>[<a href="{{GAPManualLink}}/pkg/recogbase-1.2.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A framework for group recognition</td></tr>
+PKG_ManualLink_recogbase = r'''<tr><td><a href="{{GAPManualLink}}/pkg/recogbase-1.2.4/doc/chap0.html">recogbase</a></td><td>[<a href="{{GAPManualLink}}/pkg/recogbase-1.2.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A framework for group recognition</td></tr>
 '''
 
 PKG_ManualLink_repsn = r'''<tr><td><a href="{{GAPManualLink}}/pkg/repsn/doc/chap0.html">Repsn</a></td><td>[<a href="{{GAPManualLink}}/pkg/repsn/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Constructing matrix representations of finite groups</td></tr>
@@ -950,7 +984,7 @@ PKG_ManualLink_sco = r'''<tr><td><a href="{{GAPManualLink}}/pkg/SCO/doc/chap0.ht
 PKG_ManualLink_scscp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/scscp/doc/chap0.html">SCSCP</a></td><td>[<a href="{{GAPManualLink}}/pkg/scscp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Symbolic Computation Software Composability Protocol</td></tr>
 '''
 
-PKG_ManualLink_semigroups = r'''<tr><td><a href="{{GAPManualLink}}/pkg/semigroups-2.5/doc/chap0.html">Semigroups</a></td><td>[<a href="{{GAPManualLink}}/pkg/semigroups-2.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Semigroups - Methods for semigroups</td></tr>
+PKG_ManualLink_semigroups = r'''<tr><td><a href="{{GAPManualLink}}/pkg/semigroups-2.7.3/doc/chap0.html">Semigroups</a></td><td>[<a href="{{GAPManualLink}}/pkg/semigroups-2.7.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Semigroups</td></tr>
 '''
 
 PKG_ManualLink_sglppow = r'''<tr><td><a href="{{GAPManualLink}}/pkg/sglppow/htm/chapters.htm">SglPPow</a></td><td>[<a href="{{GAPManualLink}}/pkg/sglppow/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Database of groups of prime-power order</td></tr>
@@ -968,7 +1002,7 @@ PKG_ManualLink_singular = r'''<tr><td><a href="{{GAPManualLink}}/pkg/singular/do
 PKG_ManualLink_sla = r'''<tr><td><a href="{{GAPManualLink}}/pkg/sla/doc/chap0.html">SLA</a></td><td>[<a href="{{GAPManualLink}}/pkg/sla/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with simple Lie algebras</td></tr>
 '''
 
-PKG_ManualLink_smallsemi = r'''<tr><td><a href="{{GAPManualLink}}/pkg/smallsemi-0.6.8/doc/chap0.html">Smallsemi</a></td><td>[<a href="{{GAPManualLink}}/pkg/smallsemi-0.6.8/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>a library of small semigroups</td></tr>
+PKG_ManualLink_smallsemi = r'''<tr><td><a href="{{GAPManualLink}}/pkg/smallsemi-0.6.10/doc/chap0.html">Smallsemi</a></td><td>[<a href="{{GAPManualLink}}/pkg/smallsemi-0.6.10/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>a library of small semigroups</td></tr>
 '''
 
 PKG_ManualLink_sonata = r'''<tr><td><a href="{{GAPManualLink}}/pkg/sonata/htm/ref/chapters.htm">SONATA</a></td><td>[<a href="{{GAPManualLink}}/pkg/sonata/doc/ref/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>System of nearrings and their applications</td></tr>
@@ -1002,13 +1036,19 @@ PKG_ManualLink_unipot = r'''<tr><td><a href="{{GAPManualLink}}/pkg/unipot-1.2/ht
 PKG_ManualLink_unitlib = r'''<tr><td><a href="{{GAPManualLink}}/pkg/unitlib/doc/chap0.html">UnitLib</a></td><td>[<a href="{{GAPManualLink}}/pkg/unitlib/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The library of normalized unit groups of modular group algebras</td></tr>
 '''
 
+PKG_ManualLink_utils = r'''<tr><td><a href="{{GAPManualLink}}/pkg/utils-0.25/doc/chap0.html">Utils</a></td><td>[<a href="{{GAPManualLink}}/pkg/utils-0.25/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Utility functions in GAP</td></tr>
+'''
+
 PKG_ManualLink_wedderga = r'''<tr><td><a href="{{GAPManualLink}}/pkg/wedderga/doc/chap0.html">Wedderga</a></td><td>[<a href="{{GAPManualLink}}/pkg/wedderga/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Wedderga</td></tr>
 '''
 
 PKG_ManualLink_xgap = r'''<tr><td><a href="{{GAPManualLink}}/pkg/xgap/htm/chapters.htm">XGap</a></td><td>[<a href="{{GAPManualLink}}/pkg/xgap/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>XGAP - a graphical user interface for GAP</td></tr>
 '''
 
-PKG_ManualLink_xmod = r'''<tr><td><a href="{{GAPManualLink}}/pkg/xmod-2.44/doc/chap0.html">XMod</a></td><td>[<a href="{{GAPManualLink}}/pkg/xmod-2.44/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Groups in GAP</td></tr>
+PKG_ManualLink_xmod = r'''<tr><td><a href="{{GAPManualLink}}/pkg/xmod-2.51/doc/chap0.html">XMod</a></td><td>[<a href="{{GAPManualLink}}/pkg/xmod-2.51/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Groups in GAP</td></tr>
+'''
+
+PKG_ManualLink_xmodalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/xmodalg-1.12/doc/chap0.html">XModAlg</a></td><td>[<a href="{{GAPManualLink}}/pkg/xmodalg-1.12/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Algebras in GAP</td></tr>
 '''
 
 PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/doc/chap0.html">4ti2Interface</a></td><td>[<a href="{{GAPManualLink}}/pkg/4ti2Interface/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>An interface to 4ti2.</td></tr>
@@ -1019,11 +1059,11 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/Alnuth-3.0.0/htm/chapters.htm">Alnuth</a></td><td>[<a href="{{GAPManualLink}}/pkg/Alnuth-3.0.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Algebraic number theory and an interface to PARI/GP</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/anupq-3.1.1/htm/chapters.htm">ANUPQ</a></td><td>[<a href="{{GAPManualLink}}/pkg/anupq-3.1.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ANU p-Quotient</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/anupq-3.1.3/doc/chap0.html">ANUPQ</a></td><td>[<a href="{{GAPManualLink}}/pkg/anupq-3.1.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ANU p-Quotient</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/atlasrep/doc/chap0.html">AtlasRep</a></td><td>[<a href="{{GAPManualLink}}/pkg/atlasrep/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>An Atlas of Group Representations</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/AutoDoc/doc/chap0.html">AutoDoc</a></td><td>[<a href="{{GAPManualLink}}/pkg/AutoDoc/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Generate documentation from GAP source code</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/AutoDoc-2016.02.16/doc/chap0.html">AutoDoc</a></td><td>[<a href="{{GAPManualLink}}/pkg/AutoDoc-2016.02.16/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Generate documentation from GAP source code</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/automata/doc/chap0.html">Automata</a></td><td>[<a href="{{GAPManualLink}}/pkg/automata/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td></tr>
 
@@ -1033,13 +1073,13 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/Browse/doc/chap0.html">Browse</a></td><td>[<a href="{{GAPManualLink}}/pkg/Browse/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ncurses interface and browsing applications</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">CAP</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Categories, Algorithms, Programming</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/CAP-2016.02.19/doc/chap0.html">CAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/CAP-2016.02.19/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Categories, Algorithms, Programming</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/carat/htm/chapters.htm">Carat</a></td><td>[<a href="{{GAPManualLink}}/pkg/carat/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Interface to CARAT, a crystallographic groups package</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/circle/doc/chap0.html">Circle</a></td><td>[<a href="{{GAPManualLink}}/pkg/circle/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Adjoint groups of finite rings</td></tr>
 
-<tr><td>cohomolo</td><td>[<a href="{{GAPManualLink}}/pkg/cohomolo/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing Cohomology groups and Schur Multipliers</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/cohomolo-1.6.4/htm/chapters.htm">cohomolo</a></td><td>[<a href="{{GAPManualLink}}/pkg/cohomolo-1.6.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing Cohomology groups and Schur Multipliers</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/congruence/doc/chap0.html">Congruence</a></td><td>[<a href="{{GAPManualLink}}/pkg/congruence/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Congruence subgroups of SL(2,Integers)</td></tr>
 
@@ -1059,9 +1099,11 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/cubefree/htm/chapters.htm">Cubefree</a></td><td>[<a href="{{GAPManualLink}}/pkg/cubefree/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Constructing the groups of a given cubefree order</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/cvec-2.5.3/doc/chap0.html">cvec</a></td><td>[<a href="{{GAPManualLink}}/pkg/cvec-2.5.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Compact vectors over finite fields</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/cvec-2.5.4/doc/chap0.html">cvec</a></td><td>[<a href="{{GAPManualLink}}/pkg/cvec-2.5.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Compact vectors over finite fields</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/design/htm/chapters.htm">DESIGN</a></td><td>[<a href="{{GAPManualLink}}/pkg/design/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The Design Package for GAP</td></tr>
+
+<tr><td><a href="{{GAPManualLink}}/pkg/digraphs-0.4.2/doc/chap0.html">Digraphs</a></td><td>[<a href="{{GAPManualLink}}/pkg/digraphs-0.4.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Digraphs - Methods for digraphs</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/edim/doc/chap0.html">EDIM</a></td><td>[<a href="{{GAPManualLink}}/pkg/edim/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Elementary Divisors of Integer Matrices</td></tr>
 
@@ -1073,7 +1115,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/fga/htm/chapters.htm">FGA</a></td><td>[<a href="{{GAPManualLink}}/pkg/fga/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Free Group Algorithms</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">FinInG</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>FinInG - Finite Incidence Geometry</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/fining/doc/chap0.html">FinInG</a></td><td>[<a href="{{GAPManualLink}}/pkg/fining/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>FinInG - Finite Incidence Geometry</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/float-0.6.2/doc/chap0.html">Float</a></td><td>[<a href="{{GAPManualLink}}/pkg/float-0.6.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Floating-point numbers</td></tr>
 
@@ -1096,11 +1138,11 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/gbnp/doc/chap0.htm">GBNP</a></td><td>[<a href="{{GAPManualLink}}/pkg/gbnp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Non-commutative Gröbner bases</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">GeneralizedMorphismsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Implementations of generalized morphisms for the CAP project</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/GeneralizedMorphismsForCAP/doc/chap0.html">GeneralizedMorphismsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/GeneralizedMorphismsForCAP/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Implementations of generalized morphisms for the CAP project</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/genss-1.6.2/doc/chap0.html">genss</a></td><td>[<a href="{{GAPManualLink}}/pkg/genss-1.6.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Generic Schreier-Sims</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/genss-1.6.3/doc/chap0.html">genss</a></td><td>[<a href="{{GAPManualLink}}/pkg/genss-1.6.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Generic Schreier-Sims</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/gpd-1.34/doc/chap0.html">Gpd</a></td><td>[<a href="{{GAPManualLink}}/pkg/gpd-1.34/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Finite Groupoids and Graphs of Groups</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/gpd-1.42/doc/chap0.html">Gpd</a></td><td>[<a href="{{GAPManualLink}}/pkg/gpd-1.42/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Finite Groupoids and Graphs of Groups</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/GradedModules/doc/chap0.html">GradedModules</a></td><td>[<a href="{{GAPManualLink}}/pkg/GradedModules/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings</td></tr>
 
@@ -1124,6 +1166,8 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/hecke/doc/chap0.html">hecke</a></td><td>[<a href="{{GAPManualLink}}/pkg/hecke/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Hecke - Specht 2.4 ported to GAP 4</td></tr>
 
+<tr><td><a href="{{GAPManualLink}}/pkg/help/doc/chap0.html">HeLP</a></td><td>[<a href="{{GAPManualLink}}/pkg/help/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Hertweck-Luthar-Passi method.</td></tr>
+
 <tr><td><a href="{{GAPManualLink}}/pkg/homalg/doc/chap0.html">homalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/homalg/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A homological algebra meta-package for computable Abelian categories</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/HomalgToCAS/doc/chap0.html">HomalgToCAS</a></td><td>[<a href="{{GAPManualLink}}/pkg/HomalgToCAS/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A window to the outer world</td></tr>
@@ -1132,7 +1176,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/intpic/doc/chap0.html">IntPic</a></td><td>[<a href="{{GAPManualLink}}/pkg/intpic/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>IntPic, a GAP package for drawing integers</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/io-4.4.4/doc/chap0.html">IO</a></td><td>[<a href="{{GAPManualLink}}/pkg/io-4.4.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Bindings for low level C library I/O routines</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/io-4.4.5/doc/chap0.html">IO</a></td><td>[<a href="{{GAPManualLink}}/pkg/io-4.4.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Bindings for low level C library I/O routines</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/IO_ForHomalg/doc/chap0.html">IO_ForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/IO_ForHomalg/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>IO capabilities for the homalg project</td></tr>
 
@@ -1140,11 +1184,11 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/itc/htm/chapters.htm">ITC</a></td><td>[<a href="{{GAPManualLink}}/pkg/itc/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Interactive Todd-Coxeter computations</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/json-0.8.2/doc/chap0.html">json</a></td><td>[<a href="{{GAPManualLink}}/pkg/json-0.8.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Reading and Writing JSON</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/json-1.0.1/doc/chap0.html">json</a></td><td>[<a href="{{GAPManualLink}}/pkg/json-1.0.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Reading and Writing JSON</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/kan-1.21/doc/chap0.html">Kan</a></td><td>[<a href="{{GAPManualLink}}/pkg/kan-1.21/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with Kan extensions</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/kan-1.25/doc/chap0.html">Kan</a></td><td>[<a href="{{GAPManualLink}}/pkg/kan-1.25/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with Kan extensions</td></tr>
 
-<tr><td>kbmag</td><td>[<a href="{{GAPManualLink}}/pkg/kbmag/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Knuth-Bendix on Monoids and Automatic Groups</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/kbmag-1.5.3/htm/chapters.htm">kbmag</a></td><td>[<a href="{{GAPManualLink}}/pkg/kbmag-1.5.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Knuth-Bendix on Monoids and Automatic Groups</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/laguna/doc/chap0.html">LAGUNA</a></td><td>[<a href="{{GAPManualLink}}/pkg/laguna/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Lie AlGebras and UNits of group Algebras</td></tr>
 
@@ -1156,7 +1200,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/linboxing/doc/chap0.html">linboxing</a></td><td>[<a href="{{GAPManualLink}}/pkg/linboxing/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Kernel-level access to LinBox linear algebra</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">LinearAlgebraForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Category of Matrices over a Field for CAP</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/LinearAlgebraForCAP/doc/chap0.html">LinearAlgebraForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/LinearAlgebraForCAP/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Category of Matrices over a Field for CAP</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/LocalizeRingForHomalg/doc/chap0.html">LocalizeRingForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/LocalizeRingForHomalg/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A Package for Localization of Polynomial Rings</td></tr>
 
@@ -1170,19 +1214,21 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/modisom/htm/chapters.htm">ModIsom</a></td><td>[<a href="{{GAPManualLink}}/pkg/modisom/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with nilpotent associative algebras</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">ModulePresentationsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Category R-pres for CAP</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/ModulePresentationsForCAP/doc/chap0.html">ModulePresentationsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/ModulePresentationsForCAP/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Category R-pres for CAP</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/Modules/doc/chap0.html">Modules</a></td><td>[<a href="{{GAPManualLink}}/pkg/Modules/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A homalg based package for the Abelian category of finitely presented modules over computable rings</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/nilmat/htm/chapters.htm">Nilmat</a></td><td>[<a href="{{GAPManualLink}}/pkg/nilmat/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computation with nilpotent matrix groups</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/nq-2.5.1/doc/chap0.html">nq</a></td><td>[<a href="{{GAPManualLink}}/pkg/nq-2.5.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Nilpotent Quotient Algorithm</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/NormalizInterface-0.9.5/doc/chap0_mj.html">NormalizInterface</a></td><td>[<a href="{{GAPManualLink}}/pkg/NormalizInterface-0.9.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>GAP wrapper for Normaliz</td></tr>
+
+<tr><td><a href="{{GAPManualLink}}/pkg/nq-2.5.2/doc/chap0.html">nq</a></td><td>[<a href="{{GAPManualLink}}/pkg/nq-2.5.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Nilpotent Quotient Algorithm</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/numericalsgps/doc/chap0.html">NumericalSgps</a></td><td>[<a href="{{GAPManualLink}}/pkg/numericalsgps/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>NumericalSgps, a GAP package for numerical semigroups</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/openmath/doc/chap0.html">OpenMath</a></td><td>[<a href="{{GAPManualLink}}/pkg/openmath/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>OpenMath functionality in GAP</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/orb-4.7.3/doc/chap0.html">orb</a></td><td>[<a href="{{GAPManualLink}}/pkg/orb-4.7.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Methods to enumerate orbits</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/orb-4.7.5/doc/chap0.html">orb</a></td><td>[<a href="{{GAPManualLink}}/pkg/orb-4.7.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Methods to enumerate orbits</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/pargap/htm/chapters.htm">ParGAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/pargap/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Parallel GAP</td></tr>
 
@@ -1190,7 +1236,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/permut/doc/chap0.html">PERMUT</a></td><td>[<a href="{{GAPManualLink}}/pkg/permut/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>PERMUT: A package to deal with permutability in finite groups</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/polenta-1.3.2/doc/chap0.html">polenta</a></td><td>[<a href="{{GAPManualLink}}/pkg/polenta-1.3.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Polycyclic presentations for matrix groups</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/polenta-1.3.5/doc/chap0.html">Polenta</a></td><td>[<a href="{{GAPManualLink}}/pkg/polenta-1.3.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Polycyclic presentations for matrix groups</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/polycyclic-2.11/doc/chap0.html">polycyclic</a></td><td>[<a href="{{GAPManualLink}}/pkg/polycyclic-2.11/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computation with polycyclic groups</td></tr>
 
@@ -1198,7 +1244,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/polymaking/doc/chap0.html">polymaking</a></td><td>[<a href="{{GAPManualLink}}/pkg/polymaking/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A package for using polymake in GAP</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg//doc/chap0.html">profiling</a></td><td>[<a href="{{GAPManualLink}}/pkg//doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Line by line profiling and code coverage for GAP</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/profiling-0.5.0/doc/chap0.html">profiling</a></td><td>[<a href="{{GAPManualLink}}/pkg/profiling-0.5.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Line by line profiling and code coverage for GAP</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/qaos/doc/qaos.html">QaoS</a></td><td>[<a href="{{GAPManualLink}}/pkg/qaos/doc/qaos.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>QaoS - Querying Algebraic Objects System</td></tr>
 
@@ -1212,9 +1258,9 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/rds/htm/chapters.htm">RDS</a></td><td>[<a href="{{GAPManualLink}}/pkg/rds/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Relative Difference Sets</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/recog-1.2.3/doc/chap0.html">recog</a></td><td>[<a href="{{GAPManualLink}}/pkg/recog-1.2.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A collection of group recognition methods</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/recog-1.2.4/doc/chap0.html">recog</a></td><td>[<a href="{{GAPManualLink}}/pkg/recog-1.2.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A collection of group recognition methods</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/recogbase-1.2.3/doc/chap0.html">recogbase</a></td><td>[<a href="{{GAPManualLink}}/pkg/recogbase-1.2.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A framework for group recognition</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/recogbase-1.2.4/doc/chap0.html">recogbase</a></td><td>[<a href="{{GAPManualLink}}/pkg/recogbase-1.2.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A framework for group recognition</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/repsn/doc/chap0.html">Repsn</a></td><td>[<a href="{{GAPManualLink}}/pkg/repsn/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Constructing matrix representations of finite groups</td></tr>
 
@@ -1226,7 +1272,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/scscp/doc/chap0.html">SCSCP</a></td><td>[<a href="{{GAPManualLink}}/pkg/scscp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Symbolic Computation Software Composability Protocol</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/semigroups-2.5/doc/chap0.html">Semigroups</a></td><td>[<a href="{{GAPManualLink}}/pkg/semigroups-2.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Semigroups - Methods for semigroups</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/semigroups-2.7.3/doc/chap0.html">Semigroups</a></td><td>[<a href="{{GAPManualLink}}/pkg/semigroups-2.7.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Semigroups</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/sglppow/htm/chapters.htm">SglPPow</a></td><td>[<a href="{{GAPManualLink}}/pkg/sglppow/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Database of groups of prime-power order</td></tr>
 
@@ -1238,7 +1284,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/sla/doc/chap0.html">SLA</a></td><td>[<a href="{{GAPManualLink}}/pkg/sla/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with simple Lie algebras</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/smallsemi-0.6.8/doc/chap0.html">Smallsemi</a></td><td>[<a href="{{GAPManualLink}}/pkg/smallsemi-0.6.8/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>a library of small semigroups</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/smallsemi-0.6.10/doc/chap0.html">Smallsemi</a></td><td>[<a href="{{GAPManualLink}}/pkg/smallsemi-0.6.10/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>a library of small semigroups</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/sonata/htm/ref/chapters.htm">SONATA</a></td><td>[<a href="{{GAPManualLink}}/pkg/sonata/doc/ref/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>System of nearrings and their applications</td></tr>
 <tr><td><a href="{{GAPManualLink}}/pkg/sonata/htm/tut/chapters.htm">SONATA Tutorial</a></td><td>[<a href="{{GAPManualLink}}/pkg/sonata/doc/tut/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Eight easy pieces for SONATA: a SONATA tutorial</td></tr>
@@ -1261,87 +1307,93 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/unitlib/doc/chap0.html">UnitLib</a></td><td>[<a href="{{GAPManualLink}}/pkg/unitlib/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The library of normalized unit groups of modular group algebras</td></tr>
 
+<tr><td><a href="{{GAPManualLink}}/pkg/utils-0.25/doc/chap0.html">Utils</a></td><td>[<a href="{{GAPManualLink}}/pkg/utils-0.25/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Utility functions in GAP</td></tr>
+
 <tr><td><a href="{{GAPManualLink}}/pkg/wedderga/doc/chap0.html">Wedderga</a></td><td>[<a href="{{GAPManualLink}}/pkg/wedderga/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Wedderga</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/xgap/htm/chapters.htm">XGap</a></td><td>[<a href="{{GAPManualLink}}/pkg/xgap/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>XGAP - a graphical user interface for GAP</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/xmod-2.44/doc/chap0.html">XMod</a></td><td>[<a href="{{GAPManualLink}}/pkg/xmod-2.44/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Groups in GAP</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/xmod-2.51/doc/chap0.html">XMod</a></td><td>[<a href="{{GAPManualLink}}/pkg/xmod-2.51/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Groups in GAP</td></tr>
+
+<tr><td><a href="{{GAPManualLink}}/pkg/xmodalg-1.12/doc/chap0.html">XModAlg</a></td><td>[<a href="{{GAPManualLink}}/pkg/xmodalg-1.12/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Algebras in GAP</td></tr>
 '''
 
 PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersion'/>" ], 
         [ "GAPLibrary", "<mixer var='GAPLibraryVersion'/>" ], 
         [ "4ti2Interface", "2015.11.06" ], [ "ACE", "5.1" ], 
         [ "AClib", "1.2" ], [ "Alnuth", "3.0.0" ], 
-        [ "ANUPQ", "3.1.1" ], [ "AtlasRep", "1.5.0" ], 
-        [ "AutoDoc", "2015.09.30" ], [ "Automata", "1.13" ], 
+        [ "ANUPQ", "3.1.3" ], [ "AtlasRep", "1.5.0" ], 
+        [ "AutoDoc", "2016.02.16" ], [ "Automata", "1.13" ], 
         [ "AutomGrp", "1.2.4" ], [ "AutPGrp", "1.6" ], 
-        [ "Browse", "1.8.6" ], [ "CAP", "2015.11.27" ], 
-        [ "Carat", "2.1.4" ], [ "Circle", "1.5.3" ], 
-        [ "cohomolo", "1.6" ], [ "Congruence", "1.1.1" ], 
-        [ "Convex", "2012.11.15" ], [ "CoReLG", "1.20" ], 
-        [ "Crime", "1.4" ], [ "CRISP", "1.3.9" ], 
+        [ "Browse", "1.8.6" ], [ "CAP", "2016.02.19" ], 
+        [ "Carat", "2.1.4" ], [ "Circle", "1.5.4" ], 
+        [ "cohomolo", "1.6.4" ], [ "Congruence", "1.1.1" ], 
+        [ "Convex", "2013.12.05" ], [ "CoReLG", "1.20" ], 
+        [ "Crime", "1.4" ], [ "CRISP", "1.4.1" ], 
         [ "Cryst", "4.1.12" ], [ "CrystCat", "1.1.6" ], 
-        [ "CTblLib", "1.2.2" ], [ "Cubefree", "1.13" ], 
-        [ "cvec", "2.5.3" ], [ "DESIGN", "1.6" ], 
-        [ "EDIM", "1.3.2" ], [ "Example", "3.4.5" ], 
+        [ "CTblLib", "1.2.2" ], [ "Cubefree", "1.15" ], 
+        [ "cvec", "2.5.4" ], [ "DESIGN", "1.6" ], 
+        [ "Digraphs", "0.4.2" ], [ "EDIM", "1.3.2" ], 
+        [ "Example", "3.4.5" ], 
         [ "ExamplesForHomalg", "2015.11.06" ], 
         [ "FactInt", "1.5.3" ], [ "FGA", "1.3.0" ], 
-        [ "FinInG", "1.3" ], [ "Float", "0.6.2" ], 
+        [ "FinInG", "1.3.3" ], [ "Float", "0.6.2" ], 
         [ "FORMAT", "1.3" ], [ "Forms", "1.2.3" ], 
         [ "FPLSA", "1.1" ], [ "FR", "2.2.1" ], 
         [ "fwtree", "1.0" ], [ "GAPDoc", "1.5.1" ], 
         [ "Gauss", "2015.11.06" ], 
         [ "GaussForHomalg", "2015.11.06" ], 
         [ "GBNP", "1.0.1" ], 
-        [ "GeneralizedMorphismsForCAP", "2015.11.27" ], 
-        [ "genss", "1.6.2" ], [ "gpd", "1.34" ], 
-        [ "GradedModules", "2015.11.06" ], 
-        [ "GradedRingForHomalg", "2015.11.06" ], 
-        [ "GRAPE", "4.6.1" ], [ "GrpConst", "2.3" ], 
+        [ "GeneralizedMorphismsForCAP", "2015.12.09" ], 
+        [ "genss", "1.6.3" ], [ "gpd", "1.42" ], 
+        [ "GradedModules", "2015.12.04" ], 
+        [ "GradedRingForHomalg", "2015.12.04" ], 
+        [ "GRAPE", "4.7" ], [ "GrpConst", "2.5" ], 
         [ "Guarana", "0.94" ], [ "GUAVA", "3.12" ], 
-        [ "HAP", "1.11.12" ], [ "HAPcryst", "0.1.11" ], 
+        [ "HAP", "1.11.13" ], [ "HAPcryst", "0.1.11" ], 
         [ "HAPprime", "0.6" ], [ "hecke", "1.4" ], 
-        [ "homalg", "2015.11.05" ], 
-        [ "HomalgToCAS", "2015.11.06" ], [ "idrel", "2.31" ], 
-        [ "IntPic", "0.2.1" ], [ "IO", "4.4.4" ], 
+        [ "HeLP", "2.2" ], [ "homalg", "2015.11.05" ], 
+        [ "HomalgToCAS", "2015.12.08" ], [ "idrel", "2.31" ], 
+        [ "IntPic", "0.2.1" ], [ "IO", "4.4.5" ], 
         [ "IO_ForHomalg", "2015.11.06" ], 
         [ "IRREDSOL", "1.2.4" ], [ "ITC", "1.4" ], 
-        [ "json", "0.8.2" ], [ "kan", "1.21" ], 
-        [ "kbmag", "1.5" ], [ "LAGUNA", "3.7.0" ], 
+        [ "json", "1.0.1" ], [ "kan", "1.25" ], 
+        [ "kbmag", "1.5.3" ], [ "LAGUNA", "3.7.0" ], 
         [ "liealgdb", "2.1" ], [ "LiePRing", "1.8" ], 
         [ "LieRing", "2.2" ], [ "linboxing", "0.5.2" ], 
-        [ "LinearAlgebraForCAP", "2015.11.05" ], 
+        [ "LinearAlgebraForCAP", "2015.12.03" ], 
         [ "LocalizeRingForHomalg", "2015.11.06" ], 
         [ "loops", "3.1.0" ], [ "MapClass", "1.2" ], 
         [ "matgrp", "0.1" ], 
         [ "MatricesForHomalg", "2015.11.06" ], 
-        [ "ModIsom", "2.3.2" ], 
-        [ "ModulePresentationsForCAP", "2015.11.05" ], 
-        [ "Modules", "2015.11.06" ], [ "Nilmat", "1.2" ], 
-        [ "nq", "2.5.1" ], [ "NumericalSgps", "1.0.1" ], 
-        [ "OpenMath", "11.2.0" ], [ "orb", "4.7.3" ], 
-        [ "ParGAP", "1.4.0" ], [ "PatternClass", "2.1" ], 
-        [ "permut", "1.03" ], [ "Polenta", "1.3.2" ], 
-        [ "Polycyclic", "2.11" ], 
+        [ "ModIsom", "2.3.3" ], 
+        [ "ModulePresentationsForCAP", "2015.12.09" ], 
+        [ "Modules", "2016.01.20" ], [ "Nilmat", "1.2" ], 
+        [ "NormalizInterface", "0.9.5" ], [ "nq", "2.5.2" ], 
+        [ "NumericalSgps", "1.0.1" ], [ "OpenMath", "11.3.1" ], 
+        [ "orb", "4.7.5" ], [ "ParGAP", "1.4.0" ], 
+        [ "PatternClass", "2.1" ], [ "permut", "1.03" ], 
+        [ "Polenta", "1.3.5" ], [ "Polycyclic", "2.11" ], 
         [ "PolymakeInterface", "2015.01.26" ], 
-        [ "polymaking", "0.8.1" ], [ "profiling", "0.3.0" ], 
+        [ "polymaking", "0.8.1" ], [ "profiling", "0.5.0" ], 
         [ "qaos", "main-1.0.28" ], [ "QPA", "1.23" ], 
         [ "QuaGroup", "1.8" ], [ "RadiRoot", "2.7" ], 
-        [ "RCWA", "3.7.0" ], [ "RDS", "1.6" ], 
-        [ "recog", "1.2.3" ], [ "recogbase", "1.2.3" ], 
-        [ "Repsn", "3.0.2" ], [ "ResClasses", "3.4.0" ], 
-        [ "RingsForHomalg", "2015.11.06" ], 
+        [ "RCWA", "4.0.0" ], [ "RDS", "1.6" ], 
+        [ "recog", "1.2.4" ], [ "recogbase", "1.2.4" ], 
+        [ "Repsn", "3.0.2" ], [ "ResClasses", "4.1.2" ], 
+        [ "RingsForHomalg", "2016.01.20" ], 
         [ "SCO", "2015.11.06" ], [ "SCSCP", "2.1.4" ], 
-        [ "Semigroups", "2.5" ], [ "SglPPow", "1.0" ], 
-        [ "SgpViz", "0.998" ], [ "simpcomp", "2.1.1" ], 
-        [ "singular", "12.04.28" ], [ "SLA", "0.14" ], 
-        [ "Smallsemi", "0.6.8" ], [ "SONATA", "2.8" ], 
+        [ "Semigroups", "2.7.3" ], [ "SglPPow", "1.1" ], 
+        [ "SgpViz", "0.998" ], [ "simpcomp", "2.1.6" ], 
+        [ "singular", "12.04.28" ], [ "SLA", "1.1" ], 
+        [ "Smallsemi", "0.6.10" ], [ "SONATA", "2.8" ], 
         [ "Sophus", "1.23" ], [ "SpinSym", "1.5" ], 
         [ "SymbCompCC", "1.2" ], [ "TomLib", "1.2.5" ], 
-        [ "ToolsForHomalg", "2015.11.23" ], [ "toric", "1.8" ], 
+        [ "ToolsForHomalg", "2016.02.17" ], [ "toric", "1.8" ], 
         [ "ToricVarieties", "2012.12.22" ], 
         [ "unipot", "1.2" ], [ "UnitLib", "3.2.0" ], 
-        [ "Wedderga", "4.7.3" ], [ "XGAP", "4.23" ], 
-        [ "XMod", "2.44" ], 
+        [ "Utils", "0.25" ], [ "Wedderga", "4.7.3" ], 
+        [ "XGAP", "4.23" ], [ "XMod", "2.51" ], 
+        [ "XModAlg", "1.12" ], 
 '''
 
