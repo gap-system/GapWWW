@@ -57,16 +57,18 @@ make TOPDIR=`pwd` Gmp
 make TOPDIR=`pwd` CFLAGS=`-O2`
 cd ../..
 
-cd cohomolo
+cd cohomolo-*
 ./configure 
-cd standalone/progs.d
-cp makefile.orig makefile
-cd ../..
 make 
 cd ..
 
 cd cvec-*
 ./configure 
+make
+cd ..
+
+cd digraphs-*
+./configure
 make
 cd ..
 
@@ -116,10 +118,9 @@ cd json-*
 make
 cd ..
 
-cd kbmag
-make clean
-./configure ../..
-make COPTS="-O2 -g"
+cd kbmag-*
+./configure
+make
 cd ..
 
 #  Easy, if prerequisites are installed. You may get GNU GMP
@@ -127,6 +128,12 @@ cd ..
 #  via packages in your Linux distribution. But you probably need to
 #  install LinBox (http://www.linalg.org/download.html) yourself.
 cd linboxing
+./configure 
+make
+cd ..
+
+cd NormalizInterface-*
+./build-normaliz.sh
 ./configure 
 make
 cd ..
@@ -142,6 +149,11 @@ cd ..
 
 cd orb-*
 ./configure 
+make
+cd ..
+
+cd profiling-*
+./configure
 make
 cd ..
 

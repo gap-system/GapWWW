@@ -57,16 +57,18 @@ make TOPDIR=`pwd` Gmp
 make TOPDIR=`pwd` CFLAGS=`-O2`
 cd ../..
 
-cd cohomolo
+cd cohomolo-*
 ./configure 
-cd standalone/progs.d
-cp makefile.orig makefile
-cd ../..
 make 
 cd ..
 
 cd cvec-*
 ./configure CFLAGS="-m32"
+make
+cd ..
+
+cd digraphs-*
+./configure CFLAGS=-m32 CXXFLAGS=-m32 LDFLAGS=-m32
 make
 cd ..
 
@@ -116,10 +118,9 @@ cd json-*
 make
 cd ..
 
-cd kbmag
-make clean
-./configure ../..
-make COPTS="-O2 -g"
+cd kbmag-*
+./configure
+make
 cd ..
 
 #  Easy, if prerequisites are installed. You may get GNU GMP
@@ -128,6 +129,12 @@ cd ..
 #  install LinBox (http://www.linalg.org/download.html) yourself.
 cd linboxing
 ./configure 
+make
+cd ..
+
+cd NormalizInterface-*
+CXXFLAGS="-m32" ./build-normaliz.sh
+./configure CXXFLAGS="-m32"
 make
 cd ..
 
@@ -142,6 +149,11 @@ cd ..
 
 cd orb-*
 ./configure CFLAGS="-m32"
+make
+cd ..
+
+cd profiling-*
+./configure CFLAGS="-m32" CXXFLAGS="-m32"
 make
 cd ..
 
