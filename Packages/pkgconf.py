@@ -544,7 +544,7 @@ PKG_OverviewLink_scscp = r'''<a href="{{pkgmixerpath}}/scscp.html">SCSCP</a>&nbs
 
 '''
 
-PKG_OverviewLink_semigroups = r'''<a href="{{pkgmixerpath}}/semigroups.html">Semigroups</a>&nbsp;&nbsp;2.7.3 (15/02/2016) by J. D. Mitchell, M. Delgado, J. East, A. Egri-Nagy, J. Jonusas, M. Pfeiffer, B. Steinberg, J. Smith, M. Torpey, W. Wilson
+PKG_OverviewLink_semigroups = r'''<a href="{{pkgmixerpath}}/semigroups.html">Semigroups</a>&nbsp;&nbsp;2.7.2 (28/01/2016) by J. D. Mitchell, M. Delgado, J. East, A. Egri-Nagy, J. Jonusas, M. Pfeiffer, B. Steinberg, J. Smith, M. Torpey, W. Wilson
 <br />
 
 '''
@@ -984,7 +984,7 @@ PKG_ManualLink_sco = r'''<tr><td><a href="{{GAPManualLink}}/pkg/SCO/doc/chap0.ht
 PKG_ManualLink_scscp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/scscp/doc/chap0.html">SCSCP</a></td><td>[<a href="{{GAPManualLink}}/pkg/scscp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Symbolic Computation Software Composability Protocol</td></tr>
 '''
 
-PKG_ManualLink_semigroups = r'''<tr><td><a href="{{GAPManualLink}}/pkg/semigroups-2.7.3/doc/chap0.html">Semigroups</a></td><td>[<a href="{{GAPManualLink}}/pkg/semigroups-2.7.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Semigroups</td></tr>
+PKG_ManualLink_semigroups = r'''<tr><td><a href="{{GAPManualLink}}/pkg/semigroups-2.7.2/doc/chap0.html">Semigroups</a></td><td>[<a href="{{GAPManualLink}}/pkg/semigroups-2.7.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Semigroups</td></tr>
 '''
 
 PKG_ManualLink_sglppow = r'''<tr><td><a href="{{GAPManualLink}}/pkg/sglppow/htm/chapters.htm">SglPPow</a></td><td>[<a href="{{GAPManualLink}}/pkg/sglppow/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Database of groups of prime-power order</td></tr>
@@ -1272,7 +1272,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/scscp/doc/chap0.html">SCSCP</a></td><td>[<a href="{{GAPManualLink}}/pkg/scscp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Symbolic Computation Software Composability Protocol</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/semigroups-2.7.3/doc/chap0.html">Semigroups</a></td><td>[<a href="{{GAPManualLink}}/pkg/semigroups-2.7.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Semigroups</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/semigroups-2.7.2/doc/chap0.html">Semigroups</a></td><td>[<a href="{{GAPManualLink}}/pkg/semigroups-2.7.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Semigroups</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/sglppow/htm/chapters.htm">SglPPow</a></td><td>[<a href="{{GAPManualLink}}/pkg/sglppow/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Database of groups of prime-power order</td></tr>
 
@@ -1383,7 +1383,7 @@ PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersi
         [ "Repsn", "3.0.2" ], [ "ResClasses", "4.1.2" ], 
         [ "RingsForHomalg", "2016.01.20" ], 
         [ "SCO", "2015.11.06" ], [ "SCSCP", "2.1.4" ], 
-        [ "Semigroups", "2.7.3" ], [ "SglPPow", "1.1" ], 
+        [ "Semigroups", "2.7.2" ], [ "SglPPow", "1.1" ], 
         [ "SgpViz", "0.998" ], [ "simpcomp", "2.1.6" ], 
         [ "singular", "12.04.28" ], [ "SLA", "1.1" ], 
         [ "Smallsemi", "0.6.10" ], [ "SONATA", "2.8" ], 
