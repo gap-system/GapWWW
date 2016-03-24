@@ -11,14 +11,14 @@
 # Even if it doesn't work completely automatically for you, you may get 
 # an idea what to do for a complete installation of GAP.
 
-cd ace
+cd ace-*
 ./configure ../..
 make
 cd ..
 
 cd anupq*
-./configure
-make
+./configure CFLAGS=-m32 LDFLAGS=-m32
+make CFLAGS=-m32 LOPTS=-m32
 cd ..
 
 # You may not want a writable directory here! In this case substitute

@@ -11,7 +11,7 @@
 # Even if it doesn't work completely automatically for you, you may get 
 # an idea what to do for a complete installation of GAP.
 
-cd ace
+cd ace-*
 ./configure ../..
 make
 cd ..
