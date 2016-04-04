@@ -185,7 +185,7 @@ cd ..
 # If you  miss one of  these under Linux you  can usually just  install some
 # more packages of your favorite distribution. The development files usually
 # come in some package with "dev" in its name.
-cd xgap
+cd xgap-*
 ./configure
 make
 rm -f ../../bin/xgap.sh
