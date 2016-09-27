@@ -114,7 +114,7 @@ PKG_OverviewLink_ctbllib = r'''<a href="{{pkgmixerpath}}/ctbllib.html">CTblLib</
 
 '''
 
-PKG_OverviewLink_cubefree = r'''<a href="{{pkgmixerpath}}/cubefree.html">Cubefree</a>&nbsp;&nbsp;1.15 (19/12/2015) by H. Dietrich
+PKG_OverviewLink_cubefree = r'''<a href="{{pkgmixerpath}}/cubefree.html">Cubefree</a>&nbsp;&nbsp;1.16 (06/09/2016) by H. Dietrich
 <br />Constructing the Groups of a Given Cubefree Order
 
 '''
@@ -129,7 +129,7 @@ PKG_OverviewLink_design = r'''<a href="{{pkgmixerpath}}/design.html">DESIGN</a>&
 
 '''
 
-PKG_OverviewLink_digraphs = r'''<a href="{{pkgmixerpath}}/digraphs.html">Digraphs</a>&nbsp;&nbsp;0.5 (03/03/2016) by J. De Beule, J. Jonusas, J. D. Mitchell, M. Torpey, W. Wilson
+PKG_OverviewLink_digraphs = r'''<a href="{{pkgmixerpath}}/digraphs.html">Digraphs</a>&nbsp;&nbsp;0.5.2 (20/06/2016) by J. De Beule, J. Jonusas, J. D. Mitchell, F. Smith, M. Torpey, W. Wilson
 <br />
 
 '''
@@ -164,7 +164,7 @@ PKG_OverviewLink_fining = r'''<a href="{{pkgmixerpath}}/fining.html">FinInG</a>&
 
 '''
 
-PKG_OverviewLink_float = r'''<a href="{{pkgmixerpath}}/float.html">float</a>&nbsp;&nbsp;0.7.3 (11/05/2016) by L. Bartholdi
+PKG_OverviewLink_float = r'''<a href="{{pkgmixerpath}}/float.html">float</a>&nbsp;&nbsp;0.7.4 (18/06/2016) by L. Bartholdi
 <br />Integration of mpfr, mpfi, mpc, fplll and cxsc in GAP
 
 '''
@@ -374,7 +374,7 @@ PKG_OverviewLink_localizeringforhomalg = r'''<a href="{{pkgmixerpath}}/localizer
 
 '''
 
-PKG_OverviewLink_loops = r'''<a href="{{pkgmixerpath}}/loops.html">loops</a>&nbsp;&nbsp;3.1.0 (28/10/2015) by G. Nagy, P. Vojtechovsky
+PKG_OverviewLink_loops = r'''<a href="{{pkgmixerpath}}/loops.html">loops</a>&nbsp;&nbsp;3.2.0 (02/06/2016) by G. Nagy, P. Vojtechovsky
 <br />Computing with quasigroups and loops in GAP
 
 '''
@@ -549,7 +549,7 @@ PKG_OverviewLink_semigroups = r'''<a href="{{pkgmixerpath}}/semigroups.html">Sem
 
 '''
 
-PKG_OverviewLink_sglppow = r'''<a href="{{pkgmixerpath}}/sglppow.html">SglPPow</a>&nbsp;&nbsp;1.1 (21/11/2014) by M. Vaughan-Lee, B. Eick
+PKG_OverviewLink_sglppow = r'''<a href="{{pkgmixerpath}}/sglppow.html">SglPPow</a>&nbsp;&nbsp;2.0 (11/08/2016) by M. Vaughan-Lee, B. Eick
 <br />Database of groups of prime-power order for some prime-powers
 
 '''
@@ -732,7 +732,7 @@ PKG_ManualLink_cvec = r'''<tr><td><a href="{{GAPManualLink}}/pkg/cvec-2.5.5/doc/
 PKG_ManualLink_design = r'''<tr><td><a href="{{GAPManualLink}}/pkg/design/htm/chapters.htm">DESIGN</a></td><td>[<a href="{{GAPManualLink}}/pkg/design/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The Design Package for GAP</td></tr>
 '''
 
-PKG_ManualLink_digraphs = r'''<tr><td><a href="{{GAPManualLink}}/pkg/digraphs-0.5/doc/chap0.html">Digraphs</a></td><td>[<a href="{{GAPManualLink}}/pkg/digraphs-0.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Digraphs - Methods for digraphs</td></tr>
+PKG_ManualLink_digraphs = r'''<tr><td><a href="{{GAPManualLink}}/pkg/digraphs-0.5.2/doc/chap0.html">Digraphs</a></td><td>[<a href="{{GAPManualLink}}/pkg/digraphs-0.5.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Digraphs - Methods for digraphs</td></tr>
 '''
 
 PKG_ManualLink_edim = r'''<tr><td><a href="{{GAPManualLink}}/pkg/edim/doc/chap0.html">EDIM</a></td><td>[<a href="{{GAPManualLink}}/pkg/edim/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Elementary Divisors of Integer Matrices</td></tr>
@@ -753,7 +753,7 @@ PKG_ManualLink_fga = r'''<tr><td><a href="{{GAPManualLink}}/pkg/fga/htm/chapters
 PKG_ManualLink_fining = r'''<tr><td><a href="{{GAPManualLink}}/pkg/fining/doc/chap0.html">FinInG</a></td><td>[<a href="{{GAPManualLink}}/pkg/fining/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>FinInG - Finite Incidence Geometry</td></tr>
 '''
 
-PKG_ManualLink_float = r'''<tr><td><a href="{{GAPManualLink}}/pkg/float-0.7.3/doc/chap0.html">float</a></td><td>[<a href="{{GAPManualLink}}/pkg/float-0.7.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Floating-point numbers</td></tr>
+PKG_ManualLink_float = r'''<tr><td><a href="{{GAPManualLink}}/pkg/float-0.7.4/doc/chap0.html">float</a></td><td>[<a href="{{GAPManualLink}}/pkg/float-0.7.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Floating-point numbers</td></tr>
 '''
 
 PKG_ManualLink_format = r'''<tr><td><a href="{{GAPManualLink}}/pkg/format/htm/chapters.htm">FORMAT</a></td><td>[<a href="{{GAPManualLink}}/pkg/format/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Formations of Finite Soluble Groups</td></tr>
@@ -1103,7 +1103,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/design/htm/chapters.htm">DESIGN</a></td><td>[<a href="{{GAPManualLink}}/pkg/design/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The Design Package for GAP</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/digraphs-0.5/doc/chap0.html">Digraphs</a></td><td>[<a href="{{GAPManualLink}}/pkg/digraphs-0.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Digraphs - Methods for digraphs</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/digraphs-0.5.2/doc/chap0.html">Digraphs</a></td><td>[<a href="{{GAPManualLink}}/pkg/digraphs-0.5.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Digraphs - Methods for digraphs</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/edim/doc/chap0.html">EDIM</a></td><td>[<a href="{{GAPManualLink}}/pkg/edim/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Elementary Divisors of Integer Matrices</td></tr>
 
@@ -1117,7 +1117,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface/do
 
 <tr><td><a href="{{GAPManualLink}}/pkg/fining/doc/chap0.html">FinInG</a></td><td>[<a href="{{GAPManualLink}}/pkg/fining/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>FinInG - Finite Incidence Geometry</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/float-0.7.3/doc/chap0.html">float</a></td><td>[<a href="{{GAPManualLink}}/pkg/float-0.7.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Floating-point numbers</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/float-0.7.4/doc/chap0.html">float</a></td><td>[<a href="{{GAPManualLink}}/pkg/float-0.7.4/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Floating-point numbers</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/format/htm/chapters.htm">FORMAT</a></td><td>[<a href="{{GAPManualLink}}/pkg/format/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Formations of Finite Soluble Groups</td></tr>
 
@@ -1331,13 +1331,13 @@ PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersi
         [ "Convex", "2013.12.05" ], [ "CoReLG", "1.20" ], 
         [ "Crime", "1.4" ], [ "CRISP", "1.4.4" ], 
         [ "Cryst", "4.1.12" ], [ "CrystCat", "1.1.6" ], 
-        [ "CTblLib", "1.2.2" ], [ "Cubefree", "1.15" ], 
+        [ "CTblLib", "1.2.2" ], [ "Cubefree", "1.16" ], 
         [ "cvec", "2.5.5" ], [ "DESIGN", "1.6" ], 
-        [ "Digraphs", "0.5" ], [ "EDIM", "1.3.2" ], 
+        [ "Digraphs", "0.5.2" ], [ "EDIM", "1.3.2" ], 
         [ "Example", "3.4.5" ], 
         [ "ExamplesForHomalg", "2015.11.06" ], 
         [ "FactInt", "1.5.3" ], [ "FGA", "1.3.1" ], 
-        [ "FinInG", "1.3.3" ], [ "float", "0.7.3" ], 
+        [ "FinInG", "1.3.3" ], [ "float", "0.7.4" ], 
         [ "FORMAT", "1.3" ], [ "Forms", "1.2.3" ], 
         [ "FPLSA", "1.1" ], [ "fr", "2.3.6" ], 
         [ "fwtree", "1.0" ], [ "GAPDoc", "1.5.1" ], 
@@ -1363,7 +1363,7 @@ PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersi
         [ "LieRing", "2.2" ], [ "linboxing", "0.5.2" ], 
         [ "LinearAlgebraForCAP", "2015.12.03" ], 
         [ "LocalizeRingForHomalg", "2015.11.06" ], 
-        [ "loops", "3.1.0" ], [ "MapClass", "1.2" ], 
+        [ "loops", "3.2.0" ], [ "MapClass", "1.2" ], 
         [ "matgrp", "0.4" ], 
         [ "MatricesForHomalg", "2015.11.06" ], 
         [ "ModIsom", "2.3.3" ], 
@@ -1383,7 +1383,7 @@ PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersi
         [ "Repsn", "3.0.2" ], [ "ResClasses", "4.5.0" ], 
         [ "RingsForHomalg", "2016.01.20" ], 
         [ "SCO", "2015.11.06" ], [ "SCSCP", "2.1.4" ], 
-        [ "Semigroups", "2.8.0" ], [ "SglPPow", "1.1" ], 
+        [ "Semigroups", "2.8.0" ], [ "SglPPow", "2.0" ], 
         [ "SgpViz", "0.998" ], [ "simpcomp", "2.1.6" ], 
         [ "singular", "12.04.28" ], [ "SLA", "1.1" ], 
         [ "Smallsemi", "0.6.10" ], [ "SONATA", "2.8" ], 
