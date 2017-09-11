@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/gap-system/GapWWW.svg?branch=master)](https://travis-ci.org/gap-system/GapWWW)
 
-This is the source repository for the GAP website http://www.gap-system.org.
+This is the source repository for the GAP website https://www.gap-system.org.
 
 The GAP website is NOT hosted on GitHub pages, and therefore there is NO
 branch named `gh-pages` here. We host it elsewhere, but we use GitHub for
