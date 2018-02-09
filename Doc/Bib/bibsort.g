@@ -1,4 +1,4 @@
-years:=[1987..2016];
+years:=[1987..2018];
 
 bib := ParseBibFiles("gap-publishednicer.bib")[1];;
 # no need to sort the records - in this bib-file they are already sorted 

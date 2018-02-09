@@ -66,7 +66,7 @@ end;
 
 bib2niceandhtml := function(name, header, subheader)
 local i,ii,bib, fh, out, a, b, years, counts, pos, flag, mscreport;
-  years:=[1987..2016];
+  years:=[1987..2018];
   bib := ParseBibFiles("gap-head.bib", Concatenation(name, ".bib"));
   counts:=List(years,i->0);
   for a in bib[1] do 
