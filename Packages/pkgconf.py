@@ -1,4 +1,4 @@
-# -*- coding: ISO-8859-1 -*-
+# -*- coding: utf-8 -*-
 PKG_OverviewLink_4ti2interface = r'''<a href="{{pkgmixerpath}}/4ti2interface.html">4ti2Interface</a>&nbsp;&nbsp;2017.10.04 (04/10/2017) by S. Gutsche
 <br />A link to 4ti2
 
