@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: ISO-8859-1 -*-
 
-##  feedback.py                                        Frank Lübeck
+##  feedback.py                                        Frank LÃ¼beck
 ##
 ##  handler of the feedback form on the GAP web site
 ##  - formats the non-empty values of keys used in the form as text

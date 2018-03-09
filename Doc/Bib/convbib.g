@@ -1,5 +1,5 @@
 ##  
-#A  convbib.g                                                Frank Lübeck
+#A  convbib.g                                                Frank LÃ¼beck
 ##  
 ##  A conversion tool to produce from the bib-files an html version and a
 ##  pdf-version for the web-pages, using GAPDoc.

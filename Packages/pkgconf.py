@@ -49,17 +49,17 @@ PKG_OverviewLink_autpgrp = r'''<a href="{{pkgmixerpath}}/autpgrp.html">AutPGrp</
 
 '''
 
-PKG_OverviewLink_browse = r'''<a href="{{pkgmixerpath}}/browse.html">Browse</a>&nbsp;&nbsp;1.8.7 (21/07/2017) by T. Breuer, F. L¸beck
+PKG_OverviewLink_browse = r'''<a href="{{pkgmixerpath}}/browse.html">Browse</a>&nbsp;&nbsp;1.8.7 (21/07/2017) by T. Breuer, F. L√ºbeck
 <br />browsing applications and ncurses interface
 
 '''
 
-PKG_OverviewLink_cap = r'''<a href="{{pkgmixerpath}}/cap.html">CAP</a>&nbsp;&nbsp;2017.09.25 (25/09/2017) by S. Gutsche, S. Posur, ÿ. SkartsÊterhagen
+PKG_OverviewLink_cap = r'''<a href="{{pkgmixerpath}}/cap.html">CAP</a>&nbsp;&nbsp;2017.09.25 (25/09/2017) by S. Gutsche, S. Posur, √ò. Skarts√¶terhagen
 <br />Categories, Algorithms, Programming
 
 '''
 
-PKG_OverviewLink_carat = r'''<a href="{{pkgmixerpath}}/carat.html">Carat</a>&nbsp;&nbsp;2.1.7 (22/12/2017) by F. G‰hler
+PKG_OverviewLink_carat = r'''<a href="{{pkgmixerpath}}/carat.html">Carat</a>&nbsp;&nbsp;2.1.7 (22/12/2017) by F. G√§hler
 <br />Interface to CARAT, a crystallographic groups package
 
 '''
@@ -94,7 +94,7 @@ PKG_OverviewLink_crime = r'''<a href="{{pkgmixerpath}}/crime.html">Crime</a>&nbs
 
 '''
 
-PKG_OverviewLink_crisp = r'''<a href="{{pkgmixerpath}}/crisp.html">CRISP</a>&nbsp;&nbsp;1.4.4 (20/03/2016) by B. Hˆfling
+PKG_OverviewLink_crisp = r'''<a href="{{pkgmixerpath}}/crisp.html">CRISP</a>&nbsp;&nbsp;1.4.4 (20/03/2016) by B. H√∂fling
 <br />Computing with Radicals, Injectors, Schunck classes and Projectors
 
 '''
@@ -104,12 +104,12 @@ PKG_OverviewLink_crypting = r'''<a href="{{pkgmixerpath}}/crypting.html">cryptin
 
 '''
 
-PKG_OverviewLink_cryst = r'''<a href="{{pkgmixerpath}}/cryst.html">Cryst</a>&nbsp;&nbsp;4.1.13 (22/12/2017) by B. Eick, F. G‰hler, W. Nickel
+PKG_OverviewLink_cryst = r'''<a href="{{pkgmixerpath}}/cryst.html">Cryst</a>&nbsp;&nbsp;4.1.13 (22/12/2017) by B. Eick, F. G√§hler, W. Nickel
 <br />Computing with crystallographic groups
 
 '''
 
-PKG_OverviewLink_crystcat = r'''<a href="{{pkgmixerpath}}/crystcat.html">CrystCat</a>&nbsp;&nbsp;1.1.6 (29/05/2012) by V. Felsch, F. G‰hler
+PKG_OverviewLink_crystcat = r'''<a href="{{pkgmixerpath}}/crystcat.html">CrystCat</a>&nbsp;&nbsp;1.1.6 (29/05/2012) by V. Felsch, F. G√§hler
 <br />The crystallographic groups catalog
 
 '''
@@ -124,7 +124,7 @@ PKG_OverviewLink_cubefree = r'''<a href="{{pkgmixerpath}}/cubefree.html">Cubefre
 
 '''
 
-PKG_OverviewLink_cvec = r'''<a href="{{pkgmixerpath}}/cvec.html">cvec</a>&nbsp;&nbsp;2.5.7 (01/08/2017) by M. Neunhˆffer, M. Horn
+PKG_OverviewLink_cvec = r'''<a href="{{pkgmixerpath}}/cvec.html">cvec</a>&nbsp;&nbsp;2.5.7 (01/08/2017) by M. Neunh√∂ffer, M. Horn
 <br />Compact vectors over finite fields
 
 '''
@@ -139,7 +139,7 @@ PKG_OverviewLink_digraphs = r'''<a href="{{pkgmixerpath}}/digraphs.html">Digraph
 
 '''
 
-PKG_OverviewLink_edim = r'''<a href="{{pkgmixerpath}}/edim.html">EDIM</a>&nbsp;&nbsp;1.3.2 (12/06/2013) by F. L¸beck
+PKG_OverviewLink_edim = r'''<a href="{{pkgmixerpath}}/edim.html">EDIM</a>&nbsp;&nbsp;1.3.2 (12/06/2013) by F. L√ºbeck
 <br />Elementary Divisors of Integer Matrices
 
 '''
@@ -149,7 +149,7 @@ PKG_OverviewLink_example = r'''<a href="{{pkgmixerpath}}/example.html">Example</
 
 '''
 
-PKG_OverviewLink_examplesforhomalg = r'''<a href="{{pkgmixerpath}}/examplesforhomalg.html">ExamplesForHomalg</a>&nbsp;&nbsp;2017.09.02 (02/09/2017) by M. Barakat, S. Gˆrtzen, M. Lange-Hegermann
+PKG_OverviewLink_examplesforhomalg = r'''<a href="{{pkgmixerpath}}/examplesforhomalg.html">ExamplesForHomalg</a>&nbsp;&nbsp;2017.09.02 (02/09/2017) by M. Barakat, S. G√∂rtzen, M. Lange-Hegermann
 <br />Examples for the GAP Package homalg
 
 '''
@@ -199,7 +199,7 @@ PKG_OverviewLink_fwtree = r'''<a href="{{pkgmixerpath}}/fwtree.html">fwtree</a>&
 
 '''
 
-PKG_OverviewLink_gapdoc = r'''<a href="{{pkgmixerpath}}/gapdoc.html">GAPDoc</a>&nbsp;&nbsp;1.6.1 (28/11/2017) by F. L¸beck, M. Neunhˆffer
+PKG_OverviewLink_gapdoc = r'''<a href="{{pkgmixerpath}}/gapdoc.html">GAPDoc</a>&nbsp;&nbsp;1.6.1 (28/11/2017) by F. L√ºbeck, M. Neunh√∂ffer
 <br />A Meta Package for GAP Documentation
 
 '''
@@ -215,7 +215,7 @@ PKG_OverviewLink_gaussforhomalg = r'''<a href="{{pkgmixerpath}}/gaussforhomalg.h
 '''
 
 PKG_OverviewLink_gbnp = r'''<a href="{{pkgmixerpath}}/gbnp.html">GBNP</a>&nbsp;&nbsp;1.0.3 (08/03/2016) by A. Cohen, J. Knopper
-<br />computing Grˆbner bases of noncommutative polynomials
+<br />computing Gr√∂bner bases of noncommutative polynomials
 
 '''
 
@@ -224,7 +224,7 @@ PKG_OverviewLink_generalizedmorphismsforcap = r'''<a href="{{pkgmixerpath}}/gene
 
 '''
 
-PKG_OverviewLink_genss = r'''<a href="{{pkgmixerpath}}/genss.html">genss</a>&nbsp;&nbsp;1.6.5 (21/11/2017) by M. Neunhˆffer, F. Noeske, M. Horn
+PKG_OverviewLink_genss = r'''<a href="{{pkgmixerpath}}/genss.html">genss</a>&nbsp;&nbsp;1.6.5 (21/11/2017) by M. Neunh√∂ffer, F. Noeske, M. Horn
 <br />Generic Schreier-Sims
 
 '''
@@ -284,7 +284,7 @@ PKG_OverviewLink_hecke = r'''<a href="{{pkgmixerpath}}/hecke.html">hecke</a>&nbs
 
 '''
 
-PKG_OverviewLink_help = r'''<a href="{{pkgmixerpath}}/help.html">HeLP</a>&nbsp;&nbsp;3.3 (11/12/2017) by A. B‰chle, L. Margolis
+PKG_OverviewLink_help = r'''<a href="{{pkgmixerpath}}/help.html">HeLP</a>&nbsp;&nbsp;3.3 (11/12/2017) by A. B√§chle, L. Margolis
 <br />Hertweck-Luthar-Passi method.
 
 '''
@@ -294,7 +294,7 @@ PKG_OverviewLink_homalg = r'''<a href="{{pkgmixerpath}}/homalg.html">homalg</a>&
 
 '''
 
-PKG_OverviewLink_homalgtocas = r'''<a href="{{pkgmixerpath}}/homalgtocas.html">HomalgToCAS</a>&nbsp;&nbsp;2017.11.26 (26/11/2017) by T. B‰chler, M. Barakat, T. Breuer, S. Gˆrtzen, S. Gutsche, F. L¸beck, V. Wagh
+PKG_OverviewLink_homalgtocas = r'''<a href="{{pkgmixerpath}}/homalgtocas.html">HomalgToCAS</a>&nbsp;&nbsp;2017.11.26 (26/11/2017) by T. B√§chler, M. Barakat, T. Breuer, S. G√∂rtzen, S. Gutsche, F. L√ºbeck, V. Wagh
 <br />A window to the outer world
 
 '''
@@ -309,17 +309,17 @@ PKG_OverviewLink_intpic = r'''<a href="{{pkgmixerpath}}/intpic.html">IntPic</a>&
 
 '''
 
-PKG_OverviewLink_io = r'''<a href="{{pkgmixerpath}}/io.html">IO</a>&nbsp;&nbsp;4.5.1 (10/01/2018) by M. Neunhˆffer, M. Horn
+PKG_OverviewLink_io = r'''<a href="{{pkgmixerpath}}/io.html">IO</a>&nbsp;&nbsp;4.5.1 (10/01/2018) by M. Neunh√∂ffer, M. Horn
 <br />Bindings for low level C library I/O routines
 
 '''
 
-PKG_OverviewLink_io_forhomalg = r'''<a href="{{pkgmixerpath}}/io_forhomalg.html">IO_ForHomalg</a>&nbsp;&nbsp;2017.09.02 (02/09/2017) by T. B‰chler, M. Barakat, S. Gutsche, M. Neunhˆffer, D. Robertz
+PKG_OverviewLink_io_forhomalg = r'''<a href="{{pkgmixerpath}}/io_forhomalg.html">IO_ForHomalg</a>&nbsp;&nbsp;2017.09.02 (02/09/2017) by T. B√§chler, M. Barakat, S. Gutsche, M. Neunh√∂ffer, D. Robertz
 <br />IO capabilities for the homalg project
 
 '''
 
-PKG_OverviewLink_irredsol = r'''<a href="{{pkgmixerpath}}/irredsol.html">IRREDSOL</a>&nbsp;&nbsp;1.4 (03/08/2017) by B. Hˆfling
+PKG_OverviewLink_irredsol = r'''<a href="{{pkgmixerpath}}/irredsol.html">IRREDSOL</a>&nbsp;&nbsp;1.4 (03/08/2017) by B. H√∂fling
 <br />A library of irreducible soluble linear groups over finite fields and of finite primivite soluble groups
 
 '''
@@ -414,7 +414,7 @@ PKG_OverviewLink_modulepresentationsforcap = r'''<a href="{{pkgmixerpath}}/modul
 
 '''
 
-PKG_OverviewLink_modules = r'''<a href="{{pkgmixerpath}}/modules.html">Modules</a>&nbsp;&nbsp;2018.01.07 (07/01/2018) by T. B‰chler, M. Barakat, F. Diebold, S. Gutsche, M. Lange-Hegermann, V. Wagh
+PKG_OverviewLink_modules = r'''<a href="{{pkgmixerpath}}/modules.html">Modules</a>&nbsp;&nbsp;2018.01.07 (07/01/2018) by T. B√§chler, M. Barakat, F. Diebold, S. Gutsche, M. Lange-Hegermann, V. Wagh
 <br />A homalg based package for the Abelian category of finitely presented modules over computable rings
 
 '''
@@ -424,7 +424,7 @@ PKG_OverviewLink_nilmat = r'''<a href="{{pkgmixerpath}}/nilmat.html">Nilmat</a>&
 
 '''
 
-PKG_OverviewLink_normalizinterface = r'''<a href="{{pkgmixerpath}}/normalizinterface.html">NormalizInterface</a>&nbsp;&nbsp;1.0.2 (03/12/2017) by S. Gutsche, M. Horn, C. Sˆger
+PKG_OverviewLink_normalizinterface = r'''<a href="{{pkgmixerpath}}/normalizinterface.html">NormalizInterface</a>&nbsp;&nbsp;1.0.2 (03/12/2017) by S. Gutsche, M. Horn, C. S√∂ger
 <br />GAP wrapper for Normaliz
 
 '''
@@ -434,7 +434,7 @@ PKG_OverviewLink_nq = r'''<a href="{{pkgmixerpath}}/nq.html">nq</a>&nbsp;&nbsp;2
 
 '''
 
-PKG_OverviewLink_numericalsgps = r'''<a href="{{pkgmixerpath}}/numericalsgps.html">NumericalSgps</a>&nbsp;&nbsp;1.1.5 (25/09/2017) by M. Delgado, P. A. Garcia-Sanchez, J. Morais, B. A. Heredia, J. I. GarcÌa-GarcÌa, S. Gutsche, A. Herrera-Poyatos, M. Horn, C. J. Moreno ¡vila, I. Ojeda, C. O'Neill, A. Sammartano, A. S·nchez-R. Navarro, K. Stokes, S. Francesco, G. Zito
+PKG_OverviewLink_numericalsgps = r'''<a href="{{pkgmixerpath}}/numericalsgps.html">NumericalSgps</a>&nbsp;&nbsp;1.1.5 (25/09/2017) by M. Delgado, P. A. Garcia-Sanchez, J. Morais, B. A. Heredia, J. I. Garc√≠a-Garc√≠a, S. Gutsche, A. Herrera-Poyatos, M. Horn, C. J. Moreno √Åvila, I. Ojeda, C. O'Neill, A. Sammartano, A. S√°nchez-R. Navarro, K. Stokes, S. Francesco, G. Zito
 <br />A package for numerical semigroups
 
 '''
@@ -444,7 +444,7 @@ PKG_OverviewLink_openmath = r'''<a href="{{pkgmixerpath}}/openmath.html">OpenMat
 
 '''
 
-PKG_OverviewLink_orb = r'''<a href="{{pkgmixerpath}}/orb.html">orb</a>&nbsp;&nbsp;4.7.6 (08/03/2016) by J. Mueller, M. Neunhˆffer, F. Noeske, M. Horn
+PKG_OverviewLink_orb = r'''<a href="{{pkgmixerpath}}/orb.html">orb</a>&nbsp;&nbsp;4.7.6 (08/03/2016) by J. Mueller, M. Neunh√∂ffer, F. Noeske, M. Horn
 <br />Methods to enumerate Orbits
 
 '''
@@ -524,12 +524,12 @@ PKG_OverviewLink_rds = r'''<a href="{{pkgmixerpath}}/rds.html">RDS</a>&nbsp;&nbs
 
 '''
 
-PKG_OverviewLink_recog = r'''<a href="{{pkgmixerpath}}/recog.html">recog</a>&nbsp;&nbsp;1.2.5 (08/03/2016) by M. Neunhˆffer, ¡. Seress, N. Ankaralioglu, P. Brooksbank, F. Celler, S. Howe, M. Law, S. Linton, G. Malle, A. Niemeyer, E. O'Brien, C. M. Roney-Dougal, M. Horn
+PKG_OverviewLink_recog = r'''<a href="{{pkgmixerpath}}/recog.html">recog</a>&nbsp;&nbsp;1.2.5 (08/03/2016) by M. Neunh√∂ffer, √Å. Seress, N. Ankaralioglu, P. Brooksbank, F. Celler, S. Howe, M. Law, S. Linton, G. Malle, A. Niemeyer, E. O'Brien, C. M. Roney-Dougal, M. Horn
 <br />A collection of group recognition methods
 
 '''
 
-PKG_OverviewLink_recogbase = r'''<a href="{{pkgmixerpath}}/recogbase.html">recogbase</a>&nbsp;&nbsp;1.2.5 (08/03/2016) by M. Neunhˆffer, ¡. Seress, M. Horn
+PKG_OverviewLink_recogbase = r'''<a href="{{pkgmixerpath}}/recogbase.html">recogbase</a>&nbsp;&nbsp;1.2.5 (08/03/2016) by M. Neunh√∂ffer, √Å. Seress, M. Horn
 <br />A framework for group recognition
 
 '''
@@ -544,12 +544,12 @@ PKG_OverviewLink_resclasses = r'''<a href="{{pkgmixerpath}}/resclasses.html">Res
 
 '''
 
-PKG_OverviewLink_ringsforhomalg = r'''<a href="{{pkgmixerpath}}/ringsforhomalg.html">RingsForHomalg</a>&nbsp;&nbsp;2018.01.07 (07/01/2018) by M. Barakat, S. Goertzen, M. Kirschmer, M. Lange-Hegermann, O. Motsak, M. Neunhˆffer, D. Robertz, H. Schˆnemann, A. Steenpaﬂ, V. Wagh
+PKG_OverviewLink_ringsforhomalg = r'''<a href="{{pkgmixerpath}}/ringsforhomalg.html">RingsForHomalg</a>&nbsp;&nbsp;2018.01.07 (07/01/2018) by M. Barakat, S. Goertzen, M. Kirschmer, M. Lange-Hegermann, O. Motsak, M. Neunh√∂ffer, D. Robertz, H. Sch√∂nemann, A. Steenpa√ü, V. Wagh
 <br />Dictionaries of external rings
 
 '''
 
-PKG_OverviewLink_sco = r'''<a href="{{pkgmixerpath}}/sco.html">SCO</a>&nbsp;&nbsp;2017.09.10 (10/09/2017) by S. Gˆrtzen, M. Barakat
+PKG_OverviewLink_sco = r'''<a href="{{pkgmixerpath}}/sco.html">SCO</a>&nbsp;&nbsp;2017.09.10 (10/09/2017) by S. G√∂rtzen, M. Barakat
 <br />SCO - Simplicial Cohomology of Orbifolds
 
 '''
@@ -599,7 +599,7 @@ PKG_OverviewLink_smallsemi = r'''<a href="{{pkgmixerpath}}/smallsemi.html">Small
 
 '''
 
-PKG_OverviewLink_sonata = r'''<a href="{{pkgmixerpath}}/sonata.html">SONATA</a>&nbsp;&nbsp;2.8 (29/07/2015) by E. Aichinger, F. Binder, J. Ecker, P. Mayr, C. Nˆbauer
+PKG_OverviewLink_sonata = r'''<a href="{{pkgmixerpath}}/sonata.html">SONATA</a>&nbsp;&nbsp;2.8 (29/07/2015) by E. Aichinger, F. Binder, J. Ecker, P. Mayr, C. N√∂bauer
 <br />System of nearrings and their applications
 
 '''
@@ -654,7 +654,7 @@ PKG_OverviewLink_unitlib = r'''<a href="{{pkgmixerpath}}/unitlib.html">UnitLib</
 
 '''
 
-PKG_OverviewLink_utils = r'''<a href="{{pkgmixerpath}}/utils.html">utils</a>&nbsp;&nbsp;0.49 (05/12/2017) by S. Gutsche, M. Horn, A. Hulpke, S. Kohl, F. L¸beck, C. D. Wensley
+PKG_OverviewLink_utils = r'''<a href="{{pkgmixerpath}}/utils.html">utils</a>&nbsp;&nbsp;0.49 (05/12/2017) by S. Gutsche, M. Horn, A. Hulpke, S. Kohl, F. L√ºbeck, C. D. Wensley
 <br />Utility functions in GAP
 
 '''
@@ -669,7 +669,7 @@ PKG_OverviewLink_wedderga = r'''<a href="{{pkgmixerpath}}/wedderga.html">Wedderg
 
 '''
 
-PKG_OverviewLink_xgap = r'''<a href="{{pkgmixerpath}}/xgap.html">XGAP</a>&nbsp;&nbsp;4.26 (06/11/2016) by F. Celler, M. Horn, M. Neunhˆffer
+PKG_OverviewLink_xgap = r'''<a href="{{pkgmixerpath}}/xgap.html">XGAP</a>&nbsp;&nbsp;4.26 (06/11/2016) by F. Celler, M. Horn, M. Neunh√∂ffer
 <br />a graphical user interface for GAP
 
 '''
@@ -819,7 +819,7 @@ PKG_ManualLink_gauss = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Gauss-2017.12.
 PKG_ManualLink_gaussforhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/GaussForHomalg-2017.09.10/doc/chap0.html">GaussForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/GaussForHomalg-2017.09.10/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Gauss functionality for the homalg project</td></tr>
 '''
 
-PKG_ManualLink_gbnp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/gbnp/doc/chap0.html">GBNP</a></td><td>[<a href="{{GAPManualLink}}/pkg/gbnp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Non-commutative Grˆbner bases</td></tr>
+PKG_ManualLink_gbnp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/gbnp/doc/chap0.html">GBNP</a></td><td>[<a href="{{GAPManualLink}}/pkg/gbnp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Non-commutative Gr√∂bner bases</td></tr>
 '''
 
 PKG_ManualLink_generalizedmorphismsforcap = r'''<tr><td><a href="{{GAPManualLink}}/pkg/GeneralizedMorphismsForCAP-2017.09.09/doc/chap0.html">GeneralizedMorphismsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/GeneralizedMorphismsForCAP-2017.09.09/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Implementations of generalized morphisms for the CAP project</td></tr>
@@ -1194,7 +1194,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/GaussForHomalg-2017.09.10/doc/chap0.html">GaussForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/GaussForHomalg-2017.09.10/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Gauss functionality for the homalg project</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/gbnp/doc/chap0.html">GBNP</a></td><td>[<a href="{{GAPManualLink}}/pkg/gbnp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Non-commutative Grˆbner bases</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/gbnp/doc/chap0.html">GBNP</a></td><td>[<a href="{{GAPManualLink}}/pkg/gbnp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Non-commutative Gr√∂bner bases</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/GeneralizedMorphismsForCAP-2017.09.09/doc/chap0.html">GeneralizedMorphismsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/GeneralizedMorphismsForCAP-2017.09.09/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Implementations of generalized morphisms for the CAP project</td></tr>
 
