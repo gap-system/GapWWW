@@ -1,5 +1,5 @@
 #!/bin/sh
-#                                                           Frank Lübeck
+#                                                           Frank LÃ¼beck
 #
 # Use this script inside the $GAPROOT directory (the top directory
 # containing 'bin', 'lib', 'pkg' and so on as subdirectories) to 
