@@ -18,7 +18,7 @@ m = e.match(ll[i])
 if not(m):
     sys.stdout.write("Error: IMG line incorrect.\n")
     sys.exit(1)
-print '<?xml version="1.0" encoding="ISO-8859-1"?>'
+print '<?xml version="1.0" encoding="utf-8"?>'
 print '<!-- DO NOT EDIT! This was generated automatically by maptoxhtml.py. -->'
 print '<mixer>'
 print '<img src="'+m.group(1)+'.png" usemap="#'+m.group(2)+'" alt="sitemap" />'
