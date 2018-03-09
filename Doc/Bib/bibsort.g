@@ -52,7 +52,7 @@ for y in Concatenation(years,["noyear"]) do
   filename:=Filename( Directory("Year"), Concatenation( String(y), ".mixer") );
   output := OutputTextFile( filename, false );;
   SetPrintFormattingStatus( output, false );
-  AppendTo( output,"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
+  AppendTo( output,"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
   AppendTo( output,"<mixer template=\"gw.tmpl\">\n");
   AppendTo( output,"<mixertitle>", Length(bib2), 
                    " publications using <mixer var=\"GAP\"/> published in ", y, "</mixertitle>\n");
@@ -105,7 +105,7 @@ for y in msccodes do
   filename:=Filename( Directory("MSC"), Concatenation( String(y), ".mixer" ) );
   output := OutputTextFile( filename, false );;
   SetPrintFormattingStatus( output, false );
-  AppendTo( output,"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
+  AppendTo( output,"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
   AppendTo( output,"<mixer template=\"gw.tmpl\">\n");
   AppendTo( output,"<mixertitle>", Length(bib2), 
                    " publications using <mixer var=\"GAP\"/> in the category \"",

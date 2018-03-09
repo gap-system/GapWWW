@@ -96,7 +96,7 @@ local i,ii,bib, fh, out, a, b, years, counts, pos, flag, mscreport;
     local a; 
     Print("<html>\n",
     "<meta http-equiv=\"Content-Type\" content=\"text/html;", 
-    " charset=iso-8859-1\">\n\n",
+    " charset=utf-8\">\n\n",
     "<body bgcolor=\"#FFFFFF\">\n<br>\n<h1 align=\"center\">",
     header,
     "</h1>",
@@ -117,7 +117,7 @@ local i,ii,bib, fh, out, a, b, years, counts, pos, flag, mscreport;
   PrintTo1(out, fh);
   CloseStream(out);
   PrintTo("statistics.generated",
-  "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<mixer>\n");
+  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<mixer>\n");
   for ii in [1,11..QuoInt(Length(years)-1,10)*10+1] do
     AppendTo("statistics.generated","<table>\n <colgroup>\n");
     for i in [1..10] do
@@ -153,7 +153,7 @@ local i,ii,bib, fh, out, a, b, years, counts, pos, flag, mscreport;
   
   mscreport:=StatisticsByMSC();
   PrintTo("statistics.mscreport",
-  "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<mixer>\n");
+  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<mixer>\n");
   AppendTo("statistics.mscreport","<table>\n <colgroup>\n");
   AppendTo("statistics.mscreport","  <col width=\"10%\"></col>\n");
   AppendTo("statistics.mscreport","  <col width=\"10%\"></col>\n");
