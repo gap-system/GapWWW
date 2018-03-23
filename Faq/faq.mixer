@@ -127,7 +127,7 @@
        <a href="#5.6">5.6: Why should I use the "screen" program?</a>
      </li>
      <li>
-       <a href="#5.7">5.7:Can I convert a file obtained from the
+       <a href="#5.7">5.7: Can I convert a file obtained from the
        <mixer var="GAP"/> LogTo command into a Latex file?</a>
      </li>
      <li>
@@ -252,7 +252,7 @@ check that given presentation is a nilpotent group of class 2 or not?</a>
 
 <a name="1"></a>
 <h3>
-  1.General Questions
+  1. General Questions
 </h3>
 
 <!-- ================================================================================== -->
@@ -928,22 +928,23 @@ example, type 'man screen').
 
 <a name="5.7"></a>
 <h4>
-  5.7:Can I convert a file  obtained from the <mixer var="GAP"/>  LogTo
+  5.7: Can I convert a file obtained from the <mixer var="GAP"/> LogTo
   command into a Latex file?
 </h4>
 
 <p>  David Joyner ( wdj@usna.edu) announced in the  <mixer var="GAP"/>
-Forum that he <br/>
-
-"has  written a very simple python program which takes a file
+Forum that he ...
+<blockquote>
+... has  written a very simple python program which takes a file
 obtained from the <mixer var="GAP"/> LogTo command and converts into a
 Latex file.
-You must have the python binary installed in \usr\bin
+You must have the python binary installed in /usr/bin
 (on a linux/unix setup). However, if you have the windows version
 of python then it presumably works with some editing. The file
 with an example in on David Joyner's webpage
 <a href ="http://www.usna.edu/Users/math/wdj/gap/">GAP&nbsp;Stuff</a>,
-if you are interested."
+if you are interested.
+</blockquote>
 
 </p>
 
@@ -959,35 +960,35 @@ if you are interested."
 <p>
 There are a number of possible reasons for this:
 </p>
-<ul>
+<ol>
 <li>
-1. For some calculations, GAP actually uses randomized algorithms (although,
+For some calculations, GAP actually uses randomized algorithms (although,
 unless you choose otherwise, the results produced are always checked). In
 these cases, the algorithm may be more or less "lucky" and take a shorter
 or longer time accordingly. You can usually avoid this  variation by setting
 the random seed to a standard value before each test, using RANDOM_SEED(1).
 </li>
 <li>
-2. Garbage collection. The GAP memory manager runs when the system runs out of
+Garbage collection. The GAP memory manager runs when the system runs out of
 free memory and can take significant time. To standardise when this happens,
 run GASMAN("collect") before each test.
 </li>
 <li>
-3. The granularity of the underlying OS timing function being used is at
+The granularity of the underlying OS timing function being used is at
 best 1ms, sometimes courser,  so a test which takes 0,1 or 2 ms per run could
 represent a calculation that takes about 1ms and may cross anywhere between 0
 and 2 clock ticks without more than a small variation in how long it takes.
 </li>
 <li>
-4. The method cache. The GAP method selection system caches the last few
+The method cache. The GAP method selection system caches the last few
 methods that were used for each operation. The cost of a cache miss is
 considerable.
 </li>
 <li>
-5. The CPU cache. If the relevant parts of the GAP interpreter and/or of the
+The CPU cache. If the relevant parts of the GAP interpreter and/or of the
 workspace are in CPU cache when the test starts, this will save some time.
 </li>
-</ul>
+</ol>
 <p>
 Also note that accessing, especially updating, global
 variables is significantly slower than local ones.
