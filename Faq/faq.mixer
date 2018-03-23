@@ -102,9 +102,6 @@
       <li>
         <a href="#4.6">4.6: I cannot compile GAP under Mac OS X</a>
       </li>
-      <li>
-        <a href="#4.7">4.7: GAP on an AMD64 bit machine</a>
-      </li>
     </ul>
   </li>
   <li>
@@ -815,113 +812,6 @@ You might need to install the
 <a href="https://developer.apple.com/xcode/">Apple developer tools</a> first. See also
 <a href="https://www.gap-system.org/Download/tools.html">here</a>.
 </p>
-
-<!-- ================================================================================== -->
-
-<a name="4.7"></a>
-<h4>
-  4.7: Running <mixer var="GAP"/> on an AMD64 bit machine
-</h4>
-<p>
-
-Some  comments, provided  by David Joyner,  on running GAP  on an
-AMD64 bit machine:
-</p>
-<ul>
-<li>
-<h4>Compiling in SUSE 9.1, AMD64 bit version.</h4>
-<p>
-If you compile using
-</p>
-<pre>
-./configure
-make
-</pre>
-it compiles as 32 bit. If you use
-<pre>
-./configure --enable-libsuffix=64
-make
-</pre>
-<p>
- it compiles as 64 bit.
-</p>
-<p>
-Redhat's AMD64 bit version is similar. If you have Debian-based 64-bit
-linux   then    this   still    works   but   the    simpler   command
-<tt>./configure</tt> compiles the application by default as 64-bit.
-</p>
-<p>
-In the  case of  Debian,
-another  possibility exists: use  apt-get to  download and  install it
-from   the    Debian   AMD64   development    tree.   Bill   Allombert
-(<tt>allomber@math.u-bordeaux.fr</tt>), the gap package maintainer for
-Debian, is a good contact for this.
-</p>
-</li>
-<li>
-<h4>Performance issues.</h4>
-<p>
-Comments from Frank Luebeck:
-</p>
-<p>
-The setting of C_STACK_ALIGN to 1 by the configure script is correct.
-The AMD 64 architecture has no alignment restrictions, but the access
-speed may depend on alignment. (Of course the compiler optimization
-tries to align data for fast access.)
-</p>
-<p>
-Performance of a dual Opteron 248, 2.2GHz, 8GB memory:
-</p>
-<p>
-Most of GAP is a bit faster in 32 bit mode, compared to 64 bit mode.
-The speed is similar to a 3 GHz Pentium 4 machine. One can use complete
-4 GB of memory in 32 bit mode.
-</p>
-<p>
-Most GAP objects need twice as much space in 64 bit mode compared to
-32 bit mode. So, using 64 bit mode is only interesting if you have and
-want to use more than 8 GB of memory.
-</p>
-<p>
-The exceptions concerning speed and memory are compacted kernel objects:
-long integers, compressed finite field matrices, blists. Here
-computations can go faster and need only little more memory in 64 bit
-mode (GF(2)-matrices of Baby monster multiply about 30% faster).
-</p>
-<p>
-Comments from Bill Allombert:
-</p>
-<p>
-On a Opteron at1366MHz I got:
-</p>
-64 bit build of GAP:
-<pre>
-echo 'ReadTest("tst/combinat.tst");'| bin/*/gap -q | tee debian/gap.tst
-+ &#x24;Id: combinat.tst,v 4.9.4.3 2005/05/11 14:53:02 gap Exp $
-+ GAP4stones: 1317073
-true
-</pre>
-32bit build of GAP:
-<pre>
-echo 'ReadTest("tst/combinat.tst");'| bin/*/gap -q | tee debian/gap.tst
-+ &#x24;Id: combinat.tst,v 4.9.4.3 2005/05/11 14:53:02 gap Exp $
-+ GAP4stones: 1560693
-true
-</pre>
-<p>
-A more comprehensive bench (testall.g) in 32 and 64bit variant.
-</p>
-<p>
-The bottom line is (first figure is GAPstones, 2nd is seconds):
-</p>
-<p>
-i386 :&nbsp;&nbsp;&nbsp; total&nbsp;&nbsp;&nbsp;206089&nbsp;&nbsp;&nbsp;41411
-<br />
-amd64: total&nbsp;&nbsp;&nbsp;191640&nbsp;&nbsp;&nbsp;45861
-</p>
-</li>
-</ul>
-
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
