@@ -2,7 +2,8 @@
 # Start GAP release with -r -A and read this file. Then paste the output into 
 # `GapWWW/Packages/packages.mixer`.
 
-data_libs:=["aclib","atlasrep","crystcat","ctbllib","tomlib","smallgrp"];
+data_libs:=["aclib","atlasrep","crystcat","ctbllib",
+            "primgrp","transgrp","smallgrp","tomlib"];
 
 projects := rec(
 
