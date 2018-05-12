@@ -339,7 +339,7 @@ PKG_OverviewLink_laguna = r'''<a href="{{pkgmixerpath}}/laguna.html">LAGUNA</a>&
 
 '''
 
-PKG_OverviewLink_liealgdb = r'''<a href="{{pkgmixerpath}}/liealgdb.html">LieAlgDB</a>&nbsp;&nbsp;2.2 (09/04/2018) by S. Cicalò, W. de Graaf, C. Schneider, T. GAP Team
+PKG_OverviewLink_liealgdb = r'''<a href="{{pkgmixerpath}}/liealgdb.html">LieAlgDB</a>&nbsp;&nbsp;2.2 (09/04/2018) by S. Cicalò, W. de Graaf, C. Schneider
 <br />A database of Lie algebras
 
 '''
@@ -479,7 +479,7 @@ PKG_OverviewLink_profiling = r'''<a href="{{pkgmixerpath}}/profiling.html">profi
 
 '''
 
-PKG_OverviewLink_qaos = r'''<a href="{{pkgmixerpath}}/qaos.html">qaos</a>&nbsp;&nbsp;1.6 (28/03/2018) by S. Freundt, S. Pauli, T. GAP Team
+PKG_OverviewLink_qaos = r'''<a href="{{pkgmixerpath}}/qaos.html">qaos</a>&nbsp;&nbsp;1.6 (28/03/2018) by S. Freundt, S. Pauli
 <br />Interfacing the QaoS database from GAP
 
 '''
@@ -494,7 +494,7 @@ PKG_OverviewLink_quagroup = r'''<a href="{{pkgmixerpath}}/quagroup.html">QuaGrou
 
 '''
 
-PKG_OverviewLink_radiroot = r'''<a href="{{pkgmixerpath}}/radiroot.html">RadiRoot</a>&nbsp;&nbsp;2.8 (23/04/2018) by A. Distler, T. GAP Team
+PKG_OverviewLink_radiroot = r'''<a href="{{pkgmixerpath}}/radiroot.html">RadiRoot</a>&nbsp;&nbsp;2.8 (23/04/2018) by A. Distler
 <br />Roots of a Polynomial as Radicals
 
 '''
@@ -574,7 +574,7 @@ PKG_OverviewLink_sla = r'''<a href="{{pkgmixerpath}}/sla.html">SLA</a>&nbsp;&nbs
 
 '''
 
-PKG_OverviewLink_smallgrp = r'''<a href="{{pkgmixerpath}}/smallgrp.html">SmallGrp</a>&nbsp;&nbsp;1.3 (09/04/2018) by B. Eick, H. U. Besche, E. O'Brien, T. GAP Team
+PKG_OverviewLink_smallgrp = r'''<a href="{{pkgmixerpath}}/smallgrp.html">SmallGrp</a>&nbsp;&nbsp;1.3 (09/04/2018) by B. Eick, H. U. Besche, E. O'Brien
 <br />The GAP Small Groups Library
 
 '''
@@ -589,7 +589,7 @@ PKG_OverviewLink_sonata = r'''<a href="{{pkgmixerpath}}/sonata.html">SONATA</a>&
 
 '''
 
-PKG_OverviewLink_sophus = r'''<a href="{{pkgmixerpath}}/sophus.html">Sophus</a>&nbsp;&nbsp;1.24 (09/04/2018) by C. Schneider, T. GAP Team
+PKG_OverviewLink_sophus = r'''<a href="{{pkgmixerpath}}/sophus.html">Sophus</a>&nbsp;&nbsp;1.24 (09/04/2018) by C. Schneider
 <br />Computing in nilpotent Lie algebras
 
 '''
@@ -599,7 +599,7 @@ PKG_OverviewLink_spinsym = r'''<a href="{{pkgmixerpath}}/spinsym.html">SpinSym</
 
 '''
 
-PKG_OverviewLink_symbcompcc = r'''<a href="{{pkgmixerpath}}/symbcompcc.html">SymbCompCC</a>&nbsp;&nbsp;1.3 (20/03/2018) by D. Feichtenschlager, T. GAP Team
+PKG_OverviewLink_symbcompcc = r'''<a href="{{pkgmixerpath}}/symbcompcc.html">SymbCompCC</a>&nbsp;&nbsp;1.3 (20/03/2018) by D. Feichtenschlager
 <br />Computing with parametrised presentations for p-groups of fixed coclass
 
 '''
