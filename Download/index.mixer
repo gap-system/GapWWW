@@ -11,21 +11,14 @@ released on <mixer var="reldate"/>.
 <h4>Upgrading or New Installation?</h4>
 
 <p>
-If you have any version of <mixer var="GAP"/> older than
-<mixer var="GAP"/> 4.<mixer var="relmajor"/>.<mixer var="relminor"/>,
-the only way to install <mixer var="GAP"/> 4.<mixer var="relmajor"/>.<mixer var="relminor"/>
+If you have any version of <mixer var="GAP"/> older than the
+<a href="/Releases/index.html">current version</a>,
+the only way to install a new version of <mixer var="GAP"/>
 is a new installation.
 </p>
 
 <p>
-If you already have <mixer var="GAP"/> 4.<mixer var="relmajor"/>.<mixer var="relminor"/> installed 
-with the <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/gap/rsync">rsync binary installer</a> 
-then all you need to do to upgrade is to call the <code>gapsync</code> script which was created 
-during installation. This script will update both the core system and packages to their latest versions.
-</p>
-
-<p>
-If you installed <mixer var="GAP"/> 4.<mixer var="relmajor"/>.<mixer var="relminor"/>
+If you installed <mixer var="GAP"/> 
 from the standard distribution and have not manually installed additional or 
 updated packages in your <mixer var="GAP"/> distribution (which is no
 longer necessary -- instead we recommend that you 
@@ -36,20 +29,14 @@ and downloading and installing the current archives, and this is the approach we
 for most users. Make sure that you update any scripts or links to refer to the new version.
 </p>
 
-<p>
-If you have limited bandwidth, or have customised your installation, you may be able to 
-<a href="upgrade.html">upgrade your <mixer var="GAP"/> 4.<mixer var="relmajor"/>.<mixer var="relminor"/>
-installation in place</a> with a smaller download. 
-</p>
-
 
 <h4><a name="requirements">Supported Operating Systems</a></h4>
 
 <p>
 We test <mixer var="GAP"/> on various versions of Linux and on some recent versions of Windows 
-and Mac OS X in both 32- and 64-bit modes. You can install it on any of these systems using the 
-standard distribution archives, although details of the process may vary. In addition, we offer 
-<a href="index.html#alternatives">special installers</a> for Linux, Mac OS X and Windows.
+and macOS in both 32- and 64-bit modes. You can install it on any of these systems using the 
+standard distribution archives, although details of the process may vary. In addition, there
+some <a href="/Download/alternatives.html">alternative installation methods</a> for Linux, macOS and Windows.
 To build <mixer var="GAP"/> from source you will need <a href="tools.html">some tools</a> 
 installed. <mixer var="GAP"/> may compile and work for you on other systems, and if so we would 
 be interested to know about it. 
@@ -59,7 +46,7 @@ be interested to know about it.
 
 <p>The main archives contain the current release of <mixer var="GAP"/>.
     They also contain a number of contributed packages, found in the
-    subdirectories <code>pkg</code> and <code>small</code> of the main
+    <code>pkg</code> subdirectory of the main
     distribution directory. The core part of the  <mixer var="GAP"/> 
     system is distributed under the terms of the GNU Public
     License (<a href="copyright.html">details</a> are given on a separate page),
@@ -71,82 +58,34 @@ The copyright of redistributed packages remains with their authors.
 
 <h3>The Basic Steps of a <mixer var="GAP"/> Installation</h3>
 
-Note that to obtain a fully functional GAP installation you need not only
-to compile the core system, but also some of its packages. You might want
-to consider one of the <a href="#alternatives">alternative installation methods</a> below which
-achieve this for you automatically. Otherwise, to install <mixer var="GAP"/> 
-using the source distribution, perform the following steps:
+<p>
+Note that to obtain a fully functional GAP installation you need not only to 
+compile the core system, but also some of its packages. You might want to consider 
+one of the <a href="/Download/alternatives.html">alternative installation methods</a>
+which achieve this for you automatically. Otherwise, to install 
+<mixer var="GAP"/> using the source distribution, perform the following steps:
+</p>
 
 <ul>
-<li>Choose your preferred archive format and <a href="#Download">download</a> 
+<li>Choose your preferred archive format and <a href="/Releases/index.html">download</a> 
 the corresponding archive.</li>
 <li>Unpack the archive.</li>
-<li>On UNIX, Linux or Mac OS X: compile the <mixer var="GAP"/> core system.</li>
-<li>On UNIX, Linux or Mac OS X: change to the <code>pkg</code> subdirectory and call
+<li>On UNIX, Linux or macOS: compile the <mixer var="GAP"/> core system
+by running <code>./configure; make</code> in the unpacked directory.</li>
+<li>On UNIX, Linux or macOS: change to the <code>pkg</code> subdirectory and call
 <code>../bin/BuildPackages.sh</code> to run the script which will build most of
 the packages that require compilation (provided sufficiently many libraries, headers
-and tools are available).</li>
-<li>On Windows: no compilation is needed, compiled executables for <mixer var="GAP"/> 
-and some packages are already in the win.zip-archive.</li>
-<li>Adjust some links/scripts/icons ..., depending on your system, to
+and tools are available). If something doesn't work on your system, please
+refer to the <code>README</code> file provided with the corresponding package. 
+</li>
+<li>On Windows: no compilation is needed, since compiled executables for <mixer var="GAP"/> 
+and some packages are already provided by the <code>.exe</code> installer or
+<code>-win.zip</code> archive.</li>
+<li>Adjust some links/scripts/icons etc., depending on your system, to
 make the new version of <mixer var="GAP"/> available to the users of
 your machine.</li>
 <li>Optional: run a few tests.</li>
 </ul>
-
-<a name="alternatives"></a>
-<p><strong>Alternative Installation Methods.</strong></p>
-
-<p>The following alternative installation methods offer simpler
-  installation for many users by supplying precompiled binaries and
-  support for the installation process.</p>
-
-<ul>
-<li> 
-<mixer person="Frank Luebeck" data="name_link"/> offers a 
-<a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/gap/rsync">
-Linux&nbsp;binary&nbsp;distribution</a> via remote syncronization with a
-reference installation which includes all packages and some optimisations.
-</li>
-<li>
-<a href="http://www-groups.mcs.st-and.ac.uk/~neunhoef/index.html">Max
-Neunh&ouml;ffer</a> offers 
-<a href="https://gap-system.github.io/bob/">
-BOB - a tool to download and build GAP and its packages from source</a> 
-for Linux and Mac OS X.
-You only download BOB who does all the rest for you. You need
-a C-compiler and some libraries installed on your system but BOB will
-tell you exactly what is missing.
-</li>
-<li>
-<mixer person="Alexander Konovalov" data="name_link"/> offers an
-<a href="https://www.gap-system.org/ukrgap/wininst/">
-<mixer var="GAP"/>&nbsp;Installer&nbsp;for&nbsp;Windows</a>
-with the same content as the win.zip archive above.
-It provides a standard installation procedure that will guide you 
-through all steps of the installation process.
-</li>
-<!--
-<li>
-<mixer person="Alexander Hulpke" data="name_link"/> offers a
-Vista or XP 
-<a href="http://www.math.colostate.edu/~hulpke/CGT/education.html">
-<mixer var="GAP"/>&nbsp;Installer&nbsp;for&nbsp;Windows</a>.
-</li>
--->
-</ul> 
-
-
-<!--
-<p><strong>Debian packages.</strong>
-Most <a href="http://www.debian.org">Debian</a>-based
-GNU/Linux distributions contain
-<code>.deb</code>-packages with the core part of GAP and a small number of
-the  GAP packages
-(note that after an update or new release of GAP it takes some time until these
-Linux distributions are updated to the newest GAP version).
-</p>
--->
 
 <h3>Download Archives<a name="Download"></a></h3>
 
@@ -154,7 +93,7 @@ Linux distributions are updated to the newest GAP version).
 Links to the latest archives in four <a href="formats.html">formats</a>
 (.tar.gz, .tar.bz2, .zip and -win.zip) 
 can be found on the <a href="../Releases/index.html">Downloads</a> page.
-If you use Unix or Mac OS X, you can use the .tar.gz, .tar.bz2 or .zip
+If you use Unix or macOS, you can use the .tar.gz, .tar.bz2 or .zip
 archives. If you use Windows, then use the -win.zip archive. 
 </p>
 
@@ -162,8 +101,10 @@ archives. If you use Windows, then use the -win.zip archive.
 
 <p>
 The installation procedure depends on the operating system you are using. 
-Full instructions for installation on Windows, Linux and Mac OS X are 
-available in a <a href="https://github.com/gap-system/gap/blob/v4.8.10/INSTALL.md">separate document</a>.
+Full instructions for installation on Windows, Linux and macOS are 
+available in the <code>INSTALL.md</code> file, 
+which may be found in the <mixer var="GAP"/> root directory after 
+unpacking the archive with the <mixer var="GAP"/> distribution.
 </p>
 
 
