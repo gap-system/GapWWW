@@ -91,6 +91,7 @@ local i,ii,bib, fh, out, a, b, years, counts, pos, flag, mscreport;
   Sort(bib[1], function(a,b) 
     return SIMPLE_STRING(a.author)<SIMPLE_STRING(b.author);
   end);
+  Print("Sorted ", Length(bib[1]), " records \n");
   WriteBibFile(Concatenation(name, "nicer.bib"),[bib[1],[],[]]);
   fh := function() 
     local a; 
