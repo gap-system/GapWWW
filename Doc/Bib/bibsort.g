@@ -1,6 +1,7 @@
-years:=[1987..2016];
+years:=[1987..2018];
 
 bib := ParseBibFiles("gap-publishednicer.bib")[1];;
+Print( "Loaded ", Length(bib), " records\n");
 # no need to sort the records - in this bib-file they are already sorted 
 
 # tweaking some records on which ParseBibXMLextString chokes
