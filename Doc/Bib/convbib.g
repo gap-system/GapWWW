@@ -11,63 +11,66 @@ LoadPackage("GAPDoc");
 Read("MSC2010.g");
 
 StatisticsByMSC:=function()
-local ourbib, duplicates, q, w, tab, msccodes, mscnames, 
-      b, nr, pos, posnomsc, prim, sec, i, total;
-Print( "Reading the GAP bibliography ... \n" );
-ourbib:=ParseBibFiles("gap-published.bib")[1];;
-Print( "Checking for multiple labels ... \n");
-duplicates := Filtered( Collected( List( ourbib, q->q.Label) ), w -> w[2]>1 );
-if Length(duplicates) > 0 then
-  Print("The following labels are defined more than once ", 
-        List( duplicates, w -> w[1] ), "\n");
-fi;
-Print( "Loaded ", Length(ourbib), " records from GAP bibliography\n");
-tab:=[];
-msccodes:=List(MSC2010, w -> w[1]);
-mscnames:=List(MSC2010, w -> w[2]);
-SortParallel( msccodes, mscnames);
-posnomsc := Position( msccodes, "XX" );
-for i in [1..Length(msccodes)] do
-  tab[i] := [ 0, 0, msccodes[i], mscnames[i] ];
-od;
-for b in ourbib do
-  if IsBound(b.mrclass) then
-    nr := b.mrclass;
-    prim := nr{[1..2]};
-    pos := Position( msccodes, prim ); 
-    if pos <> fail then
-      tab[pos][1]:=tab[pos][1]+1;
-      pos := PositionSublist( nr, " (" );
+  local ourbib, duplicates, q, w, tab, msccodes, mscnames, 
+        b, nr, pos, posnomsc, prim, sec, i, total;
+  Print( "Reading the GAP bibliography ... \n" );
+  ourbib:=ParseBibFiles("gap-published.bib")[1];;
+  Print( "Checking for multiple labels ... \n");
+  duplicates := Filtered( Collected( List( ourbib, q->q.Label) ), w -> w[2]>1 );
+  if Length(duplicates) > 0 then
+    Print("The following labels are defined more than once ", 
+          List( duplicates, w -> w[1] ), "\n");
+  fi;
+  Print( "Loaded ", Length(ourbib), " records from GAP bibliography\n");
+  tab:=[];
+  msccodes:=List(MSC2010, w -> w[1]);
+  mscnames:=List(MSC2010, w -> w[2]);
+  SortParallel( msccodes, mscnames);
+  posnomsc := Position( msccodes, "XX" );
+  for i in [1..Length(msccodes)] do
+    tab[i] := [ 0, 0, msccodes[i], mscnames[i] ];
+  od;
+  for b in ourbib do
+    if IsBound(b.mrclass) then
+      nr := b.mrclass;
+      prim := nr{[1..2]};
+      pos := Position( msccodes, prim ); 
       if pos <> fail then
-        sec := SplitString( nr{[pos+2..Length(nr)]}, " ", " )");
-        sec := Set( List( sec, q -> q{[1..2]} ) );
-        for q in sec do 
-          if q <> prim then
-            pos := Position( msccodes, q ); 
-            tab[pos][2]:=tab[pos][2]+1;
-          fi;
-        od;
-      fi;  
-    else  
+        tab[pos][1]:=tab[pos][1]+1;
+        pos := PositionSublist( nr, " (" );
+        if pos <> fail then
+          sec := SplitString( nr{[pos+2..Length(nr)]}, " ", " )");
+          sec := Set( List( sec, q -> q{[1..2]} ) );
+          for q in sec do 
+            if q <> prim then
+              pos := Position( msccodes, q ); 
+              tab[pos][2]:=tab[pos][2]+1;
+            fi;
+          od;
+        fi;  
+      else  
+        tab[posnomsc][1]:=tab[posnomsc][1]+1;
+      fi;
+    else
       tab[posnomsc][1]:=tab[posnomsc][1]+1;
-    fi;
-  else
-    tab[posnomsc][1]:=tab[posnomsc][1]+1;
-  fi;  
-od;
-tab[posnomsc][2]:="";
-tab[posnomsc][3]:="";
-tab := Filtered( tab, w -> w[1]+w[2]>0 );
-total := [ Sum( List( tab, w -> w[1] ) ), "", "", "TOTAL" ];
-Add( tab, total );
-return tab;
+    fi;  
+  od;
+  tab[posnomsc][2]:="";
+  tab[posnomsc][3]:="";
+  tab := Filtered( tab, w -> w[1]+w[2]>0 );
+  total := [ Sum( List( tab, w -> w[1] ) ), "", "", "TOTAL" ];
+  Add( tab, total );
+  return tab;
 end;
 
 
 bib2niceandhtml := function(name, header, subheader)
-local i,ii,bib, fh, out, a, b, years, counts, pos, flag, mscreport;
+  local i, ii, bib, fh, out, a, b, years, counts, pos, flag, 
+        mscreport, bstr, str, bad;
   years:=[1987..2018];
-  bib := ParseBibFiles("gap-head.bib", Concatenation(name, ".bib"));
+  bstr := StringFile(Concatenation(name, ".bib"));
+  bstr := HeuristicTranslationsLaTeX2XML.Apply(bstr);
+  bib := ParseBibStrings(StringFile("gap-head.bib"), bstr);
   counts:=List(years,i->0);
   for a in bib[1] do 
     NormalizeNameAndKey(a);
@@ -93,8 +96,16 @@ local i,ii,bib, fh, out, a, b, years, counts, pos, flag, mscreport;
   end);
   Print("Sorted ", Length(bib[1]), " records \n");
   WriteBibFile(Concatenation(name, "nicer.bib"),[bib[1],[],[]]);
+  # now we produce a temporary version were we substitute back
+  # some unicode characters currently not handled by pdflatex
+  bad := [["ʹ","{\\cprime}"], ["ą","{\\k a}"],["Ð","{\\Dbar}"]];
+  str := StringFile(Concatenation(name, "nicer.bib"));
+  for a in bad do
+    str := SubstitutionSublist(str, a[1], a[2]);
+  od;
+  FileString(Concatenation(name, "nicertmp.bib"), str);
   fh := function() 
-    local a; 
+    local a, str; 
     Print("<html>\n",
     "<meta http-equiv=\"Content-Type\" content=\"text/html;", 
     " charset=utf-8\">\n\n",
@@ -108,7 +119,11 @@ local i,ii,bib, fh, out, a, b, years, counts, pos, flag, mscreport;
       b.title:=Filtered(b.title,x-> not x in "{}");
       PrintBibAsHTML(b); 
       Print("<pre>\n");
-      PrintBibAsBib(a);
+      str := StringBibAsBib(a);
+      # escape HTML chars
+      str := SubstitutionSublist(str, "&", "&amp;");
+      str := SubstitutionSublist(str, "<", "&lt;");
+      PrintFormattedString(str);
       Print("\n</pre>\n\n");
     od;
     Print("\n\n</body>\n</html>\n");
@@ -184,6 +199,8 @@ local i,ii,bib, fh, out, a, b, years, counts, pos, flag, mscreport;
   PrintTo("FLtmpTeX.tex",
 "\\documentclass[11pt]{article}\n",
 "\\usepackage{amsfonts,url,fullpage,mathscinet}\n",
+"\\usepackage[utf8x]{inputenc}\n",
+"\\usepackage{polski}\n",
 "\\def\\Bbb{\\mathbb}\n",
 "\\def\\bold{\\boldmath}\n",
 "\\def\\cprime{$'$}\n",
@@ -204,10 +221,10 @@ local i,ii,bib, fh, out, a, b, years, counts, pos, flag, mscreport;
 "\\end{center}\n",
 "\\def\\refname{}\n",
 "\\bibliographystyle{plain}\n",
-"\\bibliography{gap-head,",name,"nicer","}\n",
+"\\bibliography{gap-head,",name,"nicertmp","}\n",
 "\\end{document}\n");
   Exec(Concatenation("pdflatex FLtmpTeX; bibtex FLtmpTeX; pdflatex FLtmpTeX;",
-       " pdflatex FLtmpTeX; mv FLtmpTeX.pdf ",name,".pdf; rm -f FLtmpTeX.*"));
+       " pdflatex FLtmpTeX; mv FLtmpTeX.pdf ",name,".pdf; rm -f FLtmpTeX.* ",name,"nicertmp.bib"));
 end;
 
 # Add further lists here.
