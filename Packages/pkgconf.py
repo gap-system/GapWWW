@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-PKG_OverviewLink_4ti2interface = r'''<a href="{{pkgmixerpath}}/4ti2interface.html">4ti2Interface</a>&nbsp;&nbsp;2017.10.04 (04/10/2017) by S. Gutsche
+PKG_OverviewLink_4ti2interface = r'''<a href="{{pkgmixerpath}}/4ti2interface.html">4ti2Interface</a>&nbsp;&nbsp;2018.07.06 (06/07/2018) by S. Gutsche
 <br />A link to 4ti2
 
 '''
@@ -44,7 +44,7 @@ PKG_OverviewLink_automgrp = r'''<a href="{{pkgmixerpath}}/automgrp.html">AutomGr
 
 '''
 
-PKG_OverviewLink_autpgrp = r'''<a href="{{pkgmixerpath}}/autpgrp.html">AutPGrp</a>&nbsp;&nbsp;1.9 (07/03/2018) by B. Eick, E. O'Brien
+PKG_OverviewLink_autpgrp = r'''<a href="{{pkgmixerpath}}/autpgrp.html">AutPGrp</a>&nbsp;&nbsp;1.10 (30/07/2018) by B. Eick, M. Horn, E. O'Brien
 <br />Computing the Automorphism Group of a p-Group
 
 '''
@@ -124,8 +124,23 @@ PKG_OverviewLink_cubefree = r'''<a href="{{pkgmixerpath}}/cubefree.html">Cubefre
 
 '''
 
+PKG_OverviewLink_curlinterface = r'''<a href="{{pkgmixerpath}}/curlinterface.html">curlInterface</a>&nbsp;&nbsp;2.0.2 (30/08/2018) by C. Jefferson, M. Torpey
+<br />Simple Web Access
+
+'''
+
 PKG_OverviewLink_cvec = r'''<a href="{{pkgmixerpath}}/cvec.html">cvec</a>&nbsp;&nbsp;2.6.1 (07/06/2018) by M. Neunhöffer, M. Horn
 <br />Compact vectors over finite fields
+
+'''
+
+PKG_OverviewLink_datastructures = r'''<a href="{{pkgmixerpath}}/datastructures.html">datastructures</a>&nbsp;&nbsp;0.2.2 (20/08/2018) by M. Pfeiffer, M. Horn, C. Jefferson, S. Linton
+<br />Collection of standard data structures for GAP
+
+'''
+
+PKG_OverviewLink_deepthought = r'''<a href="{{pkgmixerpath}}/deepthought.html">DeepThought</a>&nbsp;&nbsp;1.0.1 (24/08/2018) by N. Wagner, M. Horn
+<br />This package provides functions for computations in finitely generated nilpotent groups based on the Deep Thought algorithm.
 
 '''
 
@@ -134,7 +149,7 @@ PKG_OverviewLink_design = r'''<a href="{{pkgmixerpath}}/design.html">DESIGN</a>&
 
 '''
 
-PKG_OverviewLink_digraphs = r'''<a href="{{pkgmixerpath}}/digraphs.html">Digraphs</a>&nbsp;&nbsp;0.12.1 (26/04/2018) by J. De Beule, S. Burrell, L. Elliott, C. Jefferson, J. Jonusas, J. D. Mitchell, M. Pfeiffer, C. Russell, F. Smith, M. Torpey, W. A. Wilson
+PKG_OverviewLink_digraphs = r'''<a href="{{pkgmixerpath}}/digraphs.html">Digraphs</a>&nbsp;&nbsp;0.12.2 (24/08/2018) by J. De Beule, S. Burrell, L. Elliott, C. Jefferson, J. Jonusas, J. D. Mitchell, M. Pfeiffer, C. Russell, F. Smith, M. Torpey, W. A. Wilson
 <br />Graphs, digraphs, and multidigraphs in GAP
 
 '''
@@ -144,7 +159,7 @@ PKG_OverviewLink_edim = r'''<a href="{{pkgmixerpath}}/edim.html">EDIM</a>&nbsp;&
 
 '''
 
-PKG_OverviewLink_example = r'''<a href="{{pkgmixerpath}}/example.html">Example</a>&nbsp;&nbsp;4.1.0 (26/04/2018) by W. Nickel, G. Gamble, A. Konovalov
+PKG_OverviewLink_example = r'''<a href="{{pkgmixerpath}}/example.html">Example</a>&nbsp;&nbsp;4.1.1 (18/07/2018) by W. Nickel, G. Gamble, A. Konovalov
 <br />Example/Template of a GAP Package
 
 '''
@@ -209,7 +224,7 @@ PKG_OverviewLink_gauss = r'''<a href="{{pkgmixerpath}}/gauss.html">Gauss</a>&nbs
 
 '''
 
-PKG_OverviewLink_gaussforhomalg = r'''<a href="{{pkgmixerpath}}/gaussforhomalg.html">GaussForHomalg</a>&nbsp;&nbsp;2018.02.05 (05/02/2018) by S. Goertzen, M. Barakat
+PKG_OverviewLink_gaussforhomalg = r'''<a href="{{pkgmixerpath}}/gaussforhomalg.html">GaussForHomalg</a>&nbsp;&nbsp;2018.06.01 (01/06/2018) by S. Goertzen, M. Barakat
 <br />Gauss functionality for the homalg project
 
 '''
@@ -249,7 +264,7 @@ PKG_OverviewLink_groupoids = r'''<a href="{{pkgmixerpath}}/groupoids.html">group
 
 '''
 
-PKG_OverviewLink_grpconst = r'''<a href="{{pkgmixerpath}}/grpconst.html">GrpConst</a>&nbsp;&nbsp;2.6 (08/03/2018) by H. U. Besche, B. Eick
+PKG_OverviewLink_grpconst = r'''<a href="{{pkgmixerpath}}/grpconst.html">GrpConst</a>&nbsp;&nbsp;2.6.1 (09/08/2018) by H. U. Besche, B. Eick, M. Horn
 <br />Constructing the Groups of a Given Order
 
 '''
@@ -304,7 +319,7 @@ PKG_OverviewLink_intpic = r'''<a href="{{pkgmixerpath}}/intpic.html">IntPic</a>&
 
 '''
 
-PKG_OverviewLink_io = r'''<a href="{{pkgmixerpath}}/io.html">IO</a>&nbsp;&nbsp;4.5.1 (10/01/2018) by M. Neunhöffer, M. Horn
+PKG_OverviewLink_io = r'''<a href="{{pkgmixerpath}}/io.html">IO</a>&nbsp;&nbsp;4.5.2 (21/08/2018) by M. Neunhöffer, M. Horn
 <br />Bindings for low level C library I/O routines
 
 '''
@@ -319,7 +334,7 @@ PKG_OverviewLink_irredsol = r'''<a href="{{pkgmixerpath}}/irredsol.html">IRREDSO
 
 '''
 
-PKG_OverviewLink_itc = r'''<a href="{{pkgmixerpath}}/itc.html">ITC</a>&nbsp;&nbsp;1.5 (13/06/2018) by V. Felsch, L. Hippe, J. Neubüser
+PKG_OverviewLink_itc = r'''<a href="{{pkgmixerpath}}/itc.html">ITC</a>&nbsp;&nbsp;1.5 (13/06/2018) by V. Felsch, L. Hippe, J. Neubüser, The GAP Team
 <br />Interactive Todd-Coxeter
 
 '''
@@ -329,7 +344,7 @@ PKG_OverviewLink_json = r'''<a href="{{pkgmixerpath}}/json.html">json</a>&nbsp;&
 
 '''
 
-PKG_OverviewLink_jupyterkernel = r'''<a href="{{pkgmixerpath}}/jupyterkernel.html">JupyterKernel</a>&nbsp;&nbsp;0.99999 (21/06/2018) by M. Pfeiffer
+PKG_OverviewLink_jupyterkernel = r'''<a href="{{pkgmixerpath}}/jupyterkernel.html">JupyterKernel</a>&nbsp;&nbsp;0.999999 (31/07/2018) by M. Pfeiffer
 <br />Jupyter kernel written in GAP
 
 '''
@@ -349,7 +364,7 @@ PKG_OverviewLink_laguna = r'''<a href="{{pkgmixerpath}}/laguna.html">LAGUNA</a>&
 
 '''
 
-PKG_OverviewLink_liealgdb = r'''<a href="{{pkgmixerpath}}/liealgdb.html">LieAlgDB</a>&nbsp;&nbsp;2.2 (09/04/2018) by S. Cicalò, W. de Graaf, C. Schneider
+PKG_OverviewLink_liealgdb = r'''<a href="{{pkgmixerpath}}/liealgdb.html">LieAlgDB</a>&nbsp;&nbsp;2.2 (09/04/2018) by S. Cicalò, W. de Graaf, C. Schneider, The GAP Team
 <br />A database of Lie algebras
 
 '''
@@ -399,7 +414,7 @@ PKG_OverviewLink_matgrp = r'''<a href="{{pkgmixerpath}}/matgrp.html">matgrp</a>&
 
 '''
 
-PKG_OverviewLink_matricesforhomalg = r'''<a href="{{pkgmixerpath}}/matricesforhomalg.html">MatricesForHomalg</a>&nbsp;&nbsp;2018.06.02 (02/06/2018) by M. Barakat, M. Lange-Hegermann, M. Leuner, V. Wagh
+PKG_OverviewLink_matricesforhomalg = r'''<a href="{{pkgmixerpath}}/matricesforhomalg.html">MatricesForHomalg</a>&nbsp;&nbsp;2018.08.24 (24/08/2018) by M. Barakat, M. Lange-Hegermann, M. Leuner, V. Wagh
 <br />Matrices for the homalg project
 
 '''
@@ -414,7 +429,7 @@ PKG_OverviewLink_modulepresentationsforcap = r'''<a href="{{pkgmixerpath}}/modul
 
 '''
 
-PKG_OverviewLink_modules = r'''<a href="{{pkgmixerpath}}/modules.html">Modules</a>&nbsp;&nbsp;2018.05.31 (31/05/2018) by T. Bächler, M. Barakat, F. Diebold, S. Gutsche, M. Lange-Hegermann, V. Wagh
+PKG_OverviewLink_modules = r'''<a href="{{pkgmixerpath}}/modules.html">Modules</a>&nbsp;&nbsp;2018.08.24 (24/08/2018) by T. Bächler, M. Barakat, F. Diebold, S. Gutsche, M. Lange-Hegermann, V. Wagh
 <br />A homalg based package for the Abelian category of finitely presented modules over computable rings
 
 '''
@@ -449,12 +464,12 @@ PKG_OverviewLink_orb = r'''<a href="{{pkgmixerpath}}/orb.html">orb</a>&nbsp;&nbs
 
 '''
 
-PKG_OverviewLink_patternclass = r'''<a href="{{pkgmixerpath}}/patternclass.html">PatternClass</a>&nbsp;&nbsp;2.4.1 (28/09/2017) by R. Hoffmann, S. Linton, M. Albert
+PKG_OverviewLink_patternclass = r'''<a href="{{pkgmixerpath}}/patternclass.html">PatternClass</a>&nbsp;&nbsp;2.4.2 (24/07/2018) by R. Hoffmann, S. Linton, M. Albert
 <br />A permutation pattern class package
 
 '''
 
-PKG_OverviewLink_permut = r'''<a href="{{pkgmixerpath}}/permut.html">permut</a>&nbsp;&nbsp;2.0.1 (18/02/2018) by A. Ballester-Bolinches, E. Cosme-Llópez, R. Esteban-Romero
+PKG_OverviewLink_permut = r'''<a href="{{pkgmixerpath}}/permut.html">permut</a>&nbsp;&nbsp;2.0.3 (19/08/2018) by A. Ballester-Bolinches, E. Cosme-Llópez, R. Esteban-Romero
 <br />A package to deal with permutability in finite groups
 
 '''
@@ -489,7 +504,7 @@ PKG_OverviewLink_profiling = r'''<a href="{{pkgmixerpath}}/profiling.html">profi
 
 '''
 
-PKG_OverviewLink_qaos = r'''<a href="{{pkgmixerpath}}/qaos.html">qaos</a>&nbsp;&nbsp;1.6 (28/03/2018) by S. Freundt, S. Pauli
+PKG_OverviewLink_qaos = r'''<a href="{{pkgmixerpath}}/qaos.html">qaos</a>&nbsp;&nbsp;1.6 (28/03/2018) by S. Freundt, S. Pauli, The GAP Team
 <br />Interfacing the QaoS database from GAP
 
 '''
@@ -504,7 +519,7 @@ PKG_OverviewLink_quagroup = r'''<a href="{{pkgmixerpath}}/quagroup.html">QuaGrou
 
 '''
 
-PKG_OverviewLink_radiroot = r'''<a href="{{pkgmixerpath}}/radiroot.html">RadiRoot</a>&nbsp;&nbsp;2.8 (23/04/2018) by A. Distler
+PKG_OverviewLink_radiroot = r'''<a href="{{pkgmixerpath}}/radiroot.html">RadiRoot</a>&nbsp;&nbsp;2.8 (23/04/2018) by A. Distler, The GAP Team
 <br />Roots of a Polynomial as Radicals
 
 '''
@@ -579,12 +594,12 @@ PKG_OverviewLink_singular = r'''<a href="{{pkgmixerpath}}/singular.html">singula
 
 '''
 
-PKG_OverviewLink_sla = r'''<a href="{{pkgmixerpath}}/sla.html">SLA</a>&nbsp;&nbsp;1.4 (24/04/2018) by W. A. de Graaf
+PKG_OverviewLink_sla = r'''<a href="{{pkgmixerpath}}/sla.html">SLA</a>&nbsp;&nbsp;1.5 (25/07/2018) by W. A. de Graaf
 <br />a package for doing computations with simple Lie algebras
 
 '''
 
-PKG_OverviewLink_smallgrp = r'''<a href="{{pkgmixerpath}}/smallgrp.html">SmallGrp</a>&nbsp;&nbsp;1.3 (09/04/2018) by B. Eick, H. U. Besche, E. O'Brien
+PKG_OverviewLink_smallgrp = r'''<a href="{{pkgmixerpath}}/smallgrp.html">SmallGrp</a>&nbsp;&nbsp;1.3 (09/04/2018) by B. Eick, H. U. Besche, E. O'Brien, The GAP Team
 <br />The GAP Small Groups Library
 
 '''
@@ -599,7 +614,7 @@ PKG_OverviewLink_sonata = r'''<a href="{{pkgmixerpath}}/sonata.html">SONATA</a>&
 
 '''
 
-PKG_OverviewLink_sophus = r'''<a href="{{pkgmixerpath}}/sophus.html">Sophus</a>&nbsp;&nbsp;1.24 (09/04/2018) by C. Schneider
+PKG_OverviewLink_sophus = r'''<a href="{{pkgmixerpath}}/sophus.html">Sophus</a>&nbsp;&nbsp;1.24 (09/04/2018) by C. Schneider, The GAP Team
 <br />Computing in nilpotent Lie algebras
 
 '''
@@ -609,7 +624,7 @@ PKG_OverviewLink_spinsym = r'''<a href="{{pkgmixerpath}}/spinsym.html">SpinSym</
 
 '''
 
-PKG_OverviewLink_symbcompcc = r'''<a href="{{pkgmixerpath}}/symbcompcc.html">SymbCompCC</a>&nbsp;&nbsp;1.3 (20/03/2018) by D. Feichtenschlager
+PKG_OverviewLink_symbcompcc = r'''<a href="{{pkgmixerpath}}/symbcompcc.html">SymbCompCC</a>&nbsp;&nbsp;1.3 (20/03/2018) by D. Feichtenschlager, The GAP Team
 <br />Computing with parametrised presentations for p-groups of fixed coclass
 
 '''
@@ -634,7 +649,7 @@ PKG_OverviewLink_toricvarieties = r'''<a href="{{pkgmixerpath}}/toricvarieties.h
 
 '''
 
-PKG_OverviewLink_transgrp = r'''<a href="{{pkgmixerpath}}/transgrp.html">TransGrp</a>&nbsp;&nbsp;2.0.2 (13/11/2017) by A. Hulpke
+PKG_OverviewLink_transgrp = r'''<a href="{{pkgmixerpath}}/transgrp.html">TransGrp</a>&nbsp;&nbsp;2.0.4 (31/08/2018) by A. Hulpke
 <br />Transitive Groups Library
 
 '''
@@ -649,7 +664,7 @@ PKG_OverviewLink_unitlib = r'''<a href="{{pkgmixerpath}}/unitlib.html">UnitLib</
 
 '''
 
-PKG_OverviewLink_utils = r'''<a href="{{pkgmixerpath}}/utils.html">utils</a>&nbsp;&nbsp;0.54 (12/02/2018) by S. Gutsche, M. Horn, A. Hulpke, S. Kohl, F. Lübeck, C. D. Wensley
+PKG_OverviewLink_utils = r'''<a href="{{pkgmixerpath}}/utils.html">utils</a>&nbsp;&nbsp;0.57 (02/06/2018) by S. Gutsche, M. Horn, A. Hulpke, S. Kohl, F. Lübeck, C. D. Wensley
 <br />Utility functions in GAP
 
 '''
@@ -669,12 +684,12 @@ PKG_OverviewLink_xgap = r'''<a href="{{pkgmixerpath}}/xgap.html">XGAP</a>&nbsp;&
 
 '''
 
-PKG_OverviewLink_xmod = r'''<a href="{{pkgmixerpath}}/xmod.html">XMod</a>&nbsp;&nbsp;2.68 (01/05/2018) by C. D. Wensley, M. Alp, A. Odabas, E. O. Uslu
+PKG_OverviewLink_xmod = r'''<a href="{{pkgmixerpath}}/xmod.html">XMod</a>&nbsp;&nbsp;2.69 (20/07/2018) by C. D. Wensley, M. Alp, A. Odabas, E. O. Uslu
 <br />Crossed Modules and Cat1-Groups
 
 '''
 
-PKG_OverviewLink_xmodalg = r'''<a href="{{pkgmixerpath}}/xmodalg.html">XModAlg</a>&nbsp;&nbsp;1.16 (29/01/2018) by Z. Arvasi, A. Odabas
+PKG_OverviewLink_xmodalg = r'''<a href="{{pkgmixerpath}}/xmodalg.html">XModAlg</a>&nbsp;&nbsp;1.17 (30/08/2018) by Z. Arvasi, A. Odabas
 <br />Crossed Modules and Cat1-Algebras
 
 '''
@@ -684,7 +699,7 @@ PKG_OverviewLink_zeromqinterface = r'''<a href="{{pkgmixerpath}}/zeromqinterface
 
 '''
 
-PKG_ManualLink_4ti2interface = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-2017.10.04/doc/chap0.html">4ti2Interface</a></td><td>[<a href="{{GAPManualLink}}/pkg/4ti2Interface-2017.10.04/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>An interface to 4ti2.</td></tr>
+PKG_ManualLink_4ti2interface = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-2018.07.06/doc/chap0.html">4ti2Interface</a></td><td>[<a href="{{GAPManualLink}}/pkg/4ti2Interface-2018.07.06/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>An interface to 4ti2.</td></tr>
 '''
 
 PKG_ManualLink_ace = r'''<tr><td><a href="{{GAPManualLink}}/pkg/ace-5.2/htm/chapters.htm">ACE</a></td><td>[<a href="{{GAPManualLink}}/pkg/ace-5.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Advanced Coset Enumerator</td></tr>
@@ -711,7 +726,7 @@ PKG_ManualLink_automata = r'''<tr><td><a href="{{GAPManualLink}}/pkg/automata/do
 PKG_ManualLink_automgrp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/automgrp/htm/chapters.htm">AutomGrp</a></td><td>[<a href="{{GAPManualLink}}/pkg/automgrp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Automata Groups</td></tr>
 '''
 
-PKG_ManualLink_autpgrp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/autpgrp-1.9/htm/chapters.htm">AutPGrp</a></td><td>[<a href="{{GAPManualLink}}/pkg/autpgrp-1.9/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing the Automorphism Group of a p-Group</td></tr>
+PKG_ManualLink_autpgrp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/autpgrp-1.10/htm/chapters.htm">AutPGrp</a></td><td>[<a href="{{GAPManualLink}}/pkg/autpgrp-1.10/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing the Automorphism Group of a p-Group</td></tr>
 '''
 
 PKG_ManualLink_browse = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Browse/doc/chap0.html">Browse</a></td><td>[<a href="{{GAPManualLink}}/pkg/Browse/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ncurses interface and browsing applications</td></tr>
@@ -759,19 +774,28 @@ PKG_ManualLink_ctbllib = r'''<tr><td><a href="{{GAPManualLink}}/pkg/ctbllib/doc/
 PKG_ManualLink_cubefree = r'''<tr><td><a href="{{GAPManualLink}}/pkg/cubefree/htm/chapters.htm">Cubefree</a></td><td>[<a href="{{GAPManualLink}}/pkg/cubefree/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Constructing the groups of a given cubefree order</td></tr>
 '''
 
+PKG_ManualLink_curlinterface = r'''<tr><td><a href="{{GAPManualLink}}/pkg/curlInterface-2.0.2/doc/chap0.html">curl</a></td><td>[<a href="{{GAPManualLink}}/pkg/curlInterface-2.0.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Simple Web Access</td></tr>
+'''
+
 PKG_ManualLink_cvec = r'''<tr><td><a href="{{GAPManualLink}}/pkg/cvec-2.6.1/doc/chap0.html">cvec</a></td><td>[<a href="{{GAPManualLink}}/pkg/cvec-2.6.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Compact vectors over finite fields</td></tr>
+'''
+
+PKG_ManualLink_datastructures = r'''<tr><td><a href="{{GAPManualLink}}/pkg/datastructures-0.2.2/doc/chap0.html">datastructures</a></td><td>[<a href="{{GAPManualLink}}/pkg/datastructures-0.2.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>datastructures - GAP Data Structures</td></tr>
+'''
+
+PKG_ManualLink_deepthought = r'''<tr><td><a href="{{GAPManualLink}}/pkg/DeepThought-1.0.1/doc/chap0.html">DeepThought</a></td><td>[<a href="{{GAPManualLink}}/pkg/DeepThought-1.0.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>This package provides functions for multiplication and other computations in finitely generated nilpotent groups based on the Deep Thought algorithm.</td></tr>
 '''
 
 PKG_ManualLink_design = r'''<tr><td><a href="{{GAPManualLink}}/pkg/design/htm/chapters.htm">DESIGN</a></td><td>[<a href="{{GAPManualLink}}/pkg/design/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The Design Package for GAP</td></tr>
 '''
 
-PKG_ManualLink_digraphs = r'''<tr><td><a href="{{GAPManualLink}}/pkg/digraphs-0.12.1/doc/chap0.html">Digraphs</a></td><td>[<a href="{{GAPManualLink}}/pkg/digraphs-0.12.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Digraphs - Methods for digraphs</td></tr>
+PKG_ManualLink_digraphs = r'''<tr><td><a href="{{GAPManualLink}}/pkg/digraphs-0.12.2/doc/chap0.html">Digraphs</a></td><td>[<a href="{{GAPManualLink}}/pkg/digraphs-0.12.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Digraphs - Methods for digraphs</td></tr>
 '''
 
 PKG_ManualLink_edim = r'''<tr><td><a href="{{GAPManualLink}}/pkg/EDIM-1.3.3/doc/chap0.html">EDIM</a></td><td>[<a href="{{GAPManualLink}}/pkg/EDIM-1.3.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Elementary Divisors of Integer Matrices</td></tr>
 '''
 
-PKG_ManualLink_example = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Example-4.1.0/doc/chap0.html">Example</a></td><td>[<a href="{{GAPManualLink}}/pkg/Example-4.1.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Example/Template of a GAP Package</td></tr>
+PKG_ManualLink_example = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Example-4.1.1/doc/chap0.html">Example</a></td><td>[<a href="{{GAPManualLink}}/pkg/Example-4.1.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Example/Template of a GAP Package</td></tr>
 '''
 
 PKG_ManualLink_examplesforhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/ExamplesForHomalg-2018.05.29/doc/chap0.html">ExamplesForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/ExamplesForHomalg-2018.05.29/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Examples for the GAP Package homalg</td></tr>
@@ -811,7 +835,7 @@ PKG_ManualLink_gapdoc = r'''<tr><td><a href="{{GAPManualLink}}/pkg/GAPDoc-1.6.1/
 PKG_ManualLink_gauss = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Gauss-2018.04.03/doc/chap0.html">Gauss</a></td><td>[<a href="{{GAPManualLink}}/pkg/Gauss-2018.04.03/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Extended Gauss functionality for GAP</td></tr>
 '''
 
-PKG_ManualLink_gaussforhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/GaussForHomalg-2018.02.05/doc/chap0.html">GaussForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/GaussForHomalg-2018.02.05/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Gauss functionality for the homalg project</td></tr>
+PKG_ManualLink_gaussforhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/GaussForHomalg-2018.06.01/doc/chap0.html">GaussForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/GaussForHomalg-2018.06.01/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Gauss functionality for the homalg project</td></tr>
 '''
 
 PKG_ManualLink_gbnp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/gbnp/doc/chap0.html">GBNP</a></td><td>[<a href="{{GAPManualLink}}/pkg/gbnp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Non-commutative Gröbner bases</td></tr>
@@ -835,7 +859,7 @@ PKG_ManualLink_grape = r'''<tr><td><a href="{{GAPManualLink}}/pkg/grape/htm/chap
 PKG_ManualLink_groupoids = r'''<tr><td><a href="{{GAPManualLink}}/pkg/groupoids-1.55/doc/chap0.html">groupoids</a></td><td>[<a href="{{GAPManualLink}}/pkg/groupoids-1.55/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Finite Groupoids and Graphs of Groups</td></tr>
 '''
 
-PKG_ManualLink_grpconst = r'''<tr><td><a href="{{GAPManualLink}}/pkg/grpconst-2.6/htm/chapters.htm">GrpConst</a></td><td>[<a href="{{GAPManualLink}}/pkg/grpconst-2.6/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Constructing the Groups of a Given Order</td></tr>
+PKG_ManualLink_grpconst = r'''<tr><td><a href="{{GAPManualLink}}/pkg/grpconst-2.6.1/htm/chapters.htm">GrpConst</a></td><td>[<a href="{{GAPManualLink}}/pkg/grpconst-2.6.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Constructing the Groups of a Given Order</td></tr>
 '''
 
 PKG_ManualLink_guarana = r'''<tr><td><a href="{{GAPManualLink}}/pkg/guarana/doc/chap0.html">Guarana</a></td><td>[<a href="{{GAPManualLink}}/pkg/guarana/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Applications of Lie methods for computations with infinite polycyclic groups</td></tr>
@@ -869,7 +893,7 @@ PKG_ManualLink_idrel = r'''<tr><td><a href="{{GAPManualLink}}/pkg/idrel-2.41/doc
 PKG_ManualLink_intpic = r'''<tr><td><a href="{{GAPManualLink}}/pkg/IntPic-0.2.3/doc/chap0.html">IntPic</a></td><td>[<a href="{{GAPManualLink}}/pkg/IntPic-0.2.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>IntPic, a GAP package for drawing integers</td></tr>
 '''
 
-PKG_ManualLink_io = r'''<tr><td><a href="{{GAPManualLink}}/pkg/io-4.5.1/doc/chap0.html">IO</a></td><td>[<a href="{{GAPManualLink}}/pkg/io-4.5.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Bindings for low level C library I/O routines</td></tr>
+PKG_ManualLink_io = r'''<tr><td><a href="{{GAPManualLink}}/pkg/io-4.5.2/doc/chap0.html">IO</a></td><td>[<a href="{{GAPManualLink}}/pkg/io-4.5.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Bindings for low level C library I/O routines</td></tr>
 '''
 
 PKG_ManualLink_io_forhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/IO_ForHomalg-2017.09.02/doc/chap0.html">IO_ForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/IO_ForHomalg-2017.09.02/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>IO capabilities for the homalg project</td></tr>
@@ -884,7 +908,7 @@ PKG_ManualLink_itc = r'''<tr><td><a href="{{GAPManualLink}}/pkg/itc-1.5/htm/chap
 PKG_ManualLink_json = r'''<tr><td><a href="{{GAPManualLink}}/pkg/json-2.0.0/doc/chap0.html">json</a></td><td>[<a href="{{GAPManualLink}}/pkg/json-2.0.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Reading and Writing JSON</td></tr>
 '''
 
-PKG_ManualLink_jupyterkernel = r'''<tr><td><a href="{{GAPManualLink}}/pkg/JupyterKernel-0.99999/doc/chap0.html">JupyterKernel</a></td><td>[<a href="{{GAPManualLink}}/pkg/JupyterKernel-0.99999/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Jupyter kernel written in GAP</td></tr>
+PKG_ManualLink_jupyterkernel = r'''<tr><td><a href="{{GAPManualLink}}/pkg/JupyterKernel-0.999999/doc/chap0.html">JupyterKernel</a></td><td>[<a href="{{GAPManualLink}}/pkg/JupyterKernel-0.999999/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Jupyter kernel written in GAP</td></tr>
 '''
 
 PKG_ManualLink_kan = r'''<tr><td><a href="{{GAPManualLink}}/pkg/kan-1.28/doc/chap0.html">Kan</a></td><td>[<a href="{{GAPManualLink}}/pkg/kan-1.28/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with Kan extensions</td></tr>
@@ -926,7 +950,7 @@ PKG_ManualLink_mapclass = r'''<tr><td><a href="{{GAPManualLink}}/pkg/mapclass/do
 PKG_ManualLink_matgrp = r'''<tr><td><a href="{{GAPManualLink}}/pkg/matgrp/htm/chapters.htm">matgrp</a></td><td>[<a href="{{GAPManualLink}}/pkg/matgrp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Matrix Group Interface</td></tr>
 '''
 
-PKG_ManualLink_matricesforhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/MatricesForHomalg-2018.06.02/doc/chap0.html">MatricesForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/MatricesForHomalg-2018.06.02/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Lazy evaluated matrices with clever operations for the homalg project</td></tr>
+PKG_ManualLink_matricesforhomalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/MatricesForHomalg-2018.08.24/doc/chap0.html">MatricesForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/MatricesForHomalg-2018.08.24/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Lazy evaluated matrices with clever operations for the homalg project</td></tr>
 '''
 
 PKG_ManualLink_modisom = r'''<tr><td><a href="{{GAPManualLink}}/pkg/modisom/htm/chapters.htm">ModIsom</a></td><td>[<a href="{{GAPManualLink}}/pkg/modisom/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with nilpotent associative algebras</td></tr>
@@ -935,7 +959,7 @@ PKG_ManualLink_modisom = r'''<tr><td><a href="{{GAPManualLink}}/pkg/modisom/htm/
 PKG_ManualLink_modulepresentationsforcap = r'''<tr><td><a href="{{GAPManualLink}}/pkg/ModulePresentationsForCAP-2017.09.09/doc/chap0.html">ModulePresentationsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/ModulePresentationsForCAP-2017.09.09/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Category R-pres for CAP</td></tr>
 '''
 
-PKG_ManualLink_modules = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Modules-2018.05.31/doc/chap0.html">Modules</a></td><td>[<a href="{{GAPManualLink}}/pkg/Modules-2018.05.31/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A homalg based package for the Abelian category of finitely presented modules over computable rings</td></tr>
+PKG_ManualLink_modules = r'''<tr><td><a href="{{GAPManualLink}}/pkg/Modules-2018.08.24/doc/chap0.html">Modules</a></td><td>[<a href="{{GAPManualLink}}/pkg/Modules-2018.08.24/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A homalg based package for the Abelian category of finitely presented modules over computable rings</td></tr>
 '''
 
 PKG_ManualLink_nilmat = r'''<tr><td><a href="{{GAPManualLink}}/pkg/nilmat-1.3/htm/chapters.htm">Nilmat</a></td><td>[<a href="{{GAPManualLink}}/pkg/nilmat-1.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computation with nilpotent matrix groups</td></tr>
@@ -956,10 +980,10 @@ PKG_ManualLink_openmath = r'''<tr><td><a href="{{GAPManualLink}}/pkg/OpenMath-11
 PKG_ManualLink_orb = r'''<tr><td><a href="{{GAPManualLink}}/pkg/orb-4.8.0/doc/chap0.html">orb</a></td><td>[<a href="{{GAPManualLink}}/pkg/orb-4.8.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Methods to enumerate orbits</td></tr>
 '''
 
-PKG_ManualLink_patternclass = r'''<tr><td><a href="{{GAPManualLink}}/pkg/PatternClass-2.4.1/doc/chap0.html">PatternClass</a></td><td>[<a href="{{GAPManualLink}}/pkg/PatternClass-2.4.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A permutation pattern class package</td></tr>
+PKG_ManualLink_patternclass = r'''<tr><td><a href="{{GAPManualLink}}/pkg/PatternClass-2.4.2/doc/chap0.html">PatternClass</a></td><td>[<a href="{{GAPManualLink}}/pkg/PatternClass-2.4.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A permutation pattern class package</td></tr>
 '''
 
-PKG_ManualLink_permut = r'''<tr><td><a href="{{GAPManualLink}}/pkg/permut-2.0.1/doc/chap0.html">PERMUT</a></td><td>[<a href="{{GAPManualLink}}/pkg/permut-2.0.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>PERMUT: A package to deal with permutability in finite groups</td></tr>
+PKG_ManualLink_permut = r'''<tr><td><a href="{{GAPManualLink}}/pkg/permut-2.0.3/doc/chap0.html">PERMUT</a></td><td>[<a href="{{GAPManualLink}}/pkg/permut-2.0.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>PERMUT: A package to deal with permutability in finite groups</td></tr>
 '''
 
 PKG_ManualLink_polenta = r'''<tr><td><a href="{{GAPManualLink}}/pkg/polenta-1.3.8/doc/chap0.html">Polenta</a></td><td>[<a href="{{GAPManualLink}}/pkg/polenta-1.3.8/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Polycyclic presentations for matrix groups</td></tr>
@@ -1077,7 +1101,7 @@ PKG_ManualLink_unipot = r'''<tr><td><a href="{{GAPManualLink}}/pkg/unipot-1.4/ht
 PKG_ManualLink_unitlib = r'''<tr><td><a href="{{GAPManualLink}}/pkg/unitlib-4.0.0/doc/chap0.html">UnitLib</a></td><td>[<a href="{{GAPManualLink}}/pkg/unitlib-4.0.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The library of normalized unit groups of modular group algebras</td></tr>
 '''
 
-PKG_ManualLink_utils = r'''<tr><td><a href="{{GAPManualLink}}/pkg/utils-0.54/doc/chap0.html">Utils</a></td><td>[<a href="{{GAPManualLink}}/pkg/utils-0.54/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Utility functions in GAP</td></tr>
+PKG_ManualLink_utils = r'''<tr><td><a href="{{GAPManualLink}}/pkg/utils-0.57/doc/chap0.html">Utils</a></td><td>[<a href="{{GAPManualLink}}/pkg/utils-0.57/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Utility functions in GAP</td></tr>
 '''
 
 PKG_ManualLink_uuid = r'''<tr><td><a href="{{GAPManualLink}}/pkg/uuid-0.5/doc/chap0.html">uuid</a></td><td>[<a href="{{GAPManualLink}}/pkg/uuid-0.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>RFC 4122 UUIDs</td></tr>
@@ -1089,16 +1113,16 @@ PKG_ManualLink_wedderga = r'''<tr><td><a href="{{GAPManualLink}}/pkg/wedderga-4.
 PKG_ManualLink_xgap = r'''<tr><td><a href="{{GAPManualLink}}/pkg/xgap-4.27/htm/chapters.htm">XGAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/xgap-4.27/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>XGAP - a graphical user interface for GAP</td></tr>
 '''
 
-PKG_ManualLink_xmod = r'''<tr><td><a href="{{GAPManualLink}}/pkg/XMod-2.68/doc/chap0.html">XMod</a></td><td>[<a href="{{GAPManualLink}}/pkg/XMod-2.68/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Groups in GAP</td></tr>
+PKG_ManualLink_xmod = r'''<tr><td><a href="{{GAPManualLink}}/pkg/XMod-2.69/doc/chap0.html">XMod</a></td><td>[<a href="{{GAPManualLink}}/pkg/XMod-2.69/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Groups in GAP</td></tr>
 '''
 
-PKG_ManualLink_xmodalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/XModAlg-1.16/doc/chap0.html">XModAlg</a></td><td>[<a href="{{GAPManualLink}}/pkg/XModAlg-1.16/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Algebras in GAP</td></tr>
+PKG_ManualLink_xmodalg = r'''<tr><td><a href="{{GAPManualLink}}/pkg/XModAlg-1.17/doc/chap0.html">XModAlg</a></td><td>[<a href="{{GAPManualLink}}/pkg/XModAlg-1.17/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Algebras in GAP</td></tr>
 '''
 
 PKG_ManualLink_zeromqinterface = r'''<tr><td><a href="{{GAPManualLink}}/pkg/ZeroMQInterface-0.10/doc/chap0.html">ZeroMQInterface</a></td><td>[<a href="{{GAPManualLink}}/pkg/ZeroMQInterface-0.10/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ZeroMQ bindings for GAP</td></tr>
 '''
 
-PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-2017.10.04/doc/chap0.html">4ti2Interface</a></td><td>[<a href="{{GAPManualLink}}/pkg/4ti2Interface-2017.10.04/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>An interface to 4ti2.</td></tr>
+PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-2018.07.06/doc/chap0.html">4ti2Interface</a></td><td>[<a href="{{GAPManualLink}}/pkg/4ti2Interface-2018.07.06/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>An interface to 4ti2.</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/ace-5.2/htm/chapters.htm">ACE</a></td><td>[<a href="{{GAPManualLink}}/pkg/ace-5.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Advanced Coset Enumerator</td></tr>
 
@@ -1116,7 +1140,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/automgrp/htm/chapters.htm">AutomGrp</a></td><td>[<a href="{{GAPManualLink}}/pkg/automgrp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Automata Groups</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/autpgrp-1.9/htm/chapters.htm">AutPGrp</a></td><td>[<a href="{{GAPManualLink}}/pkg/autpgrp-1.9/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing the Automorphism Group of a p-Group</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/autpgrp-1.10/htm/chapters.htm">AutPGrp</a></td><td>[<a href="{{GAPManualLink}}/pkg/autpgrp-1.10/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing the Automorphism Group of a p-Group</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/Browse/doc/chap0.html">Browse</a></td><td>[<a href="{{GAPManualLink}}/pkg/Browse/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ncurses interface and browsing applications</td></tr>
 
@@ -1148,15 +1172,21 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/cubefree/htm/chapters.htm">Cubefree</a></td><td>[<a href="{{GAPManualLink}}/pkg/cubefree/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Constructing the groups of a given cubefree order</td></tr>
 
+<tr><td><a href="{{GAPManualLink}}/pkg/curlInterface-2.0.2/doc/chap0.html">curl</a></td><td>[<a href="{{GAPManualLink}}/pkg/curlInterface-2.0.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Simple Web Access</td></tr>
+
 <tr><td><a href="{{GAPManualLink}}/pkg/cvec-2.6.1/doc/chap0.html">cvec</a></td><td>[<a href="{{GAPManualLink}}/pkg/cvec-2.6.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Compact vectors over finite fields</td></tr>
+
+<tr><td><a href="{{GAPManualLink}}/pkg/datastructures-0.2.2/doc/chap0.html">datastructures</a></td><td>[<a href="{{GAPManualLink}}/pkg/datastructures-0.2.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>datastructures - GAP Data Structures</td></tr>
+
+<tr><td><a href="{{GAPManualLink}}/pkg/DeepThought-1.0.1/doc/chap0.html">DeepThought</a></td><td>[<a href="{{GAPManualLink}}/pkg/DeepThought-1.0.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>This package provides functions for multiplication and other computations in finitely generated nilpotent groups based on the Deep Thought algorithm.</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/design/htm/chapters.htm">DESIGN</a></td><td>[<a href="{{GAPManualLink}}/pkg/design/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The Design Package for GAP</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/digraphs-0.12.1/doc/chap0.html">Digraphs</a></td><td>[<a href="{{GAPManualLink}}/pkg/digraphs-0.12.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Digraphs - Methods for digraphs</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/digraphs-0.12.2/doc/chap0.html">Digraphs</a></td><td>[<a href="{{GAPManualLink}}/pkg/digraphs-0.12.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Digraphs - Methods for digraphs</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/EDIM-1.3.3/doc/chap0.html">EDIM</a></td><td>[<a href="{{GAPManualLink}}/pkg/EDIM-1.3.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Elementary Divisors of Integer Matrices</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/Example-4.1.0/doc/chap0.html">Example</a></td><td>[<a href="{{GAPManualLink}}/pkg/Example-4.1.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Example/Template of a GAP Package</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/Example-4.1.1/doc/chap0.html">Example</a></td><td>[<a href="{{GAPManualLink}}/pkg/Example-4.1.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Example/Template of a GAP Package</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/ExamplesForHomalg-2018.05.29/doc/chap0.html">ExamplesForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/ExamplesForHomalg-2018.05.29/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Examples for the GAP Package homalg</td></tr>
 
@@ -1183,7 +1213,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/Gauss-2018.04.03/doc/chap0.html">Gauss</a></td><td>[<a href="{{GAPManualLink}}/pkg/Gauss-2018.04.03/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Extended Gauss functionality for GAP</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/GaussForHomalg-2018.02.05/doc/chap0.html">GaussForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/GaussForHomalg-2018.02.05/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Gauss functionality for the homalg project</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/GaussForHomalg-2018.06.01/doc/chap0.html">GaussForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/GaussForHomalg-2018.06.01/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Gauss functionality for the homalg project</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/gbnp/doc/chap0.html">GBNP</a></td><td>[<a href="{{GAPManualLink}}/pkg/gbnp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Non-commutative Gröbner bases</td></tr>
 
@@ -1199,7 +1229,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/groupoids-1.55/doc/chap0.html">groupoids</a></td><td>[<a href="{{GAPManualLink}}/pkg/groupoids-1.55/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Finite Groupoids and Graphs of Groups</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/grpconst-2.6/htm/chapters.htm">GrpConst</a></td><td>[<a href="{{GAPManualLink}}/pkg/grpconst-2.6/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Constructing the Groups of a Given Order</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/grpconst-2.6.1/htm/chapters.htm">GrpConst</a></td><td>[<a href="{{GAPManualLink}}/pkg/grpconst-2.6.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Constructing the Groups of a Given Order</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/guarana/doc/chap0.html">Guarana</a></td><td>[<a href="{{GAPManualLink}}/pkg/guarana/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Applications of Lie methods for computations with infinite polycyclic groups</td></tr>
 
@@ -1222,7 +1252,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/IntPic-0.2.3/doc/chap0.html">IntPic</a></td><td>[<a href="{{GAPManualLink}}/pkg/IntPic-0.2.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>IntPic, a GAP package for drawing integers</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/io-4.5.1/doc/chap0.html">IO</a></td><td>[<a href="{{GAPManualLink}}/pkg/io-4.5.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Bindings for low level C library I/O routines</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/io-4.5.2/doc/chap0.html">IO</a></td><td>[<a href="{{GAPManualLink}}/pkg/io-4.5.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Bindings for low level C library I/O routines</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/IO_ForHomalg-2017.09.02/doc/chap0.html">IO_ForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/IO_ForHomalg-2017.09.02/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>IO capabilities for the homalg project</td></tr>
 
@@ -1232,7 +1262,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/json-2.0.0/doc/chap0.html">json</a></td><td>[<a href="{{GAPManualLink}}/pkg/json-2.0.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Reading and Writing JSON</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/JupyterKernel-0.99999/doc/chap0.html">JupyterKernel</a></td><td>[<a href="{{GAPManualLink}}/pkg/JupyterKernel-0.99999/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Jupyter kernel written in GAP</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/JupyterKernel-0.999999/doc/chap0.html">JupyterKernel</a></td><td>[<a href="{{GAPManualLink}}/pkg/JupyterKernel-0.999999/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Jupyter kernel written in GAP</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/kan-1.28/doc/chap0.html">Kan</a></td><td>[<a href="{{GAPManualLink}}/pkg/kan-1.28/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with Kan extensions</td></tr>
 
@@ -1260,13 +1290,13 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/matgrp/htm/chapters.htm">matgrp</a></td><td>[<a href="{{GAPManualLink}}/pkg/matgrp/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Matrix Group Interface</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/MatricesForHomalg-2018.06.02/doc/chap0.html">MatricesForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/MatricesForHomalg-2018.06.02/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Lazy evaluated matrices with clever operations for the homalg project</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/MatricesForHomalg-2018.08.24/doc/chap0.html">MatricesForHomalg</a></td><td>[<a href="{{GAPManualLink}}/pkg/MatricesForHomalg-2018.08.24/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Lazy evaluated matrices with clever operations for the homalg project</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/modisom/htm/chapters.htm">ModIsom</a></td><td>[<a href="{{GAPManualLink}}/pkg/modisom/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computing with nilpotent associative algebras</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/ModulePresentationsForCAP-2017.09.09/doc/chap0.html">ModulePresentationsForCAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/ModulePresentationsForCAP-2017.09.09/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Category R-pres for CAP</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/Modules-2018.05.31/doc/chap0.html">Modules</a></td><td>[<a href="{{GAPManualLink}}/pkg/Modules-2018.05.31/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A homalg based package for the Abelian category of finitely presented modules over computable rings</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/Modules-2018.08.24/doc/chap0.html">Modules</a></td><td>[<a href="{{GAPManualLink}}/pkg/Modules-2018.08.24/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A homalg based package for the Abelian category of finitely presented modules over computable rings</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/nilmat-1.3/htm/chapters.htm">Nilmat</a></td><td>[<a href="{{GAPManualLink}}/pkg/nilmat-1.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Computation with nilpotent matrix groups</td></tr>
 
@@ -1280,9 +1310,9 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/orb-4.8.0/doc/chap0.html">orb</a></td><td>[<a href="{{GAPManualLink}}/pkg/orb-4.8.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Methods to enumerate orbits</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/PatternClass-2.4.1/doc/chap0.html">PatternClass</a></td><td>[<a href="{{GAPManualLink}}/pkg/PatternClass-2.4.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A permutation pattern class package</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/PatternClass-2.4.2/doc/chap0.html">PatternClass</a></td><td>[<a href="{{GAPManualLink}}/pkg/PatternClass-2.4.2/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>A permutation pattern class package</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/permut-2.0.1/doc/chap0.html">PERMUT</a></td><td>[<a href="{{GAPManualLink}}/pkg/permut-2.0.1/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>PERMUT: A package to deal with permutability in finite groups</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/permut-2.0.3/doc/chap0.html">PERMUT</a></td><td>[<a href="{{GAPManualLink}}/pkg/permut-2.0.3/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>PERMUT: A package to deal with permutability in finite groups</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/polenta-1.3.8/doc/chap0.html">Polenta</a></td><td>[<a href="{{GAPManualLink}}/pkg/polenta-1.3.8/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Polycyclic presentations for matrix groups</td></tr>
 
@@ -1361,7 +1391,7 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/unitlib-4.0.0/doc/chap0.html">UnitLib</a></td><td>[<a href="{{GAPManualLink}}/pkg/unitlib-4.0.0/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The library of normalized unit groups of modular group algebras</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/utils-0.54/doc/chap0.html">Utils</a></td><td>[<a href="{{GAPManualLink}}/pkg/utils-0.54/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Utility functions in GAP</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/utils-0.57/doc/chap0.html">Utils</a></td><td>[<a href="{{GAPManualLink}}/pkg/utils-0.57/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Utility functions in GAP</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/uuid-0.5/doc/chap0.html">uuid</a></td><td>[<a href="{{GAPManualLink}}/pkg/uuid-0.5/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>RFC 4122 UUIDs</td></tr>
 
@@ -1369,20 +1399,20 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 
 <tr><td><a href="{{GAPManualLink}}/pkg/xgap-4.27/htm/chapters.htm">XGAP</a></td><td>[<a href="{{GAPManualLink}}/pkg/xgap-4.27/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>XGAP - a graphical user interface for GAP</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/XMod-2.68/doc/chap0.html">XMod</a></td><td>[<a href="{{GAPManualLink}}/pkg/XMod-2.68/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Groups in GAP</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/XMod-2.69/doc/chap0.html">XMod</a></td><td>[<a href="{{GAPManualLink}}/pkg/XMod-2.69/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Groups in GAP</td></tr>
 
-<tr><td><a href="{{GAPManualLink}}/pkg/XModAlg-1.16/doc/chap0.html">XModAlg</a></td><td>[<a href="{{GAPManualLink}}/pkg/XModAlg-1.16/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Algebras in GAP</td></tr>
+<tr><td><a href="{{GAPManualLink}}/pkg/XModAlg-1.17/doc/chap0.html">XModAlg</a></td><td>[<a href="{{GAPManualLink}}/pkg/XModAlg-1.17/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Crossed Modules and Cat1-Algebras in GAP</td></tr>
 
 <tr><td><a href="{{GAPManualLink}}/pkg/ZeroMQInterface-0.10/doc/chap0.html">ZeroMQInterface</a></td><td>[<a href="{{GAPManualLink}}/pkg/ZeroMQInterface-0.10/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ZeroMQ bindings for GAP</td></tr>
 '''
 
 PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersion'/>" ], 
         [ "GAPLibrary", "<mixer var='GAPLibraryVersion'/>" ], 
-        [ "4ti2Interface", "2017.10.04" ], [ "ACE", "5.2" ], 
+        [ "4ti2Interface", "2018.07.06" ], [ "ACE", "5.2" ], 
         [ "AClib", "1.3" ], [ "Alnuth", "3.1.0" ], 
         [ "ANUPQ", "3.2" ], [ "AtlasRep", "1.5.1" ], 
         [ "AutoDoc", "2018.02.14" ], [ "Automata", "1.13" ], 
-        [ "AutomGrp", "1.3" ], [ "AutPGrp", "1.9" ], 
+        [ "AutomGrp", "1.3" ], [ "AutPGrp", "1.10" ], 
         [ "Browse", "1.8.8" ], [ "CAP", "2017.09.25" ], 
         [ "Carat", "2.2.2" ], [ "Circle", "1.6.1" ], 
         [ "cohomolo", "1.6.6" ], [ "Congruence", "1.2.2" ], 
@@ -1390,10 +1420,11 @@ PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersi
         [ "Crime", "1.4" ], [ "CRISP", "1.4.4" ], 
         [ "crypting", "0.8" ], [ "Cryst", "4.1.17" ], 
         [ "CrystCat", "1.1.8" ], [ "CTblLib", "1.2.2" ], 
-        [ "Cubefree", "1.17" ], [ "cvec", "2.6.1" ], 
-        [ "DESIGN", "1.6" ], 
-        [ "Digraphs", "0.12.1" ], [ "EDIM", "1.3.3" ], 
-        [ "Example", "4.1.0" ], 
+        [ "Cubefree", "1.17" ], [ "curlInterface", "2.0.2" ], 
+        [ "cvec", "2.6.1" ], [ "datastructures", "0.2.2" ], 
+        [ "DeepThought", "1.0.1" ], [ "DESIGN", "1.6" ], 
+        [ "Digraphs", "0.12.2" ], [ "EDIM", "1.3.3" ], 
+        [ "Example", "4.1.1" ], 
         [ "ExamplesForHomalg", "2018.05.29" ], 
         [ "FactInt", "1.6.2" ], [ "FGA", "1.4.0" ], 
         [ "FinInG", "1.4.1" ], [ "float", "0.9.1" ], 
@@ -1401,22 +1432,22 @@ PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersi
         [ "FPLSA", "1.2.2" ], [ "FR", "2.4.5" ], 
         [ "fwtree", "1.1" ], [ "GAPDoc", "1.6.1" ], 
         [ "Gauss", "2018.04.03" ], 
-        [ "GaussForHomalg", "2018.02.05" ], 
+        [ "GaussForHomalg", "2018.06.01" ], 
         [ "GBNP", "1.0.3" ], 
         [ "GeneralizedMorphismsForCAP", "2017.09.09" ], 
         [ "genss", "1.6.5" ], 
         [ "GradedModules", "2018.02.04" ], 
         [ "GradedRingForHomalg", "2018.02.04" ], 
         [ "GRAPE", "4.8" ], [ "groupoids", "1.55" ], 
-        [ "GrpConst", "2.6" ], [ "Guarana", "0.94" ], 
+        [ "GrpConst", "2.6.1" ], [ "Guarana", "0.94" ], 
         [ "GUAVA", "3.14" ], [ "HAP", "1.12.6" ], 
         [ "HAPcryst", "0.1.11" ], [ "hecke", "1.4" ], 
         [ "HeLP", "3.3" ], [ "homalg", "2017.10.26" ], 
         [ "HomalgToCAS", "2018.06.15" ], [ "idrel", "2.41" ], 
-        [ "IntPic", "0.2.3" ], [ "IO", "4.5.1" ], 
+        [ "IntPic", "0.2.3" ], [ "IO", "4.5.2" ], 
         [ "IO_ForHomalg", "2017.09.02" ], 
         [ "IRREDSOL", "1.4" ], [ "ITC", "1.5" ], 
-        [ "json", "2.0.0" ], [ "JupyterKernel", "0.99999" ], 
+        [ "json", "2.0.0" ], [ "JupyterKernel", "0.999999" ], 
         [ "kan", "1.28" ], [ "kbmag", "1.5.5" ], 
         [ "LAGUNA", "3.9.0" ], [ "LieAlgDB", "2.2" ], 
         [ "LiePRing", "1.9" ], [ "LieRing", "2.3" ], 
@@ -1425,14 +1456,14 @@ PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersi
         [ "LocalizeRingForHomalg", "2018.02.04" ], 
         [ "loops", "3.4.0" ], [ "lpres", "0.4.3" ], 
         [ "MapClass", "1.2" ], [ "matgrp", "0.4" ], 
-        [ "MatricesForHomalg", "2018.06.02" ], 
+        [ "MatricesForHomalg", "2018.08.24" ], 
         [ "ModIsom", "2.3.3" ], 
         [ "ModulePresentationsForCAP", "2017.09.09" ], 
-        [ "Modules", "2018.05.31" ], [ "Nilmat", "1.3" ], 
+        [ "Modules", "2018.08.24" ], [ "Nilmat", "1.3" ], 
         [ "NormalizInterface", "1.0.2" ], [ "nq", "2.5.3" ], 
         [ "NumericalSgps", "1.1.8" ], [ "OpenMath", "11.4.2" ], 
-        [ "orb", "4.8.0" ], [ "PatternClass", "2.4.1" ], 
-        [ "permut", "2.0.1" ], [ "Polenta", "1.3.8" ], 
+        [ "orb", "4.8.0" ], [ "PatternClass", "2.4.2" ], 
+        [ "permut", "2.0.3" ], [ "Polenta", "1.3.8" ], 
         [ "Polycyclic", "2.14" ], 
         [ "PolymakeInterface", "2015.01.26" ], 
         [ "polymaking", "0.8.1" ], [ "PrimGrp", "3.3.1" ], 
@@ -1446,7 +1477,7 @@ PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersi
         [ "SCO", "2017.09.10" ], [ "SCSCP", "2.2.3" ], 
         [ "Semigroups", "3.0.16" ], [ "SglPPow", "2.1" ], 
         [ "SgpViz", "0.999.1" ], [ "simpcomp", "2.1.8" ], 
-        [ "singular", "12.04.28" ], [ "SLA", "1.4" ], 
+        [ "singular", "12.04.28" ], [ "SLA", "1.5" ], 
         [ "SmallGrp", "1.3" ], [ "Smallsemi", "0.6.11" ], 
         [ "SONATA", "2.8" ], [ "Sophus", "1.24" ], 
         [ "SpinSym", "1.5" ], [ "SymbCompCC", "1.3" ], 
@@ -1454,10 +1485,10 @@ PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersi
         [ "ToolsForHomalg", "2018.05.22" ], 
         [ "Toric", "1.9.4" ], 
         [ "ToricVarieties", "2012.12.22" ], 
-        [ "TransGrp", "2.0.2" ], [ "Unipot", "1.4" ], 
-        [ "UnitLib", "4.0.0" ], [ "utils", "0.54" ], 
+        [ "TransGrp", "2.0.4" ], [ "Unipot", "1.4" ], 
+        [ "UnitLib", "4.0.0" ], [ "utils", "0.57" ], 
         [ "uuid", "0.5" ], [ "Wedderga", "4.9.3" ], 
-        [ "XGAP", "4.27" ], [ "XMod", "2.68" ], 
-        [ "XModAlg", "1.16" ], [ "ZeroMQInterface", "0.10" ], 
+        [ "XGAP", "4.27" ], [ "XMod", "2.69" ], 
+        [ "XModAlg", "1.17" ], [ "ZeroMQInterface", "0.10" ], 
 '''
 
