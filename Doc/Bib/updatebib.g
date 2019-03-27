@@ -134,10 +134,10 @@ od;
 mathrev := Union( 
   MRNumbersFromMathSciNet( "ReviewText", 
     [ "www.gap", "gap-system.org", "GAP system", "GAP manual", "GAP4", "GAP3" ], 
-    [ 1986 .. 2018 ] ),
+    [ 1986 .. 2019 ] ),
   MRNumbersFromMathSciNet( "References", 
     [ "GAP system", "GAP manual", "GAP4", "GAP3" ], 
-    [ 1986 .. 2018 ] )
+    [ 1986 .. 2019 ] )
   );  
 return Filtered( mathrev, w -> (not w in ourmrno) and (not w in GAPIgnoreMRnumbers) );
 end;
@@ -146,7 +146,7 @@ end;
 CheckMathSciNetForUpdates:=function()
 #
 # The function retrieves all MathSciNet entries citing "www.gap" from 
-# 1986 till 2018.
+# 1986 till 2019.
 #
 # We use "www.gap" in references to cover our old and new website addresses.
 # This covers the majority of GAP citations. There might be several other 
@@ -158,7 +158,7 @@ CheckMathSciNetForUpdates:=function()
 #
 local mathrev, ourbib, duplicates, ourmrno, ourlabel, b, nr, pos, searchres,
 entry, suggestions, bib, newmrno, newlist, context, w;
-mathrev := MRNumbersFromMathSciNet( "References", [ "www.gap", "gap-system.org" ], [ 1986 .. 2018 ] );
+mathrev := MRNumbersFromMathSciNet( "References", [ "www.gap", "gap-system.org" ], [ 1986 .. 2019 ] );
 Print( "Reading the GAP bibliography ... \n" );
 ourbib:=ParseBibFiles("gap-published.bib")[1];;
 Print( "Checking for multiple labels ... \n");

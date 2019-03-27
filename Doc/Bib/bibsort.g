@@ -1,4 +1,4 @@
-years:=[1987..2018];
+years:=[1987..2019];
 
 bib := ParseBibFiles("gap-publishednicer.bib")[1];;
 Print( "Loaded ", Length(bib), " records\n");
