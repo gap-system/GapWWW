@@ -67,7 +67,7 @@ end;
 bib2niceandhtml := function(name, header, subheader)
   local i, ii, bib, fh, out, a, b, years, counts, pos, flag, 
         mscreport, bstr, str, bad;
-  years:=[1987..2018];
+  years:=[1987..2019];
   bstr := StringFile(Concatenation(name, ".bib"));
   bstr := HeuristicTranslationsLaTeX2XML.Apply(bstr);
   bib := ParseBibStrings(StringFile("gap-head.bib"), bstr);
@@ -239,3 +239,5 @@ Concatenation( "The GAP bibliography was partially obtained using the ",
 Exec("echo '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%.' >> gap-publishednicer.bib");
 Exec("echo '%The GAP bibliography was partially obtained using the MathSciNet database.' >> gap-publishednicer.bib");
 Exec("echo '%We acknowledge the American Mathematical Society for giving us such opportunity.' >> gap-publishednicer.bib");
+
+QUIT;
