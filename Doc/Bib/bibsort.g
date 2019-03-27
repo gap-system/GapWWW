@@ -1,6 +1,6 @@
 years:=[1987..2019];
 
-bib := ParseBibFiles("gap-published.bib")[1];;
+bib := ParseBibFiles("gap-publishednicer.bib")[1];;
 Print( "Loaded ", Length(bib), " records\n");
 # no need to sort the records - in this bib-file they are already sorted 
 
@@ -119,4 +119,4 @@ for y in msccodes do
   fi;
 od;
 
-
+QUIT;
