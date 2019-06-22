@@ -8,7 +8,7 @@ data_libs:=["aclib","atlasrep","crystcat","ctbllib",
 projects := rec(
 
 cap := SortedList(List([ "GeneralizedMorphismsForCAP", "LinearAlgebraForCAP",
-"ModulePresentationsForCAP" ],LowercaseString)),
+"ModulePresentationsForCAP", "MonoidalCategories" ],LowercaseString)),
 
 homalg := SortedList(List([ "ExamplesForHomalg", "GaussForHomalg", "GradedModules",
 "GradedRingForHomalg", "HomalgToCAS", "IO_ForHomalg", "LocalizeRingForHomalg",
