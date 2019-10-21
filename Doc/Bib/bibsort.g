@@ -56,7 +56,7 @@ for y in Concatenation(years,["noyear"]) do
   AppendTo( output,"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
   AppendTo( output,"<mixer template=\"gw.tmpl\">\n");
   AppendTo( output,"<mixertitle>", Length(bib2), 
-                   " publications using <mixer var=\"GAP\"/> published in ", y, "</mixertitle>\n");
+                   " publications using GAP published in ", y, "</mixertitle>\n");
   for b in bib2 do 
     AppendTo(output, StringBibAsHTML(b), "\n"); 
   od; 
@@ -109,7 +109,7 @@ for y in msccodes do
   AppendTo( output,"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
   AppendTo( output,"<mixer template=\"gw.tmpl\">\n");
   AppendTo( output,"<mixertitle>", Length(bib2), 
-                   " publications using <mixer var=\"GAP\"/> in the category \"",
+                   " publications using GAP in the category \"",
                    mscnames[Position(msccodes,y)], "\"</mixertitle>\n");
   for b in bib2 do 
     AppendTo(output, StringBibAsHTML(b), "\n"); 
