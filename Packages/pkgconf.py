@@ -1476,8 +1476,8 @@ PKG_AllManualLinks = r'''<tr><td><a href="{{GAPManualLink}}/pkg/4ti2Interface-20
 <tr><td><a href="{{GAPManualLink}}/pkg/ZeroMQInterface-0.11/doc/chap0.html">ZeroMQInterface</a></td><td>[<a href="{{GAPManualLink}}/pkg/ZeroMQInterface-0.11/doc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>ZeroMQ bindings for GAP</td></tr>
 '''
 
-PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='GAPKernelVersion'/>" ], 
-        [ "GAPLibrary", "<mixer var='GAPLibraryVersion'/>" ], 
+PKG_SuggestUpgradeLines = r'''        [ "GAPKernel", "<mixer var='relversion'/>" ], 
+        [ "GAPLibrary", "<mixer var='relversion'/>" ], 
         [ "4ti2Interface", "2018.07.06" ], [ "ACE", "5.2" ], 
         [ "AClib", "1.3.1" ], [ "Alnuth", "3.1.1" ], 
         [ "ANUPQ", "3.2.1" ], [ "AtlasRep", "2.1.0" ], 
