@@ -10,9 +10,10 @@ projects := rec(
 cap := SortedList(List([ "GeneralizedMorphismsForCAP", "LinearAlgebraForCAP",
 "ModulePresentationsForCAP", "MonoidalCategories" ],LowercaseString)),
 
-homalg := SortedList(List([ "ExamplesForHomalg", "GaussForHomalg", "GradedModules",
-"GradedRingForHomalg", "HomalgToCAS", "IO_ForHomalg", "LocalizeRingForHomalg",
-"MatricesForHomalg", "Modules", "RingsForHomalg", "SCO", "ToolsForHomalg",
+homalg := SortedList(List([ "4ti2Interface", "ExamplesForHomalg", "Gauss",
+"GaussForHomalg", "GradedModules", "GradedRingForHomalg", "HomalgToCAS", 
+"IO_ForHomalg", "LocalizeRingForHomalg", "MatricesForHomalg", "Modules", 
+"NConvex", "RingsForHomalg", "SCO", "PolymakeInterface", "ToolsForHomalg",
 "ToricVarieties" ],LowercaseString))
 
 );
@@ -62,3 +63,6 @@ for pkg in SortedList(RecNames(GAPInfo.PackagesInfo)) do
   fi;  
 od;
 Print("</ul>\n");
+
+QUIT;
+

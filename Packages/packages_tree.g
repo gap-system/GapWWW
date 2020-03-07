@@ -6,3 +6,5 @@ for pkg in SortedList(RecNames(GAPInfo.PackagesInfo)) do
         GAPInfo.PackagesInfo.(pkg)[1].PackageName,
         "</entry>\n");
 od;
+
+QUIT;
