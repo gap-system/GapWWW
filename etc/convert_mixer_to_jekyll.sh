@@ -17,7 +17,8 @@ perl -pi -e 's;<mixer var="relversion"/>;{{site.data.gap.relversion}};g' "$@"
 perl -pi -e 's;<mixer var="reldate"/>;{{site.data.gap.reldate}};g' "$@"
 perl -pi -e 's;<mixer var="relyear"/>;{{site.data.gap.relyear}};g' "$@"
 
-perl -0 -pi -e 's;<mixer manual="([^"]+)">\s*([^<]+\S)\s*</mixer>;{% include ref.html manual="\1" text="\2" %};g' "$@"
+perl -0 -pi -e 's;<mixer\s+manual="([^"]+)">\s*([^<]+\S)\s*</mixer>;{% include ref.html manual="\1" text="\2" %};g' "$@"
+perl -0 -pi -e 's;<mixer\s+manual="([^"]+)">\s*<span\s+class="code">\s*([^<]+\S)\s*</span>\s*</mixer>;{% include coderef.html manual="\1" text="\2" %};g' "$@"
 
 # rename the files
 for f in "$@" ; do
