@@ -2,6 +2,66 @@
 layout: start
 ---
 
-{{ content }}
+{% capture name-version %}{{ page.name | downcase | append : "-" | append: page.version }}{% endcapture %}
+{% capture manual %}{{site.data.gap.GAPManualLink | append: "/pkg/" | append: name-version}}{% endcapture %}
 
-{{ page.someVar }}
+<h2>GAP package {{ page.name }}</h2>
+
+<h2>{{ page.description }}</h2>
+
+<p class="homelink">[<a href="{{ page.www }}">WWW homepage</a>]</p>
+
+{% if page.authors.size > 1 %}
+    <h4>Authors</h4>
+{% else %}
+    <h4>Author</h4>
+{% endif %}
+{% for author in page.authors %}
+    <p><a href="{{ author.url }}">{{ author.name }}</a></p>
+{% endfor %}
+
+<h4>Short Description</h4>
+<p>{{ page.abstract }}</p>
+
+<h4>Version</h4>
+<p> Current version shipped with GAP: {{ page.version }} &nbsp;&nbsp;(Released  {{ page.date | date: "%d/%m/%Y"}})</p>
+
+<!-- TODO href to license empty-->
+<h4>License</h4>
+<p><a href="{{ page.licenseURL }}">{{ page.license }}</a></p>
+
+<h4>Status</h4>
+<p>{{ page.status }}</p>
+
+<h4>Dependencies</h4>
+<p> GAP version: {{ page.GAP }}</p>
+<p> Needed other packages:
+{% assign pkgs = "" %}
+{% for pkg in page.needed-pkgs %}
+    {% capture pkgs %}{{ pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")" | append: "|" }}{% endcapture %}
+{% endfor %}
+{{ pkgs | split: "|" | join: ", " }}
+</p>
+<p> Suggested other packages:
+{% assign pkgs = "" %}
+{% for pkg in page.suggested-pkgs %}
+    {% capture pkgs %}{{ pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")" | append: "|" }}{% endcapture %}
+{% endfor %}
+{{ pkgs | split: "|" | join: ", " }}
+</p>
+
+<!-- TODO is the link always correct? -->
+<h4>Online documentation</h4>
+<p>{{ page.name }}:  [<a href="{{ manual }}/{{ page.doc-html }}"> HTML</a>] version&nbsp;&nbsp; [<a href="{{ manual }}/{{ page.doc-pdf }}"> PDF</a>] version&nbsp;&nbsp;</p>
+
+<!-- TODO is the link to README always correct?
+     TODO file downloads-->
+<h4>Download</h4>
+<p>[<a href="{{ manual }}/README.{{ page.name | downcase }}">README</a>]&nbsp;&nbsp;&nbsp;&nbsp;{{ name-version }}
+</p>
+
+<!-- TODO www links to github.io, but we need a link to the github repository and the issue tracker-->
+<h4>Source code repository</h4>
+<p>git : <a href="{{ page.www }}">{{ page.www }}</a></p>
+<h4>Issue tracker</h4>
+<p></p>
