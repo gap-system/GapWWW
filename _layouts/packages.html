@@ -18,7 +18,11 @@ layout: start
 {% endif %}
 {% assign authors = "" %}
 {% for author in page.authors %}
-    {% capture authors %}{{ authors }}<a href="{{ author.url }}">{{ author.name }}</a>|{% endcapture %}
+    {% if author.url %}
+        {% capture authors %}{{ authors }}<a href="{{ author.url }}">{{ author.name }}</a>|{% endcapture %}
+    {% else %}
+        {% capture authors %}{{ authors }}{{author.name}}|{% endcapture %}
+    {% endif %}
 {% endfor %}
 <p>{{ authors | split: "|" | join: ", " }}</p>
 
