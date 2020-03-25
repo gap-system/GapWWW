@@ -66,7 +66,8 @@ end;
 
 bib2niceandhtml := function(name, header, subheader)
   local i, ii, bib, fh, out, a, b, years, counts, pos, flag, 
-        mscreport, bstr, str, bad;
+        mscreport, bstr, str, bad, citations_by_year_outfile,
+        citations_by_msc_outfile;
   years:=[1987..2020];
   bstr := StringFile(Concatenation(name, ".bib"));
   bstr := HeuristicTranslationsLaTeX2XML.Apply(bstr);
@@ -132,66 +133,68 @@ bib2niceandhtml := function(name, header, subheader)
   SetPrintFormattingStatus(out, false);
   PrintTo1(out, fh);
   CloseStream(out);
-  PrintTo("statistics.generated",
+  citations_by_year_outfile := "../../_includes/bib_stats_year.yml";
+  PrintTo(citations_by_year_outfile,
   "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<mixer>\n");
   for ii in [1,11..QuoInt(Length(years)-1,10)*10+1] do
-    AppendTo("statistics.generated","<table>\n <colgroup>\n");
+    AppendTo(citations_by_year_outfile,"<table>\n <colgroup>\n");
     for i in [1..10] do
-      AppendTo("statistics.generated","  <col width=\"9%\"></col>\n");
+      AppendTo(citations_by_year_outfile,"  <col width=\"9%\"></col>\n");
     od;
-    AppendTo("statistics.generated"," </colgroup>\n <tr><td>Year</td>\n");
+    AppendTo(citations_by_year_outfile," </colgroup>\n <tr><td>Year</td>\n");
     flag:=true;
     for i in years{[ii..Minimum(Length(years),ii+9)]} do
       if flag then
-	AppendTo("statistics.generated","<td class=\"green\">",i,"</td>\n");
+	AppendTo(citations_by_year_outfile,"<td class=\"green\">",i,"</td>\n");
       else
-	AppendTo("statistics.generated","<td align=\"right\">",i,"</td>\n");
+	AppendTo(citations_by_year_outfile,"<td align=\"right\">",i,"</td>\n");
       fi;
       flag:=not flag;
     od;
-    AppendTo("statistics.generated","</tr>\n<tr><td>Number</td>\n");
+    AppendTo(citations_by_year_outfile,"</tr>\n<tr><td>Number</td>\n");
     flag:=true;
     for i in counts{[ii..Minimum(Length(years),ii+9)]} do
       if flag then
-	AppendTo("statistics.generated","<td class=\"green\">",i,"</td>\n");
+	AppendTo(citations_by_year_outfile,"<td class=\"green\">",i,"</td>\n");
       else
-	AppendTo("statistics.generated","<td align=\"right\">",i,"</td>\n");
+	AppendTo(citations_by_year_outfile,"<td align=\"right\">",i,"</td>\n");
       fi;
       flag:=not flag;
     od;
-    AppendTo("statistics.generated","</tr>\n</table><br />");
+    AppendTo(citations_by_year_outfile,"</tr>\n</table><br />");
   od;
   pos:=Length(bib[1])-Sum(counts);
   if pos<>0 then
-    AppendTo("statistics.generated","<p>No year given, or year out of bounds: ",pos,"</p>\n");
+    AppendTo(citations_by_year_outfile,"<p>No year given, or year out of bounds: ",pos,"</p>\n");
   fi;
-  AppendTo("statistics.generated","</mixer>\n");
+  AppendTo(citations_by_year_outfile,"</mixer>\n");
   
   mscreport:=StatisticsByMSC();
-  PrintTo("statistics.mscreport",
+  citations_by_msc_outfile := "../../_includes/bib_stats_msc.yml";
+  PrintTo(citations_by_msc_outfile,
   "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<mixer>\n");
-  AppendTo("statistics.mscreport","<table>\n <colgroup>\n");
-  AppendTo("statistics.mscreport","  <col width=\"10%\"></col>\n");
-  AppendTo("statistics.mscreport","  <col width=\"10%\"></col>\n");
-  AppendTo("statistics.mscreport","  <col width=\"5%\"></col>\n");
-  AppendTo("statistics.mscreport","  <col width=\"70%\"></col>\n");
-  AppendTo("statistics.mscreport"," </colgroup>\n");
-  AppendTo("statistics.mscreport","<tr>\n");
-  AppendTo("statistics.mscreport","  <td align=\"right\">Primary</td>\n");
-  AppendTo("statistics.mscreport","  <td align=\"right\">Secondary</td>\n");
-  AppendTo("statistics.mscreport","  <td></td>\n");
-  AppendTo("statistics.mscreport","  <td></td>\n");
-  AppendTo("statistics.mscreport","</tr>\n");
+  AppendTo(citations_by_msc_outfile,"<table>\n <colgroup>\n");
+  AppendTo(citations_by_msc_outfile,"  <col width=\"10%\"></col>\n");
+  AppendTo(citations_by_msc_outfile,"  <col width=\"10%\"></col>\n");
+  AppendTo(citations_by_msc_outfile,"  <col width=\"5%\"></col>\n");
+  AppendTo(citations_by_msc_outfile,"  <col width=\"70%\"></col>\n");
+  AppendTo(citations_by_msc_outfile," </colgroup>\n");
+  AppendTo(citations_by_msc_outfile,"<tr>\n");
+  AppendTo(citations_by_msc_outfile,"  <td align=\"right\">Primary</td>\n");
+  AppendTo(citations_by_msc_outfile,"  <td align=\"right\">Secondary</td>\n");
+  AppendTo(citations_by_msc_outfile,"  <td></td>\n");
+  AppendTo(citations_by_msc_outfile,"  <td></td>\n");
+  AppendTo(citations_by_msc_outfile,"</tr>\n");
   for i in [1..Length(mscreport)] do
-    AppendTo("statistics.mscreport","<tr>\n");
- 	AppendTo("statistics.mscreport","  <td align=\"right\">", mscreport[i][1],"</td>\n");
- 	AppendTo("statistics.mscreport","  <td align=\"right\">", mscreport[i][2],"</td>\n");
- 	AppendTo("statistics.mscreport","  <td></td>\n");
- 	AppendTo("statistics.mscreport","  <td align=\"left\">\n", mscreport[i][4],"</td>\n");
-    AppendTo("statistics.mscreport","</tr>\n");
+    AppendTo(citations_by_msc_outfile,"<tr>\n");
+ 	AppendTo(citations_by_msc_outfile,"  <td align=\"right\">", mscreport[i][1],"</td>\n");
+ 	AppendTo(citations_by_msc_outfile,"  <td align=\"right\">", mscreport[i][2],"</td>\n");
+ 	AppendTo(citations_by_msc_outfile,"  <td></td>\n");
+ 	AppendTo(citations_by_msc_outfile,"  <td align=\"left\">\n", mscreport[i][4],"</td>\n");
+    AppendTo(citations_by_msc_outfile,"</tr>\n");
   od;  
-  AppendTo("statistics.mscreport","</table><br/>");
-  AppendTo("statistics.mscreport","</mixer>\n");
+  AppendTo(citations_by_msc_outfile,"</table><br/>");
+  AppendTo(citations_by_msc_outfile,"</mixer>\n");
   
   # changed to `plain' bibliography style. (This makes counting easier and
   # sorts according to the names, not the alpha abbreviations.)
