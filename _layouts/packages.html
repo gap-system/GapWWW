@@ -26,9 +26,9 @@ layout: start
 <p>{{ persons | split: "|" | join: ", " }}</p>
 
 {% if page.maintainers.size > 1 %}
-    <h4>Maintainer</h4>
-{% else %}
     <h4>Maintainers</h4>
+{% else %}
+    <h4>Maintainer</h4>
 {% endif %}
 {% assign persons = "" %}
 {% for person in page.maintainers %}
@@ -66,7 +66,7 @@ layout: start
 <p> Needed other packages:
 {% assign pkgs = "" %}
 {% for pkg in page.needed-pkgs %}
-    {% capture pkgs %}{{ pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")" | append: "|" }}{% endcapture %}
+    {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
 {% endfor %}
 {{ pkgs | split: "|" | join: ", " }}
 </p>
@@ -74,7 +74,7 @@ layout: start
 <p> Suggested other packages:
 {% assign pkgs = "" %}
 {% for pkg in page.suggested-pkgs %}
-    {% capture pkgs %}{{ pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")" | append: "|" }}{% endcapture %}
+    {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")" | append: "|" %}
 {% endfor %}
 {{ pkgs | split: "|" | join: ", " }}
 </p>
