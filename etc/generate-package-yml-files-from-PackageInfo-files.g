@@ -61,9 +61,20 @@ IsValidISO8601Date := function(date)
     return month in [1..12] and day in [1..DaysInMonth(month, year)];
 end;
 
-GeneratePackageYML:=function(pkg)
-    local streamFilename, stream, date, authors, maintainers, contributors,
-        formats, f, tmp;
+# path must be of the form "*dirname/PackageInfo.g"
+GeneratePackageYML:=function(path)
+    local pkg, dirname, streamFilename, stream, date, authors, maintainers,
+        contributors, formats, f, tmp;
+
+    Read(path);
+    pkg := GAPInfo.PackageInfoCurrent;
+    dirname := SplitString(path, "/");
+    if Length(dirname) >= 2 then
+        dirname := dirname[Length(dirname) - 1];
+    else
+        Error("invalid <path> argument");
+    fi;
+
 
     # TODO change path to "_Packages/.." when done
     streamFilename := Concatenation("_PackagesTest/",
@@ -73,6 +84,7 @@ GeneratePackageYML:=function(pkg)
 
     AppendTo(stream, "---\n");
     AppendTo(stream, "name: ", pkg.PackageName, "\n");
+    AppendTo(stream, "dirname: ", dirname, "\n");
     AppendTo(stream, "version: \"", pkg.Version, "\"\n");
     if IsBound(pkg.License) then
         AppendTo(stream, "license: \"", pkg.License, "\"\n");
@@ -210,7 +222,6 @@ pathsToPackageInfoFile := SplitString(pathsToPackageInfoFile, "\n");
 Print("\n");
 for path in pathsToPackageInfoFile do
     NormalizeWhitespace(path);
-    Read(path);
-    GeneratePackageYML(GAPInfo.PackageInfoCurrent);
+    GeneratePackageYML(path);
 od;
 QUIT;
