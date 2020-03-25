@@ -44,17 +44,26 @@ layout: start
 <p>{{ page.abstract }}</p>
 
 <h4>Version</h4>
-<p> Current version shipped with GAP: {{ page.version }} &nbsp;&nbsp;(Released  {{ page.date | date: "%d/%m/%Y"}})</p>
+<p> Current version shipped with GAP: {{ page.version }} &nbsp;&nbsp;(Released  {{ page.date | date: "%d/%m/%Y" }})</p>
 
-<!-- TODO href to license empty-->
+<!-- TODO href to license empty -->
 <h4>License</h4>
-<p><a href="{{ page.licenseURL }}">{{ page.license }}</a></p>
+<!-- <p><a href="{{ page.licenseURL }}">{{ page.license }}</a></p> -->
 
 <h4>Status</h4>
-<p>{{ page.status }}</p>
+<p> {{ page.status }}
+    {% if page.communicatedBy and page.acceptData %}
+        &nbsp;&nbsp; (communicated by {{page.communicatedBy}}, accepted {{ page.acceptData | date: "%d/%m/%Y" }})
+    {% elsif page.communicatedBy %}
+        &nbsp;&nbsp; (communicated by {{page.communicatedBy}})
+    {% elsif page.acceptData %}
+        &nbsp;&nbsp; (accepted {{ page.acceptData | date: "%d/%m/%Y" }})
+    {% endif %}
+</p>
 
 <h4>Dependencies</h4>
 <p> GAP version: {{ page.GAP }}</p>
+
 <p> Needed other packages:
 {% assign pkgs = "" %}
 {% for pkg in page.needed-pkgs %}
@@ -62,6 +71,7 @@ layout: start
 {% endfor %}
 {{ pkgs | split: "|" | join: ", " }}
 </p>
+
 <p> Suggested other packages:
 {% assign pkgs = "" %}
 {% for pkg in page.suggested-pkgs %}
@@ -70,12 +80,9 @@ layout: start
 {{ pkgs | split: "|" | join: ", " }}
 </p>
 
-<!-- TODO the link is not always correct -->
 <h4>Online documentation</h4>
 <p>{{ page.name }}:  [<a href="{{ manual }}/{{ page.doc-html }}"> HTML</a>] version&nbsp;&nbsp; [<a href="{{ manual }}/{{ page.doc-pdf }}"> PDF</a>] version&nbsp;&nbsp;</p>
 
-<!-- TODO the link to README is not always correct
-     TODO where are the file downloads? -->
 <h4>Download</h4>
 <p>
     [<a href="{{ manual }}/README.{{ page.name | downcase }}">README</a>]&nbsp;&nbsp;&nbsp;&nbsp;{{ page.dirname }}
@@ -87,6 +94,12 @@ layout: start
 
 <!-- TODO we need a link to the github repository and the issue tracker-->
 <h4>Source code repository</h4>
-<p></p>
+<p>{{page.sourceRepository.type}} : <a href="{{ page.sourceRepository.url }}">{{ page.sourceRepository.url }}</a></p>
+
 <h4>Issue tracker</h4>
-<p></p>
+<p><a href="{{ page.issueTrackerUrl }}">{{ page.issueTrackerUrl }}</a></p>
+
+{% if page.supportemail %}
+<h4>Support email address</h4>
+<p><a href="{{ mailto | append: page.supportemail }}">{{ page.supportemail }}</a></p>
+{% endif %}
