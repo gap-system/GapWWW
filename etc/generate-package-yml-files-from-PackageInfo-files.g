@@ -62,11 +62,14 @@ IsValidISO8601Date := function(date)
 end;
 
 GeneratePackageYML:=function(pkg)
-    local stream, date, authors, maintainers, contributors, formats, f, tmp;
+    local streamFilename, stream, date, authors, maintainers, contributors,
+        formats, f, tmp;
 
-    stream := OutputTextFile("_data/package.yml", false);
+    # TODO change to proper location "_Packages/.."
+    streamFilename := Concatenation(LowercaseString(pkg.PackageName), ".yml");
+    stream := OutputTextFile(streamFilename, false);
     SetPrintFormattingStatus(stream, false);
-    
+
     AppendTo(stream, "name: ", pkg.PackageName, "\n");
     AppendTo(stream, "version: \"", pkg.Version, "\"\n");
     if IsBound(pkg.License) then
@@ -191,6 +194,8 @@ GeneratePackageYML:=function(pkg)
 
     CloseStream(stream);
 end;
+
+# TODO make this accept a filename
 Read("PackageInfo.g");
 GeneratePackageYML(GAPInfo.PackageInfoCurrent);
 QUIT;
