@@ -172,7 +172,7 @@ With Mixer, links to the GAP manual and also package manuals are done like this:
 
 With Jekyll, you can replace this by the following
 
-    {% include ref.html label="LABELNAME" text="TEXT" %}
+    {% include ref.html manual="LABELNAME" text="TEXT" %}
 
 For example, we convert this
 
