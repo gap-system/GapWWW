@@ -1,12 +1,14 @@
 #!/bin/sh
+# TODO change this to _Packages
 collectionDir=_PackagesTest
 mkdir ${collectionDir}/tmp
 cd ${collectionDir}/tmp
-echo "Getting the GAP tarball.\n"
-wget https://www.gap-system.org/pub/gap/gap-4.11/tar.gz/gap-4.11.0.tar.gz
-echo "Unpacking the GAP tarball.\n"
+echo "----    Getting the GAP tarball    ----\n"
+# TODO put the correct link here
+wget https://files.gap-system.org/gap-4.11/tar.gz/gap-4.11.0.tar.gz
+echo "----    Unpacking the GAP tarball    ----\n"
 tar -xf gap-4.11.0.tar.gz
-echo "Generating YML files.\n"
+echo "----    Generating YML files    ----\n"
 mv gap-*/pkg .
 rm -rf gap-*
 cd ../..

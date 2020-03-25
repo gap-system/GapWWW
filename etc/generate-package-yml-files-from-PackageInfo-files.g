@@ -96,14 +96,12 @@ GeneratePackageYML:=function(pkg)
     fi;
     if not IsValidISO8601Date(date) then
         Print("malformed release date ", pkg.Date, " in ",
-              pkg.PackageName, ". Skipping this package.\n");
-        # Delete content of the stream
-        PrintTo(stream, "\n");
-        CloseStream(stream);
-        return;
+              pkg.PackageName, ".\n");
+        AppendTo(stream, "date: \"\"\n");
+    else
+        AppendTo(stream, "date: ", date, "\n");
     fi;
 
-    AppendTo(stream, "date: ", date, "\n");
     AppendTo(stream, "description: |\n");
     AppendTo(stream, "    ", pkg.Subtitle, "\n");
     AppendTo(stream, "\n");
