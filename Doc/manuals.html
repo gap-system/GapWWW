@@ -35,15 +35,16 @@ available.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </th><th>Description</th></tr>
 
-<!--TODO
-<ul>
-  {% for VAR in site.Packages %}
-    <li>
-      <h2>{{ VAR }}</h2>
-    </li>
-  {% endfor %}
-</ul>
--->
+
+{% assign packages = site.Packages | sort: "name" %}
+
+{% for pkg in packages %}
+  <tr>
+    <td>
+        <a href="../Manuals/pkg/{{pkg.dirname}}/{{pkg.doc-html}}">{{pkg.name}}</a></td><td>[<a href="../Manuals/pkg/{{pkg.dirname}}/{{pkg.doc-pdf}}">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>{{pkg.description}}
+    </td>
+  </tr>
+{% endfor %}
 
 </table>
 
