@@ -1,0 +1,484 @@
+---
+title: Balanced presentations for covering groups of simple groups
+layout: default
+---
+
+<hr />
+
+ A finite presentation is said to be balanced if the number of generators
+ is equal to the number of relators.
+<p />
+ If a finite group G has a balanced presentation, the Schur multiplier
+ of G is trivial. The converse is false in general but in the case of
+ covering groups of finite non-abelian simple groups (which always have
+ a trivial multiplier) the question remains open. Examples are given in
+ [<a href="#Kovacs95">Kovacs95</a>], however, of perfect groups with
+ trivial multiplier which do not have balanced presentations.
+<p />
+ Question. Does the covering group of a finite non-abelian simple group
+ necessarily have a balanced presentation?
+<p />
+ The purpose of this example is to demonstrate use of a program PGRelFind
+ to find a balanced presentation for certain finite non-abelian simple
+ groups.
+<p />
+ The output given here has been produced by GAP&nbsp;4,
+ the input is available in form of a plain
+ GAP&nbsp;4 <a href="balanced.in">input&nbsp;file</a>.
+
+<hr />
+
+ The following Lemma from [<a href="#CHHR03 ">CHHR03</a>] is helpful
+ (a stronger version appears in [<a href="#CHRR ">CHRR</a>]).
+<p />
+<p style="text-align:left; margin-left:0.7cm">
+ <b>Lemma.</b><br />
+ Let G be a simple group with a presentation of the form
+ &lang;&nbsp;x,&nbsp;y&nbsp;&nbsp;|
+ &nbsp;x<sup>2</sup>,&nbsp;y<sup>p</sup>,&nbsp;w(x,y)&nbsp;&rang;
+ with p prime. Then the covering group of G has a balanced presentation.
+</p><p>
+ Applying it to a simple group with trivial multiplier the lemma can be
+ used to find a balanced presentation for the simple group itself.
+</p><p>
+ The program PGRelFind uses the
+ <a href="/Packages/ace.html">ACE</a> coset enumerator.
+ For difficult examples we expect the coset enumerations to be hard so
+ for such examples it is necessary to assign ACE a large workspace.
+</p><p>
+ We give PGRelFind a presentation for a finite simple group G of the form
+</p><p class="center">
+ &lang; x, y &nbsp;|&nbsp; x<sup>2</sup>, y<sup>p</sup>,
+ w<sub>1</sub>(x,y)&nbsp;, ...&nbsp;, w<sub>k</sub>(x,y)&nbsp;&rang;
+</p><p>
+ Note that every finite simple group has such a presentation. We also
+ give PGRelFind words sgens in the generators x, y which generate a
+ subgroup H = &lt;sgens&gt; of small index n, say, in G. The program
+ PGRelFind first finds a permutation representation of G of degree n with
+ permutations X and Y corresponding to x and y respectively. It then looks
+ for a word w(x,y) so that G is presented by
+</p><p class="center">
+ &lang; x, y &nbsp;|&nbsp; x<sup>2</sup>, y<sup>p</sup>, w(x,y) &rang;
+</p><p>
+ The word w(x,y) must have the property that it reduces to the identity
+ when we substitute the permutations X and Y. so that
+ P&nbsp;= &lang;&nbsp;x,&nbsp;y&nbsp;&nbsp;|
+ &nbsp;x<sup>2</sup>,&nbsp;y<sup>p</sup>,&nbsp;w(x,y)&nbsp;&rang;
+ is a preimage of G. We look later at how such words w(x,y) are generated,
+ but first we explain the tests PGRelFind applies to decide whether G is
+ isomorphic to P.
+</p>
+<pre>
+    if P is not perfect
+    then find next w(x,y)
+
+    else if Index(P,&lang;sgens&rang;) does not complete or Index(P,&lang;sgens&rang;) &ne; n
+    then find next w(x,y)
+
+    else if Index(P,&lang;y&rang;) does not complete or Index(P,&lang;y&rang;) &ne; Size(G)/p
+    then find next w(x,y)
+
+    else a suitable w(x,y) has been found.
+</pre>
+
+Let us now say a little about how the words w(x,y) are generated. We will
+use the term bi-syllabic length to mean the number of bi-syllables of form
+xy<sup>k</sup> in such a relator. First note that since x<sup>2</sup> is
+a relator we need only consider relators that are the products of
+bi-syllables of form xy<sup>k</sup>, for some integer k in the range
+[1&nbsp;..&nbsp;p-1]. Since the relators x<sup>2</sup>, y<sup>p</sup>,
+w(x,y) must define a perfect group, the number of bi-syllables in w(x,y)
+must be odd (and coprime to p but we ignore this).
+<p />
+Furthermore, w(x,y) can be assumed to have the prefix xyxyxy<sup>-1</sup>
+if p&nbsp;=&nbsp;3 (use the fact that w(x,y) cannot be a proper power to
+see this), or xy otherwise.
+<p />
+For efficiency, the word w(x,y) is broken into three parts,
+w(x,y) = 'head'&nbsp;&lowast;&nbsp;'middle'&nbsp;&lowast;&nbsp;'tail'.
+Here 'head' is the prefix described above, 'middle' always has even
+bi-syllabic length, and 'tail' is also of even bi-syllabic length.
+<p />
+It is possible to conduct a systematic search starting at the shortest
+possible words w(x,y) (where initially 'middle' is empty). It is also
+possible to randomly select 'middle' and systematically generate 'tail's.
+A list of the options which can be set in this searching process are
+found in GAP by typing '?Using&nbsp;ACEReadResearchExample'
+after loading the Package
+<a href="/Packages/ace.html">ACE</a>.
+<p />
+We now show how to generate possible words w(x,y) to test. Note that 
+the program shown here for demonstration differs slightly from the 
+actual code in PGRelFind.  
+<p />
+We set up a free group F and generate words w(x,y) in F.
+
+<pre class="gapexample">
+gap> F := FreeGroup("x","y");;
+gap> x := F.1;; y := F.2;;
+</pre>
+
+We will look at the case p&nbsp;=&nbsp;5, that is, y<sup>5</sup> is a
+relator. Also remember that x<sup>2</sup> is our first relator.
+
+<pre class="gapexample">
+gap> p := 5;
+5
+</pre>
+
+Set the number of exponents of y to nexpts
+
+<pre class="gapexample">
+gap> nexpts := p-1;
+4
+</pre>
+
+The possible exponents of y (we assume p is odd) are
+[1, 2, ... , (p-1)/2, -(p-1)/2, ... , -2, -1]
+
+<pre class="gapexample">
+gap> expts := Concatenation([1 .. Int(p/2)], 
+> [-Int(p/2) .. -1]);
+[ 1, 2, -2, -1 ]
+</pre>
+
+Set up a list sylls of possible bi-syllables
+
+<pre class="gapexample">
+gap> sylls := List(expts, i -> x*y^i);
+[ x*y, x*y^2, x*y^-2, x*y^-1 ]
+</pre>
+
+We will look at the case of 6 bi-syllables and set up a list c of
+length 6 to contain the exponents of y. The eventual aim will be to
+run through all (p-1)<sup>6</sup> words with 6 bi-syllables
+
+<pre class="gapexample">
+gap> cLength := 6;
+6
+</pre>
+
+The simplest exponent vector is:
+
+<pre class="gapexample">
+gap> c := ListWithIdenticalEntries(cLength, expts[1]);
+[ 1, 1, 1, 1, 1, 1 ]
+</pre>
+
+We define a function that will generate a word in x, y bi-syllables
+corresponding to any such exponent vector and apply it to c.
+
+<pre class="gapexample">
+gap> word := vec -> Product(vec, veci -> x*y^expts[veci], One(x));
+function( vec ) ... end
+gap> word(c);
+x*y*x*y*x*y*x*y*x*y*x*y
+</pre>
+
+Further we define a function which replaces a given exponent vector by
+its successor with respect to a certain lexicographical order.
+
+<pre class="gapexample">
+gap> getNext := function(vec)
+> local i;
+>    i := 1;
+>    while i &lt;= cLength and vec[i] mod p = p-1 do
+>       vec[i] := 1;
+>       i := i + 1;
+>    od;
+>    if i &lt;= cLength then
+>       vec[i] := vec[i] + 1;
+>    else
+>       vec := fail;
+>    fi;
+> end;
+function( vec ) ... end
+</pre>
+
+We use this in a little program that allows us to construct and print a
+list of lexicographically ordered exponent vectors and their corresponding
+words starting from a given exponent vector.
+
+<pre class="gapexample">
+gap> printVecWord := function(vec, num)
+> local i;
+>    Print(vec, "  ", word(vec), "\n");
+>    i := 1;;
+>    while i &lt; num and vec &lt;> fail do
+>    i := i + 1;
+>    getNext(vec);
+>    Print(vec, "  ", word(vec), "\n");
+>    od;
+> end;
+function( vec, num ) ... end
+</pre>
+
+We apply this function, prescribing a start vector and asking for the
+first 20 words.
+
+<pre class="gapexample">
+gap> printVecWord( [1,1,1,1,1,1], 20);
+[ 1, 1, 1, 1, 1, 1 ]  x*y*x*y*x*y*x*y*x*y*x*y
+[ 2, 1, 1, 1, 1, 1 ]  x*y^2*x*y*x*y*x*y*x*y*x*y
+[ 3, 1, 1, 1, 1, 1 ]  x*y^-2*x*y*x*y*x*y*x*y*x*y
+[ 4, 1, 1, 1, 1, 1 ]  x*y^-1*x*y*x*y*x*y*x*y*x*y
+[ 1, 2, 1, 1, 1, 1 ]  x*y*x*y^2*x*y*x*y*x*y*x*y
+[ 2, 2, 1, 1, 1, 1 ]  x*y^2*x*y^2*x*y*x*y*x*y*x*y
+[ 3, 2, 1, 1, 1, 1 ]  x*y^-2*x*y^2*x*y*x*y*x*y*x*y
+[ 4, 2, 1, 1, 1, 1 ]  x*y^-1*x*y^2*x*y*x*y*x*y*x*y
+[ 1, 3, 1, 1, 1, 1 ]  x*y*x*y^-2*x*y*x*y*x*y*x*y
+[ 2, 3, 1, 1, 1, 1 ]  x*y^2*x*y^-2*x*y*x*y*x*y*x*y
+[ 3, 3, 1, 1, 1, 1 ]  x*y^-2*x*y^-2*x*y*x*y*x*y*x*y
+[ 4, 3, 1, 1, 1, 1 ]  x*y^-1*x*y^-2*x*y*x*y*x*y*x*y
+[ 1, 4, 1, 1, 1, 1 ]  x*y*x*y^-1*x*y*x*y*x*y*x*y
+[ 2, 4, 1, 1, 1, 1 ]  x*y^2*x*y^-1*x*y*x*y*x*y*x*y
+[ 3, 4, 1, 1, 1, 1 ]  x*y^-2*x*y^-1*x*y*x*y*x*y*x*y
+[ 4, 4, 1, 1, 1, 1 ]  x*y^-1*x*y^-1*x*y*x*y*x*y*x*y
+[ 1, 1, 2, 1, 1, 1 ]  x*y*x*y*x*y^2*x*y*x*y*x*y
+[ 2, 1, 2, 1, 1, 1 ]  x*y^2*x*y*x*y^2*x*y*x*y*x*y
+[ 3, 1, 2, 1, 1, 1 ]  x*y^-2*x*y*x*y^2*x*y*x*y*x*y
+[ 4, 1, 2, 1, 1, 1 ]  x*y^-1*x*y*x*y^2*x*y*x*y*x*y
+</pre>
+
+We have now shown how to systematically generate possible words to test.
+<p />
+As an example, we use PGRelFind to find a balanced presentation for the
+covering group of SL(2,8). Since SL(2,8) has trivial multiplier, this
+computation finds a balanced presentation for SL(2,8).
+<p />
+First we read the package
+<a href="/Packages/ace.html">ACE</a> including the function
+PGRelFind into GAP. When loading packages in general a banner is printed.
+This can be suppressed by starting GAP with option '-b'.
+We do this here to shorten the output.
+
+<pre class="gapexample">
+gap> LoadPackage("ace");
+true
+</pre>
+
+Likewise, in order to suppress output, we temporarily change the print
+level. 
+
+<pre class="gapexample">
+gap> SetInfoLevel(InfoACE,0);
+gap> ReadPackage("ace","res-examples/pgrelfind.g");
+true
+gap> SetInfoLevel(InfoACE,1);
+</pre>
+
+Here is a presentation for SL(2,8) with 4 relators.
+
+<pre class="gapexample">
+gap> f:= FreeGroup("x","y");;
+gap> x:= f.1;; y:= f.2;;
+gap> rels:=[ x^2, y^3,
+> y^(-1)*x*y^(-1)*x*y^(-1)*x*y^(-1)*x*y^(-1)*x*y^(-1)*x*y^(-1)*x,
+> x*y^(-1)*x*y*x*y^(-1)*x*y*x*y^(-1)*x*y*x*y^(-1)*x*y*x*y*x*
+> y^(-1)*x*y*x*y^(-1)*x*y*x*y^(-1)*x*y*x*y^(-1)*x*y*x*y ];;
+gap> G:=f/rels;
+&lt;fp group on the generators [ x, y ]>
+gap> Size(G);
+504
+</pre>
+
+We want to use PGRelFind to find a presentation with 3 relators, the
+first two being x<sup>2</sup>, y<sup>3</sup>. First we find a subgroup
+of small index to use to compute a small degree faithful permutation
+representation of SL(2,8). We use the "low index" method to find suitable
+subgroup generators.
+
+<pre class="gapexample">
+gap> l:=LowIndexSubgroupsFpGroup( G, TrivialSubgroup( G),10);
+[ Group(&lt;fp, no generators known>), Group(&lt;fp, no generators known>) ]
+gap> sgens:=GeneratorsOfGroup(l[2]);
+[ x, y*x*y*x*y*x^-1*y^-1 ]
+</pre>
+
+We need to translate these generators back into words in the free generators
+x, y. Use UnderlyingElement to do this.
+
+<pre class="gapexample">
+gap> sgens:=List(sgens,UnderlyingElement);
+[ x, y*x*y*x*y*x^-1*y^-1 ]
+</pre>
+
+We need to input three things to PGRelFind. The first the list of free
+generators
+
+<pre class="gapexample">
+gap> fgens := [ x, y ];
+[ x, y ]
+</pre>
+
+The second is the list of relators (as words in fgens), the first two
+relators of which have the correct form. Note that rels is already in
+the right form. Third we need generators (as words in fgens) for a
+subgroup of small index. In fact we have found generators for a
+subgroup of minimal index and sgens has already been set up in the
+correct form.
+
+<pre class="gapexample">
+gap> PGRelFind(fgens, rels, sgens );
+GroupOrder=504 SubgroupIndex=9
+#bisyllables in head = 3 head: x*y*x*y*x*y^-1
+Max #bisyllables in tail = 10 (granularity = 10)
+#bisyllables in middle = 0
+#bisyllables in middle = 12
+Candidate relator: x*y*x*y*x*y^
+-1*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y^-1*x*y^-1*x*y*x*y^
+-1*x*y^-1*x*y^-1*x*y^-1*x*y^-1*x*y^-1
+#bisyllables = 25 (#bisyllables in tail = 10) #words tested: 1
+</pre>
+
+This is the first word w(x,y) examined which has the property that it
+reduces to the identity on substituting the permutations X and Y.
+
+<pre class="gapexample">
+ACEStats:
+  index=9 cputime=0 ms maxcosets=509 totcosets=513
+Large subgroup index OK
+ACEStats for cyclic subgroup:
+  index=0 cputime=1640 ms maxcosets=645658 totcosets=666664
+</pre>
+
+This means that the first attempt of PGRelFind has been unsuccessful, so
+that the program automatically continues with another relator.
+
+<pre class="gapexample">
+Candidate relator: x*y*x*y*x*y^-1*x*y^
+-1*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y^-1*x*y*x*y^-1*x*y^
+-1*x*y*x*y*x*y^-1*x*y*x*y^-1*x*y
+#bisyllables = 25 (#bisyllables in tail = 10) #words tested: 2
+ACEStats:
+  index=9 cputime=0 ms maxcosets=555 totcosets=557
+Large subgroup index OK
+ACEStats for cyclic subgroup:
+  index=168 cputime=630 ms maxcosets=227917 totcosets=240311
+Cyclic subgroup index OK
+Success! ... new relator: 
+   x*y*x*y*x*y^-1*x*y^-1*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y^
+-1*x*y*x*y^-1*x*y^-1*x*y*x*y*x*y^-1*x*y*x*y^-1*x*y
+</pre>
+
+So a first possible relator has been found, however the program will
+continue as above since there may be a shorter relator.
+
+<pre class="gapexample">
+... continuing (there may be a shorter relator).
+Candidate relator: x*y*x*y*x*y^-1*x*y^
+-1*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y*x*y^-1*x*y*x*y*x*y^-1*x*y*x*y^
+-1*x*y*x*y*x*y^-1*x*y^-1
+               [ ... 87 lines deleted ... ]
+... continuing (there may be a shorter relator).
+Candidate relator: x*y*x*y*x*y^-1*x*y^-1*x*y^-1*x*y*x*y*x*y^-1*x*y^-1*x*y*x*y^
+-1*x*y^-1*x*y*x*y^-1*x*y
+#bisyllables = 15 (#bisyllables in tail = 0) #words tested: 1460
+ACEStats:
+  index=9 cputime=0 ms maxcosets=121 totcosets=133
+Large subgroup index OK
+ACEStats for cyclic subgroup:
+  index=168 cputime=0 ms maxcosets=170 totcosets=226
+Cyclic subgroup index OK
+Success! ... new relator: 
+   x*y*x*y*x*y^-1*x*y^-1*x*y^-1*x*y*x*y*x*y^-1*x*y^-1*x*y*x*y^-1*x*y^
+-1*x*y*x*y^-1*x*y
+Relator found is shortest possible.
+rec( gens := [ x, y ], 
+  rels := [ x^2, y^3, x*y*x*y*x*y^-1*x*y^-1*x*y^-1*x*y*x*y*x*y^-1*x*y^
+        -1*x*y*x*y^-1*x*y^-1*x*y*x*y^-1*x*y ], 
+  sgens := [ x, y*x*y*x*y*x^-1*y^-1 ] )
+</pre>
+
+This now gives a presentation in the correct form to apply the Lemma to
+find a two generator two relator presentation for the covering group of
+SL(2,8). Since SL(2,8) has trivial multiplier, this will be a two relator
+presentation for SL(2,8). Let us check that we have indeed found a
+presentation with three relators of the form that  we were looking for.
+
+<pre class="gapexample">
+gap> newrels := [ x^2, y^3, x*y*x*y*x*y^(-1)*x*y^(-1)*x*y^(-1)*x*y*x*
+> y*x*y^(-1)*x*y^(-1)*x*y*x*y^(-1)*x*y^(-1)*x*y*x*y^(-1)*x*y ];
+[ x^2, y^3, x*y*x*y*x*y^-1*x*y^-1*x*y^-1*x*y*x*y*x*y^-1*x*y^-1*x*y*x*y^-1*x*y^
+    -1*x*y*x*y^-1*x*y ]
+gap> ge:=f/newrels;
+&lt;fp group on the generators [ x, y ]>
+gap> Size(ge);
+504
+</pre>
+
+By the Lemma quoted at the beginning of this example we can deduce from
+this presentation that SL(2,8) also has a balanced presentation. The
+proof of the lemma is constructive and we finally demonstrate how in
+this case we can actually find a balanced presentation.
+<p />
+We replace the two relators x<sup>2</sup>, y<sup>3</sup> by the single
+relator x<sup>2</sup>&lowast;y<sup>3</sup>. However before doing so we
+need to adjust w(x,y) so that the group remains perfect. 
+
+<pre class="gapexample">
+gap> ExponentSumWord(newrels[3],x);
+15
+gap> ExponentSumWord(newrels[3],y);
+-1
+</pre>
+
+The new first relator will have exponent sums 2 and 3, respectively,
+so we will have a perfect group if w(x,y) is replaced by an equivalent
+relator with exponent sums -1, -1. Hence, before replacing
+x<sup>2</sup>, y<sup>3</sup> by the single relator
+x<sup>2</sup>&lowast;y<sup>3</sup> we replace w(x,y) by
+w(x,y)&lowast;x<sup>-16</sup> (which is equivalent since x<sup>2</sup>
+is a relator).
+
+<pre class="gapexample">
+gap> balancedrels := [x^2*y^3, newrels[3]*x^-16];
+[ x^2*y^3, x*y*x*y*x*y^-1*x*y^-1*x*y^-1*x*y*x*y*x*y^-1*x*y^-1*x*y*x*y^-1*x*y^
+    -1*x*y*x*y^-1*x*y*x^-16 ]
+gap> gb := f/balancedrels;
+&lt;fp group on the generators [ x, y ]>
+gap> Size(gb);
+504
+</pre>
+
+In general it may be harder to apply the Lemma than it was in this special
+case. Details are given in [<a href="#CHHR03 ">CHHR03</a>] (and for the
+more general result in [<a href="#CHRR">CHRR</a>]).
+<p />
+The program PGRelFind was used in [<a href="#CHHR03 ">CHHR03</a>]
+to prove that L_3(5) has a balanced presentation (it has trivial multiplier).
+The program was also used in [<a href="#CHRR">CHRR</a>] to show that the
+covering group of M_12 has a balanced presentation. These results complete
+the proof that the covering groups of all non-abelian simple groups of
+order &lt; 10<sup>5</sup> have balanced presentations.
+
+<hr />
+
+<h3>
+ <a name="SECTION00010000000000000000"> Bibliography</a>
+</h3>
+<dl>
+<dt><a name="CHHR03">CHHR03</a></dt>
+<dd>
+Colin&nbsp;M.&nbsp;Campbell, George&nbsp;Havas, Alexander&nbsp;Hulpke,
+Edmund&nbsp;F.&nbsp;Robertson.
+<br /><em> Efficient simple groups</em>.
+<br /> Comm. Algebra 31 (2003), no.10, 5191--5197.
+</dd>
+
+<dt><a name="CHRR">CHRR</a></dt>
+<dd>
+Colin&nbsp;M.&nbsp;Campbell, George&nbsp;Havas, Colin&nbsp;Ramsay,
+Edmund&nbsp;F.&nbsp;Robertson.
+<br /><em> Nice efficient presentations for all small simple groups
+and their covers.</em>
+<br />To appear.
+</dd>
+
+<dt><a name="Kovacs95">Kovacs95</a></dt>
+<dd>
+L.&nbsp;G.&nbsp;Kovacs.
+<br /><em>Finite groups with trivial multiplicator and large deficiency.</em>
+<br /> Groups---Korea '94 (Pusan), 211--225, de Gruyter, Berlin,1995.
+</dd>
+</dl>
