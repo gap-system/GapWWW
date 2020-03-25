@@ -209,6 +209,7 @@ end;
 inputStream := InputTextFile("_PackagesTest/tmp/list-of-paths-to-packageinfo-files.txt");
 pathsToPackageInfoFile := ReadAll(inputStream);
 pathsToPackageInfoFile := SplitString(pathsToPackageInfoFile, "\n");
+Print("\n");
 for path in pathsToPackageInfoFile do
     NormalizeWhitespace(path);
     Read(path);
