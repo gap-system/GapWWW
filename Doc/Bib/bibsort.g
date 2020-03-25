@@ -50,13 +50,14 @@ od;
 
 for y in Concatenation(years,["noyear"]) do
   bib2 := sortedbyyears.(y);
-  filename:=Filename( Directory("Year"), Concatenation( String(y), ".mixer") );
+  filename:=Filename( Directory("Year"), Concatenation( String(y), ".html") );
   output := OutputTextFile( filename, false );;
   SetPrintFormattingStatus( output, false );
-  AppendTo( output,"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
-  AppendTo( output,"<mixer template=\"gw.tmpl\">\n");
-  AppendTo( output,"<mixertitle>", Length(bib2), 
-                   " publications using GAP published in ", y, "</mixertitle>\n");
+  AppendTo( output, "---\n");
+  AppendTo( output, "title: ", Length(bib2), 
+                   " publications using GAP  published in ", y, "\n");
+  AppendTo( output, "layout: default\n");                 
+  AppendTo( output, "---\n\n");                 
   for b in bib2 do 
     AppendTo(output, StringBibAsHTML(b), "\n"); 
   od; 
@@ -103,18 +104,18 @@ od;
 for y in msccodes do
   if Length( sortedbymsc.(y) ) > 0 then
   bib2 := sortedbymsc.(y);
-  filename:=Filename( Directory("MSC"), Concatenation( String(y), ".mixer" ) );
+  filename:=Filename( Directory("MSC"), Concatenation( String(y), ".html" ) );
   output := OutputTextFile( filename, false );;
   SetPrintFormattingStatus( output, false );
-  AppendTo( output,"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
-  AppendTo( output,"<mixer template=\"gw.tmpl\">\n");
-  AppendTo( output,"<mixertitle>", Length(bib2), 
+  AppendTo( output, "---\n");
+  AppendTo( output, "title: ", Length(bib2), 
                    " publications using GAP in the category \"",
-                   mscnames[Position(msccodes,y)], "\"</mixertitle>\n");
+                   mscnames[Position(msccodes,y)], "\"\n");
+  AppendTo( output, "layout: default\n");                 
+  AppendTo( output, "---\n\n");                 
   for b in bib2 do 
     AppendTo(output, StringBibAsHTML(b), "\n"); 
   od; 
-  AppendTo(output,"</mixer>\n");
   CloseStream(output);
   fi;
 od;
