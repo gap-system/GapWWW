@@ -16,15 +16,30 @@ layout: start
 {% else %}
     <h4>Author</h4>
 {% endif %}
-{% assign authors = "" %}
+{% assign persons = "" %}
 {% for author in page.authors %}
     {% if author.url %}
-        {% capture authors %}{{ authors }}<a href="{{ author.url }}">{{ author.name }}</a>|{% endcapture %}
+        {% capture persons %}{{ persons }}<a href="{{ author.url }}">{{ author.name }}</a>|{% endcapture %}
     {% else %}
-        {% capture authors %}{{ authors }}{{author.name}}|{% endcapture %}
+        {% capture persons %}{{ persons }}{{author.name}}|{% endcapture %}
     {% endif %}
 {% endfor %}
-<p>{{ authors | split: "|" | join: ", " }}</p>
+<p>{{ persons | split: "|" | join: ", " }}</p>
+
+{% if page.maintainers.size > 1 %}
+    <h4>Maintainer</h4>
+{% else %}
+    <h4>Maintainers</h4>
+{% endif %}
+{% assign persons = "" %}
+{% for author in page.maintainers %}
+    {% if author.url %}
+        {% capture persons %}{{ persons }}<a href="{{ author.url }}">{{ author.name }}</a>|{% endcapture %}
+    {% else %}
+        {% capture persons %}{{ persons }}{{author.name}}|{% endcapture %}
+    {% endif %}
+{% endfor %}
+<p>{{ persons | split: "|" | join: ", " }}</p>
 
 <h4>Short Description</h4>
 <p>{{ page.abstract }}</p>
