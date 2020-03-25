@@ -65,11 +65,13 @@ GeneratePackageYML:=function(pkg)
     local streamFilename, stream, date, authors, maintainers, contributors,
         formats, f, tmp;
 
-    # TODO change to proper location "_Packages/.."
-    streamFilename := Concatenation(LowercaseString(pkg.PackageName), ".yml");
+    # TODO change path to "_Packages/.." when done
+    streamFilename := Concatenation("_PackagesTest/",
+                                    LowercaseString(pkg.PackageName), ".html");
     stream := OutputTextFile(streamFilename, false);
     SetPrintFormattingStatus(stream, false);
 
+    AppendTo(stream, "---\n");
     AppendTo(stream, "name: ", pkg.PackageName, "\n");
     AppendTo(stream, "version: \"", pkg.Version, "\"\n");
     if IsBound(pkg.License) then
@@ -93,7 +95,12 @@ GeneratePackageYML:=function(pkg)
         date := Concatenation(tmp[3], "-", tmp[2], "-", tmp[1]);
     fi;
     if not IsValidISO8601Date(date) then
-        Error("malformed release date ", pkg.Date);
+        Print("malformed release date ", pkg.Date, " in ",
+              pkg.PackageName, ". Skipping this package.\n");
+        # Delete content of the stream
+        PrintTo(stream, "\n");
+        CloseStream(stream);
+        return;
     fi;
 
     AppendTo(stream, "date: ", date, "\n");
@@ -136,9 +143,13 @@ GeneratePackageYML:=function(pkg)
     fi;
 
     AppendTo(stream, "www: ", pkg.PackageWWWHome, "\n");
-    tmp := SplitString(pkg.README_URL,"/");
-    tmp := tmp[Length(tmp)];  # extract README filename (typically "README" or "README.md")
-    AppendTo(stream, "readme: ", tmp, "\n");
+    # Workaround for Issue ..
+    # If README_URL is the empty string, then tmp will be an empty list.
+    if not IsEmpty(pkg.README_URL) then
+        tmp := SplitString(pkg.README_URL,"/");
+        tmp := tmp[Length(tmp)];  # extract README filename (typically "README" or "README.md")
+        AppendTo(stream, "readme: ", tmp, "\n");
+    fi;
     AppendTo(stream, "packageinfo: ", pkg.PackageInfoURL, "\n");
     if IsBound(pkg.GithubWWW) then
         AppendTo(stream, "github: ", pkg.GithubWWW, "\n");
@@ -190,12 +201,17 @@ GeneratePackageYML:=function(pkg)
     for tmp in SplitString(StringBibXMLEntry(ParseBibXMLextString(BibEntry(pkg)).entries[1],"BibTeX"),"\n") do
         AppendTo(stream, "    ", tmp, "\n");
     od;
-    AppendTo(stream, "\n");
+    AppendTo(stream, "---\n");
 
     CloseStream(stream);
 end;
 
-# TODO make this accept a filename
-Read("PackageInfo.g");
-GeneratePackageYML(GAPInfo.PackageInfoCurrent);
+inputStream := InputTextFile("_PackagesTest/tmp/list-of-paths-to-packageinfo-files.txt");
+pathsToPackageInfoFile := ReadAll(inputStream);
+pathsToPackageInfoFile := SplitString(pathsToPackageInfoFile, "\n");
+for path in pathsToPackageInfoFile do
+    NormalizeWhitespace(path);
+    Read(path);
+    GeneratePackageYML(GAPInfo.PackageInfoCurrent);
+od;
 QUIT;
