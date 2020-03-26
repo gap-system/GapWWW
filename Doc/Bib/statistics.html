@@ -3,6 +3,11 @@ title: GAP Bibliography Statistics
 layout: default
 ---
 
+<p>
+Click on the number of citations to see
+the list of papers for the given year.
+</p>
+
 <table>
 <tr>
   <td>
@@ -18,7 +23,7 @@ layout: default
     {{ stat[0] }}
   </td>
   <td>
-    {{ stat[1] }}
+    <a href="Year/{{ stat[0] }}.html">{{ stat[1] }}</a>
   </td>  
 </tr>
 {% endfor %}
@@ -28,9 +33,7 @@ layout: default
 The next table shows the number of sources in the GAP bibliography having 
 different primary and secondary <a href="http://www.ams.org/msc/">MSC2010</a> 
 codes in the appropriate categories. 
-It is also possible to view lists of publications published 
-<a href="Year/year.html">in the particular year</a> and 
-<a href="MSC/msc.html">in the particular category</a>.
+Click on the name of the category to see the list of papers in this category.
 We acknowledge the <a href="http://www.ams.org/">American Mathematical Society</a> 
 for the opportunity to use the <a href="http://www.ams.org/mathscinet/">MathSciNet</a> 
 database for performing this analysis.
@@ -57,7 +60,11 @@ database for performing this analysis.
     {{ area.secondary }}
   </td>
   <td>
+  {% if area.name == "TOTAL" %}
     {{ area.name }}
+  {% else %}
+    <a href="MSC/{{ area.code }}.html">{{ area.name }}</a>
+  {% endif %}
   </td>
 </tr>
 {% endfor %}

@@ -61,7 +61,6 @@ for y in Concatenation(years,["noyear"]) do
   for b in bib2 do 
     AppendTo(output, StringBibAsHTML(b), "\n"); 
   od; 
-  AppendTo(output,"</mixer>\n");
 od;
 
 Read("MSC2010.g");
