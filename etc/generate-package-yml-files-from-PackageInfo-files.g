@@ -77,7 +77,7 @@ GeneratePackageYML:=function(path)
 
 
     # TODO change path to "_Packages/.." when done
-    streamFilename := Concatenation("_PackagesTest/",
+    streamFilename := Concatenation("_Packages/",
                                     LowercaseString(pkg.PackageName), ".html");
     stream := OutputTextFile(streamFilename, false);
     SetPrintFormattingStatus(stream, false);
@@ -109,7 +109,7 @@ GeneratePackageYML:=function(path)
     if not IsValidISO8601Date(date) then
         Print("malformed release date ", pkg.Date, " in ",
               pkg.PackageName, ".\n");
-        AppendTo(stream, "date: \"\"\n");
+        AppendTo(stream, "date: 9999-01-01 \n");
     else
         AppendTo(stream, "date: ", date, "\n");
     fi;
@@ -194,8 +194,8 @@ GeneratePackageYML:=function(path)
 
     if IsBound(pkg.SourceRepository) then
         AppendTo(stream, "source-repo:\n");
-        AppendTo(stream, "    - type: ", pkg.SourceRepository.Type, "\n");
-        AppendTo(stream, "      url: ", pkg.SourceRepository.URL, "\n");
+        AppendTo(stream, "    type: ", pkg.SourceRepository.Type, "\n");
+        AppendTo(stream, "    url: ", pkg.SourceRepository.URL, "\n");
     fi;
 
     if IsBound(pkg.IssueTrackerURL) then
@@ -239,7 +239,7 @@ GeneratePackageYML:=function(path)
     CloseStream(stream);
 end;
 
-inputStream := InputTextFile("_PackagesTest/tmp/list-of-paths-to-packageinfo-files.txt");
+inputStream := InputTextFile("_Packages/tmp/list-of-paths-to-packageinfo-files.txt");
 pathsToPackageInfoFile := ReadAll(inputStream);
 pathsToPackageInfoFile := SplitString(pathsToPackageInfoFile, "\n");
 Print("\n");
