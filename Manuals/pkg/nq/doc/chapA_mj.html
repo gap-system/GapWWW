@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (nq) - Appendix A: The nq command line interface</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapA"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapA.html">[MathJax off]</a></p>
+<p><a id="X78A212947932A6D3" name="X78A212947932A6D3"></a></p>
+<div class="ChapSects"><a href="chapA_mj.html#X78A212947932A6D3">A <span class="Heading">The nq command line interface</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X7B495102781E821B">A.1 <span class="Heading">How to use the ANU NQ</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X791091ED814A9B87">A.2 <span class="Heading">The input format for presentations</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X7B5623E3821CC0D0">A.3 <span class="Heading">An example</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X829490077E75F283">A.4 <span class="Heading">Some remarks about the algorithm</span></a>
+</span>
+</div>
+</div>
+
+<h3>A <span class="Heading">The nq command line interface</span></h3>
+
+<p><a id="X7B495102781E821B" name="X7B495102781E821B"></a></p>
+
+<h4>A.1 <span class="Heading">How to use the ANU NQ</span></h4>
+
+<p>If you start the ANU NQ by typing</p>
+
+
+<div class="example"><pre>
+     nq -X
+</pre></div>
+
+<p>you will get the following message:</p>
+
+
+<div class="example"><pre>
+    unknown option: -X
+    usage: nq [-a] [-M] [-d] [-g] [-v] [-s] [-f] [-c] [-m]
+              [-t &lt;n&gt;] [-l &lt;n&gt;] [-r &lt;n&gt;] [-n &lt;n&gt;] [-e &lt;n&gt;]
+              [-y] [-o] [-p] [-E] [&lt;presentation&gt;] [&lt;class&gt;]
+</pre></div>
+
+<p>All parameters in square brackets are optional. The parameter &lt;presentation&gt; has to be the name of a file that contains a finite group presentation for which a nilpotent quotient is to be calculated. This file name must not start with a digit. If it is not present, nq will read the presentation from standard input. The parameter &lt;class&gt; restricts the computation of the nilpotent quotient to at most that (nilpotency) class, i.e. the program calculates the quotient group of the <span class="SimpleMath">\((c+1)\)</span>-th term of the lower central series. If &lt;class&gt; is omitted, the program computes successively the factor groups of the lower central series of the given group. If there is a largest nilpotent quotient, i.e., if the lower central series becomes constant, the program will eventually terminate with the largest nilpotent quotient. If there is no largest nilpotent quotient, the program will run forever (or more precisely will run out of resources). On termination the program prints a nilpotent presentation for the nilpotent quotient it has computed. The options -l, -r and -e can be used to enforce Engel conditions on the nilpotent quotient to be calculated. All these options have to be followed by a positive integer &lt;n&gt;. Their meaning is the following:</p>
+
+
+<dl>
+<dt><strong class="Mark">-n &lt;k&gt;</strong></dt>
+<dd><p>This option forces the first k generators to be left or right Engel element if also the option -l or -r (or both) is present. Otherwise it is ignored.</p>
+
+</dd>
+<dt><strong class="Mark">-l &lt;n&gt;</strong></dt>
+<dd><p>This forces the first k generators <span class="SimpleMath">\(g_1,...,g_k\)</span> of the nilpotent quotient Q to be left n-Engel elements, i.e., they satisfy <span class="SimpleMath">\([x,...,x,g_i] = 1\)</span> (x occurring n-times) for all x in Q and <span class="SimpleMath">\(1 &lt;= i &lt;= k\)</span>. If the option -n is not used, then k = 1.</p>
+
+</dd>
+<dt><strong class="Mark">-r &lt;n&gt;</strong></dt>
+<dd><p>This forces the first k generators <span class="SimpleMath">\(g_1,...,g_k\)</span> of the nilpotent quotient Q to be right n-Engel elements,i.e., they satisfy <span class="SimpleMath">\([g_i,x,..,x] = 1\)</span> (x occurring n-times) for all x in Q and <span class="SimpleMath">\(1 &lt;= i &lt;= k\)</span>. If the option -n is not used, then k = 1.</p>
+
+</dd>
+<dt><strong class="Mark">-e &lt;n&gt;</strong></dt>
+<dd><p>This enforces the n-th Engel law on Q, i.e., <span class="SimpleMath">\([x,y,..,y] = 1\)</span> (y occurring n-times) for all x,y in Q.</p>
+
+</dd>
+<dt><strong class="Mark">-t &lt;n&gt;</strong></dt>
+<dd><p>This option specifies how much CPU time the program is allowed to use. It will terminate after &lt;n&gt; seconds of CPU time. If &lt;n&gt; is followed (without space) by one of the letters m, h or d, &lt;n&gt; specifies the time in minutes, hours or days, respectively.</p>
+
+</dd>
+</dl>
+<p>The other options have the following meaning. Care has to be taken when the options -s or -c are used since the resulting nilpotent quotient need NOT satisfy the required Engel condition. The reason for this is that a smaller set of test words is used if one of these two options are present. Although this smaller set of test words seems to be sufficient to enforce the required Engel condition, this fact has not been proven.</p>
+
+
+<dl>
+<dt><strong class="Mark">-a</strong></dt>
+<dd><p>For each factor of the lower central series a file is created in the current directory that contains an integer matrix describing the factor as abelian group. The first number in that file is the number of columns of the matrix. Then the matrix follows in row major order. The matrix for the i-th factor is put into the file &lt;presentation&gt;.abinv.&lt;i&gt;.</p>
+
+</dd>
+<dt><strong class="Mark">-p</strong></dt>
+<dd><p>toggles printing of the pc presentation for the nilpotent quotient at the end of a calculation.</p>
+
+</dd>
+<dt><strong class="Mark">-s</strong></dt>
+<dd><p>This option causes the program to check only semigroup words in the generating set of the nilpotent quotient when an Engel condition is enforced. If none of the options -l, -r or -e are present, it is ignored.</p>
+
+</dd>
+<dt><strong class="Mark">-f</strong></dt>
+<dd><p>This option causes to check semiwords in the generating set of the nilpotent quotient first and then all other words that need to be checked. It is ignored if the option -s is used or none of the options -l, -r or -e are present.</p>
+
+</dd>
+<dt><strong class="Mark">-c</strong></dt>
+<dd><p>This option stops checking the Engel law at each class if all the checks of a certain weight did not yield any non-trivial instances of the law.</p>
+
+</dd>
+<dt><strong class="Mark">-d</strong></dt>
+<dd><p>Switch on debug mode and perform checks during the computation. Not yet implemented.</p>
+
+</dd>
+<dt><strong class="Mark">-o</strong></dt>
+<dd><p>In checking Engel identities, instances are process in the order of increased weight. This flag reverses the order.</p>
+
+</dd>
+<dt><strong class="Mark">-y</strong></dt>
+<dd><p>Enforce the identities <span class="SimpleMath">\(x^8\)</span> and <span class="SimpleMath">\([ [x1,x2,x3], [x4,x5,x6] ]\)</span> on the nilpotent quotient.</p>
+
+</dd>
+<dt><strong class="Mark">-v</strong></dt>
+<dd><p>Switch on verbose mode.</p>
+
+</dd>
+<dt><strong class="Mark">-g</strong></dt>
+<dd><p>Produce GAP output. Presently the GAP output consists only of a sequence of integer matrices whose rows are relations of the factors of the lower central series as abelian groups. This will change as soon as GAP can handle infinite polycyclic groups.</p>
+
+</dd>
+<dt><strong class="Mark">-E</strong></dt>
+<dd><p>the *last* n generators are Engel generators. This works in conjunction with option -n.</p>
+
+</dd>
+<dt><strong class="Mark">-m</strong></dt>
+<dd><p>output the relation matrix for each factor of the lower central series. The matrices are written to files with the names 'matrix.&lt;cl&gt;' where &lt;cl&gt; is replaced by the number of the factor in the lower central series. Each file contains first the number of columns of the matrix and then the rows of the matrix. The matrix is written as each relation is produced and is not in upper triangular form.</p>
+
+</dd>
+<dt><strong class="Mark">-M</strong></dt>
+<dd><p>output the relation matrix before and after relations have been enforced. This results in two groups of files with names '&lt;pres&gt;.nilp.&lt;cl&gt;' and '&lt;pres&gt;.mult.&lt;cl&gt;' where &lt;pres&gt; is the name of the input files and &lt;cl&gt; is the class. The matrices are in upper triangular form.</p>
+
+</dd>
+</dl>
+<p><a id="X791091ED814A9B87" name="X791091ED814A9B87"></a></p>
+
+<h4>A.2 <span class="Heading">The input format for presentations</span></h4>
+
+<p>The input format for finite presentations resembles the way many people write down a presentation on paper. Here are some examples of presentations that the ANU NQ accepts:</p>
+
+
+<pre class="normal">
+
+
+    &lt; a, b | &gt;                       # free group of rank 2
+
+    &lt; a, b, c | [a,b,c],             # a left normed commutator
+                [b,c,c,c]^6,         # another one raised to a power
+                a^2 = c^-3*a^2*c^3,  # a relation
+                a^(b*c) = a,         # a conjugate relation
+                (a*[b,(a*c)])^6      # something that looks complicated
+    &gt;
+
+
+</pre>
+
+<p>A presentation starts with '&lt;' followed be a list of generators separated by commas. Generator names are strings that contain only upper and lower case letters, digits, dots and underscores and that do not start with a digit. The list of generator names is separated from the list of relators/relations by the symbol '|'. Relators and relations are separated by commas and can be mixed arbitrarily. Parentheses can be used in order to group subexpressions together. Square brackets can be used in order to form left normed commutators. The symbols '*' and '^' can be used to form products and powers, respectively. The presentation finishes with the symbol '&gt;'. A comment starts with the symbol '#' and finishes at the end of the line. The file src/presentation.c contains a complete grammar for the presentations accepted by the ANU NQ.</p>
+
+<p><a id="X7B5623E3821CC0D0" name="X7B5623E3821CC0D0"></a></p>
+
+<h4>A.3 <span class="Heading">An example</span></h4>
+
+<p>Let G be the free group on two generators x and y. The input file (called free2.fp here) contains the following:</p>
+
+
+<pre class="normal">
+
+
+        &lt; x, y | &gt;
+
+
+</pre>
+
+<p>Computing the class 3 quotient with the ANU NQ by typing</p>
+
+
+<pre class="normal">
+
+
+        nq free2.fp 3
+
+
+</pre>
+
+<p>produces the following output:</p>
+
+
+<pre class="normal">
+
+
+#
+#    The ANU Nilpotent Quotient Program (Version 2.3)
+#    Calculating a nilpotent quotient
+#    Input: free2.fp
+#    Nilpotency class: 3
+#    Program: nq
+#    Size of exponents: 8 bytes
+#
+#    Calculating the abelian quotient ...
+#    The abelian quotient has 2 generators
+#        with the following exponents: 0 0
+#
+#    Calculating the class 2 quotient ...
+##  Sizes:  2  3
+#    Layer 2 of the lower central series has 1 generators
+#          with the following exponents: 0
+#
+#    Calculating the class 3 quotient ...
+##  Sizes:  2  3  5
+#    Layer 3 of the lower central series has 2 generators
+#          with the following exponents: 0 0
+#
+
+
+#    The epimorphism :
+#    x |---&gt; A
+#    y |---&gt; B
+
+
+#    The nilpotent quotient :
+    &lt;A,B,C,D,E
+      |
+        B^A           =: B*C,
+        B^(A^-1)      =  B*C^-1*D,
+        C^A           =: C*D,
+        C^(A^-1)      =  C*D^-1,
+        C^B           =: C*E,
+        C^(B^-1)      =  C*E^-1 &gt;
+
+#    Class : 3
+#    Nr of generators of each class : 2 1 2
+
+
+#    The definitions:
+#    C := [ B, A ]
+#    D := [ B, A, A ]
+#    E := [ B, A, B ]
+#    total runtime : 1 msec
+#    total size    : 0 byte
+##  Total time spent on integer matrices: 0
+
+
+</pre>
+
+<p>Most of the comments are fairly self-explanatory. One note of caution is necessary: The number of generators for each factor of the lower central series is not the minimal number possible but is the number of generators that the ANU NQ chose to use. This will be improved in one of the future version of the program. The epimorphism from the original group onto the nilpotent quotient is printed in a somewhat confusing way. The generators on the left hand side of the arrows correspond to the generators in the original presentation but are printed with different names. This will be fixed in one of the next version.</p>
+
+<p><a id="X829490077E75F283" name="X829490077E75F283"></a></p>
+
+<h4>A.4 <span class="Heading">Some remarks about the algorithm</span></h4>
+
+<p>The implementation of the algorithm is fairly straight forward. The program uses a weighted nilpotent presentation with definitions to represent a nilpotent group. Calculations in the nilpotent group are done using a collector from the left without combinatorial collection. Generators for the <span class="SimpleMath">\(c\)</span>-th lower central factor are defined as commutators of the form <span class="SimpleMath">\([y,x]\)</span>, where <span class="SimpleMath">\(x\)</span> is a generator of weight 1 and <span class="SimpleMath">\(y\)</span> is a generator of weight <span class="SimpleMath">\(c-1\)</span>. Then the program calculates the necessary changes (tails) for all relations which are not definitions, runs through the consistency check and evaluates the original relations on the polycyclic presentation. This gives a list of words, which have to be made trivial in order to obtain a consistent polycyclic presentation representing a nilpotent quotient of the given finitely presented group. This list is converted into a integer matrix, which is transformed into upper triangular form using the Kannan-Bachem algorithm. The GNU multiple precision package is used for this.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

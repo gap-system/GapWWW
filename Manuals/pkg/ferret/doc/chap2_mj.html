@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Ferret) - Chapter 2: The Solve Method</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X83B607B385FBB68A" name="X83B607B385FBB68A"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X83B607B385FBB68A">2 <span class="Heading">The Solve Method</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7ADF81FD7F1709BB">2.1 <span class="Heading">Methods of representing groups in Ferret</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C1B860E87BD036C">2.1-1 <span class="Heading">ConStabilize</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7EE49BAB82A1BB20">2.1-2 ConInGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7A415C2480970A43">2.1-3 Solve</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">The Solve Method</span></h3>
+
+<p>The central functionality of the Ferret package is based around the Solve method. This function performs a backtrack search, using the permutation backtracking algorithm, over a set of groups or cosets. Often users will want to use a higher level function which wraps this functionality, such as Stabilizer or Intersection. The solve function accepts a list of groups or cosets, and finds their intersection. For efficiency reasons, these groups can be specified in a variety of different ways. As an example, we will consider how to implement Stabilizer(G, S, OnSets), the stabilizer of a set S in a permutation group G using Solve (this is not necessary, as when Ferret is loaded this method is replaced with a Ferret-based implementation). Another way of viewing Stabilizer(G, S, OnSets) is as the Intersection of G with the Stabilizer of (Sym(n), S, OnSets), where Sym(n) is the symmetric group on n points, and n is at least as large as the largest moved point in G. Solve takes a list of objects which represent groups. Two of these are ConInGroup(G), which represents the group G, and ConStabilize(S, OnSets), which represents the group which stabilizes S. We find the intersection of these two groups by Solve([ConInGroup(G), ConStabilize(S, OnSets)]).</p>
+
+<p><a id="X7ADF81FD7F1709BB" name="X7ADF81FD7F1709BB"></a></p>
+
+<h4>2.1 <span class="Heading">Methods of representing groups in Ferret</span></h4>
+
+<p>Groups and cosets must be represented in a way which Ferret can understand. The following list gives all the types of groups and cosets which Ferret accepts, and how to construct them.</p>
+
+<p><a id="X7C1B860E87BD036C" name="X7C1B860E87BD036C"></a></p>
+
+<h5>2.1-1 <span class="Heading">ConStabilize</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConStabilize</code>( <var class="Arg">object</var>, <var class="Arg">action</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConStabilize</code>( <var class="Arg">object</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>In the first form this represents the group which stabilises <var class="Arg">object</var> under <var class="Arg">action</var>. The currently allowed actions are OnSets, OnSetsSets, OnSetsDisjointSets, OnSetsTuples, OnTuples, OnPairs and OnDirectedGraph. In the second form it represents the stabilizer of a partial perm or transformation in the symmetric group on <var class="Arg">n</var> points. Both of these methods are for constructing arguments for the <code class="func">Solve</code> (<a href="chap2_mj.html#X7A415C2480970A43"><span class="RefLink">2.1-3</span></a>) method.</p>
+
+<p><a id="X7EE49BAB82A1BB20" name="X7EE49BAB82A1BB20"></a></p>
+
+<h5>2.1-2 ConInGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConInGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Represents the permutation group <var class="Arg">G</var>, as an argument for <code class="func">Solve</code> (<a href="chap2_mj.html#X7A415C2480970A43"><span class="RefLink">2.1-3</span></a>).</p>
+
+<p>These methods are both used with Solve:</p>
+
+<p><a id="X7A415C2480970A43" name="X7A415C2480970A43"></a></p>
+
+<h5>2.1-3 Solve</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Solve</code>( <var class="Arg">constraints</var>[, <var class="Arg">rec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Finds the intersection of the list <var class="Arg">constraints</var>. Each member of <var class="Arg">constraints</var> should be a group or coset generated by one of <code class="func">ConInGroup</code> (<a href="chap2_mj.html#X7EE49BAB82A1BB20"><span class="RefLink">2.1-2</span></a>) or ConStabilize. The optional second argument allows configuration options to be passed in. These follow options are supported:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">rbaseCellHeuristic</code> (default "smallest")</strong></dt>
+<dd><p>The cell to be branched on. This is the option which will most effect the time taken to search. the default is usually best. Other options are: "First" (first cell), "Largest" (largest cell), "smallest2" (the 2nd smallest cell), "random" (a random cell) and "randomsmallest" (one of the smallest cells, choosen randomly)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">rbaseValueHeuristic</code> (default "smallest")</strong></dt>
+<dd><p>Choose which cell to branch on within a cell. While this will generally make a big difference to search, it is hard to predict the best value, and small changes to the problem will change the best heuristic. Options are the same as <code class="code">rbaseCellHeuristic</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">searchValueHeuristic</code> (default <code class="keyw">RBase</code>)</strong></dt>
+<dd><p>The order to branch during search. In general the best order is very hard to predict. Options are "RBase", "InvRBase", "Random", "Sorted" or "Nosort" (which uses the order the values naturally end up in by the algorithm).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">searchFirstBranchValueHeuristic</code> (default <code class="keyw">RBase</code>)</strong></dt>
+<dd><p>Choose the search order used just on the left-most branches of search. Allows the same options as <code class="code">searchValueHeuristic</code></p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">stats</code> (default <code class="code">false</code>)</strong></dt>
+<dd><p>Change the return value to provide a range of information about how search performed (implies <code class="code">recreturn</code>). This information will change between releases.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">nodeLimit</code> (default <code class="code">false</code>) </strong></dt>
+<dd><p>Either <strong class="button">false</strong>, or an integer which places a limit on the amount of search which should be performed. WARNING: When this option is set to an integer, Ferret will return the current best answer when the limit is reached, which may be a subgroup of the actual result. To know if this limit was reached, set <code class="code">stats</code> to <strong class="button">true</strong>, and check the nodes.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">recreturn</code> (default <code class="code">false</code>) </strong></dt>
+<dd><p>Return a record containing private information, rather than the group.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">only_find_generators</code> (default <code class="code">true</code>)</strong></dt>
+<dd><p>By default only find the generators of the group. If false, then find all members of the group. This option is only useful for testing. If 'true', then sets 'recreturn' to true.</p>
+
+</dd>
+</dl>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

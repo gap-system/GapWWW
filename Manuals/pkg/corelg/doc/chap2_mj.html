@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (CoReLG) - Chapter 2: The field SqrtField</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X83DD4ACD87694138" name="X83DD4ACD87694138"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X83DD4ACD87694138">2 <span class="Heading">The field <var class="Arg">SqrtField</var></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X80E89FFF7F52BE64">2.1 <span class="Heading"> Definition of the field </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7E924375789E5F98">2.1-1 SqrtFieldIsGaussRat</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X850FE9D385B653D9">2.2 <span class="Heading"> Construction of elements </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84E7D3D787000313">2.2-1 Sqroot</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86C3EA257D7CF10C">2.2-2 CoefficientsOfSqrtFieldElt</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7B0063817B03422F">2.2-3 SqrtFieldEltByCoefficients</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84E90EC582E8A921">2.2-4 SqrtFieldEltToCyclotomic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7EBF6AAC7A4189CC">2.2-5 SqrtFieldEltByCyclotomic</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X82EB5BE77F9F686A">2.3 <span class="Heading"> Basic operations </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X873983AD867AC476">2.3-1 SqrtFieldMakeRational</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X860A58627B6D5999">2.3-2 SqrtFieldPolynomialToRationalPolynomial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X79C882567BC98D65">2.3-3 SqrtFieldRationalPolynomialToSqrtFieldPolynomial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82D6EDC685D12AE2">2.3-4 Factors</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">The field <var class="Arg">SqrtField</var></span></h3>
+
+<p><a id="X80E89FFF7F52BE64" name="X80E89FFF7F52BE64"></a></p>
+
+<h4>2.1 <span class="Heading"> Definition of the field </span></h4>
+
+<p>The field <span class="SimpleMath">\(\mathbb{Q}^{\sqrt{}}(\imath)\)</span> with <span class="SimpleMath">\(\mathbb{Q}^{\sqrt{}}=\mathbb{Q}(\{\sqrt{p}\mid p\textrm{ a prime}\})\)</span> and <span class="SimpleMath">\(\imath=\sqrt{-1}\in\mathbb{C}\)</span> is realised as <var class="Arg">SqrtField</var>. A few functions print some information on what they are doing to the info class <var class="Arg">InfoSqrtField</var>; this can be turned off by setting <var class="Arg">SetInfoLevel( InfoSqrtField, 0 );</var>.</p>
+
+<p><a id="X7E924375789E5F98" name="X7E924375789E5F98"></a></p>
+
+<h5>2.1-1 SqrtFieldIsGaussRat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SqrtFieldIsGaussRat</code>( <var class="Arg">q</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">q</var> is an element of <var class="Arg">SqrtField</var>; this function returns <var class="Arg">true</var> if and only if <var class="Arg">q</var> is the product of <var class="Arg">One(SqrtField)</var> and a Gaussian rational.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := SqrtField;</span>
+SqrtField
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsField( F ); LeftActingDomain( F ); Size( F ); Characteristic( F );</span>
+true
+GaussianRationals
+infinity
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">one := One( F );</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">2 in F; 2*one in F; 2*E(4)*one in F;</span>
+false
+true
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := 2/3*E(4)*one;; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a in SqrtField; a in GaussianRationals; SqrtFieldIsGaussRat( a );</span>
+true
+false
+true
+</pre></div>
+
+<p><a id="X850FE9D385B653D9" name="X850FE9D385B653D9"></a></p>
+
+<h4>2.2 <span class="Heading"> Construction of elements </span></h4>
+
+<p>Every <span class="SimpleMath">\(f\)</span> in <var class="Arg">SqrtField</var> can be uniquely written as <span class="SimpleMath">\(f=\sum_{j=1}^m r_i \sqrt{k_j}\)</span> for Gaussian rationals <span class="SimpleMath">\(r_i\in\mathbb{Q}(\imath)\)</span> and pairwise distinct squarefree positive integers <span class="SimpleMath">\(k_1,\ldots,k_m\)</span>. Thus, <span class="SimpleMath">\(f\)</span> can be described efficiently by its coefficient vector <span class="SimpleMath">\([[r_1,k_1],\ldots,[r_j,k_j]]\)</span>.</p>
+
+<p><a id="X84E7D3D787000313" name="X84E7D3D787000313"></a></p>
+
+<h5>2.2-1 Sqroot</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Sqroot</code>( <var class="Arg">q</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">q</var> is a rational number and <var class="Arg">Sqroot(q)</var> is the element <span class="SimpleMath">\(\sqrt{q}\)</span> as an element of <var class="Arg">SqrtField</var>. If <span class="SimpleMath">\(q=(-1)^\epsilon a/b\)</span> with coprime integers <span class="SimpleMath">\( a,b\geq 0\)</span> and <span class="SimpleMath">\(\epsilon\in\{0,1\}\)</span>, then <var class="Arg">Sqroot(q)</var> is represented as the element <var class="Arg">E(4)</var><span class="SimpleMath">\(^\varepsilon\)</span><var class="Arg">*b*Sqroot(ab)</var> of <var class="Arg">SqrtField</var>.</p>
+
+<p><a id="X86C3EA257D7CF10C" name="X86C3EA257D7CF10C"></a></p>
+
+<h5>2.2-2 CoefficientsOfSqrtFieldElt</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoefficientsOfSqrtFieldElt</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>If <var class="Arg">f</var> is an element in <var class="Arg">SqrtField</var>, then <var class="Arg">CoefficientsOfSqrtFieldElt(f)</var> returns its coefficient vector <span class="SimpleMath">\([[r_1,k_1],\ldots,[r_m,k_m]]\)</span> as described above, that is, <span class="SimpleMath">\(r_1,\ldots,r_m\in\mathbb{Q}(\imath)\)</span> and <span class="SimpleMath">\(k_1,\ldots,k_m\)</span> are pairwise distinct positive squarefree integers such that <span class="SimpleMath">\(f=\sum_{j=1}^m r_j\sqrt{k_j}\)</span>.</p>
+
+<p><a id="X7B0063817B03422F" name="X7B0063817B03422F"></a></p>
+
+<h5>2.2-3 SqrtFieldEltByCoefficients</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SqrtFieldEltByCoefficients</code>( <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>If <var class="Arg">l</var> is a list <span class="SimpleMath">\([[r_1,k_1],\ldots,[r_m,k_m]]\)</span> with Gaussian rationals <span class="SimpleMath">\(r_j\)</span> and rationals <span class="SimpleMath">\(k_j\)</span>, then <var class="Arg">SqrtFieldEltByCoeffiients(l)</var> returns the element <span class="SimpleMath">\(\sum_{j=1}^m r_j\sqrt{k_j}\)</span> as an element of <var class="Arg">SqrtField</var>. Note that here <span class="SimpleMath">\(k_1,\ldots,k_m\)</span> need not to be positive, squarefree, or pairwise distinct.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Sqroot(-(2*3*4)/(11*13)); Sqroot(245/15); Sqroot(16/9);</span>
+2/143*E(4)*Sqroot(858)
+7/3*Sqroot(3)
+4/3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := 2+Sqroot(7)+Sqroot(99);</span>
+2 + Sqroot(7) + 3*Sqroot(11)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoefficientsOfSqrtFieldElt(a);</span>
+[ [ 2, 1 ], [ 1, 7 ], [ 3, 11 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SqrtFieldEltByCoefficients([[2,9],[1,7],[E(4),13]]);</span>
+6 + Sqroot(7) + E(4)*Sqroot(13)
+</pre></div>
+
+<p><a id="X84E90EC582E8A921" name="X84E90EC582E8A921"></a></p>
+
+<h5>2.2-4 SqrtFieldEltToCyclotomic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SqrtFieldEltToCyclotomic</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>If <var class="Arg">f</var> lies in <var class="Arg">SqrtField</var> with coefficient vector <span class="SimpleMath">\([[r_1,k_1],\ldots,[r_m,k_m]]\)</span>, then <var class="Arg">SqrtFieldEltToCyclotomic(f)</var> returns <span class="SimpleMath">\(\sum_{j=1}^m r_j\sqrt{k_j}\)</span> lying in a suitable cyclotomic field <var class="Arg">CF(n)</var>. The degree <span class="SimpleMath">\(n\)</span> can easily become too large, hence this function should be used with caution.</p>
+
+<p><a id="X7EBF6AAC7A4189CC" name="X7EBF6AAC7A4189CC"></a></p>
+
+<h5>2.2-5 SqrtFieldEltByCyclotomic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SqrtFieldEltByCyclotomic</code>( <var class="Arg">c</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>If <var class="Arg">c</var> is an element of <span class="SimpleMath">\(\mathbb{Q}^{\sqrt{}}(\imath)\)</span> represented as an element of a cyclotomic field <var class="Arg">CF(n)</var>, then <var class="Arg">SqrtFieldEltByCyclotomic(c)</var> returns the corresponding element in <var class="Arg">SqrtField</var>. Our algorithm for doing this is described in <a href="chapBib_mj.html#biBhdwdg12">[DG13]</a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SqrtFieldEltToCyclotomic( Sqroot(2) );</span>
+E(8)-E(8)^3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SqrtFieldEltToCyclotomic( Sqroot(2)+E(4)*Sqroot(7) );</span>
+E(56)^5+E(56)^8+E(56)^13-E(56)^15+E(56)^16-E(56)^23-E(56)^24+E(56)^29-E(56)^31
+ +E(56)^32+E(56)^37-E(56)^39-E(56)^40+E(56)^45-E(56)^47-E(56)^48+E(56)^53
+ -E(56)^55
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SqrtFieldEltByCyclotomic( E(8)-E(8)^3 );</span>
+Sqroot(2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SqrtFieldEltByCyclotomic( 3*E(4)*Sqrt(11)-2/4*Sqrt(-13/7) );</span>
+3*E(4)*Sqroot(11) + (-1/14*E(4))*Sqroot(91)
+</pre></div>
+
+<p><a id="X82EB5BE77F9F686A" name="X82EB5BE77F9F686A"></a></p>
+
+<h4>2.3 <span class="Heading"> Basic operations </span></h4>
+
+<p>All basic field operations are available. The inverse of an element <span class="SimpleMath">\(f\)</span> in <var class="Arg">SqrtField</var> as follows: We first compute the minimal polynomial <span class="SimpleMath">\(p(X)\)</span> of <span class="SimpleMath">\(f\)</span> over <span class="SimpleMath">\(\mathbb{Q}(\imath)\)</span>, that is, a non-trivial linear combination <span class="SimpleMath">\(0=p(f)=a_0+a_1 f+\ldots a_{i-1}f^{i-1}+f^i\)</span>. Then <span class="SimpleMath">\(f^{-1}=-(a_1+a_2f+\ldots+a_{i-1}f^{i-2}+f^{i-1})/a_0\)</span>. Although the inverse of <span class="SimpleMath">\(f\)</span> can be computed with linear algebra methods only, the degree of the minimal polynomial of <span class="SimpleMath">\(f\)</span> can become rather large. For example, if <span class="SimpleMath">\(f=\sum_{j=1}^m r_i \sqrt{k_j}\)</span> for rational <span class="SimpleMath">\(r_i\)</span> and pairwise distinct positive squarefree integers <span class="SimpleMath">\(k_1,\ldots,k_m\)</span>, then <span class="SimpleMath">\(f\)</span> is a primitive element of the number field <span class="SimpleMath">\(\mathbb{Q}(\sqrt{k_1},\ldots,\sqrt{k_m})\)</span>, see for example Lemma A.5 in <a href="chapBib_mj.html#biBhdwdg12">[DG13]</a>. For larger degree, the progress of the computation of the inverse is printed via the InfoClass <var class="Arg">InfoSqrtField</var>. We remark that the method <var class="Arg">Random</var> simply returns a sum of a few terms <span class="SimpleMath">\(a\sqrt{b}\)</span> where <span class="SimpleMath">\(a,b\)</span> are random rationals constructed with <var class="Arg">Random(Rationals)</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := Sqroot( 2 ) + 3 * Sqroot( 3/7 ); b := Sqroot( 21 ) - Sqroot( 2 );</span>
+Sqroot(2) + 3/7*Sqroot(21)
+(-1)*Sqroot(2) + Sqroot(21)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a + b; a * b; a - b;</span>
+10/7*Sqroot(21)
+7 + 4/7*Sqroot(42)
+2*Sqroot(2) + (-4/7)*Sqroot(21)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c := ( a - b )^-2;</span>
+91/8 + 7/4*Sqroot(42)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := Sum( List( [2,3,5,7], x -&gt; Sqroot( x ) ) );</span>
+Sqroot(2) + Sqroot(3) + Sqroot(5) + Sqroot(7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := a^-1; a*b;                                  </span>
+37/43*Sqroot(2) + (-29/43)*Sqroot(3) + (-133/215)*Sqroot(5) + 27/43*Sqroot(
+7) + 62/215*Sqroot(30) + (-10/43)*Sqroot(42) + (-34/215)*Sqroot(70) + 22/
+215*Sqroot(105)
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ComplexConjugate(Sqroot(17)+Sqroot(-7));</span>
+(-E(4))*Sqroot(7) + Sqroot(17)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Random( SqrtField );</span>
+E(4) + (-7/6+1/4*E(4))*Sqroot(2) + (-3/2*E(4))*Sqroot(3)
+</pre></div>
+
+<p>Most methods for list, matrices, and polynomials also work over <var class="Arg">SqrtField</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:=[[Sqroot(2),Sqroot(3)],[Sqroot(2),Sqroot(5)],[1,0]]*One(SqrtField);</span>
+[ [ Sqroot(2), Sqroot(3) ], [ Sqroot(2), Sqroot(5) ], [ 1, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NullspaceMat(m);</span>
+[ [ (-5/4)*Sqroot(2) + (-1/4)*Sqroot(30), 3/4*Sqroot(2) + 1/4*Sqroot(30), 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RankMat(m);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := [[Sqroot(2),Sqroot(3)],[Sqroot(2),Sqroot(5)]];  </span>
+[ [ Sqroot(2), Sqroot(3) ], [ Sqroot(2), Sqroot(5) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Determinant( m );  DefaultFieldOfMatrix( m );</span>
+(-1)*Sqroot(6) + Sqroot(10)
+SqrtField
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Indeterminate( SqrtField, "x" );; f := x^2+x+1;</span>
+x^2+x+1
+</pre></div>
+
+<p><a id="X873983AD867AC476" name="X873983AD867AC476"></a></p>
+
+<h5>2.3-1 SqrtFieldMakeRational</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SqrtFieldMakeRational</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>If <var class="Arg">m</var> is an element of <var class="Arg">SqrtField</var>, or a list or a matrix over <var class="Arg">SqrtField</var>, defined over the Gaussian rationals, then <var class="Arg">SqrtFieldMakeRational( m )</var> returns the corresponding element in <span class="SimpleMath">\(\mathbb{Q}(\imath)\)</span> or defined over <span class="SimpleMath">\(\mathbb{Q}(\imath)\)</span>, respectively. This function is used internally, for example, to compute the determinant or rank of a rational matrix over <var class="Arg">SqrtField</var> more efficiently. It is also used in the following three functions.</p>
+
+<p><a id="X860A58627B6D5999" name="X860A58627B6D5999"></a></p>
+
+<h5>2.3-2 SqrtFieldPolynomialToRationalPolynomial</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SqrtFieldPolynomialToRationalPolynomial</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">f</var> is a polynomial over <var class="Arg">SqrtField</var> but with coefficients in the Gaussian rationals. The function returns the corresponding polynomial defined over the Gaussian rationals.</p>
+
+<p><a id="X79C882567BC98D65" name="X79C882567BC98D65"></a></p>
+
+<h5>2.3-3 SqrtFieldRationalPolynomialToSqrtFieldPolynomial</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SqrtFieldRationalPolynomialToSqrtFieldPolynomial</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>If <var class="Arg">f</var> is a polynomial over the Gaussian rationals, then the function returns the corresponding polynomial defined over <var class="Arg">SqrtField</var>.</p>
+
+<p><a id="X82D6EDC685D12AE2" name="X82D6EDC685D12AE2"></a></p>
+
+<h5>2.3-4 Factors</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Factors</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>If <var class="Arg">f</var> is a rational polynomial defined over <var class="Arg">SqrtField</var>, then the previous two functions are used to obtain its factorisation over <span class="SimpleMath">\(\mathbb{Q}\)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := SqrtField;; one := One( SqrtField );;                 </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Indeterminate( F, "x" );; f := x^5 + 4*x^3 + E(4)*one*x;</span>
+x^5+4*x^3+E(4)*x
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SqrtFieldPolynomialToRationalPolynomial(f);</span>
+x_1^5+4*x_1^3+E(4)*x_1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SqrtFieldRationalPolynomialToSqrtFieldPolynomial(last);</span>
+x^5+4*x^3+E(4)*x
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := x^2-1;; Factors(f);</span>
+[ x-1, x+1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := x^2+1;; Factors(f);</span>
+[ x^2+1 ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

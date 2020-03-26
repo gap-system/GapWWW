@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Polenta) - Chapter 3: An example application</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X81CAD2F27B2066C4" name="X81CAD2F27B2066C4"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X81CAD2F27B2066C4">3 <span class="Heading">An example application</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7DAC33E37B977087">3.1 <span class="Heading">Presentation for rational matrix groups</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X79CF643081B3FB26">3.2 <span class="Heading">Modules series</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7BA34CD28059D6CD">3.3 <span class="Heading">Triangularizable subgroups</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">An example application</span></h3>
+
+<p>In this section we outline three example computations with functions from the previous chapter.</p>
+
+<p><a id="X7DAC33E37B977087" name="X7DAC33E37B977087"></a></p>
+
+<h4>3.1 <span class="Heading">Presentation for rational matrix groups</span></h4>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mats :=</span>
+[ [ [ 1, 0, -1/2, 0 ], [ 0, 1, 0, 1 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ],
+  [ [ 1, 1/2, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 1 ], [ 0, 0, 0, 1 ] ],
+  [ [ 1, 0, 0, 1 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ],
+  [ [ 1, -1/2, -3, 7/6 ], [ 0, 1, -1, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 0, 1 ] ],
+  [ [ -1, 3, 3, 0 ], [ 0, 0, 1, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 0, 1 ] ] ];
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := Group( mats );</span>
+&lt;matrix group with 5 generators&gt;
+
+# calculate an isomorphism from G to a pcp-group
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nat := IsomorphismPcpGroup( G );;</span>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := Image( nat );</span>
+Pcp-group with orders [ 2, 2, 3, 5, 5, 5, 0, 0, 0 ]
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := GeneratorsOfGroup( H );</span>
+[ g1, g2, g3, g4, g5, g6, g7, g8, g9]
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mats2 := List( h, x -&gt; PreImage( nat, x ) );;</span>
+
+# take a random element of G
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">exp :=  [ 1, 1, 1, 1, 0, 0, 0, 0, 1 ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := MappedVector( exp, mats2 );</span>
+[ [ -1, 17/2, -1, 233/6 ],
+  [ 0, 1, 0, -2 ],
+  [ 0, 1, -1, 2 ],
+  [ 0, 0, 0, 1 ] ]
+
+# map g into the image of nat
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i := ImageElm( nat, g );</span>
+g1*g2*g3*g4*g9
+
+# exponent vector
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Exponents( i );</span>
+[ 1, 1, 1, 1, 0, 0, 0, 0, 1 ]
+
+# compare the preimage with g
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreImagesRepresentative( nat, i );</span>
+[ [ -1, 17/2, -1, 233/6 ],
+  [ 0, 1, 0, -2 ],
+  [ 0, 1, -1, 2 ],
+  [ 0, 0, 0, 1 ] ]
+
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">last = g;</span>
+true
+
+</pre></div>
+
+<p><a id="X79CF643081B3FB26" name="X79CF643081B3FB26"></a></p>
+
+<h4>3.2 <span class="Heading">Modules series</span></h4>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens :=</span>
+[ [ [ 1746/1405, 524/7025, 418/1405, -77/2810 ],
+    [ 815/843, 899/843, -1675/843, 415/281 ],
+    [ -3358/4215, -3512/21075, 4631/4215, -629/1405 ],
+    [ 258/1405, 792/7025, 1404/1405, 832/1405 ] ],
+  [ [ -2389/2810, 3664/21075, 8942/4215, -35851/16860 ],
+    [ 395/281, 2498/2529, -5105/5058, 3260/2529 ],
+    [ 3539/2810, -13832/63225, -12001/12645, 87053/50580 ],
+    [ 5359/1405, -3128/21075, -13984/4215, 40561/8430 ] ] ];
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := Group( gens );</span>
+&lt;matrix group with 2 generators&gt;
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RadicalSeriesSolvableMatGroup( H );</span>
+[ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ],
+  [ [ 1, 0, 0, 79/138 ], [ 0, 1, 0, -275/828 ], [ 0, 0, 1, -197/414 ] ],
+  [ [ 1, 0, -3, 2 ], [ 0, 1, 55/4, -55/8 ] ],
+  [ [ 1, 4/15, 2/3, 1/6 ] ],
+  [  ] ]
+</pre></div>
+
+<p><a id="X7BA34CD28059D6CD" name="X7BA34CD28059D6CD"></a></p>
+
+<h4>3.3 <span class="Heading">Triangularizable subgroups</span></h4>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := PolExamples(3);</span>
+&lt;matrix group with 2 generators&gt;
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfGroup( G );</span>
+[ [ [ 73/10, -35/2, 42/5, 63/2 ],
+    [ 27/20, -11/4, 9/5, 27/4 ],
+    [ -3/5, 1, -4/5, -9 ],
+    [ -11/20, 7/4, -2/5, 1/4 ] ],
+  [ [ -42/5, 423/10, 27/5, 479/10 ],
+    [ -23/10, 227/20, 13/10, 231/20 ],
+    [ 14/5, -63/5, -4/5, -79/5 ],
+    [ -1/10, 9/20, 1/10, 37/20 ] ] ]
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">subgroups := SubgroupsUnipotentByAbelianByFinite( G );</span>
+rec( T := &lt;matrix group with 2 generators&gt;,
+  U := &lt;matrix group with 4 generators&gt; )
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfGroup( subgroups.T );</span>
+[ [ [ 73/10, -35/2, 42/5, 63/2 ],
+    [ 27/20, -11/4, 9/5, 27/4 ],
+    [ -3/5, 1, -4/5, -9 ],
+    [ -11/20, 7/4, -2/5, 1/4 ] ],
+  [ [ -42/5, 423/10, 27/5, 479/10 ],
+    [ -23/10, 227/20, 13/10, 231/20 ],
+    [ 14/5, -63/5, -4/5, -79/5 ],
+    [ -1/10, 9/20, 1/10, 37/20 ] ] ]
+
+# so G is triangularizable!
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

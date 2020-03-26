@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HeLP) - Chapter 2: The main functions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X7D3DC4ED855DC13C" name="X7D3DC4ED855DC13C"></a></p>
+<div class="ChapSects"><a href="chap2.html#X7D3DC4ED855DC13C">2 <span class="Heading">The main functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7C3DBA147B6CF284">2.1 <span class="Heading">Zassenhaus Conjecture</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81AF79A587054306">2.1-1 HeLP_ZC</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7B12013C7C8A6714">2.2 <span class="Heading">Prime Graph Question</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X813A10398218E9EE">2.2-1 HeLP_PQ</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">The main functions</span></h3>
+
+<p><a id="X7C3DBA147B6CF284" name="X7C3DBA147B6CF284"></a></p>
+
+<h4>2.1 <span class="Heading">Zassenhaus Conjecture</span></h4>
+
+<p>This function checks whether the Zassenhaus Conjecture ((ZC) for short, cf. Section <a href="chap5.html#X7CAEB4DF8506EBF9"><span class="RefLink">5.1</span></a>) can be proved using the HeLP method with the data available in GAP.</p>
+
+<p><a id="X81AF79A587054306" name="X81AF79A587054306"></a></p>
+
+<h5>2.1-1 HeLP_ZC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HeLP_ZC</code>( <var class="Arg">OrdinaryCharacterTable|Group</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if (ZC) can be solved using the given data, <code class="keyw">false</code> otherwise</p>
+
+<p><code class="keyw">HeLP_ZC</code> checks whether the Zassenhaus Conjecture can be solved for the given group using the HeLP method, the Wagner test and all character data available. The argument of the function can be either an ordinary character table or a group. In the second case it will first calculate the corresponding ordinary character table. If the group in question is nilpotent, the Zassenhaus Conjecture holds by a result of A. Weiss and the function will return <code class="keyw">true</code> without performing any calculations.</p>
+
+<p>If the group is not solvable, the function will check all orders which are divisors of the exponent of the group. If the group is solvable, it will only check the orders of group elements, as there can't be any torsion units of another order. The function will use the ordinary table and, for the primes <span class="Math">p</span> for which the group is not <span class="Math">p</span>-solvable, all <span class="Math">p</span>-Brauer tables which are available in GAP to produce as many constraints on the torsion units as possible. Additionally, the Wagner test is applied to the results, cf. Section <a href="chap5.html#X7BA77C9F86ADD546"><span class="RefLink">5.4</span></a>. In case the information suffices to obtain a proof for the Zassenhaus Conjecture for this group the function will return <code class="keyw">true</code> and <code class="keyw">false</code> otherwise. The possible partial augmentations for elements of order <span class="SimpleMath">k</span> and all its powers will also be stored in the list entry <code class="keyw">HeLP_sol[k]</code>.</p>
+
+<p>The prior computed partial augmentations in <code class="keyw">HeLP_sol</code> will not be used and will be overwritten. If you do not like the last fact, please use <code class="func">HeLP_AllOrders</code> (<a href="chap3.html#X8727639883F787C5"><span class="RefLink">3.3-1</span></a>).</p>
+
+<p><a id="X7B12013C7C8A6714" name="X7B12013C7C8A6714"></a></p>
+
+<h4>2.2 <span class="Heading">Prime Graph Question</span></h4>
+
+<p>This function checks whether the Prime Graph Question ((PQ) for short, cf. Section <a href="chap5.html#X7CAEB4DF8506EBF9"><span class="RefLink">5.1</span></a>) can be verified using the HeLP method with the data available in GAP.</p>
+
+<p><a id="X813A10398218E9EE" name="X813A10398218E9EE"></a></p>
+
+<h5>2.2-1 HeLP_PQ</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HeLP_PQ</code>( <var class="Arg">OrdinaryCharacterTable|Group</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if (PQ) can be solved using the given data, <code class="keyw">false</code> otherwise</p>
+
+<p><code class="keyw">HeLP_PQ</code> checks whether an affirmative answer for the Prime Graph Question for the given group can be obtained using the HeLP method, the Wagner restrictions and the data available. The argument of the function can be either an ordinary character table or a group. In the second case it will first calculate the corresponding ordinary character table. If the group in question is solvable, the Prime Graph Question has an affirmative answer by a result of W. Kimmerle and the function will return <code class="keyw">true</code> without performing any calculations.</p>
+
+<p>If the group is non-solvable, the ordinary character table and all <span class="Math">p</span>-Brauer tables for primes <span class="Math">p</span> for which the group is not <span class="Math">p</span>-solvable and which are available in GAP will be used to produce as many constraints on the torsion units as possible. Additionally, the Wagner test is applied to the results, cf. Section <a href="chap5.html#X7BA77C9F86ADD546"><span class="RefLink">5.4</span></a>. In case the information suffices to obtain an affirmative answer for the Prime Graph Question, the function will return <code class="keyw">true</code> and it will return <code class="keyw">false</code> otherwise. Let <span class="Math">p</span> and <span class="Math">q</span> be distinct primes such that there are elements of order <span class="Math">p</span> and <span class="Math">q</span> in <span class="Math">G</span> but no elements of order <span class="Math">pq</span>. Then for <span class="Math">k</span> being <span class="Math">p</span>, <span class="Math">q</span> or <span class="Math">pq</span> the function will save the possible partial augmentations for elements of order <span class="Math">k</span> and its (non-trivial) powers in <code class="keyw">HeLP_sol[k]</code>. The function also does not use the previously computed partial augmentations for elements of these orders but will overwrite the content of <code class="keyw">HeLP_sol</code>. If you do not like the last fact, please use <code class="func">HeLP_AllOrdersPQ</code> (<a href="chap3.html#X7C00E1567BFF1757"><span class="RefLink">3.3-2</span></a>).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (NMO) - Chapter 1: NMO</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chapBib.html">Bib</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7D8A0B897AE65E23" name="X7D8A0B897AE65E23"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7D8A0B897AE65E23">1 <span class="Heading">NMO</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7DFB63A97E67C0A1">1.1 <span class="Heading">Introduction</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X8282EFF97FA1752A">1.2 <span class="Heading">NMO Files within GBNP</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7F83DF528480AEA3">1.3 <span class="Heading">Quickstart</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7B44E73581910347">1.3-1 <span class="Heading">NMO Example 1</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X82D4722E7A4DA58B">1.3-2 <span class="Heading">NMO Example 2</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X85A401278794C813">1.3-3 <span class="Heading">NMO Example 3</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7C42487D8043F876">1.3-4 <span class="Heading">NMO Example 4</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7E4AAA7382D42361">1.4 <span class="Heading">Orderings</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7AE05C0578857310">1.4-1 <span class="Heading">Internals</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X785C92247DF27D6C">1.4-2 <span class="Heading">Internal Routines</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7CDF05BD85AA0EE6">1.4-3 <span class="Heading">Provided Orderings</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7F2E50BE79D79C8F">1.4-4 <span class="Heading">Externals</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7A5671D67CA092F3">1.4-5 <span class="Heading">External Routines</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X8528D2528613E9A2">1.4-6 <span class="Heading">Flexibility vs. Efficiency</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X79B90CCE7A05DEEB">1.5 <span class="Heading">Utility Routines</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7B758C747AD2344B">1.5-1 <span class="Heading">GBNP Patching Routines</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X8150015682ED1709">1.5-2 <span class="Heading">Printing Routine</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>1 <span class="Heading">NMO</span></h3>
+
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+
+<h4>1.1 <span class="Heading">Introduction</span></h4>
+
+<p>What follows is a description of the largely experimental project of providing arbitrary monomial orderings to the <strong class="pkg">GBNP</strong> package. The addition of the orderings comes in the form of a library, and a patch to <strong class="pkg">GBNP</strong>; the patching process being called at the <strong class="pkg">GBNP</strong> user's discretion.</p>
+
+<p>More precisely, after a user creates a monomial ordering via the <strong class="pkg">NMO</strong> library functions, a routine is called which overwrites the two <strong class="pkg">GBNP</strong> functions "LtNP" and "GtNP". In <strong class="pkg">GBNP</strong>, these latter two functions are explicitly length-lexicographic monomial comparison functions, and are used in GBNP's Gröbner Basis routines. Therefore <strong class="pkg">NMO</strong> allows for the creation of arbitrary monomial ordering comparison functions, which, after the patching process, will be used by GBNP in place of its native comparison functions.</p>
+
+<p><strong class="pkg">NMO</strong> is an acronym for Noncommutative Monomial Orderings. Such orderings play a key role in research surrounding noncommutative Gröbner basis theory; see <a href="chapBib.html#biBGreen1997">[Gre99]</a>, <a href="chapBib.html#biBTCS::Mora1994:131">[Mor94]</a>. This package is geared primarily toward the use and study of noncommutative (associative) free algebras with identity, over computational fields. We have done our best to write code that treats a more general class of algebras, but the routines have not been as extensively tested in those cases. Users of the package are encouraged to provide constructive feedback about this issue or any others; we have open ears to ways to better these research tools.</p>
+
+<p>Flexibility in the creation and use of noncommutative monomial orderings has been our guiding principle in writing <strong class="pkg">NMO</strong>. For example, two (or more) orderings can be chained together to form new orderings. It should be noted, however, that efficiency has also been considered in the design of <strong class="pkg">NMO</strong> for commonly used monomial orderings for noncommutative rings (e.g. length left-lexicographic). That is to say, some monomial orderings that occur regularly in the study of noncommutative algebras have already been included in <strong class="pkg">NMO</strong>.</p>
+
+<p>Throughout this chapter, methods and functions are generally classed as <em>External</em> and <em>Internal</em> routines. <em>External</em> routines are methods and functions that will be most useful to the average user, and generally work directly with native <strong class="pkg">GAP</strong> algebraic objects. <em>Internal</em> routines usually concern backend operations and mechanisms, and are often related to operations involving <em>NP representations</em> of <strong class="pkg">GAP</strong> algebraic elements, or they are related to attributes of monomial orderings. Many examples of basic code use are provided; with some examples following the reference material for the functions or methods involved.</p>
+
+<p><a id="X8282EFF97FA1752A" name="X8282EFF97FA1752A"></a></p>
+
+<h4>1.2 <span class="Heading">NMO Files within GBNP</span></h4>
+
+<p>Per the <strong class="pkg">GAP</strong> package standard, <strong class="pkg">NMO</strong> library code is read in via the file <code class="code">gbnp/read.g</code>. The following gives brief descriptions of each of the files loaded by <code class="code">gbnp/read.g</code>, all of which reside in the <code class="code">gbnp/lib/nmo/</code> subdirectory:</p>
+
+
+<ul>
+<li><p><code class="code">ncalgebra.gd</code></p>
+
+<p>Sets up some nice categories and filters in <strong class="pkg">GAP</strong>.</p>
+
+</li>
+<li><p><code class="code">ncordmachine.g*</code></p>
+
+<p>Code for creating the new <strong class="pkg">GAP</strong> family of noncommutative monomial orderings, as well as its attending (internal) machinery.</p>
+
+</li>
+<li><p><code class="code">ncorderings.g*</code></p>
+
+<p>Sets up actual noncommutative monomial orderings. This is where some specific example routines for monomial orderings are included. The less-than functions determining monomial orderings should be collected here, e.g. the length left-lexicographic ordering is here.</p>
+
+</li>
+<li><p><code class="code">ncinterface.g*</code></p>
+
+<p>These files provide the interface to comparison routines for determining equivalence, less-than, and greater-than comparison between two algebraic elements under a given <strong class="pkg">NMO</strong> ordering.</p>
+
+</li>
+<li><p><code class="code">ncutils.g*</code></p>
+
+<p>Helpful utility routines, such as: patching <strong class="pkg">GBNP</strong> for use with an <strong class="pkg">NMO</strong> ordering, unpatching <strong class="pkg">GBNP</strong>, as well as a `String' routine for elements of an associative algebra not already covered in <strong class="pkg">GAP</strong>.</p>
+
+</li>
+</ul>
+<p>There is a documentation directory in <code class="code">gbnp/doc/nmo</code> wherein the <strong class="pkg">GAPDoc</strong> source for this chapter may be found.</p>
+
+<p>Finally, there is an examples directory in <code class="code">gbnp/doc/examples/nmo</code> where the plain <strong class="pkg">GAP</strong> source can be found for the examples in the Quickstart section of this chapter.</p>
+
+<p><a id="X7F83DF528480AEA3" name="X7F83DF528480AEA3"></a></p>
+
+<h4>1.3 <span class="Heading">Quickstart</span></h4>
+
+<p>This Quickstart assumes you've already installed the <strong class="pkg">GBNP</strong> package in its proper home. If that's yet to be done, please see the <strong class="pkg">GBNP</strong> package manual for installation instructions.</p>
+
+<p>If the user wishes, cutting and pasting the commands which directly follow the <strong class="pkg">GAP</strong> prompt <code class="code">gap&gt;</code> is a good way to become familiar with <strong class="pkg">NMO</strong> via the examples below. Alternatively, code for the following examples may be found in <code class="code">gbnp/doc/examples/nmo/example0*.g</code>.</p>
+
+<p>This Quickstart covers specific use of the <strong class="pkg">NMO</strong> package's functionality as pertaining to computing noncommutative Gröbner bases for various examples. There are <strong class="pkg">NMO</strong> user-level routines beyond these Gröbner basis applications that may be of interest, all of which are documented in later sections.</p>
+
+<p><a id="X7B44E73581910347" name="X7B44E73581910347"></a></p>
+
+<h5>1.3-1 <span class="Heading">NMO Example 1</span></h5>
+
+<p>Example 1 is taken from Dr. Edward Green's paper "Noncommutative Gröbner Bases, and Projective Resolutions", and is referenced as "Example 2.7" there; please see <a href="chapBib.html#biBGreen1997">[Gre99]</a> for more information.</p>
+
+<p>Load the <strong class="pkg">GBNP</strong> package with:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("gbnp");</span>
+true
+</pre></div>
+
+<p>Create a noncommutative free algebra on 4 generators over the Rationals in <strong class="pkg">GAP</strong>:</p>
+
+
+<div class="example"><pre>
+gap&gt; A := FreeAssociativeAlgebraWithOne(Rationals,"a","b","c","d");
+&lt;algebra-with-one over Rationals, with 4 generators&gt; 
+</pre></div>
+
+<p>Label the generators of the algebra:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := A.a; b := A.b; c := A.c; d := A.d;</span>
+(1)*a
+(1)*b
+(1)*c
+(1)*d
+</pre></div>
+
+<p>Set up our polynomials, and convert them to <strong class="pkg">GBNP</strong> NP format:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">polys := [c*d*a*b-c*b,b*c-d*a];</span>
+[ (-1)*c*b+(1)*c*d*a*b, (1)*b*c+(-1)*d*a ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">reps := GP2NPList(polys);</span>
+[ [ [ [ 3, 4, 1, 2 ], [ 3, 2 ] ], [ 1, -1 ] ],
+           [ [ [ 4, 1 ], [ 2, 3 ] ], [ -1, 1 ] ] ]
+</pre></div>
+
+<p>Compute the Gröbner basis via <strong class="pkg">GBNP</strong> using its default (length left-lexicographic) ordering; that is, without patching <strong class="pkg">GBNP</strong> with an <strong class="pkg">NMO</strong> ordering:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gbreps := Grobner(reps);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gb := NP2GPList(gbreps,A);</span>
+[ (1)*d*a+(-1)*b*c, (1)*c*b*c*b+(-1)*c*b ]
+</pre></div>
+
+<p>Create length left-lexicographic ordering, with generators ordered: a &lt; b &lt; c &lt; d. Note: this is the default ordering of generators by <strong class="pkg">NMO</strong>, if none is provided:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml := NCMonomialLeftLengthLexOrdering(A);</span>
+NCMonomialLeftLengthLexicographicOrdering([ (1)*a, (1)*b, (1)*c, (1)*d ])
+</pre></div>
+
+<p>Patch <strong class="pkg">GBNP</strong> with the ordering <code class="code">ml</code>, and then run the same example. We should get the same answer as above:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PatchGBNP(ml);</span>
+LtNP patched.
+GtNP patched.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gbreps := Grobner(reps);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gb := NP2GPList(gbreps,A);</span>
+[ (1)*d*a+(-1)*b*c, (1)*c*b*c*b+(-1)*c*b ]
+</pre></div>
+
+<p>Create a Length-Lexicographic ordering on the generators such that d &lt; c &lt; b &lt; a:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml2 := NCMonomialLeftLengthLexOrdering(A,[4,3,2,1]);</span>
+NCMonomialLeftLengthLexicographicOrdering([ (1)*d, (1)*c, (1)*b, (1)*a ])
+</pre></div>
+
+<p>Compute the Gröbner basis with respect to this new ordering on the same algebra:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PatchGBNP(ml2);</span>
+LtNP patched.
+GtNP patched.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gbreps2 := SGrobner(reps);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gb2 := NP2GPList(gbreps2,A);</span>
+[ (1)*b*c+(-1)*d*a, (1)*c*d*a*b+(-1)*c*b, (1)*d*a*d*a*b+(-1)*d*a*b,
+  (1)*c*d*a*d*a+(-1)*c*d*a, (1)*d*a*d*a*d*a+(-1)*d*a*d*a ]
+</pre></div>
+
+<p><a id="X82D4722E7A4DA58B" name="X82D4722E7A4DA58B"></a></p>
+
+<h5>1.3-2 <span class="Heading">NMO Example 2</span></h5>
+
+<p>This example is the same as Example 1 above, except that the length and left-lexicographic orderings are created independently and then chained to form the usual length left-lexicographic ordering. Hence, all results should be the same. Note: we assume from this point forward in all further examples that GBNP is loaded.</p>
+
+<p>Create a noncommutative free algebra on 4 generators over the Rationals, label, and set up the example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := FreeAssociativeAlgebraWithOne(Rationals,"a","b","c","d");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := A.a;; b := A.b;; c := A.c;; d := A.d;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">polys := [c*d*a*b-c*b,b*c-d*a];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">reps := GP2NPList(polys);;</span>
+</pre></div>
+
+<p>Create left-lexicographic ordering with a &lt; b &lt; c &lt; d:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lexord := NCMonomialLeftLexicographicOrdering(A);</span>
+NCMonomialLeftLexicographicOrdering([ (1)*a, (1)*b, (1)*c, (1)*d ])
+</pre></div>
+
+<p>Create a length ordering on monomials in <span class="SimpleMath">A</span>, with ties broken by the lexicographic order <code class="code">lexord</code>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lenlex := NCMonomialLengthOrdering(A,lexord);</span>
+NCMonomialLengthOrdering([ (1)*a, (1)*b, (1)*c, (1)*d ])
+</pre></div>
+
+<p>Patch <strong class="pkg">GBNP</strong> and proceed with our example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PatchGBNP(lenlex);;</span>
+LtNP patched.
+GtNP patched.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gbreps := Grobner(reps);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gb := NP2GPList(gbreps,A);</span>
+[ (1)*d*a+(-1)*b*c, (1)*c*b*c*b+(-1)*c*b ]
+</pre></div>
+
+<p>Now, proceed similarly, with the lexicographic order such that d &lt; c &lt; b &lt; a:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lexord2 := NCMonomialLeftLexicographicOrdering(A,[4,3,2,1]);</span>
+NCMonomialLeftLexicographicOrdering([ (1)*d, (1)*c, (1)*b, (1)*a ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lenlex2 := NCMonomialLengthOrdering(A,lexord2);</span>
+NCMonomialLengthOrdering([ (1)*a, (1)*b, (1)*c, (1)*d ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PatchGBNP(lenlex2);;</span>
+LtNP patched.
+GtNP patched.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gbreps2 := Grobner(reps);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gb2 := NP2GPList(gbreps2,A);</span>
+[ (1)*b*c+(-1)*d*a, (1)*c*d*a*b+(-1)*c*b, (1)*d*a*d*a*b+(-1)*d*a*b,
+  (1)*c*d*a*d*a+(-1)*c*d*a, (1)*d*a*d*a*d*a+(-1)*d*a*d*a ]
+</pre></div>
+
+<p>An important point can be made here. Notice that when the <code class="code">lenlex2</code> length ordering is created, a lexicographic (generator) ordering table is assigned internally to the ordering since one was not provided to it. This is merely a convenience for lexicographically-dependent orderings, and in the case of the length order, it is not used. Only the lex table for <code class="code">lexord2</code> is ever used. Some clarification may be provided in examining:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasNextOrdering(lenlex2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NextOrdering(lenlex2);</span>
+NCMonomialLeftLexicographicOrdering([ (1)*d, (1)*c, (1)*b, (1)*a ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LexicographicTable(NextOrdering(lenlex2));</span>
+[ (1)*d, (1)*c, (1)*b, (1)*a ]
+</pre></div>
+
+<p><a id="X85A401278794C813" name="X85A401278794C813"></a></p>
+
+<h5>1.3-3 <span class="Heading">NMO Example 3</span></h5>
+
+<p>Example 3 is taken from the book "Ideals, Varieties, and Algorithms", (<a href="chapBib.html#biBCLO97">[CLO97]</a>, Example 2, p. 93-94); it is a commutative example.</p>
+
+<p>First, we set up the problem and find a Gröbner basis with respect to the length left-lexicographic ordering implicitly assumed in <strong class="pkg">GBNP</strong>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := FreeAssociativeAlgebraWithOne(Rationals,"x","y","z");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := A.x;; y := A.y;; z := A.z;; id := One(A);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">polys := [ x^2 + y^2 + z^2 - id, x^2 + z^2 - y, x-z,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           x*y-y*x, x*z-z*x, y*z-z*y];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">reps := GP2NPList(polys);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gb := Grobner(reps);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NP2GPList(gb,A);</span>
+[ (1)*z+(-1)*x, (1)*x^2+(-1/2)*y, (1)*y*x+(-1)*x*y,
+  (1)*y^2+(2)*x^2+(-1)*&lt;identity ...&gt; ]
+</pre></div>
+
+<p>The example, as presented in the book, uses a left-lexicographic ordering with z &lt; y &lt; x. We create the ordering in <strong class="pkg">NMO</strong>, patch <strong class="pkg">GBNP</strong>, and get the result expected:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml := NCMonomialLeftLexicographicOrdering(A,[3,2,1]);</span>
+NCMonomialLeftLexicographicOrdering([ (1)*z, (1)*y, (1)*x ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PatchGBNP(ml);</span>
+LtNP patched.
+GtNP patched.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gb := Grobner(reps);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NP2GPList(gb,A);</span>
+[ (1)*z^4+(1/2)*z^2+(-1/4)*&lt;identity ...&gt;, (1)*y+(-2)*z^2, (1)*x+(-1)*z ]
+</pre></div>
+
+<p><a id="X7C42487D8043F876" name="X7C42487D8043F876"></a></p>
+
+<h5>1.3-4 <span class="Heading">NMO Example 4</span></h5>
+
+<p>Example 4 was taken from page 339 of the book "Some Tapas of Computer Algebra" by A.M. Cohen, H. Cuypers, H. Sterk, <a href="chapBib.html#biBCohenCuypersSterk1999">[CCS99]</a>; it also appears as Example 6 in the <strong class="pkg">GBNP</strong> example set.</p>
+
+<p>A noncommutative free algebra on 6 generators over the Rationals is created in <strong class="pkg">GAP</strong>, and the generators are labeled:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := FreeAssociativeAlgebraWithOne(Rationals,"a","b","c","d","e","f");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := A.a;; b := A.b;; c := A.c;; d := A.d;; e := A.e;; f := A.f;;</span>
+</pre></div>
+
+<p>Set up list of noncommutative polynomials:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">polys := [ e*a, a^3 + f*a, a^9 + c*a^3, a^81 + c*a^9 + d*a^3,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           a^27 + d*a^81 + e*a^9 + f*a^3, b + c*a^27 + e*a^81 + f*a^9,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           c*b + d*a^27 + f*a^81, a + d*b + e*a^27, c*a + e*b + f*a^27,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           d*a + f*b, b^3 - b, a*b - b*a, a*c - c*a, a*d - d*a,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           a*e - e*a, a*f - f*a, b*c - c*b, b*d - d*b, b*e - e*b,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           b*f - f*b, c*d - d*c, c*e - e*c, c*f - f*c, d*e - e*d,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           d*f - f*d, e*f - f*e</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">reps := GP2NPList(polys);;</span>
+</pre></div>
+
+<p>Create a length left-lex ordering with the following (default) ordering on the generators a &lt; b &lt; c &lt; d &lt; e &lt; f:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml := NCMonomialLeftLengthLexOrdering(A);</span>
+NCMonomialLeftLengthLexicographicOrdering([ (1)*a, (1)*b, (1)*c, (1)*d,
+   (1)*e, (1)*f ])
+</pre></div>
+
+<p>Patch <strong class="pkg">GBNP</strong> and compute the Gröbner basis with respect to the ordering <code class="code">ml</code>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PatchGBNP(ml);</span>
+LtNP patched.
+GtNP patched.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gb := Grobner(reps);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NP2GPList(gb,A);</span>
+[ (1)*a, (1)*b, (1)*d*c+(-1)*c*d, (1)*e*c+(-1)*c*e,
+  (1)*e*d+(-1)*d*e, (1)*f*c+(-1)*c*f,
+  (1)*f*d+(-1)*d*f, (1)*f*e+(-1)*e*f ]
+</pre></div>
+
+<p><a id="X7E4AAA7382D42361" name="X7E4AAA7382D42361"></a></p>
+
+<h4>1.4 <span class="Heading">Orderings</span></h4>
+
+<p>This section describes the current orderings built into the <strong class="pkg">GAP</strong> package <strong class="pkg">NMO</strong>, and describes some of the internals of the machinery involved.</p>
+
+<p><a id="X7AE05C0578857310" name="X7AE05C0578857310"></a></p>
+
+<h5>1.4-1 <span class="Heading">Internals</span></h5>
+
+<p>The orderings portion of <strong class="pkg">NMO</strong> is divided codewise into the files <code class="code">ncordmachine.gd, ncordmachine.gi</code> and <code class="code">ncorderings.gd, ncorderings.gi</code>. The former file pair contains code to set up the machinery to create new monomial orderings on noncommutative algebras, whereas the latter sets up actual orderings. We will first describe the creation and use of length lexicographic ordering, afterward describing more of the details of the new <strong class="pkg">GAP</strong> family `NoncommutativeMonomialOrdering'.</p>
+
+<p>The <strong class="pkg">NMO</strong> package was built with the mindset of allowing great flexibility in creating new monomial orderings on noncommutative algebras. All that is required to install a new ordering is to create two <strong class="pkg">GAP</strong> functions that determine less-than comparisons (one non-indexed, and one indexed) and then call <code class="code">InstallNoncommutativeMonomialOrdering</code> with the comparison functions as arguments. The comparison functions should be written to compare simple lists of integers, these lists representing monomials as in <strong class="pkg">GBNP</strong>'s `NP' format, or the letter representation format in <strong class="pkg">GAP</strong> (see "The External Representation for Associative Words" in the <strong class="pkg">GAP</strong> reference manual). An example follows the description of the function <code class="code">InstallNoncommutativeMonomialOrdering</code>.</p>
+
+<p>A bit of explanation is due here to address the added complexity introduced by requiring that two functions <code class="code">(&lt;function&gt;, &lt;function2&gt;)</code> need be supplied to <code class="code">InstallNoncommutativeMonomialOrdering</code> to create an ordering. The first function <code class="code">&lt;function&gt;</code> should be responsible for comparing two given monomial list representations in their unadultered forms. The second, indexed, function <code class="code">&lt;function2&gt;</code> should be capable of using a provided index list corresponding to an order on generators, based on a different lexicographic ordering. This accomplishes something worthwhile: two orderings with different lexicographic tables can be applied to the same algebra in <strong class="pkg">GAP</strong>.</p>
+
+<p>One more caveat: <code class="code">InstallNoncommutativeMonomialOrdering</code> will create a default lexicographic table for all orderings, despite whether or not it will be used in the comparison function. It does this only out of convenience and ease of use.</p>
+
+<p>For example, in the creation of the following left-lex ordering, which is installed via the <code class="code">InstallNoncommutativeMonomialOrdering</code> function, a default ordering of a &lt; b &lt; c is created for <code class="code">ml</code> even though an ordering on the generators is not provided:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := FreeAssociativeAlgebraWithOne(Rationals,"a","b","c");</span>
+&lt;algebra-with-one over Rationals, with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lexord := NCMonomialLeftLexicographicOrdering(A);</span>
+NCMonomialLeftLexicographicOrdering([ (1)*a, (1)*b, (1)*c ])
+</pre></div>
+
+<p>Notice next that when an ordering on the generators is provided, it is utilized in the creation of the ordering:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lexord2 := NCMonomialLeftLexicographicOrdering(A,[2,3,1]);</span>
+NCMonomialLeftLexicographicOrdering([ (1)*b, (1)*c, (1)*a ])
+</pre></div>
+
+<p><a id="X785C92247DF27D6C" name="X785C92247DF27D6C"></a></p>
+
+<h5>1.4-2 <span class="Heading">Internal Routines</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallNoncommutativeMonomialOrdering</code>( <var class="Arg">&lt;string&gt;</var>, <var class="Arg">&lt;function&gt;</var>, <var class="Arg">&lt;function2&gt;</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Given a name <code class="code">&lt;string&gt;</code>, a direct comparison function <code class="code">&lt;function&gt;</code>, and an indexed comparison function <code class="code">&lt;function2&gt;</code>, <code class="code">InstallNoncommutativeMonomialOrdering</code> will install a monomial ordering function to allow the creation of a monomial ordering based on the provided functions.</p>
+
+<p>For example, we create a length ordering by setting up the two comparison functions, choosing a name for the ordering type and then calling <code class="code">InstallNoncommutativeMonomialOrdering</code>.</p>
+
+
+<div class="example"><pre> 
+  gap&gt; f1 := function(a,b,aux)
+  &gt;   return Length(a) &lt; Length(b);
+  &gt; end;
+  function( a, b, aux ) ... end
+  gap&gt; f2 := function(a,b,aux,idx)
+  &gt;   return Length(a) &lt; Length(b);
+  &gt; end;
+  function( a, b, aux, idx ) ... end
+  
+  DeclareGlobalFunction("lenOrdering");
+  InstallNoncommutativeMonomialOrdering("lenOrdering",f1,f2);
+  </pre></div>
+
+<p>Now we create an ordering based on this new function, and make some simple comparisons. (Note: we are passing in an empty <code class="code">aux</code> table since it is not being used. Also, the comparison function is the non-indexed version since we determined no lex order on the generators):</p>
+
+
+<div class="example"><pre>
+  gap&gt; A := FreeAssociativeAlgebraWithOne(Rationals,"a","b","c");
+  &lt;algebra-with-one over Rationals, with 3 generators&gt;
+  gap&gt; ml := lenOrdering(A);
+  lenOrdering([ (1)*a, (1)*b, (1)*c ])
+  gap&gt;
+  gap&gt; LtFunctionListRep(ml)([1,2],[1,1,1],[]);
+  true
+  gap&gt; LtFunctionListRep(ml)([1,1],[],[]);
+  false
+  </pre></div>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsNoncommutativeMonomialOrdering</code>( <var class="Arg">&lt;obj&gt;</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>A noncommutative monomial ordering is an object representing a monomial ordering on a noncommutative (associative) algebra. All <strong class="pkg">NMO</strong> orderings are of this category.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LtFunctionListRep</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns the low-level comparison function used by the given ordering. The function returned is a comparison function on the external representations (lists) for monomials in the algebra.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NextOrdering</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns the next noncommutative monomial ordering chained to the given ordering, if one exists. It is usually called after a <code class="code">true</code> determination has been made with a <code class="code">HasNextOrdering</code> call.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParentAlgebra</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns the parent algebra used in the creation of the given ordering.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LexicographicTable</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns the ordering of the generators of the <code class="code">ParentAlgebra</code>, as specified in the creation of the given ordering.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LexicographicIndexTable</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns the ordering of the generators of the <code class="code">ParentAlgebra</code>, as specified in the creation of the given ordering.</p>
+
+<p>An example here would be useful. We create a length left-lexicographic ordering on an algebra <code class="code">A</code> with an order on the generators of <span class="SimpleMath">b &lt; a &lt; d &lt; c</span>. Then in accessing the attributes via the atrributes above we see how the list given by <code class="code">LexicographicIndexTable</code> indexes the ordered generators:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := FreeAssociativeAlgebraWithOne(Rationals,"a","b","c","d");</span>
+&lt;algebra-with-one over Rationals, with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml := NCMonomialLeftLengthLexOrdering(A,2,4,1,3);</span>
+NCMonomialLeftLengthLexicographicOrdering([ (1)*b, (1)*d, (1)*a, (1)*c ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"> LexicographicTable(ml);</span>
+[ (1)*b, (1)*d, (1)*a, (1)*c ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LexicographicIndexTable(ml);</span>
+[ 3, 1, 4, 2 ]
+</pre></div>
+
+<p>The index table shows that the generator <span class="SimpleMath">a</span> is the third in the generator ordering, <span class="SimpleMath">b</span> is the least generator in the ordering, <span class="SimpleMath">c</span> is the greatest and <span class="SimpleMath">d</span> the second least in order.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LexicographicPermutation</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Experimental permutation based on the information in <code class="code">LexicographicTable</code>, could possibly be used to make indexed versions of comparison functions more efficient. Currently only used by the <strong class="pkg">NMO</strong> built-in ordering <code class="code">NCMonomialLLLTestOrdering</code>.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AuxilliaryTable</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>An extra table carried by the given ordering which can be used for such things as weight vectors, etc.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrderingLtFunctionListRep</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrderingGtFunctionListRep</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Given a noncommutative monomial ordering, <code class="code">OrderingLtFunctionListRep</code> and <code class="code">OrderingLtFunctionListRep</code> return functions which compare the `list' representations (NP representations) of two monomials from the ordering's associated parent algebra. These functions are not typically accessed by the user.</p>
+
+<p><a id="X7CDF05BD85AA0EE6" name="X7CDF05BD85AA0EE6"></a></p>
+
+<h5>1.4-3 <span class="Heading">Provided Orderings</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCMonomialLeftLengthLexicographicOrdering</code>( <var class="Arg">&lt;algebra&gt;</var>, <var class="Arg">&lt;list&gt;</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Given a free algebra <span class="SimpleMath">A</span>, and an optional ordered (possibly partial) ordered list of generators for the algebra <span class="SimpleMath">A</span>, <code class="code">NCMonomialLeftLengthLexicographicOrdering</code> returns a noncommutative length lexicographic ordering object. If an ordered list of generators is provided, its order is used in creation of the ordering object. If a list is not provided, then the ordering object is created based on the order of the generators when the free algebra <span class="SimpleMath">A</span> was created.</p>
+
+<p>Note: the synonym <code class="code">NCMonomialLeftLengthLexOrdering</code> may also be used.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCMonomialLengthOrdering</code>( <var class="Arg">&lt;algebra&gt;</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Given a free algebra <span class="SimpleMath">A</span>, <code class="code">NCMonomialLengthOrdering</code> returns a noncommutative length ordering object. Only the lengths of the words of monomials in <span class="SimpleMath">A</span> are compared using this ordering.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCMonomialLeftLexicographicOrdering</code>( <var class="Arg">&lt;algebra&gt;</var>, <var class="Arg">&lt;list&gt;</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Given a free algebra <span class="SimpleMath">A</span>, and an optional ordered (possibly partial) ordered list of generators for the algebra <span class="SimpleMath">A</span>, <code class="code">NCMonomialLeftLexicographicOrdering</code> returns a simple noncommutative left-lexicographic ordering object.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCMonomialCommutativeLexicographicOrdering</code>( <var class="Arg">&lt;algebra&gt;</var>, <var class="Arg">&lt;list&gt;</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Given a free algebra <span class="SimpleMath">A</span>, and an optional ordered (possibly partial) ordered list of generators for the algebra <span class="SimpleMath">A</span>, <code class="code">NCMonomialCommutativeLexicographicOrdering</code> returns a commutative left-lexicographic ordering object. Under this ordering, monomials from <span class="SimpleMath">A</span> are compared using their respective commutative analogues.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCMonomialWeightOrdering</code>( <var class="Arg">&lt;algebra&gt;</var>, <var class="Arg">&lt;list&gt;</var>, <var class="Arg">&lt;list2&gt;</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Given a free algebra <span class="SimpleMath">A</span>, an ordered (possibly partial) ordered <code class="code">&lt;list&gt;</code> of generators for the algebra <span class="SimpleMath">A</span>, and a <code class="code">&lt;list2&gt;</code> of respective weights for the generators, <code class="code">NCMonomialWeightOrdering</code> returns a noncommutative weight ordering object.</p>
+
+<p><a id="X7F2E50BE79D79C8F" name="X7F2E50BE79D79C8F"></a></p>
+
+<h5>1.4-4 <span class="Heading">Externals</span></h5>
+
+<p>All user-level interface routines in the descriptions following allow for the comparison of not only monomials from a given algebra with respect to a given ordering, but also compare general elements from an algebra by comparing their leading terms (again, with respect to the given ordering). These routines are located in the files <code class="code">ncinterface.gd</code> and <code class="code">ncinterface.gi</code>.</p>
+
+<p><a id="X7A5671D67CA092F3" name="X7A5671D67CA092F3"></a></p>
+
+<h5>1.4-5 <span class="Heading">External Routines</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCLessThanByOrdering</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var>, <var class="Arg">&lt;a&gt;</var>, <var class="Arg">&lt;b&gt;</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Given a <code class="code">&lt;NoncommutativeMonomialOrdering&gt;</code> on an algebra <span class="SimpleMath">A</span> and <span class="SimpleMath">a,b ∈ A</span>, <code class="code">NCLessThanByOrdering</code> returns the (boolean) result of <span class="SimpleMath">a &lt; b</span>, where <span class="SimpleMath">&lt;</span> represents the comparison operator determined by <code class="code">&lt;NoncommutativeMonomialOrdering&gt;</code>.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCGreaterThanByOrdering</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var>, <var class="Arg">&lt;a&gt;</var>, <var class="Arg">&lt;b&gt;</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Given a <code class="code">&lt;NoncommutativeMonomialOrdering&gt;</code> on an algebra <span class="SimpleMath">A</span> and <span class="SimpleMath">a,b ∈ A</span>, <code class="code">NCLessThanByOrdering</code> returns the (boolean) result of <span class="SimpleMath">a &gt; b</span>, where <span class="SimpleMath">&gt;</span> represents the comparison operator determined by <code class="code">&lt;NoncommutativeMonomialOrdering&gt;</code>.</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCEquivalentByOrdering</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var>, <var class="Arg">&lt;a&gt;</var>, <var class="Arg">&lt;b&gt;</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Given a <code class="code">&lt;NoncommutativeMonomialOrdering&gt;</code> on an algebra <span class="SimpleMath">A</span> and <span class="SimpleMath">a,b ∈ A</span>, <code class="code">NCLessThanByOrdering</code> returns the (boolean) result of <span class="SimpleMath">a = b</span>, where <span class="SimpleMath">=</span> represents the comparison operator determined by <code class="code">&lt;NoncommutativeMonomialOrdering&gt;</code>.</p>
+
+<p>Some examples of these methods in use:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := FreeAssociativeAlgebraWithOne(Rationals,"x","y","z");</span>
+&lt;algebra-with-one over Rationals, with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := A.x;; y := A.y;; z := A.z;; id := One(A);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w1 := x*x*y;; w2 := x*y*x;; w3 := z*x;;</span>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml := NCMonomialLeftLengthLexOrdering(A);</span>
+NCMonomialLeftLengthLexicographicOrdering([ (1)*x, (1)*y, (1)*z ])
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml2 := NCMonomialLengthOrdering(A);</span>
+NCMonomialLengthOrdering([ (1)*x, (1)*y, (1)*z ])
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml7 := NCMonomialWeightOrdering(A,[1,2,3],[1,1,2]);</span>
+NCMonomialWeightOrdering([ (1)*x, (1)*y, (1)*z ])
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml8 := NCMonomialWeightOrdering(A,[2,3,1],[1,1,2]);</span>
+NCMonomialWeightOrdering([ (1)*y, (1)*z, (1)*x ])
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">#  Left length-lex ordering, x&lt;y&lt;z:</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCEquivalentByOrdering(ml,w1,w2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">#  Length ordering:</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCEquivalentByOrdering(ml2,w1,w2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCEquivalentByOrdering(ml2,w3,w2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Weight ordering ( z=2, x=y=1 ):</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCEquivalentByOrdering(ml7,w1,w2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCEquivalentByOrdering(ml7,w3,w2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Weight ordering ( z=2, x=y=1 ), different lex:</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCEquivalentByOrdering(ml8,w1,w2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCEquivalentByOrdering(ml8,w3,w2);</span>
+true
+</pre></div>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCSortNP</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var>, <var class="Arg">&lt;list&gt;</var>, <var class="Arg">&lt;function&gt;</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Given a <code class="code">&lt;list&gt;</code> of NP `list' representations for monomials from a noncommutative algebra, and an NP comparison (ordering) function <code class="code">&lt;function&gt;</code>, <code class="code">NCSortNP</code> returns a sorted version of <code class="code">&lt;list&gt;</code> (with respect to the NP comparison function <code class="code">&lt;function&gt;</code>). The sort used here is an insertion sort, per the recommendation from <a href="chapBib.html#biBgN02">[NR02]</a>.</p>
+
+<p><a id="X8528D2528613E9A2" name="X8528D2528613E9A2"></a></p>
+
+<h5>1.4-6 <span class="Heading">Flexibility vs. Efficiency</span></h5>
+
+<p>We recall that <code class="code">InstallNoncommutativeMonomialOrdering</code> completes a list of generators if only a partial one is provided. An example will provide clarity here. It is given in terms of length-lex, but the generator list completion functionality is identical for any <strong class="pkg">NMO</strong> ordering. Note: If at all possible, users are encouraged to use the default ordering on generators as it is more efficient than the indirection inherent in sorting via the indexed list <code class="code">LexicographicIndexTable</code>. Here is the example showing the flexibility in requiring only a partial list of the ordering on generators:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := FreeAssociativeAlgebraWithOne(Rationals,"a","b","c","d");</span>
+&lt;algebra-with-one over Rationals, with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml2 := NCMonomialLeftLengthLexOrdering(A,[3,1]);</span>
+NCMonomialLeftLengthLexicographicOrdering([ (1)*c, (1)*a, (1)*b, (1)*d ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LexicographicTable(ml2);</span>
+[ (1)*c, (1)*a, (1)*b, (1)*d ]
+</pre></div>
+
+<p><a id="X79B90CCE7A05DEEB" name="X79B90CCE7A05DEEB"></a></p>
+
+<h4>1.5 <span class="Heading">Utility Routines</span></h4>
+
+<p><a id="X7B758C747AD2344B" name="X7B758C747AD2344B"></a></p>
+
+<h5>1.5-1 <span class="Heading">GBNP Patching Routines</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PatchGBNP</code>( <var class="Arg">&lt;NoncommutativeMonomialOrdering&gt;</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnpatchGBNP</code>(  )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Let <code class="code">&lt;NoncommutativeMonomialOrdering&gt;</code> be a monomial ordering (on an algebra <span class="SimpleMath">A</span>). <code class="code">PatchGBNP</code> overwrites the <strong class="pkg">GBNP</strong> Global functions <code class="code">LtNP</code> and <code class="code">GtNP</code> with the less-than and greater-than functions defined for <code class="code">&lt;NoncommutativeMonomialOrdering&gt;</code>. The purpose of such a patching is to force <strong class="pkg">GBNP</strong> to use <code class="code">&lt;NoncommutativeMonomialOrdering&gt;</code> in its computation of a Gröbner basis. <code class="code">UnpatchGBNP()</code> simply restores the <code class="code">LtNP</code> and <code class="code">GtNP</code> functions to their original state. The examples in Quickstart section are more illustrative, but here is an example of the use of the patching routines above:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := FreeAssociativeAlgebraWithOne(Rationals,"x","y","z");</span>
+&lt;algebra-with-one over Rationals, with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ml := NCMonomialLeftLexicographicOrdering(A,3,2,1);</span>
+NCMonomialLeftLexicographicOrdering([ (1)*z, (1)*y, (1)*x ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PatchGBNP(ml);</span>
+LtNP patched.
+GtNP patched.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnpatchGBNP();</span>
+LtNP restored.
+GtNP restored.
+</pre></div>
+
+<p><a id="X8150015682ED1709" name="X8150015682ED1709"></a></p>
+
+<h5>1.5-2 <span class="Heading">Printing Routine</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; String</code>( <var class="Arg">&lt;obj&gt;</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p><strong class="pkg">GAP</strong> seems to be currently lacking a method to convert an object from a free associative ring to a string version of the same object. This routine fills that gap.</p>
+
+<p>Example (after loading <strong class="pkg">NMO</strong> via the <strong class="pkg">GBNP</strong> package):</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := FreeAssociativeAlgebraWithOne(ZmodpZ(19),"x","y");</span>
+&lt;algebra-with-one over GF(19), with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := A.x; y := A.y;</span>
+(Z(19)^0)*x
+(Z(19)^0)*y
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsString(String(x^2+x*y*x));</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">String(x^2+x*y*x);</span>
+"(Z(19)^0)*x^2+(Z(19)^0)*x*y*x"
+</pre></div>
+
+<p>Example (before loading <strong class="pkg">NMO</strong> via the <strong class="pkg">GBNP</strong> package):</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"> A := FreeAssociativeAlgebraWithOne(ZmodpZ(19),"x","y");</span>
+&lt;lgebra-with-one over GF(19), with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := A.x; y := A.y;</span>
+(Z(19)^0)*x
+(Z(19)^0)*y
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"> String(x^2+x*y*x);</span>
+Error, no method found! For debugging hints type ?Recovery from NoMethodFound
+Error, no 1st choice method found for `String' on 1 arguments called from
+&lt;function&gt;( &lt;arguments&gt; ) called from read-eval-loop
+Entering break read-eval-print loop ...
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span>
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chapBib.html">Bib</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

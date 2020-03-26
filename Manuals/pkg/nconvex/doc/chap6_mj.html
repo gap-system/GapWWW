@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (NConvex) - Chapter 6: Polytopes</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6.html">[MathJax off]</a></p>
+<p><a id="X7B933C4686727183" name="X7B933C4686727183"></a></p>
+<div class="ChapSects"><a href="chap6_mj.html#X7B933C4686727183">6 <span class="Heading">Polytopes</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X801887DC7E5F6AB7">6.1 <span class="Heading">Creating polytopes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X83FB00B383A19F03">6.1-1 PolytopeByInequalities</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X81DC4EE8849B08DA">6.1-2 Polytope</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7C701DBF7BAE649A">6.2 <span class="Heading">Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7D8727917B72396A">6.2-1 ExternalCddPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X83B1CBC67B34BE04">6.2-2 LatticePoints</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7FB9E36C7B6C616F">6.2-3 RelativeInteriorLatticePoints</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X816ACBEF786C23F2">6.2-4 VerticesOfPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X805FCCD583DACF8F">6.2-5 Vertices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7B39989A7F321147">6.2-6 DefiningInequalities</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7DAF68C08043105D">6.2-7 EqualitiesOfPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7FDABF3D84E67F2C">6.2-8 FacetInequalities</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7EC0B0818106EA50">6.2-9 VerticesInFacets</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7DE7E52D800A7258">6.2-10 NormalFan</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8453091478A4C0F1">6.2-11 FaceFan</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X85EC550B7FCAECB5">6.2-12 AffineCone</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7ACC98FD78ACDC57">6.2-13 PolarPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8349F8DA81418C35">6.2-14 DualPolytope</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X871597447BB998A1">6.3 <span class="Heading">Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X863F64947BDFC654">6.3-1 IsEmpty</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X85181A5986107254">6.3-2 IsLatticePolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7918DAE87B159619">6.3-3 IsVeryAmple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X851AD9E684CA7434">6.3-4 IsNormalPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7F39F2BF835AA337">6.3-5 IsSimplicial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X797F6A0778C70DD0">6.3-6 IsSimplexPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X815A80E785E52474">6.3-7 IsSimplePolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X85BE2236780D0957">6.3-8 IsReflexive</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X85DEC39081FD04E9">6.3-9 IsFanoPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X780D5BDE7C177166">6.3-10 IsCanonicalFanoPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X78B2B9747E9A6FEA">6.3-11 IsTerminalFanoPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7946CEA886A48F96">6.3-12 IsSmoothFanoPolytope</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7B71F2A2834E84CE">6.4 <span class="Heading">Operations on polytopes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7F9303847F938C87"><code>6.4-1 \+</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7AEF19987E29612E"><code>6.4-2 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8079AF527BA681D1">6.4-3 IntersectionOfPolytopes</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7F2AE1197AAFF273">6.4-4 RandomInteriorPoint</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7E36517B808D2E44">6.4-5 IsInteriorPoint</a></span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">Polytopes</span></h3>
+
+<p><a id="X801887DC7E5F6AB7" name="X801887DC7E5F6AB7"></a></p>
+
+<h4>6.1 <span class="Heading">Creating polytopes</span></h4>
+
+<p><a id="X83FB00B383A19F03" name="X83FB00B383A19F03"></a></p>
+
+<h5>6.1-1 PolytopeByInequalities</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolytopeByInequalities</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a Polytope Object</p>
+
+<p>The operation takes a list <span class="SimpleMath">\(L\)</span> of lists <span class="SimpleMath">\([L_1, L_2, ...]\)</span> where each <span class="SimpleMath">\(L_j\)</span> represents an inequality and returns the polytope defined by them (if they define a polytope). For example the <span class="SimpleMath">\(j\)</span>'th entry <span class="SimpleMath">\(L_j = [c_j,a_{j1},a_{j2},...,a_{jn}]\)</span> corresponds to the inequality <span class="SimpleMath">\(c_j+\sum_{i=1}^n a_{ji}x_i \geq 0\)</span>.</p>
+
+<p><a id="X81DC4EE8849B08DA" name="X81DC4EE8849B08DA"></a></p>
+
+<h5>6.1-2 Polytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Polytope</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a Polytope Object</p>
+
+<p>The operation takes the list of the vertices and returns the polytope defined by them.</p>
+
+<p><a id="X7C701DBF7BAE649A" name="X7C701DBF7BAE649A"></a></p>
+
+<h4>6.2 <span class="Heading">Attributes</span></h4>
+
+<p><a id="X7D8727917B72396A" name="X7D8727917B72396A"></a></p>
+
+<h5>6.2-1 ExternalCddPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExternalCddPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a CddPolyhedron</p>
+
+<p>Converts the polytope to a CddPolyhedron. The operations of CddInterface can then be applied on this polyhedron.</p>
+
+<p><a id="X83B1CBC67B34BE04" name="X83B1CBC67B34BE04"></a></p>
+
+<h5>6.2-2 LatticePoints</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LatticePoints</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a List</p>
+
+<p>The operation returns the list of integer points inside the polytope.</p>
+
+<p><a id="X7FB9E36C7B6C616F" name="X7FB9E36C7B6C616F"></a></p>
+
+<h5>6.2-3 RelativeInteriorLatticePoints</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeInteriorLatticePoints</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a List</p>
+
+<p>The operation returns the interior lattice points inside the polytope.</p>
+
+<p><a id="X816ACBEF786C23F2" name="X816ACBEF786C23F2"></a></p>
+
+<h5>6.2-4 VerticesOfPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VerticesOfPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists</p>
+
+<p>The operation returns the vertices of the polytope</p>
+
+<p><a id="X805FCCD583DACF8F" name="X805FCCD583DACF8F"></a></p>
+
+<h5>6.2-5 Vertices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Vertices</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists</p>
+
+<p>The same output as <code class="code">VerticesOfPolytope</code>.</p>
+
+<p><a id="X7B39989A7F321147" name="X7B39989A7F321147"></a></p>
+
+<h5>6.2-6 DefiningInequalities</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DefiningInequalities</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists</p>
+
+<p>The operation returns the defining inequalities of the polytope. I.e., a list of lists <span class="SimpleMath">\([L_1, L_2, ...]\)</span> where each <span class="SimpleMath">\(L_j=[c_j,a_{j1},a_{j2},...,a_{jn}]\)</span> represents the inequality <span class="SimpleMath">\(c_j+\sum_{i=1}^n a_{ji}x_i \geq 0\)</span>. If <span class="SimpleMath">\(L\)</span> and <span class="SimpleMath">\(-L\)</span> occur in the output then <span class="SimpleMath">\(L\)</span> is called a defining-equality of the polytope.</p>
+
+<p><a id="X7DAF68C08043105D" name="X7DAF68C08043105D"></a></p>
+
+<h5>6.2-7 EqualitiesOfPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EqualitiesOfPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists</p>
+
+<p>The operation returns the defining-equalities of the polytope.</p>
+
+<p><a id="X7FDABF3D84E67F2C" name="X7FDABF3D84E67F2C"></a></p>
+
+<h5>6.2-8 FacetInequalities</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FacetInequalities</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists</p>
+
+<p>The operation returns the list of the inequalities of the facets. Each defining inequality that is not defining-equality of the polytope is a facet inequality.</p>
+
+<p><a id="X7EC0B0818106EA50" name="X7EC0B0818106EA50"></a></p>
+
+<h5>6.2-9 VerticesInFacets</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VerticesInFacets</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists</p>
+
+<p>The operation returns list of lists <span class="SimpleMath">\(L\)</span>. The entries of each <span class="SimpleMath">\(L_j\)</span> in <span class="SimpleMath">\(L\)</span> consists of <span class="SimpleMath">\(0\)</span>'s or <span class="SimpleMath">\(1\)</span>'s. For instance, if <span class="SimpleMath">\(L_j=[1,0,0,1,0,1]\)</span>, then The polytope has <span class="SimpleMath">\(6\)</span> vertices and the vertices of the <span class="SimpleMath">\(j\)</span>'th facet are <span class="SimpleMath">\(\{V_1,V_4,V_6\}\)</span>.</p>
+
+<p><a id="X7DE7E52D800A7258" name="X7DE7E52D800A7258"></a></p>
+
+<h5>6.2-10 NormalFan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NormalFan</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a fan</p>
+
+<p>The operation returns the normal fan of the given polytope.</p>
+
+<p><a id="X8453091478A4C0F1" name="X8453091478A4C0F1"></a></p>
+
+<h5>6.2-11 FaceFan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FaceFan</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a fan</p>
+
+<p>The operation returns the face fan of the given polytope. Remember that the face fan of a polytope is isomorphic to the normal fan of its polar polytope.</p>
+
+<p><a id="X85EC550B7FCAECB5" name="X85EC550B7FCAECB5"></a></p>
+
+<h5>6.2-12 AffineCone</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineCone</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a cone</p>
+
+<p>If the ambient space of the polytope is <span class="SimpleMath">\(\mathrm{R}^n\)</span>, then the output is a cone in <span class="SimpleMath">\(\mathrm{R}^{n+1}\)</span>. The defining rays of the cone are <span class="SimpleMath">\({[a_{j1},a_{j2},...,a_{jn},1]}_j\)</span> such that <span class="SimpleMath">\(V_j=[a_{j1},a_{j2},...,a_{jn}]\)</span> is a vertex in the polytope.</p>
+
+<p><a id="X7ACC98FD78ACDC57" name="X7ACC98FD78ACDC57"></a></p>
+
+<h5>6.2-13 PolarPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolarPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a Polytope</p>
+
+<p>The operation returns the polar polytope of the given polytope.</p>
+
+<p><a id="X8349F8DA81418C35" name="X8349F8DA81418C35"></a></p>
+
+<h5>6.2-14 DualPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DualPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a Polytope</p>
+
+<p>The operation returns the dual polytope of the given polytope.</p>
+
+<p><a id="X871597447BB998A1" name="X871597447BB998A1"></a></p>
+
+<h4>6.3 <span class="Heading">Properties</span></h4>
+
+<p><a id="X863F64947BDFC654" name="X863F64947BDFC654"></a></p>
+
+<h5>6.3-1 IsEmpty</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEmpty</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>Returns whether the polytope empty or not</p>
+
+<p><a id="X85181A5986107254" name="X85181A5986107254"></a></p>
+
+<h5>6.3-2 IsLatticePolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLatticePolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>Returns whether the polytope is lattice polytope or not.</p>
+
+<p><a id="X7918DAE87B159619" name="X7918DAE87B159619"></a></p>
+
+<h5>6.3-3 IsVeryAmple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsVeryAmple</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>Returns whether the polytope is very ample or not.</p>
+
+<p><a id="X851AD9E684CA7434" name="X851AD9E684CA7434"></a></p>
+
+<h5>6.3-4 IsNormalPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsNormalPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>Returns whether the polytope is normal or not.</p>
+
+<p><a id="X7F39F2BF835AA337" name="X7F39F2BF835AA337"></a></p>
+
+<h5>6.3-5 IsSimplicial</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSimplicial</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>Returns whether the polytope is simplicial or not.</p>
+
+<p><a id="X797F6A0778C70DD0" name="X797F6A0778C70DD0"></a></p>
+
+<h5>6.3-6 IsSimplexPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSimplexPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>Returns whether the polytope is simplex polytope or not.</p>
+
+<p><a id="X815A80E785E52474" name="X815A80E785E52474"></a></p>
+
+<h5>6.3-7 IsSimplePolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSimplePolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>Returns whether the polytope is simple or not.</p>
+
+<p><a id="X85BE2236780D0957" name="X85BE2236780D0957"></a></p>
+
+<h5>6.3-8 IsReflexive</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReflexive</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>Returns whether the polytope is reflexive or not, i.e., if its dual polytope is lattice polytope.</p>
+
+<p><a id="X85DEC39081FD04E9" name="X85DEC39081FD04E9"></a></p>
+
+<h5>6.3-9 IsFanoPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFanoPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>returns whether the polytope is Fano or not. Fano polytope is a full dimensional lattice polytope whose vertices are primitive elements in the containing lattice, i.e., each vertex is not a positive integer multiple of any other lattice element.</p>
+
+<p><a id="X780D5BDE7C177166" name="X780D5BDE7C177166"></a></p>
+
+<h5>6.3-10 IsCanonicalFanoPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCanonicalFanoPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>returns whether the polytope is canonical Fano or not. A canonical Fano polytope is a full dimensional lattice polytope whose relative interior contains only one lattice point, namely the origin.</p>
+
+<p><a id="X78B2B9747E9A6FEA" name="X78B2B9747E9A6FEA"></a></p>
+
+<h5>6.3-11 IsTerminalFanoPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTerminalFanoPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>returns whether the polytope is terminal Fano or not. A terminal Fano polytope is a full dimensional lattice polytope whose lattice points are its vertices and the origin.</p>
+
+<p><a id="X7946CEA886A48F96" name="X7946CEA886A48F96"></a></p>
+
+<h5>6.3-12 IsSmoothFanoPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSmoothFanoPolytope</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: a true or false</p>
+
+<p>Returns whether the polytope is smooth fano polytope or not, i.e, if the vertices in each facet form a basis for the containing lattice or not. polytope.</p>
+
+<p><a id="X7B71F2A2834E84CE" name="X7B71F2A2834E84CE"></a></p>
+
+<h4>6.4 <span class="Heading">Operations on polytopes</span></h4>
+
+<p><a id="X7F9303847F938C87" name="X7F9303847F938C87"></a></p>
+
+<h5><code>6.4-1 \+</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \+</code>( <var class="Arg">P1</var>, <var class="Arg">P2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>The output is Minkowski sum of the input polytopes.</p>
+
+<p><a id="X7AEF19987E29612E" name="X7AEF19987E29612E"></a></p>
+
+<h5><code>6.4-2 \*</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">n</var>, <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>The output is Minkowski sum of the input polytope with itself <span class="SimpleMath">\(n\)</span> times.</p>
+
+<p><a id="X8079AF527BA681D1" name="X8079AF527BA681D1"></a></p>
+
+<h5>6.4-3 IntersectionOfPolytopes</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntersectionOfPolytopes</code>( <var class="Arg">P1</var>, <var class="Arg">P2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>The output is the intersection of the input polytopes.</p>
+
+<p><a id="X7F2AE1197AAFF273" name="X7F2AE1197AAFF273"></a></p>
+
+<h5>6.4-4 RandomInteriorPoint</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomInteriorPoint</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns a random interior point in the polytope.</p>
+
+<p><a id="X7E36517B808D2E44" name="X7E36517B808D2E44"></a></p>
+
+<h5>6.4-5 IsInteriorPoint</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInteriorPoint</code>( <var class="Arg">M</var>, <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>Checks if the given point is interior point of the polytope.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:= Polytope( [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1, 2 ] ] );</span>
+&lt;A polytope in |R^3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNormalPolytope( P );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsVeryAmple( P );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:= Polytope( [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1, 1 ] ] );</span>
+&lt;A polytope in |R^3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNormalPolytope( Q );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsVeryAmple( Q );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q;</span>
+&lt;A normal very ample polytope in |R^3 with 4 vertices&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T:= Polytope( [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1, 4 ] ] ); </span>
+&lt;A polytope in |R^3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I:= Polytope( [ [ 0, 0, 0 ], [ 0, 0, 1 ] ] );</span>
+&lt;A polytope in |R^3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">J:= T + I; </span>
+&lt;A polytope in |R^3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsVeryAmple( J );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNormalPolytope( J );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">J;</span>
+&lt;A very ample polytope in |R^3 with 8 vertices&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Example 2.2.20 Cox, Toric Varieties</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">A:= [ [1,1,1,0,0,0], [1,1,0,1,0,0], [1,0,1,0,1,0], [ 1,0,0,1,0,1], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1,0,0,0,1,1], [ 0,1,1,0,0,1], [0,1,0,1,1,0], [0,1,0,0,1,1], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[0,0,1,1,1,0], [0,0,1,1,0,1] ];</span>
+[ [ 1, 1, 1, 0, 0, 0 ], [ 1, 1, 0, 1, 0, 0 ], [ 1, 0, 1, 0, 1, 0 ],
+[ 1, 0, 0, 1, 0, 1 ], [ 1, 0, 0, 0, 1, 1 ], [ 0, 1, 1, 0, 0, 1 ], 
+ [ 0, 1, 0, 1, 1, 0 ], [ 0, 1, 0, 0, 1, 1 ], [ 0, 0, 1, 1, 1, 0 ], 
+[ 0, 0, 1, 1, 0, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H:= Polytope( A );</span>
+&lt;A polytope in |R^6&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsVeryAmple( H );   </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNormalPolytope( H );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H;</span>
+&lt;A very ample polytope in |R^6 with 10 vertices&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l:= [ [ 0, 0, 1 ], [ 0, 0, 0 ], [ 1, 0, 0 ], [ 1, 0, 1 ], [ 0, 1, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 0, 1, 1 ], [ 1, 1, 4 ], [ 1, 1, 5 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:= Polytope( l );</span>
+&lt;A polytope in |R^3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNormalPolytope( P );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lattic_points:= LatticePoints( P );</span>
+[ [ 0, 0, 0 ], [ 0, 0, 1 ], [ 0, 1, 0 ], [ 0, 1, 1 ], [ 1, 0, 0 ], [ 1, 0, 1 ], 
+[ 1, 1, 4 ], [ 1, 1, 5 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">u:= Cartesian( lattic_points, lattic_points );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">k:= Set( List( u, u-&gt; u[1]+u[2] ) );</span>
+[ [ 0, 0, 0 ], [ 0, 0, 1 ], [ 0, 0, 2 ], [ 0, 1, 0 ], [ 0, 1, 1 ], [ 0, 1, 2 ],
+[ 0, 2, 0 ], [ 0, 2, 1 ], [ 0, 2, 2 ], [ 1, 0, 0 ], [ 1, 0, 1 ], [ 1, 0, 2 ], 
+[ 1, 1, 0 ], [ 1, 1, 1 ], [ 1, 1, 2 ], [ 1, 1, 4 ], [ 1, 1, 5 ], [ 1, 1, 6 ], 
+[ 1, 2, 4 ], [ 1, 2, 5 ], [ 1, 2, 6 ], [ 2, 0, 0 ], [ 2, 0, 1 ], [ 2, 0, 2 ], 
+[ 2, 1, 4 ], [ 2, 1, 5 ], [ 2, 1, 6 ], [ 2, 2, 8 ], [ 2, 2, 9 ], [ 2, 2, 10 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:= 2*P;</span>
+&lt;A polytope in |R^3 with 8 vertices&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LatticePoints( Q );</span>
+[ [ 0, 0, 0 ], [ 0, 0, 1 ], [ 0, 0, 2 ], [ 0, 1, 0 ], [ 0, 1, 1 ], [ 0, 1, 2 ],
+[ 0, 2, 0 ], [ 0, 2, 1 ], [ 0, 2, 2 ], [ 1, 0, 0 ], 
+  [ 1, 0, 1 ], [ 1, 0, 2 ], [ 1, 1, 0 ], [ 1, 1, 1 ], [ 1, 1, 2 ], [ 1, 1, 3 ], 
+[ 1, 1, 4 ], [ 1, 1, 5 ], [ 1, 1, 6 ], [ 1, 2, 4 ], [ 1, 2, 5 ], [ 1, 2, 6 ], 
+[ 2, 0, 0 ], [ 2, 0, 1 ], [ 2, 0, 2 ], [ 2, 1, 4 ], 
+  [ 2, 1, 5 ], [ 2, 1, 6 ], [ 2, 2, 8 ], [ 2, 2, 9 ], [ 2, 2, 10 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:= Polytope( [ [ 1, 1 ], [ 1, -1 ], [ -1, 1 ], [ -1, -1 ] ] );</span>
+&lt;A polytope in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:= PolarPolytope( P );</span>
+&lt;A polytope in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Vertices( Q );</span>
+[ [ -1, 0 ], [ 0, -1 ], [ 0, 1 ], [ 1, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T := PolarPolytope( Q );</span>
+&lt;A polytope in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Vertices( T );</span>
+[ [ -1, -1 ], [ -1, 1 ], [ 1, -1 ], [ 1, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:= Polytope( [ [ 0, 0 ], [ 1, -1], [ -1, 1 ], [ -1, -1 ] ] );</span>
+&lt;A polytope in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># PolarPolytope( P );;</span>
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P := PolytopeByInequalities( [ [ 0, 0, 1 ], [ 1, -1, -1 ], [ 1, 1, -1 ] ] );</span>
+&lt;A polytope in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Vertices( P );</span>
+[ [ -1, 0 ], [ 0, 1 ], [ 1, 0 ] ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (ref) - Chapter 79: Creating New Objects</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap79"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chap14_mj.html">14</a>  <a href="chap15_mj.html">15</a>  <a href="chap16_mj.html">16</a>  <a href="chap17_mj.html">17</a>  <a href="chap18_mj.html">18</a>  <a href="chap19_mj.html">19</a>  <a href="chap20_mj.html">20</a>  <a href="chap21_mj.html">21</a>  <a href="chap22_mj.html">22</a>  <a href="chap23_mj.html">23</a>  <a href="chap24_mj.html">24</a>  <a href="chap25_mj.html">25</a>  <a href="chap26_mj.html">26</a>  <a href="chap27_mj.html">27</a>  <a href="chap28_mj.html">28</a>  <a href="chap29_mj.html">29</a>  <a href="chap30_mj.html">30</a>  <a href="chap31_mj.html">31</a>  <a href="chap32_mj.html">32</a>  <a href="chap33_mj.html">33</a>  <a href="chap34_mj.html">34</a>  <a href="chap35_mj.html">35</a>  <a href="chap36_mj.html">36</a>  <a href="chap37_mj.html">37</a>  <a href="chap38_mj.html">38</a>  <a href="chap39_mj.html">39</a>  <a href="chap40_mj.html">40</a>  <a href="chap41_mj.html">41</a>  <a href="chap42_mj.html">42</a>  <a href="chap43_mj.html">43</a>  <a href="chap44_mj.html">44</a>  <a href="chap45_mj.html">45</a>  <a href="chap46_mj.html">46</a>  <a href="chap47_mj.html">47</a>  <a href="chap48_mj.html">48</a>  <a href="chap49_mj.html">49</a>  <a href="chap50_mj.html">50</a>  <a href="chap51_mj.html">51</a>  <a href="chap52_mj.html">52</a>  <a href="chap53_mj.html">53</a>  <a href="chap54_mj.html">54</a>  <a href="chap55_mj.html">55</a>  <a href="chap56_mj.html">56</a>  <a href="chap57_mj.html">57</a>  <a href="chap58_mj.html">58</a>  <a href="chap59_mj.html">59</a>  <a href="chap60_mj.html">60</a>  <a href="chap61_mj.html">61</a>  <a href="chap62_mj.html">62</a>  <a href="chap63_mj.html">63</a>  <a href="chap64_mj.html">64</a>  <a href="chap65_mj.html">65</a>  <a href="chap66_mj.html">66</a>  <a href="chap67_mj.html">67</a>  <a href="chap68_mj.html">68</a>  <a href="chap69_mj.html">69</a>  <a href="chap70_mj.html">70</a>  <a href="chap71_mj.html">71</a>  <a href="chap72_mj.html">72</a>  <a href="chap73_mj.html">73</a>  <a href="chap74_mj.html">74</a>  <a href="chap75_mj.html">75</a>  <a href="chap76_mj.html">76</a>  <a href="chap77_mj.html">77</a>  <a href="chap78_mj.html">78</a>  <a href="chap79_mj.html">79</a>  <a href="chap80_mj.html">80</a>  <a href="chap81_mj.html">81</a>  <a href="chap82_mj.html">82</a>  <a href="chap83_mj.html">83</a>  <a href="chap84_mj.html">84</a>  <a href="chap85_mj.html">85</a>  <a href="chap86_mj.html">86</a>  <a href="chap87_mj.html">87</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap78_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap80_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap79.html">[MathJax off]</a></p>
+<p><a id="X83548994805AD1C9" name="X83548994805AD1C9"></a></p>
+<div class="ChapSects"><a href="chap79_mj.html#X83548994805AD1C9">79 <span class="Heading">Creating New Objects</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X82E86CF37B123FD4">79.1 <span class="Heading">Creating Objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap79_mj.html#X7CB5C12E813F512B">79.1-1 Objectify</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap79_mj.html#X85377AC07E775066">79.1-2 ObjectifyWithAttributes</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X866E223484649E5A">79.2 <span class="Heading">Component Objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap79_mj.html#X823965BF7DFDACC9">79.2-1 NamesOfComponents</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X834893D07FAA6FD2">79.3 <span class="Heading">Positional Objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X82309B3F81DD2237">79.4 <span class="Heading">Implementing New List Objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X849D8BC278649EA5">79.5 <span class="Heading">Example – Constructing Enumerators</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X7F6BF6CE7AD04EFC">79.6 <span class="Heading">Example – Constructing Iterators</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X829629E87E30090C">79.7 <span class="Heading">Arithmetic Issues in the Implementation of New Kinds of Lists</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X7EBB961E7FE1B0EB">79.8 <span class="Heading">External Representation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap79_mj.html#X8542B32A8206118C">79.8-1 ExtRepOfObj</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X8090219A7C76AF55">79.9 <span class="Heading">Mutability and Copying</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X87E29BA57C8208A4">79.10 <span class="Heading">Global Variables in the Library</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap79_mj.html#X8324B5DE8300E0F2">79.10-1 DeclareGlobalVariable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap79_mj.html#X7A23F09886E936D2">79.10-2 InstallValue</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap79_mj.html#X87A4316C818B3DE3">79.10-3 FlushCaches</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap79_mj.html#X834A8CC587A609BE">79.10-4 DeclareGlobalFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap79_mj.html#X851654DA87616207">79.10-5 DeclareSynonym</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap79_mj.html#X7837CA9A83D93B38">79.11 <span class="Heading">Declaration and Implementation Part</span></a>
+</span>
+</div>
+</div>
+
+<h3>79 <span class="Heading">Creating New Objects</span></h3>
+
+<p>This chapter is divided into three parts.</p>
+
+<p>In the first part, it is explained how to create objects with given type (see <a href="chap79_mj.html#X82E86CF37B123FD4"><span class="RefLink">79.1</span></a>).</p>
+
+<p>In the second part, first a few small examples are given, for dealing with the usual cases of component objects (see <a href="chap79_mj.html#X866E223484649E5A"><span class="RefLink">79.2</span></a>) and positional objects (see <a href="chap79_mj.html#X834893D07FAA6FD2"><span class="RefLink">79.3</span></a>), and for the implementation of new kinds of lists (see <a href="chap79_mj.html#X82309B3F81DD2237"><span class="RefLink">79.4</span></a> and <a href="chap79_mj.html#X829629E87E30090C"><span class="RefLink">79.7</span></a>). Finally, the external representation of objects is introduced (see <a href="chap79_mj.html#X7EBB961E7FE1B0EB"><span class="RefLink">79.8</span></a>), as a tool for representation independent access to an object.</p>
+
+<p>The third part deals with some rules concerning the organization of the <strong class="pkg">GAP</strong> library; namely, some commands for creating global variables are explained (see <a href="chap79_mj.html#X87E29BA57C8208A4"><span class="RefLink">79.10</span></a>) that correspond to the ones discussed in the first part of the chapter, and the idea of distinguishing declaration and implementation part of <strong class="pkg">GAP</strong> packages is outlined (see <a href="chap79_mj.html#X7837CA9A83D93B38"><span class="RefLink">79.11</span></a>).</p>
+
+<p>See also Chapter <a href="chap81_mj.html#X8125CC6A87409887"><span class="RefLink">81</span></a> for examples how the functions from the first part are used, and why it is useful to have a declaration part and an implementation part.</p>
+
+<p><a id="X82E86CF37B123FD4" name="X82E86CF37B123FD4"></a></p>
+
+<h4>79.1 <span class="Heading">Creating Objects</span></h4>
+
+<p><a id="X7CB5C12E813F512B" name="X7CB5C12E813F512B"></a></p>
+
+<h5>79.1-1 Objectify</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Objectify</code>( <var class="Arg">type</var>, <var class="Arg">data</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>New objects are created by <code class="func">Objectify</code>. <var class="Arg">data</var> is a list or a record, and <var class="Arg">type</var> is the type that the desired object shall have. <code class="func">Objectify</code> turns <var class="Arg">data</var> into an object with type <var class="Arg">type</var>. That is, <var class="Arg">data</var> is changed, and afterwards it will not be a list or a record unless <var class="Arg">type</var> is of type list resp. record.</p>
+
+<p>If <var class="Arg">data</var> is a list then <code class="func">Objectify</code> turns it into a positional object, if <var class="Arg">data</var> is a record then <code class="func">Objectify</code> turns it into a component object (for examples, see <a href="chap79_mj.html#X866E223484649E5A"><span class="RefLink">79.2</span></a> and <a href="chap79_mj.html#X834893D07FAA6FD2"><span class="RefLink">79.3</span></a>).</p>
+
+<p><code class="func">Objectify</code> does also return the object that it made out of <var class="Arg">data</var>.</p>
+
+<p>For examples where <code class="func">Objectify</code> is used, see <a href="chap79_mj.html#X866E223484649E5A"><span class="RefLink">79.2</span></a>, <a href="chap79_mj.html#X834893D07FAA6FD2"><span class="RefLink">79.3</span></a>, and the example in Chapter <a href="chap81_mj.html#X8125CC6A87409887"><span class="RefLink">81</span></a>.</p>
+
+<p><a id="X85377AC07E775066" name="X85377AC07E775066"></a></p>
+
+<h5>79.1-2 ObjectifyWithAttributes</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ObjectifyWithAttributes</code>( <var class="Arg">obj</var>, <var class="Arg">type</var>, <var class="Arg">attr1</var>, <var class="Arg">val1</var>, <var class="Arg">attr2</var>, <var class="Arg">val2</var>, <var class="Arg">...</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Attribute assignments will change the type of an object. If you create many objects, code of the form</p>
+
+
+<div class="example"><pre>
+o:=Objectify(type,rec());
+SetMyAttribute(o,value);
+</pre></div>
+
+<p>will take a lot of time for type changes. You can avoid this by setting the attributes immediately while the object is created, as follows. <code class="func">ObjectifyWithAttributes</code> changes the type of object <var class="Arg">obj</var> to type <var class="Arg">type</var> and sets attribute <var class="Arg">attr1</var> to <var class="Arg">val1</var>, sets attribute <var class="Arg">attr2</var> to <var class="Arg">val2</var> and so forth.</p>
+
+<p>If the filter list of <var class="Arg">type</var> includes that these attributes are set (and the properties also include values of the properties) and if no special setter methods are installed for any of the involved attributes then they are set simultaneously without type changes. This can produce a substantial speedup.</p>
+
+<p>If the conditions of the last sentence are not fulfilled, an ordinary <code class="func">Objectify</code> (<a href="chap79_mj.html#X7CB5C12E813F512B"><span class="RefLink">79.1-1</span></a>) with subsequent setter calls for the attributes is performed instead.</p>
+
+<p><a id="X866E223484649E5A" name="X866E223484649E5A"></a></p>
+
+<h4>79.2 <span class="Heading">Component Objects</span></h4>
+
+<p>A <em>component object</em> is an object in the representation <code class="func">IsComponentObjectRep</code> (<a href="chap13_mj.html#X805F1C3B7C730062"><span class="RefLink">13.4-1</span></a>) or a subrepresentation of it. Such an object <var class="Arg">cobj</var> is built from subobjects that can be accessed via <code class="code"><var class="Arg">cobj</var>!.<var class="Arg">name</var></code>, similar to components of a record. Also analogously to records, values can be assigned to components of <var class="Arg">cobj</var> via <code class="code"><var class="Arg">cobj</var>!.<var class="Arg">name</var>:= <var class="Arg">val</var></code>. For the creation of component objects, see <a href="chap79_mj.html#X82E86CF37B123FD4"><span class="RefLink">79.1</span></a>. One must be <em>very careful</em> when using the <code class="code">!.</code> operator, in order to interpret the component in the right way, and even more careful when using the assignment to components using <code class="code">!.</code>, in order to keep the information stored in <var class="Arg">cobj</var> consistent.</p>
+
+<p>First of all, in the access or assignment to a component as shown above, <var class="Arg">name</var> must be among the admissible component names for the representation of <var class="Arg">cobj</var>, see <code class="func">NewRepresentation</code> (<a href="chap13_mj.html#X7CC8106F809E15CF"><span class="RefLink">13.4-4</span></a>). Second, preferably only few low level functions should use <code class="code">!.</code>, whereas this operator should not occur in "user interactions".</p>
+
+<p>Note that even if <var class="Arg">cobj</var> claims that it is immutable, i.e., if <var class="Arg">cobj</var> is not in the category <code class="func">IsMutable</code> (<a href="chap12_mj.html#X7999AD1D7A4F1F46"><span class="RefLink">12.6-2</span></a>), access and assignment via <code class="code">!.</code> and <code class="code">!.:=</code> work. This is necessary for being able to store newly discovered information in immutable objects.</p>
+
+<p>The following example shows the implementation of an iterator (see <a href="chap30_mj.html#X85A3F00985453F95"><span class="RefLink">30.8</span></a>) for the domain of integers, which is represented as component object. See <a href="chap79_mj.html#X834893D07FAA6FD2"><span class="RefLink">79.3</span></a> for an implementation using positional objects. (In practice, such an iterator can be implemented more elegantly using <code class="func">IteratorByFunctions</code> (<a href="chap30_mj.html#X82677D8F817D6701"><span class="RefLink">30.8-8</span></a>), see <a href="chap79_mj.html#X7F6BF6CE7AD04EFC"><span class="RefLink">79.6</span></a>.)</p>
+
+<p>The used succession of integers is <span class="SimpleMath">\(0, 1, -1, 2, -2, 3, -3, \ldots\)</span>, that is, <span class="SimpleMath">\(a_n = n/2\)</span> if <span class="SimpleMath">\(n\)</span> is even, and <span class="SimpleMath">\(a_n = (1-n)/2\)</span> otherwise.</p>
+
+
+<div class="example"><pre>
+IsIntegersIteratorCompRep := NewRepresentation( "IsIntegersIteratorRep",
+    IsComponentObjectRep, [ "counter" ] );
+</pre></div>
+
+<p>The above command creates a new representation (see <code class="func">NewRepresentation</code> (<a href="chap13_mj.html#X7CC8106F809E15CF"><span class="RefLink">13.4-4</span></a>)) <code class="code">IsIntegersIteratorCompRep</code>, as a subrepresentation of <code class="func">IsComponentObjectRep</code> (<a href="chap13_mj.html#X805F1C3B7C730062"><span class="RefLink">13.4-1</span></a>), and with one admissible component <code class="code">counter</code>. So no other components than <code class="code">counter</code> will be needed.</p>
+
+
+<div class="example"><pre>
+InstallMethod( Iterator,
+    "method for `Integers'",
+    [ IsIntegers ],
+    function( Integers )
+    return Objectify( NewType( IteratorsFamily,
+                                   IsIterator
+                               and IsIntegersIteratorCompRep ),
+                      rec( counter := 0 ) );
+    end );
+</pre></div>
+
+<p>After the above method installation, one can already ask for <code class="code">Iterator( Integers )</code>. Note that exactly the domain of integers is described by the filter <code class="func">IsIntegers</code> (<a href="chap14_mj.html#X818683B17F8C97F3"><span class="RefLink">14.1-2</span></a>).</p>
+
+<p>By the call to <code class="func">NewType</code> (<a href="chap13_mj.html#X7CE39E9478AEC826"><span class="RefLink">13.9-3</span></a>), the returned object lies in the family containing all iterators, which is <code class="code">IteratorsFamily</code>, it lies in the category <code class="func">IsIterator</code> (<a href="chap30_mj.html#X87168A827E5B28E4"><span class="RefLink">30.8-3</span></a>) and in the representation <code class="code">IsIntegersIteratorCompRep</code>; furthermore, it has the component <code class="code">counter</code> with value <code class="code">0</code>.</p>
+
+<p>What is missing now are methods for the two basic operations of iterators, namely <code class="func">IsDoneIterator</code> (<a href="chap30_mj.html#X8055FC557B5D899E"><span class="RefLink">30.8-4</span></a>) and <code class="func">NextIterator</code> (<a href="chap30_mj.html#X879F62F77D1D1179"><span class="RefLink">30.8-5</span></a>). The former must always return <code class="keyw">false</code>, since there are infinitely many integers. The latter must return the next integer in the iteration, and update the information stored in the iterator, that is, increase the value of the component <code class="code">counter</code>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( IsDoneIterator,
+    "method for iterator of `Integers'",
+    [ IsIterator and IsIntegersIteratorCompRep ],
+    ReturnFalse );
+
+InstallMethod( NextIterator,
+    "method for iterator of `Integers'",
+    [ IsIntegersIteratorCompRep ],
+    function( iter )
+    iter!.counter:= iter!.counter + 1;
+    if iter!.counter mod 2 = 0 then
+      return iter!.counter / 2;
+    else
+      return ( 1 - iter!.counter ) / 2;
+    fi;
+    end );
+</pre></div>
+
+<p><a id="X823965BF7DFDACC9" name="X823965BF7DFDACC9"></a></p>
+
+<h5>79.2-1 NamesOfComponents</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NamesOfComponents</code>( <var class="Arg">comobj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For a component object <var class="Arg">comobj</var>, <code class="func">NamesOfComponents</code> returns a list of strings, which are the names of components currently bound in <var class="Arg">comobj</var>.</p>
+
+<p>For a record <var class="Arg">comobj</var>, <code class="func">NamesOfComponents</code> returns the result of <code class="func">RecNames</code> (<a href="chap29_mj.html#X837F1E1F866FB1A0"><span class="RefLink">29.1-2</span></a>).</p>
+
+<p><a id="X834893D07FAA6FD2" name="X834893D07FAA6FD2"></a></p>
+
+<h4>79.3 <span class="Heading">Positional Objects</span></h4>
+
+<p>A <em>positional object</em> is an object in the representation <code class="func">IsPositionalObjectRep</code> (<a href="chap13_mj.html#X805F1C3B7C730062"><span class="RefLink">13.4-1</span></a>) or a subrepresentation of it. Such an object <var class="Arg">pobj</var> is built from subobjects that can be accessed via <code class="code"><var class="Arg">pobj</var>![<var class="Arg">pos</var>]</code>, similar to positions in a list. Also analogously to lists, values can be assigned to positions of <var class="Arg">pobj</var> via <code class="code"><var class="Arg">pobj</var>![<var class="Arg">pos</var>]:= <var class="Arg">val</var></code>. For the creation of positional objects, see <a href="chap79_mj.html#X82E86CF37B123FD4"><span class="RefLink">79.1</span></a>.</p>
+
+<p>One must be <em>very careful</em> when using the <code class="code">![]</code> operator, in order to interpret the position in the right way, and even more careful when using the assignment to positions using <code class="code">![]</code>, in order to keep the information stored in <var class="Arg">pobj</var> consistent.</p>
+
+<p>First of all, in the access or assignment to a position as shown above, <var class="Arg">pos</var> must be among the admissible positions for the representation of <var class="Arg">pobj</var>, see <code class="func">NewRepresentation</code> (<a href="chap13_mj.html#X7CC8106F809E15CF"><span class="RefLink">13.4-4</span></a>). Second, preferably only few low level functions should use <code class="code">![]</code>, whereas this operator should not occur in "user interactions".</p>
+
+<p>Note that even if <var class="Arg">pobj</var> claims that it is immutable, i.e., if <var class="Arg">pobj</var> is not in the category <code class="func">IsMutable</code> (<a href="chap12_mj.html#X7999AD1D7A4F1F46"><span class="RefLink">12.6-2</span></a>), access and assignment via <code class="code">![]</code> work. This is necessary for being able to store newly discovered information in immutable objects.</p>
+
+<p>The following example shows the implementation of an iterator (see <a href="chap30_mj.html#X85A3F00985453F95"><span class="RefLink">30.8</span></a>) for the domain of integers, which is represented as positional object. See <a href="chap79_mj.html#X866E223484649E5A"><span class="RefLink">79.2</span></a> for an implementation using component objects, and more details.</p>
+
+
+<div class="example"><pre>
+IsIntegersIteratorPosRep := NewRepresentation( "IsIntegersIteratorRep",
+    IsPositionalObjectRep, [ 1 ] );
+</pre></div>
+
+<p>The above command creates a new representation (see <code class="func">NewRepresentation</code> (<a href="chap13_mj.html#X7CC8106F809E15CF"><span class="RefLink">13.4-4</span></a>)) <code class="code">IsIntegersIteratorPosRep</code>, as a subrepresentation of <code class="func">IsPositionalObjectRep</code> (<a href="chap13_mj.html#X805F1C3B7C730062"><span class="RefLink">13.4-1</span></a>), and with only the first position being admissible for storing data.</p>
+
+
+<div class="example"><pre>
+InstallMethod( Iterator,
+    "method for `Integers'",
+    [ IsIntegers ],
+    function( Integers )
+    return Objectify( NewType( IteratorsFamily,
+                                   IsIterator
+                               and IsIntegersIteratorRep ),
+                      [ 0 ] );
+    end );
+</pre></div>
+
+<p>After the above method installation, one can already ask for <code class="code">Iterator( Integers )</code>. Note that exactly the domain of integers is described by the filter <code class="func">IsIntegers</code> (<a href="chap14_mj.html#X818683B17F8C97F3"><span class="RefLink">14.1-2</span></a>).</p>
+
+<p>By the call to <code class="func">NewType</code> (<a href="chap13_mj.html#X7CE39E9478AEC826"><span class="RefLink">13.9-3</span></a>), the returned object lies in the family containing all iterators, which is <code class="code">IteratorsFamily</code>, it lies in the category <code class="func">IsIterator</code> (<a href="chap30_mj.html#X87168A827E5B28E4"><span class="RefLink">30.8-3</span></a>) and in the representation <code class="code">IsIntegersIteratorPosRep</code>; furthermore, the first position has value <code class="code">0</code>.</p>
+
+<p>What is missing now are methods for the two basic operations of iterators, namely <code class="func">IsDoneIterator</code> (<a href="chap30_mj.html#X8055FC557B5D899E"><span class="RefLink">30.8-4</span></a>) and <code class="func">NextIterator</code> (<a href="chap30_mj.html#X879F62F77D1D1179"><span class="RefLink">30.8-5</span></a>). The former must always return <code class="keyw">false</code>, since there are infinitely many integers. The latter must return the next integer in the iteration, and update the information stored in the iterator, that is, increase the value stored in the first position.</p>
+
+
+<div class="example"><pre>
+InstallMethod( IsDoneIterator,
+    "method for iterator of `Integers'",
+    [ IsIterator and IsIntegersIteratorPosRep ],
+    ReturnFalse );
+
+InstallMethod( NextIterator,
+    "method for iterator of `Integers'",
+    [ IsIntegersIteratorPosRep ],
+    function( iter )
+    iter![1]:= iter![1] + 1;
+    if iter![1] mod 2 = 0 then
+      return iter![1] / 2;
+    else
+      return ( 1 - iter![1] ) / 2;
+    fi;
+    end );
+</pre></div>
+
+<p>It should be noted that one can of course install both the methods shown in Section <a href="chap79_mj.html#X866E223484649E5A"><span class="RefLink">79.2</span></a> and <a href="chap79_mj.html#X834893D07FAA6FD2"><span class="RefLink">79.3</span></a>. The call <code class="code">Iterator( Integers )</code> will cause one of the methods to be selected, and for the returned iterator, which will have one of the representations we constructed, the right <code class="func">NextIterator</code> (<a href="chap30_mj.html#X879F62F77D1D1179"><span class="RefLink">30.8-5</span></a>) method will be chosen.</p>
+
+<p><a id="X82309B3F81DD2237" name="X82309B3F81DD2237"></a></p>
+
+<h4>79.4 <span class="Heading">Implementing New List Objects</span></h4>
+
+<p>This section gives some hints for the quite usual situation that one wants to implement new objects that are lists. More precisely, one either wants to deal with lists that have additional features, or one wants that some objects also behave as lists. An example can be found in <a href="chap79_mj.html#X849D8BC278649EA5"><span class="RefLink">79.5</span></a>.</p>
+
+<p>A <em>list</em> in <strong class="pkg">GAP</strong> is an object in the category <code class="func">IsList</code> (<a href="chap21_mj.html#X7C4CC4EA8299701E"><span class="RefLink">21.1-1</span></a>). Basic operations for lists are <code class="func">Length</code> (<a href="chap21_mj.html#X780769238600AFD1"><span class="RefLink">21.17-5</span></a>), <code class="func">\[\]</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>), and <code class="func">IsBound\[\]</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>) (see <a href="chap21_mj.html#X7B202D147A5C2884"><span class="RefLink">21.2</span></a>).</p>
+
+<p>Note that the access to the position <var class="Arg">pos</var> in the list <var class="Arg">list</var> via <code class="code"><var class="Arg">list</var>[<var class="Arg">pos</var>]</code> is handled by the call <code class="code">\[\]( <var class="Arg">list</var>, <var class="Arg">pos</var> )</code> to the operation <code class="func">\[\]</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>). To explain the somewhat strange name <code class="code">\[\]</code> of this operation, note that non-alphanumeric characters like <code class="code">[</code> and <code class="code">]</code> may occur in <strong class="pkg">GAP</strong> variable names only if they are escaped by a <code class="code">\</code> character.</p>
+
+<p>Analogously, the check <code class="code">IsBound( <var class="Arg">list</var>[<var class="Arg">pos</var>] )</code> whether the position <var class="Arg">pos</var> of the list <var class="Arg">list</var> is bound is handled by the call <code class="code">IsBound\[\]( <var class="Arg">list</var>, <var class="Arg">pos</var> )</code> to the operation <code class="func">IsBound\[\]</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>).</p>
+
+<p>For mutable lists, also assignment to positions and unbinding of positions via the operations <code class="func">\[\]\:\=</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>) and <code class="func">Unbind\[\]</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>) are basic operations. The assignment <code class="code"><var class="Arg">list</var>[<var class="Arg">pos</var>]:= <var class="Arg">val</var></code> is handled by the call <code class="code">\[\]\:\=( <var class="Arg">list</var>, <var class="Arg">pos</var>, <var class="Arg">val</var> )</code>, and <code class="code">Unbind( <var class="Arg">list</var>[<var class="Arg">pos</var>] )</code> is handled by the call <code class="code">Unbind\[\]( <var class="Arg">list</var>, <var class="Arg">pos</var> )</code>.</p>
+
+<p>All other operations for lists, e.g., <code class="func">Add</code> (<a href="chap21_mj.html#X795EC9D67E34DAB0"><span class="RefLink">21.4-2</span></a>), <code class="func">Append</code> (<a href="chap21_mj.html#X79E31DB27C82D6E1"><span class="RefLink">21.4-5</span></a>), <code class="func">Sum</code> (<a href="chap21_mj.html#X7A04B71C84CFCC2D"><span class="RefLink">21.20-26</span></a>), are based on these operations. This means that it is sufficient to install methods for the new list objects only for the basic operations.</p>
+
+<p>So if one wants to implement new list objects then one creates them as objects in the category <code class="func">IsList</code> (<a href="chap21_mj.html#X7C4CC4EA8299701E"><span class="RefLink">21.1-1</span></a>), and installs methods for <code class="func">Length</code> (<a href="chap21_mj.html#X780769238600AFD1"><span class="RefLink">21.17-5</span></a>), <code class="func">\[\]</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>), and <code class="func">IsBound\[\]</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>). If the new lists shall be mutable, one needs to install also methods for <code class="func">\[\]\:\=</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>) and <code class="func">Unbind\[\]</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>).</p>
+
+<p>One application for this is the implementation of <em>enumerators</em> for domains. An enumerator for the domain <span class="SimpleMath">\(D\)</span> is a dense list whose entries are in bijection with the elements of <span class="SimpleMath">\(D\)</span>. If <span class="SimpleMath">\(D\)</span> is large then it is not useful to write down all elements. Instead one can implement such a bijection implicitly. This works also for infinite domains.</p>
+
+<p>In this situation, one implements a new representation of the lists that are already available in <strong class="pkg">GAP</strong>, in particular the family of such a list is the same as the family of the domain <span class="SimpleMath">\(D\)</span>.</p>
+
+<p>But it is also possible to implement new kinds of lists that lie in new families, and thus are not equal to lists that were available in <strong class="pkg">GAP</strong> before. An example for this is the implementation of matrices whose multiplication via "<code class="code">*</code>" is the Lie product of matrices.</p>
+
+<p>In this situation, it makes no sense to put the new matrices into the same family as the original matrices. Note that the product of two Lie matrices shall be defined but not the product of an ordinary matrix and a Lie matrix. So it is possible to have two lists that have the same entries but that are not equal w.r.t. "<code class="code">=</code>" because they lie in different families.</p>
+
+<p><a id="X849D8BC278649EA5" name="X849D8BC278649EA5"></a></p>
+
+<h4>79.5 <span class="Heading">Example – Constructing Enumerators</span></h4>
+
+<p>When dealing with countable sets, a usual task is to define enumerations, i.e., bijections to the positive integers. In <strong class="pkg">GAP</strong>, this can be implemented via <em>enumerators</em> (see <a href="chap21_mj.html#X7EA3ACE27E43D174"><span class="RefLink">21.23</span></a>). These are lists containing the elements in a specified ordering, and the operations <code class="func">Position</code> (<a href="chap21_mj.html#X79975EC6783B4293"><span class="RefLink">21.16-1</span></a>) and list access via <code class="func">\[\]</code> (<a href="chap21_mj.html#X8297BBCD79642BE6"><span class="RefLink">21.2-1</span></a>) define the desired bijection. For implementing such an enumerator, one mainly needs to install the appropriate functions for these operations.</p>
+
+<p>A general setup for creating such lists is given by <code class="func">EnumeratorByFunctions</code> (<a href="chap30_mj.html#X85E149177AC547C3"><span class="RefLink">30.3-4</span></a>).</p>
+
+<p>If the set in question is a domain <var class="Arg">D</var> for which a <code class="func">Size</code> (<a href="chap30_mj.html#X858ADA3B7A684421"><span class="RefLink">30.4-6</span></a>) method is available then all one has to do is to write down the functions for computing the <span class="SimpleMath">\(n\)</span>-th element of the list and for computing the position of a given <strong class="pkg">GAP</strong> object in the list, to put them into the components <code class="code">ElementNumber</code> and <code class="code">NumberElement</code> of a record, and to call <code class="func">EnumeratorByFunctions</code> (<a href="chap30_mj.html#X85E149177AC547C3"><span class="RefLink">30.3-4</span></a>) with the domain <var class="Arg">D</var> and this record as arguments. For example, the following lines of code install an <code class="func">Enumerator</code> (<a href="chap30_mj.html#X7EF8910F82B45EC7"><span class="RefLink">30.3-2</span></a>) method for the case that <var class="Arg">D</var> is the domain of rational integers. (Note that <code class="func">IsIntegers</code> (<a href="chap14_mj.html#X818683B17F8C97F3"><span class="RefLink">14.1-2</span></a>) is a filter that describes exactly the domain of rational integers.)</p>
+
+
+<div class="example"><pre>
+InstallMethod( Enumerator,
+    "for integers",
+    [ IsIntegers ],
+    Integers -&gt; EnumeratorByFunctions( Integers, rec(
+                    ElementNumber := function( e, n ) ... end,
+                    NumberElement := function( e, x ) ... end ) ) );
+</pre></div>
+
+<p>The bodies of the functions have been omitted above; here is the code that is actually used in <strong class="pkg">GAP</strong>. (The ordering coincides with that for the iterators for the domain of rational integers that have been discussed in <a href="chap79_mj.html#X866E223484649E5A"><span class="RefLink">79.2</span></a> and <a href="chap79_mj.html#X834893D07FAA6FD2"><span class="RefLink">79.3</span></a>.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">enum:= Enumerator( Integers );</span>
+&lt;enumerator of Integers&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( enum!.NumberElement, "\n" );</span>
+function ( e, x )
+    local  pos;
+    if not IsInt( x )  then
+        return fail;
+    elif 0 &lt; x  then
+        pos := 2 * x;
+    else
+        pos := -2 * x + 1;
+    fi;
+    return pos;
+end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( enum!.ElementNumber, "\n" );</span>
+function ( e, n )
+    if n mod 2 = 0  then
+        return n / 2;
+    else
+        return (1 - n) / 2;
+    fi;
+    return;
+end
+</pre></div>
+
+<p>The situation becomes slightly more complicated if the set <span class="SimpleMath">\(S\)</span> in question is not a domain. This is because one must provide also at least a method for computing the length of the list, and because one has to determine the family in which it lies (see <a href="chap79_mj.html#X82E86CF37B123FD4"><span class="RefLink">79.1</span></a>). The latter should usually not be a problem since either <span class="SimpleMath">\(S\)</span> is nonempty and all its elements lie in the same family –in this case one takes the collections family of any element in <span class="SimpleMath">\(S\)</span>– or the family of the enumerator must be <code class="code">ListsFamily</code>.</p>
+
+<p>An example in the <strong class="pkg">GAP</strong> library is an enumerator for the set of <span class="SimpleMath">\(k\)</span>-tuples over a finite set; the function is called <code class="func">EnumeratorOfTuples</code> (<a href="chap16_mj.html#X7BA135297E8DA819"><span class="RefLink">16.2-9</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( EnumeratorOfTuples, "\n" );</span>
+function ( set, k )
+    local  enum;
+    if k = 0  then
+        return Immutable( [ [  ] ] );
+    elif IsEmpty( set )  then
+        return Immutable( [  ] );
+    fi;
+    enum 
+     := EnumeratorByFunctions( CollectionsFamily( FamilyObj( set ) ), 
+       rec(
+          ElementNumber := function ( enum, n )
+                local  nn, t, i;
+                nn := n - 1;
+                t := [  ];
+                for i  in [ 1 .. enum!.k ]  do
+                    t[i] := RemInt( nn, Length( enum!.set ) ) + 1;
+                    nn := QuoInt( nn, Length( enum!.set ) );
+                od;
+                if nn &lt;&gt; 0  then
+                    Error( "&lt;enum&gt;[", n, 
+                     "] must have an assigned value" );
+                fi;
+                nn := enum!.set{Reversed( t )};
+                MakeImmutable( nn );
+                return nn;
+            end,
+          NumberElement := function ( enum, elm )
+                local  n, i;
+                if not IsList( elm )  then
+                    return fail;
+                fi;
+                elm := List( elm, function ( x )
+                        return Position( enum!.set, x );
+                    end );
+                if fail in elm or Length( elm ) &lt;&gt; enum!.k  then
+                    return fail;
+                fi;
+                n := 0;
+                for i  in [ 1 .. enum!.k ]  do
+                    n := Length( enum!.set ) * n + elm[i] - 1;
+                od;
+                return n + 1;
+            end,
+          Length := function ( enum )
+                return Length( enum!.set ) ^ enum!.k;
+            end,
+          PrintObj := function ( enum )
+                Print( "EnumeratorOfTuples( ", enum!.set, ", ", 
+                 enum!.k, " )" );
+                return;
+            end,
+          set := Set( set ),
+          k := k ) );
+    SetIsSSortedList( enum, true );
+    return enum;
+end
+</pre></div>
+
+<p>We see that the enumerator is a homogeneous list that stores individual functions <code class="code">ElementNumber</code>, <code class="code">NumberElement</code>, <code class="code">Length</code>, and <code class="code">PrintObj</code>; besides that, the data components <span class="SimpleMath">\(S\)</span> and <span class="SimpleMath">\(k\)</span> are contained.</p>
+
+<p><a id="X7F6BF6CE7AD04EFC" name="X7F6BF6CE7AD04EFC"></a></p>
+
+<h4>79.6 <span class="Heading">Example – Constructing Iterators</span></h4>
+
+<p>Iterators are a kind of objects that is implemented for several collections in the <strong class="pkg">GAP</strong> library and which might be interesting also in other cases, see <a href="chap30_mj.html#X85A3F00985453F95"><span class="RefLink">30.8</span></a>. A general setup for implementing new iterators is provided by <code class="func">IteratorByFunctions</code> (<a href="chap30_mj.html#X82677D8F817D6701"><span class="RefLink">30.8-8</span></a>).</p>
+
+<p>All one has to do is to write down the functions for <code class="func">NextIterator</code> (<a href="chap30_mj.html#X879F62F77D1D1179"><span class="RefLink">30.8-5</span></a>), <code class="func">IsDoneIterator</code> (<a href="chap30_mj.html#X8055FC557B5D899E"><span class="RefLink">30.8-4</span></a>), and <code class="func">ShallowCopy</code> (<a href="chap12_mj.html#X846BC7107C352031"><span class="RefLink">12.7-1</span></a>), and to call <code class="func">IteratorByFunctions</code> (<a href="chap30_mj.html#X82677D8F817D6701"><span class="RefLink">30.8-8</span></a>) with this record as argument. For example, the following lines of code install an <code class="func">Iterator</code> (<a href="chap30_mj.html#X83ADF8287ED0668E"><span class="RefLink">30.8-1</span></a>) method for the case that the argument is the domain of rational integers.</p>
+
+<p>(Note that <code class="func">IsIntegers</code> (<a href="chap14_mj.html#X818683B17F8C97F3"><span class="RefLink">14.1-2</span></a>) is a filter that describes exactly the domain of rational integers.)</p>
+
+
+<div class="example"><pre>
+InstallMethod( Iterator,
+    "for integers",
+    [ IsIntegers ],
+    Integers -&gt; IteratorByFunctions( rec(
+                    NextIterator:= function( iter ) ... end,
+                    IsDoneIterator := ReturnFalse,
+                    ShallowCopy := function( iter ) ... end ) ) );
+</pre></div>
+
+<p>The bodies of two of the functions have been omitted above; here is the code that is actually used in <strong class="pkg">GAP</strong>. (The ordering coincides with that for the iterators for the domain of rational integers that have been discussed in <a href="chap79_mj.html#X866E223484649E5A"><span class="RefLink">79.2</span></a> and <a href="chap79_mj.html#X834893D07FAA6FD2"><span class="RefLink">79.3</span></a>.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iter:= Iterator( Integers );</span>
+&lt;iterator of Integers at 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( iter!.NextIterator, "\n" );</span>
+function ( iter )
+    iter!.counter := iter!.counter + 1;
+    if iter!.counter mod 2 = 0  then
+        return iter!.counter / 2;
+    else
+        return (1 - iter!.counter) / 2;
+    fi;
+    return;
+end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( iter!.ShallowCopy, "\n" );   </span>
+function ( iter )
+    return rec(
+        counter := iter!.counter );
+end
+</pre></div>
+
+<p>Note that the <code class="code">ShallowCopy</code> component of the record must be a function that does not return an iterator but a record that can be used as the argument of <code class="func">IteratorByFunctions</code> (<a href="chap30_mj.html#X82677D8F817D6701"><span class="RefLink">30.8-8</span></a>) in order to create the desired shallow copy.</p>
+
+<p><a id="X829629E87E30090C" name="X829629E87E30090C"></a></p>
+
+<h4>79.7 <span class="Heading">Arithmetic Issues in the Implementation of New Kinds of Lists</span></h4>
+
+<p>When designing a new kind of list objects in <strong class="pkg">GAP</strong>, defining the arithmetic behaviour of these objects is an issue.</p>
+
+<p>There are situations where arithmetic operations of list objects are unimportant in the sense that adding two such lists need not be represented in a special way. In such cases it might be useful either to support no arithmetics at all for the new lists, or to enable the default arithmetic methods. The former can be achieved by not setting the filters <code class="func">IsGeneralizedRowVector</code> (<a href="chap21_mj.html#X87ABCEE9809585A0"><span class="RefLink">21.12-1</span></a>) and <code class="func">IsMultiplicativeGeneralizedRowVector</code> (<a href="chap21_mj.html#X7FBCA5B58308C158"><span class="RefLink">21.12-2</span></a>) in the types of the lists, the latter can be achieved by setting the filter <code class="func">IsListDefault</code> (<a href="chap21_mj.html#X7BAD12E67BFC90DE"><span class="RefLink">21.12-3</span></a>). (for details, see <a href="chap21_mj.html#X84D642967B8546B7"><span class="RefLink">21.12</span></a>). An example for "wrapped lists" with default behaviour are vector space bases; they are lists with additional properties concerning the computation of coefficients, but arithmetic properties are not important. So it is no loss to enable the default methods for these lists.</p>
+
+<p>However, often the arithmetic behaviour of new list objects is important, and one wants to keep these lists away from default methods for addition, multiplication etc. For example, the sum and the product of (compatible) block matrices shall be represented as a block matrix, so the default methods for sum and product of matrices shall not be applicable, although the results will be equal to those of the default methods in the sense that their entries at corresponding positions are equal.</p>
+
+<p>So one does not set the filter <code class="func">IsListDefault</code> (<a href="chap21_mj.html#X7BAD12E67BFC90DE"><span class="RefLink">21.12-3</span></a>) in such cases, and thus one can implement one's own methods for arithmetic operations. (Of course "can" means on the other hand that one <em>must</em> implement such methods if one is interested in arithmetics of the new lists.)</p>
+
+<p>The specific binary arithmetic methods for the new lists will usually cover the case that both arguments are of the new kind, and perhaps also the interaction between a list of the new kind and certain other kinds of lists may be handled if this appears to be useful.</p>
+
+<p>For the last situation, interaction between a new kind of lists and other kinds of lists, <strong class="pkg">GAP</strong> provides already a setup. Namely, there are the categories <code class="func">IsGeneralizedRowVector</code> (<a href="chap21_mj.html#X87ABCEE9809585A0"><span class="RefLink">21.12-1</span></a>) and <code class="func">IsMultiplicativeGeneralizedRowVector</code> (<a href="chap21_mj.html#X7FBCA5B58308C158"><span class="RefLink">21.12-2</span></a>), which are concerned with the additive and the multiplicative behaviour, respectively, of lists. For lists in these filters, the structure of the results of arithmetic operations is prescribed (see <a href="chap21_mj.html#X7E6A1F66781BE923"><span class="RefLink">21.13</span></a> and <a href="chap21_mj.html#X782ED7F27D8C7FC1"><span class="RefLink">21.14</span></a>).</p>
+
+<p>For example, if one implements block matrices in <code class="func">IsMultiplicativeGeneralizedRowVector</code> (<a href="chap21_mj.html#X7FBCA5B58308C158"><span class="RefLink">21.12-2</span></a>) then automatically the product of such a block matrix and a (plain) list of such block matrices will be defined as the obvious list of matrix products, and a default method for plain lists will handle this multiplication. (Note that this method will rely on a method for computing the product of the block matrices, and of course no default method is available for that.) Conversely, if the block matrices are not in <code class="func">IsMultiplicativeGeneralizedRowVector</code> (<a href="chap21_mj.html#X7FBCA5B58308C158"><span class="RefLink">21.12-2</span></a>) then the product of a block matrix and a (plain) list of block matrices is not defined. (There is no default method for it, and one can define the result and provide a method for computing it.)</p>
+
+<p>Thus if one decides to set the filters <code class="func">IsGeneralizedRowVector</code> (<a href="chap21_mj.html#X87ABCEE9809585A0"><span class="RefLink">21.12-1</span></a>) and <code class="func">IsMultiplicativeGeneralizedRowVector</code> (<a href="chap21_mj.html#X7FBCA5B58308C158"><span class="RefLink">21.12-2</span></a>) for the new lists, on the one hand one loses freedom in defining arithmetic behaviour, but on the other hand one gains several default methods for a more or less natural behaviour.</p>
+
+<p>If a list in the filter <code class="func">IsGeneralizedRowVector</code> (<a href="chap21_mj.html#X87ABCEE9809585A0"><span class="RefLink">21.12-1</span></a>) (<code class="func">IsMultiplicativeGeneralizedRowVector</code> (<a href="chap21_mj.html#X7FBCA5B58308C158"><span class="RefLink">21.12-2</span></a>)) lies in <code class="func">IsAttributeStoringRep</code> (<a href="chap13_mj.html#X7A951C33839AF2C1"><span class="RefLink">13.5-5</span></a>), the values of additive (multiplicative) nesting depth is stored in the list and need not be calculated for each arithmetic operation. One can then store the value(s) already upon creation of the lists, with the effect that the default arithmetic operations will access elements of these lists only if this is unavoidable. For example, the sum of two plain lists of "wrapped matrices" with stored nesting depths are computed via the method for adding two such wrapped lists, and without accessing any of their rows (which might be expensive). In this sense, the wrapped lists are treated as black boxes.</p>
+
+<p><a id="X7EBB961E7FE1B0EB" name="X7EBB961E7FE1B0EB"></a></p>
+
+<h4>79.8 <span class="Heading">External Representation</span></h4>
+
+<p>An operation is defined for elements rather than for objects in the sense that if the arguments are replaced by objects that are equal to the old arguments w.r.t. the equivalence relation "<code class="code">=</code>" then the result must be equal to the old result w.r.t. "<code class="code">=</code>".</p>
+
+<p>But the implementation of many methods is representation dependent in the sense that certain representation dependent subobjects are accessed.</p>
+
+<p>For example, a method that implements the addition of univariate polynomials may access coefficients lists of its arguments only if they are really stored, while in the case of sparsely represented polynomials a different approach is needed.</p>
+
+<p>In spite of this, for many operations one does not want to write an own method for each possible representations of each argument, for example because none of the methods could in fact take advantage of the actually given representations of the objects. Another reason could be that one wants to install first a representation independent method, and then add specific methods as they are needed to gain more efficiency, by really exploiting the fact that the arguments have certain representations.</p>
+
+<p>For the purpose of admitting representation independent code, one can define an <em>external representation</em> of objects in a given family, install methods to compute this external representation for each representation of the objects, and then use this external representation of the objects whenever they occur.</p>
+
+<p>We cannot provide conversion functions that allow us to first convert any object in question to one particular "standard representation", and then access the data in the way defined for this representation, simply because it may be impossible to choose such a "standard representation" uniformly for all objects in the given family.</p>
+
+<p>So the aim of an external representation of an object <var class="Arg">obj</var> is a different one, namely to describe the data from which <var class="Arg">obj</var> is composed. In particular, the external representation of <var class="Arg">obj</var> is <em>not</em> one possible ("standard") representation of <var class="Arg">obj</var>, in fact the external representation of <var class="Arg">obj</var> is in general different from <var class="Arg">obj</var> w.r.t. "<code class="code">=</code>", first of all because the external representation of <var class="Arg">obj</var> does in general not lie in the same family as <var class="Arg">obj</var>.</p>
+
+<p>For example the external representation of a rational function is a list of length two or three, the first entry being the zero coefficient, the second being a list describing the coefficients and monomials of the numerator, and the third, if bound, being a list describing the coefficients and monomials of the denominator. In particular, the external representation of a polynomial is a list and not a polynomial.</p>
+
+<p>The other way round, the external representation of <var class="Arg">obj</var> encodes <var class="Arg">obj</var> in such a way that from this data and the family of <var class="Arg">obj</var>, one can create an object that is equal to <var class="Arg">obj</var>. Usually the external representation of an object is a list or a record.</p>
+
+<p>Although the external representation of <var class="Arg">obj</var> is by definition independent of the actually available representations for <var class="Arg">obj</var>, it is usual that a representation of <var class="Arg">obj</var> exists for which the computation of the external representation is obtained by just "unpacking" <var class="Arg">obj</var>, in the sense that the desired data is stored in a component or a position of <var class="Arg">obj</var>, if <var class="Arg">obj</var> is a component object (see <a href="chap79_mj.html#X866E223484649E5A"><span class="RefLink">79.2</span></a>) or a positional object (see <a href="chap79_mj.html#X834893D07FAA6FD2"><span class="RefLink">79.3</span></a>).</p>
+
+<p>To implement an external representation means to install methods for the following two operations.</p>
+
+<p><a id="X8542B32A8206118C" name="X8542B32A8206118C"></a></p>
+
+<h5>79.8-1 ExtRepOfObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExtRepOfObj</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ObjByExtRep</code>( <var class="Arg">fam</var>, <var class="Arg">data</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="func">ExtRepOfObj</code> returns the external representation of its argument, and <code class="func">ObjByExtRep</code> returns an object in the family <var class="Arg">fam</var> that has external representation <var class="Arg">data</var>.</p>
+
+<p>Of course, <code class="code">ObjByExtRep( FamilyObj( <var class="Arg">obj</var> ), ExtRepOfObj( <var class="Arg">obj</var> ) )</code> must be equal to <var class="Arg">obj</var> w.r.t. the operation <code class="func">\=</code> (<a href="chap31_mj.html#X7EF67D047F03CA6F"><span class="RefLink">31.11-1</span></a>). But it is <em>not</em> required that equal objects have equal external representations.</p>
+
+<p>Note that if one defines a new representation of objects for which an external representation does already exist then one <em>must</em> install a method to compute this external representation for the objects in the new representation.</p>
+
+<p><a id="X8090219A7C76AF55" name="X8090219A7C76AF55"></a></p>
+
+<h4>79.9 <span class="Heading">Mutability and Copying</span></h4>
+
+<p>Any <strong class="pkg">GAP</strong> object is either mutable or immutable. This can be tested with the function <code class="func">IsMutable</code> (<a href="chap12_mj.html#X7999AD1D7A4F1F46"><span class="RefLink">12.6-2</span></a>). The intended meaning of (im)mutability is a mathematical one: an immutable object should never change in such a way that it represents a different Element. Objects <em>may</em> change in other ways, for instance to store more information, or represent an element in a different way.</p>
+
+<p>Immutability is enforced in different ways for built-in objects (like records, or lists) and for external objects (made using <code class="func">Objectify</code> (<a href="chap79_mj.html#X7CB5C12E813F512B"><span class="RefLink">79.1-1</span></a>)).</p>
+
+<p>For built-in objects which are immutable, the kernel will prevent you from changing them. Thus</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := [1,2,4];</span>
+[ 1, 2, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MakeImmutable(l);</span>
+[ 1, 2, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l[3] := 5;</span>
+Error, List Assignment: &lt;list&gt; must be a mutable list
+</pre></div>
+
+<p>For external objects, the situation is different. An external object which claims to be immutable (i.e. its type does not contain <code class="func">IsMutable</code> (<a href="chap12_mj.html#X7999AD1D7A4F1F46"><span class="RefLink">12.6-2</span></a>)) should not admit any methods which change the element it represents. The kernel does <em>not</em> prevent the use of <code class="code">!.</code> and <code class="code">![</code> to change the underlying data structure. This is used for instance by the code that stores attribute values for reuse. In general, these <code class="code">!</code> operations should only be used in methods which depend on the representation of the object. Furthermore, we would <em>not</em> recommend users to install methods which depend on the representations of objects created by the library or by <strong class="pkg">GAP</strong> packages, as there is certainly no guarantee of the representations being the same in future versions of <strong class="pkg">GAP</strong>.</p>
+
+<p>Here we see an immutable object (the group <span class="SimpleMath">\(S_4\)</span>), in which we improperly install a new component.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := SymmetricGroup(IsPermGroup,4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMutable(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NamesOfComponents(g);</span>
+[ "Size", "NrMovedPoints", "MovedPoints", 
+  "GeneratorsOfMagmaWithInverses" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g!.silly := "rubbish";</span>
+"rubbish"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NamesOfComponents(g);</span>
+[ "Size", "NrMovedPoints", "MovedPoints", 
+  "GeneratorsOfMagmaWithInverses", "silly" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g!.silly;</span>
+"rubbish"
+</pre></div>
+
+<p>On the other hand, if we form an immutable externally represented list, we find that <strong class="pkg">GAP</strong> will not let us change the object.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := Enumerator(g);</span>
+&lt;enumerator of perm group&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMutable(e);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsList(e);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e[3];</span>
+(1,2,4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e[3] := false;</span>
+Error, The list you are trying to assign to is immutable
+</pre></div>
+
+<p>When we consider copying objects, another filter <code class="func">IsCopyable</code> (<a href="chap12_mj.html#X811EFD727EBD1ADC"><span class="RefLink">12.6-1</span></a>), enters the game and we find that <code class="func">ShallowCopy</code> (<a href="chap12_mj.html#X846BC7107C352031"><span class="RefLink">12.7-1</span></a>) and <code class="func">StructuralCopy</code> (<a href="chap12_mj.html#X7C1E70587EBDD2CB"><span class="RefLink">12.7-2</span></a>) behave quite differently. Objects can be divided for this purpose into three: mutable objects, immutable but copyable objects, and non-copyable objects (called constants).</p>
+
+<p>A mutable or copyable object should have a method for the operation <code class="func">ShallowCopy</code> (<a href="chap12_mj.html#X846BC7107C352031"><span class="RefLink">12.7-1</span></a>), which should make a new mutable object, sharing its top-level subobjects with the original. The exact definition of top-level subobject may be defined by the implementor for new kinds of object.</p>
+
+<p><code class="func">ShallowCopy</code> (<a href="chap12_mj.html#X846BC7107C352031"><span class="RefLink">12.7-1</span></a>) applied to a constant simply returns the constant.</p>
+
+<p><code class="func">StructuralCopy</code> (<a href="chap12_mj.html#X7C1E70587EBDD2CB"><span class="RefLink">12.7-2</span></a>) is expected to be much less used than <code class="func">ShallowCopy</code> (<a href="chap12_mj.html#X846BC7107C352031"><span class="RefLink">12.7-1</span></a>). Applied to a mutable object, it returns a new mutable object which shares no mutable sub-objects with the input. Applied to an immutable object (even a copyable one), it just returns the object. It is not an operation (indeed, it's a rather special kernel function).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e1 := StructuralCopy(e);</span>
+&lt;enumerator of perm group&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMutable(e1);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e2 := ShallowCopy(e);</span>
+[ (), (1,4), (1,2,4), (1,3,4), (2,4), (1,4,2), (1,2), (1,3,4,2), 
+  (2,3,4), (1,4,2,3), (1,2,3), (1,3)(2,4), (3,4), (1,4,3), (1,2,4,3), 
+  (1,3), (2,4,3), (1,4,3,2), (1,2)(3,4), (1,3,2), (2,3), (1,4)(2,3), 
+  (1,2,3,4), (1,3,2,4) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+</pre></div>
+
+<p>There are two other related functions: <code class="func">Immutable</code> (<a href="chap12_mj.html#X7F0ABF2C870B0CBB"><span class="RefLink">12.6-3</span></a>), which makes a new immutable object which shares no mutable subobjects with its input and <code class="func">MakeImmutable</code> (<a href="chap12_mj.html#X80CE136D804097C7"><span class="RefLink">12.6-4</span></a>) which changes an object and its mutable subobjects <em>in place</em> to be immutable. It should only be used on "new" objects that you have just created, and which cannot share mutable subobjects with anything else.</p>
+
+<p>Both <code class="func">Immutable</code> (<a href="chap12_mj.html#X7F0ABF2C870B0CBB"><span class="RefLink">12.6-3</span></a>) and <code class="func">MakeImmutable</code> (<a href="chap12_mj.html#X80CE136D804097C7"><span class="RefLink">12.6-4</span></a>) work on external objects by just resetting the <code class="func">IsMutable</code> (<a href="chap12_mj.html#X7999AD1D7A4F1F46"><span class="RefLink">12.6-2</span></a>) filter in the object's type. This should make ineligible any methods that might change the object. As a consequence, you must allow for the possibility of immutable versions of any objects you create.</p>
+
+<p>So, if you are implementing your own external objects. The rules amount to the following:</p>
+
+<ol>
+<li><p>You decide if your objects should be mutable or copyable or constants, by fixing whether their type includes <code class="func">IsMutable</code> (<a href="chap12_mj.html#X7999AD1D7A4F1F46"><span class="RefLink">12.6-2</span></a>) or <code class="func">IsCopyable</code> (<a href="chap12_mj.html#X811EFD727EBD1ADC"><span class="RefLink">12.6-1</span></a>).</p>
+
+</li>
+<li><p>You install methods for your objects respecting that decision:</p>
+
+
+<dl>
+<dt><strong class="Mark">for constants:</strong></dt>
+<dd><p>no methods change the underlying elements;</p>
+
+</dd>
+<dt><strong class="Mark">for copyables:</strong></dt>
+<dd><p>you provide a method for <code class="func">ShallowCopy</code> (<a href="chap12_mj.html#X846BC7107C352031"><span class="RefLink">12.7-1</span></a>);</p>
+
+</dd>
+<dt><strong class="Mark">for mutables:</strong></dt>
+<dd><p>you may have methods that change the underlying elements and these should explicitly require <code class="func">IsMutable</code> (<a href="chap12_mj.html#X7999AD1D7A4F1F46"><span class="RefLink">12.6-2</span></a>).</p>
+
+</dd>
+</dl>
+</li>
+</ol>
+<p><a id="X87E29BA57C8208A4" name="X87E29BA57C8208A4"></a></p>
+
+<h4>79.10 <span class="Heading">Global Variables in the Library</span></h4>
+
+<p>Global variables in the <strong class="pkg">GAP</strong> library are usually read-only in order to avoid their being overwritten accidentally. See also Section <a href="chap4_mj.html#X816FBEEA85782EC2"><span class="RefLink">4.9</span></a>.</p>
+
+<p><a id="X8324B5DE8300E0F2" name="X8324B5DE8300E0F2"></a></p>
+
+<h5>79.10-1 DeclareGlobalVariable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeclareGlobalVariable</code>( <var class="Arg">name</var>[, <var class="Arg">description</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For global variables that are <em>not</em> functions, instead of using <code class="func">BindGlobal</code> (<a href="chap4_mj.html#X7D39D3E17CF49F5B"><span class="RefLink">4.9-8</span></a>) one can also declare the variable with <code class="func">DeclareGlobalVariable</code> which creates a new global variable named by the string <var class="Arg">name</var>. If the second argument <var class="Arg">description</var> is entered then this must be a string that describes the meaning of the global variable. <code class="func">DeclareGlobalVariable</code> shall be used in the declaration part of the respective package (see <a href="chap79_mj.html#X7837CA9A83D93B38"><span class="RefLink">79.11</span></a>), values can then be assigned to the new variable with <code class="func">InstallValue</code> (<a href="chap79_mj.html#X7A23F09886E936D2"><span class="RefLink">79.10-2</span></a>), <code class="func">InstallFlushableValue</code> (<a href="chap79_mj.html#X7A23F09886E936D2"><span class="RefLink">79.10-2</span></a>) or <code class="func">InstallFlushableValueFromFunction</code> (<a href="chap79_mj.html#X7A23F09886E936D2"><span class="RefLink">79.10-2</span></a>), in the implementation part (again, see <a href="chap79_mj.html#X7837CA9A83D93B38"><span class="RefLink">79.11</span></a>).</p>
+
+<p><a id="X7A23F09886E936D2" name="X7A23F09886E936D2"></a></p>
+
+<h5>79.10-2 InstallValue</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallValue</code>( <var class="Arg">gvar</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallFlushableValue</code>( <var class="Arg">gvar</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallFlushableValueFromFunction</code>( <var class="Arg">gvar</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">InstallValue</code> assigns the value <var class="Arg">value</var> to the global variable <var class="Arg">gvar</var>. <code class="func">InstallFlushableValue</code> does the same but additionally provides that each call of <code class="func">FlushCaches</code> (<a href="chap79_mj.html#X87A4316C818B3DE3"><span class="RefLink">79.10-3</span></a>) will assign a structural copy of <var class="Arg">value</var> to <var class="Arg">gvar</var>. <code class="func">InstallFlushableValueFromFunction</code> instead assigns the result of <var class="Arg">func</var> to <var class="Arg">gvar</var> (<var class="Arg">func</var> is re-evaluated for each invocation of <code class="func">FlushCaches</code> (<a href="chap79_mj.html#X87A4316C818B3DE3"><span class="RefLink">79.10-3</span></a>)</p>
+
+<p><code class="func">InstallValue</code> does <em>not</em> work if <var class="Arg">value</var> is an "immediate object", i.e., an internally represented small integer or finite field element. It also fails for booleans. Furthermore, <code class="func">InstallFlushableValue</code> works only if <var class="Arg">value</var> is a list or a record. (Note that <code class="func">InstallFlushableValue</code> makes sense only for <em>mutable</em> global variables.)</p>
+
+<p><a id="X87A4316C818B3DE3" name="X87A4316C818B3DE3"></a></p>
+
+<h5>79.10-3 FlushCaches</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FlushCaches</code>(  )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="func">FlushCaches</code> resets the value of each global variable that has been declared with <code class="func">DeclareGlobalVariable</code> (<a href="chap79_mj.html#X8324B5DE8300E0F2"><span class="RefLink">79.10-1</span></a>) and for which the initial value has been set with <code class="func">InstallFlushableValue</code> (<a href="chap79_mj.html#X7A23F09886E936D2"><span class="RefLink">79.10-2</span></a>) or <code class="func">InstallFlushableValueFromFunction</code> (<a href="chap79_mj.html#X7A23F09886E936D2"><span class="RefLink">79.10-2</span></a>) to this initial value.</p>
+
+<p><code class="func">FlushCaches</code> should be used only for debugging purposes, since the involved global variables include for example lists that store finite fields and cyclotomic fields used in the current <strong class="pkg">GAP</strong> session, in order to avoid that these fields are constructed anew in each call to <code class="func">GF</code> (<a href="chap59_mj.html#X8592DBB086A8A9BE"><span class="RefLink">59.3-2</span></a>) and <code class="func">CF</code> (<a href="chap60_mj.html#X80D21D80850EFA4B"><span class="RefLink">60.1-1</span></a>).</p>
+
+<p><a id="X834A8CC587A609BE" name="X834A8CC587A609BE"></a></p>
+
+<h5>79.10-4 DeclareGlobalFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeclareGlobalFunction</code>( <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallGlobalFunction</code>( <var class="Arg">oper</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">DeclareGlobalFunction</code> <strong class="pkg">GAP</strong> functions that are not operations and that are intended to be called by users should be notified to <strong class="pkg">GAP</strong> in the declaration part of the respective package (see Section <a href="chap79_mj.html#X7837CA9A83D93B38"><span class="RefLink">79.11</span></a>) via <code class="func">DeclareGlobalFunction</code>, which returns a function that serves as a place holder for the function that will be installed later, and that will print an error message if it is called. See also <code class="func">DeclareSynonym</code> (<a href="chap79_mj.html#X851654DA87616207"><span class="RefLink">79.10-5</span></a>).</p>
+
+<p>A global function declared with <code class="func">DeclareGlobalFunction</code> can be given its value <var class="Arg">func</var> via <code class="func">InstallGlobalFunction</code>; <var class="Arg">gvar</var> is the global variable (or a string denoting its name) named with the <var class="Arg">name</var> argument of the call to <code class="func">DeclareGlobalFunction</code>. For example, a declaration like</p>
+
+
+<div class="example"><pre>
+DeclareGlobalFunction( "SumOfTwoCubes" );
+</pre></div>
+
+<p>in the "declaration part" (see Section <a href="chap79_mj.html#X7837CA9A83D93B38"><span class="RefLink">79.11</span></a>) might have a corresponding "implementation part" of:</p>
+
+
+<div class="example"><pre>
+InstallGlobalFunction( SumOfTwoCubes, function(x, y) return x^3 + y^3; end);
+</pre></div>
+
+<p><a id="X851654DA87616207" name="X851654DA87616207"></a></p>
+
+<h5>79.10-5 DeclareSynonym</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeclareSynonym</code>( <var class="Arg">name</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeclareSynonymAttr</code>( <var class="Arg">name</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">DeclareSynonym</code> assigns the string <var class="Arg">name</var> to a global variable as a synonym for <var class="Arg">value</var>. Two typical intended usages are to declare an "and-filter", e.g.</p>
+
+
+<div class="example"><pre>
+DeclareSynonym( "IsGroup", IsMagmaWithInverses and IsAssociative );
+</pre></div>
+
+<p>and to provide a previously declared global function with an alternative name, e.g.</p>
+
+
+<div class="example"><pre>
+DeclareGlobalFunction( "SizeOfSomething" );
+DeclareSynonym( "OrderOfSomething", SizeOfSomething );
+</pre></div>
+
+<p><em>Note:</em> Before using <code class="func">DeclareSynonym</code> in the way of this second example, one should determine whether the synonym is really needed. Perhaps an extra index entry in the documentation would be sufficient.</p>
+
+<p>When <var class="Arg">value</var> is actually an attribute then <code class="func">DeclareSynonymAttr</code> should be used; this binds also globals variables <code class="code">Set</code><var class="Arg">name</var> and <code class="code">Has</code><var class="Arg">name</var> for its setter and tester, respectively.</p>
+
+
+<div class="example"><pre>
+DeclareSynonymAttr( "IsField", IsDivisionRing and IsCommutative );
+DeclareAttribute( "GeneratorsOfDivisionRing", IsDivisionRing );
+DeclareSynonymAttr( "GeneratorsOfField", GeneratorsOfDivisionRing );
+</pre></div>
+
+<p><a id="X7837CA9A83D93B38" name="X7837CA9A83D93B38"></a></p>
+
+<h4>79.11 <span class="Heading">Declaration and Implementation Part</span></h4>
+
+<p>Each package of <strong class="pkg">GAP</strong> code consists of two parts, the <em>declaration part</em> that defines the new categories and operations for the objects the package deals with, and the <em>implementation part</em> where the corresponding methods are installed. The declaration part should be representation independent, representation dependent information should be dealt with in the implementation part.</p>
+
+<p><strong class="pkg">GAP</strong> functions that are not operations and that are intended to be called by users should be notified to <strong class="pkg">GAP</strong> in the declaration part via <code class="func">DeclareGlobalFunction</code> (<a href="chap79_mj.html#X834A8CC587A609BE"><span class="RefLink">79.10-4</span></a>). Values for these functions can be installed in the implementation part via <code class="func">InstallGlobalFunction</code> (<a href="chap79_mj.html#X834A8CC587A609BE"><span class="RefLink">79.10-4</span></a>).</p>
+
+<p>Calls to the following functions belong to the declaration part.</p>
+
+
+<ul>
+<li><p><code class="func">DeclareAttribute</code> (<a href="chap13_mj.html#X7A00FC8A7A677A56"><span class="RefLink">13.5-4</span></a>),</p>
+
+</li>
+<li><p><code class="func">DeclareCategory</code> (<a href="chap13_mj.html#X879DE2A17A6C6E92"><span class="RefLink">13.3-5</span></a>),</p>
+
+</li>
+<li><p><code class="func">DeclareFilter</code> (<a href="chap13_mj.html#X846EA18A7D36626C"><span class="RefLink">13.8-2</span></a>),</p>
+
+</li>
+<li><p><code class="func">DeclareOperation</code> (<a href="chap78_mj.html#X843F48137B899BC3"><span class="RefLink">78.1-5</span></a>),</p>
+
+</li>
+<li><p><code class="func">DeclareGlobalFunction</code> (<a href="chap79_mj.html#X834A8CC587A609BE"><span class="RefLink">79.10-4</span></a>),</p>
+
+</li>
+<li><p><code class="func">DeclareSynonym</code> (<a href="chap79_mj.html#X851654DA87616207"><span class="RefLink">79.10-5</span></a>),</p>
+
+</li>
+<li><p><code class="func">DeclareSynonymAttr</code> (<a href="chap79_mj.html#X851654DA87616207"><span class="RefLink">79.10-5</span></a>),</p>
+
+</li>
+<li><p><code class="func">DeclareProperty</code> (<a href="chap13_mj.html#X7F4602F082682A04"><span class="RefLink">13.7-5</span></a>),</p>
+
+</li>
+<li><p><code class="func">InstallTrueMethod</code> (<a href="chap78_mj.html#X860B8B707995CFE3"><span class="RefLink">78.8-1</span></a>).</p>
+
+</li>
+</ul>
+<p>Calls to the following functions belong to the implementation part.</p>
+
+
+<ul>
+<li><p><code class="func">DeclareRepresentation</code> (<a href="chap13_mj.html#X7C81FB2682AE54CD"><span class="RefLink">13.4-5</span></a>),</p>
+
+</li>
+<li><p><code class="func">InstallGlobalFunction</code> (<a href="chap79_mj.html#X834A8CC587A609BE"><span class="RefLink">79.10-4</span></a>),</p>
+
+</li>
+<li><p><code class="func">InstallMethod</code> (<a href="chap78_mj.html#X837EFDAB7BEF290B"><span class="RefLink">78.3-1</span></a>),</p>
+
+</li>
+<li><p><code class="func">InstallImmediateMethod</code> (<a href="chap78_mj.html#X87B47AC0849611F8"><span class="RefLink">78.7-1</span></a>),</p>
+
+</li>
+<li><p><code class="func">InstallOtherMethod</code> (<a href="chap78_mj.html#X7D2C12DB841CE539"><span class="RefLink">78.3-2</span></a>),</p>
+
+</li>
+<li><p><code class="func">NewFamily</code> (<a href="chap13_mj.html#X7FB4123E7E22137D"><span class="RefLink">13.1-2</span></a>),</p>
+
+</li>
+<li><p><code class="func">NewType</code> (<a href="chap13_mj.html#X7CE39E9478AEC826"><span class="RefLink">13.9-3</span></a>),</p>
+
+</li>
+<li><p><code class="func">Objectify</code> (<a href="chap79_mj.html#X7CB5C12E813F512B"><span class="RefLink">79.1-1</span></a>).</p>
+
+</li>
+</ul>
+<p>Whenever both a <code class="code">New</code><var class="Arg">Something</var> and a <code class="code">Declare</code><var class="Arg">Something</var> variant of a function exist (see <a href="chap79_mj.html#X87E29BA57C8208A4"><span class="RefLink">79.10</span></a>), the use of <code class="code">Declare</code><var class="Arg">Something</var> is recommended because this protects the variables in question from being overwritten. Note that there are <em>no</em> functions <code class="code">DeclareFamily</code> and <code class="code">DeclareType</code> since families and types are created dynamically, hence usually no global variables are associated to them. Further note that <code class="func">DeclareRepresentation</code> (<a href="chap13_mj.html#X7C81FB2682AE54CD"><span class="RefLink">13.4-5</span></a>) is regarded as belonging to the implementation part, because usually representations of objects are accessed only in very few places, and all code that involves a particular representation is contained in one file; additionally, representations of objects are often not interesting for the user, so there is no need to provide a user interface or documentation about representations.</p>
+
+<p>It should be emphasized that "declaration" means only an explicit notification of mathematical or technical terms or of concepts to <strong class="pkg">GAP</strong>. For example, declaring a category or property with name <code class="code">IsInteresting</code> does of course not tell <strong class="pkg">GAP</strong> what this shall mean, and it is necessary to implement possibilities to create objects that know already that they lie in <code class="code">IsInteresting</code> in the case that it is a category, or to install implications or methods in order to compute for a given object whether <code class="code">IsInteresting</code> is <code class="keyw">true</code> or <code class="keyw">false</code> for it in the case that <code class="code">IsInteresting</code> is a property.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap78_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap80_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chap14_mj.html">14</a>  <a href="chap15_mj.html">15</a>  <a href="chap16_mj.html">16</a>  <a href="chap17_mj.html">17</a>  <a href="chap18_mj.html">18</a>  <a href="chap19_mj.html">19</a>  <a href="chap20_mj.html">20</a>  <a href="chap21_mj.html">21</a>  <a href="chap22_mj.html">22</a>  <a href="chap23_mj.html">23</a>  <a href="chap24_mj.html">24</a>  <a href="chap25_mj.html">25</a>  <a href="chap26_mj.html">26</a>  <a href="chap27_mj.html">27</a>  <a href="chap28_mj.html">28</a>  <a href="chap29_mj.html">29</a>  <a href="chap30_mj.html">30</a>  <a href="chap31_mj.html">31</a>  <a href="chap32_mj.html">32</a>  <a href="chap33_mj.html">33</a>  <a href="chap34_mj.html">34</a>  <a href="chap35_mj.html">35</a>  <a href="chap36_mj.html">36</a>  <a href="chap37_mj.html">37</a>  <a href="chap38_mj.html">38</a>  <a href="chap39_mj.html">39</a>  <a href="chap40_mj.html">40</a>  <a href="chap41_mj.html">41</a>  <a href="chap42_mj.html">42</a>  <a href="chap43_mj.html">43</a>  <a href="chap44_mj.html">44</a>  <a href="chap45_mj.html">45</a>  <a href="chap46_mj.html">46</a>  <a href="chap47_mj.html">47</a>  <a href="chap48_mj.html">48</a>  <a href="chap49_mj.html">49</a>  <a href="chap50_mj.html">50</a>  <a href="chap51_mj.html">51</a>  <a href="chap52_mj.html">52</a>  <a href="chap53_mj.html">53</a>  <a href="chap54_mj.html">54</a>  <a href="chap55_mj.html">55</a>  <a href="chap56_mj.html">56</a>  <a href="chap57_mj.html">57</a>  <a href="chap58_mj.html">58</a>  <a href="chap59_mj.html">59</a>  <a href="chap60_mj.html">60</a>  <a href="chap61_mj.html">61</a>  <a href="chap62_mj.html">62</a>  <a href="chap63_mj.html">63</a>  <a href="chap64_mj.html">64</a>  <a href="chap65_mj.html">65</a>  <a href="chap66_mj.html">66</a>  <a href="chap67_mj.html">67</a>  <a href="chap68_mj.html">68</a>  <a href="chap69_mj.html">69</a>  <a href="chap70_mj.html">70</a>  <a href="chap71_mj.html">71</a>  <a href="chap72_mj.html">72</a>  <a href="chap73_mj.html">73</a>  <a href="chap74_mj.html">74</a>  <a href="chap75_mj.html">75</a>  <a href="chap76_mj.html">76</a>  <a href="chap77_mj.html">77</a>  <a href="chap78_mj.html">78</a>  <a href="chap79_mj.html">79</a>  <a href="chap80_mj.html">80</a>  <a href="chap81_mj.html">81</a>  <a href="chap82_mj.html">82</a>  <a href="chap83_mj.html">83</a>  <a href="chap84_mj.html">84</a>  <a href="chap85_mj.html">85</a>  <a href="chap86_mj.html">86</a>  <a href="chap87_mj.html">87</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

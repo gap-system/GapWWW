@@ -1,0 +1,1454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ref) - Chapter 7: Debugging and Profiling Facilities</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chap19.html">19</a>  <a href="chap20.html">20</a>  <a href="chap21.html">21</a>  <a href="chap22.html">22</a>  <a href="chap23.html">23</a>  <a href="chap24.html">24</a>  <a href="chap25.html">25</a>  <a href="chap26.html">26</a>  <a href="chap27.html">27</a>  <a href="chap28.html">28</a>  <a href="chap29.html">29</a>  <a href="chap30.html">30</a>  <a href="chap31.html">31</a>  <a href="chap32.html">32</a>  <a href="chap33.html">33</a>  <a href="chap34.html">34</a>  <a href="chap35.html">35</a>  <a href="chap36.html">36</a>  <a href="chap37.html">37</a>  <a href="chap38.html">38</a>  <a href="chap39.html">39</a>  <a href="chap40.html">40</a>  <a href="chap41.html">41</a>  <a href="chap42.html">42</a>  <a href="chap43.html">43</a>  <a href="chap44.html">44</a>  <a href="chap45.html">45</a>  <a href="chap46.html">46</a>  <a href="chap47.html">47</a>  <a href="chap48.html">48</a>  <a href="chap49.html">49</a>  <a href="chap50.html">50</a>  <a href="chap51.html">51</a>  <a href="chap52.html">52</a>  <a href="chap53.html">53</a>  <a href="chap54.html">54</a>  <a href="chap55.html">55</a>  <a href="chap56.html">56</a>  <a href="chap57.html">57</a>  <a href="chap58.html">58</a>  <a href="chap59.html">59</a>  <a href="chap60.html">60</a>  <a href="chap61.html">61</a>  <a href="chap62.html">62</a>  <a href="chap63.html">63</a>  <a href="chap64.html">64</a>  <a href="chap65.html">65</a>  <a href="chap66.html">66</a>  <a href="chap67.html">67</a>  <a href="chap68.html">68</a>  <a href="chap69.html">69</a>  <a href="chap70.html">70</a>  <a href="chap71.html">71</a>  <a href="chap72.html">72</a>  <a href="chap73.html">73</a>  <a href="chap74.html">74</a>  <a href="chap75.html">75</a>  <a href="chap76.html">76</a>  <a href="chap77.html">77</a>  <a href="chap78.html">78</a>  <a href="chap79.html">79</a>  <a href="chap80.html">80</a>  <a href="chap81.html">81</a>  <a href="chap82.html">82</a>  <a href="chap83.html">83</a>  <a href="chap84.html">84</a>  <a href="chap85.html">85</a>  <a href="chap86.html">86</a>  <a href="chap87.html">87</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7_mj.html">[MathJax on]</a></p>
+<p><a id="X8345F6817DFD6394" name="X8345F6817DFD6394"></a></p>
+<div class="ChapSects"><a href="chap7.html#X8345F6817DFD6394">7 <span class="Heading">Debugging and Profiling Facilities</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X83C45B0A797AAF96">7.1 <span class="Heading">Recovery from NoMethodFound-Errors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X86B5FEC67A9394DC">7.1-1 ShowArguments</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X834BD9928773DCC1">7.1-2 ShowArgument</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7D25D904800D5CBA">7.1-3 ShowDetails</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F6996CA872478B8">7.1-4 ShowMethods</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7E5E2E7B85029E34">7.1-5 ShowOtherMethods</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7FDA1D4B87BD25A8">7.2 <span class="Heading">Inspecting Applicable Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X80848FF486BD6F9F">7.2-1 ApplicableMethod</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7D43A2D885B37739">7.3 <span class="Heading">Tracing Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X80B044017C9E4137">7.3-1 TraceMethods</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7D34CADB813A4AF1">7.3-2 TraceAllMethods</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7EB04D387C53E4C1">7.3-3 UntraceMethods</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B3018AA82D55949">7.3-4 UntraceAllMethods</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81078D3387A38E31">7.3-5 TraceImmediateMethods</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7A9C902479CB6F7C">7.4 <span class="Heading">Info Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AA1A1CF79F20790">7.4-1 NewInfoClass</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B3709C584B3DA1E">7.4-2 DeclareInfoClass</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7A43B9E68765EE9E">7.4-3 SetInfoLevel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B2ADC37783104B9">7.4-4 InfoLevel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7BA636EF80A1435A">7.4-5 ShowUsedInfoClasses</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X864E4B6886E2697D">7.4-6 Info</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X800234B5815CAC97">7.4-7 <span class="Heading">Customizing <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) statements</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7A28F77C82D6A3E0">7.4-8 InfoWarning</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X86425F067FC63A4C">7.5 <span class="Heading">Assertions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C7596418423660B">7.5-1 SetAssertionLevel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X876C83707F13A0FD">7.5-2 AssertionLevel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X830E443284780FB9">7.5-3 Assert</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X792BA9A67E64CDED">7.6 <span class="Heading">Timing</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X80355C9282B35673">7.6-1 Runtimes</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7E32B27F81870D24">7.6-2 Runtime</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X844E1CFE80F41760">7.6-3 NanosecondsSinceEpoch</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C0F91F982189624">7.6-4 time</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B543F357C7202CF">7.6-5 Sleep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X844CB04081A771FB">7.7 <span class="Heading">Tracking Memory Usage</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8077B50B844C4EFC">7.7-1 TotalMemoryAllocated</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8156D7208591460F">7.7-2 memory_allocated</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7FDF923D7D2937A1">7.8 <span class="Heading">Profiling</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7939F6F182FDA5F1">7.8-1 <span class="Heading">Function Profiling</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X79D6CB927BBEB940">7.8-2 ProfileGlobalFunctions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C893F68841B990B">7.8-3 ProfileOperations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X79D41E977DCA2BEE">7.8-4 ProfileOperationsAndMethods</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81E8A8627C34FD3B">7.8-5 ProfileFunctions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X79D394EC7BE8D008">7.8-6 UnprofileFunctions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X787AC3BE7F991344">7.8-7 ProfileMethods</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X87A05F977F033693">7.8-8 UnprofileMethods</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X80FEA6A08775A48E">7.8-9 DisplayProfile</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7DAF9AB9793AE203">7.8-10 ClearProfile</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C5CE32579891120">7.8-11 <span class="Heading">An Example of Function Profiling</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X812F9CE0817110EA">7.8-12 <span class="Heading">Line By Line Profiling</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7E9C65B17B8EF993">7.8-13 <span class="Heading">Line by Line profiling example</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X86557887796F66FA">7.8-14 ProfileLineByLine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X87CC48807DB4C008">7.8-15 CoverageLineByLine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C5DED9C7CC77504">7.8-16 UnprofileLineByLine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B705B2D8670A9C5">7.8-17 UncoverageLineByLine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8015CD3D7F97B08C">7.8-18 ActivateProfileColour</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7823C83D79B36D3B">7.8-19 IsLineByLineProfileActive</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X83D8A42B7BB92F5B">7.8-20 DisplayCacheStats</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X79C58704838232CC">7.8-21 ClearCacheStats</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7EE874867C0BEEDD">7.9 <span class="Heading">Information about the version used</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X801051CC86594630">7.10 <span class="Heading">Test Files</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8213757B7ACC76E6">7.10-1 <span class="Heading">Starting and stopping test</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X87712F9D8732193C">7.10-2 Test</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X87AF67528799481F">7.10-3 TestDirectory</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X85FF55448787CCA0">7.11 <span class="Heading">Debugging Recursion</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7D8968FC7E24A4E5">7.11-1 SetRecursionTrapInterval</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X85679F17791D9B63">7.12 <span class="Heading">Global Memory Information</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X836977DE80416F3D">7.12-1 GasmanStatistics</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X85327FA5872E0356">7.12-2 GasmanMessageStatus</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X80C683247E94769F">7.12-3 GasmanLimits</a></span>
+</div></div>
+</div>
+
+<h3>7 <span class="Heading">Debugging and Profiling Facilities</span></h3>
+
+<p>This chapter describes some functions that are useful mainly for debugging and profiling purposes.</p>
+
+<p>Probably the most important debugging tool in <strong class="pkg">GAP</strong> is the break loop (see Section <a href="chap6.html#X8593B49F8705B486"><span class="RefLink">6.4</span></a>) which can be entered by putting an <code class="func">Error</code> (<a href="chap6.html#X7E7AD8D87EBA1A08"><span class="RefLink">6.6-1</span></a>) statement into your code or by hitting Control-C. In the break loop one can inspect variables, stack traces and issue commands as usual in an interactive <strong class="pkg">GAP</strong> session. See also the <code class="func">DownEnv</code> (<a href="chap6.html#X79E66DA2875303B0"><span class="RefLink">6.5-1</span></a>), <code class="func">UpEnv</code> (<a href="chap6.html#X79E66DA2875303B0"><span class="RefLink">6.5-1</span></a>), <code class="func">Where</code> (<a href="chap6.html#X7A7FFA2B7C1EF5A3"><span class="RefLink">6.4-5</span></a>) and <code class="func">WhereWithVars</code> (<a href="chap6.html#X7A7FFA2B7C1EF5A3"><span class="RefLink">6.4-5</span></a>) functions.</p>
+
+<p>Sections <a href="chap7.html#X7FDA1D4B87BD25A8"><span class="RefLink">7.2</span></a> and <a href="chap7.html#X7D43A2D885B37739"><span class="RefLink">7.3</span></a> show how to get information about the methods chosen by the method selection mechanism (see chapter <a href="chap78.html#X8058CC8187162644"><span class="RefLink">78</span></a>).</p>
+
+<p>The final sections describe functions for collecting statistics about computations (see <code class="func">Runtime</code> (<a href="chap7.html#X7E32B27F81870D24"><span class="RefLink">7.6-2</span></a>), <a href="chap7.html#X7FDF923D7D2937A1"><span class="RefLink">7.8</span></a>).</p>
+
+<p><a id="X83C45B0A797AAF96" name="X83C45B0A797AAF96"></a></p>
+
+<h4>7.1 <span class="Heading">Recovery from NoMethodFound-Errors</span></h4>
+
+<p>When the method selection fails because there is no applicable method, an error as in the following example occurs and a break loop is entered:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNormal(2,2);</span>
+Error, no method found! For debugging hints type ?Recovery from NoMethodFound
+Error, no 1st choice method found for `IsNormal' on 2 arguments at GAPROOT/lib/methsel2.g:250 called from
+&lt;function "HANDLE_METHOD_NOT_FOUND"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at *stdin*:1
+type 'quit;' to quit to outer loop
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput"></span>
+</pre></div>
+
+<p>This only says, that the method selection tried to find a method for <code class="code">IsNormal</code> on two arguments and failed. In this situation it is crucial to find out, why this happened. Therefore there are a few functions which can display further information. Note that you can leave the break loop by the <code class="keyw">quit</code> command (see <a href="chap6.html#X83033EEB81CF4F49"><span class="RefLink">6.4-1</span></a>) and that the information about the incident is no longer accessible afterwards.</p>
+
+<p><a id="X86B5FEC67A9394DC" name="X86B5FEC67A9394DC"></a></p>
+
+<h5>7.1-1 ShowArguments</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShowArguments</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function is only available within a break loop caused by a "No Method Found"-error. It prints as a list the arguments of the operation call for which no method was found.</p>
+
+<p><a id="X834BD9928773DCC1" name="X834BD9928773DCC1"></a></p>
+
+<h5>7.1-2 ShowArgument</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShowArgument</code>( <var class="Arg">nr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function is only available within a break loop caused by a "No Method Found"-error. It prints the <var class="Arg">nr</var>-th arguments of the operation call for which no method was found. <code class="func">ShowArgument</code> needs exactly one argument which is an integer between 0 and the number of arguments the operation was called with.</p>
+
+<p><a id="X7D25D904800D5CBA" name="X7D25D904800D5CBA"></a></p>
+
+<h5>7.1-3 ShowDetails</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShowDetails</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function is only available within a break loop caused by a "No Method Found"-error. It prints the details of this error: The operation, the number of arguments, a flag which indicates whether the operation is being traced, a flag which indicates whether the operation is a constructor method, and the number of methods that refused to apply by calling <code class="func">TryNextMethod</code> (<a href="chap78.html#X7EED949B83046A7F"><span class="RefLink">78.5-1</span></a>). The last number is called <code class="code">Choice</code> and is printed as an ordinal. So if exactly <span class="SimpleMath">k</span> methods were found but called <code class="func">TryNextMethod</code> (<a href="chap78.html#X7EED949B83046A7F"><span class="RefLink">78.5-1</span></a>) and there were no more methods it says <code class="code">Choice: </code><span class="SimpleMath">k</span><code class="code">th</code>.</p>
+
+<p><a id="X7F6996CA872478B8" name="X7F6996CA872478B8"></a></p>
+
+<h5>7.1-4 ShowMethods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShowMethods</code>( [<var class="Arg">verbosity</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function is only available within a break loop caused by a "No Method Found"-error. It prints an overview about the installed methods for those arguments the operation was called with (using <a href="chap7.html#X7FDA1D4B87BD25A8"><span class="RefLink">7.2</span></a>. The verbosity can be controlled by the optional integer parameter <var class="Arg">verbosity</var>. The default is 2, which lists all applicable methods. With verbosity 1 <code class="func">ShowMethods</code> only shows the number of installed methods and the methods matching, which can only be those that were already called but refused to work by calling <code class="func">TryNextMethod</code> (<a href="chap78.html#X7EED949B83046A7F"><span class="RefLink">78.5-1</span></a>). With verbosity 3 not only all installed methods but also the reasons why they do not match are displayed.</p>
+
+<p><a id="X7E5E2E7B85029E34" name="X7E5E2E7B85029E34"></a></p>
+
+<h5>7.1-5 ShowOtherMethods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShowOtherMethods</code>( [<var class="Arg">verbosity</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function is only available within a break loop caused by a "No Method Found"-error. It prints an overview about the installed methods for a different number of arguments than the number of arguments the operation was called with (using <a href="chap7.html#X7FDA1D4B87BD25A8"><span class="RefLink">7.2</span></a>. The verbosity can be controlled by the optional integer parameter <var class="Arg">verbosity</var>. The default is 1 which lists only the number of applicable methods. With verbosity 2 <code class="func">ShowOtherMethods</code> lists all installed methods and with verbosity 3 also the reasons, why they are not applicable. Calling <code class="func">ShowOtherMethods</code> with verbosity 3 in this function will normally not make any sense, because the different numbers of arguments are simulated by supplying the corresponding number of ones, for which normally no reasonable methods will be installed.</p>
+
+<p><a id="X7FDA1D4B87BD25A8" name="X7FDA1D4B87BD25A8"></a></p>
+
+<h4>7.2 <span class="Heading">Inspecting Applicable Methods</span></h4>
+
+<p><a id="X80848FF486BD6F9F" name="X80848FF486BD6F9F"></a></p>
+
+<h5>7.2-1 ApplicableMethod</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ApplicableMethod</code>( <var class="Arg">opr</var>, <var class="Arg">args</var>[, <var class="Arg">printlevel</var>[, <var class="Arg">nr</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ApplicableMethodTypes</code>( <var class="Arg">opr</var>, <var class="Arg">args</var>[, <var class="Arg">printlevel</var>[, <var class="Arg">nr</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Called with two arguments, <code class="func">ApplicableMethod</code> returns the method of highest rank that is applicable for the operation <var class="Arg">opr</var> with the arguments in the list <var class="Arg">args</var>. The default <var class="Arg">printlevel</var> is <code class="code">0</code>. If no method is applicable then <code class="keyw">fail</code> is returned.</p>
+
+<p>If a positive integer is given as the fourth argument <var class="Arg">nr</var> then <code class="func">ApplicableMethod</code> returns the <var class="Arg">nr</var>-th applicable method for the operation <var class="Arg">opr</var> with the arguments in the list <var class="Arg">args</var>, where the methods are ordered according to descending rank. If less than <var class="Arg">nr</var> methods are applicable then <code class="keyw">fail</code> is returned.</p>
+
+<p>If the fourth argument <var class="Arg">nr</var> is the string <code class="code">"all"</code> then <code class="func">ApplicableMethod</code> returns a list of all applicable methods for <var class="Arg">opr</var> with arguments <var class="Arg">args</var>, ordered according to descending rank.</p>
+
+<p>Depending on the integer value <var class="Arg">printlevel</var>, additional information is printed. Admissible values and their meaning are as follows.</p>
+
+
+<dl>
+<dt><strong class="Mark">0</strong></dt>
+<dd><p>no information,</p>
+
+</dd>
+<dt><strong class="Mark">1</strong></dt>
+<dd><p>information about the applicable method,</p>
+
+</dd>
+<dt><strong class="Mark">2</strong></dt>
+<dd><p>also information about the not applicable methods of higher rank,</p>
+
+</dd>
+<dt><strong class="Mark">3</strong></dt>
+<dd><p>also for each not applicable method the first reason why it is not applicable,</p>
+
+</dd>
+<dt><strong class="Mark">4</strong></dt>
+<dd><p>also for each not applicable method all reasons why it is not applicable.</p>
+
+</dd>
+<dt><strong class="Mark">6</strong></dt>
+<dd><p>also the function body of the selected method(s)</p>
+
+</dd>
+</dl>
+<p>When a method returned by <code class="func">ApplicableMethod</code> is called then it returns either the desired result or the string <code class="code">"TRY_NEXT_METHOD"</code>, which corresponds to a call to <code class="func">TryNextMethod</code> (<a href="chap78.html#X7EED949B83046A7F"><span class="RefLink">78.5-1</span></a>) in the method and means that the method selection would call the next applicable method.</p>
+
+<p><em>Note:</em> The <strong class="pkg">GAP</strong> kernel provides special treatment for the infix operations <code class="code">\+</code>, <code class="code">\-</code>, <code class="code">\*</code>, <code class="code">\/</code>, <code class="code">\^</code>, <code class="code">\mod</code> and <code class="code">\in</code>. For some kernel objects (notably cyclotomic numbers, finite field elements and row vectors thereof) it calls kernel methods circumventing the method selection mechanism. Therefore for these operations <code class="func">ApplicableMethod</code> may return a method which is not the kernel method actually used.</p>
+
+<p>The function <code class="func">ApplicableMethodTypes</code> takes the <em>types</em> or <em>filters</em> of the arguments as argument (if only filters are given of course family predicates cannot be tested).</p>
+
+<p><a id="X7D43A2D885B37739" name="X7D43A2D885B37739"></a></p>
+
+<h4>7.3 <span class="Heading">Tracing Methods</span></h4>
+
+<p><a id="X80B044017C9E4137" name="X80B044017C9E4137"></a></p>
+
+<h5>7.3-1 TraceMethods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TraceMethods</code>( <var class="Arg">opr1</var>, <var class="Arg">opr2</var>, <var class="Arg">...</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TraceMethods</code>( <var class="Arg">oprs</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>After the call of <code class="code">TraceMethods</code>, whenever a method of one of the operations <var class="Arg">opr1</var>, <var class="Arg">opr2</var>, ... is called, the information string used in the installation of the method is printed. The second form has the same effect for each operation from the list <var class="Arg">oprs</var> of operations.</p>
+
+<p><a id="X7D34CADB813A4AF1" name="X7D34CADB813A4AF1"></a></p>
+
+<h5>7.3-2 TraceAllMethods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TraceAllMethods</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Invokes <code class="code">TraceMethods</code> for all operations.</p>
+
+<p><a id="X7EB04D387C53E4C1" name="X7EB04D387C53E4C1"></a></p>
+
+<h5>7.3-3 UntraceMethods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UntraceMethods</code>( <var class="Arg">opr1</var>, <var class="Arg">opr2</var>, <var class="Arg">...</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UntraceMethods</code>( <var class="Arg">oprs</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>turns the tracing off for all operations <var class="Arg">opr1</var>, <var class="Arg">opr2</var>, ... or in the second form, for all operations in the list <var class="Arg">oprs</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TraceMethods( [ Size ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= Group( (1,2,3), (1,2) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( g );</span>
+#I  Size: for a permutation group at /gap5/lib/grpperm.gi:487
+#I  Setter(Size): system setter
+#I  Size: system getter
+#I  Size: system getter
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UntraceMethods( [ Size ] );</span>
+</pre></div>
+
+<p><a id="X7B3018AA82D55949" name="X7B3018AA82D55949"></a></p>
+
+<h5>7.3-4 UntraceAllMethods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UntraceAllMethods</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Equivalent to calling <code class="code">UntraceMethods</code> for all operations.</p>
+
+<p><a id="X81078D3387A38E31" name="X81078D3387A38E31"></a></p>
+
+<h5>7.3-5 TraceImmediateMethods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TraceImmediateMethods</code>( [<var class="Arg">flag</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UntraceImmediateMethods</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TraceImmediateMethods</code> enables tracing for all immediate methods if <var class="Arg">flag</var> is either <code class="keyw">true</code>, or not present. <code class="func">UntraceImmediateMethods</code>, or <code class="func">TraceImmediateMethods</code> with <var class="Arg">flag</var> equal <code class="keyw">false</code> turns tracing off. (There is no facility to trace <em>specific</em> immediate methods.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TraceImmediateMethods( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= Group( (1,2,3), (1,2) );;</span>
+#I RunImmediateMethods
+#I  immediate: Size
+#I  immediate: IsCyclic
+#I  immediate: IsCommutative
+#I  immediate: IsTrivial
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( g );</span>
+#I  immediate: IsPerfectGroup
+#I  immediate: IsNonTrivial
+#I  immediate: Size
+#I  immediate: IsFreeAbelian
+#I  immediate: IsTorsionFree
+#I  immediate: IsNonTrivial
+#I  immediate: IsPerfectGroup
+#I  immediate: GeneralizedPcgs
+#I  immediate: IsEmpty
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UntraceImmediateMethods( );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UntraceMethods( [ Size ] );</span>
+</pre></div>
+
+<p>This example gives an explanation for the two calls of the "system getter" for <code class="func">Size</code> (<a href="chap30.html#X858ADA3B7A684421"><span class="RefLink">30.4-6</span></a>). Namely, there are immediate methods that access the known size of the group. Note that the group <code class="code">g</code> was known to be finitely generated already before the size was computed, the calls of the immediate method for <code class="func">IsFinitelyGeneratedGroup</code> (<a href="chap39.html#X81E22D07871DF37E"><span class="RefLink">39.15-17</span></a>) after the call of <code class="func">Size</code> (<a href="chap30.html#X858ADA3B7A684421"><span class="RefLink">30.4-6</span></a>) have other arguments than <code class="code">g</code>.</p>
+
+<p><a id="X7A9C902479CB6F7C" name="X7A9C902479CB6F7C"></a></p>
+
+<h4>7.4 <span class="Heading">Info Functions</span></h4>
+
+<p>The <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) mechanism permits operations to display intermediate results or information about the progress of the algorithms. Information is always given according to one or more <em>info classes</em>. Each of the info classes defined in the <strong class="pkg">GAP</strong> library usually covers a certain range of algorithms, so for example <code class="code">InfoLattice</code> covers all the cyclic extension algorithms for the computation of a subgroup lattice.</p>
+
+<p>Note that not all info classes defined in the <strong class="pkg">GAP</strong> library are currently documented. Many <strong class="pkg">GAP</strong> packages define additional info classes, which are typically documented in the corresponding package documentation. The function <code class="func">ShowUsedInfoClasses</code> (<a href="chap7.html#X7BA636EF80A1435A"><span class="RefLink">7.4-5</span></a>) will show all info classes which <strong class="pkg">GAP</strong> considers while executing code.</p>
+
+<p>The amount of information to be displayed by each info class can be separately specified by the user. This is done by selecting a non-negative integer <em>level</em> for the info class: no information will be displayed at level 0, and the higher the level, the more information that will be displayed. At creation, an info class has level 0. By default, all built-in GAP info classes have level 0, except for the following info classes, which have level 1:</p>
+
+
+<ul>
+<li><p><code class="func">InfoWarning</code> (<a href="chap7.html#X7A28F77C82D6A3E0"><span class="RefLink">7.4-8</span></a>),</p>
+
+</li>
+<li><p><code class="func">InfoPackageLoading</code> (<a href="chap76.html#X7D162DDF813D2BBA"><span class="RefLink">76.2-5</span></a>),</p>
+
+</li>
+<li><p><code class="code">InfoDebug</code>,</p>
+
+</li>
+<li><p><code class="code">InfoPerformance</code>,</p>
+
+</li>
+<li><p><code class="code">InfoTempDirectories</code>,</p>
+
+</li>
+<li><p><code class="code">InfoPrimeInt</code>, and</p>
+
+</li>
+<li><p><code class="code">InfoSLP</code>.</p>
+
+</li>
+</ul>
+<p><a id="X7AA1A1CF79F20790" name="X7AA1A1CF79F20790"></a></p>
+
+<h5>7.4-1 NewInfoClass</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewInfoClass</code>( <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>creates a new info class with name <var class="Arg">name</var>.</p>
+
+<p><a id="X7B3709C584B3DA1E" name="X7B3709C584B3DA1E"></a></p>
+
+<h5>7.4-2 DeclareInfoClass</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeclareInfoClass</code>( <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>creates a new info class with name <var class="Arg">name</var> and binds it to the global variable <var class="Arg">name</var>. The variable must previously be writable, and is made readonly by this function.</p>
+
+<p><a id="X7A43B9E68765EE9E" name="X7A43B9E68765EE9E"></a></p>
+
+<h5>7.4-3 SetInfoLevel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetInfoLevel</code>( <var class="Arg">infoclass</var>, <var class="Arg">level</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Sets the info level for <var class="Arg">infoclass</var> to the non-negative integer <var class="Arg">level</var>.</p>
+
+<p><a id="X7B2ADC37783104B9" name="X7B2ADC37783104B9"></a></p>
+
+<h5>7.4-4 InfoLevel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoLevel</code>( <var class="Arg">infoclass</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the info level of <var class="Arg">infoclass</var>.</p>
+
+<p><a id="X7BA636EF80A1435A" name="X7BA636EF80A1435A"></a></p>
+
+<h5>7.4-5 ShowUsedInfoClasses</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShowUsedInfoClasses</code>( <var class="Arg">infoclass</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Called with argument <code class="keyw">true</code>, this makes <strong class="pkg">GAP</strong> print the info class and level of any executed <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) statement. Calling with the argument <code class="keyw">false</code> stops this printing. Each level of each info class is only printed once. The history of printed info classes and levels is reset whenever <code class="keyw">true</code> is passed.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ShowUsedInfoClasses(true);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Intersection(Group((1,3,2,4,5,6)), Group((1,2,3,4,5,6)));</span>
+#I Would print info with SetInfoLevel(InfoOptions,1)
+#I Would print info with SetInfoLevel(InfoBckt,1)
+#I Would print info with SetInfoLevel(InfoBckt,3)
+#I Would print info with SetInfoLevel(InfoBckt,5)
+Group(())
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Intersection(Group((1,3,2,4,5,6)), Group((1,2,3,4,5,6)));</span>
+Group(())
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ShowUsedInfoClasses(false);</span>
+</pre></div>
+
+<p><a id="X864E4B6886E2697D" name="X864E4B6886E2697D"></a></p>
+
+<h5>7.4-6 Info</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Info</code>( <var class="Arg">infoclass</var>, <var class="Arg">level</var>, <var class="Arg">info</var>[, <var class="Arg">moreinfo</var>, <var class="Arg">...</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>If the info level of <var class="Arg">infoclass</var> is at least <var class="Arg">level</var>, then the remaining arguments, <var class="Arg">info</var>, and possibly <var class="Arg">moreinfo</var> and so on, are evaluated. (Technically, <code class="func">Info</code> is a keyword and not a function.)</p>
+
+<p>By default, the results of these evaluations are viewed, preceded by the string <code class="code">"#I "</code> and followed by a newline.</p>
+
+<p>If the info level of <var class="Arg">infoclass</var> is strictly less than <var class="Arg">level</var>, then the third and subsequent arguments are not evaluated. (The latter can save substantial time when displaying difficult results.)</p>
+
+<p>The behaviour can be customized with <code class="func">SetInfoHandler</code> (<a href="chap7.html#X800234B5815CAC97"><span class="RefLink">7.4-7</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InfoExample:=NewInfoClass("InfoExample");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Info(InfoExample,1,"one");Info(InfoExample,2,"two");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoExample,1);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Info(InfoExample,1,"one");Info(InfoExample,2,"two");</span>
+#I  one
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoExample,2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Info(InfoExample,1,"one");Info(InfoExample,2,"two");</span>
+#I  one
+#I  two
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InfoLevel(InfoExample);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Info(InfoExample,3,Length(Combinations([1..9999])));</span>
+</pre></div>
+
+<p>Note that the last <code class="func">Info</code> call is executed without problems, since the actual level <code class="code">2</code> of <code class="code">InfoExample</code> causes <code class="func">Info</code> to ignore the last argument, which prevents <code class="code">Length(Combinations([1..9999]))</code> from being evaluated; note that an evaluation would be impossible due to memory restrictions.</p>
+
+<p>A set of info classes (called an <em>info selector</em>) may be passed to a single <code class="func">Info</code> statement. As a shorthand, info classes and selectors may be combined with <code class="code">+</code> rather than <code class="func">Union</code> (<a href="chap30.html#X799F0E2F7A502DBA"><span class="RefLink">30.5-3</span></a>). In this case, the message is triggered if the level of <em>any</em> of the classes is high enough.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InfoExample:=NewInfoClass("InfoExample");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoExample,0);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Info(InfoExample + InfoWarning, 1, "hello");</span>
+#I  hello
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Info(InfoExample + InfoWarning, 2, "hello");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoExample,2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Info(InfoExample + InfoWarning, 2, "hello");</span>
+#I  hello
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InfoLevel(InfoWarning);</span>
+1
+</pre></div>
+
+<p><a id="X800234B5815CAC97" name="X800234B5815CAC97"></a></p>
+
+<h5>7.4-7 <span class="Heading">Customizing <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) statements</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetInfoHandler</code>( <var class="Arg">infoclass</var>, <var class="Arg">handler</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetInfoOutput</code>( <var class="Arg">infoclass</var>, <var class="Arg">out</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnbindInfoOutput</code>( <var class="Arg">infoclass</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoOutput</code>( <var class="Arg">infoclass</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetDefaultInfoOutput</code>( <var class="Arg">out</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This allows one to customize what happens in an <code class="code">Info(<var class="Arg">infoclass</var>, <var class="Arg">level</var>, ...)</code> statement.</p>
+
+<p>In the first function, <var class="Arg">handler</var> must be a function with three arguments <var class="Arg">infoclass</var>, <var class="Arg">level</var>, <var class="Arg">list</var>. Here <var class="Arg">list</var> is the list containing the third argument and any subsequent optional arguments of the <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) call.</p>
+
+<p>The default handler is the function <code class="code">DefaultInfoHandler</code>. It prints <code class="code">"#I "</code>, then the third and further arguments of the info statement, and finally a <code class="code">"\n"</code>.</p>
+
+<p>If the first argument of an <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) statement is a sum of Info classes, the handler of the first summand is used.</p>
+
+<p>The file or stream to which <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) statements for individual <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) classes print can be overriden with <code class="func">SetInfoOutput</code>, retrieved with <code class="func">InfoOutput</code> and reset to the default with <code class="func">UnbindInfoOutput</code>. The initial default for all <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) classes is the string <code class="code">"*Print*"</code> which means the current output file. The default can be changed with <code class="func">SetDefaultInfoOutput</code>. The argument <var class="Arg">out</var> can be a filename or an open stream, the special names <code class="code">"*Print*"</code>, <code class="code">"*errout*</code> and <code class="code">"*stdout*</code> are also recognized.</p>
+
+<p>For example, <code class="code">SetDefaultInfoOutput("*errout*");</code> would send <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) output to standard error, which can be interesting if <strong class="pkg">GAP</strong>s output is redirected.</p>
+
+<p><a id="X7A28F77C82D6A3E0" name="X7A28F77C82D6A3E0"></a></p>
+
+<h5>7.4-8 InfoWarning</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoWarning</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p>is an info class to which general warnings are sent at level 1, which is its default level. More specialised warnings are shown via calls of <code class="func">Info</code> (<a href="chap7.html#X864E4B6886E2697D"><span class="RefLink">7.4-6</span></a>) at <code class="func">InfoWarning</code> level 2, e.g. information about the autoloading of <strong class="pkg">GAP</strong> packages and the initial line matched when displaying an on-line help topic.</p>
+
+<p><a id="X86425F067FC63A4C" name="X86425F067FC63A4C"></a></p>
+
+<h4>7.5 <span class="Heading">Assertions</span></h4>
+
+<p>Assertions are used to find errors in algorithms. They test whether intermediate results conform to required conditions and issue an error if not.</p>
+
+<p><a id="X7C7596418423660B" name="X7C7596418423660B"></a></p>
+
+<h5>7.5-1 SetAssertionLevel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetAssertionLevel</code>( <var class="Arg">lev</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>assigns the global assertion level to <var class="Arg">lev</var>. By default it is zero.</p>
+
+<p><a id="X876C83707F13A0FD" name="X876C83707F13A0FD"></a></p>
+
+<h5>7.5-2 AssertionLevel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AssertionLevel</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns the current assertion level.</p>
+
+<p><a id="X830E443284780FB9" name="X830E443284780FB9"></a></p>
+
+<h5>7.5-3 Assert</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Assert</code>( <var class="Arg">lev</var>, <var class="Arg">cond</var>[, <var class="Arg">message</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>With two arguments, if the global assertion level is at least <var class="Arg">lev</var>, condition <var class="Arg">cond</var> is tested and if it does not return <code class="keyw">true</code> an error is raised. Thus <code class="code">Assert(lev, <var class="Arg">cond</var>)</code> is equivalent to the code</p>
+
+
+<div class="example"><pre>
+if AssertionLevel() &gt;= lev and not &lt;cond&gt; then
+  Error("Assertion failure");
+fi;
+</pre></div>
+
+<p>With the <var class="Arg">message</var> argument form of the <code class="func">Assert</code> statement, if the global assertion level is at least <var class="Arg">lev</var>, condition <var class="Arg">cond</var> is tested and if it does not return <code class="keyw">true</code> then <var class="Arg">message</var> is evaluated and printed.</p>
+
+<p>Assertions are used at various places in the library. Thus turning assertions on can slow code execution significantly.</p>
+
+<p><a id="X792BA9A67E64CDED" name="X792BA9A67E64CDED"></a></p>
+
+<h4>7.6 <span class="Heading">Timing</span></h4>
+
+<p><a id="X80355C9282B35673" name="X80355C9282B35673"></a></p>
+
+<h5>7.6-1 Runtimes</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Runtimes</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">Runtimes</code> returns a record with components bound to integers or <code class="keyw">fail</code>. Each integer is the cpu time (processor time) in milliseconds spent by <strong class="pkg">GAP</strong> in a certain status:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">user_time</code></strong></dt>
+<dd><p>cpu time spent with <strong class="pkg">GAP</strong> functions (without child processes).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">system_time</code></strong></dt>
+<dd><p>cpu time spent in system calls, e.g., file access (<code class="keyw">fail</code> if not available).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">user_time_children</code></strong></dt>
+<dd><p>cpu time spent in child processes (<code class="keyw">fail</code> if not available).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">system_time_children</code></strong></dt>
+<dd><p>cpu time spent in system calls by child processes (<code class="keyw">fail</code> if not available).</p>
+
+</dd>
+</dl>
+<p>Note that this function is not fully supported on all systems. Only the <code class="code">user_time</code> component is (and may on some systems include the system time).</p>
+
+<p>The following example demonstrates tasks which contribute to the different time components:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Runtimes(); # after startup</span>
+rec( user_time := 3980, system_time := 60, user_time_children := 0, 
+  system_time_children := 0 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Exec("cat /usr/bin/*||wc"); # child process with a lot of file access</span>
+ 893799 7551659 200928302
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Runtimes();</span>
+rec( user_time := 3990, system_time := 60, user_time_children := 1590, 
+  system_time_children := 600 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=0;;for i in [1..100000000] do a:=a+1; od; # GAP user time</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Runtimes();  </span>
+rec( user_time := 12980, system_time := 70, user_time_children := 1590, 
+  system_time_children := 600 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">?blabla  # first call of help, a lot of file access</span>
+Help: no matching entry found
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Runtimes();</span>
+rec( user_time := 13500, system_time := 440, user_time_children := 1590, 
+  system_time_children := 600 )
+</pre></div>
+
+<p><a id="X7E32B27F81870D24" name="X7E32B27F81870D24"></a></p>
+
+<h5>7.6-2 Runtime</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Runtime</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">Runtime</code> returns the time spent by <strong class="pkg">GAP</strong> in milliseconds as an integer. It is the same as the value of the <code class="code">user_time</code> component given by <code class="func">Runtimes</code> (<a href="chap7.html#X80355C9282B35673"><span class="RefLink">7.6-1</span></a>), as explained above.</p>
+
+<p>See <code class="func">StringTime</code> (<a href="chap27.html#X802469C47F886A59"><span class="RefLink">27.10-9</span></a>) for a translation from milliseconds into hour/minute format.</p>
+
+<p><a id="X844E1CFE80F41760" name="X844E1CFE80F41760"></a></p>
+
+<h5>7.6-3 NanosecondsSinceEpoch</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NanosecondsSinceEpoch</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NanosecondsSinceEpochInfo</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">NanosecondsSinceEpoch</code> returns the time in nanoseconds that has passed since some fixed, but unspecified time in the past. This function is appropriate for doing wallclock time measurements. The actual resolution depends on the system that <strong class="pkg">GAP</strong> is run on. Information about the used timers can be obtained by calling <code class="func">NanosecondsSinceEpochInfo</code>, which returns a record containing members <code class="code">Method</code>, <code class="code">Monotonic</code>, <code class="code">Reliable</code> and <code class="code">Resolution</code>.</p>
+
+<p><code class="code">Method</code> is a string describing the method used to obtain timer values. This will usually contain the name of the syscall used.</p>
+
+<p><code class="code">Monotonic</code> is a boolean. If it is <code class="keyw">true</code>, then the values returned by <code class="func">NanosecondsSinceEpoch</code> are guaranteed to be strictly monotonically increasing between two calls, if it is <code class="keyw">false</code> then there is no such guarantee.</p>
+
+<p><code class="code">Resolution</code> is an integer reflecting the resolution of the timer used in nanoseconds.</p>
+
+<p><code class="code">Reliable</code> is a boolean. If it is <code class="keyw">true</code> then the value <code class="code">Resolution</code> is deemed reliable in the sense that it was obtained by querying the operating system, otherwise <code class="code">Resolution</code> should be treated as an estimate.</p>
+
+<p><a id="X7C0F91F982189624" name="X7C0F91F982189624"></a></p>
+
+<h5>7.6-4 time</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; time</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>In the read-eval-print loop, <code class="func">time</code> stores the number of milliseconds the last command took (see also <code class="func">memory_allocated</code> (<a href="chap7.html#X8156D7208591460F"><span class="RefLink">7.7-2</span></a>) for the number of bytes of memory it allocated).</p>
+
+<p><a id="X7B543F357C7202CF" name="X7B543F357C7202CF"></a></p>
+
+<h5>7.6-5 Sleep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Sleep</code>( <var class="Arg">time</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MicroSleep</code>( <var class="Arg">time</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>These functions make GAP stop execution for a given period of time. The time to stop is given to <code class="func">Sleep</code> in seconds and <code class="func">MicroSleep</code> in microseconds.</p>
+
+<p><a id="X844CB04081A771FB" name="X844CB04081A771FB"></a></p>
+
+<h4>7.7 <span class="Heading">Tracking Memory Usage</span></h4>
+
+<p><a id="X8077B50B844C4EFC" name="X8077B50B844C4EFC"></a></p>
+
+<h5>7.7-1 TotalMemoryAllocated</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TotalMemoryAllocated</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TotalMemoryAllocated</code> returns the total amount of memory in bytes allocated by the <strong class="pkg">GAP</strong> memory manager since <strong class="pkg">GAP</strong> started.</p>
+
+<p><a id="X8156D7208591460F" name="X8156D7208591460F"></a></p>
+
+<h5>7.7-2 memory_allocated</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; memory_allocated</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>In the read-eval-print loop, <code class="func">memory_allocated</code> stores the number of bytes of memory allocated by the last completed statement (see also <code class="func">time</code> (<a href="chap7.html#X7C0F91F982189624"><span class="RefLink">7.6-4</span></a>) for the number of milliseconds it took).</p>
+
+<p><a id="X7FDF923D7D2937A1" name="X7FDF923D7D2937A1"></a></p>
+
+<h4>7.8 <span class="Heading">Profiling</span></h4>
+
+<p>Profiling of code can be used to determine in which parts of a program how much time has been spent and how much memory has been allocated during runtime. GAP has two different methods of profiling. GAP can either profile by function, or line-by-line. Line by line profiling is currently only used for code coverage, while function profiling tracks memory and time usage.</p>
+
+<p><a id="X7939F6F182FDA5F1" name="X7939F6F182FDA5F1"></a></p>
+
+<h5>7.8-1 <span class="Heading">Function Profiling</span></h5>
+
+<p>This section describes how to profiling at the function level. The idea is that</p>
+
+
+<ul>
+<li><p>first one switches on profiling for those <strong class="pkg">GAP</strong> functions the performance of which one wants to check,</p>
+
+</li>
+<li><p>then one runs some <strong class="pkg">GAP</strong> computations,</p>
+
+</li>
+<li><p>then one looks at the profile information collected during these computations,</p>
+
+</li>
+<li><p>then one runs more computations (perhaps clearing all profile information before, see <code class="func">ClearProfile</code> (<a href="chap7.html#X7DAF9AB9793AE203"><span class="RefLink">7.8-10</span></a>)),</p>
+
+</li>
+<li><p>and finally one switches off profiling.</p>
+
+</li>
+</ul>
+<p>For switching on and off profiling, <strong class="pkg">GAP</strong> supports entering a list of functions (see <code class="func">ProfileFunctions</code> (<a href="chap7.html#X81E8A8627C34FD3B"><span class="RefLink">7.8-5</span></a>), <code class="func">UnprofileFunctions</code> (<a href="chap7.html#X79D394EC7BE8D008"><span class="RefLink">7.8-6</span></a>)) or a list of operations whose methods shall be (un)profiled (<code class="func">ProfileMethods</code> (<a href="chap7.html#X787AC3BE7F991344"><span class="RefLink">7.8-7</span></a>), <code class="func">UnprofileMethods</code> (<a href="chap7.html#X87A05F977F033693"><span class="RefLink">7.8-8</span></a>)), and <code class="func">DisplayProfile</code> (<a href="chap7.html#X80FEA6A08775A48E"><span class="RefLink">7.8-9</span></a>) can be used to show profile information about functions in a given list.</p>
+
+<p>Besides these functions, <code class="func">ProfileGlobalFunctions</code> (<a href="chap7.html#X79D6CB927BBEB940"><span class="RefLink">7.8-2</span></a>), <code class="func">ProfileOperations</code> (<a href="chap7.html#X7C893F68841B990B"><span class="RefLink">7.8-3</span></a>), and <code class="func">ProfileOperationsAndMethods</code> (<a href="chap7.html#X79D41E977DCA2BEE"><span class="RefLink">7.8-4</span></a>) can be used for switching on or off profiling for <em>all</em> global functions, operations, and operations together with all their methods, respectively, and for showing profile information about these functions.</p>
+
+<p>Note that <strong class="pkg">GAP</strong> will perform more slowly when profiling than when not.</p>
+
+<p><a id="X79D6CB927BBEB940" name="X79D6CB927BBEB940"></a></p>
+
+<h5>7.8-2 ProfileGlobalFunctions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProfileGlobalFunctions</code>( [<var class="Arg">bool</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Called with argument <code class="keyw">true</code>, <code class="func">ProfileGlobalFunctions</code> starts profiling of all functions that have been declared via <code class="func">DeclareGlobalFunction</code> (<a href="chap79.html#X834A8CC587A609BE"><span class="RefLink">79.10-4</span></a>). Old profile information for all these functions is cleared. A function call with the argument <code class="keyw">false</code> stops profiling of all these functions. Recorded information is still kept, so you can display it even after turning the profiling off.</p>
+
+<p>When <code class="func">ProfileGlobalFunctions</code> is called without argument, profile information for all global functions is displayed, see <code class="func">DisplayProfile</code> (<a href="chap7.html#X80FEA6A08775A48E"><span class="RefLink">7.8-9</span></a>).</p>
+
+<p><a id="X7C893F68841B990B" name="X7C893F68841B990B"></a></p>
+
+<h5>7.8-3 ProfileOperations</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProfileOperations</code>( [<var class="Arg">bool</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Called with argument <code class="keyw">true</code>, <code class="func">ProfileOperations</code> starts profiling of all operations. Old profile information for all operations is cleared. A function call with the argument <code class="keyw">false</code> stops profiling of all operations. Recorded information is still kept, so you can display it even after turning the profiling off.</p>
+
+<p>When <code class="func">ProfileOperations</code> is called without argument, profile information for all operations is displayed (see <code class="func">DisplayProfile</code> (<a href="chap7.html#X80FEA6A08775A48E"><span class="RefLink">7.8-9</span></a>)).</p>
+
+<p><a id="X79D41E977DCA2BEE" name="X79D41E977DCA2BEE"></a></p>
+
+<h5>7.8-4 ProfileOperationsAndMethods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProfileOperationsAndMethods</code>( [<var class="Arg">bool</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Called with argument <code class="keyw">true</code>, <code class="func">ProfileOperationsAndMethods</code> starts profiling of all operations and their methods. Old profile information for these functions is cleared. A function call with the argument <code class="keyw">false</code> stops profiling of all operations and their methods. Recorded information is still kept, so you can display it even after turning the profiling off.</p>
+
+<p>When <code class="func">ProfileOperationsAndMethods</code> is called without argument, profile information for all operations and their methods is displayed, see <code class="func">DisplayProfile</code> (<a href="chap7.html#X80FEA6A08775A48E"><span class="RefLink">7.8-9</span></a>).</p>
+
+<p><a id="X81E8A8627C34FD3B" name="X81E8A8627C34FD3B"></a></p>
+
+<h5>7.8-5 ProfileFunctions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProfileFunctions</code>( <var class="Arg">funcs</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>starts profiling for all function in the list <var class="Arg">funcs</var>. You can use <code class="func">ProfileGlobalFunctions</code> (<a href="chap7.html#X79D6CB927BBEB940"><span class="RefLink">7.8-2</span></a>) to turn profiling on for all globally declared functions simultaneously.</p>
+
+<p><a id="X79D394EC7BE8D008" name="X79D394EC7BE8D008"></a></p>
+
+<h5>7.8-6 UnprofileFunctions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnprofileFunctions</code>( <var class="Arg">funcs</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>stops profiling for all function in the list <var class="Arg">funcs</var>. Recorded information is still kept, so you can display it even after turning the profiling off.</p>
+
+<p><a id="X787AC3BE7F991344" name="X787AC3BE7F991344"></a></p>
+
+<h5>7.8-7 ProfileMethods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProfileMethods</code>( <var class="Arg">ops</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>starts profiling of the methods for all operations in the list <var class="Arg">ops</var>.</p>
+
+<p><a id="X87A05F977F033693" name="X87A05F977F033693"></a></p>
+
+<h5>7.8-8 UnprofileMethods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnprofileMethods</code>( <var class="Arg">ops</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>stops profiling of the methods for all operations in the list <var class="Arg">ops</var>. Recorded information is still kept, so you can display it even after turning the profiling off.</p>
+
+<p><a id="X80FEA6A08775A48E" name="X80FEA6A08775A48E"></a></p>
+
+<h5>7.8-9 DisplayProfile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DisplayProfile</code>( [<var class="Arg">functions</var>, ][<var class="Arg">mincount</var>, <var class="Arg">mintime</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GAPInfo.ProfileThreshold</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>Called without arguments, <code class="func">DisplayProfile</code> displays the profile information for profiled operations, methods and functions. If an argument <var class="Arg">functions</var> is given, only profile information for the functions in the list <var class="Arg">functions</var> is shown. If two integer values <var class="Arg">mincount</var>, <var class="Arg">mintime</var> are given as arguments then the output is restricted to those functions that were called at least <var class="Arg">mincount</var> times or for which the total time spent (see below) was at least <var class="Arg">mintime</var> milliseconds. The defaults for <var class="Arg">mincount</var> and <var class="Arg">mintime</var> are the entries of the list stored in the global variable <code class="func">GAPInfo.ProfileThreshold</code>.</p>
+
+<p>The default value of <code class="func">GAPInfo.ProfileThreshold</code> is <code class="code">[ 10000, 30 ]</code>.</p>
+
+<p>Profile information is displayed in a list of lines for all functions (including operations and methods) which are profiled. For each function, "count" gives the number of times the function has been called. "self/ms" gives the time (in milliseconds) spent in the function itself, "chld/ms" the time (in milliseconds) spent in profiled functions called from within this function, "stor/kb" the amount of storage (in kilobytes) allocated by the function itself, "chld/kb" the amount of storage (in kilobytes) allocated by profiled functions called from within this function, and "package" the name of the <strong class="pkg">GAP</strong> package to which the function belongs; the entry "GAP" in this column means that the function belongs to the <strong class="pkg">GAP</strong> library, the entry "(oprt.)" means that the function is an operation (which may belong to several packages), and an empty entry means that <code class="func">FilenameFunc</code> (<a href="chap5.html#X80E108C57F90FAA3"><span class="RefLink">5.1-4</span></a>) cannot determine in which file the function is defined.</p>
+
+<p>The list is sorted according to the total time spent in the functions, that is the sum of the values in the columns "self/ms" and "chld/ms".</p>
+
+<p>At the end of the list, two lines are printed that show the total time used and the total memory allocated by the profiled functions not shown in the list (label <code class="code">OTHER</code>) and by all profiled functions (label <code class="code">TOTAL</code>), respectively.</p>
+
+<p>An interactive variant of <code class="func">DisplayProfile</code> is the function <code class="func">BrowseProfile</code> (<a href="../../pkg/Browse/doc/chap6.html#X7B42091982DE7AE7"><span class="RefLink">Browse: BrowseProfile</span></a>) that is provided by the <strong class="pkg">GAP</strong> package <strong class="pkg">Browse</strong>.</p>
+
+<p><a id="X7DAF9AB9793AE203" name="X7DAF9AB9793AE203"></a></p>
+
+<h5>7.8-10 ClearProfile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClearProfile</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>clears all stored profile information.</p>
+
+<p><a id="X7C5CE32579891120" name="X7C5CE32579891120"></a></p>
+
+<h5>7.8-11 <span class="Heading">An Example of Function Profiling</span></h5>
+
+<p>Let us suppose we want to get information about the computation of the conjugacy classes of a certain permutation group. For that, first we create the group, then we start profiling for all global functions and for all operations and their methods, then we compute the conjugacy classes, and then we stop profiling.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= PrimitiveGroup( 24, 1 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProfileGlobalFunctions( true );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProfileOperationsAndMethods( true );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ConjugacyClasses( g );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProfileGlobalFunctions( false );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProfileOperationsAndMethods( false );</span>
+</pre></div>
+
+<p>Now the profile information is available. We can list the information for all profiled functions with <code class="func">DisplayProfile</code> (<a href="chap7.html#X80FEA6A08775A48E"><span class="RefLink">7.8-9</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayProfile();</span>
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+  17647        0        0      275        0  GAP      BasePoint             
+  10230        0        0      226        0  (oprt.)  ShallowCopy           
+  10139        0        0        0        0           PositionSortedOp: for*
+  10001        0        0      688        0           UniteSet: for two int*
+  10001        8        0       28      688  (oprt.)  UniteSet              
+  14751       12        0        0        0           =: for two families: *
+  10830        8        4      182      276  GAP      Concatenation         
+   2700       20       12      313       55  GAP      AddRefinement         
+   2444       28        4     3924      317  GAP      ConjugateStabChain    
+   4368        0       32        7      714  (oprt.)  Size                  
+   2174       32        4     1030      116  GAP      List                  
+    585        4       32       45      742  GAP      RRefine               
+   1532       32        8      194       56  GAP      AddGeneratorsExtendSc*
+   1221        8       32      349      420  GAP      Partition             
+ 185309       28       12        0        0  (oprt.)  Length                
+    336        4       40       95      817  GAP      ExtendSeriesPermGroup 
+      4       28       20      488      454  (oprt.)  Sortex                
+   2798        0       52       54      944  GAP      StabChainForcePoint   
+    560        4       48       83      628  GAP      StabChainSwap         
+    432       16       40      259      461  GAP      SubmagmaWithInversesNC
+ 185553       48        8      915       94  (oprt.)  Add                   
+     26        0       64        0     2023  (oprt.)  CentralizerOp         
+     26        0       64        0     2023  GAP      CentralizerOp: perm g*
+     26        0       64        0     2023  GAP      Centralizer: try to e*
+    152        4       64        0     2024  (oprt.)  Centralizer           
+   1605        0       68        0     2032  (oprt.)  StabilizerOfExternalS*
+     26        0       68        0     2024  GAP      Meth(StabilizerOfExte*
+    382        0       96       69     1922  GAP      TryPcgsPermGroup      
+   5130        4       96      309     3165  GAP      ForAll                
+   7980       24      116      330     6434  GAP      ChangeStabChain       
+  12076       12      136      351     6478  GAP      ProcessFixpoint       
+    192        0      148        4     3029  GAP      StabChainMutable: cal*
+   2208        4      148        3     3083  (oprt.)  StabChainMutable      
+    217        0      160        0     3177  (oprt.)  StabChainOp           
+    217       12      148       60     3117  GAP      StabChainOp: group an*
+    216       36      464      334    12546  GAP      PartitionBacktrack    
+   1479       12      668      566    18474  GAP      RepOpElmTuplesPermGro*
+   1453       12      684       56    18460  GAP      in: perm class rep    
+    126        0      728       13    19233  GAP      ConjugacyClassesTry   
+      1        0      736        0    19671  GAP      ConjugacyClassesByRan*
+      2        0      736        2    19678  (oprt.)  ConjugacyClasses      
+      1        0      736        0    19675  GAP      ConjugacyClasses: per*
+  13400     1164        0        0        0  (oprt.)  Position              
+             484             12052                    OTHER                 
+            2048             23319                    TOTAL                 
+</pre></div>
+
+<p>We can restrict the list to global functions with <code class="func">ProfileGlobalFunctions</code> (<a href="chap7.html#X79D6CB927BBEB940"><span class="RefLink">7.8-2</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProfileGlobalFunctions();</span>
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+  17647        0        0      275        0  GAP      BasePoint             
+  10830        8        4      182      276  GAP      Concatenation         
+   2700       20       12      313       55  GAP      AddRefinement         
+   2444       28        4     3924      317  GAP      ConjugateStabChain    
+   2174       32        4     1030      116  GAP      List                  
+    585        4       32       45      742  GAP      RRefine               
+   1532       32        8      194       56  GAP      AddGeneratorsExtendSc*
+   1221        8       32      349      420  GAP      Partition             
+    336        4       40       95      817  GAP      ExtendSeriesPermGroup 
+   2798        0       52       54      944  GAP      StabChainForcePoint   
+    560        4       48       83      628  GAP      StabChainSwap         
+    432       16       40      259      461  GAP      SubmagmaWithInversesNC
+    382        0       96       69     1922  GAP      TryPcgsPermGroup      
+   5130        4       96      309     3165  GAP      ForAll                
+   7980       24      116      330     6434  GAP      ChangeStabChain       
+  12076       12      136      351     6478  GAP      ProcessFixpoint       
+    216       36      464      334    12546  GAP      PartitionBacktrack    
+   1479       12      668      566    18474  GAP      RepOpElmTuplesPermGro*
+    126        0      728       13    19233  GAP      ConjugacyClassesTry   
+      1        0      736        0    19671  GAP      ConjugacyClassesByRan*
+            1804             14536                    OTHER                 
+            2048             23319                    TOTAL                 
+</pre></div>
+
+<p>We can restrict the list to operations with <code class="func">ProfileOperations</code> (<a href="chap7.html#X7C893F68841B990B"><span class="RefLink">7.8-3</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProfileOperations();</span>
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+  10230        0        0      226        0  (oprt.)  ShallowCopy           
+  10001        8        0       28      688  (oprt.)  UniteSet              
+   4368        0       32        7      714  (oprt.)  Size                  
+ 185309       28       12        0        0  (oprt.)  Length                
+      4       28       20      488      454  (oprt.)  Sortex                
+ 185553       48        8      915       94  (oprt.)  Add                   
+     26        0       64        0     2023  (oprt.)  CentralizerOp         
+    152        4       64        0     2024  (oprt.)  Centralizer           
+   1605        0       68        0     2032  (oprt.)  StabilizerOfExternalS*
+   2208        4      148        3     3083  (oprt.)  StabChainMutable      
+    217        0      160        0     3177  (oprt.)  StabChainOp           
+      2        0      736        2    19678  (oprt.)  ConjugacyClasses      
+  13400     1164        0        0        0  (oprt.)  Position              
+             764             21646                    OTHER                 
+            2048             23319                    TOTAL                 
+</pre></div>
+
+<p>We can restrict the list to operations and their methods with <code class="func">ProfileOperationsAndMethods</code> (<a href="chap7.html#X79D41E977DCA2BEE"><span class="RefLink">7.8-4</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProfileOperationsAndMethods();</span>
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+  10230        0        0      226        0  (oprt.)  ShallowCopy           
+  10139        0        0        0        0           PositionSortedOp: for*
+  10001        0        0      688        0           UniteSet: for two int*
+  10001        8        0       28      688  (oprt.)  UniteSet              
+  14751       12        0        0        0           =: for two families: *
+   4368        0       32        7      714  (oprt.)  Size                  
+ 185309       28       12        0        0  (oprt.)  Length                
+      4       28       20      488      454  (oprt.)  Sortex                
+ 185553       48        8      915       94  (oprt.)  Add                   
+     26        0       64        0     2023  (oprt.)  CentralizerOp         
+     26        0       64        0     2023  GAP      CentralizerOp: perm g*
+     26        0       64        0     2023  GAP      Centralizer: try to e*
+    152        4       64        0     2024  (oprt.)  Centralizer           
+   1605        0       68        0     2032  (oprt.)  StabilizerOfExternalS*
+     26        0       68        0     2024  GAP      Meth(StabilizerOfExte*
+    192        0      148        4     3029  GAP      StabChainMutable: cal*
+   2208        4      148        3     3083  (oprt.)  StabChainMutable      
+    217        0      160        0     3177  (oprt.)  StabChainOp           
+    217       12      148       60     3117  GAP      StabChainOp: group an*
+   1453       12      684       56    18460  GAP      in: perm class rep    
+      2        0      736        2    19678  (oprt.)  ConjugacyClasses      
+      1        0      736        0    19675  GAP      ConjugacyClasses: per*
+  13400     1164        0        0        0  (oprt.)  Position              
+             728             20834                    OTHER                 
+            2048             23319                    TOTAL                 
+</pre></div>
+
+<p>Finally, we can restrict the list to explicitly given functions with <code class="func">DisplayProfile</code> (<a href="chap7.html#X80FEA6A08775A48E"><span class="RefLink">7.8-9</span></a>), by entering the list of functions as an argument.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayProfile( [ StabChainOp, Centralizer ] );</span>
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+    152        4       64        0     2024  (oprt.)  Centralizer           
+    217        0      160        0     3177  (oprt.)  StabChainOp           
+            2044             23319                    OTHER                 
+            2048             23319                    TOTAL                 
+</pre></div>
+
+<p><a id="X812F9CE0817110EA" name="X812F9CE0817110EA"></a></p>
+
+<h5>7.8-12 <span class="Heading">Line By Line Profiling</span></h5>
+
+<p>Line By Line profiling tracks which lines have been executed in a piece of GAP code. Built into GAP are the methods necessary to generate profiles, the resulting profiles can be displayed with the 'profiling' package.</p>
+
+<p><a id="X7E9C65B17B8EF993" name="X7E9C65B17B8EF993"></a></p>
+
+<h5>7.8-13 <span class="Heading">Line by Line profiling example</span></h5>
+
+<p>There are two kinds of profiles GAP can build:</p>
+
+
+<ul>
+<li><p>Coverage : This records which lines of code are executed</p>
+
+</li>
+<li><p>Timing : This records how much time is spend executing each line of code</p>
+
+</li>
+</ul>
+<p>A timing profile provides more information, but will take longer to generate and parse. A timing profile is generated using the functions <code class="func">ProfileLineByLine</code> (<a href="chap7.html#X86557887796F66FA"><span class="RefLink">7.8-14</span></a>) and <code class="func">UnprofileLineByLine</code> (<a href="chap7.html#X7C5DED9C7CC77504"><span class="RefLink">7.8-16</span></a>), as follows:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProfileLineByLine("output.gz");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(AlternatingGroup(10)); ; # Execute some GAP code you want to profile</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnprofileLineByLine();</span>
+</pre></div>
+
+<p>For code coverage, use instead the functions <code class="func">CoverageLineByLine</code> (<a href="chap7.html#X87CC48807DB4C008"><span class="RefLink">7.8-15</span></a>) and <code class="func">UncoverageLineByLine</code> (<a href="chap7.html#X7B705B2D8670A9C5"><span class="RefLink">7.8-17</span></a>). The profiler will only record lines which are read and executed while the profiler is running. If you want to perform code coverage or profile GAP's library, then you can use the GAP command line option '--cover filename.gz', which executes <code class="func">CoverageLineByLine</code> (<a href="chap7.html#X87CC48807DB4C008"><span class="RefLink">7.8-15</span></a>) before GAP starts. Similarly the option '--prof filename.gz' executes <code class="func">ProfileLineByLine</code> (<a href="chap7.html#X86557887796F66FA"><span class="RefLink">7.8-14</span></a>) before GAP starts. The profiler is designed for high performance, because of this, there are some limitations which users should be aware of:</p>
+
+
+<ul>
+<li><p>By default the profiler records the wall-clock time which has passed, rather than the CPU time taken (because it is lower overhead), so any time taken writing commands will be charged to the last GAP statement which was executed. Therefore it is better to write a function which starts profiling, executes your code, and then stops profiling.</p>
+
+</li>
+<li><p>If you end the filename with ".gz", the resulting file will automatically be compressed. This is highly recommended!</p>
+
+</li>
+<li><p>The profiler can only track GAP code which occurs in a function -- this is most obvious when looking at code coverage examples, which will appear to miss lines of code in files not in a function.</p>
+
+</li>
+<li><p>If the current GAP is forked, using the <code class="code">IO_fork</code> function in the <strong class="pkg">IO</strong> package, a new profile output file will be created for the new child process, with the process ID of the child attached to the end of the filename.</p>
+
+</li>
+</ul>
+<p>Profiles are transformed into a human-readable form with 'profiling' package, for example with the 'OutputAnnotatedCodeCoverageFiles' function.</p>
+
+<p><a id="X86557887796F66FA" name="X86557887796F66FA"></a></p>
+
+<h5>7.8-14 ProfileLineByLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProfileLineByLine</code>( <var class="Arg">filename</var>[, <var class="Arg">options</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ProfileLineByLine</code> begins GAP recording profiling data to the file <var class="Arg">filename</var>. This file will get *very* large very quickly. This file is compressed using gzip to reduce its size. <var class="Arg">options</var> is an optional dictionary, which sets various configuration options. These are</p>
+
+
+<dl>
+<dt><strong class="Mark">coverage</strong></dt>
+<dd><p>Boolean (defaults to false). If this is enabled, only information about which lines are read and executed is stored. Enabling this is the same as calling <code class="func">CoverageLineByLine</code> (<a href="chap7.html#X87CC48807DB4C008"><span class="RefLink">7.8-15</span></a>). Using this ignores all other options.</p>
+
+</dd>
+<dt><strong class="Mark">wallTime</strong></dt>
+<dd><p>Boolean (defaults to true). Sets if time should be measured using wall-clock time (true) or CPU time (false). (measuring CPU-time has a higher overhead).</p>
+
+</dd>
+<dt><strong class="Mark">recordMem</strong></dt>
+<dd><p>Boolean (defaults to false). Instead of recording the CPU time taken by statements, record the total size of all new objects created by each line.</p>
+
+</dd>
+<dt><strong class="Mark">resolution</strong></dt>
+<dd><p>Integer (defaults to 0). By default profiling will record a trace of all executed code. When <var class="Arg">resolution</var> non-zero, GAP instead samples which piece of code is being executed every <var class="Arg">resolution</var> nanoseconds. Increasing this improves performance and produces smaller traces, at the cost of accuracy. GAP will still accurately record which statements are executed at least once.</p>
+
+</dd>
+</dl>
+<p><a id="X87CC48807DB4C008" name="X87CC48807DB4C008"></a></p>
+
+<h5>7.8-15 CoverageLineByLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoverageLineByLine</code>( <var class="Arg">filename</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">CoverageLineByLine</code> begins GAP recording code coverage to the file <var class="Arg">filename</var>. This is equivalent to calling <code class="func">ProfileLineByLine</code> (<a href="chap7.html#X86557887796F66FA"><span class="RefLink">7.8-14</span></a>) with coverage=true.</p>
+
+<p><a id="X7C5DED9C7CC77504" name="X7C5DED9C7CC77504"></a></p>
+
+<h5>7.8-16 UnprofileLineByLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnprofileLineByLine</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Stops profiling which was previously started with <code class="func">ProfileLineByLine</code> (<a href="chap7.html#X86557887796F66FA"><span class="RefLink">7.8-14</span></a>) or <code class="func">CoverageLineByLine</code> (<a href="chap7.html#X87CC48807DB4C008"><span class="RefLink">7.8-15</span></a>).</p>
+
+<p><a id="X7B705B2D8670A9C5" name="X7B705B2D8670A9C5"></a></p>
+
+<h5>7.8-17 UncoverageLineByLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UncoverageLineByLine</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Stops profiling which was previously started with <code class="func">ProfileLineByLine</code> (<a href="chap7.html#X86557887796F66FA"><span class="RefLink">7.8-14</span></a>) or <code class="func">CoverageLineByLine</code> (<a href="chap7.html#X87CC48807DB4C008"><span class="RefLink">7.8-15</span></a>).</p>
+
+<p><a id="X8015CD3D7F97B08C" name="X8015CD3D7F97B08C"></a></p>
+
+<h5>7.8-18 ActivateProfileColour</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivateProfileColour</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Called with argument <code class="keyw">true</code>, <code class="func">ActivateProfileColour</code> makes GAP colour functions when printing them to show which lines have been executed while profiling was active via <code class="func">ProfileLineByLine</code> (<a href="chap7.html#X86557887796F66FA"><span class="RefLink">7.8-14</span></a>) at any time during this GAP session. Passing <code class="keyw">false</code> disables this behaviour.</p>
+
+<p><a id="X7823C83D79B36D3B" name="X7823C83D79B36D3B"></a></p>
+
+<h5>7.8-19 IsLineByLineProfileActive</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLineByLineProfileActive</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">IsLineByLineProfileActive</code> returns if line-by-line profiling is currently activated.</p>
+
+<p><a id="X83D8A42B7BB92F5B" name="X83D8A42B7BB92F5B"></a></p>
+
+<h5>7.8-20 DisplayCacheStats</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DisplayCacheStats</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>displays statistics about the different caches used by the method selection.</p>
+
+<p><a id="X79C58704838232CC" name="X79C58704838232CC"></a></p>
+
+<h5>7.8-21 ClearCacheStats</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClearCacheStats</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>clears all statistics about the different caches used by the method selection.</p>
+
+<p><a id="X7EE874867C0BEEDD" name="X7EE874867C0BEEDD"></a></p>
+
+<h4>7.9 <span class="Heading">Information about the version used</span></h4>
+
+<p>The global variable <code class="code">GAPInfo.Version</code> (see <code class="func">GAPInfo</code> (<a href="chap3.html#X8354754E7935F935"><span class="RefLink">3.5-1</span></a>)) contains the version number of the version of <strong class="pkg">GAP</strong>. Its value can be checked other version number using <code class="func">CompareVersionNumbers</code> (<a href="chap76.html#X787DFEB383545A49"><span class="RefLink">76.3-9</span></a>).</p>
+
+<p>To produce sample citations for the used version of <strong class="pkg">GAP</strong> or for a package available in this <strong class="pkg">GAP</strong> installation, use <code class="func">Cite</code> (<a href="chap76.html#X79637D9A7B1AD7F7"><span class="RefLink">76.3-17</span></a>).</p>
+
+<p>If you wish to report a problem to <strong class="pkg">GAP</strong> Support or <strong class="pkg">GAP</strong> Forum, it may be useful to not only report the version used, but also to include the <strong class="pkg">GAP</strong> banner displays the information about the architecture for which the <strong class="pkg">GAP</strong> binary is built, used libraries and loaded packages.</p>
+
+<p><a id="X801051CC86594630" name="X801051CC86594630"></a></p>
+
+<h4>7.10 <span class="Heading">Test Files</span></h4>
+
+<p>Test files are used to check that <strong class="pkg">GAP</strong> produces correct results in certain computations. A selection of test files for the library can be found in the <code class="file">tst</code> directory of the <strong class="pkg">GAP</strong> distribution.</p>
+
+<p><a id="X8213757B7ACC76E6" name="X8213757B7ACC76E6"></a></p>
+
+<h5>7.10-1 <span class="Heading">Starting and stopping test</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; START_TEST</code>( <var class="Arg">id</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; STOP_TEST</code>( <var class="Arg">file</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">START_TEST</code> and <code class="func">STOP_TEST</code> may be optionally used in files that are read via <code class="func">Test</code> (<a href="chap7.html#X87712F9D8732193C"><span class="RefLink">7.10-2</span></a>). If used, <code class="func">START_TEST</code> reinitialize the caches and the global random number generator, in order to be independent of the reading order of several test files. Furthermore, the assertion level (see <code class="func">Assert</code> (<a href="chap7.html#X830E443284780FB9"><span class="RefLink">7.5-3</span></a>)) is set to <span class="SimpleMath">2</span> (if it was lower before) by <code class="func">START_TEST</code> and set back to the previous value in the subsequent <code class="func">STOP_TEST</code> call.</p>
+
+<p>To use these options, a test file should be started with a line</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">START_TEST( "arbitrary identifier string" );</span>
+</pre></div>
+
+<p>(Note that the <code class="code">gap&gt; </code> prompt is part of the line!)</p>
+
+<p>and should be finished with a line</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">STOP_TEST( "filename" );</span>
+</pre></div>
+
+<p>Here the string <code class="code">"filename"</code> should give the name of the test file.</p>
+
+<p>Note that the functions in <code class="file">tst/testutil.g</code> temporarily replace <code class="func">STOP_TEST</code> before they call <code class="func">Test</code> (<a href="chap7.html#X87712F9D8732193C"><span class="RefLink">7.10-2</span></a>).</p>
+
+<p>If you want to run a quick test of your <strong class="pkg">GAP</strong> installation (though this is not required), you can read in a test script that exercises some <strong class="pkg">GAP</strong>'s capabilities.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Read( Filename( DirectoriesLibrary( "tst" ), "testinstall.g" ) );</span>
+</pre></div>
+
+
+<div class="example"><pre>
+test file         time(msec)
+-------------------------------------------
+testing: ................/gap4r5/tst/zlattice.tst
+zlattice.tst               0
+testing: ................/gap4r5/tst/gaussian.tst
+gaussian.tst              10
+[ further lines deleted ]
+</pre></div>
+
+<p>If you want to run a more advanced check (this is not required and make take up to an hour), you can read <code class="file">teststandard.g</code> which is an extended test script performing all tests from the <code class="file">tst</code> directory.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Read( Filename( DirectoriesLibrary( "tst" ), "teststandard.g" ) );</span>
+</pre></div>
+
+<p><a id="X87712F9D8732193C" name="X87712F9D8732193C"></a></p>
+
+<h5>7.10-2 Test</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Test</code>( <var class="Arg">fname</var>[, <var class="Arg">optrec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code>.</p>
+
+<p>The argument <var class="Arg">fname</var> must be the name of a file or an open input stream. The content of this file or stream should contain <strong class="pkg">GAP</strong> input and output. The function <code class="func">Test</code> runs the input lines, compares the actual output with the output stored in <var class="Arg">fname</var> and reports differences. With an optional record as argument <var class="Arg">optrec</var> details of this process can be adjusted. Note that the <code class="code">rewriteToFile</code> option is especially useful for generating test files.</p>
+
+<p>More precisely, the content of <var class="Arg">fname</var> must have the following format. <br /> Lines starting with <code class="code">"gap&gt; "</code> are considered as <strong class="pkg">GAP</strong> input, they can be followed by lines starting with <code class="code">"&gt; "</code> if the input is continued over several lines. <br /> To allow for comments in <var class="Arg">fname</var> the following lines are ignored by default: lines at the beginning of <var class="Arg">fname</var> that start with <code class="code">"#"</code> or are empty, and one empty line together with one or more lines starting with <code class="code">"#"</code>.<br /> All other lines are considered as <strong class="pkg">GAP</strong> output from the preceding <strong class="pkg">GAP</strong> input.</p>
+
+<p>Lines which begin "#@" define special configuration options for tests. The <code class="code">#@local</code> and <code class="code">#@exec</code> options can only be used before any <strong class="pkg">GAP</strong> input, and the other commands can only be used between individual tests (just before a line starting <code class="code">gap&gt;</code>, or at end of the file). Currently defined options are:</p>
+
+
+<dl>
+<dt><strong class="Mark">#@local identifierlist</strong></dt>
+<dd><p>Run all the tests in the input as if it is in a function with local variable list <code class="code">identifierlist</code>, which is a comma-separated list of identifers. Multiple #@local lines may be used.</p>
+
+</dd>
+<dt><strong class="Mark">#@exec gapcode</strong></dt>
+<dd><p>Execute the code <code class="code">gapcode</code> before any test in the input is run. This allows defining global variables when using <code class="code">#@local</code>.</p>
+
+</dd>
+<dt><strong class="Mark">#@if EXPR ...  [#@else] ... #@fi</strong></dt>
+<dd><p>A <code class="code">#@if</code> allows to conditionally skip parts of the test input depending on the value of a boolean expression. The exact behavior is done as follows:</p>
+
+<p>If the <strong class="pkg">GAP</strong> expression <code class="code">EXPR</code> evaluates to <code class="code">true</code>, then the lines after the <code class="code">#@if</code> are used until either a <code class="code">#@else</code> or <code class="code">#@fi</code> is reached. If a <code class="code">#@else</code> is present then the code after the <code class="code">#@else</code> is used if and only if <code class="code">EXPR</code> evaluated to <code class="code">false</code>. Finally, once <code class="code">#endif</code> is reached, evaluation continues normally.</p>
+
+</dd>
+</dl>
+<p>By default the actual <strong class="pkg">GAP</strong> output is compared exactly with the stored output, and if these are different some information about the differences is printed.</p>
+
+<p>If any differences are found then <code class="func">Test</code> returns <code class="keyw">false</code>, otherwise <code class="keyw">true</code>.</p>
+
+<p>If the optional argument <var class="Arg">optrec</var> is given it must be a record. The following components of <var class="Arg">optrec</var> are recognized and can change the default behaviour of <code class="func">Test</code>:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">ignoreComments</code></strong></dt>
+<dd><p>If set to <code class="keyw">false</code> then no lines in <var class="Arg">fname</var> are ignored as explained above (default is <code class="keyw">true</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">width</code></strong></dt>
+<dd><p>The screen width used for the new output (default is <code class="code">80</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">compareFunction</code></strong></dt>
+<dd><p>This must be a function that gets two strings as input, the newly generated and the stored output of some <strong class="pkg">GAP</strong> input. The function must return <code class="keyw">true</code> or <code class="keyw">false</code>, indicating if the strings should be considered equivalent or not. By default <code class="func">\=</code> (<a href="chap31.html#X7EF67D047F03CA6F"><span class="RefLink">31.11-1</span></a>) is used. <br /> Two strings are recognized as abbreviations in this component: <code class="code">"uptowhitespace"</code> checks if the two strings become equal after removing all white space. And <code class="code">"uptonl"</code> compares the string up to trailing newline characters.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">reportDiff</code></strong></dt>
+<dd><p>A function that gets six arguments and reports a difference in the output: the <strong class="pkg">GAP</strong> input, the expected <strong class="pkg">GAP</strong> output, the newly generated output, the name of tested file, the line number of the input, the time to run the input. (The default is demonstrated in the example below.)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">rewriteToFile</code></strong></dt>
+<dd><p>If this is bound to a string it is considered as a file name and that file is written with the same input and comment lines as <var class="Arg">fname</var> but the output substituted by the newly generated version; if it is bound to <code class="keyw">true</code>, then this is treated as if it was bound to <var class="Arg">fname</var> (default is <code class="keyw">false</code>). This is especially useful for generating test files because it ensures that the test files are formatted exactly as <code class="func">Test</code> expects them to be.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">writeTimings</code></strong></dt>
+<dd><p>If this is bound to a string it is considered as a file name, that file is written and contains timing information for each input in <var class="Arg">fname</var>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">compareTimings</code></strong></dt>
+<dd><p>If this is bound to a string it is considered as name of a file to which timing information was stored via <code class="code">writeTimings</code> in a previous call. The new timings are compared to the stored ones. By default only commands which take more than a threshold of 100 milliseconds are considered, and only differences of more than 20% are considered significant. These defaults can be overwritten by assigning a list <code class="code">[timingfile, threshold, percentage]</code> to this component. (The default of <code class="code">compareTimings</code> is <code class="keyw">false</code>.)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">reportTimeDiff</code></strong></dt>
+<dd><p>This component can be used to overwrite the default function to display timing differences. It must be a function with 5 arguments: <strong class="pkg">GAP</strong> input, name of test file, line number, stored time, new time.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ignoreSTOP_TEST</code></strong></dt>
+<dd><p>By default set to <code class="keyw">true</code>, in that case the output of <strong class="pkg">GAP</strong> input starting with <code class="code">"STOP_TEST"</code> is not checked.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">showProgress</code></strong></dt>
+<dd><p>If this is <code class="keyw">true</code> then <strong class="pkg">GAP</strong> prints position information and the input line before it is processed; if set to <code class="code">"some"</code>, then GAP shows the current line number of the test being processed; if set to <code class="keyw">false</code>, no progress updates are displayed (default is <code class="code">"some"</code> if GAP's output goes to a terminal, otherwise <code class="keyw">false</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">subsWindowsLineBreaks</code></strong></dt>
+<dd><p>If this is <code class="keyw">true</code> then <strong class="pkg">GAP</strong> substitutes DOS/Windows style line breaks "\r\n" by UNIX style line breaks "\n" after reading the test file. (default is <code class="keyw">true</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">returnNumFailures</code></strong></dt>
+<dd><p>If this is <code class="keyw">true</code> then <strong class="pkg">GAP</strong> returns the number of input lines of the test file which had differences in their output, instead of returning <code class="keyw">true</code> or <code class="keyw">false</code>.</p>
+
+</dd>
+</dl>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tnam := Filename(DirectoriesLibrary(), "../doc/ref/demo.tst");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mask := function(str) return Concatenation("| ", </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         JoinStringsWithSeparator(SplitString(str, "\n", ""), "\n| "),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         "\n"); end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(mask(StringFile(tnam)));</span>
+| # this is a demo file for the 'Test' function
+| #
+| gap&gt; g := Group((1,2), (1,2,3));
+| Group([ (1,2), (1,2,3) ])
+| 
+| # another comment following an empty line
+| # the following fails:
+| gap&gt; a := 13+29;
+| 41
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ss := InputTextString(StringFile(tnam));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Test(ss);</span>
+########&gt; Diff in test stream, line 8:
+# Input is:
+a := 13+29;
+# Expected output:
+41
+# But found:
+42
+########
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RewindStream(ss);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dtmp := DirectoryTemporary();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ftmp := Filename(dtmp,"demo.tst");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Test(ss, rec(reportDiff := Ignore, rewriteToFile := ftmp));</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Test(ftmp);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(mask(StringFile(ftmp)));</span>
+| # this is a demo file for the 'Test' function
+| #
+| gap&gt; g := Group((1,2), (1,2,3));
+| Group([ (1,2), (1,2,3) ])
+| 
+| # another comment following an empty line
+| # the following fails:
+| gap&gt; a := 13+29;
+| 42
+</pre></div>
+
+<p><a id="X87AF67528799481F" name="X87AF67528799481F"></a></p>
+
+<h5>7.10-3 TestDirectory</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TestDirectory</code>( <var class="Arg">inlist</var>[, <var class="Arg">optrec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code>.</p>
+
+<p>The argument <var class="Arg">inlist</var> must be either a single filename or directory name, or a list of filenames and directories. The function <code class="func">TestDirectory</code> will take create a list of files to be tested by taking any files in <var class="Arg">inlist</var>, and recursively searching any directories in <var class="Arg">inlist</var> for files ending in <code class="code">.tst</code>. Each of these files is then run through <code class="func">Test</code> (<a href="chap7.html#X87712F9D8732193C"><span class="RefLink">7.10-2</span></a>), and the results printed, and <code class="keyw">true</code> returned if all tests passed.</p>
+
+<p>If the optional argument <var class="Arg">optrec</var> is given it must be a record. Note that the <code class="code">rewriteToFile</code> option is especially useful for generating test files. The following components of <var class="Arg">optrec</var> are recognized and can change the default behaviour of <code class="func">TestDirectory</code>:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">testOptions</code></strong></dt>
+<dd><p>A record which will be passed on as the second argument of <code class="func">Test</code> (<a href="chap7.html#X87712F9D8732193C"><span class="RefLink">7.10-2</span></a>) if present.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">earlyStop</code></strong></dt>
+<dd><p>If <code class="keyw">true</code>, stop as soon as any <code class="func">Test</code> (<a href="chap7.html#X87712F9D8732193C"><span class="RefLink">7.10-2</span></a>) fails (defaults to <code class="keyw">false</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">showProgress</code></strong></dt>
+<dd><p>Print information about how tests are progressing (defaults to <code class="code">"some"</code> if GAP's output goes to a terminal, otherwise <code class="keyw">false</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">suppressStatusMessage</code></strong></dt>
+<dd><p>suppress displaying status messages <code class="code">#I Errors detected while testing</code> and <code class="code">#I No errors detected while testing</code> after the test (defaults to <code class="keyw">false</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">rewriteToFile</code></strong></dt>
+<dd><p>If <code class="keyw">true</code>, then rewrite each test file to disc, with the output substituted by the results of running the test (defaults to <code class="keyw">false</code>). This is especially useful for generating test files because it ensures that the test files are formatted exactly as <code class="func">Test</code> (<a href="chap7.html#X87712F9D8732193C"><span class="RefLink">7.10-2</span></a>) expects them to be.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">exclude</code></strong></dt>
+<dd><p>A list of file and directory names which will be excluded from testing (defaults to <code class="keyw">[]</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">exitGAP</code></strong></dt>
+<dd><p>Rather than returning <code class="keyw">true</code> or <code class="keyw">false</code>, exit GAP with the return value of GAP set to success or fail, depending on if all tests passed (defaults to <code class="keyw">false</code>).</p>
+
+</dd>
+</dl>
+<p>See also <code class="func">TestPackage</code> (<a href="chap76.html#X866ADD4E814A54F0"><span class="RefLink">76.3-5</span></a>) for the information on running standard tests for <strong class="pkg">GAP</strong> packages.</p>
+
+<p><a id="X85FF55448787CCA0" name="X85FF55448787CCA0"></a></p>
+
+<h4>7.11 <span class="Heading">Debugging Recursion</span></h4>
+
+<p>The <strong class="pkg">GAP</strong> interpreter monitors the level of nesting of <strong class="pkg">GAP</strong> functions during execution. By default, whenever this nesting reaches a multiple of <span class="SimpleMath">5000</span>, <strong class="pkg">GAP</strong> enters a break loop (<a href="chap6.html#X8593B49F8705B486"><span class="RefLink">6.4</span></a>) allowing you to terminate the calculation, or enter <strong class="button">Return</strong><code class="code">;</code> to continue it.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dive:= function(depth) if depth&gt;1 then dive(depth-1); fi; return; end;</span>
+function( depth ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dive(100);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OnBreak:= function() Where(1); end; # shorter traceback</span>
+function(  ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dive(6000);</span>
+recursion depth trap (5000)
+ at
+dive( depth - 1 );
+ called from
+dive( depth - 1 ); called from
+...
+Entering break read-eval-print loop ...
+you can 'quit;' to quit to outer loop, or
+you may 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">return;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dive(11000);</span>
+recursion depth trap (5000)
+ at
+dive( depth - 1 );
+ called from
+dive( depth - 1 ); called from
+...
+Entering break read-eval-print loop ...
+you can 'quit;' to quit to outer loop, or
+you may 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">return;</span>
+recursion depth trap (10000)
+ at
+dive( depth - 1 );
+ called from
+dive( depth - 1 ); called from
+...
+Entering break read-eval-print loop ...
+you can 'quit;' to quit to outer loop, or
+you may 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">return;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+</pre></div>
+
+<p>This behaviour can be controlled using the following procedures.</p>
+
+<p><a id="X7D8968FC7E24A4E5" name="X7D8968FC7E24A4E5"></a></p>
+
+<h5>7.11-1 SetRecursionTrapInterval</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetRecursionTrapInterval</code>( <var class="Arg">interval</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetRecursionDepth</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">GetRecursionDepth</code> returns the nesting level of the GAP interpreter. This is reset to 0 every time the break loop is entered. <code class="func">SetRecursionTrapInterval</code> sets the depth of the stack at which GAP will enter the Break loop. <var class="Arg">interval</var> must be a non-negative small integer (between 0 and <span class="SimpleMath">2^28</span>). An <var class="Arg">interval</var> of 0 suppresses the monitoring of recursion altogether. In this case excessive recursion may cause <strong class="pkg">GAP</strong> to crash.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GetRecursionDepth();</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dive := function(depth)</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> if depth&gt;1 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   dive(depth-1);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   Print("Depth ", GetRecursionDepth());</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetRecursionTrapInterval(1000);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dive(100);</span>
+Depth 100
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dive(2500);</span>
+recursion depth trap (1000)
+ at
+dive( depth - 1 );
+ called from
+dive( depth - 1 ); called from
+...
+Entering break read-eval-print loop ...
+you can 'quit;' to quit to outer loop, or
+you may 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">return;</span>
+recursion depth trap (2000)
+ at
+dive( depth - 1 );
+ called from
+dive( depth - 1 ); called from
+...
+Entering break read-eval-print loop ...
+you can 'quit;' to quit to outer loop, or
+you may 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">GetRecursionDepth();</span>
+0
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">return;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetRecursionTrapInterval(-1);</span>
+SetRecursionTrapInterval( &lt;interval&gt; ): &lt;interval&gt; must be a non-negative smal\
+l integer
+not in any function
+Entering break read-eval-print loop ...
+you can 'quit;' to quit to outer loop, or
+you can replace &lt;interval&gt; via 'return &lt;interval&gt;;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">return 0;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dive(20000);</span>
+Depth 20000
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dive(2000000);</span>
+Segmentation fault
+</pre></div>
+
+<p><a id="X85679F17791D9B63" name="X85679F17791D9B63"></a></p>
+
+<h4>7.12 <span class="Heading">Global Memory Information</span></h4>
+
+<p>The <strong class="pkg">GAP</strong> environment provides automatic memory management, so that the programmer does not need to concern themselves with allocating space for objects, or recovering space when objects are no longer needed. The component of the kernel which provides this is called <code class="code">GASMAN</code> (<strong class="pkg">GAP</strong> Storage MANager). Messages reporting garbage collections performed by <code class="code">GASMAN</code> can be switched on by the <code class="code">-g</code> command line option (see section <a href="chap3.html#X782751D5858A6EAF"><span class="RefLink">3.1</span></a>). There are also some facilities to access information from <code class="code">GASMAN</code> from <strong class="pkg">GAP</strong> programs.</p>
+
+<p><a id="X836977DE80416F3D" name="X836977DE80416F3D"></a></p>
+
+<h5>7.12-1 GasmanStatistics</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GasmanStatistics</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">GasmanStatistics</code> returns a record containing some information from the garbage collection mechanism. The record may contain up to four components: <code class="code">full</code>, <code class="code">partial</code>, <code class="code">npartial</code>, and <code class="code">nfull</code>.</p>
+
+<p>The <code class="code">full</code> component will be present if a full garbage collection has taken place since <strong class="pkg">GAP</strong> started. It contains information about the most recent full garbage collection. It is a record, with eight components: <code class="code">livebags</code> contains the number of bags which survived the garbage collection; <code class="code">livekb</code> contains the total number of kilobytes occupied by those bags; <code class="code">deadbags</code> contains the total number of bags which were reclaimed by that garbage collection and all the partial garbage collections preceding it, since the previous full garbage collection; <code class="code">deadkb</code> contains the total number of kilobytes occupied by those bags; <code class="code">freekb</code> reports the total number of kilobytes available in the <strong class="pkg">GAP</strong> workspace for new objects; <code class="code">totalkb</code> reports the actual size of the workspace; <code class="code">time</code> reports the CPU time in milliseconds spent on the last garbage collection and <code class="code">cumulative</code> the total CPU time in milliseconds spent on that type of garbage collection since <strong class="pkg">GAP</strong> started.</p>
+
+<p>These figures should be viewed with some caution. They are stored internally in fixed length integer formats, and <code class="code">deadkb</code> and <code class="code">deadbags</code> are liable to overflow if there are many partial collections before a full collection. Also, note that <code class="code">livekb</code> and <code class="code">freekb</code> will not usually add up to <code class="code">totalkb</code>. The difference is essentially the space overhead of the memory management system.</p>
+
+<p>The <code class="code">partial</code> component will be present if there has been a partial garbage collection since the last full one. It is also a record with the same six components as <code class="code">full</code>. In this case <code class="code">deadbags</code> and <code class="code">deadkb</code> refer only to the number and total size of the garbage bags reclaimed in this partial garbage collection and <code class="code">livebags</code>and <code class="code">livekb</code> only to the numbers and total size of the young bags that were considered for garbage collection, and survived.</p>
+
+<p>The <code class="code">npartial</code> and <code class="code">nfull</code> components will contain the number of full and partial garbage collections performed since <strong class="pkg">GAP</strong> started.</p>
+
+<p><a id="X85327FA5872E0356" name="X85327FA5872E0356"></a></p>
+
+<h5>7.12-2 GasmanMessageStatus</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GasmanMessageStatus</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetGasmanMessageStatus</code>( <var class="Arg">stat</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">GasmanMessageStatus</code> returns one of the strings <code class="code">"none"</code>, <code class="code">"full"</code>, or <code class="code">"all"</code>, depending on whether the garbage collector is currently set to print messages on no collections, full collections only, or all collections, respectively.</p>
+
+<p>Calling <code class="func">SetGasmanMessageStatus</code> with the argument <var class="Arg">stat</var>, which should be one of the three strings mentioned above, sets the garbage collector messaging level.</p>
+
+<p><a id="X80C683247E94769F" name="X80C683247E94769F"></a></p>
+
+<h5>7.12-3 GasmanLimits</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GasmanLimits</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">GasmanLimits</code> returns a record with three components: <code class="code">min</code> is the minimum workspace size as set by the <code class="code">-m</code> command line option in kilobytes. The workspace size will never be reduced below this by the garbage collector. <code class="code">max</code> is the maximum workspace size, as set by the '-o' command line option, also in kilobytes. If the workspace would need to grow past this point, <strong class="pkg">GAP</strong> will enter a break loop to warn the user. A value of 0 indicates no limit. <code class="code">kill</code> is the absolute maximum, set by the <code class="code">-K</code> command line option. The workspace will never be allowed to grow past this limit.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chap19.html">19</a>  <a href="chap20.html">20</a>  <a href="chap21.html">21</a>  <a href="chap22.html">22</a>  <a href="chap23.html">23</a>  <a href="chap24.html">24</a>  <a href="chap25.html">25</a>  <a href="chap26.html">26</a>  <a href="chap27.html">27</a>  <a href="chap28.html">28</a>  <a href="chap29.html">29</a>  <a href="chap30.html">30</a>  <a href="chap31.html">31</a>  <a href="chap32.html">32</a>  <a href="chap33.html">33</a>  <a href="chap34.html">34</a>  <a href="chap35.html">35</a>  <a href="chap36.html">36</a>  <a href="chap37.html">37</a>  <a href="chap38.html">38</a>  <a href="chap39.html">39</a>  <a href="chap40.html">40</a>  <a href="chap41.html">41</a>  <a href="chap42.html">42</a>  <a href="chap43.html">43</a>  <a href="chap44.html">44</a>  <a href="chap45.html">45</a>  <a href="chap46.html">46</a>  <a href="chap47.html">47</a>  <a href="chap48.html">48</a>  <a href="chap49.html">49</a>  <a href="chap50.html">50</a>  <a href="chap51.html">51</a>  <a href="chap52.html">52</a>  <a href="chap53.html">53</a>  <a href="chap54.html">54</a>  <a href="chap55.html">55</a>  <a href="chap56.html">56</a>  <a href="chap57.html">57</a>  <a href="chap58.html">58</a>  <a href="chap59.html">59</a>  <a href="chap60.html">60</a>  <a href="chap61.html">61</a>  <a href="chap62.html">62</a>  <a href="chap63.html">63</a>  <a href="chap64.html">64</a>  <a href="chap65.html">65</a>  <a href="chap66.html">66</a>  <a href="chap67.html">67</a>  <a href="chap68.html">68</a>  <a href="chap69.html">69</a>  <a href="chap70.html">70</a>  <a href="chap71.html">71</a>  <a href="chap72.html">72</a>  <a href="chap73.html">73</a>  <a href="chap74.html">74</a>  <a href="chap75.html">75</a>  <a href="chap76.html">76</a>  <a href="chap77.html">77</a>  <a href="chap78.html">78</a>  <a href="chap79.html">79</a>  <a href="chap80.html">80</a>  <a href="chap81.html">81</a>  <a href="chap82.html">82</a>  <a href="chap83.html">83</a>  <a href="chap84.html">84</a>  <a href="chap85.html">85</a>  <a href="chap86.html">86</a>  <a href="chap87.html">87</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

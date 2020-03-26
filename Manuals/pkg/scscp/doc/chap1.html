@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (scscp) - Chapter 1: Preface</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X874E1D45845007FE" name="X874E1D45845007FE"></a></p>
+<div class="ChapSects"><a href="chap1.html#X874E1D45845007FE">1 <span class="Heading">Preface</span></a>
+</div>
+
+<h3>1 <span class="Heading">Preface</span></h3>
+
+<p>The <strong class="pkg">GAP</strong> package <strong class="pkg">SCSCP</strong> implements the Symbolic Computation Software Composability protocol <a href="chapBib.html#biBSCSCP">[FHK+b]</a>. This protocol specifies an <strong class="pkg">OpenMath</strong>-based remote procedure call framework, in which all messages (procedure calls and returns of results of successful computation or error messages) are encoded in <strong class="pkg">OpenMath</strong> using content dictionaries <strong class="pkg">scscp1</strong> and <strong class="pkg">scscp2</strong> (<a href="chapBib.html#biBscscp1cd">[FHK+a]</a>, <a href="chapBib.html#biBscscp2cd">[FHK+c]</a>). Using the <strong class="pkg">SCSCP</strong> package, <strong class="pkg">GAP</strong> can communicate locally or remotely with any other <strong class="pkg">OpenMath</strong>-enabled <strong class="pkg">SCSCP</strong>-compliant application which may be not only another computer algebra system but also another instance of the <strong class="pkg">GAP</strong> system or even, for example, an external Java or C/C++ application via libraries <span class="URL"><a href="http://java.symcomp.org/">http://java.symcomp.org/</a></span> or <span class="URL"><a href="http://www.imcce.fr/Equipes/ASD/trip/scscp/">http://www.imcce.fr/Equipes/ASD/trip/scscp/</a></span> providing an <strong class="pkg">SCSCP</strong> API. Such communication will go into seamless manner for the <strong class="pkg">GAP</strong> user, since all conversions from <strong class="pkg">GAP</strong> to <strong class="pkg">OpenMath</strong> and vice versa will be performed in the background. See the SCSCP protocol page <span class="URL"><a href="https://www.openmath.org/standard/scscp/">https://www.openmath.org/standard/scscp/</a></span> for the details about computer algebra systems and other sotware supporting <strong class="pkg">SCSCP</strong></p>
+
+<p>The <strong class="pkg">SCSCP</strong> package for <strong class="pkg">GAP</strong> has two main components:</p>
+
+
+<ul>
+<li><p>SCSCP server;</p>
+
+</li>
+<li><p>SCSCP client.</p>
+
+</li>
+</ul>
+<p>There are several ways to start <strong class="pkg">GAP</strong> <strong class="pkg">SCSCP</strong> server:</p>
+
+
+<ul>
+<li><p>call <code class="func">RunSCSCPserver</code> (<a href="chap5.html#X831C84577884215E"><span class="RefLink">5.2-1</span></a>) from the <strong class="pkg">GAP</strong> session specifying the server name and the port number from the <strong class="pkg">GAP</strong> session;</p>
+
+</li>
+<li><p>start <strong class="pkg">GAP</strong> as <code class="code">gap myserver.g</code>, where <code class="file">myserver.g</code> is the server configuration file with the last command being the call of <code class="func">RunSCSCPserver</code> (<a href="chap5.html#X831C84577884215E"><span class="RefLink">5.2-1</span></a>) (an example of such configuration file is given in <code class="file">scscp/example/myserver.g</code> );</p>
+
+</li>
+<li><p>start <strong class="pkg">GAP</strong> as a daemon using the script <code class="file">gapd.sh</code> which is supplied in the root directory of the package (for the description of all available options see comments in <code class="file">gapd.sh</code>).</p>
+
+</li>
+</ul>
+<p>During startup the server installs all procedures that it will provide and loads their lookup mechanisms, and then begins to listen to the specified port. The recommended port number is 26133 which has been assigned to SCSCP by the Internet Assigned Numbers Authority (IANA) in November 2007, see <span class="URL"><a href="http://www.iana.org/assignments/port-numbers">http://www.iana.org/assignments/port-numbers</a></span>.</p>
+
+<p>When the server accepts a connection from client, it starts the "accept-evaluate-return" loop:</p>
+
+
+<ul>
+<li><p>accepts the <code class="code">"procedure_call";</code> message;</p>
+
+</li>
+<li><p>performs lookup of the appropriate GAP function;</p>
+
+</li>
+<li><p>evaluates the result (or produces a side-effect);</p>
+
+</li>
+<li><p>returns the result in the <code class="code">"procedure_completed"</code> message or returns an error in the <code class="code">"procedure_terminated"</code> message.</p>
+
+</li>
+</ul>
+<p>The server works in a "multi-user" mode. When one client is connected, the server is busy for other clients. As soon as the computation is finished and the client is disconnected, the server is waiting for the next connection, and normally it never stops until it will be terminated by the service provider. The server maintain a queue of five incoming connections (this parameter can be easily modified), and on each iteration evaluates the next request from the queue.</p>
+
+<p>There is an <strong class="pkg">SCSCP</strong> server accessible at <code class="file">scscp.gap-system.org</code>, port 26133. It is running under development versions of the <strong class="pkg">GAP</strong> system and a selection of currently distributed packages. The reader is encouraged to try to use examples from the manual to access this service, replacing <code class="file">"localhost"</code> by its address, where appropriate. Please report to Alexander Konovalov if you will discover any bugs or if the server seems not available.</p>
+
+<p>The SCSCP client:</p>
+
+
+<ul>
+<li><p>establishes connection with the specified server at the specified port;</p>
+
+</li>
+<li><p>sends the <code class="code">"procedure_call"</code> message to the server;</p>
+
+</li>
+<li><p>waits for the result of the computation or returns to pick it up later;</p>
+
+</li>
+<li><p>fetches the response, extracting the result from the <code class="code">"procedure_completed"</code> message or entering the break loop in the case of the <code class="code">"procedure_terminated"</code> message.</p>
+
+</li>
+</ul>
+<p>On the top of this functionality we built a set of instructions for simple parallel computations framework using the <strong class="pkg">SCSCP</strong> protocol, which allows to send several procedure calls in parallel and then collect all results or pick up the first available result, and implements the master-worker skeleton. These tools are presented in the Chapter <a href="chap8.html#X7C80E6FA7CB91D28"><span class="RefLink">8</span></a>.</p>
+
+<p>The package also implements a new kind of <strong class="pkg">GAP</strong> input-output streams, namely input-output TCP streams (see Chapter <a href="chap3.html#X7CB06121820FD0DD"><span class="RefLink">3</span></a>), based on the functionality for TCP/IP protocol usage provided by the <strong class="pkg">GAP</strong> package <strong class="pkg">IO</strong>. Such streams may constitute an independent interest for adapting streams-using <strong class="pkg">GAP</strong> code to use streams across the network.</p>
+
+<p>Finally, the manual describes how the communication by <strong class="pkg">SCSCP</strong> goes between several instances of the <strong class="pkg">GAP</strong> system, but the same behaviour is expected from any <strong class="pkg">SCSCP</strong>-compliant application: the set of supported <strong class="pkg">OpenMath</strong> symbols clearly will be different, but the rules of communication are precisely specified in the <strong class="pkg">SCSCP</strong> specification <a href="chapBib.html#biBSCSCP">[FHK+b]</a>. See the SCSCP protocol page <span class="URL"><a href="https://www.openmath.org/standard/scscp/">https://www.openmath.org/standard/scscp/</a></span> for the information about <strong class="pkg">SCSCP</strong>-compliant computer algebra systems and other tools developed in the project.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

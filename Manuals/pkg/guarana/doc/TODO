@@ -1,0 +1,41 @@
+Study group computations with underlying mal'cev collection.
+
+ll := GUARANA.Tr_n_O1( 3 );
+malCol := MalcevCollectorConstruction( ll );
+
+G := malCol!.G;
+AttacheMalcevCollector( G, malCol );
+
+a := Random( G );
+b := Random( G );
+c := a*b;
+d := a^3;
+Inverse( a);
+
+FittingSubgroup( G );
+
+#############################################################################
+# Exam 2
+# 
+ll := GUARANA.Tr_n_O1( 6 );
+malCol := MalcevCollectorConstruction( ll );
+
+G := malCol!.G;
+AttacheMalcevCollector( G, malCol );
+
+a := Random( G );
+b := Random( G );
+c := a*b;
+
+coll := Collector( G );
+n := coll![PC_NUMBER_OF_GENERATORS];
+range := 100;
+exps_g := List( [1..n], x-> Random( [-range..range] ) );
+exps_h := List( [1..n], x-> Random( [-range..range] ) );
+g := PcpElementByExponents( coll, exps_g );
+h := PcpElementByExponents( coll, exps_h );
+
+Subgroup( G, [a] );
+Subgroup( G, [g] );
+FittingSubgroup( G );
+

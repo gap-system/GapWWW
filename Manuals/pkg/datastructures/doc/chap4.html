@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (datastructures) - Chapter 4: Queues and Deques</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X7E4B7210874702B2" name="X7E4B7210874702B2"></a></p>
+<div class="ChapSects"><a href="chap4.html#X7E4B7210874702B2">4 <span class="Heading">Queues and Deques</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7C5F33687C53BEF0">4.1 <span class="Heading">API</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82229C878341CDDC">4.1-1 IsQueue</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CD371EE7EB88DA8">4.1-2 IsDeque</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8372434383E08554">4.1-3 PushBack</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7A19020A835C39A7">4.1-4 PushFront</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7FFC2AAF85355F50">4.1-5 PopBack</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CD527F87861A5FE">4.1-6 PopFront</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80D3DF0B7DF6B8BC">4.1-7 Enqueue</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87D9EF6E84B98629">4.1-8 Dequeue</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X84CF84A087CA6719">4.1-9 Capacity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7AFCE0EC7D282807">4.1-10 Capacity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86CB9F747A49AA9F">4.1-11 Length</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78F8FB38830FF16A">4.1-12 Length</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7E65C2D087E8B8CA">4.2 <span class="Heading">Deques implemented using plain lists</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7817028981968371">4.2-1 PlistDeque</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7BF75DB47D46C91E">4.2-2 PlistDequePushFront</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E8676DB84B2C360">4.2-3 PlistDequePushBack</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8704C6BD875D0385">4.2-4 PlistDequePopFront</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86B4266878A93741">4.2-5 PlistDequePopBack</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X841543137B0F720C">4.2-6 PlistDequePeekFront</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81D966A282FB7872">4.2-7 PlistDequePeekBack</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B35697B780919D7">4.2-8 PlistDequeExpand</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Queues and Deques</span></h3>
+
+<p><a id="X7C5F33687C53BEF0" name="X7C5F33687C53BEF0"></a></p>
+
+<h4>4.1 <span class="Heading">API</span></h4>
+
+<p><a id="X82229C878341CDDC" name="X82229C878341CDDC"></a></p>
+
+<h5>4.1-1 IsQueue</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsQueue</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The category of queues.</p>
+
+<p><a id="X7CD371EE7EB88DA8" name="X7CD371EE7EB88DA8"></a></p>
+
+<h5>4.1-2 IsDeque</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDeque</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The category of deques.</p>
+
+<p><a id="X8372434383E08554" name="X8372434383E08554"></a></p>
+
+<h5>4.1-3 PushBack</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PushBack</code>( <var class="Arg">deque</var>, <var class="Arg">object</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Add <var class="Arg">object</var> to the back of <var class="Arg">deque</var>.</p>
+
+<p><a id="X7A19020A835C39A7" name="X7A19020A835C39A7"></a></p>
+
+<h5>4.1-4 PushFront</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PushFront</code>( <var class="Arg">deque</var>, <var class="Arg">object</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Add <var class="Arg">object</var> to the front of <var class="Arg">deque</var>.</p>
+
+<p><a id="X7FFC2AAF85355F50" name="X7FFC2AAF85355F50"></a></p>
+
+<h5>4.1-5 PopBack</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PopBack</code>( <var class="Arg">deque</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: object</p>
+
+<p>Remove an element from the back of <var class="Arg">deque</var> and return it.</p>
+
+<p><a id="X7CD527F87861A5FE" name="X7CD527F87861A5FE"></a></p>
+
+<h5>4.1-6 PopFront</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PopFront</code>( <var class="Arg">deque</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: object</p>
+
+<p>Remove an element from the front of <var class="Arg">deque</var> and return it.</p>
+
+<p>For queues, this is just an alias for PushBack</p>
+
+<p><a id="X80D3DF0B7DF6B8BC" name="X80D3DF0B7DF6B8BC"></a></p>
+
+<h5>4.1-7 Enqueue</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Enqueue</code>( <var class="Arg">queue</var>, <var class="Arg">object</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Add <var class="Arg">object</var> to <var class="Arg">queue</var>.</p>
+
+<p><a id="X87D9EF6E84B98629" name="X87D9EF6E84B98629"></a></p>
+
+<h5>4.1-8 Dequeue</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Dequeue</code>( <var class="Arg">queue</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: object</p>
+
+<p>Remove an object from the front of <var class="Arg">queue</var> and return it.</p>
+
+<p><a id="X84CF84A087CA6719" name="X84CF84A087CA6719"></a></p>
+
+<h5>4.1-9 Capacity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Capacity</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Allocated storage capacity of <var class="Arg">queue</var>.</p>
+
+<p><a id="X7AFCE0EC7D282807" name="X7AFCE0EC7D282807"></a></p>
+
+<h5>4.1-10 Capacity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Capacity</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Allocated storage capacity of <var class="Arg">deque</var>.</p>
+
+<p><a id="X86CB9F747A49AA9F" name="X86CB9F747A49AA9F"></a></p>
+
+<h5>4.1-11 Length</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Length</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Number of elements in <var class="Arg">queue</var>.</p>
+
+<p><a id="X78F8FB38830FF16A" name="X78F8FB38830FF16A"></a></p>
+
+<h5>4.1-12 Length</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Length</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Number of elements in <var class="Arg">deque</var>.</p>
+
+<p><a id="X7E65C2D087E8B8CA" name="X7E65C2D087E8B8CA"></a></p>
+
+<h4>4.2 <span class="Heading">Deques implemented using plain lists</span></h4>
+
+<p><strong class="pkg">datastructures</strong> implements deques using a circular buffer stored in a <strong class="pkg">GAP</strong> a plain list, wrapped in a positional object (<a href="../../../doc/ref/chap79_mj.html#X834893D07FAA6FD2"><span class="RefLink">Reference: Positional Objects</span></a>).</p>
+
+<p>The five positions in such a deque <code class="code">Q</code> have the following purpose</p>
+
+
+<ul>
+<li><p><code class="code">Q![1]</code> - head, the index in <code class="code">Q![5]</code> of the first element in the deque</p>
+
+</li>
+<li><p><code class="code">Q![2]</code> - tail, the index in <code class="code">Q![5]</code> of the last element in the deque</p>
+
+</li>
+<li><p><code class="code">Q![3]</code> - capacity, the allocated capacity in the deque</p>
+
+</li>
+<li><p><code class="code">Q![4]</code> - factor by which storage is increased if capacity is exceeded</p>
+
+</li>
+<li><p><code class="code">Q![5]</code> - GAP plain list with storage for capacity many entries</p>
+
+</li>
+</ul>
+<p>Global constants <code class="keyw">QHEAD</code>, <code class="keyw">QTAIL</code>, <code class="keyw">QCAPACITY</code>, <code class="keyw">QFACTOR</code>, and <code class="keyw">QDATA</code> are bound to reflect the above.</p>
+
+<p>When a push fills the deque, its capacity is resized by a factor of <code class="keyw">QFACTOR</code> using PlistDequeExpand. A new empty plist is allocated and all current entries of the deque are copied into the new plist with the head entry at index 1.</p>
+
+<p>The deque is empty if and only if head = tail and the entry that head and tail point to in the storage list is unbound.</p>
+
+<p><a id="X7817028981968371" name="X7817028981968371"></a></p>
+
+<h5>4.2-1 PlistDeque</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PlistDeque</code>( [<var class="Arg">capacity</var>[, <var class="Arg">factor</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a deque</p>
+
+<p>Constructor for plist based deques. The optinal argument <var class="Arg">capacity</var> must be a positive integer and is the capacity of the created deque, and the optional argument <var class="Arg">factor</var> must be a rational number greater than one which is the factor by which the storage of the deque is increased if it runs out of capacity when an object is put on the queue.</p>
+
+<p><a id="X7BF75DB47D46C91E" name="X7BF75DB47D46C91E"></a></p>
+
+<h5>4.2-2 PlistDequePushFront</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PlistDequePushFront</code>( <var class="Arg">deque</var>, <var class="Arg">object</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Push <var class="Arg">object</var> to the front of <var class="Arg">deque</var>.</p>
+
+<p><a id="X7E8676DB84B2C360" name="X7E8676DB84B2C360"></a></p>
+
+<h5>4.2-3 PlistDequePushBack</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PlistDequePushBack</code>( <var class="Arg">deque</var>, <var class="Arg">object</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Push <var class="Arg">object</var> to the back of <var class="Arg">deque</var>.</p>
+
+<p><a id="X8704C6BD875D0385" name="X8704C6BD875D0385"></a></p>
+
+<h5>4.2-4 PlistDequePopFront</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PlistDequePopFront</code>( <var class="Arg">deque</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: object or fail</p>
+
+<p>Pop object from the front of <var class="Arg">deque</var> and return it. If <var class="Arg">deque</var> is empty, returns <code class="keyw">fail</code>.</p>
+
+<p><a id="X86B4266878A93741" name="X86B4266878A93741"></a></p>
+
+<h5>4.2-5 PlistDequePopBack</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PlistDequePopBack</code>( <var class="Arg">deque</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: object or fail</p>
+
+<p>Pop object from the back of <var class="Arg">deque</var> and return it. If <var class="Arg">deque</var> is empty, returns <code class="keyw">fail</code>.</p>
+
+<p><a id="X841543137B0F720C" name="X841543137B0F720C"></a></p>
+
+<h5>4.2-6 PlistDequePeekFront</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PlistDequePeekFront</code>( <var class="Arg">deque</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: object or fail</p>
+
+<p>Returns the object at the front <var class="Arg">deque</var> without removing it. If <var class="Arg">deque</var> is empty, returns <code class="keyw">fail</code>.</p>
+
+<p><a id="X81D966A282FB7872" name="X81D966A282FB7872"></a></p>
+
+<h5>4.2-7 PlistDequePeekBack</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PlistDequePeekBack</code>( <var class="Arg">deque</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: object or fail</p>
+
+<p>Returns the object at the back <var class="Arg">deque</var> without removing it. If <var class="Arg">deque</var> is empty, returns <code class="keyw">fail</code>.</p>
+
+<p><a id="X7B35697B780919D7" name="X7B35697B780919D7"></a></p>
+
+<h5>4.2-8 PlistDequeExpand</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PlistDequeExpand</code>( <var class="Arg">deque</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Helper function to expand the capacity of <var class="Arg">deque</var> by the configured factor.</p>
+
+<p><em>Queues</em> are linear data structure that allow adding elements at the end of the queue, and removing elements from the front. A <em>deque</em> is a <em>double-ended queue</em>; a linear data structure that allows access to objects at both ends.</p>
+
+<p>The API that objects that lie in <code class="func">IsQueue</code> (<span class="RefLink">???</span>) and <code class="func">IsDeque</code> (<span class="RefLink">???</span>) must implement the API set out below.</p>
+
+<p><strong class="pkg">datastructures</strong> provides</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

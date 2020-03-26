@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (ref) - Chapter 86: Weak Pointers</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap86"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chap14_mj.html">14</a>  <a href="chap15_mj.html">15</a>  <a href="chap16_mj.html">16</a>  <a href="chap17_mj.html">17</a>  <a href="chap18_mj.html">18</a>  <a href="chap19_mj.html">19</a>  <a href="chap20_mj.html">20</a>  <a href="chap21_mj.html">21</a>  <a href="chap22_mj.html">22</a>  <a href="chap23_mj.html">23</a>  <a href="chap24_mj.html">24</a>  <a href="chap25_mj.html">25</a>  <a href="chap26_mj.html">26</a>  <a href="chap27_mj.html">27</a>  <a href="chap28_mj.html">28</a>  <a href="chap29_mj.html">29</a>  <a href="chap30_mj.html">30</a>  <a href="chap31_mj.html">31</a>  <a href="chap32_mj.html">32</a>  <a href="chap33_mj.html">33</a>  <a href="chap34_mj.html">34</a>  <a href="chap35_mj.html">35</a>  <a href="chap36_mj.html">36</a>  <a href="chap37_mj.html">37</a>  <a href="chap38_mj.html">38</a>  <a href="chap39_mj.html">39</a>  <a href="chap40_mj.html">40</a>  <a href="chap41_mj.html">41</a>  <a href="chap42_mj.html">42</a>  <a href="chap43_mj.html">43</a>  <a href="chap44_mj.html">44</a>  <a href="chap45_mj.html">45</a>  <a href="chap46_mj.html">46</a>  <a href="chap47_mj.html">47</a>  <a href="chap48_mj.html">48</a>  <a href="chap49_mj.html">49</a>  <a href="chap50_mj.html">50</a>  <a href="chap51_mj.html">51</a>  <a href="chap52_mj.html">52</a>  <a href="chap53_mj.html">53</a>  <a href="chap54_mj.html">54</a>  <a href="chap55_mj.html">55</a>  <a href="chap56_mj.html">56</a>  <a href="chap57_mj.html">57</a>  <a href="chap58_mj.html">58</a>  <a href="chap59_mj.html">59</a>  <a href="chap60_mj.html">60</a>  <a href="chap61_mj.html">61</a>  <a href="chap62_mj.html">62</a>  <a href="chap63_mj.html">63</a>  <a href="chap64_mj.html">64</a>  <a href="chap65_mj.html">65</a>  <a href="chap66_mj.html">66</a>  <a href="chap67_mj.html">67</a>  <a href="chap68_mj.html">68</a>  <a href="chap69_mj.html">69</a>  <a href="chap70_mj.html">70</a>  <a href="chap71_mj.html">71</a>  <a href="chap72_mj.html">72</a>  <a href="chap73_mj.html">73</a>  <a href="chap74_mj.html">74</a>  <a href="chap75_mj.html">75</a>  <a href="chap76_mj.html">76</a>  <a href="chap77_mj.html">77</a>  <a href="chap78_mj.html">78</a>  <a href="chap79_mj.html">79</a>  <a href="chap80_mj.html">80</a>  <a href="chap81_mj.html">81</a>  <a href="chap82_mj.html">82</a>  <a href="chap83_mj.html">83</a>  <a href="chap84_mj.html">84</a>  <a href="chap85_mj.html">85</a>  <a href="chap86_mj.html">86</a>  <a href="chap87_mj.html">87</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap85_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap87_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap86.html">[MathJax off]</a></p>
+<p><a id="X86390538806F67CF" name="X86390538806F67CF"></a></p>
+<div class="ChapSects"><a href="chap86_mj.html#X86390538806F67CF">86 <span class="Heading">Weak Pointers</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap86_mj.html#X86D963DC7968899B">86.1 <span class="Heading">Weak Pointer Objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap86_mj.html#X8155EE1386F46063">86.1-1 WeakPointerObj</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap86_mj.html#X7F4476958497F239">86.2 <span class="Heading">Low Level Access Functions for Weak Pointer Objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap86_mj.html#X7B9748ED7BAAA379">86.2-1 SetElmWPObj</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap86_mj.html#X8468DD647DDEFD82">86.3 <span class="Heading">Accessing Weak Pointer Objects as Lists</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap86_mj.html#X830918AC8702A189">86.4 <span class="Heading">Copying Weak Pointer Objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap86_mj.html#X7C1EFEEB8071E0A2">86.5 <span class="Heading">The GASMAN Interface for Weak Pointer Objects</span></a>
+</span>
+</div>
+</div>
+
+<h3>86 <span class="Heading">Weak Pointers</span></h3>
+
+<p>This chapter describes the use of the kernel feature of <em>weak pointers</em>. This feature is primarily intended for use only in <strong class="pkg">GAP</strong> internals, and should be used extremely carefully otherwise.</p>
+
+<p>The GASMAN garbage collector is the part of the kernel that manages memory in the users workspace. It will normally only reclaim the storage used by an object when the object cannot be reached as a subobject of any <strong class="pkg">GAP</strong> variable, or from any reference in the kernel. We say that any link to object <span class="SimpleMath">\(a\)</span> from object <span class="SimpleMath">\(b\)</span> "keeps object <span class="SimpleMath">\(a\)</span> alive", as long as <span class="SimpleMath">\(b\)</span> is alive. It is occasionally convenient, however, to have a link to an object which <em>does not keep it alive</em>, and this is a weak pointer. The most common use is in caches, and similar structures, where it is only necessary to remember how to solve problem <span class="SimpleMath">\(x\)</span> as long as some other link to <span class="SimpleMath">\(x\)</span> exists.</p>
+
+<p>The following section <a href="chap86_mj.html#X86D963DC7968899B"><span class="RefLink">86.1</span></a> describes the semantics of the objects that contain weak pointers. Following sections describe the functions available to manipulate them.</p>
+
+<p><a id="X86D963DC7968899B" name="X86D963DC7968899B"></a></p>
+
+<h4>86.1 <span class="Heading">Weak Pointer Objects</span></h4>
+
+<p>A <em>weak pointer object</em> is similar to a mutable plain list, except that it does not keep its subobjects alive during a garbage collection. From the <strong class="pkg">GAP</strong> viewpoint this means that its entries may become unbound, apparently spontaneously, at any time. Considerable care is therefore needed in programming with such an object.</p>
+
+<p><a id="X8155EE1386F46063" name="X8155EE1386F46063"></a></p>
+
+<h5>86.1-1 WeakPointerObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeakPointerObj</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">WeakPointerObj</code> returns a weak pointer object which contains the same subobjects as the list <var class="Arg">list</var>, that is it returns a <em>shallow</em> weak copy of <var class="Arg">list</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w := WeakPointerObj( [ 1, , [2,3], fail, rec( a := 1) ] );</span>
+WeakPointerObj( [ 1, , [ 2, 3 ], fail, rec( a := 1 ) ] )
+</pre></div>
+
+<p>After some computations involving garbage collections (but not necessarily in the <em>first</em> garbage collection after the above assignment), <strong class="pkg">GAP</strong> will notice that the list and the record stored in <code class="code">w</code> are not referenced by other objects than <code class="code">w</code>, and that therefore these entries may disappear.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GASMAN("collect");</span>
+
+... (perhaps more computations and garbage collections) ...
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GASMAN("collect");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w;</span>
+WeakPointerObj( [ 1, , , fail ] )
+</pre></div>
+
+<p>Note that <code class="code">w</code> has failed to keep its list and record subobjects alive during the garbage collections. Certain subobjects, such as small integers and elements of small finite fields, are not stored in the workspace, and so are not subject to garbage collection, while certain other objects, such as the boolean values, are always reachable from global variables or the kernel and so are never garbage collected.</p>
+
+<p>Subobjects reachable without going through a weak pointer object do not evaporate, as in:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w := WeakPointerObj( [ 1, , , fail ] );</span>
+WeakPointerObj( [ 1, , , fail ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := [1,2,3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w[1] := l;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w;</span>
+WeakPointerObj( [ [ 1, 2, 3 ], , , fail ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GASMAN("collect");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w;                </span>
+WeakPointerObj( [ [ 1, 2, 3 ], , , fail ] )
+</pre></div>
+
+<p>Note also that the global variables <code class="code">last</code>, <code class="code">last2</code> and <code class="code">last3</code> will keep things alive –this can be confusing when debugging.</p>
+
+<p><a id="X7F4476958497F239" name="X7F4476958497F239"></a></p>
+
+<h4>86.2 <span class="Heading">Low Level Access Functions for Weak Pointer Objects</span></h4>
+
+<p><a id="X7B9748ED7BAAA379" name="X7B9748ED7BAAA379"></a></p>
+
+<h5>86.2-1 SetElmWPObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetElmWPObj</code>( <var class="Arg">wp</var>, <var class="Arg">pos</var>, <var class="Arg">val</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnbindElmWPObj</code>( <var class="Arg">wp</var>, <var class="Arg">pos</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElmWPObj</code>( <var class="Arg">wp</var>, <var class="Arg">pos</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBoundElmWPObj</code>( <var class="Arg">wp</var>, <var class="Arg">pos</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LengthWPObj</code>( <var class="Arg">wp</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The functions <code class="func">SetElmWPObj</code> and <code class="func">UnbindElmWPObj</code> set and unbind entries in a weak pointer object.</p>
+
+<p>The function <code class="func">ElmWPObj</code> returns the element at position <var class="Arg">pos</var> of the weak pointer object <var class="Arg">wp</var>, if there is one, and <code class="keyw">fail</code> otherwise. A return value of <code class="keyw">fail</code> can thus arise either because (a) the value <code class="keyw">fail</code> is stored at position <var class="Arg">pos</var>, or (b) no value is stored at position <var class="Arg">pos</var>. Since <code class="keyw">fail</code> cannot vanish in a garbage collection, these two cases can safely be distinguished by a <em>subsequent</em> call to <code class="func">IsBoundElmWPObj</code>, which returns <code class="keyw">true</code> if there is currently a value bound at position <var class="Arg">pos</var> of <var class="Arg">wp</var> and <code class="keyw">false</code> otherwise.</p>
+
+<p>Note that it is <em>not</em> safe to write:</p>
+
+<p><code class="code">if IsBoundElmWPObj(w,i) then x:= ElmWPObj(w,i); fi;</code></p>
+
+<p>and treat <code class="code">x</code> as reliably containing a value taken from <code class="code">w</code>, as a badly timed garbage collection could leave <code class="code">x</code> containing <code class="keyw">fail</code>. Instead use</p>
+
+<p><code class="code">x := ElmWPObj(w,i); if x &lt;&gt; fail or IsBoundElmWPObj(w,i) then . . .</code>.</p>
+
+<p>Here is an example.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w := WeakPointerObj( [ 1, , [2,3], fail, rec() ] );   </span>
+WeakPointerObj( [ 1, , [ 2, 3 ], fail, rec(  ) ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetElmWPObj(w,5,[]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w;</span>
+WeakPointerObj( [ 1, , [ 2, 3 ], fail, [  ] ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnbindElmWPObj(w,1);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w;</span>
+WeakPointerObj( [ , , [ 2, 3 ], fail, [  ] ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElmWPObj(w,3);      </span>
+[ 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElmWPObj(w,1);</span>
+fail
+</pre></div>
+
+<p>Now after some computations and garbage collections <span class="SimpleMath">\(\ldots\)</span></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">2;;3;;4;;GASMAN("collect"); # clear last, last2, last3</span>
+</pre></div>
+
+<p><span class="SimpleMath">\(\ldots\)</span> we get the following.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElmWPObj(w,3);          </span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w;</span>
+WeakPointerObj( [ , , , fail ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElmWPObj(w,4);</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsBoundElmWPObj(w,3);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsBoundElmWPObj(w,4);</span>
+true
+</pre></div>
+
+<p><a id="X8468DD647DDEFD82" name="X8468DD647DDEFD82"></a></p>
+
+<h4>86.3 <span class="Heading">Accessing Weak Pointer Objects as Lists</span></h4>
+
+<p>Weak pointer objects are members of <code class="code">ListsFamily</code> and the categories <code class="func">IsList</code> (<a href="chap21_mj.html#X7C4CC4EA8299701E"><span class="RefLink">21.1-1</span></a>) and <code class="func">IsMutable</code> (<a href="chap12_mj.html#X7999AD1D7A4F1F46"><span class="RefLink">12.6-2</span></a>). Methods based on the low-level functions in the previous section, are installed for the list access operations, enabling them to be used as lists. However, it is <em>not recommended</em> that these be used in programming. They are supplied mainly as a convenience for interactive working, and may not be safe, since functions and methods for lists may assume that after <code class="code">IsBound(w[i])</code> returns <code class="keyw">true</code>, access to <code class="code">w[i]</code> is safe.</p>
+
+<p><a id="X830918AC8702A189" name="X830918AC8702A189"></a></p>
+
+<h4>86.4 <span class="Heading">Copying Weak Pointer Objects</span></h4>
+
+<p>A <code class="func">ShallowCopy</code> (<a href="chap12_mj.html#X846BC7107C352031"><span class="RefLink">12.7-1</span></a>) method is installed, which makes a new weak pointer object containing the same objects as the original.</p>
+
+<p>It is possible to apply <code class="func">StructuralCopy</code> (<a href="chap12_mj.html#X7C1E70587EBDD2CB"><span class="RefLink">12.7-2</span></a>) to a weak pointer object, obtaining a new weak pointer object containing copies of the objects in the original. This <em>may not be safe</em> if a badly timed garbage collection occurs during copying.</p>
+
+<p>Applying <code class="func">Immutable</code> (<a href="chap12_mj.html#X7F0ABF2C870B0CBB"><span class="RefLink">12.6-3</span></a>) to a weak pointer object produces an immutable plain list containing immutable copies of the objects contained in the weak pointer object. An immutable weak pointer object is a contradiction in terms.</p>
+
+<p><a id="X7C1EFEEB8071E0A2" name="X7C1EFEEB8071E0A2"></a></p>
+
+<h4>86.5 <span class="Heading">The GASMAN Interface for Weak Pointer Objects</span></h4>
+
+<p>The key support for weak pointers is in the files <code class="file">src/gasman.c</code> and <code class="file">src/gasman.h</code>. This document assumes familiarity with the rest of the operation of GASMAN. A kernel type (tnum) of bags which are intended to act as weak pointers to their subobjects must meet three conditions. Firstly, the marking function installed for that tnum must use <code class="code">MarkBagWeakly</code> for those subbags, rather than <code class="code">MarkBag</code>. Secondly, before any access to such a subbag, it must be checked with <code class="code">IsWeakDeadBag</code>. If that returns <code class="keyw">true</code>, then the subbag has evaporated in a recent garbage collection and must not be accessed. Typically the reference to it should be removed. Thirdly, a <em>sweeping function</em> must be installed for that tnum which copies the bag, removing all references to dead weakly held subbags.</p>
+
+<p>The files <code class="file">src/weakptr.c</code> and <code class="file">src/weakptr.h</code> use this interface to support weak pointer objects. Other objects with weak behaviour could be implemented in a similar way.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap85_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap87_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chap14_mj.html">14</a>  <a href="chap15_mj.html">15</a>  <a href="chap16_mj.html">16</a>  <a href="chap17_mj.html">17</a>  <a href="chap18_mj.html">18</a>  <a href="chap19_mj.html">19</a>  <a href="chap20_mj.html">20</a>  <a href="chap21_mj.html">21</a>  <a href="chap22_mj.html">22</a>  <a href="chap23_mj.html">23</a>  <a href="chap24_mj.html">24</a>  <a href="chap25_mj.html">25</a>  <a href="chap26_mj.html">26</a>  <a href="chap27_mj.html">27</a>  <a href="chap28_mj.html">28</a>  <a href="chap29_mj.html">29</a>  <a href="chap30_mj.html">30</a>  <a href="chap31_mj.html">31</a>  <a href="chap32_mj.html">32</a>  <a href="chap33_mj.html">33</a>  <a href="chap34_mj.html">34</a>  <a href="chap35_mj.html">35</a>  <a href="chap36_mj.html">36</a>  <a href="chap37_mj.html">37</a>  <a href="chap38_mj.html">38</a>  <a href="chap39_mj.html">39</a>  <a href="chap40_mj.html">40</a>  <a href="chap41_mj.html">41</a>  <a href="chap42_mj.html">42</a>  <a href="chap43_mj.html">43</a>  <a href="chap44_mj.html">44</a>  <a href="chap45_mj.html">45</a>  <a href="chap46_mj.html">46</a>  <a href="chap47_mj.html">47</a>  <a href="chap48_mj.html">48</a>  <a href="chap49_mj.html">49</a>  <a href="chap50_mj.html">50</a>  <a href="chap51_mj.html">51</a>  <a href="chap52_mj.html">52</a>  <a href="chap53_mj.html">53</a>  <a href="chap54_mj.html">54</a>  <a href="chap55_mj.html">55</a>  <a href="chap56_mj.html">56</a>  <a href="chap57_mj.html">57</a>  <a href="chap58_mj.html">58</a>  <a href="chap59_mj.html">59</a>  <a href="chap60_mj.html">60</a>  <a href="chap61_mj.html">61</a>  <a href="chap62_mj.html">62</a>  <a href="chap63_mj.html">63</a>  <a href="chap64_mj.html">64</a>  <a href="chap65_mj.html">65</a>  <a href="chap66_mj.html">66</a>  <a href="chap67_mj.html">67</a>  <a href="chap68_mj.html">68</a>  <a href="chap69_mj.html">69</a>  <a href="chap70_mj.html">70</a>  <a href="chap71_mj.html">71</a>  <a href="chap72_mj.html">72</a>  <a href="chap73_mj.html">73</a>  <a href="chap74_mj.html">74</a>  <a href="chap75_mj.html">75</a>  <a href="chap76_mj.html">76</a>  <a href="chap77_mj.html">77</a>  <a href="chap78_mj.html">78</a>  <a href="chap79_mj.html">79</a>  <a href="chap80_mj.html">80</a>  <a href="chap81_mj.html">81</a>  <a href="chap82_mj.html">82</a>  <a href="chap83_mj.html">83</a>  <a href="chap84_mj.html">84</a>  <a href="chap85_mj.html">85</a>  <a href="chap86_mj.html">86</a>  <a href="chap87_mj.html">87</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

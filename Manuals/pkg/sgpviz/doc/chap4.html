@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (SgpViz) - Chapter 4: User friendly ways to give semigroups and automata</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X83D3B9D482790646" name="X83D3B9D482790646"></a></p>
+<div class="ChapSects"><a href="chap4.html#X83D3B9D482790646">4 <span class="Heading">User friendly ways to give semigroups and automata</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X811E5FC2849C5644">4.1 <span class="Heading"> 
+Finite automata 
+      </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8470C731867684DF">4.1-1 XAutomaton</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X836830E97ED27F7F">4.2 <span class="Heading"> Finite semigroups </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CFD37938771E821">4.2-1 XSemigroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83397F6B7B44CACD">4.2-2 <span class="Heading"> 
+Semigroups given through generators and relations 
+      </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7FCC7AFB793048E2">4.2-3 <span class="Heading"> 
+Semigroups given by partial transformations
+      </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X854F0DDF7D612393">4.2-4 <span class="Heading"> 
+Syntatic semigroups
+      </span></a>
+</span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">User friendly ways to give semigroups and automata</span></h3>
+
+<p>This chapter describes two Tcl/Tk graphical interfaces that can be used to define and edit semigroups and automata.</p>
+
+<p><a id="X811E5FC2849C5644" name="X811E5FC2849C5644"></a></p>
+
+<h4>4.1 <span class="Heading"> 
+Finite automata 
+      </span></h4>
+
+<p><a id="X8470C731867684DF" name="X8470C731867684DF"></a></p>
+
+<h5>4.1-1 XAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XAutomaton</code>( [<var class="Arg">A</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code"> Xautomaton </code> without arguments opens a new window where an automaton may be specified. A finite automaton (which may then be edited) may be given as argument.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XAutomaton();</span>
+      </pre></div>
+
+<p>It opens a window like the following:</p>
+
+<p><br><center><img src="images/xaut.png"></center><br> <code class="code"> Var </code> is the <strong class="pkg">GAP</strong> name of the automaton, <code class="code"> States </code> is the number of states, <code class="code"> Alphabet </code> represents the alphabet and may be given through a positive integer (in this case the alphabet is understood to be <code class="code"> a,b,c,... </code>) or through a string whose symbols, in order, being the letters of the alphabet. The numbers corresponding to the initial and accepting states are placed in the respective boxes. The automaton may be specified to be deterministic, non deterministic or with epsilon transitions. After pressing the <strong class="button"> transition matrix </strong> button the window gets larger and the transition matrix of the automaton may be given. The <em>i</em>th row of the matrix describes the action of the <em>i</em>th letter on the states. <br><center><img src="images/xautoma.png"></center><br> A non deterministic automaton may be given as follows: <br><center><img src="images/xndAUT.png"></center><br></p>
+
+<p>By pressing the button <strong class="button"> Ok </strong> the <strong class="pkg">GAP</strong> shell aquires the aspect shown in the following picture and the automaton <code class="code"> ndAUT </code> may be used to do computations. Some computations such as getting a rational expression representing the language of the automaton, the (complete) minimal automaton representing the same language or the transition semigroup of the automaton, may be done directly after pressing the <strong class="button"> Functions</strong> button. <br><center><img src="images/xndAUTok.png"></center><br></p>
+
+<p>By pressing the button <strong class="button"> View </strong> an image representing the automaton is displayed in a new window. <br><center><img src="images/ndAutImage.png"></center><br> An automaton with epsilon transitions may be given as follows shown in the following picture. The last letter of the alphabet is always considered to be the <span class="SimpleMath">ϵ</span>. In the images it is represented by @. <br><center><img src="images/EpsTrAut.png"></center><br></p>
+
+<p>A new window with an image representing the automaton may be obtained by pressing the button <strong class="button"> View </strong>. <br><center><img src="images/EpsTrAutImage.png"></center><br></p>
+
+<p>In the next example it is given an argument to the function <code class="code">XAutomaton</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := RandomAutomaton("det",2,2);</span>
+&lt; deterministic automaton on 2 letters with 2 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XAutomaton(A);</span>
+      </pre></div>
+
+<p>It opens a window like the following:</p>
+
+<p><br><center><img src="images/xautgiven.png"></center><br></p>
+
+<p><a id="X836830E97ED27F7F" name="X836830E97ED27F7F"></a></p>
+
+<h4>4.2 <span class="Heading"> Finite semigroups </span></h4>
+
+<p>The most common ways to give a semigroup to are through generators and relations, a set of (partial) transformations as generating set and as syntactic semigroups of automata or rational languages.</p>
+
+<p><a id="X7CFD37938771E821" name="X7CFD37938771E821"></a></p>
+
+<h5>4.2-1 XSemigroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XSemigroup</code>( [<var class="Arg">S</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code"> XSemigroup </code> without arguments opens a new window where a semigroup (or monoid) may be specified. A finite semigroup (which may then be edited) may be given as argument.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XSemigroup();</span>
+      </pre></div>
+
+<p>It opens a window like the following: <br><center><img src="images/xsgp.png"></center><br> where one may choose how to give the semigroup.</p>
+
+<p><a id="X83397F6B7B44CACD" name="X83397F6B7B44CACD"></a></p>
+
+<h5>4.2-2 <span class="Heading"> 
+Semigroups given through generators and relations 
+      </span></h5>
+
+<p>In the window opened by <code class="code">XSemigroup</code>, by pressing the button <strong class="button">Proceed</strong> the window should enlarge and have the following aspect. (If the window does not enlarge automatically, use the mouse to do it.)</p>
+
+<p><br><center><img src="images/xb211.png"></center><br> <code class="code"> GAP variable </code> is the <strong class="pkg">GAP</strong> name of the semigroup. One has then to specify the number of generators, the number of relations (which does not to be exact) and whether one wants to produce a monoid or a semigroup. Pressing the <strong class="button">Proceed</strong> button one gets: <br><center><img src="images/xb212.png"></center><br> <br><center><img src="images/xb21.png"></center><br> When giving the relations, the usual abbreviations "0" and "1" may be used.</p>
+
+<p>Pressing the <strong class="button">Done</strong> button would output the following to the shell where <strong class="pkg">GAP</strong> is running: <br><center><img src="images/gapb21.png"></center><br></p>
+
+<p>The menu button <strong class="button">Functions</strong> has the following commands: <br><center> <img src="images/funcsind.png"> <img src="images/funcsmenu.png"> </center><br> The interface allows to add and remove <strong class="pkg">GAP</strong> functions to the menu. When adding a function, the name of the function should be provided. (In its current version, it works only with functions that have as only argument a semigroup.)</p>
+
+<p>By pressing the menu button <strong class="button">Functions</strong> and selecting "Draw Schutzenberger Graphs" would pop up the following window: <br><center><img src="images/ShuzenbergerGraphb21.png"></center><br> By pressing the menu button <strong class="button">Functions</strong> and selecting "Draw Cayley Graph" would pop up the following window: <br><center><img src="images/CayleyGraphb21.png"></center><br> By pressing the menu button <strong class="button">Functions</strong> and selecting "Draw D-Classes" would pop up the following window: <br><center><img src="images/DClassesb21.png"></center><br></p>
+
+<p><a id="X7FCC7AFB793048E2" name="X7FCC7AFB793048E2"></a></p>
+
+<h5>4.2-3 <span class="Heading"> 
+Semigroups given by partial transformations
+      </span></h5>
+
+<p><code class="code">XSemigroup(poi3);</code> would pop up the following window, where everything should be clear: <br><center><img src="images/Xsemigroup1.png"></center><br></p>
+
+<p><a id="X854F0DDF7D612393" name="X854F0DDF7D612393"></a></p>
+
+<h5>4.2-4 <span class="Heading"> 
+Syntatic semigroups
+      </span></h5>
+
+<p><code class="code">XSemigroup();</code> would pop up the following window, where we would select "Syntatic semigroup", press the <strong class="button">Proceed</strong> button and then choose either to give a "Rational expression" or an "Automaton" by pressing one of those buttons: <br><center><img src="images/Xsemigroup2.png"></center><br> If "Rational expression" is chosen, a new window pops up where the expression can be specified: <br><center><img src="images/regexp.png"></center><br> After pressing the <strong class="button">Ok</strong> button, notice that the menu button <strong class="button">Functions</strong> appears on the main window (lower right corner) meaning that <strong class="pkg">GAP</strong> already recognizes the given semigroup: <br><center><img src="images/regexp2.png"></center><br></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

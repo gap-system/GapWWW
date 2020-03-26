@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (GBNP) - Chapter 2: Description</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7BBCB13F82ACC213" name="X7BBCB13F82ACC213"></a></p>
+<div class="ChapSects"><a href="chap2.html#X7BBCB13F82ACC213">2 <span class="Heading">Description</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7FDF3E5E7F33D3A2">2.1 <span class="Heading">Non-commutative Polynomials (NPs)</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7B27E2D1784538DE">2.2 <span class="Heading">Non-commutative Polynomials for Modules (NPMs)</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X84BD98F5811EAC45">2.3 <span class="Heading">Core functions</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7EEE260680A64013">2.4 <span class="Heading">About the implementation</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X8739B6547BC89505">2.5 <span class="Heading">Tracing
+variant</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X78CF5C44879D34B6">2.6 <span class="Heading">Truncation variant</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X86F1F4EE7D4D06B7">2.7 <span class="Heading">Module variant</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X80DAE0A97CFC95DD">2.8 <span class="Heading">Gröbner basis records</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X85A91A467FF1DE45">2.9 <span class="Heading">Quotient algebras</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">Description</span></h3>
+
+<p><a id="X7FDF3E5E7F33D3A2" name="X7FDF3E5E7F33D3A2"></a></p>
+
+<h4>2.1 <span class="Heading">Non-commutative Polynomials (NPs)</span></h4>
+
+<p>The main datatype of the GBNP package is a list of non-commutative polynomials (NPs). The data type for a <em>non-commutative polynomial</em>, referred to as its NP format, is a list of two lists:</p>
+
+
+<ul>
+<li><p>The first list is a list <code class="code">m</code> of monomials.</p>
+
+</li>
+<li><p>The second list is a list <code class="code">c</code> of coefficients of these monomials.</p>
+
+</li>
+</ul>
+<p>The two lists have the same length. The polynomial represented by the ordered pair <code class="code">[m,c]</code> is <span class="SimpleMath">∑_i c_i m_i</span>.</p>
+
+<p>A monomial is a list of positive integers. They are interpreted as the indices of the variables. So, if <code class="code">k = [1,2,3,2,1]</code> and the variables are <span class="SimpleMath">x</span>,<span class="SimpleMath">y</span>,<span class="SimpleMath">z</span> (in this order), then <code class="code">k</code> represents the monomial <span class="SimpleMath">xyzyx</span>. By the way, the name of the variables has no meaning. There are various ways to print these but the default is <span class="SimpleMath">a</span>,<span class="SimpleMath">b</span>,<span class="SimpleMath">c</span>,<span class="SimpleMath">...</span> (see below).</p>
+
+<p>The zero polynomial is represented by <code class="code">[[],[]]</code>. The polynomial 1 is represented by <code class="code">[[[]],[1]]</code>.</p>
+
+<p>The algorithms work for the algebra <span class="SimpleMath">F⟨⟨ x_1,x_2,...,x_t⟩⟩</span> of non-commutative polynomials in <var class="Arg">t</var> variables over the field <span class="SimpleMath">F</span>. Accordingly, the list <code class="code">c</code> should contain elements of <span class="SimpleMath">F</span>. It is not always easy to recover <span class="SimpleMath">F</span> from the list <code class="code">c</code>. The GAP functions <code class="code">One</code> and <code class="code">Zero</code> can be of some help.</p>
+
+<p>In order to facilitate viewing the polynomials, we provide the function <code class="func">PrintNP</code> (<a href="chap3.html#X7B63BEA87A8D6162"><span class="RefLink">3.2-1</span></a>). For instance</p>
+
+
+<div class="example"><pre>PrintNP([[[1,2],[2,1]],[3,-1]]);</pre></div>
+
+<p>yields</p>
+
+
+<div class="example"><pre>3ab - ba</pre></div>
+
+<p>Indeed, we have the names: <code class="code">a</code>, <code class="code">b</code>, <code class="code">c</code>, <span class="SimpleMath">...</span> for <span class="SimpleMath">x_1</span>, <span class="SimpleMath">x_2</span>, <span class="SimpleMath">x_3</span>, <span class="SimpleMath">...</span>, except that everything beyond <span class="SimpleMath">l</span> (the 12-th letter) is called <span class="SimpleMath">x</span>. This can be easily changed by calling the function <code class="code">GBNP.ConfigPrint</code>, which can be found in Section <a href="chap3.html#X78F44B01851B1020"><span class="RefLink">3.2</span></a>.</p>
+
+<p>The function <code class="func">PrintNPList</code> (<a href="chap3.html#X832103DC79A9E9D0"><span class="RefLink">3.2-3</span></a>) is available for printing a list of NPs (=non-commutative polynomials).</p>
+
+<p>In order to facilitate testing whether two data structures represent the same NP, we use the convention that polynomials are "clean". This means that they look as if they are output of the function <code class="func">CleanNP</code> (<a href="chap3.html#X855F3D4C783000E3"><span class="RefLink">3.3-7</span></a>). In other words:</p>
+
+
+<ul>
+<li><p>each monomial occurs at most once in the list of monomials,</p>
+
+</li>
+<li><p>no monomials occur whose coefficients are zero,</p>
+
+</li>
+<li><p>the monomials are ordered (total degree first, then lexicographically) from big to small.</p>
+
+</li>
+</ul>
+<p>An advantage of the ordering is that the leading monomial of an NP <code class="code">p</code> is just <code class="code">p[1][1]</code> and that its leading coefficient is <code class="code">p[2][1]</code>. Users who want to work with other orderings can use the functions defined in the NMO extension <a href="chapBib.html#biBNMODoc">[Con10]</a> to GBNP.</p>
+
+<p><a id="X7B27E2D1784538DE" name="X7B27E2D1784538DE"></a></p>
+
+<h4>2.2 <span class="Heading">Non-commutative Polynomials for Modules (NPMs)</span></h4>
+
+<p>In Section <a href="chap2.html#X7FDF3E5E7F33D3A2"><span class="RefLink">2.1</span></a> the NP format for elements of a free algebra <span class="SimpleMath">A</span> of non-commutative polynomials in a fixed number of variables is described. This format can be adjusted slightly to allow the use of a free right module <span class="SimpleMath">A^n</span> of finite rank <span class="SimpleMath">n</span> over <span class="SimpleMath">A</span>. The internal format of an element of the module is similar to that of a non-commutative polynomial. The only change is that each monomial will start with a negative number. The absolute value of this number is the index of the standard basis vector of the free module.</p>
+
+<p>For example in the free <span class="SimpleMath">F⟨⟨ x_1, x_2,..., x_t⟩⟩</span>-module of rank 3, the expression <code class="code">[[[-1]],[1]]</code> represents <span class="SimpleMath">[1,0,0]</span> and <code class="code">[[[-1,1,2],[-1,2,1],[-3,2,2,2]],[6,-7,9]]</code> represents <span class="SimpleMath">[6x_1x_2-7x_2x_1,0,9x_2^3]</span>. The zero vector is the represented in the same way as its NP format counterpart in <a href="chap2.html#X7FDF3E5E7F33D3A2"><span class="RefLink">2.1</span></a> and the only one without a negative entry: <code class="code">[[],[]]</code>. We refer to this format as the NPM format.</p>
+
+<p>Elements of modules are printed as vectors. See Section <a href="chap3.html#X8706DD3287E82019"><span class="RefLink">3.9</span></a> on how to use modules. Examples <a href="chapA.html#X85DBF3967C4DF5FE"><span class="RefLink">A.19</span></a>, <a href="chapA.html#X780C4B777FEA9080"><span class="RefLink">A.21</span></a>, and <a href="chapA.html#X78FCAC347D9D607E"><span class="RefLink">A.20</span></a> are also recommended.</p>
+
+<p><a id="X84BD98F5811EAC45" name="X84BD98F5811EAC45"></a></p>
+
+<h4>2.3 <span class="Heading">Core functions</span></h4>
+
+<p>The core function is <code class="func">SGrobner</code> (<a href="chap3.html#X7FEDA29E78B0CEED"><span class="RefLink">3.4-2</span></a>) (which is short for Strong Gröbner, as we use the Strong Normal Form, discussed in Section <code class="func">StrongNormalFormNPM</code> (<a href="chap3.html#X87D51A8379C50A80"><span class="RefLink">3.9-5</span></a>), most of the time). It takes a list of NPs in a free algebra <span class="SimpleMath">A</span> and prepares two lists for treatment in a loop:</p>
+
+
+<ul>
+<li><p>First the list itself, called <code class="code">G</code>. Before entering the loop, <code class="code">G</code> is cleaned, ordered, and its elements are made monic, that is, multiplied by a scalar so that the leading coefficient becomes one. The ordering is done by comparison of leading monomials. The ordering on leading monomials is length lexicographic. For other orderings, the functions of the NMO extension can be used; see <a href="chapBib.html#biBNMODoc">[Con10]</a>.</p>
+
+</li>
+<li><p>Second the list of all normal forms with respect to <code class="code">G</code> of S-polynomials of elements of <code class="code">G</code>. This list is called <code class="code">D</code>. For a Gröbner basis, the S-polynomials of polynomials in <code class="code">D</code> (possibly with an element of <code class="code">G</code>) need to be computed. If <code class="code">D</code> is empty then <code class="code">G</code> is a Gröbner basis.</p>
+
+</li>
+</ul>
+<p>Then, the function calls the routine <code class="code">GBNP.SGrobnerLoop</code> on the arguments <code class="code">G</code>, <code class="code">D</code> which are changed in an attempt to modify <code class="code">G</code> while still preserving the following two properties.</p>
+
+<ol>
+<li><p><code class="code">G</code> generates the same two-sided ideal <span class="SimpleMath">I</span> in <span class="SimpleMath">A</span> as before.</p>
+
+</li>
+<li><p><code class="code">D</code> contains all normal forms with respect to <code class="code">G</code> of S-polynomials of elements from <code class="code">G</code> that need to reduce to zero for the basis to be a Gröbner basis.</p>
+
+</li>
+</ol>
+<p>The importance of this feature is that, in case of huge computations, the user may store <code class="code">G</code> and <code class="code">D</code> at almost any time and resume the computation by reloading <code class="code">G</code> and <code class="code">D</code> and calling the loop function <code class="code">GBNP.SGrobnerLoop</code> whenever convenient. The only technical detail to handle is that the last element of the list <code class="code">G</code> should be copied into the <code class="code">D</code> list. The loop itself performs a step towards making <code class="code">G</code> more like a Gröbner basis of <span class="SimpleMath">I</span>. As in the commutative case, the progress can be indicated by use of an ordering on the set of leading monomials of the elements of <code class="code">G</code>.</p>
+
+<p>In contrast to the commutative case, however, this ordering is not well founded, and there is no a priori guarantee that the loop will be exited after a finite number of iterations. The loop ends when the list <code class="code">D</code> is empty, in which case the work is essentially done: after some internal cleaning and a bit of further rewriting, the computation is over.</p>
+
+<p>There is also a <code class="func">Grobner</code> (<a href="chap3.html#X7CD9F9C97B2563E2"><span class="RefLink">3.4-1</span></a>) function. It uses (at some places) the Normal Form instead of the Strong Normal Form algorithm. In most of our applications, this usually led to slower performance, so we are not very keen to use it.</p>
+
+<p>In many of our own applications, the full polynomial ring modulo the two-sided ideal <span class="SimpleMath">I</span> generated by <code class="code">G</code> is a finite-dimensional quotient algebra. In such cases, one would like to know the dimension (whence the function <code class="func">DimQA</code> (<a href="chap3.html#X81A50EEE7B56C723"><span class="RefLink">3.5-2</span></a>), QA for Quotient Algebra), find a basis (whence the function <code class="func">BaseQA</code> (<a href="chap3.html#X7EAA04247B2C6330"><span class="RefLink">3.5-1</span></a>)), or just the monomials up to a certain degree that are not divisible by a leading term of <code class="code">G</code> (whence the function <code class="code">GBNP.NondivMons</code>). Actually by use of <code class="func">MulQA</code> (<a href="chap3.html#X80C4D0E882B05FDF"><span class="RefLink">3.5-5</span></a>), you can even multiply elements of the quotient algebra. In case it is unknown whether the quotient algebra is finite or infinite, one can use the functions <code class="func">FinCheckQA</code> (<a href="chap3.html#X792E39A98717D779"><span class="RefLink">3.6-2</span></a>) and <code class="func">DetermineGrowthQA</code> (<a href="chap3.html#X83C57C3A7DCF0471"><span class="RefLink">3.6-1</span></a>). When the quotient algebra is infinite dimensional you may want to determine its partial Hilbert Series. This can be done with the function <code class="func">HilbertSeriesQA</code> (<a href="chap3.html#X7CFD47367CF309EB"><span class="RefLink">3.6-3</span></a>).</p>
+
+<p><a id="X7EEE260680A64013" name="X7EEE260680A64013"></a></p>
+
+<h4>2.4 <span class="Heading">About the implementation</span></h4>
+
+<p>Rather than storing all obstructions, the Gröbner basis algorithm computes the (Strong) Normal Form of obstructions from <code class="code">G</code> and puts them into <code class="code">D</code> whenever nonzero. At the beginning of the loop, we take the first element of the <code class="code">D</code> list and prepare it for addition to <code class="code">G</code>. We are then concerned with two goals:</p>
+
+<ol>
+<li><p>to restore the invariant properties,</p>
+
+</li>
+<li><p>to clean up G (that is, reduce it to a more succinct, shorter set).</p>
+
+</li>
+</ol>
+<p>This is mainly done by means of additional S-polynomial and Normal Form computations.</p>
+
+<p>As for data management, we have chosen to work with lists in situ, that is, not to copy the list but rather perform all operations on one and the same list. To this end we use operations like <code class="code">RemoveElmList</code> and <code class="code">Add</code>, see <a href="/usr/share/gap/doc/ref/chap21.html#X795EC9D67E34DAB0"><span class="RefLink">Reference: Add</span></a>. The idea here is to economize on space for large computations. We do not use in situ operations everywhere, but have concentrated on the potentially biggest lists: <code class="code">G</code> and <code class="code">D</code>.</p>
+
+<p>For checking whether a monomial can be reduced, an internal tree structure is used.</p>
+
+<p><a id="X8739B6547BC89505" name="X8739B6547BC89505"></a></p>
+
+<h4>2.5 <span class="Heading">Tracing
+variant</span></h4>
+
+<p>When computing with small examples, it may be handy to provide the elements of the Gröbner basis with a way of expressing them as elements in <code class="code">I</code>, that is, as combinations of elements of the input. This can be done, not only for elements of <code class="code">G</code>, but for any element, by the functions in the file <code class="file">trace.g</code>. This file calls the file <code class="file">nparith.g</code> for arithmetic keeping track of the expressions of polynomials as combinations of elements from the original basis. With respect to a given input basis <code class="code">B</code>, a polynomial <code class="code">p</code> in the traced version is a record, called the traced polynomial, with two fields. One field, denoted <code class="code">p.pol</code>, is the usual polynomial in NP format. The other, denoted <code class="code">p.trace</code>, is a list of elements indexed by <code class="code">B</code>. Each element of <code class="code">p.trace</code> is a list whose elements are four-tuples <code class="code">[ml,i,mr,c]</code> where <code class="code">ml</code> and <code class="code">mr</code> are monomials, <code class="code">i</code> is an index of an element of <code class="code">B</code> and <code class="code">c</code> is a scalar. The interpretation of this data structure is that <code class="code">p.pol</code> can be written as the sum over all four-tuples <code class="code">[ml,i,mr,c]</code> of <span class="SimpleMath">c*ml*B_i*mr</span>. Functions for printing these expressions in a human understandable way are described in Section <a href="chap3.html#X7BA5CAA07890F7AA"><span class="RefLink">3.7</span></a>.</p>
+
+<p><a id="X78CF5C44879D34B6" name="X78CF5C44879D34B6"></a></p>
+
+<h4>2.6 <span class="Heading">Truncation variant</span></h4>
+
+<p>For computations with large and/or infinite examples, it may be convenient to truncate everything above a certain degree. In fact, we encountered various examples where the polynomials are (weighted) homogeneous and then it makes perfect sense to truncate the polynomials, that is, to disregard everything above a certain degree. For then the Grobner basis, if it exists, will be also be homogeneous and the part consisting of all of its polynomials of degree less than a given degree <span class="SimpleMath">d</span> is equal to the Grobner basis of the join of the original list of polynomials with all monomials of degree <span class="SimpleMath">d+1</span>. Here an NP polynomial in <span class="SimpleMath">n</span> variables is called homogeneous of degree <span class="SimpleMath">d</span> with respect to <span class="SimpleMath">v</span>, a vector with non-negative integers of length <span class="SimpleMath">n</span>, if, for each of its monomials <span class="SimpleMath">[t_1,...,t_k]</span>, the sum over all <span class="SimpleMath">v_t_i</span> is equal to <span class="SimpleMath">d</span>. The most classical choice for <span class="SimpleMath">v</span> is the all-one vector in which case one often speaks of homogeneous without mentioning the all-one vector. If two polynomials are homogeneous with respect to <span class="SimpleMath">v</span>, then so are their S-polynomials. If <span class="SimpleMath">K</span> is a list of homogeneous polynomials with respect to <span class="SimpleMath">v</span>, then the normal form with respect to <span class="SimpleMath">K</span> of any homogeneous polynomial of degree <span class="SimpleMath">d</span> with respect to <span class="SimpleMath">v</span> is again homogeneous of degree <span class="SimpleMath">d</span> with respect to <span class="SimpleMath">v</span>. In particular, the Gröbner basis of a list of polynomials that are homogeneous with respect to <span class="SimpleMath">v</span>, consists of homogeneous polynomials, and those input polynomials contributing to polynomials in the Gröbner basis of degree at most <span class="SimpleMath">d</span> have degree at most <span class="SimpleMath">d</span> themselves. These facts enable the computation of the truncated Gröbner basis. The functions of this variant can be found in Section <a href="chap3.html#X7E4E3AD07B2465F9"><span class="RefLink">3.8</span></a>.</p>
+
+<p><a id="X86F1F4EE7D4D06B7" name="X86F1F4EE7D4D06B7"></a></p>
+
+<h4>2.7 <span class="Heading">Module variant</span></h4>
+
+<p>Suppose we are given a finite set <span class="SimpleMath">G</span> of polynomials in a free non-commutative algebra <span class="SimpleMath">A</span> generated by, say <span class="SimpleMath">t</span> indeterminates, and a positive integer <span class="SimpleMath">s</span>. Denote by <span class="SimpleMath">I</span> the two-sided ideal of <span class="SimpleMath">A</span> generated by <span class="SimpleMath">G</span>. We can work with the free right <span class="SimpleMath">A/I</span> module <span class="SimpleMath">(A/I)^s</span>. See Section <a href="chap2.html#X7B27E2D1784538DE"><span class="RefLink">2.2</span></a> on how to represent vectors of <span class="SimpleMath">(A/I)^s</span> by elements of the free module <span class="SimpleMath">A^s</span>. Given a subset <span class="SimpleMath">W</span> of <span class="SimpleMath">A^s</span>, whose elements are called prefix relations, let <span class="SimpleMath">W'</span> be the submodule generated by the image of <span class="SimpleMath">W</span> in <span class="SimpleMath">(A/I)^s</span>. The function <code class="func">SGrobnerModule</code> (<a href="chap3.html#X860966487ED88A43"><span class="RefLink">3.9-1</span></a>) is meant to determine the quotient module <span class="SimpleMath">(A/I)^s/W'</span>. If the algorithm terminates, it delivers a Gröbner basis for <span class="SimpleMath">I</span> as well as a suitable set of generators for <span class="SimpleMath">W'</span>, with Gröbner like properties. This implies that <code class="func">StrongNormalFormNPM</code> (<a href="chap3.html#X87D51A8379C50A80"><span class="RefLink">3.9-5</span></a>), a strong normal form computation, can be used to find the canonical representative in <span class="SimpleMath">A^s</span> of an element in <span class="SimpleMath">(A/I)^s/W'</span>. Theoretic details can be found in <a href="chapBib.html#biBCohenGijsbersEtAl2007">[Coh07]</a>. If <span class="SimpleMath">(A/I)^s/W'</span> is a finite-dimensional vector space over the coefficient field of <span class="SimpleMath">A</span>, then a basis can be found by use of <code class="func">BaseQM</code> (<a href="chap3.html#X7E3160E67C504F37"><span class="RefLink">3.9-2</span></a>) and its dimension can be computed by use of <code class="func">DimQM</code> (<a href="chap3.html#X813E6A2C8709C9F3"><span class="RefLink">3.9-3</span></a>).</p>
+
+<p><a id="X80DAE0A97CFC95DD" name="X80DAE0A97CFC95DD"></a></p>
+
+<h4>2.8 <span class="Heading">Gröbner basis records</span></h4>
+
+<p>The function <code class="func">SGrobnerModule</code> (<a href="chap3.html#X860966487ED88A43"><span class="RefLink">3.9-1</span></a>) calculates a Gröbner basis consisting of some two-sided relations in the algebra and some prefix or module relations in the vector space. These are returned in a record <code class="code">GBR</code>. The two-sided relations can be found under the name <code class="code">GBR.ts</code> and the prefix relations under the name <code class="code">GBR.p</code>. Some other information is stored in this record as well.</p>
+
+<p>The prefix conditions are in NPM format (see <a href="chap2.html#X7B27E2D1784538DE"><span class="RefLink">2.2</span></a>) and the two-sided relations are in NP format.</p>
+
+<p><a id="X85A91A467FF1DE45" name="X85A91A467FF1DE45"></a></p>
+
+<h4>2.9 <span class="Heading">Quotient algebras</span></h4>
+
+<p>Once a Gröbner basis of a list <span class="SimpleMath">G</span> of polynomials in NP format, defining elements of a free algebra <span class="SimpleMath">A</span>, is computed, the quotient algebra <span class="SimpleMath">QA</span> of <span class="SimpleMath">A</span> by the two-sided ideal generated by <span class="SimpleMath">G</span> (or, which amounts to the same, the Gröbner basis) can be analyzed. A number of functions are available to determine whether <span class="SimpleMath">QA</span> is finite dimensional or not.</p>
+
+<p>Elements of <span class="SimpleMath">QA</span> are represented by elements of <span class="SimpleMath">A</span>. Two elements are equal if and only if their strong normal forms coincide; see <code class="func">StrongNormalFormNP</code> (<a href="chap3.html#X8563683E7FA604F8"><span class="RefLink">3.5-6</span></a>). The multiplication is take care of by <code class="func">MulQA</code> (<a href="chap3.html#X80C4D0E882B05FDF"><span class="RefLink">3.5-5</span></a>), which is little more than the strong normal form of the product of two polynomials in NP format representing elements of <span class="SimpleMath">QA</span>.</p>
+
+<p>If <span class="SimpleMath">QA</span> is finite dimensional, a basis of it over the field can be found by <code class="func">BaseQA</code> (<a href="chap3.html#X7EAA04247B2C6330"><span class="RefLink">3.5-1</span></a>). The size of the base, in other words, the dimension of <span class="SimpleMath">QA</span>, can be computed with <code class="func">DimQA</code> (<a href="chap3.html#X81A50EEE7B56C723"><span class="RefLink">3.5-2</span></a>). Right multiplication by an element of <span class="SimpleMath">QA</span> is a linear transformation. The matrix of this linear transformation with respect to the base, in case the element belongs to the base, can be computed by <code class="func">MatrixQA</code> (<a href="chap3.html#X7DFA841A8425DD94"><span class="RefLink">3.5-3</span></a>) or, for all basis elements, <code class="func">MatricesQA</code> (<a href="chap3.html#X78E4BF2F7F0D5E74"><span class="RefLink">3.5-4</span></a>).</p>
+
+<p>A list of leading terms of the Gröbner basis <span class="SimpleMath">G</span> can be constructed with <code class="func">LMonsNP</code> (<a href="chap3.html#X86ECA4F57C720E45"><span class="RefLink">3.3-10</span></a>). The dimension of <span class="SimpleMath">QA</span> only depends on this list and is computationally easier to work with than <span class="SimpleMath">G</span>. Most functions designed to analyze dimensionality work with a monomial ideal generated by a strong Gröbner basis, which in this case means that no element divides any other element.</p>
+
+<p>The function <code class="func">FinCheckQA</code> (<a href="chap3.html#X792E39A98717D779"><span class="RefLink">3.6-2</span></a>) determines whether <span class="SimpleMath">QA</span> is finite or infinite dimensional. More generally, the growth of <span class="SimpleMath">QA</span> can be determined by means of the function <code class="func">DetermineGrowthQA</code> (<a href="chap3.html#X83C57C3A7DCF0471"><span class="RefLink">3.6-1</span></a>), which either returns the information that <span class="SimpleMath">QA</span> is finite dimensional, or that <span class="SimpleMath">QA</span> has polynomial growth, in which case it gives bounds for the degree of polynomial growth, or that <span class="SimpleMath">QA</span> has exponential growth. Finally, with the function <code class="func">HilbertSeriesQA</code> (<a href="chap3.html#X7CFD47367CF309EB"><span class="RefLink">3.6-3</span></a>) one can compute coefficients of the Hilbert series.</p>
+
+<p>The purpose of the functions <code class="func">FinCheckQA</code> (<a href="chap3.html#X792E39A98717D779"><span class="RefLink">3.6-2</span></a>) and <code class="func">DetermineGrowthQA</code> (<a href="chap3.html#X83C57C3A7DCF0471"><span class="RefLink">3.6-1</span></a>) are closely related. The former is faster, while the latter provides more information, as illustrated from the following table.</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b>dimensionality functions; <code class="code">d</code> stands for degree,
+<code class="code">[d1,d2]</code> for an interval containing the degree</caption>
+<tr>
+<td class="tdleft"> </td>
+<td class="tdleft"><code class="code">FinCheckQA</code></td>
+<td class="tdleft"><code class="code">DetermineGrowthQA</code></td>
+</tr>
+<tr>
+<td class="tdleft">finite</td>
+<td class="tdleft"><code class="code">true</code></td>
+<td class="tdleft"><code class="code">0</code></td>
+</tr>
+<tr>
+<td class="tdleft">polynomial growth</td>
+<td class="tdleft"><code class="code">false</code></td>
+<td class="tdleft"><code class="code">d</code> or <code class="code">[d1,d2]</code></td>
+</tr>
+<tr>
+<td class="tdleft">exponential growth</td>
+<td class="tdleft"><code class="code">false</code></td>
+<td class="tdleft"><code class="code">"exponential growth"</code></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>The function <code class="func">DetermineGrowthQA</code> (<a href="chap3.html#X83C57C3A7DCF0471"><span class="RefLink">3.6-1</span></a>) may find the exact degree of polynomial growth (if at hand). If this is the case, that degree is returned. It may also happen that only an interval <code class="code">[d1,d2]</code> is returned in which the dimension lies. To force an exact answer, its third argument should be <code class="code">true</code>.</p>
+
+<p>With the function <code class="func">PreprocessAnalysisQA</code> (<a href="chap3.html#X863124677B933CEE"><span class="RefLink">3.6-4</span></a>), the computations done by these 3 functions can be sped up. Note however that by applying preprocessing of the data, the set of monomials in the ideal basis is changed and corresponds no longer to the same quotient algebra (but to a quotient algebra with the same growth).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (AutoDoc) - Chapter 1: Getting started using AutoDoc</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1.html">[MathJax off]</a></p>
+<p><a id="X7A0D7AA484F466E1" name="X7A0D7AA484F466E1"></a></p>
+<div class="ChapSects"><a href="chap1_mj.html#X7A0D7AA484F466E1">1 <span class="Heading">Getting started using <strong class="pkg">AutoDoc</strong></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X7BFBC6907B26AA95">1.1 <span class="Heading">Creating a package manual from scratch</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X87A00EED866E22E8">1.2 <span class="Heading">Documenting code with <strong class="pkg">AutoDoc</strong></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X7FA614637B807F4D">1.3 <span class="Heading">Using <strong class="pkg">AutoDoc</strong> in an existing <strong class="pkg">GAPDoc</strong> manual</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7F3CEB097AF47C1E">1.3-1 <span class="Heading">Using <strong class="pkg">AutoDoc</strong> on a complete <strong class="pkg">GAPDoc</strong> manual</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7D0DDF2284F2D24A">1.3-2 <span class="Heading">Setting different <strong class="pkg">GAPDoc</strong> options</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X83448D91868D7994">1.3-3 <span class="Heading">
+Checklist for converting an existing <strong class="pkg">GAPDoc</strong> manual to use <strong class="pkg">AutoDoc</strong>
+</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X8524193D824CDE0D">1.4 <span class="Heading">Scaffolds</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7CF22DE28478316F">1.4-1 <span class="Heading">Generating a title page</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7CD72CC780874FD5">1.4-2 <span class="Heading">Generating the main XML file</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7A3C8A34806ACF30">1.4-3 <span class="Heading">What data is extracted from <code class="file">PackageInfo.g</code>?</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X80ED3C2A78146AD1">1.5 <span class="Heading">AutoDoc worksheets</span></a>
+</span>
+</div>
+</div>
+
+<h3>1 <span class="Heading">Getting started using <strong class="pkg">AutoDoc</strong></span></h3>
+
+<p><strong class="pkg">AutoDoc</strong> is a <strong class="pkg">GAP</strong> package which is meant to aid <strong class="pkg">GAP</strong> package authors in creating and maintaining the documentation of their packages. In this capacity it builds upon the <strong class="pkg">GAPDoc</strong> package (see <span class="URL"><a href="https://www.gap-system.org/Packages/gapdoc.html">https://www.gap-system.org/Packages/gapdoc.html</a></span>). As such, it is not a replacement for <strong class="pkg">GAPDoc</strong>, but rather complements it.</p>
+
+<p>In this chapter we describe how to get started using <strong class="pkg">AutoDoc</strong> for your package. First, we explain in Section <a href="chap1_mj.html#X7BFBC6907B26AA95"><span class="RefLink">1.1</span></a> how to write a new package manual from scratch.</p>
+
+<p>Then we show in Section <a href="chap1_mj.html#X7FA614637B807F4D"><span class="RefLink">1.3</span></a> how you might benefit from <strong class="pkg">AutoDoc</strong> even if you already have a complete manual written using <strong class="pkg">GAPDoc</strong>.</p>
+
+<p>In Section <a href="chap1_mj.html#X8524193D824CDE0D"><span class="RefLink">1.4</span></a>, we explain how you may use <strong class="pkg">AutoDoc</strong> to generate a title page and the main XML file for your manual.</p>
+
+<p>Finally, Section <a href="chap1_mj.html#X80ED3C2A78146AD1"><span class="RefLink">1.5</span></a>, explains what <strong class="pkg">AutoDoc</strong> worksheets are and how to use them.</p>
+
+<p><a id="X7BFBC6907B26AA95" name="X7BFBC6907B26AA95"></a></p>
+
+<h4>1.1 <span class="Heading">Creating a package manual from scratch</span></h4>
+
+<p>Suppose your package is already up and running, but so far has no manual. Then you can rapidly generate a "scaffold" for a package manual using the <code class="func">AutoDoc</code> (<a href="chap4_mj.html#X7CBD8AAF7DCEF352"><span class="RefLink">4.1-1</span></a>) command like this, while running <strong class="pkg">GAP</strong> from within your package's directory (the one containing the <code class="file">PackageInfo.g</code> file):</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( scaffold := true ) );
+</pre></div>
+
+<p>This first reads the <code class="file">PackageInfo.g</code> file from the current directory. It extracts information about package from it (such as its name and version, see Section <a href="chap1_mj.html#X7CF22DE28478316F"><span class="RefLink">1.4-1</span></a>). It then creates two XML files <code class="file">doc/NAME_OF_YOUR_PACKAGE.xml</code> and <code class="file">doc/title.xml</code> insider the package directory. Finally, it runs <strong class="pkg">GAPDoc</strong> on them to produce a nice initial PDF and HTML version of your fresh manual.</p>
+
+<p>To ensure that the <strong class="pkg">GAP</strong> help system picks up your package manual, you should also add something like the following to your <code class="file">PackageInfo.g</code>:</p>
+
+
+<div class="example"><pre>
+PackageDoc := rec(
+  BookName  := ~.PackageName,
+  ArchiveURLSubset := ["doc"],
+  HTMLStart := "doc/chap0.html",
+  PDFFile   := "doc/manual.pdf",
+  SixFile   := "doc/manual.six",
+  LongTitle := ~.Subtitle,
+),
+</pre></div>
+
+<p>Congratulations, your package now has a minimal working manual. Of course it will be mostly empty for now, but it already should contain some useful information, based on the data in your <code class="file">PackageInfo.g</code>. This includes your package's name, version and description as well as information about its authors. And if you ever change the package data, (e.g. because your email address changed), just re-run the above command to regenerate the two main XML files with the latest information.</p>
+
+<p>Next of course you need to provide actual content (unfortunately, we were not yet able to automate <em>that</em> for you, more research on artificial intelligence is required). To add more content, you have several options: You could add further <strong class="pkg">GAPDoc</strong> XML files containing extra chapters, sections and so on. Or you could use classic <strong class="pkg">GAPDoc</strong> source comments. For details on either, please refer to <a href="../../../pkg/GAPDoc-1.6.3/doc/chap4_mj.html#X7A3355C07F57C280"><span class="RefLink">GAPDoc: Distributing a Document into Several Files</span></a>, as well as Section <a href="chap1_mj.html#X7FA614637B807F4D"><span class="RefLink">1.3</span></a> of this manual on how to teach the <code class="func">AutoDoc</code> (<a href="chap4_mj.html#X7CBD8AAF7DCEF352"><span class="RefLink">4.1-1</span></a>) command to include this extra documentation. Or you could use the special documentation facilities <strong class="pkg">AutoDoc</strong> provides (see Section <a href="chap1_mj.html#X87A00EED866E22E8"><span class="RefLink">1.2</span></a>).</p>
+
+<p>You will probably want to re-run the <code class="func">AutoDoc</code> (<a href="chap4_mj.html#X7CBD8AAF7DCEF352"><span class="RefLink">4.1-1</span></a>) command frequently, e.g. whenever you modified your documentation or your <code class="file">PackageInfo.g</code>. To make this more convenient and reproducible, we recommend putting its invocation into a file <code class="file">makedoc.g</code> in your package directory, with content based on the following example:</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( autodoc := true ) );
+QUIT;
+</pre></div>
+
+<p>Then you can regenerate the package manual from the command line with the following command, executed from within in the package directory:</p>
+
+
+<div class="example"><pre>
+gap makedoc.g
+</pre></div>
+
+<p><a id="X87A00EED866E22E8" name="X87A00EED866E22E8"></a></p>
+
+<h4>1.2 <span class="Heading">Documenting code with <strong class="pkg">AutoDoc</strong></span></h4>
+
+<p>To get one of your global functions, operations, attributes etc. to appear in the package manual, simply insert an <strong class="pkg">AutoDoc</strong> comment of the form <code class="code">#!</code> directly in front of it. For example:</p>
+
+
+<div class="example"><pre>
+#!
+DeclareOperation( "ToricVariety", [ IsConvexObject ] );
+</pre></div>
+
+<p>This tiny change is already sufficient to ensure that the operation appears in the manual. In general, you will want to add further information about the operation, such as in the following example:</p>
+
+
+<div class="example"><pre>
+#! @Arguments conv
+#! @Returns a toric variety
+#! @Description
+#!  Creates a toric variety out
+#!  of the convex object &lt;A&gt;conv&lt;/A&gt;.
+DeclareOperation( "ToricVariety", [ IsConvexObject ] );
+</pre></div>
+
+<p>For a thorough description of what you can do with <strong class="pkg">AutoDoc</strong> documentation comments, please refer to chapter <a href="chap2_mj.html#X87668C487B1A2094"><span class="RefLink">2</span></a>.</p>
+
+<p>Suppose you have not been using <strong class="pkg">GAPDoc</strong> before but instead used the process described in section <a href="chap1_mj.html#X7BFBC6907B26AA95"><span class="RefLink">1.1</span></a> to create your manual. Then the following <strong class="pkg">GAP</strong> command will regenerate the manual and automatically include all newly documented functions, operations etc.:</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( scaffold := true,
+              autodoc := true ) );
+</pre></div>
+
+<p>If you are not using the scaffolding feature, e.g. because you already have an existing <strong class="pkg">GAPDoc</strong> based manual, then you can still use <strong class="pkg">AutoDoc</strong> documentation comments. Just make sure to first edit the main XML file of your documentation, and insert the line</p>
+
+
+<div class="example"><pre>
+&lt;#Include SYSTEM "_AutoDocMainFile.xml"&gt;
+</pre></div>
+
+<p>in a suitable place. This means that you can mix <strong class="pkg">AutoDoc</strong> documentation comment freely with your existing documentation; you can even still make use of any existing <strong class="pkg">GAPDoc</strong> documentation comments in your code. The following command should be useful for you in this case; it still scans the package code for <strong class="pkg">AutoDoc</strong> documentation comments and the runs <strong class="pkg">GAPDoc</strong> to produce HTML and PDF output, but does not touch your documentation XML files otherwise.</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( autodoc := true ) );
+</pre></div>
+
+<p><a id="X7FA614637B807F4D" name="X7FA614637B807F4D"></a></p>
+
+<h4>1.3 <span class="Heading">Using <strong class="pkg">AutoDoc</strong> in an existing <strong class="pkg">GAPDoc</strong> manual</span></h4>
+
+<p>Even if you already have an existing <strong class="pkg">GAPDoc</strong> manual, it might be interesting for you to use <strong class="pkg">AutoDoc</strong> for two purposes:</p>
+
+<p>First off, with <strong class="pkg">AutoDoc</strong> is very convenient to regenerate your documentation.</p>
+
+<p>Secondly, the scaffolding feature which generates a title page with all the metadata of your package in a uniform way is very handy. The somewhat tedious process of keeping your title page in sync with your <code class="file">PackageInfo.g</code> is fully automated this way (including the correct version, release data, author information and so on).</p>
+
+<p>There are various examples of packages using <strong class="pkg">AutoDoc</strong> for only this purpose, e.g. <strong class="pkg">io</strong> and <strong class="pkg">orb</strong>.</p>
+
+<p><a id="X7F3CEB097AF47C1E" name="X7F3CEB097AF47C1E"></a></p>
+
+<h5>1.3-1 <span class="Heading">Using <strong class="pkg">AutoDoc</strong> on a complete <strong class="pkg">GAPDoc</strong> manual</span></h5>
+
+<p>Suppose you already have a complete XML manual, with some main and title XML files and some documentation for operations distributed over all your <code class="file">.g</code>, <code class="file">.gd</code>, and <code class="file">.gi</code> files. Suppose the main XML file is named <code class="file">PACKAGENAME.xml</code> and is in the <code class="file">/doc</code> subdirectory of your package. Then you can rebuild your manual by executing the following two <strong class="pkg">GAP</strong> commands from a <strong class="pkg">GAP</strong> sessions started started in the root directory of your package:</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( );
+</pre></div>
+
+<p>In contrast, the <strong class="pkg">RingsForHomalg</strong> currently uses essentially the following code in its <code class="file">makedoc.g</code> file to achieve the same result</p>
+
+
+<div class="example"><pre>
+LoadPackage( "GAPDoc" );
+SetGapDocLaTeXOptions( "utf8" );
+bib := ParseBibFiles( "doc/RingsForHomalg.bib" );
+WriteBibXMLextFile( "doc/RingsForHomalgBib.xml", bib );
+list := [
+         "../gap/RingsForHomalg.gd",
+         "../gap/RingsForHomalg.gi",
+         "../gap/Singular.gi",
+         "../gap/SingularBasic.gi",
+         "../examples/RingConstructionsExternalGAP.g",
+         "../examples/RingConstructionsSingular.g",
+         "../examples/RingConstructionsMAGMA.g",
+         "../examples/RingConstructionsMacaulay2.g",
+         "../examples/RingConstructionsSage.g",
+         "../examples/RingConstructionsMaple.g",
+         ];
+MakeGAPDocDoc( "doc", "RingsForHomalg", list, "RingsForHomalg" );
+GAPDocManualLab( "RingsForHomalg" );
+</pre></div>
+
+<p>Note that in particular, you do not have to worry about keeping a list of your implementation files up-to-date.</p>
+
+<p>But there is more. <strong class="pkg">AutoDoc</strong> can create <code class="file">.tst</code> files from the examples in your manual to test your package. This can be achieved via</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( extract_examples := true ) );
+</pre></div>
+
+<p>Now files <code class="file">PACKAGENAME01.tst</code>, <code class="file">PACKAGENAME02.tst</code> and so appear in the <code class="file">tst/</code> subdirectory of your package, and can be tested as usual using <code class="func">Test</code> (<a href="../../../doc/ref/chap7_mj.html#X87712F9D8732193C"><span class="RefLink">Reference: Test</span></a>) respectively <code class="func">TestDirectory</code> (<a href="../../../doc/ref/chap7_mj.html#X87AF67528799481F"><span class="RefLink">Reference: TestDirectory</span></a>).</p>
+
+<p><a id="X7D0DDF2284F2D24A" name="X7D0DDF2284F2D24A"></a></p>
+
+<h5>1.3-2 <span class="Heading">Setting different <strong class="pkg">GAPDoc</strong> options</span></h5>
+
+<p>Sometimes, the default values for the <strong class="pkg">GAPDoc</strong> command used by <strong class="pkg">AutoDoc</strong> may not be suitable for your manual.</p>
+
+<p>Suppose your main XML file is <em>not</em> named <code class="file">PACKAGENAME.xml</code>, but rather something else, e.g. <code class="file">main.xml</code>. Then you can tell <strong class="pkg">AutoDoc</strong> to use this file as the main XML file via</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( gapdoc := rec( main := "main" ) ) );
+</pre></div>
+
+<p>As explained above, by default <strong class="pkg">AutoDoc</strong> scans all <code class="file">.g</code>, <code class="file">.gd</code> and <code class="file">.gi</code> files it can find inside of your package root directory, and in the subdirectories <code class="file">gap</code>, <code class="file">lib</code>, <code class="file">examples</code> and <code class="file">examples/doc</code> as well. If you keep source files with documentation in other directories, you can adjust the list of directories AutoDoc scans via the <code class="code">scan_dirs</code> option. The following example illustrates this by instructing <strong class="pkg">AutoDoc</strong> to only search in the subdirectory <code class="file">package_sources</code> of the packages root directory.</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( gapdoc := rec( scan_dirs := [ "package_sources" ] ) ) );
+</pre></div>
+
+<p>You can also specify an explicit list of files containing documentation, which will be searched in addition to any files located within the scan directories:</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( gapdoc := rec( files := [ "path/to/some/hidden/file.gds" ] ) ) );
+</pre></div>
+
+<p>Giving such a file does not prevent the standard <code class="code">scan_dirs</code> from being scanned for other files.</p>
+
+<p>Next, <strong class="pkg">GAPDoc</strong> supports the documentation to be built with relative paths. This means, links to manuals of other packages or the <strong class="pkg">GAP</strong> library will not be absolute, but relative from your documentation. This can be particularly useful if you want to build a release tarball or move your <strong class="pkg">GAP</strong> installation around later. Suppose you are starting <strong class="pkg">GAP</strong> in the root path of your package as always, and the standard call of <code class="func">AutoDoc</code> (<a href="chap4_mj.html#X7CBD8AAF7DCEF352"><span class="RefLink">4.1-1</span></a>) will then build the documentation in the <code class="file">doc</code> subdirectory of your package. From this directory, the gap root directory has the relative path <code class="file">../../..</code>. Then you can enable the relative paths by</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( gapdoc := rec( gap_root_relative_path := "../../.." ) ) );
+</pre></div>
+
+<p>or, since <code class="file">../../..</code> is the standard option for <code class="code">gap_root_relative_path</code>, by</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( gapdoc := rec( gap_root_relative_path := true ) ) );
+</pre></div>
+
+<p><a id="X83448D91868D7994" name="X83448D91868D7994"></a></p>
+
+<h5>1.3-3 <span class="Heading">
+Checklist for converting an existing <strong class="pkg">GAPDoc</strong> manual to use <strong class="pkg">AutoDoc</strong>
+</span></h5>
+
+<p>Here is a checklist for authors of a package <strong class="pkg">PackageName</strong>, <em>which already has a <strong class="pkg">GAPDoc</strong> based manual</em>, who wish to use <strong class="pkg">AutoDoc</strong> to build the manual from now on. We assume that the manual is currently built by reading a file <code class="file">makedoc.g</code> and that the main <code class="file">.xml</code> file is named <code class="file">manual.xml</code>.</p>
+
+<p>The files <code class="file">PackageInfo.g</code>, <code class="file">makedoc.g</code>, <code class="file">doc/title.xml</code> and <code class="file">doc/PackageName.xml</code> (if it exists) will be altered by this procedure, so it may be wise to keep backup copies.</p>
+
+<p>You should have copies of the <strong class="pkg">AutoDoc</strong> files <code class="file">PackageInfo.g</code> and <code class="file">makedoc.g</code> to hand when reading these instructions.</p>
+
+
+<ul>
+<li><p>Copy <code class="file">AutoDoc/makedoc.g</code> to <code class="file">PackageName/makedoc.g</code>.</p>
+
+</li>
+<li><p>Edit <code class="file">PackageName/makedoc.g</code> as follows.</p>
+
+
+<ul>
+<li><p>Change the header comment to match other files in your package.</p>
+
+</li>
+<li><p>After <code class="code">LoadPackage("AutoDoc");</code> add <code class="code">LoadPackage("PackageName");</code>.</p>
+
+</li>
+<li><p>In the <code class="code">AutoDoc</code> record delete <code class="code">autodoc := true;</code>.</p>
+
+</li>
+<li><p>In the <code class="code">scaffold</code> record change the <code class="code">includes</code> list to be the list of your <code class="code">.xml</code> files that are contained in <code class="file">manual.xml</code>.</p>
+
+</li>
+<li><p>If you do not have a bibliography you may delete the <code class="code">bib := "bib.xml",</code> field in the scaffold. Otherwise, edit the file name if you have a different file. If you only have a <code class="code">.bib</code> file (<code class="code">manual.bib</code> or <code class="code">bib.xml.bib</code> say) you should rename this file <code class="file">PackageName.bib</code>.</p>
+
+</li>
+<li><p>In the <code class="code">LaTeXOptions</code> record, which is in the <code class="code">gapdoc</code> record, enter any LaTeX <code class="code">newcommands</code> previously in <code class="file">manual.xml</code>. (If there are none you may safely delete this record.) To illustrate this option, the <strong class="pkg">AutoDoc</strong> file <code class="file">makedoc.g</code> defines the command <code class="code">\bbZ</code> by <code class="code">\newcommand{\bbZ}{\mathbb{Z}}</code>, which may be used to produce the LaTeX formula <span class="SimpleMath">\(f : \bbZ^2 \to \bbZ\)</span>.</p>
+
+</li>
+<li><p>In the <code class="code">entities</code> record enter any entities previously stored in <code class="file">manual.xml</code>. (Again, if you have none, you may safely delete this record.) To illustrate this option the <strong class="pkg">AutoDoc</strong> file <code class="file">makedoc.g</code> defines entities for the names of packages <strong class="pkg">io</strong> and <strong class="pkg">PackageName</strong>.</p>
+
+</li>
+</ul>
+</li>
+<li><p>Now edit <code class="file">PackageName/PackageInfo.g</code> as follows.</p>
+
+
+<ul>
+<li><p>Delete any <code class="code">PKGVERSIONDATA</code> chunk that may be there. The main reason for converting your manual to use <strong class="pkg">AutoDoc</strong> is to stop using entities such as <code class="code">PACKAGENAMEVERSION</code>.</p>
+
+</li>
+<li><p>Copy the <code class="code">AutoDoc</code> record from <code class="file">AutoDoc/PackageInfo.g</code> to the end of your file (just before the final <code class="code">"));"</code>.</p>
+
+</li>
+<li><p>Replace the <code class="code">Copyright</code>, <code class="code">Abstract</code> and <code class="code">Acknowledgements</code> fields of the <code class="code">TitlePage</code> record with the corresponding material from your <code class="file">manual.xml</code>. (If you do not have an abstract, then delete the <code class="code">Abstract</code> field, etc.) For other introductory components, such as <code class="code">Colophon</code>, consult the file <code class="file">gap/Magic.gd</code>.</p>
+
+</li>
+</ul>
+</li>
+<li><p>If you are using a GitHub repository, as well as running "<code class="code">git add</code>" on files <code class="file">makedoc.g</code>, <code class="file">PackageInfo.g</code> and <code class="file">doc/PackageName.bib</code>, you should run "<code class="code">git rm -f</code>" on files <code class="file">doc/manual.xml</code>, and <code class="file">doc/title.xml</code>.</p>
+
+</li>
+</ul>
+<p>You should now be ready to run <strong class="pkg">GAP</strong> and <code class="code">Read("makedoc.g");</code> in your package root directory.</p>
+
+<p><a id="X8524193D824CDE0D" name="X8524193D824CDE0D"></a></p>
+
+<h4>1.4 <span class="Heading">Scaffolds</span></h4>
+
+<p><a id="X7CF22DE28478316F" name="X7CF22DE28478316F"></a></p>
+
+<h5>1.4-1 <span class="Heading">Generating a title page</span></h5>
+
+<p>For most (if not all) <strong class="pkg">GAP</strong> packages, the title page of the package manual lists information such as the release date, version, names and contact details of the authors, and so on. All this data is also contained in your <code class="file">PackageInfo.g</code>, and whenever you make a change to that file, there is a risk that you forget to update your manual to match. And even if you don't forget it, you of course have to spend some time to adjust the manual. <strong class="pkg">GAPDoc</strong> can help to a degree with this via entities. Thus, you will sometimes see code like this in <code class="file">PackageInfo.g</code> files:</p>
+
+
+<div class="example"><pre>
+Version        := "1.2.3",
+Date           := "20/01/2015",
+##  &lt;#GAPDoc Label="PKGVERSIONDATA"&gt;
+##  &lt;!ENTITY VERSION "1.2.3"&gt;
+##  &lt;!ENTITY RELEASEDATE "20 January 2015"&gt;
+##  &lt;!ENTITY RELEASEYEAR "2015"&gt;
+##  &lt;#/GAPDoc&gt;
+</pre></div>
+
+<p>However, it is still easy to forget both of these versions. And it doesn't solve the problem of updating package authors addresses. Neither of these is a big issue, of course, but there have been plenty examples in the past where people forget either of these two things, and it can be slightly embarrassing. It may even require you to make a new release just to fix the issue, which in our opinion is a sad waste of your valuable time.</p>
+
+<p>So instead of worrying about manually synchronising these things, you can instruct <strong class="pkg">AutoDoc</strong> to generate a title page for your manual based on the information in your <code class="file">PackageInfo.g</code>. The following commands do just that (in addition to building your manual), by generating a file called <code class="file">doc/title.xml</code>.</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( scaffold := rec( MainPage := false ) ) );
+</pre></div>
+
+<p>Note that this only outputs <code class="file">doc/title.xml</code> but does not touch any other files of your documentation. In particular, you need to explicitly include <code class="file">doc/title.xml</code> from your main XML file.</p>
+
+<p>However, you can also tell <strong class="pkg">AutoDoc</strong> to maintain the main XML file for you, in which case this is automatic. In fact, this is the default if you enable scaffolding; the above example command explicitly told <strong class="pkg">AutoDoc</strong> not to generate a main page.</p>
+
+<p><a id="X7CD72CC780874FD5" name="X7CD72CC780874FD5"></a></p>
+
+<h5>1.4-2 <span class="Heading">Generating the main XML file</span></h5>
+
+<p>The following generates a main XML file for your documentation in addition to the title page. The main XML file includes the title page by default, as well as any documentation generated from <strong class="pkg">AutoDoc</strong> documentation comments.</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc( rec( scaffold := true ) );
+</pre></div>
+
+<p>You can instruct <strong class="pkg">AutoDoc</strong> to include additional XML files by giving it a list of filenames, as in the following example:</p>
+
+
+<div class="example"><pre>
+LoadPackage( "AutoDoc" );
+AutoDoc(rec(
+    scaffold := rec(
+        includes := [ "somefile.xml", "anotherfile.xml" ]
+    )
+));
+</pre></div>
+
+<p>For more information, please consult the documentation of the <code class="func">AutoDoc</code> (<a href="chap4_mj.html#X7CBD8AAF7DCEF352"><span class="RefLink">4.1-1</span></a>) function.</p>
+
+<p><a id="X7A3C8A34806ACF30" name="X7A3C8A34806ACF30"></a></p>
+
+<h5>1.4-3 <span class="Heading">What data is extracted from <code class="file">PackageInfo.g</code>?</span></h5>
+
+<p><strong class="pkg">AutoDoc</strong> can extract data from <code class="file">PackageInfo.g</code> in order to generate a title page. Specifically, the following components of the package info record are looked at:</p>
+
+
+<dl>
+<dt><strong class="Mark">Version</strong></dt>
+<dd><p>This is used to set the <code class="code">&lt;Version&gt;</code> element of the title page, with the string "Version " prepended.</p>
+
+</dd>
+<dt><strong class="Mark">Date</strong></dt>
+<dd><p>This is used to set the <code class="code">&lt;Date&gt;</code> element of the title page.</p>
+
+</dd>
+<dt><strong class="Mark">Subtitle</strong></dt>
+<dd><p>This is used to set the <code class="code">&lt;Subtitle&gt;</code> element of the title page (the <code class="code">&lt;Title&gt;</code> is set to the package name).</p>
+
+</dd>
+<dt><strong class="Mark">Persons</strong></dt>
+<dd><p>This is used to generate <code class="code">&lt;Author&gt;</code> elements in the generated title page.</p>
+
+</dd>
+<dt><strong class="Mark">PackageDoc</strong></dt>
+<dd><p>This is a record (or a list of records) which is used to tell the <strong class="pkg">GAP</strong> help system about the package manual. Currently <strong class="pkg">AutoDoc</strong> extracts the value of the <code class="code">PackageDoc.BookName</code> component and then passes that on to <strong class="pkg">GAPDoc</strong> when creating the HTML, PDF and text versions of the manual.</p>
+
+</dd>
+<dt><strong class="Mark">AutoDoc</strong></dt>
+<dd><p>This is a record which can be used to control the scaffolding performed by <strong class="pkg">AutoDoc</strong>, specifically to provide extra information for the title page. For example, you can set <code class="code">AutoDoc.TitlePage.Copyright</code> to a string which will then be inserted on the generated title page. Using this method you can customize the following title page elements: <code class="code">TitleComment</code>, <code class="code">Abstract</code>, <code class="code">Copyright</code>, <code class="code">Acknowledgements</code> and <code class="code">Colophon</code>.</p>
+
+<p>Note that <code class="code">AutoDoc.TitlePage</code> behaves exactly the same as the <code class="code">scaffold.TitlePage</code> parameter of the <code class="func">AutoDoc</code> (<a href="chap4_mj.html#X7CBD8AAF7DCEF352"><span class="RefLink">4.1-1</span></a>) function.</p>
+
+</dd>
+</dl>
+<p><a id="X80ED3C2A78146AD1" name="X80ED3C2A78146AD1"></a></p>
+
+<h4>1.5 <span class="Heading">AutoDoc worksheets</span></h4>
+
+<p><strong class="pkg">AutoDoc</strong> worksheets can be used to create HTML and PDF documents using AutoDoc syntax and possibly including <strong class="pkg">GAP</strong> examples and implementations without having them associated to a package. A file for a worksheet could look like this:</p>
+
+
+<div class="example"><pre>
+#! @Title My first worksheet
+#! @Author Charlie Brown
+
+#! @Chapter Some groups
+
+#! @BeginExample
+S3 := SymmetricGroup( 3 );;
+S4 := SymmetricGroup( 4 );;
+#! @EndExample
+</pre></div>
+
+<p>Now, one can create a PDF and HTML document, like a package documentation out of it. Suppose the document above is saved as <code class="file">worksheet.g</code>. Then, when <strong class="pkg">GAP</strong> is started in the directory of this file, the command</p>
+
+
+<div class="example"><pre>
+AutoDocWorksheet( "worksheet.g" );
+</pre></div>
+
+<p>will create a subdirectory called <code class="file">doc</code> of the current directory in which it will create the documentation. There are several options to configure the output of the worksheet command, which are identical to the options of the <code class="func">AutoDoc</code> (<a href="chap4_mj.html#X7CBD8AAF7DCEF352"><span class="RefLink">4.1-1</span></a>) command. It is even possible to test the examples in the worksheet using the <code class="code">extract_examples</code> option of the <code class="func">AutoDoc</code> (<a href="chap4_mj.html#X7CBD8AAF7DCEF352"><span class="RefLink">4.1-1</span></a>) command.</p>
+
+<p>Since the worksheets do not have a <code class="file">PackageInfo.g</code> to extract information, all possible tags that <strong class="pkg">GAPDoc</strong> supports for the title page can be set into the document. A fully typed title page can look like this:</p>
+
+
+<div class="example"><pre>
+#! @Title My first worksheet
+#! @Subtitle Some small examples
+#! @Author Charlie Brown
+
+#! @Version 0.1
+#! @TitleComment Some worksheet
+#! @Date 01/01/2016
+#! @Address TU Kaiserslautern
+#! @Abstract
+#!  A worksheet showing some small examples about groups.
+#! @Copyright 2016 Charlie Brown
+#! @Acknowledgements Woodstock
+#! @Colophon Some colophon
+
+#! @Chapter Some groups
+
+#! @BeginExample
+S3 := SymmetricGroup( 3 );;
+S4 := SymmetricGroup( 4 );;
+#! @EndExample
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

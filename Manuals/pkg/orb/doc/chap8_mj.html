@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (orb) - Chapter 8: AVL trees</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap8"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap8.html">[MathJax off]</a></p>
+<p><a id="X7F2630FB7AA3C73D" name="X7F2630FB7AA3C73D"></a></p>
+<div class="ChapSects"><a href="chap8_mj.html#X7F2630FB7AA3C73D">8 <span class="Heading">AVL trees</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X792FFB378773B140">8.1 <span class="Heading">The idea of AVL trees</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X7D4FEC9479D3EBB4">8.2 <span class="Heading">Using AVL trees</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X791E346F84F0430C">8.2-1 AVLTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X83EC43DA871C7F60">8.2-2 AVLCmp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7F65886F84E991C7">8.2-3 AVLAdd</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7E6EF8297C68F553">8.2-4 AVLLookup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X82CE14F17B5DD6B2">8.2-5 AVLDelete</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7D1B85DA814DA26C">8.2-6 AVLFindIndex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X810E5CDF7ED14BF8">8.2-7 AVLIndex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X8541DB5C78B60A6B">8.2-8 AVLIndexLookup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X817B8377799DE5E1">8.2-9 AVLIndexAdd</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X79E13784868CEAAF">8.2-10 AVLIndexDelete</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7EF737C286E94F23">8.2-11 AVLFind</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X80CF197882D71FD7">8.2-12 AVLIndexFind</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X78B2EEB4804987F2">8.2-13 AVLData</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X78DE1F2C80B0D55C">8.2-14 AVLValue</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X83A5C59278E13248">8.2-15 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X805C33C281B29B00">8.2-16 ELM_LIST</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X79975EC6783B4293">8.2-17 Position</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X795EC9D67E34DAB0">8.2-18 Add</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7E98B11B79BA9167">8.2-19 Remove</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X780769238600AFD1">8.2-20 Length</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X87BDB89B7AAFE8AD"><code>8.2-21 \in</code></a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X87323803809E0EF5">8.3 <span class="Heading">The internal data structures</span></a>
+</span>
+</div>
+</div>
+
+<h3>8 <span class="Heading">AVL trees</span></h3>
+
+<p><a id="X792FFB378773B140" name="X792FFB378773B140"></a></p>
+
+<h4>8.1 <span class="Heading">The idea of AVL trees</span></h4>
+
+<p>AVL trees are balanced binary trees called "AVL trees" in honour of their inventors G.M. Adelson-Velskii and E.M. Landis (see <a href="chapBib_mj.html#biBAVL">[AVM62]</a>). A description in English can be found in <a href="chapBib_mj.html#biBACP3">[Knu97]</a> in Section 6.2.3 about balanced trees.</p>
+
+<p>The general idea is to store data in a binary tree such that all entries in the left subtree of a node are smaller than the entry at the node and all entries in the right subtree are bigger. The tree is kept "balanced" which means that for each node the depth of the left and right subtrees differs by at most 1. In this way, finding something in the tree, adding a new entry, deleting an entry all have complexity <span class="SimpleMath">\(log(n)\)</span> where <span class="SimpleMath">\(n\)</span> is the number of entries in the tree. If one additionally stores the number of entries in the left subtree of each node, then finding the <span class="SimpleMath">\(k\)</span>-th entry, removing the <span class="SimpleMath">\(k\)</span>-th entry and inserting an entry in position <span class="SimpleMath">\(k\)</span> also have complexity <span class="SimpleMath">\(log(n)\)</span>. The <strong class="pkg">orb</strong> contains an implementation of such tree objects providing all these operations.</p>
+
+<p>"Entries" in AVL tree objects are key-value pairs and the sorting is done by the key. If all values as <code class="keyw">true</code> then no memory is needed to store the values (see the corresponding behaviour for hash tables). The only requirement on the type of the keys is that two arbitrary keys must be comparable in the sense that one can decide which of them is smaller. If <strong class="pkg">GAP</strong>s standard comparison operations <span class="SimpleMath">\(&lt;\)</span> and <span class="SimpleMath">\(=\)</span> work for your keys, no further action is required, if not, then you must provide your own three-way comparison function (see below).</p>
+
+<p>Note that the AVL trees implemented here can be used in basically two different ways, which can sometimes be mixed: The usual way is by accessing entries by their key, the tree is then automatically kept sorted. The alternative way is by accessing entries by their index in the tree! Since the nodes of the trees remember how many elements are stored in their left subtree, it is in fact possible to access the <span class="SimpleMath">\(k\)</span>-th entry in the tree or delete it. It is even possible to insert something in position <span class="SimpleMath">\(k\)</span>. However, note that if you do this latter operation, you are yourself responsible to keep the entries in the tree sorted. You can ignore this responsibility, but then you can no longer access the entries in the tree by their key and the corresponding functions might fail or even run into errors.</p>
+
+<p>This usage can be useful, since in this way AVL trees provide an implementation of a list data structure where the operation list access (by index), adding an element (in an arbitrary position) and deleting an element (by its index) all have complexity <span class="SimpleMath">\(log(n)\)</span> where <span class="SimpleMath">\(n\)</span> is the number of entries in the list.</p>
+
+<p><a id="X7D4FEC9479D3EBB4" name="X7D4FEC9479D3EBB4"></a></p>
+
+<h4>8.2 <span class="Heading">Using AVL trees</span></h4>
+
+<p>An AVL tree is created using the following function:</p>
+
+<p><a id="X791E346F84F0430C" name="X791E346F84F0430C"></a></p>
+
+<h5>8.2-1 AVLTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLTree</code>( [<var class="Arg">opt</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A new AVL tree object</p>
+
+<p>This function creates a new AVL tree object. The optional argument <var class="Arg">opt</var> is an options record, in which you can bind the following components:</p>
+
+<p><code class="code">cmpfunc</code> is a three-way comparison function taking two arguments <var class="Arg">a</var> and <var class="Arg">b</var> and returning <span class="SimpleMath">\(-1\)</span> if <span class="SimpleMath">\(\textit{a} &lt; \textit{b}\)</span>, <span class="SimpleMath">\(+1\)</span> if <span class="SimpleMath">\(\textit{a} &gt; \textit{b}\)</span> and <span class="SimpleMath">\(0\)</span> if <span class="SimpleMath">\(\textit{a} = \textit{b}\)</span>. If no function is given then the generic function <code class="func">AVLCmp</code> (<a href="chap8_mj.html#X83EC43DA871C7F60"><span class="RefLink">8.2-2</span></a>) is taken. This three-way comparison function is stored with the tree and is used for all comparisons in tree operations. <code class="code">allocsize</code> is the number of nodes which are allocated for the tree initially. It can be useful to specify this if you know that your tree will eventually contain a lot of entries, since then the tree object does not have to grow that many times.</p>
+
+<p>For every AVL tree a three-way comparison function is needed, usually you can get away with using the following default one:</p>
+
+<p><a id="X83EC43DA871C7F60" name="X83EC43DA871C7F60"></a></p>
+
+<h5>8.2-2 AVLCmp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLCmp</code>( <var class="Arg">a</var>, <var class="Arg">b</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: -1, 0 or 1</p>
+
+<p>This function calls the <code class="keyw">&lt;</code> operation and the <code class="keyw">=</code> operation to provide a generic three-way comparison function to be used in AVL tree operations. See <code class="func">AVLTree</code> (<a href="chap8_mj.html#X791E346F84F0430C"><span class="RefLink">8.2-1</span></a>) for a description of the return value. This function is implemented in the kernel and should be particularly fast.</p>
+
+<p>The following functions are used to access entries by key:</p>
+
+<p><a id="X7F65886F84E991C7" name="X7F65886F84E991C7"></a></p>
+
+<h5>8.2-3 AVLAdd</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLAdd</code>( <var class="Arg">t</var>, <var class="Arg">key</var>, <var class="Arg">val</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">fail</code></p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree. This function stores the key <var class="Arg">key</var> with value <var class="Arg">value</var> in the tree assuming that the keys in it are sorted according to the three-way comparison function stored with the tree. If <var class="Arg">value</var> is <code class="keyw">true</code> then no additional memory is needed. It is an error if there is already a key equal to <var class="Arg">key</var> in the tree, in this case the function returns <code class="keyw">fail</code>. Otherwise it returns <code class="keyw">true</code>.</p>
+
+<p><a id="X7E6EF8297C68F553" name="X7E6EF8297C68F553"></a></p>
+
+<h5>8.2-4 AVLLookup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLLookup</code>( <var class="Arg">t</var>, <var class="Arg">key</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an value or <code class="keyw">fail</code></p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree. This function looks up the key <var class="Arg">key</var> in the tree and returns the value which is associated to it. If the key is not in the tree, the value <code class="keyw">fail</code> is returned. This function assumes that the keys in the tree are sorted according to the three-way comparison function stored with the tree.</p>
+
+<p><a id="X82CE14F17B5DD6B2" name="X82CE14F17B5DD6B2"></a></p>
+
+<h5>8.2-5 AVLDelete</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLDelete</code>( <var class="Arg">t</var>, <var class="Arg">key</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an value or <code class="keyw">fail</code></p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree. This function looks up the key <var class="Arg">key</var> in the tree, deletes it and returns the value which was associated with it. If <var class="Arg">key</var> is not contained in the tree then <code class="keyw">fail</code> is returned. This function assumes that the keys in the tree are sorted according to the three-way comparison function stored with the tree.</p>
+
+<p><a id="X7D1B85DA814DA26C" name="X7D1B85DA814DA26C"></a></p>
+
+<h5>8.2-6 AVLFindIndex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLFindIndex</code>( <var class="Arg">t</var>, <var class="Arg">key</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an integer or <code class="keyw">fail</code></p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree. This function looks up the key <var class="Arg">key</var> in the tree and returns the index, under which it is stored in the tree. This index is one-based, that is, it takes values from 1 to the number of entries in the tree. If <var class="Arg">key</var> is not contained in the tree then <code class="keyw">fail</code> is returned. This function assumes that the keys in the tree are sorted according to the three-way comparison function stored with the tree.</p>
+
+<p>The following functions are used to access entries in trees by their index:</p>
+
+<p><a id="X810E5CDF7ED14BF8" name="X810E5CDF7ED14BF8"></a></p>
+
+<h5>8.2-7 AVLIndex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLIndex</code>( <var class="Arg">t</var>, <var class="Arg">index</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a key or <code class="keyw">fail</code></p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree. This function returns the key at index <var class="Arg">index</var> in the tree, so <var class="Arg">index</var> must be an integer in the range 1 to the number of elements in the tree. If the value is out of these bounds, <code class="keyw">fail</code> is returned. Note that to use this function it is not necessary that the keys in the tree are sorted according to the three-way comparison function stored with the tree.</p>
+
+<p><a id="X8541DB5C78B60A6B" name="X8541DB5C78B60A6B"></a></p>
+
+<h5>8.2-8 AVLIndexLookup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLIndexLookup</code>( <var class="Arg">t</var>, <var class="Arg">index</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a value or <code class="keyw">fail</code></p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree. This function returns the value associated to the key at index <var class="Arg">index</var> in the tree, so <var class="Arg">index</var> must be an integer in the range 1 to the number of elements in the tree. If the value is out of these bounds, <code class="keyw">fail</code> is returned. Note that to use this function it is not necessary that the keys in the tree are sorted according to the three-way comparison function stored with the tree.</p>
+
+<p><a id="X817B8377799DE5E1" name="X817B8377799DE5E1"></a></p>
+
+<h5>8.2-9 AVLIndexAdd</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLIndexAdd</code>( <var class="Arg">t</var>, <var class="Arg">key</var>, <var class="Arg">value</var>, <var class="Arg">index</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a key or <code class="keyw">fail</code></p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree. This function inserts the key <var class="Arg">key</var> at index <var class="Arg">index</var> in the tree and associates the value <var class="Arg">value</var> with it. If <var class="Arg">value</var> is <code class="keyw">true</code> then no additional memory is needed to store the value. The index <var class="Arg">index</var> must be an integer in the range 1 to <span class="SimpleMath">\(n+1\)</span> where <span class="SimpleMath">\(n\)</span> is the number of entries in the tree. The new key is inserted before the key which currently is stored at index <var class="Arg">index</var>, so calling with <var class="Arg">index</var> equal to <span class="SimpleMath">\(n+1\)</span> puts the new key at the end. If <var class="Arg">index</var> is not in the corrent range, this function returns <code class="keyw">fail</code> and the tree remains unchanged.</p>
+
+<p><strong class="button">Caution:</strong> With this function it is possible to put a key into the tree at a position such that the keys in the tree are no longer sorted according to the three-way comparison function stored with the tree! If you do this, the functions <code class="func">AVLAdd</code> (<a href="chap8_mj.html#X7F65886F84E991C7"><span class="RefLink">8.2-3</span></a>), <code class="func">AVLLookup</code> (<a href="chap8_mj.html#X7E6EF8297C68F553"><span class="RefLink">8.2-4</span></a>), <code class="func">AVLDelete</code> (<a href="chap8_mj.html#X82CE14F17B5DD6B2"><span class="RefLink">8.2-5</span></a>) and <code class="func">AVLFindIndex</code> (<a href="chap8_mj.html#X7D1B85DA814DA26C"><span class="RefLink">8.2-6</span></a>) will no longer work since they assume that the keys are sorted!</p>
+
+<p><a id="X79E13784868CEAAF" name="X79E13784868CEAAF"></a></p>
+
+<h5>8.2-10 AVLIndexDelete</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLIndexDelete</code>( <var class="Arg">t</var>, <var class="Arg">index</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a key or <code class="keyw">fail</code></p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree. This function deletes the key at index <var class="Arg">index</var> in the tree and returns the value which was associated with it.</p>
+
+<p>The following functions allow low level access to the AVL tree object:</p>
+
+<p><a id="X7EF737C286E94F23" name="X7EF737C286E94F23"></a></p>
+
+<h5>8.2-11 AVLFind</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLFind</code>( <var class="Arg">t</var>, <var class="Arg">key</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an integer or <code class="keyw">fail</code></p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree. This function locates the key <var class="Arg">key</var> in the tree and returns the position in the positional object, at which the node which contains the key is stored. This position will always be divisible by 4. Use the functions <code class="func">AVLData</code> (<a href="chap8_mj.html#X78B2EEB4804987F2"><span class="RefLink">8.2-13</span></a>) and <code class="func">AVLValue</code> (<a href="chap8_mj.html#X78DE1F2C80B0D55C"><span class="RefLink">8.2-14</span></a>) to access the key and value of the node respectively. The function returns <code class="keyw">fail</code> if the key is not found in the tree. This function assumes that the keys in the tree are sorted according to the three-way comparison function stored with the tree.</p>
+
+<p><a id="X80CF197882D71FD7" name="X80CF197882D71FD7"></a></p>
+
+<h5>8.2-12 AVLIndexFind</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLIndexFind</code>( <var class="Arg">t</var>, <var class="Arg">index</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an integer or <code class="keyw">fail</code></p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree. This function locates the index <var class="Arg">index</var> in the tree and returns the position in the positional object, at which the node which hash this index is stored. This position will always be divisible by 4. Use the functions <code class="func">AVLData</code> (<a href="chap8_mj.html#X78B2EEB4804987F2"><span class="RefLink">8.2-13</span></a>) and <code class="func">AVLValue</code> (<a href="chap8_mj.html#X78DE1F2C80B0D55C"><span class="RefLink">8.2-14</span></a>) to access the key and value of the node respectively. The function returns <code class="keyw">fail</code> if the key is not found in the tree. This function does not assume that the keys in the tree are sorted according to the three-way comparison function stored with the tree.</p>
+
+<p><a id="X78B2EEB4804987F2" name="X78B2EEB4804987F2"></a></p>
+
+<h5>8.2-13 AVLData</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLData</code>( <var class="Arg">t</var>, <var class="Arg">pos</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an key</p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree and the second a position in the positional object corresponding to a node as returned by <code class="func">AVLFind</code> (<a href="chap8_mj.html#X7EF737C286E94F23"><span class="RefLink">8.2-11</span></a>). The function returns the key associated with this node.</p>
+
+<p><a id="X78DE1F2C80B0D55C" name="X78DE1F2C80B0D55C"></a></p>
+
+<h5>8.2-14 AVLValue</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AVLValue</code>( <var class="Arg">t</var>, <var class="Arg">pos</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a value</p>
+
+<p>The first argument <var class="Arg">t</var> must be an AVL tree and the second a position in the positional object corresponding to a node as returned by <code class="func">AVLFind</code> (<a href="chap8_mj.html#X7EF737C286E94F23"><span class="RefLink">8.2-11</span></a>). The function returns the value associated with this node.</p>
+
+<p>The following convenience methods for standard list methods are implemented for AVL tree objects:</p>
+
+<p><a id="X83A5C59278E13248" name="X83A5C59278E13248"></a></p>
+
+<h5>8.2-15 Display</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Display</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This function displays the tree in a user-friendly way. Do not try this with trees containing many nodes!</p>
+
+<p><a id="X805C33C281B29B00" name="X805C33C281B29B00"></a></p>
+
+<h5>8.2-16 ELM_LIST</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ELM_LIST</code>( <var class="Arg">t</var>, <var class="Arg">index</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A key or <code class="keyw">fail</code></p>
+
+<p>This method allows for easy access to the key at index <var class="Arg">index</var> in the tree using the square bracket notation <code class="code"><var class="Arg">t</var>[<var class="Arg">index</var>]</code>. It does exactly the same as <code class="func">AVLIndex</code> (<a href="chap8_mj.html#X810E5CDF7ED14BF8"><span class="RefLink">8.2-7</span></a>). This is to make AVL trees behave more like lists.</p>
+
+<p><a id="X79975EC6783B4293" name="X79975EC6783B4293"></a></p>
+
+<h5>8.2-17 Position</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Position</code>( <var class="Arg">t</var>, <var class="Arg">key</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an integer or <code class="keyw">fail</code></p>
+
+<p>This method allows to use the <code class="code">Position</code> operation to locate the index at which the key <var class="Arg">key</var> is stored in the tree. It does exactly the same as <code class="func">AVLFindIndex</code> (<a href="chap8_mj.html#X7D1B85DA814DA26C"><span class="RefLink">8.2-6</span></a>). This is to make AVL trees behave more like lists.</p>
+
+<p><a id="X795EC9D67E34DAB0" name="X795EC9D67E34DAB0"></a></p>
+
+<h5>8.2-18 Add</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Add</code>( <var class="Arg">t</var>, <var class="Arg">key</var>[, <var class="Arg">index</var>] )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This method allows to use the <code class="code">Add</code> operation to add a key (with associated value <code class="keyw">true</code>) to the tree at index <var class="Arg">index</var>. It does exactly the same as <code class="func">AVLIndexAdd</code> (<a href="chap8_mj.html#X817B8377799DE5E1"><span class="RefLink">8.2-9</span></a>), so the same warning about sortedness as there applies! If <var class="Arg">index</var> is omitted, the key is added at the end. This is to make AVL trees behave more like lists.</p>
+
+<p><a id="X7E98B11B79BA9167" name="X7E98B11B79BA9167"></a></p>
+
+<h5>8.2-19 Remove</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Remove</code>( <var class="Arg">t</var>, <var class="Arg">index</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a key</p>
+
+<p>This method allows to use the <code class="code">Remove</code> operation to remove a key from the tree at index <var class="Arg">index</var>. If <var class="Arg">index</var> is omitted, the last key in the tree is remove. This method returns the deleted key or <code class="keyw">fail</code> if the tree was empty. This is to make AVL trees behave more like lists.</p>
+
+<p><a id="X780769238600AFD1" name="X780769238600AFD1"></a></p>
+
+<h5>8.2-20 Length</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Length</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a key</p>
+
+<p>This method returns the number of entries stored in the tree <var class="Arg">t</var>. This is to make AVL trees behave more like lists.</p>
+
+<p><a id="X87BDB89B7AAFE8AD" name="X87BDB89B7AAFE8AD"></a></p>
+
+<h5><code>8.2-21 \in</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \in</code>( <var class="Arg">key</var>, <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>This method tests whether or not the key <var class="Arg">key</var> is stored in the AVL tree <var class="Arg">t</var>. This is to make AVL trees behave more like lists.</p>
+
+<p><a id="X87323803809E0EF5" name="X87323803809E0EF5"></a></p>
+
+<h4>8.3 <span class="Heading">The internal data structures</span></h4>
+
+<p>An AVL tree is a positional object in which the first 7 positions are used for administrative data (see table below) and then from position 8 on follow the nodes of the tree. Each node uses 4 positions such that all nodes begin at positions divisible by 4. The system allocates the positional object larger than actually needed such that not every new node leads to the object being copied. Nodes which become free are collected in a free list. The following table contains the information what is stored in each of the first 7 entries:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdleft">1</td>
+<td class="tdleft">last actually used position, is always congruent 3 mod 4</td>
+</tr>
+<tr>
+<td class="tdleft">2</td>
+<td class="tdleft">position of first node in free list</td>
+</tr>
+<tr>
+<td class="tdleft">3</td>
+<td class="tdleft">number of currently used nodes in the tree</td>
+</tr>
+<tr>
+<td class="tdleft">4</td>
+<td class="tdleft">position of largest allocated position is always congruent 3 mod 4</td>
+</tr>
+<tr>
+<td class="tdleft">5</td>
+<td class="tdleft">three-way comparison function</td>
+</tr>
+<tr>
+<td class="tdleft">6</td>
+<td class="tdleft">position of the top node</td>
+</tr>
+<tr>
+<td class="tdleft">7</td>
+<td class="tdleft">a plain list holding the values stored under the keys</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>The four positions used for a node contain the following information, recall that each node starts at a position divisible by 4:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdleft">0 mod 4</td>
+<td class="tdleft">reference to the key</td>
+</tr>
+<tr>
+<td class="tdleft">1 mod 4</td>
+<td class="tdleft">position of left node or 0 if empty, balance factor (see below)</td>
+</tr>
+<tr>
+<td class="tdleft">2 mod 4</td>
+<td class="tdleft">position of right node or 0 if empty</td>
+</tr>
+<tr>
+<td class="tdleft">3 mod 4</td>
+<td class="tdleft">index: number of nodes in left subtree plus one</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>Since all positions of nodes are divisible by 4, we can use the least significant two bits of the left node reference for the so called balance factor. Balance factor 0 (both bits 0) indicates that the depth of the left subtree is equal to the depth of the right subtree. Balance factor 1 (bits 01) indicates that the depth of the right subtree is one greater than the depth of the left subtree. Balance factor 2 (or -1 in <a href="chapBib_mj.html#biBACP3">[Knu97]</a>, here bits 10) indicates that the depth of the left subtree is one greater than the depth of the right subtree.</p>
+
+<p>For freed nodes the position of the next free node in the free list is held in the 0 mod 4 position and 0 means the end of the free list.</p>
+
+<p>Position 7 in the positional object can contain the value <code class="keyw">fail</code>, in this case all stored values are <code class="keyw">true</code>. This is a measure to limit the memory usage in the case that the only relevant information in the tree is the key and no values are stored there. This is in particular interesting if the tree structure is just used as a list implementation.</p>
+
+<p>Note that all functions dealing with AVL trees are both implemented on the <strong class="pkg">GAP</strong> level and on the kernel level. Both implementations do exactly the same thing, the kernel version is only much faster and tuned for efficiency whereas the <strong class="pkg">GAP</strong> version documents the functionality better and is used as a fallback if the C-part of the <strong class="pkg">orb</strong> is not compiled.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

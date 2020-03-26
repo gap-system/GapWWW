@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (orb) - Chapter 3: Basic orbit enumeration</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X7D55DB437F5407E8" name="X7D55DB437F5407E8"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7D55DB437F5407E8">3 <span class="Heading">Basic orbit enumeration</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X87DF498E7F386786">3.1 <span class="Heading">Enumerating orbits</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86A89A0881CE04F6">3.1-1 Orb</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BCD5342793C7A7E">3.1-2 Enumerate</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81D5A4A97AA9D4B0">3.1-3 IsClosed</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81BF5A087B9E1353">3.1-4 <span class="Heading">Options for orbits</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B11180F80A77D48">3.1-5 <span class="Heading">Output components of orbits</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X833670F47BD5632C">3.1-6 StabWords</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84F62CB679D6B3CE">3.1-7 PositionOfFound</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X791CE79C8041058C">3.1-8 UnderlyingPlist</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79A6D04C7CBABFC7">3.1-9 DepthOfSchreierTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FEBA8B4838FBD52">3.1-10 IsGradedOrbit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BBE86D97DF2304B">3.1-11 Grades</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8389D8AB794EF721">3.1-12 OrbitGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A08E68585088C89">3.1-13 OrbitGraphAsSets</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81C12D677CE815C7">3.1-14 ActionOnOrbit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7EA4E92180F142D3">3.1-15 OrbActionHomomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F927E787BA898BF">3.1-16 TraceSchreierTreeForward</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80615B4D83620AA1">3.1-17 TraceSchreierTreeBack</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D892CE87E7EBEDB">3.1-18 ActWithWord</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X799D2F3C866B9AED">3.1-19 EvaluateWord</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D100BE4820039C1">3.1-20 AddGeneratorsToOrbit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X823F7A9A83EACFD0">3.1-21 MakeSchreierTreeShallow</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8566B13379E697F6">3.1-22 FindSuborbits</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83015A9E823E1AB1">3.1-23 OrbitIntersectionMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8245A2D280E66B2C">3.1-24 ORB_EstimateOrbitSize</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Basic orbit enumeration</span></h3>
+
+<p>This package contains a new implementation of the standard orbit enumeration algorithm. The design principles for this implementation have been:</p>
+
+
+<ul>
+<li><p>Allow partial orbit enumeration and later continuation.</p>
+
+</li>
+<li><p>Consequently use hashing techniques.</p>
+
+</li>
+<li><p>Implement stabiliser calculation and Schreier transversals on demand.</p>
+
+</li>
+<li><p>Allow for searching in orbits during orbit enumeration.</p>
+
+</li>
+</ul>
+<p>Some of these design principles made it necessary to change the user interface in comparison to the standard <strong class="pkg">GAP</strong> one.</p>
+
+<p><a id="X87DF498E7F386786" name="X87DF498E7F386786"></a></p>
+
+<h4>3.1 <span class="Heading">Enumerating orbits</span></h4>
+
+<p>The enumeration of an orbit works in at least two stages: First an orbit object is created with all the necessary information to describe the orbit. Then the actual enumeration is started. The latter stage can be repeated as many times as needed in the case that the orbit enumeration stopped for some reason before the orbit was enumerated completely. See below for conditions under which this happens.</p>
+
+<p>For orbit object creation there is the following function:</p>
+
+<p><a id="X86A89A0881CE04F6" name="X86A89A0881CE04F6"></a></p>
+
+<h5>3.1-1 Orb</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Orb</code>( <var class="Arg">gens</var>, <var class="Arg">point</var>, <var class="Arg">op</var>[, <var class="Arg">opt</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: An orbit object</p>
+
+<p>The argument <var class="Arg">gens</var> is either a <strong class="pkg">GAP</strong> group, semigroup or monoid object or a list of generators of the magma acting, <var class="Arg">point</var> is a point in the orbit to be enumerated, <var class="Arg">op</var> is a <strong class="pkg">GAP</strong> function describing the action of the generators on points in the usual way, that is, <code class="code"><var class="Arg">op</var>(p,g)</code> returns the result of the action of the element <code class="code">g</code> on the point <code class="code">p</code>.</p>
+
+<p>Note that in the case of a semigroup or monoid acting not all options make sense (for example stabilisers only work for groups). In this case the "directed" or "weak" orbit is computed.</p>
+
+<p>The optional argument <var class="Arg">opt</var> is a <strong class="pkg">GAP</strong> record which can contain quite a few options changing the orbit enumeration. For a list of possible options see Subsection <a href="chap3.html#X81BF5A087B9E1353"><span class="RefLink">3.1-4</span></a> at the end of this section.</p>
+
+<p>The function returns an "orbit" object that can later be used to enumerate (a part of) the orbit of <var class="Arg">point</var> under the action of the group generated by <var class="Arg">gens</var>.</p>
+
+<p>If <var class="Arg">gens</var> is a group, semigroup or monoid object, then its generators are taken as the list of generators acting. If a group object knows its size, then this size is used to speed up orbit and in particular stabiliser computations.</p>
+
+<p>The following operation actually starts the orbit enumeration:</p>
+
+<p><a id="X7BCD5342793C7A7E" name="X7BCD5342793C7A7E"></a></p>
+
+<h5>3.1-2 Enumerate</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Enumerate</code>( <var class="Arg">orb</var>[, <var class="Arg">limit</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The orbit object <var class="Arg">orb</var></p>
+
+<p><var class="Arg">orb</var> must be an orbit object created by <code class="func">Orb</code> (<a href="chap3.html#X86A89A0881CE04F6"><span class="RefLink">3.1-1</span></a>). The optional argument <var class="Arg">limit</var> must be a positive integer meaning that the orbit enumeration should stop if <var class="Arg">limit</var> points have been found, regardless whether the orbit is complete or not. Note that the orbit enumeration can be continued by again calling the <code class="func">Enumerate</code> operation. If the argument <var class="Arg">limit</var> is omitted, the whole orbit is enumerated, unless other options lead to prior termination.</p>
+
+<p>To see whether an orbit is closed you can use the following operation:</p>
+
+<p><a id="X81D5A4A97AA9D4B0" name="X81D5A4A97AA9D4B0"></a></p>
+
+<h5>3.1-3 IsClosed</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsClosed</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>The result indicates, whether the orbit <var class="Arg">orb</var> is already complete or not.</p>
+
+<p>Here is an example of an orbit enumeration:</p>
+
+
+<div class="example"><pre><span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := GeneratorsOfGroup(MathieuGroup(24)); </span>
+[ (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23), 
+  (3,17,10,7,9)(4,13,14,19,5)(8,18,11,12,23)(15,20,22,21,16), 
+  (1,24)(2,23)(3,12)(4,16)(5,18)(6,10)(7,20)(8,14)(9,21)(11,17)(13,22)(15,19) 
+ ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o := Orb(g,2,OnPoints);</span>
+&lt;open Int-orbit, 1 points&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Enumerate(o,20);</span>
+&lt;open Int-orbit, 21 points&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsClosed(o);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Enumerate(o);   </span>
+&lt;closed Int-orbit, 24 points&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsClosed(o);    </span>
+true</pre></div>
+
+<p>The orbit object <code class="code">o</code> now behaves like an immutable dense list, the entries of which are the points in the orbit in the order as they were found during the orbit enumeration (note that this is not always true when one uses the function <code class="func">AddGeneratorsToOrbit</code> (<a href="chap3.html#X7D100BE4820039C1"><span class="RefLink">3.1-20</span></a>)). So you can ask the orbit for its length, access entries, and ask, whether a given point lies in the orbit or not. Due to the hashing techniques used such lookups are quite fast, they usually only use a constant time regardless of the length of the orbit!</p>
+
+
+<div class="example"><pre><span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(o);</span>
+24
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o[1];</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o[2];</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o{[3..5]};</span>
+[ 23, 4, 17 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">17 in o;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Position(o,17);</span>
+5</pre></div>
+
+<p><a id="X81BF5A087B9E1353" name="X81BF5A087B9E1353"></a></p>
+
+<h5>3.1-4 <span class="Heading">Options for orbits</span></h5>
+
+<p>The optional fourth argument <var class="Arg">opt</var> of the function <code class="func">Orb</code> (<a href="chap3.html#X86A89A0881CE04F6"><span class="RefLink">3.1-1</span></a>) is a <strong class="pkg">GAP</strong> record and its components change the behaviour of the orbit enumeration. In this subsection we explain the use of the components of this options record. All components are themselves optional. For every component we also describe the possible values in the following list:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">eqfunc</code></strong></dt>
+<dd><p>This component always has to be given together with the component <code class="code">hashfunc</code>. If both are given, they are used to set up a hash table to store the points in the orbit. You have to use this if the automatic mechanism to find a suitable hash function does not work for your starting point in the orbit.</p>
+
+<p>Note that if you use this feature, the hash table cannot grow automatically any more, unless you also use the components <code class="code">hfbig</code> and <code class="code">hfdbig</code> as well. See the description of <code class="func">GrowHT</code> (<a href="chap4.html#X86E9DEC68728425C"><span class="RefLink">4.4-5</span></a>) for an explanation how to use this feature.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">genstoapply</code></strong></dt>
+<dd><p>This is only used internally and is intentionally not documented.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">gradingfunc</code></strong></dt>
+<dd><p>If this component is bound it must be bound to a function taking two arguments, the first is the orbit object, the second is a new point. This function is called for every new point and is supposed to compute a "grade" for the point which can be an arbitrary <strong class="pkg">GAP</strong> object. The resulting values are then stored in a list of equal length to the orbit and can later be queried with the <code class="func">Grades</code> (<a href="chap3.html#X7BBE86D97DF2304B"><span class="RefLink">3.1-11</span></a>) operation. If this feature is used the orbit object will lie in the filter <code class="func">IsGradedOrbit</code> (<a href="chap3.html#X7FEBA8B4838FBD52"><span class="RefLink">3.1-10</span></a>). In connection with the <code class="code">onlygrades</code> option the enumeration of an orbit can be limited to points with certain grades, see below.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">grpsizebound</code></strong></dt>
+<dd><p>Possible values for this component are positive integers. By setting this value one can help the orbit enumeration to complete earlier. The given number must be an upper bound for the order of the group. If the exact group order is given and the stabiliser is calculated during the orbit enumeration (see component <code class="code">permgens</code>), then the orbit enumeration can stop as soon as the orbit is found completely and the stabiliser is complete, which is usually much earlier than after all generator are applied to all points in the orbit.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">forflatplainlists</code></strong></dt>
+<dd><p>If this component is set to <code class="keyw">true</code> then the user guarantees that all the points in the orbit will be flat plain lists, that is, plain lists with no subobjects. For example lists of immediate integers will fulfill this requirement, but ranges don't. In this case, a particularly good and efficient hash function will automatically be taken and the components <code class="code">hf</code>, <code class="code">hfd</code>, <code class="code">hfbig</code> and <code class="code">hfdbig</code> are ignored. Note that this cannot be automatically detected because it depends not only on the first point of the orbit but also on the other points in the orbit and thus on the group generators given.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hashfunc</code></strong></dt>
+<dd><p>This component always has to be given together with the <code class="code">eqfunc</code> component (see also there). The value should be a record with components <code class="code">func</code> and <code class="code">data</code>. The former is used as the hash function (component <code class="code">hf</code> in the options to <code class="func">HTCreate</code> (<a href="chap4.html#X79F46D9982BB0E12"><span class="RefLink">4.3-1</span></a>)) and the latter as data argument (component <code class="code">hfd</code>). The length of the hash is determined by the value of the component <code class="code">hashlen</code>. If a tree hash is to be used, the component <code class="code">treehashsize</code> has to be used instead of <code class="code">hashlen</code>. If you want to use a hash table that can grow automatically, use the <code class="code">hfbig</code> and <code class="code">htdbig</code> components together with <code class="code">hashlen</code> for the initial size. See <code class="func">HTCreate</code> (<a href="chap4.html#X79F46D9982BB0E12"><span class="RefLink">4.3-1</span></a>) for details.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hashlen</code></strong></dt>
+<dd><p>Possible values are positive integers. This component determines the initial size of the hash used for the orbit enumeration. The default value is <span class="SimpleMath">10000</span>. If the hash table turns out not to be large enough, it is automatically increased by a factor of two during the calculation. Although this process is quite fast it still improves performance to give a sensible hash size in advance.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hfbig</code> and <code class="code">hfdbig</code></strong></dt>
+<dd><p>These components can only be used in connection with <code class="code">eqfunc</code> and <code class="code">hashfunc</code> and are otherwise ignored. There values are simply passed on to the hash table created. The idea is to still be able to grow the hash table if need be. See Section <a href="chap4.html#X8069137484662072"><span class="RefLink">4.5</span></a> for more details.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">treehashsize</code></strong></dt>
+<dd><p>This component indicates that instead of a normal hash table a tree hash table (TreeHashTab) should be used (see Section <a href="chap4.html#X814DE39B7C1B1554"><span class="RefLink">4.1</span></a>). If bound, it must be set to the length of the tree hash table. You should still choose this length big enough, however, this type of hash table should be more resilient to bad hash functions since the performance of operations will only deteriorate up to <span class="SimpleMath">log(n)</span> instead of to <span class="SimpleMath">n</span> (number of entries). If you use this option your hash keys must be comparable by <code class="code">&lt;</code> and not only by <code class="code">=</code>. You can supply your own three-way comparison function (see <code class="func">HTCreate</code> (<a href="chap4.html#X79F46D9982BB0E12"><span class="RefLink">4.3-1</span></a>)) by using the <code class="code">cmpfunc</code> component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">cmpfunc</code></strong></dt>
+<dd><p>If the previous component <code class="code">treehashsize</code> is bound, you can specify a three-way comparison function for the hash keys in this component. See <code class="func">HTCreate</code> (<a href="chap4.html#X79F46D9982BB0E12"><span class="RefLink">4.3-1</span></a>) and <code class="func">AVLCmp</code> (<a href="chap8.html#X83EC43DA871C7F60"><span class="RefLink">8.2-2</span></a>) for details.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">log</code></strong></dt>
+<dd><p>If this component is set to <code class="keyw">true</code> then a log of the enumeration of the orbit is written into the components <code class="code">log</code>, <code class="code">logind</code> and <code class="code">logpos</code>. Every time a new point is found in the orbit enumeration, two numbers are appended to the log, first the number of the generator applied, then the index, under which the new point is stored in the orbit. For each point in the orbit, the start of the entries for that point in <code class="code">log</code> is stored in <code class="code">logind</code> and the end of those entries is marked by storing the number of the last generator producing a new point negated.</p>
+
+<p>The purpose of a log is the following: With a log one can later add group generators to the orbit and thus get a different Schreier tree, such that the resulting orbit enumeration is still a breadth first enumeration using the new generating set! This is desirable to decrease the depth of the Schreier tree. The log helps to implement this in a way, such that the old generators do not again have to be applied to all the points in the orbit. See <code class="func">AddGeneratorsToOrbit</code> (<a href="chap3.html#X7D100BE4820039C1"><span class="RefLink">3.1-20</span></a>) for details.</p>
+
+<p>A log needs roughly 3 machine words per point in the orbit as memory.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">lookingfor</code></strong></dt>
+<dd><p>This component is used to search for something in the orbit. The idea is that the orbit enumeration is stopped when some condition is met. This condition can be specified with a great flexibility. The first way is to store a list of points into <code class="code">orb.lookingfor</code>. In that case the orbit enumeration stops, when a point is found that is in that list. A second possiblity is to store a hash table object into <code class="code">orb.lookingfor</code>. Then every newly found point in the orbit is looked up in that hash table and the orbit enumeration stops as soon as a point is found that is also in the hash table. The third possibility is functional: You can store a <strong class="pkg">GAP</strong> function into <code class="code">opt.lookingfor</code> which is called for every newly found point in the orbit. It gets both the orbit object and the point as its two arguments. This function has to return <code class="keyw">false</code> or <code class="keyw">true</code> and in the latter case the orbit enumeration is stopped.</p>
+
+<p>Whenever the orbit enumeration is stopped the component <code class="code">found</code> is set to the number of the found point in the orbit. Access this information using <code class="code">PositionOfFound(orb)</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">matgens</code></strong></dt>
+<dd><p>This is not yet implemented. It will allow for stabiliser computations in matrix groups.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">onlygrades</code></strong></dt>
+<dd><p>This option is to limit the orbit enumeration to points with certain grades (see option <code class="code">gradingfunc</code>). The primary way to do this is to bind <code class="code">onlygrades</code> to a function taking two arguments. The first is the grade value, the second is the value bound to the option <code class="code">onlygradesdata</code> below. The function is then called for every new point after its grade is computed. If the function returns <code class="keyw">true</code> the point is stored in the orbit as usual, if it returns <code class="keyw">false</code> the point is dropped. Note that using this option can (and ought to) lead to incomplete orbits which claim to be closed.</p>
+
+<p>As a shorthand notation one can bind a list or hash table to the component <code class="code">onlygrades</code>. In this case a standard membership test of the grade value in the list or hash table is performed to decide whether or not the point is stored. One does not have to assign <code class="code">onlygradesdata</code> in this case.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">onlygradesdata</code></strong></dt>
+<dd><p>As described above this component holds the data for the second argument of the <code class="code">onlygrades</code> test function. See option <code class="code">onlygrades</code> above.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">onlystab</code></strong></dt>
+<dd><p>If this boolean flag is set to <code class="keyw">true</code> then the orbit enumeration stops once the stabiliser is completely determined. Note that this can only be known, if a bound for the group size is given in the <code class="code">opt.grpsizebound</code> option and when more than half of the orbit is already found, or when <code class="code">opt.stabsizebound</code> is given.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">orbsizebound</code></strong></dt>
+<dd><p>Possible values for this component are positive integers. The given number must be an upper bound for the orbit length. Giving this number helps the orbit enumeration to stop earlier, when the orbit is found completely.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">orbitgraph</code></strong></dt>
+<dd><p>If this component is <code class="keyw">true</code> then the so called orbit graph is computed. The vertices of this graph are the points of the orbit and the (directed) edges are given by the generators acting. So if a generator <span class="SimpleMath">g</span> maps point <span class="SimpleMath">a</span> to <span class="SimpleMath">b</span> then there is a directed edge from the vertex <span class="SimpleMath">a</span> to the vertex <span class="SimpleMath">b</span>. This graph can later be queried using the <code class="func">OrbitGraph</code> (<a href="chap3.html#X8389D8AB794EF721"><span class="RefLink">3.1-12</span></a>) and <code class="func">OrbitGraphAsSets</code> (<a href="chap3.html#X7A08E68585088C89"><span class="RefLink">3.1-13</span></a>) operations. The data format in which the graph is returned is described there.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">permbase</code></strong></dt>
+<dd><p>This component is used to tell the orbit enumerator that a certain list of points is a base of the permutation representation given in the <code class="code">opt.permgens</code> component. This information is often available beforehand and can drastically speed up the calculation of Schreier generators, especially for the common case that they are trivial. The value is just a list of integers.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">permgens</code></strong></dt>
+<dd><p>If this component is set, it must be set to a list of permutations, that represent the same group as the generators used to define the orbit. This permutation representation is then used to calculate the stabiliser of the starting point. After the orbit enumeration is complete, you can call <code class="code">Stabilizer(<var class="Arg">orb</var>)</code> with <var class="Arg">orb</var> being the orbit object and get the stabiliser as a permutation group. The stabiliser is also stored in the <code class="code">stab</code> component of the orbit object. Furthermore, the size of the stabiliser is stored in the <code class="code">stabsize</code> component of the orbit object and the component <code class="code">stabwords</code> contains the stabiliser generators as words in the original group generators. Access these words with <code class="code">StabWords(orb)</code>. Here, a word is a list of integers, where positive integers are numbers of generators and a negative integer <span class="SimpleMath">i</span> indicates the inverse of the generator with number <span class="SimpleMath">-i</span>. In this way, complete information about the stabiliser can be derived from the orbit object.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">report</code></strong></dt>
+<dd><p>Possible values are non-negative integers. This value asks for a status report whenever the orbit enumeration has applied all generators to <code class="code">opt.report</code> points. A value of <span class="SimpleMath">0</span>, which is the default, switches off this report. In each report, the total number of points already found are given.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">schreier</code></strong></dt>
+<dd><p>This boolean flag decides, whether a Schreier tree is stored together with the orbit. A Schreier tree just stores for each point, which generator was applied to which other point in the orbit to get it. Thus, having the Schreier tree enables the usage of the operations <code class="func">TraceSchreierTreeForward</code> (<a href="chap3.html#X7F927E787BA898BF"><span class="RefLink">3.1-16</span></a>) and <code class="func">TraceSchreierTreeBack</code> (<a href="chap3.html#X80615B4D83620AA1"><span class="RefLink">3.1-17</span></a>). A Schreier tree needs two additional machine words of memory per point in the orbit. The <code class="code">opt.schreier</code> flag is automatically set when a stabiliser is computed during orbit enumeration (see components <code class="code">opt.permgens</code> and <code class="code">opt.matgens</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">schreiergenaction</code></strong></dt>
+<dd><p>The value of this component must be a function with 4 arguments: the orbit object, an index <var class="Arg">i</var>, an integer <var class="Arg">j</var>, and an index <var class="Arg">pos</var>. It is called, whenever during the orbit enumeration generator number <var class="Arg">j</var> was applied to point number <var class="Arg">i</var> and the result was an already known point with number <var class="Arg">pos</var>. The function has to return <code class="keyw">true</code> or <code class="keyw">false</code>. The former case is used internally and triggers the evaluation of some conditions for stabiliser computations. Simply return <code class="keyw">false</code> if you do not want this to happen.</p>
+
+<p>Once the component <code class="code">stabcomplete</code> is set to <code class="keyw">true</code> during the orbit computation (which happens when there is evidence that the stabiliser is already completely determined), no more calls to <code class="code">schreiergenaction</code> happen.</p>
+
+<p>This component is mainly used internally when the <code class="code">permgens</code> component was set and the stabiliser is calculated.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">seeds</code></strong></dt>
+<dd><p>In this component you can specify a list of additional seed points, which are appended to the orbit before the enumeration starts.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">stab</code></strong></dt>
+<dd><p>This component is used to tell the orbit enumerator that a subgroup of the stabiliser of the starting point is already known. Store a subgroup of the group generated by the permutations in <code class="code">opt.permgens</code> stabilising the starting point into this component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">stabchainrandom</code></strong></dt>
+<dd><p>This value can be a positive integer between <span class="SimpleMath">1</span> and <span class="SimpleMath">1000</span>. If <code class="code">opt.permgens</code> is given, an integer value is used to set the <code class="code">random</code> option when calculating a stabiliser chain to compute the size of the group generated by the Schreier generators. Although this size computation can be speeded up considerably, the user should be aware that for values smaller than <span class="SimpleMath">1000</span> this triggers a Monte Carlo algorithm that can produce wrong results with a certain error probability. A verification of the obtained results is advisable. Note however, that such computations can only err in one direction, namely underestimating the size of the group.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">stabsizebound</code></strong></dt>
+<dd><p>Possible values for this component are positive integers. The given number must be an upper bound for the size of the stabiliser. Giving this number helps the orbit enumeration to stop earlier, when also <code class="code">opt.orbsizebound</code> or <code class="code">opt.grpsizebound</code> are given or when <code class="code">opt.onlystab</code> is set.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">storenumbers</code></strong></dt>
+<dd><p>This boolean flag decides, whether the positions of points in the orbit are stored in the hash. The memory requirement for this is one machine word (<span class="SimpleMath">4</span> or <span class="SimpleMath">8</span> bytes depending on the architecture) per point in the orbit. If you just need the orbit itself this is not necessary. If you however want to find the position of a point in the orbit efficiently after enumeration, then you should switch this on. That is, the operation <code class="code">\in</code> is always fast, but <code class="code">Position(<var class="Arg">orb</var>, <var class="Arg">point</var>)</code> is only fast if <code class="code">opt.storenumbers</code> was set to <code class="keyw">true</code> or the orbit is "permutations acting on positive integers". In the latter case this flag is ignored.</p>
+
+</dd>
+</dl>
+<p>For some examples using these options see Chapter <a href="chap11.html#X7A489A5D79DA9E5C"><span class="RefLink">11</span></a>.</p>
+
+<p><a id="X7B11180F80A77D48" name="X7B11180F80A77D48"></a></p>
+
+<h5>3.1-5 <span class="Heading">Output components of orbits</span></h5>
+
+<p>The following components are bound in an orbit object. There might be some more, but those are implementation specific and not guaranteed to be there in future versions. Note that you have to access these components using the "<code class="code">.~</code>" dot exclamation mark notation and you should avoid using these if at all possible.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">depth</code> and <code class="code">depthmarks</code></strong></dt>
+<dd><p>If the orbit has either a Schreier tree or a log, then the component <code class="code">depth</code> holds its depth, that is the maximal number of generator applications needed to reach any point in the orbit. The corresponding component <code class="code">depthmarks</code> is a list of indices, at position <span class="SimpleMath">i</span> it holds the index of the first point in the orbit in depth <span class="SimpleMath">i</span> in the Schreier tree.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">gens</code></strong></dt>
+<dd><p>The list of group generators.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ht</code></strong></dt>
+<dd><p>If the orbit uses a hash table it is stored in this component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">op</code></strong></dt>
+<dd><p>The operation function.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">orbind</code></strong></dt>
+<dd><p>If generators have been added to the orbit later then the order in which the points are actually stored in the orbit might not correspond to a breadth first search. To cover this case, the component <code class="code">orbind</code> contains in position <span class="SimpleMath">i</span> the index under which the <span class="SimpleMath">i</span>-th point in the breadth-first search using the new generating set is actually stored in the orbit.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">schreiergen</code> and <code class="code">schreierpos</code></strong></dt>
+<dd><p>If a Schreier tree of the orbit was kept then both these components are lists containing integers. If point number <span class="SimpleMath">i</span> was found by applying generator number <span class="SimpleMath">j</span> to point number <span class="SimpleMath">p</span> then position <span class="SimpleMath">i</span> of <code class="code">schreiergen</code> is <span class="SimpleMath">j</span> and position <span class="SimpleMath">i</span> of <code class="code">schreierpos</code> is <span class="SimpleMath">p</span>. You can use the operations <code class="func">TraceSchreierTreeForward</code> (<a href="chap3.html#X7F927E787BA898BF"><span class="RefLink">3.1-16</span></a>) and <code class="func">TraceSchreierTreeBack</code> (<a href="chap3.html#X80615B4D83620AA1"><span class="RefLink">3.1-17</span></a>) to compute words in the generators using these two components.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">tab</code></strong></dt>
+<dd><p>For an orbit in which permutations act on positive integers this component is bound to a list containing in position <span class="SimpleMath">i</span> the index in the orbit, where the number <span class="SimpleMath">i</span> is stored.</p>
+
+</dd>
+</dl>
+<p>The following operations help to ask additional information about orbit objects:</p>
+
+<p><a id="X833670F47BD5632C" name="X833670F47BD5632C"></a></p>
+
+<h5>3.1-6 StabWords</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StabWords</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list of words</p>
+
+<p>If the stabiliser was computed during the orbit enumeration, then this function returns the stabiliser generators found as words in the generators. A word is a sequence of integers, where positive integers stand for generators and negative numbers for their inverses.</p>
+
+<p><a id="X84F62CB679D6B3CE" name="X84F62CB679D6B3CE"></a></p>
+
+<h5>3.1-7 PositionOfFound</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PositionOfFound</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An integer</p>
+
+<p>If during the orbit enumeration the option <code class="code">lookingfor</code> was used and the orbit enumerator looked for something, then this operation returns the index in the orbit, where the something was found most recently.</p>
+
+<p><a id="X791CE79C8041058C" name="X791CE79C8041058C"></a></p>
+
+<h5>3.1-8 UnderlyingPlist</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingPlist</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An plain list</p>
+
+<p>This returns the current elements in the orbit represented by <var class="Arg">orb</var> as a plain list. This is guaranteed to be a very fast operation using only constant time. However, it does give you a part of the internal data structure of <var class="Arg">orb</var>. Note that it is not allowed to change the resulting list in any way because that would corrupt the data structures of the orbit.</p>
+
+<p><a id="X79A6D04C7CBABFC7" name="X79A6D04C7CBABFC7"></a></p>
+
+<h5>3.1-9 DepthOfSchreierTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DepthOfSchreierTree</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An integer</p>
+
+<p>If a Schreier tree or a log was stored during orbit enumeration, then this operation returns the depth of the Schreier tree.</p>
+
+<p><a id="X7FEBA8B4838FBD52" name="X7FEBA8B4838FBD52"></a></p>
+
+<h5>3.1-10 IsGradedOrbit</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGradedOrbit</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>If the option <code class="code">gradingfunc</code> has been used when creating the orbit object, then a "grade" is computed for every point in the orbit. In this case the orbit object lies in this filter. The list of grades can then be queried using the <code class="func">Grades</code> (<a href="chap3.html#X7BBE86D97DF2304B"><span class="RefLink">3.1-11</span></a>) operation below.</p>
+
+<p><a id="X7BBE86D97DF2304B" name="X7BBE86D97DF2304B"></a></p>
+
+<h5>3.1-11 Grades</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Grades</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of grades</p>
+
+<p>If the option <code class="code">gradingfunc</code> has been used when creating the orbit object, then a "grade" is computed for every point in the orbit. This operation retrieves the list of grades from the orbit object <var class="Arg">orb</var>. Note that this is in general a mutable list which must not be changed. It needs to be mutable if the orbit enumeration goes on and this operation does not copy it for efficiency reasons.</p>
+
+<p><a id="X8389D8AB794EF721" name="X8389D8AB794EF721"></a></p>
+
+<h5>3.1-12 OrbitGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitGraph</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists</p>
+
+<p>The vertices of the orbit graph are the points of the orbit and the (directed) edges are given by the generators acting. So if a generator <span class="SimpleMath">g</span> maps point <span class="SimpleMath">a</span> to <span class="SimpleMath">b</span> then there is a directed edge from the vertex <span class="SimpleMath">a</span> to the vertex <span class="SimpleMath">b</span>. This operation returns the orbit graph can in the following format: The result is a list of equal length as the orbit. Each entry (corresponding to a point in the orbit) contains a list of orbit point numbers, one for each generator used for the orbit enumeration. That is, position <span class="SimpleMath">[i][j]</span> in the list contains the number in the orbit of the image of orbit point number <span class="SimpleMath">i</span> under the generator with number <span class="SimpleMath">j</span>.</p>
+
+<p>Note that if the <code class="code">gradingfunc</code> and <code class="code">onlygrades</code> options are used some entries in these lists can be unbound. This shows that some edges of the complete orbit graph leave the part of the orbit which has been enumerated by the grade restriction.</p>
+
+<p><a id="X7A08E68585088C89" name="X7A08E68585088C89"></a></p>
+
+<h5>3.1-13 OrbitGraphAsSets</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitGraphAsSets</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of sets</p>
+
+<p>This operation returns the same graph as <code class="func">OrbitGraph</code> (<a href="chap3.html#X8389D8AB794EF721"><span class="RefLink">3.1-12</span></a>) in a slightly different format. The neighbours of a point are reported as a set of numbers rather than as a tuple. That is, position <span class="SimpleMath">[i]</span> of the resulting lists is the set of numbers of the (directed) neighbours of point number <span class="SimpleMath">i</span>.</p>
+
+<p>We present a few more operations one can do with orbit objects. One can express the action of a given group element in the group generated by the generators given in the <code class="code">Orb</code> command on this orbit as a permutation:</p>
+
+<p><a id="X81C12D677CE815C7" name="X81C12D677CE815C7"></a></p>
+
+<h5>3.1-14 ActionOnOrbit</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActionOnOrbit</code>( <var class="Arg">orb</var>, <var class="Arg">grpels</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A permutation or <code class="keyw">fail</code></p>
+
+<p><var class="Arg">orb</var> must be an orbit object and <var class="Arg">grpels</var> a list of group elements acting on the orbit. This operation calculates the action of <var class="Arg">grpels</var> on <var class="Arg">orb</var> as <strong class="pkg">GAP</strong> permutations, where the numbering of the points is in the same order as the points have been found in the orbit. Note that this operation is particularly fast if the orbit is an orbit of a permutation group acting on positive integers or if you used the option <code class="code">storenumbers</code> described in Subsection <a href="chap3.html#X81BF5A087B9E1353"><span class="RefLink">3.1-4</span></a>.</p>
+
+<p><a id="X7EA4E92180F142D3" name="X7EA4E92180F142D3"></a></p>
+
+<h5>3.1-15 OrbActionHomomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbActionHomomorphism</code>( <var class="Arg">g</var>, <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An action homomorphism</p>
+
+<p>The argument <var class="Arg">g</var> must be a group and <var class="Arg">orb</var> an orbit on which <var class="Arg">g</var> acts in the action of the orbit object. This operation returns a homomorphism into a permutation group acquired by taking the action of <var class="Arg">g</var> on the orbit.</p>
+
+<p><a id="X7F927E787BA898BF" name="X7F927E787BA898BF"></a></p>
+
+<h5>3.1-16 TraceSchreierTreeForward</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TraceSchreierTreeForward</code>( <var class="Arg">orb</var>, <var class="Arg">nr</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A word in the generators</p>
+
+<p><var class="Arg">orb</var> must be an orbit object with a Schreier tree, that is, the option <code class="code">schreier</code> must have been set during creation, and <var class="Arg">nr</var> must be the number of a point in the orbit. This operation traces the Schreier tree and returns a word in the generators that maps the starting point to the point with number <var class="Arg">nr</var>. Here, a word is a list of positive integers which are numbers of generators of the orbit.</p>
+
+<p><a id="X80615B4D83620AA1" name="X80615B4D83620AA1"></a></p>
+
+<h5>3.1-17 TraceSchreierTreeBack</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TraceSchreierTreeBack</code>( <var class="Arg">orb</var>, <var class="Arg">nr</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A word in the generators</p>
+
+<p><var class="Arg">orb</var> must be an orbit object with a Schreier tree, that is, the option <code class="code">schreier</code> must have been set during creation, and <var class="Arg">nr</var> must be the number of a point in the orbit. This operation traces the Schreier tree and returns a word in the inverses of the generators that maps the point with number <var class="Arg">nr</var> to the starting point. As above, a word is here a list of positive integers which are numbers of inverses of the generators of the orbit.</p>
+
+<p><a id="X7D892CE87E7EBEDB" name="X7D892CE87E7EBEDB"></a></p>
+
+<h5>3.1-18 ActWithWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActWithWord</code>( <var class="Arg">gens</var>, <var class="Arg">w</var>, <var class="Arg">op</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A point</p>
+
+<p><var class="Arg">gens</var> must be a list of group generators, <var class="Arg">w</var> a list of positive integers less than or equal to the length of <var class="Arg">gens</var>, <var class="Arg">op</var> an action function and <var class="Arg">p</var> a point. This operation computes the action of the word <var class="Arg">w</var> in the generators <var class="Arg">gens</var> on the point <var class="Arg">p</var> and returns the result.</p>
+
+<p><a id="X799D2F3C866B9AED" name="X799D2F3C866B9AED"></a></p>
+
+<h5>3.1-19 EvaluateWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EvaluateWord</code>( <var class="Arg">gens</var>, <var class="Arg">w</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A group element</p>
+
+<p><var class="Arg">gens</var> must be a list of group generators, <var class="Arg">w</var> a list of positive integers less than or equal to the length of <var class="Arg">gens</var>. This operation evaluates the word <var class="Arg">w</var> in the generators <var class="Arg">gens</var> and returns the result.</p>
+
+<p><a id="X7D100BE4820039C1" name="X7D100BE4820039C1"></a></p>
+
+<h5>3.1-20 AddGeneratorsToOrbit</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddGeneratorsToOrbit</code>( <var class="Arg">orb</var>, <var class="Arg">l</var>[, <var class="Arg">p</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The orbit object <var class="Arg">orb</var></p>
+
+<p><var class="Arg">orb</var> must be an orbit object, <var class="Arg">l</var> a list of new generators and, if given, <var class="Arg">p</var> must be a list of permutations of equal length. <var class="Arg">p</var> must be given if and only if the component <code class="code">permgens</code> was specified upon creation of the orbit object. The new generators are appended to the old list of generators. The orbit object is changed such that it then shows the outcome of a breadth-first orbit enumeration with the <em>new</em> list of generators. Note that the order of the points already enumerated will <em>not</em> be changed. However, the Schreier tree changes, the component <code class="code">orbind</code> is changed to indicate the order in which the points were found in the breadth-first search with the new generators and the components <code class="code">depth</code> and <code class="code">depthmarks</code> are changed.</p>
+
+<p>Note that all this is particularly efficient if the orbit has a log. If you add generators to an orbit with log, the old generators do not have to be applied again to all points!</p>
+
+<p>Note that new generators can actually enlarge an orbit if they generate a larger group than the old ones alone. Note also that when adding generators, the orbit is automatically enumerated completely</p>
+
+<p><a id="X823F7A9A83EACFD0" name="X823F7A9A83EACFD0"></a></p>
+
+<h5>3.1-21 MakeSchreierTreeShallow</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeSchreierTreeShallow</code>( <var class="Arg">orb</var>[, <var class="Arg">d</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>The argument <var class="Arg">orb</var> must be a closed orbit object with a log and a Schreier tree, that is, the options <code class="code">log</code> and <code class="code">schreier</code> must have been set to true during creation.</p>
+
+<p>Uses <code class="func">AddGeneratorsToOrbit</code> (<a href="chap3.html#X7D100BE4820039C1"><span class="RefLink">3.1-20</span></a>) to add more generators to the orbit in order to make the Schreier tree shallower. If <var class="Arg">d</var> it is given, generators are added until the depth is less than or equal to <var class="Arg">d</var> or until three more generators did not reduce the depth any more. If <var class="Arg">d</var> is not given, then the logarithm to base 2 of the orbit length is taken as a default value.</p>
+
+<p><a id="X8566B13379E697F6" name="X8566B13379E697F6"></a></p>
+
+<h5>3.1-22 FindSuborbits</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindSuborbits</code>( <var class="Arg">orb</var>, <var class="Arg">subgens</var>[, <var class="Arg">nrsuborbits</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A record</p>
+
+<p>The argument <var class="Arg">orb</var> must be a closed orbit object with a Schreier vector, <var class="Arg">subgens</var> a list of generators for a subgroup of the originally acting group. If given, <var class="Arg">nrsuborbits</var> must be a lower limit for the number of suborbits.</p>
+
+<p>The returned record describes the suborbit structure of <var class="Arg">orb</var> with respect to the group generated by <var class="Arg">subgens</var> using the following components: <code class="code">issuborbitrecord</code> is bound to <code class="keyw">true</code>, <code class="code">o</code> is bound to <var class="Arg">orb</var>, <code class="code">nrsuborbits</code> is bound to the number of suborbits and <code class="code">reps</code> is a list of length <code class="code">nrsuborbits</code> containing the index in the orbit of a representative for each suborbit. Likewise, <code class="code">words</code> contains words in the original group generators of the orbit that map the starting point of the orbit to those representatives. <code class="code">lens</code> is a list containing the lengths of the suborbits. The component <code class="code">suborbs</code> is bound to a list of lists, one for each suborbit containing the indices of the points in the orbit. The component <code class="code">suborbnr</code> is a list with the same length as the orbit, containing in position <span class="SimpleMath">i</span> the number of the suborbit in which point <span class="SimpleMath">i</span> in the orbit is contained.</p>
+
+<p>Finally, the component <code class="code">conjsuborbit</code> is bound to a list of length <code class="code">nrsuborbits</code>, containing for each suborbit the number the suborbit reached from the starting point by the inverse of the word used to reach the orbit representative. This latter information probably only makes sense when the subgroup generated by <var class="Arg">subgens</var> is contained in the point stabiliser of the starting point of the orbit, because then this is the so-called conjugate suborbit of a suborbit.</p>
+
+<p><a id="X83015A9E823E1AB1" name="X83015A9E823E1AB1"></a></p>
+
+<h5>3.1-23 OrbitIntersectionMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitIntersectionMatrix</code>( <var class="Arg">r</var>, <var class="Arg">g</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An integer matrix</p>
+
+<p>The argument <var class="Arg">r</var> must be a suborbit record as returned by the operation <code class="func">FindSuborbits</code> (<a href="chap3.html#X8566B13379E697F6"><span class="RefLink">3.1-22</span></a>) above, describing the suborbit structure of an orbit with respect to a subgroup. <var class="Arg">g</var> must be an element of the acting group. If <span class="SimpleMath">k</span> is the number of suborbits and the suborbits are <span class="SimpleMath">O_1, ..., O_k</span>, then the matrix returned by this operation has the integer <span class="SimpleMath">|O_i ⋅ <var class="Arg">g</var> ∩ O_j|</span> in its <span class="SimpleMath">(i,j)</span>-entry.</p>
+
+<p><a id="X8245A2D280E66B2C" name="X8245A2D280E66B2C"></a></p>
+
+<h5>3.1-24 ORB_EstimateOrbitSize</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ORB_EstimateOrbitSize</code>( <var class="Arg">gens</var>, <var class="Arg">pt</var>, <var class="Arg">op</var>, <var class="Arg">L</var>, <var class="Arg">limit</var>, <var class="Arg">timeout</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">fail</code> or a record</p>
+
+<p>The argument <var class="Arg">gens</var> is a list of group generators for a group <span class="SimpleMath">G</span>, the argument <var class="Arg">pt</var> a point and <var class="Arg">op</var> and action function for a group action of <span class="SimpleMath">G</span> acting on points like <var class="Arg">pt</var>. This function starts to act with random elements of <span class="SimpleMath">G</span> on <var class="Arg">pt</var> producing random elements of the orbit <span class="SimpleMath"><var class="Arg">pt</var>*G</span> and uses the birthday paradox to estimate the orbit size. To this end it creates points of the orbit until <var class="Arg">L</var> coincidences (points found twice) have been found. If before this happens <var class="Arg">limit</var> tries have been reached or if more than <var class="Arg">timeout</var> milliseconds have ellapsed, the function gives up and returns <code class="keyw">fail</code>. Otherwise it estimates the orbit size giving an estimate in the component <code class="code">estimate</code>, a confidence interval described by the components <code class="code">lowerbound</code> and <code class="code">upperbound</code>, a list of generators for the stabiliser in the component <code class="code">Sgens</code> and the number of coincidences that were caused by picking the same group element. The length of <code class="code">Sgens</code> is <span class="SimpleMath"><var class="Arg">L</var>-</span><code class="code">grpcoinc</code>. Use at least <span class="SimpleMath">15</span> for <var class="Arg">L</var>, otherwise the statistics are not valid.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,1185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Forms) - Chapter 4: Constructing forms and basic functionality</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X8166C704848D128E" name="X8166C704848D128E"></a></p>
+<div class="ChapSects"><a href="chap4.html#X8166C704848D128E">4 <span class="Heading">Constructing forms and basic functionality</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X83494A76866B06A5">4.1 <span class="Heading">Important filters</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7FA162E5874E8330">4.1-1 <span class="Heading">Categories for forms</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7999E38082474342">4.1-2 <span class="Heading">Representation for forms</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X78D981A67DBFCD6D">4.2 <span class="Heading">Constructing forms using a matrix</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C9D7E517A73F02F">4.2-1 BilinearFormByMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86B8694F782A4EE7">4.2-2 QuadraticFormByMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C027FF77AFED321">4.2-3 HermitianFormByMatrix</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X78476EDF7B9498D7">4.3 <span class="Heading">Constructing forms using a polynomial</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81D571077C4BCEFF">4.3-1 BilinearFormByPolynomial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86ADE1D986CC90CB">4.3-2 QuadraticFormByPolynomial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E21CFFA84180D0D">4.3-3 HermitianFormByPolynomial</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X843B68558283CE5F">4.4 <span class="Heading">Switching between bilinear and quadratic forms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F13EAC17BDE228D">4.4-1 QuadraticFormByBilinearForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X812963777BBF97E3">4.4-2 BilinearFormByQuadraticForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7BF7FBCA7FF91052">4.4-3 AssociatedBilinearForm</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8110213A7B303D1C">4.5 <span class="Heading">Evaluating forms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X808AB7B9840ABC27">4.5-1 EvaluateForm</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7A0825A987C88978">4.6 <span class="Heading">Orthogonality, totally isotropic subspaces, and totally singular subspaces</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78F2409184D192D3">4.6-1 OrthogonalSubspaceMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8394CCAD798053C6">4.6-2 IsIsotropicVector</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X855E539185D7D3C7">4.6-3 IsSingularVector</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8141325085AAC0CD">4.6-4 IsTotallyIsotropicSubspace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X834FD9117F1DA8D0">4.6-5 IsTotallySingularSubspace</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X813A02878352E9E5">4.7 <span class="Heading">Attributes and properties of forms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80254BFD7E4B8F06">4.7-1 IsReflexiveForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D5AB7E484CFBF63">4.7-2 IsAlternatingForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85585B2C80413490">4.7-3 IsSymmetricForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87E9C9A1781AB058">4.7-4 IsOrthogonalForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X861AF6EE82F4DA39">4.7-5 IsPseudoForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86F552AE7ACC12C7">4.7-6 IsSymplecticForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C60B9587D130DBB">4.7-7 IsDegenerateForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7A0E882F801624DA">4.7-8 IsSingularForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7BCBA564829D9E89">4.7-9 BaseField</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X847AFB4C81A90B3F">4.7-10 GramMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7855C3C07AAA1A68">4.7-11 RadicalOfForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82E7367F817C6BD0">4.7-12 PolynomialOfForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87B652A28534E0D2">4.7-13 DiscriminantOfForm</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8400E22D7D51FCCE">4.8 <span class="Heading">Recognition of forms preserved by a classical group</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X784481E57E207B3D">4.8-1 PreservedForms</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X84056A357E5447AF">4.8-2 PreservedSesquilinearForms</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D6F72B682E405E1">4.8-3 PreservedQuadraticForms</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X836A21687A685839">4.9 <span class="Heading">The trivial form and some of its properties</span></a>
+</span>
+</div>
+</div>
+
+<h3>4 <span class="Heading">Constructing forms and basic functionality</span></h3>
+
+<p>In this chapter, all operations to construct sesquilinear and quadratic forms are listed, along with their basic attributes and properties.</p>
+
+<p><a id="X83494A76866B06A5" name="X83494A76866B06A5"></a></p>
+
+<h4>4.1 <span class="Heading">Important filters</span></h4>
+
+<p><a id="X7FA162E5874E8330" name="X7FA162E5874E8330"></a></p>
+
+<h5>4.1-1 <span class="Heading">Categories for forms</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBilinearForm</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHermitianForm</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSesquilinearForm</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsQuadraticForm</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsForm</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsForm</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTrivialForm</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>The categories <code class="code">IsBilinearForm</code> and <code class="code">IsHermitianForm</code> are categories for bilinear and hermitian forms, respectively. They are disjoint and are both contained in the category <code class="code">IsSesquilinearForm</code>.</p>
+
+<p>Quadratic forms are contained in the category <code class="code">IsQuadraticForm</code>. The categories <code class="code">IsSesquilinearForm</code> and <code class="code">IsQuadraticForm</code> are disjoint and are both contained in the category <code class="code">IsForm</code>.</p>
+
+<p>The user is allowed to construct the trivial form (mapping all vectors to the zero element of the field). The trivial form is an object in the category <code class="code">IsTrivialForm</code>. This category is contained in <code class="code">IsForm</code> and disjoint from <code class="code">IsSesquilinearForm</code> and <code class="code">IsQuadraticForm</code>.</p>
+
+<p><a id="X7999E38082474342" name="X7999E38082474342"></a></p>
+
+<h5>4.1-2 <span class="Heading">Representation for forms</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFormRep</code></td><td class="tdright">(&nbsp;representation&nbsp;)</td></tr></table></div>
+<p>Every form is represented by a matrix, the base field and a string describing the ``type'' of the form.</p>
+
+<p><a id="X78D981A67DBFCD6D" name="X78D981A67DBFCD6D"></a></p>
+
+<h4>4.2 <span class="Heading">Constructing forms using a matrix</span></h4>
+
+<p><a id="X7C9D7E517A73F02F" name="X7C9D7E517A73F02F"></a></p>
+
+<h5>4.2-1 BilinearFormByMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BilinearFormByMatrix</code>( <var class="Arg">matrix</var>, <var class="Arg">field</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BilinearFormByMatrix</code>( <var class="Arg">matrix</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a bilinear form</p>
+
+<p>The argument <var class="Arg">matrix</var> must be a symmetric, or skew-symmetric, square matrix over the finite field <var class="Arg">field</var>. The argument <var class="Arg">field</var> is an optional argument, and if it is not given, then we assume that the <em>defining field</em> of the bilinear form is the smallest field containing the entries of matrix. Below we give an example where the defining field can make a difference in some applications. As it is only possible to construct reflexive bilinear forms, it is checked whether the matrix <var class="Arg">matrix</var> is symmetric or skew symmetric. If matrix <var class="Arg">matrix</var> is not symmetric nor skew symmetric, then an error message is returned. The output is a bilinear form (i.e., an object in <code class="code">IsBilinearForm</code>) with Gram matrix <var class="Arg">matrix</var> and defining field <var class="Arg">field</var>. (See <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> for more on bilinear forms).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := IdentityMat(4, GF(9));</span>
+[ [ Z(3)^0, 0*Z(3), 0*Z(3), 0*Z(3) ], [ 0*Z(3), Z(3)^0, 0*Z(3), 0*Z(3) ], 
+  [ 0*Z(3), 0*Z(3), Z(3)^0, 0*Z(3) ], [ 0*Z(3), 0*Z(3), 0*Z(3), Z(3)^0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(9));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Bilinear form
+Gram Matrix:
+ 1 . . .
+ . 1 . .
+ . . 1 .
+ . . . 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[0*Z(2),Z(16)^12,0*Z(2),Z(4)^2,Z(16)^13],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [Z(16)^12,0*Z(2),0*Z(2),Z(16)^11,Z(16)],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [0*Z(2),0*Z(2),0*Z(2),Z(4)^2,Z(16)^3],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [Z(4)^2,Z(16)^11,Z(4)^2,0*Z(2),Z(16)^3],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [Z(16)^13,Z(16),Z(16)^3,Z(16)^3,0*Z(2) ]];</span>
+[ [ 0*Z(2), Z(2^4)^12, 0*Z(2), Z(2^2)^2, Z(2^4)^13 ], 
+  [ Z(2^4)^12, 0*Z(2), 0*Z(2), Z(2^4)^11, Z(2^4) ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), Z(2^2)^2, Z(2^4)^3 ], 
+  [ Z(2^2)^2, Z(2^4)^11, Z(2^2)^2, 0*Z(2), Z(2^4)^3 ], 
+  [ Z(2^4)^13, Z(2^4), Z(2^4)^3, Z(2^4)^3, 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(16));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Bilinear form
+Gram Matrix:
+z = Z(16)
+    . z^12    . z^10 z^13
+ z^12    .    . z^11  z^1
+    .    .    . z^10  z^3
+ z^10 z^11 z^10    .  z^3
+ z^13  z^1  z^3  z^3    .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]]*Z(7)^0;</span>
+[ [ Z(7)^0, 0*Z(7), 0*Z(7), 0*Z(7) ], [ 0*Z(7), Z(7)^0, 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), Z(7)^0 ], [ 0*Z(7), 0*Z(7), Z(7)^0, 0*Z(7) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat);</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WittIndex(form);</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(49));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WittIndex(form);</span>
+2 
+</pre></div>
+
+<p><a id="X86B8694F782A4EE7" name="X86B8694F782A4EE7"></a></p>
+
+<h5>4.2-2 QuadraticFormByMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuadraticFormByMatrix</code>( <var class="Arg">matrix</var>, <var class="Arg">field</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuadraticFormByMatrix</code>( <var class="Arg">matrix</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a quadratic form</p>
+
+<p>The argument <var class="Arg">matrix</var> must be a square matrix over the finite field <var class="Arg">field</var>. The argument <var class="Arg">field</var> is an optional argument, and if it is not given, then we assume that the <em>defining field</em> of the bilinear form is the smallest field containing the entries of matrix. Below we give an example where the defining field can make a difference in some applications. Any square matrix determines a quadratic form, but the Gram matrix is recomputed so that it is an upper triangle matrix. The output is a quadratic form (i.e., an object in <code class="code">IsQuadraticForm</code>) with defining field <var class="Arg">field</var>. (See <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a> for more on bilinear forms).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[1,0,0,0],[0,3,0,0],[0,0,0,6],[0,0,6,0]]*Z(7)^0;</span>
+[ [ Z(7)^0, 0*Z(7), 0*Z(7), 0*Z(7) ], [ 0*Z(7), Z(7), 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), Z(7)^3 ], [ 0*Z(7), 0*Z(7), Z(7)^3, 0*Z(7) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat,GF(7));</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Quadratic form
+Gram Matrix:
+ 1 . . .
+ . 3 . .
+ . . . 5
+ . . . .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gf := GF(2^2);</span>
+GF(2^2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := InvariantQuadraticForm( SO(-1, 4, 4) )!.matrix;</span>
+[ [ 0*Z(2), Z(2)^0, 0*Z(2), 0*Z(2) ], [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), Z(2^2)^2, Z(2)^0 ], [ 0*Z(2), 0*Z(2), 0*Z(2), Z(2^2)^2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix( mat, gf );</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Quadratic form
+Gram Matrix:
+z = Z(4)
+   .   1   .   .
+   .   .   .   .
+   .   . z^2   1
+   .   .   . z^2 
+</pre></div>
+
+<p>The following example shows how using the argument <var class="Arg">field</var> has influence on the properties of the constructed form.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[[Z(2)^0,Z(2)^0,0*Z(2),0*Z(2)],[0*Z(2),Z(2)^0,0*Z(2),0*Z(2)], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> [0*Z(2),0*Z(2),0*Z(2),Z(2)^0],[0*Z(2),0*Z(2),0*Z(2),0*Z(2)]];</span>
+[ [ Z(2)^0, Z(2)^0, 0*Z(2), 0*Z(2) ], [ 0*Z(2), Z(2)^0, 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), Z(2)^0 ], [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat);</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WittIndex(form);</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat,GF(4));</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WittIndex(form);</span>
+2 
+</pre></div>
+
+<p><a id="X7C027FF77AFED321" name="X7C027FF77AFED321"></a></p>
+
+<h5>4.2-3 HermitianFormByMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HermitianFormByMatrix</code>( <var class="Arg">matrix</var>, <var class="Arg">field</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a quadratic form</p>
+
+<p>The argument <var class="Arg">matrix</var> must be a hermitian square matrix over the finite field <var class="Arg">field</var>, and <var class="Arg">field</var> has square order. The field must be specified, since we can only determine the smallest field containing the entries of <var class="Arg">matrix</var>. As it is only possible to construct reflexive sesquilinear forms, it is checked whether the matrix is a hermitian matrix, and if not, an error message is returned. The output is a hermitian sesquilinear form (i.e., an object in <code class="code">IsHermitianForm</code>) with Gram matrix <var class="Arg">matrix</var> and defining field <var class="Arg">field</var>. (See <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> for more on hermitian forms).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gf := GF(3^2);</span>
+GF(3^2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := IdentityMat(4, gf);</span>
+[ [ Z(3)^0, 0*Z(3), 0*Z(3), 0*Z(3) ], [ 0*Z(3), Z(3)^0, 0*Z(3), 0*Z(3) ], 
+  [ 0*Z(3), 0*Z(3), Z(3)^0, 0*Z(3) ], [ 0*Z(3), 0*Z(3), 0*Z(3), Z(3)^0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := HermitianFormByMatrix( mat, gf );</span>
+&lt; hermitian form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Hermitian form
+Gram Matrix:
+ 1 . . .
+ . 1 . .
+ . . 1 .
+ . . . 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[Z(11)^0,0*Z(11),0*Z(11)],[0*Z(11),0*Z(11),Z(11)],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [0*Z(11),Z(11),0*Z(11)]];</span>
+[ [ Z(11)^0, 0*Z(11), 0*Z(11) ], [ 0*Z(11), 0*Z(11), Z(11) ], 
+  [ 0*Z(11), Z(11), 0*Z(11) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := HermitianFormByMatrix(mat,GF(121));</span>
+&lt; hermitian form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Hermitian form
+Gram Matrix:
+  1  .  .
+  .  .  2
+  .  2  . 
+</pre></div>
+
+<p><a id="X78476EDF7B9498D7" name="X78476EDF7B9498D7"></a></p>
+
+<h4>4.3 <span class="Heading">Constructing forms using a polynomial</span></h4>
+
+<p>Suppose that <span class="SimpleMath">f</span> is a sesquilinear form on an <span class="SimpleMath">n</span>-dimensional vectorspace. Consider a vector <span class="SimpleMath">x</span> with coordinates x<sub>1</sub>,...,x<sub>n</sub> with x<sub>i</sub> indeterminates over the field. Then <span class="SimpleMath">f(x,x)</span> is a polynomial in <span class="SimpleMath">n</span> indeterminates. When <span class="SimpleMath">f</span> is alternating, <span class="SimpleMath">f(x,x)</span> is identically zero, but in all other cases, <span class="SimpleMath">f(x,x)</span> determines <span class="SimpleMath">f</span> completely.</p>
+
+<p>Conversely, suppose that <span class="SimpleMath">Q</span> is a quadratic form on an <span class="SimpleMath">n</span>-dimensional vectorspace. Consider a vector <span class="SimpleMath">x</span> with coordinates x<sub>1</sub>,...,x<sub>n</sub> with x<sub>i</sub> indeterminates over the field. Then <span class="SimpleMath">Q(x)</span> is a polynomial in <span class="SimpleMath">n</span> indeterminates, and <span class="SimpleMath">Q(x)</span> determines <span class="SimpleMath">Q</span> completely.</p>
+
+<p><strong class="pkg">Forms</strong> provides functionality to construct bilinear, hermitian and quadratic forms using an appropriate polynomial.</p>
+
+<p><a id="X81D571077C4BCEFF" name="X81D571077C4BCEFF"></a></p>
+
+<h5>4.3-1 BilinearFormByPolynomial</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BilinearFormByPolynomial</code>( <var class="Arg">poly</var>, <var class="Arg">r</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BilinearFormByPolynomial</code>( <var class="Arg">poly</var>, <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a bilinear form</p>
+
+<p>The argument <var class="Arg">poly</var> must be a polynomial in the polynomial ring <var class="Arg">r</var>. The (optional) last argument is the dimension for the underlying vector space of the resulting form, which by default is the number of indeterminates specified by <var class="Arg">poly</var>. It is checked whether the polynomial is a homogeneous polynomial of degree two over the given field, and if not, an error message is returned. It is not possible to construct a nontrivial bilinear form from a polynomial in even characteristic. The output is a bilinear (orthogonal) form in the category <code class="code">IsBilinearForm</code>. (See <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> for more on bilinear forms).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := PolynomialRing( GF(11), 4);</span>
+GF(11)[x_1,x_2,x_3,x_4]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vars := IndeterminatesOfPolynomialRing( r );</span>
+[ x_1, x_2, x_3, x_4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pol := vars[1]*vars[2]+vars[3]*vars[4];</span>
+x_1*x_2+x_3*x_4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByPolynomial(pol, r, 4);</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Bilinear form
+Gram Matrix:
+  .  6  .  .
+  6  .  .  .
+  .  .  .  6
+  .  .  6  .
+Polynomial: x_1*x_2+x_3*x_4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := PolynomialRing(GF(4),2);</span>
+GF(2^2)[x_1,x_2]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pol := r.1*r.2;</span>
+x_1*x_2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByPolynomial(pol,r);</span>
+Error, No orthogonal form can be associated with a quadratic polynomial in even cha\
+ra
+cteristic
+ called from
+BilinearFormByPolynomial( pol, pring, n 
+ ) at ./pkg/forms/lib/forms.gi:470 called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 14 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit; </span>
+</pre></div>
+
+<p><a id="X86ADE1D986CC90CB" name="X86ADE1D986CC90CB"></a></p>
+
+<h5>4.3-2 QuadraticFormByPolynomial</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuadraticFormByPolynomial</code>( <var class="Arg">poly</var>, <var class="Arg">r</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuadraticFormByPolynomial</code>( <var class="Arg">poly</var>, <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a quadratic form</p>
+
+<p>The argument <var class="Arg">poly</var> must be a polynomial in the polynomial ring <var class="Arg">r</var>. The (optional) last argument is the dimension for the underlying vector space of the resulting form, which by default is the number of indeterminates specified by <var class="Arg">poly</var>. It is checked whether the polynomial is a homogeneous polynomial of degree two over the given field, and if not, an error message is returned. The output is a quadratic form in the category <code class="code">IsQuadraticForm</code>. (See <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a> for more on quadratic forms).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := PolynomialRing( GF(8), 3);</span>
+GF(2^3)[x_1,x_2,x_3]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">poly := r.1^2 + r.2^2 + r.3^2;</span>
+x_1^2+x_2^2+x_3^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByPolynomial(poly, r);</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RadicalOfForm(form);</span>
+&lt;vector space over GF(2^3), with 63 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := PolynomialRing(GF(9),4);</span>
+GF(3^2)[x_1,x_2,x_3,x_4]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">poly := Z(3)^2*r.1^2+r.2^2+r.3*r.4;</span>
+x_1^2+x_2^2+x_3*x_4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">qform := QuadraticFormByPolynomial(poly,r);</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(qform);</span>
+Quadratic form
+Gram Matrix:
+ 1 . . .
+ . 1 . .
+ . . . 1
+ . . . .
+Polynomial: x_1^2+x_2^2+x_3*x_4 
+</pre></div>
+
+<p><a id="X7E21CFFA84180D0D" name="X7E21CFFA84180D0D"></a></p>
+
+<h5>4.3-3 HermitianFormByPolynomial</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HermitianFormByPolynomial</code>( <var class="Arg">poly</var>, <var class="Arg">r</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HermitianFormByPolynomial</code>( <var class="Arg">poly</var>, <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an hermitian form</p>
+
+<p>The argument <var class="Arg">poly</var> must be a polynomial in the polynomial ring <var class="Arg">r</var> defined over a finite field of square order q<sup>2</sup> The (optional) last argument is the dimension for the underlying vector space of the resulting form, which by default is the number of indeterminates specified by <var class="Arg">poly</var>. It is checked whether the polynomial is a homogeneous polynomial of degree <span class="SimpleMath">q+1</span>, and if not, an error message is returned. The output is a hermitian form in the category <code class="code">IsHermitianForm</code>. (See <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> for more on hermitian forms).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := PolynomialRing( GF(9), 4);</span>
+GF(3^2)[x_1,x_2,x_3,x_4]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vars := IndeterminatesOfPolynomialRing( r );</span>
+[ x_1, x_2, x_3, x_4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">poly := vars[1]*vars[2]^3+vars[1]^3*vars[2]+</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">             vars[3]*vars[4]^3+vars[3]^3*vars[4];</span>
+x_1^3*x_2+x_1*x_2^3+x_3^3*x_4+x_3*x_4^3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := HermitianFormByPolynomial(poly,r);</span>
+&lt; hermitian form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Hermitian form
+Gram Matrix:
+ . 1 . .
+ 1 . . .
+ . . . 1
+ . . 1 .
+Polynomial: x_1^3*x_2+x_1*x_2^3+x_3^3*x_4+x_3*x_4^3 
+</pre></div>
+
+<p><a id="X843B68558283CE5F" name="X843B68558283CE5F"></a></p>
+
+<h4>4.4 <span class="Heading">Switching between bilinear and quadratic forms</span></h4>
+
+<p>When the characteristic of the field is odd, a homogeneous quadratic polynomial determines a bilinear form, and a quadratic form. In some situations, when a quadratic form <span class="SimpleMath">Q</span> is given, it is useful to consider the bilinear form <span class="SimpleMath">f</span> such that <span class="SimpleMath">f(v,v)=Q(v)</span>, i.e., the bilinear form which is determined by exactly the same polynomial determining the quadratic form <span class="SimpleMath">Q</span>. <strong class="pkg">Forms</strong> provides functionality to construct a bilinear form <span class="SimpleMath">f</span> from a given quadratic form <span class="SimpleMath">Q</span> such that <span class="SimpleMath">f(v,v)=Q(v)</span>. Conversely, we can extract a quadratic form from a given bilinear form.</p>
+
+<p><a id="X7F13EAC17BDE228D" name="X7F13EAC17BDE228D"></a></p>
+
+<h5>4.4-1 QuadraticFormByBilinearForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuadraticFormByBilinearForm</code>( <var class="Arg">form</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a quadratic form</p>
+
+<p>The argument <span class="SimpleMath">form</span> is an orthogonal bilinear form (and thus it belongs to <code class="code">IsBilinearForm</code>), otherwise a ``No method found'' error is returned. The output is the quadratic form <span class="SimpleMath">Q</span> (an object in <code class="code">IsQuadraticForm</code>), such that <span class="SimpleMath">Q(v) = form(v,v)</span> for all vectors <span class="SimpleMath">v</span> in a vector space equipped with <span class="SimpleMath">form</span>. An error is returned when the characteristic of the field is even, or when <span class="SimpleMath">form</span> is not orthogonal.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [ [ Z(3^2)^7, Z(3)^0, Z(3^2)^2, 0*Z(3), Z(3^2)^5 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ Z(3)^0, Z(3^2)^7, Z(3^2)^6, Z(3^2)^5, Z(3^2)^2 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ Z(3^2)^2, Z(3^2)^6, Z(3^2)^7, Z(3^2)^2, Z(3^2)^2 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ 0*Z(3), Z(3^2)^5, Z(3^2)^2, Z(3^2)^6, Z(3^2)^7 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ Z(3^2)^5, Z(3^2)^2, Z(3^2)^2, Z(3^2)^7, Z(3) ] ];</span>
+[ [ Z(3^2)^7, Z(3)^0, Z(3^2)^2, 0*Z(3), Z(3^2)^5 ], 
+  [ Z(3)^0, Z(3^2)^7, Z(3^2)^6, Z(3^2)^5, Z(3^2)^2 ], 
+  [ Z(3^2)^2, Z(3^2)^6, Z(3^2)^7, Z(3^2)^2, Z(3^2)^2 ], 
+  [ 0*Z(3), Z(3^2)^5, Z(3^2)^2, Z(3^2)^6, Z(3^2)^7 ], 
+  [ Z(3^2)^5, Z(3^2)^2, Z(3^2)^2, Z(3^2)^7, Z(3) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(9));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := QuadraticFormByBilinearForm(form);</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Bilinear form
+Gram Matrix:
+z = Z(9)
+ z^7   1 z^2   . z^5
+   1 z^7 z^6 z^5 z^2
+ z^2 z^6 z^7 z^2 z^2
+   . z^5 z^2 z^6 z^7
+ z^5 z^2 z^2 z^7   2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q);</span>
+Quadratic form
+Gram Matrix:
+z = Z(9)
+ z^7   2 z^6   . z^1
+   . z^7 z^2 z^1 z^6
+   .   . z^7 z^6 z^6
+   .   .   . z^6 z^3
+   .   .   .   .   2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Set(List(GF(9)^5),x-&gt;[x,x]^form=x^Q);</span>
+[ true ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PolynomialOfForm(form);</span>
+Z(3^2)^7*x_1^2-x_1*x_2+Z(3^2)^6*x_1*x_3+Z(3^2)*x_1*x_5+Z(3^2)^7*x_2^2+Z(3^2)^2
+*x_2*x_3+Z(3^2)*x_2*x_4+Z(3^2)^6*x_2*x_5+Z(3^2)^7*x_3^2+Z(3^2)^6*x_3*x_4+Z(3^2
+)^6*x_3*x_5+Z(3^2)^6*x_4^2+Z(3^2)^3*x_4*x_5-x_5^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PolynomialOfForm(Q);</span>
+Z(3^2)^7*x_1^2-x_1*x_2+Z(3^2)^6*x_1*x_3+Z(3^2)*x_1*x_5+Z(3^2)^7*x_2^2+Z(3^2)^2
+*x_2*x_3+Z(3^2)*x_2*x_4+Z(3^2)^6*x_2*x_5+Z(3^2)^7*x_3^2+Z(3^2)^6*x_3*x_4+Z(3^2
+)^6*x_3*x_5+Z(3^2)^6*x_4^2+Z(3^2)^3*x_4*x_5-x_5^2 
+</pre></div>
+
+<p>Note that the given bilinear form <var class="Arg">form</var> is <strong class="button">not</strong> the associated bilinear form of the constructed quadratic form <span class="SimpleMath">Q</span>, according to the definition in Section <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a>. We can construct the associated bilinear forms by using <code class="func">AssociatedBilinearForm</code> (<a href="chap4.html#X7BF7FBCA7FF91052"><span class="RefLink">4.4-3</span></a>). (See <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a> for more on quadratic forms).</p>
+
+<p><a id="X812963777BBF97E3" name="X812963777BBF97E3"></a></p>
+
+<h5>4.4-2 BilinearFormByQuadraticForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BilinearFormByQuadraticForm</code>( <var class="Arg">Q</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a bilinear form</p>
+
+<p>The argument <span class="SimpleMath">Q</span> must be a quadratic form (and thus it belongs to <code class="code">IsQuadraticForm</code>). The output is the orthogonal bilinear form <span class="SimpleMath">f</span> (an object in <code class="code">IsBilinearForm</code>), such that <span class="SimpleMath">f(v,v) = Q(v)</span> for all vectors <span class="SimpleMath">v</span> in a vector space equipped with <span class="SimpleMath">Q</span>. An error is returned when the characteristic of the field is even.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := PolynomialRing(GF(9),4);</span>
+GF(3^2)[x_1,x_2,x_3,x_4]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">poly := -r.1*r.2+Z(3^2)*r.3^2+r.4^2;</span>
+-x_1*x_2+Z(3^2)*x_3^2+x_4^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">qform := QuadraticFormByPolynomial(poly,r);</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( qform );</span>
+Quadratic form
+Gram Matrix:
+z = Z(9)
+   .   2   .   .
+   .   .   .   .
+   .   . z^1   .
+   .   .   .   1
+Polynomial: -x_1*x_2+Z(3^2)*x_3^2+x_4^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByQuadraticForm( qform );</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Bilinear form
+Gram Matrix:
+z = Z(9)
+   .   1   .   .
+   1   .   .   .
+   .   . z^1   .
+   .   .   .   1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Set(GF(9)^4, x -&gt; [x,x]^form = x^qform);</span>
+[ true ] 
+</pre></div>
+
+<p>Note that the constructed bilinear form <span class="SimpleMath">f</span> is <strong class="button">not</strong> the associated bilinear form of the given quadratic form <span class="SimpleMath">Q</span>, according to the definition in Section <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a>. We can construct the associated bilinear forms by using <code class="func">AssociatedBilinearForm</code> (<a href="chap4.html#X7BF7FBCA7FF91052"><span class="RefLink">4.4-3</span></a>). (See <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a> for more on quadratic forms).</p>
+
+<p><a id="X7BF7FBCA7FF91052" name="X7BF7FBCA7FF91052"></a></p>
+
+<h5>4.4-3 AssociatedBilinearForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AssociatedBilinearForm</code>( <var class="Arg">Q</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a bilinear form</p>
+
+<p>The argument <span class="SimpleMath">Q</span> must be a quadratic form (and thus it belongs to <code class="code">IsQuadraticForm</code>). The output is the associated bilinear form <span class="SimpleMath">f</span> (an object in <code class="code">IsBilinearForm</code>), as defined in Section <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a>, i.e. the bilinear form <span class="SimpleMath">f</span> such that <span class="SimpleMath">f(v,w) = Q(v+w)-Q(v)-Q(w)</span> for all vectors <span class="SimpleMath">v,w</span> in a vector space equipped with <span class="SimpleMath">Q</span>. (See <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a> for more on quadratic forms).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:= PolynomialRing(GF(121),6);</span>
+GF(11^2)[x_1,x_2,x_3,x_4,x_5,x_6]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">poly := r.1*r.5-r.2*r.6+r.3*r.4;</span>
+x_1*x_5-x_2*x_6+x_3*x_4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByPolynomial(poly,r);</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aform := AssociatedBilinearForm(form);</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(aform);</span>
+Bilinear form
+Gram Matrix:
+  .  .  .  .  1  .
+  .  .  .  .  . 10
+  .  .  .  1  .  .
+  .  .  1  .  .  .
+  1  .  .  .  .  .
+  . 10  .  .  .  . 
+</pre></div>
+
+<p><a id="X8110213A7B303D1C" name="X8110213A7B303D1C"></a></p>
+
+<h4>4.5 <span class="Heading">Evaluating forms</span></h4>
+
+<p><a id="X808AB7B9840ABC27" name="X808AB7B9840ABC27"></a></p>
+
+<h5>4.5-1 EvaluateForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EvaluateForm</code>( <var class="Arg">f</var>, <var class="Arg">u</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EvaluateForm</code>( <var class="Arg">f</var>, <var class="Arg">u</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a finite field element</p>
+
+<p>The argument <var class="Arg">f</var> is either a sesquilinear or quadratic form defined over a finite field GF(q). The other argument is a pair of vectors or matrices, or a single vector or matrix. In case that <var class="Arg">u</var> (and <var class="Arg">v</var> when using three arguments) is a matrix, its rows represent a basis for the subspace (or subspaces) where <span class="SimpleMath">f</span> is evaluated in. This operation evaluates the form on the given vector or pair of vectors and returns an element in <span class="SimpleMath">GF(q)</span>. There is also an overloading of the operation <var class="Arg">\^</var> where <code class="file">(u,v)^f</code> represents <span class="SimpleMath">f(u,v)</span> in the case that <var class="Arg">f</var> is sesquilinear, and <code class="file">u^f</code> stands for <span class="SimpleMath">f(u)</span> in the quadratic case. So for convenience, the user may use this compressed version of this operation, which we show in the following example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[Z(8),0,0,0],[0,0,Z(8)^4,0],[0,0,0,1],[0,0,0,0]]*Z(8)^0;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat,GF(8));</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">u := [ Z(2^3)^4, Z(2^3)^4, Z(2)^0, Z(2^3)^3 ];</span>
+[ Z(2^3)^4, Z(2^3)^4, Z(2)^0, Z(2^3)^3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EvaluateForm( form, u );</span>
+Z(2^3)^6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">u^form;</span>
+Z(2^3)^6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gram := [[0,0,0,0,0,2],[0,0,0,0,2,0],[0,0,0,1,0,0],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">              [0,0,1,0,0,0],[0,2,0,0,0,0],[2,0,0,0,0,0]]*Z(3)^0;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(gram,GF(3));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">u := [ [ Z(3)^0, 0*Z(3), 0*Z(3), Z(3)^0, 0*Z(3), Z(3)^0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(3), 0*Z(3), Z(3)^0, Z(3)^0, Z(3), 0*Z(3) ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := [ [ Z(3)^0, 0*Z(3), Z(3)^0, Z(3), 0*Z(3), Z(3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(3), Z(3)^0, 0*Z(3), Z(3), Z(3), Z(3) ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EvaluateForm( form, u, v);</span>
+[ [ Z(3)^0, Z(3)^0 ], [ 0*Z(3), 0*Z(3) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[u,v]^form;</span>
+[ [ Z(3)^0, Z(3)^0 ], [ 0*Z(3), 0*Z(3) ] ] 
+</pre></div>
+
+<p><a id="X7A0825A987C88978" name="X7A0825A987C88978"></a></p>
+
+<h4>4.6 <span class="Heading">Orthogonality, totally isotropic subspaces, and totally singular subspaces</span></h4>
+
+<p><a id="X78F2409184D192D3" name="X78F2409184D192D3"></a></p>
+
+<h5>4.6-1 OrthogonalSubspaceMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrthogonalSubspaceMat</code>( <var class="Arg">form</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrthogonalSubspaceMat</code>( <var class="Arg">form</var>, <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a base of the subspace orthogonal to the given vector or subspace with relation to the given form</p>
+
+<p>The argument <var class="Arg">form</var> is a sesquilinear or quadratic form. For a given vector <var class="Arg">v</var>, this operation returns a base of the subspace orthogonal to <var class="Arg">v</var> with relation to the sesquilinear <var class="Arg">form</var> or with relation to the associated bilinear form of the quadratic form <var class="Arg">form</var>. For a given matrix <var class="Arg">mat</var>, this operation returns a base of the subspace orthogonal to the subspace spanned by the rows of <var class="Arg">mat</var> with relation to the sesquilinear <var class="Arg">form</var> or with relation to the associated bilinear form of the quadratic form <var class="Arg">form</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[0,0,0,-2],[0,0,-3,0],[0,3,0,0],[2,0,0,0]]*Z(7)^0;</span>
+[ [ 0*Z(7), 0*Z(7), 0*Z(7), Z(7)^5 ], [ 0*Z(7), 0*Z(7), Z(7)^4, 0*Z(7) ], 
+  [ 0*Z(7), Z(7), 0*Z(7), 0*Z(7) ], [ Z(7)^2, 0*Z(7), 0*Z(7), 0*Z(7) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat);</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := [0*Z(7),Z(7)^0,Z(7)^3,Z(7)^5];</span>
+[ 0*Z(7), Z(7)^0, Z(7)^3, Z(7)^5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vperp := OrthogonalSubspaceMat(form,v);</span>
+[ [ Z(7)^0, Z(7)^0, 0*Z(7), 0*Z(7) ], [ Z(7)^0, 0*Z(7), Z(7)^0, 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), Z(7)^0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(vperp,x-&gt;[x,v]^form);</span>
+[ 0*Z(7), 0*Z(7), 0*Z(7) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sub := [[1,1,0,0],[0,0,1,2]]*Z(7)^0;</span>
+[ [ Z(7)^0, Z(7)^0, 0*Z(7), 0*Z(7) ], [ 0*Z(7), 0*Z(7), Z(7)^0, Z(7)^2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">subperp := OrthogonalSubspaceMat(form,sub);</span>
+[ [ Z(7)^0, Z(7)^0, 0*Z(7), 0*Z(7) ], [ 0*Z(7), 0*Z(7), Z(7)^4, Z(7)^0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(subperp,x-&gt;List(sub,y-&gt;[x,y]^form));</span>
+[ [ 0*Z(7), 0*Z(7) ], [ 0*Z(7), 0*Z(7) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[1,0,0],[0,0,1],[0,0,0]]*Z(2)^0;</span>
+[ [ Z(2)^0, 0*Z(2), 0*Z(2) ], [ 0*Z(2), 0*Z(2), Z(2)^0 ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat);</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := [Z(2)^0,Z(2)^0,0*Z(2)];</span>
+[ Z(2)^0, Z(2)^0, 0*Z(2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vperp := OrthogonalSubspaceMat(form,v);</span>
+[ &lt;an immutable GF2 vector of length 3&gt;, &lt;an immutable GF2 vector of length 
+    3&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bil_form := AssociatedBilinearForm(form);</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(vperp,x-&gt;[x,v]^bil_form);</span>
+[ 0*Z(2), 0*Z(2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sub := [[1,0,1],[1,0,0]]*Z(2)^0;</span>
+[ [ Z(2)^0, 0*Z(2), Z(2)^0 ], [ Z(2)^0, 0*Z(2), 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">subperp := OrthogonalSubspaceMat(form,sub);</span>
+[ &lt;an immutable GF2 vector of length 3&gt;, &lt;an immutable GF2 vector of length 
+    3&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(subperp,x-&gt;List(sub,y-&gt;[x,y]^bil_form));</span>
+[ [ 0*Z(2), 0*Z(2) ], [ 0*Z(2), 0*Z(2) ] ]
+ 
+</pre></div>
+
+<p><a id="X8394CCAD798053C6" name="X8394CCAD798053C6"></a></p>
+
+<h5>4.6-2 IsIsotropicVector</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIsotropicVector</code>( <var class="Arg">form</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>The operation return <var class="Arg">true</var> if and only if <var class="Arg">v</var> is isotropic with relation to the sesquilinear or quadratic form <var class="Arg">form</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[1,0,0,0],[0,-1,0,0],[0,0,0,1],[0,0,1,0]]*Z(41)^0;</span>
+[ [ Z(41)^0, 0*Z(41), 0*Z(41), 0*Z(41) ], 
+  [ 0*Z(41), Z(41)^20, 0*Z(41), 0*Z(41) ], 
+  [ 0*Z(41), 0*Z(41), 0*Z(41), Z(41)^0 ], 
+  [ 0*Z(41), 0*Z(41), Z(41)^0, 0*Z(41) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat);</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := [1,1,0,0]*Z(41)^0;</span>
+[ Z(41)^0, Z(41)^0, 0*Z(41), 0*Z(41) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIsotropicVector(form,v);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[1,0,0,0,0],[0,0,0,0,1],[0,0,0,0,0],[0,0,1,0,0],[0,0,0,0,0]]*Z(8)^0;</span>
+[ [ Z(2)^0, 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), Z(2)^0 ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), Z(2)^0, 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat);</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v1 := [1,0,0,0,0]*Z(8)^0;</span>
+[ Z(2)^0, 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v2 := [0,1,0,0,0]*Z(8)^0;</span>
+[ 0*Z(2), Z(2)^0, 0*Z(2), 0*Z(2), 0*Z(2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIsotropicVector(form,v1);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIsotropicVector(form,v2);</span>
+true
+ 
+</pre></div>
+
+<p><a id="X855E539185D7D3C7" name="X855E539185D7D3C7"></a></p>
+
+<h5>4.6-3 IsSingularVector</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSingularVector</code>( <var class="Arg">form</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>The operation return <var class="Arg">true</var> if and only if <var class="Arg">v</var> is singular with relation to the quadratic form <var class="Arg">form</var>. Note that only when the characteristic of the field is odd, the singular vectors with relation to a quadratic form are the isotropic vectors with relation to its associated form.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[1,0,0,0,0],[0,0,0,0,1],[0,0,0,0,0],[0,0,1,0,0],[0,0,0,0,0]]*Z(8)^0;</span>
+[ [ Z(2)^0, 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), Z(2)^0 ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), Z(2)^0, 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat);</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v1 := [1,0,0,0,0]*Z(8)^0;</span>
+[ Z(2)^0, 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v2 := [0,1,0,0,0]*Z(8)^0;</span>
+[ 0*Z(2), Z(2)^0, 0*Z(2), 0*Z(2), 0*Z(2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSingularVector(form,v1);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSingularVector(form,v2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIsotropicVector(form,v1);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIsotropicVector(form,v2);</span>
+true
+ 
+</pre></div>
+
+<p><a id="X8141325085AAC0CD" name="X8141325085AAC0CD"></a></p>
+
+<h5>4.6-4 IsTotallyIsotropicSubspace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTotallyIsotropicSubspace</code>( <var class="Arg">form</var>, <var class="Arg">sub</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>The operation return <var class="Arg">true</var> if and only if the subspace spanned by the vectors in the list <var class="Arg">sub</var> is totally isotropic with relation to the sesquilinear or quadratic form <var class="Arg">form</var>. Note that when <var class="Arg">form</var> is a quadratic form, it is checked whether <var class="Arg">sub</var> generates a subspace that is totally isotropic with relation to the associated bilinear form of <var class="Arg">form</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[1,0,0,0],[0,-1,0,0],[0,0,0,1],[0,0,1,0]]*Z(7)^0;</span>
+[ [ Z(7)^0, 0*Z(7), 0*Z(7), 0*Z(7) ], [ 0*Z(7), Z(7)^3, 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), Z(7)^0 ], [ 0*Z(7), 0*Z(7), Z(7)^0, 0*Z(7) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat);</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sub:= [[Z(7)^0,0*Z(7),Z(7)^0,Z(7)],[0*Z(7),Z(7)^0,Z(7)^0,Z(7)^4]];</span>
+[ [ Z(7)^0, 0*Z(7), Z(7)^0, Z(7) ], [ 0*Z(7), Z(7)^0, Z(7)^0, Z(7)^4 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsTotallyIsotropicSubspace(form,sub);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := IdentityMat(6,GF(2));</span>
+[ &lt;a GF2 vector of length 6&gt;, &lt;a GF2 vector of length 6&gt;, 
+  &lt;a GF2 vector of length 6&gt;, &lt;a GF2 vector of length 6&gt;, 
+  &lt;a GF2 vector of length 6&gt;, &lt;a GF2 vector of length 6&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := HermitianFormByMatrix(mat,GF(4));</span>
+&lt; hermitian form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sub := [[Z(2)^0,0*Z(2),0*Z(2),Z(2)^0,Z(2)^0,Z(2)^0], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [0*Z(2),Z(2)^0,0*Z(2),Z(2^2)^2,Z(2^2),Z(2)^0], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [0*Z(2),0*Z(2),Z(2)^0,Z(2)^0,Z(2^2),Z(2^2)^2]];</span>
+[ [ Z(2)^0, 0*Z(2), 0*Z(2), Z(2)^0, Z(2)^0, Z(2)^0 ], 
+  [ 0*Z(2), Z(2)^0, 0*Z(2), Z(2^2)^2, Z(2^2), Z(2)^0 ], 
+  [ 0*Z(2), 0*Z(2), Z(2)^0, Z(2)^0, Z(2^2), Z(2^2)^2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsTotallyIsotropicSubspace(form,sub);</span>
+true
+
+</pre></div>
+
+<p><a id="X834FD9117F1DA8D0" name="X834FD9117F1DA8D0"></a></p>
+
+<h5>4.6-5 IsTotallySingularSubspace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTotallySingularSubspace</code>( <var class="Arg">form</var>, <var class="Arg">sub</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>The operation return <var class="Arg">true</var> if and only if the subspace spanned by the vectors in the list <var class="Arg">sub</var> is totally singular with relation to quadratic form <var class="Arg">form</var>. Note that only when the characteristic of the field is odd, the totally singular subspaces of given dimension <span class="SimpleMath">n</span> with relation to a quadratic form are exactly the totally isotropic subspaces of dimension <span class="SimpleMath">n</span> with relation to its associated form.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[1,0,0,0,0],[0,0,0,0,1],[0,0,0,0,0],[0,0,1,0,0],[0,0,0,0,0]]*Z(8)^0;</span>
+[ [ Z(2)^0, 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), Z(2)^0 ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), Z(2)^0, 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat);</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sub := [[Z(2)^0,0*Z(2),Z(2^3)^6,Z(2^3),Z(2^3)^3],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       [0*Z(2),Z(2)^0,Z(2^3)^6,Z(2^3)^2,Z(2^3)]];</span>
+[ [ Z(2)^0, 0*Z(2), Z(2^3)^6, Z(2^3), Z(2^3)^3 ], 
+  [ 0*Z(2), Z(2)^0, Z(2^3)^6, Z(2^3)^2, Z(2^3) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsTotallySingularSubspace(form,sub);</span>
+true
+
+</pre></div>
+
+<p><a id="X813A02878352E9E5" name="X813A02878352E9E5"></a></p>
+
+<h4>4.7 <span class="Heading">Attributes and properties of forms</span></h4>
+
+<p><a id="X80254BFD7E4B8F06" name="X80254BFD7E4B8F06"></a></p>
+
+<h5>4.7-1 IsReflexiveForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReflexiveForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>A sesquilinear form <span class="SimpleMath">f</span> on a vector space <span class="SimpleMath">V</span> is <em>reflexive</em> if <span class="SimpleMath">f(v,w)=0 ⇒ f(w,v)=0</span> for all <span class="SimpleMath">v,w ∈ V</span>. The argument <span class="SimpleMath">f</span> must be a sesquilinear form (and thus it belongs to <code class="code">IsSesquilinearForm</code>). A sesquilinear form <span class="SimpleMath">f</span> is <em>reflexive</em> if whenever we have <span class="SimpleMath">f(u,v)=0</span>, for two vectors <span class="SimpleMath">u,v</span> in the associated vector space, then we also have <span class="SimpleMath">f(v,u)=0</span>. This attribute simply returns <var class="Arg">true</var> or <var class="Arg">false</var> according to whether <var class="Arg">f</var> is reflexive or not, and is stored as a property of <var class="Arg">f</var>. It is not possible in this version of <strong class="pkg">Forms</strong> to construct non-reflexive forms. (See <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> for more on reflexive sesquilinear forms).</p>
+
+<p><a id="X7D5AB7E484CFBF63" name="X7D5AB7E484CFBF63"></a></p>
+
+<h5>4.7-2 IsAlternatingForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAlternatingForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>A sesquilinear form <span class="SimpleMath">f</span> on a vector space <span class="SimpleMath">V</span> is <em>alternating</em> if <span class="SimpleMath">f(v,v)=0</span> for all <span class="SimpleMath">v ∈ V</span>. The argument <span class="SimpleMath">f</span> must be a sesquilinear form (and thus it belongs to <code class="code">IsSesquilinearForm</code>). A bilinear form <span class="SimpleMath">f</span> is <em>alternating</em> if <span class="SimpleMath">f(v,v)=0</span> for all <span class="SimpleMath">v</span>. This method simply returns <var class="Arg">true</var> or <var class="Arg">false</var> according to whether <var class="Arg">f</var> is alternating or not, and is stored as a property of <var class="Arg">f</var>. (See <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> for more on alternating sesquilinear forms).</p>
+
+<p><a id="X85585B2C80413490" name="X85585B2C80413490"></a></p>
+
+<h5>4.7-3 IsSymmetricForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSymmetricForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>A sesquilinear form <span class="SimpleMath">f</span> on a vector space <span class="SimpleMath">V</span> is <em>symmetric</em> if <span class="SimpleMath">f(v,w)=f(w,v)</span> for all <span class="SimpleMath">v,w ∈ V</span>. The argument <span class="SimpleMath">f</span> must be a sesquilinear form (and thus it belongs to <code class="code">IsSesquilinearForm</code>). A bilinear form <span class="SimpleMath">f</span> is <em>symmetric</em> if <span class="SimpleMath">f(u,v)=f(v,u)</span> for all pairs of vectors <span class="SimpleMath">u</span> and <span class="SimpleMath">v</span>. This attribute simply returns <var class="Arg">true</var> or <var class="Arg">false</var> according to whether <var class="Arg">f</var> is symmetric or not, and is stored as a property of <var class="Arg">f</var>. (See <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> for more on symmetric sesquilinear forms).</p>
+
+<p><a id="X87E9C9A1781AB058" name="X87E9C9A1781AB058"></a></p>
+
+<h5>4.7-4 IsOrthogonalForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOrthogonalForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>The argument <span class="SimpleMath">f</span> must be a sesquilinear form (and thus it belongs to <code class="code">IsSesquilinearForm</code>). A bilinear form <span class="SimpleMath">f</span> is called <em>orthogonal</em> if the characteristic of the underlying field is odd, and <span class="SimpleMath">f</span> is a symmetric form. (See <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> for more on bilinear forms). This operation simply returns <var class="Arg">true</var> or <var class="Arg">false</var> according to whether <var class="Arg">f</var> is an orthogonal bilinear form or not, and is stored as a property of <var class="Arg">f</var>.</p>
+
+<p><a id="X861AF6EE82F4DA39" name="X861AF6EE82F4DA39"></a></p>
+
+<h5>4.7-5 IsPseudoForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPseudoForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>When the characteristic of the field is odd, we call a form <span class="SimpleMath">f</span> <em>orthogonal</em> if and only <span class="SimpleMath">f</span> is symmetric, and when the characteristic of the field is even, we call a form <span class="SimpleMath">f</span> <em>pseudo</em> if and only if <span class="SimpleMath">f</span> is symmetric but not alternating. The argument <span class="SimpleMath">f</span> must be a sesquilinear form (and thus it belongs to <code class="code">IsSesquilinearForm</code>). (See <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> for more on pseudo forms). This method simply returns <var class="Arg">true</var> or <var class="Arg">false</var> according to whether <var class="Arg">f</var> is a pseudo form or not, and is stored as a property of <var class="Arg">f</var>.</p>
+
+<p><a id="X86F552AE7ACC12C7" name="X86F552AE7ACC12C7"></a></p>
+
+<h5>4.7-6 IsSymplecticForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSymplecticForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>We call a bilinear form <span class="SimpleMath">f</span> <em>symplectic</em> if and only if <span class="SimpleMath">f</span> is alternating. The argument <span class="SimpleMath">f</span> must be a sesquilinear form (and thus it belongs to <code class="code">IsSesquilinearForm</code>). (See <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> for more on symplectic forms). This method simply returns <var class="Arg">true</var> or <var class="Arg">false</var> according to whether <var class="Arg">f</var> is symplectic or not, and is stored as a property of <var class="Arg">f</var>.</p>
+
+<p><a id="X7C60B9587D130DBB" name="X7C60B9587D130DBB"></a></p>
+
+<h5>4.7-7 IsDegenerateForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDegenerateForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>The argument <span class="SimpleMath">f</span> must be a form (and thus it belongs to <code class="code">IsForm</code>). A sesquilinear form <span class="SimpleMath">f</span> is <em>degenerate</em> if its radical is non-trivial. A quadratic form is degenerate if and only if the radical of the associated bilinear form is non-trivial. Note that degeneracy for quadratic forms is too restrictive if the characteristic is even. See also <code class="func">IsSingularForm</code> (<a href="chap4.html#X7A0E882F801624DA"><span class="RefLink">4.7-8</span></a>). This attribute simply returns <var class="Arg">true</var> or <var class="Arg">false</var> according to whether <var class="Arg">f</var> is degenerate or not, and is stored as a property of <var class="Arg">f</var>.</p>
+
+<p><a id="X7A0E882F801624DA" name="X7A0E882F801624DA"></a></p>
+
+<h5>4.7-8 IsSingularForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSingularForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>The argument <span class="SimpleMath">f</span> must be a quadratic form (and thus it belongs to <code class="code">IsQuadraticForm</code>). A quadratic form <span class="SimpleMath">f</span> is <em>singular</em> if its radical is non-trivial. When the characteristic of the field is odd, a quadratic form is singular if and only if it is degenerate. This is not the case when the characteristic of the field is even. This method simply returns <var class="Arg">true</var> or <var class="Arg">false</var> according to whether <var class="Arg">f</var> is singular or not, and is stored as a property of <var class="Arg">f</var>.</p>
+
+<p><a id="X7BCBA564829D9E89" name="X7BCBA564829D9E89"></a></p>
+
+<h5>4.7-9 BaseField</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BaseField</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: the underlying field of <var class="Arg">f</var>.</p>
+
+<p>The argument <span class="SimpleMath">f</span> must be a form (and thus it belongs to <code class="code">IsForm</code>). The method returns the field which is stored as the <em>defining field</em> of <span class="SimpleMath">f</span>. We sometimes stipulate in <strong class="pkg">Forms</strong> that a form have a defining field, for mathematical reasons. Clearly, to define a hermitian form one needs to specify the field of scalars for the vector space that you wish your hermitian form to act on. The default, if the user has not specified a field on creation of a form, is the smallest field containing the entries or coefficients of the input (a matrix or polynomial). Having a particular defining field for a form can be very useful, for example, when one wants to find a change of basis from one form to another (isometric) form. In this case, one needs to know in which GL(d,q) the base-transition matrix should be taken.</p>
+
+<p><a id="X847AFB4C81A90B3F" name="X847AFB4C81A90B3F"></a></p>
+
+<h5>4.7-10 GramMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GramMatrix</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: the Gram matrix of <var class="Arg">f</var>.</p>
+
+<p>The argument <span class="SimpleMath">f</span> must be a form (and thus it belongs to <code class="code">IsForm</code>). This method returns the Gram matrix of <span class="SimpleMath">f</span> (see <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> and <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a>).</p>
+
+<p><a id="X7855C3C07AAA1A68" name="X7855C3C07AAA1A68"></a></p>
+
+<h5>4.7-11 RadicalOfForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RadicalOfForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: The radical of the form <var class="Arg">f</var></p>
+
+<p>The argument <span class="SimpleMath">f</span> must be a form (and thus it belongs to <code class="code">IsForm</code>) on some vector space <span class="SimpleMath">V</span>. The radical of a sesquilinear form <span class="SimpleMath">f</span> is the subspace consisting of vectors which are orthogonal to every vector, i.e.,</p>
+
+<p><center>Rad(f) = {v ∈ V | f(v,w) = 0 for all w ∈ V}.</center></p>
+
+<p>The <em>radical</em> of the quadratic form <span class="SimpleMath">Q</span>, is the intersection of the set of all singular vectors with relation to <span class="SimpleMath">Q</span> and the radical of the associated bilinear form <span class="SimpleMath">f</span> (see <code class="func">AssociatedBilinearForm</code> (<a href="chap4.html#X7BF7FBCA7FF91052"><span class="RefLink">4.4-3</span></a>)), i.e.</p>
+
+<p><center>Rad(Q) = {v ∈ V | Q(v) = 0 and v ∈ Rad(f)}.</center></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := PolynomialRing( GF(8), 3 );</span>
+GF(2^3)[x_1,x_2,x_3]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">poly := r.1^2 + r.2 * r.3;</span>
+x_1^2+x_2*x_3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByPolynomial( poly, r );</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := RadicalOfForm( form );</span>
+&lt;vector space over GF(2^3), with 0 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension(r);</span>
+0 
+</pre></div>
+
+<p><a id="X82E7367F817C6BD0" name="X82E7367F817C6BD0"></a></p>
+
+<h5>4.7-12 PolynomialOfForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolynomialOfForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: the polynomial associated with <var class="Arg">f</var>.</p>
+
+<p>The argument <var class="Arg">f</var> must be a form (and thus it belongs to <code class="code">IsForm</code>). All forms, except for bilinear forms in even characteristic, have an associated polynomial defining a quadratic or hermitian form (see <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> and <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a>). This method returns the polynomial associated with <var class="Arg">f</var>, and if not already bound, stores it as a property of <var class="Arg">f</var>.</p>
+
+
+<div class="example"><pre> 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [ [ Z(8) , 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> [ 0*Z(2), Z(2)^0, Z(2^3)^5, 0*Z(2), 0*Z(2) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), Z(2)^0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> [ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat,GF(8));</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PolynomialOfForm(form);</span>
+Z(2^3)*x_1^2+x_2^2+Z(2^3)^5*x_2*x_3+x_4*x_5 
+</pre></div>
+
+<p><a id="X87B652A28534E0D2" name="X87B652A28534E0D2"></a></p>
+
+<h5>4.7-13 DiscriminantOfForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiscriminantOfForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a string</p>
+
+<p>The argument <span class="SimpleMath">f</span> must be a form (and thus it belongs to <code class="code">IsForm</code>). Given a quadratic or bilinear form <var class="Arg">f</var> of even dimension, this operation returns a string: ``square'' or ``nonsquare''. More specifically, let <span class="SimpleMath">f</span> be a from over GF(q), and let <span class="SimpleMath">M</span> be the Gram matrix of <span class="SimpleMath">f</span>. Define the <em>discriminant</em> of <span class="SimpleMath">Q</span> (n.b., <em>quasideterminant</em> in <a href="chapBib.html#biBAtlas">[CCN+85]</a>) as `square' if det(M) is a square of GF(q), and `non-square' otherwise. The discriminant is an invariant of nondegenerate orthogonal spaces over finite fields of odd order, up to isometry. Thus, discriminants can be used to delineate the isometry type of an orthogonal form in even (algebraic) dimension. The discriminant of a hermitian form is not defined, and applying this operation on a hermitian form, will result in an error message.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gram := InvariantQuadraticForm(GO(-1,4,5))!.matrix;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">qform := QuadraticFormByMatrix(gram, GF(5));</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DiscriminantOfForm( qform );</span>
+"nonsquare" 
+</pre></div>
+
+<p><a id="X8400E22D7D51FCCE" name="X8400E22D7D51FCCE"></a></p>
+
+<h4>4.8 <span class="Heading">Recognition of forms preserved by a classical group</span></h4>
+
+<p>In this section, we describe a function that was initially developed by Frank Celler (and which has now been adapted to <strong class="pkg">Forms</strong>) for the recognition of quadratic and sesquilinear forms left invariant by a matrix group. More importantly, we should stress that this routine differs to that already offered by the <strong class="pkg">MeatAxe</strong> in that it finds sesquilinear forms preserved up to <strong class="button">scalars</strong>. Eventually, the procedure used for finding preserved sesquilinear forms does use the <strong class="pkg">MeatAxe</strong> but in some cases it can rule out the existence of preserved forms without calling the <strong class="pkg">MeatAxe</strong>. For more information on the algorithm, please see <a href="chapBib.html#biBCLGNNPP">[CLGN+08]</a>.</p>
+
+<p><a id="X784481E57E207B3D" name="X784481E57E207B3D"></a></p>
+
+<h5>4.8-1 PreservedForms</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreservedForms</code>( <var class="Arg">group</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of forms</p>
+
+<p>The argument <var class="Arg">group</var> is a matrix group. The function uses random methods to find all of the bilinear, unitary or quadratic forms preserved by <var class="Arg">group</var> (the trivial form is also a possibility) up to a scalar. Since the procedure relies on a pseudo-random generator, the user may need to execute the operation more than once to find all invariant sesquilinear forms. Note that when possible, a quadratic form will be given.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := GO(-1,4,4);</span>
+GO(-1,4,4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pres_forms := PreservedForms(group);</span>
+[ &lt; quadratic form &gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := GO(1,6,9);</span>
+GO(+1,6,9)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pres_forms := PreservedForms(group);</span>
+[ &lt; quadratic form &gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := SU(4,16);</span>
+SU(4,16)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pres_forms := PreservedForms(group);</span>
+[ &lt; hermitian form &gt; ]
+
+</pre></div>
+
+<p>The next example demonstrates the impact of randomized methods on the number of preserved forms returned. For the particular matrix group, two preserved forms are returned after four calls of the operation.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens := [ [ [ Z(5)^0, 0*Z(5), 0*Z(5), 0*Z(5) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">	[ 0*Z(5), 0*Z(5), Z(5)^3, Z(5^2)^21 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">	[ 0*Z(5), Z(5), Z(5), Z(5^2)^3 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     	[ 0*Z(5), Z(5^2)^21, Z(5^2)^15, Z(5)^2 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ [ Z(5)^3, Z(5^2)^7, Z(5^2)^16, Z(5^2)^15 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      	[ 0*Z(5), Z(5)^0, Z(5^2)^4, Z(5)^3 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      	[ Z(5^2)^22, Z(5^2)^10, Z(5^2)^21, Z(5)^2 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      	[ Z(5^2)^7, Z(5^2)^23, Z(5^2)^9, Z(5^2)^11 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ [ 0*Z(5), Z(5^2), 0*Z(5), 0*Z(5) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">	[ Z(5^2)^5, 0*Z(5), 0*Z(5), 0*Z(5) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      	[ 0*Z(5), 0*Z(5), Z(5)^0, Z(5^2)^4 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      	[ 0*Z(5), 0*Z(5), Z(5^2)^20, Z(5)^2 ] ] ];</span>
+[ [ [ Z(5)^0, 0*Z(5), 0*Z(5), 0*Z(5) ], [ 0*Z(5), 0*Z(5), Z(5)^3, Z(5^2)^21 ],
+      [ 0*Z(5), Z(5), Z(5), Z(5^2)^3 ], 
+      [ 0*Z(5), Z(5^2)^21, Z(5^2)^15, Z(5)^2 ] ], 
+  [ [ Z(5)^3, Z(5^2)^7, Z(5^2)^16, Z(5^2)^15 ], 
+      [ 0*Z(5), Z(5)^0, Z(5^2)^4, Z(5)^3 ], 
+      [ Z(5^2)^22, Z(5^2)^10, Z(5^2)^21, Z(5)^2 ], 
+      [ Z(5^2)^7, Z(5^2)^23, Z(5^2)^9, Z(5^2)^11 ] ], 
+  [ [ 0*Z(5), Z(5^2), 0*Z(5), 0*Z(5) ], [ Z(5^2)^5, 0*Z(5), 0*Z(5), 0*Z(5) ], 
+      [ 0*Z(5), 0*Z(5), Z(5)^0, Z(5^2)^4 ], 
+      [ 0*Z(5), 0*Z(5), Z(5^2)^20, Z(5)^2 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := Group(gens);</span>
+&lt;matrix group with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreservedForms(group);</span>
+[ &lt; quadratic form &gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreservedForms(group);</span>
+[ &lt; quadratic form &gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreservedForms(group);</span>
+[ &lt; quadratic form &gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreservedForms(group);</span>
+[ &lt; quadratic form &gt;, &lt; hermitian form &gt; ]
+
+</pre></div>
+
+<p><a id="X84056A357E5447AF" name="X84056A357E5447AF"></a></p>
+
+<h5>4.8-2 PreservedSesquilinearForms</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreservedSesquilinearForms</code>( <var class="Arg">group</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of forms</p>
+
+<p>The argument <var class="Arg">group</var> is a matrix group. The function uses random methods to find all of the bilinear or unitary forms preserved by <var class="Arg">group</var> (the trivial form is also a possibility) up to a scalar. Since the procedure relies on a pseudo-random generator, the user may need to execute the operation more than once to find all invariant sesquilinear forms.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := SU(4,3);</span>
+SU(4,3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">forms := PreservedSesquilinearForms(g);</span>
+[ &lt; hermitian form &gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( forms[1] );</span>
+Hermitian form
+Gram Matrix:
+ . . . 2
+ . . 2 .
+ . 2 . .
+ 2 . . . 
+</pre></div>
+
+<p>Here is another example which shows that this procedure is suitable in some cases where using the <strong class="pkg">MeatAxe</strong> is not applicable. Here, our matrix group is the group of similarities preserving a (hyperbolic) bilinear form on a 6-dimensional vector space over <span class="SimpleMath">GF(3)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := [ [ -1, 0, 0, -1, 0, 1 ], [ 0, -1, -1, 0, 0, 1 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       [ -1, 0, 0, 1, 0, 0 ],  [ 0, -1, 1, 0, 0, -1 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       [ 0, 0, 0, 0, 0, -1 ], [ 0, -1, -1, 1, 1, 1 ] ] * One(GF(3));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := [ [ 1, -1, 1, -1, 1, -1 ], [ 1, 1, -1, 1, 1, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       [ -1, 0, 1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 1 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       [ 1, 1, 1, 1, 1, 1 ], [ -1, 1, 1, 1, -1, 0 ] ] * One(GF(3));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := Group( a, b );</span>
+&lt;matrix group with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">forms := PreservedSesquilinearForms( g );</span>
+[ &lt; bilinear form &gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( forms[1] );</span>
+Bilinear form
+Gram Matrix:
+ . 1 . . . .
+ 1 . . . . .
+ . . . 1 . .
+ . . 1 . . .
+ . . . . . 1
+ . . . . 1 .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := GModuleByMats( [a,b], GF(3) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">usemeataxe := MTX.InvariantBilinearForm(m);</span>
+fail 
+</pre></div>
+
+<p><a id="X7D6F72B682E405E1" name="X7D6F72B682E405E1"></a></p>
+
+<h5>4.8-3 PreservedQuadraticForms</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreservedQuadraticForms</code>( <var class="Arg">group</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of forms</p>
+
+<p>The argument <var class="Arg">group</var> is a matrix group. The function uses random methods to find all of the quadratic forms preserved by <var class="Arg">group</var> up to a scalar. Since the procedure relies on a pseudo-random generator, the user may need to execute the operation more than once to find all invariant sesquilinear forms.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := GO(-1,4,8);</span>
+GO(-1,4,8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pres_forms := PreservedQuadraticForms(group);</span>
+[ &lt; quadratic form &gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := GO(1,6,9);</span>
+GO(+1,6,9)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pres_forms := PreservedQuadraticForms(group);</span>
+[ &lt; quadratic form &gt; ]
+
+</pre></div>
+
+<p><a id="X836A21687A685839" name="X836A21687A685839"></a></p>
+
+<h4>4.9 <span class="Heading">The trivial form and some of its properties</span></h4>
+
+<p>It can be useful to work with trivial a quadratic or sesquilinear form, i.e. a form mapping all vectors, couples of vectors respectively, to the zero element of their basefield. As mentioned in Section <a href="chap4.html#X83494A76866B06A5"><span class="RefLink">4.1</span></a>, <strong class="pkg">Forms</strong> allows the construction of an object in the Category <code class="code">IsTrivialForm</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[0,0,0],[0,0,0],[0,0,0]]*Z(7)^0;</span>
+[ [ 0*Z(7), 0*Z(7), 0*Z(7) ], [ 0*Z(7), 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form1 := BilinearFormByMatrix(mat,GF(7));</span>
+&lt; trivial form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form2 := QuadraticFormByMatrix(mat,GF(7));</span>
+&lt; trivial form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form1 = form2;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsQuadraticForm(form1);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSesquilinearForm(form1);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[0,0],[0,0]]*Z(4)^0;</span>
+[ [ 0*Z(2), 0*Z(2) ], [ 0*Z(2), 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form3 := BilinearFormByMatrix(mat,GF(4));</span>
+&lt; trivial form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form3 = form1;</span>
+false
+ 
+</pre></div>
+
+<p>As we have seen by the above example, there is only one trivial form for a given vector space over a finite field, and such a trivial form can result from the construction of a quadratic form or a sesquilinear form, but the trivial form itself is none of these, although it can behave as a sesquilinear or a quadratic form, depending on its arguments.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]*Z(3)^0;</span>
+[ [ 0*Z(3), 0*Z(3), 0*Z(3), 0*Z(3) ], [ 0*Z(3), 0*Z(3), 0*Z(3), 0*Z(3) ], 
+  [ 0*Z(3), 0*Z(3), 0*Z(3), 0*Z(3) ], [ 0*Z(3), 0*Z(3), 0*Z(3), 0*Z(3) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(3));</span>
+&lt; trivial form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := Random(GF(3)^4);</span>
+[ Z(3), Z(3), 0*Z(3), Z(3) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[v,v]^form;</span>
+0*Z(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v^form;</span>
+0*Z(3)
+ 
+</pre></div>
+
+<p>The attributes and properties described in Section <a href="chap4.html#X813A02878352E9E5"><span class="RefLink">4.7</span></a> are all applicable to trivial forms.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[0,0,0],[0,0,0],[0,0,0]]*Z(11)^0;</span>
+[ [ 0*Z(11), 0*Z(11), 0*Z(11) ], [ 0*Z(11), 0*Z(11), 0*Z(11) ], 
+  [ 0*Z(11), 0*Z(11), 0*Z(11) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat,GF(121));</span>
+&lt; trivial form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsReflexiveForm(form);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAlternatingForm(form);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSymmetricForm(form);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOrthogonalForm(form);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPseudoForm(form);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSymplecticForm(form);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDegenerateForm(form);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSingularForm(form);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BaseField(form);</span>
+GF(11^2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GramMatrix(form);</span>
+[ [ 0*Z(11), 0*Z(11), 0*Z(11) ], [ 0*Z(11), 0*Z(11), 0*Z(11) ], 
+  [ 0*Z(11), 0*Z(11), 0*Z(11) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RadicalOfForm(form);</span>
+&lt;vector space over GF(11^2), with 3 generators&gt;
+ 
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

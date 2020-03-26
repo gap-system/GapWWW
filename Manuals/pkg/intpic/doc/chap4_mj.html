@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (IntPic) - Chapter 4: Visualization of the pictures created</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
+<p><a id="X79BE6CBC7AA29804" name="X79BE6CBC7AA29804"></a></p>
+<div class="ChapSects"><a href="chap4_mj.html#X79BE6CBC7AA29804">4 <span class="Heading">Visualization of the pictures created</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X814F5C4A8192D756">4.1 <span class="Heading">Viewing using <strong class="pkg">Viz</strong></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X84C1E5D278E701CC">4.2 <span class="Heading">Viewing without using <strong class="pkg">Viz</strong></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7B47AFA881BFC9DC">4.2-1 <span class="Heading">A complete example</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X80799C0678DFAA4D">4.3 <span class="Heading">Other examples of use of the <strong class="pkg">IntPic</strong> package</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X850A57EF80CDB124">4.3-1 <span class="Heading">Varia</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X784E0A5A7DB88332">4.3-2 <span class="Heading">The banner</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Visualization of the pictures created</span></h3>
+
+<p>This chapter describes two easy ways to visualize the images created by using the <span class="URL"><a href="https://gap-packages.github.io/intpic/">IntPic</a></span> package. Both require LaTeX and some LaTeX packages, such as <strong class="pkg">Tikz</strong> and <strong class="pkg">pgf</strong>, to be installed and working. One of the ways we will describe is almost completely automatic. It makes use of the function <code class="code">Splash</code>, borrowed from the <strong class="pkg">Viz</strong> package. The other is not so automatic but has the advantage of not requiring other packages, besides the LaTeX ones, and should work in any operation system.</p>
+
+<p><a id="X814F5C4A8192D756" name="X814F5C4A8192D756"></a></p>
+
+<h4>4.1 <span class="Heading">Viewing using <strong class="pkg">Viz</strong></span></h4>
+
+<p>Producing and displaying a picture from a <code class="code">tikz</code> string <var class="Arg">tkz</var> may me achieved in a simple way. (Warning: extenvive tests have only been done with Linux.) One just have to type the following:</p>
+
+
+<div class="example"><pre>
+IP_Splash(tkz);
+</pre></div>
+
+<p>A picture is popped up after this use of the function <code class="code">IP_Splash</code>.. To see the name of the temporary directory created to perform the computations, and thus being able to copy the files involved to any other place, one should set the info level <code class="code">InfoViz</code> to <span class="SimpleMath">\(1\)</span> or more. The following example illustrates this and the use of some options of the function <code class="code">IP_Splash</code>. For instance, the <code class="code">pdf</code> viewer can be changed.</p>
+
+
+<div class="example"><pre>
+gap&gt; SetInfoLevel(InfoViz,1);
+gap&gt; IP_Splash(tkz,rec(viewer:="okular")); 
+#I  The temporary directory used is: /tmp/tmJcpphI/
+</pre></div>
+
+<p>The temporary directory /tmp/tmJcpphI/ contains the file and vizpicture.tex. The file vizpicture.tex is the LaTeX document to be processed. Other files, namely the <code class="code">vizpicture.pdf</code> are created by the <code class="code">pdflatex</code> command that is called by the <code class="code">IP_Splash</code> function.</p>
+
+<p><code class="code">Warning:</code> In the case of large pictures, it may happen the LaTeX memory being exceeded. In this case, no image is produced and the user is not warned.</p>
+
+<p><a id="X84C1E5D278E701CC" name="X84C1E5D278E701CC"></a></p>
+
+<h4>4.2 <span class="Heading">Viewing without using <strong class="pkg">Viz</strong></span></h4>
+
+<p>This section describes a way to visualize images without sing <strong class="pkg">Viz</strong>. Besides being useful in the case of not having a working copy of <strong class="pkg">Viz</strong>, it is rather convenient when the decision of where to save the pictures is made. In this case, you may start your gap session in the desired place, the working directory. Furthermore, if your intention is, for instance, to include the images in a document, you may just decide the name for the file containing the <code class="code">tikz</code> code and let your document input it. The glogal variables <code class="code">IP_Preamble</code> and <code class="code">Closing</code> can be used to pruduce a complete LaTeX document rather than only the <code class="code">tizk</code> code for the picture. The document may then be processed by using <code class="code">pdflatex</code> and the picture viewed by using some <code class="code">pdf</code> viewer. The <code class="code">pdf</code> produced can be included in a LaTeX document instead of the <code class="code">tizk</code> code. In the later case, the code is processed each time the document is processed, which should perhaps be avoided in the case of large images.</p>
+
+<p>Note the use of the <code class="code">preview</code> package, which is used to produce the complete picture without having to pay attention to the paper size nor to crop the image. It is useful for viewing purposes and also to include the <code class="code">pdf</code> file produced in a LaTeX document to be processed with <code class="code">pdflatex</code>.</p>
+
+
+<div class="example"><pre>      
+gap&gt; Print(IP_Preamble);
+\documentclass{minimal}
+\usepackage{amsmath}
+\usepackage[active,tightpage]{preview}
+\setlength\PreviewBorder{1pt}
+\usepackage{pgf}
+\usepackage{tikz}
+\usepgfmodule{plot}
+\usepgflibrary{plothandlers}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shadings}
+\begin{document}
+\begin{preview}
+</pre></div>
+
+
+<div class="example"><pre>      
+gap&gt; Print(IP_Closing);
+\end{preview}
+\end{document}
+</pre></div>
+
+<p><a id="X7B47AFA881BFC9DC" name="X7B47AFA881BFC9DC"></a></p>
+
+<h5>4.2-1 <span class="Heading">A complete example</span></h5>
+
+<p>Admit you want to produce a document which contains the picture corresponding to the <code class="code">tikz</code> code obtained through the instructions</p>
+
+
+<div class="example"><pre>      
+arr := [[1,2,3,4,5,6],[1,2,3,4,5],[1,2,3,4],[1,2,3],[1,2],[1]];;
+tkz := IP_TikzArrayOfIntegers([1..10],5,rec(highlights:=arr));;
+</pre></div>
+
+<p>The picture is: <br><center><img src="../images/pic_for_complete_document.jpg"></center><br> The elements of the set <span class="SimpleMath">\([1,2,3,4,5,6]\)</span> are highlighted using the first color (red); those of the set <span class="SimpleMath">\([1,2,3,4,5]\)</span> are highlighted using the second color (green); those of the set <span class="SimpleMath">\([1,2,3,4]\)</span> are highlighted using the third color (blue); those of the set <span class="SimpleMath">\([1,2,3]\)</span> are highlighted using the fourth color (cyan); those of the set <span class="SimpleMath">\([1,2]\)</span> are highlighted using the fifth color (magenta); those of the set <span class="SimpleMath">\([1]\)</span> is highlighted using the sixth color (yellow).</p>
+
+<p>Let us explain how the six colors used for the cell containing <span class="SimpleMath">\(1\)</span> are distributed: upper left corner -- red; upper right corner -- green; lower left corner -- blue; lower right corner -- cyan; the number -- magenta; the border -- yellow.</p>
+
+<p>The colors of the cell containing <span class="SimpleMath">\(2\)</span> and <span class="SimpleMath">\(3\)</span> are distributed in a similar way.</p>
+
+<p>The colors of the cell containing <span class="SimpleMath">\(4\)</span>: left -- red; middle -- blue; right -- green.</p>
+
+<p>After the session listed below, the files <code class="code">tikz_pic_for_complete_document.tex</code> and <code class="code">pic_for_complete_document.tex</code> have been created in the current directory (that is, the one where the <strong class="pkg">GAP</strong> session has started). For other directories, complete paths may have to be given.</p>
+
+
+<div class="example"><pre>      
+gap&gt; tikzfile := "tikz_pic_for_complete_document.tex";;
+gap&gt; file := "pic_for_complete_document.tex";;
+gap&gt; 
+gap&gt; arr := [[1,2,3,4,5,6],[1,2,3,4,5],[1,2,3,4],[1,2,3],[1,2],[1]];;
+gap&gt; tkz := IP_TikzArrayOfIntegers([1..10],5,rec(highlights:=arr));;
+gap&gt; 
+gap&gt; FileString(tikzfile,tkz);
+642
+gap&gt; FileString(file,Concatenation(IP_Preamble,tkz,IP_Closing));
+961
+</pre></div>
+
+<p>Executing something like</p>
+
+
+<div class="example"><pre>      
+pdflatex pic_for_complete_document.tex
+convert pic_for_complete_document.pdf pic_for_complete_document.jpg
+</pre></div>
+
+<p>the <code class="code">pdf</code> and the <code class="code">jpg</code> formats of the image have been created. The <code class="code">jpg</code> format is usefull to be included into an html document, for instance.</p>
+
+<p>Note that the tikz code has been saved into the file <code class="code">tikz_pic_for_complete_document.tex</code>. A complete example of a LaTeX document follows.</p>
+
+
+<div class="example"><pre>      
+\documentclass{article}
+\usepackage{amsmath}
+%\usepackage[active,tightpage]{preview}
+%\setlength\PreviewBorder{1pt}
+\usepackage{pgf}
+\usepackage{tikz}
+\usepgfmodule{plot}
+\usepgflibrary{plothandlers}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shadings}
+\usepackage{graphicx}
+\author{Author}
+\title{How to include images in a \LaTeX\ document}
+\date{June, 2013}
+\begin{document}
+%\begin{preview}
+\maketitle
+Using the pdf file:
+
+\begin{center}
+  \includegraphics[width=0.80\textwidth]{../images/pic_for_complete_document.pdf}
+\end{center}
+
+Using the PGF/TikZ code:
+
+\begin{center}
+\input{../images/tikz_pic_for_complete_document.tex}
+\end{center}
+If you want to scale this image, please chang the ``scale'' in the file
+\textt{tikz_pic_for_complete_document.tex} 
+%\end{preview}
+\end{document}
+</pre></div>
+
+<p>The output, after processing with <code class="code">pdflatex</code> is as follows: <br><center><img src="../images/complete_latex_document.jpg"></center><br></p>
+
+<p><a id="X80799C0678DFAA4D" name="X80799C0678DFAA4D"></a></p>
+
+<h4>4.3 <span class="Heading">Other examples of use of the <strong class="pkg">IntPic</strong> package</span></h4>
+
+<p><a id="X850A57EF80CDB124" name="X850A57EF80CDB124"></a></p>
+
+<h5>4.3-1 <span class="Heading">Varia</span></h5>
+
+<p>The following example shows how to produce <code class="code">tikz</code> code for a picture containing the odd integers from <span class="SimpleMath">\(801\)</span> to <span class="SimpleMath">\(999\)</span>. Each line (except the highest) contains <span class="SimpleMath">\(15\)</span> cells.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rg := Filtered([801..889],u-&gt;(u mod 2)&lt;&gt;0);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flen := 15;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">twins := Filtered(Primes, p -&gt; p + 2 in Primes);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">arr := [Primes,Union(twins,twins+2),Filtered(rg,u-&gt;(u mod 3)=0)];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz := IP_TikzArrayOfIntegers(rg,flen,rec(highlights:=arr));;</span>
+</pre></div>
+
+<p>The picture obtained highlights the primes, the twin primes and the multiples of <span class="SimpleMath">\(3\)</span>. As the twins are also primes, a gradient is used to highlight them. In this example the default list of colors is used. <br><center><img src="../images/primesandtwinsamongodd.jpg"></center><br> The same computations, but defining other color lists.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cls := IP_ColorsCompRedTones;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rg := Filtered([801..889],u-&gt;(u mod 2)&lt;&gt;0);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flen := 15;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">twins := Filtered(Primes, p -&gt; p + 2 in Primes);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">arr := [Primes,Union(twins,twins+2),Filtered(rg,u-&gt;(u mod 3)=0)];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz := IP_TikzArrayOfIntegers(rg,flen,rec(colors := cls,highlights:=arr));;</span>
+</pre></div>
+
+<p><br><center><img src="../images/primesandtwinsamongodd_comp_red.jpg"></center><br></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cls := IP_ColorsDGrayTones;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rg := Filtered([801..889],u-&gt;(u mod 2)&lt;&gt;0);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flen := 15;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">twins := Filtered(Primes, p -&gt; p + 2 in Primes);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">arr := [Primes,Union(twins,twins+2),Filtered(rg,u-&gt;(u mod 3)=0)];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz := IP_TikzArrayOfIntegers(rg,flen,rec(colors := cls,highlights:=arr));;</span>
+</pre></div>
+
+<p><br><center><img src="../images/primesandtwinsamongodd_dark_gray.jpg"></center><br></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cls := ["blue","-blue","black"];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rg := Filtered([801..889],u-&gt;(u mod 2)&lt;&gt;0);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flen := 15;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">twins := Filtered(Primes, p -&gt; p + 2 in Primes);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">arr := [Primes,Union(twins,twins+2),Filtered(rg,u-&gt;(u mod 3)=0)];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz := IP_TikzArrayOfIntegers(rg,flen,rec( colors := cls,highlights:=arr));;</span>
+</pre></div>
+
+<p><br><center><img src="../images/primesandtwinsamongodd_other.jpg"></center><br> The following example uses the <span class="URL"><a href="http://www.fc.up.pt/cmup/mdelgado/numericalsgps">NumericalSgps</a></span> package.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">#LoadPackage("numericalsgps");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ns := NumericalSemigroup(11,19,30,42,59);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cls := ShuffleIP_Colors([IP_ColorsGreenTones,IP_ColorsCompBlueTones]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flen := 20;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">#some notable elements</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">arr := [SmallElementsOfNumericalSemigroup(ns),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        GapsOfNumericalSemigroup(ns),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        MinimalGeneratingSystemOfNumericalSemigroup(ns),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        FundamentalGapsOfNumericalSemigroup(ns),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [ConductorOfNumericalSemigroup(ns)],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        PseudoFrobeniusOfNumericalSemigroup(ns)];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz := IP_TikzArrayOfIntegers(flen,rec(colors := cls,highlights:=arr));;</span>
+</pre></div>
+
+<p><br><center><img src="../images/numericalsgp_notable.jpg"></center><br> Using the default colors <br><center><img src="../images/numericalsgp_notable_df_colors.jpg"></center><br></p>
+
+<p><a id="X784E0A5A7DB88332" name="X784E0A5A7DB88332"></a></p>
+
+<h5>4.3-2 <span class="Heading">The banner</span></h5>
+
+<p>The code in the following example has been used to produce one possible banner for the homepage of the <span class="URL"><a href="https://gap-packages.github.io/intpic/">IntPic</a></span> package. It is a nice picture that gives an idea about the primes less than <span class="SimpleMath">\(10000\)</span>. Of course, other ranges could have been chosen. I warn the user that pictures involving a large amount of data may face the problem of exceeding TeX capacity...</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">row_length := 200;; # the legth of each row</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">columns := 50;; # the number of colums</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := row_length*columns;</span>
+10000
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">##compute the primes less than n</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Primes is a GAP variable representing the list of primes less than 1000</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mp := Maximum(Primes);</span>
+997
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">newprimes := [];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">while mp &lt; n do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  mp := NextPrimeInt(mp);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  Add(newprimes, mp);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">small_primes := Union(Primes, newprimes);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">##compute the first element of each pair of twin primes less than n</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">twins := Filtered(small_primes, p -&gt; IsPrime(p+2));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rg := [1..n];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">arr := [Intersection(small_primes,rg),[],[], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        Intersection(Union(twins,twins+2),rg),[],[],[],[],[],[],[],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [],[],[],[],[],[],Difference(rg,small_primes)];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz:=IP_TikzArrayOfIntegers([1..n],row_length,rec(highlights:=arr,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">             cell_width := "6",colsep:="0",rowsep:="0",inner_sep:="2",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">             shape_only:=" ",line_width:="0",line_color:="black!20" ));;</span>
+</pre></div>
+
+<p><br><center><img src="../images/intpic_banner.jpg"></center><br></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

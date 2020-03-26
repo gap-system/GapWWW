@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (FR) - Chapter 4: Functionally recursive elements</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X863D82207A1320F1" name="X863D82207A1320F1"></a></p>
+<div class="ChapSects"><a href="chap4.html#X863D82207A1320F1">4 <span class="Heading">Functionally recursive elements</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X79DE08CD7EE57360">4.1 <span class="Heading">Creators for <code class="code">FRElement</code>s</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7839813183881054">4.1-1 FRElementNC</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CF5EDEB874BF9E3">4.1-2 FRElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86181654827919EE">4.1-3 FRElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80D518E2804ABF70">4.1-4 ComposeElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CE388057DAB4802">4.1-5 VertexElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X848EB430831097E6">4.1-6 DiagonalElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7EB5DE3978840CDF">4.1-7 AsGroupFRElement</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X812C932C7E2F2885">4.2 <span class="Heading">Operations and Attributes for <code class="code">FRElement</code>s</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78F819CF7DDBF310">4.2-1 Output</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8732D01C82999F32">4.2-2 Activity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CE58B2D837B2845">4.2-3 Transition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D4248467B1B097A">4.2-4 Transitions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X84A193C67CDBDA35">4.2-5 Portrait</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X850EB66E7804BA3B">4.2-6 DecompositionOfFRElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85441F1683E9D820">4.2-7 StateSet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X819E3E3080297347">4.2-8 State</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B0C97BC7C3BA20D">4.2-9 States</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X804B2E0F7E37F5B8">4.2-10 FixedStates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8303B36C83371FB3">4.2-11 LimitStates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C4076707CBBE945">4.2-12 IsFiniteStateFRElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X829A87E087F15194">4.2-13 NucleusOfFRMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X79E65E818690B4EB">4.2-14 InitialState</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X823B6E3D819432D6"><code>4.2-15 \^</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C3CF6AF86336EDC"><code>4.2-16 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78C19ACA78F9F067"><code>4.2-17 \[\]</code></a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Functionally recursive elements</span></h3>
+
+<p>A <em>functionally recursive element</em> is given by a functionally recursive machine and an initial state <span class="SimpleMath">q</span>. Many functions for FR machines, which accept a state as an argument, apply to FR elements. In that case, no state is passed to the function.</p>
+
+<p>The main function of FR elements is to serve as group/monoid/semigroup elements: they can be multiplied and divided, and they act naturally on sequences. They can also be tested for equality, and can be sorted.</p>
+
+<p>FR elements are stored as free group/monoid/semigroup words. They are printed as <code class="code">&lt;n|w&gt;</code>, where <code class="code">n</code> is the degree of their alphabet.</p>
+
+<p>Equality of FR elements is tested as follows. Given FR elements <span class="SimpleMath">(m,q)</span> and <span class="SimpleMath">(m,r)</span>, we set up a "rewriting system" for <span class="SimpleMath">m</span>, which records a purported set of relations among states of <span class="SimpleMath">m</span>. We start by an empty rewriting system, and we always ensure that the rewriting system is reduced and shortlex-reducing. Then, to compare <span class="SimpleMath">q</span> and <span class="SimpleMath">r</span>, we first compare their activities. If they differ, the elements are distinct. Otherwise, we reduce <span class="SimpleMath">q</span> and <span class="SimpleMath">r</span> using the rewriting system. If the resulting words are graphically equal, then they are equal. Otherwise, we add the rule <span class="SimpleMath">q-&gt; r</span> or <span class="SimpleMath">r-&gt; q</span> to the rewriting system, and proceed recursively to compare coordinatewise the states of these reduced words. As a bonus, we keep the rewriting system to speed up future comparisons.</p>
+
+<p>Efficient comparison requires lookup in sorted lists, aka "Sets". Given two FR elements <span class="SimpleMath">x</span> and <span class="SimpleMath">y</span>, we declare that <span class="SimpleMath">x&lt;y</span> if, for the shortlex-first sequence <span class="SimpleMath">l</span> such that <code class="code">Output(Transition(x,l))</code> and <code class="code">Output(Transition(y,l))</code> differ, the former is less than the latter (compared as lists). In fact, a single internal function compares <span class="SimpleMath">x</span> and <span class="SimpleMath">y</span> and returns <span class="SimpleMath">-1,0,1</span> depending on whether <span class="SimpleMath">x&lt;y</span> or <span class="SimpleMath">x=y</span> or <span class="SimpleMath">x&gt;y</span>. It traverses, in breadth first fashion, the alphabet sequences, and stops either when provably <span class="SimpleMath">x=y</span> or if different outputs appear.</p>
+
+<p><a id="X79DE08CD7EE57360" name="X79DE08CD7EE57360"></a></p>
+
+<h4>4.1 <span class="Heading">Creators for <code class="code">FRElement</code>s</span></h4>
+
+<p><a id="X7839813183881054" name="X7839813183881054"></a></p>
+
+<h5>4.1-1 FRElementNC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRElementNC</code>( <var class="Arg">fam</var>, <var class="Arg">free</var>, <var class="Arg">transitions</var>, <var class="Arg">outputs</var>, <var class="Arg">init</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR element.</p>
+
+<p>This function constructs a new FR element, belonging to family <var class="Arg">fam</var>. It has stateset the free group/semigroup/monoid <var class="Arg">free</var>, and transitions described by <var class="Arg">states</var> and <var class="Arg">outputs</var>, and initial states <var class="Arg">init</var>.</p>
+
+<p><var class="Arg">transitions</var> is a list of lists; <var class="Arg">transitions</var>[<var class="Arg">s</var>][<var class="Arg">x</var>] is a word in <var class="Arg">free</var>, which is the state reached by the machine when started in state <var class="Arg">s</var> and fed input <var class="Arg">x</var>.</p>
+
+<p><var class="Arg">outputs</var> is a list of lists; <var class="Arg">outputs</var>[<var class="Arg">s</var>][<var class="Arg">x</var>] is a output letter of the machine when it receives input <var class="Arg">x</var> in state <var class="Arg">s</var>.</p>
+
+<p><var class="Arg">init</var> is a word in <var class="Arg">free</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := FreeGroup(2);</span>
+&lt;free group on the generators [ f1, f2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := FRElementNC(FREFamily([1,2]),f,[[One(f),f.1],[One(f),f.2^-1]],</span>
+                      [[2,1],[2,1]],f.1);
+&lt;2|f1&gt;
+</pre></div>
+
+<p><a id="X7CF5EDEB874BF9E3" name="X7CF5EDEB874BF9E3"></a></p>
+
+<h5>4.1-2 FRElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRElement</code>( [<var class="Arg">names</var>, ]<var class="Arg">transitions</var>, <var class="Arg">outputs</var>, <var class="Arg">init</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRElement</code>( <var class="Arg">free</var>, <var class="Arg">transitions</var>, <var class="Arg">outputs</var>, <var class="Arg">init</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR element.</p>
+
+<p>This function constructs a new FR element. It has stateset a free group/semigroup/monoid, structure described by <var class="Arg">transitions</var> and <var class="Arg">outputs</var>, and initial state <var class="Arg">init</var>. If the stateset is not passed as argument <var class="Arg">free</var>, then it is determined by <var class="Arg">transitions</var> and <var class="Arg">outputs</var>; it is a free group if all states are invertible, and a free monoid otherwise. In that case, <var class="Arg">names</var> is an optional list; at position <var class="Arg">s</var> it contains a string describing generator <var class="Arg">s</var>.</p>
+
+<p><var class="Arg">transitions</var> is a list of lists; <code class="code">transitions[s][x]</code> is either an associative word, or a list of integers or FR elements describing the state reached by the machine when started in state <var class="Arg">s</var> and fed input <var class="Arg">x</var>. Positive integers indicate a generator, negative integers its inverse, the empty list in the identity state, and lists of length greater than one indicate a product of states. If an entry is an FR element, then its machine is incorporated into the newly constructed element.</p>
+
+<p><var class="Arg">outputs</var> is a list; at position <var class="Arg">s</var> it contains a permutation, a transformation, or a list of images, describing the activity of state <var class="Arg">s</var>.</p>
+
+<p><var class="Arg">init</var> is either an associative word, an integer, or a list of integers describing the inital state of the machine.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);</span>
+&lt;2|tau&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau1 := FRElement(["tau1","tau"],[[[],[2]],[[],[2]]],[(),(1,2)],1);</span>
+&lt;2|tau1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">(tau/tau1)^2;</span>
+&lt;2|tau1*tau2^-1*tau1*tau2^-1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOne(last);</span>
+true
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := FreeGroup("tau","tau1");</span>
+&lt;free group on the generators [ tau, tau1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(f,[[One(f),f.1],[One(f),f.1]],[(1,2),()],f.1);</span>
+&lt;2|tau&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau1 := FRElement(f,[[One(f),f.1],[One(f),f.1]],[(1,2),()],f.2);</span>
+&lt;2|tau1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">(tau/tau1)^2;</span>
+&lt;2|tau1*tau2^-1*tau1*tau2^-1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOne(last);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tauX := FRElement(f,[[One(f),f.1],[One(f),f.1]],[(1,2),()],1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tauY := FRElement(f,[[One(f),f.1],[One(f),f.1]],[(1,2),()],f.1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(Set([tau,tauX,tauY]));</span>
+1
+</pre></div>
+
+<p><a id="X86181654827919EE" name="X86181654827919EE"></a></p>
+
+<h5>4.1-3 FRElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRElement</code>( <var class="Arg">m</var>, <var class="Arg">q</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR element.</p>
+
+<p>This function constructs a new FR element. If <var class="Arg">m</var> is an FR machine, it creates the element <span class="SimpleMath">(m,q)</span> whose <code class="code">FRMachine</code> is <var class="Arg">m</var> and whose initial state is <var class="Arg">q</var>.</p>
+
+<p>If <var class="Arg">m</var> is an FR element, this command creates an FR element with the same FR machine as <var class="Arg">m</var>, and with initial state <var class="Arg">q</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);</span>
+&lt;FR machine with alphabet [ 1 .. 2 ] on Group( [ a, b ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := FRElement(m,1); b := FRElement(m,2);</span>
+&lt;2|a&gt;
+&lt;2|b&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Comm(b,b^a);</span>
+&lt;2|b^-1*a^-1*b^-1*a*b*a^-1*b*a&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOne(last);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">last2=FRElement(m,[-2,-1,-2,1,2,-1,2,1]);</span>
+true
+</pre></div>
+
+<p><a id="X80D518E2804ABF70" name="X80D518E2804ABF70"></a></p>
+
+<h5>4.1-4 ComposeElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ComposeElement</code>( <var class="Arg">l</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR element.</p>
+
+<p>This function constructs a new FR element. <var class="Arg">l</var> is a list of FR elements, and <var class="Arg">p</var> is a permutation, transformation or list. In that last case, the resulting element <code class="code">g</code> satisfies <code class="code">DecompositionOfFRElement(g)=[l,p]</code>.</p>
+
+<p>If all arguments are Mealy elements, the result is a Mealy element. Otherwise, it is a MonoidFRElement.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := FRElement(m,1); b := FRElement(m,2);</span>
+&lt;2|a&gt;
+&lt;2|b&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ComposeElement([b^0,b],(1,2));</span>
+&lt;2|f1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">last=a;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DecompositionOfFRElement(last2);</span>
+[ [ &lt;2|identity ...&gt;, &lt;2|f5&gt; ], [ 2, 1 ] ]
+</pre></div>
+
+<p><a id="X7CE388057DAB4802" name="X7CE388057DAB4802"></a></p>
+
+<h5>4.1-5 VertexElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VertexElement</code>( <var class="Arg">v</var>, <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR element.</p>
+
+<p>This function constructs a new FR element. <var class="Arg">v</var> is either an integer or a list of integers, and represents a vertex. <var class="Arg">e</var> is an FR element. The resulting element acts on the subtree below vertex <var class="Arg">v</var> as <var class="Arg">e</var> acts on the whole tree, and fixes all other subtrees.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := FRElement([[[],[]]],[(1,2)],[1]);</span>
+&lt;2|f1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := VertexElement(1,e);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := VertexElement(2,f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g = VertexElement([2,1],e);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1^e;</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[1,1]^f;</span>
+[ 1, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[2,1,1]^g;</span>
+[ 2, 1, 2 ]
+</pre></div>
+
+<p><a id="X848EB430831097E6" name="X848EB430831097E6"></a></p>
+
+<h5>4.1-6 DiagonalElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiagonalElement</code>( <var class="Arg">n</var>, <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR element.</p>
+
+<p>This function constructs a new FR element. <var class="Arg">n</var> is either an integer or a list of integers, representing a sequence of operations to be performed on <var class="Arg">e</var> starting from the last.</p>
+
+<p><code class="code">DiagonalElement(n,e)</code> is an element with trivial output, and with <span class="SimpleMath">e^(-1)^i binomial(n,i)</span> in coordinate <span class="SimpleMath">i+1</span> of the alphabet, assumed to be of the form <code class="code">[1..d]</code>.</p>
+
+<p>In particular, <code class="code">DiagonalElement(0,e)</code> is the same as <code class="code">VertexElement(1,e)</code>; <code class="code">DiagonalElement(1,e)</code> is the commutator of <code class="code">VertexElement(1,e)</code> with any cycle mapping 1 to 2; and <code class="code">DiagonalElement(-1,e)</code> has a transition to <var class="Arg">e</var> at all inputs.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := FRElement([[[],[],[1]]],[(1,2,3)],[1]);</span>
+&lt;3|f1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(e);</span>
+    |     1        2      3
+----+--------+--------+------+
+ f1 | &lt;id&gt;,2   &lt;id&gt;,3   f1,1
+----+--------+--------+------+
+Initial state: f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(DiagonalElement(0,e));</span>
+    |     1        2        3
+----+--------+--------+--------+
+ f1 |   f2,1   &lt;id&gt;,2   &lt;id&gt;,3
+ f2 | &lt;id&gt;,2   &lt;id&gt;,3     f2,1
+----+--------+--------+--------+
+Initial state: f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(DiagonalElement(1,e));</span>
+    |     1         2        3
+----+--------+---------+--------+
+ f1 |   f2,1   f2^-1,2   &lt;id&gt;,3
+ f2 | &lt;id&gt;,2    &lt;id&gt;,3     f2,1
+----+--------+---------+--------+
+Initial state: f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(DiagonalElement(2,e));</span>
+    |     1         2      3
+----+--------+---------+------+
+ f1 |   f2,1   f2^-2,2   f2,3
+ f2 | &lt;id&gt;,2    &lt;id&gt;,3   f2,1
+----+--------+---------+------+
+Initial state: f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(DiagonalElement(-1,e));</span>
+    |     1        2      3
+----+--------+--------+------+
+ f1 |   f2,1     f2,2   f2,3
+ f2 | &lt;id&gt;,2   &lt;id&gt;,3   f2,1
+----+--------+--------+------+
+Initial state: f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DiagonalElement(-1,e)=DiagonalElement(2,e);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(DiagonalElement([0,-1],e));</span>
+ G  |     1        2        3
+----+--------+--------+--------+
+ f1 |   f2,1   &lt;id&gt;,2   &lt;id&gt;,3
+ f2 |   f3,1     f3,2     f3,3
+ f3 | &lt;id&gt;,2   &lt;id&gt;,3     f3,1
+----+--------+--------+--------+
+Initial state: f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(DiagonalElement([-1,0],e));</span>
+ G  |     1        2        3
+----+--------+--------+--------+
+ f1 |   f2,1     f2,2     f2,3
+ f2 |   f3,1   &lt;id&gt;,2   &lt;id&gt;,3
+ f3 | &lt;id&gt;,2   &lt;id&gt;,3     f3,1
+----+--------+--------+--------+
+Initial state: f1
+</pre></div>
+
+<p><a id="X7EB5DE3978840CDF" name="X7EB5DE3978840CDF"></a></p>
+
+<h5>4.1-7 AsGroupFRElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsGroupFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsMonoidFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsSemigroupFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An FR element isomorphic to <var class="Arg">m</var>, with a free group/monoid/semigroup as stateset.</p>
+
+<p>This function constructs, from the FR element <var class="Arg">e</var>, an isomorphic FR element <code class="code">f</code> with a free group/monoid/semigroup as stateset. <var class="Arg">e</var> may be a Mealy, group, monoid or semigroup FR element.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := AsGroupFRElement(FRElement(GuptaSidkiMachines(3),4));</span>
+&lt;3|f1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(e);</span>
+ G  |     1         2        3
+----+--------+---------+--------+
+ f1 |   f2,1   f2^-1,2     f1,3
+ f2 | &lt;id&gt;,2    &lt;id&gt;,3   &lt;id&gt;,1
+----+--------+---------+--------+
+Initial state: f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e=FRElement(GuptaSidkiMachines(3),4);</span>
+#I  \=: converting second argument to FR element
+true
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := AsMonoidFRElement(FRElement(GuptaSidkiMachines(3),4));</span>
+&lt;3|m1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(e);</span>
+ M  |     1        2        3
+----+--------+--------+--------+
+ m1 |   m2,1     m3,2     m1,3
+ m2 | &lt;id&gt;,2   &lt;id&gt;,3   &lt;id&gt;,1
+ m3 | &lt;id&gt;,3   &lt;id&gt;,1   &lt;id&gt;,2
+----+--------+--------+--------+
+Initial state: m1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e=FRElement(GuptaSidkiMachines(3),4);</span>
+#I  \=: converting second argument to FR element
+true
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := AsSemigroupFRElement(FRElement(GuptaSidkiMachines(3),4));</span>
+&lt;3|s1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(e);</span>
+ S  |   1      2      3
+----+------+------+------+
+ s1 | s2,1   s3,2   s1,3
+ s2 | s4,2   s4,3   s4,1
+ s3 | s4,3   s4,1   s4,2
+ s4 | s4,1   s4,2   s4,3
+----+------+------+------+
+Initial state: s1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e=FRElement(GuptaSidkiMachines(3),4);</span>
+#I  \=: converting second argument to FR element
+true
+</pre></div>
+
+<p><a id="X812C932C7E2F2885" name="X812C932C7E2F2885"></a></p>
+
+<h4>4.2 <span class="Heading">Operations and Attributes for <code class="code">FRElement</code>s</span></h4>
+
+<p><a id="X78F819CF7DDBF310" name="X78F819CF7DDBF310"></a></p>
+
+<h5>4.2-1 Output</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Output</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A transformation of <var class="Arg">e</var>'s alphabet.</p>
+
+<p>This function returns the transformation of <var class="Arg">e</var>'s alphabet, i.e. the action on strings of length 1 over the alphabet. This transformation is a permutation if <var class="Arg">machine</var> is a group machine, and a transformation otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Output(tau);</span>
+(1,2)
+zap := FRElement(["zap"],[[[],[1]]],[[1,1]],[1]);;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Output(zap);</span>
+&lt;1,1&gt;
+</pre></div>
+
+<p><a id="X8732D01C82999F32" name="X8732D01C82999F32"></a></p>
+
+<h5>4.2-2 Activity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Activity</code>( <var class="Arg">e</var>[, <var class="Arg">l</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivityInt</code>( <var class="Arg">e</var>[, <var class="Arg">l</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivityTransformation</code>( <var class="Arg">e</var>[, <var class="Arg">l</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivityPerm</code>( <var class="Arg">e</var>[, <var class="Arg">l</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The transformation induced by <var class="Arg">e</var> on the <var class="Arg">l</var>th level of the tree.</p>
+
+<p>This function returns the transformation induced by <var class="Arg">e</var> on the <var class="Arg">l</var>th level of the tree, i.e. on the strings of length <var class="Arg">l</var> over <var class="Arg">e</var>'s alphabet.</p>
+
+<p>This set of strings is identified with the set <span class="SimpleMath">L={1,...,d^l}</span> of integers, where the alphabet of <var class="Arg">e</var> has <span class="SimpleMath">d</span> letters. Changes of the first letter of a string induce changes of a multiple of <span class="SimpleMath">d^l-1</span> on the position in <span class="SimpleMath">L</span>, while changes of the last letter of a string induce changes of <span class="SimpleMath">1</span> on the position in <span class="SimpleMath">L</span>.</p>
+
+<p>In its first form, this command returns a permutation (for group elements) or a <code class="func">Transformation</code> (<a href="../../../doc/ref/chap53.html#X860026B880BCB2A5"><span class="RefLink">Reference: Transformations</span></a>) (for other elements). In the second form, it returns the unique integer <code class="code">i</code> such that the transformation <var class="Arg">e</var> acts on <code class="code">[1..Length(AlphabetOfFRObject(e))^n]</code> as adding <code class="code">i</code> in base <code class="code">Length(alphabet(e))</code>, or <code class="keyw">fail</code> if no such <code class="code">i</code> exists. In the third form, it returns a <strong class="pkg">GAP</strong> transformation. In the fourth form, it returns a permutation, or <code class="keyw">fail</code> if <var class="Arg">e</var> is not invertible.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Output(tau); PermList(last)=Activity(tau);</span>
+[ 2, 1 ]
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Activity(tau,2); ActivityInt(tau,2);</span>
+(1,3,2,4)
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Activity(tau,3); ActivityInt(tau,3);</span>
+(1,5,3,7,2,6,4,8)
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zap := FRElement(["zap"],[[[1],[]]],[[1,1]],[1]);</span>
+&lt;2|zap&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Output(zap);</span>
+[ 1, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Activity(zap,3);</span>
+&lt;1,1,1,2,1,2,3,4&gt;
+</pre></div>
+
+<p><a id="X7CE58B2D837B2845" name="X7CE58B2D837B2845"></a></p>
+
+<h5>4.2-3 Transition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Transition</code>( <var class="Arg">e</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An element of <var class="Arg">machine</var>'s stateset.</p>
+
+<p>This function returns the state reached by <var class="Arg">e</var> when fed input <var class="Arg">i</var>. This input may be an alphabet letter or a sequence of alphabet letters.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transition(tau,2);</span>
+tau
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transition(tau,[2,2]);</span>
+tau
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transition(tau^2,[2,2]);</span>
+tau
+</pre></div>
+
+<p><a id="X7D4248467B1B097A" name="X7D4248467B1B097A"></a></p>
+
+<h5>4.2-4 Transitions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Transitions</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list of elements of <var class="Arg">machine</var>'s stateset.</p>
+
+<p>This function returns the states reached by <var class="Arg">e</var> when fed the alphabet as input.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transitions(tau);</span>
+[ &lt;identity ...&gt;, tau ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transition(tau^2);</span>
+[ tau, tau ]
+</pre></div>
+
+<p><a id="X84A193C67CDBDA35" name="X84A193C67CDBDA35"></a></p>
+
+<h5>4.2-5 Portrait</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Portrait</code>( <var class="Arg">e</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PortraitPerm</code>( <var class="Arg">e</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PortraitTransformation</code>( <var class="Arg">e</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PortraitInt</code>( <var class="Arg">e</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A nested list describing the action of <var class="Arg">e</var>.</p>
+
+<p>This function returns a sequence of <span class="SimpleMath">l+1</span> lists; the <span class="SimpleMath">i</span>th list in the sequence is an <var class="Arg">i-1</var>-fold nested list. The entry at position <span class="SimpleMath">(x_1,...,x_i)</span> is the transformation of the alphabet induced by <var class="Arg">e</var> under vertex <span class="SimpleMath">x_1... x_i</span>.</p>
+
+<p>The difference between the commands is the following: <code class="code">Portrait</code> returns transformations, <code class="code">PortraitPerm</code> returns permutations, and and <code class="code">PortraitInt</code> returns integers, the power of the cycle <span class="SimpleMath">x↦ x+1</span> that represents the transformation, as for the function <code class="func">ActivityInt</code> (<a href="chap4.html#X8732D01C82999F32"><span class="RefLink">4.2-2</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Portrait(tau,0);</span>
+[ &lt;2,1&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Portrait(tau,3);</span>
+[ &lt;2,1&gt;, [ &lt;&gt;, &lt;2,1&gt; ], [ [ &lt;&gt;, &lt;&gt; ], [ &lt;&gt;, &lt;2,1&gt; ] ],
+  [ [ [ &lt;&gt;, &lt;&gt; ], [ &lt;&gt;, &lt;&gt; ] ], [ [ &lt;&gt;, &lt;&gt; ], [ &lt;&gt;, &lt;2,1&gt; ] ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PortraitPerm(tau,0);</span>
+[ (1,2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PortraitInt(tau,0);</span>
+[ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PortraitInt(tau,3);</span>
+[ 1 , [ 0 , 1 ],
+  [ [ 0 , 0 ], [ 0 , 1 ] ],
+  [ [ [ 0 , 0 ], [ 0 , 0 ] ], [ [ 0 , 0 ], [ 0 , 1 ] ] ] ]
+</pre></div>
+
+<p><a id="X850EB66E7804BA3B" name="X850EB66E7804BA3B"></a></p>
+
+<h5>4.2-6 DecompositionOfFRElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecompositionOfFRElement</code>( <var class="Arg">e</var>[, <var class="Arg">n</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list describing the action and transitions of <var class="Arg">e</var>.</p>
+
+<p>This function returns a list. The second coordinate is the action of <var class="Arg">e</var> on its alphabet, see <code class="func">Output</code> (<a href="chap4.html#X78F819CF7DDBF310"><span class="RefLink">4.2-1</span></a>). The first coordinate is a list, containing in position <span class="SimpleMath">i</span> the FR element inducing the action of <var class="Arg">e</var> on strings starting with <span class="SimpleMath">i</span>.</p>
+
+<p>If a second argument <var class="Arg">n</var> is supplied, the decomposition is iterated <var class="Arg">n</var> times.</p>
+
+<p>This FR element has same underlying machine as <var class="Arg">e</var>, and initial state given by <code class="func">Transition</code> (<a href="chap4.html#X7CE58B2D837B2845"><span class="RefLink">4.2-3</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DecompositionOfFRElement(tau);</span>
+[ [ &lt;2|identity ...&gt;, &lt;2|tau&gt; ], [ 2, 1 ] ]
+</pre></div>
+
+<p><a id="X85441F1683E9D820" name="X85441F1683E9D820"></a></p>
+
+<h5>4.2-7 StateSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StateSet</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The set of states associated with <var class="Arg">e</var>.</p>
+
+<p>This function returns the stateset of <var class="Arg">e</var>. If <var class="Arg">e</var> is of Mealy type, this is the list of all states reached by <var class="Arg">e</var>.</p>
+
+<p>If <var class="Arg">e</var> is of group/semigroup/monoid type, then this is the stateset of the underlying FR machine, and not the minimal set of states of <var class="Arg">e</var>, which is computed with <code class="func">States</code> (<a href="chap4.html#X7B0C97BC7C3BA20D"><span class="RefLink">4.2-9</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StateSet(tau);</span>
+&lt;free group on the generators [ tau ]&gt;
+</pre></div>
+
+<p><a id="X819E3E3080297347" name="X819E3E3080297347"></a></p>
+
+<h5>4.2-8 State</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; State</code>( <var class="Arg">e</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An FR element describing the action of <var class="Arg">e</var> at vertex <var class="Arg">v</var>.</p>
+
+<p>This function returns the FR element with same underlying machine as <var class="Arg">e</var>, acting on the binary tree as <var class="Arg">e</var> acts on the subtree below <var class="Arg">v</var>.</p>
+
+<p><var class="Arg">v</var> is either an integer or a list. This function returns an FR element, but otherwise is essentially a call to <code class="func">Transition</code> (<a href="chap4.html#X7CE58B2D837B2845"><span class="RefLink">4.2-3</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">State(tau,2);</span>
+&lt;2|tau&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">State(tau,[2,2]);</span>
+&lt;2|tau&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">State(tau^2,[2,2]);</span>
+&lt;2|tau&gt;
+</pre></div>
+
+<p><a id="X7B0C97BC7C3BA20D" name="X7B0C97BC7C3BA20D"></a></p>
+
+<h5>4.2-9 States</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; States</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list of FR elements describing the action of <var class="Arg">e</var> on all subtrees.</p>
+
+<p>This function calls repeatedly <code class="func">State</code> (<a href="chap4.html#X819E3E3080297347"><span class="RefLink">4.2-8</span></a>) to compute all the states of <var class="Arg">e</var>; it returns the smallest list of <code class="code">FRElement</code>s that is closed under the function <code class="func">State</code> (<a href="chap4.html#X819E3E3080297347"><span class="RefLink">4.2-8</span></a>).</p>
+
+<p><var class="Arg">e</var> may be either an FR element, or a list of FR elements. In the latter case, it amounts to computing the list of all states of all elements of the list <var class="Arg">e</var>.</p>
+
+<p>The ordering of the list is as follows. First come <var class="Arg">e</var>, or all elements of <var class="Arg">e</var>. Then come the states reached by <var class="Arg">e</var> in one transition, ordered by the alphabet letter leading to them; then come those reached in two transitions, ordered lexicographically by the transition; etc.</p>
+
+<p>Note that this function is not guaranteed to terminate. There is currently no mechanism that detects whether an FR element is finite state, so in fact this function terminates if and only if <var class="Arg">e</var> is finite-state.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := FRElement(m,1);; b := FRElement(m,2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">States(a);</span>
+[ &lt;2|a&gt;, &lt;2|identity ...&gt;, &lt;2|b&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">States(b);</span>
+[ &lt;2|b&gt;, &lt;2|identity ...&gt;, &lt;2|a&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">States(a^2);</span>
+[ &lt;2|a^2&gt;, &lt;2|b&gt;, &lt;2|identity ...&gt;, &lt;2|a&gt; ]
+</pre></div>
+
+<p><a id="X804B2E0F7E37F5B8" name="X804B2E0F7E37F5B8"></a></p>
+
+<h5>4.2-10 FixedStates</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FixedStates</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list of FR elements describing the action of <var class="Arg">e</var> at fixed vertices.</p>
+
+<p>This function calls repeatedly <code class="func">State</code> (<a href="chap4.html#X819E3E3080297347"><span class="RefLink">4.2-8</span></a>) to compute all the states of <var class="Arg">e</var> at non-trivial fixed vertices.</p>
+
+<p><var class="Arg">e</var> may be either an FR element, or a list of FR elements. In the latter case, it amounts to computing the list of all states of all elements of the list <var class="Arg">e</var>.</p>
+
+<p>The ordering of the list is as follows. First come <var class="Arg">e</var>, or all elements of <var class="Arg">e</var>. Then come the states reached by <var class="Arg">e</var> in one transition, ordered by the alphabet letter leading to them; then come those reached in two transitions, ordered lexicographically by the transition; etc.</p>
+
+<p>Note that this function is not guaranteed to terminate, if <var class="Arg">e</var> is not finite-state.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := FRElement(m,1);; b := FRElement(m,2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FixedStates(a);</span>
+[ ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FixedStates(b);</span>
+[ &lt;2|identity ...&gt;, &lt;2|a&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FixedStates(a^2);</span>
+[ &lt;2|b&gt;, &lt;2|identity ...&gt;, &lt;2|a&gt; ]
+</pre></div>
+
+<p><a id="X8303B36C83371FB3" name="X8303B36C83371FB3"></a></p>
+
+<h5>4.2-11 LimitStates</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LimitStates</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A set of FR element describing the recurring actions of <var class="Arg">e</var> on all subtrees.</p>
+
+<p>This function computes the <code class="func">States</code> (<a href="chap4.html#X7B0C97BC7C3BA20D"><span class="RefLink">4.2-9</span></a>) <span class="SimpleMath">S</span> of <var class="Arg">e</var>, and then repeatedly removes elements that are not <em>recurrent</em>, i.e. that do not appear as states of elements of <span class="SimpleMath">S</span> on subtrees distinct from the entire tree; and then converts the result to a set.</p>
+
+<p>As for <code class="func">States</code> (<a href="chap4.html#X7B0C97BC7C3BA20D"><span class="RefLink">4.2-9</span></a>), <var class="Arg">e</var> may be either an FR element, or a list of FR elements.</p>
+
+<p>Note that this function is not guaranteed to terminate. It currently terminates if and only if <code class="func">States</code> (<a href="chap4.html#X7B0C97BC7C3BA20D"><span class="RefLink">4.2-9</span></a>) terminates.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := FRElement(m,1);; b := FRElement(m,2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LimitStates(a);</span>
+[ &lt;2|identity ...&gt;, &lt;2|b&gt;, &lt;2|a&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LimitStates(a^2);</span>
+[ &lt;2|identity ...&gt;, &lt;2|b&gt;, &lt;2|a&gt; ]
+</pre></div>
+
+<p><a id="X7C4076707CBBE945" name="X7C4076707CBBE945"></a></p>
+
+<h5>4.2-12 IsFiniteStateFRElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFiniteStateFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFiniteStateFRMachine</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">e</var> is a finite-state element.</p>
+
+<p>This function tests whether <var class="Arg">e</var> is a finite-state element.</p>
+
+<p>When applied to a Mealy element, it returns <code class="keyw">true</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := GuptaSidkiMachines(3);; Display(m);</span>
+   |  1     2     3
+---+-----+-----+-----+
+ a | a,1   a,2   a,3
+ b | a,2   a,3   a,1
+ c | a,3   a,1   a,2
+ d | b,1   c,2   d,3
+---+-----+-----+-----+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Filtered(StateSet(m),i-&gt;IsFiniteStateFRElement(FRElement(m,i)));</span>
+[ 1, 2, 3, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsFiniteStateFRMachine(m);</span>
+true
+</pre></div>
+
+<p><a id="X829A87E087F15194" name="X829A87E087F15194"></a></p>
+
+<h5>4.2-13 NucleusOfFRMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NucleusOfFRMachine</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Nucleus</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The nucleus of the machine <var class="Arg">m</var>.</p>
+
+<p>This function computes the <em>nucleus</em> of the machine <var class="Arg">m</var>. It is the minimal set <code class="code">N</code> of states such that, for every word <var class="Arg">s</var> in the states of <var class="Arg">m</var>, all states of <var class="Arg">s</var> of at large enough depth belong to <code class="code"></code>.</p>
+
+<p>It may also be characterized as the minimal set <code class="code">N</code> of states that contains the limit states of <var class="Arg">m</var> and is such that the limit states of <code class="code">N*m</code> belong to <code class="code">N</code>.</p>
+
+<p>The elements of the nucleus form the stateset of a Mealy machine; this machine is created by <code class="func">NucleusMachine</code> (<a href="chap5.html#X7F8163B5816969C8"><span class="RefLink">5.2-27</span></a>).</p>
+
+<p>This command is not guaranteed to terminate; though it will, if the semigroup generated by <var class="Arg">m</var> is contracting. If the minimal such <code class="code">N</code> is infinite, this command either returns <var class="Arg">K</var> or runs forever.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NucleusOfFRMachine(m);</span>
+[ &lt;2|identity ...&gt;, &lt;2|b&gt;, &lt;2|a&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine(["a","b"],[[[],[1]],[[1],[2]]],[(1,2),()]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NucleusOfFRMachine(m);</span>
+fail
+</pre></div>
+
+<p><a id="X79E65E818690B4EB" name="X79E65E818690B4EB"></a></p>
+
+<h5>4.2-14 InitialState</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InitialState</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The initial state of an FR element.</p>
+
+<p>This function returns the initial state of an FR element. It is an element of the stateset of the underlying FR machine of <var class="Arg">e</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRElement(["tau","mu"],[[[],[1]],[[],[-2]]],[(1,2),(1,2)],[1,2]);</span>
+&lt;2|tau*mu&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InitialState(n);</span>
+tau*mu
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">last in StateSet(n);</span>
+true
+</pre></div>
+
+<p><a id="X823B6E3D819432D6" name="X823B6E3D819432D6"></a></p>
+
+<h5><code>4.2-15 \^</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \^</code>( <var class="Arg">e</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: The image of a vertex <var class="Arg">v</var> under <var class="Arg">e</var>.</p>
+
+<p>This function accepts an FR element and a vertex <var class="Arg">v</var>, which is either an integer or a list. It returns the image of <var class="Arg">v</var> under the transformation <var class="Arg">e</var>, in the same format (integer/list) as <var class="Arg">v</var>.</p>
+
+<p>The list <var class="Arg">v</var> can be a periodic list (see <code class="func">PeriodicList</code> (<a href="chap11.html#X7B401DFE817D3927"><span class="RefLink">11.2-2</span></a>)). In that case, the result is again a periodic list. The computation will succeed only if the states along the period are again periodic.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1^tau;</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[1,1]^tau;</span>
+[ 2, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[2,2,2]^tau;</span>
+[ 1, 1, 1 ]
+gap List([0..5],i-&gt;PeriodicList([],[2])^(tau^i));
+[ [/ 2 ], [/ 1 ], [ 2, / 1 ], [ 1, 2, / 1 ], [ 2, 2, / 1 ],
+  [ 1, 1, 2, / 1 ] ]
+</pre></div>
+
+<p><a id="X7C3CF6AF86336EDC" name="X7C3CF6AF86336EDC"></a></p>
+
+<h5><code>4.2-16 \*</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: The product of the two FR elements <var class="Arg">m</var> and <var class="Arg">n</var>.</p>
+
+<p>This function returns a new FR element, which is the product of the FR elements <var class="Arg">m</var> and <var class="Arg">n</var>.</p>
+
+<p>In case <var class="Arg">m</var> and <var class="Arg">n</var> have the same underlying machine, this is the machine of the result. In case the machine of <var class="Arg">n</var> embeds in the machine of <var class="Arg">m</var> (see <code class="func">SubFRMachine</code> (<a href="chap3.html#X811B5BF17A3FE577"><span class="RefLink">3.5-9</span></a>)), the machine of the product is the machine of <var class="Arg">m</var>. In case the machine of <var class="Arg">m</var> embeds in the machine of <var class="Arg">n</var>, the machine of the product is the machine of <var class="Arg">n</var>. Otherwise the machine of the product is the product of the machines of <var class="Arg">m</var> and <var class="Arg">n</var> (See <code class="func">\*</code> (<a href="chap3.html#X7857704878577048"><span class="RefLink">3.5-3</span></a>)).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRElement(["tau"],[[[],[1]]],[(1,2)],[1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau*tau; tau^2;</span>
+&lt;2|tau^2&gt;
+&lt;2|tau^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[2,2,2]^(tau^2);</span>
+[ 2, 1, 1 ]
+</pre></div>
+
+<p><a id="X78C19ACA78F9F067" name="X78C19ACA78F9F067"></a></p>
+
+<h5><code>4.2-17 \[\]</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \[\]</code>( <var class="Arg">m</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \{\}</code>( <var class="Arg">m</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A [list of] FR element[s] with initial state <var class="Arg">i</var>.</p>
+
+<p>These are respectively synonyms for <code class="code">FRElement(m,i)</code> and <code class="code">List(l,s-&gt;FRElement(m,s))</code>. The argument <var class="Arg">m</var> must be an FR machine, <var class="Arg">i</var> must be a positive integer, and <var class="Arg">l</var> must be a list.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

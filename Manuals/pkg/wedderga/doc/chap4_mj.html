@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Wedderga) - Chapter 4: Idempotents</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
+<p><a id="X7C651C9C78398FFF" name="X7C651C9C78398FFF"></a></p>
+<div class="ChapSects"><a href="chap4_mj.html#X7C651C9C78398FFF">4 <span class="Heading">Idempotents</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7DF49142844C278D">4.1 <span class="Heading">Computing idempotents from character table</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7BBEB4A084DBF0D6">4.1-1 PrimitiveCentralIdempotentsByCharacterTable</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X83F7CF1E87D02581">4.2 <span class="Heading">Testing lists of idempotents for completeness</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X81FCD27E812078F0">4.2-1 IsCompleteSetOfOrthogonalIdempotents</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7C66102485AF5F80">4.3 <span class="Heading">Idempotents from Shoda pairs</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X78D597207D3030EA">4.3-1 PrimitiveCentralIdempotentsByESSP</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7B48EE1A7ECAB151">4.3-2 PrimitiveCentralIdempotentsByStrongSP</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X82460B1285A0A7D7">4.3-3 PrimitiveCentralIdempotentsBySP</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X8577F9547FC58C4C">4.4 <span class="Heading">Complete set of orthogonal primitive idempotents from Shoda pairs and cyclotomic classes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E95CDF17C4D54DB">4.4-1 PrimitiveIdempotentsNilpotent</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8784570980B9B750">4.4-2 PrimitiveIdempotentsTrivialTwisting</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Idempotents</span></h3>
+
+<p><a id="X7DF49142844C278D" name="X7DF49142844C278D"></a></p>
+
+<h4>4.1 <span class="Heading">Computing idempotents from character table</span></h4>
+
+<p><a id="X7BBEB4A084DBF0D6" name="X7BBEB4A084DBF0D6"></a></p>
+
+<h5>4.1-1 PrimitiveCentralIdempotentsByCharacterTable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrimitiveCentralIdempotentsByCharacterTable</code>( <var class="Arg">FG</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list of group algebra elements.</p>
+
+<p>The input <var class="Arg">FG</var> should be a semisimple group algebra.</p>
+
+<p>Returns the list of primitive central idempotents of <var class="Arg">FG</var> using the character table of <span class="SimpleMath">\(G\)</span> (<a href="chap9_mj.html#X87B6505C7C2EE054"><span class="RefLink">9.4</span></a>).</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QS3 := GroupRing( Rationals, SymmetricGroup(3) );;                 </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrimitiveCentralIdempotentsByCharacterTable( QS3 );</span>
+[ (1/6)*()+(-1/6)*(2,3)+(-1/6)*(1,2)+(1/6)*(1,2,3)+(1/6)*(1,3,2)+(-1/6)*(1,3),
+  (2/3)*()+(-1/3)*(1,2,3)+(-1/3)*(1,3,2), (1/6)*()+(1/6)*(2,3)+(1/6)*(1,2)+(1/
+    6)*(1,2,3)+(1/6)*(1,3,2)+(1/6)*(1,3) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG:=GroupRing( Rationals , SmallGroup(24,3) );</span>
+&lt;algebra-with-one over Rationals, with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FG:=GroupRing( CF(3) , SmallGroup(24,3) );</span>
+&lt;algebra-with-one over CF(3), with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pciQG := PrimitiveCentralIdempotentsByCharacterTable(QG);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pciFG := PrimitiveCentralIdempotentsByCharacterTable(FG);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(pciQG);</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(pciFG);</span>
+7
+
+</pre></div>
+
+<p><a id="X83F7CF1E87D02581" name="X83F7CF1E87D02581"></a></p>
+
+<h4>4.2 <span class="Heading">Testing lists of idempotents for completeness</span></h4>
+
+<p><a id="X81FCD27E812078F0" name="X81FCD27E812078F0"></a></p>
+
+<h5>4.2-1 IsCompleteSetOfOrthogonalIdempotents</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCompleteSetOfOrthogonalIdempotents</code>( <var class="Arg">R</var>, <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The input should be formed by a unital ring <var class="Arg">R</var> and a list <var class="Arg">list</var> of elements of <var class="Arg">R</var>.</p>
+
+<p>Returns <code class="keyw">true</code> if the list <var class="Arg">list</var> is a complete list of orthogonal idempotents of <var class="Arg">R</var>. That is, the output is <code class="keyw">true</code> provided the following conditions are satisfied:</p>
+
+<p><span class="SimpleMath">\(\cdot\)</span> The sum of the elements of <var class="Arg">list</var> is the identity of <var class="Arg">R</var>,</p>
+
+<p><span class="SimpleMath">\(\cdot\)</span> <span class="SimpleMath">\(e^2=e\)</span>, for every <span class="SimpleMath">\(e\)</span> in <var class="Arg">list</var> and</p>
+
+<p><span class="SimpleMath">\(\cdot\)</span> <span class="SimpleMath">\(e*f=0\)</span>, if <span class="SimpleMath">\(e\)</span> and <span class="SimpleMath">\(f\)</span> are elements in different positions of <var class="Arg">list</var>.</p>
+
+<p>No claim is made on the idempotents being central or primitive.</p>
+
+<p>Note that the if a non-zero element <span class="SimpleMath">\(t\)</span> of <var class="Arg">R</var> appears in two different positions of <var class="Arg">list</var> then the output is <code class="keyw">false</code>, and that the list <var class="Arg">list</var> must not contain zeroes.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QS5 := GroupRing( Rationals, SymmetricGroup(5) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">idemp := PrimitiveCentralIdempotentsByCharacterTable( QS5 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCompleteSetOfOrthogonalIdempotents( QS5, idemp );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCompleteSetOfOrthogonalIdempotents( QS5, [ One( QS5 ) ] );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCompleteSetOfOrthogonalIdempotents( QS5, [ One( QS5 ), One( QS5 ) ] );</span>
+false
+
+</pre></div>
+
+<p><a id="X7C66102485AF5F80" name="X7C66102485AF5F80"></a></p>
+
+<h4>4.3 <span class="Heading">Idempotents from Shoda pairs</span></h4>
+
+<p><a id="X78D597207D3030EA" name="X78D597207D3030EA"></a></p>
+
+<h5>4.3-1 PrimitiveCentralIdempotentsByESSP</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrimitiveCentralIdempotentsByESSP</code>( <var class="Arg">QG</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A list of group algebra elements.</p>
+
+<p>The input <var class="Arg">QG</var> should be a semisimple rational group algebra of a finite group <span class="SimpleMath">\(G\)</span>.</p>
+
+<p>The output is the list of primitive central idempotents of the group algebra <var class="Arg">QG</var> realizable by extremely strong Shoda pairs (<a href="chap9_mj.html#X81B5CE0378DC4913"><span class="RefLink">9.16</span></a>) of <span class="SimpleMath">\(G\)</span>.</p>
+
+<p>If the list of primitive central idempotents given by the output is not complete (i.e. if the group <span class="SimpleMath">\(G\)</span> is not <em> normally monomial</em> (<a href="chap9_mj.html#X7C8D47C180E0ACAD"><span class="RefLink">9.18</span></a>)) then a warning is displayed.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG:=GroupRing( Rationals, DihedralGroup(16) );;  </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrimitiveCentralIdempotentsByESSP( QG );</span>
+[ (1/16)*&lt;identity&gt; of ...+(1/16)*f1+(1/16)*f2+(1/16)*f3+(1/16)*f4+(1/
+    16)*f1*f2+(1/16)*f1*f3+(1/16)*f1*f4+(1/16)*f2*f3+(1/16)*f2*f4+(1/
+    16)*f3*f4+(1/16)*f1*f2*f3+(1/16)*f1*f2*f4+(1/16)*f1*f3*f4+(1/
+    16)*f2*f3*f4+(1/16)*f1*f2*f3*f4, (1/16)*&lt;identity&gt; of ...+(-1/16)*f1+(-1/
+    16)*f2+(1/16)*f3+(1/16)*f4+(1/16)*f1*f2+(-1/16)*f1*f3+(-1/16)*f1*f4+(-1/
+    16)*f2*f3+(-1/16)*f2*f4+(1/16)*f3*f4+(1/16)*f1*f2*f3+(1/16)*f1*f2*f4+(-1/
+    16)*f1*f3*f4+(-1/16)*f2*f3*f4+(1/16)*f1*f2*f3*f4, 
+  (1/16)*&lt;identity&gt; of ...+(-1/16)*f1+(1/16)*f2+(1/16)*f3+(1/16)*f4+(-1/
+    16)*f1*f2+(-1/16)*f1*f3+(-1/16)*f1*f4+(1/16)*f2*f3+(1/16)*f2*f4+(1/
+    16)*f3*f4+(-1/16)*f1*f2*f3+(-1/16)*f1*f2*f4+(-1/16)*f1*f3*f4+(1/
+    16)*f2*f3*f4+(-1/16)*f1*f2*f3*f4, (1/16)*&lt;identity&gt; of ...+(1/16)*f1+(-1/
+    16)*f2+(1/16)*f3+(1/16)*f4+(-1/16)*f1*f2+(1/16)*f1*f3+(1/16)*f1*f4+(-1/
+    16)*f2*f3+(-1/16)*f2*f4+(1/16)*f3*f4+(-1/16)*f1*f2*f3+(-1/16)*f1*f2*f4+(1/
+    16)*f1*f3*f4+(-1/16)*f2*f3*f4+(-1/16)*f1*f2*f3*f4, 
+  (1/4)*&lt;identity&gt; of ...+(-1/4)*f3+(1/4)*f4+(-1/4)*f3*f4, 
+  (1/2)*&lt;identity&gt; of ...+(-1/2)*f4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG := GroupRing( Rationals, SmallGroup(24,12) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrimitiveCentralIdempotentsByESSP( QG );</span>
+Wedderga: Warning!!!
+The output is a NON-COMPLETE list of prim. central idemp.s of the input! 
+[ (1/24)*&lt;identity&gt; of ...+(1/24)*f1+(1/24)*f2+(1/24)*f3+(1/24)*f4+(1/
+    24)*f1*f2+(1/24)*f1*f3+(1/24)*f1*f4+(1/24)*f2^2+(1/24)*f2*f3+(1/
+    24)*f2*f4+(1/24)*f3*f4+(1/24)*f1*f2^2+(1/24)*f1*f2*f3+(1/24)*f1*f2*f4+(1/
+    24)*f1*f3*f4+(1/24)*f2^2*f3+(1/24)*f2^2*f4+(1/24)*f2*f3*f4+(1/24)*f1*f2^
+    2*f3+(1/24)*f1*f2^2*f4+(1/24)*f1*f2*f3*f4+(1/24)*f2^2*f3*f4+(1/24)*f1*f2^
+    2*f3*f4, (1/24)*&lt;identity&gt; of ...+(-1/24)*f1+(1/24)*f2+(1/24)*f3+(1/
+    24)*f4+(-1/24)*f1*f2+(-1/24)*f1*f3+(-1/24)*f1*f4+(1/24)*f2^2+(1/
+    24)*f2*f3+(1/24)*f2*f4+(1/24)*f3*f4+(-1/24)*f1*f2^2+(-1/24)*f1*f2*f3+(-1/
+    24)*f1*f2*f4+(-1/24)*f1*f3*f4+(1/24)*f2^2*f3+(1/24)*f2^2*f4+(1/
+    24)*f2*f3*f4+(-1/24)*f1*f2^2*f3+(-1/24)*f1*f2^2*f4+(-1/24)*f1*f2*f3*f4+(1/
+    24)*f2^2*f3*f4+(-1/24)*f1*f2^2*f3*f4, (1/6)*&lt;identity&gt; of ...+(-1/12)*f2+(
+    1/6)*f3+(1/6)*f4+(-1/12)*f2^2+(-1/12)*f2*f3+(-1/12)*f2*f4+(1/6)*f3*f4+(-1/
+    12)*f2^2*f3+(-1/12)*f2^2*f4+(-1/12)*f2*f3*f4+(-1/12)*f2^2*f3*f4 ]
+
+</pre></div>
+
+<p><a id="X7B48EE1A7ECAB151" name="X7B48EE1A7ECAB151"></a></p>
+
+<h5>4.3-2 PrimitiveCentralIdempotentsByStrongSP</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrimitiveCentralIdempotentsByStrongSP</code>( <var class="Arg">FG</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A list of group algebra elements.</p>
+
+<p>The input <var class="Arg">FG</var> should be a semisimple group algebra of a finite group <span class="SimpleMath">\(G\)</span> whose coefficient field <span class="SimpleMath">\(F\)</span> is either a finite field or the field <span class="SimpleMath">\(ℚ\)</span> of rationals.</p>
+
+<p>If <span class="SimpleMath">\( F = ℚ \)</span> then the output is the list of primitive central idempotents of the group algebra <var class="Arg">FG</var> realizable by strong Shoda pairs (<a href="chap9_mj.html#X7E3479527BAE5B9E"><span class="RefLink">9.15</span></a>) of <span class="SimpleMath">\(G\)</span>.</p>
+
+<p>If <span class="SimpleMath">\(F\)</span> is a finite field then the output is the list of primitive central idempotents of <var class="Arg">FG</var> realizable by strong Shoda pairs <span class="SimpleMath">\((K,H)\)</span> of <span class="SimpleMath">\(G\)</span> and <span class="SimpleMath">\(q\)</span>-cyclotomic classes modulo the index of <span class="SimpleMath">\(H\)</span> in <span class="SimpleMath">\(K\)</span> (<a href="chap9_mj.html#X800D8C5087D79DC8"><span class="RefLink">9.19</span></a>).</p>
+
+<p>If the list of primitive central idempotents given by the output is not complete (i.e. if the group <span class="SimpleMath">\(G\)</span> is not <em>strongly monomial</em> (<a href="chap9_mj.html#X84C694978557EFE5"><span class="RefLink">9.17</span></a>)) then a warning is displayed.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG:=GroupRing( Rationals, AlternatingGroup(4) );;           </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrimitiveCentralIdempotentsByStrongSP( QG );</span>
+[ (1/12)*()+(1/12)*(2,3,4)+(1/12)*(2,4,3)+(1/12)*(1,2)(3,4)+(1/12)*(1,2,3)+(1/
+    12)*(1,2,4)+(1/12)*(1,3,2)+(1/12)*(1,3,4)+(1/12)*(1,3)(2,4)+(1/12)*
+    (1,4,2)+(1/12)*(1,4,3)+(1/12)*(1,4)(2,3),
+  (1/6)*()+(-1/12)*(2,3,4)+(-1/12)*(2,4,3)+(1/6)*(1,2)(3,4)+(-1/12)*(1,2,3)+(
+    -1/12)*(1,2,4)+(-1/12)*(1,3,2)+(-1/12)*(1,3,4)+(1/6)*(1,3)(2,4)+(-1/12)*
+    (1,4,2)+(-1/12)*(1,4,3)+(1/6)*(1,4)(2,3),
+  (3/4)*()+(-1/4)*(1,2)(3,4)+(-1/4)*(1,3)(2,4)+(-1/4)*(1,4)(2,3) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG := GroupRing( Rationals, SmallGroup(24,3) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrimitiveCentralIdempotentsByStrongSP( QG );;</span>
+Wedderga: Warning!!!
+The output is a NON-COMPLETE list of prim. central idemp.s of the input! 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FG := GroupRing( GF(2), Group((1,2,3)) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrimitiveCentralIdempotentsByStrongSP( FG );</span>
+[ (Z(2)^0)*()+(Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2), 
+  (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FG := GroupRing( GF(5), SmallGroup(24,3) );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrimitiveCentralIdempotentsByStrongSP( FG );;</span>
+Wedderga: Warning!!!
+The output is a NON-COMPLETE list of prim. central idemp.s of the input! 
+
+</pre></div>
+
+<p><a id="X82460B1285A0A7D7" name="X82460B1285A0A7D7"></a></p>
+
+<h5>4.3-3 PrimitiveCentralIdempotentsBySP</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrimitiveCentralIdempotentsBySP</code>( <var class="Arg">QG</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A list of group algebra elements.</p>
+
+<p>The input should be a rational group algebra of a finite group <span class="SimpleMath">\(G\)</span>.</p>
+
+<p>Returns a list containing all the primitive central idempotents <span class="SimpleMath">\(e\)</span> of the rational group algebra <var class="Arg">QG</var> such that <span class="SimpleMath">\(\chi(e)\ne 0\)</span> for some irreducible monomial character <span class="SimpleMath">\(\chi\)</span> of <span class="SimpleMath">\(G\)</span>.</p>
+
+<p>The output is the list of all primitive central idempotents of <var class="Arg">QG</var> if and only if <span class="SimpleMath">\(G\)</span> is monomial, otherwise a warning message is displayed.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG := GroupRing( Rationals, SymmetricGroup(4) );</span>
+&lt;algebra-with-one over Rationals, with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pci:=PrimitiveCentralIdempotentsBySP( QG );</span>
+[ (1/24)*()+(1/24)*(3,4)+(1/24)*(2,3)+(1/24)*(2,3,4)+(1/24)*(2,4,3)+(1/24)*
+    (2,4)+(1/24)*(1,2)+(1/24)*(1,2)(3,4)+(1/24)*(1,2,3)+(1/24)*(1,2,3,4)+(1/
+    24)*(1,2,4,3)+(1/24)*(1,2,4)+(1/24)*(1,3,2)+(1/24)*(1,3,4,2)+(1/24)*
+    (1,3)+(1/24)*(1,3,4)+(1/24)*(1,3)(2,4)+(1/24)*(1,3,2,4)+(1/24)*(1,4,3,2)+(
+    1/24)*(1,4,2)+(1/24)*(1,4,3)+(1/24)*(1,4)+(1/24)*(1,4,2,3)+(1/24)*(1,4)
+    (2,3), (1/24)*()+(-1/24)*(3,4)+(-1/24)*(2,3)+(1/24)*(2,3,4)+(1/24)*
+    (2,4,3)+(-1/24)*(2,4)+(-1/24)*(1,2)+(1/24)*(1,2)(3,4)+(1/24)*(1,2,3)+(-1/
+    24)*(1,2,3,4)+(-1/24)*(1,2,4,3)+(1/24)*(1,2,4)+(1/24)*(1,3,2)+(-1/24)*
+    (1,3,4,2)+(-1/24)*(1,3)+(1/24)*(1,3,4)+(1/24)*(1,3)(2,4)+(-1/24)*
+    (1,3,2,4)+(-1/24)*(1,4,3,2)+(1/24)*(1,4,2)+(1/24)*(1,4,3)+(-1/24)*(1,4)+(
+    -1/24)*(1,4,2,3)+(1/24)*(1,4)(2,3), (3/8)*()+(-1/8)*(3,4)+(-1/8)*(2,3)+(
+    -1/8)*(2,4)+(-1/8)*(1,2)+(-1/8)*(1,2)(3,4)+(1/8)*(1,2,3,4)+(1/8)*
+    (1,2,4,3)+(1/8)*(1,3,4,2)+(-1/8)*(1,3)+(-1/8)*(1,3)(2,4)+(1/8)*(1,3,2,4)+(
+    1/8)*(1,4,3,2)+(-1/8)*(1,4)+(1/8)*(1,4,2,3)+(-1/8)*(1,4)(2,3), 
+  (3/8)*()+(1/8)*(3,4)+(1/8)*(2,3)+(1/8)*(2,4)+(1/8)*(1,2)+(-1/8)*(1,2)(3,4)+(
+    -1/8)*(1,2,3,4)+(-1/8)*(1,2,4,3)+(-1/8)*(1,3,4,2)+(1/8)*(1,3)+(-1/8)*(1,3)
+    (2,4)+(-1/8)*(1,3,2,4)+(-1/8)*(1,4,3,2)+(1/8)*(1,4)+(-1/8)*(1,4,2,3)+(-1/
+    8)*(1,4)(2,3), (1/6)*()+(-1/12)*(2,3,4)+(-1/12)*(2,4,3)+(1/6)*(1,2)(3,4)+(
+    -1/12)*(1,2,3)+(-1/12)*(1,2,4)+(-1/12)*(1,3,2)+(-1/12)*(1,3,4)+(1/6)*(1,3)
+    (2,4)+(-1/12)*(1,4,2)+(-1/12)*(1,4,3)+(1/6)*(1,4)(2,3) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCompleteSetOfPCIs(QG,pci);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QS5 := GroupRing( Rationals, SymmetricGroup(5) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pci:=PrimitiveCentralIdempotentsBySP( QS5 );;</span>
+Wedderga: Warning!!
+The output is a NON-COMPLETE list of prim. central idemp.s of the input!
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCompleteSetOfPCIs( QS5 , pci );</span>
+false
+
+</pre></div>
+
+<p>The output of <code class="func">PrimitiveCentralIdempotentsBySP</code> contains the output of <code class="func">PrimitiveCentralIdempotentsByStrongSP</code> (<a href="chap4_mj.html#X7B48EE1A7ECAB151"><span class="RefLink">4.3-2</span></a>), possibly properly.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG := GroupRing( Rationals, SmallGroup(48,28) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pci:=PrimitiveCentralIdempotentsBySP( QG );;</span>
+Wedderga: Warning!!
+The output is a NON-COMPLETE list of prim. central idemp.s of the input! 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(pci);    </span>
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">spci:=PrimitiveCentralIdempotentsByStrongSP( QG );;  </span>
+Wedderga: Warning!!!
+The output is a NON-COMPLETE list of prim. central idemp.s of the input! 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(spci);</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubset(pci,spci);          </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG:=GroupRing(Rationals,SmallGroup(1000,86));</span>
+&lt;algebra-with-one over Rationals, with 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCompleteSetOfPCIs( QG , PrimitiveCentralIdempotentsBySP(QG) );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCompleteSetOfPCIs( QG , PrimitiveCentralIdempotentsByStrongSP(QG) );</span>
+Wedderga: Warning!!!
+The output is a NON-COMPLETE list of prim. central idemp.s of the input!
+false
+
+</pre></div>
+
+<p><a id="X8577F9547FC58C4C" name="X8577F9547FC58C4C"></a></p>
+
+<h4>4.4 <span class="Heading">Complete set of orthogonal primitive idempotents from Shoda pairs and cyclotomic classes</span></h4>
+
+<p><a id="X7E95CDF17C4D54DB" name="X7E95CDF17C4D54DB"></a></p>
+
+<h5>4.4-1 PrimitiveIdempotentsNilpotent</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrimitiveIdempotentsNilpotent</code>( <var class="Arg">FG</var>, <var class="Arg">H</var>, <var class="Arg">K</var>, <var class="Arg">C</var>, <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list of orthogonal primitive idempotents.</p>
+
+<p>The input <var class="Arg">FG</var> should be a semisimple group algebra of a finite nilpotent group <span class="SimpleMath">\(G\)</span> whose coefficient field <span class="SimpleMath">\(F\)</span> is a finite field. <var class="Arg">H</var> and <var class="Arg">K</var> should form a strong Shoda pair <span class="SimpleMath">\((H,K)\)</span> of <span class="SimpleMath">\(G\)</span>. <var class="Arg">args</var> is a list containing an epimorphism map <var class="Arg">epi</var> from <span class="SimpleMath">\(N_G(K)\)</span> to <span class="SimpleMath">\(N_G(K)/K\)</span> and a generator <var class="Arg">gq</var> of <span class="SimpleMath">\(H/K\)</span>. <span class="SimpleMath">\(C\)</span> is the <span class="SimpleMath">\(|F|\)</span>-cyclotomic class modulo <span class="SimpleMath">\([H:K]\)</span> (w.r.t. the generator <span class="SimpleMath">\(gq\)</span> of <span class="SimpleMath">\(H/K\)</span>)</p>
+
+<p>The output is a complete set of orthogonal primitive idempotents of the simple algebra <span class="SimpleMath">\(FGe_C(G,H,K)\)</span> (<a href="chap9_mj.html#X8472ACCF802EC188"><span class="RefLink">9.22</span></a>).</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=DihedralGroup(8);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=GF(3);;                     </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FG:=GroupRing(F,G);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H:=StrongShodaPairs(G)[5][1];</span>
+Group([ f1*f2*f3, f3 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:=StrongShodaPairs(G)[5][2];</span>
+Group([ f1*f2 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N:=Normalizer(G,K); </span>
+Group([ f1*f2*f3, f3 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">epi:=NaturalHomomorphismByNormalSubgroup(N,K);</span>
+[ f1*f2*f3, f3 ] -&gt; [ f1, f1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QHK:=Image(epi,H); </span>
+Group([ f1, f1 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gq:=MinimalGeneratingSet(QHK)[1]; </span>
+f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C:=CyclotomicClasses(Size(F),Index(H,K))[2];</span>
+[ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrimitiveIdempotentsNilpotent(FG,H,K,C,[epi,gq]);</span>
+[ (Z(3)^0)*&lt;identity&gt; of ...+(Z(3))*f3+(Z(3)^0)*f1*f2+(Z(3))*f1*f2*f3, 
+  (Z(3)^0)*&lt;identity&gt; of ...+(Z(3))*f3+(Z(3))*f1*f2+(Z(3)^0)*f1*f2*f3 ]
+
+</pre></div>
+
+<p><a id="X8784570980B9B750" name="X8784570980B9B750"></a></p>
+
+<h5>4.4-2 PrimitiveIdempotentsTrivialTwisting</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrimitiveIdempotentsTrivialTwisting</code>( <var class="Arg">FG</var>, <var class="Arg">H</var>, <var class="Arg">K</var>, <var class="Arg">C</var>, <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list of orthogonal primitive idempotents.</p>
+
+<p>The input <var class="Arg">FG</var> should be a semisimple group algebra of a finite group <span class="SimpleMath">\(G\)</span> whose coefficient field <span class="SimpleMath">\(F\)</span> is a finite field. <var class="Arg">H</var> and <var class="Arg">K</var> should form a strong Shoda pair <span class="SimpleMath">\((H,K)\)</span> of <span class="SimpleMath">\(G\)</span>. <var class="Arg">args</var> is a list containing an epimorphism map <var class="Arg">epi</var> from <span class="SimpleMath">\(N_G(K)\)</span> to <span class="SimpleMath">\(N_G(K)/K\)</span> and a generator <var class="Arg">gq</var> of <span class="SimpleMath">\(H/K\)</span>. <span class="SimpleMath">\(C\)</span> is the <span class="SimpleMath">\(|F|\)</span>-cyclotomic class modulo <span class="SimpleMath">\([H:K]\)</span> (w.r.t. the generator <span class="SimpleMath">\(gq\)</span> of <span class="SimpleMath">\(H/K\)</span>). The input parameters should be such that the simple component <span class="SimpleMath">\(FGe_C(G,H,K)\)</span> has a trivial twisting.</p>
+
+<p>The output is a complete set of orthogonal primitive idempotents of the simple algebra <span class="SimpleMath">\(FGe_C(G,H,K)\)</span> (<a href="chap9_mj.html#X8472ACCF802EC188"><span class="RefLink">9.22</span></a>).</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=DihedralGroup(8);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=GF(3);;                     </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FG:=GroupRing(F,G);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H:=StrongShodaPairs(G)[5][1];</span>
+Group([ f1*f2*f3, f3 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:=StrongShodaPairs(G)[5][2];</span>
+Group([ f1*f2 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N:=Normalizer(G,K); </span>
+Group([ f1*f2*f3, f3 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">epi:=NaturalHomomorphismByNormalSubgroup(N,K);</span>
+[ f1*f2*f3, f3 ] -&gt; [ f1, f1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QHK:=Image(epi,H); </span>
+Group([ f1, f1 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gq:=MinimalGeneratingSet(QHK)[1]; </span>
+f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C:=CyclotomicClasses(Size(F),Index(H,K))[2];</span>
+[ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrimitiveIdempotentsTrivialTwisting(FG,H,K,C,[epi,gq]);</span>
+[ (Z(3)^0)*&lt;identity&gt; of ...+(Z(3))*f3+(Z(3)^0)*f1*f2+(Z(3))*f1*f2*f3, 
+  (Z(3)^0)*&lt;identity&gt; of ...+(Z(3))*f3+(Z(3))*f1*f2+(Z(3)^0)*f1*f2*f3 ]
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

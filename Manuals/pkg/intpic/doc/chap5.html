@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (IntPic) - Chapter 5: 
+    The IntPic package options.
+  </title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X7DE2DA167A0098E7" name="X7DE2DA167A0098E7"></a></p>
+<div class="ChapSects"><a href="chap5.html#X7DE2DA167A0098E7">5 <span class="Heading">
+    The <strong class="pkg">IntPic</strong> package options.
+  </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X83F97BF484ED50E5">5.1 <span class="Heading">Available options</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7B1EC49C7F448906">5.2 <span class="Heading">Default options</span></a>
+</span>
+</div>
+</div>
+
+<h3>5 <span class="Heading">
+    The <strong class="pkg">IntPic</strong> package options.
+  </span></h3>
+
+<p><a id="X83F97BF484ED50E5" name="X83F97BF484ED50E5"></a></p>
+
+<h4>5.1 <span class="Heading">Available options</span></h4>
+
+<p>The list of allowed options, some of which already familiar from the examples, can be obtained as follows:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RecNames(IP_TikzDefaultOptionsForArraysOfIntegers);</span>
+[ "other", "colors", "highlights", "shape_only", "colsep", "rowsep", 
+  "cell_width", "allow_adjust_cell_width", "scale", "inner_sep", 
+  "line_width", "line_color" ]
+</pre></div>
+
+<p>Its meaning is as follows:</p>
+
+
+<ul>
+<li><p><var class="Arg">colors</var>: any list of colors (to be used with the LaTeX package <strong class="pkg">xcolor</strong>)</p>
+
+</li>
+<li><p><var class="Arg">highlights</var>: a list of lists of integers -- the elements of the first are colored by using the first color, etc. In cases of elements that appear in more than one list a kind of gradient (made with 4 colors at most) is used to fill the cell; the number may be printed with a fifth color and a sixt color may be used for the border.</p>
+
+</li>
+<li><p><var class="Arg">shape_only</var>: an option to be used when only the shape is important. When <var class="Arg">true</var> or " " is used, all the nodes are empty; using a symbol, for instance a <span class="SimpleMath">*</span>, this symbol is printed in all the nodes.</p>
+
+</li>
+<li><p><var class="Arg">colsep</var>: the <strong class="pkg">tikz</strong> matrix option <var class="Arg">column sep</var></p>
+
+</li>
+<li><p><var class="Arg">rowsep</var>: the <strong class="pkg">tikz</strong> matrix option <var class="Arg">row sep</var></p>
+
+</li>
+<li><p><var class="Arg">cell_width</var>: the <strong class="pkg">tikz</strong> matrix option <var class="Arg">minimum width</var></p>
+
+</li>
+<li><p><var class="Arg">scale</var>: the <strong class="pkg">tikz</strong> matrix option <var class="Arg">scale</var></p>
+
+</li>
+<li><p><var class="Arg">inner_sep</var>: the <strong class="pkg">tikz</strong> matrix option <var class="Arg">inner sep</var></p>
+
+</li>
+<li><p><var class="Arg">line_width</var>: the <strong class="pkg">tikz</strong> matrix option <var class="Arg">line width</var></p>
+
+</li>
+<li><p><var class="Arg">line_color</var>: the <strong class="pkg">tikz</strong> matrix option <var class="Arg">line color</var>: the color of the cell borders</p>
+
+</li>
+<li><p><var class="Arg">allow_adjust_cell_width</var>: the number of points per digit (to avoid discrepancies between the width of the cells when there are numbers with different number of digits to be printed). When the user sets the option cell_width, then allow_adjust_cell_width is automatically set to <var class="Arg">false</var></p>
+
+</li>
+<li><p><var class="Arg">other</var>: if non empty, the complete <code class="code">tikz</code> code has to be written (it may be useful when several images are to be produced - otherwise, changing the <code class="code">tikz</code> code would be enough)</p>
+
+
+<div class="example"><pre>
+other := ["\\draw[postaction={draw,line width=1pt,red}] (-80pt,-8pt) 
+rectangle (16pt,40pt);","\\draw[postaction={draw,line width=1pt,blue}] 
+(-16pt,8pt) rectangle (80pt,-40pt);"]</pre></div>
+
+</li>
+</ul>
+<p>Adding this option to one of the preceding examples, one obtains the following: <br><center><img src="../images/table_axis_ground_shape_other_option.jpg"></center><br></p>
+
+<p><a id="X7B1EC49C7F448906" name="X7B1EC49C7F448906"></a></p>
+
+<h4>5.2 <span class="Heading">Default options</span></h4>
+
+<p>The defaults for the available options are as follows</p>
+
+
+<ul>
+<li><p><var class="Arg">colors</var>: ShuffledIP_colors</p>
+
+</li>
+<li><p><var class="Arg">highlights</var>: [[]]</p>
+
+</li>
+<li><p><var class="Arg">shape_only </var>: "false"</p>
+
+</li>
+<li><p><var class="Arg">colsep</var>: "2"</p>
+
+</li>
+<li><p><var class="Arg">rowsep</var>: "2"</p>
+
+</li>
+<li><p><var class="Arg">cell_width</var>: "30"</p>
+
+</li>
+<li><p><var class="Arg">scale</var>: "1"</p>
+
+</li>
+<li><p><var class="Arg">inner_sep</var>: "3"</p>
+
+</li>
+<li><p><var class="Arg">line_width</var>: "0"</p>
+
+</li>
+<li><p><var class="Arg">line_color</var>: "black"</p>
+
+</li>
+<li><p><var class="Arg">allow_adjust_cell_width</var>: "10"</p>
+
+</li>
+<li><p><var class="Arg">other</var>: []</p>
+
+</li>
+</ul>
+<p>They may be consulted:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IP_TikzDefaultOptionsForArraysOfIntegers;</span>
+rec( allow_adjust_cell_width := "10", cell_width := "30", 
+  colors := [ "red", "green", "blue", "-red", "-green", "-blue", "black!80", 
+      "black!30", "red!50", "green!50", "blue!50", "-red!50", "-green!50", 
+      "-blue!50", "black!70", "black!25", "red!20", "green!20", "blue!20", 
+      "-red!20", "-green!20", "-blue!20", "black!60", "black!20", 
+      "red!80!green!50", "green!80!red!50", "blue!80!red!50", 
+      "-red!80!green!50", "-green!80!red!50", "-blue!80!red!50", "black!50", 
+      "black!15", "red!80!blue!60", "green!80!blue!60", "blue!80!green!60", 
+      "-red!80!blue!60", "-green!80!blue!60", "-blue!80!green!60", 
+      "black!40", "black!10" ], colsep := "2", highlights := [ [  ] ], 
+  inner_sep := "3", line_color := "black", line_width := "1", other := [  ], 
+  rowsep := "2", scale := "1", shape_only := "false" )
+
+        </pre></div>
+
+<p>The user may want to change the defaults by editing the file <code class="code">options.gd</code> in the folder <code class="code">gap</code>. The changes are lost whenever any re-installation occurs. It is recommended that in this case a copy is made, although it is not guaranteed that it will work in the next release.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (ANUPQ) - Chapter 2: Mathematical Background and Terminology</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X7E7F3B617F42EF03" name="X7E7F3B617F42EF03"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X7E7F3B617F42EF03">2 <span class="Heading">Mathematical Background and Terminology</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X79A052C47C92AF09">2.1 <span class="Heading">Basic notions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7BD675838609D547">2.1-1 <span class="Heading">pc Presentations and Consistency</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7944DB037F2277A6">2.1-2 <span class="Heading">Exponent-<span class="SimpleMath">\(p\)</span> Central Series and Weighted pc Presentations</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C43ACA37D391EBD">2.1-3 <span class="Heading"><span class="SimpleMath">\(p\)</span>-Cover, <span class="SimpleMath">\(p\)</span>-Multiplicator</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X801A27A08462AFAB">2.1-4 <span class="Heading">Descendants, Capable, Terminal, Nucleus</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X81FBE7ED79EFF5EF">2.1-5 <span class="Heading">Laws</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7C8CE96D80FC3614">2.2 <span class="Heading">The p-quotient Algorithm</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X791EB6F77899CB3D">2.2-1 <span class="Heading">Finding the <span class="SimpleMath">\(p\)</span>-cover</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X804CF5C97F7BB880">2.2-2 <span class="Heading">Imposing the Relations of the fp Group</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F1A8CCD84462775">2.2-3 <span class="Heading">Imposing Laws</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X807FB2EC85E6648D">2.3 <span class="Heading">The p-group generation Algorithm, Standard Presentation, 
+Isomorphism Testing</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">Mathematical Background and Terminology</span></h3>
+
+<p>In this chapter we will give a brief description of the mathematical notions used in the algorithms implemented in the ANU <code class="code">pq</code> program that are made accessible from <strong class="pkg">GAP</strong> through this package. For proofs and details we will point to relevant places in the published literature. Also we will try to give some explanation of terminology that may help to use the "low-level" interactive functions described in Section <a href="chap5_mj.html#X857F050C832A1FE4"><span class="RefLink"><span class="Heading">Low-level Interactive ANUPQ functions based on menu items of the pq program</span></span></a>. However, users who intend to use these functions are strongly advised to acquire a thorough understanding of the algorithms from the quoted literature. There is little or no checking done in these functions and naive use may result in incorrect results.</p>
+
+<p><a id="X79A052C47C92AF09" name="X79A052C47C92AF09"></a></p>
+
+<h4>2.1 <span class="Heading">Basic notions</span></h4>
+
+<p><a id="X7BD675838609D547" name="X7BD675838609D547"></a></p>
+
+<h5>2.1-1 <span class="Heading">pc Presentations and Consistency</span></h5>
+
+<p>For details, see e.g. <a href="chapBib_mj.html#biBNNN98">[NNN98]</a>.</p>
+
+<p>Every finite <span class="SimpleMath">\(p\)</span>-group <span class="SimpleMath">\(G\)</span> has a presentation of the form:</p>
+
+<p class="center">\[
+\{a_1,\dots,a_n \mid a_i^p = v_{ii}, 1 \le i \le n, 
+               [a_k, a_j] = v_{jk}, 1 \le j &lt; k \le n \}.
+\]</p>
+
+<p>where <span class="SimpleMath">\(v_{jk}\)</span> is a word in the elements <span class="SimpleMath">\(a_{k+1},\dots,a_n\)</span> for <span class="SimpleMath">\(1 \le j \leq k \le n\)</span>.</p>
+
+<p>This is called a <em>power-commutator</em> presentation (or <em>pc presentation</em> or <em>pcp</em>) of <span class="SimpleMath">\(G\)</span>, generators from such a presentation will be referred to as <em>pc generators</em>. In terms of such pc generators every element of <span class="SimpleMath">\(G\)</span> can be written in a "normal form" <span class="SimpleMath">\(a_1^{e_1}\dots a_n^{e_n}\)</span> with <span class="SimpleMath">\(0 \le e_i &lt; p\)</span>. Moreover any given product of the generators can be brought into such a normal form using the defining relations in the above presentation as rewrite rules. Any such process is called <em>collection</em>. For the discussion of various collection methods see <a href="chapBib_mj.html#biBLGS90">[LGS90]</a> and <a href="chapBib_mj.html#biBVL90a">[VL90b]</a>.</p>
+
+<p>Every <span class="SimpleMath">\(p\)</span>-group of order <span class="SimpleMath">\(p^n\)</span> has such a pcp on <span class="SimpleMath">\(n\)</span> generators and conversely every such presentation defines a <span class="SimpleMath">\(p\)</span>-group. However a <span class="SimpleMath">\(p\)</span>-group defined by a pcp on <span class="SimpleMath">\(n\)</span> generators can be of smaller order <span class="SimpleMath">\(p^m\)</span> with <span class="SimpleMath">\(m&lt;n\)</span>. A pcp on <span class="SimpleMath">\(n\)</span> generators that does in fact define a <span class="SimpleMath">\(p\)</span>-group of order <span class="SimpleMath">\(p^n\)</span> is called <em>consistent</em> in this manual, in line with most of the literature on the algorithms occurring here. A consistent pcp determines a <em>confluent rewriting system</em> (see <code class="func">IsConfluent</code> (<a href="../../../doc/ref/chap38_mj.html#X8006790B86328CE8"><span class="RefLink">Reference: IsConfluent</span></a>) of the <strong class="pkg">GAP</strong> Reference Manual) for the group it defines and for this reason often (in particular in the <strong class="pkg">GAP</strong> Reference Manual) such a pcp presentation is also called <em>confluent</em>.</p>
+
+<p>Consistency of a pcp is tantamount to the fact that for any given word in the generators any two collections will yield the same normal form.</p>
+
+<p>Consistency of a pcp can be checked by a finite set of <em>consistency conditions</em>, demanding that collection of the left hand side and of the right hand side of certain equations, starting with subproducts indicated by bracketing, will result in the same normal form. There are 3 types of such equations (that will be referred to in the manual):</p>
+
+<p class="center">\[
+\begin{array}{rclrl}
+(a^n)a &amp;=&amp; a(a^n)                                &amp;&amp;{\rm (Type 1)} \\
+(b^n)a &amp;=&amp; b^{(n-1)}(ba), b(a^n) = (ba)a^{(n-1)} &amp;&amp;{\rm (Type 2)} \\
+ c(ba) &amp;=&amp; (cb)a                                 &amp;&amp;{\rm (Type 3)} \\
+\end{array}
+\]</p>
+
+<p>See <a href="chapBib_mj.html#biBVL84">[VL84]</a> for a description of a sufficient set of consistency conditions in the context of the <span class="SimpleMath">\(p\)</span>-quotient algorithm.</p>
+
+<p><a id="X7944DB037F2277A6" name="X7944DB037F2277A6"></a></p>
+
+<h5>2.1-2 <span class="Heading">Exponent-<span class="SimpleMath">\(p\)</span> Central Series and Weighted pc Presentations</span></h5>
+
+<p>For details, see <a href="chapBib_mj.html#biBNNN98">[NNN98]</a>.</p>
+
+<p>The (<em>descending</em> or <em>lower</em>) (<em>exponent-</em>)<em><span class="SimpleMath">\(p\)</span>-central series</em> of an arbitrary group <span class="SimpleMath">\(G\)</span> is defined by</p>
+
+<p class="center">\[
+P_0(G) := G, P_i(G) := [G, P_{i-1}(G)] P_{i-1}(G)^p.
+\]</p>
+
+<p>For a <span class="SimpleMath">\(p\)</span>-group <span class="SimpleMath">\(G\)</span> this series terminates with the trivial group. <span class="SimpleMath">\(G\)</span> has <em><span class="SimpleMath">\(p\)</span>-class</em> <span class="SimpleMath">\(c\)</span> if <span class="SimpleMath">\(c\)</span> is the smallest integer such that <span class="SimpleMath">\(P_c(G)\)</span> is the trivial group. In this manual, as well as in much of the literature about the <code class="code">pq</code>- and related algorithms, the <span class="SimpleMath">\(p\)</span>-class is often referred to simply by <em>class</em>.</p>
+
+<p>Let the <span class="SimpleMath">\(p\)</span>-group <span class="SimpleMath">\(G\)</span> have a consistent pcp as above. Then the subgroups</p>
+
+<p class="center">\[
+\langle1\rangle &lt; {\langle}a_n\rangle &lt; {\langle}a_n, a_{n-1}\rangle
+    &lt; \dots &lt; {\langle}a_n,\dots,a_i\rangle &lt; \dots &lt; G
+\]</p>
+
+<p>form a central series of <span class="SimpleMath">\(G\)</span>. If this refines the <span class="SimpleMath">\(p\)</span>-central series, we can define the <em>weight function</em> <span class="SimpleMath">\(w\)</span> for the pc generators by <span class="SimpleMath">\(w(a_i) = k\)</span>, if <span class="SimpleMath">\(a_i\)</span> is contained in <span class="SimpleMath">\(P_{k-1}(G)\)</span> but not in <span class="SimpleMath">\(P_k(G)\)</span>.</p>
+
+<p>The pair of such a weight function and a pcp allowing it, is called a <em>weighted pcp</em>.</p>
+
+<p><a id="X7C43ACA37D391EBD" name="X7C43ACA37D391EBD"></a></p>
+
+<h5>2.1-3 <span class="Heading"><span class="SimpleMath">\(p\)</span>-Cover, <span class="SimpleMath">\(p\)</span>-Multiplicator</span></h5>
+
+<p>For details, see <a href="chapBib_mj.html#biBNNN98">[NNN98]</a>.</p>
+
+<p>Let <span class="SimpleMath">\(d\)</span> be the minimal number of generators of the <span class="SimpleMath">\(p\)</span>-group <span class="SimpleMath">\(G\)</span> of <span class="SimpleMath">\(p\)</span>-class <span class="SimpleMath">\(c\)</span>. Then <span class="SimpleMath">\(G\)</span> is isomorphic to a factor group <span class="SimpleMath">\(F/R\)</span> of a free group <span class="SimpleMath">\(F\)</span> of rank <span class="SimpleMath">\(d\)</span>. We denote <span class="SimpleMath">\([F, R] R^p\)</span> by <span class="SimpleMath">\(R^*\)</span>. It can be proved (see e.g. <a href="chapBib_mj.html#biBOBr90">[O'B90]</a>) that the isomorphism type of <span class="SimpleMath">\(G^* := F/R^*\)</span> depends only on <span class="SimpleMath">\(G\)</span>. <span class="SimpleMath">\(G^*\)</span> is called the <em><span class="SimpleMath">\(p\)</span>-covering group</em> or <em><span class="SimpleMath">\(p\)</span>-cover</em> of <span class="SimpleMath">\(G\)</span>, and <span class="SimpleMath">\(R/R^*\)</span> the <em><span class="SimpleMath">\(p\)</span>-multiplicator</em> of <span class="SimpleMath">\(G\)</span>. The <span class="SimpleMath">\(p\)</span>-multiplicator is, of course, an elementary abelian <span class="SimpleMath">\(p\)</span>-group; its minimal number of generators is called the <em>(<span class="SimpleMath">\(p\)</span>-)multiplicator rank</em>.</p>
+
+<p><a id="X801A27A08462AFAB" name="X801A27A08462AFAB"></a></p>
+
+<h5>2.1-4 <span class="Heading">Descendants, Capable, Terminal, Nucleus</span></h5>
+
+<p>For details, see <a href="chapBib_mj.html#biBNew77">[New77]</a> and <a href="chapBib_mj.html#biBOBr90">[O'B90]</a>.</p>
+
+<p>Let again <span class="SimpleMath">\(G\)</span> be a <span class="SimpleMath">\(p\)</span>-group of <span class="SimpleMath">\(p\)</span>-class <span class="SimpleMath">\(c\)</span> and <span class="SimpleMath">\(d\)</span> the minimal number of generators of <span class="SimpleMath">\(G\)</span>. A <span class="SimpleMath">\(p\)</span>-group <span class="SimpleMath">\(H\)</span> is a <em>descendant</em> of <span class="SimpleMath">\(G\)</span> if the minimal number of generators of <span class="SimpleMath">\(H\)</span> is <span class="SimpleMath">\(d\)</span> and <span class="SimpleMath">\(H/P_c(H)\)</span> is isomorphic to <span class="SimpleMath">\(G\)</span>. A descendant <span class="SimpleMath">\(H\)</span> of <span class="SimpleMath">\(G\)</span> is an <em>immediate descendant</em> if it has <span class="SimpleMath">\(p\)</span>-class <span class="SimpleMath">\(c+1\)</span>. <span class="SimpleMath">\(G\)</span> is called <em>capable</em> if it has immediate descendants; otherwise it is <em>terminal</em>.</p>
+
+<p>Let <span class="SimpleMath">\(G^* = F/R^*\)</span> again be the <span class="SimpleMath">\(p\)</span>-cover of <span class="SimpleMath">\(G\)</span>. Then the group <span class="SimpleMath">\(P_c(G^*)\)</span> is called the <em>nucleus</em> of <span class="SimpleMath">\(G\)</span>. Note that <span class="SimpleMath">\(P_c(G^*)\)</span> is contained in the <span class="SimpleMath">\(p\)</span>-multiplicator <span class="SimpleMath">\(R/R^*\)</span>.</p>
+
+<p>It is proved (e.g. in <a href="chapBib_mj.html#biBOBr90">[O'B90]</a>) that the immediate descendants of <span class="SimpleMath">\(G\)</span> are obtained as factor groups of the <span class="SimpleMath">\(p\)</span>-cover by (proper) supplements of the nucleus in the (elementary abelian) <span class="SimpleMath">\(p\)</span>-multiplicator. These are also called <em>allowable</em>.</p>
+
+<p>It is further proved there that every automorphism <span class="SimpleMath">\(\alpha\)</span> of <span class="SimpleMath">\(F/R\)</span> extends to an automorphism <span class="SimpleMath">\(\alpha^*\)</span> of the <span class="SimpleMath">\(p\)</span>-cover <span class="SimpleMath">\(F/R^*\)</span> and that the restriction of <span class="SimpleMath">\(\alpha^*\)</span> to the multiplicator <span class="SimpleMath">\(R/R^*\)</span> is uniquely determined by <span class="SimpleMath">\(\alpha\)</span>. Each <em>extended automorphism</em> <span class="SimpleMath">\(\alpha^*\)</span> induces a permutation of the allowable subgroups. Thus the extended automorphisms determine a group <span class="SimpleMath">\(P\)</span> of <em>permutations</em> on the set <span class="SimpleMath">\(A\)</span> of allowable subgroups (The group <span class="SimpleMath">\(P\)</span> of permutations will appear in the description of some interactive functions). Choosing a representative <span class="SimpleMath">\(S\)</span> from each orbit of <span class="SimpleMath">\(P\)</span> on <span class="SimpleMath">\(A\)</span>, the set of factor groups <span class="SimpleMath">\(F/S\)</span> contains each (isomorphism type of) immediate descendant of <span class="SimpleMath">\(G\)</span> exactly once. For each immediate descendant, the procedure of computing the <span class="SimpleMath">\(p\)</span>-cover, extending the automorphisms and computing the orbits on allowable subgroups can be repeated. Iteration of this procedure can in principle be used to determine all descendants of a <span class="SimpleMath">\(p\)</span>-group.</p>
+
+<p><a id="X81FBE7ED79EFF5EF" name="X81FBE7ED79EFF5EF"></a></p>
+
+<h5>2.1-5 <span class="Heading">Laws</span></h5>
+
+<p>Let <span class="SimpleMath">\(l(x_1, \dots, x_n)\)</span> be a word in the free generators <span class="SimpleMath">\(x_1, \dots, x_n\)</span> of a free group of rank <span class="SimpleMath">\(n\)</span>. Then <span class="SimpleMath">\(l(x_1, \dots, x_n) = 1\)</span> is called a <em>law</em> or <em>identical relation</em> in a group <span class="SimpleMath">\(G\)</span> if <span class="SimpleMath">\(l(g_1, \dots, g_n) = 1\)</span> for any choice of elements <span class="SimpleMath">\(g_1, \dots, g_n\)</span> in <span class="SimpleMath">\(G\)</span>. In particular, <span class="SimpleMath">\(x^e = 1\)</span> is called an <em>exponent law</em>, <span class="SimpleMath">\([[x,y],[u,v]] = 1\)</span> the <em>metabelian law</em>, and <span class="SimpleMath">\([\dots [[x_1,x_2],x_2],\dots, x_2] = 1\)</span> an <em>Engel identity</em>.</p>
+
+<p><a id="X7C8CE96D80FC3614" name="X7C8CE96D80FC3614"></a></p>
+
+<h4>2.2 <span class="Heading">The p-quotient Algorithm</span></h4>
+
+<p>For details, see <a href="chapBib_mj.html#biBHN80">[HN80]</a>, <a href="chapBib_mj.html#biBNO96">[NO96]</a> and <a href="chapBib_mj.html#biBVL84">[VL84]</a>. Other descriptions of the algorithm are given in <a href="chapBib_mj.html#biBSims94">[Sim94]</a>.</p>
+
+<p>The <code class="code">pq</code> algorithm successively determines the factor groups of the groups of the <span class="SimpleMath">\(p\)</span>-central series of a finitely presented (fp) group <span class="SimpleMath">\(G\)</span>. If a bound <span class="SimpleMath">\(b\)</span> for the <span class="SimpleMath">\(p\)</span>-class is given, the algorithm will determine those factor groups up to at most <span class="SimpleMath">\(p\)</span>-class <span class="SimpleMath">\(b\)</span>. If the <span class="SimpleMath">\(p\)</span>-central series terminates with a subgroup <span class="SimpleMath">\(P_k(G)\)</span> with <span class="SimpleMath">\(k &lt; b\)</span>, the algorithm will stop with that group. If no such bound is given, it will try to find the biggest such factor group.</p>
+
+<p><span class="SimpleMath">\(G/P_1(G)\)</span> is the largest elementary abelian <span class="SimpleMath">\(p\)</span>-factor group of <span class="SimpleMath">\(G\)</span> and this can be found from the relation matrix of <span class="SimpleMath">\(G\)</span> using matrix diagonalisation modulo <span class="SimpleMath">\(p\)</span>. So it suffices to explain how <span class="SimpleMath">\(G/P_{i+1}(G)\)</span> is found from <span class="SimpleMath">\(G\)</span> and <span class="SimpleMath">\(G/P_i(G)\)</span> for some <span class="SimpleMath">\(i \ge 1\)</span>.</p>
+
+<p>This is done, in principle, in two steps: first the <span class="SimpleMath">\(p\)</span>-cover of <span class="SimpleMath">\(G_i := G/P_i(G)\)</span> is determined (which depends only on <span class="SimpleMath">\(G_i\)</span>, not on <span class="SimpleMath">\(G\)</span>) and then <span class="SimpleMath">\(G/P_{i+1}(G)\)</span> as a factor group of this <span class="SimpleMath">\(p\)</span>-cover.</p>
+
+<p><a id="X791EB6F77899CB3D" name="X791EB6F77899CB3D"></a></p>
+
+<h5>2.2-1 <span class="Heading">Finding the <span class="SimpleMath">\(p\)</span>-cover</span></h5>
+
+<p>A very detailed description of the first step is given in <a href="chapBib_mj.html#biBNNN98">[NNN98]</a>, from which we just extract some passages in order to point to some terms occurring in this manual.</p>
+
+<p>Let <span class="SimpleMath">\(H\)</span> be a <span class="SimpleMath">\(p\)</span>-group and <span class="SimpleMath">\(p^{d(b)}\)</span> be the order of <span class="SimpleMath">\(H/P_b(H)\)</span>. So <span class="SimpleMath">\(d := d(1)\)</span> is the minimal number of generators of <span class="SimpleMath">\(H\)</span>. A weighted pcp of <span class="SimpleMath">\(H\)</span> will be called <em>labelled</em> if for each generator <span class="SimpleMath">\(a_k\)</span>, <span class="SimpleMath">\(k &gt; d\)</span> one relation, having this generator as its right hand side, is marked as <em>definition</em> of this generator.</p>
+
+<p>As described in <a href="chapBib_mj.html#biBNNN98">[NNN98]</a>, a weighted labelled pcp of a <span class="SimpleMath">\(p\)</span>-group can be obtained stepping down its <span class="SimpleMath">\(p\)</span>-central series.</p>
+
+<p>So let us assume that a weighted labelled pcp of <span class="SimpleMath">\(G_i\)</span> is given. A straightforward way of of writing down a (not necessarily consistent) pcp for its <span class="SimpleMath">\(p\)</span>-cover is to add generators, one for each relation which is not a definition, and modify the right hand side of each such relation by multiplying it on the right by one of the new generators -- a different generator for each such relation. Further relations are then added to make the new generators central and of order <span class="SimpleMath">\(p\)</span>. This procedure is called <em>adding tails</em>. A more formal description of it is again given in <a href="chapBib_mj.html#biBNNN98">[NNN98]</a>.</p>
+
+<p>It is important to realise that the "new" generators will generate an elementary abelian group, that is, in additive notation, a vector space over the field of <span class="SimpleMath">\(p\)</span> elements. As said, the pcp of the <span class="SimpleMath">\(p\)</span>-cover obtained in this way need not be consistent. Since the pcp of <span class="SimpleMath">\(G_i\)</span> was consistent, applying the consistency conditions to the pcp of the <span class="SimpleMath">\(p\)</span>-cover, in case the presentation obtained for <span class="SimpleMath">\(p\)</span>-cover is not consistent, will produce a set of equations between the new generators, that, written additively, are linear equations over the field of <span class="SimpleMath">\(p\)</span> elements and can hence be used to remove redundant generators until a consistent pcp is obtained.</p>
+
+<p>In reality, to follow this straightforward procedure would be forbiddingly inefficient except for very small examples. There are many ways of a priori reducing the number of "new generators" to be introduced, using e.g. the weights attached to the generators, and the main part of <a href="chapBib_mj.html#biBNNN98">[NNN98]</a> is devoted to a detailed discussion with proofs of these possibilities.</p>
+
+<p><a id="X804CF5C97F7BB880" name="X804CF5C97F7BB880"></a></p>
+
+<h5>2.2-2 <span class="Heading">Imposing the Relations of the fp Group</span></h5>
+
+<p>In order to obtain <span class="SimpleMath">\(G/P_{i+1}(G)\)</span> from the pcp of the <span class="SimpleMath">\(p\)</span>-cover of <span class="SimpleMath">\(G_i = G/P_i(G)\)</span>, the defining relations from the original presentation of <span class="SimpleMath">\(G\)</span> must be imposed. Since <span class="SimpleMath">\(G_i\)</span> is a homomorphic image of <span class="SimpleMath">\(G\)</span>, these relations again yield relations between the "new generators" in the presentation of the <span class="SimpleMath">\(p\)</span>-cover of <span class="SimpleMath">\(G_i\)</span>.</p>
+
+<p><a id="X7F1A8CCD84462775" name="X7F1A8CCD84462775"></a></p>
+
+<h5>2.2-3 <span class="Heading">Imposing Laws</span></h5>
+
+<p>While we have so far only considered the computation of the factor groups of a given fp group by the groups of its descending <span class="SimpleMath">\(p\)</span>-central series, the <span class="SimpleMath">\(p\)</span>-quotient algorithm allows a very important variant of this idea: laws can be prescribed that should be fulfilled by the <span class="SimpleMath">\(p\)</span>-factor groups computed by the algorithm. The key observation here is the fact that at each step down the descending <span class="SimpleMath">\(p\)</span>-central series it suffices to impose these laws only for a finite number of words. Again for efficiency of the method it is crucial to keep the number of such words small, and much of <a href="chapBib_mj.html#biBNO96">[NO96]</a> and the literature quoted in this paper is devoted to this problem.</p>
+
+<p>In this form, starting with a free group and imposing an exponent law (also referred to as an <em>exponent check</em>) the <code class="code">pq</code> program has, in fact, found its most noted application in the determination of (restricted) Burnside groups (as reported in e.g. <a href="chapBib_mj.html#biBHN80">[HN80]</a>, <a href="chapBib_mj.html#biBNO96">[NO96]</a> and <a href="chapBib_mj.html#biBVL90b">[VL90a]</a>).</p>
+
+<p>Via a <strong class="pkg">GAP</strong> program using the "local" interactive functions of the <code class="code">pq</code> program made available through this interface also arbitrary laws can be imposed via the option <code class="code">Identities</code> (see <a href="chap6_mj.html#X87EE6DD67C9996A3"><span class="RefLink">6.2</span></a>).</p>
+
+<p><a id="X807FB2EC85E6648D" name="X807FB2EC85E6648D"></a></p>
+
+<h4>2.3 <span class="Heading">The p-group generation Algorithm, Standard Presentation, 
+Isomorphism Testing</span></h4>
+
+<p>For details, see <a href="chapBib_mj.html#biBNew77">[New77]</a> and <a href="chapBib_mj.html#biBOBr90">[O'B90]</a>.</p>
+
+<p>The <span class="SimpleMath">\(p\)</span>-group generation algorithm determines the immediate descendants of a given <span class="SimpleMath">\(p\)</span>-group <span class="SimpleMath">\(G\)</span> up to isomorphism. From what has been explained in Section <a href="chap2_mj.html#X79A052C47C92AF09"><span class="RefLink"><span class="Heading">Basic notions</span></span></a>, it is clear that this amounts to the construction of the <span class="SimpleMath">\(p\)</span>-cover, the extension of the automorphisms of <span class="SimpleMath">\(G\)</span> to the <span class="SimpleMath">\(p\)</span>-cover and the determination of representatives of the orbits of the action of these automorphisms on the set of supplements of the nucleus in the <span class="SimpleMath">\(p\)</span>-multiplicator.</p>
+
+<p>The main practical problem here is the determination of these representatives. <a href="chapBib_mj.html#biBOBr90">[O'B90]</a> describes methods for this and the <code class="code">pq</code> program allows choices according to whether space or time limitations must be met.</p>
+
+<p>As well as the descendants of <span class="SimpleMath">\(G\)</span>, the <code class="code">pq</code> program determines their automorphism groups from that of <span class="SimpleMath">\(G\)</span> (see <a href="chapBib_mj.html#biBOBr95">[O'B95]</a>), which is important for an iteration of the process; this has been used by Eamonn O'Brien, e.g. in the classification of the <span class="SimpleMath">\(2\)</span>-groups that are now also part of the <em>Small Groups</em> library available through <strong class="pkg">GAP</strong>.</p>
+
+<p>A variant of the <span class="SimpleMath">\(p\)</span>-group generation algorithm is also used to define a <em>standard presentation</em> of a given <span class="SimpleMath">\(p\)</span>-group. This is done by constructing an isomorphic copy of the given group through a chain of descendants and at each step making a choice of a particular representative for the respective orbit of capable groups. In a fairly delicate process, subgroups of the <span class="SimpleMath">\(p\)</span>-multiplicator are represented by <em>echelonised matrices</em> and a first among the <em>labels for standard matrices</em> is chosen (this is described in detail in <a href="chapBib_mj.html#biBOBr94">[O'B94]</a>).</p>
+
+<p>Finally, the standard presentation provides a way of testing if two given <span class="SimpleMath">\(p\)</span>-groups are isomorphic: the standard presentations of the groups are computed, for practical purposes <em>compacted</em> and the results compared for being identical, i.e. the groups are isomorphic if and only if their standard presentations are identical.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

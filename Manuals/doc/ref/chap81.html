@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ref) - Chapter 81: An Example – Residue Class Rings</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap81"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chap19.html">19</a>  <a href="chap20.html">20</a>  <a href="chap21.html">21</a>  <a href="chap22.html">22</a>  <a href="chap23.html">23</a>  <a href="chap24.html">24</a>  <a href="chap25.html">25</a>  <a href="chap26.html">26</a>  <a href="chap27.html">27</a>  <a href="chap28.html">28</a>  <a href="chap29.html">29</a>  <a href="chap30.html">30</a>  <a href="chap31.html">31</a>  <a href="chap32.html">32</a>  <a href="chap33.html">33</a>  <a href="chap34.html">34</a>  <a href="chap35.html">35</a>  <a href="chap36.html">36</a>  <a href="chap37.html">37</a>  <a href="chap38.html">38</a>  <a href="chap39.html">39</a>  <a href="chap40.html">40</a>  <a href="chap41.html">41</a>  <a href="chap42.html">42</a>  <a href="chap43.html">43</a>  <a href="chap44.html">44</a>  <a href="chap45.html">45</a>  <a href="chap46.html">46</a>  <a href="chap47.html">47</a>  <a href="chap48.html">48</a>  <a href="chap49.html">49</a>  <a href="chap50.html">50</a>  <a href="chap51.html">51</a>  <a href="chap52.html">52</a>  <a href="chap53.html">53</a>  <a href="chap54.html">54</a>  <a href="chap55.html">55</a>  <a href="chap56.html">56</a>  <a href="chap57.html">57</a>  <a href="chap58.html">58</a>  <a href="chap59.html">59</a>  <a href="chap60.html">60</a>  <a href="chap61.html">61</a>  <a href="chap62.html">62</a>  <a href="chap63.html">63</a>  <a href="chap64.html">64</a>  <a href="chap65.html">65</a>  <a href="chap66.html">66</a>  <a href="chap67.html">67</a>  <a href="chap68.html">68</a>  <a href="chap69.html">69</a>  <a href="chap70.html">70</a>  <a href="chap71.html">71</a>  <a href="chap72.html">72</a>  <a href="chap73.html">73</a>  <a href="chap74.html">74</a>  <a href="chap75.html">75</a>  <a href="chap76.html">76</a>  <a href="chap77.html">77</a>  <a href="chap78.html">78</a>  <a href="chap79.html">79</a>  <a href="chap80.html">80</a>  <a href="chap81.html">81</a>  <a href="chap82.html">82</a>  <a href="chap83.html">83</a>  <a href="chap84.html">84</a>  <a href="chap85.html">85</a>  <a href="chap86.html">86</a>  <a href="chap87.html">87</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap80.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap82.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap81_mj.html">[MathJax on]</a></p>
+<p><a id="X8125CC6A87409887" name="X8125CC6A87409887"></a></p>
+<div class="ChapSects"><a href="chap81.html#X8125CC6A87409887">81 <span class="Heading">An Example – Residue Class Rings</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap81.html#X81008A74838A792E">81.1 <span class="Heading">A First Attempt to Implement Elements of Residue Class Rings</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap81.html#X78B6425787FDB0E5">81.2 <span class="Heading">Why Proceed in a Different Way?</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap81.html#X85B914DD81732492">81.3 <span class="Heading">A Second Attempt to Implement Elements of Residue Class Rings</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap81.html#X83127B258512C436">81.4 <span class="Heading">Compatibility of Residue Class Rings with Prime Fields</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap81.html#X81CA1C7087A815DE">81.5 <span class="Heading">Further Improvements in Implementing Residue Class Rings</span></a>
+</span>
+</div>
+</div>
+
+<h3>81 <span class="Heading">An Example – Residue Class Rings</span></h3>
+
+<p>In this chapter, we give an example how <strong class="pkg">GAP</strong> can be extended by new data structures and new functionality. In order to focus on the issues of the implementation, the mathematics in the example chosen is trivial. Namely, we will discuss computations with elements of residue class rings <span class="SimpleMath">ℤ / nℤ</span>.</p>
+
+<p>The first attempt is straightforward (see Section <a href="chap81.html#X81008A74838A792E"><span class="RefLink">81.1</span></a>), it deals with the implementation of the necessary arithmetic operations. Section <a href="chap81.html#X78B6425787FDB0E5"><span class="RefLink">81.2</span></a> deals with the question why it might be useful to use an approach that involves creating a new data structure and integrating the algorithms dealing with these new <strong class="pkg">GAP</strong> objects into the system. Section <a href="chap81.html#X85B914DD81732492"><span class="RefLink">81.3</span></a> shows how this can be done in our example, and Section <a href="chap81.html#X83127B258512C436"><span class="RefLink">81.4</span></a>, the question of further compatibility of the new objects with known <strong class="pkg">GAP</strong> objects is discussed. Finally, Section <a href="chap81.html#X81CA1C7087A815DE"><span class="RefLink">81.5</span></a> gives some hints how to improve the implementation presented before.</p>
+
+<p><a id="X81008A74838A792E" name="X81008A74838A792E"></a></p>
+
+<h4>81.1 <span class="Heading">A First Attempt to Implement Elements of Residue Class Rings</span></h4>
+
+<p>Suppose we want to do computations with elements of a ring <span class="SimpleMath">ℤ / nℤ</span>, where <span class="SimpleMath">n</span> is a positive integer.</p>
+
+<p>First we have to decide how to represent the element <span class="SimpleMath">k + nℤ</span> in <strong class="pkg">GAP</strong>. If the modulus <span class="SimpleMath">n</span> is fixed then we can use the integer <span class="SimpleMath">k</span>. More precisely, we can use any integer <span class="SimpleMath">k'</span> such that <span class="SimpleMath">k - k'</span> is a multiple of <span class="SimpleMath">n</span>. If different moduli are likely to occur then using a list of the form <span class="SimpleMath">[ k, n ]</span>, or a record of the form <code class="code">rec( residue := <var class="Arg">k</var>, modulus := <var class="Arg">n</var> )</code> is more appropriate. In the following, let us assume the list representation <span class="SimpleMath">[ k, n ]</span> is chosen. Moreover, we decide that the residue <span class="SimpleMath">k</span> in all such lists satisfies <span class="SimpleMath">0 ≤ k &lt; n</span>, i.e., the result of adding two residue classes represented by <span class="SimpleMath">[ k_1, n ]</span> and <span class="SimpleMath">[ k_2, n ]</span> (of course with same modulus <span class="SimpleMath">n</span>) will be <span class="SimpleMath">[ k, n ]</span> with <span class="SimpleMath">k_1 + k_2</span> congruent to <span class="SimpleMath">k</span> modulo <span class="SimpleMath">n</span> and <span class="SimpleMath">0 ≤ k &lt; n</span>.</p>
+
+<p>Now we can implement the arithmetic operations for residue classes. Note that the result of the <code class="keyw">mod</code> operator is normalized as required. The division by a noninvertible residue class results in <code class="keyw">fail</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">resclass_sum := function( c1, c2 )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if c1[2] &lt;&gt; c2[2] then Error( "different moduli" ); fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return [ ( c1[1] + c2[1] ) mod c1[2], c1[2] ];</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">resclass_diff := function( c1, c2 )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if c1[2] &lt;&gt; c2[2] then Error( "different moduli" ); fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return [ ( c1[1] - c2[1] ) mod c1[2], c1[2] ];</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">resclass_prod := function( c1, c2 )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if c1[2] &lt;&gt; c2[2] then Error( "different moduli" ); fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return [ ( c1[1] * c2[1] ) mod c1[2], c1[2] ];</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">resclass_quo := function( c1, c2 )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local quo;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if c1[2] &lt;&gt; c2[2] then Error( "different moduli" ); fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   quo:= QuotientMod( c1[1], c2[1], c1[2] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if quo &lt;&gt; fail then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     quo:= [ quo, c1[2] ];</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return quo;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;;</span>
+</pre></div>
+
+<p>With these functions, we can in principle compute with residue classes.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list:= List( [ 0 .. 3 ], k -&gt; [ k, 4 ] );</span>
+[ [ 0, 4 ], [ 1, 4 ], [ 2, 4 ], [ 3, 4 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">resclass_sum( list[2], list[4] );</span>
+[ 0, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">resclass_diff( list[1], list[2] );</span>
+[ 3, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">resclass_prod( list[2], list[4] );</span>
+[ 3, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">resclass_prod( list[3], list[4] );</span>
+[ 2, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( list, x -&gt; resclass_quo( list[2], x ) );</span>
+[ fail, [ 1, 4 ], fail, [ 3, 4 ] ]
+</pre></div>
+
+<p><a id="X78B6425787FDB0E5" name="X78B6425787FDB0E5"></a></p>
+
+<h4>81.2 <span class="Heading">Why Proceed in a Different Way?</span></h4>
+
+<p>It depends on the computations we intended to do with residue classes whether or not the implementation described in the previous section is satisfactory for us.</p>
+
+<p>Probably we are mainly interested in more complex data structures than the residue classes themselves, for example in matrix algebras or matrix groups over a ring such as <span class="SimpleMath">ℤ / 4ℤ</span>. For this, we need functions to add, multiply, invert etc. matrices of residue classes. Of course this is not a difficult task, but it requires to write additional <strong class="pkg">GAP</strong> code.</p>
+
+<p>And when we have implemented the arithmetic operations for matrices of residue classes, we might be interested in domain operations such as computing the order of a matrix group over <span class="SimpleMath">ℤ / 4ℤ</span>, a Sylow <span class="SimpleMath">2</span> subgroup, and so on. The problem is that a residue class represented as a pair <span class="SimpleMath">[ k, n ]</span> is not regarded as a group element by <strong class="pkg">GAP</strong>. We have not yet discussed how a matrix of residue classes shall be represented, but if we choose the obvious representation of a list of lists of our residue classes then also this is not a valid group element in <strong class="pkg">GAP</strong>. Hence we cannot apply the function <code class="func">Group</code> (<a href="chap39.html#X7D8E473384DE9CD4"><span class="RefLink">39.2-1</span></a>) to create a group of residue classes or a group of matrices of residue classes. This is because <strong class="pkg">GAP</strong> assumes that group elements can be multiplied via the infix operator <code class="code">*</code> (equivalently, via the operation <code class="func">\*</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>)). Note that in fact the multiplication of two lists <span class="SimpleMath">[ k_1, n ]</span>, <span class="SimpleMath">[ k_2, n ]</span> is defined, but we have <span class="SimpleMath">[ k_1, n ] * [ k_2, n ] = k_1 * k_2 + n * n</span>, the standard scalar product of two row vectors of same length. That is, the multiplication with <code class="code">*</code> is not compatible with the function <code class="code">resclass_prod</code> introduced in the previous section. Similarly, ring elements are assumed to be added via the infix operator <code class="code">+</code>; the addition of residue classes is not compatible with the available addition of row vectors.</p>
+
+<p>What we have done in the previous section can be described as implementation of a "standalone" arithmetic for residue classes. In order to use the machinery of the <strong class="pkg">GAP</strong> library for creating higher level objects such as matrices, polynomials, or domains over residue class rings, we have to "integrate" this implementation into the <strong class="pkg">GAP</strong> library. The key step will be to create a new kind of <strong class="pkg">GAP</strong> objects. This will be done in the following sections; there we assume that residue classes and residue class rings are not yet available in <strong class="pkg">GAP</strong>; in fact they are available, and their implementation is very close to what is described here.</p>
+
+<p><a id="X85B914DD81732492" name="X85B914DD81732492"></a></p>
+
+<h4>81.3 <span class="Heading">A Second Attempt to Implement Elements of Residue Class Rings</span></h4>
+
+<p>Faced with the problem to implement elements of the rings <span class="SimpleMath">ℤ / nℤ</span>, we must define the <em>types</em> of these elements as far as is necessary to distinguish them from other <strong class="pkg">GAP</strong> objects.</p>
+
+<p>As is described in Chapter <a href="chap13.html#X7E8202627B421DB1"><span class="RefLink">13</span></a>, the type of an object comprises several aspects of information about this object; the <em>family</em> determines the relation of the object to other objects, the <em>categories</em> determine what operations the object admits, the <em>representation</em> determines how an object is actually represented, and the <em>attributes</em> describe knowledge about the object.</p>
+
+<p>First of all, we must decide about the <em>family</em> of each residue class. A natural way to do this is to put the elements of each ring <span class="SimpleMath">ℤ / nℤ</span> into a family of their own. This means that for example elements of <span class="SimpleMath">ℤ / 3ℤ</span> and <span class="SimpleMath">ℤ / 9ℤ</span> lie in different families. So the only interesting relation between the families of two residue classes is equality; binary arithmetic operations with two residue classes will be admissible only if their families are equal. Note that in the naive approach in Section <a href="chap81.html#X81008A74838A792E"><span class="RefLink">81.1</span></a>, we had to take care of different moduli by a check in each function; these checks may disappear in the new approach because of our choice of families.</p>
+
+<p>Note that we do not need to tell <strong class="pkg">GAP</strong> anything about the above decision concerning the families of the objects that we are going to implement, that is, the <em>declaration part</em> (see <a href="chap79.html#X7837CA9A83D93B38"><span class="RefLink">79.11</span></a>) of the little <strong class="pkg">GAP</strong> package we are writing contains nothing about the distribution of the new objects into families. (The actual construction of a family happens in the function <code class="code">MyZmodnZ</code> shown below.)</p>
+
+<p>Second, we want to describe methods to add or multiply two elements in <span class="SimpleMath">ℤ / nℤ</span>, and these methods shall be not applicable to other <strong class="pkg">GAP</strong> objects. The natural way to do this is to create a new <em>category</em> in which all elements of all rings <span class="SimpleMath">ℤ / nℤ</span> lie. This is done as follows.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareCategory( "IsMyZmodnZObj", IsScalar );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cat:= CategoryCollections( IsMyZmodnZObj );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cat:= CategoryCollections( cat );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cat:= CategoryCollections( cat );;</span>
+</pre></div>
+
+<p>So all elements in the rings <span class="SimpleMath">ℤ / nℤ</span> will lie in the category <code class="code">IsMyZmodnZObj</code>, which is a subcategory of <code class="func">IsScalar</code> (<a href="chap31.html#X8113834E84FD0435"><span class="RefLink">31.14-20</span></a>). The latter means that one can add, subtract, multiply and divide two such elements that lie in the same family, with the obvious restriction that the second operand of a division must be invertible. (The name <code class="code">IsMyZmodnZObj</code> is chosen because <code class="func">IsZmodnZObj</code> (<a href="chap14.html#X7D0107DD79753901"><span class="RefLink">14.5-4</span></a>) is already defined in <strong class="pkg">GAP</strong>, for an implementation of residue classes that is very similar to the one developed in this manual chapter. Using this different name, one can simply enter the <strong class="pkg">GAP</strong> code of this chapter into a <strong class="pkg">GAP</strong> session, either interactively or by reading a file with this code, and experiment after each step whether the expected behaviour has been achieved, and what is still missing.)</p>
+
+<p>The next lines of <strong class="pkg">GAP</strong> code above create the categories <code class="code">CategoryCollections( IsMyZmodnZObj )</code> and two higher levels of collections categories of this, which will be needed later; it is important to create these categories before collections of the objects in <code class="code">IsMyZmodnZObj</code> actually arise.</p>
+
+<p>Note that the only difference between <code class="func">DeclareCategory</code> (<a href="chap13.html#X879DE2A17A6C6E92"><span class="RefLink">13.3-5</span></a>) and <code class="func">NewCategory</code> (<a href="chap13.html#X87F68F887B44DBBD"><span class="RefLink">13.3-4</span></a>) is that in a call to <code class="func">DeclareCategory</code> (<a href="chap13.html#X879DE2A17A6C6E92"><span class="RefLink">13.3-5</span></a>), a variable corresponding to the first argument is set to the new category, and this variable is read-only. The same holds for <code class="func">DeclareRepresentation</code> (<a href="chap13.html#X7C81FB2682AE54CD"><span class="RefLink">13.4-5</span></a>) and <code class="func">NewRepresentation</code> (<a href="chap13.html#X7CC8106F809E15CF"><span class="RefLink">13.4-4</span></a>) etc.</p>
+
+<p>There is no analogue of categories in the implementation in Section <a href="chap81.html#X81008A74838A792E"><span class="RefLink">81.1</span></a>, since there it was not necessary to distinguish residue classes from other <strong class="pkg">GAP</strong> objects. Note that the functions there assumed that their arguments were residue classes, and the user was responsible not to call them with other arguments. Thus an important aspect of types is to describe arguments of functions explicitly.</p>
+
+<p>Third, we must decide about the <em>representation</em> of our objects. This is something we know already from Section <a href="chap81.html#X81008A74838A792E"><span class="RefLink">81.1</span></a>, where we chose a list of length two. Here we may choose between two essentially different representations for the new <strong class="pkg">GAP</strong> objects, namely as "component object" (record-like) or "positional object" (list-like). We decide to store the modulus of each residue class in its family, and to encode the element <span class="SimpleMath">k + nℤ</span> by the unique residue in the range <span class="SimpleMath">[ 0 .. n-1 ]</span> that is congruent to <span class="SimpleMath">k</span> modulo <span class="SimpleMath">n</span>, and the object itself is chosen to be a positional object with this residue at the first and only position (see <a href="chap79.html#X834893D07FAA6FD2"><span class="RefLink">79.3</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareRepresentation("IsMyModulusRep", IsPositionalObjectRep, [1]);</span>
+</pre></div>
+
+<p>The fourth ingredients of a type, <em>attributes</em>, are usually of minor importance for element objects. In particular, we do not need to introduce special attributes for residue classes.</p>
+
+<p>Having defined what the new objects shall look like, we now declare a global function (see <a href="chap79.html#X7837CA9A83D93B38"><span class="RefLink">79.11</span></a>), to create an element when family and residue are given.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareGlobalFunction( "MyZmodnZObj" );</span>
+</pre></div>
+
+<p>Now we have declared what we need, and we can start to implement the missing methods resp. functions; so the following command belongs to the <em>implementation part</em> of our package (see <a href="chap79.html#X7837CA9A83D93B38"><span class="RefLink">79.11</span></a>).</p>
+
+<p>The probably most interesting function is the one to construct a residue class.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallGlobalFunction( MyZmodnZObj, function( Fam, residue )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return Objectify( NewType( Fam, IsMyZmodnZObj and IsMyModulusRep ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                     [ residue mod Fam!.modulus ] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end );</span>
+</pre></div>
+
+<p>Note that we normalize <code class="code">residue</code> explicitly using <code class="keyw">mod</code>; we assumed that the modulus is stored in <code class="code">Fam</code>, so we must take care of this below. If <code class="code">Fam</code> is a family of residue classes, and <code class="code">residue</code> is an integer, <code class="code">MyZmodnZObj</code> returns the corresponding object in the family <code class="code">Fam</code>, which lies in the category <code class="code">IsMyZmodnZObj</code> and in the representation <code class="code">IsMyModulusRep</code>.</p>
+
+<p><code class="code">MyZmodnZObj</code> needs an appropriate family as first argument, so let us see how to get our hands on this. Of course we could write a handy function to create such a family for given modulus, but we choose another way. In fact we do not really want to call <code class="code">MyZmodnZObj</code> explicitly when we want to create residue classes. For example, if we want to enter a matrix of residues then usually we start with a matrix of corresponding integers, and it is more elegant to do the conversion via multiplying the matrix with the identity of the required ring <span class="SimpleMath">ℤ / nℤ</span>; this is also done for the conversion of integral matrices to finite field matrices. (Note that we will have to install a method for this.) So it is often sufficient to access this identity, for example via <code class="code">One( MyZmodnZ( <var class="Arg">n</var> ) )</code>, where <code class="code">MyZmodnZ</code> returns a domain representing the ring <span class="SimpleMath">ℤ / nℤ</span> when called with the argument <span class="SimpleMath">n</span>. We decide that constructing this ring is a natural place where the creation of the family can be hidden, and implement the function. (Note that the declaration belongs to the declaration part, and the installation belongs to the implementation part, see <a href="chap79.html#X7837CA9A83D93B38"><span class="RefLink">79.11</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareGlobalFunction( "MyZmodnZ" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallGlobalFunction( MyZmodnZ, function( n )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local F, R;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if not IsPosInt( n ) then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     Error( "&lt;n&gt; must be a positive integer" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   # Construct the family of element objects of our ring.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   F:= NewFamily( Concatenation( "MyZmod", String( n ), "Z" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                  IsMyZmodnZObj );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   # Install the data.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   F!.modulus:= n;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   # Make the domain.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   R:= RingWithOneByGenerators( [ MyZmodnZObj( F, 1 ) ] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   SetIsWholeFamily( R, true );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   SetName( R, Concatenation( "(Integers mod ", String(n), ")" ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   # Return the ring.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return R;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end );</span>
+</pre></div>
+
+<p>Note that the modulus <code class="code">n</code> is stored in the component <code class="code">modulus</code> of the family, as is assumed by <code class="code">MyZmodnZ</code>. Thus it is not necessary to store the modulus in each element. When storing <code class="code">n</code> with the <code class="code">!.</code> operator as value of the component <code class="code">modulus</code>, we used that all families are in fact represented as component objects (see <a href="chap79.html#X866E223484649E5A"><span class="RefLink">79.2</span></a>).</p>
+
+<p>We see that we can use <code class="func">RingWithOneByGenerators</code> (<a href="chap56.html#X851115EC79B8C393"><span class="RefLink">56.3-3</span></a>) to construct a ring with one if we have the appropriate generators. The construction via <code class="func">RingWithOneByGenerators</code> (<a href="chap56.html#X851115EC79B8C393"><span class="RefLink">56.3-3</span></a>) makes sure that <code class="func">IsRingWithOne</code> (<a href="chap56.html#X7E601FBD8020A0F3"><span class="RefLink">56.3-1</span></a>) (and <code class="func">IsRing</code> (<a href="chap56.html#X80FD843C8221DAC9"><span class="RefLink">56.1-1</span></a>)) is <code class="keyw">true</code> for each output of <code class="code">MyZmodnZ</code>. So the main problem is to create the identity element of the ring, which in our case suffices to generate the ring. In order to create this element via <code class="code">MyZmodnZObj</code>, we have to construct its family first, at each call of <code class="code">MyZmodnZ</code>.</p>
+
+<p>Also note that we may enter known information about the ring. Here we store that it contains the whole family of elements; this is useful for example when we want to check the membership of an element in the ring, which can be decided from the type of the element if the ring contains its whole elements family. Giving a name to the ring causes that it will be printed via printing the name. (By the way: This name <code class="code">(Integers mod <var class="Arg">n</var>)</code> looks like a call to <code class="func">\mod</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>) with the arguments <code class="func">Integers</code> (<a href="chap14.html#X853DF11B80068ED5"><span class="RefLink">14</span></a>) and <var class="Arg">n</var>; a construction of the ring via this call seems to be more natural than by calling <code class="code">MyZmodnZ</code>; later we shall install a <code class="func">\mod</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>) method in order to admit this construction.)</p>
+
+<p>Now we can read the above code into <strong class="pkg">GAP</strong>, and the following works already.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= MyZmodnZ( 4 );</span>
+(Integers mod 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRing( R );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens:= GeneratorsOfRingWithOne( R );</span>
+[ &lt;object&gt; ]
+</pre></div>
+
+<p>But of course this means just to ask for the information we have explicitly stored in the ring. Already the questions whether the ring is finite and how many elements it has, cannot be answered by <strong class="pkg">GAP</strong>. Clearly we know the answers, and we could store them in the ring, by setting the value of the property <code class="func">IsFinite</code> (<a href="chap30.html#X808A4061809A6E67"><span class="RefLink">30.4-2</span></a>) to <code class="keyw">true</code> and the value of the attribute <code class="func">Size</code> (<a href="chap30.html#X858ADA3B7A684421"><span class="RefLink">30.4-6</span></a>) to <var class="Arg">n</var> (the argument of the call to <code class="code">MyZmodnZ</code>). If we do not want to do so then <strong class="pkg">GAP</strong> could only try to find out the number of elements of the ring via forming the closure of the generators under addition and multiplication, but up to now, <strong class="pkg">GAP</strong> does not know how to add or multiply two elements of our ring.</p>
+
+<p>So we must install some methods for arithmetic and other operations if the elements are to behave as we want.</p>
+
+<p>We start with a method for showing elements nicely on the screen. There are different operations for this purpose. One of them is <code class="func">PrintObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>), which is called for each argument in an explicit call to <code class="func">Print</code> (<a href="chap6.html#X7AFA64D97A1F39A3"><span class="RefLink">6.3-4</span></a>). Another one is <code class="func">ViewObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>), which is called in the read-eval-print loop for each object. <code class="func">ViewObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) shall produce short and human readable information about the object in question, whereas <code class="func">PrintObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) shall produce information that may be longer and is (if reasonable) readable by <strong class="pkg">GAP</strong>. We cannot satisfy the latter requirement for a <code class="func">PrintObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) method because there is no way to make a family <strong class="pkg">GAP</strong> readable. So we decide to display the expression <code class="code">( k mod n )</code> for an object that is given by the residue <code class="code">k</code> and the modulus <code class="code">n</code>, which would be fine as a <code class="func">ViewObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) method. Since the default for <code class="func">ViewObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) is to call <code class="func">PrintObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>), and since no other <code class="func">ViewObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) method is applicable to our elements, we need only a <code class="func">PrintObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) method.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( PrintObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   Print( "( ", x![1], " mod ", FamilyObj(x)!.modulus, " )" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+</pre></div>
+
+<p>So we installed a method for the operation <code class="func">PrintObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) (first argument), and we gave it a suitable information message (second argument), see <a href="chap7.html#X80848FF486BD6F9F"><span class="RefLink">7.2-1</span></a> and <a href="chap7.html#X7D43A2D885B37739"><span class="RefLink">7.3</span></a> for applications of this information string. The third argument tells <strong class="pkg">GAP</strong> that the method is applicable for objects that lie in the category <code class="code">IsMyZmodnZObj</code> and in the representation <code class="code">IsMyModulusRep</code>. and the fourth argument is the method itself. More details about <code class="func">InstallMethod</code> (<a href="chap78.html#X837EFDAB7BEF290B"><span class="RefLink">78.3-1</span></a>) can be found in <a href="chap78.html#X795EE8257848B438"><span class="RefLink">78.3</span></a>.</p>
+
+<p>Note that the requirement <code class="code">IsMyModulusRep</code> for the argument <code class="code">x</code> allows us to access the residue as <code class="code">x![1]</code>. Since the family of <code class="code">x</code> has the component <code class="code">modulus</code> bound if it is constructed by <code class="code">MyZmodnZ</code>, we may access this component. We check whether the method installation has some effect.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens;</span>
+[ ( 1 mod 4 ) ]
+</pre></div>
+
+<p>Next we install methods for the comparison operations. Note that we can assume that the residues in the representation chosen are normalized.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \=,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for two elements in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [IsMyZmodnZObj and IsMyModulusRep, IsMyZmodnZObj and IsMyModulusRep],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y ) return x![1] = y![1]; end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \&lt;,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for two elements in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [IsMyZmodnZObj and IsMyModulusRep, IsMyZmodnZObj and IsMyModulusRep],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y ) return x![1] &lt; y![1]; end );</span>
+</pre></div>
+
+<p>The third argument used in these installations specifies the required relation between the families of the arguments (see <a href="chap13.html#X846063757EC05986"><span class="RefLink">13.1</span></a>). This argument of a method installation, if present, is a function that shall be applied to the families of the arguments. <code class="func">IsIdenticalObj</code> (<a href="chap12.html#X7961183378DFB902"><span class="RefLink">12.5-1</span></a>) means that the methods are applicable only if both arguments lie in the same family. (In installations for unary methods, obviously no relation is required, so this argument is left out there.)</p>
+
+<p>Up to now, we see no advantage of the new approach over the one in Section <a href="chap81.html#X81008A74838A792E"><span class="RefLink">81.1</span></a>. For a residue class represented as <code class="code">[ <var class="Arg">k</var>, <var class="Arg">n</var> ]</code>, the way it is printed on the screen is sufficient, and equality and comparison of lists are good enough to define equality and comparison of residue classes if needed. But this is not the case in other situations. For example, if we would have decided that the residue <var class="Arg">k</var> need not be normalized then we would have needed functions in Section <a href="chap81.html#X81008A74838A792E"><span class="RefLink">81.1</span></a> that compute whether two residue classes are equal, and which of two residue classes is regarded as larger than another. Note that we are free to define what "larger" means for objects that are newly introduced.</p>
+
+<p>Next we install methods for the arithmetic operations, first for the additive structure.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \+,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for two elements in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [IsMyZmodnZObj and IsMyModulusRep, IsMyZmodnZObj and IsMyModulusRep],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return MyZmodnZObj( FamilyObj( x ), x![1] + y![1] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( ZeroOp,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObj ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   x -&gt; MyZmodnZObj( FamilyObj( x ), 0 ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( AdditiveInverseOp,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   x -&gt; MyZmodnZObj( FamilyObj( x ), AdditiveInverse( x![1] ) ) );</span>
+</pre></div>
+
+<p>Here the new approach starts to pay off. The method for the operation <code class="func">\+</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>) allows us to use the infix operator <code class="code">+</code> for residue classes. The method for <code class="func">ZeroOp</code> (<a href="chap31.html#X8040AC7A79FFC442"><span class="RefLink">31.10-3</span></a>) is used when we call this operation or the attribute <code class="func">Zero</code> (<a href="chap31.html#X8040AC7A79FFC442"><span class="RefLink">31.10-3</span></a>) explicitly, and <code class="func">ZeroOp</code> (<a href="chap31.html#X8040AC7A79FFC442"><span class="RefLink">31.10-3</span></a>) it is also used when we ask for <code class="code">0 * <var class="Arg">rescl</var></code>, where <var class="Arg">rescl</var> is a residue class.</p>
+
+<p>(Note that <code class="func">Zero</code> (<a href="chap31.html#X8040AC7A79FFC442"><span class="RefLink">31.10-3</span></a>) and <code class="func">ZeroOp</code> (<a href="chap31.html#X8040AC7A79FFC442"><span class="RefLink">31.10-3</span></a>) are distinguished because <code class="code">0 * <var class="Arg">obj</var></code> is guaranteed to return a <em>mutable</em> result whenever a mutable version of this result exists in <strong class="pkg">GAP</strong> –for example if <var class="Arg">obj</var> is a matrix– whereas <code class="func">Zero</code> (<a href="chap31.html#X8040AC7A79FFC442"><span class="RefLink">31.10-3</span></a>) is an attribute and therefore returns <em>immutable</em> results; for our example there is no difference since the residue classes are always immutable, nevertheless we have to install the method for <code class="func">ZeroOp</code> (<a href="chap31.html#X8040AC7A79FFC442"><span class="RefLink">31.10-3</span></a>). The same holds for <code class="func">AdditiveInverse</code> (<a href="chap31.html#X84BB723C81D55D63"><span class="RefLink">31.10-9</span></a>), <code class="func">One</code> (<a href="chap31.html#X8046262384895B2A"><span class="RefLink">31.10-2</span></a>), and <code class="func">Inverse</code> (<a href="chap31.html#X78EE524E83624057"><span class="RefLink">31.10-8</span></a>).)</p>
+
+<p>Similarly, <code class="func">AdditiveInverseOp</code> (<a href="chap31.html#X84BB723C81D55D63"><span class="RefLink">31.10-9</span></a>) can be either called directly or via the unary <code class="code">-</code> operator; so we can compute the additive inverse of the residue class <var class="Arg">rescl</var> as <code class="code">-<var class="Arg">rescl</var></code>.</p>
+
+<p>It is not necessary to install methods for subtraction, since this is handled via addition of the additive inverse of the second argument if no other method is installed.</p>
+
+<p>Let us try what we can do with the methods that are available now.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:= gens[1];  y:= x + x;</span>
+( 1 mod 4 )
+( 2 mod 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">0 * x;  -x;</span>
+( 0 mod 4 )
+( 3 mod 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y = -y;  x = y;  x &lt; y;  -x &lt; y;</span>
+true
+false
+true
+false
+</pre></div>
+
+<p>We might want to admit the addition of integers and elements in rings <span class="SimpleMath">ℤ / nℤ</span>, where an integer is implicitly identified with its residue modulo <span class="SimpleMath">n</span>. To achieve this, we install methods to add an integer to an object in <code class="code">IsMyZmodnZObj</code> from the left and from the right.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \+,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/nZ (ModulusRep) and integer",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObj and IsMyModulusRep, IsInt ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return MyZmodnZObj( FamilyObj( x ), x![1] + y );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \+,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for integer and element in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsInt, IsMyZmodnZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return MyZmodnZObj( FamilyObj( y ), x + y![1] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+</pre></div>
+
+<p>Now we can do also the following.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">2 + x;  7 - x;  y - 2;</span>
+( 3 mod 4 )
+( 2 mod 4 )
+( 0 mod 4 )
+</pre></div>
+
+<p>Similarly we install the methods dealing with the multiplicative structure. We need methods to multiply two of our objects, and to compute identity and inverse. The operation <code class="func">OneOp</code> (<a href="chap31.html#X8046262384895B2A"><span class="RefLink">31.10-2</span></a>) is called when we ask for <code class="code"><var class="Arg">rescl</var>^0</code>, and <code class="func">InverseOp</code> (<a href="chap31.html#X78EE524E83624057"><span class="RefLink">31.10-8</span></a>) is called when we ask for <code class="code"><var class="Arg">rescl</var>^-1</code>. Note that the method for <code class="func">InverseOp</code> (<a href="chap31.html#X78EE524E83624057"><span class="RefLink">31.10-8</span></a>) returns <code class="keyw">fail</code> if the argument is not invertible.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \*,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for two elements in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [IsMyZmodnZObj and IsMyModulusRep, IsMyZmodnZObj and IsMyModulusRep],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return MyZmodnZObj( FamilyObj( x ), x![1] * y![1] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( OneOp,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObj ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   elm -&gt; MyZmodnZObj( FamilyObj( elm ), 1 ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( InverseOp,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( elm )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local residue;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   residue:= QuotientMod( 1, elm![1], FamilyObj( elm )!.modulus );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if residue &lt;&gt; fail then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     residue:= MyZmodnZObj( FamilyObj( elm ), residue );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return residue;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+</pre></div>
+
+<p>To be able to multiply our objects with integers, we need not (but we may, and we should if we are going for efficiency) install special methods. This is because in general, <strong class="pkg">GAP</strong> interprets the multiplication of an integer and an additive object as abbreviation of successive additions, and there is one generic method for such a multiplication that uses only additions and –in the case of a negative integer– taking the additive inverse. Analogously, there is a generic method for powering by integers that uses only multiplications and taking the multiplicative inverse.</p>
+
+<p>Note that we could also interpret the multiplication with an integer as a shorthand for the multiplication with the corresponding residue class. We are lucky that this interpretation is compatible with the one that is already available. If this would not be the case then of course we would get into trouble by installing a concurrent multiplication that computes something different from the multiplication that is already defined, since <strong class="pkg">GAP</strong> does not guarantee which of the applicable methods is actually chosen (see <a href="chap78.html#X851FC6387CA2B241"><span class="RefLink">78.4</span></a>).</p>
+
+<p>Now we have implemented methods for the arithmetic operations for our elements, and the following calculations work.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:= 2 * x;  z:= (-5) * x;</span>
+( 2 mod 4 )
+( 3 mod 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y * z;  y * y;</span>
+( 2 mod 4 )
+( 0 mod 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y^-1;  y^0;</span>
+fail
+( 1 mod 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z^-1;</span>
+( 3 mod 4 )
+</pre></div>
+
+<p>There are some other operations in <strong class="pkg">GAP</strong> that we may want to accept our elements as arguments. An example is the operation <code class="func">Int</code> (<a href="chap14.html#X87CA734380B5F68C"><span class="RefLink">14.2-3</span></a>) that returns, e.g., the integral part of a rational number or the integer corresponding to an element in a finite prime field. For our objects, we may define that <code class="func">Int</code> (<a href="chap14.html#X87CA734380B5F68C"><span class="RefLink">14.2-3</span></a>) returns the normalized residue.</p>
+
+<p>Note that we <em>define</em> this behaviour for elements but we <em>implement</em> it for objects in the representation <code class="code">IsMyModulusRep</code>. This means that if someone implements another representation of residue classes then this person must be careful to implement <code class="func">Int</code> (<a href="chap14.html#X87CA734380B5F68C"><span class="RefLink">14.2-3</span></a>) methods for objects in this new representation compatibly with our definition, i.e., such that the result is independent of the representation.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( Int,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   z -&gt; z![1] );</span>
+</pre></div>
+
+<p>Another example of an operation for which we might want to install a method is <code class="func">\mod</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>). We make the ring print itself as <code class="func">Integers</code> (<a href="chap14.html#X853DF11B80068ED5"><span class="RefLink">14</span></a>) mod the modulus, and then it is reasonable to allow a construction this way, which makes the <code class="func">PrintObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) output of the ring <strong class="pkg">GAP</strong> readable.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( PrintObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for full collection Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ CategoryCollections( IsMyZmodnZObj ) and IsWholeFamily ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( R )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   Print( "(Integers mod ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          ElementsFamily( FamilyObj(R) )!.modulus, ")" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \mod,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for `Integers', and a positive integer",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsIntegers, IsPosRat and IsInt ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( Integers, n ) return MyZmodnZ( n ); end );</span>
+</pre></div>
+
+<p>Let us try this.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Int( y );</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Integers mod 1789;</span>
+(Integers mod 1789)
+</pre></div>
+
+<p>Probably it is not necessary to emphasize that with the approach of Section <a href="chap81.html#X81008A74838A792E"><span class="RefLink">81.1</span></a>, installing methods for existing operations is usually not possible or at least not recommended. For example, installing the function <code class="code">resclass_sum</code> defined in Section <a href="chap81.html#X81008A74838A792E"><span class="RefLink">81.1</span></a> as a <code class="func">\+</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>) method for adding two lists of length two (with integer entries) would not be compatible with the general definition of the addition of two lists of same length. Installing a method for the operation <code class="func">Int</code> (<a href="chap14.html#X87CA734380B5F68C"><span class="RefLink">14.2-3</span></a>) that takes a list <code class="code">[ <var class="Arg">k</var>, <var class="Arg">n</var> ]</code> and returns <var class="Arg">k</var> would in principle be possible, since there is no <code class="func">Int</code> (<a href="chap14.html#X87CA734380B5F68C"><span class="RefLink">14.2-3</span></a>) method for lists yet, but it is not sensible to do so because one can think of other interpretations of such a list where different <code class="func">Int</code> (<a href="chap14.html#X87CA734380B5F68C"><span class="RefLink">14.2-3</span></a>) methods could be installed with the same right.</p>
+
+<p>As mentioned in Section <a href="chap81.html#X78B6425787FDB0E5"><span class="RefLink">81.2</span></a>, one advantage of the new approach is that with the implementation we have up to now, automatically also matrices of residue classes can be treated.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:= Integers mod 16;</span>
+(Integers mod 16)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:= One( r );</span>
+( 1 mod 16 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat:= IdentityMat( 2 ) * x;</span>
+[ [ ( 1 mod 16 ), ( 0 mod 16 ) ], [ ( 0 mod 16 ), ( 1 mod 16 ) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat[1][2]:= x;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat;</span>
+[ [ ( 1 mod 16 ), ( 1 mod 16 ) ], [ ( 0 mod 16 ), ( 1 mod 16 ) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order( mat );</span>
+16
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat + mat;</span>
+[ [ ( 2 mod 16 ), ( 2 mod 16 ) ], [ ( 0 mod 16 ), ( 2 mod 16 ) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">last^4;</span>
+[ [ ( 0 mod 16 ), ( 0 mod 16 ) ], [ ( 0 mod 16 ), ( 0 mod 16 ) ] ]
+</pre></div>
+
+<p>Such matrices, if they are invertible, are valid as group elements. One technical problem is that the default algorithm for inverting matrices may give up since Gaussian elimination need not be successful over rings containing zero divisors. Therefore we install a simpleminded inversion method that inverts an integer matrix.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( InverseOp,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for an ordinary matrix over a ring Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMatrix and IsOrdinaryMatrix</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     and CategoryCollections( CategoryCollections( IsMyZmodnZObj ) ) ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( mat )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local one, modulus;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   one:= One( mat[1][1] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   modulus:= FamilyObj( one )!.modulus;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   mat:= InverseOp( List( mat, row -&gt; List( row, Int ) ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if mat &lt;&gt; fail then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     mat:= ( mat mod modulus ) * one;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if not IsMatrix( mat ) then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     mat:= fail;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return mat;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+</pre></div>
+
+<p>Additionally we install a method for finding a domain that contains the matrix entries; this is used by some <strong class="pkg">GAP</strong> library functions.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( DefaultFieldOfMatrixGroup,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "for a matrix group over a ring Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ IsMatrixGroup and CategoryCollections( CategoryCollections(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          CategoryCollections( IsMyZmodnZObj ) ) ) ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    G -&gt; RingWithOneByGenerators([ One( Representative( G )[1][1] ) ]));</span>
+</pre></div>
+
+<p>Now we can deal with matrix groups over residue class rings.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat2:= IdentityMat( 2 ) * x;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat2[2][1]:= x;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= Group( mat, mat2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( g );</span>
+3072
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Factors( last );</span>
+[ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">syl3:= SylowSubgroup( g, 3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens:= GeneratorsOfGroup( syl3 );</span>
+[ [ [ ( 1 mod 16 ), ( 7 mod 16 ) ], [ ( 11 mod 16 ), ( 14 mod 16 ) ] 
+     ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order( gens[1] );</span>
+3
+</pre></div>
+
+<p>It should be noted that this way more involved methods for matrix groups may not be available. For example, many questions about a finite matrix group can be delegated to an isomorphic permutation group via a so-called "nice monomorphism"; this can be controlled by the filter <code class="func">IsHandledByNiceMonomorphism</code> (<a href="chap40.html#X78849F81804C44B3"><span class="RefLink">40.5-1</span></a>).</p>
+
+<p>By the way, also groups of (invertible) residue classes can be formed, but this may be of minor interest.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= Group( x );;  Size( g );</span>
+#I  default `IsGeneratorsOfMagmaWithInverses' method returns `true' for 
+[ ( 1 mod 16 ) ]
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= Group( 3*x );;  Size( g );</span>
+#I  default `IsGeneratorsOfMagmaWithInverses' method returns `true' for 
+[ ( 3 mod 16 ) ]
+4
+</pre></div>
+
+<p>(The messages above tell that <strong class="pkg">GAP</strong> does not know a method for deciding whether the given elements are valid group elements. We could add an appropriate <code class="code">IsGeneratorsOfMagmaWithInverses</code> method if we would want.)</p>
+
+<p>Having done enough for the elements, we may install some more methods for the rings if we want to use them as arguments. These rings are finite, and there are many generic methods that will work if they are able to compute the list of elements of the ring, so we install a method for this.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( Enumerator,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for full collection Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ CategoryCollections( IsMyZmodnZObj ) and IsWholeFamily ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( R )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local F;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   F:= ElementsFamily( FamilyObj(R) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return List( [ 0 .. Size( R ) - 1 ], x -&gt; MyZmodnZObj( F, x ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+</pre></div>
+
+<p>Note that this method is applicable only to full rings <span class="SimpleMath">ℤ / nℤ</span>, for proper subrings it would return a wrong result. Furthermore, it is not required that the argument is a ring; in fact this method is applicable also to the additive group formed by all elements in the family, provided that it knows to contain the whole family.</p>
+
+<p>Analogously, we install methods to compute the size, a random element, and the units of full rings <span class="SimpleMath">ℤ / nℤ</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( Random,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for full collection Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ CategoryCollections( IsMyZmodnZObj ) and IsWholeFamily ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   R -&gt; MyZmodnZObj( ElementsFamily( FamilyObj(R) ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   Random( 0, Size( R ) - 1 ) ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( Size,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for full ring Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ CategoryCollections( IsMyZmodnZObj ) and IsWholeFamily ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   R -&gt; ElementsFamily( FamilyObj(R) )!.modulus );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( Units,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for full ring Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [     CategoryCollections( IsMyZmodnZObj )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     and IsWholeFamily and IsRing ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( R )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local F;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   F:= ElementsFamily( FamilyObj( R ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return List( PrimeResidues( Size(R) ), x -&gt; MyZmodnZObj( F, x ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+</pre></div>
+
+<p>The <code class="func">Units</code> (<a href="chap56.html#X853C045B7BA6A580"><span class="RefLink">56.5-2</span></a>) method has the disadvantage that the result is returned as a list (in fact this list is also strictly sorted). We could improve the implementation by returning the units as a group; if we do not want to take the full list of elements as generators, we can use the function <code class="func">GeneratorsPrimeResidues</code> (<a href="chap15.html#X7D191CF67E5018BE"><span class="RefLink">15.2-4</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( Units,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for full ring Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [     CategoryCollections( IsMyZmodnZObj )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     and IsWholeFamily and IsRing ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( R )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local G, gens;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   gens:= GeneratorsPrimeResidues( Size( R ) ).generators;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if not IsEmpty( gens ) and gens[ 1 ] = 1 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     gens:= gens{ [ 2 .. Length( gens ) ] };</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   gens:= Flat( gens ) * One( R );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return GroupByGenerators( gens, One( R ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+</pre></div>
+
+<p>Each ring <span class="SimpleMath">ℤ / nℤ</span> is finite, and we could install a method that returns <code class="keyw">true</code> when <code class="func">IsFinite</code> (<a href="chap30.html#X808A4061809A6E67"><span class="RefLink">30.4-2</span></a>) is called with <span class="SimpleMath">ℤ / nℤ</span> as argument. But we can do this more elegantly via installing a <em>logical implication</em>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallTrueMethod( IsFinite,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   CategoryCollections( IsMyZmodnZObj ) and IsDomain );</span>
+</pre></div>
+
+<p>In effect, every domain that consists of elements in <code class="code">IsMyZmodnZObj</code> will automatically store that it is finite, even if <code class="func">IsFinite</code> (<a href="chap30.html#X808A4061809A6E67"><span class="RefLink">30.4-2</span></a>) is not called for it.</p>
+
+<p><a id="X83127B258512C436" name="X83127B258512C436"></a></p>
+
+<h4>81.4 <span class="Heading">Compatibility of Residue Class Rings with Prime Fields</span></h4>
+
+<p>The above implementation of residue classes and residue class rings has at least two disadvantages. First, if <span class="SimpleMath">p</span> is a prime then the ring <span class="SimpleMath">ℤ / pℤ</span> is in fact a field, but the return values of <code class="code">MyZmodnZ</code> are never regarded as fields because they are not in the category <code class="func">IsMagmaWithInversesIfNonzero</code> (<a href="chap35.html#X83E4903D7FBB2E24"><span class="RefLink">35.1-3</span></a>). Second, and this makes the example really interesting, there are already elements of finite prime fields implemented in <strong class="pkg">GAP</strong>, and we may want to identify them with elements in <span class="SimpleMath">ℤ / pℤ</span>.</p>
+
+<p>To be more precise, elements of finite fields in <strong class="pkg">GAP</strong> lie in the category <code class="func">IsFFE</code> (<a href="chap59.html#X7D3DF32C84FEBD25"><span class="RefLink">59.1-1</span></a>), and there is already a representation, <code class="func">IsInternalRep</code> (<a href="chap13.html#X805F1C3B7C730062"><span class="RefLink">13.4-1</span></a>), of these elements via discrete logarithms. The aim of this section is to make <code class="code">IsMyModulusRep</code> an alternative representation of elements in finite prime fields.</p>
+
+<p>Note that this is only one step towards the desired compatibility. Namely, after having a second representation of elements in finite prime fields, we may wish that the function <code class="func">GF</code> (<a href="chap59.html#X8592DBB086A8A9BE"><span class="RefLink">59.3-2</span></a>) (which is the usual function to create finite fields in <strong class="pkg">GAP</strong>) is able to return <code class="code">MyZmodnZ( <var class="Arg">p</var> )</code> when <code class="code">GF( <var class="Arg">p</var> )</code> is called for a prime <var class="Arg">p</var>. Moreover, then we have to decide about a default representation of elements in <code class="code">GF( <var class="Arg">p</var> )</code> for primes <var class="Arg">p</var> for which both representations are available. Of course we can force the new representation by explicitly calling <code class="code">MyZmodnZ</code> and <code class="code">MyZmodnZObj</code> whenever we want, but it is not a priori clear in which situation which representation is preferable.</p>
+
+<p>The same questions will occur when we want to implement a new representation for non-prime fields. The steps of this implementation will be the same as described in this chapter, and we will have to achieve compatibility with both the internal representation of elements in small finite fields and the representation <code class="code">IsMyModulusRep</code> of elements in arbitrary prime fields.</p>
+
+<p>But let us now turn back to the task of this section. We first adjust the setup of the declaration part of the previous section, and then repeat the installations with suitable modifications.</p>
+
+<p>(We should start a new <strong class="pkg">GAP</strong> session for that, otherwise <strong class="pkg">GAP</strong> will complain that the objects to be declared are already bound; additionally, the methods installed above may be not compatible with the ones we want.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareCategory( "IsMyZmodnZObj", IsScalar );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareCategory( "IsMyZmodnZObjNonprime", IsMyZmodnZObj );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareSynonym( "IsMyZmodpZObj", IsMyZmodnZObj and IsFFE );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareRepresentation( "IsMyModulusRep", IsPositionalObjectRep, [ 1 ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareGlobalFunction( "MyZmodnZObj" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareGlobalFunction( "MyZmodnZ" );</span>
+</pre></div>
+
+<p>As in the previous section, all (newly introduced) elements of rings <span class="SimpleMath">ℤ / nℤ</span> lie in the category <code class="code">IsMyZmodnZObj</code>. But now we introduce two subcategories, namely <code class="code">IsMyZmodnZObjNonprime</code> for all elements in rings <span class="SimpleMath">ℤ / nℤ</span> where <span class="SimpleMath">n</span> is not a prime, and <code class="code">IsMyZmodpZObj</code> for elements in finite prime fields. All objects in the latter are automatically known to lie in the category <code class="func">IsFFE</code> (<a href="chap59.html#X7D3DF32C84FEBD25"><span class="RefLink">59.1-1</span></a>) of finite field elements.</p>
+
+<p>It would be reasonable if also those internally represented elements in the category <code class="func">IsFFE</code> (<a href="chap59.html#X7D3DF32C84FEBD25"><span class="RefLink">59.1-1</span></a>) that do in fact lie in a prime field would also lie in the category <code class="code">IsMyZmodnZObj</code> (and thus in fact in <code class="code">IsMyZmodpZObj</code>). But this cannot be achieved because internally represented finite field elements do in general not store whether they lie in a prime field.</p>
+
+<p>As for the implementation part, again let us start with the definitions of <code class="code">MyZmodnZObj</code> and <code class="code">MyZmodnZ</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallGlobalFunction( MyZmodnZObj, function( Fam, residue )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if IsFFEFamily( Fam ) then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     return Objectify( NewType( Fam, IsMyZmodpZObj</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                                 and IsMyModulusRep ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   [ residue mod Characteristic( Fam ) ] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     return Objectify( NewType( Fam, IsMyZmodnZObjNonprime</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                                 and IsMyModulusRep ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   [ residue mod Fam!.modulus ] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end );</span>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallGlobalFunction( MyZmodnZ, function( n )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local F, R;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if not ( IsInt( n ) and IsPosRat( n ) ) then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     Error( "&lt;n&gt; must be a positive integer" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   elif IsPrimeInt( n ) then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     # Construct the family of element objects of our field.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     F:= FFEFamily( n );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     # Make the domain.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     R:= FieldOverItselfByGenerators( [ MyZmodnZObj( F, 1 ) ] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     SetIsPrimeField( R, true );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     # Construct the family of element objects of our ring.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     F:= NewFamily( Concatenation( "MyZmod", String( n ), "Z" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                    IsMyZmodnZObjNonprime );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     # Install the data.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     F!.modulus:= n;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     # Make the domain.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     R:= RingWithOneByGenerators( [ MyZmodnZObj( F, 1 ) ] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     SetIsWholeFamily( R, true );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     SetName( R, Concatenation( "(Integers mod ",String(n),")" ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   # Return the ring resp. field.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return R;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end );</span>
+</pre></div>
+
+<p>Note that the result of <code class="code">MyZmodnZ</code> with a prime as argument is a field that does not contain the whole family of its elements, since all finite field elements of a fixed characteristic lie in the same family. Further note that we cannot expect a family of finite field elements to have a component <code class="code">modulus</code>, so we use <code class="func">Characteristic</code> (<a href="chap31.html#X81278E53800BF64D"><span class="RefLink">31.10-1</span></a>) to get the modulus. Requiring that <code class="code">Fam!.modulus</code> works also if <code class="code">Fam</code> is a family of finite field elements would violate the rule that an extension of <strong class="pkg">GAP</strong> should not force changes in existing code, in this case code dealing with families of finite field elements.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( PrintObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObjNonprime and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   Print( "( ", x![1], " mod ", FamilyObj(x)!.modulus, " )" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( PrintObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/pZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodpZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   Print( "( ", x![1], " mod ", Characteristic(x), " )" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \=,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for two elements in Z/nZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObj and IsMyModulusRep,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IsMyZmodnZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y ) return x![1] = y![1]; end );</span>
+</pre></div>
+
+<p>The above method to check equality is independent of whether the arguments have a prime or nonprime modulus, so we installed it for arguments in <code class="code">IsMyZmodnZObj</code>. Now we install also methods to compare objects in <code class="code">IsMyZmodpZObj</code> with the "old" finite field elements.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \=,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/pZ (ModulusRep) and internal FFE",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodpZObj and IsMyModulusRep, IsFFE and IsInternalRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return DegreeFFE( y ) = 1 and x![1] = IntFFE( y );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \=,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for internal FFE and element in Z/pZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsFFE and IsInternalRep, IsMyZmodpZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return DegreeFFE( x ) = 1 and IntFFE( x ) = y![1];</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+</pre></div>
+
+<p>The situation with the operation <code class="code">&lt;</code> is more difficult. Of course we are free to define the comparison of objects in <code class="code">IsMyZmodnZObjNonprime</code>, but for the finite field elements, the comparison must be compatible with the predefined comparison of the "old" finite field elements. The definition of the <code class="code">&lt;</code> comparison of internally represented finite field elements can be found in Chapter <a href="chap59.html#X7893ABF67A028802"><span class="RefLink">59</span></a>. In situations where the documentation does not provide the required information, one has to look it up in the <strong class="pkg">GAP</strong> code; for example, the comparison in our case can be found in the appropriate source code file of the <strong class="pkg">GAP</strong> kernel.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \&lt;,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for two elements in Z/nZ (ModulusRep, nonprime)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObjNonprime and IsMyModulusRep,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IsMyZmodnZObjNonprime and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y ) return x![1] &lt; y![1]; end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \&lt;,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for two elements in Z/pZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodpZObj and IsMyModulusRep,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IsMyZmodpZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local p, r;      # characteristic and primitive root</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if x![1] = 0 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     return y![1] &lt;&gt; 0;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   elif y![1] = 0 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     return false;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     p:= Characteristic( x );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     r:= PrimitiveRootMod( p );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     return LogMod( x![1], r, p ) &lt; LogMod( y![1], r, p );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \&lt;,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/pZ (ModulusRep) and internal FFE",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodpZObj and IsMyModulusRep, IsFFE and IsInternalRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return x![1] * One( y ) &lt; y;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \&lt;,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for internal FFE and element in Z/pZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsFFE and IsInternalRep, IsMyZmodpZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return x &lt; y![1] * One( x );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+</pre></div>
+
+<p>Now we install the same methods for the arithmetic operations <code class="func">\+</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>), <code class="func">ZeroOp</code> (<a href="chap31.html#X8040AC7A79FFC442"><span class="RefLink">31.10-3</span></a>), <code class="func">AdditiveInverseOp</code> (<a href="chap31.html#X84BB723C81D55D63"><span class="RefLink">31.10-9</span></a>), <code class="code">\-</code>, <code class="func">\*</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>), and <code class="func">OneOp</code> (<a href="chap31.html#X8046262384895B2A"><span class="RefLink">31.10-2</span></a>) as in the previous section, without listing them below. Also the same <code class="func">Int</code> (<a href="chap14.html#X87CA734380B5F68C"><span class="RefLink">14.2-3</span></a>) method is installed for objects in <code class="code">IsMyZmodnZObj</code>. Note that it is compatible with the definition of <code class="func">Int</code> (<a href="chap14.html#X87CA734380B5F68C"><span class="RefLink">14.2-3</span></a>) for finite field elements. And of course the same method for <code class="func">\mod</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>) is installed.</p>
+
+<p>We have to be careful, however, with the methods for <code class="func">InverseOp</code> (<a href="chap31.html#X78EE524E83624057"><span class="RefLink">31.10-8</span></a>), <code class="func">\/</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>), and <code class="func">\^</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>). These methods and the missing methods for arithmetic operations with one argument in <code class="code">IsMyModulusRep</code> and the other in <code class="func">IsInternalRep</code> (<a href="chap13.html#X805F1C3B7C730062"><span class="RefLink">13.4-1</span></a>) are given below.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \+,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/pZ (ModulusRep) and internal FFE",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodpZObj and IsMyModulusRep, IsFFE and IsInternalRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y ) return x![1] + y; end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \+,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for internal FFE and element in Z/pZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsFFE and IsInternalRep, IsMyZmodpZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y ) return x + y![1]; end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \*,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/pZ (ModulusRep) and internal FFE",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodpZObj and IsMyModulusRep, IsFFE and IsInternalRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y ) return x![1] * y; end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \*,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for internal FFE and element in Z/pZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsFFE and IsInternalRep, IsMyZmodpZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x, y ) return x * y![1]; end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( InverseOp,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/nZ (ModulusRep, nonprime)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodnZObjNonprime and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local residue;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   residue:= QuotientMod( 1, x![1], FamilyObj(x)!.modulus );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if residue &lt;&gt; fail then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     residue:= MyZmodnZObj( FamilyObj(x), residue );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return residue;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( InverseOp,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/pZ (ModulusRep)",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodpZObj and IsMyModulusRep ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( x )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local residue;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   residue:= QuotientMod( 1, x![1], Characteristic( FamilyObj(x) ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if residue &lt;&gt; fail then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     residue:= MyZmodnZObj( FamilyObj(x), residue );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return residue;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+</pre></div>
+
+<p>The operation <code class="func">DegreeFFE</code> (<a href="chap59.html#X828E846E7C1EA3DD"><span class="RefLink">59.2-1</span></a>) is defined for finite field elements, we need a method for objects in <code class="code">IsMyZmodpZObj</code>. Note that we need not require <code class="code">IsMyModulusRep</code> since no access to representation dependent data occurs.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( DegreeFFE,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for element in Z/pZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ IsMyZmodpZObj ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   z -&gt; 1 );</span>
+</pre></div>
+
+<p>The methods for <code class="func">Enumerator</code> (<a href="chap30.html#X7EF8910F82B45EC7"><span class="RefLink">30.3-2</span></a>), <code class="func">Random</code> (<a href="chap30.html#X7FF906E57D6936F8"><span class="RefLink">30.7-1</span></a>), <code class="func">Size</code> (<a href="chap30.html#X858ADA3B7A684421"><span class="RefLink">30.4-6</span></a>), and <code class="func">Units</code> (<a href="chap56.html#X853C045B7BA6A580"><span class="RefLink">56.5-2</span></a>), that we had installed in the previous section had all assumed that their argument contains the whole family of its elements. So these methods make sense only for the nonprime case. For the prime case, there are already methods for these operations with argument a field.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( Enumerator,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for full ring Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ CategoryCollections( IsMyZmodnZObjNonprime ) and IsWholeFamily ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( R )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local F;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   F:= ElementsFamily( FamilyObj( R ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return List( [ 0 .. Size( R ) - 1 ], x -&gt; MyZmodnZObj( F, x ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( Random,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for full ring Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ CategoryCollections( IsMyZmodnZObjNonprime ) and IsWholeFamily ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   R -&gt; MyZmodnZObj( ElementsFamily( FamilyObj( R ) ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   Random( 0, Size( R ) - 1 ) ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( Size,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for full ring Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ CategoryCollections( IsMyZmodnZObjNonprime ) and IsWholeFamily ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   R -&gt; ElementsFamily( FamilyObj( R ) )!.modulus );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( Units,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   "for full ring Z/nZ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [     CategoryCollections( IsMyZmodnZObjNonprime )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     and IsWholeFamily and IsRing ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   function( R )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local G, gens;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   gens:= GeneratorsPrimeResidues( Size( R ) ).generators;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if not IsEmpty( gens ) and gens[ 1 ] = 1 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     gens:= gens{ [ 2 .. Length( gens ) ] };</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   gens:= Flat( gens ) * One( R );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return GroupByGenerators( gens, One( R ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallTrueMethod( IsFinite,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   CategoryCollections( IsMyZmodnZObjNonprime ) and IsDomain );</span>
+</pre></div>
+
+<p><a id="X81CA1C7087A815DE" name="X81CA1C7087A815DE"></a></p>
+
+<h4>81.5 <span class="Heading">Further Improvements in Implementing Residue Class Rings</span></h4>
+
+<p>There are of course many possibilities to improve the implementation.</p>
+
+<p>With the setup as described above, subsequent calls <code class="code">MyZmodnZ( <var class="Arg">n</var> )</code> with the same <var class="Arg">n</var> yield incompatible rings in the sense that elements of one ring cannot be added to elements of an other one. The solution for this problem is to keep a global list of all results of <code class="code">MyZmodnZ</code> in the current <strong class="pkg">GAP</strong> session, and to return the stored values whenever possible. Note that this approach would admit <code class="func">PrintObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) methods that produce <strong class="pkg">GAP</strong> readable output.</p>
+
+<p>One can improve the <code class="func">Units</code> (<a href="chap56.html#X853C045B7BA6A580"><span class="RefLink">56.5-2</span></a>) method for the full ring in such a way that a group is returned and not only a list of its elements; then the result of <code class="func">Units</code> (<a href="chap56.html#X853C045B7BA6A580"><span class="RefLink">56.5-2</span></a>) can be used, e. g., as input for the operation <code class="func">SylowSubgroup</code> (<a href="chap39.html#X7AA351308787544C"><span class="RefLink">39.13-1</span></a>).</p>
+
+<p>To make computations more efficient, one can install methods for <code class="code">\-</code>, <code class="func">\/</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>), and <code class="func">\^</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>); one reason for doing so may be that this avoids the unnecessary construction of the additive or multiplicative inverse, or of intermediate powers.</p>
+
+
+<div class="example"><pre>
+InstallMethod( \-, "two elements in Z/nZ (ModulusRep)", ... );
+InstallMethod( \-, "Z/nZ-obj. (ModulusRep) and integer", ... );
+InstallMethod( \-, "integer and Z/nZ-obj. (ModulusRep)", ... );
+InstallMethod( \-, "Z/pZ-obj. (ModulusRep) and internal FFE", ... );
+InstallMethod( \-, "internal FFE and Z/pZ-obj. (ModulusRep)", ... );
+InstallMethod( \*, "Z/nZ-obj. (ModulusRep) and integer", ... );
+InstallMethod( \*, "integer and Z/nZ-obj. (ModulusRep)", ... );
+InstallMethod( \/, "two Z/nZ-objs. (ModulusRep, nonprime)", ... );
+InstallMethod( \/, "two Z/pZ-objs. (ModulusRep)", ... );
+InstallMethod( \/, "Z/nZ-obj. (ModulusRep) and integer", ... );
+InstallMethod( \/, "integer and Z/nZ-obj. (ModulusRep)", ... );
+InstallMethod( \/, "Z/pZ-obj. (ModulusRep) and internal FFE", ... );
+InstallMethod( \/, "internal FFE and Z/pZ-obj. (ModulusRep)", ... );
+InstallMethod( \^, "Z/nZ-obj. (ModulusRep, nonprime) &amp; int.", ... );
+InstallMethod( \^, "Z/pZ-obj. (ModulusRep), and integer", ... );
+</pre></div>
+
+<p>The call to <code class="func">NewType</code> (<a href="chap13.html#X7CE39E9478AEC826"><span class="RefLink">13.9-3</span></a>) in <code class="code">MyZmodnZObj</code> can be avoided by storing the required type, e.g., in the family. But note that it is <em>not</em> admissible to take the type of an existing object as first argument of <code class="func">Objectify</code> (<a href="chap79.html#X7CB5C12E813F512B"><span class="RefLink">79.1-1</span></a>). For example, suppose two objects in <code class="code">IsMyZmodnZObj</code> shall be added. Then we must not use the type of one of the arguments in a call of <code class="func">Objectify</code> (<a href="chap79.html#X7CB5C12E813F512B"><span class="RefLink">79.1-1</span></a>), because the argument may have knowledge that is not correct for the result of the addition. One may think of the property <code class="func">IsOne</code> (<a href="chap31.html#X814D78347858EC13"><span class="RefLink">31.10-5</span></a>) that may hold for both arguments but certainly not for their sum.</p>
+
+<p>For comparing two objects in <code class="code">IsMyZmodpZObj</code> via "<code class="code">&lt;</code>", we had to install a quite expensive method because of the compatibility with the comparison of finite field elements that did already exist. In fact <strong class="pkg">GAP</strong> supports finite fields with elements represented via discrete logarithms only up to a given size. So in principle we have the freedom to define a cheaper comparison via "<code class="code">&lt;</code>" for objects in <code class="code">IsMyZmodpZObj</code> if the modulus is large enough. This is possible by introducing two categories <code class="code">IsMyZmodpZObjSmall</code> and <code class="code">IsMyZmodpZObjLarge</code>, which are subcategories of <code class="code">IsMyZmodpZObj</code>, and to install different <code class="func">\&lt;</code> (<a href="chap31.html#X7EF67D047F03CA6F"><span class="RefLink">31.11-1</span></a>) methods for pairs of objects in these categories.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap80.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap82.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chap19.html">19</a>  <a href="chap20.html">20</a>  <a href="chap21.html">21</a>  <a href="chap22.html">22</a>  <a href="chap23.html">23</a>  <a href="chap24.html">24</a>  <a href="chap25.html">25</a>  <a href="chap26.html">26</a>  <a href="chap27.html">27</a>  <a href="chap28.html">28</a>  <a href="chap29.html">29</a>  <a href="chap30.html">30</a>  <a href="chap31.html">31</a>  <a href="chap32.html">32</a>  <a href="chap33.html">33</a>  <a href="chap34.html">34</a>  <a href="chap35.html">35</a>  <a href="chap36.html">36</a>  <a href="chap37.html">37</a>  <a href="chap38.html">38</a>  <a href="chap39.html">39</a>  <a href="chap40.html">40</a>  <a href="chap41.html">41</a>  <a href="chap42.html">42</a>  <a href="chap43.html">43</a>  <a href="chap44.html">44</a>  <a href="chap45.html">45</a>  <a href="chap46.html">46</a>  <a href="chap47.html">47</a>  <a href="chap48.html">48</a>  <a href="chap49.html">49</a>  <a href="chap50.html">50</a>  <a href="chap51.html">51</a>  <a href="chap52.html">52</a>  <a href="chap53.html">53</a>  <a href="chap54.html">54</a>  <a href="chap55.html">55</a>  <a href="chap56.html">56</a>  <a href="chap57.html">57</a>  <a href="chap58.html">58</a>  <a href="chap59.html">59</a>  <a href="chap60.html">60</a>  <a href="chap61.html">61</a>  <a href="chap62.html">62</a>  <a href="chap63.html">63</a>  <a href="chap64.html">64</a>  <a href="chap65.html">65</a>  <a href="chap66.html">66</a>  <a href="chap67.html">67</a>  <a href="chap68.html">68</a>  <a href="chap69.html">69</a>  <a href="chap70.html">70</a>  <a href="chap71.html">71</a>  <a href="chap72.html">72</a>  <a href="chap73.html">73</a>  <a href="chap74.html">74</a>  <a href="chap75.html">75</a>  <a href="chap76.html">76</a>  <a href="chap77.html">77</a>  <a href="chap78.html">78</a>  <a href="chap79.html">79</a>  <a href="chap80.html">80</a>  <a href="chap81.html">81</a>  <a href="chap82.html">82</a>  <a href="chap83.html">83</a>  <a href="chap84.html">84</a>  <a href="chap85.html">85</a>  <a href="chap86.html">86</a>  <a href="chap87.html">87</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

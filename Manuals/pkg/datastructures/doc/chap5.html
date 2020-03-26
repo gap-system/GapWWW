@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (datastructures) - Chapter 5: Union-Find</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X7C0CE80081C1D1A2" name="X7C0CE80081C1D1A2"></a></p>
+<div class="ChapSects"><a href="chap5.html#X7C0CE80081C1D1A2">5 <span class="Heading">Union-Find</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7DFB63A97E67C0A1">5.1 <span class="Heading">Introduction</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7C5F33687C53BEF0">5.2 <span class="Heading">API</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X804726FA84A7EA0F">5.2-1 IsPartitionDS</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X825B71A18396CB33">5.2-2 PartitionDS</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C1DC93085E00307">5.2-3 PartitionDS</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8344F7007AD2C44B">5.2-4 Representative</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7FABCE367DC2F82B">5.2-5 Unite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7A41C16979664337">5.2-6 RootsIteratorOfPartitionDS</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X83E6F1DE84ABFB69">5.2-7 NumberParts</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8635245A83D7DC1B">5.2-8 SizeUnderlyingSetDS</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8716AC8F79820C86">5.2-9 PartsOfPartitionDS</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Union-Find</span></h3>
+
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+
+<h4>5.1 <span class="Heading">Introduction</span></h4>
+
+<p><strong class="pkg">datastructures</strong> defines the interface for mutable data structures representing partitions of <code class="code">[1..n]</code>, commonly known as union-find data structures. Key operations are <code class="func">Unite</code> (<a href="chap5.html#X7FABCE367DC2F82B"><span class="RefLink">5.2-5</span></a>) which fuses two parts of a partition and <code class="func">Representative</code> (<a href="chap5.html#X8344F7007AD2C44B"><span class="RefLink">5.2-4</span></a>) which returns a canonical representative of the part containing a given point.</p>
+
+<p><a id="X7C5F33687C53BEF0" name="X7C5F33687C53BEF0"></a></p>
+
+<h4>5.2 <span class="Heading">API</span></h4>
+
+<p><a id="X804726FA84A7EA0F" name="X804726FA84A7EA0F"></a></p>
+
+<h5>5.2-1 IsPartitionDS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPartitionDS</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Category of datastructures representing partitions. Equality is identity and family is ignored.</p>
+
+<p><a id="X825B71A18396CB33" name="X825B71A18396CB33"></a></p>
+
+<h5>5.2-2 PartitionDS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PartitionDS</code>( <var class="Arg">filter</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;constructor&nbsp;)</td></tr></table></div>
+<p>Family containing all partition data structures Returns the trivial partition of the set <code class="code">[1..n]</code>.</p>
+
+<p><a id="X7C1DC93085E00307" name="X7C1DC93085E00307"></a></p>
+
+<h5>5.2-3 PartitionDS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PartitionDS</code>( <var class="Arg">filter</var>, <var class="Arg">partition</var> )</td><td class="tdright">(&nbsp;constructor&nbsp;)</td></tr></table></div>
+<p>Returns the union find structure of <var class="Arg">partition</var>.</p>
+
+<p><a id="X8344F7007AD2C44B" name="X8344F7007AD2C44B"></a></p>
+
+<h5>5.2-4 Representative</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Representative</code>( <var class="Arg">unionfind</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a positive integer</p>
+
+<p>Returns a canonical representative of the part of the partition that <var class="Arg">k</var> is contained in.</p>
+
+<p><a id="X7FABCE367DC2F82B" name="X7FABCE367DC2F82B"></a></p>
+
+<h5>5.2-5 Unite</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Unite</code>( <var class="Arg">unionfind</var>, <var class="Arg">k1</var>, <var class="Arg">k2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Fuses the parts of the paritition <var class="Arg">unionfind</var> containing <var class="Arg">k1</var> and <var class="Arg">k2</var>.</p>
+
+<p><a id="X7A41C16979664337" name="X7A41C16979664337"></a></p>
+
+<h5>5.2-6 RootsIteratorOfPartitionDS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RootsIteratorOfPartitionDS</code>( <var class="Arg">unionfind</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an iterator</p>
+
+<p>Returns an iterator that runs through canonical representatives of parts of the partition <var class="Arg">unionfind</var>.</p>
+
+<p><a id="X83E6F1DE84ABFB69" name="X83E6F1DE84ABFB69"></a></p>
+
+<h5>5.2-7 NumberParts</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumberParts</code>( <var class="Arg">unionfind</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a positive integer</p>
+
+<p>Returns the number of parts of the partition <var class="Arg">unionfind</var>.</p>
+
+<p><a id="X8635245A83D7DC1B" name="X8635245A83D7DC1B"></a></p>
+
+<h5>5.2-8 SizeUnderlyingSetDS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SizeUnderlyingSetDS</code>( <var class="Arg">unionfind</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a positive integer</p>
+
+<p>Returns the size of the underlying set of the partition <var class="Arg">unionfind</var>.</p>
+
+<p><a id="X8716AC8F79820C86" name="X8716AC8F79820C86"></a></p>
+
+<h5>5.2-9 PartsOfPartitionDS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PartsOfPartitionDS</code>( <var class="Arg">unionfind</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists</p>
+
+<p>Returns the partition <var class="Arg">unionfind</var> as a list of lists.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

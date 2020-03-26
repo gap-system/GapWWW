@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (cvec) - Chapter 3: The Data Structures</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X81F8AEBD87002F6F" name="X81F8AEBD87002F6F"></a></p>
+<div class="ChapSects"><a href="chap3.html#X81F8AEBD87002F6F">3 <span class="Heading">The Data Structures</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7B9DCCCC83400B47">3.1 <span class="Heading">Finite field elements</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7ED5B368830755AF">3.2 <span class="Heading">Compressed Vectors in Memory</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X87968B277C5DF090">3.2-1 <span class="Heading">Packing of prime field elements</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C195F41802266B7">3.2-2 <span class="Heading">Extension Fields</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X819040FD7BCBABB2">3.2-3 <span class="Heading">How is information about the base field stored?</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DF0FE978626CE59">3.2-4 <span class="Heading">Limits that follow from the Data Format</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X78694256795D3A28">3.3 <span class="Heading">Compressed Matrices</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X783395FC81A451F3">3.4 <span class="Heading">External Representation of Matrices on Storage</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B82906C7FFF36F5">3.4-1 <span class="Heading">Byte ordering and word length</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7ACD96C483D7DA8A">3.4-2 <span class="Heading">The header of a <code class="code">cmat</code> file</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">The Data Structures</span></h3>
+
+<p>This chapter describes all the data structures used in this package. We start with a section on finite fields and what is already there in the <strong class="pkg">GAP</strong> kernel and library. Then we describe compressed vectors and compressed matrices.</p>
+
+<p><a id="X7B9DCCCC83400B47" name="X7B9DCCCC83400B47"></a></p>
+
+<h4>3.1 <span class="Heading">Finite field elements</span></h4>
+
+<p>Throughout the package, elements in the field <span class="SimpleMath">GF(p)</span> of <span class="SimpleMath">p</span> elements are represented by numbers <span class="SimpleMath">0,1,...,p-1</span> and arithmetic is just the standard arithmetic in the integers modulo <span class="SimpleMath">p</span>.</p>
+
+<p>Bigger finite fields are done by calculating in the polynomial ring <span class="SimpleMath">GF(p)[x]</span> in one indeterminate <span class="SimpleMath">x</span> modulo a certain irreducible polynomial. By convention, we use the so-called "Conway polynomials" (see <span class="URL"><a href="http://www.math.rwth-aachen.de:8001/~Frank.Luebeck/data/ConwayPol/index.html">http://www.math.rwth-aachen.de:8001/~Frank.Luebeck/data/ConwayPol/index.html</a></span>) for this purpose, because they provide a standard way of embedding finite fields into their extension fields. Because Conway polynomials are monic, we can store coset representatives by storing polynomials of degree less than <span class="SimpleMath">d</span>, where <span class="SimpleMath">d</span> is the degree of the finite field over its prime field.</p>
+
+<p>As of this writing, <strong class="pkg">GAP</strong> has two implementation of finite field elements built into its kernel and library, the first of which stores finite field elements by storing the discrete logarithm with respect to a primitive root of the field. Although this is nice and efficient for small finite fields, it becomes unhandy for larger finite fields, because one needs a lookup table of length <span class="SimpleMath">p^d</span> for doing efficient addition. This implementation thus is limited to fields with less than or equal to <span class="SimpleMath">65536</span> elements. The other implementation using polynomial arithmetic modulo the Conway polynomial is used for fields with more than <span class="SimpleMath">65536</span> elements. For prime fields of characteristic <span class="SimpleMath">p</span> with more than that elements, there is an implementation using integers modulo <span class="SimpleMath">p</span>.</p>
+
+<p><a id="X7ED5B368830755AF" name="X7ED5B368830755AF"></a></p>
+
+<h4>3.2 <span class="Heading">Compressed Vectors in Memory</span></h4>
+
+<p><a id="X87968B277C5DF090" name="X87968B277C5DF090"></a></p>
+
+<h5>3.2-1 <span class="Heading">Packing of prime field elements</span></h5>
+
+<p>For this section, we assume that the base field is <span class="SimpleMath">GF(p^d)</span>, the finite field with <span class="SimpleMath">p^d</span> elements, where <span class="SimpleMath">p</span> is a prime and <span class="SimpleMath">d</span> is a positive integer. This is realized as a field extension of degree <span class="SimpleMath">d</span> over the prime field <span class="SimpleMath">GF(p)</span> using the Conway polynomial <span class="SimpleMath">c ∈ GF(p)[x]</span>. We always represent field elements of <span class="SimpleMath">GF(p^d)</span> by polynomials <span class="Math">a = \sum_{{i=0}}^{{d-1}} a_i x^i</span> where the coefficients <span class="SimpleMath">a_i</span> are in <span class="SimpleMath">GF(p)</span>. Because <span class="SimpleMath">c</span> is monic, this gives a one-to-one correspondence between polynomials and finite field elements.</p>
+
+<p>The memory layout for compressed vectors is determined by two important constants, depending only on <span class="SimpleMath">p</span> and the word length of the machine. The word length is 4 bytes on 32bit machines (for example on the i386 architecture) and 8 bytes on 64bit machines (for example on the AMD64 architecture). More concretely, a "<code class="code">Word</code>" is an <code class="code">unsigned long int</code> in C and the length of a <code class="code">Word</code> is <code class="code">sizeof(unsigned long int)</code>.</p>
+
+<p>Those constants are <code class="code">bitsperel</code> (bits per prime field element) and <code class="code">elsperword</code> (prime field elements per <code class="code">Word</code>). <code class="code">bitsperel</code> is <span class="SimpleMath">1</span> for <span class="SimpleMath">p=2</span> and otherwise the smallest integer, such that <span class="SimpleMath">2^bitsperel &gt; 2⋅ p-1</span>. This means, that we can store the numbers from <span class="SimpleMath">0</span> to <span class="SimpleMath">2⋅ p - 1</span> in <code class="code">bitsperel</code> bits. <code class="code">elsperword</code> is <span class="SimpleMath">32/bitsperel</span> rounded down to the next integer and multiplied by <span class="SimpleMath">2</span> if the length of a <code class="code">Word</code> is <span class="SimpleMath">8</span> bytes. Note that we thus store as many prime field elements as possible into one <code class="code">Word</code>, however, on 64bit machines we store only twice as much as would fit into 32bit, even if we could pack one more into a <code class="code">Word</code>. This has technical reasons to make conversion between different architectures more efficient.</p>
+
+<p>These definitions imply that we can put <code class="code">elsperword</code> prime field elements into one <code class="code">Word</code>. We do this by using the <code class="code">bitsperel</code> least significant bits in the <code class="code">Word</code> for the first prime field element, using the next <code class="code">bitsperel</code> bits for the next prime field element and so on. Here is an example that shows how the <span class="SimpleMath">6</span> finite field elements <span class="SimpleMath">0,1,2,3,4,5</span> of <span class="SimpleMath">GF(11)</span> are stored in that order in one 32bit <code class="code">Word</code>. <code class="code">bitsperel</code> is here <span class="SimpleMath">4</span>, because <span class="SimpleMath">2^4 &lt; 2⋅ 11 - 1 = 21 &lt; 2^5</span>. Therefore <code class="code">elsperword</code> is <span class="SimpleMath">5</span> on a 32bit machine.</p>
+
+
+<div class="example"><pre>
+ most significant xx|.....|.....|.....|.....|.....|..... least significant
+                  00|00101|00100|00011|00010|00001|00000 
+                    |    5|    4|    3|    2|    1|    0
+</pre></div>
+
+<p>Here is another example that shows how the <span class="SimpleMath">20</span> finite field elements <span class="SimpleMath">0,1,2,0,0,0,1,1,1,2,2,2,0,1,2,2,1,0,2,2</span> of <span class="SimpleMath">GF(3)</span> are stored in that order in one 64bit <code class="code">Word</code>. <code class="code">bitsperel</code> is here <span class="SimpleMath">3</span>, because <span class="SimpleMath">2^2 &lt; 2⋅ 3 - 1 = 5 &lt; 2^3</span>. Therefore <code class="code">elsperword</code> is <span class="SimpleMath">20</span> on a 32bit machine. Remember, that we only put twice as many elements in one 64bit <code class="code">Word</code> than we could in one 32bit <code class="code">Word</code>!</p>
+
+
+<div class="example"><pre>
+ xxxx..!..!..!..!..!..!..!..!..!..!..!..!..!..!..!..!..!..!..!..!
+ 0000010010000001010010001000010010010001001001000000000010001000
+       2  2  0  1  2  2  1  0  2  2  2  1  1  1  0  0  0  2  1  0
+</pre></div>
+
+<p>(The exclamation marks mark the right hand side of the prime field elements.)</p>
+
+<p>Note that different architectures store their <code class="code">Word</code>s in a different byte order in memory ("endianess"). We do <em>not</em> specify how the data is distributed into bytes here! All access is via <code class="code">Word</code>s and their arithmetic (shifting, addition, multiplication, etc.). See Section <a href="chap3.html#X783395FC81A451F3"><span class="RefLink">3.4</span></a> for a discussion of this with respect to our external representation.</p>
+
+<p><a id="X7C195F41802266B7" name="X7C195F41802266B7"></a></p>
+
+<h5>3.2-2 <span class="Heading">Extension Fields</span></h5>
+
+<p>Now that we have seen how prime field elements are packed into <code class="code">Word</code>s, we proceed to the description how compressed vectors are stored over arbitrary extension fields:</p>
+
+<p>Assume a compressed vector has length <span class="SimpleMath">l</span> with <span class="SimpleMath">l ≥ 0</span>. If <span class="SimpleMath">d=1</span> (prime field), it just uses <span class="SimpleMath">elsperword/l</span> <code class="code">Word</code>s (division rounded up to the next integer), where the first <code class="code">Word</code> stores the leftmost <code class="code">elsperword</code> field elements in the first <code class="code">Word</code> as described above and so on. This means, that the very first field element is stored in the least significant bits of the first <code class="code">Word</code>.</p>
+
+<p>In the extension field case <span class="SimpleMath">GF(p^d)</span>, a vector of length <span class="SimpleMath">l</span> uses <span class="SimpleMath">(elsperword/l)*d</span> <code class="code">Word</code>s (division rounded up to the next integer), where the first <span class="SimpleMath">d</span> <code class="code">Word</code>s store the leftmost <code class="code">elsperword</code> field elements. The very first word stores all the constant coefficients of the polynomials representing the first <code class="code">elsperword</code> field elements in their order from left to right, the second <code class="code">Word</code> stores the coefficients of <span class="SimpleMath">x^1</span> and so on until the <span class="SimpleMath">d</span>'th <code class="code">Word</code>, which stores the coefficients of <span class="SimpleMath">x^{d-1}</span>. Unused entries behind the end of the actual vector data within the last <code class="code">Word</code> has to be zero!.</p>
+
+<p>The following example shows, how the <span class="SimpleMath">9</span> field elements <span class="SimpleMath">x^2+x+1</span>, <span class="SimpleMath">x^2+2x+2</span>, <span class="SimpleMath">x^2+3x+3</span>, <span class="SimpleMath">x^2+4x+4</span>, <span class="SimpleMath">2x^2+x</span>, <span class="SimpleMath">2x^2+3x+1</span>, <span class="SimpleMath">2x^2+4x+2</span>, <span class="SimpleMath">3x^2+1</span>, and <span class="SimpleMath">4x^2+x+3</span> of <span class="SimpleMath">GF(5^3)</span> occurring in a vector of length <span class="SimpleMath">9</span> in that order are stored on a 32bit machine:</p>
+
+
+<div class="example"><pre>
+ ^^^ lower memory addresses ^^^
+            ....|....|....|....|....|....|....|....  (least significant bit)
+ 1st Word:  0001|0010|0001|0000|0100|0011|0010|0001| (first
+ 2nd Word:  0000|0100|0011|0001|0100|0011|0010|0001|     8 field
+ 3rd Word:  0011|0010|0010|0010|0001|0001|0001|0001|        elements)
+ ---------------------------------------------------
+ 4th Word:  0000|0000|0000|0000|0000|0000|0000|0011| (second
+ 5th Word:  0000|0000|0000|0000|0000|0000|0000|0001|     8 field
+ 6th Word:  0000|0000|0000|0000|0000|0000|0000|0100|        elements)
+ VVV higher memory addresses VVV
+</pre></div>
+
+<p>A "<code class="code">cvec</code>" (one of our compressed vectors) is a <strong class="pkg">GAP</strong> "Data object" (that is with <code class="code">TNUM</code> equal to <code class="code">T_DATOBJ</code>). The first machine word in its bag is a pointer to its type, from the second machine word on the <code class="code">Word</code>s containing the above data are stored. The bag is exactly long enough to hold the type pointer and the data <code class="code">Word</code>s.</p>
+
+<p><a id="X819040FD7BCBABB2" name="X819040FD7BCBABB2"></a></p>
+
+<h5>3.2-3 <span class="Heading">How is information about the base field stored?</span></h5>
+
+<p>But how does the system know, over which field the vector is and how long it is? The type of a <strong class="pkg">GAP</strong> object consists of <span class="SimpleMath">3</span> pieces: A family, a bit list (for the filters), and one <strong class="pkg">GAP</strong> object for "defining data". The additional information about the vector is stored in the third piece, the defining data, and is called a "<code class="code">cvecclass</code>".</p>
+
+<p>A <code class="code">cvecclass</code> is a positional object with <span class="SimpleMath">5</span> components:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b>Components of a <code class="code">cvecclass</code></caption>
+<tr>
+<td class="tdcenter">Position</td>
+<td class="tdleft">Name</td>
+<td class="tdleft">Content</td>
+</tr>
+<tr>
+<td class="tdcenter">1</td>
+<td class="tdleft"><code class="code">IDX_fieldinfo</code></td>
+<td class="tdleft">a <code class="code">fieldinfo</code> object, see below</td>
+</tr>
+<tr>
+<td class="tdcenter">2</td>
+<td class="tdleft"><code class="code">IDX_len</code></td>
+<td class="tdleft">the length of the vector as immediate <strong class="pkg">GAP</strong> integer</td>
+</tr>
+<tr>
+<td class="tdcenter">3</td>
+<td class="tdleft"><code class="code">IDX_wordlen</code></td>
+<td class="tdleft">the number of <code class="code">Word</code>s used as immediate <strong class="pkg">GAP</strong> integer</td>
+</tr>
+<tr>
+<td class="tdcenter">4</td>
+<td class="tdleft"><code class="code">IDX_type</code></td>
+<td class="tdleft">a <strong class="pkg">GAP</strong> type used to create new vectors</td>
+</tr>
+<tr>
+<td class="tdcenter">5</td>
+<td class="tdleft"><code class="code">IDX_GF</code></td>
+<td class="tdleft">a <strong class="pkg">GAP</strong> object for the base field</td>
+</tr>
+<tr>
+<td class="tdcenter">6</td>
+<td class="tdleft"><code class="code">IDX_lens</code></td>
+<td class="tdleft">a list holding lengths of vectors in <code class="code">cvecclasses</code> for the same field</td>
+</tr>
+<tr>
+<td class="tdcenter">7</td>
+<td class="tdleft"><code class="code">IDX_classes</code></td>
+<td class="tdleft">a list holding <code class="code">cvecclass</code>es for the same field with lengths as in entry number 6</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>In position 5 we have just the <strong class="pkg">GAP</strong> finite field object <code class="code">GF(p,d)</code>. The names appear as symbols in the code.</p>
+
+<p>The field is described by the <strong class="pkg">GAP</strong> object in position 1, a so-called <code class="code">fieldinfo</code> object, which is described in the following table:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b>Components of a <code class="code">fieldinfo</code></caption>
+<tr>
+<td class="tdcenter"><em>Position</em></td>
+<td class="tdleft">Name</td>
+<td class="tdleft"><em>Content</em></td>
+</tr>
+<tr>
+<td class="tdcenter">1</td>
+<td class="tdleft"><code class="code">IDX_p</code></td>
+<td class="tdleft"><span class="SimpleMath">p</span> as an immediate <strong class="pkg">GAP</strong> integer</td>
+</tr>
+<tr>
+<td class="tdcenter">2</td>
+<td class="tdleft"><code class="code">IDX_d</code></td>
+<td class="tdleft"><span class="SimpleMath">d</span> as an immediate <strong class="pkg">GAP</strong> integer</td>
+</tr>
+<tr>
+<td class="tdcenter">3</td>
+<td class="tdleft"><code class="code">IDX_q</code></td>
+<td class="tdleft"><span class="SimpleMath">q=p^d</span> as a <strong class="pkg">GAP</strong> integer</td>
+</tr>
+<tr>
+<td class="tdcenter">4</td>
+<td class="tdleft"><code class="code">IDX_conway</code></td>
+<td class="tdleft">a <strong class="pkg">GAP</strong> string containing the coefficients of the Conway Polynomial as unsigned int []</td>
+</tr>
+<tr>
+<td class="tdcenter">5</td>
+<td class="tdleft"><code class="code">IDX_bitsperel</code></td>
+<td class="tdleft">number of bits per element of the prime field (<code class="code">bitsperel</code>)</td>
+</tr>
+<tr>
+<td class="tdcenter">6</td>
+<td class="tdleft"><code class="code">IDX_elsperword</code></td>
+<td class="tdleft">prime field elements per <code class="code">Word</code> (<code class="code">elsperword</code>)</td>
+</tr>
+<tr>
+<td class="tdcenter">7</td>
+<td class="tdleft"><code class="code">IDX_wordinfo</code></td>
+<td class="tdleft">a <strong class="pkg">GAP</strong> string containing C data for internal use</td>
+</tr>
+<tr>
+<td class="tdcenter">8</td>
+<td class="tdleft"><code class="code">IDX_bestgrease</code></td>
+<td class="tdleft">the best grease level (see Section <a href="chap5.html#X7DA0D38A7D5DBDFF"><span class="RefLink">5.8</span></a>)</td>
+</tr>
+<tr>
+<td class="tdcenter">9</td>
+<td class="tdleft"><code class="code">IDX_greasetabl</code></td>
+<td class="tdleft">the length of a grease table using best grease</td>
+</tr>
+<tr>
+<td class="tdcenter">10</td>
+<td class="tdleft"><code class="code">IDX_filts</code></td>
+<td class="tdleft">a filter list for the creation of new vectors over this field</td>
+</tr>
+<tr>
+<td class="tdcenter">11</td>
+<td class="tdleft"><code class="code">IDX_tab1</code></td>
+<td class="tdleft">a table for <span class="SimpleMath">GF(q)</span> to <code class="code">[0..q-1]</code> conversion if <span class="SimpleMath">q ≤ 65536</span></td>
+</tr>
+<tr>
+<td class="tdcenter">12</td>
+<td class="tdleft"><code class="code">IDX_tab2</code></td>
+<td class="tdleft">a table for <code class="code">[0..q-1]</code> to <span class="SimpleMath">GF(q)</span> conversion if <span class="SimpleMath">q ≤ 65536</span></td>
+</tr>
+<tr>
+<td class="tdcenter">13</td>
+<td class="tdleft"><code class="code">IDX_size</code></td>
+<td class="tdleft">0 for <span class="SimpleMath">q ≤ 65536</span>, otherwise 1 if <span class="SimpleMath">q</span> is a <strong class="pkg">GAP</strong> immediate integer and 2 if not</td>
+</tr>
+<tr>
+<td class="tdcenter">14</td>
+<td class="tdleft"><code class="code">IDX_scafam</code></td>
+<td class="tdleft">the scalars family</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>Note that <strong class="pkg">GAP</strong> has a family for all finite field elements of a given characteristic <span class="SimpleMath">p</span>, vectors over a finite field are then in the collections family of that family and matrices are in the collections family of the collections family of the scalars family. We use the same families in the same way for compressed vectors and matrices.</p>
+
+<p><a id="X7DF0FE978626CE59" name="X7DF0FE978626CE59"></a></p>
+
+<h5>3.2-4 <span class="Heading">Limits that follow from the Data Format</span></h5>
+
+<p>The following limits come from the above mentioned data format or other internal restrictions (an "immediate integer" in <strong class="pkg">GAP</strong> can take values between <span class="SimpleMath">2^{-28}</span> and <span class="SimpleMath">(2^{28})-1</span> inclusively on 32bit machines and between <span class="SimpleMath">2^{-60}</span> and <span class="SimpleMath">(2^{60})-1</span> on 64bit machines):</p>
+
+
+<ul>
+<li><p>The prime <span class="SimpleMath">p</span> must be an immediate integer.</p>
+
+</li>
+<li><p>The degree <span class="SimpleMath">d</span> must be smaller than <span class="SimpleMath">1024</span> (this limit is arbitrarily chosen at the moment and could be increased easily).</p>
+
+</li>
+<li><p>The Conway polynomial must be known to <strong class="pkg">GAP</strong>.</p>
+
+</li>
+<li><p>The length of a vector must be an immediate integer.</p>
+
+</li>
+</ul>
+<p><a id="X78694256795D3A28" name="X78694256795D3A28"></a></p>
+
+<h4>3.3 <span class="Heading">Compressed Matrices</span></h4>
+
+<p>The implementation of <code class="code">cmats</code> (compressed matrices) is done mainly on the <strong class="pkg">GAP</strong> level without using too many C parts. Only the time critical parts for some operations for matrices are done in the kernel.</p>
+
+<p>A <code class="code">cmat</code> object is a positional object with at least the following components:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b>Components of a <code class="code">cmat</code> object</caption>
+<tr>
+<td class="tdleft">Component name</td>
+<td class="tdleft">Content</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="code">len</code></td>
+<td class="tdleft">the number of rows, can be <span class="SimpleMath">0</span></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="code">vecclass</code></td>
+<td class="tdleft">a <code class="code">cvecclass</code> object describing the class of rows</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="code">scaclass</code></td>
+<td class="tdleft">a <code class="code">cscaclass</code> object holding a reference to <code class="code">GF(p,d)</code></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="code">rows</code></td>
+<td class="tdleft">a list containing the rows of the matrix, which are <code class="code">cvec</code>s</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="code">greasehint</code></td>
+<td class="tdleft">the recommended greasing level</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>The <code class="code">cvecclass</code> in the component <code class="code">vecclass</code> determines the number of columns of the matrix by the length of the rows.</p>
+
+<p>The length of the list in component <code class="code">rows</code> is <code class="code">len+1</code>, because the first position is equal to the integer <span class="SimpleMath">0</span> such that the type of the list <code class="code">rows</code> can always be computed efficiently. The rows are then stored in positions 2 to <code class="code">len+1</code>.</p>
+
+<p>The component <code class="code">greasehint</code> contains the greasing level for the next matrix multiplication, in which this matrix occurs as the factor on the right hand side (if greasing is worth the effort, see Section <a href="chap5.html#X7DA0D38A7D5DBDFF"><span class="RefLink">5.8</span></a>).</p>
+
+<p>A <code class="code">cmat</code> can be "pre-greased", which just means, that a certain number of linear combinations of its rows is already precomputed (see Section <a href="chap5.html#X7DA0D38A7D5DBDFF"><span class="RefLink">5.8</span></a>). In that case, the object is in the additional filter <code class="code">HasGreaseTab</code> and the following components are bound additionally:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b>Additional components of a <code class="code">cmat</code> object when pre-greased
+</caption>
+<tr>
+<td class="tdleft">Component name</td>
+<td class="tdleft">Content</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="code">greaselev</code></td>
+<td class="tdleft">the grease level</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="code">greasetab</code></td>
+<td class="tdleft">the grease table, a list of lists of <code class="code">cvecs</code></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="code">greaseblo</code></td>
+<td class="tdleft">the number of greasing blocks</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="code">spreadtab</code></td>
+<td class="tdleft">a lookup table for indexing the right linear combination</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X783395FC81A451F3" name="X783395FC81A451F3"></a></p>
+
+<h4>3.4 <span class="Heading">External Representation of Matrices on Storage</span></h4>
+
+<p><a id="X7B82906C7FFF36F5" name="X7B82906C7FFF36F5"></a></p>
+
+<h5>3.4-1 <span class="Heading">Byte ordering and word length</span></h5>
+
+<p>This section describes the external representation of matrices. A special data format is needed here, because of differences between computer architectures with respect to word length (32bit/64bit) and endianess. The term "endianess" refers to the fact, that different architectures store their long words in a different way in memory, namely they order the bytes that together make up a long word in different orders.</p>
+
+<p>The external representation is the same as the internal format of a 32bit machine with little endianess, which means, that the lower significant bytes of a <code class="code">Word</code> are stored in lower addresses. The reasons for this decision are firstly that 64bit machines can do the bit shifting to convert between internal and external representation easier using their wide registers, and secondly, that the nowadays most popular architectures i386 and AMD64 use both little endianess, such that conversion is only necessary on a minority of machines.</p>
+
+<p><a id="X7ACD96C483D7DA8A" name="X7ACD96C483D7DA8A"></a></p>
+
+<h5>3.4-2 <span class="Heading">The header of a <code class="code">cmat</code> file</span></h5>
+
+<p>The header of a <code class="code">cmat</code> file consists of 5 words of 64bit each, that are stored in little endian byte order:</p>
+
+<div class="pcenter"><table class="GAPDocTablenoborder">
+<caption class="GAPDocTable"><b>Table: </b>Header of a <code class="code">cmat</code> file</caption>
+<tr>
+<td class="tdleft">the magic value "<code class="code">GAPCMat1</code>" as ASCII letters (8 bytes) in this order</td>
+</tr>
+<tr>
+<td class="tdleft">the value of <span class="SimpleMath">p</span> to describe the base field</td>
+</tr>
+<tr>
+<td class="tdleft">the value of <span class="SimpleMath">d</span> to describe the base field</td>
+</tr>
+<tr>
+<td class="tdleft">the number of rows of the matrix</td>
+</tr>
+<tr>
+<td class="tdleft">the number of columns of the matrix</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>After these <span class="SimpleMath">40</span> bytes follow the data words as described above using little endian 32bit <code class="code">Word</code>s as in the internal representation on 32bit machines.</p>
+
+<p>Note that the decision to put not more than twice as many prime field elements into a 64bit <code class="code">Word</code> than would fit into a 32bit <code class="code">Word</code> makes the conversion between internal and external representation much easier to implement.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

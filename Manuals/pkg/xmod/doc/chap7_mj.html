@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (XMod) - Chapter 7: Induced constructions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7.html">[MathJax off]</a></p>
+<p><a id="X8339DF98872D2E1C" name="X8339DF98872D2E1C"></a></p>
+<div class="ChapSects"><a href="chap7_mj.html#X8339DF98872D2E1C">7 <span class="Heading">Induced constructions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X80D3C8F97A10D5E5">7.1 <span class="Heading">Coproducts of crossed modules</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7C01F5D98046E44B">7.1-1 CoproductXMod</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X7966FF497C36C465">7.2 <span class="Heading">Induced crossed modules</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X874CB2A278AADE3A">7.2-1 InducedXMod</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7B24D47F8078540F">7.2-2 AllInducedXMods</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X814A695779706E22">7.3 <span class="Heading">Induced cat<span class="SimpleMath">\(^1\)</span>-groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7BCE57BE7F6E6B08">7.3-1 InducedCat1Group</a></span>
+</div></div>
+</div>
+
+<h3>7 <span class="Heading">Induced constructions</span></h3>
+
+<p>Before describing general functions for computing induced structures, we consider coproducts of crossed modules which provide induced crossed modules in certain cases.</p>
+
+<p><a id="X80D3C8F97A10D5E5" name="X80D3C8F97A10D5E5"></a></p>
+
+<h4>7.1 <span class="Heading">Coproducts of crossed modules</span></h4>
+
+<p>Need to add here a reference (or two) for coproducts.</p>
+
+<p><a id="X7C01F5D98046E44B" name="X7C01F5D98046E44B"></a></p>
+
+<h5>7.1-1 CoproductXMod</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoproductXMod</code>( <var class="Arg">X1</var>, <var class="Arg">X2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoproductInfo</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This function calculates the coproduct crossed module of two or more crossed modules which have a common range <span class="SimpleMath">\(R\)</span>. The standard method applies to <span class="SimpleMath">\(\calX_1 = (\partial_1 : S_1 \to R)\)</span> and <span class="SimpleMath">\(\calX_2 = (\partial_2 : S_2 \to R)\)</span>. See below for the case of three or more crossed modules.</p>
+
+<p>The source <span class="SimpleMath">\(S_2\)</span> of <span class="SimpleMath">\(\calX_2\)</span> acts on <span class="SimpleMath">\(S_1\)</span> via <span class="SimpleMath">\(\partial_2\)</span> and the action of <span class="SimpleMath">\(\calX_1\)</span>, so we can form a precrossed module <span class="SimpleMath">\((\partial' : S_1 \ltimes S_2 \to R)\)</span> where <span class="SimpleMath">\(\partial'(s_1,s_2) = (\partial_1 s_1)(\partial_2 s_2)\)</span>. The action of this precrossed module is the diagonal action <span class="SimpleMath">\((s_1,s_2)^r = (s_1^r,s_2^r)\)</span>. Factoring out by the Peiffer subgroup, we obtain the coproduct crossed module <span class="SimpleMath">\(\calX_1 \circ \calX_2\)</span>.</p>
+
+<p>In the example the structure descriptions of the precrossed module, the Peiffer subgroup, and the resulting coproduct are printed out when <code class="code">InfoLevel(InfoXMod}</code> is at least <span class="SimpleMath">\(1\)</span>. The coproduct comes supplied with attribute <code class="code">CoproductInfo</code>, which includes the embedding morphisms of the two factors.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q8 := Group( (1,2,3,4)(5,8,7,6), (1,5,3,7)(2,6,4,8) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X8 := XModByAutomorphismGroup( q8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s4b := Range( X8 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( q8, "q8" );  SetName( s4b, "s4b" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := q8.1;;  b := q8.2;; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">alpha := GroupHomomorphismByImages( q8, q8, [a,b], [a^-1,b] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">beta := GroupHomomorphismByImages( q8, q8, [a,b], [a,b^-1] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">k4b := Subgroup( s4b, [ alpha, beta ] );;  SetName( k4b, "k4b" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z8 := XModByNormalSubgroup( s4b, k4b );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( X8, "X8" );  SetName( Z8, "Z8" );  </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel( InfoXMod, 1 ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">XZ8 := CoproductXMod( X8, Z8 );</span>
+#I  prexmod is [ [ 32, 47 ], [ 24, 12 ] ]
+#I  peiffer subgroup is C2, [ 2, 1 ]
+#I  the coproduct is [ "C2 x C2 x C2 x C2", "S4" ], [ [ 16, 14 ], [ 24, 12 ] ]
+[Group( [ f1, f2, f3, f4 ] )-&gt;s4b]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( XZ8, "XZ8" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">info := CoproductInfo( XZ8 );</span>
+rec( embeddings := [ [X8 =&gt; XZ8], [Z8 =&gt; XZ8] ], xmods := [ X8, Z8 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel( InfoXMod, 0 ); </span>
+
+</pre></div>
+
+<p>Given a list of more than two crossed modules with a common range <span class="SimpleMath">\(R\)</span>, then an iterated coproduct is formed:</p>
+
+<p class="center">\[
+\bigcirc~\left[ \calX_1,\calX_2,\ldots,\calX_n\right] 
+    ~=~ \calX_1 \circ (\calX_2 \circ ( \ldots 
+        (\calX_{n-1} \circ \calX_n) \ldots ) ). 
+\]</p>
+
+<p>The <code class="code">embeddings</code> field of the <code class="code">CoproductInfo</code> of the resulting crossed module <span class="SimpleMath">\(\calY\)</span> contains the <span class="SimpleMath">\(n\)</span> morphisms <span class="SimpleMath">\(\epsilon_i : \calX_i \to \calY (1 \leqslant i \leqslant n)\)</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Y := CoproductXMod( [ X8, X8, Z8, Z8 ] );</span>
+[Group( [ f1, f2, f3, f4, f5, f6, f7, f8 ] )-&gt;s4b]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StructureDescription( Y );          </span>
+[ "C2 x C2 x C2 x C2 x C2 x C2 x C2 x C2", "S4" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoproductInfo( Y );</span>
+rec( 
+  embeddings := 
+    [ [X8 =&gt; [Group( [ f1, f2, f3, f4, f5, f6, f7, f8 ] ) -&gt; s4b]], 
+      [X8 =&gt; [Group( [ f1, f2, f3, f4, f5, f6, f7, f8 ] ) -&gt; s4b]], 
+      [Z8 =&gt; [Group( [ f1, f2, f3, f4, f5, f6, f7, f8 ] ) -&gt; s4b]], 
+      [Z8 =&gt; [Group( [ f1, f2, f3, f4, f5, f6, f7, f8 ] ) -&gt; s4b]] ], 
+  xmods := [ X8, X8, Z8, Z8 ] )
+
+</pre></div>
+
+<p><a id="X7966FF497C36C465" name="X7966FF497C36C465"></a></p>
+
+<h4>7.2 <span class="Heading">Induced crossed modules</span></h4>
+
+<p><a id="X874CB2A278AADE3A" name="X874CB2A278AADE3A"></a></p>
+
+<h5>7.2-1 InducedXMod</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InducedXMod</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInducedXMod</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InducedXModBySurjection</code>( <var class="Arg">xmod</var>, <var class="Arg">hom</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InducedXModByCopower</code>( <var class="Arg">xmod</var>, <var class="Arg">hom</var>, <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MorphismOfInducedXMod</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>A morphism of crossed modules <span class="SimpleMath">\((\sigma, \rho) : \calX_1 \to \calX_2\)</span> factors uniquely through an induced crossed module <span class="SimpleMath">\(\rho_{\ast} \calX_1 = (\delta : \rho_{\ast} S_1 \to R_2)\)</span>. Similarly, a morphism of cat1-groups factors through an induced cat1-group. Calculation of induced crossed modules of <span class="SimpleMath">\(\calX\)</span> also provides an algebraic means of determining the homotopy <span class="SimpleMath">\(2\)</span>-type of homotopy pushouts of the classifying space of <span class="SimpleMath">\(\calX\)</span>. For more background from algebraic topology see references in <a href="chapBib_mj.html#biBBH1">[BH78]</a>, <a href="chapBib_mj.html#biBBW1">[BW95]</a>, <a href="chapBib_mj.html#biBBW2">[BW96]</a>. Induced crossed modules and induced cat1-groups also provide the building blocks for constructing pushouts in the categories <em>XMod</em> and <em>Cat1</em>.</p>
+
+<p>Data for the cases of algebraic interest is provided by a crossed module <span class="SimpleMath">\(\calX = (\partial : S \to R)\)</span> and a homomorphism <span class="SimpleMath">\(\iota : R \to Q\)</span>. The output from the calculation is a crossed module <span class="SimpleMath">\(\iota_{\ast}\calX = (\delta : \iota_{\ast}S \to Q)\)</span> together with a morphism of crossed modules <span class="SimpleMath">\(\calX \to \iota_{\ast}\calX\)</span>. When <span class="SimpleMath">\(\iota\)</span> is a surjection with kernel <span class="SimpleMath">\(K\)</span> then <span class="SimpleMath">\(\iota_{\ast}S = S/[K,S]\)</span> where <span class="SimpleMath">\([K,S]\)</span> is the subgroup of <span class="SimpleMath">\(S\)</span> generated by elements of the form <span class="SimpleMath">\(s^{-1}s^k, s \in S, k \in K\)</span> (see <a href="chapBib_mj.html#biBBH1">[BH78]</a>, Prop.9). (For many years, up until June 2018, this manual has stated the result to be <span class="SimpleMath">\([K,S]\)</span>, though the correct quotient had been calculated.) When <span class="SimpleMath">\(\iota\)</span> is an inclusion the induced crossed module may be calculated using a copower construction <a href="chapBib_mj.html#biBBW1">[BW95]</a> or, in the case when <span class="SimpleMath">\(R\)</span> is normal in <span class="SimpleMath">\(Q\)</span>, as a coproduct of crossed modules (<a href="chapBib_mj.html#biBBW2">[BW96]</a>, but not yet implemented). When <span class="SimpleMath">\(\iota\)</span> is neither a surjection nor an inclusion, <span class="SimpleMath">\(\iota\)</span> is factored as the composite of the surjection onto the image and the inclusion of the image in <span class="SimpleMath">\(Q\)</span>, and then the composite induced crossed module is constructed. These constructions use Tietze transformation routines in the library file <code class="code">tietze.gi</code>.</p>
+
+<p>As a first, surjective example, we take for <span class="SimpleMath">\(\calX\)</span> the normal inclusion crossed module of <code class="code">a4</code> in <code class="code">s4</code>, and for <span class="SimpleMath">\(\iota\)</span> the surjection from <code class="code">s4</code> to <code class="code">s3</code> with kernel <code class="code">k4</code>. The induced crossed module is isomorphic to <code class="code">X3 = [c3-&gt;s3]</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s4gens := GeneratorsOfGroup( s4 );</span>
+[ (1,2), (2,3), (3,4) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a4gens := GeneratorsOfGroup( a4 );</span>
+[ (1,2,3), (2,3,4) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s3b := Group( (5,6),(6,7) );;  SetName( s3b, "s3b" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">epi := GroupHomomorphismByImages( s4, s3b, s4gens, [(5,6),(6,7),(5,6)] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X4 := XModByNormalSubgroup( s4, a4 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">indX4 := InducedXModBySurjection( X4, epi );</span>
+[a4/ker-&gt;s3b]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( indX4 );</span>
+
+Crossed module [a4/ker-&gt;s3b] :- 
+: Source group a4/ker has generators:
+  [ (1,3,2), (1,2,3) ]
+: Range group s3b has generators:
+  [ (5,6), (6,7) ]
+: Boundary homomorphism maps source generators to:
+  [ (5,6,7), (5,7,6) ]
+: Action homomorphism maps range generators to automorphisms:
+  (5,6) --&gt; { source gens --&gt; [ (1,2,3), (1,3,2) ] }
+  (6,7) --&gt; { source gens --&gt; [ (1,2,3), (1,3,2) ] }
+  These 2 automorphisms generate the group of automorphisms.
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">morX4 := MorphismOfInducedXMod( indX4 );</span>
+[[a4-&gt;s4] =&gt; [a4/ker-&gt;s3b]]
+
+</pre></div>
+
+<p>For a second, injective example we take for <span class="SimpleMath">\(\calX\)</span> the automorphism crossed module <code class="code">X8</code> of <code class="func">CoproductXMod</code> (<a href="chap7_mj.html#X7C01F5D98046E44B"><span class="RefLink">7.1-1</span></a>), and for <span class="SimpleMath">\(\iota\)</span> an inclusion of <code class="code">s4b</code> in <code class="code">s5</code>. The resulting source group is <code class="code">SL(2,5)</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iso4 := IsomorphismGroups( s4b, s4 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s5 := Group( (1,2,3,4,5), (4,5) );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( s5, "s5" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">inc45 := InclusionMappingGroups( s5, s4 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iota45 := iso4 * inc45;; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">indX8 := InducedXMod( X8, iota45 );</span>
+i*(X8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( indX8 );</span>
+[ 120, 120 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StructureDescription( indX8 );          </span>
+[ "SL(2,5)", "S5" ]
+
+</pre></div>
+
+<p>For a third example we use the version <code class="code">InducedXMod(Q,R,S)</code> of this global function, with <span class="SimpleMath">\(Q \geqslant R \unrhd S\)</span>. We take the identity mapping on <code class="code">s3c</code> as boundary, and the inclusion of <code class="code">s3c</code> in <code class="code">s4</code> as <span class="SimpleMath">\(\iota\)</span>. The induced group is a general linear group <code class="code">GL(2,3)</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s3c := Subgroup( s4, [ (2,3), (3,4) ] );;  </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( s3c, "s3c" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">indXs3c := InducedXMod( s4, s3c, s3c );</span>
+#I induced group has Size: 48
+i*([s3c-&gt;s3c])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StructureDescription( indXs3c );</span>
+[ "GL(2,3)", "S4" ]
+
+</pre></div>
+
+<p><a id="X7B24D47F8078540F" name="X7B24D47F8078540F"></a></p>
+
+<h5>7.2-2 AllInducedXMods</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllInducedXMods</code>( <var class="Arg">Q</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>This function calculates all the induced crossed modules <code class="code">InducedXMod(Q,R,S)</code>, where <code class="code">R</code> runs over all conjugacy classes of subgroups of <code class="code">Q</code> and <code class="code">S</code> runs over all non-trivial normal subgroups of <code class="code">R</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">all := AllInducedXMods( q8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ids := List( all, x -&gt; IdGroup(x) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Sort( ids );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ids;</span>
+[ [ [ 1, 1 ], [ 8, 4 ] ], [ [ 1, 1 ], [ 8, 4 ] ], [ [ 1, 1 ], [ 8, 4 ] ], 
+  [ [ 1, 1 ], [ 8, 4 ] ], [ [ 4, 2 ], [ 8, 4 ] ], [ [ 4, 2 ], [ 8, 4 ] ], 
+  [ [ 4, 2 ], [ 8, 4 ] ], [ [ 16, 2 ], [ 8, 4 ] ], [ [ 16, 2 ], [ 8, 4 ] ], 
+  [ [ 16, 2 ], [ 8, 4 ] ], [ [ 16, 14 ], [ 8, 4 ] ] ]
+
+</pre></div>
+
+<p><a id="X814A695779706E22" name="X814A695779706E22"></a></p>
+
+<h4>7.3 <span class="Heading">Induced cat<span class="SimpleMath">\(^1\)</span>-groups</span></h4>
+
+<p><a id="X7BCE57BE7F6E6B08" name="X7BCE57BE7F6E6B08"></a></p>
+
+<h5>7.3-1 InducedCat1Group</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InducedCat1Group</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InducedCat1GroupByFreeProduct</code>( <var class="Arg">grp</var>, <var class="Arg">hom</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>This area awaits development.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

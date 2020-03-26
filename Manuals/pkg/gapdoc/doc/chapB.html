@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (GAPDoc) - Appendix B: The File gapdoc.dtd</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapB"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapA.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapC.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapB_mj.html">[MathJax on]</a></p>
+<p><a id="X85366C6480D58C51" name="X85366C6480D58C51"></a></p>
+<div class="ChapSects"><a href="chapB.html#X85366C6480D58C51">B <span class="Heading">The File <code class="file">gapdoc.dtd</code></span></a>
+</div>
+
+<h3>B <span class="Heading">The File <code class="file">gapdoc.dtd</code></span></h3>
+
+<p>For easier reference we repeat here the complete content of the file <code class="file">gapdoc.dtd</code>.</p>
+
+
+<div class="example"><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!-- ==================================================================
+     gapdoc.dtd - XML Document type definition for GAP documentation
+     By Frank Lübeck and Max Neunhöffer
+     ================================================================== --&gt;
+
+
+&lt;!-- Note that this definition goes "bottom-up" because entities can only
+     be used after their definition in the file. --&gt;
+
+
+&lt;!-- ==================================================================
+     Some entities:
+     ================================================================== --&gt;
+
+&lt;!-- The standard XML entities: --&gt;
+
+&lt;!ENTITY lt     "&amp;#38;#60;"&gt; 
+&lt;!ENTITY gt     "&amp;#62;"&gt; 
+&lt;!ENTITY amp    "&amp;#38;#38;"&gt; 
+&lt;!ENTITY apos   "&amp;#39;"&gt; 
+&lt;!ENTITY quot   "&amp;#34;"&gt;
+
+
+&lt;!-- The following were introduced in GAPDoc version &lt; 1.0, it is no longer
+     necessary to take care of LaTeX special characters
+     (we keep the entities with simplified definitions for compatibility) --&gt;
+     
+&lt;!ENTITY tamp "&amp;amp;"&gt;
+&lt;!ENTITY tlt "&amp;lt;"&gt;
+&lt;!ENTITY tgt "&amp;gt;"&gt;
+&lt;!ENTITY hash "#"&gt;
+&lt;!ENTITY dollar "$"&gt;
+&lt;!ENTITY percent "&amp;#37;"&gt;
+&lt;!ENTITY tilde "~"&gt;
+&lt;!ENTITY bslash "\\"&gt;
+&lt;!ENTITY obrace "{"&gt;
+&lt;!ENTITY cbrace "}"&gt;
+&lt;!ENTITY uscore "_"&gt;
+&lt;!ENTITY circum "^"&gt;
+
+&lt;!-- ==================================================================
+     Our predefined entities:
+     ================================================================== --&gt;
+
+&lt;!ENTITY nbsp "&amp;#160;"&gt;
+&lt;!ENTITY ndash "&amp;#x2013;"&gt;
+&lt;!ENTITY GAP    "&lt;Package&gt;GAP&lt;/Package&gt;"&gt;
+&lt;!ENTITY GAPDoc "&lt;Package&gt;GAPDoc&lt;/Package&gt;"&gt;
+&lt;!ENTITY TeX    
+  "&lt;Alt Only='LaTeX'&gt;{\TeX}&lt;/Alt&gt;&lt;Alt Not='LaTeX'&gt;TeX&lt;/Alt&gt;"&gt;
+&lt;!ENTITY LaTeX  
+  "&lt;Alt Only='LaTeX'&gt;{\LaTeX}&lt;/Alt&gt;&lt;Alt Not='LaTeX'&gt;LaTeX&lt;/Alt&gt;"&gt;
+&lt;!ENTITY BibTeX 
+  "&lt;Alt Only='LaTeX'&gt;{Bib\TeX}&lt;/Alt&gt;&lt;Alt Not='LaTeX'&gt;BibTeX&lt;/Alt&gt;"&gt;
+&lt;!ENTITY MeatAxe "&lt;Package&gt;MeatAxe&lt;/Package&gt;"&gt;
+&lt;!ENTITY XGAP   "&lt;Package&gt;XGAP&lt;/Package&gt;"&gt;
+&lt;!ENTITY copyright "&amp;#169;"&gt;
+
+&lt;!-- and unicode math symbols --&gt;
+&lt;!ENTITY CC "&amp;#x2102;" &gt; &lt;!-- double struck --&gt;
+&lt;!ENTITY ZZ "&amp;#x2124;" &gt;
+&lt;!ENTITY NN "&amp;#x2115;" &gt;
+&lt;!ENTITY PP "&amp;#x2119;" &gt;
+&lt;!ENTITY QQ "&amp;#x211a;" &gt;
+&lt;!ENTITY HH "&amp;#x210d;" &gt;
+&lt;!ENTITY RR "&amp;#x211d;" &gt;
+
+
+&lt;!-- ==================================================================
+     The following describes the "innermost" documentation text which 
+     can occur at various places in the document like for example
+     section headings. It does neither contain further sectioning 
+     elements nor environments like Enums or Lists. 
+     ================================================================== --&gt;
+
+&lt;!ENTITY % InnerText "#PCDATA |
+                      Alt |
+                      Emph | E |
+                      Par | P | Br |
+                      Keyword | K | Arg | A | Quoted | Q | Code | C | 
+                      File | F | Button | B | Package |
+                      M | Math | Display | 
+                      Example | Listing | Log | Verb |
+                      URL | Email | Homepage | Address | Cite | Label | 
+                      Ref | Index |
+                      Ignore" &gt;
+
+
+&lt;!ELEMENT Alt (%InnerText;)*&gt;     &lt;!-- This is only to allow "Only" and
+                                       "Not" attributes for normal text --&gt;
+&lt;!ATTLIST Alt Only CDATA #IMPLIED
+              Not  CDATA #IMPLIED&gt;
+
+&lt;!-- The following elements declare a certain block of InnerText to
+     have a certain property. They are non-terminal and can contain
+     any InnerText recursively. --&gt;
+
+&lt;!ELEMENT Emph (%InnerText;)*&gt;    &lt;!-- Emphasize something --&gt;
+&lt;!ELEMENT E    (%InnerText;)*&gt;    &lt;!-- the same as shortcut --&gt;
+
+
+&lt;!-- The following is an empty element marking a paragraph boundary. --&gt;
+
+&lt;!ELEMENT Par EMPTY&gt;    &lt;!-- this is intentionally empty! --&gt;
+&lt;!ELEMENT P EMPTY&gt;      &lt;!-- the same as shortcut  --&gt;
+
+&lt;!-- And here is an element for forcing a line break, not starting
+     a new paragraph. --&gt;
+
+&lt;!ELEMENT Br EMPTY&gt;     &lt;!-- a forced line break  --&gt;
+
+&lt;!-- The following elements mark a word or sentence to be of a certain
+     kind, such that it can  be typeset differently. They are terminal
+     elements that should only contain  character data. But we have to
+     allow  Alt elements  for handling  special characters.  For these
+     elements we introduce  a long name - which is  easy to remember -
+     and a  short name - which  you may prefer because  of the shorter
+     markup. --&gt;
+
+&lt;!ELEMENT Keyword (#PCDATA|Alt)*&gt;  &lt;!-- Keyword --&gt;
+&lt;!ELEMENT K (#PCDATA|Alt)*&gt;        &lt;!-- Keyword (shortcut) --&gt;
+
+&lt;!ELEMENT Arg (#PCDATA|Alt)*&gt;      &lt;!-- Argument --&gt;
+&lt;!ELEMENT A (#PCDATA|Alt)*&gt;        &lt;!-- Argument (shortcut) --&gt;
+
+&lt;!ELEMENT Code (#PCDATA|Alt|A|Arg)*&gt; &lt;!-- GAP code --&gt;
+&lt;!ELEMENT C (#PCDATA|Alt|A|Arg)*&gt;    &lt;!-- GAP code (shortcut) --&gt;
+
+&lt;!ELEMENT File (#PCDATA|Alt)*&gt;     &lt;!-- Filename --&gt;
+&lt;!ELEMENT F (#PCDATA|Alt)*&gt;        &lt;!-- Filename (shortcut) --&gt;
+
+&lt;!ELEMENT Button (#PCDATA|Alt)*&gt;   &lt;!-- "Button" (also Menu, Key) --&gt;
+&lt;!ELEMENT B (#PCDATA|Alt)*&gt;        &lt;!-- "Button" (shortcut) --&gt;
+
+&lt;!ELEMENT Package (#PCDATA|Alt)*&gt;  &lt;!-- A package name --&gt;
+
+&lt;!ELEMENT Quoted (%InnerText;)*&gt;   &lt;!-- Quoted (in quotes) text --&gt;
+&lt;!ELEMENT Q (%InnerText;)*&gt;        &lt;!-- Quoted text (shortcut) --&gt;
+
+
+&lt;!-- The following elements contain mathematical formulae. They are 
+     terminal elements that contain character data in TeX notation. --&gt;
+
+&lt;!-- Math with well defined translation to text output --&gt;
+&lt;!ELEMENT M (#PCDATA|A|Arg|Alt)*&gt;
+&lt;!-- Normal TeX math mode formula --&gt;
+&lt;!ELEMENT Math (#PCDATA|A|Arg|Alt)*&gt;   
+&lt;!-- TeX displayed math mode formula --&gt;
+&lt;!ELEMENT Display (#PCDATA|A|Arg|Alt)*&gt;
+&lt;!-- Mode="M" causes &lt;M&gt;-style formatting --&gt;
+&lt;!ATTLIST Display Mode CDATA #IMPLIED&gt;  
+
+
+&lt;!-- The  following  elements  contain  GAP related  text  like  code,
+     session  logs or  examples. They  are all  terminal elements  and
+     consist of character data which is normally typeset verbatim. The
+     different  types  of  the  elements only  control  how  they  are
+     treated. --&gt;
+
+&lt;!ELEMENT Example (#PCDATA)&gt;  &lt;!-- This is subject to the automatic 
+                                   example checking mechanism --&gt;
+&lt;!ELEMENT Log (#PCDATA)&gt;      &lt;!-- This not --&gt;
+&lt;!ELEMENT Listing (#PCDATA)&gt;  &lt;!-- This is just for code listings --&gt;
+&lt;!ATTLIST Listing Type CDATA #IMPLIED&gt; &lt;!-- a comment about the type of
+                                            listed code, may appear in
+                                            output --&gt;
+
+&lt;!-- One  further  verbatim element,  this is truely  verbatim without
+     any processing and intended  for ASCII substitutes of complicated
+     displayed formulae or tables. --&gt;
+
+&lt;!ELEMENT Verb  (#PCDATA)&gt; 
+
+&lt;!-- The following  elements are  for cross-referencing  purposes like
+     URLs, citations,  references, and  the index. All  these elements
+     are  terminal and  need special  methods  to make  up the  actual
+     output during document generation. --&gt;
+
+&lt;!ELEMENT URL (#PCDATA|Alt|Link|LinkText)*&gt;  &lt;!-- Link, LinkText
+     variant for case where text needs further markup --&gt;
+&lt;!ATTLIST URL Text CDATA #IMPLIED&gt;   &lt;!-- This is for output formats
+                                          that have links like HTML --&gt;
+&lt;!ELEMENT Link     (%InnerText;)*&gt; &lt;!-- the URL --&gt;
+&lt;!ELEMENT LinkText (%InnerText;)*&gt; &lt;!-- text for links, can contain markup --&gt;
+&lt;!-- The following two are actually URLs, but the element name determines
+     the type. --&gt;
+&lt;!ELEMENT Email (#PCDATA|Alt|Link|LinkText)*&gt;
+&lt;!ELEMENT Homepage (#PCDATA|Alt|Link|LinkText)*&gt;
+
+&lt;!-- Those who still want to give postal addresses can use the following
+     element. Use &lt;Br/&gt; for specifying typical line breaks  --&gt;
+
+&lt;!ELEMENT Address (#PCDATA|Alt|Br)*&gt;
+
+&lt;!ELEMENT Cite EMPTY&gt;
+&lt;!ATTLIST Cite Key CDATA #REQUIRED
+               Where CDATA #IMPLIED&gt;
+               
+&lt;!ELEMENT Label EMPTY&gt;
+&lt;!ATTLIST Label Name CDATA #REQUIRED&gt;
+
+&lt;!ELEMENT Ref EMPTY&gt;
+&lt;!ATTLIST Ref Func      CDATA #IMPLIED
+              Oper      CDATA #IMPLIED
+              Constr    CDATA #IMPLIED
+              Meth      CDATA #IMPLIED
+              Filt      CDATA #IMPLIED
+              Prop      CDATA #IMPLIED
+              Attr      CDATA #IMPLIED
+              Var       CDATA #IMPLIED
+              Fam       CDATA #IMPLIED
+              InfoClass CDATA #IMPLIED
+              Chap      CDATA #IMPLIED
+              Sect      CDATA #IMPLIED
+              Subsect   CDATA #IMPLIED
+              Appendix  CDATA #IMPLIED
+              Text      CDATA #IMPLIED
+
+              Label     CDATA #IMPLIED
+              BookName  CDATA #IMPLIED
+              Style (Text|Number) #IMPLIED&gt;  &lt;!-- normally automatic --&gt;
+
+&lt;!-- Note that  only one attribute  of Ref is used  normally. BookName
+     and  Style  can  be  specified in  addition  to  handle  external
+     references and the typesetting style of the reference. --&gt;
+
+&lt;!-- For explicit index entries (Func and so on should cause an
+     automatically generated index entry). Use the attributes Key,
+     Subkey for sorting (simplified, without markup). The Subkey value
+     also gets printed. Use the optional Subkey element if the printed
+     version needs some markup.                                        --&gt;
+&lt;!ELEMENT Index (%InnerText;|Subkey)*&gt;
+&lt;!ATTLIST Index Key    CDATA #IMPLIED
+                Subkey CDATA #IMPLIED&gt;
+&lt;!ELEMENT Subkey (%InnerText;)*&gt;
+
+
+&lt;!-- ==================================================================
+     The following  describes the normal documentation  text which can
+     occur  at various  places in  the document.  It does  not contain
+     further sectioning elements. In addition to InnerText it can contain 
+     environments like enumerations, lists, and such.
+     ================================================================== --&gt;
+
+&lt;!ENTITY % Text "%InnerText; | List | Enum | Table"&gt;
+
+&lt;!ELEMENT Item ( %Text;)*&gt;
+&lt;!ELEMENT Mark ( %InnerText;)*&gt;
+
+&lt;!ELEMENT List ( ((Mark,Item)|Item)+ )&gt;
+&lt;!ATTLIST List Only CDATA #IMPLIED
+               Not  CDATA #IMPLIED&gt;
+&lt;!ELEMENT Enum ( Item+ )&gt;
+&lt;!ATTLIST Enum Only CDATA #IMPLIED
+               Not  CDATA #IMPLIED&gt;
+
+&lt;!ELEMENT Table ( Caption?, (Row | HorLine)+ )&gt;
+&lt;!ATTLIST Table Label   CDATA #IMPLIED
+                Only    CDATA #IMPLIED
+                Not     CDATA #IMPLIED
+                Align   CDATA #REQUIRED&gt;    &lt;!-- A TeX tabular string --&gt;
+                &lt;!-- We allow | and l,c,r, nothing else --&gt;
+&lt;!ELEMENT Row   ( Item+ )&gt;
+&lt;!ELEMENT HorLine EMPTY&gt;
+&lt;!ELEMENT Caption ( %InnerText;)*&gt;
+
+&lt;!-- ==================================================================
+     We start defining some things within the overall structure:
+     ================================================================== --&gt;
+
+&lt;!-- The TitlePage consists of several sub-elements: --&gt;
+
+&lt;!ELEMENT TitlePage (Title, Subtitle?, Version?, TitleComment?, 
+                     Author+, Date?, Address?, Abstract?, Copyright?, 
+                     Acknowledgements? , Colophon? )&gt;
+
+&lt;!ELEMENT Title (%Text;)*&gt;
+&lt;!ELEMENT Subtitle (%Text;)*&gt;
+&lt;!ELEMENT Version (%Text;)*&gt;
+&lt;!ELEMENT TitleComment (%Text;)*&gt;
+&lt;!ELEMENT Author (%Text;)*&gt;    &lt;!-- There may be more than one Author! --&gt;
+&lt;!ELEMENT Date (%Text;)*&gt;
+&lt;!ELEMENT Abstract (%Text;)*&gt;
+&lt;!ELEMENT Copyright (%Text;)*&gt;
+&lt;!ELEMENT Acknowledgements (%Text;)*&gt;  
+&lt;!ELEMENT Colophon (%Text;)*&gt;
+
+
+&lt;!-- The following things just specify some information about the
+     corresponding parts of the Book: --&gt;
+
+&lt;!ELEMENT TableOfContents EMPTY&gt;
+&lt;!ELEMENT Bibliography EMPTY&gt;
+&lt;!ATTLIST Bibliography Databases CDATA #REQUIRED
+                       Style CDATA #IMPLIED&gt;
+&lt;!ELEMENT TheIndex EMPTY&gt;
+
+&lt;!-- ==================================================================
+     The Ignore element can be used everywhere to include further
+     information in a GAPDoc document which is not intended for the 
+     standard converters (e.g., source code, not yet finished stuff,
+     and so on. This information can be extracted by special converter 
+     routines, more precise information about the content of an Ignore
+     element can be given by the "Remark" attribute.
+     ================================================================== --&gt;
+
+&lt;!ELEMENT Ignore (%Text;| Chapter | Section | Subsection | ManSection |
+                  Heading)*&gt;
+&lt;!ATTLIST Ignore Remark CDATA #IMPLIED&gt;
+     
+&lt;!-- ==================================================================
+     Now we go on with the overall structure by defining the sectioning 
+     structure, which includes the Synopsis element: 
+     ================================================================== --&gt;
+
+
+&lt;!ELEMENT Subsection (%Text;| Heading)*&gt;
+&lt;!ATTLIST Subsection Label CDATA #IMPLIED&gt; &lt;!-- For reference purposes --&gt;
+
+&lt;!ELEMENT ManSection ( Heading?, 
+                      ((Func, Returns?) | (Oper, Returns?) | 
+                       (Meth, Returns?) | (Filt, Returns?) | 
+                       (Prop, Returns?) | (Attr, Returns?) |
+                       (Constr, Returns?) |
+                       Var | Fam | InfoClass)+, Description )&gt;
+&lt;!ATTLIST ManSection Label CDATA #IMPLIED&gt; &lt;!-- For reference purposes --&gt;
+
+&lt;!ELEMENT Returns (%Text;)*&gt;
+&lt;!ELEMENT Description (%Text;)*&gt;
+
+
+&lt;!-- Note that  the ManSection element  is actually a  subsection with
+     respect  to labelling,  referencing, and  counting of  sectioning
+     elements. --&gt;
+
+&lt;!ELEMENT Func EMPTY&gt;
+&lt;!ATTLIST Func Name  CDATA #REQUIRED
+               Label CDATA #IMPLIED
+               Arg   CDATA #REQUIRED
+               Comm  CDATA #IMPLIED&gt;
+
+&lt;!-- Note  that Arg  contains the  full list  of arguments,  including
+     optional  parts,  which  are   denoted  by  square  brackets  [].
+     Arguments   are  separated   by  whitespace,   commas  count   as
+     whitespace. --&gt;
+
+&lt;!-- Note further that although Name and Label are  CDATA (and not ID)
+     Label must make up a unique identifier. --&gt;
+
+&lt;!ELEMENT Oper EMPTY&gt;
+&lt;!ATTLIST Oper Name  CDATA #REQUIRED
+               Label CDATA #IMPLIED
+               Arg   CDATA #REQUIRED
+               Comm  CDATA #IMPLIED&gt;
+
+&lt;!ELEMENT Constr EMPTY&gt;
+&lt;!ATTLIST Constr Name  CDATA #REQUIRED
+                 Label CDATA #IMPLIED
+                 Arg   CDATA #REQUIRED
+                 Comm  CDATA #IMPLIED&gt;
+
+&lt;!ELEMENT Meth EMPTY&gt;
+&lt;!ATTLIST Meth Name  CDATA #REQUIRED
+               Label CDATA #IMPLIED
+               Arg   CDATA #REQUIRED
+               Comm  CDATA #IMPLIED&gt;
+
+&lt;!ELEMENT Filt EMPTY&gt;
+&lt;!ATTLIST Filt Name  CDATA #REQUIRED
+               Label CDATA #IMPLIED
+               Arg   CDATA #IMPLIED
+               Comm  CDATA #IMPLIED
+               Type  CDATA #IMPLIED&gt;  
+
+&lt;!ELEMENT Prop EMPTY&gt;
+&lt;!ATTLIST Prop Name  CDATA #REQUIRED
+               Label CDATA #IMPLIED
+               Arg   CDATA #REQUIRED
+               Comm  CDATA #IMPLIED&gt;
+
+&lt;!ELEMENT Attr EMPTY&gt;
+&lt;!ATTLIST Attr Name  CDATA #REQUIRED
+               Label CDATA #IMPLIED
+               Arg   CDATA #REQUIRED
+               Comm  CDATA #IMPLIED&gt;
+
+&lt;!ELEMENT Var  EMPTY&gt;
+&lt;!ATTLIST Var  Name  CDATA #REQUIRED
+               Label CDATA #IMPLIED
+               Comm  CDATA #IMPLIED&gt;
+
+&lt;!ELEMENT Fam  EMPTY&gt;
+&lt;!ATTLIST Fam  Name  CDATA #REQUIRED
+               Label CDATA #IMPLIED
+               Comm  CDATA #IMPLIED&gt;
+
+&lt;!ELEMENT InfoClass EMPTY&gt;
+&lt;!ATTLIST InfoClass Name  CDATA #REQUIRED
+                    Label CDATA #IMPLIED
+                    Comm  CDATA #IMPLIED&gt;
+
+
+&lt;!ELEMENT Heading (%InnerText;)*&gt;
+
+&lt;!ELEMENT Section (%Text;| Heading | Subsection | ManSection)*&gt;
+&lt;!ATTLIST Section Label CDATA #IMPLIED&gt;    &lt;!-- For reference purposes --&gt;
+
+
+&lt;!ELEMENT Chapter (%Text;| Heading | Section)*&gt;
+&lt;!ATTLIST Chapter Label CDATA #IMPLIED&gt;    &lt;!-- For reference purposes --&gt;
+
+
+&lt;!-- Note that  the entity %InnerText; is  documentation that contains
+     neither sectioning  elements nor environments  like enumerations,
+     but  only  formulae,  labels, references,  citations,  and  other
+     terminal elements. --&gt;
+
+&lt;!ELEMENT Appendix (%Text;| Heading | Section)*&gt;
+&lt;!ATTLIST Appendix Label CDATA #IMPLIED&gt;   &lt;!-- For reference purposes --&gt;
+
+&lt;!-- Note that  an Appendix  is exactly  the same  as a  Chapter. They
+     differ only in the numbering. --&gt;
+
+&lt;!-- ==================================================================
+     At last we define the overall structure of a gapdoc Book:
+     ================================================================== --&gt;
+
+&lt;!ELEMENT Body  ( %Text;| Chapter | Section )*&gt;
+
+&lt;!ELEMENT Book (TitlePage,
+                TableOfContents?,
+                Body,
+                Appendix*,
+                Bibliography?,
+                TheIndex?)&gt;
+&lt;!ATTLIST Book Name CDATA #REQUIRED&gt;
+               
+&lt;!-- Note  that  the  entity  %Text; is  documentation  that  contains
+     no  further sectioning  elements but  possibly environments  like
+     enumerations,  and formulae,  labels, references,  and citations.
+     --&gt;
+
+&lt;!-- ============================================================== --&gt;
+
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapA.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapC.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

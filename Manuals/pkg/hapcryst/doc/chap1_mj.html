@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (HAPcryst) - Chapter 1: Introduction</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1.html">[MathJax off]</a></p>
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+<div class="ChapSects"><a href="chap1_mj.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X813275957BA5B5E0">1.1 <span class="Heading">Abstract and Notation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7F4A00F481A1FB39">1.1-1 <span class="Heading">The natural action of crystallographic groups</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X85A08CF187A6D986">1.2 <span class="Heading">Requirements</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7990986A8114E0DB">1.2-1 <span class="Heading">Recommendation concerning polymake</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X7D9044767BEB1523">1.3 <span class="Heading">Global Variables</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X78B0A21E7FD0F3BB">1.3-1 InfoHAPcryst</a></span>
+</div></div>
+</div>
+
+<h3>1 <span class="Heading">Introduction</span></h3>
+
+<p><a id="X813275957BA5B5E0" name="X813275957BA5B5E0"></a></p>
+
+<h4>1.1 <span class="Heading">Abstract and Notation</span></h4>
+
+<p><strong class="pkg">HAPcryst</strong> is an extension for "Homological Algebra Programming" (<strong class="pkg">HAP</strong>, <a href="chapBib_mj.html#biBhap">[Ell]</a>) by Graham Ellis. It uses geometric methods to calculate resolutions for crystallographic groups. In this manual, we will use the terms "space group" and "crystallographic group" synonymous. As usual in <strong class="pkg">GAP</strong>, group elements are supposed to act from the right. To emphasize this fact, some functions have names ending in "OnRight" (namely those, which rely on the action from the right). This is also meant to make work with <strong class="pkg">HAPcryst</strong> and <strong class="pkg">cryst</strong> <a href="chapBib_mj.html#biBcryst">[EGN]</a> easier.</p>
+
+<p>The functions called "somethingStandardSpaceGroup" are supposed to work for standard crystallographic groups on left and right some time in the future. Currently only the versions acting on right are implemented. As in <strong class="pkg">cryst</strong> <a href="chapBib_mj.html#biBcryst">[EGN]</a>, space groups are represented as affine linear groups. For the computations in <strong class="pkg">HAPcryst</strong>, crystallographic groups have to be in "standard form". That is, the translation basis has to be the standard basis of the space. This implies that the linear part of a group element need not be orthogonal with respect to the usual scalar product.</p>
+
+<p><a id="X7F4A00F481A1FB39" name="X7F4A00F481A1FB39"></a></p>
+
+<h5>1.1-1 <span class="Heading">The natural action of crystallographic groups</span></h5>
+
+<p>There is some confusion about the way crystallographic groups are written. This concerns the question if we act on left or on right and if vectors are of the form <code class="code">[1,...]</code> or <code class="code">[...,1]</code>.</p>
+
+<p>As mentioned, <strong class="pkg">HAPcryst</strong> handles affine crystallographic groups on right (and maybe later also on left) acting on vectors of the form <span class="SimpleMath">\([...,1]\)</span>.</p>
+
+<p><strong class="button">BUT:</strong> The functions in <strong class="pkg">HAPcryst</strong> do not take augmented vectors as input (no leading or ending ones). The handling of vectors is done internally. So in <strong class="pkg">HAPcryst</strong>, a crystallographic group is a group of <span class="SimpleMath">\(n\times n\)</span> matrices which acts on a vector space of dimension <span class="SimpleMath">\(n-1\)</span> whose elements are vectors of length <span class="SimpleMath">\(n-1\)</span> (not <span class="SimpleMath">\(n\)</span>). Example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=SpaceGroup(3,4); #This group acts on 3-Space</span>
+SpaceGroupOnRightBBNWZ( 3, 2, 1, 1, 2 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Representative(G));</span>
+[ [  1,  0,  0,  0 ],
+  [  0,  1,  0,  0 ],
+  [  0,  0,  1,  0 ],
+  [  0,  0,  0,  1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitStabilizerInUnitCubeOnRight(G,[1/2,0,0]);</span>
+rec( orbit := [ [ 1/2, 0, 0 ], [ 1/2, 1/2, 0 ] ],
+  stabilizer := Group([ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ],
+          [ 0, 0, 0, 1 ] ] ]) )
+</pre></div>
+
+<p><a id="X85A08CF187A6D986" name="X85A08CF187A6D986"></a></p>
+
+<h4>1.2 <span class="Heading">Requirements</span></h4>
+
+<p>The following <strong class="pkg">GAP</strong> packages are required</p>
+
+
+<ul>
+<li><p><strong class="pkg">polymaking</strong> which in turn depends on the computational geometry software polymake.</p>
+
+</li>
+<li><p><strong class="pkg">HAP</strong></p>
+
+</li>
+<li><p><strong class="pkg">Cryst</strong></p>
+
+</li>
+</ul>
+<p>The following <strong class="pkg">GAP</strong> packages are not required but highly recommended:</p>
+
+
+<ul>
+<li><p><strong class="pkg">carat</strong></p>
+
+</li>
+<li><p><strong class="pkg">CrystCat</strong></p>
+
+</li>
+<li><p><strong class="pkg">GAPDoc</strong> is needed to display the online manual</p>
+
+</li>
+</ul>
+<p><a id="X7990986A8114E0DB" name="X7990986A8114E0DB"></a></p>
+
+<h5>1.2-1 <span class="Heading">Recommendation concerning polymake</span></h5>
+
+<p>Calculating resolutions of Bieberbach groups involves convex hull computations. polymake by default uses cdd to compute convex hulls. Experiments suggest that lrs is the more suitable algorithm for the computations done in HAPcryst than the default cdd. You can change the behaviour of by editing the file "yourhomedirectory/.polymake/prefer.pl". It should contain a section like this (just make sure lrs is before cdd, the position of beneath_beyond does not matter):</p>
+
+
+<div class="example"><pre>
+#########################################
+application polytope;
+
+prefer "*.convex_hull  lrs, beneath_beyond, cdd";
+</pre></div>
+
+<p><a id="X7D9044767BEB1523" name="X7D9044767BEB1523"></a></p>
+
+<h4>1.3 <span class="Heading">Global Variables</span></h4>
+
+<p><strong class="pkg">HAPcryst</strong> itself does only have one global variable, namely <code class="func">InfoHAPcryst</code> (<a href="chap1_mj.html#X78B0A21E7FD0F3BB"><span class="RefLink">1.3-1</span></a>). The location of files generated for interaction with polymake are determined by the value of <code class="func">POLYMAKE_DATA_DIR</code> (<a href="../../../pkg/polymaking-0.8.2/doc/chap3_mj.html#X7C07B16B873BA46D"><span class="RefLink">polymaking: POLYMAKE_DATA_DIR</span></a>) which is a global variable of <strong class="pkg">polymaking</strong>.</p>
+
+<p><a id="X78B0A21E7FD0F3BB" name="X78B0A21E7FD0F3BB"></a></p>
+
+<h5>1.3-1 InfoHAPcryst</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoHAPcryst</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p>At a level of 1, only the most important messages are printed. At level 2, additional information is displayed, and level 3 is even more verbose. At level 0, <strong class="pkg">HAPcryst</strong> remains silent.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (hpc) - Chapter 11: Low-level functionality</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap11"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap10.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap11_mj.html">[MathJax on]</a></p>
+<p><a id="X7B27C7E98204353D" name="X7B27C7E98204353D"></a></p>
+<div class="ChapSects"><a href="chap11.html#X7B27C7E98204353D">11 <span class="Heading">Low-level functionality</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X864926CD80307F32">11.1 <span class="Heading">Explicit lock and unlock primitives</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X828E21CD78EFE07A">11.1-1 LOCK</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7A7256AA7D7E3C4B">11.1-2 TRYLOCK</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7EBEFBC6875F149A">11.1-3 UNLOCK</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X83B01F7D7DC9FCD0">11.2 <span class="Heading">Hash locks</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X8145561486573102">11.2-1 HASH_LOCK</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7AD0136085D9CFE0">11.2-2 HASH_UNLOCK</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7BE2F84778C68D04">11.2-3 HASH_LOCK_SHARED</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X877AEBBC8249DA2C">11.2-4 HASH_UNLOCK_SHARED</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X834BA1408083326A">11.3 <span class="Heading">Migration to the public region</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X8011BF108795B266">11.3-1 MAKE_PUBLIC</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X81142B5B86D8FE29">11.3-2 MAKE_PUBLIC_NORECURSE</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X81C8B4FA86E9DFD9">11.4 <span class="Heading">Memory barriers</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7C15E19D85AD81E2">11.4-1 ORDERED_WRITE</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7C4DDAEF7A900359">11.4-2 ORDERED_READ</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X8217AB0984FDE424">11.5 <span class="Heading">Object manipulation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X84644A1284D0AB35">11.5-1 SWITCH_OBJ</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7AA8AD9E7B28961C">11.5-2 FORCE_SWITCH_OBJ</a></span>
+</div></div>
+</div>
+
+<h3>11 <span class="Heading">Low-level functionality</span></h3>
+
+<p>The functionality described in this section should only be used by experts, and even by those only with caution (especially the parts that relate to the memory model).</p>
+
+<p>Not only is it possible to crash or hang the GAP kernel, it can happen in ways that are very difficult to reproduce, leading to software defects that are discovered only long after deployment of a package and then become difficult to correct.</p>
+
+<p>The performance benefit of using these primitives is generally minimal; while concurrency can induce some overhead, the benefit from micromanaging concurrency in an interpreted language such as GAP is likely to be small.</p>
+
+<p>These low-level primitives exist primarily for the benefit of kernel programmers; it allows them to prototype new kernel functionality in GAP before implementing it in C.</p>
+
+<p><a id="X864926CD80307F32" name="X864926CD80307F32"></a></p>
+
+<h4>11.1 <span class="Heading">Explicit lock and unlock primitives</span></h4>
+
+<p>The <code class="func">LOCK</code> (<a href="chap11.html#X828E21CD78EFE07A"><span class="RefLink">11.1-1</span></a>) operation combined with <code class="func">UNLOCK</code> (<a href="chap11.html#X7EBEFBC6875F149A"><span class="RefLink">11.1-3</span></a>) is a low-level interface for the functionality of the statement.</p>
+
+<p><a id="X828E21CD78EFE07A" name="X828E21CD78EFE07A"></a></p>
+
+<h5>11.1-1 LOCK</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LOCK</code>( [<var class="Arg">arg_1</var>, <var class="Arg">...</var>, <var class="Arg">arg_n</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">LOCK</code> takes zero or more pairs of parameters, where each is either an object or a boolean value. If an argument is an object, the region containing it will be locked. If an argument is the boolean value <code class="keyw">false</code>, all subsequent locks will be read locks; if it is the boolean value <code class="keyw">true</code>, all subsequent locks will be write locks. If the first argument is not a boolean value, all locks until the first boolean value will be write locks.</p>
+
+<p>Locks are managed internally as a stack of locked regions; <code class="func">LOCK</code> returns an integer indicating a pointer to the top of the stack; this integer is used later by the <code class="func">UNLOCK</code> (<a href="chap11.html#X7EBEFBC6875F149A"><span class="RefLink">11.1-3</span></a>) operation to unlock locks on the stack up to that position. If <code class="func">LOCK</code> should fail for some reason, it will return <code class="keyw">fail</code>.</p>
+
+<p>Calling <code class="func">LOCK</code> with no parameters returns the current lock stack pointer.</p>
+
+<p><a id="X7A7256AA7D7E3C4B" name="X7A7256AA7D7E3C4B"></a></p>
+
+<h5>11.1-2 TRYLOCK</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TRYLOCK</code>( [<var class="Arg">arg_1</var>, <var class="Arg">...</var>, <var class="Arg">arg_n</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TRYLOCK</code> works similarly to <code class="func">LOCK</code> (<a href="chap11.html#X828E21CD78EFE07A"><span class="RefLink">11.1-1</span></a>). If it cannot acquire all region locks, it returns <code class="keyw">fail</code> and does not lock any regions. Otherwise, its semantics are identical to <code class="func">LOCK</code> (<a href="chap11.html#X828E21CD78EFE07A"><span class="RefLink">11.1-1</span></a>).</p>
+
+<p><a id="X7EBEFBC6875F149A" name="X7EBEFBC6875F149A"></a></p>
+
+<h5>11.1-3 UNLOCK</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UNLOCK</code>( <var class="Arg">stackpos</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">UNLOCK</code> unlocks all regions on the stack at <var class="Arg">stackpos</var> or higher and sets the stack pointer to <var class="Arg">stackpos</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l1 := ShareObj([1,2,3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l2 := ShareObj([4,5,6]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := LOCK(l1);</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LOCK(l2);</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UNLOCK(p); # unlock both RegionOf(l1) and RegionOf(l2)</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LOCK(); # current stack pointer</span>
+0
+</pre></div>
+
+<p><a id="X83B01F7D7DC9FCD0" name="X83B01F7D7DC9FCD0"></a></p>
+
+<h4>11.2 <span class="Heading">Hash locks</span></h4>
+
+<p>HPC-GAP supports <em>hash locks</em>; internally, the kernel maintains a fixed size array of locks; objects are mapped to a lock via hash function. The hash function is based on the object reference, not its contents (except for short integers and finite field elements).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := [ 1, 2, 3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := l -&gt; Sum(l);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HASH_LOCK(l);   # lock 'l'</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f(l);           # do something with 'l'</span>
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HASH_UNLOCK(l); # unlock 'l'</span>
+</pre></div>
+
+<p>Hash locks should only be used for very short operations, since there is a chance that two concurrently locked objects map to the same hash value, leading to unnecessary contention.</p>
+
+<p>Hash locks are unrelated to the locks used by the <code class="code">atomic</code> statements and the <code class="func">LOCK</code> (<a href="chap11.html#X828E21CD78EFE07A"><span class="RefLink">11.1-1</span></a>) and <code class="func">UNLOCK</code> (<a href="chap11.html#X7EBEFBC6875F149A"><span class="RefLink">11.1-3</span></a>) primitives.</p>
+
+<p><a id="X8145561486573102" name="X8145561486573102"></a></p>
+
+<h5>11.2-1 HASH_LOCK</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HASH_LOCK</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">HASH_LOCK</code> obtains the read-write lock for the hash value associated with <code class="code">obj</code>.</p>
+
+<p><a id="X7AD0136085D9CFE0" name="X7AD0136085D9CFE0"></a></p>
+
+<h5>11.2-2 HASH_UNLOCK</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HASH_UNLOCK</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">HASH_UNLOCK</code> releases the read-write lock for the hash value associated with <code class="code">obj</code>.</p>
+
+<p><a id="X7BE2F84778C68D04" name="X7BE2F84778C68D04"></a></p>
+
+<h5>11.2-3 HASH_LOCK_SHARED</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HASH_LOCK_SHARED</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">HASH_LOCK_SHARED</code> obtains the read-only lock for the hash value associated with <code class="code">obj</code>.</p>
+
+<p><a id="X877AEBBC8249DA2C" name="X877AEBBC8249DA2C"></a></p>
+
+<h5>11.2-4 HASH_UNLOCK_SHARED</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HASH_UNLOCK_SHARED</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">HASH_UNLOCK_SHARED</code> releases the read-only lock for the hash value associated with <code class="code">obj</code>.</p>
+
+<p><a id="X834BA1408083326A" name="X834BA1408083326A"></a></p>
+
+<h4>11.3 <span class="Heading">Migration to the public region</span></h4>
+
+<p>HPC-GAP allows migration of arbitrary objects to the public region. This functionality is potentially dangerous; for example, if two threads try resize a plain list simultaneously, this can result in memory corruption.</p>
+
+<p>Accordingly, such data should never be accessed except through operations that protect accesses through locks, memory barriers, or other mechanisms.</p>
+
+<p><a id="X8011BF108795B266" name="X8011BF108795B266"></a></p>
+
+<h5>11.3-1 MAKE_PUBLIC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MAKE_PUBLIC</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">MAKE_PUBLIC</code> makes <var class="Arg">obj</var> and all its subobjects members of the public region.</p>
+
+<p><a id="X81142B5B86D8FE29" name="X81142B5B86D8FE29"></a></p>
+
+<h5>11.3-2 MAKE_PUBLIC_NORECURSE</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MAKE_PUBLIC_NORECURSE</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">MAKE_PUBLIC_NORECURSE</code> makes <var class="Arg">obj</var>, but not any of its subobjects members of the public region.</p>
+
+<p><a id="X81C8B4FA86E9DFD9" name="X81C8B4FA86E9DFD9"></a></p>
+
+<h4>11.4 <span class="Heading">Memory barriers</span></h4>
+
+<p>The memory models of some processors do no guarantee that read and writes reflect accesses to main memory in the same order in which the processor performed them; for example, code may write variable <code class="code">v1</code> first, and <code class="code">v2</code> second; but the cache line containing <code class="code">v2</code> is flushed to main memory first so that other processors see the change to <code class="code">v2</code> before the change to <code class="code">v1</code>.</p>
+
+<p>Memory barriers can be used to prevent such counter-intuitive reordering of memory accesses.</p>
+
+<p><a id="X7C15E19D85AD81E2" name="X7C15E19D85AD81E2"></a></p>
+
+<h5>11.4-1 ORDERED_WRITE</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ORDERED_WRITE</code>( <var class="Arg">expr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">ORDERED_WRITE</code> function guarantees that all writes that occur prior to its execution or during the evaluation of <var class="Arg">expr</var> become visible to other processors before any of the code executed after.</p>
+
+<p>Example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=0;; f := function() y := 1; return 2; end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := ORDERED_WRITE(f());</span>
+2
+</pre></div>
+
+<p>Here, the write barrier ensure that the assignment to <code class="code">y</code> that occurs during the call of <code class="code">f()</code> becomes visible to other processors before or at the same time as the assignment to <code class="code">x</code>.</p>
+
+<p>This can also be done differently, with the same semantics:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t := f();; # temporary variable</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ORDERED_WRITE(0);; # dummy argument</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := t;</span>
+2
+</pre></div>
+
+<p><a id="X7C4DDAEF7A900359" name="X7C4DDAEF7A900359"></a></p>
+
+<h5>11.4-2 ORDERED_READ</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ORDERED_READ</code>( <var class="Arg">expr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Conversely, the <code class="func">ORDERED_READ</code> function ensures that reads that occur before its call or during the evaluation of <var class="Arg">expr</var> are not reordered with respects to memory reads occurring after it.</p>
+
+<p><a id="X8217AB0984FDE424" name="X8217AB0984FDE424"></a></p>
+
+<h4>11.5 <span class="Heading">Object manipulation</span></h4>
+
+<p>There are two new functions to exchange a pair of objects.</p>
+
+<p><a id="X84644A1284D0AB35" name="X84644A1284D0AB35"></a></p>
+
+<h5>11.5-1 SWITCH_OBJ</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SWITCH_OBJ</code>( <var class="Arg">obj1</var>, <var class="Arg">obj2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">SWITCH_OBJ</code> exchanges its two arguments. All variables currently referencing <var class="Arg">obj1</var> will reference <var class="Arg">obj2</var> instead after the operation completes, and vice versa. Both objects stay within their previous regions.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := [ 1, 2, 3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := [ 4, 5, 6];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SWITCH_OBJ(a, b);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a;</span>
+[ 4, 5, 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b;</span>
+[ 1, 2, 3 ]
+</pre></div>
+
+<p>The function requires exclusive access to both objects, which may necessitate using an atomic statement, e.g.:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := ShareObj([ 1, 2, 3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := ShareObj([ 4, 5, 6]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic a, b do SWITCH_OBJ(a, b); od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic readonly a do Display(a); od;</span>
+[ 4, 5, 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic readonly b do Display(b); od;</span>
+[ 1, 2, 3 ]
+</pre></div>
+
+<p><a id="X7AA8AD9E7B28961C" name="X7AA8AD9E7B28961C"></a></p>
+
+<h5>11.5-2 FORCE_SWITCH_OBJ</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FORCE_SWITCH_OBJ</code>( <var class="Arg">obj1</var>, <var class="Arg">obj2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">FORCE_SWITCH_OBJ</code> works like <code class="func">SWITCH_OBJ</code> (<a href="chap11.html#X84644A1284D0AB35"><span class="RefLink">11.5-1</span></a>), except that it can also exchange objects in the public region:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := ShareObj([ 1, 2, 3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := MakeImmutable([ 4, 5, 6]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic a do FORCE_SWITCH_OBJ(a, b); od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a;</span>
+[ 4, 5, 6 ]
+</pre></div>
+
+<p>This function should be used with extreme caution and only with public objects for which only the current thread has a reference. Otherwise, undefined behavior and crashes can result from other threads accessing the public object concurrently.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap10.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

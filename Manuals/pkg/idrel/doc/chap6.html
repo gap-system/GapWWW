@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (IdRel) - Chapter 6: Identities Among Relators</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6_mj.html">[MathJax on]</a></p>
+<p><a id="X78038BF07E998E21" name="X78038BF07E998E21"></a></p>
+<div class="ChapSects"><a href="chap6.html#X78038BF07E998E21">6 <span class="Heading">Identities Among Relators</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7D428F9B8054F5FB">6.1 <span class="Heading">The original approach</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7FD998C87BF9AAC9">6.1-1 IdentitiesAmongRelators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7BEE0DBB78F9355E">6.1-2 RootIdentities</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X809923437C987089">6.2 <span class="Heading">Knuth-Bendix identities</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X800D7F047976EDDF">6.2-1 IdentitiesAmongRelatorsKB</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X8448909D82CF6FE9">6.3 <span class="Heading">Partial lists of elements</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7FCEF03E7A57C331">6.3-1 PartialElementsOfMonoidRepresentation</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7A9CE0B37EF88CEA">6.4 <span class="Heading">Identities for infinite groups</span></a>
+</span>
+</div>
+</div>
+
+<h3>6 <span class="Heading">Identities Among Relators</span></h3>
+
+<p>The identities among the relators for a finitely presented group <span class="SimpleMath">G</span> are constructed as logged module polynomials. The procedure, described in <a href="chapBib.html#biBHeWe1">[HW03]</a> and based on work in <a href="chapBib.html#biBBrSa">[BRS99]</a>, is to construct a full set of <em>group relator sequences</em> for the group; convert these into module polynomials (eliminating empty sequences); and then apply simplification rules (including the primary identity property) to eliminate obvious duplicates and conjugates.</p>
+
+<p>When a reduced set of polynomials has been obtained, the relator sequences from which they were formed are returned as the <em>identities among relators</em> for <span class="SimpleMath">G</span>.</p>
+
+<p>Here are some of the details when working with the group <span class="SimpleMath">S_3 = ⟨ a,b ~|~ ρ=a^3, σ=b^2, τ=(ab)^2 ⟩</span>. The monoid presentation has generators <span class="SimpleMath">{a^+,b^+,a^-,b^-}</span> and relators</p>
+
+<p class="pcenter">
+[~ 1 = a^+a^-,~ 2 = b^+b^-,~ 3 = a^-a^+,~ 4 = b^-b^+,~ 
+   5 = a^{+3},~ 6 = b^{+2},~ 7 = (a^+b^+)^2 ~]\ , 
+</p>
+
+<p>and the elements are <span class="SimpleMath">{ id, a^+,b^+,a^-,a^+b^-,b^+a^+}</span>. The logged rewriting system has relations</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdleft"><span class="SimpleMath">a^+a^- = id,quad b^+b^- = id,quad a^-a^+ = id,quad b^-b^+ = id,</span></td>
+</tr>
+<tr>
+<td class="tdleft"><span class="SimpleMath">a^+2 = [5, id]a^-,quad a^-2 = [-5, id]a^+,quad b^+2 = [6, id] id,quad b^- = [-6, id]b^+,</span></td>
+</tr>
+<tr>
+<td class="tdleft"><span class="SimpleMath">b^+a^- = [-7,a^+b^-][6, id]a^+b^+,quad a^-b^+ = [-7,a^+][6,a^-b^-]b^+a^+,</span></td>
+</tr>
+<tr>
+<td class="tdleft"><span class="SimpleMath">a^+b^+a^+ = [7, id][-6, id]b^+,quad b^+a^+b^+ = [7,a^+]a^-.</span></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>To construct the <em>identity monoid relator sequences</em> we follow in turn the relators <span class="SimpleMath">5=ρ,6=σ,7=τ</span> at each of the elements of <span class="SimpleMath">S_3</span>. For example, applying <span class="SimpleMath">τ</span> at <span class="SimpleMath">a^+</span> gives the cycle:</p>
+
+<p class="pcenter">
+a^+ \stackrel{a^+}{\longrightarrow} a^- 
+    \stackrel{b^+}{\longrightarrow} b^+a^+ 
+    \stackrel{a^+}{\longrightarrow} a^+b^+ 
+    \stackrel{b^+}{\longrightarrow} a^+\ .
+</p>
+
+<p>Each of these edges has a non-trivial logged rewrite, particularly the third edge where <span class="SimpleMath">b^+a^+a^+ -&gt; b^+a^- -&gt; a^+b^+</span>. Combining this log information we obtain the sequence:</p>
+
+<p class="pcenter">
+[5,{\rm id}].[-7,a^+][6,a^-b^-].
+[5,{\rm id}]^{b^-}[-7,a^+b^-][6,{\rm id}].[6,{\rm id}]^{a^-}\ .
+</p>
+
+<p>Expanding this gives:</p>
+
+<p class="pcenter">
+a^+a^+a^+.a^-b^-a^-b^-a^-a^+.b^+a^+b^+b^+a^-b^-.b^+a^+a^+a^+b^-. 
+b^+a^-b^-a^-b^-a^-a^+b^-.b^+b^+.a^+b^+b^+a^-
+</p>
+
+<p>which cancels to leave, as expected, <span class="SimpleMath">a^+(a^+b^+a^+b^+)a^- = [7,a^-]</span>. Adding the inverse <span class="SimpleMath">[-7,a^-]</span> to the front of the log expression gives the identity</p>
+
+<p class="pcenter">
+[-7,a^-].[5,{\rm id}].[-7,a^+][6,a^-b^-].
+[5,b^-][-7,a^+b^-][6,{\rm id}].[6,a^-]\ .
+</p>
+
+<p>Converting this back to the group presentation, and conjugating by <span class="SimpleMath">a</span>, we obtain the <em>identity group relator sequence</em> given in the introduction (<a href="chap1.html#X80F39D77788BD099"><span class="RefLink">1.1</span></a>):</p>
+
+<p class="pcenter">
+\tau^{-1}\; \rho^a\;
+\left(\tau^{-1}\right)^{a^2}\; \sigma^{a^{-1}b^{-1}a}\; 
+\rho^{b^{-1}a}\; \left(\tau^{-1}\right)^{ab^{-1}a}\; 
+\sigma^a\; \sigma\ .
+</p>
+
+<p>This is then transformed into the module polynomial</p>
+
+<p class="pcenter">
+  \rho(a^+ + b^+a^+) + \sigma({\rm id} + a^+ + a^+b^+) 
+- \tau({\rm id} + a^- + b^+)\ ,
+</p>
+
+<p>where the monoid elements are transformed into their normal forms.</p>
+
+<p>The collection of saturated sets of these module polynomials is then reduced as far as possible, and the minimal set obtained returned as the <code class="code">IdentityYSequences</code> of the group. The group relator sequences corresponding to these module polynomials form the <code class="code">IdentitiesAmongRelators</code> for the group.</p>
+
+<p><a id="X7D428F9B8054F5FB" name="X7D428F9B8054F5FB"></a></p>
+
+<h4>6.1 <span class="Heading">The original approach</span></h4>
+
+<p>This section describes the approach used from the earliest versions of <strong class="pkg">IdRel</strong> up to version 2.38 in 2017. For version 2.39 the methods were revised so as to produce some data for infinite groups. This experimental work is described in later sections.</p>
+
+<p><a id="X7FD998C87BF9AAC9" name="X7FD998C87BF9AAC9"></a></p>
+
+<h5>6.1-1 IdentitiesAmongRelators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentitiesAmongRelators</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityYSequences</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityRelatorSequences</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>It is <em>not</em> guaranteed that a minimal set of identities is obtained. For <code class="code">q8</code> a set of seven identities is returned, whereas a minimal set contains only six. See Example 5.1 of <a href="chapBib.html#biBHeWe1">[HW03]</a> for further details.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gseq8 := IdentityRelatorSequences( q8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( gseq8 );</span>
+19
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gseq8[1];</span>
+[ 1, 9, [ [ q8_R1^-1, &lt;identity ...&gt; ], [ q8_R1, f1^-1 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">idsq8 := IdentitiesAmongRelators( q8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( idsq8 );</span>
+7
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( idsq8 );</span>
+[ [ [ q8_R1^-1, &lt;identity ...&gt; ], [ q8_R1, f1^-1 ] ], 
+  [ [ q8_R2^-1, &lt;identity ...&gt; ], [ q8_R4^-1, f2^-1 ], [ q8_R2, f1^-2*f2^-1 ],
+      [ q8_R4, f2^-1 ] ], 
+  [ [ q8_R1^-1, &lt;identity ...&gt; ], [ q8_R4^-1, f2^-1 ], [ q8_R3, f1^-1*f2^-1 ],
+      [ q8_R3, f2^-1 ], [ q8_R3, f1*f2^-1 ], [ q8_R1^-1, f2^-1 ], 
+      [ q8_R3, f1^-2*f2^-1 ], [ q8_R4, f2^-1 ] ], 
+  [ [ q8_R3^-1, &lt;identity ...&gt; ], [ q8_R4^-1, f2^-1 ], [ q8_R3, f1^-1*f2^-1 ],
+      [ q8_R4, f1*f2^-1 ] ], 
+  [ [ q8_R4^-1, &lt;identity ...&gt; ], [ q8_R4^-1, f2^-1 ], [ q8_R3, f1^-1*f2^-1 ],
+      [ q8_R3, f2^-1 ], [ q8_R4^-1, f2^-1 ], [ q8_R2, f1^-2*f2^-1 ], 
+      [ q8_R4, f2^-1 ] ], 
+  [ [ q8_R4^-1, &lt;identity ...&gt; ], [ q8_R3, f1*f2 ], [ q8_R1^-1, f2 ], 
+      [ q8_R3, f1^-2*f2 ], [ q8_R4, f2 ] ], 
+  [ [ q8_R4^-1, &lt;identity ...&gt; ], [ q8_R4^-1, f1^-2 ], [ q8_R2, f1^-4 ], 
+      [ q8_R1, f1^-1 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">idyseq8 := IdentityYSequences( q8 );</span>
+[ ( q8_Y1*( -q8_M1), q8_R1*( q8_M1 - &lt;identity ...&gt;) ), 
+  ( q8_Y5*( &lt;identity ...&gt;), q8_R2*( q8_M2 - &lt;identity ...&gt;) ), 
+  ( q8_Y18*( q8_M2), q8_R1*( -q8_M2 - &lt;identity ...&gt;) + q8_R3*( q8_M1^2 + q8_M\
+3 + q8_M1 + &lt;identity ...&gt;) ), 
+  ( q8_Y8*( q8_M2), q8_R3*( q8_M3 - q8_M2) + q8_R4*( q8_M1 - &lt;identity ...&gt;) )
+    , 
+  ( q8_Y17*( -q8_M2), q8_R2*( -q8_M1^2) + q8_R3*( -q8_M3 - &lt;identity ...&gt;) + q\
+8_R4*( q8_M2 + &lt;identity ...&gt;) ), 
+  ( q8_Y11*( &lt;identity ...&gt;), q8_R1*( -q8_M2) + q8_R3*( q8_M1*q8_M2 + q8_M4) +\
+ q8_R4*( q8_M2 - &lt;identity ...&gt;) ), 
+  ( q8_Y10*( -q8_M1), q8_R1*( -&lt;identity ...&gt;) + q8_R2*( -q8_M1) + q8_R4*( q8_\
+M3 + q8_M1) ) ]
+
+</pre></div>
+
+<p><a id="X7BEE0DBB78F9355E" name="X7BEE0DBB78F9355E"></a></p>
+
+<h5>6.1-2 RootIdentities</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RootIdentities</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The <em>root identities</em> are identities of the form <span class="SimpleMath">r^wr^-1</span> where <span class="SimpleMath">r = w^n</span> is a relator and <span class="SimpleMath">n&gt;1</span>. (For equivalent forms invert, or permute the factors cyclically, or act with <span class="SimpleMath">w^-1</span>.)</p>
+
+<p>For <code class="code">q8</code> only two of the four relators are proper powers, <span class="SimpleMath">π=a^4</span> and <span class="SimpleMath">ρ=b^4</span>, so the root identities are <span class="SimpleMath">π^aπ^-1</span> and <span class="SimpleMath">ρ^bρ^-1</span>. In the listing below the second of these is displayed as <span class="SimpleMath">ρ^-1(ξ^-1)^b^-1}ρ^a^-2b^-1}ξ^b^-1}</span>, where <span class="SimpleMath">ξ = a^2b^2</span>. Because the second term is the inverse of the fourth, we may convert the final three terms into a conjugate of the third, so that the identity is equivalent to <span class="SimpleMath">ρ^-1ρ^b</span>:</p>
+
+<p class="pcenter">
+\left(\rho^{a^{-2}b^{-1}}\right)^{\xi^{b^{-1}}} 
+~=~ \left(\rho^{a^{-2}b^{-1}}\right)^{b(a^2b^2)b^{-1}} 
+~=~ \rho^b~. 
+</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RootIdentities( q8 );</span>
+[ [ [ q8_R1^-1, &lt;identity ...&gt; ], [ q8_R1, f1^-1 ] ], 
+  [ [ q8_R2^-1, &lt;identity ...&gt; ], [ q8_R4^-1, f2^-1 ], [ q8_R2, f1^-2*f2^-1 ],
+      [ q8_R4, f2^-1 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RootIdentities(s3);</span>
+[ [ [ s3_R1^-1, &lt;identity ...&gt; ], [ s3_R1, f1^-1 ] ], 
+  [ [ s3_R2^-1, &lt;identity ...&gt; ], [ s3_R2, f2 ] ], 
+  [ [ s3_R3^-1, &lt;identity ...&gt; ], [ s3_R3, f1*f2 ] ] ]
+
+</pre></div>
+
+<p><a id="X809923437C987089" name="X809923437C987089"></a></p>
+
+<h4>6.2 <span class="Heading">Knuth-Bendix identities</span></h4>
+
+<p>Given an initial set of rules, the logged Knuth-Bendix procedure considers overlaps between pairs of logged rules <span class="SimpleMath">l_1=L_1r_1</span> and <span class="SimpleMath">l_2=L_2r_2</span>. In the case <span class="SimpleMath">u_1l_1=l_2v_2</span> for some words <span class="SimpleMath">u_1,v_2</span>, the critical pair resulting from the overlap is <span class="SimpleMath">(u_1r_1,r_2v_2)</span>. Logged reduction is then applied to these two words giving <span class="SimpleMath">u_1r_1=M_1z_1</span> and <span class="SimpleMath">r_2v_2=M_2z_2</span>, say. Then, if <span class="SimpleMath">z_1&gt;z_2</span>, the additional rule <span class="SimpleMath">z_1 = (M_1^-1L_1^-u_1^-1}L_2M_2)z_2</span> is added. There is a similar formula when <span class="SimpleMath">z_2&gt;z_1</span>.</p>
+
+<p><a id="X800D7F047976EDDF" name="X800D7F047976EDDF"></a></p>
+
+<h5>6.2-1 IdentitiesAmongRelatorsKB</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentitiesAmongRelatorsKB</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityYSequencesKB</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityRelatorSequencesKB</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The third possibility is that <span class="SimpleMath">z_1=z_2</span>, and in this case there is no reduction rule to be added. However the log expression <span class="SimpleMath">M_1^-1L_1^-u_1^-1}L_2M_2</span> must reduce to the identity, and so is an identity relator sequence. Since version 2.41 of this package, the function <code class="code">LoggedRewritingSystemFpGroup</code> returns two lists: a complete set of reduction rules, and a set of identity relator sequences produced in this way. In the case of the quaternion group <code class="code">q8</code> a total of <span class="SimpleMath">42</span> sequences are produced by logged Knuth-Bendix, and these are then reduced to <span class="SimpleMath">8</span> identities.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gseqKB8 := IdentityRelatorSequencesKB( q8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(last);</span>
+42
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">idrelsKB8 := IdentitiesAmongRelatorsKB( q8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( idrelsKB8 );</span>
+[ [ [ q8_R1^-1, &lt;identity ...&gt; ], [ q8_R1, f1^-1 ] ], 
+  [ [ q8_R3^-1, f1^-1 ], [ q8_R3^-1, f1^-2 ], [ q8_R1, &lt;identity ...&gt; ], 
+      [ q8_R3^-1, f1 ], [ q8_R1, f2^-1 ], [ q8_R3^-1, &lt;identity ...&gt; ] ], 
+  [ [ q8_R3, f1*f2 ], [ q8_R4^-1, &lt;identity ...&gt; ], [ q8_R3^-1, f1^-2 ], 
+      [ q8_R4, f1^-1 ] ], 
+  [ [ q8_R2^-1, f1^-3 ], [ q8_R4, f1^-1 ], [ q8_R3, &lt;identity ...&gt; ], 
+      [ q8_R3^-1, f1*f2^-1 ], [ q8_R4^-1, &lt;identity ...&gt; ], [ q8_R2, f1^-2 ] ]
+    , [ [ q8_R4^-1, f2 ], [ q8_R2, f1^-2*f2 ], [ q8_R4^-1, &lt;identity ...&gt; ], 
+      [ q8_R3, f1^-1 ], [ q8_R3, &lt;identity ...&gt; ] ], 
+  [ [ q8_R4^-1, &lt;identity ...&gt; ], [ q8_R3^-1, f1^-2 ], 
+      [ q8_R1, &lt;identity ...&gt; ], [ q8_R3^-1, f1 ], [ q8_R4, f2^-1 ] ], 
+  [ [ q8_R4^-1, &lt;identity ...&gt; ], [ q8_R4^-1, f1^-2 ], [ q8_R2, f1^-4 ], 
+      [ q8_R1, &lt;identity ...&gt; ] ], 
+  [ [ q8_R4, f1^-1 ], [ q8_R3, f1*f2 ], [ q8_R1^-1, f2 ], 
+      [ q8_R2^-1, f1^-2*f2 ], [ q8_R4, f2 ], [ q8_R3, f1 ], [ q8_R3^-1, f2 ], 
+      [ q8_R4^-1, &lt;identity ...&gt; ], [ q8_R3, f1^-1 ], [ q8_R4^-1, f1^-1 ], 
+      [ q8_R2, f1^-3 ] ] ]
+
+</pre></div>
+
+<p><a id="X8448909D82CF6FE9" name="X8448909D82CF6FE9"></a></p>
+
+<h4>6.3 <span class="Heading">Partial lists of elements</span></h4>
+
+<p>As we have seen, the procedure for obtaining identities involves applying each relator at each element of the group. Since this will not terminate when the group is infinite, we include an operation to construct words up to a given length in the monoid representation of the group.</p>
+
+<p><a id="X7FCEF03E7A57C331" name="X7FCEF03E7A57C331"></a></p>
+
+<h5>6.3-1 PartialElementsOfMonoidRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PartialElementsOfMonoidRepresentation</code>( <var class="Arg">G</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>As an example we take the group <span class="SimpleMath">⟨ u,v,w ~|~ u^3, v^2, w^2, (uv)^2, (vw)^2⟩</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup(3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">u := F.1;;  v := F.2;;  w := F.3;; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rels := [ u^3, v^2, w^2, (u*v)^2, (v*w)^2 ];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q0 := F/rels;; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetArrangementOfMonoidGenerators( q0, [1,-1,2,-2,3,-3] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( q0, "q0" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">monq0 := MonoidPresentationFpGroup( q0 );</span>
+monoid presentation with group relators 
+[ q0_M1^3, q0_M3^2, q0_M5^2, (q0_M1*q0_M3)^2, (q0_M3*q0_M5)^2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lrws := LoggedRewritingSystemFpGroup( q0 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PartialElementsOfMonoidPresentation( q0, 1 ); </span>
+[ &lt;identity ...&gt;, q0_M1, q0_M2, q0_M3, q0_M5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PartialElementsOfMonoidPresentation( q0, 2 ); </span>
+[ &lt;identity ...&gt;, q0_M1, q0_M2, q0_M3, q0_M5, q0_M1*q0_M3, q0_M1*q0_M5, 
+  q0_M2*q0_M3, q0_M2*q0_M5, q0_M3*q0_M5, q0_M5*q0_M1, q0_M5*q0_M2 ]
+
+</pre></div>
+
+<p><a id="X7A9CE0B37EF88CEA" name="X7A9CE0B37EF88CEA"></a></p>
+
+<h4>6.4 <span class="Heading">Identities for infinite groups</span></h4>
+
+<p>Because the list of elements is incomplete, it is not guaranteed that the list of identities is complete.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">idsq0 := IdentitiesAmongRelators( q0 );</span>
+[ [ [ q0_R1^-1, &lt;identity ...&gt; ], [ q0_R1, f1^-1 ] ], 
+  [ [ q0_R2^-1, &lt;identity ...&gt; ], [ q0_R2, f2 ] ], 
+  [ [ q0_R3^-1, &lt;identity ...&gt; ], [ q0_R3, f3 ] ], 
+  [ [ q0_R4^-1, &lt;identity ...&gt; ], [ q0_R2^-1, f1^-1 ], [ q0_R4, f1*f2 ], 
+      [ q0_R2, f1*f2 ] ], 
+  [ [ q0_R5^-1, &lt;identity ...&gt; ], [ q0_R3^-1, f2^-1 ], [ q0_R5, f2*f3 ], 
+      [ q0_R3, f2*f3 ] ], 
+  [ [ q0_R1^-1, &lt;identity ...&gt; ], [ q0_R2^-1, f1^-1 ], [ q0_R4, f1*f2 ], 
+      [ q0_R2^-1, f1^-1*f2^-1*f1*f2 ], [ q0_R4, f1^2*f2 ], [ q0_R1^-1, f2 ], 
+      [ q0_R2^-1, f1^-1*f2^-1*f1^-1*f2 ], [ q0_R4, f2 ] ], 
+  [ [ q0_R2^-1, &lt;identity ...&gt; ], [ q0_R3^-1, f2^-1 ], [ q0_R5, f2*f3 ], 
+      [ q0_R2^-1, f3 ], [ q0_R3^-1, f2^-1*f3^-1*f2^-1*f3 ], [ q0_R5, f3 ] ] ]
+
+</pre></div>
+
+<p> </p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

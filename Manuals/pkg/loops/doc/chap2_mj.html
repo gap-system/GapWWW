@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Loops) - Chapter 2: Mathematical Background</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X7EF1B6708069B0C7" name="X7EF1B6708069B0C7"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X7EF1B6708069B0C7">2 <span class="Heading">Mathematical Background</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X80243DE5826583B8">2.1 <span class="Heading">Quasigroups and Loops</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7EC01B437CC2B2C9">2.2 <span class="Heading">Translations</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X83EDF04F7952143F">2.3 <span class="Heading">Subquasigroups and Subloops</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X869CBCE381E2C422">2.4 <span class="Heading">Nilpotence and Solvability</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7E0849977869E53D">2.5 <span class="Heading">Associators and Commutators</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X791066ED7DD9F254">2.6 <span class="Heading">Homomorphism and Homotopisms</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">Mathematical Background</span></h3>
+
+<p>We assume that you are familiar with the theory of quasigroups and loops, for instance with the textbook of Bruck <a href="chapBib_mj.html#biBBr">[Bru58]</a> or Pflugfelder <a href="chapBib_mj.html#biBPf">[Pfl90]</a>. Nevertheless, we did include definitions and results in this manual in order to unify terminology and improve legibility of the text. Some general concepts of quasigroups and loops can be found in this chapter. More special concepts are defined throughout the text as needed.</p>
+
+<p><a id="X80243DE5826583B8" name="X80243DE5826583B8"></a></p>
+
+<h4>2.1 <span class="Heading">Quasigroups and Loops</span></h4>
+
+<p>A set with one binary operation (denoted <span class="SimpleMath">\(\cdot\)</span> here) is called <em>groupoid</em> or <em>magma</em>, the latter name being used in <strong class="pkg">GAP</strong>.</p>
+
+<p>An element <span class="SimpleMath">\(1\)</span> of a groupoid <span class="SimpleMath">\(G\)</span> is a <em>neutral element</em> or an <em>identity element</em> if <span class="SimpleMath">\(1\cdot x = x\cdot 1 = x\)</span> for every <span class="SimpleMath">\(x\)</span> in <span class="SimpleMath">\(G\)</span>.</p>
+
+<p>Let <span class="SimpleMath">\(G\)</span> be a groupoid with neutral element <span class="SimpleMath">\(1\)</span>. Then an element <span class="SimpleMath">\(x^{-1}\)</span> is called a <em>two-sided inverse</em> of <span class="SimpleMath">\(x\)</span> in <span class="SimpleMath">\(G\)</span> if <span class="SimpleMath">\( x\cdot x^{-1} = x^{-1}\cdot x = 1\)</span>.</p>
+
+<p>Recall that groups are associative groupoids with an identity element and two-sided inverses. Groups can be reached in another way from groupoids, namely via quasigroups and loops.</p>
+
+<p>A <em>quasigroup</em> <span class="SimpleMath">\(Q\)</span> is a groupoid such that the equation <span class="SimpleMath">\(x\cdot y=z\)</span> has a unique solution in <span class="SimpleMath">\(Q\)</span> whenever two of the three elements <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(z\)</span> of <span class="SimpleMath">\(Q\)</span> are specified. Note that multiplication tables of finite quasigroups are precisely <em>latin squares</em>, i.e., square arrays with symbols arranged so that each symbol occurs in each row and in each column exactly once. A <em>loop</em> <span class="SimpleMath">\(L\)</span> is a quasigroup with a neutral element.</p>
+
+<p>Groups are clearly loops. Conversely, it is not hard to show that associative quasigroups are groups.</p>
+
+<p><a id="X7EC01B437CC2B2C9" name="X7EC01B437CC2B2C9"></a></p>
+
+<h4>2.2 <span class="Heading">Translations</span></h4>
+
+<p>Given an element <span class="SimpleMath">\(x\)</span> of a quasigroup <span class="SimpleMath">\(Q\)</span>, we can associative two permutations of <span class="SimpleMath">\(Q\)</span> with it: the <em>left translation</em> <span class="SimpleMath">\(L_x:Q\to Q\)</span> defined by <span class="SimpleMath">\(y\mapsto x\cdot y\)</span>, and the <em>right translation</em> <span class="SimpleMath">\(R_x:Q\to Q\)</span> defined by <span class="SimpleMath">\(y\mapsto y\cdot x\)</span>.</p>
+
+<p>The binary operation <span class="SimpleMath">\(x\backslash y = L_x^{-1}(y)\)</span> is called the <em>left division</em>, and <span class="SimpleMath">\(x/y = R_y^{-1}(x)\)</span> is called the <em>right division</em>.</p>
+
+<p>Although it is possible to compose two left (right) translations of a quasigroup, the resulting permutation is not necessarily a left (right) translation. The set <span class="SimpleMath">\(\{L_x|x\in Q\}\)</span> is called the <em>left section</em> of <span class="SimpleMath">\(Q\)</span>, and <span class="SimpleMath">\(\{R_x|x\in Q\}\)</span> is the <em>right section</em> of <span class="SimpleMath">\(Q\)</span>.</p>
+
+<p>Let <span class="SimpleMath">\(S_Q\)</span> be the symmetric group on <span class="SimpleMath">\(Q\)</span>. Then the subgroup <span class="SimpleMath">\({\rm Mlt}_{\lambda}(Q)=\langle L_x|x\in Q\rangle\)</span> of <span class="SimpleMath">\(S_Q\)</span> generated by all left translations is the <em>left multiplication group</em> of <span class="SimpleMath">\(Q\)</span>. Similarly, <span class="SimpleMath">\({\rm Mlt}_{\rho}(Q)= \langle R_x|x\in Q\rangle\)</span> is the <em>right multiplication group</em> of <span class="SimpleMath">\(Q\)</span>. The smallest group containing both <span class="SimpleMath">\({\rm Mlt}_{\lambda}(Q)\)</span> and <span class="SimpleMath">\({\rm Mlt}_{\rho}(Q)\)</span> is called the <em>multiplication group</em> of <span class="SimpleMath">\(Q\)</span> and is denoted by <span class="SimpleMath">\({\rm Mlt}(Q)\)</span>.</p>
+
+<p>For a loop <span class="SimpleMath">\(Q\)</span>, the <em>left inner mapping group</em> <span class="SimpleMath">\({\rm Inn}_{\lambda}(Q)\)</span> is the stabilizer of <span class="SimpleMath">\(1\)</span> in <span class="SimpleMath">\({\rm Mlt}_{\lambda}(Q)\)</span>. The <em>right inner mapping group</em> <span class="SimpleMath">\({\rm Inn}_{\rho}(Q)\)</span> is defined dually. The <em>inner mapping group</em> <span class="SimpleMath">\({\rm Inn}(Q)\)</span> is the stabilizer of <span class="SimpleMath">\(1\)</span> in <span class="SimpleMath">\(Q\)</span>.</p>
+
+<p><a id="X83EDF04F7952143F" name="X83EDF04F7952143F"></a></p>
+
+<h4>2.3 <span class="Heading">Subquasigroups and Subloops</span></h4>
+
+<p>A nonempty subset <span class="SimpleMath">\(S\)</span> of a quasigroup <span class="SimpleMath">\(Q\)</span> is a <em>subquasigroup</em> if it is closed under multiplication and the left and right divisions. In the finite case, it suffices for <span class="SimpleMath">\(S\)</span> to be closed under multiplication. <em>Subloops</em> are defined analogously when <span class="SimpleMath">\(Q\)</span> is a loop.</p>
+
+<p>The <em>left nucleus</em> <span class="SimpleMath">\({\rm Nuc}_{\lambda}(Q)\)</span> of <span class="SimpleMath">\(Q\)</span> consists of all elements <span class="SimpleMath">\(x\)</span> of <span class="SimpleMath">\(Q\)</span> such that <span class="SimpleMath">\(x(yz) = (xy)z\)</span> for every <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(z\)</span> in <span class="SimpleMath">\(Q\)</span>. The <em>middle nucleus</em> <span class="SimpleMath">\({\rm Nuc}_{\mu}(Q)\)</span> and the <em>right nucleus</em> <span class="SimpleMath">\({\rm Nuc}_{\rho}(Q)\)</span> are defined analogously. The <em>nucleus</em> <span class="SimpleMath">\({\rm Nuc}(Q)\)</span> is the intersection of the left, middle and right nuclei.</p>
+
+<p>The <em>commutant</em> <span class="SimpleMath">\(C(Q)\)</span> of <span class="SimpleMath">\(Q\)</span> consists of all elements <span class="SimpleMath">\(x\)</span> of <span class="SimpleMath">\(Q\)</span> that commute with all elements of <span class="SimpleMath">\(Q\)</span>. The <em>center</em> <span class="SimpleMath">\(Z(Q)\)</span> of <span class="SimpleMath">\(Q\)</span> is the intersection of <span class="SimpleMath">\({\rm Nuc}(Q)\)</span> with <span class="SimpleMath">\(C(Q)\)</span>.</p>
+
+<p>A subloop <span class="SimpleMath">\(S\)</span> of <span class="SimpleMath">\(Q\)</span> is <em>normal</em> in <span class="SimpleMath">\(Q\)</span> if <span class="SimpleMath">\(f(S)=S\)</span> for every inner mapping <span class="SimpleMath">\(f\)</span> of <span class="SimpleMath">\(Q\)</span>.</p>
+
+<p><a id="X869CBCE381E2C422" name="X869CBCE381E2C422"></a></p>
+
+<h4>2.4 <span class="Heading">Nilpotence and Solvability</span></h4>
+
+<p>For a loop <span class="SimpleMath">\(Q\)</span> define <span class="SimpleMath">\(Z_0(Q) = 1\)</span> and let <span class="SimpleMath">\(Z_{i+1}(Q)\)</span> be the preimage of the center of <span class="SimpleMath">\(Q/Z_i(Q)\)</span> in <span class="SimpleMath">\(Q\)</span>. A loop <span class="SimpleMath">\(Q\)</span> is <em>nilpotent of class</em> <span class="SimpleMath">\(n\)</span> if <span class="SimpleMath">\(n\)</span> is the least nonnegative integer such that <span class="SimpleMath">\(Z_n(Q)=Q\)</span>. In such case <span class="SimpleMath">\(Z_0(Q)\le Z_1(Q)\le \dots \le Z_n(Q)\)</span> is the <em>upper central series</em>.</p>
+
+<p>The <em>derived subloop</em> <span class="SimpleMath">\(Q'\)</span> of <span class="SimpleMath">\(Q\)</span> is the least normal subloop of <span class="SimpleMath">\(Q\)</span> such that <span class="SimpleMath">\(Q/Q'\)</span> is a commutative group. Define <span class="SimpleMath">\(Q^{(0)}=Q\)</span> and let <span class="SimpleMath">\(Q^{(i+1)}\)</span> be the derived subloop of <span class="SimpleMath">\(Q^{(i)}\)</span>. Then <span class="SimpleMath">\(Q\)</span> is <em>solvable of class</em> <span class="SimpleMath">\(n\)</span> if <span class="SimpleMath">\(n\)</span> is the least nonnegative integer such that <span class="SimpleMath">\(Q^{(n)} = 1\)</span>. In such a case <span class="SimpleMath">\(Q^{(0)}\ge Q^{(1)}\ge \cdots \ge Q^{(n)}\)</span> is the <em>derived series</em> of <span class="SimpleMath">\(Q\)</span>.</p>
+
+<p><a id="X7E0849977869E53D" name="X7E0849977869E53D"></a></p>
+
+<h4>2.5 <span class="Heading">Associators and Commutators</span></h4>
+
+<p>Let <span class="SimpleMath">\(Q\)</span> be a quasigroup and let <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(z\)</span> be elements of <span class="SimpleMath">\(Q\)</span>. Then the <em>commutator</em> of <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span> is the unique element <span class="SimpleMath">\([x,y]\)</span> of <span class="SimpleMath">\(Q\)</span> such that <span class="SimpleMath">\(xy = [x,y](yx)\)</span>, and the <em>associator</em> of <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(z\)</span> is the unique element <span class="SimpleMath">\([x,y,z]\)</span> of <span class="SimpleMath">\(Q\)</span> such that <span class="SimpleMath">\((xy)z = [x,y,z](x(yz))\)</span>.</p>
+
+<p>The <em>associator subloop</em> <span class="SimpleMath">\(A(Q)\)</span> of <span class="SimpleMath">\(Q\)</span> is the least normal subloop of <span class="SimpleMath">\(Q\)</span> such that <span class="SimpleMath">\(Q/A(Q)\)</span> is a group.</p>
+
+<p>It is not hard to see that <span class="SimpleMath">\(A(Q)\)</span> is the least normal subloop of <span class="SimpleMath">\(Q\)</span> containing all commutators, and <span class="SimpleMath">\(Q'\)</span> is the least normal subloop of <span class="SimpleMath">\(Q\)</span> containing all commutators and associators.</p>
+
+<p><a id="X791066ED7DD9F254" name="X791066ED7DD9F254"></a></p>
+
+<h4>2.6 <span class="Heading">Homomorphism and Homotopisms</span></h4>
+
+<p>Let <span class="SimpleMath">\(K\)</span>, <span class="SimpleMath">\(H\)</span> be two quasigroups. Then a map <span class="SimpleMath">\(f:K\to H\)</span> is a <em>homomorphism</em> if <span class="SimpleMath">\(f(x)\cdot f(y)=f(x\cdot y)\)</span> for every <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\in K\)</span>. If <span class="SimpleMath">\(f\)</span> is also a bijection, we speak of an <em>isomorphism</em>, and the two quasigroups are called isomorphic.</p>
+
+<p>An ordered triple <span class="SimpleMath">\((\alpha,\beta,\gamma)\)</span> of maps <span class="SimpleMath">\(\alpha\)</span>, <span class="SimpleMath">\(\beta\)</span>, <span class="SimpleMath">\(\gamma:K\to H\)</span> is a <em>homotopism</em> if <span class="SimpleMath">\(\alpha(x)\cdot\beta(y) = \gamma(x\cdot y)\)</span> for every <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span> in <span class="SimpleMath">\(K\)</span>. If the three maps are bijections, then <span class="SimpleMath">\((\alpha,\beta,\gamma)\)</span> is an <em>isotopism</em>, and the two quasigroups are isotopic.</p>
+
+<p>Isotopic groups are necessarily isomorphic, but this is certainly not true for nonassociative quasigroups or loops. In fact, every quasigroup is isotopic to a loop.</p>
+
+<p>Let <span class="SimpleMath">\((K,\cdot)\)</span>, <span class="SimpleMath">\((K,\circ)\)</span> be two quasigroups defined on the same set <span class="SimpleMath">\(K\)</span>. Then an isotopism <span class="SimpleMath">\((\alpha,\beta,{\rm id}_K)\)</span> is called a <em>principal isotopism</em>. An important class of principal isotopisms is obtained as follows: Let <span class="SimpleMath">\((K,\cdot)\)</span> be a quasigroup, and let <span class="SimpleMath">\(f\)</span>, <span class="SimpleMath">\(g\)</span> be elements of <span class="SimpleMath">\(K\)</span>. Define a new operation <span class="SimpleMath">\(\circ\)</span> on <span class="SimpleMath">\(K\)</span> by <span class="SimpleMath">\(x\circ y = R_g^{-1}(x)\cdot L_f^{-1}(y)\)</span>, where <span class="SimpleMath">\(R_g\)</span>, <span class="SimpleMath">\(L_f\)</span> are translations. Then <span class="SimpleMath">\((K,\circ)\)</span> is a quasigroup isotopic to <span class="SimpleMath">\((K,\cdot)\)</span>, in fact a loop with neutral element <span class="SimpleMath">\(f\cdot g\)</span>. We call <span class="SimpleMath">\((K,\circ)\)</span> a <em>principal loop isotope</em> of <span class="SimpleMath">\((K,\cdot)\)</span>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

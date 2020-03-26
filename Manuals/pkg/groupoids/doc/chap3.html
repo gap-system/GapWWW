@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (groupoids) - Chapter 3: Mappings of many-object structures</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X78FC7902804CED8E" name="X78FC7902804CED8E"></a></p>
+<div class="ChapSects"><a href="chap3.html#X78FC7902804CED8E">3 <span class="Heading">Mappings of many-object structures</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X82F856A086B93832">3.1 <span class="Heading">Homomorphisms of magmas with objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86E00FEA7FF38FEA">3.1-1 MagmaWithObjectsHomomorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7C4D1AEE80D41A35">3.2 <span class="Heading">Homomorphisms of semigroups and monoids with objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X795C8DE37AED7B44">3.3 <span class="Heading">Homomorphisms to more than one piece</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AE44D9485EB50F1">3.3-1 HomomorphismByUnion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C053B0379DDCE13">3.3-2 IsInjectiveOnObjects</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7B9D71BB7BAEFAAA">3.4 <span class="Heading">Mappings defined by a function</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81B64F9A855D265F">3.4-1 MappingWithObjectsByFunction</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Mappings of many-object structures</span></h3>
+
+<p>A <em>homomorphism</em> <span class="SimpleMath">f</span> from a magma with objects <span class="SimpleMath">M</span> to a magma with objects <span class="SimpleMath">N</span> consists of</p>
+
+
+<ul>
+<li><p>a map <span class="SimpleMath">f_O</span> from the objects of <span class="SimpleMath">M</span> to those of <span class="SimpleMath">N</span>,</p>
+
+</li>
+<li><p>a map <span class="SimpleMath">f_A</span> from the arrows of <span class="SimpleMath">M</span> to those of <span class="SimpleMath">N</span>.</p>
+
+</li>
+</ul>
+<p>The map <span class="SimpleMath">f_A</span> is required to be compatible with the tail and head maps and to preserve multiplication:</p>
+
+<p class="pcenter">
+f_A(a : u \to v) * f_A(b : v \to w) ~=~ f_A(a*b : u \to w) 
+</p>
+
+<p>with tail <span class="SimpleMath">f_O(u)</span> and head <span class="SimpleMath">f_O(w)</span>.</p>
+
+<p>When the underlying magma of <span class="SimpleMath">M</span> is a monoid or group, the map <span class="SimpleMath">f_A</span> is required to preserve identities and inverses.</p>
+
+<p><a id="X82F856A086B93832" name="X82F856A086B93832"></a></p>
+
+<h4>3.1 <span class="Heading">Homomorphisms of magmas with objects</span></h4>
+
+<p><a id="X86E00FEA7FF38FEA" name="X86E00FEA7FF38FEA"></a></p>
+
+<h5>3.1-1 MagmaWithObjectsHomomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MagmaWithObjectsHomomorphism</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomomorphismFromSinglePiece</code>( <var class="Arg">src</var>, <var class="Arg">rng</var>, <var class="Arg">hom</var>, <var class="Arg">imobs</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomomorphismToSinglePiece</code>( <var class="Arg">src</var>, <var class="Arg">rng</var>, <var class="Arg">images</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MappingToSinglePieceData</code>( <var class="Arg">mwohom</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PiecesOfMapping</code>( <var class="Arg">mwohom</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsomorphismNewObjects</code>( <var class="Arg">src</var>, <var class="Arg">objlist</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>There are a variety of homomorphism constructors.</p>
+
+<p>The simplest construction gives a homomorphism <span class="SimpleMath">M -&gt; N</span> with both <span class="SimpleMath">M</span> and <span class="SimpleMath">N</span> connected. It is implemented as <code class="code">IsMappingToSinglePieceRep</code> with attributes <code class="code">Source</code>, <code class="code">Range</code> and <code class="code">MappingToSinglePieceData</code>. The operation requires the following information:</p>
+
+
+<ul>
+<li><p>a magma homomorphism <code class="code">hom</code> from the underlying magma of <span class="SimpleMath">M</span> to the underlying magma of <span class="SimpleMath">N</span>,</p>
+
+</li>
+<li><p>a list <code class="code">imobs</code> of the images of the objects of <span class="SimpleMath">M</span>.</p>
+
+</li>
+</ul>
+<p>In the first example we construct endomappings of <code class="code">m</code> and <code class="code">M78</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tup1 := [ DirectProductElement([m1,m2]), DirectProductElement([m2,m1]), </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">             DirectProductElement([m3,m4]), DirectProductElement([m4,m3]) ];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f1 := GeneralMappingByElements( m, m, tup1 ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMagmaHomomorphism( f1 ); </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom1 := MagmaWithObjectsHomomorphism( M78, M78, f1, [-8,-7] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( hom1 );</span>
+homomorphism to single piece magma: M78 -&gt; M78
+ magma hom: &lt;mapping: m -&gt; m &gt; 
+object map: [ -8, -7 ] -&gt; [ -8, -7 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Source( hom1 ), Range( hom1 ) ]; </span>
+[ M78, M78 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b87;</span>
+[m4 : -8 -&gt; -7]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">im1 := ImageElm( hom1, b87 );</span>
+[m3 : -8 -&gt; -7]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i56 := IsomorphismNewObjects( M78, [-5,-6] ); </span>
+magma with objects homomorphism : 
+[ [ IdentityMapping( m ), [ -5, -6 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ib87 := ImageElm( i56, b87 );</span>
+[m4 : -5 -&gt; -6]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M65 := Range( i56);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( M65, "M65" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">j56 := InverseGeneralMapping( i56 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImagesOfObjects( j56 ); </span>
+[ -7, -8 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">comp := j56 * hom1;</span>
+magma with objects homomorphism : M65 -&gt; M78
+[ [ &lt;mapping: m -&gt; m &gt;, [ -7, -8 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImageElm( comp, ib87 );</span>
+[m3 : -8 -&gt; -7]
+
+</pre></div>
+
+<p>A homomorphism <em>to</em> a connected magma with objects may have a source with several pieces, and so is a union of homomorphisms <em>from</em> single pieces.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M4 := UnionOfPieces( [ M78, M65 ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">images := [ MappingToSinglePieceData( hom1 )[1], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">MappingToSinglePieceData( j56 )[1] ]; </span>
+[ [ &lt;mapping: m -&gt; m &gt;, [ -8, -7 ] ], [ IdentityMapping( m ), [ -7, -8 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">map4 := HomomorphismToSinglePiece( M4, M78, images ); </span>
+magma with objects homomorphism : 
+[ [ &lt;mapping: m -&gt; m &gt;, [ -8, -7 ] ], [ IdentityMapping( m ), [ -7, -8 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImageElm( map4, b87 );</span>
+[m3 : -8 -&gt; -7]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImageElm( map4, ib87 );</span>
+[m4 : -8 -&gt; -7]
+
+</pre></div>
+
+<p><a id="X7C4D1AEE80D41A35" name="X7C4D1AEE80D41A35"></a></p>
+
+<h4>3.2 <span class="Heading">Homomorphisms of semigroups and monoids with objects</span></h4>
+
+<p>The next example exhibits a homomorphism between transformation semigroups with objects.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t2 := Transformation( [2,2,4,1] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s2 := Transformation( [1,1,4,4] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r2 := Transformation( [4,1,3,3] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sgp2 := Semigroup( [ t2, s2, r2 ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( sgp2, "sgp&lt;t2,s2,r2&gt;" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">##  apparently no method for transformation semigroups available for: </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">##  nat := NaturalHomomorphismByGenerators( sgp, sgp2 );  so we use: </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">##  in the function flip below t is a transformation on [1..n] </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flip := function( t ) </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    local i, j, k, L, L2, n; </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    n := DegreeOfTransformation( t );  </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    L := ImageListOfTransformation( t ); </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    if IsOddInt(n) then n:=n+1; L1:=Concatenation(L,[n]); </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   else L1:=L; fi; </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    L2 := ShallowCopy( L1 );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    for i in [1..n] do </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        if IsOddInt(i) then j:=i+1; else j:=i-1; fi; </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        k := L1[j]; </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        if IsOddInt(k) then L2[i]:=k+1; else L2[i]:=k-1; fi; </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    od; </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    return( Transformation( L2 ) ); </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">smap := MappingByFunction( sgp, sgp2, flip );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ok := RespectsMultiplication( smap ); </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ t, ImageElm( smap, t ) ]; </span>
+[ Transformation( [ 1, 1, 2, 3 ] ), Transformation( [ 2, 2, 4, 1 ] ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ s, ImageElm( smap, s ) ]; </span>
+[ Transformation( [ 2, 2, 3, 3 ] ), Transformation( [ 1, 1, 4, 4 ] ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ r, ImageElm( smap, r ) ]; </span>
+[ Transformation( [ 2, 3, 4, 4 ] ), Transformation( [ 4, 1, 3, 3 ] ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( smap, "smap" ); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T123 := SemigroupWithObjects( sgp2, [-13,-12,-11] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">shom := MagmaWithObjectsHomomorphism( S123, T123, smap, [-11,-12,-13] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">it12 := ImageElm( shom, t12 );;  [ t12, it12 ]; </span>
+[ [Transformation( [ 1, 1, 2, 3 ] ) : -1 -&gt; -2], 
+  [Transformation( [ 2, 2, 4, 1 ] ) : -13 -&gt; -12] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">is23 := ImageElm( shom, s23 );;  [ s23, is23 ]; </span>
+[ [Transformation( [ 2, 2, 3, 3 ] ) : -2 -&gt; -3], 
+  [Transformation( [ 1, 1, 4, 4 ] ) : -12 -&gt; -11] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ir31 := ImageElm( shom, r31 );;  [ r31, ir31 ]; </span>
+[ [Transformation( [ 2, 3, 4, 4 ] ) : -3 -&gt; -1], 
+  [Transformation( [ 4, 1, 3, 3 ] ) : -11 -&gt; -13] ]
+
+</pre></div>
+
+<p><a id="X795C8DE37AED7B44" name="X795C8DE37AED7B44"></a></p>
+
+<h4>3.3 <span class="Heading">Homomorphisms to more than one piece</span></h4>
+
+<p><a id="X7AE44D9485EB50F1" name="X7AE44D9485EB50F1"></a></p>
+
+<h5>3.3-1 HomomorphismByUnion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomomorphismByUnion</code>( <var class="Arg">src</var>, <var class="Arg">rng</var>, <var class="Arg">homs</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>When <span class="SimpleMath">f : M -&gt; N</span> and <span class="SimpleMath">N</span> has more than one connected component, then <span class="SimpleMath">f</span> is a union of homomorphisms, one for each piece in the range.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N4 := UnionOfPieces( [ M78, T123 ] );</span>
+magma with objects having 2 pieces :-
+1: semigroup with objects :-
+    magma = sgp&lt;t2,s2,r2&gt;
+  objects = [ -13, -12, -11 ]
+2: M78
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h14 := HomomorphismByUnionNC( N1, N4, [ hom1, shom ] );</span>
+magma with objects homomorphism : 
+[ magma with objects homomorphism : M78 -&gt; M78
+    [ [ &lt;mapping: m -&gt; m &gt;, [ -8, -7 ] ] ], magma with objects homomorphism : 
+    [ [ smap, [ -11, -12, -13 ] ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImageElm( h14, a78 );</span>
+[m1 : -7 -&gt; -8]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImageElm( h14, r31 );</span>
+[Transformation( [ 4, 1, 3, 3 ] ) : -11 -&gt; -13]
+
+</pre></div>
+
+<p><a id="X7C053B0379DDCE13" name="X7C053B0379DDCE13"></a></p>
+
+<h5>3.3-2 IsInjectiveOnObjects</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInjectiveOnObjects</code>( <var class="Arg">mwohom</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSurjectiveOnObjects</code>( <var class="Arg">mwohom</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBijectiveOnObjects</code>( <var class="Arg">mwohom</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEndomorphismWithObjects</code>( <var class="Arg">mwohom</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAutomorphismWithObjects</code>( <var class="Arg">mwohom</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>The meaning of these five properties is obvious.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsInjectiveOnObjects( h14 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSurjectiveOnObjects( h14 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsBijectiveOnObjects( h14 ); </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsEndomorphismWithObjects( h14 ); </span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAutomorphismWithObjects( h14 ); </span>
+false
+
+</pre></div>
+
+<p><a id="X7B9D71BB7BAEFAAA" name="X7B9D71BB7BAEFAAA"></a></p>
+
+<h4>3.4 <span class="Heading">Mappings defined by a function</span></h4>
+
+<p><a id="X81B64F9A855D265F" name="X81B64F9A855D265F"></a></p>
+
+<h5>3.4-1 MappingWithObjectsByFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MappingWithObjectsByFunction</code>( <var class="Arg">src</var>, <var class="Arg">rng</var>, <var class="Arg">fun</var>, <var class="Arg">imobs</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMappingWithObjectsByFunction</code>( <var class="Arg">map</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingFunction</code>( <var class="Arg">map</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>More general mappings, which need not preserve multiplication, are available using this operation. See section <a href="chap5.html#X803E01577A2B37D2"><span class="RefLink">5.6</span></a> for an application.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flip := function(a) return Arrow(M78,a![1],a![3],a![2]); end;      </span>
+function( a ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flipmap := MappingWithObjectsByFunction( M78, M78, flip, [-8,-7] );</span>
+magma with objects mapping by function : M78 -&gt; M78
+function: function ( a )
+    return Arrow( M78, a![1], a![3], a![2] );
+end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a78; ImageElm( flipmap, a78 );                                     </span>
+[m2 : -7 -&gt; -8]
+[m2 : -8 -&gt; -7]
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Automata) - Chapter 2: Finite Automata</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X811E5FC2849C5644" name="X811E5FC2849C5644"></a></p>
+<div class="ChapSects"><a href="chap2.html#X811E5FC2849C5644">2 <span class="Heading">Finite Automata</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X821C3B3687B1F2FF">2.1 <span class="Heading">Automata generation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87D8222D7B50731E">2.1-1 Automaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X83CCDEF9814F1E6D">2.1-2 IsAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D39CECC7E12DD8A">2.1-3 IsDeterministicAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X83C1148481BAA3DD">2.1-4 IsNonDeterministicAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81EC5331790D6022">2.1-5 IsEpsilonAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81FB5BE27903EC32">2.1-6 String</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X801019097C93BCCC">2.1-7 RandomAutomaton</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X80AB906D86BBC153">2.2 <span class="Heading">Automata internals</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A34B47778B50FFE">2.2-1 AlphabetOfAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8044B24B82C59BBF">2.2-2 AlphabetOfAutomatonAsList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X872BB42A81E4D0E7">2.2-3 TransitionMatrixOfAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B5C3CFA83FF80EA">2.2-4 InitialStatesOfAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8408FE8487028B7F">2.2-5 SetInitialStatesOfAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X78CDDCC27D085F00">2.2-6 FinalStatesOfAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80689F1480F9D959">2.2-7 SetFinalStatesOfAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D22AD207A3D5FF4">2.2-8 NumberStatesOfAutomaton</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X8454E24E7D9FC1C2">2.3 <span class="Heading">Comparison of automata</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X867887A683961C63">2.4 <span class="Heading">Tests involving automata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8356E41086482483">2.4-1 IsDenseAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8676D8388053F1E7">2.4-2 IsRecognizedByAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80CCDD438258CD25">2.4-3 IsPermutationAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B7CA23680888C9C">2.4-4 IsInverseAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A4CDEFB84B97849">2.4-5 AddInverseEdgesToInverseAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8321BCE57E55FB30">2.4-6 IsReversibleAutomaton</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X82EB5BE77F9F686A">2.5 <span class="Heading">Basic operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8225A1B886131707">2.5-1 CopyAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80D423A584246E2E">2.5-2 NullCompletionAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X79F052EC81135807">2.5-3 ListSinkStatesAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8240136E7A26B1A6">2.5-4 RemovedSinkStates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C0526217BFE7A65">2.5-5 ReversedAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A4A066583C71ABE">2.5-6 PermutedAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A72DDF0782E8D5E">2.5-7 ListPermutedAutomata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7FA7DF6D87D63D67">2.5-8 NormalizedAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A94A77A7C65BA90">2.5-9 UnionAutomata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X83E772F2878546A4">2.5-10 ProductAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85F6AD697DCA5765">2.5-11 ProductOfLanguages</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X79F21CB37B34A354">2.6 <span class="Heading">Links with Semigroups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B9994827CF94CC7">2.6-1 TransitionSemigroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E3F29DF86A26347">2.6-2 SyntacticSemigroupAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D058F0D83D7B49B">2.6-3 SyntacticSemigroupLang</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Finite Automata</span></h3>
+
+<p>This chapter describes the representations used in this package for finite automata and some functions to determine information about them.</p>
+
+<p>We have to remark that the states of an automaton are always named <span class="SimpleMath">1,2,3,...;</span> the alphabet may be given by the user. By default it is <span class="SimpleMath">{a,b,c,...}</span> (or <span class="SimpleMath">{a_1,a_2,a_3,...}</span> in the case of alphabets with more than <span class="SimpleMath">26</span> letters).</p>
+
+<p>The transition function of an automaton with <span class="SimpleMath">q</span> states over an alphabet with <span class="SimpleMath">n</span> letters is represented by a (not necessarily dense) <span class="SimpleMath">n× q</span> matrix. Each row of the matrix describes the action of the corresponding letter on the states. In the case of a <em>deterministic automaton</em> (DFA) the entries of the matrix are non-negative integers. When all entries of the transition table are positive integers, the automaton is said to be <em>dense</em> or <em>complete</em>. In the case of a <em>non deterministic automaton</em> (NFA) the entries of the matrix may be lists of non-negative integers. <em>Automata with <span class="SimpleMath">ϵ</span>-transitions</em> are also allowed: the last letter of the alphabet is assumed to be <span class="SimpleMath">ϵ</span> and is represented by @.</p>
+
+<p><a id="X821C3B3687B1F2FF" name="X821C3B3687B1F2FF"></a></p>
+
+<h4>2.1 <span class="Heading">Automata generation</span></h4>
+
+<p>The way to create an automaton in <strong class="pkg">GAP</strong> is the following</p>
+
+<p><a id="X87D8222D7B50731E" name="X87D8222D7B50731E"></a></p>
+
+<h5>2.1-1 Automaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Automaton</code>( <var class="Arg">Type</var>, <var class="Arg">Size</var>, <var class="Arg">Alphabet</var>, <var class="Arg">TransitionTable</var>, <var class="Arg">Initial</var>, <var class="Arg">Accepting</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">Type</code> may be <code class="code">"det"</code>, <code class="code">"nondet"</code> or <code class="code">"epsilon"</code> according to whether the automaton is deterministic, non deterministic or an automaton with <span class="SimpleMath">ϵ</span>-transitions. <code class="code">Size</code> is a positive integer representing the number of states of the automaton. <code class="code">Alphabet</code> is the number of letters of the alphabet or a list with the letters of the ordered alphabet. <code class="code">TransitionTable</code> is the transition matrix. The entries are non-negative integers not greater than the size of the automaton. In the case of non deterministic automata, lists of non-negative integers not greater than the size of the automaton are also allowed. <code class="code">Initial</code> and <code class="code">Accepting</code> are, respectively, the lists of initial and accepting states.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,2,[[3,,3,4],[3,4,0,4]],[1],[4]);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(aut);</span>
+   |  1  2  3  4
+-----------------
+ a |  3     3  4
+ b |  3  4     4
+Initial state:   [ 1 ]
+Accepting state: [ 4 ]
+
+</pre></div>
+
+<p>The alphabet of the automaton may be specified:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,"01",[[3,,3,4],[3,4,0,4]],[1],[4]);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(aut);</span>
+   |  1  2  3  4
+-----------------
+ 0 |  3     3  4
+ 1 |  3  4     4
+Initial state:   [ 1 ]
+Accepting state: [ 4 ]
+</pre></div>
+
+<p>Instead of leaving a hole in the transition matrix, we may write a <code class="code">0</code> to mean that no transition is present. Non deterministic automata may be given the same way.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ndaut:=Automaton("nondet",4,2,[[3,[1,2],3,0],[3,4,0,[2,3]]],[1],[4]);</span>
+&lt; non deterministic automaton on 2 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(ndaut);</span>
+   |  1       2          3       4
+-----------------------------------------
+ a | [ 3 ]   [ 1, 2 ]   [ 3 ]
+ b | [ 3 ]   [ 4 ]              [ 2, 3 ]
+Initial state:   [ 1 ]
+Accepting state: [ 4 ]
+</pre></div>
+
+<p>Also in the same way can be given <span class="SimpleMath">ϵ</span>-automata. The letter <span class="SimpleMath">ϵ</span> is written <code class="code">@</code> instead.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("epsilon",3,"01@",[[,[2],[3]],[[1,3],,[1]],[[1],[2],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[2]]],[2],[2,3]);</span>
+&lt; epsilon automaton on 3 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(x);</span>
+   |  1          2       3
+------------------------------
+ 0 |            [ 2 ]   [ 3 ]
+ 1 | [ 1, 3 ]           [ 1 ]
+ @ | [ 1 ]      [ 2 ]   [ 2 ]
+Initial state:    [ 2 ]
+Accepting states: [ 2, 3 ]
+</pre></div>
+
+<p>Bigger automata are displayed in another form:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",16,2,[[4,0,0,6,3,1,4,8,7,4,3,0,6,1,6,0],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[3,4,0,0,6,1,0,6,1,6,1,6,6,4,8,7,4,5]],[1],[4]);</span>
+&lt; deterministic automaton on 2 letters with 16 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(aut);</span>
+1    a   4
+1    b   3
+2    b   4
+    ... some more lines
+15   a   6
+15   b   8
+16   b   7
+Initial state:   [ 1 ]
+Accepting state: [ 4 ]
+</pre></div>
+
+<p><a id="X83CCDEF9814F1E6D" name="X83CCDEF9814F1E6D"></a></p>
+
+<h5>2.1-2 IsAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAutomaton</code>( <var class="Arg">O</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>In the presence of an object <var class="Arg">O</var>, one may want to test whether <code class="code">O</code> is an automaton. This may be done using the function <code class="code">IsAutomaton</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 0, 2, 0 ], [ 0, 1, 0 ] ],[ 3 ],[ 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAutomaton(x);</span>
+true
+</pre></div>
+
+<p><a id="X7D39CECC7E12DD8A" name="X7D39CECC7E12DD8A"></a></p>
+
+<h5>2.1-3 IsDeterministicAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDeterministicAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns <code class="keyw">true</code> when <code class="code">aut</code> is a deterministic automaton and <code class="keyw">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 0, 2, 0 ], [ 0, 1, 0 ] ],[ 3 ],[ 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDeterministicAutomaton(x);</span>
+true
+</pre></div>
+
+<p><a id="X83C1148481BAA3DD" name="X83C1148481BAA3DD"></a></p>
+
+<h5>2.1-4 IsNonDeterministicAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsNonDeterministicAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns <code class="keyw">true</code> when <code class="code">aut</code> is a non deterministic automaton and <code class="keyw">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("nondet",3,2,[[,[1,3],],[,[2,3],[1,3]]],[1,2],[1,3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNonDeterministicAutomaton(y);</span>
+true
+</pre></div>
+
+<p><a id="X81EC5331790D6022" name="X81EC5331790D6022"></a></p>
+
+<h5>2.1-5 IsEpsilonAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEpsilonAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns <code class="keyw">true</code> when <code class="code">aut</code> is an <span class="SimpleMath">ϵ</span>-automaton and <code class="keyw">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z:=Automaton("epsilon",2,2,[[[1,2],],[[2],[1]]],[1,2],[1,2]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsEpsilonAutomaton(z);</span>
+true
+</pre></div>
+
+<p><a id="X81FB5BE27903EC32" name="X81FB5BE27903EC32"></a></p>
+
+<h5>2.1-6 String</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; String</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The way <strong class="pkg">GAP</strong> displays an automaton is quite natural, but when one wants to do small changes, for example using <em>copy/paste</em>, the use of the function <code class="code">String</code> (possibly followed by <code class="code">Print</code>) may be usefull.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 0, 2, 0 ], [ 0, 1, 0 ] ],[ 3 ],[ 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">String(x);</span>
+"Automaton(\"det\",3,\"ab\",[ [ 0, 2, 0 ], [ 0, 1, 0 ] ],[ 3 ],[ 2 ]);;"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(String(x));</span>
+Automaton("det",3,"ab",[ [ 0, 2, 0 ], [ 0, 1, 0 ] ],[ 3 ],[ 2 ]);;
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z:=Automaton("epsilon",2,2,[[[1,2],],[[2],[1]]],[1,2],[1,2]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(String(z));</span>
+Automaton("epsilon",2,"a@",[ [ [ 1, 2 ], [ ] ], [ [ 2 ], [ 1 ] ] ],[ 1, 2 ],[ \
+1, 2 ]);;
+</pre></div>
+
+<p><a id="X801019097C93BCCC" name="X801019097C93BCCC"></a></p>
+
+<h5>2.1-7 RandomAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomAutomaton</code>( <var class="Arg">Type</var>, <var class="Arg">Size</var>, <var class="Arg">Alphabet</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given the <var class="Arg">Type</var>, the <var class="Arg">Size</var> (i.e. the number of states) and the <var class="Arg">Alphabet</var> (a positive integer or a list), returns a pseudo random automaton with these parameters.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomAutomaton("det",5,"ac");</span>
+&lt; deterministic automaton on 2 letters with 5 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+   |  1  2  3  4  5
+--------------------
+ a |     2  3
+ c |  2  3
+Initial state:    [ 4 ]
+Accepting states: [ 3, 4 ]
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomAutomaton("nondet",3,["a","b","c"]);</span>
+&lt; non deterministic automaton on 3 letters with 3 states &gt;
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomAutomaton("epsilon",2,"abc");</span>
+&lt; epsilon automaton on 4 letters with 2 states &gt;
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomAutomaton("epsilon",2,2);</span>
+&lt; epsilon automaton on 3 letters with 2 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+   |  1          2
+----------------------
+ a | [ 1, 2 ]
+ b | [ 2 ]      [ 1 ]
+ @ | [ 1, 2 ]
+Initial state:    [ 2 ]
+Accepting states: [ 1, 2 ]
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=RandomTransformation(3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b:=RandomTransformation(3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=RandomAutomaton("det",4,[a,b]);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+</pre></div>
+
+<p><a id="X80AB906D86BBC153" name="X80AB906D86BBC153"></a></p>
+
+<h4>2.2 <span class="Heading">Automata internals</span></h4>
+
+<p>In this section we describe the functions used to access the internals of an automaton.</p>
+
+<p><a id="X7A34B47778B50FFE" name="X7A34B47778B50FFE"></a></p>
+
+<h5>2.2-1 AlphabetOfAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlphabetOfAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the number of symbols in the alphabet of automaton <code class="code">aut</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,2,[[3,,3,4],[3,4,0,]],[1],[4]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfAutomaton(aut);</span>
+2
+</pre></div>
+
+<p><a id="X8044B24B82C59BBF" name="X8044B24B82C59BBF"></a></p>
+
+<h5>2.2-2 AlphabetOfAutomatonAsList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlphabetOfAutomatonAsList</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the alphabet of automaton <code class="code">aut</code> always as a list. Note that when the alphabet of the automaton is given as an integer (meaning the number of symbols) not greater than 26 it returns the list <code class="code">"abcd...."</code>. If the alphabet is given by means of an integer greater than 26, the function returns <code class="code">[ "a1", "a2", "a3", "a4", ... ]</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=RandomAutomaton("det",5,"cat");</span>
+&lt; deterministic automaton on 3 letters with 5 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfAutomaton(a);</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfAutomatonAsList(a);</span>
+"cat"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=RandomAutomaton("det",5,20);</span>
+&lt; deterministic automaton on 20 letters with 5 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfAutomaton(a);</span>
+20
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfAutomatonAsList(a);</span>
+"abcdefghijklmnopqrst"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=RandomAutomaton("det",5,30);</span>
+&lt; deterministic automaton on 30 letters with 5 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfAutomaton(a);</span>
+30
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfAutomatonAsList(a);</span>
+[ "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10", "a11", 
+  "a12", "a13", "a14", "a15", "a16", "a17", "a18", "a19", "a20", "a21",
+  "a22", "a23", "a24", "a25", "a26", "a27", "a28", "a29", "a30" ]
+</pre></div>
+
+<p><a id="X872BB42A81E4D0E7" name="X872BB42A81E4D0E7"></a></p>
+
+<h5>2.2-3 TransitionMatrixOfAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TransitionMatrixOfAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the transition matrix of automaton <code class="code">aut</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,2,[[3,,3,4],[3,4,0,]],[1],[4]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TransitionMatrixOfAutomaton(aut);</span>
+[ [ 3, 0, 3, 4 ], [ 3, 4, 0, 0 ] ]
+</pre></div>
+
+<p><a id="X7B5C3CFA83FF80EA" name="X7B5C3CFA83FF80EA"></a></p>
+
+<h5>2.2-4 InitialStatesOfAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InitialStatesOfAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the initial states of automaton <code class="code">aut</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,2,[[3,,3,4],[3,4,0,]],[1],[4]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InitialStatesOfAutomaton(aut);</span>
+[ 1 ]
+</pre></div>
+
+<p><a id="X8408FE8487028B7F" name="X8408FE8487028B7F"></a></p>
+
+<h5>2.2-5 SetInitialStatesOfAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetInitialStatesOfAutomaton</code>( <var class="Arg">aut</var>, <var class="Arg">I</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Sets the initial states of automaton <code class="code">aut</code>. <code class="code">I</code> may be a positive integer or a list of positive integers.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,2,[[3,,3,4],[3,4,0,]],[1],[4]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInitialStatesOfAutomaton(aut,4);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InitialStatesOfAutomaton(aut);</span>
+[ 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInitialStatesOfAutomaton(aut,[2,3]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InitialStatesOfAutomaton(aut);</span>
+[ 2, 3 ]
+</pre></div>
+
+<p><a id="X78CDDCC27D085F00" name="X78CDDCC27D085F00"></a></p>
+
+<h5>2.2-6 FinalStatesOfAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FinalStatesOfAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the final states of automaton <code class="code">aut</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,2,[[3,,3,4],[3,4,0,]],[1],[4]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FinalStatesOfAutomaton(aut);</span>
+[ 4 ]
+</pre></div>
+
+<p><a id="X80689F1480F9D959" name="X80689F1480F9D959"></a></p>
+
+<h5>2.2-7 SetFinalStatesOfAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetFinalStatesOfAutomaton</code>( <var class="Arg">aut</var>, <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Sets the final states of automaton <code class="code">aut</code>. <code class="code">F</code> may be a positive integer or a list of positive integers.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,2,[[3,,3,4],[3,4,0,]],[1],[4]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FinalStatesOfAutomaton(aut);</span>
+[ 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetFinalStatesOfAutomaton(aut,2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FinalStatesOfAutomaton(aut);</span>
+[ 2 ]
+</pre></div>
+
+<p><a id="X7D22AD207A3D5FF4" name="X7D22AD207A3D5FF4"></a></p>
+
+<h5>2.2-8 NumberStatesOfAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumberStatesOfAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the number of states of automaton <code class="code">aut</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,2,[[3,,3,4],[3,4,0,]],[1],[4]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberStatesOfAutomaton(aut);</span>
+4
+</pre></div>
+
+<p><a id="X8454E24E7D9FC1C2" name="X8454E24E7D9FC1C2"></a></p>
+
+<h4>2.3 <span class="Heading">Comparison of automata</span></h4>
+
+<p>Although there is no standard way to compare automata it is usefull to be able to do some kind of comparison. Doing so, one can consider sets of automata. We just compare the strings of the automata.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 0, 2, 0 ], [ 0, 1, 0 ] ],[ 3 ],[ 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("det",3,2,[ [ 2, 0, 0 ], [ 1, 3, 0 ] ],[ 3 ],[ 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x=y;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(Set([y,x,x]));</span>
+2
+</pre></div>
+
+<p><a id="X867887A683961C63" name="X867887A683961C63"></a></p>
+
+<h4>2.4 <span class="Heading">Tests involving automata</span></h4>
+
+<p>This section describes some useful tests involving automata.</p>
+
+<p><a id="X8356E41086482483" name="X8356E41086482483"></a></p>
+
+<h5>2.4-1 IsDenseAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDenseAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Tests whether a deterministic automaton <code class="code">aut</code> is complete. (See also <code class="func">NullCompletionAutomaton</code> (<a href="chap2.html#X80D423A584246E2E"><span class="RefLink">2.5-2</span></a>).)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,2,[[3,,3,4],[3,4,0,]],[1],[4]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDenseAutomaton(aut);                                 </span>
+false
+</pre></div>
+
+<p><a id="X8676D8388053F1E7" name="X8676D8388053F1E7"></a></p>
+
+<h5>2.4-2 IsRecognizedByAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRecognizedByAutomaton</code>( <var class="Arg">A</var>, <var class="Arg">w</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The arguments are: an automaton <var class="Arg">A</var> and a string (i.e. a word) <var class="Arg">w</var> in the alphabet of the automaton. Returns <code class="code">true</code> if the word is recognized by the automaton and <code class="code">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",3,2,[[1,2,1],[2,1,3]],[1],[2]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRecognizedByAutomaton(aut,"bbb");</span>
+true
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",3,"01",[[1,2,1],[2,1,3]],[1],[2]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRecognizedByAutomaton(aut,"111");</span>
+true
+</pre></div>
+
+<p><a id="X80CCDD438258CD25" name="X80CCDD438258CD25"></a></p>
+
+<h5>2.4-3 IsPermutationAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPermutationAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The argument is a deterministic automaton. Returns <code class="keyw">true</code> when each letter of the alphabet induces a permutation on the vertices and <code class="keyw">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 1, 2, 3 ], [ 1, 2, 3 ] ],[ 1 ],[ 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPermutationAutomaton(x);</span>
+true
+</pre></div>
+
+<p><a id="X7B7CA23680888C9C" name="X7B7CA23680888C9C"></a></p>
+
+<h5>2.4-4 IsInverseAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInverseAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The argument is a deterministic automaton. Returns <code class="keyw">true</code> when each letter of the alphabet induces an injective partial function on the vertices and <code class="keyw">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 0, 1, 3 ], [ 0, 1, 2 ] ],[ 2 ],[ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsInverseAutomaton(x);</span>
+true
+</pre></div>
+
+<p>Frequently an inverse automaton is thought as if the inverse edges (labeled by formal inverses of the letters of the alphabet) were present, although they are usually not explicited. They can be made explicit using the function <code class="code">AddInverseEdgesToInverseAutomaton</code></p>
+
+<p><a id="X7A4CDEFB84B97849" name="X7A4CDEFB84B97849"></a></p>
+
+<h5>2.4-5 AddInverseEdgesToInverseAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddInverseEdgesToInverseAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The argument is an inverse automaton over the alphabet <span class="SimpleMath">{a,b,c,...}</span>. Returns an automaton with the inverse edges added. (The formal inverse of a letter is represented by the corresponding capital letter.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[[ 0, 1, 3 ],[ 0, 1, 2 ]],[ 2 ],[ 1 ]);;Display(x);</span>
+   |  1  2  3
+--------------
+ a |     1  3
+ b |     1  2
+Initial state:   [ 2 ]
+Accepting state: [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddInverseEdgesToInverseAutomaton(x);Display(x);</span>
+   |  1  2  3
+--------------
+ a |     1  3
+ b |     1  2
+ A |  2     3
+ B |  2  3
+Initial state:   [ 2 ]
+Accepting state: [ 1 ]
+</pre></div>
+
+<p><a id="X8321BCE57E55FB30" name="X8321BCE57E55FB30"></a></p>
+
+<h5>2.4-6 IsReversibleAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReversibleAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The argument is a deterministic automaton. Returns <code class="keyw">true</code> when <var class="Arg">aut</var> is a reversible automaton, i.e. the automaton obtained by reversing all edges and switching the initial and final states (see also <code class="func">ReversedAutomaton</code> (<a href="chap2.html#X7C0526217BFE7A65"><span class="RefLink">2.5-5</span></a>)) is deterministic. Returns <code class="keyw">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 0, 1, 2 ], [ 0, 1, 3 ] ],[ 2 ],[ 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsReversibleAutomaton(x);</span>
+true
+</pre></div>
+
+<p><a id="X82EB5BE77F9F686A" name="X82EB5BE77F9F686A"></a></p>
+
+<h4>2.5 <span class="Heading">Basic operations</span></h4>
+
+<p><a id="X8225A1B886131707" name="X8225A1B886131707"></a></p>
+
+<h5>2.5-1 CopyAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns a new automaton, which is a copy of automaton <var class="Arg">aut</var>.</p>
+
+<p><a id="X80D423A584246E2E" name="X80D423A584246E2E"></a></p>
+
+<h5>2.5-2 NullCompletionAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NullCompletionAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">aut</code> is a deterministic automaton. If it is complete returns <var class="Arg">aut</var>, otherwise returns the completion (with a null state) of <var class="Arg">aut</var>. Notice that the words recognized by <var class="Arg">aut</var> and its completion are the same.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,2,[[3,,3,4],[2,4,4,]],[1],[4]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDenseAutomaton(aut);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=NullCompletionAutomaton(aut);;Display(y);</span>
+   |  1  2  3  4  5
+--------------------
+ a |  3  5  3  4  5
+ b |  2  4  4  5  5
+Initial state:   [ 1 ]
+Accepting state: [ 4 ]
+</pre></div>
+
+<p>The state added is a <em>sink state</em> i.e. it is a state <span class="SimpleMath">q</span> which is not initial nor accepting and for all letter <span class="SimpleMath">a</span> in the alphabet of the automaton, <span class="SimpleMath">q</span> is the result of the action of <span class="SimpleMath">a</span> in <span class="SimpleMath">q</span>. (Notice that reading a word, one does not go out of a sink state.)</p>
+
+<p><a id="X79F052EC81135807" name="X79F052EC81135807"></a></p>
+
+<h5>2.5-3 ListSinkStatesAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ListSinkStatesAut</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Computes the list of all sink states of the automaton <var class="Arg">aut</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 2, 3, 3 ], [ 1, 2, 3 ] ],[ 1 ],[ 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ListSinkStatesAut(x);</span>
+[  ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("det",3,2,[ [ 2, 3, 3 ], [ 1, 2, 3 ] ],[ 1 ],[ 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ListSinkStatesAut(y);</span>
+[ 3 ]
+</pre></div>
+
+<p><a id="X8240136E7A26B1A6" name="X8240136E7A26B1A6"></a></p>
+
+<h5>2.5-4 RemovedSinkStates</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RemovedSinkStates</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Removes all sink states of the automaton <var class="Arg">aut</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("det",3,2,[[ 2, 3, 3 ],[ 1, 2, 3 ]],[ 1 ],[ 2 ]);;Display(y);</span>
+   |  1  2  3
+--------------
+ a |  2  3  3
+ b |  1  2  3
+Initial state:   [ 1 ]
+Accepting state: [ 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := RemovedSinkStates(y);Display(x);</span>
+&lt; deterministic automaton on 2 letters with 2 states &gt;
+   |  1  2
+-----------
+ a |  2
+ b |  1  2
+Initial state:   [ 1 ]
+Accepting state: [ 2 ]
+</pre></div>
+
+<p><a id="X7C0526217BFE7A65" name="X7C0526217BFE7A65"></a></p>
+
+<h5>2.5-5 ReversedAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReversedAutomaton</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Inverts the arrows of the automaton <var class="Arg">aut</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("det",3,2,[ [ 2, 3, 3 ], [ 1, 2, 3 ] ],[ 1 ],[ 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z:=ReversedAutomaton(y);;Display(z);</span>
+   |  1       2       3
+------------------------------
+ a |         [ 1 ]   [ 2, 3 ]
+ b | [ 1 ]   [ 2 ]   [ 3 ]
+Initial state:   [ 2 ]
+Accepting state: [ 1 ]
+</pre></div>
+
+<p><a id="X7A4A066583C71ABE" name="X7A4A066583C71ABE"></a></p>
+
+<h5>2.5-6 PermutedAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PermutedAutomaton</code>( <var class="Arg">aut</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given an automaton <var class="Arg">aut</var> and a list <var class="Arg">p</var> representing a permutation of the states, outputs the equivalent permuted automaton.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("det",4,2,[[2,3,4,2],[0,0,0,1]],[1],[3]);;Display(y);</span>
+   |  1  2  3  4
+-----------------
+ a |  2  3  4  2
+ b |           1
+Initial state:   [ 1 ]
+Accepting state: [ 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(PermutedAutomaton(y, [3,2,4,1]));</span>
+   |  1  2  3  4
+-----------------
+ a |  2  4  2  1
+ b |  3
+Initial state:   [ 3 ]
+Accepting state: [ 4 ]
+</pre></div>
+
+<p><a id="X7A72DDF0782E8D5E" name="X7A72DDF0782E8D5E"></a></p>
+
+<h5>2.5-7 ListPermutedAutomata</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ListPermutedAutomata</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given an automaton <var class="Arg">aut</var>, returns a list of automata with permuted states</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 0, 2, 3 ], [ 1, 2, 3 ] ],[ 1 ],[ 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ListPermutedAutomata(x);</span>
+[ &lt; deterministic automaton on 2 letters with 3 states &gt;, 
+  &lt; deterministic automaton on 2 letters with 3 states &gt;, 
+  &lt; deterministic automaton on 2 letters with 3 states &gt;, 
+  &lt; deterministic automaton on 2 letters with 3 states &gt;, 
+  &lt; deterministic automaton on 2 letters with 3 states &gt;, 
+  &lt; deterministic automaton on 2 letters with 3 states &gt; ]
+</pre></div>
+
+<p><a id="X7FA7DF6D87D63D67" name="X7FA7DF6D87D63D67"></a></p>
+
+<h5>2.5-8 NormalizedAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NormalizedAutomaton</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Produces an equivalent automaton but in which the initial state is numbered 1 and the accepting states have the greatest numbers.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[[ 1, 2, 0 ],[ 0, 1, 2 ]],[2],[1, 2]);;Display(x);</span>
+   |  1  2  3
+--------------
+ a |  1  2
+ b |     1  2
+Initial state:    [ 2 ]
+Accepting states: [ 1, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(NormalizedAutomaton(x));</span>
+   |  1  2  3
+--------------
+ a |  1     3
+ b |  3  1
+Initial state:    [ 1 ]
+Accepting states: [ 3, 1 ]
+</pre></div>
+
+<p><a id="X7A94A77A7C65BA90" name="X7A94A77A7C65BA90"></a></p>
+
+<h5>2.5-9 UnionAutomata</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionAutomata</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Produces the disjoint union of the deterministic or non deterministic automata <code class="code">A</code> and <code class="code">B</code>. The output is a non-deterministic automaton.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 1, 2, 0 ], [ 0, 1, 2 ] ],[ 2 ],[ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("det",3,2,[ [ 0, 1, 3 ], [ 0, 0, 0 ] ],[ 1 ],[ 1, 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnionAutomata(x,y);</span>
+&lt; non deterministic automaton on 2 letters with 6 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+   |  1       2       3       4    5       6
+------------------------------------------------
+ a | [ 1 ]   [ 2 ]                [ 4 ]   [ 6 ]
+ b |         [ 1 ]   [ 2 ]
+Initial states:   [ 2, 4 ]
+Accepting states: [ 1, 2, 4, 5, 6 ]
+</pre></div>
+
+<p><a id="X83E772F2878546A4" name="X83E772F2878546A4"></a></p>
+
+<h5>2.5-10 ProductAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProductAutomaton</code>( <var class="Arg">A1</var>, <var class="Arg">A2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The arguments must be deterministic automata. Returns the product of <var class="Arg">A1</var> and <var class="Arg">A2</var>.</p>
+
+<p>Note: <span class="SimpleMath">(p,q)-&gt;(p-1)m+q</span> is a bijection from <span class="SimpleMath">{1,..., n}× {1,..., m}</span> to <span class="SimpleMath">{1,...,mn}</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Automaton("det",3,"ab",[ [ 0, 1, 2 ], [ 1, 3, 0 ] ],[ 1 ],[ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(x);</span>
+   |  1  2  3  
+--------------
+ a |     1  2  
+ b |  1  3     
+Initial state:    [ 1 ]
+Accepting states: [ 1, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y := Automaton("det",3,"ab",[ [ 0, 1, 2 ], [ 0, 2, 0 ] ],[ 2 ],[ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(y);</span>
+   |  1  2  3  
+--------------
+ a |     1  2  
+ b |     2     
+Initial state:    [ 2 ]
+Accepting states: [ 1, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z:=ProductAutomaton(x, y);;Display(z);</span>
+   |  1  2  3  4  5  6  7  8  9  
+--------------------------------
+ a |              1  2     4  5  
+ b |     2        8              
+Initial state:    [ 2 ]
+Accepting states: [ 1, 2, 4, 5 ]
+</pre></div>
+
+<p><a id="X85F6AD697DCA5765" name="X85F6AD697DCA5765"></a></p>
+
+<h5>2.5-11 ProductOfLanguages</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProductOfLanguages</code>( <var class="Arg">A1</var>, <var class="Arg">A2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given two regular languages (as automata or rational expressions), returns an automaton that recognizes the concatenation of the given languages, that is, the set of words <span class="SimpleMath">uv</span> such that <span class="SimpleMath">u</span> belongs to the first language and <span class="SimpleMath">v</span> belongs to the second language.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a1:=ListOfWordsToAutomaton("ab",["aa","bb"]);</span>
+&lt; deterministic automaton on 2 letters with 5 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a2:=ListOfWordsToAutomaton("ab",["a","b"]);</span>
+&lt; deterministic automaton on 2 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProductOfLanguages(a1,a2);</span>
+&lt; deterministic automaton on 2 letters with 5 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FAtoRatExp(last);</span>
+(bbUaa)(aUb)
+</pre></div>
+
+<p><a id="X79F21CB37B34A354" name="X79F21CB37B34A354"></a></p>
+
+<h4>2.6 <span class="Heading">Links with Semigroups</span></h4>
+
+<p>Each letter of the alphabet of an automaton induces a partial transformation in its set of states. The semigroup generated by these transformations is called the <em>transition semigroup</em> of the automaton.</p>
+
+<p><a id="X7B9994827CF94CC7" name="X7B9994827CF94CC7"></a></p>
+
+<h5>2.6-1 TransitionSemigroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TransitionSemigroup</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the transition semigroup of the deterministic automaton <var class="Arg">aut</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut := Automaton("det",10,2,[[7,5,7,5,4,9,10,9,10,9],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[8,6,8,9,9,1,3,1,9,9]],[2],[6,7,8,9,10]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := TransitionSemigroup(aut);;       </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(s);                                                                  </span>
+30
+</pre></div>
+
+<p>The transition semigroup of the minimal automaton recognizing a language is the <em>syntactic semigroup</em> of that language.</p>
+
+<p><a id="X7E3F29DF86A26347" name="X7E3F29DF86A26347"></a></p>
+
+<h5>2.6-2 SyntacticSemigroupAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyntacticSemigroupAut</code>( <var class="Arg">aut</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the syntactic semigroup of the deterministic automaton <var class="Arg">aut</var> (i.e. the transition semigroup of the equivalent minimal automaton) when it is non empty and returns <code class="keyw">fail</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 1, 2, 0 ], [ 0, 1, 2 ] ],[ 2 ],[ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=SyntacticSemigroupAut(x);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(S);</span>
+3
+</pre></div>
+
+<p><a id="X7D058F0D83D7B49B" name="X7D058F0D83D7B49B"></a></p>
+
+<h5>2.6-3 SyntacticSemigroupLang</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyntacticSemigroupLang</code>( <var class="Arg">rat</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the syntactic semigroup of the language given by the rational expression <var class="Arg">rat</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rat := RationalExpression("a*ba*ba*(@Ub)");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=SyntacticSemigroupLang(rat);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(S);</span>
+7
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

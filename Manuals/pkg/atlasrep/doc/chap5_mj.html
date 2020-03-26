@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (AtlasRep) - Chapter 5: Extensions of the AtlasRep Package</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5.html">[MathJax off]</a></p>
+<p><a id="X7B0718A178BB10CA" name="X7B0718A178BB10CA"></a></p>
+<div class="ChapSects"><a href="chap5_mj.html#X7B0718A178BB10CA">5 <span class="Heading">Extensions of the <strong class="pkg">AtlasRep</strong> Package</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X78E7F7347DE8A125">5.1 <span class="Heading">Notify Additional Data</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81B5FA0578257653">5.1-1 <span class="Heading">AtlasOfGroupRepresentationsNotifyData</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7E0DC24681F17A9D">5.1-2 AtlasOfGroupRepresentationsForgetData</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81C5440983E47DBD">5.1-3 StringOfAtlasTableOfContents</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7A6024EC87A95E0B">5.2 <span class="Heading">The Effect of Extensions on the User Interface</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7E7307FC835D09DF">5.3 <span class="Heading">An Example of Extending the <strong class="pkg">AtlasRep</strong> Data</span></a>
+</span>
+</div>
+</div>
+
+<h3>5 <span class="Heading">Extensions of the <strong class="pkg">AtlasRep</strong> Package</span></h3>
+
+<p>It may be interesting to use the functions of the <strong class="pkg">GAP</strong> interface also for representations or programs that are <em>not</em> part of the <strong class="pkg">ATLAS</strong> of Group Representations. This chapter describes how to achieve this.</p>
+
+<p>The main idea is that users can notify collections of "private" data files, which may consist of</p>
+
+<ol>
+<li><p>new faithful representations and programs for groups that are declared already in the core part of the database that belongs to the "official" <strong class="pkg">ATLAS</strong> of Group Representations (see Section <a href="chap5_mj.html#X78E7F7347DE8A125"><span class="RefLink">5.1</span></a>),</p>
+
+</li>
+<li><p>the declaration of groups that are not declared in the <strong class="pkg">ATLAS</strong> of Group Representations, and representations and programs for them (see Section <a href="chap5_mj.html#X7A6024EC87A95E0B"><span class="RefLink">5.2</span></a>), and</p>
+
+</li>
+<li><p>the definition of new kinds of representations and programs (see Section <a href="chap7_mj.html#X809898027EFDA56E"><span class="RefLink">7.5</span></a>).</p>
+
+</li>
+</ol>
+<p>A test example of a local extension is given in Section <a href="chap5_mj.html#X7E7307FC835D09DF"><span class="RefLink">5.3</span></a>. Another such example is the small collection of data that is distributed together with the package, in its <code class="file">datapkg</code> directory; its contents can be listed by calling <code class="code">DisplayAtlasInfo( "contents", "internal" )</code>.</p>
+
+<p>Examples of extensions by files that can be downloaded from the internet can be found in the <strong class="pkg">GAP</strong> packages <strong class="pkg">MFER</strong> <a href="chapBib_mj.html#biBMFER">[BHM09]</a> and <strong class="pkg">CTBlocks</strong> <a href="chapBib_mj.html#biBCTBlocks">[Bre14]</a>. These extensions are automatically notified as soon as <strong class="pkg">AtlasRep</strong> is available, via the default value of the user preference <code class="code">AtlasRepTOCData</code>, see Section <a href="chap4_mj.html#X7F21FFBE7F8108E4"><span class="RefLink">4.2-3</span></a>; their contents can be listed by calling <code class="code">DisplayAtlasInfo( "contents", "mfer" )</code> and <code class="code">DisplayAtlasInfo( "contents", "ctblocks" )</code>, respectively.</p>
+
+<p>Several of the sanity checks for the core part of the <strong class="pkg">AtlasRep</strong> data make sense also for data extensions, see Section <a href="chap7_mj.html#X79C5F2267ACCF52A"><span class="RefLink">7.9</span></a> for more information.</p>
+
+<p><a id="X78E7F7347DE8A125" name="X78E7F7347DE8A125"></a></p>
+
+<h4>5.1 <span class="Heading">Notify Additional Data</span></h4>
+
+<p>After the <strong class="pkg">AtlasRep</strong> package has been loaded into the <strong class="pkg">GAP</strong> session, one can extend the data which the interface can access by own representations and programs. The following two variants are supported.</p>
+
+
+<ul>
+<li><p>The additional data files are locally available in some directory. Information about the declaration of new groups or about additional information such as the character names of representations can be provided in an optional JSON format file named <code class="file">toc.json</code> in this directory.</p>
+
+</li>
+<li><p>The data files can be downloaded from the internet. Both the list of available data and additional information as in the above case are given by either a local JSON format file or the URL of a JSON format file. This variant requires the user preference <code class="code">AtlasRepAccessRemoteFiles</code> (see Section <a href="chap4_mj.html#X7C3293A98577EE68"><span class="RefLink">4.2-1</span></a>) to have the value <code class="keyw">true</code>.</p>
+
+</li>
+</ul>
+<p>In both cases, <code class="func">AtlasOfGroupRepresentationsNotifyData</code> (<a href="chap5_mj.html#X81B5FA0578257653"><span class="RefLink">5.1-1</span></a>) can be used to make the private data available to the interface.</p>
+
+<p><a id="X81B5FA0578257653" name="X81B5FA0578257653"></a></p>
+
+<h5>5.1-1 <span class="Heading">AtlasOfGroupRepresentationsNotifyData</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AtlasOfGroupRepresentationsNotifyData</code>( <var class="Arg">dir</var>, <var class="Arg">id</var>[, <var class="Arg">test</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AtlasOfGroupRepresentationsNotifyData</code>( <var class="Arg">filename</var>[, <var class="Arg">id</var>][, <var class="Arg">test</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AtlasOfGroupRepresentationsNotifyData</code>( <var class="Arg">url</var>[, <var class="Arg">id</var>][, <var class="Arg">test</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if the overview of the additional data can be evaluated and if the names of the data files in the extension are compatible with the data files that had been available before the call, otherwise <code class="keyw">false</code>.</p>
+
+<p>The following variants are supported for notifying additional data.</p>
+
+
+<dl>
+<dt><strong class="Mark">Contents of a local directory</strong></dt>
+<dd><p>The first argument <var class="Arg">dir</var> must be either a local directory (see <a href="../../../doc/ref/chap9_mj.html#X85030B35865A1080"><span class="RefLink">Reference: Directories</span></a>) or a string denoting the path of a local directory, such that the <strong class="pkg">GAP</strong> object describing this directory can be obtained by calling <code class="func">Directory</code> (<a href="../../../doc/ref/chap9_mj.html#X86A71E927EEC7EAD"><span class="RefLink">Reference: Directory</span></a>) with the argument <var class="Arg">dir</var>; in the latter case, <var class="Arg">dir</var> can be an absolute path or a path relative to the user's home directory (starting with a tilde character <code class="code">~</code>) or a path relative to the directory where <strong class="pkg">GAP</strong> was started. The files contained in this directory or in its subdirectories (only one level deep) are considered. If the directory contains a JSON document in a file with the name <code class="file">toc.json</code> then this file gets evaluated; its purpose is to provide additional information about the data files.</p>
+
+<p>Calling <code class="func">AtlasOfGroupRepresentationsNotifyData</code> means to evaluate the contents of the directory and (if available) of the file <code class="file">toc.json</code>.</p>
+
+<p>Accessing data means to read the locally available data files.</p>
+
+<p>The argument <var class="Arg">id</var> must be a string. It will be used in the <code class="code">identifier</code> components of the records that are returned by interface functions (see Section <a href="chap3_mj.html#X7CC88B2287A72204"><span class="RefLink">3.5</span></a>) for data contained in the directory <var class="Arg">dir</var>. (Note that the directory name may be different in different <strong class="pkg">GAP</strong> sessions or for different users who want to access the same data, whereas the <code class="code">identifier</code> components shall be independent of such differences.)</p>
+
+<p>An example of a local extension is the contents of the <code class="file">datapkg</code> directory of the <strong class="pkg">AtlasRep</strong> package. This extension gets notified automatically when <strong class="pkg">AtlasRep</strong> gets loaded. For restricting data collections to this extension, one can use the identifier <code class="code">"internal"</code>.</p>
+
+</dd>
+<dt><strong class="Mark">Local file describing the contents of a local or remote directory</strong></dt>
+<dd><p>The first argument <var class="Arg">filename</var> must be the name of a local file whose content is a JSON document that lists the available data, additional information about these data, and an URL from where the data can be downloaded. The data format of this file is defined by the JSON schema file <code class="file">doc/atlasreptoc_schema.json</code> of the <strong class="pkg">AtlasRep</strong> package.</p>
+
+<p>Calling <code class="func">AtlasOfGroupRepresentationsNotifyData</code> means to evaluate the contents of the file <var class="Arg">filename</var>, without trying to access the remote data. The <var class="Arg">id</var> is then either given implicitly by the <code class="code">ID</code> component of the JSON document or can be given as the second argument.</p>
+
+<p>Downloaded data files are stored in the subdirectory <code class="file">dataext/</code><var class="Arg">id</var> of the directory that is given by the user preference <code class="code">AtlasRepDataDirectory</code>, see Section <a href="chap4_mj.html#X7C36E9A78021A71A"><span class="RefLink">4.2-2</span></a>.</p>
+
+<p>Accessing data means to download remote files if necessary but to prefer files that are already locally available.</p>
+
+<p>An example of such an extension is the set of permutation representations provided by the <strong class="pkg">MFER</strong> package <a href="chapBib_mj.html#biBMFER">[BHM09]</a>; due to the file sizes, these representations are <em>not</em> distributed together with the <strong class="pkg">MFER</strong> package. For restricting data collections to this extension, one can use the identifier <code class="code">"mfer"</code>.</p>
+
+<p>Another example is given by some of the data that belong to the <strong class="pkg">CTBlocks</strong> package <a href="chapBib_mj.html#biBCTBlocks">[Bre14]</a>. These data are also distributed with that package, and notifying the extension in the situation that the <strong class="pkg">CTBlocks</strong> package is available will make its local data available, via the component <code class="code">LocalDirectory</code> of the JSON document <code class="file">ctblocks.json</code>; notifying the extension in the situation that the <strong class="pkg">CTBlocks</strong> package is <em>not</em> available will make the remote files available, via the component <code class="code">DataURL</code> of this JSON document. For restricting data collections to this extension, one can use the identifier <code class="code">"ctblocks"</code>.</p>
+
+</dd>
+<dt><strong class="Mark">URL of a file</strong></dt>
+<dd><p>(This variant works only if the <strong class="pkg">IO</strong> package <a href="chapBib_mj.html#biBIO">[Neu14]</a> is available.)</p>
+
+<p>The first argument <var class="Arg">url</var> must be the URL of a JSON document as in the previous case.</p>
+
+<p>Calling <code class="func">AtlasOfGroupRepresentationsNotifyData</code> in <em>online mode</em> (that is, the user preference <code class="code">AtlasRepAccessRemoteFiles</code> has the value <code class="keyw">true</code>) means to download this file and to evaluate it; the <var class="Arg">id</var> is then given implicitly by the <code class="code">ID</code> component of the JSON document, and the contents of the document gets stored in a file with name <code class="file">dataext/</code><var class="Arg">id</var><code class="file">/toc.json</code>, relative to the directory given by the value of the user preference <code class="code">AtlasRepDataDirectory</code>. Also downloaded files for this extension will be stored in the directory <code class="file">dataext/</code><var class="Arg">id</var>.</p>
+
+<p>Calling <code class="func">AtlasOfGroupRepresentationsNotifyData</code> in <em>offline mode</em> requires that the argument <var class="Arg">id</var> is explicitly given. In this case, it is checked whether the <code class="file">dataext</code> subdirectory contains a subdirectory with name <var class="Arg">id</var>; if not then <code class="keyw">false</code> is returned, if yes then the contents of this local directory gets notified via the first form described above.</p>
+
+<p>Accessing data in online mode means the same as in the case of a remote directory. Accessing data in offline mode means the same as in the case of a local directory.</p>
+
+<p>Examples of such extension are again the data from the packages <strong class="pkg">CTBlocks</strong> and <strong class="pkg">MFER</strong> described above, but in the situation that these packages are <em>not</em> loaded, and that just the web URLs of their JSON documents are entered which describe the contents.</p>
+
+</dd>
+</dl>
+<p>In all three cases, if the optional argument <var class="Arg">test</var> is given then it must be either <code class="keyw">true</code> or <code class="keyw">false</code>. In the <code class="keyw">true</code> case, consistency checks are switched on during the notification. The default for <var class="Arg">test</var> is <code class="keyw">false</code>.</p>
+
+<p>The notification of an extension may happen as a side-effect when a <strong class="pkg">GAP</strong> package gets loaded that provides the data in question. Besides that, one may collect the notifications of data extensions in one's <code class="file">gaprc</code> file (see Section <a href="../../../doc/ref/chap3_mj.html#X7FD66F977A3B02DF"><span class="RefLink">Reference: The gap.ini and gaprc files</span></a>).</p>
+
+<p><a id="X7E0DC24681F17A9D" name="X7E0DC24681F17A9D"></a></p>
+
+<h5>5.1-2 AtlasOfGroupRepresentationsForgetData</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AtlasOfGroupRepresentationsForgetData</code>( <var class="Arg">dirid</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>If <var class="Arg">dirid</var> is the identifier of a database extension that has been notified with <code class="func">AtlasOfGroupRepresentationsNotifyData</code> (<a href="chap5_mj.html#X81B5FA0578257653"><span class="RefLink">5.1-1</span></a>) then <code class="func">AtlasOfGroupRepresentationsForgetData</code> undoes the notification; this means that from then on, the data of this extension cannot be accessed anymore in the current session.</p>
+
+<p><a id="X81C5440983E47DBD" name="X81C5440983E47DBD"></a></p>
+
+<h5>5.1-3 StringOfAtlasTableOfContents</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StringOfAtlasTableOfContents</code>( <var class="Arg">inforec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For a record <var class="Arg">inforec</var> with at least the component <code class="code">ID</code>, with value <code class="code">"core"</code> or the identifier of a data extension (see <code class="func">AtlasOfGroupRepresentationsNotifyData</code> (<a href="chap5_mj.html#X81B5FA0578257653"><span class="RefLink">5.1-1</span></a>)), this function returns a string that describes the part of <strong class="pkg">AtlasRep</strong> data belonging to <var class="Arg">inforec</var><code class="code">.ID</code>.</p>
+
+<p>Printed to a file, the returned string can be used as the table of contents of this part of the data. For that purpose, also the following components of <var class="Arg">inforec</var> must be bound (all strings). <code class="code">Version</code>, <code class="code">SelfURL</code> (the internet address of the table of contents file itself). At least one of the following two components must be bound. <code class="code">DataURL</code> is the internet address of the directory from where the data in question can be downloaded. <code class="code">LocalDirectory</code> is a path relative to <strong class="pkg">GAP</strong>'s <code class="file">pkg</code> directory where the data may be stored locally (depending on whether some <strong class="pkg">GAP</strong> package is installed). If the component <code class="code">DataURL</code> is bound then the returned string contains the information about the data files; this is not necessary if the data are <em>only</em> locally available. If both <code class="code">DataURL</code> and <code class="code">LocalDirectory</code> are bound then locally available data will be prefered at runtime.</p>
+
+<p>Alternatively, <var class="Arg">inforec</var> can also be the <code class="code">ID</code> string; in this case, the values of those of the supported components mentioned above that are defined in an available JSON file for this <code class="code">ID</code> are automatically inserted. (If there is no such file yet then entering the <code class="code">ID</code> string as <var class="Arg">inforec</var> does not make sense.)</p>
+
+<p>For an example how to use the function, see Section <a href="chap5_mj.html#X7E7307FC835D09DF"><span class="RefLink">5.3</span></a>.</p>
+
+<p><a id="X7A6024EC87A95E0B" name="X7A6024EC87A95E0B"></a></p>
+
+<h4>5.2 <span class="Heading">The Effect of Extensions on the User Interface</span></h4>
+
+<p>First suppose that only new groups or new data for known groups or for new groups are added.</p>
+
+<p>In this case, <code class="func">DisplayAtlasInfo</code> (<a href="chap3_mj.html#X79DACFFA7E2D1A99"><span class="RefLink">3.5-1</span></a>) lists the additional representations and programs in the same way as other data known to <strong class="pkg">AtlasRep</strong>, except that parts outside the core database are marked with the string that is the value of the user preference <code class="code">AtlasRepMarkNonCoreData</code>, see Section <a href="chap4_mj.html#X862C660878D422FA"><span class="RefLink">4.2-13</span></a>. The ordering of representations listed by <code class="func">DisplayAtlasInfo</code> (<a href="chap3_mj.html#X79DACFFA7E2D1A99"><span class="RefLink">3.5-1</span></a>) (and referred to by <code class="func">AtlasGenerators</code> (<a href="chap3_mj.html#X7D1CCCF8852DFF39"><span class="RefLink">3.5-3</span></a>)) will in general change whenever extensions get notified. For the other interface functions described in Chapter <a href="chap3_mj.html#X87EAF8E578D95793"><span class="RefLink">3</span></a>, the only difference is that also the additional data can be accessed.</p>
+
+<p>If also new data types are introduced in an extension (see Section <a href="chap7_mj.html#X809898027EFDA56E"><span class="RefLink">7.5</span></a>) then additional columns or rows can appear in the output of <code class="func">DisplayAtlasInfo</code> (<a href="chap3_mj.html#X79DACFFA7E2D1A99"><span class="RefLink">3.5-1</span></a>), and new inputs can become meaningful for all interface functions.</p>
+
+<p><a id="X7E7307FC835D09DF" name="X7E7307FC835D09DF"></a></p>
+
+<h4>5.3 <span class="Heading">An Example of Extending the <strong class="pkg">AtlasRep</strong> Data</span></h4>
+
+<p>This section shows an extension by a few <em>locally available</em> files.</p>
+
+<p>We set the info level of <code class="func">InfoAtlasRep</code> (<a href="chap7_mj.html#X8006BE167EB81E16"><span class="RefLink">7.1-1</span></a>) to <span class="SimpleMath">\(1\)</span> in this section.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">locallevel:= InfoLevel( InfoAtlasRep );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel( InfoAtlasRep, 1 );</span>
+</pre></div>
+
+<p>Let us assume that the local directory <code class="file">privdir</code> contains data for the cyclic group <span class="SimpleMath">\(C_4\)</span> of order <span class="SimpleMath">\(4\)</span> and for the alternating group <span class="SimpleMath">\(A_5\)</span> on <span class="SimpleMath">\(5\)</span> points, respectively. Note that it is obvious what the term "standard generators" means for the group <span class="SimpleMath">\(C_4\)</span>.</p>
+
+<p>Further let us assume that <code class="file">privdir</code> contains the following files.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="file">C4G1-p4B0.m1</code></strong></dt>
+<dd><p>a faithful permutation representation of <span class="SimpleMath">\(C_4\)</span> on <span class="SimpleMath">\(4\)</span> points,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="file">C4G1-max1W1</code></strong></dt>
+<dd><p>the straight line program that returns the square of its unique input,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="file">C4G1-a2W1</code></strong></dt>
+<dd><p>the straight line program that raises its unique input to the third power,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="file">C4G1-XtestW1</code></strong></dt>
+<dd><p>the straight line program that returns the square of its unique input,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="file">A5G1-p60B0.m1</code> and <code class="file">A5G1-p60B0.m2</code></strong></dt>
+<dd><p>standard generators for <span class="SimpleMath">\(A_5\)</span> in its regular permutation representation.</p>
+
+</dd>
+</dl>
+<p>The directory and the files can be created as follows.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">prv:= DirectoryTemporary( "privdir" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FileString( Filename( prv, "C4G1-p4B0.m1" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">               MeatAxeString( [ (1,2,3,4) ], 4 ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FileString( Filename( prv, "C4G1-max1W1" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">               "inp 1\npwr 2 1 2\noup 1 2\n" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FileString( Filename( prv, "C4G1-XtestW1" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">               "inp 1\npwr 2 1 2\noup 1 2\n" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FileString( Filename( prv, "C4G1-a2W1" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">               "inp 1\npwr 3 1 2\noup 1 2\n" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FileString( Filename( prv, "C4G1-Ar1aB0.g" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">               "return rec( generators:= [ [[E(4)]] ] );\n" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">points:= Elements( AlternatingGroup( 5 ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FileString( Filename( prv, "A5G1-p60B0.m1" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     MeatAxeString( [ Permutation( (1,2)(3,4), points, OnRight ) ], 60 ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FileString( Filename( prv, "A5G1-p60B0.m2" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     MeatAxeString( [ Permutation( (1,3,5), points, OnRight ) ], 60 ) );;</span>
+</pre></div>
+
+<p>(We could also introduce intermediate directories <code class="file">C4</code> and <code class="file">A5</code>, say, each with the data for one group only. Here we do not show this because creating directories programmatically seems to require the <strong class="pkg">GAP</strong> package <strong class="pkg">IO</strong>.)</p>
+
+<p>The core part of the <strong class="pkg">AtlasRep</strong> data does not contain information about <span class="SimpleMath">\(C_4\)</span>, so we first notify this group, in the file <code class="file">privdir/toc.json</code>. Besides the name of the group, we store the following information: the group order, the number of (classes of) maximal subgroups, their orders, their structures, and describing data about the three representations. The group <span class="SimpleMath">\(A_5\)</span> is already known with name <code class="code">A5</code> in the core part of the <strong class="pkg">AtlasRep</strong> data, so it need not and cannot be notified again.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FileString( Filename( prv, "toc.json" ), Concatenation( [ "{\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "\"ID\":\"priv\",\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "\"Data\":[\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "[\"GNAN\",[\"C4\",\"C4\"]],\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "[\"GRS\",[\"C4\",4]],\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "[\"MXN\",[\"C4\",1]],\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "[\"MXO\",[\"C4\",[2]]],\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "[\"MXS\",[\"C4\",[\"C2\"]]],\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "[\"RNG\",[\"C4G1-Ar1aB0\",\"CF(4)\"]],\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "[\"API\",[\"C4G1-p4B0\",[1,4,\"imprim\",\"1 &lt; C2\"]]],\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "[\"API\",[\"A5G1-p60B0\",[1,60,\"imprim\",\"1 &lt; S3\"]]]\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "]\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "}\n" ] ) );;</span>
+</pre></div>
+
+<p>Then we notify the extension.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AtlasOfGroupRepresentationsNotifyData( prv, "priv", true );</span>
+true
+</pre></div>
+
+<p>Now we can use the interface functions for accessing the additional data.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAtlasInfo( [ "C4" ] );</span>
+group | # | maxes | cl | cyc | out | fnd | chk | prs
+------+---+-------+----+-----+-----+-----+-----+----
+C4*   | 2 |     1 |    |     |   2 |     |     |    
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAtlasInfo( "C4" );</span>
+Representations for G = C4:    (all refer to std. generators 1)
+---------------------------
+1: G &lt;= Sym(4)*       rank 4, on cosets of 1 &lt; C2
+2: G &lt;= GL(1a,CF(4))* 
+
+Programs for G = C4:    (all refer to std. generators 1)
+--------------------
+- automorphisms*:
+  2*               
+- maxes (all 1):
+  1*:  C2          
+- other scripts*:
+  "test"*          
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAtlasInfo( "C4", IsPermGroup, true );</span>
+Representations for G = C4:    (all refer to std. generators 1)
+---------------------------
+1: G &lt;= Sym(4)* rank 4, on cosets of 1 &lt; C2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAtlasInfo( "C4", IsMatrixGroup );</span>
+Representations for G = C4:    (all refer to std. generators 1)
+---------------------------
+2: G &lt;= GL(1a,CF(4))* 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAtlasInfo( "C4", Dimension, 2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAtlasInfo( "A5", NrMovedPoints, 60 );</span>
+Representations for G = A5:    (all refer to std. generators 1)
+---------------------------
+4: G &lt;= Sym(60)* rank 60, on cosets of 1 &lt; S3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">info:= OneAtlasGeneratingSetInfo( "C4" );</span>
+rec( contents := "priv", groupname := "C4", id := "", 
+  identifier := [ "C4", [ [ "priv", "C4G1-p4B0.m1" ] ], 1, 4 ], 
+  isPrimitive := false, p := 4, rankAction := 4, 
+  repname := "C4G1-p4B0", repnr := 1, size := 4, 
+  stabilizer := "1 &lt; C2", standardization := 1, transitivity := 1, 
+  type := "perm" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AtlasGenerators( info.identifier );</span>
+rec( contents := "priv", generators := [ (1,2,3,4) ], 
+  groupname := "C4", id := "", 
+  identifier := [ "C4", [ [ "priv", "C4G1-p4B0.m1" ] ], 1, 4 ], 
+  isPrimitive := false, p := 4, rankAction := 4, 
+  repname := "C4G1-p4B0", repnr := 1, size := 4, 
+  stabilizer := "1 &lt; C2", standardization := 1, transitivity := 1, 
+  type := "perm" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AtlasProgram( "C4", 1 );</span>
+rec( groupname := "C4", 
+  identifier := [ "C4", [ [ "priv", "C4G1-max1W1" ] ], 1 ], 
+  program := &lt;straight line program&gt;, size := 2, standardization := 1,
+  subgroupname := "C2", version := "1" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AtlasProgram( "C4", "maxes", 1 );</span>
+rec( groupname := "C4", 
+  identifier := [ "C4", [ [ "priv", "C4G1-max1W1" ] ], 1 ], 
+  program := &lt;straight line program&gt;, size := 2, standardization := 1,
+  subgroupname := "C2", version := "1" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AtlasProgram( "C4", "maxes", 2 );</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AtlasGenerators( "C4", 1 );</span>
+rec( contents := "priv", generators := [ (1,2,3,4) ], 
+  groupname := "C4", id := "", 
+  identifier := [ "C4", [ [ "priv", "C4G1-p4B0.m1" ] ], 1, 4 ], 
+  isPrimitive := false, p := 4, rankAction := 4, 
+  repname := "C4G1-p4B0", repnr := 1, size := 4, 
+  stabilizer := "1 &lt; C2", standardization := 1, transitivity := 1, 
+  type := "perm" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AtlasGenerators( "C4", 2 );</span>
+rec( contents := "priv", dim := 1, generators := [ [ [ E(4) ] ] ], 
+  groupname := "C4", id := "a", 
+  identifier := [ "C4", [ [ "priv", "C4G1-Ar1aB0.g" ] ], 1, 1 ], 
+  repname := "C4G1-Ar1aB0", repnr := 2, ring := GaussianRationals, 
+  size := 4, standardization := 1, type := "matalg" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AtlasGenerators( "C4", 3 );</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AtlasProgram( "C4", "other", "test" );</span>
+rec( groupname := "C4", 
+  identifier := [ "C4", [ [ "priv", "C4G1-XtestW1" ] ], 1 ], 
+  program := &lt;straight line program&gt;, standardization := 1, 
+  version := "1" )
+</pre></div>
+
+<p>We can restrict the data shown by <code class="func">DisplayAtlasInfo</code> (<a href="chap3_mj.html#X79DACFFA7E2D1A99"><span class="RefLink">3.5-1</span></a>) to our extension, as follows.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAtlasInfo( "contents", "priv" );</span>
+group | # | maxes | cl | cyc | out | fnd | chk | prs
+------+---+-------+----+-----+-----+-----+-----+----
+A5*   | 1 |       |    |     |     |     |     |    
+C4*   | 2 |     1 |    |     |   2 |     |     |    
+</pre></div>
+
+<p>For checking the data in the extension, we apply the relevant sanity checks (see Section <a href="chap7_mj.html#X79C5F2267ACCF52A"><span class="RefLink">7.9</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AGR.Test.Words( "priv" );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AGR.Test.FileHeaders( "priv" );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AGR.Test.Files( "priv" );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AGR.Test.BinaryFormat( "priv" );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AGR.Test.Primitivity( "priv" : TryToExtendData );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AGR.Test.Characters( "priv" : TryToExtendData );</span>
+#I  AGR.Test.Character:
+#I  add new info
+["CHAR",["A5","A5G1-p60B0",
+0,[1,[2,3],[3,3],[4,4],[5,5]],"1a+3a^3b^3+4a^4+5a^5"]],
+#I  AGR.Test.Character:
+#I  add new info
+["CHAR",["C4","C4G1-p4B0",0,[1,2,3,4],"1abcd"]],
+true
+</pre></div>
+
+<p>We did not store the character information in the file <code class="file">privdir/toc.json</code>, and <strong class="pkg">GAP</strong> was able to identify the characters of the two permutation representations. (The identification of the character for the matrix representation fails because we cannot distinguish between the two Galois conjugate faithful characters.)</p>
+
+<p>If we store the character information as proposed by <strong class="pkg">GAP</strong>, this information will for example become part of the records returned by <code class="func">OneAtlasGeneratingSetInfo</code> (<a href="chap3_mj.html#X841478AB7CD06D44"><span class="RefLink">3.5-6</span></a>). (Note that we have to enter <code class="code">"priv"</code> as the last argument of <code class="code">AGR.CHAR</code> when we call the function interactively, in order to assign the information to the right context.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AGR.CHAR("A5","A5G1-p60B0",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">0,[1,[2,3],[3,3],[4,4],[5,5]],"1a+3a^3b^3+4a^4+5a^5", "priv" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AGR.CHAR("C4","C4G1-p4B0",0,[1,2,3,4],"1abcd", "priv" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AGR.Test.Characters( "priv" );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneAtlasGeneratingSetInfo( "C4" );</span>
+rec( charactername := "1abcd", constituents := [ 1, 2, 3, 4 ], 
+  contents := "priv", groupname := "C4", id := "", 
+  identifier := [ "C4", [ [ "priv", "C4G1-p4B0.m1" ] ], 1, 4 ], 
+  isPrimitive := false, p := 4, rankAction := 4, 
+  repname := "C4G1-p4B0", repnr := 1, size := 4, 
+  stabilizer := "1 &lt; C2", standardization := 1, transitivity := 1, 
+  type := "perm" )
+</pre></div>
+
+<p>A string that describes the JSON format overview of the data extension can be created with <code class="func">StringOfAtlasTableOfContents</code> (<a href="chap5_mj.html#X81C5440983E47DBD"><span class="RefLink">5.1-3</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( StringOfAtlasTableOfContents( "priv" ) );</span>
+{
+"ID":"priv",
+"Data":[
+["GNAN",["C4","C4"]],
+
+["GRS",["C4",4]],
+
+["MXN",["C4",1]],
+
+["MXO",["C4",[2]]],
+
+["MXS",["C4",["C2"]]],
+
+["RNG",["C4G1-Ar1aB0","CF(4)"]],
+
+["API",["A5G1-p60B0",[1,60,"imprim","1 &lt; S3"]]],
+["API",["C4G1-p4B0",[1,4,"imprim","1 &lt; C2"]]],
+
+["CHAR",["A5","A5G1-p60B0",0,[1,[2,3],[3,3],[4,4],[5,5]],"1a+3a^3b^3+4\
+a^4+5a^5"]],
+["CHAR",["C4","C4G1-p4B0",0,[1,2,3,4],"1abcd"]]
+]
+}
+</pre></div>
+
+<p>If we prescribe a <code class="code">"DataURL"</code> component that starts with <code class="code">"http"</code> then also the <code class="code">"TOC"</code> lines are listed, in order to enable remote access to the data.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( StringOfAtlasTableOfContents(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">              rec( ID:= "priv", DataURL:= "http://someurl" ) ) );</span>
+{
+"ID":"priv",
+"DataURL":"http://someurl",
+"Data":[
+["GNAN",["C4","C4"]],
+
+["GRS",["C4",4]],
+
+["MXN",["C4",1]],
+
+["MXO",["C4",[2]]],
+
+["MXS",["C4",["C2"]]],
+
+["TOC",["perm","A5G1-p60B0.m",[118815263,24584221]]],
+["TOC",["matalg","C4G1-Ar1aB0.g",[49815028]]],
+["TOC",["otherscripts","C4G1-XtestW1",[-27672877]]],
+["TOC",["out","C4G1-a2W1",[126435524]]],
+["TOC",["maxes","C4G1-max1W1",[-27672877]]],
+["TOC",["perm","C4G1-p4B0.m",[102601978]]],
+
+["RNG",["C4G1-Ar1aB0","CF(4)"]],
+
+["API",["A5G1-p60B0",[1,60,"imprim","1 &lt; S3"]]],
+["API",["C4G1-p4B0",[1,4,"imprim","1 &lt; C2"]]],
+
+["CHAR",["A5","A5G1-p60B0",0,[1,[2,3],[3,3],[4,4],[5,5]],"1a+3a^3b^3+4\
+a^4+5a^5"]],
+["CHAR",["C4","C4G1-p4B0",0,[1,2,3,4],"1abcd"]]
+]
+}
+</pre></div>
+
+<p>Finally, we "uninstall" our extension, and reset the info level that had been set to <span class="SimpleMath">\(1\)</span> in the beginning. (Also the group name <code class="code">C4</code> is removed this way, which is an advantage of using a <code class="file">toc.json</code> file over calling <code class="code">AGR.GNAN</code> directly.),</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AtlasOfGroupRepresentationsForgetData( "priv" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel( InfoAtlasRep, locallevel );</span>
+</pre></div>
+
+<p>We need not care about removing the temporary directory and the files in it. <strong class="pkg">GAP</strong> will try to remove directories created with <code class="func">DirectoryTemporary</code> (<a href="../../../doc/ref/chap9_mj.html#X8222B1A886E6195E"><span class="RefLink">Reference: DirectoryTemporary</span></a>) at the end of the <strong class="pkg">GAP</strong> session.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

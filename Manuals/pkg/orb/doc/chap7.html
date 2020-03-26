@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (orb) - Chapter 7: Searching in groups and orbits</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7_mj.html">[MathJax on]</a></p>
+<p><a id="X7DF379C283FE23EF" name="X7DF379C283FE23EF"></a></p>
+<div class="ChapSects"><a href="chap7.html#X7DF379C283FE23EF">7 <span class="Heading">Searching in groups and orbits</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X85BB0EBC7F0D8329">7.1 <span class="Heading">Searching using orbit enumeration</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7F6A0E447E369404">7.2 <span class="Heading">Random searches in groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7971BF5D8099E557">7.2-1 RandomSearcher</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X835FBD72853595BE">7.2-2 Search</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X833CDEF4843DF5C5">7.3 <span class="Heading">The dihedral trick and applications</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X84659F6786852150">7.3-1 FindInvolution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7FBBCD5C82211934">7.3-2 FindCentralisingElementOfInvolution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X80CEAEAB7EDB57FE">7.3-3 FindInvolutionCentralizer</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7DE53BFB7A82324D">7.4 <span class="Heading">Orbit statistics on vector spaces</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X80E95A9D82ADB62D">7.4-1 OrbitStatisticOnVectorSpace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8124E7F17C95BECB">7.4-2 OrbitStatisticOnVectorSpaceLines</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7F051A447E2E8573">7.5 <span class="Heading">Finding generating sets of subgroups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X80BB35D380A972BB">7.5-1 FindShortGeneratorsOfSubgroup</a></span>
+</div></div>
+</div>
+
+<h3>7 <span class="Heading">Searching in groups and orbits</span></h3>
+
+<p><a id="X85BB0EBC7F0D8329" name="X85BB0EBC7F0D8329"></a></p>
+
+<h4>7.1 <span class="Heading">Searching using orbit enumeration</span></h4>
+
+<p>As described in Subsection <a href="chap3.html#X81BF5A087B9E1353"><span class="RefLink">3.1-4</span></a> the standard orbit enumeration routines can perform search operations during orbit enumeration. If one is looking for a shortest word in the generators of a group to express a group element with a certain property, then this natural breadth-first search can be used, for example by letting the group act on its own elements, either by multiplication or by conjugation.</p>
+
+<p>All technical instructions to do this are already given in Subsection <a href="chap3.html#X81BF5A087B9E1353"><span class="RefLink">3.1-4</span></a>, so we are content to provide an example here. Assume you want to find the shortest way to express some <span class="SimpleMath">7</span>-cycle in the symmetric group <span class="SimpleMath">S_{10}</span> as a product of generators <span class="SimpleMath">a :=</span><code class="code">(1,2,3,4,5,6,7,8,9,10)</code> and <span class="SimpleMath">b :=</span><code class="code">(1,2)</code>. Then you could do this in the following way:</p>
+
+
+<div class="example"><pre><span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens := [(1,2,3,4,5,6,7,8,9,10),(1,2)];</span>
+[ (1,2,3,4,5,6,7,8,9,10), (1,2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o := Orb(gens,(),OnRight,rec( report := 2000,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">lookingfor := </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">function(o,x) return NrMovedPoints(x) = 7 and Order(x)=7; end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">schreier := true ));</span>
+&lt;open orbit, 1 points with Schreier tree looking for sth.&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Enumerate(o);</span>
+&lt;open orbit, 614 points with Schreier tree looking for sth.&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w := TraceSchreierTreeForward(o,PositionOfFound(o));</span>
+[ 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ActWithWord(o!.gens,w,o!.op,o[1]);                  </span>
+(1,10,9,8,7,6,5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o[PositionOfFound(o)] = ActWithWord(o!.gens,w,o!.op,o[1]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EvaluateWord(o!.gens,w);</span>
+(1,10,9,8,7,6,5)</pre></div>
+
+<p>The result shows that <span class="SimpleMath">a^6 ⋅ (a⋅ b)^3</span> is a <span class="SimpleMath">7</span>-cycle and that there is no word in <span class="SimpleMath">a</span> and <span class="SimpleMath">b</span> with fewer than <span class="SimpleMath">12</span> letters expressing a <span class="SimpleMath">7</span>-cycle.</p>
+
+<p>Note that we can go on with the above orbit enumeration to find further words to express <span class="SimpleMath">7</span>-cycles.</p>
+
+<p><a id="X7F6A0E447E369404" name="X7F6A0E447E369404"></a></p>
+
+<h4>7.2 <span class="Heading">Random searches in groups</span></h4>
+
+<p>Another possibility to look for elements in a group satisfying certain properties is to look at random elements, usually obtained by doing product replacement (see Section <a href="chap6.html#X7B46C06479401BED"><span class="RefLink">6.2</span></a>). Although this can lead to very long expressions as words in the generators, one can cope with this problem by using the <code class="code">maxdepth</code> option of the product replacer objects, which just reinitialises the product replacement table after a certain number of product replacements has been performed. To organise all this conveniently, there is the concept of "random searcher objects" described here.</p>
+
+<p><a id="X7971BF5D8099E557" name="X7971BF5D8099E557"></a></p>
+
+<h5>7.2-1 RandomSearcher</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomSearcher</code>( <var class="Arg">gens</var>, <var class="Arg">testfunc</var>[, <var class="Arg">opt</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a random searcher object</p>
+
+<p><var class="Arg">gens</var> must be a list of group generators, <var class="Arg">testfunc</var> a function taking as argument one group element and returning <code class="keyw">true</code> or <code class="keyw">false</code>. <var class="Arg">opt</var> is an optional options record. For possible options see below.</p>
+
+<p>At first, the random searcher object is just initialised but no random searching is performed. The actual search is triggered by the <code class="func">Search</code> (<a href="chap7.html#X835FBD72853595BE"><span class="RefLink">7.2-2</span></a>) operation (see below). The idea of random searcher objects is that a product replacer object is created and during a search random elements are produced using this product replacer object, and for each group element produced the function <var class="Arg">testfunc</var> is called. If this function returns <code class="keyw">true</code>, the search stops and the group element found is returned.</p>
+
+<p>The following options can be bound in the options record <var class="Arg">opt</var>:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">exceptions</code></strong></dt>
+<dd><p>This component can be a list to initialise the exception list in the random searcher object. Group elements in this list are not considered as successful searches. This list is also used to continue search operations to found more suitable group elements as every group element considered "found" is added to that list before returning it. Thus every element will only be found once.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">maxdepth</code></strong></dt>
+<dd><p>Sets the <code class="code">maxdepth</code> option of the created product replacer object. This limits the length of the expression as product of the generators of the found group elements.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">addslots</code></strong></dt>
+<dd><p>Sets the <code class="code">addslots</code> option of the created product replacer object.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">scramble</code></strong></dt>
+<dd><p>If this component is bound at all, then the created product replacer object is created with options <code class="code">scramble=100</code> and <code class="code">scramblefactor=10</code> (the default values), otherwise the options <code class="code">scramble=0</code> and <code class="code">scramblefactor=0</code> are used, leading to no scrambling at all. See <code class="func">ProductReplacer</code> (<a href="chap6.html#X8290E4C57DE25CD4"><span class="RefLink">6.2-1</span></a>) for details on the product replacement algorithm.</p>
+
+</dd>
+</dl>
+<p>Note that of course the generators in <var class="Arg">gens</var> may have memory. However, the function <var class="Arg">testfunc</var> is called with the group element with memory stripped off.</p>
+
+<p><a id="X835FBD72853595BE" name="X835FBD72853595BE"></a></p>
+
+<h5>7.2-2 Search</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Search</code>( <var class="Arg">rs</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a group element</p>
+
+<p>Runs the search with the random searcher object <var class="Arg">rs</var> and returns with the first group element found.</p>
+
+<p><a id="X833CDEF4843DF5C5" name="X833CDEF4843DF5C5"></a></p>
+
+<h4>7.3 <span class="Heading">The dihedral trick and applications</span></h4>
+
+<p>With the "dihedral" trick we mean the following: Two involutions <span class="SimpleMath">a</span> and <span class="SimpleMath">b</span> in a group always generate a dihedral group. Thus, to find a pseudo-random element in the centraliser of an involution <span class="SimpleMath">a</span>, we can proceed as follows: Create a pseudo-random element <span class="SimpleMath">c</span>, then <span class="SimpleMath">b := a^c</span> is another involution. If then <span class="SimpleMath">ab</span> has order <span class="SimpleMath">2o</span>, we can use <span class="SimpleMath">(ab)^o</span>. Otherwise, if the order of <span class="SimpleMath">ab</span> is <span class="SimpleMath">2o-1</span>, then <span class="SimpleMath">(ab)^o ⋅ c^{-1}</span> centralises <span class="SimpleMath">a</span>.</p>
+
+<p>This trick allows to efficiently produce elements in the centraliser of an involution and thus, with high probability, generators for the full centraliser.</p>
+
+<p>There are the following functions:</p>
+
+<p><a id="X84659F6786852150" name="X84659F6786852150"></a></p>
+
+<h5>7.3-1 FindInvolution</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindInvolution</code>( <var class="Arg">pr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an involution</p>
+
+<p><var class="Arg">pr</var> must be a product replacer object (see Section <a href="chap6.html#X7B46C06479401BED"><span class="RefLink">6.2</span></a>). Searches an involution by finding a random element of even order and powering up. Returns the involution.</p>
+
+<p><a id="X7FBBCD5C82211934" name="X7FBBCD5C82211934"></a></p>
+
+<h5>7.3-2 FindCentralisingElementOfInvolution</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindCentralisingElementOfInvolution</code>( <var class="Arg">pr</var>, <var class="Arg">a</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a group element</p>
+
+<p><var class="Arg">pr</var> must be a product replacer object (see Section <a href="chap6.html#X7B46C06479401BED"><span class="RefLink">6.2</span></a>). Produces one random element and builds an element the centralises the involution <var class="Arg">a</var> using the dihedral trick described above.</p>
+
+<p><a id="X80CEAEAB7EDB57FE" name="X80CEAEAB7EDB57FE"></a></p>
+
+<h5>7.3-3 FindInvolutionCentralizer</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindInvolutionCentralizer</code>( <var class="Arg">pr</var>, <var class="Arg">a</var>, <var class="Arg">nr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of <var class="Arg">nr</var> group elements</p>
+
+<p><var class="Arg">pr</var> must be a product replacer object (see Section <a href="chap6.html#X7B46C06479401BED"><span class="RefLink">6.2</span></a>) and <var class="Arg">a</var> and involution. This function uses <code class="func">FindCentralisingElementOfInvolution</code> (<a href="chap7.html#X7FBBCD5C82211934"><span class="RefLink">7.3-2</span></a>) <var class="Arg">nr</var> times to produce an element centralising the involution <var class="Arg">a</var> and returns the list of results.</p>
+
+<p><a id="X7DE53BFB7A82324D" name="X7DE53BFB7A82324D"></a></p>
+
+<h4>7.4 <span class="Heading">Orbit statistics on vector spaces</span></h4>
+
+<p>The following two functions are tools to get a rough and quick estimate about the average orbit length of a group acting on a vector space.</p>
+
+<p><a id="X80E95A9D82ADB62D" name="X80E95A9D82ADB62D"></a></p>
+
+<h5>7.4-1 OrbitStatisticOnVectorSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitStatisticOnVectorSpace</code>( <var class="Arg">gens</var>, <var class="Arg">size</var>, <var class="Arg">ti</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p><var class="Arg">gens</var> must be a list of matrix group generators and <var class="Arg">size</var> an integer giving an upper bound for the lengths of orbits (for example given by the order of the group generated by <var class="Arg">gens</var>). <var class="Arg">ti</var> is an integer specifying the number of seconds to run. This function enumerates orbits of random vectors in the natural space the group is acting on (with an upper limit of length given by <var class="Arg">size</var>). The average length and some other information is printed on the screen.</p>
+
+<p><a id="X8124E7F17C95BECB" name="X8124E7F17C95BECB"></a></p>
+
+<h5>7.4-2 OrbitStatisticOnVectorSpaceLines</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitStatisticOnVectorSpaceLines</code>( <var class="Arg">gens</var>, <var class="Arg">size</var>, <var class="Arg">ti</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p><var class="Arg">gens</var> must be a list of matrix group generators and <var class="Arg">size</var> an integer giving an upper bound for the lengths of orbits (for example the order of the group generated by <var class="Arg">gens</var>). <var class="Arg">ti</var> is an integer specifying the number of seconds to run. This function enumerates orbits of random one-dimensional subspaces in the natural space the group is acting on (with an upper limit of length given by <var class="Arg">size</var>). The average length and some other information is printed on the screen.</p>
+
+<p><a id="X7F051A447E2E8573" name="X7F051A447E2E8573"></a></p>
+
+<h4>7.5 <span class="Heading">Finding generating sets of subgroups</span></h4>
+
+<p>The following function can be used to find generators of a subgroup of a group <span class="SimpleMath">G</span>, expressed as a straight line program in the generators of <span class="SimpleMath">G</span>.</p>
+
+<p><a id="X80BB35D380A972BB" name="X80BB35D380A972BB"></a></p>
+
+<h5>7.5-1 FindShortGeneratorsOfSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindShortGeneratorsOfSubgroup</code>( <var class="Arg">G</var>, <var class="Arg">U</var>[, <var class="Arg">membopt</var>] )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record described below</p>
+
+<p>The arguments <var class="Arg">U</var> and <var class="Arg">G</var> must be <strong class="pkg">GAP</strong> group objects with <var class="Arg">U</var> being a subgroup of <var class="Arg">G</var>. The argument <var class="Arg">membopt</var> can be a function taking two arguments, namely a group element and a group, that checks, whether the group element lies in the group or not, returning <code class="keyw">true</code> or <code class="keyw">false</code> accordingly. You can usually just use the function <code class="code">\in</code> as third argument. Note that this function will only ever be called with <var class="Arg">U</var> as its second argument so you can in fact provide a function which ignores its second argument and has <var class="Arg">U</var> somehow built in it.</p>
+
+<p>Optionally, the third argument <var class="Arg">membopt</var> can also be an options record. The component <code class="code">membershiptest</code> has the same meaning like the third argument <var class="Arg">membopt</var> above. The component <code class="code">sizetester</code> can be bound to a function which estimates the size of a group generated by some elements in <var class="Arg">U</var>. This estimate function can for example be a function which runs a random Schreier-Sims algorithm. In particular it may underestimate the size with a certain probability. The method <code class="func">FindShortGeneratorsOfSubgroup</code> will keep looking for elements to generate <var class="Arg">U</var> until the <code class="code">sizetester</code> returns the same number as for <var class="Arg">U</var> itself. Note that to avoid the possibility that the <code class="code">sizetester</code> underestimates the size of <var class="Arg">U</var> in the first place you can bind the component <code class="code">sizeU</code> in the options record to the correct size of <var class="Arg">U</var> or make sure that the group object <var class="Arg">U</var> does know its size before the call to <code class="func">FindShortGeneratorsOfSubgroup</code>.</p>
+
+<p>This function does a breadth-first search to find elements in <var class="Arg">U</var> using the generators of <var class="Arg">G</var>. It then uses calculates the size of the group generated and proceeds in this way, until a generating system for <var class="Arg">U</var> is found in terms of the generators of <var class="Arg">G</var>. Those generators are guaranteed to be shortest words in the generators of <var class="Arg">G</var> lying in <var class="Arg">U</var>.</p>
+
+<p>The function returns a record with two components bound: <code class="code">gens</code> is a list of generators for <var class="Arg">U</var> and <code class="code">slp</code> is a <strong class="pkg">GAP</strong> straight line program expressing exactly those generators in the generators of <var class="Arg">G</var>.</p>
+
+<p>Note that this function only performs satisfactorily when the index of <var class="Arg">U</var> in <var class="Arg">G</var> is not to huge. It also helps if the groups come in a representation in which <strong class="pkg">GAP</strong> can compute efficiently for example as permutation groups.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

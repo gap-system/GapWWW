@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Congruence) - Chapter 4: Farey symbols for congruence subgroups</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X831C60277F7D80B2" name="X831C60277F7D80B2"></a></p>
+<div class="ChapSects"><a href="chap4.html#X831C60277F7D80B2">4 <span class="Heading">Farey symbols for congruence subgroups</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7F43DB8B803F313F">4.1 <span class="Heading">Computation of the Farey symbol for a finite index subgroup</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8594896287DCFE8D">4.1-1 FareySymbol</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X80AE179D869BEE90">4.2 <span class="Heading">Computation of generators of a finite index subgroup from its Farey symbol</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8790C1498107A39A">4.2-1 MatrixByEvenInterval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78779BDF7A1DB4AE">4.2-2 MatrixByOddInterval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F792846795E3A63">4.2-3 MatrixByFreePairOfIntervals</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7905B050800E4416">4.2-4 GeneratorsByFareySymbol</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X79C44528864044C5">4.2-5 GeneratorsOfGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7C5AB1D786207745">4.3 <span class="Heading">Other properties derived from Farey symbols</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80EED34183408106">4.3-1 IndexInPSL2ZByFareySymbol</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Farey symbols for congruence subgroups</span></h3>
+
+<p>The package <strong class="pkg">Congruence</strong> provides functions to construct Farey symbols for finite index subgroups. The algorithm used in the package allows to construct a Farey symbol for any finite index subgroup of <span class="SimpleMath">SL_2(ℤ)</span> for which it is possible to check whether a given matrix belongs to this subgroup or not.</p>
+
+<p>The development of an algorithm to determine the Farey symbol for a subgroup G of a finite index in <span class="SimpleMath">SL_2(ℤ)</span> was started by Ravi Kulkarni in <a href="chapBib.html#biBKulkarni">[Kul91]</a> and later it was improved by Mong-Lung Lang, Chong-Hai Lim and Ser-Peow Tan in <a href="chapBib.html#biBLLT-Hecke">[LLT95b]</a>, <a href="chapBib.html#biBLLT-Algorithm">[LLT95a]</a>.</p>
+
+<p><a id="X7F43DB8B803F313F" name="X7F43DB8B803F313F"></a></p>
+
+<h4>4.1 <span class="Heading">Computation of the Farey symbol for a finite index subgroup</span></h4>
+
+<p><a id="X8594896287DCFE8D" name="X8594896287DCFE8D"></a></p>
+
+<h5>4.1-1 FareySymbol</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FareySymbol</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>For a subgroup of a finite index G, this attribute stores one of the Farey symbols corresponding to the congruence subgroup <var class="Arg">G</var>. The algorithm for its computation will work for any matrix group for which a membership test is available.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FareySymbol(PrincipalCongruenceSubgroup(8));</span>
+[ infinity, 0, 1/4, 1/3, 3/8, 2/5, 1/2, 3/5, 5/8, 2/3, 3/4, 1, 5/4, 4/3, 
+  11/8, 7/5, 3/2, 8/5, 13/8, 5/3, 7/4, 2, 9/4, 7/3, 19/8, 12/5, 5/2, 13/5, 
+  21/8, 8/3, 11/4, 3, 13/4, 10/3, 27/8, 17/5, 7/2, 18/5, 29/8, 11/3, 15/4, 4, 
+  17/4, 13/3, 9/2, 14/3, 19/4, 5, 21/4, 16/3, 11/2, 17/3, 23/4, 6, 25/4, 
+  19/3, 13/2, 20/3, 27/4, 7, 29/4, 22/3, 15/2, 23/3, 31/4, 8, infinity ]
+[ 1, 17, 10, 26, 32, 18, 19, 27, 30, 5, 2, 2, 13, 28, 26, 20, 21, 29, 27, 7, 
+  3, 3, 16, 31, 28, 22, 23, 33, 29, 9, 4, 4, 5, 30, 31, 24, 25, 32, 33, 12, 
+  6, 6, 7, 19, 18, 15, 8, 8, 9, 21, 20, 10, 11, 11, 12, 23, 22, 13, 14, 14, 
+  15, 25, 24, 16, 17, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FareySymbol(CongruenceSubgroupGamma0(20));</span>
+[ infinity, 0, 1/5, 1/4, 2/7, 3/10, 1/3, 2/5, 1/2, 3/5, 2/3, 3/4, 4/5, 1, 
+  infinity ]
+[ 1, 3, 4, 6, 7, 7, 5, 2, 2, 3, 6, 4, 5, 1 ]  
+
+</pre></div>
+
+<p><a id="X80AE179D869BEE90" name="X80AE179D869BEE90"></a></p>
+
+<h4>4.2 <span class="Heading">Computation of generators of a finite index subgroup from its Farey symbol</span></h4>
+
+<p>If <var class="Arg">fs</var> is the Farey symbol for a group <span class="SimpleMath">G</span> with <span class="SimpleMath">r_1</span> even labels, <span class="SimpleMath">r_2</span> odd labels and <span class="SimpleMath">r_3</span> pairs of intervals, then <span class="SimpleMath">G</span> is generated by <span class="SimpleMath">r_1+r_2+r_3</span> matrices, which form a set of independent generators for <span class="SimpleMath">G</span>. These matrices are constructed as follows:</p>
+
+<p>for each even interval <span class="SimpleMath">[x_i, x_i+1]</span>, take the matrix</p>
+
+
+<pre class="normal">
+
+                       A=  [a_{i+1} b_{i+1} + a_i b_i    -a_i^2 - a_{i+1}^2        ]
+                           [b_i^2 +b_{i+1}^2             -a_{i+1} b_{i+1} - a_i b_i]
+
+</pre>
+
+<p>for each odd interval <span class="SimpleMath">[x_j,x_j+1]</span>, take the matrix</p>
+
+
+<pre class="normal">
+
+                        B=  [a_{j+1} b_{j+1} + a_j b_{j+1} + a_j b_j      -a_j^2 - a_j a_{j+1} -a_{j+1}^2]
+                            [ b_j^2 + b_j b_{j+1} + b_{j+1}^2  -a_{j+1}   b_{j+1} - a_{j+1} b_j - a_j b_j]
+
+</pre>
+
+<p>for each pair of free intervals <span class="SimpleMath">[x_k,x_k+1]</span> and <span class="SimpleMath">[x_s,x_s+1]</span>, take the matrix</p>
+
+
+<pre class="normal">
+
+                        C=  [a_{s+1} b_{k+1} + a_s b_k    -a_s a_k - a_{s+1} a_{k+1}]
+                            [b_s b_k- b_{s+1} b_{k+1}c    -a_{k+1} b_{s+1} - a_k b_s]
+
+</pre>
+
+<p><a id="X8790C1498107A39A" name="X8790C1498107A39A"></a></p>
+
+<h5>4.2-1 MatrixByEvenInterval</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatrixByEvenInterval</code>( <var class="Arg">gfs</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the matrix corresponding to the even interval i in the generalized Farey sequence <var class="Arg">gfs</var>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H:=CongruenceSubgroupGamma0(5); </span>
+&lt;congruence subgroup CongruenceSubgroupGamma_0(5) in SL_2(Z)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fs:=FareySymbol(H);</span>
+[ infinity, 0, 1/2, 1, infinity ]
+[ 1, "even", "even", 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gfs:=GeneralizedFareySequence(fs);</span>
+[ infinity, 0, 1/2, 1, infinity ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MatrixByEvenInterval(gfs,2);      </span>
+[ [ 2, -1 ], [ 5, -2 ] ]
+
+</pre></div>
+
+<p><a id="X78779BDF7A1DB4AE" name="X78779BDF7A1DB4AE"></a></p>
+
+<h5>4.2-2 MatrixByOddInterval</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatrixByOddInterval</code>( <var class="Arg">gfs</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the matrix corresponding to the odd interval i in the generalized Farey sequence <var class="Arg">gfs</var>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fs_oo:=FareySymbolByData([infinity,0,infinity],["odd","odd"]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gfs_oo:=GeneralizedFareySequence(fs_oo);</span>
+[ infinity, 0, infinity ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MatrixByOddInterval(gfs_oo,1);</span>
+[ [ -1, -1 ], [ 1, 0 ] ]
+
+</pre></div>
+
+<p><a id="X7F792846795E3A63" name="X7F792846795E3A63"></a></p>
+
+<h5>4.2-3 MatrixByFreePairOfIntervals</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatrixByFreePairOfIntervals</code>( <var class="Arg">gfs</var>, <var class="Arg">k</var>, <var class="Arg">kp</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the matrix corresponding to the pair of free intervals k and kp in the generalized Farey sequence <var class="Arg">gfs</var>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fs_free:=FareySymbolByData([infinity,0,1,2,infinity],[1,2,2,1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gfs_free:=GeneralizedFareySequence(fs_free);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MatrixByFreePairOfIntervals(gfs_free,2,3);                                                        </span>
+[ [ 3, -2 ], [ 2, -1 ] ]
+
+</pre></div>
+
+<p><a id="X7905B050800E4416" name="X7905B050800E4416"></a></p>
+
+<h5>4.2-4 GeneratorsByFareySymbol</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneratorsByFareySymbol</code>( <var class="Arg">fs</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns a set of matrices constructed as above.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fs_eo:=FareySymbolByData([infinity,0,infinity],["even","odd"]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsByFareySymbol(last);                                  </span>
+[ [ [ 0, -1 ], [ 1, 0 ] ], [ [ 0, -1 ], [ 1, -1 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsByFareySymbol(fs); </span>
+[ [ [ 1, 1 ], [ 0, 1 ] ], [ [ 2, -1 ], [ 5, -2 ] ], [ [ 3, -2 ], [ 5, -3 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsByFareySymbol(fs_oo);</span>
+[ [ [ -1, -1 ], [ 1, 0 ] ], [ [ 0, -1 ], [ 1, -1 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsByFareySymbol(fs_free);                                                        </span>
+[ [ [ 1, 2 ], [ 0, 1 ] ], [ [ 3, -2 ], [ 2, -1 ] ] ]
+
+</pre></div>
+
+<p><a id="X79C44528864044C5" name="X79C44528864044C5"></a></p>
+
+<h5>4.2-5 GeneratorsOfGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneratorsOfGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns a set of generators for the finite index group G in <span class="SimpleMath">SL_2(Z)</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=PrincipalCongruenceSubgroup(2);</span>
+&lt;principal congruence subgroup of level 2 in SL_2(Z)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FareySymbol(G);</span>
+[ infinity, 0, 1, 2, infinity ]
+[ 2, 1, 1, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfGroup(G);</span>
+#I  Using the Congruence package for GeneratorsOfGroup ...
+[ [ [ 1, 2 ], [ 0, 1 ] ], [ [ 3, -2 ], [ 2, -1 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H:=CongruenceSubgroupGamma0(5);        </span>
+&lt;congruence subgroup CongruenceSubgroupGamma_0(5) in SL_2(Z)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfGroup(H);</span>
+#I  Using the Congruence package for GeneratorsOfGroup ...
+[ [ [ 1, 1 ], [ 0, 1 ] ], [ [ 2, -1 ], [ 5, -2 ] ], [ [ 3, -2 ], [ 5, -3 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I:=IntersectionOfCongruenceSubgroups(PrincipalCongruenceSubgroup(2),CongruenceSubgroupGamma0(3));</span>
+&lt;intersection of congruence subgroups of resulting level 6 in SL_2(Z)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FareySymbol(I);</span>
+[ infinity, 0, 1/3, 1/2, 2/3, 1, 4/3, 3/2, 5/3, 2, infinity ]
+[ 1, 5, 4, 3, 2, 2, 3, 4, 5, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfGroup(I);                                                          </span>
+#I  Using the Congruence package for GeneratorsOfGroup ...
+[ [ [ 1, 2 ], [ 0, 1 ] ], [ [ 11, -2 ], [ 6, -1 ] ], 
+  [ [ 19, -8 ], [ 12, -5 ] ], [ [ 17, -10 ], [ 12, -7 ] ], 
+  [ [ 7, -6 ], [ 6, -5 ] ] ]
+
+</pre></div>
+
+<p><a id="X7C5AB1D786207745" name="X7C5AB1D786207745"></a></p>
+
+<h4>4.3 <span class="Heading">Other properties derived from Farey symbols</span></h4>
+
+<p><a id="X80EED34183408106" name="X80EED34183408106"></a></p>
+
+<h5>4.3-1 IndexInPSL2ZByFareySymbol</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IndexInPSL2ZByFareySymbol</code>( <var class="Arg">fs</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>By Proposition 7.2 in [Kulkarni], for the Farey symbol with underlying generalized Farey sequence [infinity, x0, x1, ..., xn, infinity], the index in <span class="SimpleMath">PSL_2(Z)</span> is given by the formula d = 3*n + e3, where e3 is the number of odd intervals.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IndexInPSL2ZByFareySymbol(fs);</span>
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IndexInPSL2ZByFareySymbol(fs_oo);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IndexInPSL2ZByFareySymbol(fs_free);</span>
+6
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

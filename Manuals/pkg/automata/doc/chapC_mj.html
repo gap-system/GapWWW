@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Automata) - Appendix C: Inverse automata and subgroups of the free group</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapC"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapB_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapC.html">[MathJax off]</a></p>
+<p><a id="X7DBBB0537ADC9899" name="X7DBBB0537ADC9899"></a></p>
+<div class="ChapSects"><a href="chapC_mj.html#X7DBBB0537ADC9899">C <span class="Heading">Inverse automata and subgroups of the free group</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC_mj.html#X7DDDA5127A3D170C">C.1 <span class="Heading">From subgroups to inverse automata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X85358D097C314EB5">C.1-1 GeneratorsToListRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X80F3E10784590374">C.1-2 ListToGeneratorsRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7EAFF7E879D115C5">C.1-3 FlowerAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7F729A4E8784D92E">C.1-4 FoldFlowerAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X826D581D794F1BFB">C.1-5 SubgroupGenToInvAut</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC_mj.html#X85F2060A86DBE62B">C.2 <span class="Heading">From inverse automata to subgroups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X81DA149779A167BD">C.2-1 GeodesicTreeOfInverseAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7F117C43814F2CDE">C.2-2 InverseAutomatonToGenerators</a></span>
+</div></div>
+</div>
+
+<h3>C <span class="Heading">Inverse automata and subgroups of the free group</span></h3>
+
+<p>Inverse automata with a single initial/accepting state are in a one to one correspondence with finitely generated subgroups of the free group over the alphabet of the automaton. See <a href="chapBib_mj.html#biBMSW:2001">[MSW01]</a>, <a href="chapBib_mj.html#biBKM:2002">[KM02]</a> for details, as well as for concepts such as <em>flower automaton</em> and <em>Stallings foldings</em>.</p>
+
+<p><a id="X7DDDA5127A3D170C" name="X7DDDA5127A3D170C"></a></p>
+
+<h4>C.1 <span class="Heading">From subgroups to inverse automata</span></h4>
+
+<p>A finitely generated subgroup of a finitely generated free group is given through a list whose first element is the number of generators of the free group and the remaining elements are the generators of the subgroup. The set of generators of the free group of rank <span class="SimpleMath">\(n\)</span> consists on the <span class="SimpleMath">\(n\)</span> first letters of the set <span class="SimpleMath">\(\{a,b,c,d,e,f,g\}\)</span>. In particular, free groups of rank greater than <span class="SimpleMath">\(8\)</span> must not be considered. A formal inverse of a generator is represented by the corresponding capital letter.</p>
+
+<p>A generator of the subgroup may be given through a string of letters or through a list of positive integers as should be clear from the example that follows.</p>
+
+<p>For example, <code class="code">[2,"abA","bbabAB"]</code> stands for the subgroup of the free group of rank 2 on the generators <span class="SimpleMath">\(aba^{-1}\)</span> and <span class="SimpleMath">\(bbaba^{-1}b^{-1}\)</span>. The same subgroup may be given as <code class="code">[2,[1,2,3],[2,2,1,2,3,4]]</code>. The number <span class="SimpleMath">\( n+j\)</span> represents the formal inverse of the generator represented by <span class="SimpleMath">\(j\)</span>. One can go from one representation to another, using the following functions.</p>
+
+<p><a id="X85358D097C314EB5" name="X85358D097C314EB5"></a></p>
+
+<h5>C.1-1 GeneratorsToListRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneratorsToListRepresentation</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:=[2,"abA","bbabAB"];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsToListRepresentation(L);</span>
+[ 2, [ 1, 2, 3 ], [ 2, 2, 1, 2, 3, 4 ] ]
+</pre></div>
+
+<p><a id="X80F3E10784590374" name="X80F3E10784590374"></a></p>
+
+<h5>C.1-2 ListToGeneratorsRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ListToGeneratorsRepresentation</code>( <var class="Arg">K</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:=[2,[1,2,3],[2,2,1,2,3,4]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ListToGeneratorsRepresentation(K);</span>
+[ 2, "abA", "bbabAB" ]
+</pre></div>
+
+<p><a id="X7EAFF7E879D115C5" name="X7EAFF7E879D115C5"></a></p>
+
+<h5>C.1-3 FlowerAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FlowerAutomaton</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The argument <code class="code">L</code> is a subgroup of the free group given through any of the representations described above. Returns the flower automaton.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">W:=[2,"bbbAB","abAbA"];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=FlowerAutomaton(W);</span>
+&lt; non deterministic automaton on 2 letters with 9 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(A);</span>
+   |  1          2       3       4    5       6       7    8       9
+---------------------------------------------------------------------
+ a | [ 6, 9 ]                        [ 4 ]                [ 7 ]
+ b | [ 2, 5 ]   [ 3 ]   [ 4 ]                [ 7 ]        [ 9 ]
+Initial state:   [ 1 ]
+Accepting state: [ 1 ]
+</pre></div>
+
+<p><a id="X7F729A4E8784D92E" name="X7F729A4E8784D92E"></a></p>
+
+<h5>C.1-4 FoldFlowerAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FoldFlowerAutomaton</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Makes identifications on the flower automaton <code class="code">A</code>. In the literature, these identifications are called Stallings foldings.</p>
+
+<p>(This function may have <code class="code">true</code> as a second argument. WARNING: the second argument should only be used when facilities to draw automata are available. In that case, one may visualize the identifications that are taking place.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := FoldFlowerAutomaton(A);</span>
+&lt; deterministic automaton on 2 letters with 7 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(B);</span>
+   |  1  2  3  4  5  6  7
+--------------------------
+ a |  5  4              6
+ b |  2  3  4     6     5
+Initial state:   [ 1 ]
+Accepting state: [ 1 ]
+</pre></div>
+
+<p><a id="X826D581D794F1BFB" name="X826D581D794F1BFB"></a></p>
+
+<h5>C.1-5 SubgroupGenToInvAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubgroupGenToInvAut</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the inverse automaton corresponding to the subgroup given by <var class="Arg">L</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:=[2,"bbbAB","AbAbA"];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SubgroupGenToInvAut(L);</span>
+&lt; deterministic automaton on 2 letters with 8 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+   |  1  2  3  4  5  6  7  8
+-----------------------------
+ a |  8  4        1     6
+ b |  2  3  4     6     8
+Initial state:   [ 1 ]
+Accepting state: [ 1 ]
+</pre></div>
+
+<p><a id="X85F2060A86DBE62B" name="X85F2060A86DBE62B"></a></p>
+
+<h4>C.2 <span class="Heading">From inverse automata to subgroups</span></h4>
+
+<p>Given an inverse automaton with a single initial/accepting state, one can find a set of generators for the subgroup represented by the automaton. Moreover, using a geodesic tree, one can find a Nielsen reduced set of generators <a href="chapBib_mj.html#biBKM:2002">[KM02]</a>.</p>
+
+<p><a id="X81DA149779A167BD" name="X81DA149779A167BD"></a></p>
+
+<h5>C.2-1 GeodesicTreeOfInverseAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeodesicTreeOfInverseAutomaton</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns a subautomaton of <var class="Arg">A</var>whose underlying graph is a geodesic tree of the underlying graph of the inverse automaton <code class="code">A</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det",4,2,[ [ 3, 4, 0, 0 ], [ 2, 3, 4, 0 ] ],[ 1 ],[ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := GeodesicTreeOfInverseAutomaton(A);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(G);</span>
+   |  1  2  3  4
+-----------------
+ a |  3
+ b |  2     4
+Initial state:   [ 1 ]
+Accepting state: [ 1 ]
+</pre></div>
+
+<p><a id="X7F117C43814F2CDE" name="X7F117C43814F2CDE"></a></p>
+
+<h5>C.2-2 InverseAutomatonToGenerators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InverseAutomatonToGenerators</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns a set of generators (given trough the representation above) of the subgroup of the free group corresponding to the automaton <code class="code">A</code> given.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NW := InverseAutomatonToGenerators(A);</span>
+[ 2, "baBA", "bbA" ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapB_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

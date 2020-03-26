@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (hpc) - Chapter 7: Channels</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7_mj.html">[MathJax on]</a></p>
+<p><a id="X82C4DEA2841FAC0B" name="X82C4DEA2841FAC0B"></a></p>
+<div class="ChapSects"><a href="chap7.html#X82C4DEA2841FAC0B">7 <span class="Heading">Channels</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X82C4DEA2841FAC0B">7.1 <span class="Heading">Channels</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7E666A8B7C37ADA4">7.1-1 CreateChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81233BCB7B1173FA">7.1-2 SendChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8004E54A7D91929C">7.1-3 TransmitChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AEFF25D8143DA77">7.1-4 TrySendChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7BB33C037A81BCF6">7.1-5 TryTransmitChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7FEABC588101CCE7">7.1-6 ReceiveChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X788785E380C10A01">7.1-7 TryReceiveChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7A5E26F5799A17B4">7.1-8 MultiSendChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X85B8D09B802D2122">7.1-9 TryMultiSendChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X807D4263798D775E">7.1-10 MultiReceiveChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8355AFCC8530B2CA">7.1-11 ReceiveAnyChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X846C7B3F7BF7CA0B">7.1-12 ReceiveAnyChannelWithIndex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81A731667C33E150">7.1-13 TallyChannel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AF2B2ED8552E33D">7.1-14 InspectChannel</a></span>
+</div></div>
+</div>
+
+<h3>7 <span class="Heading">Channels</span></h3>
+
+<p><a id="X82C4DEA2841FAC0B" name="X82C4DEA2841FAC0B"></a></p>
+
+<h4>7.1 <span class="Heading">Channels</span></h4>
+
+<p>Channels are FIFO queues that threads can use to coordinate their activities.</p>
+
+<p><a id="X7E666A8B7C37ADA4" name="X7E666A8B7C37ADA4"></a></p>
+
+<h5>7.1-1 CreateChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateChannel</code>( [<var class="Arg">capacity</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">CreateChannel</code> returns a FIFO communication channel that can be used to exchange information between threads. Its optional argument is a capacity (positive integer). If insufficient resources are available to create a channel, it returns -1. If the capacity is not a positive integer, an error will be raised.</p>
+
+<p>If a capacity is not provided, by default the channel can hold an indefinite number of objects. Otherwise, attempts to store objects in the channel beyond its capacity will block.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch1:=CreateChannel();</span>
+&lt;channel 0x460339c: 0 elements, 0 waiting&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch2:=CreateChannel(5);</span>
+&lt;channel 0x460324c: 0/5 elements, 0 waiting&gt;
+</pre></div>
+
+<p><a id="X81233BCB7B1173FA" name="X81233BCB7B1173FA"></a></p>
+
+<h5>7.1-2 SendChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SendChannel</code>( <var class="Arg">channel</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">SendChannel</code> accepts two arguments, a channel object returned by <code class="func">CreateChannel</code> (<a href="chap7.html#X7E666A8B7C37ADA4"><span class="RefLink">7.1-1</span></a>), and an arbitrary GAP object. It stores <var class="Arg">obj</var> in <var class="Arg">channel</var>. If <var class="Arg">channel</var> has a finite capacity and is currently full, then <code class="func">SendChannel</code> will block until at least one element has been removed from the channel, e.g. using <code class="func">ReceiveChannel</code> (<a href="chap7.html#X7FEABC588101CCE7"><span class="RefLink">7.1-6</span></a>).</p>
+
+<p><code class="func">SendChannel</code> performs automatic region migration for thread-local objects. If <var class="Arg">obj</var> is thread-local for the current thread, it will be migrated (along with all subobjects contained in the same region) to the receiving thread's thread-local data space. In between sending and receiving, <var class="Arg">obj</var> cannot be accessed by either thread.</p>
+
+<p>This example demonstrates sending messages across a channel.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch1 := CreateChannel();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch1,1);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch1;</span>
+&lt;channel 0x460339c: 1 elements, 0 waiting&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReceiveChannel(ch1);</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch1;</span>
+&lt;channel 0x460339c: 0 elements, 0 waiting&gt;
+</pre></div>
+
+<p><code class="code">Sleep</code> in the following example is used to demonstrate blocking.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch2 := CreateChannel(5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch3 := CreateChannel();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for i in [1..5] do SendChannel(ch2,i); od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch2;</span>
+&lt;channel 0x460324c: 5/5 elements, 0 waiting&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=CreateThread(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">function()</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">local x;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">Sleep(10);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">x:=ReceiveChannel(ch2);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">Sleep(10);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">SendChannel(ch3,x);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">Print("Thread finished\n");</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end);;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">SendChannel(ch2,3); # this blocks until the thread reads from ch2</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReceiveChannel(ch3); # the thread is blocked until we read from ch3</span>
+1
+Thread finished
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WaitThread(t);</span>
+</pre></div>
+
+<p><a id="X8004E54A7D91929C" name="X8004E54A7D91929C"></a></p>
+
+<h5>7.1-3 TransmitChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TransmitChannel</code>( <var class="Arg">channel</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TransmitChannel</code> is identical to <code class="func">SendChannel</code> (<a href="chap7.html#X81233BCB7B1173FA"><span class="RefLink">7.1-2</span></a>), except that it does not perform automatic region migration of thread-local objects.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch := CreateChannel(5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := [ 1, 2, 3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">original_region := RegionOf(l);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch, l);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WaitThread(CreateThread(function()</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     local ob; ob := ReceiveChannel(ch);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     Display(RegionOf(ob) = original_region);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end));</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := [ 1, 2, 3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">original_region := RegionOf(l);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TransmitChannel(ch, l);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WaitThread(CreateThread(function()</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     local ob; ob := ReceiveChannel(ch);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     Display(RegionOf(ob) = original_region);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end));</span>
+true
+</pre></div>
+
+<p><a id="X7AEFF25D8143DA77" name="X7AEFF25D8143DA77"></a></p>
+
+<h5>7.1-4 TrySendChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TrySendChannel</code>( <var class="Arg">channel</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TrySendChannel</code> is identical to <code class="func">SendChannel</code> (<a href="chap7.html#X81233BCB7B1173FA"><span class="RefLink">7.1-2</span></a>), except that it returns if the channel is full instead of blocking. It returns true if the send was successful and false otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch := CreateChannel(1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TrySendChannel(ch, 99);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TrySendChannel(ch, 99);</span>
+false
+</pre></div>
+
+<p><a id="X7BB33C037A81BCF6" name="X7BB33C037A81BCF6"></a></p>
+
+<h5>7.1-5 TryTransmitChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TryTransmitChannel</code>( <var class="Arg">channel</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TryTransmitChannel</code> is identical to <code class="func">TrySendChannel</code> (<a href="chap7.html#X7AEFF25D8143DA77"><span class="RefLink">7.1-4</span></a>), except that it does not perform automatic region migration of thread-local objects.</p>
+
+<p><a id="X7FEABC588101CCE7" name="X7FEABC588101CCE7"></a></p>
+
+<h5>7.1-6 ReceiveChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReceiveChannel</code>( <var class="Arg">channel</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ReceiveChannel</code> is used to retrieve elements from a channel. If <var class="Arg">channel</var> is empty, the call will block until an element has been added to the channel via <code class="func">SendChannel</code> (<a href="chap7.html#X81233BCB7B1173FA"><span class="RefLink">7.1-2</span></a>) or a similar primitive.</p>
+
+<p>See <code class="func">SendChannel</code> (<a href="chap7.html#X81233BCB7B1173FA"><span class="RefLink">7.1-2</span></a>) for an example.</p>
+
+<p><a id="X788785E380C10A01" name="X788785E380C10A01"></a></p>
+
+<h5>7.1-7 TryReceiveChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TryReceiveChannel</code>( <var class="Arg">channel</var>, <var class="Arg">default</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TryReceiveChannel</code>, like <code class="func">ReceiveChannel</code> (<a href="chap7.html#X7FEABC588101CCE7"><span class="RefLink">7.1-6</span></a>), attempts to retrieve an object from <var class="Arg">channel</var>. If it does not succeed, however, it will return <var class="Arg">default</var> rather than blocking.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch := CreateChannel();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch, 99);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TryReceiveChannel(ch, fail);</span>
+99
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TryReceiveChannel(ch, fail);</span>
+fail
+</pre></div>
+
+<p><a id="X7A5E26F5799A17B4" name="X7A5E26F5799A17B4"></a></p>
+
+<h5>7.1-8 MultiSendChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MultiSendChannel</code>( <var class="Arg">channel</var>, <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">MultiSendChannel</code> allows the sending of all the objects contained in the list <var class="Arg">list</var> to <var class="Arg">channel</var> as a single operation. The list must be dense and is not modified by the call. The function will send elements starting at index 1 until all elements have been sent. If a channel with finite capacity is full, then the operation will block until all elements can be sent.</p>
+
+<p>The operation is designed to be more efficient than sending all elements individually via <code class="func">SendChannel</code> (<a href="chap7.html#X81233BCB7B1173FA"><span class="RefLink">7.1-2</span></a>) by minimizing potentially expensive concurrency operations.</p>
+
+<p>See <code class="func">MultiReceiveChannel</code> (<a href="chap7.html#X807D4263798D775E"><span class="RefLink">7.1-10</span></a>) for an example.</p>
+
+<p><a id="X85B8D09B802D2122" name="X85B8D09B802D2122"></a></p>
+
+<h5>7.1-9 TryMultiSendChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TryMultiSendChannel</code>( <var class="Arg">channel</var>, <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TryMultiSendChannel</code> operates like <code class="func">MultiSendChannel</code> (<a href="chap7.html#X7A5E26F5799A17B4"><span class="RefLink">7.1-8</span></a>), except that it returns rather than blocking if it cannot send any more elements if the channel is full. It returns the number of elements it has sent. If <var class="Arg">channel</var> does not have finite capacity, <code class="func">TryMultiSendChannel</code> will always send all elements in the list.</p>
+
+<p><a id="X807D4263798D775E" name="X807D4263798D775E"></a></p>
+
+<h5>7.1-10 MultiReceiveChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MultiReceiveChannel</code>( <var class="Arg">channel</var>, <var class="Arg">amount</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">MultiReceiveChannel</code> is the receiving counterpart to <code class="func">MultiSendChannel</code> (<a href="chap7.html#X7A5E26F5799A17B4"><span class="RefLink">7.1-8</span></a>).It will try to receive up to <var class="Arg">amount</var> objects from <var class="Arg">channel</var>. If the channel contains less than <var class="Arg">amount</var> objects, it will return rather than blocking.</p>
+
+<p>The function returns a list of all the objects received.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch:=CreateChannel();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MultiSendChannel(ch, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MultiReceiveChannel(ch,7);</span>
+[ 1, 2, 3, 4, 5, 6, 7 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MultiReceiveChannel(ch,7);</span>
+[ 8, 9, 10 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MultiReceiveChannel(ch,7);</span>
+[  ]
+</pre></div>
+
+<p><a id="X8355AFCC8530B2CA" name="X8355AFCC8530B2CA"></a></p>
+
+<h5>7.1-11 ReceiveAnyChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReceiveAnyChannel</code>( <var class="Arg">channel_1</var>, <var class="Arg">...</var>, <var class="Arg">channel_n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReceiveAnyChannel</code>( <var class="Arg">channel_list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ReceiveAnyChannel</code> is a multiplexing variant of<code class="func">ReceiveChannel</code> (<a href="chap7.html#X7FEABC588101CCE7"><span class="RefLink">7.1-6</span></a>). It blocks until at least one of the channels provided contains an object. It will then retrieve that object from the channel and return it.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch1 := CreateChannel();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch2 := CreateChannel();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch2, [1, 2, 3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReceiveAnyChannel(ch1, ch2);</span>
+[ 1, 2, 3 ]
+</pre></div>
+
+<p><a id="X846C7B3F7BF7CA0B" name="X846C7B3F7BF7CA0B"></a></p>
+
+<h5>7.1-12 ReceiveAnyChannelWithIndex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReceiveAnyChannelWithIndex</code>( <var class="Arg">channel_1</var>, <var class="Arg">...</var>, <var class="Arg">channel_n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReceiveAnyChannelWithIndex</code>( <var class="Arg">channel_list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ReceiveAnyChannelWithIndex</code> works like <code class="func">ReceiveAnyChannel</code> (<a href="chap7.html#X8355AFCC8530B2CA"><span class="RefLink">7.1-11</span></a>), except that it returns a list with two elements, the first being the object being received, the second being the number of the channel from which the object has been retrieved.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch1 := CreateChannel();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch2 := CreateChannel();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch2, [1, 2, 3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReceiveAnyChannelWithIndex(ch1, ch2);</span>
+[ [ 1, 2, 3 ], 2 ]
+</pre></div>
+
+<p><a id="X81A731667C33E150" name="X81A731667C33E150"></a></p>
+
+<h5>7.1-13 TallyChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TallyChannel</code>( <var class="Arg">channel</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TallyChannel</code> returns the number of objects that a channel contains. This number can increase or decrease, as data is sent to or received from this channel. Send operations will only ever increase and receive operations will only ever decrease this count. Thus, if there is only one thread receiving data from the channel, it can use the result as a lower bound for the number of elements that will be available in the channel.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch := CreateChannel();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch, 2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch, 3);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch, 5);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TallyChannel(ch);</span>
+3
+</pre></div>
+
+<p><a id="X7AF2B2ED8552E33D" name="X7AF2B2ED8552E33D"></a></p>
+
+<h5>7.1-14 InspectChannel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InspectChannel</code>( <var class="Arg">channel</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">InspectChannel</code> returns a list of the objects that a channel contains. Note that objects that are not in the shared, public, or read-only region will be temporarily stored in the so-called limbo region while in transit and will be inaccessible through normal means until they have been received.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ch := CreateChannel();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch, 2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch, 3);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SendChannel(ch, 5);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InspectChannel(ch);</span>
+[ 2, 3, 5 ]
+</pre></div>
+
+<p>This function is primarly intended for debugging purposes.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

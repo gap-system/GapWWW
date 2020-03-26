@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HeLP) - Chapter 4: Extended examples</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X7CDC63A27F7790AA" name="X7CDC63A27F7790AA"></a></p>
+<div class="ChapSects"><a href="chap4.html#X7CDC63A27F7790AA">4 <span class="Heading">Extended examples</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7DEAD03D7811F9FA">4.1 <span class="Heading">The Character Table Library</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X84ED1F0D7A47B055">4.2 <span class="Heading">The behavior of the variable HeLP sol</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7E939D8483F1EE64">4.3 <span class="Heading">Saving time</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8242093A82FE41FA">4.4 <span class="Heading">Using InfoLevels</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X818A647182CA20B3">4.5 <span class="Heading">Non-standard characters</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X879DC8C287C41B09">4.6 <span class="Heading">A complete example: (PQ) for the MacLaughlin simple group</span></a>
+</span>
+</div>
+</div>
+
+<h3>4 <span class="Heading">Extended examples</span></h3>
+
+<p>We will give some more examples which are intended to give the user an idea of the behavior on different inputs and the variable HeLP_sol. We also give hints how to use the package more efficiently, to use characters not available in libraries and how InfoLevels can be helpful.</p>
+
+<p><a id="X7DEAD03D7811F9FA" name="X7DEAD03D7811F9FA"></a></p>
+
+<h4>4.1 <span class="Heading">The Character Table Library</span></h4>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := SL(2,7);</span>
+SL(2,7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_ZC(G);</span>
+#I  The Brauer tables for the following primes are not available: [ 2, 3, 7 ].
+#I  (ZC) can't be solved, using the given data, for the orders: [ 8 ].
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C1 := CharacterTable(G);</span>
+CharacterTable( SL(2,7) )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_ZC(C1);</span>
+#I  The Brauer tables for the following primes are not available: [ 2, 3, 7 ].
+#I  (ZC) can't be solved, using the given data, for the orders: [ 8 ].
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C2 := CharacterTable("2.L2(7)");</span>
+CharacterTable( "2.L3(2)" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_ZC(C2);</span>
+true
+</pre></div>
+
+<p>Note that the first and the second call of <code class="func">HeLP_ZC</code> (<a href="chap2.html#X81AF79A587054306"><span class="RefLink">2.1-1</span></a>) are equivalent -- the only difference being that in the first version the character table of the group is also calculated by the function, in the second version the calculations are performed with the given character table. For the third call of <code class="func">HeLP_ZC</code> (<a href="chap2.html#X81AF79A587054306"><span class="RefLink">2.1-1</span></a>) a character table for SL2(7) is used which comes from the character table library. The different result is due to the fact, that in the third version the Brauer tables are available (the Brauer table for the prime <span class="Math">p = 7</span> is needed to rule out some non-trivial partial augmentations for elements of order 8), whereas for the first and the second call no Brauer tables are available in GAP.</p>
+
+<p><a id="X84ED1F0D7A47B055" name="X84ED1F0D7A47B055"></a></p>
+
+<h4>4.2 <span class="Heading">The behavior of the variable HeLP sol</span></h4>
+
+<p>This sections demonstrates when the global variable <code class="keyw">HeLP_sol</code> is reset. This is the case if calculations are performed using (the character table of) another group than before:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("A5");</span>
+CharacterTable( "A5" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_ZC(C);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_sol;</span>
+[ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ],, 
+  [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ], [  ],,,, [  ],,,,, [  ],,,,,,,,,,,,,,, [  ] 
+ ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("L3(7).2");</span>
+CharacterTable( "L3(7).2" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrderAndPA(Irr(C){[3,7,9,10]},21,[[1],[3,9,-11]]);</span>
+#I  Number of solutions for elements of order 21 with these partial augmentation
+s for the powers: 1.
+[ [ [ 1 ], [ 3, 9, -11 ], [ -6, 0, 3, 4 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_sol;</span>
+[ [ [ [ 1 ] ] ] ]
+</pre></div>
+
+<p>The function <code class="func">HeLP_WithGivenOrderAndPA</code> (<a href="chap3.html#X7CD0CEF283F13F7B"><span class="RefLink">3.1-2</span></a>) does not write a result in <code class="keyw">HeLP_sol[k]</code> (as it does not calculate all possible solutions of order <span class="Math">k</span>). However <code class="keyw">HeLP_sol</code> is reset as a different character table is used. We continue the above example.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C,3);</span>
+#I  Number of solutions for elements of order 3: 1; stored in HeLP_sol[3].
+[ [ [ 1 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_sol;</span>
+[ [ [ [ 1 ] ] ],, [ [ [ 1 ] ] ] ]
+</pre></div>
+
+<p>If HeLP detects that the table used belongs to the same group, <code class="keyw">HeLP_sol</code> is not reset:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C mod 7, 19);</span>
+#I  Number of solutions for elements of order 19: 3; stored in HeLP_sol[19].
+[ [ [ 0, 0, 1 ] ], [ [ 0, 1, 0 ] ], [ [ 1, 0, 0 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_sol;</span>
+[ [ [ [ 1 ] ] ],, [ [ [ 1 ] ] ],,,,,,,,,,,,,,,, 
+  [ [ [ 0, 0, 1 ] ], [ [ 0, 1, 0 ] ], [ [ 1, 0, 0 ] ] ] ]
+# the previously calaculated result for order 3 is still there.
+</pre></div>
+
+<p>HeLP can detect that the character tables belong to the same group, if they are identical objects in GAP or if both are tables of the same group from the ATLAS and their InfoText begins with "origin: ATLAS of finite groups" (which is usually the case for ATLAS tables). If the program can verify that the character table which is used at the current call of a function belongs to the same group as in the previous call of a function, the solutions stored in <code class="keyw">HeLP_sol</code> are kept. If the character table belongs to another group or it can not be made sure that the character table belongs to the same group, <code class="keyw">HeLP_sol</code> is reset to the initial value <code class="keyw">[ [ [1] ] ]</code> representing the trivial solution for units of order <span class="Math">1</span>.</p>
+
+<p>Not reseting <code class="keyw">HeLP_sol</code> can also be achieved using <code class="func">HeLP_ChangeCharKeepSols</code> (<a href="chap3.html#X7BB9009482784E90"><span class="RefLink">3.4-1</span></a>). However, caution should be exercised when using this command since it may manipulate <code class="keyw">HeLP_sol</code> into something meaningless.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := PSL(2,7);</span>
+Group([ (3,7,5)(4,8,6), (1,2,6)(3,4,8) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_ZC(G);</span>
+#I  The Brauer tables for the following primes are not available: [ 2, 3, 7 ].
+#I  (ZC) can't be solved, using the given data, for the orders: [ 6 ].
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_sol;</span>
+[ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ], [ 0, 1 ] ] ],, 
+  [ [ [ 1 ], [ 1 ], [ -2, 3 ] ] ], [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ],,,,, [  ],, 
+  [  ],,,,,,, [  ],,,,,,, [  ],,,,,,,,,,,,,, [  ],,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  ,,,,,,,,,,,,, [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("L2(7)") mod 7;</span>
+BrauerTable( "L3(2)", 7 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_ChangeCharKeepSols(C); #This table belongs to the same group.</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C,6);</span>
+#I  Number of solutions for elements of order 6: 0; stored in HeLP_sol[6].
+[  ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_sol;</span>
+[ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ], [ 0, 1 ] ] ],, 
+  [  ], [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ],,,,, [  ],, [  ],,,,,,, [  ],,,,,,, 
+  [  ],,,,,,,,,,,,,, [  ],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("L3(7).2") mod 7;</span>
+BrauerTable( "L3(7).2", 7 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_ChangeCharKeepSols(C); #This table is from a different group</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C,19);</span>
+#I  Number of solutions for elements of order 19: 3; stored in HeLP_sol[19].
+[ [ [ 0, 0, 1 ] ], [ [ 0, 1, 0 ] ], [ [ 1, 0, 0 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_sol;</span>
+[ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ], [ 0, 1 ] ] ],, 
+  [  ], [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ],,,,, [  ],, [  ],,,,, 
+  [ [ [ 0, 0, 1 ] ], [ [ 0, 1, 0 ] ], [ [ 1, 0, 0 ] ] ],, [  ],,,,,,, [  ],,,,
+  ,,,,,,,,,, [  ],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, [  ] ]
+# The content of HeLP_sol does not have a mathematical value anymore.
+</pre></div>
+
+<p>The following functions manipulate the variable <code class="keyw">HeLP_sol</code>: <code class="func">HeLP_ZC</code> (<a href="chap2.html#X81AF79A587054306"><span class="RefLink">2.1-1</span></a>), <code class="func">HeLP_PQ</code> (<a href="chap2.html#X813A10398218E9EE"><span class="RefLink">2.2-1</span></a>), <code class="func">HeLP_WithGivenOrder</code> (<a href="chap3.html#X7F8F6E3D80A23C1D"><span class="RefLink">3.1-1</span></a>), <code class="func">HeLP_WithGivenOrderSConstant</code> (<a href="chap3.html#X7CAC647C7D1E95B0"><span class="RefLink">3.2-1</span></a>) (for elements of order <span class="Math">t</span> and if the existence of elements of order <span class="Math">st</span> can be excluded also for this order), <code class="func">HeLP_AllOrders</code> (<a href="chap3.html#X8727639883F787C5"><span class="RefLink">3.3-1</span></a>), <code class="func">HeLP_AllOrdersPQ</code> (<a href="chap3.html#X7C00E1567BFF1757"><span class="RefLink">3.3-2</span></a>), <code class="func">HeLP_VerifySolution</code> (<a href="chap3.html#X7DAA7EF785621D9E"><span class="RefLink">3.6-1</span></a>) (if existing solutions were checked), <code class="func">HeLP_FindAndVerifySolution</code> (<a href="chap3.html#X8452B7F58641E7F5"><span class="RefLink">3.6-2</span></a>). Note that the functions only will write results in <code class="keyw">HeLP_sol[k]</code> if <span class="Math">k</span> is a divisor of the exponent of the group as this information is enough to decide whether (ZC) and (PQ) are valid for the group in consideration. In all other cases an empty list will be returned but no value will be written in <code class="keyw">HeLP_sol[k]</code>.</p>
+
+<p><a id="X7E939D8483F1EE64" name="X7E939D8483F1EE64"></a></p>
+
+<h4>4.3 <span class="Heading">Saving time</span></h4>
+
+<p>The most time consuming operation when using the functions of this package is solving the system of inequalities given by the HeLP method, see Section <a href="chap5.html#X8663389F87B9CE62"><span class="RefLink">5.3</span></a>. This package uses the programs 4ti2 and/or normaliz to do this and it is not completely clear to the authors of this package which input is solved faster by these programs. In any case it is helpful to reduce the number of variables, using e.g. <span class="Math">p</span>-constant characters, and in many situations it is useful to reduce the number of inequalities, i.e. of used characters.</p>
+
+<p>To measure the time a function needs we use <code class="keyw">IO_gettimeofday</code> from the IO-package rather than functions like <code class="keyw">time</code> or <code class="keyw">Runtime</code>, since these measure only the GAP time, but do not return the time the functions spend using 4ti2 or normaliz. We used the following function (which is essentially due to Alexander Konovalov) to meassure the time used for the computation:</p>
+
+
+<div class="example"><pre>
+TimeFunction := function(f, args)
+ # input: the function of which the computing time should be measured 
+ #        and the list of arguments for this function
+ # output: time needed for the calculations in seconds
+ local start;
+ start := IO_gettimeofday();
+ CallFuncList(f,args);
+ return IO_gettimeofday().tv_sec - start.tv_sec;
+ end; 
+</pre></div>
+
+<p>All times will be given in seconds. The computations were perfomed on an a machine with four 2,6 GHz kernels.</p>
+
+<p>A lot of time might be saved by testing only a few characters instead of a whole character table:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("L2(49)");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_Solver("normaliz");</span>
+'normaliz' will be used from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [C,35]);           </span>
+#I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
+6  # I.e.: The computation took 6 seconds.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [Irr(C){[2]}, 35]);</span>
+#I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_Solver("4ti2");                                 </span>
+'4ti2' will be used from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [C,35]);           </span>
+#I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [Irr(C){[2]}, 35]);</span>
+#I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
+1
+</pre></div>
+
+<p>I.e.: Using only one character instead of all of them is about six times faster in this situation and this is also quickly found by <code class="keyw">HeLP_FindAndVerifySolution</code>.</p>
+
+<p>Using only a few characters might even be a life saver:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("L4(3).2^2");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C, 3);;</span>
+#I  Number of solutions for elements of order 3: 63; stored in HeLP_sol[3].
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C, 13);;</span>
+#I  Number of solutions for elements of order 13: 198; stored in HeLP_sol[13].
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(HeLP_Info,4);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_Solver("4ti2");</span>
+'4ti2' will be used from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_UseRedund(true);</span>
+'redund' will be used from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);</span>
+#I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
+438
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_UseRedund(false);</span>
+The calculations will be performed without using 'redund' from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);</span>
+#I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
+430
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_Solver("normaliz");</span>
+'normaliz' will be used from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);</span>
+#I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
+340
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_UseRedund(true); </span>
+'redund' will be used from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);</span>
+#I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
+419
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_UseRedund(false);</span>
+The calculations will be performed without using 'redund' from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_Solver("normaliz");</span>
+'normaliz' will be used from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [Irr(C), 39]);</span>
+#I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
+6234
+</pre></div>
+
+<p>Sometimes it is helpful to look at groups containing the group of interest:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("2F4(2)'");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C, 13);;</span>
+#I  Number of solutions for elements of order 13: 316; stored in HeLP_sol[13].
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C, 3);;</span>
+#I  Number of solutions for elements of order 3: 1; stored in HeLP_sol[3].
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [C, 39]);</span>
+#I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].
+80
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C:=CharacterTable("2F4(2)'.2");</span>
+CharacterTable( "2F4(2)'.2" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrder, [C, 39]);</span>
+#I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].
+1
+</pre></div>
+
+<p>This is also a good example to use <span class="Math">p</span>-constant characters:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C:=CharacterTable("2F4(2)'");</span>
+CharacterTable( "2F4(2)'" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_WithGivenOrderSConstant, [C, 13, 3]);</span>
+#I    Number of non-trivial 13-constant characters in the list: 19.           
+0
+</pre></div>
+
+<p>If using 4ti2, for some groups switching redund on and off gives major improvements.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_Solver("4ti2");</span>
+'4ti2' will be used from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_UseRedund(true);</span>
+'redund' will be used from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable(SmallGroup(160,91));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_ZC, [C]);</span>
+26
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_Solver("normaliz");</span>
+'normaliz' will be used from now on.                                                                            
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_ZC, [C]);</span>
+12
+</pre></div>
+
+<p>Using 4ti2 but not redund <code class="keyw">HeLP_ZC(C)</code> ran for over 400 hours without a result.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable(SmallGroup(96,12));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_UseRedund(false);</span>
+The calculations will be performed without using 'redund' from now on.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_Solver("4ti2");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TimeFunction(HeLP_ZC, [C]);</span>
+2                                                                            
+</pre></div>
+
+<p>Running this example using redund the computations does not proceed for elements of order 12.</p>
+
+<p><a id="X8242093A82FE41FA" name="X8242093A82FE41FA"></a></p>
+
+<h4>4.4 <span class="Heading">Using InfoLevels</span></h4>
+
+<p>HeLP provides different InfoLevels for different situations. The variable controlling the InfoLevel is <code class="keyw">HeLP_Info</code> and it might be changed using <code class="keyw">SetInfoLevel(HeLP_Info, n)</code> to set the InfoLevel to n. The maximal <code class="keyw">HeLP_Info</code> entry is 5, the default InfoLevel is 1. The examples below give some idea, how one can use <code class="keyw">HeLP_Info</code>, but do not give complete information on all possibilities.</p>
+
+<p>If one is only interested whether (ZC) or (PQ) can be solved using the HeLP method, one can set <code class="keyw">HeLP_Info</code> to 0:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("M11");</span>
+CharacterTable( "M11" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_ZC(C);</span>
+#I  ZC can't be solved, using the given data, for the orders: [ 4, 6, 8 ].
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(HeLP_Info, 0);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_ZC(C);</span>
+false
+</pre></div>
+
+<p>If the InfoLevel is set to 2, the functions <code class="func">HeLP_ZC</code> (<a href="chap2.html#X81AF79A587054306"><span class="RefLink">2.1-1</span></a>) and <code class="func">HeLP_PQ</code> (<a href="chap2.html#X813A10398218E9EE"><span class="RefLink">2.2-1</span></a>) print information which order of torsion units is currently considered, so that the user can keep track of the progress. This may be used for bigger groups to see, if the calculations might finish at some point. Continuing the above example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(HeLP_Info, 2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_PQ(C);</span>
+#I  Checking order 2.
+#I  Checking order 3.
+#I  Checking order 5.
+#I  Checking order 10.
+#I  Checking order 11.
+#I  Checking order 15.
+#I  Checking order 22.
+#I  Checking order 33.
+#I  Checking order 55.
+true
+</pre></div>
+
+<p><code class="keyw">HeLP_Info</code> at InfoLevel 3 provides also some information about the used ordinary character table or Brauer tables:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(HeLP_Info, 3);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_PQ(C);</span>
+#I  Checking order 2.
+#I    Using table BrauerTable( "M11", 3 ).
+#I  Checking order 3.
+#I    Using table BrauerTable( "M11", 3 ).
+#I    Using table BrauerTable( "M11", 11 ).
+#I  Checking order 5.
+#I    Using table BrauerTable( "M11", 3 ).
+#I  Checking order 10.
+#I    Using table BrauerTable( "M11", 3 ).
+#I  Checking order 11.
+#I    Using table BrauerTable( "M11", 3 ).
+#I  Checking order 15.
+#I    Using table BrauerTable( "M11", 3 ).
+#I    Using table BrauerTable( "M11", 11 ).
+#I  Checking order 22.
+#I    Using table BrauerTable( "M11", 3 ).
+#I  Checking order 33.
+#I    Using table BrauerTable( "M11", 3 ).
+#I    Using table BrauerTable( "M11", 11 ).
+#I    Using table BrauerTable( "M11", 2 ).
+#I  Checking order 55.
+#I    Using table BrauerTable( "M11", 3 ).
+true
+</pre></div>
+
+<p>Setting <code class="keyw">HeLP_Info</code> to 4 is useful when there are many possibilities for the partial augmentations of the powers of some unit. A good example is the example on "L4(3).2^2" in the section on Time Saving <a href="chap4.html#X7E939D8483F1EE64"><span class="RefLink">4.3</span></a>, see above: If you see quickly that almost nothing is happening, you might want to change your strategy.</p>
+
+<p><code class="keyw">HeLP_Info</code> at level 5 informs the user on all changes of the used character table. Using it makes sense, if you work with the command <code class="func">HeLP_ChangeCharKeepSols</code> (<a href="chap3.html#X7BB9009482784E90"><span class="RefLink">3.4-1</span></a>).</p>
+
+<p><a id="X818A647182CA20B3" name="X818A647182CA20B3"></a></p>
+
+<h4>4.5 <span class="Heading">Non-standard characters</span></h4>
+
+<p>The package also allows using characters even if the whole character table is not available. E.g. induced characters:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("U3(8)");</span>
+CharacterTable( "U3(8)" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := PSU(3,8);               </span>
+&lt;permutation group of size 5515776 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AutomorphismGroup(G);</span>
+&lt;group of size 99283968 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllCharacterTableNames(Size,Size(A));</span>
+[ "3.U3(8).6", "3.U3(8).S3" ]
+</pre></div>
+
+<p>This means: The character table of the automorphism group A of PSU(3,8) is not available in GAP. However one can use induced characters:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NN := NormalSubgroups(A);</span>
+[ &lt;trivial group&gt;, &lt;group of size 5515776 with 2 generators&gt;, 
+  &lt;group with 3 generators&gt;, &lt;group of size 16547328 with 3 generators&gt;, 
+  &lt;group of size 49641984 with 4 generators&gt;, 
+  &lt;group of size 33094656 with 4 generators&gt;, 
+  &lt;group of size 99283968 with 4 generators&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := NN[2];      #Subgroup of A isomorphic to G              </span>
+&lt;group of size 5515776 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CharacterTableWithStoredGroup(H,C); </span>
+CharacterTable( &lt;group of size 5515776 with 2 generators&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := CharacterTable(H);      </span>
+CharacterTable( &lt;group of size 5515776 with 2 generators&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">chi := InducedClassFunction(Irr(D)[2],A);</span>
+Character( CharacterTable( &lt;group of size 99283968 with 4 generators&gt; ),
+ [ 1008, -144, -126, 18, 0, 0, 0, 0, 36, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -18, 0, 0, 
+  0, 0 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder([chi],7*19);</span>
+#I  Number of solutions for elements of order 133: 0; stored in HeLP_sol[133].
+[  ]
+</pre></div>
+
+<p>One can also use characters, which are not available in GAP, but are entered manually:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("L2(49)");</span>
+CharacterTable( "L2(49)" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C,15);;</span>
+#I  Number of solutions for elements of order 15: 56; stored in HeLP_sol[15].
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C7 := C mod 7;</span>
+fail
+</pre></div>
+
+<p>The Brauer characters for the prime 7 are well known, see e.g. <a href="chapBib.html#biBSrinivasanPSL">[Sri64]</a> , but are not yet available in GAP.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrdersClassRepresentatives(C);</span>
+[ 1, 2, 3, 4, 5, 5, 6, 7, 7, 8, 8, 12, 12, 24, 24, 24, 24, 25, 25, 25, 25, 
+  25, 25, 25, 25, 25, 25 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">chi := ClassFunction(C, [ 3, 0, -1, 0, -E(5)^2-E(5)^3, -E(5)-E(5)^4, 0,  </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]);</span>
+ClassFunction( CharacterTable( "L2(49)" ),
+ [ 3, 0, -1, 0, -E(5)^2-E(5)^3, -E(5)-E(5)^4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder([chi],15);</span>
+#I  Number of solutions for elements of order 15: 0; stored in HeLP_sol[15].
+[  ]
+</pre></div>
+
+<p>The class function <code class="keyw">chi</code> above is of course not a proper character of the group, but the values coincide with the values of a 7-Brauer character of the group on the conjugacy classes of order 1, 3 and 5, i.e. the one needed to use HeLP for order 15. All functions of the HeLP-package only access values of class functions on conjugacy classes of elements with an order dividing the order of the unit in question. That is why this class function <code class="keyw">chi</code> can be used in this setting.</p>
+
+<p><a id="X879DC8C287C41B09" name="X879DC8C287C41B09"></a></p>
+
+<h4>4.6 <span class="Heading">A complete example: (PQ) for the MacLaughlin simple group</span></h4>
+
+<p>This section gives a demonstration of many functions of the package. The goal is to verify the Prime Graph Question for the McLaughlin simple group, which was proved in <a href="chapBib.html#biBKonovalovMcL">[BK07b]</a></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := CharacterTable("McL");</span>
+CharacterTable( "McL" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(HeLP_Info,4);</span>
+</pre></div>
+
+<p>The function <code class="keyw">HeLP_PQ(C)</code> would take really long. Instead one can use <code class="keyw">HeLP_AllOrdersPQ(C)</code> several times on a high InfoLevel. Any time you see the function needs long, just try some manual calculations. Compute first the partial augmentations of elements of prime order:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C,2);;</span>
+#I  Number of solutions for elements of order 2: 1; stored in HeLP_sol[2].    
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C mod 2,3);;</span>
+#I  Number of solutions for elements of order 3: 4; stored in HeLP_sol[3].    
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C mod 3,5);;</span>
+#I  Number of solutions for elements of order 5: 6; stored in HeLP_sol[5].    
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C mod 3,7);;</span>
+#I  Number of solutions for elements of order 7: 174; stored in HeLP_sol[7].  
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrder(C mod 3,11);;</span>
+#I  Number of solutions for elements of order 11: 20; stored in HeLP_sol[11].
+</pre></div>
+
+<p>For mixed order in most situations <span class="SimpleMath">p</span>-constant characters are interesting. Check the tables for such characters of small degree.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrderSConstant(Irr(C){[2,3,4,5]},7,3);</span>
+#I    Number of non-trivial 7-constant characters in the list: 4.
+[  ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrderSConstant(Irr(C){[2,3,4,5]},11,2);</span>
+#I    Number of non-trivial 11-constant characters in the list: 4.
+[  ]                                                                          
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrderSConstant(Irr(C){[2,3,4,5]},11,3);</span>
+#I    Number of non-trivial 11-constant characters in the list: 4.
+[  ]  
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrderSConstant(Irr(C mod 3){[2,3,4,5]},7,5);</span>
+#I    Number of non-trivial 7-constant characters in the list: 4.
+[  ]  
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrderSConstant(Irr(C mod 3){[2,3,4,5]},7,11);</span>
+#I    Number of non-trivial 7-constant characters in the list: 4.
+[  ] 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_WithGivenOrderSConstant(Irr(C mod 3){[2,3,4,5]},11,5);</span>
+#I    Number of non-trivial 11-constant characters in the list: 2.
+[  ] 
+</pre></div>
+
+<p>These calculations are enough to obtain an affirmative answer to the Prime Graph Question:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HeLP_AllOrdersPQ(C);</span>
+#I  Checking order 2.
+#I    Using the known solutions for elements of order 2.
+#I  Checking order 3.
+#I    Using the known solutions for elements of order 3.
+#I  Checking order 5.
+#I    Using the known solutions for elements of order 5.
+#I  Checking order 7.
+#I    Using the known solutions for elements of order 7.
+#I  Checking order 11.
+#I    Using the known solutions for elements of order 11.
+#I  Checking order 21.
+#I    Using the known solutions for elements of order 21.
+#I  Checking order 22.
+#I    Using the known solutions for elements of order 22.
+#I  Checking order 33.
+#I    Using the known solutions for elements of order 33.
+#I  Checking order 35.
+#I    Using the known solutions for elements of order 35.
+#I  Checking order 55.
+#I    Using the known solutions for elements of order 55.
+#I  Checking order 77.
+#I    Using the known solutions for elements of order 77.
+true
+</pre></div>
+
+<p>Checking these computations takes a few minutes.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Utils) - Chapter 10: The transfer procedure</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap10"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap10_mj.html">[MathJax on]</a></p>
+<p><a id="X84AC9613842F014C" name="X84AC9613842F014C"></a></p>
+<div class="ChapSects"><a href="chap10.html#X84AC9613842F014C">10 <span class="Heading">The transfer procedure</span></a>
+</div>
+
+<h3>10 <span class="Heading">The transfer procedure</span></h3>
+
+<p>We consider here the process for transferring utility functions from a package <strong class="pkg">Home</strong> to <strong class="pkg">Utils</strong> which has to avoid the potential problem of duplicate declarations of a function causing loading problems in <strong class="pkg">GAP</strong>.</p>
+
+<p>If the functions in <strong class="pkg">Home</strong> all have names of the form <code class="code">HOME_FunctionName</code> then, in <strong class="pkg">Utils</strong>, these functions are likely to be renamed as <code class="code">FunctionName</code> or something similar. In this case the problem of duplicate declarations does not arise. This is what has happened with transfers from the <strong class="pkg">AutoDoc</strong> package.</p>
+
+<p>The case where the function names are unchanged is more complicated. Initially we tried out a process which allowed repeated declarations and installations of the functions being transferred. This involved additions to the main library files <code class="file">global.g</code> and <code class="file">oper.g</code>. Since there were misgivings about interfering in this way with basic operations such as <code class="code">BIND_GLOBAL</code>, a simpler (but slightly less convenient) process has been adopted.</p>
+
+<p>Using this alternative procedure, the following steps will be followed when making transfers from <strong class="pkg">Home</strong> to <strong class="pkg">Utils</strong>.</p>
+
+<ol>
+<li><p>(<strong class="pkg">Home</strong>:) Offer functions for inclusion. This may be simply done by emailing a list of functions. More usefully, email the declaration, implementation, test and documentation files, e.g.: <code class="file">home.gd</code>, <code class="file">home.gi</code>, <code class="file">home.tst</code> and <code class="file">home.xml</code>. (All active authors should be involved.)</p>
+
+</li>
+<li><p>(<strong class="pkg">Home</strong>:) Declare that <strong class="button">m.n</strong> is the last version of <strong class="pkg">Home</strong> to contain these functions, so that <strong class="button">m.n+1</strong> (or similar) will be the first version of <strong class="pkg">Home</strong> to have all these functions removed, and to specify <strong class="pkg">Utils</strong> as a required package.</p>
+
+</li>
+<li><p>(<strong class="pkg">Utils</strong>:) Add strings <var class="Arg">"home"</var> and <var class="Arg">"m.n"</var> to the list <code class="code">UtilsPackageVersions</code> in the file <code class="file">utils/lib/start.gd</code>.</p>
+
+
+<div class="example"><pre>
+
+UtilsPackageVersions := 
+  [ "autodoc",     "2016.01.31", 
+    "resclasses",  "4.2.5", 
+    "home",        "m.n",
+    ...,           ... 
+  ];
+
+</pre></div>
+
+<p>While the transfers are being made, it is essential that any new versions of <strong class="pkg">Home</strong> should be tested with the latest version of <strong class="pkg">Utils</strong> before they are released, so as to avoid loading failures.</p>
+
+</li>
+<li><p>(<strong class="pkg">Utils</strong>:) Include the function declaration and implementation sections in suitable files, enclosed within a conditional clause of the form:</p>
+
+
+<div class="example"><pre>
+
+if OKtoReadFromUtils( "Home" ) then
+. . . . . . 
+ &lt;the code&gt; 
+. . . . . . 
+fi;
+
+</pre></div>
+
+<p>The function <code class="code">OKtoReadFromUtils</code> returns <code class="keyw">true</code> only if there is an installed version of <strong class="pkg">Home</strong> and if this version is greater than <strong class="button">m.n</strong>. So, at this stage, <em>the copied code will not be read</em>, and the transferred functions can only be called if <strong class="pkg">Home</strong> has been installed.</p>
+
+</li>
+<li><p>(<strong class="pkg">Utils</strong>:) Add the test and documentation material to the appropriate files. The copied code can be tested by temporarily moving <strong class="pkg">Home</strong> away from <strong class="pkg">GAP</strong>'s package directory.</p>
+
+</li>
+<li><p>(<strong class="pkg">Utils</strong>:) Release a new version of <strong class="pkg">Utils</strong> containing all the transferred material.</p>
+
+</li>
+<li><p>(<strong class="pkg">Home</strong>:) Edit out the declarations and implementations of all the transferred functions, and remove references to them in the manual and tests. Possibly add a note to the manual that these functions have been transferred. Add <strong class="pkg">Utils</strong> to the list of <strong class="pkg">Home</strong>'s required packages in <code class="file">PackageInfo.g</code>. Release a new version of <strong class="pkg">Home</strong>.</p>
+
+</li>
+<li><p>(<strong class="pkg">Utils</strong>:) In due course, when the new version(s) of <strong class="pkg">Home</strong> are well established, it may be safe to remove the conditional clauses mentioned in item 4 above. The entry for <strong class="pkg">Home</strong> in <code class="code">UtilsPackageLists</code> may then be removed.</p>
+
+</li>
+</ol>
+<p>Finally, a note on the procedure for testing these functions. As long as a function being transferred still exists in the <strong class="pkg">Home</strong> package, the code will not be read from <strong class="pkg">Utils</strong>. So, when the tests are run, it is necessary to <code class="code">LoadPackage("home")</code> before the function is called. The file <code class="file">utils/tst/testall.g</code> makes sure that all the necessary packages are loaded before the individual tests are called.</p>
+
+<p> </p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

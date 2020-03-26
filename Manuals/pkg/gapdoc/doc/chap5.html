@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (GAPDoc) - Chapter 5: The Converters and an XML Parser</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X845E7FDC7C082CC4" name="X845E7FDC7C082CC4"></a></p>
+<div class="ChapSects"><a href="chap5.html#X845E7FDC7C082CC4">5 <span class="Heading">The Converters and an XML Parser</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7D1BB5867C13FA14">5.1 <span class="Heading">Producing Documentation from Source Files</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X826F530686F4D052">5.1-1 MakeGAPDocDoc</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7FE2AF49838D9034">5.2 <span class="Heading">Parsing XML Documents</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X847EB8498151D443">5.2-1 ParseTreeXMLString</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X835887057D0B4DA8">5.2-2 StringXMLElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X786827BF793191B3">5.2-3 EntitySubstitution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X86589C5C859ACE38">5.2-4 DisplayXMLStructure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7A7B223A83E38B40">5.2-5 ApplyToNodesParseTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F76D4A27C7FB946">5.2-6 GetTextXMLTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8466F74C80442F7D">5.2-7 XMLElements</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X84CFF72484B19C0D">5.2-8 CheckAndCleanGapDocTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X84062CD67B286FF0">5.2-9 AddParagraphNumbersGapDocTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X78A22C58841E5D0B">5.2-10 InfoXMLParser</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X8560E1A2845EC2C1">5.3 <span class="Heading">The Converters</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85BE6DF178423EF5">5.3-1 GAPDoc2LaTeX</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X86CD0B197CD58D2A">5.3-2 GAPDoc2Text</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7DFCE7357D6032A2">5.3-3 GAPDoc2TextPrintTextFiles</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7EB5E86F87A09F94">5.3-4 AddPageNumbersToSix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D42CFED7885BC00">5.3-5 PrintSixFile</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7DEB37417BBD8941">5.3-6 SetGAPDocTextTheme</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X84F22EEB78845CFD">5.3-7 GAPDoc2HTML</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X84A7007778073E7A">5.3-8 GAPDoc2HTMLPrintHTMLFiles</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X788AB14383272FDB">5.3-9 <span class="Heading">Stylesheet files</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X813599E982DE9B98">5.3-10 CopyHTMLStyleFiles</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85AFD98383174BB5">5.3-11 SetGAPDocHTMLStyle</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X864A528B81C661A2">5.3-12 InfoGAPDoc</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82AB468887ED0DBB">5.3-13 SetGapDocLanguage</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X800299827B88ABBE">5.4 <span class="Heading">Testing Manual Examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8337B2BC79253B3F">5.4-1 ExtractExamples</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X781D56FC7B938DCB">5.4-2 RunExamples</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">The Converters and an XML Parser</span></h3>
+
+<p>The <strong class="pkg">GAPDoc</strong> package contains a set of programs which allow us to convert a <strong class="pkg">GAPDoc</strong> book into several output versions and to make them available to <strong class="pkg">GAP</strong>'s online help.</p>
+
+<p>Currently the following output formats are provided: text for browsing inside a terminal running <strong class="pkg">GAP</strong>, LaTeX with <code class="code">hyperref</code>-package for cross references via hyperlinks and HTML for reading with a Web-browser.</p>
+
+<p><a id="X7D1BB5867C13FA14" name="X7D1BB5867C13FA14"></a></p>
+
+<h4>5.1 <span class="Heading">Producing Documentation from Source Files</span></h4>
+
+<p>Here we explain how to use the functions which are described in more detail in the following sections. We assume that we have the main file <code class="file">MyBook.xml</code> of a book <code class="code">"MyBook"</code> in the directory <code class="file">/my/book/path</code>. This contains <code class="code">&lt;#Include ...&gt;</code>-statements as explained in Chapter <a href="chap4.html#X7A3355C07F57C280"><span class="RefLink">4</span></a>. These refer to some other files as well as pieces of text which are found in the comments of some <strong class="pkg">GAP</strong> source files <code class="file">../lib/a.gd</code> and <code class="file">../lib/b.gi</code> (relative to the path above). A BibTeX database <code class="file">MyBook.bib</code> for the citations is also in the directory given above. We want to produce a text-, <code class="code">pdf-</code> and HTML-version of the document. (A LaTeX version of the manual is produced, so it is also easy to compile <code class="code">dvi</code>-, and postscript-versions.)</p>
+
+<p>All the commands shown in this Section are collected in the single function <code class="func">MakeGAPDocDoc</code> (<a href="chap5.html#X826F530686F4D052"><span class="RefLink">5.1-1</span></a>).</p>
+
+<p>First we construct the complete XML-document as a string with <code class="func">ComposedDocument</code> (<a href="chap4.html#X857D77557D12559D"><span class="RefLink">4.2-1</span></a>). This interprets recursively the <code class="code">&lt;#Include ...&gt;</code>-statements.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">path := Directory("/my/book/path");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">main := "MyBook.xml";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">files := ["../lib/a.gd", "../lib/b.gi"];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bookname := "MyBook";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">doc := ComposedDocument("GAPDoc", path, main, files, true);;</span>
+</pre></div>
+
+<p>Now <code class="code">doc</code> is a list with two entries, the first is a string containing the XML-document, the second gives information from which files and locations which part of the document was collected. This is useful in the next step, if there are any errors in the document.</p>
+
+<p>Next we parse the document and store its structure in a tree-like data structure. The commands for this are <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>) and <code class="func">CheckAndCleanGapDocTree</code> (<a href="chap5.html#X84CFF72484B19C0D"><span class="RefLink">5.2-8</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := ParseTreeXMLString(doc[1], doc[2]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CheckAndCleanGapDocTree(r);</span>
+true
+</pre></div>
+
+<p>We start to produce a text version of the manual, which can be read in a terminal (window). The command is <code class="func">GAPDoc2Text</code> (<a href="chap5.html#X86CD0B197CD58D2A"><span class="RefLink">5.3-2</span></a>). This produces a record with the actual text and some additional information. The text can be written chapter-wise into files with <code class="func">GAPDoc2TextPrintTextFiles</code> (<a href="chap5.html#X7DFCE7357D6032A2"><span class="RefLink">5.3-3</span></a>). The names of these files are <code class="file">chap0.txt</code>, <code class="file">chap1.txt</code> and so on. The text contains some markup using ANSI escape sequences. This markup is substituted by the <strong class="pkg">GAP</strong> help system (user configurable) to show the text with colors and other attributes. For the bibliography we have to tell <code class="func">GAPDoc2Text</code> (<a href="chap5.html#X86CD0B197CD58D2A"><span class="RefLink">5.3-2</span></a>) the location of the BibTeX database by specifying a <code class="code">path</code> as second argument.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t := GAPDoc2Text(r, path);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GAPDoc2TextPrintTextFiles(t, path);</span>
+</pre></div>
+
+<p>This command constructs all parts of the document including table of contents, bibliography and index. The functions <code class="func">FormatParagraph</code> (<a href="chap6.html#X812058CE7C8E9022"><span class="RefLink">6.1-4</span></a>) for formatting text paragraphs and <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>) for reading BibTeX files with <strong class="pkg">GAP</strong> may be of independent interest.</p>
+
+<p>With the text version we have also produced the information which is used for searching with <strong class="pkg">GAP</strong>'s online help. Also, labels are produced which can be used by links in the HTML- and <code class="code">pdf</code>-versions of the manual.</p>
+
+<p>Next we produce a LaTeX version of the document. <code class="func">GAPDoc2LaTeX</code> (<a href="chap5.html#X85BE6DF178423EF5"><span class="RefLink">5.3-1</span></a>) returns a string containing the LaTeX source. The utility function <code class="func">FileString</code> (<a href="chap6.html#X7E14D32181FBC3C3"><span class="RefLink">6.3-5</span></a>) writes the content of a string to a file, we choose <code class="file">MyBook.tex</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := GAPDoc2LaTeX(r);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FileString(Filename(path, Concatenation(bookname, ".tex")), l);</span>
+</pre></div>
+
+<p>Assuming that you have a sufficiently good installation of TeX available (see <code class="func">GAPDoc2LaTeX</code> (<a href="chap5.html#X85BE6DF178423EF5"><span class="RefLink">5.3-1</span></a>) for details) this can be processed with a series of commands like in the following example.</p>
+
+
+<div class="example"><pre>
+cd /my/book/path
+pdflatex MyBook
+bibtex MyBook
+pdflatex MyBook
+makeindex MyBook
+pdflatex MyBook
+mv MyBook.pdf manual.pdf
+</pre></div>
+
+<p>After this we have a <code class="code">pdf</code>-version of the document in the file <code class="file">manual.pdf</code>. It contains hyperlink information which can be used with appropriate browsers for convenient reading of the document on screen (e.g., <code class="code">xpdf</code> is nice because it allows remote calls to display named locations of the document). Of course, we could also use other commands like <code class="code">latex</code> or <code class="code">dvips</code> to process the LaTeX source file. Furthermore we have produced a file <code class="file">MyBook.pnr</code> which is <strong class="pkg">GAP</strong>-readable and contains the page number information for each (sub-)section of the document.</p>
+
+<p>We can add this page number information to the indexing information collected by the text converter and then print a <code class="file">manual.six</code> file which is read by <strong class="pkg">GAP</strong> when the manual is loaded. This is done with <code class="func">AddPageNumbersToSix</code> (<a href="chap5.html#X7EB5E86F87A09F94"><span class="RefLink">5.3-4</span></a>) and <code class="func">PrintSixFile</code> (<a href="chap5.html#X7D42CFED7885BC00"><span class="RefLink">5.3-5</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddPageNumbersToSix(r, Filename(path, "MyBook.pnr"));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrintSixFile(Filename(path, "manual.six"), r, bookname);</span>
+</pre></div>
+
+<p>Finally we produce an HTML-version of the document and write it (chapter-wise) into files <code class="file">chap0.html</code>, <code class="file">chap1.html</code> and so on. They can be read with any Web-browser. The commands are <code class="func">GAPDoc2HTML</code> (<a href="chap5.html#X84F22EEB78845CFD"><span class="RefLink">5.3-7</span></a>) and <code class="func">GAPDoc2HTMLPrintHTMLFiles</code> (<a href="chap5.html#X84A7007778073E7A"><span class="RefLink">5.3-8</span></a>). We also add a link from <code class="file">manual.html</code> to <code class="file">chap0.html</code>. You probably want to copy stylesheet files into the same directory, see <a href="chap5.html#X788AB14383272FDB"><span class="RefLink">5.3-9</span></a> for more details. The argument <code class="code">path</code> of <code class="func">GAPDoc2HTML</code> (<a href="chap5.html#X84F22EEB78845CFD"><span class="RefLink">5.3-7</span></a>) specifies the directory containing the BibTeX database files.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := GAPDoc2HTML(r, path);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GAPDoc2HTMLPrintHTMLFiles(h, path);</span>
+</pre></div>
+
+<p><a id="X826F530686F4D052" name="X826F530686F4D052"></a></p>
+
+<h5>5.1-1 MakeGAPDocDoc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeGAPDocDoc</code>( <var class="Arg">path</var>, <var class="Arg">main</var>, <var class="Arg">files</var>, <var class="Arg">bookname</var>[, <var class="Arg">gaproot</var>][, <var class="Arg">...</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function collects all the commands for producing a text-, <code class="code">pdf</code>- and HTML-version of a <strong class="pkg">GAPDoc</strong> document as described in Section <a href="chap5.html#X7D1BB5867C13FA14"><span class="RefLink">5.1</span></a>. It checks the <code class="code">.log</code> file from the call of <code class="code">pdflatex</code> and reports if there are errors, warnings or overfull boxes.</p>
+
+<p><em>Note:</em> If this function works for you depends on your operating system and installed software. It will probably work on most <code class="code">UNIX</code> systems with a standard LaTeX installation. If the function doesn't work for you look at the source code and adjust it to your system.</p>
+
+<p>Here <var class="Arg">path</var> must be the directory (as string or directory object) containing the main file <var class="Arg">main</var> of the document (given with or without the <code class="code">.xml</code> extension. The argument <var class="Arg">files</var> is a list of (probably source code) files relative to <var class="Arg">path</var> which contain pieces of documentation which must be included in the document, see Chapter <a href="chap4.html#X7A3355C07F57C280"><span class="RefLink">4</span></a>. And <var class="Arg">bookname</var> is the name of the book used by <strong class="pkg">GAP</strong>'s online help. The optional argument <var class="Arg">gaproot</var> must be a string which gives the relative path from <var class="Arg">path</var> to the main <strong class="pkg">GAP</strong> root directory. If this is given, the HTML files are produced with relative paths to external books.</p>
+
+<p>If the string <code class="code">"nopdf"</code> is given as optional argument then <code class="func">MakeGAPDocDoc</code> will not produce a <code class="code">pdf</code>-version of the help book (the source <code class="code">.tex</code>-file is generated). Consequently, the index for the help system will not contain page numbers for the <code class="code">pdf</code>-version. This variant of <code class="func">MakeGAPDocDoc</code> should work independently of the operating system because no external programs are called. It is recommended that distributed manuals contain the <code class="code">pdf</code>-version.</p>
+
+<p><code class="func">MakeGAPDocDoc</code> can be called with additional arguments <code class="code">"MathJax"</code>, <code class="code">"Tth"</code> and/or <code class="code">"MathML"</code>. If these are given additional variants of the HTML conversion are called, see <code class="func">GAPDoc2HTML</code> (<a href="chap5.html#X84F22EEB78845CFD"><span class="RefLink">5.3-7</span></a>) for details.</p>
+
+<p>It is possible to use <strong class="pkg">GAPDoc</strong> with other languages than English, see <code class="func">SetGapDocLanguage</code> (<a href="chap5.html#X82AB468887ED0DBB"><span class="RefLink">5.3-13</span></a>) for more details.</p>
+
+<p><a id="X7FE2AF49838D9034" name="X7FE2AF49838D9034"></a></p>
+
+<h4>5.2 <span class="Heading">Parsing XML Documents</span></h4>
+
+<p>Arbitrary well-formed XML documents can be parsed and browsed by the following functions.</p>
+
+<p><a id="X847EB8498151D443" name="X847EB8498151D443"></a></p>
+
+<h5>5.2-1 ParseTreeXMLString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParseTreeXMLString</code>( <var class="Arg">str</var>[, <var class="Arg">srcinfo</var>][, <var class="Arg">entitydict</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParseTreeXMLFile</code>( <var class="Arg">fname</var>[, <var class="Arg">entitydict</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a record which is root of a tree structure</p>
+
+<p>The first function parses an XML-document stored in string <var class="Arg">str</var> and returns the document in form of a tree.</p>
+
+<p>The optional argument <var class="Arg">srcinfo</var> must have the same format as in <code class="func">OriginalPositionDocument</code> (<a href="chap4.html#X86D1141E7EDCAAC8"><span class="RefLink">4.2-2</span></a>). If it is given then error messages refer to the original source of the text with the problem.</p>
+
+<p>With the optional argument <var class="Arg">entitydict</var> named entities can be given to the parser, for example entities which are defined in the <code class="code">.dtd</code>-file (which is not read by this parser). The standard XML-entities do not need to be provided, and for <strong class="pkg">GAPDoc</strong> documents the entity definitions from <code class="code">gapdoc.dtd</code> are automatically provided. Entities in the document's <code class="code">&lt;!DOCTYPE</code> declaration are parsed and also need not to be provided here. The argument <var class="Arg">entitydict</var> must be a record where each component name is an entity name (without the surrounding &amp; and ;) to which is assigned its substitution string.</p>
+
+<p>The second function is just a shortcut for <code class="code">ParseTreeXMLString( StringFile(</code><var class="Arg">fname</var><code class="code">), ... )</code>, see <code class="func">StringFile</code> (<a href="chap6.html#X7E14D32181FBC3C3"><span class="RefLink">6.3-5</span></a>).</p>
+
+<p>After these functions return the list of named entities which were known during the parsing can be found in the record <code class="code">ENTITYDICT</code>.</p>
+
+<p>A node in the result tree corresponds to an XML element, or to some parsed character data. In the first case it looks as follows:</p>
+
+
+<div class="example"><pre>
+rec( name := "Book",
+     attributes := rec( Name := "EDIM" ),
+     content := [ ... list of nodes for content ...],
+     start := 312,
+     stop := 15610,
+     next := 15611     )
+</pre></div>
+
+<p>This means that <code class="code"><var class="Arg">str</var>{[312..15610]}</code> looks like <code class="code">&lt;Book Name="EDIM"&gt; ... content ... &lt;/Book&gt;</code>.</p>
+
+<p>The leaves of the tree encode parsed character data as in the following example:</p>
+
+
+<div class="example"><pre>
+rec( name := "PCDATA", 
+     content := "text without markup "     )
+</pre></div>
+
+<p>This function checks whether the XML document is <em>well formed</em>, see <a href="chap2.html#X8561F07A81CABDD6"><span class="RefLink">2.1-14</span></a> for an explanation. If an error in the XML structure is found, a break loop is entered and the text around the position where the problem starts is shown. With <code class="code">Show();</code> one can browse the original input in the <code class="func">Pager</code> (<a href="../../../doc/ref/chap2.html#X7ED03E41792C3840"><span class="RefLink">Reference: Pager</span></a>), starting with the line where the error occurred. All entities are resolved when they are either entities defined in the <strong class="pkg">GAPDoc</strong> package (in particular the standard XML entities) or if their definition is included in the <code class="code">&lt;!DOCTYPE ..&gt;</code> tag of the document.</p>
+
+<p>Note that <code class="func">ParseTreeXMLString</code> does not parse and interpret the corresponding document type definition (the <code class="code">.dtd</code>-file given in the <code class="code">&lt;!DOCTYPE ..&gt;</code> tag). Hence it also does not check the <em>validity</em> of the document (i.e., it is no <em>validating XML parser</em>).</p>
+
+<p>If you are using this function to parse a <strong class="pkg">GAPDoc</strong> document you can use <code class="func">CheckAndCleanGapDocTree</code> (<a href="chap5.html#X84CFF72484B19C0D"><span class="RefLink">5.2-8</span></a>) for some validation and additional checking of the document structure.</p>
+
+<p><a id="X835887057D0B4DA8" name="X835887057D0B4DA8"></a></p>
+
+<h5>5.2-2 StringXMLElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StringXMLElement</code>( <var class="Arg">tree</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list <code class="code">[string, positions]</code></p>
+
+<p>The argument <var class="Arg">tree</var> must have a format of a node in the parse tree of an XML document as returned by <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>) (including the root node representing the full document). This function computes a pair <code class="code">[string, positions]</code> where <code class="code">string</code> contains XML code which is equivalent to the code which was parsed to get <var class="Arg">tree</var>. And <code class="code">positions</code> is a list of lists of four numbers <code class="code">[eltb, elte, contb, conte]</code>. There is one such list for each XML element occuring in <code class="code">string</code>, where <code class="code">eltb</code> and <code class="code">elte</code> are the begin and end position of this element in <code class="code">string</code> and where <code class="code">contb</code> and <code class="code">conte</code> are begin and end position of the content of this element, or both are <code class="code">0</code> if there is no content.</p>
+
+<p>Note that parsing XML code is an irreversible task, we can only expect to get equivalent XML code from this function. But parsing the resulting <code class="code">string</code> again and applying <code class="func">StringXMLElement</code> again gives the same result. See the function <code class="func">EntitySubstitution</code> (<a href="chap5.html#X786827BF793191B3"><span class="RefLink">5.2-3</span></a>) for back-substitutions of entities in the result.</p>
+
+<p><a id="X786827BF793191B3" name="X786827BF793191B3"></a></p>
+
+<h5>5.2-3 EntitySubstitution</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EntitySubstitution</code>( <var class="Arg">xmlstring</var>, <var class="Arg">entities</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a string</p>
+
+<p>The argument <var class="Arg">xmlstring</var> must be a string containing XML code or a pair <code class="code">[string, positions]</code> as returned by <code class="func">StringXMLElement</code> (<a href="chap5.html#X835887057D0B4DA8"><span class="RefLink">5.2-2</span></a>). The argument <var class="Arg">entities</var> specifies entity names (without the surrounding <var class="Arg">&amp;</var> and <code class="code">;</code>) and their substitution strings, either a list of pairs of strings or as a record with the names as components and the substitutions as values.</p>
+
+<p>This function tries to substitute non-intersecting parts of <code class="code">string</code> by the given entities. If the <code class="code">positions</code> information is given then only parts of the document which allow a valid substitution by an entity are considered. Otherwise a simple text substitution without further check is done.</p>
+
+<p>Note that in general the entity resolution in XML documents is a complicated and non-reversible task. But nevertheless this utility may be useful in not too complicated situations.</p>
+
+<p><a id="X86589C5C859ACE38" name="X86589C5C859ACE38"></a></p>
+
+<h5>5.2-4 DisplayXMLStructure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DisplayXMLStructure</code>( <var class="Arg">tree</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This utility displays the tree structure of an XML document as it is returned by <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>) (without the <code class="code">PCDATA</code> leaves).</p>
+
+<p>Since this is usually quite long the result is shown using the <code class="func">Pager</code> (<a href="../../../doc/ref/chap2.html#X7ED03E41792C3840"><span class="RefLink">Reference: Pager</span></a>).</p>
+
+<p><a id="X7A7B223A83E38B40" name="X7A7B223A83E38B40"></a></p>
+
+<h5>5.2-5 ApplyToNodesParseTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ApplyToNodesParseTree</code>( <var class="Arg">tree</var>, <var class="Arg">fun</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddRootParseTree</code>( <var class="Arg">tree</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RemoveRootParseTree</code>( <var class="Arg">tree</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="func">ApplyToNodesParseTree</code> applies a function <var class="Arg">fun</var> to all nodes of the parse tree <var class="Arg">tree</var> of an XML document returned by <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>).</p>
+
+<p>The function <code class="func">AddRootParseTree</code> is an application of this. It adds to all nodes a component <code class="code">.root</code> to which the top node tree <var class="Arg">tree</var> is assigned. These components can be removed afterwards with <code class="func">RemoveRootParseTree</code>.</p>
+
+<p>Here are two more utilities which use <code class="func">ApplyToNodesParseTree</code>.</p>
+
+<p><a id="X7F76D4A27C7FB946" name="X7F76D4A27C7FB946"></a></p>
+
+<h5>5.2-6 GetTextXMLTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetTextXMLTree</code>( <var class="Arg">tree</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a string</p>
+
+<p>The argument <var class="Arg">tree</var> must be a node of a parse tree of some XML document, see <code class="func">ParseTreeXMLFile</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>). This function collects the content of this and all included elements recursively into a string.</p>
+
+<p><a id="X8466F74C80442F7D" name="X8466F74C80442F7D"></a></p>
+
+<h5>5.2-7 XMLElements</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XMLElements</code>( <var class="Arg">tree</var>, <var class="Arg">eltnames</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of nodes</p>
+
+<p>The argument <var class="Arg">tree</var> must be a node of a parse tree of some XML document, see <code class="func">ParseTreeXMLFile</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>). This function returns a list of all subnodes of <var class="Arg">tree</var> (possibly including <var class="Arg">tree</var>) of elements with name given in the list of strings <var class="Arg">eltnames</var>. Use <code class="code">"PCDATA"</code> as name for leave nodes which contain the actual text of the document. As an abbreviation <var class="Arg">eltnames</var> can also be a string which is then put in a one element list.</p>
+
+<p>And here are utilities for processing <strong class="pkg">GAPDoc</strong> XML documents.</p>
+
+<p><a id="X84CFF72484B19C0D" name="X84CFF72484B19C0D"></a></p>
+
+<h5>5.2-8 CheckAndCleanGapDocTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CheckAndCleanGapDocTree</code>( <var class="Arg">tree</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>The argument <var class="Arg">tree</var> of this function is a parse tree from <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>) of some <strong class="pkg">GAPDoc</strong> document. This function does an (incomplete) validity check of the document according to the document type declaration in <code class="file">gapdoc.dtd</code>. It also does some additional checks which cannot be described in the DTD (like checking whether chapters and sections have a heading). For elements with element content the whitespace between these elements is removed.</p>
+
+<p>In case of an error the break loop is entered and the position of the error in the original XML document is printed. With <code class="code">Show();</code> one can browse the original input in the <code class="func">Pager</code> (<a href="../../../doc/ref/chap2.html#X7ED03E41792C3840"><span class="RefLink">Reference: Pager</span></a>).</p>
+
+<p><a id="X84062CD67B286FF0" name="X84062CD67B286FF0"></a></p>
+
+<h5>5.2-9 AddParagraphNumbersGapDocTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddParagraphNumbersGapDocTree</code>( <var class="Arg">tree</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>The argument <var class="Arg">tree</var> must be an XML tree returned by <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>) applied to a <strong class="pkg">GAPDoc</strong> document. This function adds to each node of the tree a component <code class="code">.count</code> which is of form <code class="code">[Chapter[, Section[, Subsection, Paragraph] ] ]</code>. Here the first three numbers should be the same as produced by the LaTeX version of the document. Text before the first chapter is counted as chapter <code class="code">0</code> and similarly for sections and subsections. Some elements are always considered to start a new paragraph.</p>
+
+<p><a id="X78A22C58841E5D0B" name="X78A22C58841E5D0B"></a></p>
+
+<h5>5.2-10 InfoXMLParser</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoXMLParser</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p>The default level of this info class is 1. Functions like <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>) are then printing some information, in particular in case of errors. You can suppress it by setting the level of <code class="func">InfoXMLParser</code> to 0. With level 2 there may be some more information for debugging purposes.</p>
+
+<p><a id="X8560E1A2845EC2C1" name="X8560E1A2845EC2C1"></a></p>
+
+<h4>5.3 <span class="Heading">The Converters</span></h4>
+
+<p>Here are more details about the conversion programs for <strong class="pkg">GAPDoc</strong> XML documents.</p>
+
+<p><a id="X85BE6DF178423EF5" name="X85BE6DF178423EF5"></a></p>
+
+<h5>5.3-1 GAPDoc2LaTeX</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GAPDoc2LaTeX</code>( <var class="Arg">tree</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: LaTeX document as string</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetGapDocLaTeXOptions</code>( [<var class="Arg">...</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: Nothing</p>
+
+<p>The argument <var class="Arg">tree</var> for this function is a tree describing a <strong class="pkg">GAPDoc</strong> XML document as returned by <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>) (probably also checked with <code class="func">CheckAndCleanGapDocTree</code> (<a href="chap5.html#X84CFF72484B19C0D"><span class="RefLink">5.2-8</span></a>)). The output is a string containing a version of the document which can be written to a file and processed with LaTeX or pdfLaTeX (and probably BibTeX and <code class="code">makeindex</code>).</p>
+
+<p>The output uses the <code class="code">report</code> document class and needs the following LaTeX packages: <code class="code">amssymb</code>, <code class="code">inputenc</code>, <code class="code">makeidx</code>, <code class="code">color</code>, <code class="code">fancyvrb</code>, <code class="code">psnfss</code>, <code class="code">pslatex</code>, <code class="code">enumitem</code> and <code class="code">hyperref</code>. These are for example provided by the <strong class="pkg">teTeX-1.0</strong> or <strong class="pkg">texlive</strong> distributions of TeX (which in turn are used for most TeX packages of current Linux distributions); see <span class="URL"><a href="http://www.tug.org/tetex/">http://www.tug.org/tetex/</a></span>.</p>
+
+<p>In particular, the resulting <code class="code">pdf</code>-output (and <code class="code">dvi</code>-output) contains (internal and external) hyperlinks which can be very useful for onscreen browsing of the document.</p>
+
+<p>The LaTeX processing also produces a file with extension <code class="code">.pnr</code> which is <strong class="pkg">GAP</strong> readable and contains the page numbers for all (sub)sections of the document. This can be used by <strong class="pkg">GAP</strong>'s online help; see <code class="func">AddPageNumbersToSix</code> (<a href="chap5.html#X7EB5E86F87A09F94"><span class="RefLink">5.3-4</span></a>). Non-ASCII characters in the <strong class="pkg">GAPDoc</strong> document are translated to LaTeX input in ASCII-encoding with the help of <code class="func">Encode</code> (<a href="chap6.html#X818A31567EB30A39"><span class="RefLink">6.2-2</span></a>) and the option <code class="code">"LaTeX"</code>. See the documentation of <code class="func">Encode</code> (<a href="chap6.html#X818A31567EB30A39"><span class="RefLink">6.2-2</span></a>) for how to proceed if you have a character which is not handled (yet).</p>
+
+<p>This function works by running recursively through the document tree and calling a handler function for each <strong class="pkg">GAPDoc</strong> XML element. Many of these handler functions (usually in <code class="code">GAPDoc2LaTeXProcs.&lt;ElementName&gt;</code>) are not difficult to understand (the greatest complications are some commands for index entries, labels or the output of page number information). So it should be easy to adjust layout details to your own taste by slight modifications of the program.</p>
+
+<p>Former versions of <strong class="pkg">GAPDoc</strong> supported some XML processing instructions to add some extra lines to the preamble of the LaTeX document. Its use is now deprecated, use the much more flexible <code class="func">SetGapDocLaTeXOptions</code> instead: The default layout of the resulting documents can be changed with <code class="func">SetGapDocLaTeXOptions</code>. This changes parts of the header of the LaTeX file produced by <strong class="pkg">GAPDoc</strong>. You can see the header with some placeholders by <code class="code">Page(GAPDoc2LaTeXProcs.Head);</code>. The placeholders are filled with components from the record <code class="code">GAPDoc2LaTeXProcs.DefaultOptions</code>. The arguments of <code class="func">SetGapDocLaTeXOptions</code> can be records with the same structure (or parts of it) with different values. As abbreviations there are also three strings supported as arguments. These are <code class="code">"nocolor"</code> for switching all colors to black; then <code class="code">"nopslatex"</code> to use standard LaTeX fonts instead of postscript fonts; and finally <code class="code">"utf8"</code> to choose UTF-8 as input encoding for the LaTeX document.</p>
+
+<p><a id="X86CD0B197CD58D2A" name="X86CD0B197CD58D2A"></a></p>
+
+<h5>5.3-2 GAPDoc2Text</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GAPDoc2Text</code>( <var class="Arg">tree</var>[, <var class="Arg">bibpath</var>][, <var class="Arg">width</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: record containing text files as strings and other information</p>
+
+<p>The argument <var class="Arg">tree</var> for this function is a tree describing a <strong class="pkg">GAPDoc</strong> XML document as returned by <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>) (probably also checked with <code class="func">CheckAndCleanGapDocTree</code> (<a href="chap5.html#X84CFF72484B19C0D"><span class="RefLink">5.2-8</span></a>)). This function produces a text version of the document which can be used with <strong class="pkg">GAP</strong>'s online help (with the <code class="code">"screen"</code> viewer, see <code class="func">SetHelpViewer</code> (<a href="../../../doc/ref/chap2.html#X87C1BFB2826488B0"><span class="RefLink">Reference: SetHelpViewer</span></a>)). It includes title page, bibliography and index. The bibliography is made from BibXMLext or BibTeX databases, see <a href="chap7.html#X7EB94CE97ABF7192"><span class="RefLink">7</span></a>. Their location must be given with the argument <var class="Arg">bibpath</var> (as string or directory object).</p>
+
+<p>The output is a record with one component for each chapter (with names <code class="code">"0"</code>, <code class="code">"1"</code>, ..., <code class="code">"Bib"</code> and <code class="code">"Ind"</code>). Each such component is again a record with the following components:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">text</code></strong></dt>
+<dd><p>the text of the whole chapter as a string</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ssnr</code></strong></dt>
+<dd><p>list of subsection numbers in this chapter (like <code class="code">[3, 2, 1]</code> for chapter 3, section 2, subsection 1)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">linenr</code></strong></dt>
+<dd><p>corresponding list of line numbers where the subsections start</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">len</code></strong></dt>
+<dd><p>number of lines of this chapter</p>
+
+</dd>
+</dl>
+<p>The result can be written into files with the command <code class="func">GAPDoc2TextPrintTextFiles</code> (<a href="chap5.html#X7DFCE7357D6032A2"><span class="RefLink">5.3-3</span></a>).</p>
+
+<p>As a side effect this function also produces the <code class="file">manual.six</code> information which is used for searching in <strong class="pkg">GAP</strong>'s online help. This is stored in <code class="code"><var class="Arg">tree</var>.six</code> and can be printed into a <code class="file">manual.six</code> file with <code class="func">PrintSixFile</code> (<a href="chap5.html#X7D42CFED7885BC00"><span class="RefLink">5.3-5</span></a>) (preferably after producing a LaTeX version of the document as well and adding the page number information to <code class="code"><var class="Arg">tree</var>.six</code>, see <code class="func">GAPDoc2LaTeX</code> (<a href="chap5.html#X85BE6DF178423EF5"><span class="RefLink">5.3-1</span></a>) and <code class="func">AddPageNumbersToSix</code> (<a href="chap5.html#X7EB5E86F87A09F94"><span class="RefLink">5.3-4</span></a>)).</p>
+
+<p>The text produced by this function contains some markup via ANSI escape sequences. The sequences used here are usually ignored by terminals. But the <strong class="pkg">GAP</strong> help system will substitute them by interpreted color and attribute sequences (see <code class="func">TextAttr</code> (<a href="chap6.html#X785F61E77899580E"><span class="RefLink">6.1-2</span></a>)) before displaying them. There is a default markup used for this but it can also be configured by the user, see <code class="func">SetGAPDocTextTheme</code> (<a href="chap5.html#X7DEB37417BBD8941"><span class="RefLink">5.3-6</span></a>). Furthermore, the text produced is in UTF-8 encoding. The encoding is also translated on the fly, if <code class="code">GAPInfo.TermEncoding</code> is set to some encoding supported by <code class="func">Encode</code> (<a href="chap6.html#X818A31567EB30A39"><span class="RefLink">6.2-2</span></a>), e.g., <code class="code">"ISO-8859-1"</code> or <code class="code">"latin1"</code>.</p>
+
+<p>With the optional argument <var class="Arg">width</var> a different length of the output text lines can be chosen. The default is 76 and all lines in the resulting text start with two spaces. This looks good on a terminal with a standard width of 80 characters and you probably don't want to use this argument.</p>
+
+<p><a id="X7DFCE7357D6032A2" name="X7DFCE7357D6032A2"></a></p>
+
+<h5>5.3-3 GAPDoc2TextPrintTextFiles</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GAPDoc2TextPrintTextFiles</code>( <var class="Arg">t</var>[, <var class="Arg">path</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>The first argument must be a result returned by <code class="func">GAPDoc2Text</code> (<a href="chap5.html#X86CD0B197CD58D2A"><span class="RefLink">5.3-2</span></a>). The second argument is a path for the files to write, it can be given as string or directory object. The text of each chapter is written into a separate file with name <code class="file">chap0.txt</code>, <code class="file">chap1.txt</code>, ..., <code class="file">chapBib.txt</code>, and <code class="file">chapInd.txt</code>.</p>
+
+<p>If you want to make your document accessible via the <strong class="pkg">GAP</strong> online help you must put at least these files for the text version into a directory, together with the file <code class="file">manual.six</code>, see <code class="func">PrintSixFile</code> (<a href="chap5.html#X7D42CFED7885BC00"><span class="RefLink">5.3-5</span></a>). Then specify the path to the <code class="file">manual.six</code> file in the packages <code class="file">PackageInfo.g</code> file, see <a href="../../../doc/ref/chap76.html#X85C8DE357EE424D8"><span class="RefLink">Reference: The PackageInfo.g File</span></a>.</p>
+
+<p>Optionally you can add the <code class="code">dvi</code>- and <code class="code">pdf</code>-versions of the document which are produced with <code class="func">GAPDoc2LaTeX</code> (<a href="chap5.html#X85BE6DF178423EF5"><span class="RefLink">5.3-1</span></a>) to this directory. The files must have the names <code class="file">manual.dvi</code> and <code class="file">manual.pdf</code>, respectively. Also you can add the files of the HTML version produced with <code class="func">GAPDoc2HTML</code> (<a href="chap5.html#X84F22EEB78845CFD"><span class="RefLink">5.3-7</span></a>) to this directory, see <code class="func">GAPDoc2HTMLPrintHTMLFiles</code> (<a href="chap5.html#X84A7007778073E7A"><span class="RefLink">5.3-8</span></a>). The handler functions in <strong class="pkg">GAP</strong> for this help format detect automatically which of the optional formats of a book are actually available.</p>
+
+<p><a id="X7EB5E86F87A09F94" name="X7EB5E86F87A09F94"></a></p>
+
+<h5>5.3-4 AddPageNumbersToSix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddPageNumbersToSix</code>( <var class="Arg">tree</var>, <var class="Arg">pnrfile</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Here <var class="Arg">tree</var> must be the XML tree of a <strong class="pkg">GAPDoc</strong> document, returned by <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>). Running <code class="code">latex</code> on the result of <code class="code">GAPDoc2LaTeX(<var class="Arg">tree</var>)</code> produces a file <var class="Arg">pnrfile</var> (with extension <code class="code">.pnr</code>). The command <code class="code">GAPDoc2Text(<var class="Arg">tree</var>)</code> creates a component <code class="code"><var class="Arg">tree</var>.six</code> which contains all information about the document for the <strong class="pkg">GAP</strong> online help, except the page numbers in the <code class="code">.dvi, .ps, .pdf</code> versions of the document. This command adds the missing page number information to <code class="code"><var class="Arg">tree</var>.six</code>.</p>
+
+<p><a id="X7D42CFED7885BC00" name="X7D42CFED7885BC00"></a></p>
+
+<h5>5.3-5 PrintSixFile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrintSixFile</code>( <var class="Arg">tree</var>, <var class="Arg">bookname</var>, <var class="Arg">fname</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This function prints the <code class="code">.six</code> file <var class="Arg">fname</var> for a <strong class="pkg">GAPDoc</strong> document stored in <var class="Arg">tree</var> with name <var class="Arg">bookname</var>. Such a file contains all information about the book which is needed by the <strong class="pkg">GAP</strong> online help. This information must first be created by calls of <code class="func">GAPDoc2Text</code> (<a href="chap5.html#X86CD0B197CD58D2A"><span class="RefLink">5.3-2</span></a>) and <code class="func">AddPageNumbersToSix</code> (<a href="chap5.html#X7EB5E86F87A09F94"><span class="RefLink">5.3-4</span></a>).</p>
+
+<p><a id="X7DEB37417BBD8941" name="X7DEB37417BBD8941"></a></p>
+
+<h5>5.3-6 SetGAPDocTextTheme</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetGAPDocTextTheme</code>( [<var class="Arg">optrec1</var>[, <var class="Arg">optrec2</var>], <var class="Arg">...</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This utility function is for readers of the screen version of <strong class="pkg">GAP</strong> manuals which are generated by the <strong class="pkg">GAPDoc</strong> package. It allows to configure the color and attribute layout of the displayed text. There is a default which can be reset by calling this function without argument.</p>
+
+<p>As an abbreviation the arguments <var class="Arg">optrec1</var> and so on can be strings for the known name of a theme. Information about valid names is shown with <code class="code">SetGAPDocTextTheme("");</code>.</p>
+
+<p>Otherwise, <var class="Arg">optrec1</var> and so on must be a record. Its entries overwrite the corresponding entries in the default and in previous arguments. To construct valid markup you can use <code class="func">TextAttr</code> (<a href="chap6.html#X785F61E77899580E"><span class="RefLink">6.1-2</span></a>). Entries must be either pairs of strings, which are put before and after the corresponding text, or as an abbreviation it can be a single string. In the latter case, the second string is implied; if the string contains an escape sequence the second string is <code class="code">TextAttr.reset</code>, otherwise the given string is used. The following components are recognized:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">flush</code></strong></dt>
+<dd><p><code class="code">"both"</code> for left-right justified paragraphs, and <code class="code">"left"</code> for ragged right ones</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Heading</code></strong></dt>
+<dd><p>chapter and (sub-)section headings</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Func</code></strong></dt>
+<dd><p>function, operation, ... names</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Arg</code></strong></dt>
+<dd><p>argument names in descriptions</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Example</code></strong></dt>
+<dd><p>example code</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Package</code></strong></dt>
+<dd><p>package names</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Returns</code></strong></dt>
+<dd><p>Returns-line in descriptions</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">URL</code></strong></dt>
+<dd><p>URLs</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Mark</code></strong></dt>
+<dd><p>Marks in description lists</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">K</code></strong></dt>
+<dd><p><strong class="pkg">GAP</strong> keywords</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">C</code></strong></dt>
+<dd><p>code or text to type</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">F</code></strong></dt>
+<dd><p>file names</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">B</code></strong></dt>
+<dd><p>buttons</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">M</code></strong></dt>
+<dd><p>simplified math elements</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Math</code></strong></dt>
+<dd><p>normal math elements</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Display</code></strong></dt>
+<dd><p>displayed math elements</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Emph</code></strong></dt>
+<dd><p>emphasized text</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Q</code></strong></dt>
+<dd><p>quoted text</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Ref</code></strong></dt>
+<dd><p>reference text</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Prompt</code></strong></dt>
+<dd><p><strong class="pkg">GAP</strong> prompt in examples</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BrkPrompt</code></strong></dt>
+<dd><p><strong class="pkg">GAP</strong> break prompt in examples</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">GAPInput</code></strong></dt>
+<dd><p><strong class="pkg">GAP</strong> input in examples</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">reset</code></strong></dt>
+<dd><p>reset to default, don't change this</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BibAuthor</code></strong></dt>
+<dd><p>author names in bibliography</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BibTitle</code></strong></dt>
+<dd><p>titles in bibliography</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BibJournal</code></strong></dt>
+<dd><p>journal names in bibliography</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BibVolume</code></strong></dt>
+<dd><p>volume number in bibliography</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BibLabel</code></strong></dt>
+<dd><p>labels for bibliography entries</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BibReset</code></strong></dt>
+<dd><p>reset for bibliography, don't change</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ListBullet</code></strong></dt>
+<dd><p>bullet for simple lists (2 visible characters long)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">EnumMarks</code></strong></dt>
+<dd><p>one visible character before and after the number in enumerated lists</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">DefLineMarker</code></strong></dt>
+<dd><p>marker before function and variable definitions (2 visible characters long)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">FillString</code></strong></dt>
+<dd><p>for filling in definitions and example separator lines</p>
+
+</dd>
+</dl>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># use no colors for GAP examples and </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># change display of headings to bold green</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetGAPDocTextTheme("noColorPrompt", </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           rec(Heading:=Concatenation(TextAttr.bold, TextAttr.2)));</span>
+</pre></div>
+
+<p><a id="X84F22EEB78845CFD" name="X84F22EEB78845CFD"></a></p>
+
+<h5>5.3-7 GAPDoc2HTML</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GAPDoc2HTML</code>( <var class="Arg">tree</var>[, <var class="Arg">bibpath</var>[, <var class="Arg">gaproot</var>]][, <var class="Arg">mtrans</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: record containing HTML files as strings and other information</p>
+
+<p>The argument <var class="Arg">tree</var> for this function is a tree describing a <strong class="pkg">GAPDoc</strong> XML document as returned by <code class="func">ParseTreeXMLString</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>) (probably also checked with <code class="func">CheckAndCleanGapDocTree</code> (<a href="chap5.html#X84CFF72484B19C0D"><span class="RefLink">5.2-8</span></a>)). Without an <var class="Arg">mtrans</var> argument this function produces an HTML version of the document which can be read with any Web-browser and also be used with <strong class="pkg">GAP</strong>'s online help (see <code class="func">SetHelpViewer</code> (<a href="../../../doc/ref/chap2.html#X87C1BFB2826488B0"><span class="RefLink">Reference: SetHelpViewer</span></a>)). It includes title page, bibliography, and index. The bibliography is made from BibTeX databases. Their location must be given with the argument <var class="Arg">bibpath</var> (as string or directory object, if not given the current directory is used). If the third argument <var class="Arg">gaproot</var> is given and is a string then this string is interpreted as relative path to <strong class="pkg">GAP</strong>'s main root directory. Reference-URLs to external HTML-books which begin with the <strong class="pkg">GAP</strong> root path are then rewritten to start with the given relative path. This makes the HTML-documentation portable provided a package is installed in some standard location below the <strong class="pkg">GAP</strong> root.</p>
+
+<p>The output is a record with one component for each chapter (with names <code class="code">"0"</code>, <code class="code">"1"</code>, ..., <code class="code">"Bib"</code>, and <code class="code">"Ind"</code>). Each such component is again a record with the following components:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">text</code></strong></dt>
+<dd><p>the text of an HTML file containing the whole chapter (as a string)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ssnr</code></strong></dt>
+<dd><p>list of subsection numbers in this chapter (like <code class="code">[3, 2, 1]</code> for chapter 3, section 2, subsection 1)</p>
+
+</dd>
+</dl>
+<p><em>Standard output format without</em> <var class="Arg">mtrans</var> <em>argument</em></p>
+
+<p>The HTML code produced with this converter conforms to the W3C specification "XHTML 1.0 strict", see <span class="URL"><a href="http://www.w3.org/TR/xhtml1">http://www.w3.org/TR/xhtml1</a></span>. First, this means that the HTML files are valid XML files. Secondly, the extension "strict" says in particular that the code doesn't contain any explicit font or color information.</p>
+
+<p>Mathematical formulae are handled as in the text converter <code class="func">GAPDoc2Text</code> (<a href="chap5.html#X86CD0B197CD58D2A"><span class="RefLink">5.3-2</span></a>). We don't want to assume that the browser can use symbol fonts. Some <strong class="pkg">GAP</strong> users like to browse the online help with <code class="code">lynx</code>, see <code class="func">SetHelpViewer</code> (<a href="../../../doc/ref/chap2.html#X87C1BFB2826488B0"><span class="RefLink">Reference: SetHelpViewer</span></a>), which runs inside the same terminal windows as <strong class="pkg">GAP</strong>.</p>
+
+<p>To view the generated files in graphical browsers, stylesheet files with layout configuration should be copied into the directory with the generated HTML files, see <a href="chap5.html#X788AB14383272FDB"><span class="RefLink">5.3-9</span></a>.</p>
+
+<p><em>Output format with</em> <var class="Arg">mtrans</var> argument</p>
+
+<p>Currently, there are three variants of this converter available which handle mathematical formulae differently. They are accessed via the optional last <var class="Arg">mtrans</var> argument.</p>
+
+<p>If <var class="Arg">mtrans</var> is set to <code class="code">"MathJax"</code> the formulae are essentially translated as for LaTeX documents (there is no processing of <code class="code">&lt;M&gt;</code> elements as decribed in <a href="chap3.html#X7ABF42328467E966"><span class="RefLink">3.8-2</span></a>). Inline formulae are delimited by <code class="code">\(</code> and <code class="code">\)</code> and displayed formulae by <code class="code">\[</code> and <code class="code">\]</code>. With <strong class="pkg">MathJax</strong> webpages can contain nicely formatted scalable and searchable formulae. The resulting files link by default to <span class="URL"><a href="http://cdn.mathjax.org">http://cdn.mathjax.org</a></span> to get the <strong class="pkg">MathJax</strong> script and fonts. This means that they can only be used on computers with internet access. An alternative URL can be set by overwriting <code class="code">GAPDoc2HTMLProcs.MathJaxURL</code> before building the HTML version of a manual. This way a local installation of <strong class="pkg">MathJax</strong> could be used. See <span class="URL"><a href="http://www.mathjax.org/">http://www.mathjax.org/</a></span> for more details.</p>
+
+<p>The following possibilities for <var class="Arg">mtrans</var> are still supported, but since the <strong class="pkg">MathJax</strong> approach seems much better, their use is deprecated.</p>
+
+<p>If the argument <var class="Arg">mtrans</var> is set to <code class="code">"Tth"</code> it is assumed that you have installed the LaTeX to HTML translation program <code class="code">tth</code>. This is used to translate the contents of the <code class="code">M</code>, <code class="code">Math</code> and <code class="code">Display</code> elements into HTML code. Note that the resulting code is not compliant with any standard. Formally it is "XHTML 1.0 Transitional", it contains explicit font specifications and the characters of mathematical symbols are included via their position in a "Symbol" font. Some graphical browsers can be configured to display this in a useful manner, check <span class="URL"><a href="http://hutchinson.belmont.ma.us/tth/">the Tth homepage</a></span> for more details.</p>
+
+<p>This function works by running recursively through the document tree and calling a handler function for each <strong class="pkg">GAPDoc</strong> XML element. Many of these handler functions (usually in <code class="code">GAPDoc2TextProcs.&lt;ElementName&gt;</code>) are not difficult to understand (the greatest complications are some commands for index entries, labels or the output of page number information). So it should be easy to adjust certain details to your own taste by slight modifications of the program.</p>
+
+<p>The result of this converter can be written to files with the command <code class="func">GAPDoc2HTMLPrintHTMLFiles</code> (<a href="chap5.html#X84A7007778073E7A"><span class="RefLink">5.3-8</span></a>).</p>
+
+<p>There are two user preferences for reading the HTML manuals produced by <strong class="pkg">GAPDoc</strong>. A user can choose among several style files which determine the appearance of the manual pages with <code class="code">SetUserPreference("GAPDoc", "HTMLStyle", [...]);</code> where the list in the third argument are arguments for <code class="func">SetGAPDocHTMLStyle</code> (<a href="chap5.html#X85AFD98383174BB5"><span class="RefLink">5.3-11</span></a>). The second preference is set by <code class="code">SetUserPreference("GAPDoc", "UseMathJax", ...);</code> where the third argument is <code class="keyw">true</code> or <code class="keyw">false</code> (default). If this is set to <code class="keyw">true</code>, the <strong class="pkg">GAP</strong> help system displays the <strong class="pkg">MathJax</strong> version of the HTML manuals.</p>
+
+<p><a id="X84A7007778073E7A" name="X84A7007778073E7A"></a></p>
+
+<h5>5.3-8 GAPDoc2HTMLPrintHTMLFiles</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GAPDoc2HTMLPrintHTMLFiles</code>( <var class="Arg">t</var>[, <var class="Arg">path</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>The first argument must be a result returned by <code class="func">GAPDoc2HTML</code> (<a href="chap5.html#X84F22EEB78845CFD"><span class="RefLink">5.3-7</span></a>). The second argument is a path for the files to write, it can be given as string or directory object. The text of each chapter is written into a separate file with name <code class="file">chap0.html</code>, <code class="file">chap1.html</code>, ..., <code class="file">chapBib.html</code>, and <code class="file">chapInd.html</code>.</p>
+
+<p>The <strong class="pkg">MathJax</strong> versions are written to files <code class="file">chap0_mj.html</code>, ..., <code class="file">chapInd_mj.html</code>.</p>
+
+<p>The experimental version which is produced with <code class="code">tth</code> uses different names for the files, namely <code class="file">chap0_sym.html</code>, and so on for files which need symbol fonts.</p>
+
+<p>You should also add stylesheet files to the directory with the HTML files, see <a href="chap5.html#X788AB14383272FDB"><span class="RefLink">5.3-9</span></a>.</p>
+
+<p><a id="X788AB14383272FDB" name="X788AB14383272FDB"></a></p>
+
+<h5>5.3-9 <span class="Heading">Stylesheet files</span></h5>
+
+<p>For graphical browsers the layout of the generated HTML manuals can be highly configured by cascading stylesheet (CSS) and javascript files. Such files are provided in the <code class="file">styles</code> directory of the <strong class="pkg">GAPDoc</strong> package.</p>
+
+<p>We recommend that these files are copied into each manual directory (such that each of them is selfcontained). There is a utility function <code class="func">CopyHTMLStyleFiles</code> (<a href="chap5.html#X813599E982DE9B98"><span class="RefLink">5.3-10</span></a>) which does this. Of course, these files may be changed or new styles may be added. New styles may also be sent to the <strong class="pkg">GAPDoc</strong> authors for possible inclusion in future versions.</p>
+
+<p>The generated HTML files refer to the file <code class="file">manual.css</code> which conforms to the W3C specification CSS 2.0, see <span class="URL"><a href="http://www.w3.org/TR/REC-CSS2">http://www.w3.org/TR/REC-CSS2</a></span>, and the javascript file <code class="file">manual.js</code> (only in browsers which support CSS or javascript, respectively; but the HTML files are also readable without any of them). To add a style <code class="code">mystyle</code> one or both of <code class="file">mystyle.css</code> and <code class="file">mystyle.js</code> must be provided; these can overwrite default settings and add new javascript functions. For more details see the comments in <code class="file">manual.js</code>.</p>
+
+<p><a id="X813599E982DE9B98" name="X813599E982DE9B98"></a></p>
+
+<h5>5.3-10 CopyHTMLStyleFiles</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyHTMLStyleFiles</code>( <var class="Arg">dir</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This utility function copies the <code class="file">*.css</code> and <code class="file">*.js</code> files from the <code class="file">styles</code> directory of the <strong class="pkg">GAPDoc</strong> package into the directory <var class="Arg">dir</var>.</p>
+
+<p><a id="X85AFD98383174BB5" name="X85AFD98383174BB5"></a></p>
+
+<h5>5.3-11 SetGAPDocHTMLStyle</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetGAPDocHTMLStyle</code>( [<var class="Arg">style1</var>[, <var class="Arg">style2</var>], <var class="Arg">...</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This utility function is for readers of the HTML version of <strong class="pkg">GAP</strong> manuals which are generated by the <strong class="pkg">GAPDoc</strong> package. It allows to configure the display style of the manuals. This will only have an effect if you are using a browser that supports <strong class="pkg">javascript</strong>. There is a default which can be reset by calling this function without argument.</p>
+
+<p>The arguments <var class="Arg">style1</var> and so on must be strings. You can find out about the valid strings by following the <strong class="button">[Style]</strong> link on top of any manual page. (Going back to the original page, its address has a setting for <code class="code">GAPDocStyle</code> which is the list of strings, separated by commas, you want to use here.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># show/hide subsections in tables on contents only after click,</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># and don't use colors in GAP examples</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetGAPDocHTMLStyle("toggless", "nocolorprompt");</span>
+</pre></div>
+
+<p><a id="X864A528B81C661A2" name="X864A528B81C661A2"></a></p>
+
+<h5>5.3-12 InfoGAPDoc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoGAPDoc</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p>The default level of this info class is 1. The converter functions for <strong class="pkg">GAPDoc</strong> documents are then printing some information. You can suppress this by setting the level of <code class="func">InfoGAPDoc</code> to 0. With level 2 there may be some more information for debugging purposes.</p>
+
+<p><a id="X82AB468887ED0DBB" name="X82AB468887ED0DBB"></a></p>
+
+<h5>5.3-13 SetGapDocLanguage</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetGapDocLanguage</code>( [<var class="Arg">lang</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>The <strong class="pkg">GAPDoc</strong> converter programs sometimes produce text which is not explicit in the document, e.g., headers like "Abstract", "Appendix", links to "Next Chapter", variable types "function" and so on.</p>
+
+<p>With <code class="func">SetGapDocLanguage</code> the language for these texts can be changed. The argument <var class="Arg">lang</var> must be a string. Calling without argument or with a language name for which no translations are available is the same as using the default <code class="code">"english"</code>.</p>
+
+<p>If your language <var class="Arg">lang</var> is not yet available, look at the record <code class="code">GAPDocTexts.english</code> and translate all the strings to <var class="Arg">lang</var>. Then assign this record to <code class="code">GAPDocTexts.(<var class="Arg">lang</var>)</code> and send it to the <strong class="pkg">GAPDoc</strong> authors for inclusion in future versions of <strong class="pkg">GAPDoc</strong>. (Currently, there are translations for <code class="code">english</code>, <code class="code">german</code>, <code class="code">russian</code> and <code class="code">ukrainian</code>.)</p>
+
+<p><em>Further hints:</em> To get strings produced by LaTeX right you will probably use the <code class="code">babel</code> package with option <var class="Arg">lang</var>, see <code class="func">SetGapDocLaTeXOptions</code> (<a href="chap5.html#X85BE6DF178423EF5"><span class="RefLink">5.3-1</span></a>). If <var class="Arg">lang</var> cannot be encoded in <code class="code">latin1</code> encoding you can consider the use of <code class="code">"utf8"</code> with <code class="func">SetGapDocLaTeXOptions</code> (<a href="chap5.html#X85BE6DF178423EF5"><span class="RefLink">5.3-1</span></a>).</p>
+
+<p><a id="X800299827B88ABBE" name="X800299827B88ABBE"></a></p>
+
+<h4>5.4 <span class="Heading">Testing Manual Examples</span></h4>
+
+<p>We also provide some tools to check and adjust the examples given in <code class="code">&lt;Example&gt;</code>-elements.</p>
+
+<p>Former versions of <strong class="pkg">GAPDoc</strong> provided functions <code class="code">ManualExamples</code> and <code class="code">TestManualExamples</code>. These functions are still available, but no longer documented. Their use is deprecated.</p>
+
+<p><a id="X8337B2BC79253B3F" name="X8337B2BC79253B3F"></a></p>
+
+<h5>5.4-1 ExtractExamples</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExtractExamples</code>( <var class="Arg">path</var>, <var class="Arg">main</var>, <var class="Arg">files</var>, <var class="Arg">units</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExtractExamplesXMLTree</code>( <var class="Arg">tree</var>, <var class="Arg">units</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists</p>
+
+<p>The argument <var class="Arg">tree</var> must be a parse tree of a <strong class="pkg">GAPDoc</strong> document, see <code class="func">ParseTreeXMLFile</code> (<a href="chap5.html#X847EB8498151D443"><span class="RefLink">5.2-1</span></a>). The function <code class="func">ExtractExamplesXMLTree</code> returns a data structure representing the <code class="code">&lt;Example&gt;</code> elements of the document. The return value can be used with <code class="func">RunExamples</code> (<a href="chap5.html#X781D56FC7B938DCB"><span class="RefLink">5.4-2</span></a>) to check and optionally update the examples of the document.</p>
+
+<p>Depending on the argument <var class="Arg">units</var> several examples are collected in one list. Recognized values for <var class="Arg">units</var> are <code class="code">"Chapter"</code>, <code class="code">"Section"</code>, <code class="code">"Subsection"</code> or <code class="code">"Single"</code>. The latter means that each example is in a separate list. For all other value of <var class="Arg">units</var> just one list with all examples is returned.</p>
+
+<p>The arguments <var class="Arg">path</var>, <var class="Arg">main</var> and <var class="Arg">files</var> of <code class="func">ExtractExamples</code> are the same as for <code class="func">ComposedDocument</code> (<a href="chap4.html#X857D77557D12559D"><span class="RefLink">4.2-1</span></a>). This function first contructs and parses the <strong class="pkg">GAPDoc</strong> document and then applies <code class="func">ExtractExamplesXMLTree</code>.</p>
+
+<p><a id="X781D56FC7B938DCB" name="X781D56FC7B938DCB"></a></p>
+
+<h5>5.4-2 RunExamples</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RunExamples</code>( <var class="Arg">exmpls</var>[, <var class="Arg">optrec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>The argument <var class="Arg">exmpls</var> must be the output of a call to <code class="func">ExtractExamples</code> (<a href="chap5.html#X8337B2BC79253B3F"><span class="RefLink">5.4-1</span></a>) or <code class="func">ExtractExamplesXMLTree</code> (<a href="chap5.html#X8337B2BC79253B3F"><span class="RefLink">5.4-1</span></a>). The optional argument <var class="Arg">optrec</var> must be a record, its components can change the default behaviour of this function.</p>
+
+<p>By default this function runs the <strong class="pkg">GAP</strong> input of all examples and compares the actual output with the output given in the examples. If differences occur these are displayed together with information on the location of the source code of that example. Before running the examples in each unit (entry of <var class="Arg">exmpls</var>) the function <code class="func">START_TEST</code> (<a href="../../../doc/ref/chap7.html#X8213757B7ACC76E6"><span class="RefLink">Reference: START_TEST</span></a>) is called and the screen width is set to 72 characters.</p>
+
+<p>This function returns <code class="keyw">true</code> if no differences are found and <code class="keyw">false</code> otherwise.</p>
+
+<p>If the argument <var class="Arg">optrec</var> is given, the following components are recognized:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">showDiffs</code></strong></dt>
+<dd><p>The default value is <code class="keyw">true</code>, if set to something else found differences in the examples are not displayed.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">width</code></strong></dt>
+<dd><p>The value must be a positive integer which is used as screen width when running the examples. As mentioned above, the default is 72 which is a sensible value for the text version of the <strong class="pkg">GAPDoc</strong> document used in a 80 character wide terminal.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ignoreComments</code></strong></dt>
+<dd><p>The default is <code class="keyw">false</code>.<br /> If set to <code class="keyw">true</code> comments in the input will be ignored (as in the default behaviour of the <code class="func">Test</code> (<a href="../../../doc/ref/chap7.html#X87712F9D8732193C"><span class="RefLink">Reference: Test</span></a>) function).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">changeSources</code></strong></dt>
+<dd><p>If this is set to <code class="keyw">true</code> then the source code of all manual examples which show differences is adjusted to the current outputs. The default is <code class="keyw">false</code>.<br /> Use this feature with care. Note that sometimes differences can indicate a bug, and in such a case it is more appropriate to fix the bug instead of changing the example output.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">compareFunction</code></strong></dt>
+<dd><p>The function used to compare the output shown in the example and the current output. See <code class="func">Test</code> (<a href="../../../doc/ref/chap7.html#X87712F9D8732193C"><span class="RefLink">Reference: Test</span></a>) for more details.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">checkWidth</code></strong></dt>
+<dd><p>If this option is a positive integer <code class="code">n</code> the function prints warnings if an example contains any line with more than <code class="code">n</code> characters (input and output lines are considered). By default this option is set to <code class="keyw">false</code>.</p>
+
+</dd>
+</dl>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

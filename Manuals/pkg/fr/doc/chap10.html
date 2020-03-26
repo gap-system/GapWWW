@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (FR) - Chapter 10: FR implementation details</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap10"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X86D6616E868AF75C" name="X86D6616E868AF75C"></a></p>
+<div class="ChapSects"><a href="chap10.html#X86D6616E868AF75C">10 <span class="Heading">FR implementation details</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X79719CD17A948933">10.1 <span class="Heading">The family of FR objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7F5497A47F8C81DD">10.1-1 FRMFamily</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7C6A63427F6DB4C6">10.1-2 FREFamily</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7BC9CD3685C26823">10.1-3 AlphabetOfFRObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X793E0E1283BE7C73">10.1-4 AsPermutation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7B41902D87A48EDB">10.1-5 AsTransformation</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X856A3AD87C93FC1F">10.2 <span class="Heading">Filters for <code class="code">FRObject</code>s</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7CC0BFD67CE7060E">10.2-1 IsGroupFRMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8157AE587CBA24C4">10.2-2 IsFRMachineStrRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X79C2395A7D65214B">10.2-3 IsMealyMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7C86614187606A4C">10.2-4 IsMealyElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X78E206B28015A395">10.2-5 IsMealyMachineIntRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7AE5B4257E2DB7E6">10.2-6 IsMealyMachineDomainRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8087EE9F79E8E339">10.2-7 IsVectorFRMachineRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7859869E7FEDA49F">10.2-8 IsAlgebraFRMachineRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X877B1EBD80170001">10.2-9 IsLinearFRMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X823F46A67D458AAD">10.2-10 IsLinearFRElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7966F9B982B1DFE1">10.2-11 IsFRElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X847A4BBE82C736B6">10.2-12 IsFRMealyElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X785D09F27DBDF6A8">10.2-13 IsFRObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7C22A1A28058F754">10.2-14 IsFRMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X83AEFB8184F4B023">10.2-15 IsInvertible</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X81D717E187305F2A">10.2-16 IsFRGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X853B16B381CB5366">10.2-17 IsFRAlgebra</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7E97015E8153F782">10.3 <span class="Heading">Some of the algorithms implemented</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X84278D6F7AAD101F">10.3-1 FRMachineRWS</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X84B4FF607DA18152">10.3-2 <span class="Heading">Order of FR elements</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X847B4AFF809D2A56">10.3-3 <span class="Heading">Membership in semigroups</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7F24533B7F846FC4">10.3-4 <span class="Heading">The conjugacy problem</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8735D8087DADCCC9">10.3-5 OrbitSignalizer</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X817F734280E22447">10.3-6 FRConjugacyAlgorithm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X82A289077D4DAA03">10.3-7 FRBranchGroupConjugacyData</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7A0AC96784ACE0BE">10.3-8 <span class="Heading">Order of groups</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8329884F790E1542">10.3-9 <span class="Heading">Images and preimages of some groups in
+  f.p. and l.p. groups</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7F4247367D1EBEB9">10.3-10 <span class="Heading">Comparison of FR, Mealy, vector,
+  and algebra elements</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X81F95FEB7C72ABFF">10.3-11 <span class="Heading">Inverses of linear elements</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>10 <span class="Heading">FR implementation details</span></h3>
+
+<p><strong class="pkg">FR</strong> creates new categories for the various objects considered in the package. The first category is <code class="code">FRObject</code>; all objects are in this category, and have an <code class="code">Alphabet</code> method.</p>
+
+<p>There are two categories below: <code class="code">FRMachine</code> and <code class="code">FRElement</code>. An <code class="code">FRMachine</code> must have a <code class="code">StateSet</code>, and methods for <code class="code">Output</code> and a <code class="code">Transition</code>. An <code class="code">FRElement</code> must have an underlying <code class="code">FRMachine</code> and <code class="code">InitialState</code>, and <code class="code">Output</code> and a <code class="code">Transition</code> that use the initial state.</p>
+
+<p>A self-similar group is simply a collections category of FR elements which is also a group.</p>
+
+<p><a id="X79719CD17A948933" name="X79719CD17A948933"></a></p>
+
+<h4>10.1 <span class="Heading">The family of FR objects</span></h4>
+
+<p>All FR objects have an associated <code class="func">AlphabetOfFRObject</code> (<a href="chap10.html#X7BC9CD3685C26823"><span class="RefLink">10.1-3</span></a>).</p>
+
+<p><a id="X7F5497A47F8C81DD" name="X7F5497A47F8C81DD"></a></p>
+
+<h5>10.1-1 FRMFamily</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRMFamily</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: the family of FR machines on alphabet <var class="Arg">obj</var>.</p>
+
+<p>The family of an FR object is the arity of the tree on which elements cat act; in other words, there is one family for each alphabet.</p>
+
+<p><a id="X7C6A63427F6DB4C6" name="X7C6A63427F6DB4C6"></a></p>
+
+<h5>10.1-2 FREFamily</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FREFamily</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: the family of FR elements on alphabet <var class="Arg">obj</var>.</p>
+
+<p>The family of an FR object is the arity of the tree on which elements cat act; in other words, there is one family for each alphabet.</p>
+
+<p>The argument may be an FR machine, an alphabet, or a family of FR machines.</p>
+
+<p><a id="X7BC9CD3685C26823" name="X7BC9CD3685C26823"></a></p>
+
+<h5>10.1-3 AlphabetOfFRObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlphabetOfFRObject</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlphabetOfFRAlgebra</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlphabetOfFRSemigroup</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Alphabet</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: the alphabet associated with <var class="Arg">obj</var>.</p>
+
+<p>This command applies to the family of any FR object, or to the object themselves. Alphabets are returned as lists, and in pratice are generally of the form <code class="code">[1..n]</code>.</p>
+
+<p><a id="X793E0E1283BE7C73" name="X793E0E1283BE7C73"></a></p>
+
+<h5>10.1-4 AsPermutation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsPermutation</code>( <var class="Arg">o</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>This method takes as argument an FR object <var class="Arg">o</var>: machine, element, or group, and produces an equivalent object whose outputs are permutations. In particular, it converts Mealy machines from domain representation to int representation.</p>
+
+<p>If this is not possible, the method returns <code class="keyw">fail</code>.</p>
+
+<p><a id="X7B41902D87A48EDB" name="X7B41902D87A48EDB"></a></p>
+
+<h5>10.1-5 AsTransformation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsTransformation</code>( <var class="Arg">o</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>This method takes as argument an FR object <var class="Arg">o</var>: machine, element, or group, and produces an equivalent object whose outputs are transformations. In particular, it converts Mealy machines from domain representation to int representation.</p>
+
+<p>Since transformations can never be inverted by <strong class="pkg">GAP</strong>, even when they are invertible, this function returns a monoid when applied to a full SC group.</p>
+
+<p><a id="X856A3AD87C93FC1F" name="X856A3AD87C93FC1F"></a></p>
+
+<h4>10.2 <span class="Heading">Filters for <code class="code">FRObject</code>s</span></h4>
+
+<p><a id="X7CC0BFD67CE7060E" name="X7CC0BFD67CE7060E"></a></p>
+
+<h5>10.2-1 IsGroupFRMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGroupFRMachine</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMonoidFRMachine</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSemigroupFRMachine</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is an FR machine whose stateset is a free group/monoid/semigroup.</p>
+
+<p>This function is the acceptor for those functionally recursive machines whose stateset (accessible via <code class="func">StateSet</code> (<a href="chap3.html#X8000470D7DA7FFBD"><span class="RefLink">3.4-1</span></a>)) is a free group, monoid or semigroup. The generating set of its stateset is accessible via <code class="func">GeneratorsOfFRMachine</code> (<a href="chap3.html#X7F77F5DD789FA2F4"><span class="RefLink">3.4-2</span></a>).</p>
+
+<p><a id="X8157AE587CBA24C4" name="X8157AE587CBA24C4"></a></p>
+
+<h5>10.2-2 IsFRMachineStrRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFRMachineStrRep</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is a standard (group,monoid,semigroup) FR machine.</p>
+
+<p>There is a free object <code class="code">free</code>, of rank <span class="SimpleMath">N</span>, a list <code class="code">transitions</code> of length <span class="SimpleMath">N</span>, each entry a list, indexed by the alphabet, of elements of <code class="code">free</code>, and a list <code class="code">output</code> of length <code class="code">N</code> of transformations or permutations of the alphabet.</p>
+
+<p><a id="X79C2395A7D65214B" name="X79C2395A7D65214B"></a></p>
+
+<h5>10.2-3 IsMealyMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMealyMachine</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is a Mealy machine.</p>
+
+<p>This function is the acceptor for the <em>Mealy machine</em> subcategory of <em>FR machine</em>s.</p>
+
+<p><a id="X7C86614187606A4C" name="X7C86614187606A4C"></a></p>
+
+<h5>10.2-4 IsMealyElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMealyElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is a Mealy element.</p>
+
+<p>This function is the acceptor for the <em>Mealy element</em> subcategory of <em>FR element</em>s.</p>
+
+<p><a id="X78E206B28015A395" name="X78E206B28015A395"></a></p>
+
+<h5>10.2-5 IsMealyMachineIntRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMealyMachineIntRep</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is a Mealy machine in integer representation.</p>
+
+<p>A Mealy machine in <em>integer</em> representation has components <code class="code">nrstates</code>, <code class="code">transitions</code>, <code class="code">output</code> and optionally <code class="code">initial</code>.</p>
+
+<p>Its stateset is <code class="code">[1..nrstates]</code>, its transitions is a matrix with <code class="code">transitions[s][x]</code> the transition from state <code class="code">s</code> with input <code class="code">x</code>, its output is a list of transformations or permutations, and its initial state is an integer.</p>
+
+<p><a id="X7AE5B4257E2DB7E6" name="X7AE5B4257E2DB7E6"></a></p>
+
+<h5>10.2-6 IsMealyMachineDomainRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMealyMachineDomainRep</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is a Mealy machine in domain representation.</p>
+
+<p>A Mealy machine in <em>domain</em> representation has components <code class="code">states</code>, <code class="code">transitions</code>, <code class="code">output</code> and optionally <code class="code">initial</code>.</p>
+
+<p>Its states is a domain, its transitions is a function with <code class="code">transitions(s,x)</code> the transition from state <code class="code">s</code> with input <code class="code">x</code>, its output is a function with <code class="code">output(s,x)</code> the output from input <code class="code">x</code> in state <code class="code">s</code>, and its initial state is an elemnent of <code class="code">states</code>.</p>
+
+<p><a id="X8087EE9F79E8E339" name="X8087EE9F79E8E339"></a></p>
+
+<h5>10.2-7 IsVectorFRMachineRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsVectorFRMachineRep</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is a vector machine</p>
+
+<p>A <em>vector machine</em> is a representation of a linear machine by a finite-dimensional vector space (implicit in the structure), a transition tensor (represented as a matrix of matrices), and an output vector (represented as a list).</p>
+
+<p><a id="X7859869E7FEDA49F" name="X7859869E7FEDA49F"></a></p>
+
+<h5>10.2-8 IsAlgebraFRMachineRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAlgebraFRMachineRep</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is an algebra machine</p>
+
+<p>An <em>algebra machine</em> is a representation of a linear machine by a finitely generated free algebra, a tensor of transitions, indexed by generator index and two alphabet indices, and an output vector, indexed by a generator index.</p>
+
+<p>The transition tensor's last two entries are the 0 and 1 matrix over the free algebra, and the output tensor's last two entries are the 0 and 1 elements of the left acting domain.</p>
+
+<p><a id="X877B1EBD80170001" name="X877B1EBD80170001"></a></p>
+
+<h5>10.2-9 IsLinearFRMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLinearFRMachine</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is a linear machine.</p>
+
+<p>This function is the acceptor for the <em>linear machine</em> subcategory of <em>FR machine</em>s.</p>
+
+<p><a id="X823F46A67D458AAD" name="X823F46A67D458AAD"></a></p>
+
+<h5>10.2-10 IsLinearFRElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLinearFRElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is a linear element.</p>
+
+<p>This function is the acceptor for the <em>linear element</em> subcategory of <em>FR element</em>s.</p>
+
+<p><a id="X7966F9B982B1DFE1" name="X7966F9B982B1DFE1"></a></p>
+
+<h5>10.2-11 IsFRElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFRElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSemigroupFRElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMonoidFRElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGroupFRElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is an FR element.</p>
+
+<p>This filter is the acceptor for the <em>functionally recursive element</em> category.</p>
+
+<p>It implies that <var class="Arg">obj</var> has an underlying FR machine, may act on sequences, and has a recursive <code class="func">DecompositionOfFRElement</code> (<a href="chap4.html#X850EB66E7804BA3B"><span class="RefLink">4.2-6</span></a>).</p>
+
+<p>The next filters specify the type of free object the stateset of <var class="Arg">obj</var> is modelled on.</p>
+
+<p><a id="X847A4BBE82C736B6" name="X847A4BBE82C736B6"></a></p>
+
+<h5>10.2-12 IsFRMealyElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFRMealyElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSemigroupFRMealyElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMonoidFRMealyElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGroupFRMealyElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingMealyElement</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is an FR element.</p>
+
+<p>This filter is the acceptor for the <em>functionally recursive element</em> category, with an additional Mealy element stored as attribute for faster calculations. It defines a subcategory of <code class="func">IsFRElement</code> (<a href="chap10.html#X7966F9B982B1DFE1"><span class="RefLink">10.2-11</span></a>). This additional Mealy element may be obtained as <code class="code">UnderlyingMealyElement(obj)</code>.</p>
+
+<p>The next filters specify the type of free object the stateset of <var class="Arg">obj</var> is modelled on.</p>
+
+<p><a id="X785D09F27DBDF6A8" name="X785D09F27DBDF6A8"></a></p>
+
+<h5>10.2-13 IsFRObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFRObject</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is an FR machine or element.</p>
+
+<p>This function is the acceptor for the most general FR category (which splits up as <code class="func">IsFRMachine</code> (<a href="chap10.html#X7C22A1A28058F754"><span class="RefLink">10.2-14</span></a>) and <code class="func">IsFRElement</code> (<a href="chap10.html#X7966F9B982B1DFE1"><span class="RefLink">10.2-11</span></a>)).</p>
+
+<p>It implies that <var class="Arg">obj</var> has an attribute <code class="func">AlphabetOfFRObject</code> (<a href="chap10.html#X7BC9CD3685C26823"><span class="RefLink">10.1-3</span></a>).</p>
+
+<p><a id="X7C22A1A28058F754" name="X7C22A1A28058F754"></a></p>
+
+<h5>10.2-14 IsFRMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFRMachine</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is an FR machine.</p>
+
+<p>This function is the acceptor for the <em>functionally recursive machine</em> category. It splits up as <code class="func">IsGroupFRMachine</code> (<a href="chap10.html#X7CC0BFD67CE7060E"><span class="RefLink">10.2-1</span></a>), <code class="func">IsSemigroupFRMachine</code> (<a href="chap10.html#X7CC0BFD67CE7060E"><span class="RefLink">10.2-1</span></a>), <code class="func">IsMonoidFRMachine</code> (<a href="chap10.html#X7CC0BFD67CE7060E"><span class="RefLink">10.2-1</span></a>) and <code class="func">IsMealyMachine</code> (<a href="chap10.html#X79C2395A7D65214B"><span class="RefLink">10.2-3</span></a>)).</p>
+
+<p>It implies that <var class="Arg">obj</var> has attributes <code class="func">StateSet</code> (<a href="chap3.html#X8000470D7DA7FFBD"><span class="RefLink">3.4-1</span></a>), <code class="func">GeneratorsOfFRMachine</code> (<a href="chap3.html#X7F77F5DD789FA2F4"><span class="RefLink">3.4-2</span></a>), and <code class="func">WreathRecursion</code> (<a href="chap3.html#X7D95D1498586E5D0"><span class="RefLink">3.4-6</span></a>); the last two are usually not used for Mealy machines.</p>
+
+<p><a id="X83AEFB8184F4B023" name="X83AEFB8184F4B023"></a></p>
+
+<h5>10.2-15 IsInvertible</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInvertible</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">m</var> is an invertible FR machine.</p>
+
+<p>This function accepts invertible FR machines, i.e. machines <var class="Arg">m</var> such that <span class="SimpleMath">(m,q)</span> is an invertible transformation of the alphabet for all <span class="SimpleMath">q</span> in the stateset of <var class="Arg">m</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine([[[],[]]],[(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsInvertible(m);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine([[[],[]]],[[1,1]]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Monoid( [ m1 ], ... )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsInvertible(m);</span>
+false
+</pre></div>
+
+<p><a id="X81D717E187305F2A" name="X81D717E187305F2A"></a></p>
+
+<h5>10.2-16 IsFRGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFRGroup</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFRMonoid</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFRSemigroup</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is a FR group/monoid/semigroup.</p>
+
+<p>These functions accept <em>self-similar groups/monoids/semigroups</em>, i.e. groups/monoids/semigroups whose elements are FR elements.</p>
+
+<p><a id="X853B16B381CB5366" name="X853B16B381CB5366"></a></p>
+
+<h5>10.2-17 IsFRAlgebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFRAlgebra</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFRAlgebraWithOne</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">obj</var> is a FR algebra [with one].</p>
+
+<p>These functions accept <em>self-similar algebras [with one]</em>, i.e. algebras whose elements are linear FR elements.</p>
+
+<p><a id="X7E97015E8153F782" name="X7E97015E8153F782"></a></p>
+
+<h4>10.3 <span class="Heading">Some of the algorithms implemented</span></h4>
+
+<p>Few calculations with infinite groups can be guaranteed to terminate --- and especially to terminate within reasonable time. This section describes some of the algorithms implemented in <strong class="pkg">FR</strong>.</p>
+
+<p><a id="X84278D6F7AAD101F" name="X84278D6F7AAD101F"></a></p>
+
+<h5>10.3-1 FRMachineRWS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRMachineRWS</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A record containing a rewriting system for <var class="Arg">m</var>.</p>
+
+<p>Elements of an FR machine are compared using a rewriting system, which records all known relations among states of the machine.</p>
+
+<p>One may specify via an optional argument <code class="code">:fr_maxlen:=n</code>, the maximal length of rules to be added. By default, this maximum length is 5.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ a, b ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FRMachineRWS(n);</span>
+rec( rws := Knuth Bendix Rewriting System for Monoid( [ a^-1, a, b^-1, b
+     ], ... ) with rules
+    [ [ a^-1*a, &lt;identity ...&gt; ], [ a*a^-1, &lt;identity ...&gt; ],
+      [ b^-1*b, &lt;identity ...&gt; ], [ b*b^-1, &lt;identity ...&gt; ] ],
+  tzrules := [ [ [ 1, 2 ], [  ] ], [ [ 2, 1 ], [  ] ], [ [ 3, 4 ], [  ] ],
+      [ [ 4, 3 ], [  ] ] ], letterrep := function( w ) ... end,
+  pi := function( w ) ... end, reduce := function( w ) ... end,
+  addgprule := function( w ) ... end, commit := function(  ) ... end,
+  restart := function(  ) ... end )
+</pre></div>
+
+<p><a id="X84B4FF607DA18152" name="X84B4FF607DA18152"></a></p>
+
+<h5>10.3-2 <span class="Heading">Order of FR elements</span></h5>
+
+<p>The order of an FR element <code class="code">e</code> is computed as follows: the tree is traversed recursively, filling it as follows. For each cycle of <code class="code">e</code> on the first level, the product of the states on that cycle are computed. The method continues recursively with that product, remembering the order of the cycle. Once a state reappears in the traversal, <strong class="pkg">FR</strong> determines if one instance of the state is in the subtree of the other, and if so whether the top one was raised to a non-trivial power to yield the second one as a state. If this happens, then <code class="code">e</code> has infinite order. Otherwise, the least common multiple of the powers that appeared in the traversal is returned.</p>
+
+<p>This method is guaranteed to succeed if <code class="code">e</code> is a bounded element. To improve chances of success, <strong class="pkg">FR</strong> first computes whether <code class="code">e</code> acts by vertex transformations belonging to an abelian group; and if so, if <code class="code">e</code> is conjugate to an adding machine. In that case too, <code class="code">e</code> has infinite order.</p>
+
+<p><a id="X847B4AFF809D2A56" name="X847B4AFF809D2A56"></a></p>
+
+<h5>10.3-3 <span class="Heading">Membership in semigroups</span></h5>
+
+<p>The following algorithm is used to determine whether a Mealy element belongs to a self-similar group. The corresponding problem of membership of an FR element in a state-closed self-similar group can be much simpler, because an FR element has an associated FR machine, all of whose states belong to the group.</p>
+
+<p>Assume the group is given by generators. <strong class="pkg">FR</strong> attempts to express the given Mealy element as a product of generators. At the same time, it constructs epimorphisms to finite groups. It is hoped that one of these two processes will stop.</p>
+
+<p>This amounts, in fact, to the following. Consider a group <span class="SimpleMath">G</span> acting on a tree. It has a natural, profinite closure <span class="SimpleMath">overline G</span>. The algorithm then attempts either to write an element <span class="SimpleMath">x</span> as a product of generators of <var class="Arg">G</var>, or to show that <span class="SimpleMath">x</span> does not belong to <span class="SimpleMath">overline G</span>.</p>
+
+<p>There are groups <span class="SimpleMath">G</span> such that <span class="SimpleMath">overline G∖ G</span> contains Mealy machines. For these, the above algorithm will not terminate.</p>
+
+<p>An additional refinement is implemented for bounded groups (see <code class="func">IsBoundedFRSemigroup</code> (<a href="chap7.html#X7A6CB30181662C77"><span class="RefLink">7.2-14</span></a>)). The <code class="func">Germs</code> (<a href="chap5.html#X81592E3D79745A40"><span class="RefLink">5.2-24</span></a>) of an element are computed, and compared to the germs of elements in the group.</p>
+
+<p>Finally, for a group that possesses self-similar data (see Section <a href="chap10.html#X8329884F790E1542"><span class="RefLink">10.3-9</span></a>), very fast methods are implemented to recognize and express an FR element as a product of generators.</p>
+
+<p><a id="X7F24533B7F846FC4" name="X7F24533B7F846FC4"></a></p>
+
+<h5>10.3-4 <span class="Heading">The conjugacy problem</span></h5>
+
+<p>The conjugacy problem for self-similar branch groups has been implemented by Thorsten Groth, as part of his Diploma Thesis. His code is integrated in <strong class="pkg">FR</strong>.</p>
+
+<p>Specialized algorithms are implemented for the Grigorchuk and Gupta-Sidki groups, and a generic algorithm is implemented, which is however not guaranteed to succeed. The implementation follows <a href="chapBib.html#biBMR3054572">[BBSZ13]</a>.</p>
+
+<p>The following extra attibutes are part of his implementation:</p>
+
+<p><a id="X8735D8087DADCCC9" name="X8735D8087DADCCC9"></a></p>
+
+<h5>10.3-5 OrbitSignalizer</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitSignalizer</code>( <var class="Arg">g</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: The Orbit Signalizer of the group element <var class="Arg">g</var></p>
+
+<p>This attribute computes the orbit signalizer of an element. This is the set <span class="SimpleMath">OS(g) := {g^|Orb_g(v)|@v ∣ v ∈ X^*}</span> where <span class="SimpleMath">X</span> is the alphabet of the element <var class="Arg">g</var> and <span class="SimpleMath">Orb_g(v)</span> is the orbit of <span class="SimpleMath">v</span> under <span class="SimpleMath">⟨ g ⟩</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := MealyElement([[2,2],[2,2]],[(1,2),()],1);</span>
+&lt;Mealy element on alphabet [ 1 .. 2 ] with 2 states&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitSignalizer(a);</span>
+[ &lt;Mealy element on alphabet [ 1 .. 2 ] with 2 states&gt;, &lt;Trivial Mealy element on alphabet [ 1 .. 2 ]&gt; ]
+</pre></div>
+
+<p>DeclareAttribute("OrbitSignalizer", IsFRElement);</p>
+
+<p><a id="X817F734280E22447" name="X817F734280E22447"></a></p>
+
+<h5>10.3-6 FRConjugacyAlgorithm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRConjugacyAlgorithm</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A function which solves the conjugacy problem for <var class="Arg">G</var></p>
+
+<p>This attribute stores a function in three arguments which computes a representative conjugator if exists or fail otherwise.</p>
+
+<p>This attribute is not meant to have a standard setter but to be set if a specialized conjugacy algorithm for a certain group is discovered.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := FRConjugacyAlgorithm(GrigorchukGroup);</span>
+function( G, g, h ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AssignGeneratorVariables(GrigorchukGroup);</span>
+#I  Assigned the global variables [ "a", "b", "c", "d" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f(GrigorchukGroup,a,a^b);</span>
+&lt;Mealy element on alphabet [ 1 .. 2 ] with 5 states&gt;
+</pre></div>
+
+<p>DeclareAttribute("FRConjugacyAlgorithm", IsFRGroup,2);</p>
+
+<p><a id="X82A289077D4DAA03" name="X82A289077D4DAA03"></a></p>
+
+<h5>10.3-7 FRBranchGroupConjugacyData</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRBranchGroupConjugacyData</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: The initial data for the branch algorithm for <var class="Arg">G</var></p>
+
+<p>This attribute records the data for the branch algorithm. The record has the following components:</p>
+
+
+<dl>
+<dt><strong class="Mark">initial_conj_dic:</strong></dt>
+<dd><p>Dictionary of already known conjugacy pairs with corresponding conjugator tuples. This has to cover at least the TorsionNucleus of <var class="Arg">G</var></p>
+
+</dd>
+<dt><strong class="Mark">Branchstructure</strong></dt>
+<dd><p>Usally calculated by the function BranchStructure</p>
+
+</dd>
+<dt><strong class="Mark">RepSystem</strong></dt>
+<dd><p>List of representatives of <span class="SimpleMath">G/K</span> where <span class="SimpleMath">K</span> is the branching subgroup of <var class="Arg">G</var></p>
+
+</dd>
+</dl>
+<p>DeclareAttribute("FRBranchGroupConjugacyData", IsFRGroup,"mutable");</p>
+
+<p><a id="X7A0AC96784ACE0BE" name="X7A0AC96784ACE0BE"></a></p>
+
+<h5>10.3-8 <span class="Heading">Order of groups</span></h5>
+
+<p>The order of an FR group is computed as follows: if all generators are finitary, then enumeration will succeed in computing the order. If the action of the group is primitive, and it comes from a bireversible automaton, then the Thompson-Wielandt theorem is tested against. This theorem states that, in our context (a group acting on a rooted tree, coming from a larger group acting transitively), if the group is finite then the stabilizer of a sphere of radius 2 is a <span class="SimpleMath">p</span>-group; see <a href="chapBib.html#biBMR1839488">[BM00a, Proposition 2.1.1]</a>. Then, <strong class="pkg">FR</strong> attempts to find whether the group is level-transitive (in which case it would be infinite). Finally, it attempts to enumerate the group's elements, testing at the same time whether these elements have infinite order.</p>
+
+<p>Needless to say, none except the first few steps are guaranteed to succeed.</p>
+
+<p><a id="X8329884F790E1542" name="X8329884F790E1542"></a></p>
+
+<h5>10.3-9 <span class="Heading">Images and preimages of some groups in
+  f.p. and l.p. groups</span></h5>
+
+<p>Contracting, branched groups admit finite L-presentations (see <a href="chapBib.html#biBMR2009317">[Bar03a]</a>), that is, presentations by finitely many generators, relators and endomorphisms; the (usual) relators are the images of the given relators under iteration by all endomorphisms.</p>
+
+<p>Using the package <strong class="pkg">NQL</strong>, it is possible to construct infinite nilpotent quotients of self-similar groups, and perform fast computations in them.</p>
+
+<p>It is possible to construct, algorithmically, such an L-presentation from a self-similar groups; however, this algorithm has not been implemented yet, mainly because efficiency issues would make it usable only in very few cases.</p>
+
+<p>For groups with an isomorphism to an L-presented group (constructed by <code class="func">IsomorphismLpGroup</code> (<a href="chap7.html#X8740656382656D63"><span class="RefLink">7.2-31</span></a>)), a fast method expresses group elements as words in the L-presented group's generators. It proceeds recursively on the decomposition of the element, mapping elements that are expressible by short words over the nucleus (usually length 1; length 3 is needed for the <code class="func">BrunnerSidkiVieiraGroup</code> (<a href="chap9.html#X7F93EC437B5AE276"><span class="RefLink">9.1-13</span></a>)) to their value in the L-presented group, and using the presentation's endomorphism to construct words with appropriate decompositions.</p>
+
+<p>In particular, the algorithm will stop, returning <code class="keyw">fail</code>, if during the recursion it reaches an element <span class="SimpleMath">x</span> such that <span class="SimpleMath">x</span> is a state of <span class="SimpleMath">x</span> but <span class="SimpleMath">x</span> does not belong to the nucleus.</p>
+
+<p><a id="X7F4247367D1EBEB9" name="X7F4247367D1EBEB9"></a></p>
+
+<h5>10.3-10 <span class="Heading">Comparison of FR, Mealy, vector,
+  and algebra elements</span></h5>
+
+<p>FR and Mealy elements can be compared quite efficiently, as long as they are distinct. The algorithm runs as follows: let the two elements be <span class="SimpleMath">x</span> and <span class="SimpleMath">y</span>. Considering both in turn, <strong class="pkg">FR</strong> constructs the first entries of minimal Mealy elements expressing <span class="SimpleMath">x</span> and <span class="SimpleMath">y</span>; as soon as an output entry is distinct for <span class="SimpleMath">x</span> and for <span class="SimpleMath">y</span>, the status of <span class="SimpleMath">x&lt;y</span> is determined; and similarly for transition entries. Finally, if either of <span class="SimpleMath">x</span> or <span class="SimpleMath">y</span> is finite-state and the entries were identical up to that step, then the element with smallest stateset is considered smaller.</p>
+
+<p>In this way, FR and Mealy elements can efficiently be compared. For Mealy elements, it suffices to follow their internal data; while for FR elements, this amounts to constructing Mealy elements approximating them to a sufficient precision so that they can be compared as such.</p>
+
+<p>The algorithm first tries to test its arguments for equality; this test is not guaranteed to succeed.</p>
+
+<p>A similar algorithm applies for linear elements. Here, one constructs vector element approximations; and compares, for ever-increasing values of <span class="SimpleMath">i</span>, first the output vectors of basis state <span class="SimpleMath">i</span>; then the transitions from state <span class="SimpleMath">i</span> to state <span class="SimpleMath">j</span>, for all <span class="SimpleMath">j∈{1,...,i}</span>; then the transitions from state <span class="SimpleMath">j</span> to state <span class="SimpleMath">i</span> for all <span class="SimpleMath">j∈{1,...,i-1}</span>.</p>
+
+<p><a id="X81F95FEB7C72ABFF" name="X81F95FEB7C72ABFF"></a></p>
+
+<h5>10.3-11 <span class="Heading">Inverses of linear elements</span></h5>
+
+<p>It is probably difficult to compute the inverse of a vector element. The following approach is used: to compute the inverse of <span class="SimpleMath">x</span>, large (scalar) matrix approximations of <span class="SimpleMath">x</span> are computed; they are inverted using linear algebra; a vector element representing this inverse is guessed; and the guess is checked. As long as that check fails, larger approximations are computed.</p>
+
+<p>Needless to say, this method need not succeed; for there are vector elements that are invertible, but whose inverse is not a vector element. A good test example appears in <a href="chapBib.html#biBMR2422072">[Bac08]</a>: consider the infinite matrix with 1's on the diagonal, and <span class="SimpleMath">ω</span> below the diagonal. This element admits an inverse if and only if <span class="SimpleMath">ω</span> is a root of unity. The complexity of the inverse grows as the degree of <span class="SimpleMath">ω</span> grows. Here is an illustation:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bacher := function(n)</span>
+  local f;
+  f := CyclotomicField(n);
+  return VectorElement(f,One(f)*[[[[1,0],[0,0]],
+	[[0,0],[0,1]]],[[[0,1],[0,0]],[[1,0],[0,0]]]],[One(f),E(n)],[One(f),Zero(f)]);
+end;;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Inverse(bacher(3));</span>
+&lt;Linear element on alphabet CF(3)^2 with 4-dimensional stateset&gt;
+6 gap&gt; Inverse(bacher(5));
+&lt;Linear element on alphabet CF(5)^2 with 6-dimensional stateset&gt;
+</pre></div>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b>Dimension of states of inverse</caption>
+<tr>
+<td class="tdright"><span class="SimpleMath">n</span></td>
+<td class="tdcenter">1</td>
+<td class="tdcenter">2</td>
+<td class="tdcenter">3</td>
+<td class="tdcenter">4</td>
+<td class="tdcenter">5</td>
+<td class="tdcenter">6</td>
+<td class="tdcenter">7</td>
+<td class="tdcenter">8</td>
+<td class="tdcenter">9</td>
+<td class="tdcenter">10</td>
+</tr>
+<tr>
+<td class="tdright">dimension</td>
+<td class="tdcenter"></td>
+<td class="tdcenter">2</td>
+<td class="tdcenter">4</td>
+<td class="tdcenter">4</td>
+<td class="tdcenter">6</td>
+<td class="tdcenter">3</td>
+<td class="tdcenter">5</td>
+<td class="tdcenter">5</td>
+<td class="tdcenter">8</td>
+<td class="tdcenter">5</td>
+</tr>
+<tr>
+<td class="tdright"><span class="SimpleMath">n</span></td>
+<td class="tdcenter">11</td>
+<td class="tdcenter">12</td>
+<td class="tdcenter">13</td>
+<td class="tdcenter">14</td>
+<td class="tdcenter">15</td>
+<td class="tdcenter">16</td>
+<td class="tdcenter">17</td>
+<td class="tdcenter">18</td>
+<td class="tdcenter">19</td>
+<td class="tdcenter">20</td>
+</tr>
+<tr>
+<td class="tdright">dimension</td>
+<td class="tdcenter">?</td>
+<td class="tdcenter">5</td>
+<td class="tdcenter">?</td>
+<td class="tdcenter">4</td>
+<td class="tdcenter">6</td>
+<td class="tdcenter">6</td>
+<td class="tdcenter">?</td>
+<td class="tdcenter">7</td>
+<td class="tdcenter">?</td>
+<td class="tdcenter">7</td>
+</tr>
+<tr>
+<td class="tdright"><span class="SimpleMath">n</span></td>
+<td class="tdcenter">22</td>
+<td class="tdcenter">24</td>
+<td class="tdcenter">26</td>
+<td class="tdcenter">28</td>
+<td class="tdcenter">30</td>
+<td class="tdcenter">32</td>
+<td class="tdcenter">34</td>
+<td class="tdcenter">36</td>
+<td class="tdcenter">38</td>
+<td class="tdcenter">40</td>
+</tr>
+<tr>
+<td class="tdright">dimension</td>
+<td class="tdcenter">?</td>
+<td class="tdcenter">6</td>
+<td class="tdcenter">?</td>
+<td class="tdcenter">6</td>
+<td class="tdcenter">?</td>
+<td class="tdcenter">7</td>
+<td class="tdcenter">?</td>
+<td class="tdcenter">?</td>
+<td class="tdcenter">?</td>
+<td class="tdcenter">?</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

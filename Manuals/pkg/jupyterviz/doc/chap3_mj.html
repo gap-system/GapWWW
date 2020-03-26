@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (JupyterViz) - Chapter 3: Using the low-level API</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X8363BC74806376BE" name="X8363BC74806376BE"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X8363BC74806376BE">3 <span class="Heading">Using the low-level API</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7A4D73457C664283">3.1 <span class="Heading">The <code class="code">CreateVisualization</code> function</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X82B836487E900D62">3.2 <span class="Heading">Looking beneath the high-level API</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7BA83ABA84945681">3.2-1 <span class="Heading">Looking beneath <code class="code">Plot</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X792C30817A29E033">3.2-2 <span class="Heading">Looking beneath <code class="code">PlotGraph</code></span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X835575F282027572">3.3 <span class="Heading">Using JSON from a file</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X860FD2F97E9F936B">3.4 <span class="Heading">Documentation for each visualization tool</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82D1D7E380E9F6CD">3.4-1 <span class="Heading">Charting and plotting tools</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X795882857B6028D4">3.4-2 <span class="Heading">Graph drawing tools</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79F3C554780769C5">3.4-3 <span class="Heading">General-purpose tools for custom visualizations</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X83A1AF4B7E339161">3.5 <span class="Heading">Example uses of the low-level API</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B0290B3876FCDA1">3.5-1 <span class="Heading">Example: AnyChart</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E2737FC7EDB79B1">3.5-2 <span class="Heading">Example: Cytoscape</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Using the low-level API</span></h3>
+
+<p><a id="X7A4D73457C664283" name="X7A4D73457C664283"></a></p>
+
+<h4>3.1 <span class="Heading">The <code class="code">CreateVisualization</code> function</span></h4>
+
+<p>The low-level API is accessed through just one function, <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>). You can view its complete documentation in the function reference in Chapter <a href="chap7_mj.html#X7ECCCA82839EA283"><span class="RefLink">7</span></a>, but examples are given in this chapter.</p>
+
+<p>Nearly all visualizations in this package are created by passing to the <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) function records describing what to draw. Even visualizations created by the high-level API documented in Chapter <a href="chap2_mj.html#X83888F2D8472E029"><span class="RefLink">2</span></a> call the <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) function under the hood. Those records are converted into <span class="URL"><a href="http://www.json.org/">JSON</a></span> form by the <strong class="pkg">json</strong> package, and handed to whichever JavaScript toolkit you have chosen to use for creating the visualization (or the default tool if you use a high-level function and do not specify).</p>
+
+<p>The sections below describe how to communicate with each of the visualization tools this package makes available, using <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>).</p>
+
+<p><a id="X82B836487E900D62" name="X82B836487E900D62"></a></p>
+
+<h4>3.2 <span class="Heading">Looking beneath the high-level API</span></h4>
+
+<p>There are a few techniques for taking a call to the high-level API (either to <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>) or <code class="func">PlotGraph</code> (<a href="chap7_mj.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>)) and computing what data it eventally passes to <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>). This is a great starting point for learning the data formats that <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) expects, in preparation for either tweaking them or creating them from scratch. We cover two examples here.</p>
+
+<p><a id="X7BA83ABA84945681" name="X7BA83ABA84945681"></a></p>
+
+<h5>3.2-1 <span class="Heading">Looking beneath <code class="code">Plot</code></span></h5>
+
+<p>Assume that you have a plot that you're creating with the high-level API, like the following example.</p>
+
+
+<div class="example"><pre>
+Plot( x -&gt; x^0.5, rec( tool := "canvasjs" ) );
+</pre></div>
+
+<p>You can find out what kind of data is being passed, under the hood, to <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) by running the following code.</p>
+
+
+<div class="example"><pre>
+dataSeries := JUPVIZMakePlotDataSeries( x -&gt; x^0.5 );;
+big := ConvertDataSeriesForTool.canvasjs( [ dataSeries ] );
+# The result is the following GAP record:
+# rec(
+#     animationEnabled := true,
+#     data := [
+#         rec(
+#             dataPoints := [
+#                 rec( x := 1, y := 1 ),
+#                 rec( x := 2, y := 1.4142135623730951 ),
+#                 rec( x := 3, y := 1.7320508075688772 ),
+#                 rec( x := 4, y := 2. ),
+#                 rec( x := 5, y := 2.2360679774997898 )
+#             ],
+#             type := "line"
+#         )
+#     ],
+#     height := 400
+# )
+</pre></div>
+
+<p>That record is passed to <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) with a call like the following.</p>
+
+
+<div class="example"><pre>
+CreateVisualization( rec( tool := "canvasjs", data := big ) );
+</pre></div>
+
+<p>If you wanted to change any of the internal options, such as the default <code class="code">animationEnabled := true</code> or the default <code class="code">height := 400</code>, you could alter the record yourself before passing it on to <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>).</p>
+
+<p>Such options may be specific to the tool you've chosen, and are not guaranteed to work with other tools. For example, you can't change <code class="code">"canvasjs"</code> to <code class="code">"anychart"</code> and expect the <code class="code">animationEnabled</code> setting to work, because it is specific to CanvasJS. See Section <a href="chap3_mj.html#X860FD2F97E9F936B"><span class="RefLink">3.4</span></a> for links to each tool's documentation, which give detailed data formats.</p>
+
+<p>If you had researched other options about CanvasJS and wanted to include those, you could do so as well, as shown below.</p>
+
+
+<div class="example"><pre>
+big.animationEnabled := false;;     # changing an option
+big.height := 500;;                 # changing an option
+big.backgroundColor := "#F5DEB3";;  # adding an option
+CreateVisualization( rec( tool := "canvasjs", data := big ) );
+</pre></div>
+
+<p><img height="240" src="05createplot.png"/></p>
+
+<p><a id="X792C30817A29E033" name="X792C30817A29E033"></a></p>
+
+<h5>3.2-2 <span class="Heading">Looking beneath <code class="code">PlotGraph</code></span></h5>
+
+<p>In the previous section, we saw how you could take a call to <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>) and find out what data that call would pass to <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>). You can do the same with <code class="func">PlotGraph</code> (<a href="chap7_mj.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>), but it takes a few more steps.</p>
+
+<p>First, we you must have a list of your graph's vertices. Here we will assume it is in a variable called <code class="code">vertices</code>. Second, you must have a list of your graph's edges. Similarly, we will assume it is in a variable called <code class="code">edges</code>.</p>
+
+
+<div class="example"><pre>
+vertices := [ 1, 2, 3, 4 ];
+edges := [ [ 1, 2 ], [ 2, 3 ], [ 2, 4 ] ];
+</pre></div>
+
+<p>You can then convert your graph into the format passed to <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) as follows. Note that at the time of this writing, there is only one graph visualization tool, cytoscape, so we use that one directly.</p>
+
+
+<div class="example"><pre>
+big := ConvertGraphForTool.cytoscape( rec(
+    vertices := vertices,
+    edges := edges,
+    options := rec() # or any options you like here
+) );
+# The result is the following GAP record:
+# rec(
+#     elements := [
+#         rec( data := rec( id := "1" ) ),
+#         rec( data := rec( id := "2" ) ),
+#         rec( data := rec( id := "3" ) ),
+#         rec( data := rec( id := "4" ) ),
+#         rec( data := rec( source := "1", target := "2" ) ),
+#         rec( data := rec( source := "2", target := "3" ) ),
+#         rec( data := rec( source := "2", target := "4" ) )
+#     ],
+#     layout := rec( name := "cose" ),
+#     style := [
+#         rec(
+#             selector := "node",
+#             style := rec( content := "data(id)" )
+#         )
+#     ]
+# )
+</pre></div>
+
+<p>That record is passed to <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) with a call like the following. Note the inclusion of a default height, if you don't provide one.</p>
+
+
+<div class="example"><pre>
+CreateVisualization( rec(
+    tool := "cytoscape", data := big, height := 400
+) );
+</pre></div>
+
+<p>If you wanted to change any of the internal options, including creating elements not supported by the simple high-level API, you could alter or recreate the contents of the <code class="code">big</code> record. We do so here, using features we could learn from the cytoscape JSON format reference, linked to in Section <a href="chap3_mj.html#X860FD2F97E9F936B"><span class="RefLink">3.4</span></a>.</p>
+
+
+<div class="example"><pre>
+CreateVisualization( rec(
+    tool := "cytoscape",
+    height := 400,
+    data := rec(
+        elements := [
+            rec( # node 1
+                group := "nodes",
+                data := rec( id := "Child1", parent := "Parent" ),
+                position := rec( x := 100, y := 100 ),
+                selected := false,
+                selectable := true,
+                locked := false,
+                grabbable := true
+            ),
+            rec( # node 2
+                data := rec( id := "Friend" ),
+                renderedPosition := rec( x := 200, y := 200 )
+            ),
+            rec( # node 3
+                data := rec( id := "Child2", parent := "Parent" ),
+                position := rec( x := 123, y := 234 )
+            ),
+            rec( # node parent
+                data := rec(
+                    id := "Parent",
+                    position := rec( x := 200, y := 100 )
+                )
+            ),
+            rec( # edge 1
+                data := rec(
+                    id := "Edge1",
+                    source := "Child1",
+                    target := "Friend"
+                )
+            )
+        ],
+        layout := rec( name := "preset" ),
+        style := [
+            rec(
+                selector := "node",
+                style := rec( content := "data(id)" )
+            )
+        ]
+    )
+) );
+</pre></div>
+
+<p><img height="240" src="09creategraph.png"/></p>
+
+<p><a id="X835575F282027572" name="X835575F282027572"></a></p>
+
+<h4>3.3 <span class="Heading">Using JSON from a file</span></h4>
+
+<p>As the documentation cited in Section <a href="chap3_mj.html#X860FD2F97E9F936B"><span class="RefLink">3.4</span></a> states, all of the underlying visualization tools used by this package accept input in JSON form. You might have some data in that form generated by another source or downloaded from the web. For example, in this package's directory, the file <code class="file">example/EV Charge Points.json</code> contains JSON data from one of <span class="URL"><a href="https://medium.com/@plotlygraphs/leading-the-charge-10-charts-on-electric-vehicles-in-plotly-d951acdc49c1">the Plotly project's blog posts</a></span>.</p>
+
+<p>You can load it and use it in a visualization as follows.</p>
+
+
+<div class="example"><pre>
+# read file and convert JSON into a GAP record
+jsonText := ReadAll( InputTextFile( "EV Charge Points.json" ) );;
+gapRecord := JsonStringToGap( jsonText );;
+
+# ensure it's big enough to be visible:
+if IsBound( gapRecord.layout ) then
+    gapRecord.layout.height := 500;;
+else
+    gapRecord.layout := rec( height := 500 );;
+fi;
+
+# show it
+CreateVisualization( rec( tool := "plotly", data := gapRecord ) );
+</pre></div>
+
+<p><img height="350" src="06loadfromjson.png"/></p>
+
+<p><a id="X860FD2F97E9F936B" name="X860FD2F97E9F936B"></a></p>
+
+<h4>3.4 <span class="Heading">Documentation for each visualization tool</span></h4>
+
+<p>This section provides links to documentation on the web for each JavaScript visualization tool supported by this package. When possible, we link directly to that portion of the tool's documentation that covers its JSON data format requirements.</p>
+
+<p><a id="X82D1D7E380E9F6CD" name="X82D1D7E380E9F6CD"></a></p>
+
+<h5>3.4-1 <span class="Heading">Charting and plotting tools</span></h5>
+
+
+<ul>
+<li><p><code class="code">anychart</code>'s JSON data format is given here:</p>
+
+<p><span class="URL"><a href="https://docs.anychart.com/Working_with_Data/Data_From_JSON">https://docs.anychart.com/Working_with_Data/Data_From_JSON</a></span></p>
+
+</li>
+<li><p><code class="code">canvasjs</code>'s JSON data format is given here:</p>
+
+<p><span class="URL"><a href="https://canvasjs.com/docs/charts/chart-types/">https://canvasjs.com/docs/charts/chart-types/</a></span></p>
+
+</li>
+<li><p><code class="code">chartjs</code>'s JSON data format is given here:</p>
+
+<p><span class="URL"><a href="http://www.chartjs.org/docs/latest/getting-started/usage.html">http://www.chartjs.org/docs/latest/getting-started/usage.html</a></span></p>
+
+</li>
+<li><p><code class="code">plotly</code>'s JSON data format is given here:</p>
+
+<p><span class="URL"><a href="https://plot.ly/javascript/plotlyjs-function-reference/#plotlynewplot">https://plot.ly/javascript/plotlyjs-function-reference/#plotlynewplot</a></span></p>
+
+</li>
+</ul>
+<p><a id="X795882857B6028D4" name="X795882857B6028D4"></a></p>
+
+<h5>3.4-2 <span class="Heading">Graph drawing tools</span></h5>
+
+
+<ul>
+<li><p><code class="code">cytoscape</code>'s JSON data format is given here:</p>
+
+<p><span class="URL"><a href="http://js.cytoscape.org/#notation/elements-json">http://js.cytoscape.org/#notation/elements-json</a></span></p>
+
+</li>
+</ul>
+<p><a id="X79F3C554780769C5" name="X79F3C554780769C5"></a></p>
+
+<h5>3.4-3 <span class="Heading">General-purpose tools for custom visualizations</span></h5>
+
+
+<ul>
+<li><p><code class="code">canvas</code> is a regular HTML canvas element, on which you can draw using arbitrary JavaScript included in the <var class="Arg">code</var> parameter</p>
+
+</li>
+<li><p><code class="code">d3</code> is loaded into an SVG element in the notebook's output cell, and the caller can call any D3 methods on that element thereafter, using arbitrary JavaScript included in the <var class="Arg">code</var> parameter. It does not support creating charts from JSON input only, but its full documentation appears here: <span class="URL"><a href="https://github.com/d3/d3/wiki">https://github.com/d3/d3/wiki</a></span></p>
+
+</li>
+<li><p><code class="code">html</code> fills the output element with arbitrary HTML, which the caller should provide as a string in the <code class="code">html</code> field of <var class="Arg">data</var>, as documented below</p>
+
+</li>
+</ul>
+<p><a id="X83A1AF4B7E339161" name="X83A1AF4B7E339161"></a></p>
+
+<h4>3.5 <span class="Heading">Example uses of the low-level API</span></h4>
+
+<p><a id="X7B0290B3876FCDA1" name="X7B0290B3876FCDA1"></a></p>
+
+<h5>3.5-1 <span class="Heading">Example: AnyChart</span></h5>
+
+<p>Following the conventions in the AnyChart documentation linked to in the previous section, we could give AnyChart the following JSON to produce a pie chart.</p>
+
+
+<div class="example"><pre>
+{
+    "chart" : {
+        "type" : "pie",
+        "data" : [
+            { "x" : "Subgroups of order 6", "value" : 1 },
+            { "x" : "Subgroups of order 3", "value" : 1 },
+            { "x" : "Subgroups of order 2", "value" : 3 },
+            { "x" : "Subgroups of order 1", "value" : 1 }
+        ]
+    }
+}
+</pre></div>
+
+<p>In <strong class="pkg">GAP</strong>, the same data would be represented with a record, as follows.</p>
+
+
+<div class="example"><pre>
+myChartData := rec(
+    chart := rec(
+        type := "pie",
+        data := [
+            rec( x := "Subgroups of order 6", value := 1 ),
+            rec( x := "Subgroups of order 3", value := 1 ),
+            rec( x := "Subgroups of order 2", value := 3 ),
+            rec( x := "Subgroups of order 1", value := 1 )
+        ]
+    )
+);
+</pre></div>
+
+<p>We can pass that data directly to <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>). We wrap it in a record that specifies the tool to use and optionally other details not used in this example.</p>
+
+
+<div class="example"><pre>
+CreateVisualization( rec( tool := "anychart", data := myChartData ) );
+</pre></div>
+
+<p><img width="350" src="anychart-example.png"/></p>
+
+<p><a id="X7E2737FC7EDB79B1" name="X7E2737FC7EDB79B1"></a></p>
+
+<h5>3.5-2 <span class="Heading">Example: Cytoscape</span></h5>
+
+<p>Unlike AnyChart, which is for charts and plots, Cytoscape is for graph drawing. A tiny Cytoscape graph (just <span class="SimpleMath">\(A\to B\)</span>) is represented by the following JSON.</p>
+
+
+<div class="example"><pre>
+{
+    elements : [
+        { data : { id : "A" } },
+        { data : { id : "B" } },
+        { data : { id : "edge", source : "A", target : "B" } }
+    ],
+    layout : { name : "grid", rows : 1 }
+}
+</pre></div>
+
+<p>Cytoscape graphs can also have style attributes not shown here. Refer to its documentation, linked to in the previous section.</p>
+
+<p>Rather than copy this data directly into <strong class="pkg">GAP</strong>, let's generate graph data in the same format using <strong class="pkg">GAP</strong> code. Here we make a graph of the first 50 positive integers, with <span class="SimpleMath">\(n\to m\)</span> iff <span class="SimpleMath">\(n\mid m\)</span> (ordinary integer divisibility).</p>
+
+
+<div class="example"><pre>
+N := 50;
+elements := [ ];
+for i in [2..N] do
+    Add( elements, rec( data := rec( id := String( i ) ) ) );
+    for j in [2..i-1] do
+        if i mod j = 0 then
+            Add( elements, rec( data := rec(
+                source := String( j ),
+                target := String( i ) ) ) );
+        fi;
+    od;
+od;
+</pre></div>
+
+<p>We then need to choose a layout algorithm. The Cytoscape documentation suggests that the "cose" layout works well as a force-directed layout. Here, we do choose a height (in pixels) for the result, because Cytoscape does not automaticlly resize visualizations to fit their containing HTML element. We also set the style for each node to display its ID (which is the integer associated with it).</p>
+
+
+<div class="example"><pre>
+CreateVisualization( rec(
+    tool := "cytoscape",
+    height := 600,
+    data := rec(
+        elements := elements, # computed in the code above
+        layout := rec( name := "cose" ),
+        style := [
+            rec( selector := "node", style := rec( content := "data(id)" ) )
+        ]
+    )
+) );
+</pre></div>
+
+<p><img width="350" src="cytoscape-example.png"/></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

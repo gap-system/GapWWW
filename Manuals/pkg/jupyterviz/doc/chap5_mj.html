@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (JupyterViz) - Chapter 5: Adding new visualization tools</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5.html">[MathJax off]</a></p>
+<p><a id="X81249ADA79916213" name="X81249ADA79916213"></a></p>
+<div class="ChapSects"><a href="chap5_mj.html#X81249ADA79916213">5 <span class="Heading">Adding new visualization tools</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7DB91A9C7C03FF67">5.1 <span class="Heading">Why you might want to do this</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X858B113D80E8D32B">5.2 <span class="Heading">What you will need</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7E5726AC788EADCC">5.3 <span class="Heading">Extending this package with a new tool</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X8434DB9C80EC7E6B">5.4 <span class="Heading">Installing a new tool at runtime</span></a>
+</span>
+</div>
+</div>
+
+<h3>5 <span class="Heading">Adding new visualization tools</span></h3>
+
+<p><a id="X7DB91A9C7C03FF67" name="X7DB91A9C7C03FF67"></a></p>
+
+<h4>5.1 <span class="Heading">Why you might want to do this</span></h4>
+
+<p>The visualization tools made available by this package (Plotly, D3, CanvasJS, etc.) provide many visualization options. However, you may come across a situation that they do not cover. Or a new and better tool may be invented after this package is created, and you wish to add it to the package.</p>
+
+<p>There are two supported way to do this. First, for tools that you wish to be available to all users of this package, you can alter the package code itself to include the tool. (Then please create a pull request so that your work might be shared with other <strong class="pkg">GAP</strong> users in a subsequent release of this package.) Second, for tools that you need for just one project or just one other package, there is support for installing such tools at runtime. This chapter documents both approaches, each in its own section. But first, we begin with the list of what you will need to have on hand before you begin, which is the same for both approaches.</p>
+
+<p><a id="X858B113D80E8D32B" name="X858B113D80E8D32B"></a></p>
+
+<h4>5.2 <span class="Heading">What you will need</span></h4>
+
+<p>Begin by gathering the following information.</p>
+
+
+<ul>
+<li><p>A URL on the internet that serves the JavaScript code defining the new visualization tool you wish to add. For instance, the ChartJS library is imported from CloudFlare, at <span class="URL"><a href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js">https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js</a></span>. It is best if you have this URL from a Content Delivery Network (CDN) to ensure very high availability. This URL may not be necessary in all cases. For instance, perhaps the new visualization tool you wish to install can be defined using the basic JavaScript features in all browsers, or is imported via an <code class="code">iframe</code> rather than as a script in the page itself. If you choose to use such a URL, it will be imported using RequireJS, which expects you to omit the final <code class="code">.js</code> suffix at the end.</p>
+
+</li>
+<li><p>Knowledge of how to write a short JavaScript function that can embed the given tool into any given DOM <code class="code">Element</code>. For many tools, this is just a single call to the main class's contructor or the library's initialization function. Or, if you haven't imported any library that constructs the visualization for you, then this function may be more extensive, as you construct the visualization yourself.</p>
+
+</li>
+<li><p>While not necessary, it makes things easy if you know a function to call in your chosen library that converts JSON data into a visualization. This makes it easier for users to pass all the required data and options from <strong class="pkg">GAP</strong> code, which is the typical user's preferred way of defining a visualization.</p>
+
+</li>
+</ul>
+<p>With this information available, proceed to either of the next two sections, depending on whether you intend to upgrade this package itself with a new visualization, or just install one into it at runtime.</p>
+
+<p><a id="X7E5726AC788EADCC" name="X7E5726AC788EADCC"></a></p>
+
+<h4>5.3 <span class="Heading">Extending this package with a new tool</span></h4>
+
+<p>This section explains how to enhance this package itself. If you follow these instructions, you should submit a pull request to have your work added to the main repository for the package, and thus eventually included in the next release of <strong class="pkg">GAP</strong>.</p>
+
+<p>If instead you wish to install a new visualization at runtime for just your own use in a particular project (or in a package that depends on this one), refer to the instructions in the Section <a href="chap5_mj.html#X8434DB9C80EC7E6B"><span class="RefLink">5.4</span></a> instead.</p>
+
+<p>Throughout these steps, I will assume that the name of the new tool you wish to install is <code class="code">NEWTOOL</code>. I choose all capital letters to make it stand out, so that you can tell where you need to fill in blanks in the examples, but you should probably use lower-case letters, to match the convention used by all of the built-in tools.</p>
+
+<ol>
+<li><p>Clone the repository for this package.</p>
+
+</li>
+<li><p>Enter the <code class="file">lib/js/</code> folder in the repository.</p>
+
+</li>
+<li><p>Duplicate the file <code class="file">viz-tool-chartjs.js</code> and rename it suitably for the tool you wish to import, such as <code class="file">viz-tool-NEWTOOL.js</code>. It <em>must</em> begin with <code class="file">viz-tool-</code>.</p>
+
+</li>
+<li><p>Edit that file. At the top, you will notice the installation of the CDN URL mentioned in the previous section. Replace it with the URL for your toolkit, and replace the identifier <code class="code">chartjs</code> with <code class="code">NEWTOOL</code>.</p>
+
+
+<div class="example"><pre>
+window.requirejs.config( {
+    paths : {
+        NEWTOOL : 'https://cdn.example.com/NEWTOOL.min.js'
+    }
+} );
+</pre></div>
+
+</li>
+<li><p>In the middle of the same file, feel free to update the comments to reflect your toolkit rather than ChartJS.</p>
+
+</li>
+<li><p>At the end of the same file, you will notice code that installs <code class="code">chartjs</code> as a new function in the <code class="code">window.VisualizationTools</code> object. Replace it with code that installs your tool instead. See the comments below for some guidance.</p>
+
+
+<div class="example"><pre>
+window.VisualizationTools.NEWTOOL = function ( element, json, callback ) {
+    // The variable "element" is the HTML element in the page into
+    // which you should place your visualization.  For example, perhaps
+    // your new toolkit does its work in an SVG element, so you need one:
+    var result = document.createElement( 'SVG' );
+    element.append( result );
+    // The variable "json" is all the data, in JSON form, passed from
+    // GAP to tell you how to create a visualization.  The data format
+    // convention is up to you to explain and document with your new
+    // tool.  Two attributes in particular are important here, "width"
+    // and "height" -- if you ignore everything else, at least respect
+    // those in whatever way makes sense for your visualization.  Here
+    // is an example for an SVG:
+    if ( json.width ) result.width = json.width;
+    if ( json.height ) result.width = json.height;
+    // Then use RequireJS to import your toolkit (which will use the CDN
+    // URL you registered above) and use it to fill the element with the
+    // desired visualization.  You may or may not need to modify "json"
+    // before passing it to your toolkit; this is up to the conventions
+    // you choose to establish.
+    require( [ 'NEWTOOL' ], function ( NEWTOOL ) {
+        // Use your library to set up a visualization.  Example:
+        var viz = NEWTOOL.setUpVisualizationInElement( result );
+        // Tell your library what to draw.  Example:
+        viz.buildVisualizationFromJSON( json );
+        // Call the callback when you're done.  Pass the element you were
+        // given, plus the visualization you created.
+        callback( element, result );
+    } );
+};
+</pre></div>
+
+</li>
+<li><p>Optionally, in the <code class="file">lib/js/</code> folder, run the <code class="file">minify-all-scripts.sh</code> script, which compresses your JavaScript code to save on data transfer, memory allocation, and parsing time. Rerun that script each time you change your file as well.</p>
+
+</li>
+<li><p>You should now be able to use your new visualization tool in <strong class="pkg">GAP</strong>. Verify that your changes worked, and debug as necessary. If you are testing in a Jupyter Notebook, you may be able to notice the change only if you refresh in your browser the page containing notebook and also restart the <strong class="pkg">GAP</strong> kernel in that same page. Then try code like the following to test what you've done.</p>
+
+
+<div class="example"><pre>
+CreateVisualization( rec(
+    tool := "NEWTOOL",
+    # any other data you need goes here as a GAP record,
+    # which the GAP json package will convert into JSON
+) );
+</pre></div>
+
+</li>
+</ol>
+<p>At this point, you have added support in <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) for the new tool but have not extended that support to include the high-level functions <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>) or <code class="func">PlotGraph</code> (<a href="chap7_mj.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>). If possible, you should add that support as well, by following the steps below.</p>
+
+<ol>
+<li><p>Read the documentation for either <code class="func">ConvertDataSeriesForTool</code> (<a href="chap7_mj.html#X7B36451A873E06B2"><span class="RefLink">7.1-2</span></a>) or <code class="func">ConvertGraphForTool</code> (<a href="chap7_mj.html#X80380CBB7E1FA082"><span class="RefLink">7.1-4</span></a>), depending on whether the new tool you have installed supports plots or graphs. If it supports both, read both. That documentation explains the new function you would need to install in one or both of those records in order to convert the type of data users provide to <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>) or <code class="func">PlotGraph</code> (<a href="chap7_mj.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>) into the type of data used by <code class="func">CreateVisualization</code> (<a href="chap7_mj.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>).</p>
+
+</li>
+<li><p>Edit the <code class="file">main.gi</code> file in this package. Find the section in which new elements are added to the <code class="func">ConvertDataSeriesForTool</code> (<a href="chap7_mj.html#X7B36451A873E06B2"><span class="RefLink">7.1-2</span></a>) or <code class="func">ConvertGraphForTool</code> (<a href="chap7_mj.html#X80380CBB7E1FA082"><span class="RefLink">7.1-4</span></a>) records. Add a new section of code that installs a new field for your tool. It will look like one of the following two blocks (or both if your tool supports both types of visualization).</p>
+
+
+<div class="example"><pre>
+ConvertDataSeriesForTool.NEWTOOL := function ( series )
+  local result;
+  # Write the code here that builds the components of the
+  # GAP record you need, stored in result.
+  # You can leverage series.x, series.y, and series.options.
+  return result;
+end;
+ConvertGraphForTool.NEWTOOL := function ( graph )
+  local result;
+  # Write the code here that builds the components of the
+  # GAP record you need, stored in result.
+  # You can leverage graph.vertices, graph.edges, and graph.options.
+  return result;
+end;
+</pre></div>
+
+</li>
+<li><p>Test your work by loading the updated package into <strong class="pkg">GAP</strong> and making a call to <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>) or <code class="func">PlotGraph</code> (<a href="chap7_mj.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>) that specifically requests the use of your newly-supported visualization tool.</p>
+
+
+<div class="example"><pre>
+# for plots:
+Plot( x -&gt; x^2, rec( tool := "NEWTOOL" ) );
+# or for graphs:
+PlotGraph( RandomMat( 5, 5 ), rec( tool := "NEWTOOL" ) );
+</pre></div>
+
+<p>Verify that it produces the desired results.</p>
+
+</li>
+<li><p>Once your changes work, commit them to the repository and submit a pull request back to the original repository, to have your work included in the default distribution.</p>
+
+</li>
+</ol>
+<p>A complete and working (but silly) example follows. It is a tiny enough visualization tool that it cannot support either plotting data nor drawing graphs, so we don't have to install high-level API support. This portion would go in <code class="file">lib/js/viz-tool-color.js</code>:</p>
+
+
+<div class="example"><pre>
+// No need to import any library from a CDN for this little example.
+window.VisualizationTools.color = function ( element, json, callback ) {
+    // just writes json.text in json.color, that's all
+    var span = document.createElement( 'span' );
+    span.textContent = json.text;
+    span.style.color = json.color;
+    callback( element, span );
+};
+</pre></div>
+
+<p>This is an example usage of that simple tool from <strong class="pkg">GAP</strong> in a Jupyter notebook:</p>
+
+
+<div class="example"><pre>
+CreateVisualization( rec(
+    tool := "color",
+    text := "Happy St. Patrick's Day.",
+    color := "green"
+) );
+</pre></div>
+
+<p><a id="X8434DB9C80EC7E6B" name="X8434DB9C80EC7E6B"></a></p>
+
+<h4>5.4 <span class="Heading">Installing a new tool at runtime</span></h4>
+
+<p>This section explains how to add a new visualization tool to this package at runtime, by calling functions built into the package. This is most useful when the visualization tool you wish to install is useful in only a narrow context, such as one of your projects or packages.</p>
+
+<p>If you have a visualization tool that might be of use to anyone who uses this package, consider instead adding it to the package itself and submitting a pull request to have it included in the next release. The previous section explains how to do that.</p>
+
+<p>To install a new visualization tool at runtime, you have two methods available. You can either provide all the JavaScript code yourself or you can provide the necessary ingredients that will be automatically filled into a pre-existing JavaScript code template. We will examine both methods in this section.</p>
+
+<p>The previous section thoroughly documents the two types of code that are likely to show up in the definition of a new tool: the installation into RequireJS of the tool's CDN URL and the installation into <code class="code">window.VisualizationTool</code> of a function that uses that tool to create a visualization from a given JSON object.</p>
+
+<p>If you have all of this JavaScript code already stored in a single GAP string (or in a file that you can load into a string), call it <code class="code">S</code>, then you can install it into this package with a single function call, like so:</p>
+
+
+<div class="example"><pre>
+InstallVisualizationTool( "TOOL_NAME_HERE", S );
+</pre></div>
+
+<p>Here is a trivial working example. It is sufficiently small that it does not install any new JavaScript libraries into RequireJS.</p>
+
+
+<div class="example"><pre>
+# GAP code to install a new visualization tool:
+InstallVisualizationTool( "smallExample",
+"""
+window.VisualizationTool.smallExample =
+function ( element, json, callback ) {
+    element.innerHTML = '&lt;span color=red&gt;' + json.text + '&lt;/span&gt;';
+    callback( element, element.childNodes[0] );
+}
+"""
+) );
+
+# GAP code to use that new visualization tool:
+CreateVisualization( rec(
+    tool := "smallExample",
+    text := "This text will show up red."
+) );
+</pre></div>
+
+<p>Because the assignment of a function to create visualizations from JSON is the essential component of installing a new visualization, we have made that step easier by creating a template into which you can just fill in the function body. So the above call to <code class="func">InstallVisualizationTool</code> (<a href="chap7_mj.html#X83454CD67FF0EED7"><span class="RefLink">7.2-3</span></a>) is equivalent to the following call to <code class="func">InstallVisualizationToolFromTemplate</code> (<a href="chap7_mj.html#X876DFB2B87FC3732"><span class="RefLink">7.2-4</span></a>).</p>
+
+
+<div class="example"><pre>
+InstallVisualizationToolFromTemplate( "smallExample",
+"""
+    element.innerHTML = '&lt;span color=red&gt;' + json.text + '&lt;/span&gt;';
+    callback( element, element.childNodes[0] );
+"""
+) );
+</pre></div>
+
+<p>If you provide a third parametr to <code class="func">InstallVisualizationToolFromTemplate</code> (<a href="chap7_mj.html#X876DFB2B87FC3732"><span class="RefLink">7.2-4</span></a>), it is treated as the CDN URL for an external library, and code is automatically inserted that installs that external library into RequireJS and wraps the tool's function body in a <code class="code">require</code> call. For instance, the CanvasJS library (which is built into this package) could have been installed with code like the following.</p>
+
+
+<div class="example"><pre>
+InstallVisualizationToolFromTemplate( "canvasjs",
+"""
+    ( new window.CanvasJS.Chart( element, json.data ) ).render();
+    window.resizeToShowContents( element );
+    callback( element, element.childNodes[0] );
+""",
+"https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"
+) );
+</pre></div>
+
+<p>While RequireJS demands that you omit the <code class="code">.js</code> suffix from such an URL, <code class="func">InstallVisualizationToolFromTemplate</code> (<a href="chap7_mj.html#X876DFB2B87FC3732"><span class="RefLink">7.2-4</span></a>) will automatically remove it for you if you forget to remove it.</p>
+
+<p>After using either of those two methods, if the new visualization tool is capable of drawing either plots or graphs, and you wish to expose it to the high-level API, you should follow the steps for doing so documented in the second half of Section <a href="chap5_mj.html#X7E5726AC788EADCC"><span class="RefLink">5.3</span></a>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

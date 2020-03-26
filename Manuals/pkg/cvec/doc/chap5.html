@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (cvec) - Chapter 5: Matrices</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X812CCAB278643A59" name="X812CCAB278643A59"></a></p>
+<div class="ChapSects"><a href="chap5.html#X812CCAB278643A59">5 <span class="Heading">Matrices</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X788B78DE82579F3D">5.1 <span class="Heading">Creation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CC3BB7982789EB1">5.1-1 CMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CC3BB7982789EB1">5.1-2 CMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CC3BB7982789EB1">5.1-3 CMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CC3BB7982789EB1">5.1-4 CMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85DE9EF67ADE6A6B">5.1-5 CVEC_ZeroMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C188AFF84F2E3ED">5.1-6 CVEC_IdentityMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X879CE439863CC8D1">5.1-7 CVEC_RandomMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X78BD0AD885D4C2FF">5.1-8 MutableCopyMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X879384D479EB1D82">5.1-9 Matrix</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7C9F7D327BAECA5E">5.2 <span class="Heading">Matrices as lists</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X795EC9D67E34DAB0">5.2-1 Add</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E98B11B79BA9167">5.2-2 Remove</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X805C33C281B29B00">5.2-3 ELM_LIST</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X829C3BD17C7A6F4F">5.2-4 ASS_LIST</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E3A8E51853DEC58">5.2-5 ELMS_LIST</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82C3E70078F51817">5.2-6 ASSS_LIST</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X780769238600AFD1">5.2-7 Length</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X846BC7107C352031">5.2-8 ShallowCopy</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7ECE9056792F28BA">5.2-9 Collected</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8727F2928467C2F9">5.2-10 DuplicateFreeList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X79E31DB27C82D6E1">5.2-11 Append</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C86D7F7795125F0">5.2-12 Filtered</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82AACD43853C24D1">5.2-13 Unbind</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X79862FF37B75BF48">5.3 <span class="Heading">Arithmetic</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X819B1A8A7DE1EE88"><code>5.3-1 \+</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X814AFD8E8377D4DB"><code>5.3-2 \-</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82AFC3A987140922">5.3-3 AdditiveInverseSameMutability</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8548396F7D4CAC21">5.3-4 AdditiveInverseMutable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X848404F57FBFFE7A"><code>5.3-5 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7DAFB0227C5529C6"><code>5.3-6 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8255927C7923A294"><code>5.3-7 \^</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F673C397A919D81"><code>5.3-8 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X781AD339797C0625">5.3-9 ZeroSameMutability</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X796D9B2C83C0667B">5.3-10 ZeroMutable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7ED3BC7D8198EE2E">5.3-11 OneSameMutability</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7FBD3ABF80EB659C">5.3-12 OneMutable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X78F9A4028122E39B">5.3-13 InverseMutable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8593B0F886BBD8A7">5.3-14 InverseSameMutability</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X87F304F3826A7063">5.3-15 TransposedMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8634C79E7DB22934">5.3-16 KroneckerProduct</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X845009E07A011131">5.4 <span class="Heading">Comparison of matrices and other information</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X806A4814806A4814">5.4-1 =</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7FBCE84886AB9848">5.4-2 LT</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82BDA47282F9BBA7">5.4-3 IsZero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X814D78347858EC13">5.4-4 IsOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7FF01BF686AD0623">5.4-5 IsDiagonalMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7ECFBD9F8664982B">5.4-6 IsUpperTriangularMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X81671CFD7CFE4819">5.4-7 IsLowerTriangularMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X875B076C8559CAF0">5.4-8 CVEC_HashFunctionForCMats</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7ACED4FB7C971A5A">5.4-9 ChooseHashFunction</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7B54DF167CFC6C0F">5.5 <span class="Heading">Slicing and submatrices</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X838B45F7790E9FDF">5.5-1 ExtractSubMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7ED9E5D4809E3B50">5.5-2 CopySubMatrix</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X805F24017D4348E2">5.6 <span class="Heading">Information about matrices</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B5FF52186205C5E">5.6-1 BaseField</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7EC55E298313BCB1">5.6-2 Characteristic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E9F7B7E7BEDA69E">5.6-3 DegreeFFE</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C6624AF7CEAA74D">5.6-4 DefaultField</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X78DA04477DDD0ACE">5.7 <span class="Heading">Input and output</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7DF1D51F7924429A">5.7-1 CVEC_WriteMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X794D936C7E99F805">5.7-2 CVEC_WriteMatToFile</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X78F898D17D9E522C">5.7-3 CVEC_WriteMatsToFile</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X79E47CB5831D48CC">5.7-4 CVEC_ReadMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X824FA01878D60EE1">5.7-5 CVEC_ReadMatFromFile</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X79397B1D78E0746A">5.7-6 CVEC_ReadMatsFromFile</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7DA0D38A7D5DBDFF">5.8 <span class="Heading">Grease</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7DF5A56F8747DD45">5.8-1 GreaseMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E8A9C7E7E014FC7">5.8-2 UnGreaseMat</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7A0D26B180BEDE37">5.9 <span class="Heading">Everything else</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B97048782F7EE43">5.9-1 Randomize</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8114198F7D6486CB">5.9-2 OverviewMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X84AAF220841589D9">5.9-3 Unpack</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Matrices</span></h3>
+
+<p>A compressed matrix (a <code class="code">cmat</code>) behaves very much like a list of <code class="code">cvec</code>s. However, it insists on having only <code class="code">cvec</code>s of the same length and over the same base field as its elements, and it insists on being a list without holes. Apart from these restrictions, you can use all the standard list operations with <code class="code">cmat</code>s (see Section <a href="chap5.html#X7C9F7D327BAECA5E"><span class="RefLink">5.2</span></a>.</p>
+
+<p>In the rest of this chapter, we document all methods for matrices for the sake of completeness. If they behave exactly as is to be expected by the already defined operation no further explanation is given.</p>
+
+<p><a id="X788B78DE82579F3D" name="X788B78DE82579F3D"></a></p>
+
+<h4>5.1 <span class="Heading">Creation</span></h4>
+
+<p>The basic operation to create new <code class="code">cmat</code>s is <code class="file">CMat</code>, for which a variety of methods is available:</p>
+
+<p><a id="X7CC3BB7982789EB1" name="X7CC3BB7982789EB1"></a></p>
+
+<h5>5.1-1 CMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CMat</code>( <var class="Arg">l</var>, <var class="Arg">cl</var>, <var class="Arg">dochecks</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CMat</code>( <var class="Arg">l</var>, <var class="Arg">cl</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a new <code class="code">cmat</code></p>
+
+<p>A new <code class="code">cmat</code> is created with rows being in the <code class="code">cvecclass</code> <var class="Arg">cl</var>. All elements of the list <var class="Arg">l</var> must be <code class="code">cvec</code>s in that class. The boolean flag <var class="Arg">dochecks</var> indicates, whether this should be checked or not. If the flag is omitted, checks are performed. Note that <var class="Arg">l</var> may be the empty list.</p>
+
+<p><a id="X7CC3BB7982789EB1" name="X7CC3BB7982789EB1"></a></p>
+
+<h5>5.1-2 CMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CMat</code>( <var class="Arg">l</var>, <var class="Arg">dochecks</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CMat</code>( <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a new <code class="code">cmat</code></p>
+
+<p>A new <code class="code">cmat</code> is created with rows being in the <code class="code">cvecclass</code> of the vectors in <var class="Arg">l</var>. All elements of the list <var class="Arg">l</var> must be <code class="code">cvec</code>s in the same class. The boolean flag <var class="Arg">dochecks</var> indicates, whether this should be checked or not. If the flag is omitted, checks are performed. Note that <var class="Arg">l</var> may not be the empty list.</p>
+
+<p><a id="X7CC3BB7982789EB1" name="X7CC3BB7982789EB1"></a></p>
+
+<h5>5.1-3 CMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CMat</code>( <var class="Arg">l</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a new <code class="code">cmat</code></p>
+
+<p>A new <code class="code">cmat</code> is created with rows being in the <code class="code">cvecclass</code> of the <code class="code">cvec</code> <var class="Arg">v</var>. All elements of the list <var class="Arg">l</var> must be <code class="code">cvec</code>s in the that same class. This is checked. Note that <var class="Arg">l</var> may be the empty list.</p>
+
+<p><a id="X7CC3BB7982789EB1" name="X7CC3BB7982789EB1"></a></p>
+
+<h5>5.1-4 CMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a new <code class="code">cmat</code></p>
+
+<p>Creates a new <code class="code">cmat</code> which is equal to <var class="Arg">m</var>, which must be a compressed matrix in the filter <code class="file">IsGF2MatrixRep</code> or the filter <code class="file">Is8BitMatrixRep</code>.</p>
+
+<p>There are some methods to create <code class="code">cmat</code>s of special form:</p>
+
+<p><a id="X85DE9EF67ADE6A6B" name="X85DE9EF67ADE6A6B"></a></p>
+
+<h5>5.1-5 CVEC_ZeroMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_ZeroMat</code>( <var class="Arg">rows</var>, <var class="Arg">cl</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_ZeroMat</code>( <var class="Arg">rows</var>, <var class="Arg">cols</var>, <var class="Arg">p</var>, <var class="Arg">d</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a new <code class="code">cmat</code></p>
+
+<p>Creates a zero matrix with <var class="Arg">rows</var> rows and <var class="Arg">cols</var> columns over the field <code class="code">GF(<var class="Arg">p</var>,<var class="Arg">d</var>)</code>. If a <code class="code">cvecclass</code> <var class="Arg">cl</var> is given, the number of columns and the field follow from that.</p>
+
+<p><a id="X7C188AFF84F2E3ED" name="X7C188AFF84F2E3ED"></a></p>
+
+<h5>5.1-6 CVEC_IdentityMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_IdentityMat</code>( <var class="Arg">cl</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_IdentityMat</code>( <var class="Arg">n</var>, <var class="Arg">p</var>, <var class="Arg">d</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a new <code class="code">cmat</code></p>
+
+<p>Creates an identity matrix with <var class="Arg">n</var> rows and columns over the field <code class="code">GF(<var class="Arg">p</var>,<var class="Arg">d</var>)</code>. If a <code class="code">cvecclass</code> <var class="Arg">cl</var> is given, the number of columns and the field follow from that.</p>
+
+<p><a id="X879CE439863CC8D1" name="X879CE439863CC8D1"></a></p>
+
+<h5>5.1-7 CVEC_RandomMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_RandomMat</code>( <var class="Arg">rows</var>, <var class="Arg">cl</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_RandomMat</code>( <var class="Arg">rows</var>, <var class="Arg">cols</var>, <var class="Arg">p</var>, <var class="Arg">d</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a new <code class="code">cmat</code></p>
+
+<p>Creates a random matrix with <var class="Arg">rows</var> rows and <var class="Arg">cols</var> columns over the field <code class="code">GF(<var class="Arg">p</var>,<var class="Arg">d</var>)</code>. If a <code class="code">cvecclass</code> <var class="Arg">cl</var> is given, the number of columns and the field follow from that. Note that this is not particularly efficient.</p>
+
+<p><a id="X78BD0AD885D4C2FF" name="X78BD0AD885D4C2FF"></a></p>
+
+<h5>5.1-8 MutableCopyMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MutableCopyMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a mutable copy of <var class="Arg">m</var></p>
+
+<p>Creates a mutable copy of the <code class="code">cmat</code> <var class="Arg">m</var>.</p>
+
+<p><a id="X879384D479EB1D82" name="X879384D479EB1D82"></a></p>
+
+<h5>5.1-9 Matrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Matrix</code>( <var class="Arg">vectorlist</var>, <var class="Arg">vector</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatrixNC</code>( <var class="Arg">vectorlist</var>, <var class="Arg">vector</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a new mutable <code class="code">cmat</code></p>
+
+<p>Returns a new <code class="code">cmat</code> containing the vectors in <var class="Arg">vectorlist</var> as rows. The elements in <var class="Arg">vectorlist</var> must be vectors of the same length as the sample vector <var class="Arg">vector</var> and must live over the same base field. The sample vector is always necessary to be able to use the method selection. The <var class="Arg">vectorlist</var> may be empty. The NC method does not check the inputs.</p>
+
+<p><a id="X7C9F7D327BAECA5E" name="X7C9F7D327BAECA5E"></a></p>
+
+<h4>5.2 <span class="Heading">Matrices as lists</span></h4>
+
+<p>In this section, arguments named <var class="Arg">m</var> and <var class="Arg">n</var> are <code class="code">cmat</code>s and <var class="Arg">v</var> and <var class="Arg">w</var> are <code class="code">cvec</code>s that fit into the corresponding matrices. <var class="Arg">pos</var> is an integer between <span class="SimpleMath">1</span> and <code class="code">Length(m)</code> if it applies to the matrix <var class="Arg">m</var>.</p>
+
+<p><a id="X795EC9D67E34DAB0" name="X795EC9D67E34DAB0"></a></p>
+
+<h5>5.2-1 Add</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Add</code>( <var class="Arg">m</var>, <var class="Arg">v</var>[, <var class="Arg">pos</var>] )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Behaves exactly as expected. Note that one can only add <code class="code">cvec</code>s of the right length and over the right field.</p>
+
+<p><a id="X7E98B11B79BA9167" name="X7E98B11B79BA9167"></a></p>
+
+<h5>5.2-2 Remove</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Remove</code>( <var class="Arg">m</var>[, <var class="Arg">pos</var>] )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="code">cvec</code></p>
+
+<p>Behaves exactly as expected. No holes can be made.</p>
+
+<p><a id="X805C33C281B29B00" name="X805C33C281B29B00"></a></p>
+
+<h5>5.2-3 ELM_LIST</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ELM_LIST</code>( <var class="Arg">m</var>, <var class="Arg">pos</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="code">cvec</code></p>
+
+<p>Behaves exactly as expected. Note that this method is triggered when one uses the (reading) syntax "<code class="code">m[pos]</code>".</p>
+
+<p><a id="X829C3BD17C7A6F4F" name="X829C3BD17C7A6F4F"></a></p>
+
+<h5>5.2-4 ASS_LIST</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ASS_LIST</code>( <var class="Arg">m</var>, <var class="Arg">pos</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Behaves exactly as expected. Note that one can only assign to positions such that the resulting matrix has no holes. This method is triggered when one uses the (assignment) syntax "<code class="code">m[pos] := </code>".</p>
+
+<p><a id="X7E3A8E51853DEC58" name="X7E3A8E51853DEC58"></a></p>
+
+<h5>5.2-5 ELMS_LIST</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ELMS_LIST</code>( <var class="Arg">m</var>, <var class="Arg">poss</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a sub <code class="code">cmat</code></p>
+
+<p>Behaves exactly as expected: A new matrix containing a subset of the rows is returned. Note that the row vectors are the same <strong class="pkg">GAP</strong> objects as the corresponding rows of <var class="Arg">m</var>. This operation is triggered by the expression <var class="Arg">m</var><code class="code">{<var class="Arg">poss</var>}</code>.</p>
+
+<p><a id="X82C3E70078F51817" name="X82C3E70078F51817"></a></p>
+
+<h5>5.2-6 ASSS_LIST</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ASSS_LIST</code>( <var class="Arg">m</var>, <var class="Arg">poss</var>, <var class="Arg">vals</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Behaves exactly as expected. Of course all values in <var class="Arg">vals</var> must be <code class="code">cvec</code>s over the correct field and the <code class="code">cmat</code> <var class="Arg">m</var> must be a dense list afterwards. This operation is triggered by the statement <var class="Arg">m</var><code class="code">{<var class="Arg">poss</var>} := <var class="Arg">vals</var></code>.</p>
+
+<p><a id="X780769238600AFD1" name="X780769238600AFD1"></a></p>
+
+<h5>5.2-7 Length</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Length</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the number of rows of the <code class="code">cmat</code> <var class="Arg">m</var></p>
+
+<p>Behaves exactly as expected.</p>
+
+<p><a id="X846BC7107C352031" name="X846BC7107C352031"></a></p>
+
+<h5>5.2-8 ShallowCopy</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShallowCopy</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a new matrix containing the same rows than the <code class="code">cmat</code> <var class="Arg">m</var></p>
+
+<p>Behaves exactly as expected. Note that the rows of the result are the very same <strong class="pkg">GAP</strong> objects than the rows of the <code class="code">cmat</code> <var class="Arg">m</var>.</p>
+
+<p><a id="X7ECE9056792F28BA" name="X7ECE9056792F28BA"></a></p>
+
+<h5>5.2-9 Collected</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Collected</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the same as the collected list of the rows of <var class="Arg">m</var></p>
+
+<p>Behaves exactly as expected. Just uses the standard <code class="func">Collected</code> (<a href="../../../doc/ref/chap21_mj.html#X7ECE9056792F28BA"><span class="RefLink">Reference: Collected</span></a>) on the list of rows.</p>
+
+<p><a id="X8727F2928467C2F9" name="X8727F2928467C2F9"></a></p>
+
+<h5>5.2-10 DuplicateFreeList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DuplicateFreeList</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a new mutable <code class="code">cmat</code> containing the rows of <var class="Arg">m</var> with duplicates removed</p>
+
+<p>Behaves exactly as expected. Just uses the standard <code class="func">DuplicateFreeList</code> (<a href="../../../doc/ref/chap21_mj.html#X8727F2928467C2F9"><span class="RefLink">Reference: DuplicateFreeList</span></a>) on the list of rows.</p>
+
+<p><a id="X79E31DB27C82D6E1" name="X79E31DB27C82D6E1"></a></p>
+
+<h5>5.2-11 Append</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Append</code>( <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Behaves exactly as expected. Of course, the <code class="code">cmat</code>s <var class="Arg">m</var> and <var class="Arg">n</var> must be over the same field and have the same number of columns. Note that the rows of <var class="Arg">n</var> themselves (and no copies) will be put into the matrix <var class="Arg">m</var>.</p>
+
+<p><a id="X7C86D7F7795125F0" name="X7C86D7F7795125F0"></a></p>
+
+<h5>5.2-12 Filtered</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Filtered</code>( <var class="Arg">m</var>, <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a new <code class="code">cmat</code> containing some of the rows of <var class="Arg">m</var></p>
+
+<p>Behaves exactly as expected. The function <var class="Arg">f</var> will be called for each row of <var class="Arg">m</var>.</p>
+
+<p><a id="X82AACD43853C24D1" name="X82AACD43853C24D1"></a></p>
+
+<h5>5.2-13 Unbind</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Unbind</code>( <var class="Arg">m</var>, <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Behaves exactly as expected. Of course, only the last bound row may be unbound.</p>
+
+<p><a id="X79862FF37B75BF48" name="X79862FF37B75BF48"></a></p>
+
+<h4>5.3 <span class="Heading">Arithmetic</span></h4>
+
+<p>Of course, the standard arithmetic infix operations <span class="SimpleMath">+</span>, <span class="SimpleMath">-</span> and <span class="SimpleMath">*</span> (for vectors and scalars) work as expected by using the methods below. The comments on the usage of scalars in arithmetic operations involving vectors from Subsection <a href="chap4.html#X788A3D6482290F7D"><span class="RefLink">4.2-1</span></a> apply analogously.</p>
+
+<p><a id="X819B1A8A7DE1EE88" name="X819B1A8A7DE1EE88"></a></p>
+
+<h5><code>5.3-1 \+</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \+</code>( <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the sum <span class="SimpleMath"><var class="Arg">m</var>+<var class="Arg">n</var></span> as a new <code class="code">cmat</code></p>
+
+<p>For two <code class="code">cmat</code>s <var class="Arg">m</var> and <var class="Arg">n</var>. Works as expected.</p>
+
+<p><a id="X814AFD8E8377D4DB" name="X814AFD8E8377D4DB"></a></p>
+
+<h5><code>5.3-2 \-</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \-</code>( <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the difference <span class="SimpleMath"><var class="Arg">m</var>-<var class="Arg">n</var></span> as a new <code class="code">cmat</code></p>
+
+<p>For two <code class="code">cmat</code>s <var class="Arg">m</var> and <var class="Arg">n</var>. Works as expected.</p>
+
+<p><a id="X82AFC3A987140922" name="X82AFC3A987140922"></a></p>
+
+<h5>5.3-3 AdditiveInverseSameMutability</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdditiveInverseSameMutability</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \-</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the additive inverse of <var class="Arg">m</var> as a new <code class="code">cmat</code></p>
+
+<p>For a <code class="code">cmat</code> <var class="Arg">m</var>. Works as expected.</p>
+
+<p><a id="X8548396F7D4CAC21" name="X8548396F7D4CAC21"></a></p>
+
+<h5>5.3-4 AdditiveInverseMutable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdditiveInverseMutable</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the additive inverse of <var class="Arg">m</var> as a new mutable <code class="code">cmat</code></p>
+
+<p>For a <code class="code">cmat</code> <var class="Arg">m</var>. Works as expected.</p>
+
+<p><a id="X848404F57FBFFE7A" name="X848404F57FBFFE7A"></a></p>
+
+<h5><code>5.3-5 \*</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">m</var>, <var class="Arg">s</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">s</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the scalar multiple <var class="Arg">s</var><span class="SimpleMath">⋅</span><var class="Arg">m</var></p>
+
+<p>For a <code class="code">cmat</code> <var class="Arg">m</var> and a scalar <var class="Arg">s</var>. For the format of the scalar see <a href="chap4.html#X788A3D6482290F7D"><span class="RefLink">4.2-1</span></a>. Works as expected.</p>
+
+<p><a id="X7DAFB0227C5529C6" name="X7DAFB0227C5529C6"></a></p>
+
+<h5><code>5.3-6 \*</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">v</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the product <var class="Arg">v</var><span class="SimpleMath">⋅</span><var class="Arg">m</var></p>
+
+<p>For a <code class="code">cmat</code> <var class="Arg">m</var> and a <code class="code">cvec</code> <var class="Arg">s</var> with the same length as the number of rows of <var class="Arg">m</var>. Works as expected. Note that there is a very fast method for the case that <var class="Arg">m</var> is pre-greased (see <a href="chap5.html#X7DA0D38A7D5DBDFF"><span class="RefLink">5.8</span></a>).</p>
+
+<p><a id="X8255927C7923A294" name="X8255927C7923A294"></a></p>
+
+<h5><code>5.3-7 \^</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \^</code>( <var class="Arg">v</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the product <var class="Arg">v</var><span class="SimpleMath">⋅</span><var class="Arg">m</var></p>
+
+<p>For a <code class="code">cmat</code> <var class="Arg">m</var> and a <code class="code">cvec</code> <var class="Arg">s</var> with the same length as the number of rows of <var class="Arg">m</var>. Works as expected. Note that there is a very fast method for the case that <var class="Arg">m</var> is pre-greased (see <a href="chap5.html#X7DA0D38A7D5DBDFF"><span class="RefLink">5.8</span></a>).</p>
+
+<p><a id="X7F673C397A919D81" name="X7F673C397A919D81"></a></p>
+
+<h5><code>5.3-8 \*</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the product <var class="Arg">m</var><span class="SimpleMath">⋅</span><var class="Arg">n</var></p>
+
+<p>Of course, the <code class="code">cmat</code> <var class="Arg">m</var> must have as many columns as the <code class="code">cmat</code> <var class="Arg">n</var> has rows. Works as expected. Note that there is a very fast method for the case that <var class="Arg">n</var> is pre-greased (see <a href="chap5.html#X7DA0D38A7D5DBDFF"><span class="RefLink">5.8</span></a>).</p>
+
+<p><a id="X781AD339797C0625" name="X781AD339797C0625"></a></p>
+
+<h5>5.3-9 ZeroSameMutability</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroSameMutability</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the zero <code class="code">cmat</code> over the same field and with the same dimensions as <var class="Arg">m</var></p>
+
+<p><var class="Arg">m</var> must be a <code class="code">cmat</code>.</p>
+
+<p><a id="X796D9B2C83C0667B" name="X796D9B2C83C0667B"></a></p>
+
+<h5>5.3-10 ZeroMutable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroMutable</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a mutable copy of the zero <code class="code">cmat</code> over the same field and with the same dimensions as <var class="Arg">m</var></p>
+
+<p><var class="Arg">m</var> must be a <code class="code">cmat</code>.</p>
+
+<p><a id="X7ED3BC7D8198EE2E" name="X7ED3BC7D8198EE2E"></a></p>
+
+<h5>5.3-11 OneSameMutability</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OneSameMutability</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the identity <code class="code">cmat</code> over the same field and with the same dimensions as <var class="Arg">m</var></p>
+
+<p><var class="Arg">m</var> must be a square <code class="code">cmat</code>.</p>
+
+<p><a id="X7FBD3ABF80EB659C" name="X7FBD3ABF80EB659C"></a></p>
+
+<h5>5.3-12 OneMutable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OneMutable</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a mutable copy of the identity <code class="code">cmat</code> over the same field and with the same dimensions as <var class="Arg">m</var></p>
+
+<p><var class="Arg">m</var> must be a square <code class="code">cmat</code>.</p>
+
+<p><a id="X78F9A4028122E39B" name="X78F9A4028122E39B"></a></p>
+
+<h5>5.3-13 InverseMutable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InverseMutable</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the multiplicative inverse of <var class="Arg">m</var></p>
+
+<p>If the <code class="code">cmat</code> is not square or not invertible then <code class="code">fail</code> is returned. Behaves exactly as expected.</p>
+
+<p><a id="X8593B0F886BBD8A7" name="X8593B0F886BBD8A7"></a></p>
+
+<h5>5.3-14 InverseSameMutability</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InverseSameMutability</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the multiplicative inverse of <var class="Arg">m</var></p>
+
+<p>If the <code class="code">cmat</code> is not square or not invertible then <code class="code">fail</code> is returned. Behaves exactly as expected.</p>
+
+<p><a id="X87F304F3826A7063" name="X87F304F3826A7063"></a></p>
+
+<h5>5.3-15 TransposedMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TransposedMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the transpose of <var class="Arg">m</var></p>
+
+<p>Behaves exactly as expected.</p>
+
+<p><a id="X8634C79E7DB22934" name="X8634C79E7DB22934"></a></p>
+
+<h5>5.3-16 KroneckerProduct</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KroneckerProduct</code>( <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the Kronecker product of <var class="Arg">m</var> and <var class="Arg">n</var></p>
+
+<p>Behaves exactly as expected.</p>
+
+<p><a id="X845009E07A011131" name="X845009E07A011131"></a></p>
+
+<h4>5.4 <span class="Heading">Comparison of matrices and other information</span></h4>
+
+<p><a id="X806A4814806A4814" name="X806A4814806A4814"></a></p>
+
+<h5>5.4-1 =</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; =</code>( <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Returns <code class="code">true</code> if the <code class="code">cmat</code>s <var class="Arg">m</var> and <var class="Arg">n</var> are equal. The matrices must be over the same field and must have equal dimensions.</p>
+
+<p><a id="X7FBCE84886AB9848" name="X7FBCE84886AB9848"></a></p>
+
+<h5>5.4-2 LT</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LT</code>( <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Returns <code class="code">true</code> if the <code class="code">cmat</code> <var class="Arg">m</var> is smaller than <var class="Arg">n</var>. The matrices must be over the same field and must have equal dimensions. The method implements the lexicographic order and uses <code class="func">LT</code> for the ordering of vectors. Note that the operation <code class="code">LT</code> is the same as <code class="code">\&lt;</code>.</p>
+
+<p><a id="X82BDA47282F9BBA7" name="X82BDA47282F9BBA7"></a></p>
+
+<h5>5.4-3 IsZero</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsZero</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Returns <code class="code">true</code> if the <code class="code">cmat</code> <var class="Arg">m</var> is equal to zero, meaning that all entries are equal to zero.</p>
+
+<p><a id="X814D78347858EC13" name="X814D78347858EC13"></a></p>
+
+<h5>5.4-4 IsOne</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOne</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Returns <code class="code">true</code> iff the <code class="code">cmat</code> <var class="Arg">m</var> is equal to the identity matrix.</p>
+
+<p><a id="X7FF01BF686AD0623" name="X7FF01BF686AD0623"></a></p>
+
+<h5>5.4-5 IsDiagonalMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagonalMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Returns <code class="code">true</code> iff the <code class="code">cmat</code> <var class="Arg">m</var> is a diagonal matrix.</p>
+
+<p><a id="X7ECFBD9F8664982B" name="X7ECFBD9F8664982B"></a></p>
+
+<h5>5.4-6 IsUpperTriangularMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsUpperTriangularMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Returns <code class="code">true</code> iff the <code class="code">cmat</code> <var class="Arg">m</var> is an upper triangular matrix.</p>
+
+<p><a id="X81671CFD7CFE4819" name="X81671CFD7CFE4819"></a></p>
+
+<h5>5.4-7 IsLowerTriangularMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLowerTriangularMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Returns <code class="code">true</code> iff the <code class="code">cmat</code> <var class="Arg">m</var> is a lower triangular matrix.</p>
+
+<p><a id="X875B076C8559CAF0" name="X875B076C8559CAF0"></a></p>
+
+<h5>5.4-8 CVEC_HashFunctionForCMats</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_HashFunctionForCMats</code>( <var class="Arg">m</var>, <var class="Arg">data</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an integer hash value</p>
+
+<p>This is a hash function usable for the <code class="func">ChooseHashFunction</code> (<a href="../../../pkg/orb-4.8.2/doc/chap4_mj.html#X7ACED4FB7C971A5A"><span class="RefLink">orb: ChooseHashFunction</span></a>) framework. It takes as arguments a <code class="code">cmat</code> <var class="Arg">m</var> and a list <var class="Arg">data</var> of length <span class="SimpleMath">2</span>. The first entry of <var class="Arg">data</var> is the length of the hash table used and the second entry is the number of bytes looked at in the <code class="code">cvec</code>s in the matrices.</p>
+
+<p><a id="X7ACED4FB7C971A5A" name="X7ACED4FB7C971A5A"></a></p>
+
+<h5>5.4-9 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">m</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record with entries <code class="code">func</code> and <code class="code">data</code>.</p>
+
+<p>Chooses a hash function to be used for <code class="code">cmat</code>s like <var class="Arg">m</var> (that is, over the same field with the same number of columns) and for hash tables of length <var class="Arg">l</var>. The hash function itself is stored in the <code class="code">func</code> component of the resulting record. The hash function has to be called with two arguments: the first must be a matrix like <var class="Arg">m</var> and the second must be the value of the <code class="code">data</code> component of the resulting record.</p>
+
+<p><a id="X7B54DF167CFC6C0F" name="X7B54DF167CFC6C0F"></a></p>
+
+<h4>5.5 <span class="Heading">Slicing and submatrices</span></h4>
+
+<p>As described in Section <a href="chap5.html#X7C9F7D327BAECA5E"><span class="RefLink">5.2</span></a> you can use the slicing operator <code class="code">\{\}</code> for read and write access of a subset of the rows of a <code class="code">cmat</code>. However, the double slicing operator is not supported. The reason for this is twofold: First there is a technical issue that the double slicing operator cannot easily be overloaded in the <strong class="pkg">GAP</strong> system. The second is, that very often the double slicing operator is used to copy a part of one matrix to another part of another matrix using double slicing on both sides of an assignment. This is quite inefficient because it creates an intermediate object, namely the submatrix which is extracted.</p>
+
+<p>Therefore we have chosen to support submatrix access through two operations <code class="func">ExtractSubMatrix</code> (<a href="chap5.html#X838B45F7790E9FDF"><span class="RefLink">5.5-1</span></a>) and <code class="func">CopySubMatrix</code> (<a href="chap5.html#X7ED9E5D4809E3B50"><span class="RefLink">5.5-2</span></a>) described below.</p>
+
+<p><a id="X838B45F7790E9FDF" name="X838B45F7790E9FDF"></a></p>
+
+<h5>5.5-1 ExtractSubMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExtractSubMatrix</code>( <var class="Arg">m</var>, <var class="Arg">rows</var>, <var class="Arg">cols</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a submatrix of <var class="Arg">m</var></p>
+
+<p>This operation extracts the submatrix of the matrix <var class="Arg">m</var> consisting of the rows described by the integer list (or range) <var class="Arg">rows</var> and of the columns described by the integer list (or range) <var class="Arg">cols</var>. This is thus equivalent to the usage <var class="Arg">m</var><code class="code">{</code><var class="Arg">rows</var><code class="code">}{</code><var class="Arg">cols</var><code class="code">}</code>. Note that the latter does not work for <code class="code">cmat</code>s, whereas a quite efficient method for <code class="func">ExtractSubMatrix</code> is available for <code class="code">cmat</code>s.</p>
+
+<p><a id="X7ED9E5D4809E3B50" name="X7ED9E5D4809E3B50"></a></p>
+
+<h5>5.5-2 CopySubMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopySubMatrix</code>( <var class="Arg">src</var>, <var class="Arg">dst</var>, <var class="Arg">srows</var>, <var class="Arg">drows</var>, <var class="Arg">scols</var>, <var class="Arg">dcols</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This operation extracts the submatrix of the matrix <var class="Arg">src</var> consisting of the rows described by the integer list (or range) <var class="Arg">srows</var> and of the columns described by the integer list (or range) <var class="Arg">scols</var> and copies it into the submatrix of <var class="Arg">dst</var> described by the integer lists (or ranges) <var class="Arg">drows</var> and <var class="Arg">dcols</var>. No intermediate object is created. This is thus equivalent to the usage <var class="Arg">dst</var><code class="code">{</code><var class="Arg">drows</var><code class="code">}{</code><var class="Arg">dcols</var><code class="code">} := </code><var class="Arg">src</var><code class="code">{</code><var class="Arg">srows</var><code class="code">}{</code><var class="Arg">scols</var><code class="code">}</code>. Note that the latter does not work for <code class="code">cmat</code>s, whereas a quite efficient method for <code class="func">CopySubMatrix</code> is available for <code class="code">cmat</code>s.</p>
+
+<p><a id="X805F24017D4348E2" name="X805F24017D4348E2"></a></p>
+
+<h4>5.6 <span class="Heading">Information about matrices</span></h4>
+
+<p><a id="X7B5FF52186205C5E" name="X7B5FF52186205C5E"></a></p>
+
+<h5>5.6-1 BaseField</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BaseField</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the base field of <var class="Arg">m</var></p>
+
+<p>For a <code class="code">cmat</code> <var class="Arg">m</var> this returns the <strong class="pkg">GAP</strong> object <code class="code">GF(p,d)</code> corresponding to the base field of <var class="Arg">m</var>. Note that this is a relatively fast lookup.</p>
+
+<p><a id="X7EC55E298313BCB1" name="X7EC55E298313BCB1"></a></p>
+
+<h5>5.6-2 Characteristic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Characteristic</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the characteristic of the base field of <var class="Arg">m</var></p>
+
+<p>Returns the characteristic of the base field of <var class="Arg">m</var> (see <code class="func">BaseField</code> (<a href="chap5.html#X7B5FF52186205C5E"><span class="RefLink">5.6-1</span></a>)).</p>
+
+<p><a id="X7E9F7B7E7BEDA69E" name="X7E9F7B7E7BEDA69E"></a></p>
+
+<h5>5.6-3 DegreeFFE</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DegreeFFE</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the degree of the base field of <var class="Arg">m</var> over its prime field</p>
+
+<p>Returns the degree of the base field of <var class="Arg">m</var> over its prime field (see <code class="func">BaseField</code> (<a href="chap5.html#X7B5FF52186205C5E"><span class="RefLink">5.6-1</span></a>)).</p>
+
+<p><a id="X7C6624AF7CEAA74D" name="X7C6624AF7CEAA74D"></a></p>
+
+<h5>5.6-4 DefaultField</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DefaultField</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the base field of <var class="Arg">m</var></p>
+
+<p>For a <code class="code">cmat</code> <var class="Arg">m</var> this returns the <strong class="pkg">GAP</strong> object <code class="code">GF(p,d)</code> corresponding to the base field of <var class="Arg">m</var>. Note that this is a relatively fast lookup.</p>
+
+<p><a id="X78DA04477DDD0ACE" name="X78DA04477DDD0ACE"></a></p>
+
+<h4>5.7 <span class="Heading">Input and output</span></h4>
+
+<p><a id="X7DF1D51F7924429A" name="X7DF1D51F7924429A"></a></p>
+
+<h5>5.7-1 CVEC_WriteMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_WriteMat</code>( <var class="Arg">f</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">fail</code></p>
+
+<p><var class="Arg">f</var> must be a file object from the <strong class="pkg">IO</strong> package (see <code class="func">IsFile</code> (<a href="../../../pkg/io-4.6.0/doc/chap4_mj.html#X80C9B80A80E3A555"><span class="RefLink">IO: IsFile</span></a>)) and <var class="Arg">m</var> must be a <code class="code">cmat</code>. The matrix <var class="Arg">m</var> is written to the file <var class="Arg">f</var>. Note that the format (see Section <a href="chap3.html#X783395FC81A451F3"><span class="RefLink">3.4</span></a>) is platform independent, such that matrices can be exchanged between different architectures. The result is <code class="code">true</code> or <code class="code">fail</code> depending on whether everything worked or an error occurred respectively.</p>
+
+<p><a id="X794D936C7E99F805" name="X794D936C7E99F805"></a></p>
+
+<h5>5.7-2 CVEC_WriteMatToFile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_WriteMatToFile</code>( <var class="Arg">fn</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">fail</code></p>
+
+<p><var class="Arg">fn</var> must be a string object containing a file name and <var class="Arg">m</var> must be a <code class="code">cmat</code>. The matrix <var class="Arg">m</var> is written to the file with name <var class="Arg">fn</var> on the local storage. Note that the format (see Section <a href="chap3.html#X783395FC81A451F3"><span class="RefLink">3.4</span></a>) is platform independent, such that matrices can be exchanged between different architectures. The result is <code class="code">true</code> or <code class="code">fail</code> depending on whether everything worked or an error occurred respectively.</p>
+
+<p><a id="X78F898D17D9E522C" name="X78F898D17D9E522C"></a></p>
+
+<h5>5.7-3 CVEC_WriteMatsToFile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_WriteMatsToFile</code>( <var class="Arg">fnpref</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">fail</code></p>
+
+<p><var class="Arg">fnpref</var> must be a string object containing a file name prefix and <var class="Arg">m</var> must be a list of <code class="code">cmat</code>s. The matrices in <var class="Arg">l</var> are written to the files with names determined by using the string <var class="Arg">fnpref</var> and appending the natural numbers from <span class="SimpleMath">1</span> to the length of <var class="Arg">l</var> on the local storage. Note that the format (see Section <a href="chap3.html#X783395FC81A451F3"><span class="RefLink">3.4</span></a>) is platform independent, such that matrices can be exchanged between different architectures. The result is <code class="code">true</code> or <code class="code">fail</code> depending on whether everything worked or an error occurred respectively.</p>
+
+<p><a id="X79E47CB5831D48CC" name="X79E47CB5831D48CC"></a></p>
+
+<h5>5.7-4 CVEC_ReadMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_ReadMat</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="code">cmat</code> or <code class="code">fail</code></p>
+
+<p><var class="Arg">f</var> must be a file object from the <strong class="pkg">IO</strong> package (see <code class="func">IsFile</code> (<a href="../../../pkg/io-4.6.0/doc/chap4_mj.html#X80C9B80A80E3A555"><span class="RefLink">IO: IsFile</span></a>)). A matrix is read from the file <var class="Arg">f</var>. Note that the format (see Section <a href="chap3.html#X783395FC81A451F3"><span class="RefLink">3.4</span></a>) is platform independent, such that matrices can be exchanged between different architectures. The result is <code class="code">fail</code> if an error occurred.</p>
+
+<p><a id="X824FA01878D60EE1" name="X824FA01878D60EE1"></a></p>
+
+<h5>5.7-5 CVEC_ReadMatFromFile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_ReadMatFromFile</code>( <var class="Arg">fn</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="code">cmat</code> or <code class="code">fail</code></p>
+
+<p><var class="Arg">fn</var> must be a string object containing a file name. A matrix is read from the file with name <var class="Arg">fn</var> on the local storage. Note that the format (see Section <a href="chap3.html#X783395FC81A451F3"><span class="RefLink">3.4</span></a>) is platform independent, such that matrices can be exchanged between different architectures. The result is <code class="code">fail</code> if an error occurred.</p>
+
+<p><a id="X79397B1D78E0746A" name="X79397B1D78E0746A"></a></p>
+
+<h5>5.7-6 CVEC_ReadMatsFromFile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CVEC_ReadMatsFromFile</code>( <var class="Arg">fnpref</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of <code class="code">cmat</code>s or <code class="code">fail</code></p>
+
+<p><var class="Arg">fnpref</var> must be a string object containing a file name prefix. A list of matrices is read from the files with names determined by using the string <var class="Arg">fnpref</var> and appending the natural numbers from <span class="SimpleMath">1</span> on from the local storage. The number of matrices read is determined by the highest number such that the corresponding filename exists in the filesystem. Note that the format (see Section <a href="chap3.html#X783395FC81A451F3"><span class="RefLink">3.4</span></a>) is platform independent, such that matrices can be exchanged between different architectures. The result is <code class="code">fail</code> if an error occurred.</p>
+
+<p><a id="X7DA0D38A7D5DBDFF" name="X7DA0D38A7D5DBDFF"></a></p>
+
+<h4>5.8 <span class="Heading">Grease</span></h4>
+
+<p>The basic idea behind the "grease" technique is that over a finite field there are only finitely many linear combinations of a fixed list of vectors. Thus, many operations including matrix multiplication can be speeded up by precomputing all possible linear combinations and then just looking up the right one. For the case of matrix multiplication this can for example gain a factor of about <span class="SimpleMath">4</span> over the field with <span class="SimpleMath">2</span> elements using "grease level<span class="SimpleMath">8</span>", which means that for blocks of <span class="SimpleMath">8</span> rows all linear combinations are precomputed.</p>
+
+<p>The <strong class="pkg">cvec</strong> uses grease whenever appropriate automatically for example for matrix multiplication. However, occasionally the user has to take a conscious decision, which matrices to grease, because this of course uses more memory.</p>
+
+<p>A <code class="code">cmat</code> can be "pre-greased" with level <span class="SimpleMath">l</span>, which means that it is chopped into chunks of <span class="SimpleMath">l</span> rows and for each such chunk all possible linear combinations are precomputed and stored. This increases the memory used to store the matrix by a factor of <span class="SimpleMath">q^l</span> if the base field of the matrix has <span class="SimpleMath">q</span> elements. However, operations like vector matrix multiplication and matrix matrix multiplication (here the right hand side matrix must be greased!) are speeded up. As a rule of thumb the factor one can hope for is about <span class="SimpleMath">l ⋅ (q-1)/q</span>. Note that for big matrices matrix multiplication does greasing on the fly anyway and therefore one cannot hope for such a big factor by pre-greasing.</p>
+
+<p><a id="X7DF5A56F8747DD45" name="X7DF5A56F8747DD45"></a></p>
+
+<h5>5.8-1 GreaseMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GreaseMat</code>( <var class="Arg">m</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GreaseMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p><var class="Arg">m</var> must be a <code class="code">cmat</code>. It is pregreased with level <var class="Arg">l</var>. Without the argument <var class="Arg">l</var> a grease level depending of the field size is chosen automatically. Note that the matrix will need much more memory when pregreased.</p>
+
+<p><a id="X7E8A9C7E7E014FC7" name="X7E8A9C7E7E014FC7"></a></p>
+
+<h5>5.8-2 UnGreaseMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnGreaseMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p><var class="Arg">m</var> must be a <code class="code">cmat</code>. The pregreased information is deleted. This can save a lot of memory.</p>
+
+<p><a id="X7A0D26B180BEDE37" name="X7A0D26B180BEDE37"></a></p>
+
+<h4>5.9 <span class="Heading">Everything else</span></h4>
+
+<p><a id="X7B97048782F7EE43" name="X7B97048782F7EE43"></a></p>
+
+<h5>5.9-1 Randomize</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Randomize</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Randomize</code>( <var class="Arg">m</var>, <var class="Arg">rs</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the matrix <var class="Arg">m</var></p>
+
+<p><var class="Arg">m</var> must be a <code class="code">cmat</code> and <var class="Arg">rs</var> must be a random source object if given. This method changes the matrix <var class="Arg">m</var> in place by (pseudo) random values in the field over which the matrix lives. If a random source is given, the pseudo random numbers used are taken from this source, otherwise the global random source in the <strong class="pkg">GAP</strong> library is taken.</p>
+
+<p><a id="X8114198F7D6486CB" name="X8114198F7D6486CB"></a></p>
+
+<h5>5.9-2 OverviewMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OverviewMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>An ASCII art overview over the <code class="code">cmat</code> <var class="Arg">m</var> is printed. Stars indicate nonzero blocks in the matrix and dots zero blocks.</p>
+
+<p><a id="X84AAF220841589D9" name="X84AAF220841589D9"></a></p>
+
+<h5>5.9-3 Unpack</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Unpack</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of lists of finite field elements</p>
+
+<p>This operation unpacks a <code class="code">cmat</code> <var class="Arg">m</var>. A new plain list of plain lists containing the corresponding numbers as <strong class="pkg">GAP</strong> finite field elements. Note that the matrix <var class="Arg">m</var> remains unchanged.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

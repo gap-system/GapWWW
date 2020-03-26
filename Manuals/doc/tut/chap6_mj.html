@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (tut) - Chapter 6: Vector Spaces and Algebras</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6.html">[MathJax off]</a></p>
+<p><a id="X853484B982F1DF96" name="X853484B982F1DF96"></a></p>
+<div class="ChapSects"><a href="chap6_mj.html#X853484B982F1DF96">6 <span class="Heading">Vector Spaces and Algebras</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7DAD6700787EC845">6.1 <span class="Heading">Vector Spaces</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7DDBF6F47A2E021C">6.2 <span class="Heading">Algebras</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X843A8D6F7A7592B5">6.3 <span class="Heading">Further Information about Vector Spaces and Algebras</span></a>
+</span>
+</div>
+</div>
+
+<h3>6 <span class="Heading">Vector Spaces and Algebras</span></h3>
+
+<p>This chapter contains an introduction into vector spaces and algebras in <strong class="pkg">GAP</strong>.</p>
+
+<p><a id="X7DAD6700787EC845" name="X7DAD6700787EC845"></a></p>
+
+<h4>6.1 <span class="Heading">Vector Spaces</span></h4>
+
+<p>A <em>vector space</em> over the field <span class="SimpleMath">\(F\)</span> is an additive group that is closed under scalar multiplication with elements in <span class="SimpleMath">\(F\)</span>. In <strong class="pkg">GAP</strong>, only those domains that are constructed as vector spaces are regarded as vector spaces. In particular, an additive group that does not know about an acting domain of scalars is not regarded as a vector space in <strong class="pkg">GAP</strong>.</p>
+
+<p>Probably the most common <span class="SimpleMath">\(F\)</span>-vector spaces in <strong class="pkg">GAP</strong> are so-called <em>row spaces</em>. They consist of row vectors, that is, lists whose elements lie in <span class="SimpleMath">\(F\)</span>. In the following example we compute the vector space spanned by the row vectors <code class="code">[ 1, 1, 1 ]</code> and <code class="code">[ 1, 0, 2 ]</code> over the rationals.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:= Rationals;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:= VectorSpace( F, [ [ 1, 1, 1 ], [ 1, 0, 2 ] ] );</span>
+&lt;vector space over Rationals, with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ 2, 1, 3 ] in V;</span>
+true
+</pre></div>
+
+<p>The full row space <span class="SimpleMath">\(F^n\)</span> is created by commands like:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:= GF( 7 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:= F^3;   # The full row space over F of dimension 3. </span>
+( GF(7)^3 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ 1, 2, 3 ] * One( F ) in V;  </span>
+true
+</pre></div>
+
+<p>In the same way we can also create matrix spaces. Here the short notation <code class="code"><var class="Arg">field</var>^[<var class="Arg">dim1</var>,<var class="Arg">dim2</var>]</code> can be used:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m1:= [ [ 1, 2 ], [ 3, 4 ] ];; m2:= [ [ 0, 1 ], [ 1, 0 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:= VectorSpace( Rationals, [ m1, m2 ] );</span>
+&lt;vector space over Rationals, with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m1+m2 in V;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">W:= Rationals^[3,2];</span>
+( Rationals^[ 3, 2 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ [ 1, 1 ], [ 2, 2 ], [ 3, 3 ] ] in W;</span>
+true
+</pre></div>
+
+<p>A field is naturally a vector space over itself.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsVectorSpace( Rationals );</span>
+true
+</pre></div>
+
+<p>If <span class="SimpleMath">\(\Phi\)</span> is an algebraic extension of <span class="SimpleMath">\(F\)</span>, then <span class="SimpleMath">\(\Phi\)</span> is also a vector space over <span class="SimpleMath">\(F\)</span> (and indeed over any subfield of <span class="SimpleMath">\(\Phi\)</span> that contains <span class="SimpleMath">\(F\)</span>). This field <span class="SimpleMath">\(F\)</span> is stored in the attribute <code class="func">LeftActingDomain</code> (<span class="RefLink">Reference: LeftActingDomain</span>). In <strong class="pkg">GAP</strong>, the default is to view fields as vector spaces over their <em>prime</em> fields. By the function <code class="func">AsVectorSpace</code> (<span class="RefLink">Reference: AsVectorSpace</span>), we can view fields as vector spaces over fields other than the prime field.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:= GF( 16 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftActingDomain( F );</span>
+GF(2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:= AsVectorSpace( GF( 4 ), F );</span>
+AsField( GF(2^2), GF(2^4) )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F = G;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftActingDomain( G );</span>
+GF(2^2)
+</pre></div>
+
+<p>A vector space has three important attributes: its <em>field</em> of definition, its <em>dimension</em> and a <em>basis</em>. We already encountered the function <code class="func">LeftActingDomain</code> (<span class="RefLink">Reference: LeftActingDomain</span>) in the example above. It extracts the field of definition of a vector space. The function <code class="func">Dimension</code> (<span class="RefLink">Reference: Dimension</span>) provides the dimension of the vector space.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:= GF( 9 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:= [ [ Z(3)^0, 0*Z(3), 0*Z(3) ], [ 0*Z(3), Z(3)^0, Z(3)^0 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:= VectorSpace( F, m );</span>
+&lt;vector space over GF(3^2), with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension( V );</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">W:= AsVectorSpace( GF( 3 ), V );</span>
+&lt;vector space over GF(3), with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V = W;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension( W );</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftActingDomain( W );</span>
+GF(3)
+</pre></div>
+
+<p>One of the most important attributes is a <em>basis</em>. For a given basis <span class="SimpleMath">\(B\)</span> of <span class="SimpleMath">\(V\)</span>, every vector <span class="SimpleMath">\(v\)</span> in <span class="SimpleMath">\(V\)</span> can be expressed uniquely as <span class="SimpleMath">\(v = \sum_{b \in B} c_b b\)</span>, with coefficients <span class="SimpleMath">\(c_b \in F\)</span>.</p>
+
+<p>In <strong class="pkg">GAP</strong>, bases are special lists of vectors. They are used mainly for the computation of coefficients and linear combinations.</p>
+
+<p>Given a vector space <span class="SimpleMath">\(V\)</span>, a basis of <span class="SimpleMath">\(V\)</span> is obtained by simply applying the function <code class="func">Basis</code> (<span class="RefLink">Reference: Basis</span>) to <span class="SimpleMath">\(V\)</span>. The vectors that form the basis are extracted from the basis by <code class="func">BasisVectors</code> (<span class="RefLink">Reference: BasisVectors</span>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m1:= [ [ 1, 2 ], [ 3, 4 ] ];; m2:= [ [ 1, 1 ], [ 1, 0 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:= VectorSpace( Rationals, [ m1, m2 ] );</span>
+&lt;vector space over Rationals, with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B:= Basis( V );</span>
+SemiEchelonBasis( &lt;vector space over Rationals, with 
+2 generators&gt;, ... )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BasisVectors( Basis( V ) );</span>
+[ [ [ 1, 2 ], [ 3, 4 ] ], [ [ 0, 1 ], [ 2, 4 ] ] ]
+</pre></div>
+
+<p>The coefficients of a vector relative to a given basis are found by the function <code class="func">Coefficients</code> (<span class="RefLink">Reference: Coefficients</span>). Furthermore, linear combinations of the basis vectors are constructed using <code class="func">LinearCombination</code> (<span class="RefLink">Reference: LinearCombination</span>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:= VectorSpace( Rationals, [ [ 1, 2 ], [ 3, 4 ] ] );</span>
+&lt;vector space over Rationals, with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B:= Basis( V );</span>
+SemiEchelonBasis( &lt;vector space over Rationals, with 
+2 generators&gt;, ... )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BasisVectors( Basis( V ) );</span>
+[ [ 1, 2 ], [ 0, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Coefficients( B, [ 1, 0 ] );</span>
+[ 1, -2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LinearCombination( B, [ 1, -2 ] );</span>
+[ 1, 0 ]
+</pre></div>
+
+<p>In the above examples we have seen that <strong class="pkg">GAP</strong> often chooses the basis it wants to work with. It is also possible to construct bases with prescribed basis vectors by giving a list of these vectors as second argument to <code class="func">Basis</code> (<span class="RefLink">Reference: Basis</span>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:= VectorSpace( Rationals, [ [ 1, 2 ], [ 3, 4 ] ] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B:= Basis( V, [ [ 1, 0 ], [ 0, 1 ] ] );</span>
+SemiEchelonBasis( &lt;vector space over Rationals, with 2 generators&gt;, 
+[ [ 1, 0 ], [ 0, 1 ] ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Coefficients( B, [ 1, 2 ] );</span>
+[ 1, 2 ]
+</pre></div>
+
+<p>We can construct subspaces and quotient spaces of vector spaces. The natural projection map (constructed by <code class="func">NaturalHomomorphismBySubspace</code> (<span class="RefLink">Reference: NaturalHomomorphismBySubspace</span>)), connects a vector space with its quotient space.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:= Rationals^4;</span>
+( Rationals^4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">W:= Subspace( V, [ [ 1, 2, 3, 4 ], [ 0, 9, 8, 7 ] ] );</span>
+&lt;vector space over Rationals, with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">VmodW:= V/W;</span>
+( Rationals^2 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h:= NaturalHomomorphismBySubspace( V, W );</span>
+&lt;linear mapping by matrix, ( Rationals^4 ) -&gt; ( Rationals^2 )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Image( h, [ 1, 2, 3, 4 ] );</span>
+[ 0, 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreImagesRepresentative( h, [ 1, 0 ] );</span>
+[ 1, 0, 0, 0 ]
+</pre></div>
+
+<p><a id="X7DDBF6F47A2E021C" name="X7DDBF6F47A2E021C"></a></p>
+
+<h4>6.2 <span class="Heading">Algebras</span></h4>
+
+<p>If a multiplication is defined for the elements of a vector space, and if the vector space is closed under this multiplication then it is called an <em>algebra</em>. For example, every field is an algebra:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= GF(8); IsAlgebra( f );</span>
+GF(2^3)
+true
+</pre></div>
+
+<p>One of the most important classes of algebras are sub-algebras of matrix algebras. On the set of all <span class="SimpleMath">\(n \times n\)</span> matrices over a field <span class="SimpleMath">\(F\)</span> it is possible to define a multiplication in many ways. The most frequent are the ordinary matrix multiplication and the Lie multiplication.</p>
+
+<p>Each matrix constructed as <span class="SimpleMath">\([ \textit{row1}, \textit{row2}, \ldots ]\)</span> is regarded by <strong class="pkg">GAP</strong> as an <em>ordinary</em> matrix, its multiplication is the ordinary associative matrix multiplication. The sum and product of two ordinary matrices are again ordinary matrices.</p>
+
+<p>The <em>full</em> matrix associative algebra can be created as follows:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:= GF( 9 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:= F^[3,3];</span>
+( GF(3^2)^[ 3, 3 ] )
+</pre></div>
+
+<p>An algebra can be constructed from generators using the function <code class="func">Algebra</code> (<span class="RefLink">Reference: Algebra</span>). It takes as arguments the field of coefficients and a list of generators. Of course the coefficient field and the generators must fit together; if we want to construct an algebra of ordinary matrices, we may take the field generated by the entries of the generating matrices, or a subfield or extension field.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m1:= [ [ 1, 1 ], [ 0, 0 ] ];; m2:= [ [ 0, 0 ], [ 0, 1 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:= Algebra( Rationals, [ m1, m2 ] );</span>
+&lt;algebra over Rationals, with 2 generators&gt;
+</pre></div>
+
+<p>An interesting class of algebras for which many special algorithms are implemented is the class of <em>Lie algebras</em>. They arise for example as algebras of matrices whose product is defined by the Lie bracket <span class="SimpleMath">\([ A, B ] = A * B - B * A\)</span>, where <span class="SimpleMath">\(*\)</span> denotes the ordinary matrix product.</p>
+
+<p>Since the multiplication of objects in <strong class="pkg">GAP</strong> is always assumed to be the operation <code class="code">*</code> (resp. the infix operator <code class="code">*</code>), and since there is already the "ordinary" matrix product defined for ordinary matrices, as mentioned above, we must use a different construction for matrices that occur as elements of Lie algebras. Such Lie matrices can be constructed by <code class="func">LieObject</code> (<span class="RefLink">Reference: LieObject</span>) from ordinary matrices, the sum and product of Lie matrices are again Lie matrices.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:= LieObject( [ [ 1, 1 ], [ 1, 1 ] ] ); </span>
+LieObject( [ [ 1, 1 ], [ 1, 1 ] ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m*m;</span>
+LieObject( [ [ 0, 0 ], [ 0, 0 ] ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOrdinaryMatrix( m1 ); IsOrdinaryMatrix( m );</span>
+true
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLieMatrix( m1 ); IsLieMatrix( m );</span>
+false
+true
+</pre></div>
+
+<p>Given a field <code class="code">F</code> and a list <code class="code">mats</code> of Lie objects over <code class="code">F</code>, we can construct the Lie algebra generated by <code class="code">mats</code> using the function <code class="func">Algebra</code> (<span class="RefLink">Reference: Algebra</span>). Alternatively, if we do not want to be bothered with the function <code class="func">LieObject</code> (<span class="RefLink">Reference: LieObject</span>), we can use the function <code class="func">LieAlgebra</code> (<span class="RefLink">Reference: LieAlgebra for an associative algebra</span>) that takes a field and a list of ordinary matrices, and constructs the Lie algebra generated by the corresponding Lie matrices. Note that this means that the ordinary matrices used in the call of <code class="func">LieAlgebra</code> (<span class="RefLink">Reference: LieAlgebra for an associative algebra</span>) are not contained in the returned Lie algebra.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m1:= [ [ 0, 1 ], [ 0, 0 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m2:= [ [ 0, 0 ], [ 1, 0 ] ];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= LieAlgebra( Rationals, [ m1, m2 ] );</span>
+&lt;Lie algebra over Rationals, with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m1 in L;</span>
+false
+</pre></div>
+
+<p>A second way of creating an algebra is by specifying a multiplication table. Let <span class="SimpleMath">\(A\)</span> be a finite dimensional algebra with basis <span class="SimpleMath">\((x_1, x_2, \ldots, x_n)\)</span>, then for <span class="SimpleMath">\(1 \leq i, j \leq n\)</span> the product <span class="SimpleMath">\(x_i x_j\)</span> is a linear combination of basis elements, i.e., there are <span class="SimpleMath">\(c_{ij}^k\)</span> in the ground field such that <span class="SimpleMath">\(x_i x_j = \sum_{k=1}^n c_{ij}^k x_k.\)</span> It is not difficult to show that the constants <span class="SimpleMath">\(c_{ij}^k\)</span> determine the multiplication completely. Therefore, the <span class="SimpleMath">\(c_{ij}^k\)</span> are called <em>structure constants</em>. In <strong class="pkg">GAP</strong> we can create a finite dimensional algebra by specifying an array of structure constants.</p>
+
+<p>In <strong class="pkg">GAP</strong> such a table of structure constants is represented using lists. The obvious way to do this would be to construct a "three-dimensional" list <code class="code">T</code> such that <code class="code">T[i][j][k]</code> equals <span class="SimpleMath">\(c_{ij}^k\)</span>. But it often happens that many of these constants vanish. Therefore a more complicated structure is used in order to be able to omit the zeros. A multiplication table of an <span class="SimpleMath">\(n\)</span>-dimensional algebra is an <span class="SimpleMath">\(n \times n\)</span> array <code class="code">T</code> such that <code class="code">T[i][j]</code> describes the product of the <code class="code">i</code>-th and the <code class="code">j</code>-th basis element. This product is encoded in the following way. The entry <code class="code">T[i][j]</code> is a list of two elements. The first of these is a list of indices <span class="SimpleMath">\(k\)</span> such that <span class="SimpleMath">\(c_{ij}^k\)</span> is nonzero. The second list contains the corresponding constants <span class="SimpleMath">\(c_{ij}^k\)</span>. Suppose, for example, that <code class="code">S</code> is the table of an algebra with basis <span class="SimpleMath">\((x_1, x_2, \ldots, x_8)\)</span> and that <code class="code">S[3][7]</code> equals <code class="code">[ [ 2, 4, 6 ], [ 1/2, 2, 2/3 ] ]</code>. Then in the algebra we have the relation <span class="SimpleMath">\(x_3 x_7 = (1/2) x_2 + 2 x_4 + (2/3) x_6.\)</span> Furthermore, if <code class="code">S[6][1] = [ [ ], [ ] ]</code> then the product of the sixth and first basis elements is zero.</p>
+
+<p>Finally two numbers are added to the table. The first number can be 1, -1, or 0. If it is 1, then the table is known to be symmetric, i.e., <span class="SimpleMath">\(c_{ij}^k = c_{ji}^k\)</span>. If this number is -1, then the table is known to be antisymmetric (this happens for instance when the algebra is a Lie algebra). The remaining case, 0, occurs in all other cases. The second number that is added is the zero element of the field over which the algebra is defined.</p>
+
+<p>Empty structure constants tables are created by the function <code class="func">EmptySCTable</code> (<span class="RefLink">Reference: EmptySCTable</span>), which takes a dimension <span class="SimpleMath">\(d\)</span>, a zero element <span class="SimpleMath">\(z\)</span>, and optionally one of the strings <code class="code">"symmetric"</code>, <code class="code">"antisymmetric"</code>, and returns an empty structure constants table <span class="SimpleMath">\(T\)</span> corresponding to a <span class="SimpleMath">\(d\)</span>-dimensional algebra over a field with zero element <span class="SimpleMath">\(z\)</span>. Structure constants can be entered into the table <span class="SimpleMath">\(T\)</span> using the function <code class="func">SetEntrySCTable</code> (<span class="RefLink">Reference: SetEntrySCTable</span>). It takes four arguments, namely <span class="SimpleMath">\(T\)</span>, two indices <span class="SimpleMath">\(i\)</span> and <span class="SimpleMath">\(j\)</span>, and a list of the form <span class="SimpleMath">\([ c_{ij}^{{k_1}}, k_1, c_{ij}^{{k_2}}, k_2, \ldots ]\)</span>. In this call to <code class="code">SetEntrySCTable</code>, the product of the <span class="SimpleMath">\(i\)</span>-th and the <span class="SimpleMath">\(j\)</span>-th basis vector in any algebra described by <span class="SimpleMath">\(T\)</span> is set to <span class="SimpleMath">\(\sum_l c_{ij}^{{k_l}} x_{{k_l}}\)</span>. (Note that in the empty table, this product was zero.) If <span class="SimpleMath">\(T\)</span> knows that it is (anti)symmetric, then at the same time also the product of the <span class="SimpleMath">\(j\)</span>-th and the <span class="SimpleMath">\(i\)</span>-th basis vector is set appropriately.</p>
+
+<p>In the following example we temporarily increase the line length limit from its default value 80 to 82 in order to make the long output expression fit into one line.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T:= EmptySCTable( 2, 0, "symmetric" );</span>
+[ [ [ [  ], [  ] ], [ [  ], [  ] ] ], 
+  [ [ [  ], [  ] ], [ [  ], [  ] ] ], 1, 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetEntrySCTable( T, 1, 2, [1/2,1,1/3,2] );  T;</span>
+[ [ [ [  ], [  ] ], [ [ 1, 2 ], [ 1/2, 1/3 ] ] ], 
+  [ [ [ 1, 2 ], [ 1/2, 1/3 ] ], [ [  ], [  ] ] ], 1, 0 ]
+</pre></div>
+
+<p>If we have defined a structure constants table, then we can construct the corresponding algebra by <code class="func">AlgebraByStructureConstants</code> (<span class="RefLink">Reference: AlgebraByStructureConstants</span>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:= AlgebraByStructureConstants( Rationals, T );</span>
+&lt;algebra of dimension 2 over Rationals&gt;
+</pre></div>
+
+<p>If we know that a structure constants table defines a Lie algebra, then we can construct the corresponding Lie algebra by <code class="func">LieAlgebraByStructureConstants</code> (<span class="RefLink">Reference: LieAlgebraByStructureConstants</span>); the algebra returned by this function knows that it is a Lie algebra, so <strong class="pkg">GAP</strong> need not check the Jacobi identity.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T:= EmptySCTable( 2, 0, "antisymmetric" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetEntrySCTable( T, 1, 2, [2/3,1] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= LieAlgebraByStructureConstants( Rationals, T );</span>
+&lt;Lie algebra of dimension 2 over Rationals&gt;
+</pre></div>
+
+<p>In <strong class="pkg">GAP</strong> an algebra is naturally a vector space. Hence all the functionality for vector spaces is also available for algebras.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:= GF(2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z:= Zero( F );;  o:= One( F );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T:= EmptySCTable( 3, z, "antisymmetric" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetEntrySCTable( T, 1, 2, [ o, 1, o, 3 ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetEntrySCTable( T, 1, 3, [ o, 1 ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetEntrySCTable( T, 2, 3, [ o, 3 ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:= AlgebraByStructureConstants( F, T );</span>
+&lt;algebra of dimension 3 over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension( A );</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftActingDomain( A );</span>
+GF(2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Basis( A );</span>
+CanonicalBasis( &lt;algebra of dimension 3 over GF(2)&gt; )
+</pre></div>
+
+<p>Subalgebras and ideals of an algebra can be constructed by specifying a set of generators for the subalgebra or ideal. The quotient space of an algebra by an ideal is naturally an algebra itself.</p>
+
+<p>In the following example we temporarily increase the line length limit from its default value 80 to 81 in order to make the long output expression fit into one line.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:= [ [ 1, 2, 3 ], [ 0, 1, 6 ], [ 0, 0, 1 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:= Algebra( Rationals, [ m ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">subA:= Subalgebra( A, [ m-m^2 ] );</span>
+&lt;algebra over Rationals, with 1 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension( subA );</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">idA:= Ideal( A, [ m-m^3 ] );</span>
+&lt;two-sided ideal in &lt;algebra of dimension 3 over Rationals&gt;, 
+  (1 generators)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension( idA ); </span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B:= A/idA;</span>
+&lt;algebra of dimension 1 over Rationals&gt;
+</pre></div>
+
+<p>The call <code class="code">B:= A/idA</code> creates a new algebra that does not "know" about its connection with <code class="code">A</code>. If we want to connect an algebra with its factor via a homomorphism, then we first have to create the homomorphism (<code class="func">NaturalHomomorphismByIdeal</code> (<span class="RefLink">Reference: NaturalHomomorphismByIdeal</span>)). After this we create the factor algebra from the homomorphism by the function <code class="func">ImagesSource</code> (<span class="RefLink">Reference: ImagesSource</span>). In the next example we divide an algebra <code class="code">A</code> by its radical and lift the central idempotents of the factor to the original algebra <code class="code">A</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m1:=[[1,0,0],[0,2,0],[0,0,3]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m2:=[[0,1,0],[0,0,2],[0,0,0]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:= Algebra( Rationals, [ m1, m2 ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension( A );</span>
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RadicalOfAlgebra( A );</span>
+&lt;algebra of dimension 3 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h:= NaturalHomomorphismByIdeal( A, R );</span>
+&lt;linear mapping by matrix, &lt;algebra of dimension 
+6 over Rationals&gt; -&gt; &lt;algebra of dimension 3 over Rationals&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AmodR:= ImagesSource( h );</span>
+&lt;algebra of dimension 3 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">id:= CentralIdempotentsOfAlgebra( AmodR );</span>
+[ v.3, v.2+(-3)*v.3, v.1+(-2)*v.2+(3)*v.3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreImagesRepresentative( h, id[1] );</span>
+[ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreImagesRepresentative( h, id[2] );</span>
+[ [ 0, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreImagesRepresentative( h, id[3] );</span>
+[ [ 1, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ]
+</pre></div>
+
+<p>Structure constants tables for the simple Lie algebras are present in <strong class="pkg">GAP</strong>. They can be constructed using the function <code class="func">SimpleLieAlgebra</code> (<span class="RefLink">Reference: SimpleLieAlgebra</span>). The Lie algebras constructed by this function come with a root system attached.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra( "G", 2, Rationals );</span>
+&lt;Lie algebra of dimension 14 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem( L );</span>
+&lt;root system of rank 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PositiveRoots( R );</span>
+[ [ 2, -1 ], [ -3, 2 ], [ -1, 1 ], [ 1, 0 ], [ 3, -1 ], [ 0, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CartanMatrix( R );</span>
+[ [ 2, -1 ], [ -3, 2 ] ]
+</pre></div>
+
+<p>Another example of algebras is provided by <em>quaternion algebras</em>. We define a quaternion algebra over an extension field of the rationals, namely the field generated by <span class="SimpleMath">\(\sqrt{{5}}\)</span>. (The number <code class="code">EB(5)</code> is equal to <span class="SimpleMath">\(1/2 (-1+\sqrt{{5}})\)</span>. The field is printed as <code class="code">NF(5,[ 1, 4 ])</code>.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b5:= EB(5);</span>
+E(5)+E(5)^4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q:= QuaternionAlgebra( FieldByGenerators( [ b5 ] ) );</span>
+&lt;algebra-with-one of dimension 4 over NF(5,[ 1, 4 ])&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens:= GeneratorsOfAlgebra( q );</span>
+[ e, i, j, k ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e:= gens[1];; i:= gens[2];; j:= gens[3];; k:= gens[4];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAssociative( q );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCommutative( q );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i*j; j*i;</span>
+k
+(-1)*k
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">One( q );</span>
+e
+</pre></div>
+
+<p>If the coefficient field is a real subfield of the complex numbers then the quaternion algebra is in fact a division ring.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDivisionRing( q );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Inverse( e+i+j );</span>
+(1/3)*e+(-1/3)*i+(-1/3)*j
+</pre></div>
+
+<p>So <strong class="pkg">GAP</strong> knows about this fact. As in any ring, we can look at groups of units. (The function <code class="func">StarCyc</code> (<span class="RefLink">Reference: StarCyc</span>) used below computes the unique algebraic conjugate of an element in a quadratic subfield of a cyclotomic field.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c5:= StarCyc( b5 );</span>
+E(5)^2+E(5)^3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g1:= 1/2*( b5*e + i - c5*j );</span>
+(1/2*E(5)+1/2*E(5)^4)*e+(1/2)*i+(-1/2*E(5)^2-1/2*E(5)^3)*j
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order( g1 );</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g2:= 1/2*( -c5*e + i + b5*k );</span>
+(-1/2*E(5)^2-1/2*E(5)^3)*e+(1/2)*i+(1/2*E(5)+1/2*E(5)^4)*k
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order( g2 );</span>
+10
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=Group( g1, g2 );;</span>
+#I  default `IsGeneratorsOfMagmaWithInverses' method returns `true' for 
+  [ (1/2*E(5)+1/2*E(5)^4)*e+(1/2)*i+(-1/2*E(5)^2-1/2*E(5)^3)*j, 
+  (-1/2*E(5)^2-1/2*E(5)^3)*e+(1/2)*i+(1/2*E(5)+1/2*E(5)^4)*k ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( g );</span>
+120
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPerfect( g );</span>
+true
+</pre></div>
+
+<p>Since there is only one perfect group of order 120, up to isomorphism, we see that the group <code class="code">g</code> is isomorphic to <span class="SimpleMath">\(SL_2(5)\)</span>. As usual, a permutation representation of the group can be constructed using a suitable action of the group.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cos:= RightCosets( g, Subgroup( g, [ g1 ] ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( cos );</span>
+24
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom:= ActionHomomorphism( g, cos, OnRight );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">im:= Image( hom );</span>
+Group([ (2,3,5,9,15)(4,7,12,8,14)(10,17,23,20,24)(11,19,22,16,13), 
+  (1,2,4,8,3,6,11,20,17,19)(5,10,18,7,13,22,12,21,24,15)(9,16)(14,23) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( im );</span>
+120
+</pre></div>
+
+<p>To get a matrix representation of <code class="code">g</code> or of the whole algebra <code class="code">q</code>, we must specify a basis of the vector space on which the algebra acts, and compute the linear action of elements w.r.t. this basis.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bas:= CanonicalBasis( q );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BasisVectors( bas );</span>
+[ e, i, j, k ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">op:= OperationAlgebraHomomorphism( q, bas, OnRight );</span>
+&lt;op. hom. AlgebraWithOne( NF(5,[ 1, 4 ]), 
+[ e, i, j, k ] ) -&gt; matrices of dim. 4&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImagesRepresentative( op, e );</span>
+[ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImagesRepresentative( op, i );</span>
+[ [ 0, 1, 0, 0 ], [ -1, 0, 0, 0 ], [ 0, 0, 0, -1 ], [ 0, 0, 1, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImagesRepresentative( op, g1 );</span>
+[ [ 1/2*E(5)+1/2*E(5)^4, 1/2, -1/2*E(5)^2-1/2*E(5)^3, 0 ], 
+  [ -1/2, 1/2*E(5)+1/2*E(5)^4, 0, -1/2*E(5)^2-1/2*E(5)^3 ], 
+  [ 1/2*E(5)^2+1/2*E(5)^3, 0, 1/2*E(5)+1/2*E(5)^4, -1/2 ], 
+  [ 0, 1/2*E(5)^2+1/2*E(5)^3, 1/2, 1/2*E(5)+1/2*E(5)^4 ] ]
+</pre></div>
+
+<p><a id="X843A8D6F7A7592B5" name="X843A8D6F7A7592B5"></a></p>
+
+<h4>6.3 <span class="Heading">Further Information about Vector Spaces and Algebras</span></h4>
+
+<p>More information about vector spaces can be found in Chapter <span class="RefLink">Reference: Vector Spaces</span>. Chapter <span class="RefLink">Reference: Algebras</span> deals with the functionality for general algebras. Furthermore, concerning special functions for Lie algebras, there is Chapter <span class="RefLink">Reference: Lie Algebras</span>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

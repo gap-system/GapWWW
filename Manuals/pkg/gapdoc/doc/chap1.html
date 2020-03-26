@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (GAPDoc) - Chapter 1: Introduction and Example</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X7D4EE663818DA109" name="X7D4EE663818DA109"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7D4EE663818DA109">1 <span class="Heading">Introduction and Example</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X8590236E858F7E93">1.1 <span class="Heading">XML</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7B47AFA881BFC9DC">1.2 <span class="Heading">A complete example</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X79A97B867F45E5C7">1.3 <span class="Heading">Some questions</span></a>
+</span>
+</div>
+</div>
+
+<h3>1 <span class="Heading">Introduction and Example</span></h3>
+
+<p>The main purpose of the <strong class="pkg">GAPDoc</strong> package is to define a file format for documentation of <strong class="pkg">GAP</strong>-programs and -packages (see <a href="chapBib.html#biBGAP4">[GAP06]</a>). The problem is that such documentation should be readable in several output formats. For example it should be possible to read the documentation inside the terminal in which <strong class="pkg">GAP</strong> is running (a text mode) and there should be a printable version in high typesetting quality (produced by some version of TeX). It is also popular to view <strong class="pkg">GAP</strong>'s online help with a Web-browser via an HTML-version of the documentation. Nowadays one can use LaTeX and standard viewer programs to produce and view on the screen <code class="code">dvi</code>- or <code class="code">pdf</code>-files with full support of internal and external hyperlinks. Certainly there will be other interesting document formats and tools in this direction in the future.</p>
+
+<p>Our aim is to find a <em>format for writing</em> the documentation which allows a relatively easy translation into the output formats just mentioned and which hopefully makes it easy to translate to future output formats as well.</p>
+
+<p>To make documentation written in the <strong class="pkg">GAPDoc</strong> format directly usable, we also provide a set of programs, called converters, which produce text-, hyperlinked LaTeX- and HTML-output versions of a <strong class="pkg">GAPDoc</strong> document. These programs are developed by the first named author. They run completely inside <strong class="pkg">GAP</strong>, i.e., no external programs are needed. You only need <code class="code">latex</code> and <code class="code">pdflatex</code> to process the LaTeX output. These programs are described in Chapter <a href="chap5.html#X845E7FDC7C082CC4"><span class="RefLink">5</span></a>.</p>
+
+<p><a id="X8590236E858F7E93" name="X8590236E858F7E93"></a></p>
+
+<h4>1.1 <span class="Heading">XML</span></h4>
+
+<p>The definition of the <strong class="pkg">GAPDoc</strong> format uses XML, the "eXtendible Markup Language". This is a standard (defined by the W3C consortium, see <span class="URL"><a href="http://www.w3c.org">http://www.w3c.org</a></span>) which lays down a syntax for adding markup to a document or to some data. It allows to define document structures via introducing markup <em>elements</em> and certain relations between them. This is done in a <em>document type definition</em>. The file <code class="file">gapdoc.dtd</code> contains such a document type definition and is the central part of the <strong class="pkg">GAPDoc</strong> package.</p>
+
+<p>The easiest way for getting a good idea about this is probably to look at an example. The Appendix <a href="chapA.html#X830C58F97F9CD901"><span class="RefLink">A</span></a> contains a short but complete <strong class="pkg">GAPDoc</strong> document for a fictitious share package. In the next section we will go through this document, explain basic facts about XML and the <strong class="pkg">GAPDoc</strong> document type, and give pointers to more details in later parts of this documentation.</p>
+
+<p>In the last Section <a href="chap1.html#X79A97B867F45E5C7"><span class="RefLink">1.3</span></a> of this introductory chapter we try to answer some general questions about the decisions which lead to the <strong class="pkg">GAPDoc</strong> package.</p>
+
+<p><a id="X7B47AFA881BFC9DC" name="X7B47AFA881BFC9DC"></a></p>
+
+<h4>1.2 <span class="Heading">A complete example</span></h4>
+
+<p>In this section we recall the lines from the example document in Appendix <a href="chapA.html#X830C58F97F9CD901"><span class="RefLink">A</span></a> and give some explanations.</p>
+
+
+<div class="example"><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt; 
+</pre></div>
+
+<p>This line just tells a human reader and computer programs that the file is a document with XML markup and that the text is encoded in the UTF-8 character set (other common encodings are ASCII or ISO-8895-X encodings).</p>
+
+
+<div class="example"><pre>
+&lt;!--   A complete "fake package" documentation   
+--&gt;
+</pre></div>
+
+<p>Everything in a XML file between "<code class="code">&lt;!--</code>" and "<code class="code">--&gt;</code>" is a comment and not part of the document content.</p>
+
+
+<div class="example"><pre>
+&lt;!DOCTYPE Book SYSTEM "gapdoc.dtd"&gt;
+</pre></div>
+
+<p>This line says that the document contains markup which is defined in the system file <code class="file">gapdoc.dtd</code> and that the markup obeys certain rules defined in that file (the ending <code class="file">dtd</code> means "document type definition"). It further says that the actual content of the document consists of an element with name "Book". And we can really see that the remaining part of the file is enclosed as follows:</p>
+
+
+<div class="example"><pre>
+&lt;Book Name="3k+1"&gt;
+  [...] (content omitted)
+&lt;/Book&gt;
+</pre></div>
+
+<p>This demonstrates the basics of the markup in XML. This part of the document is an "element". It consists of the "start tag" <code class="code">&lt;Book Name="3k+1"&gt;</code>, the "element content" and the "end tag" <code class="code">&lt;/Book&gt;</code> (end tags always start with <code class="code">&lt;/</code>). This element also has an "attribute" <code class="code">Name</code> whose "value" is <code class="code">3k+1</code>.</p>
+
+<p>If you know HTML, this will look familiar to you. But there are some important differences: The element name <code class="code">Book</code> and attribute name <code class="code">Name</code> are <em>case sensitive</em>. The value of an attribute must <em>always</em> be enclosed in quotes. In XML <em>every</em> element has a start and end tag (which can be combined for elements defined as "empty", see for example <code class="code">&lt;TableOfContents/&gt;</code> below).</p>
+
+<p>If you know LaTeX, you are familiar with quite different types of markup, for example: The equivalent of the <code class="code">Book</code> element in LaTeX is <code class="code">\begin{document} ... \end{document}</code>. The sectioning in LaTeX is not done by explicit start and end markup, but implicitly via heading commands like <code class="code">\section</code>. Other markup is done by using braces <code class="code">{}</code> and putting some commands inside. And for mathematical formulae one can use the <code class="code">$</code> for the start <em>and</em> the end of the markup. In XML <em>all</em> markup looks similar to that of the <code class="code">Book</code> element.</p>
+
+<p>The content of the book starts with a title page.</p>
+
+
+<div class="example"><pre>
+&lt;TitlePage&gt;
+  &lt;Title&gt;The &lt;Package&gt;ThreeKPlusOne&lt;/Package&gt; Package&lt;/Title&gt;
+  &lt;Version&gt;Version 42&lt;/Version&gt;
+  &lt;Author&gt;Dummy Authör
+    &lt;Email&gt;3kplusone@dev.null&lt;/Email&gt;
+  &lt;/Author&gt;
+
+  &lt;Copyright&gt;&amp;copyright; 2000 The Author. &lt;P/&gt;
+    You can do with this package what you want.&lt;P/&gt; Really.
+  &lt;/Copyright&gt;
+&lt;/TitlePage&gt;
+</pre></div>
+
+<p>The content of the <code class="code">TitlePage</code> element consists again of elements. In Chapter <a href="chap3.html#X7859CFF180D52D49"><span class="RefLink">3</span></a> we describe which elements are allowed within a <code class="code">TitlePage</code> and that their ordering is prescribed in this case. In the (stupid) name of the author you see that a German umlaut is used directly (in ISO-latin1 encoding).</p>
+
+<p>Contrary to LaTeX- or HTML-files this markup does not say anything about the actual layout of the title page in any output version of the document. It just adds information about the <em>meaning</em> of pieces of text.</p>
+
+<p>Within the <code class="code">Copyright</code> element there are two more things to learn about XML markup. The <code class="code">&lt;P/&gt;</code> is a complete element. It is a combined start and end tag. This shortcut is allowed for elements which are defined to be always "empty", i.e., to have no content. You may have already guessed that <code class="code">&lt;P/&gt;</code> is used as a paragraph separator. Note that empty lines do not separate paragraphs (contrary to LaTeX).</p>
+
+<p>The other construct we see here is <code class="code">&amp;copyright;</code>. This is an example of an "entity" in XML and is a macro for some substitution text. Here we use an entity as a shortcut for a complicated expression which makes it possible that the term <em>copyright</em> is printed as some text like <code class="code">(C)</code> in text terminal output and as a copyright character in other output formats. In <strong class="pkg">GAPDoc</strong> we predefine some entities. Certain "special characters" must be typed via entities, for example "&lt;", "&gt;" and "&amp;" to avoid a misinterpretation as XML markup. It is possible to define additional entities for your document inside the <code class="code">&lt;!DOCTYPE ...&gt;</code> declaration, see <a href="chap2.html#X7BDFF6D37FBED400"><span class="RefLink">2.2-3</span></a>.</p>
+
+<p>Note that elements in XML must always be properly nested, as in this example. A construct like <code class="code">&lt;a&gt;&lt;b&gt;...&lt;/a&gt;&lt;/b&gt;</code> is <em>not</em> allowed.</p>
+
+
+<div class="example"><pre>
+&lt;TableOfContents/&gt;
+</pre></div>
+
+<p>This is another example of an "empty element". It just means that a table of contents for the whole document should be included into any output version of the document.</p>
+
+<p>After this the main text of the document follows inside certain sectioning elements:</p>
+
+
+<div class="example"><pre>
+&lt;Body&gt;
+  &lt;Chapter&gt; &lt;Heading&gt;The &lt;M&gt;3k+1&lt;/M&gt; Problem&lt;/Heading&gt;
+    &lt;Section Label="sec:theory"&gt; &lt;Heading&gt;Theory&lt;/Heading&gt;
+      [...] (content omitted)
+    &lt;/Section&gt;
+    &lt;Section&gt; &lt;Heading&gt;Program&lt;/Heading&gt;
+      [...] (content omitted) 
+    &lt;/Section&gt;
+  &lt;/Chapter&gt;
+&lt;/Body&gt;
+</pre></div>
+
+<p>These elements are used similarly to "\chapter" and "\section" in LaTeX. But note that the explicit end tags are necessary here.</p>
+
+<p>The sectioning commands allow to assign an optional attribute "Label". This can be used for referring to a section inside the document.</p>
+
+<p>The text of the first section starts as follows. The whitespace in the text is unimportant and the indenting is not necessary.</p>
+
+
+<div class="example"><pre>
+
+      Let  &lt;M&gt;k \in  &amp;NN;&lt;/M&gt; be  a  natural number.  We consider  the
+      sequence &lt;M&gt;n(i, k), i \in &amp;NN;,&lt;/M&gt; with &lt;M&gt;n(1, k) = k&lt;/M&gt; and
+      else 
+</pre></div>
+
+<p>Here we come to the interesting question how to type mathematical formulae in a <strong class="pkg">GAPDoc</strong> document. We did not find any alternative for writing formulae in TeX syntax. (There is MATHML, but even simple formulae contain a lot of markup, become quite unreadable and they are cumbersome to type. Furthermore there seem to be no tools available which translate such formulae in a nice way into TeX and text.) So, formulae are essentially typed as in LaTeX. (Actually, it is also possible to type unicode characters of some mathematical symbols directly, or via an entity like the <code class="code">&amp;NN;</code> above.) There are three types of elements containing formulae: "M", "Math" and "Display". The first two are for in-text formulae and the third is for displayed formulae. Here "M" and "Math" are equivalent, when translating a <strong class="pkg">GAPDoc</strong> document into LaTeX. But they are handled differently for terminal text (and HTML) output. For the content of an "M"-element there are defined rules for a translation into well readable terminal text. More complicated formulae are in "Math" or "Display" elements and they are just printed as they are typed in text output. So, to make a section well readable inside a terminal window you should try to put as many formulae as possible into "M"-elements. In our example text we used the notation <code class="code">n(i, k)</code> instead of <code class="code">n_i(k)</code> because it is easier to read in text mode. See Sections <a href="chap2.html#X7EAE0C5A835F126F"><span class="RefLink">2.2-2</span></a> and <a href="chap3.html#X7A0D26B180BEDE37"><span class="RefLink">3.9</span></a> for more details.</p>
+
+<p>A few lines further on we find two non-internal references.</p>
+
+
+<div class="example"><pre>
+      problem, see &lt;Cite Key="Wi98"/&gt; or
+      &lt;URL&gt;http://mathsrv.ku-eichstaett.de/MGF/homes/wirsching/&lt;/URL&gt;
+</pre></div>
+
+<p>The first within the "Cite"-element is the citation of a book. In <strong class="pkg">GAPDoc</strong> we use the widely used BibTeX database format for reference lists. This does not use XML but has a well documented structure which is easy to parse. And many people have collections of references readily available in this format. The reference list in an output version of the document is produced with the empty element</p>
+
+
+<div class="example"><pre>
+&lt;Bibliography Databases="3k+1" /&gt;
+</pre></div>
+
+<p>close to the end of our example file. The attribute "Databases" give the name(s) of the database (<code class="file">.bib</code>) files which contain the references.</p>
+
+<p>Putting a Web-address into an "URL"-element allows one to create a hyperlink in output formats which allow this.</p>
+
+<p>The second section of our example contains a special kind of subsection defined in <strong class="pkg">GAPDoc</strong>.</p>
+
+
+<div class="example"><pre>
+      &lt;ManSection&gt; 
+        &lt;Func Name="ThreeKPlusOneSequence" Arg="k[, max]"/&gt;
+        &lt;Description&gt;
+          This  function computes  for a  natural number  &lt;A&gt;k&lt;/A&gt; the
+          beginning of the sequence  &lt;M&gt;n(i, k)&lt;/M&gt; defined in section
+          &lt;Ref Sect="sec:theory"/&gt;.  The sequence  stops at  the first
+          &lt;M&gt;1&lt;/M&gt;  or at  &lt;M&gt;n(&lt;A&gt;max&lt;/A&gt;, k)&lt;/M&gt;,  if &lt;A&gt;max&lt;/A&gt;  is
+          given.
+&lt;Example&gt;
+gap&gt; ThreeKPlusOneSequence(101);
+"Sorry, not yet implemented. Wait for Version 84 of the package"
+&lt;/Example&gt;
+        &lt;/Description&gt;
+      &lt;/ManSection&gt;
+</pre></div>
+
+<p>A "ManSection" contains the description of some function, operation, method, filter and so on. The "Func"-element describes the name of a <em>function</em> (there are also similar elements "Oper", "Meth", "Filt" and so on) and names for its arguments, optional arguments enclosed in square brackets. See Section <a href="chap3.html#X877B8B7C7EDD09E9"><span class="RefLink">3.4</span></a> for more details.</p>
+
+<p>In the "Description" we write the argument names as "A"-elements. A good description of a function should usually contain an example of its use. For this there are some verbatim-like elements in <strong class="pkg">GAPDoc</strong>, like "Example" above (here, clearly, whitespace matters which causes a slightly strange indenting).</p>
+
+<p>The text contains an internal reference to the first section via the explicitly defined label <code class="code">sec:theory</code>.</p>
+
+<p>The first section also contains a "Ref"-element which refers to the function described here. Note that there is no explicit label for such a reference. The pair <code class="code">&lt;Func Name="ThreeKPlusOneSequence" Arg="k[, max]"/&gt;</code> and <code class="code">&lt;Ref Func="ThreeKPlusOneSequence"/&gt;</code> does the cross referencing (and hyperlinking if possible) implicitly via the name of the function.</p>
+
+<p>Here is one further element from our example document which we want to explain.</p>
+
+
+<div class="example"><pre>
+&lt;TheIndex/&gt;
+</pre></div>
+
+<p>This is again an empty element which just says that an output version of the document should contain an index. Many entries for the index are generated automatically because the "Func" and similar elements implicitly produce such entries. It is also possible to include explicit additional entries in the index.</p>
+
+<p><a id="X79A97B867F45E5C7" name="X79A97B867F45E5C7"></a></p>
+
+<h4>1.3 <span class="Heading">Some questions</span></h4>
+
+
+<dl>
+<dt><strong class="Mark">Are those XML files too ugly to read and edit?</strong></dt>
+<dd><p>Just have a look and decide yourself. The markup needs more characters than most TeX or LaTeX markup. But the structure of the document is easier to see. If you configure your favorite editor well, you do not need more key strokes for typing the markup than in LaTeX.</p>
+
+</dd>
+<dt><strong class="Mark">Why do we not use LaTeX alone?</strong></dt>
+<dd><p>LaTeX is good for writing books. But LaTeX files are generally difficult to parse and to process to other output formats like text for browsing in a terminal window or HTML (or new formats which may become popular in the future). <strong class="pkg">GAPDoc</strong> markup is one step more abstract than LaTeX insofar as it describes meaning instead of appearance of text. The inner workings of LaTeX are too complicated to learn without pain, which makes it difficult to overcome problems that occur occasionally.</p>
+
+</dd>
+<dt><strong class="Mark">Why XML and not a newly defined markup language?</strong></dt>
+<dd><p>XML is a well defined standard that is more and more widely used. Lots of people have thought about it. Years of experience with SGML went into the design. It is easy to explain, easy to parse and lots of tools are available, there will be more in the future.</p>
+
+</dd>
+</dl>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

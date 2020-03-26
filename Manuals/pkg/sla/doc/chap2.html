@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (SLA) - Chapter 2: Auxiliary Functions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X866E18057EF83F65" name="X866E18057EF83F65"></a></p>
+<div class="ChapSects"><a href="chap2.html#X866E18057EF83F65">2 <span class="Heading">Auxiliary Functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7D22A7DF7EF96F24">2.1 <span class="Heading"> Root Systems </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8122C42F7CCFC6ED">2.1-1 ExtendedCartanMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7DABAF857F49C8EB">2.1-2 CartanType</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X808290B47CC22D62">2.2 <span class="Heading"> Weyl groups </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8789147A7A570A01">2.2-1 WeylTransversal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X78A375CD80A0F31E">2.2-2 SizeOfWeylGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X835F02DB7E5C1AF4">2.2-3 WeylGroupAsPermGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X824D038880907771">2.2-4 ApplyWeylPermToWeight</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X79E8F3D5809EB6F8">2.2-5 WeylWordAsPerm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X821242C278AA7C5F">2.2-6 PermAsWeylWord</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X78851B9C8710F7FD">2.3 <span class="Heading"> Lie Algebras and Their Modules </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7FA167DB80B7D701">2.3-1 IsomorphismOfSemisimpleLieAlgebras</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7866133B814EA2B2">2.3-2 AdmissibleLattice</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A4E769A87A9B2B3">2.3-3 DirectSumDecomposition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7889949D87615523">2.3-4 CharacteristicsOfStrata</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Auxiliary Functions</span></h3>
+
+<p>This chapter contains the description of some functions that do not fit in any other chapter.</p>
+
+<p><a id="X7D22A7DF7EF96F24" name="X7D22A7DF7EF96F24"></a></p>
+
+<h4>2.1 <span class="Heading"> Root Systems </span></h4>
+
+<p><a id="X8122C42F7CCFC6ED" name="X8122C42F7CCFC6ED"></a></p>
+
+<h5>2.1-1 ExtendedCartanMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExtendedCartanMatrix</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">R</var> is a root system. This function returns the extended Cartan matrix of <var class="Arg">R</var>. That is the Cartan matrix correponding to the lowest root (coming first), and the simple roots of <var class="Arg">R</var>.</p>
+
+<p>The output is a record with components <var class="Arg">ECM</var> (the extended Cartan matrix) and <var class="Arg">labels</var> (the labels of the corresponding Dynkin diagram; they are the integer coefficients of a linear dependency of the roots corresponding to the nodes).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem("F",4);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ExtendedCartanMatrix(R);</span>
+rec( ECM := [ [ 2, -1, 0, 0, 0 ], [ -1, 2, -1, 0, 0 ], [ 0, -1, 2, -2, 0 ], 
+      [ 0, 0, -1, 2, -1 ], [ 0, 0, 0, -1, 2 ] ], labels := [ 1, 2, 3, 4, 2 ] )
+</pre></div>
+
+<p><a id="X7DABAF857F49C8EB" name="X7DABAF857F49C8EB"></a></p>
+
+<h5>2.1-2 CartanType</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CartanType</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">C</var> is a Cartan matrix (i.e., an integer matrix with 2-s on the diagonal, non-positive entries otherwise, and there exists a diagonal integer matrix <var class="Arg">D</var> such that <var class="Arg">CD</var> is a positive definite symmetric matrix). This function returns a record with two components: <var class="Arg">types</var>, a list containing the types of the simple components of the corresponding root system, and <var class="Arg">enumeration</var>, a standard enumeration of the vertices of the Dynkin diagram of <var class="Arg">C</var>. So this can be used to construct isomorphisms of root systems.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C:= [[2,0,-3,0],[0,2,0,-1],[-1,0,2,0],[0,-1,0,2]];</span>
+[ [ 2, 0, -3, 0 ], [ 0, 2, 0, -1 ], [ -1, 0, 2, 0 ], [ 0, -1, 0, 2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CartanType(C);</span>
+rec( enumeration := [ [ 3, 1 ], [ 2, 4 ] ], 
+  types := [ [ "G", 2 ], [ "A", 2 ] ] )
+</pre></div>
+
+<p><a id="X808290B47CC22D62" name="X808290B47CC22D62"></a></p>
+
+<h4>2.2 <span class="Heading"> Weyl groups </span></h4>
+
+<p><a id="X8789147A7A570A01" name="X8789147A7A570A01"></a></p>
+
+<h5>2.2-1 WeylTransversal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeylTransversal</code>( <var class="Arg">R</var>, <var class="Arg">inds</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeylTransversal</code>( <var class="Arg">R</var>, <var class="Arg">roots</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">R</var> is a root system, and <var class="Arg">inds</var> a list of indices of <em>positive</em> roots of <var class="Arg">R</var> that form a set of simple roots of a root subsystem of <var class="Arg">R</var> (the system does not check this). Here an index of a positive root is its position in the list <var class="Arg">PositiveRootsNF( R )</var>.</p>
+
+<p>This function returns a list of shortest representatives of the right cosets of the corresponding Weyl subgroup of the Weyl group of <var class="Arg">R</var>. The elements of the Weyl group are given as reduced expressions.</p>
+
+<p>In the second form <var class="Arg">rts</var> is a list of roots of <var class="Arg">R</var>, that form a set of simple roots of a root subsystem of <var class="Arg">R</var> (again, this is not checked). In this form the roots so not have to be positive. They have to be represented with respect to the basis of simple roots, i.e., they are elements of <var class="Arg">PositiveRootsNF(R)</var> or of <var class="Arg">NegativeRootsNF(R)</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem("A",3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WeylTransversal( R, [2,6] );</span>
+[ [  ], [ 1 ], [ 3 ], [ 1, 2 ], [ 1, 3 ], [ 3, 2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem("E",8);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:= PositiveRootsNF(R);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:= WeylTransversal( R, [p[1],p[3],p[4],p[5],p[6],p[7],p[8],-p[120]] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(a);</span>
+1920
+</pre></div>
+
+<p><a id="X78A375CD80A0F31E" name="X78A375CD80A0F31E"></a></p>
+
+<h5>2.2-2 SizeOfWeylGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SizeOfWeylGroup</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SizeOfWeylGroup</code>( <var class="Arg">type</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SizeOfWeylGroup</code>( <var class="Arg">X</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>In the first from <var class="Arg">R</var> is a root system. In the second form <var class="Arg">type</var> is a list of lists describing the type of a root system. For example: <var class="Arg">[["A",3],["B",5],["G",2]]</var>. In the third form <var class="Arg">X</var> is a letter (i.e., a string) and <var class="Arg">n</var> a positive integer, so that <var class="Arg"> Xn</var> is the type of a root system. In all cases the number of elements of the Weyl group is returned.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem( SimpleLieAlgebra("E",6,Rationals) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SizeOfWeylGroup(R);                </span>
+51840
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SizeOfWeylGroup( [["E",6]] );</span>
+51840
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SizeOfWeylGroup( "E", 6 );   </span>
+51840
+</pre></div>
+
+<p><a id="X835F02DB7E5C1AF4" name="X835F02DB7E5C1AF4"></a></p>
+
+<h5>2.2-3 WeylGroupAsPermGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeylGroupAsPermGroup</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">R</var> is a root system. This function returns a permutation group whose set of elements is in bijection with the set of elements of the Weyl group of <var class="Arg">R</var>. More precisely, this bijection works as follows.</p>
+
+<p>Let <span class="SimpleMath">n</span> be the number of positive roots of <var class="Arg">R</var>. We list the positive roots in the order in which they apppear in <var class="Arg">PositiveRootsNF( R )</var>. To this list we append the negative roots, listed in the same order. Thus the list of roots is <span class="SimpleMath">{α_1,...,α_2n}</span>, where <span class="SimpleMath">α_i+n = -α_i</span> for <span class="SimpleMath">1≤ i≤ n</span>. Then a reflection <span class="SimpleMath">s_α</span> corresponding to the root <span class="SimpleMath">α</span> corresponds to the permutation <span class="SimpleMath">π_α</span>, where <span class="SimpleMath">s_α( α_i ) = α_i^π_α}</span>. Note, however, that <span class="SimpleMath">s_α</span> acts from the <em>left</em>, whereas <span class="SimpleMath">π_α</span> acts from the <em>right</em>. Let <span class="SimpleMath">W</span> denote the Weyl group of <var class="Arg">R</var> and let <span class="SimpleMath">G</span> be the group generated by the permutations <span class="SimpleMath">π_α</span> for <span class="SimpleMath">α</span> in the fixed set of simple roots of <var class="Arg">R</var>. Then mapping <span class="SimpleMath">s_α</span> to <span class="SimpleMath">π_α</span> extends to an <em>anti-isomorphism</em> <span class="SimpleMath">W-&gt; G</span>. The reason for doing it like this is that in the vast majority of literature on Lie theory the Weyl group acts from the left, but in <strong class="pkg">GAP</strong> permutation groups act from the right. When applying the group that is output by this function this difference has to be kept in mind. For example, the orbit of a root <span class="SimpleMath">β</span> under <span class="SimpleMath">W</span> equals the set of images of <span class="SimpleMath">β</span> under the representatives of the left cosets of the stabilizer of <span class="SimpleMath">β</span>. But when we use the group <span class="SimpleMath">G</span> we have to consider the right cosets for this.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem("E",6);</span>
+&lt;root system of type E6&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:= WeylGroupAsPermGroup( R );</span>
+&lt;permutation group with 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(G);</span>
+51840
+</pre></div>
+
+<p><a id="X824D038880907771" name="X824D038880907771"></a></p>
+
+<h5>2.2-4 ApplyWeylPermToWeight</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ApplyWeylPermToWeight</code>( <var class="Arg">R</var>, <var class="Arg">p</var>, <var class="Arg">w</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">R</var> is a root system, <var class="Arg">p</var> is an element of the group returned by <code class="func">WeylGroupAsPermGroup</code> (<a href="chap2.html#X835F02DB7E5C1AF4"><span class="RefLink">2.2-3</span></a>) with input <var class="Arg">R</var>. Here <var class="Arg">w</var> is a weight, that the list of coefficients of a weight when written as a linear combination of fundamental weights. This function returns the result of acting with the element of the Weyl group corresponding to <var class="Arg">p</var> on <var class="Arg">w</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem("D",4);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:= WeylGroupAsPermGroup(R);</span>
+&lt;permutation group with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">wt:= ApplyWeylPermToWeight( R, Random(G), [1,1,1,1] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ConjugateDominantWeight( WeylGroup(R), wt );</span>
+[ 1, 1, 1, 1 ] 
+</pre></div>
+
+<p><a id="X79E8F3D5809EB6F8" name="X79E8F3D5809EB6F8"></a></p>
+
+<h5>2.2-5 WeylWordAsPerm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeylWordAsPerm</code>( <var class="Arg">R</var>, <var class="Arg">u</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">R</var> is a root system, and <var class="Arg">u</var> is an element of the Weyl group given as a (not necessarily reduced) word, that is, <var class="Arg">u</var> is given by a list of indices between 1 and the rank of <var class="Arg">R</var>. This function returns the permutation corresponding to <var class="Arg">u</var>, that is, the image of <var class="Arg">u</var> under the anti-iromorphism discussed in <code class="func">WeylGroupAsPermGroup</code> (<a href="chap2.html#X835F02DB7E5C1AF4"><span class="RefLink">2.2-3</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem("D",4);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WeylWordAsPerm( R, [1,2,1,3,4,2,3,4,1] );</span>
+(1,23,12,17)(2,10,14,22)(3,19,16,6)(4,18,15,7)(5,13,11,24)(8,21)(9,20)
+</pre></div>
+
+<p><a id="X821242C278AA7C5F" name="X821242C278AA7C5F"></a></p>
+
+<h5>2.2-6 PermAsWeylWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PermAsWeylWord</code>( <var class="Arg">R</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>This is the inverse operation to the one discussed in <code class="func">WeylWordAsPerm</code> (<a href="chap2.html#X79E8F3D5809EB6F8"><span class="RefLink">2.2-5</span></a>). That is, the element of the Weyl group (this time given as reduced expression) corresponding to the permutation <var class="Arg">p</var> is returned.</p>
+
+<p>In the next example we compute generators of the stabilizer of a subset of a root system. The generators are given as reduced words.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem("D",4);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rts:= [1,3,4,12,13,15,16,24];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:= WeylGroupAsPermGroup(R);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:= Stabilizer( G, rts, OnSets );</span>
+&lt;permutation group of size 64 with 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(S);</span>
+64
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( GeneratorsOfGroup(S), g -&gt; PermAsWeylWord( R, g ) );</span>
+[ [ 3 ], [ 3, 4 ], [ 2, 1, 3, 2, 4, 2, 1, 3, 2, 4 ], [ 2, 1, 3, 2 ], 
+  [ 2, 1, 4, 2 ], [ 1, 3 ] ]
+</pre></div>
+
+<p><a id="X78851B9C8710F7FD" name="X78851B9C8710F7FD"></a></p>
+
+<h4>2.3 <span class="Heading"> Lie Algebras and Their Modules </span></h4>
+
+<p><a id="X7FA167DB80B7D701" name="X7FA167DB80B7D701"></a></p>
+
+<h5>2.3-1 IsomorphismOfSemisimpleLieAlgebras</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsomorphismOfSemisimpleLieAlgebras</code>( <var class="Arg">L1</var>, <var class="Arg">L2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L1</var> and <var class="Arg">L2</var> are two semisimple Lie algebras that are known to be isomorphic (i.e., they have the same type). This function returns an isomorphism.</p>
+
+<p><a id="X7866133B814EA2B2" name="X7866133B814EA2B2"></a></p>
+
+<h5>2.3-2 AdmissibleLattice</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdmissibleLattice</code>( <var class="Arg">V</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">V</var> is a <em>simple</em> module over a semisimple Lie algebra. This function returns a basis of <var class="Arg">V</var> that spans an admissible lattice in <var class="Arg">V</var>. This means that for a root vector <span class="SimpleMath">x</span> of the acting Lie algebra the matrix <span class="SimpleMath">exp( mx )</span> is integral, where <span class="SimpleMath">mx</span> denotes the matrix of <span class="SimpleMath">x</span> relative to the admissible lattice.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("G",2,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:= HighestWeightModule( L, [2,0] );</span>
+&lt;27-dimensional left-module over &lt;Lie algebra of dimension 14 over Rationals&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B:=AdmissibleLattice(V);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:= L.1;</span>
+v.1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mx:= MatrixOfAction( B, x );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsZero(mx^4); IsZero(mx^5);</span>
+false
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">exp:=Sum( List( [0..4], i -&gt; mx^i/Factorial(i) ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ForAll( Flat(exp), IsInt );</span>
+true
+</pre></div>
+
+<p><a id="X7A4E769A87A9B2B3" name="X7A4E769A87A9B2B3"></a></p>
+
+<h5>2.3-3 DirectSumDecomposition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DirectSumDecomposition</code>( <var class="Arg">V</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">V</var> is a module over a semisimple Lie algebra; this function computes a list of sub-modules such that <var class="Arg">V</var> is their direct sum.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("G",2,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:= HighestWeightModule( L, [1,0] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">W:= TensorProductOfAlgebraModules( V, V );</span>
+&lt;49-dimensional left-module over &lt;Lie algebra of dimension 14 over Rationals&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DirectSumDecomposition( W );</span>
+[ &lt;left-module over &lt;Lie algebra of dimension 14 over Rationals&gt;&gt;, 
+  &lt;left-module over &lt;Lie algebra of dimension 14 over Rationals&gt;&gt;, 
+  &lt;left-module over &lt;Lie algebra of dimension 14 over Rationals&gt;&gt;, 
+  &lt;left-module over &lt;Lie algebra of dimension 14 over Rationals&gt;&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( last, Dimension );</span>
+[ 27, 7, 14, 1 ]
+</pre></div>
+
+<p><a id="X7889949D87615523" name="X7889949D87615523"></a></p>
+
+<h5>2.3-4 CharacteristicsOfStrata</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CharacteristicsOfStrata</code>( <var class="Arg">L</var>, <var class="Arg">hw</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a semisimple Lie algebra over a field of characteristic 0. Secondly, <var class="Arg">hw</var> is a dominant weight, represented as a list of non-negative integers (where the ordering of the fundamantal weights is given by the Cartan matrix of the root system of <var class="Arg">L</var>). Let <span class="SimpleMath">G</span> denote the semisimple algebraic group acting on the irreducible representation with highest weight <var class="Arg">hw</var>. Hesselink (<a href="chapBib.html#biBhesselink">[Hes79]</a>) defined a stratification of the nullcone relative to the action of <span class="SimpleMath">G</span>. Popov and Vinberg (<a href="chapBib.html#biBpovin">[VP89]</a>) have described this stratification in terms of characteristics, which are elements of a Cartan subalgebra of <var class="Arg">L</var>. To each characteristic there corresponds a stratum. This function is an implementation of an algorithm due to Popov (<a href="chapBib.html#biBpopov">[Pop03]</a>), for computing the characteristics of the strata. It returns a list of two lists. The first list contains the characteristics. The second list contains the dimensions of the corresponding strata. If the highest weight <var class="Arg">hw</var> defines the adjoint representation, then the characteristics of the strata are exactly the characteristics of the nilpotent orbits in <var class="Arg">L</var>. This means the following: let <span class="SimpleMath">h</span> be a characteristic, then there are <span class="SimpleMath">e,f</span> in <var class="Arg">L</var> such that the triple <span class="SimpleMath">h,e,f</span> satisfies the commutation relations of <span class="SimpleMath">mathfraksl_2</span>, and the elements <span class="SimpleMath">e</span> thus obtained are the representatives of the nilpotent <span class="SimpleMath">G</span>-orbits in <var class="Arg">L</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("G",2,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("G",2,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CharacteristicsOfStrata( L, [0,1] );</span>
+[ [ v.13+(2)*v.14, (2)*v.13+(3)*v.14, (2)*v.13+(4)*v.14, (6)*v.13+(10)*v.14 ],
+  [ 6, 8, 10, 12 ] ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

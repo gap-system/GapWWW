@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (cvec) - Chapter 6: Linear Algebra routines</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6.html">[MathJax off]</a></p>
+<p><a id="X8571243581CAD780" name="X8571243581CAD780"></a></p>
+<div class="ChapSects"><a href="chap6_mj.html#X8571243581CAD780">6 <span class="Heading">Linear Algebra routines</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X79C4BA5B821BBE58">6.1 <span class="Heading">Semi echelonised bases and cleaning</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X87855EEA8779C855">6.1-1 EmptySemiEchelonBasis</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7D12102B824C97B4">6.1-2 Vectors</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8464F2B87BCA3D34">6.1-3 Length</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7F4EA39D7D18D9B7">6.1-4 CleanRow</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X82A37BC982B1D8CA">6.1-5 SemiEchelonBasisMutable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X82A37BC982B1D8CA">6.1-6 SemiEchelonBasisMutable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X839298477E3F7345">6.1-7 SemiEchelonBasisMutableX</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8309FC85858FC96B">6.1-8 SemiEchelonBasisMutableT</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X845EFC3B87BED1BB">6.1-9 SemiEchelonBasisMutableTX</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X837F20C4831FA08E">6.1-10 SemiEchelonBasisMutableP</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8218306B812EB85E">6.1-11 SemiEchelonBasisMutablePX</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7E5C2C297CAAE3FB">6.1-12 MutableNullspaceMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7A9596C98725862E">6.1-13 MutableNullspaceMatX</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7DA0D5887DB12DC4">6.1-14 NullspaceMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X87684B0F7AB7B7DB">6.1-15 NullspaceMatDestructive</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X825613828322BD22">6.2 <span class="Heading">Characteristic and minimal polynomial</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7BB7DCBF78177638">6.2-1 CharacteristicPolynomialOfMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7FE2A9D281A74FDD">6.2-2 FactorsOfCharacteristicPolynomial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7A110EA07A2EC59C">6.2-3 MinimalPolynomialOfMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X862C6AA0794E41C4">6.2-4 CharAndMinimalPolynomialOfMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X839407B37A85AAC8">6.2-5 MinimalPolynomialOfMatrixMC</a></span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">Linear Algebra routines</span></h3>
+
+<p><a id="X79C4BA5B821BBE58" name="X79C4BA5B821BBE58"></a></p>
+
+<h4>6.1 <span class="Heading">Semi echelonised bases and cleaning</span></h4>
+
+<p>A semi echelonised basis is a record with the following components: <code class="code">vectors</code> is a list of vectors of equal length, optionally (and optimally) they can be wrapped to a matrix. <code class="code">pivots</code> is a list of integers. The number <span class="SimpleMath">\(i\)</span> in position <span class="SimpleMath">\(j\)</span> indicates that the <span class="SimpleMath">\(j\)</span>th vector in <code class="code">vectors</code> has a one in column number <span class="SimpleMath">\(i\)</span> and all vectors with a number bigger than <span class="SimpleMath">\(i\)</span> in <code class="code">vectors</code> have a zero in column number <span class="SimpleMath">\(i\)</span>.</p>
+
+<p>Note that for technical reasons another component <code class="code">helper</code> is bound containing a <code class="code">cvec</code> of length <span class="SimpleMath">\(1\)</span> over the same field.</p>
+
+<p>Note further that the output of the <strong class="pkg">GAP</strong> library operation <code class="func">SemiEchelonMat</code> (<a href="../../../doc/ref/chap24_mj.html#X7D5D6BD07B7E981B"><span class="RefLink">Reference: SemiEchelonMat</span></a>) is not compatible to this setup, because it contains a component <code class="code">heads</code> that contains at position <span class="SimpleMath">\(i\)</span>, if nonzero, the number of the row for that the pivot element is in column <span class="SimpleMath">\(i\)</span>.</p>
+
+<p><a id="X87855EEA8779C855" name="X87855EEA8779C855"></a></p>
+
+<h5>6.1-1 EmptySemiEchelonBasis</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EmptySemiEchelonBasis</code>( <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a new mutable empty semi echelonised basis</p>
+
+<p>The argument <var class="Arg">v</var> must be a sample vector or matrix. If it is a matrix, then one of its rows is taken as sample vector.</p>
+
+<p><a id="X7D12102B824C97B4" name="X7D12102B824C97B4"></a></p>
+
+<h5>6.1-2 Vectors</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Vectors</code>( <var class="Arg">b</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a matrix</p>
+
+<p>The argument <var class="Arg">b</var> must be a semi echelonised basis. This operation returns a (mutable) matrix whose rows are the basis vectors.</p>
+
+<p><a id="X8464F2B87BCA3D34" name="X8464F2B87BCA3D34"></a></p>
+
+<h5>6.1-3 Length</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Length</code>( <var class="Arg">b</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>The argument <var class="Arg">b</var> must be a semi echelonised basis. This operation returns the number of vectors in the basis.</p>
+
+<p><a id="X7F4EA39D7D18D9B7" name="X7F4EA39D7D18D9B7"></a></p>
+
+<h5>6.1-4 CleanRow</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CleanRow</code>( <var class="Arg">b</var>, <var class="Arg">v</var>, <var class="Arg">extend</var>, <var class="Arg">dec</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>This is the basic operation for cleaning with a semi echelonised basis <var class="Arg">b</var>. The vector <var class="Arg">v</var> is cleaned with the vectors in the semi echelonised basis. The function returns <code class="code">true</code> if <var class="Arg">v</var> lies in the span of <var class="Arg">b</var> and false otherwise.</p>
+
+<p>The boolean value <var class="Arg">extend</var> indicates, whether the basis should be extended in the latter case by the newly cleaned vector.</p>
+
+<p>The argument <var class="Arg">dec</var> is either <code class="code">fail</code> in which case it is not used or a vector over the same field as <var class="Arg">v</var> that is at least as long as the number <span class="SimpleMath">\(n\)</span> of vectors in <var class="Arg">b</var> (plus one if <var class="Arg">extend</var> is <code class="code">true</code>). In this case, the first <span class="SimpleMath">\(n\)</span> components of <var class="Arg">dec</var> are changed such that <span class="SimpleMath">\(\sum_{{i=1}}^{n} \textit{dec}_i \textit{b}_i\)</span>. If <var class="Arg">extend</var> is <code class="code">true</code> and <var class="Arg">v</var> is not contained in the span of the vectors in <var class="Arg">b</var> and <var class="Arg">dec</var> is a vector, then the first <span class="SimpleMath">\(n+1\)</span> components of <var class="Arg">dec</var> are changed such that <span class="SimpleMath">\(\textit{v} = \sum_{{i=1}}^{n+1} \textit{dec}_i \textit{b}_i\)</span>.</p>
+
+<p><a id="X82A37BC982B1D8CA" name="X82A37BC982B1D8CA"></a></p>
+
+<h5>6.1-5 SemiEchelonBasisMutable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiEchelonBasisMutable</code>( <var class="Arg">b</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a semi echelonised basis</p>
+
+<p>Turns the output <var class="Arg">b</var> of <code class="func">SemiEchelonMat</code> (<a href="../../../doc/ref/chap24_mj.html#X7D5D6BD07B7E981B"><span class="RefLink">Reference: SemiEchelonMat</span></a>) into a valid semi echelonised basis in the sense of the <strong class="pkg">cvec</strong> package. This means that the component <code class="code">pivots</code> is calculated from the component <code class="code">heads</code>. Use this function only if absolutely necessary. Instead, directly invoke <code class="func">SemiEchelonBasisMutable</code> on the original matrix.</p>
+
+<p><a id="X82A37BC982B1D8CA" name="X82A37BC982B1D8CA"></a></p>
+
+<h5>6.1-6 SemiEchelonBasisMutable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiEchelonBasisMutable</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a semi echelonised basis</p>
+
+<p>The argument <var class="Arg">m</var> must be a <code class="code">cmat</code>. This method calculates a semi echelonised basis for the row space of <var class="Arg">m</var>.</p>
+
+<p>There are a number of similar operations the names of which are derived from <code class="func">SemiEchelonBasisMutable</code> by appending single letters: The letters "P", "T" and "X" are modifiers and there are operations for most of the <span class="SimpleMath">\(8\)</span> combinations of those letters being present or not respectively. Always give the present letters in alphabetical order.</p>
+
+<p>The "X" indicates, that the input matrix may be destroyed, that is, the rows of <var class="Arg">m</var> will be changed and the very same objects be used in the semi echelonised result basis.</p>
+
+<p>The "T" indicates, that the transformation is calculated, that is, the resulting record <code class="code">r</code> will have a component <code class="code">coeffs</code>, such that <code class="code">r.coeffs * <var class="Arg">m</var></code> is equal to <code class="code">r.vectors</code> component of the semi echelonised result. Further, with given letter "T" there will be a component <code class="code">relations</code> which is a basis for the (left) nullspace of <var class="Arg">m</var>.</p>
+
+<p>The "P" indicates, that a component <code class="code">r.p</code> is calculated such that <code class="code">r.p * r.vectors</code> is the original matrix <var class="Arg">m</var>.</p>
+
+<p>Currently the variants with "P" and "T" both present are not implement because they will probably not be very useful.</p>
+
+<p><a id="X839298477E3F7345" name="X839298477E3F7345"></a></p>
+
+<h5>6.1-7 SemiEchelonBasisMutableX</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiEchelonBasisMutableX</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a semi echelonised basis</p>
+
+<p>Same as <code class="func">SemiEchelonBasisMutable</code> (<a href="chap6_mj.html#X82A37BC982B1D8CA"><span class="RefLink">6.1-6</span></a>) but destructive in <var class="Arg">m</var>.</p>
+
+<p><a id="X8309FC85858FC96B" name="X8309FC85858FC96B"></a></p>
+
+<h5>6.1-8 SemiEchelonBasisMutableT</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiEchelonBasisMutableT</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a semi echelonised basis</p>
+
+<p>Same as <code class="func">SemiEchelonBasisMutable</code> (<a href="chap6_mj.html#X82A37BC982B1D8CA"><span class="RefLink">6.1-6</span></a>) but in addition stores the transformation, see <code class="func">SemiEchelonBasisMutable</code> (<a href="chap6_mj.html#X82A37BC982B1D8CA"><span class="RefLink">6.1-6</span></a>).</p>
+
+<p><a id="X845EFC3B87BED1BB" name="X845EFC3B87BED1BB"></a></p>
+
+<h5>6.1-9 SemiEchelonBasisMutableTX</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiEchelonBasisMutableTX</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a semi echelonised basis</p>
+
+<p>Same as <code class="func">SemiEchelonBasisMutableT</code> (<a href="chap6_mj.html#X8309FC85858FC96B"><span class="RefLink">6.1-8</span></a>) but destructive in <var class="Arg">m</var>.</p>
+
+<p><a id="X837F20C4831FA08E" name="X837F20C4831FA08E"></a></p>
+
+<h5>6.1-10 SemiEchelonBasisMutableP</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiEchelonBasisMutableP</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a semi echelonised basis</p>
+
+<p>Same as <code class="func">SemiEchelonBasisMutable</code> (<a href="chap6_mj.html#X82A37BC982B1D8CA"><span class="RefLink">6.1-6</span></a>) but in addition stores the inverse transformation, see <code class="func">SemiEchelonBasisMutable</code> (<a href="chap6_mj.html#X82A37BC982B1D8CA"><span class="RefLink">6.1-6</span></a>).</p>
+
+<p><a id="X8218306B812EB85E" name="X8218306B812EB85E"></a></p>
+
+<h5>6.1-11 SemiEchelonBasisMutablePX</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiEchelonBasisMutablePX</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a semi echelonised basis</p>
+
+<p>Same as <code class="func">SemiEchelonBasisMutableP</code> (<a href="chap6_mj.html#X837F20C4831FA08E"><span class="RefLink">6.1-10</span></a>) but destructive in <var class="Arg">m</var>.</p>
+
+<p><a id="X7E5C2C297CAAE3FB" name="X7E5C2C297CAAE3FB"></a></p>
+
+<h5>6.1-12 MutableNullspaceMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MutableNullspaceMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="code">cmat</code></p>
+
+<p>Returns a <code class="code">cmat</code> the rows of which are a basis of the (left) nullspace of the <code class="code">cmat</code> <var class="Arg">m</var>. Internally, <code class="func">SemiEchelonBasisMutableT</code> (<a href="chap6_mj.html#X8309FC85858FC96B"><span class="RefLink">6.1-8</span></a>) is used and the component <code class="code">relations</code> of the result is returned. The result is mutable, which is the reason for the introduction of a new operation besides <code class="func">NullspaceMat</code> (<a href="../../../doc/ref/chap24_mj.html#X7DA0D5887DB12DC4"><span class="RefLink">Reference: NullspaceMat</span></a>).</p>
+
+<p><a id="X7A9596C98725862E" name="X7A9596C98725862E"></a></p>
+
+<h5>6.1-13 MutableNullspaceMatX</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MutableNullspaceMatX</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="code">cmat</code></p>
+
+<p>Same as <code class="func">MutableNullspaceMat</code> (<a href="chap6_mj.html#X7E5C2C297CAAE3FB"><span class="RefLink">6.1-12</span></a>) but destructive in <var class="Arg">m</var>.</p>
+
+<p><a id="X7DA0D5887DB12DC4" name="X7DA0D5887DB12DC4"></a></p>
+
+<h5>6.1-14 NullspaceMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NullspaceMat</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an immutable <code class="code">cmat</code></p>
+
+<p>Behaves exactly as expected. <var class="Arg">m</var> must be a <code class="code">cmat</code>.</p>
+
+<p><a id="X87684B0F7AB7B7DB" name="X87684B0F7AB7B7DB"></a></p>
+
+<h5>6.1-15 NullspaceMatDestructive</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NullspaceMatDestructive</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an immutable <code class="code">cmat</code></p>
+
+<p>Behaves exactly as expected. <var class="Arg">m</var> must be a <code class="code">cmat</code>.</p>
+
+<p><a id="X825613828322BD22" name="X825613828322BD22"></a></p>
+
+<h4>6.2 <span class="Heading">Characteristic and minimal polynomial</span></h4>
+
+<p><a id="X7BB7DCBF78177638" name="X7BB7DCBF78177638"></a></p>
+
+<h5>6.2-1 CharacteristicPolynomialOfMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CharacteristicPolynomialOfMatrix</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CharacteristicPolynomialOfMatrix</code>( <var class="Arg">m</var>, <var class="Arg">indetnr</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>Calculates the characteristic polynomial of the <code class="code">cmat</code> <var class="Arg">m</var> over its base field. Because during the calculations the polynomial automatically comes as a product of some not necessarily irreducible factors, the result is returned in a record with two components. The <code class="code">poly</code> component contains the full characteristic polynomial. The <code class="code">factors</code> component contains a list of not necessarily irreducibly factors the product of which is the characteristic polynomial. If an indeterminate number is given as second argument, the polynomials are written in that indeterminate, otherwise in the first indeterminate over the base field.</p>
+
+<p><a id="X7FE2A9D281A74FDD" name="X7FE2A9D281A74FDD"></a></p>
+
+<h5>6.2-2 FactorsOfCharacteristicPolynomial</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FactorsOfCharacteristicPolynomial</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FactorsOfCharacteristicPolynomial</code>( <var class="Arg">m</var>, <var class="Arg">indetnr</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Calculates the characteristic polynomial of the <code class="code">cmat</code> <var class="Arg">m</var> over its base field. The result is a list of irreducible factors of the characteristic polynomial of <var class="Arg">m</var>, the product of which is the characteristic polynomial. Because during the calculations the polynomial automatically comes as a product of some not necessarily irreducible factors, this is more efficient than just calculating the characteristic polynomial and then factoring it. If an indeterminate number is given as second argument, the polynomials are written in that indeterminate, otherwise in the first indeterminate over the base field.</p>
+
+<p><a id="X7A110EA07A2EC59C" name="X7A110EA07A2EC59C"></a></p>
+
+<h5>6.2-3 MinimalPolynomialOfMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinimalPolynomialOfMatrix</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinimalPolynomialOfMatrix</code>( <var class="Arg">m</var>, <var class="Arg">indetnr</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a polynomial over the base field of <var class="Arg">m</var></p>
+
+<p>Calculates the minimal polynomial of the <code class="code">cmat</code> <var class="Arg">m</var> over its base field. The polynomial is returned. If an indeterminate number is given as second argument, the polynomials are written in that indeterminate, otherwise in the first indeterminate over the base field.</p>
+
+<p><a id="X862C6AA0794E41C4" name="X862C6AA0794E41C4"></a></p>
+
+<h5>6.2-4 CharAndMinimalPolynomialOfMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CharAndMinimalPolynomialOfMatrix</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CharAndMinimalPolynomialOfMatrix</code>( <var class="Arg">m</var>, <var class="Arg">indetnr</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>Calculates the characteristic and minimal polynomial of the <code class="code">cmat</code> <var class="Arg">m</var> over its base field. Because during the calculation of the minimal polynomial the characteristic polynomial is calculated anyway, the result is returned in a record with five components: The <code class="code">charpoly</code> component contains the full characteristic polynomial. The <code class="code">irreds</code> component contains the set of irreducible factors of the characteristic polynomial as a list. The <code class="code">mult</code> component contains a corresponding list of multiplicities, that is in position <span class="SimpleMath">\(i\)</span> is the multiplicity of the irreducible factor number <span class="SimpleMath">\(i\)</span> in the characteristic polynomial. The component <code class="code">minpoly</code> contains the minimal polynomial and the component <code class="code">multmin</code> the corresponding multiplicities of the irreducible factors of the characteristic polynomial in the minimal polynomial. If an indeterminate number is given as second argument, the polynomials are written in that indeterminate, otherwise in the first indeterminate over the base field.</p>
+
+<p><a id="X839407B37A85AAC8" name="X839407B37A85AAC8"></a></p>
+
+<h5>6.2-5 MinimalPolynomialOfMatrixMC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinimalPolynomialOfMatrixMC</code>( <var class="Arg">m</var>, <var class="Arg">prob</var>[, <var class="Arg">indetnr</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method calculates the characteristic and minimal polynomials of the row list matrix <var class="Arg">m</var> over its base domain. It uses the Monte Carlo algorithm by Neunhoeffer and Praeger. The second argument <var class="Arg">prob</var> is an upper bound for the error probability, it can be <span class="SimpleMath">\(0\)</span> in which case a deterministic verification is done. The optional argument <var class="Arg">indetnr</var> is the number of the indeterminate over the base domain to be used to express polynomials.</p>
+
+<p>The result is a record with the following components bound: The component <code class="code">charpoly</code> is the characteristic polynomial which is guaranteed to be correct. The component <code class="code">minpoly</code> is always a divisor of the minimal polynomial and usually is equal to it. See below for details. The component <code class="code">irreds</code> is a sorted list of the irreducible factors of the characteristic polynomial. The component <code class="code">mult</code> is a corresponding list of the same length containing the multiplicities of these irreducible factors in the characteristic polynomial. The component <code class="code">minmult</code> is a corresponding list of the same length containing the multiplicities of these irreducible factors in the polynomial given in <code class="code">minpoly</code>. The component <code class="code">proof</code> is set to <code class="code">true</code> if the result is proved to be correct, which can happen even if <var class="Arg">prob</var> was non-zero (for example in the case of a cyclic matrix). The component <code class="code">iscyclic</code> is set to <code class="code">true</code> if and only if the minimal polynomial is equal to the characteristic polynomial. The component <code class="code">prob</code> is set to the probability given in <var class="Arg">prob</var>, if that was zero then it is set to <span class="SimpleMath">\(1/10000\)</span> but <code class="code">proof</code> will be <code class="code">true</code>. The components <code class="code">A</code>, <code class="code">B</code> and <code class="code">S</code> describe a base change for <var class="Arg">m</var> to a sparse form which is obtained as a byproduct. <code class="code">S</code> is a semi echelonised basis which was obtained by a spin-up computation with <var class="Arg">m</var> and if <span class="SimpleMath">\(Y\)</span> is the sparse basis then <span class="SimpleMath">\(Y = A \cdot S\)</span> and <span class="SimpleMath">\(B=A^{-1}\)</span>.</p>
+
+<p>The given result for the minimal polynomial could be a proper divisor of the real minimal polynomial if <var class="Arg">prob</var> was non-zero, however, the probability for this outcome is guaranteed to be less than or equal to <var class="Arg">prob</var>. Note that it is always guaranteed that all irreducible factors of the minimal polynomial are actually present, it can only happen that the multiplicities are too small.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

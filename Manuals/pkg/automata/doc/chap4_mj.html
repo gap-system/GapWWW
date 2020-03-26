@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Automata) - Chapter 4: Automata versus rational expressions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
+<p><a id="X7B5CD9B7796BD926" name="X7B5CD9B7796BD926"></a></p>
+<div class="ChapSects"><a href="chap4_mj.html#X7B5CD9B7796BD926">4 <span class="Heading">Automata <em>versus</em> rational expressions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7E631B92873300C1">4.1 <span class="Heading">From automata to rational expressions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8751E3927CA4DEA1">4.1-1 AutomatonToRatExp </a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X8138227D7E65FC8C">4.2 <span class="Heading">From rational expression to automata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X840EEB7B7DD8B03D">4.2-1 RatExpToNDAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X866BCCB2788E8561">4.2-2 RatExpToAutomaton</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X85DCEFB88712056E">4.3 <span class="Heading">
+      Some tests on automata
+    </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X84E0143A860889A6">4.3-1 IsEmptyLang</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X86AA1A5F7E1EEAFE">4.3-2 IsFullLang</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8346D1B17DBF96E7">4.3-3 AreEqualLang</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7FCB176285FA5BBB">4.3-4 IsContainedLang</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X83F1DE067C2D31A5">4.3-5 AreDisjointLang</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Automata <em>versus</em> rational expressions</span></h3>
+
+<p>A remarkable theorem due to Kleene shows that a language is recognized by a finite automaton precisely when it may be given by means of a rational expression, i.e. is a rational language.</p>
+
+<p>An automaton and a rational expression are said to be <em>equivalent</em> when both represent the same language. In this chapter we describe functions to go from automata to equivalent rational expressions and <em>vice-versa</em>.</p>
+
+<p><a id="X7E631B92873300C1" name="X7E631B92873300C1"></a></p>
+
+<h4>4.1 <span class="Heading">From automata to rational expressions</span></h4>
+
+<p><a id="X8751E3927CA4DEA1" name="X8751E3927CA4DEA1"></a></p>
+
+<h5>4.1-1 AutomatonToRatExp </h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutomatonToRatExp </code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutToRatExp</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FAtoRatExp</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>From a finite automaton, <code class="code">FAtoRatExp</code>, <code class="code">AutToRatExp</code> and <code class="code">AutomatonToRatExp</code>, which are synonyms, compute one equivalent rational expression, using the state elimination algorithm.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",4,2,[[ 0, 1, 2, 3 ],[ 0, 1, 2, 3 ]],[ 3 ],[ 1, 3, 4 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FAtoRatExp(x);</span>
+(aUb)(aUb)U@
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut:=Automaton("det",4,"xy",[[ 0, 1, 2, 3 ],[ 0, 1, 2, 3 ]],[ 3 ],[ 1, 3, 4 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FAtoRatExp(aut);</span>
+(xUy)(xUy)U@
+</pre></div>
+
+<p><a id="X8138227D7E65FC8C" name="X8138227D7E65FC8C"></a></p>
+
+<h4>4.2 <span class="Heading">From rational expression to automata</span></h4>
+
+<p><a id="X840EEB7B7DD8B03D" name="X840EEB7B7DD8B03D"></a></p>
+
+<h5>4.2-1 RatExpToNDAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RatExpToNDAut</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given a rational expression <var class="Arg">R</var>, computes the equivalent NFA</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RationalExpression("aUab");</span>
+aUab
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(RatExpToNDAut(r));</span>
+   |  1    2       3    4
+--------------------------------
+ a |                   [ 1, 2 ]
+ b |      [ 3 ]
+Initial state:    [ 4 ]
+Accepting states: [ 1, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RationalExpression("xUxy"); </span>
+xUxy
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(RatExpToNDAut(r));    </span>
+   |  1    2       3    4
+--------------------------------
+ x |                   [ 1, 2 ]   
+ y |      [ 3 ]                   
+Initial state:    [ 4 ]
+Accepting states: [ 1, 3 ]
+</pre></div>
+
+<p><a id="X866BCCB2788E8561" name="X866BCCB2788E8561"></a></p>
+
+<h5>4.2-2 RatExpToAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RatExpToAutomaton</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RatExpToAut</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given a rational expression <var class="Arg">R</var>, these functions, which are synonyms, use <code class="func">RatExpToNDAut</code> (<a href="chap4_mj.html#X840EEB7B7DD8B03D"><span class="RefLink">4.2-1</span></a>)) to compute the equivalent NFA and then returns the equivalent minimal DFA</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RationalExpression("@U(aUb)(aUb)");</span>
+@U(aUb)(aUb)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(RatExpToAut(r));</span>
+   |  1  2  3  4
+-----------------
+ a |  3  1  3  2
+ b |  3  1  3  2
+Initial state:    [ 4 ]
+Accepting states: [ 1, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RationalExpression("@U(0U1)(0U1)");</span>
+@U(0U1)(0U1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(RatExpToAut(r));              </span>
+   |  1  2  3  4  
+-----------------
+ 0 |  3  1  3  2  
+ 1 |  3  1  3  2  
+Initial state:    [ 4 ]
+Accepting states: [ 1, 4 ]
+</pre></div>
+
+<p><a id="X85DCEFB88712056E" name="X85DCEFB88712056E"></a></p>
+
+<h4>4.3 <span class="Heading">
+      Some tests on automata
+    </span></h4>
+
+<p>This section describes functions that perform tests on automata, rational expressions and their accepted languages.</p>
+
+<p><a id="X84E0143A860889A6" name="X84E0143A860889A6"></a></p>
+
+<h5>4.3-1 IsEmptyLang</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEmptyLang</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function tests if the language given through a rational expression or an automaton <var class="Arg"> R </var> is the empty language.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := RationalExpression("empty_set");</span>
+empty_set
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsEmptyLang(r);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := RationalExpression("aUb");</span>
+aUb
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsEmptyLang(r);</span>
+false
+</pre></div>
+
+<p><a id="X86AA1A5F7E1EEAFE" name="X86AA1A5F7E1EEAFE"></a></p>
+
+<h5>4.3-2 IsFullLang</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFullLang</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function tests if the language given through a rational expression or an automaton <var class="Arg"> R </var> represents the Kleene closure of the alphabet of <var class="Arg"> R </var> .</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RationalExpression("aUb");</span>
+aUb
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsFullLang(r);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RationalExpression("(aUb)*");</span>
+(aUb)*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsFullLang(r);</span>
+true
+</pre></div>
+
+<p><a id="X8346D1B17DBF96E7" name="X8346D1B17DBF96E7"></a></p>
+
+<h5>4.3-3 AreEqualLang</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AreEqualLang</code>( <var class="Arg">A1</var>, <var class="Arg">A2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AreEquivAut</code>( <var class="Arg">A1</var>, <var class="Arg">A2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>These functions, which are synonyms, test if the automata or rational expressions <var class="Arg">A1</var> and <var class="Arg">A2</var> are equivalent, i.e. represent the same language. This is performed by checking that the corresponding minimal automata are isomorphic. Note hat this cannot happen if the alphabets are different.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Automaton("det",4,"ab",[ [ 0, 1, 3, 4 ], [ 0, 1, 2, 0 ] ],[ 2 ],[ 1, 2, 3, 4 ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y := Automaton("det",4,"ab",[ [ 1, 3, 4, 0 ], [ 0, 3, 4, 0 ] ],[ 3 ],[ 1, 3, 4 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := Automaton("det",4,"ab",[ [ 0, 4, 0, 0 ], [ 1, 3, 4, 0 ] ],[ 2 ],[ 1, 3, 4 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AreEquivAut(x, y);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AreEquivAut(x, z);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=RationalExpression("(aUb)*ab*");</span>
+(aUb)*ab*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b:=RationalExpression("(aUb)*");</span>
+(aUb)*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AreEqualLang(a, b);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=RationalExpression("(bUa)*");</span>
+(bUa)*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AreEqualLang(a, b);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=RationalExpression("(1U0)*");</span>
+(1U0)*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AreEqualLang(a, x);  </span>
+The given languages are not over the same alphabet
+false
+</pre></div>
+
+<p><a id="X7FCB176285FA5BBB" name="X7FCB176285FA5BBB"></a></p>
+
+<h5>4.3-4 IsContainedLang</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsContainedLang</code>( <var class="Arg">R1</var>, <var class="Arg">R2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Tests if the language represented (through an automaton or a rational expression) by <var class="Arg"> R1 </var> is contained in the language represented (through an automaton or a rational expression) by <var class="Arg"> R2 </var> .</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RationalExpression("aUab");</span>
+aUab
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:=RationalExpression("a","ab");</span>
+a
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsContainedLang(s,r);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsContainedLang(r,s);</span>
+false
+</pre></div>
+
+<p><a id="X83F1DE067C2D31A5" name="X83F1DE067C2D31A5"></a></p>
+
+<h5>4.3-5 AreDisjointLang</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AreDisjointLang</code>( <var class="Arg">R1</var>, <var class="Arg">R2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Tests if the languages represented (through automata or a rational expressions) by <var class="Arg"> R1 </var> and <var class="Arg"> R2 </var> are disjoint.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RationalExpression("aUab");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:=RationalExpression("a","ab");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AreDisjointLang(r,s);</span>
+false
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

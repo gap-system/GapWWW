@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Browse) - Chapter 2: Interface to the ncurses Library</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X7E049B1185A56B30" name="X7E049B1185A56B30"></a></p>
+<div class="ChapSects"><a href="chap2.html#X7E049B1185A56B30">2 <span class="Heading">Interface to the <code class="code">ncurses</code> Library</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X85DE9B75837BA65B">2.1 <span class="Heading">The <code class="code">ncurses</code> Library</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8499A3A384BF1F2D">2.1-1 <span class="Heading">Setting the terminal</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X800D5B6381F0356F">2.1-2 <span class="Heading">Manipulating windows</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D541BDE7BB8BED5">2.1-3 <span class="Heading">Manipulating panels</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7F23F5F48650A78B">2.1-4 <span class="Heading">Getting keyboard input</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7FD4E558816B3146">2.1-5 <span class="Heading">Writing to windows</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8091936586CCD248">2.1-6 <span class="Heading">Line drawing characters</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X793D897483674294">2.1-7 <span class="Heading">Text attributes and colors</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X86675F5F791FEFEF">2.1-8 <span class="Heading">Low level <code class="code">ncurses</code> mouse support</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X83897BF984211EFD">2.1-9 <span class="Heading">Miscellaneous function</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X864A5C1C7F181B4B">2.2 <span class="Heading">The <code class="code">ncurses</code> <strong class="pkg">GAP</strong>
+functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X83ADB4E37C105B8C">2.2-1 NCurses.ColorAttr</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X879D81B37A0A4E8F">2.2-2 NCurses.SetTerm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81D1FC927C455AEB">2.2-3 NCurses.IsAttributeLine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8372F0C57816A29E">2.2-4 NCurses.ConcatenationAttributeLines</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D2EB0BF82C4F25C">2.2-5 NCurses.RepeatedAttributeLine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X83FFD5047ADE716E">2.2-6 NCurses.PutLine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X82C53ACD805EE0C3">2.2-7 NCurses.WidthAttributeLine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X790715F683BF1E66">2.2-8 NCurses.Grid</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X82B801587B37D571">2.2-9 NCurses.WBorder</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X799C033A7AB582D7">2.2-10 <span class="Heading">Mouse support in <code class="code">ncurses</code> applications</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85FB1D7878A322EB">2.2-11 NCurses.SaveWin</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Interface to the <code class="code">ncurses</code> Library</span></h3>
+
+<p>In this chapter we describe the <strong class="pkg">GAP</strong> interface to the <strong class="pkg">GNU</strong> <code class="code">curses</code>/<code class="code">ncurses</code> <code class="code">C</code>-library. This library contains routines to manipulate the contents of terminal windows. It allows one to write programs which should work on a wide variety of terminal emulations with different sets of capabilities.</p>
+
+<p>This technical chapter is intended for readers who want to program new applications using the <code class="code">ncurses</code> functionality. If you are only interested in the function <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) from this package or some of its applications you can skip this chapter.</p>
+
+<p>Detailed documentation of the <code class="code">ncurses</code> library is probably available in your operating system (try <code class="code">man ncurses</code>) and from the web (see for example <a href="chapBib.html#biBNCursesWeb">[NCu]</a>). Here, we only give short reminders about the functions provided in the <strong class="pkg">GAP</strong> interface and explain how to use the <strong class="pkg">GAP</strong> functions.</p>
+
+<p><a id="X85DE9B75837BA65B" name="X85DE9B75837BA65B"></a></p>
+
+<h4>2.1 <span class="Heading">The <code class="code">ncurses</code> Library</span></h4>
+
+<p>In this section we list the functions from the GNU <code class="code">ncurses</code> library and its <code class="code">panel</code> extension which are made available in <strong class="pkg">GAP</strong> via the <strong class="pkg">Browse</strong> package. See the following section <a href="chap2.html#X864A5C1C7F181B4B"><span class="RefLink">2.2</span></a> for explanations how to use these functions from within <strong class="pkg">GAP</strong>.</p>
+
+<p>The basic objects to manipulate are called <em>windows</em>, they correspond to rectangular regions of the terminal screen. Windows can overlap but <code class="code">ncurses</code> cannot handle this for the display. Therefore windows can be wrapped in <em>panels</em>, they provide a display depth for windows and it is possible to move panels to the top and bottom of the display or to hide a panel.</p>
+
+<p>We will not import all the functions of the <code class="code">ncurses</code> library to <strong class="pkg">GAP</strong>. For example, there are many pairs of functions with the same name except for a leading <code class="code">w</code> (like <code class="code">move</code> and <code class="code">wmove</code> for moving the cursor in a window). Here, we only import the versions with <code class="code">w</code>, which get a window as first argument. The functions without <code class="code">w</code> are for the <code class="code">ncurses</code> standard screen window <code class="code">stdscr</code> which is available as window <code class="code">0</code> in <strong class="pkg">GAP</strong>. Similarly, there are functions with the same name except for an extra <code class="code">n</code> (like <code class="code">waddstr</code> and <code class="code">waddnstr</code> for placing a string into a window). Here, we only import the safer functions with <code class="code">n</code> which get the number of characters to write as argument. (More convenient functions are then implemented on the <strong class="pkg">GAP</strong> level.)</p>
+
+<p><a id="X8499A3A384BF1F2D" name="X8499A3A384BF1F2D"></a></p>
+
+<h5>2.1-1 <span class="Heading">Setting the terminal</span></h5>
+
+<p>We first list flags for setting the basic behavior of a terminal. With <code class="code">savetty</code>/<code class="code">resetty</code> a setting can be stored and recovered.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">savetty()</code></strong></dt>
+<dd><p>This stores the current setting of the terminal in a buffer.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">resetty()</code></strong></dt>
+<dd><p>This resets the terminal to what was stored in the last call to <code class="code">savetty</code>.</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">cbreak()/nocbreak()</code></strong></dt>
+<dd><p>In <code class="code">cbreak</code> mode each input character from a terminal is directly forwarded to the application (but see <code class="code">keypad</code>). With <code class="code">nocbreak</code> this only happens after a newline or return is typed.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">keypad(win, bool)</code></strong></dt>
+<dd><p>If set to <code class="keyw">true</code> some special input like arrow or function keys can be read as single characters from the input (such keys actually generate certain sequences of characters), see also <a href="chap2.html#X7F23F5F48650A78B"><span class="RefLink">2.1-4</span></a>. (The <var class="Arg">win</var> argument is irrelevant.)</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">echo()</code>/<code class="code">noecho()</code></strong></dt>
+<dd><p>This determines if input characters are automatically echoed by the terminal at the current cursor position.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">curs_set(vis)</code></strong></dt>
+<dd><p>This determines the visibility of the cursor. The argument <var class="Arg">vis</var>=0 makes the cursor invisible. With <var class="Arg">vis</var>=1 it becomes visible; some terminals allow also higher levels of visibility.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wtimeout(win, delay)</code></strong></dt>
+<dd><p>Here <var class="Arg">delay</var> determines a timeout in milliseconds for reading characters from the input of a window. Negative values mean infinity, that is a blocking read.</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">nl()</code>/<code class="code">nonl()</code></strong></dt>
+<dd><p>With <code class="code">nl</code> a return on input is translated to a newline character and a newline on output is interpreted as return and linefeed.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">intrflush(win, bool)</code></strong></dt>
+<dd><p>This flag determines if after an interrupt pending output to the terminal is flushed. (The <var class="Arg">win</var> argument is irrelevant.)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">idlok(win, bool)</code></strong></dt>
+<dd><p>With <code class="keyw">true</code> the library tries to use a hardware line insertion functionality (in particular for scrolling).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">scrollok(win, bool)</code></strong></dt>
+<dd><p>If set to <code class="keyw">true</code> moving the cursor down from the last line of a window causes scrolling of the whole window, otherwise nothing happens.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">leaveok(win, bool)</code></strong></dt>
+<dd><p>If set to <code class="keyw">true</code> a refresh of the window leaves the cursor at its current location, otherwise this is not guaranteed.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">clearok(win, bool)</code></strong></dt>
+<dd><p>If set to <code class="keyw">true</code> the next refresh of the window will clear the screen completely and redraw everything.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">immedok(win, bool)</code></strong></dt>
+<dd><p>If set to <code class="keyw">true</code> all changes of the window will automatically also call a <code class="code">wrefresh</code>.</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">raw()</code>/<code class="code">noraw()</code></strong></dt>
+<dd><p>Similar to <code class="code">cbreak</code>, usually not needed (see the <code class="code">ncurses</code> documentation for details).</p>
+
+</dd>
+</dl>
+<p><a id="X800D5B6381F0356F" name="X800D5B6381F0356F"></a></p>
+
+<h5>2.1-2 <span class="Heading">Manipulating windows</span></h5>
+
+<p>In <code class="code">ncurses</code> an arbitrary number of windows which correspond to rectangular regions (maybe overlapping) of the screen can be handled. You should always delete windows which are no longer needed. To get a proper display of overlapping windows (which may occur by recursively called functions using this library) we suggest that you always wrap windows in panels, see <a href="chap2.html#X7D541BDE7BB8BED5"><span class="RefLink">2.1-3</span></a>.</p>
+
+<p>For functions which involve coordinates recall that the upper left corner of the screen or internally of any window has the coordinates (0,0).</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">newwin(nlines, ncols, y, x)</code></strong></dt>
+<dd><p>This creates a new window whose upper left corner has the coordinates (<var class="Arg">y</var>,<var class="Arg">x</var>) on the screen and has <var class="Arg">nlines</var> lines and <var class="Arg">ncols</var> columns, if this is possible. The arguments <var class="Arg">nlines</var> and <var class="Arg">ncols</var> can be zero, then their maximal possible values are assumed.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">delwin(win)</code></strong></dt>
+<dd><p>Deletes a window.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">mvwin(win, y, x)</code></strong></dt>
+<dd><p>Moves the upper left corner of the window to the given coordinates, if the window still fits on the screen. With panels don't use this function, but use <code class="code">move_panel</code> mentioned below.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wrefresh(win)</code></strong></dt>
+<dd><p>Writing to a window only changes some internal buffers, this function copies the window content to the actual display screen. You don't need this function if you wrap your windows in panels, use <code class="code">update_panels</code> and <code class="code">doupdate</code> instead.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">doupdate()</code></strong></dt>
+<dd><p>Use this function to update the content of your display screen to the current content of all windows. If your terminal is not yet in visual mode this function changes to visual mode.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">endwin()</code></strong></dt>
+<dd><p>Use this function to leave the visual mode of your terminal. (Remark: If you use this function while not in visual mode the cursor will be moved to the line where the visual mode was started last time. To avoid this use <code class="code">isendwin</code> first.)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">isendwin()</code></strong></dt>
+<dd><p>Returns <code class="keyw">true</code> if called while not in visual mode and <code class="keyw">false</code> otherwise</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">getbegyx(win)</code></strong></dt>
+<dd><p>Get the coordinates of the upper left corner of a window on the screen.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">getmaxyx(win)</code></strong></dt>
+<dd><p>Get the number of lines and columns of a window.</p>
+
+</dd>
+</dl>
+<p><a id="X7D541BDE7BB8BED5" name="X7D541BDE7BB8BED5"></a></p>
+
+<h5>2.1-3 <span class="Heading">Manipulating panels</span></h5>
+
+<p>Wrap windows in panels to get a proper handling of overlapping windows on the display. Don't forget to delete a panel before deleting the corresponding window.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">new_panel(win)</code></strong></dt>
+<dd><p>Create a panel for a window.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">del_panel(pan)</code></strong></dt>
+<dd><p>Delete a panel.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">update_panels()</code></strong></dt>
+<dd><p>Use this function to copy changes of windows and panels to a screen buffer. Then call <code class="code">doupdate()</code> to update the display screen.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">move_panel(pan, y, x)</code></strong></dt>
+<dd><p>Move top left corner of a panel wrapped window to coordinates (<var class="Arg">y</var>,<var class="Arg">x</var>) if possible.</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">hide_panel(pan)</code>/<code class="code">show_panel(pan)</code></strong></dt>
+<dd><p>Hide or show, respectively, the content of a panel on the display screen.</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">top_panel(pan)</code>/<code class="code">bottom_panel(pan)</code></strong></dt>
+<dd><p>Move a panel to the top or bottom of all panels, respectively.</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">panel_below(pan)</code>/<code class="code">panel_above(pan)</code></strong></dt>
+<dd><p>Return the panel directly below or above the given one, respectively. With argument <code class="code">0</code> the top or bottom panel are returned, respectively. If argument is the bottom or top panel, respectively, then <code class="keyw">false</code> is returned.</p>
+
+</dd>
+</dl>
+<p><a id="X7F23F5F48650A78B" name="X7F23F5F48650A78B"></a></p>
+
+<h5>2.1-4 <span class="Heading">Getting keyboard input</span></h5>
+
+<p>If you want to read input from the user first adjust the terminal settings of <code class="code">cbreak</code>, <code class="code">keypad</code>, <code class="code">echo</code>, <code class="code">wtimeout</code> and <code class="code">curs_set</code> to your needs, see <a href="chap2.html#X8499A3A384BF1F2D"><span class="RefLink">2.1-1</span></a>. The basic functions are as follows.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">wgetch(win)</code></strong></dt>
+<dd><p>Reads one character from user input (returned as integer). If <code class="code">wtimeout</code> was set with a positive <var class="Arg">delay</var> then the function returns <code class="keyw">false</code> if there was no input for <var class="Arg">delay</var> milliseconds. Note that in <code class="code">nocbreak</code> mode typed characters reach the application only after typing a return. If the <code class="code">keypad</code> flag is set to <code class="keyw">true</code> some special keys can be read like single characters; the keys are explained below. (Note that there is only one input queue for all windows.)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ungetch(char)</code></strong></dt>
+<dd><p>Puts back the character <var class="Arg">char</var> on the input queue.</p>
+
+</dd>
+</dl>
+<p>Some terminals allow one to read special keys like one character, we import some of the symbolic names of such keys into <strong class="pkg">GAP</strong>. You can check for such characters by comparing with the components of the record <code class="code">NCurses.keys</code>, these are</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">UP</code>/<code class="code">DOWN</code>/<code class="code">LEFT</code>/<code class="code">RIGHT</code></strong></dt>
+<dd><p>the arrow keys</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">PPAGE</code>/<code class="code">NPAGE</code></strong></dt>
+<dd><p>the page up and page down keys</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">HOME</code>/<code class="code">END</code></strong></dt>
+<dd><p>the home and end keys</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BACKSPACE</code>/<code class="code">DC</code></strong></dt>
+<dd><p>the backspace and delete keys</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">IC</code></strong></dt>
+<dd><p>the insert key</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ENTER</code></strong></dt>
+<dd><p>the enter key</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">F1</code>/<code class="code">F2</code>/../<code class="code">F24</code></strong></dt>
+<dd><p>the function keys</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">MOUSE</code></strong></dt>
+<dd><p>a pseudo key to detect mouse events</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">A1</code>/<code class="code">A3</code>/<code class="code">B2</code>/<code class="code">C1</code>/<code class="code">C3</code></strong></dt>
+<dd><p>the keys around the arrow keys on a num pad</p>
+
+</dd>
+</dl>
+<p>It can happen that on a specific keyboard there is no key for some of these. Also, not all terminals can interpret all of these keys. You can check this with the function</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">has_key(key)</code></strong></dt>
+<dd><p>Checks if the special key <var class="Arg">key</var> is recognized by the terminal.</p>
+
+</dd>
+</dl>
+<p><a id="X7FD4E558816B3146" name="X7FD4E558816B3146"></a></p>
+
+<h5>2.1-5 <span class="Heading">Writing to windows</span></h5>
+
+<p>The display of text in <code class="code">ncurses</code> windows has two aspects. The first is to get actual characters on the screen. The second is to specify attributes which influence the display, for example normal or bold fonts or colors. This subsection is for the first aspect. Possible attributes are explained below in <a href="chap2.html#X793D897483674294"><span class="RefLink">2.1-7</span></a>.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">wmove(win, y, x)</code></strong></dt>
+<dd><p>Moves the cursor to position (<var class="Arg">y</var>,<var class="Arg">x</var>), recall that the coordinates are zero based, (0,0) being the top left corner.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">waddnstr(win, str, len)</code></strong></dt>
+<dd><p>Writes the string <var class="Arg">str</var> to the window starting from the current cursor position. Writes at most <var class="Arg">len</var> characters. At end of line the cursor moves to the beginning of next line. The behavior at the end of the window depends on the setting of <code class="code">scrollok</code>, see <a href="chap2.html#X8499A3A384BF1F2D"><span class="RefLink">2.1-1</span></a>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">waddch(win, char)</code></strong></dt>
+<dd><p>Writes a character to the window at the current cursor position and moves the cursor on. The character <var class="Arg">char</var> is given as integer and can include attribute information.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wborder(win, charlist)</code></strong></dt>
+<dd><p>Draws a border around the window. If <var class="Arg">charlist</var> is a plain list of eight <strong class="pkg">GAP</strong> characters these are taken for left/right/top/bottom sides and top-left/top-right/bottom-left/bottom-right corners. Otherwise default characters are used. (See <code class="func">NCurses.WBorder</code> (<a href="chap2.html#X82B801587B37D571"><span class="RefLink">2.2-9</span></a>) for a more user friendly interface.)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wvline(win, char, len)</code></strong></dt>
+<dd><p>Writes a vertical line of length <var class="Arg">len</var> (or as long as fitting into the window) starting from the current cursor position to the bottom, using the character <var class="Arg">char</var>. If <var class="Arg">char</var>=<code class="code">0</code> the default character is used.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">whline(win, char, len)</code></strong></dt>
+<dd><p>Same as <code class="code">wvline</code> but for horizontal lines starting from the cursor position to the right.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">werase(win)</code></strong></dt>
+<dd><p>Deletes all characters in the window.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wclear(win)</code></strong></dt>
+<dd><p>Like <code class="code">werase</code>, but also calls <code class="code">clearok</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wclrtobot(win)</code></strong></dt>
+<dd><p>Deletes all characters from cursor position to the right and bottom.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wclrtoeol(win)</code></strong></dt>
+<dd><p>Deletes all characters from cursor position to end of line.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">winch(win)</code></strong></dt>
+<dd><p>Returns the character at current cursor position, as integer and including color and attribute information.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">getyx(win)</code></strong></dt>
+<dd><p>Returns the current cursor position.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">waddstr(win, str)</code></strong></dt>
+<dd><p>Delegates to <code class="code">waddnstr(win, str, Length(str))</code>.</p>
+
+</dd>
+</dl>
+<p><a id="X8091936586CCD248" name="X8091936586CCD248"></a></p>
+
+<h5>2.1-6 <span class="Heading">Line drawing characters</span></h5>
+
+<p>For drawing lines and grids in a terminal window you should use some "virtual" characters which are available as components of the record <code class="code">NCurses.lineDraw</code>. On some terminals these are nicely displayed as proper lines (on others they are simulated by ASCII characters). These are:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">BLOCK</code></strong></dt>
+<dd><p>solid block</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BOARD</code></strong></dt>
+<dd><p>board of squares</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BTEE/LTEE/RTEE/TTEE</code></strong></dt>
+<dd><p>bottom/left/right/top tee</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BULLET</code></strong></dt>
+<dd><p>bullet</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">CKBOARD</code></strong></dt>
+<dd><p>checker board</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">DARROW/LARROW/RARROW/UARROW</code></strong></dt>
+<dd><p>down/left/right/up arrow</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">DEGREE</code></strong></dt>
+<dd><p>degree symbol</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">DIAMOND</code></strong></dt>
+<dd><p>diamond</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">GEQUAL</code></strong></dt>
+<dd><p>greater than or equal</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">HLINE/VLINE</code></strong></dt>
+<dd><p>horizontal/vertical line</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">LANTERN</code></strong></dt>
+<dd><p>lantern symbol</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">LEQUAL</code></strong></dt>
+<dd><p>less than or equal</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">LLCORNER/LRCORNER/ULCORNER/URCORNER</code></strong></dt>
+<dd><p>lower left/lower right/upper left/upper right corner</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">NEQUAL</code></strong></dt>
+<dd><p>not equal</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">PI</code></strong></dt>
+<dd><p>letter pi</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">PLMINUS</code></strong></dt>
+<dd><p>plus-minus</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">PLUS</code></strong></dt>
+<dd><p>crossing lines like a plus</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">S1/S3/S7/S9</code></strong></dt>
+<dd><p>scan line 1/3/7/9</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">STERLING</code></strong></dt>
+<dd><p>pound sterling</p>
+
+</dd>
+</dl>
+<p><a id="X793D897483674294" name="X793D897483674294"></a></p>
+
+<h5>2.1-7 <span class="Heading">Text attributes and colors</span></h5>
+
+<p>In addition to the actual characters to be written to the screen the way they are displayed can be changed by additional <em>attributes</em>. (There should be no danger to mix up this notion of attributes with the one introduced in <a href="../../../doc/ref/chap13.html#X7C701DBF7BAE649A"><span class="RefLink">Reference: Attributes</span></a>.) The available attributes are stored in the record <code class="code">NCurses.attrs</code>, they are</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">NORMAL</code></strong></dt>
+<dd><p>normal display with no extra attributes.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">STANDOUT</code></strong></dt>
+<dd><p>displays text in the best highlighting mode of the terminal.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">UNDERLINE</code></strong></dt>
+<dd><p>underlines the text.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">REVERSE</code></strong></dt>
+<dd><p>display in reverse video by exchanging the foreground and background color.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BLINK</code></strong></dt>
+<dd><p>displays the text blinking.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">DIM</code></strong></dt>
+<dd><p>displays the text half bright.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BOLD</code></strong></dt>
+<dd><p>displays the text in a bold font.</p>
+
+</dd>
+</dl>
+<p>Note that not all of these work with all types of terminals, or some may cause the same display. Furthermore, if <code class="code">NCurses.attrs.has_colors</code> is <code class="keyw">true</code> there is a list <code class="code">NCurses.attrs.ColorPairs</code> of attributes to set the foreground and background color. These should be accessed indirectly with <code class="func">NCurses.ColorAttr</code> (<a href="chap2.html#X83ADB4E37C105B8C"><span class="RefLink">2.2-1</span></a>). Attributes can be combined by adding their values (internally, they are represented by integers). They can also be added to the integer representing a character for use with <code class="code">waddch</code>.</p>
+
+<p>The library functions for setting attributes are:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">wattrset(win, attr)</code></strong></dt>
+<dd><p>This sets the default (combined) attributes for a window which is added to all characters written to it; using <code class="code">NCurses.attrs.NORMAL</code> as attribute is a reset.</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">wattron(win, attr)</code>/<code class="code">wattroff(win, attr)</code></strong></dt>
+<dd><p>This sets or unsets one or some default attributes of the window without changing the others.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wattr_get(win)</code></strong></dt>
+<dd><p>This returns the current default attribute and default color pair of a window.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wbkgdset(win, attr)</code></strong></dt>
+<dd><p>This is similar to <code class="code">wattrset</code> but you can also add a character to <var class="Arg">attr</var> which is used as default instead of blanks.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wbkgd(win, attr)</code></strong></dt>
+<dd><p>This function changes the attributes for all characters in the window to <var class="Arg">attr</var>, also used for further characters written to that window.</p>
+
+</dd>
+</dl>
+<p><a id="X86675F5F791FEFEF" name="X86675F5F791FEFEF"></a></p>
+
+<h5>2.1-8 <span class="Heading">Low level <code class="code">ncurses</code> mouse support</span></h5>
+
+<p>Many <code class="code">xterm</code> based terminals support mouse events. The recognition of mouse events by the <code class="code">ncurses</code> input queue can be switched on and off. If switched on and a mouse event occurs, then <code class="code">NCurses.wgetch</code> gets <code class="code">NCurses.keys.MOUSE</code> if the <code class="code">keypad</code> flag is <code class="keyw">true</code> (see <a href="chap2.html#X7F23F5F48650A78B"><span class="RefLink">2.1-4</span></a>). If this is read one must call <code class="code">NCurses.getmouse</code> which reads further characters from the input queue and interprets them as details on the mouse event. In most cases the function <code class="func">NCurses.GetMouseEvent</code> (<a href="chap2.html#X799C033A7AB582D7"><span class="RefLink">2.2-10</span></a>) can be used in applications (it calls <code class="code">NCurses.getmouse</code>). The following low level functions are available as components of the record <code class="code">NCurses</code>.</p>
+
+<p>The names of mouse events which may be possible are stored in the list <code class="code">NCurses.mouseEvents</code>, which starts <code class="code">[</code> <code class="code">"BUTTON1_PRESSED",</code> <code class="code">"BUTTON1_RELEASED",</code> <code class="code">"BUTTON1_CLICKED",</code> <code class="code">"BUTTON1_DOUBLE_CLICKED",</code> <code class="code">"BUTTON1_TRIPLE_CLICKED",</code> <code class="code">...</code> and contains the same for buttons number 2 to 5 and a few other events.</p>
+
+
+<dl>
+<dt><strong class="Mark">
+<code class="code">mousemask(intlist)</code></strong></dt>
+<dd><p>The argument <var class="Arg">intlist</var> is a list of integers specifying mouse events. An entry <code class="code">i</code> refers to the event described in <code class="code">NCurses.mouseEvents[i+1]</code>. It returns a record with components <code class="code">.new</code> (for the current setting) and <code class="code">.old</code> (for the previous setting) which are again lists of integers with the same meaning. Note that <code class="code">.new</code> may be different from <var class="Arg">intlist</var>, it is always the empty list if the terminal does not support mouse events. In applications use <code class="func">NCurses.UseMouse</code> (<a href="chap2.html#X799C033A7AB582D7"><span class="RefLink">2.2-10</span></a>) instead of this low level function.</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">getmouse()</code></strong></dt>
+<dd><p>This function must be called after a key <code class="code">NCurses.keys.MOUSE</code> was read. It returns a list with three entries <code class="code">[y, x, intlist]</code> where <code class="code">y</code> and <code class="code">x</code> are the coordinates of the character cell where the mouse event occured and <code class="code">intlist</code> describes the event, it should have length one and refers to a position in <code class="code">NCurses.mouseEvents</code>.</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">wenclose(win, y, x)</code></strong></dt>
+<dd><p>This functions returns <code class="keyw">true</code> if the screen position <var class="Arg">y</var>, <var class="Arg">x</var> is within window <var class="Arg">win</var> and <code class="keyw">false</code> otherwise.</p>
+
+</dd>
+<dt><strong class="Mark">
+<code class="code">mouseinterval(t)</code></strong></dt>
+<dd><p>Sets the time to recognize a press and release of a mouse button as a click to <var class="Arg">t</var> milliseconds. (Note that this may have no effect because a window manager may catch this.)</p>
+
+</dd>
+</dl>
+<p><a id="X83897BF984211EFD" name="X83897BF984211EFD"></a></p>
+
+<h5>2.1-9 <span class="Heading">Miscellaneous function</span></h5>
+
+<p>We also provide the <code class="code">ncurses</code> function <code class="code">mnap(msec)</code> which is a sleep for <var class="Arg">msec</var> milliseconds.</p>
+
+<p>Furthermore, there a two utilities which can be useful for scripts and testing, namely a check if standard input or standard output are connected to terminals. These can be called as <code class="code">NCurses.IsStdinATty()</code> or <code class="code">NCurses.IsStdoutATty()</code>, respectively.</p>
+
+<p><a id="X864A5C1C7F181B4B" name="X864A5C1C7F181B4B"></a></p>
+
+<h4>2.2 <span class="Heading">The <code class="code">ncurses</code> <strong class="pkg">GAP</strong>
+functions</span></h4>
+
+<p>The functions of the <code class="code">ncurses</code> library are used within <strong class="pkg">GAP</strong> very similarly to their <code class="code">C</code> equivalents. The functions are available as components of a record <code class="code">NCurses</code> with the name of the <code class="code">C</code> function (e.g., <code class="code">NCurses.newwin</code>).</p>
+
+<p>In <strong class="pkg">GAP</strong> the <code class="code">ncurses</code> windows are accessed via integers (as returned by <code class="code">NCurses.newwin</code>). The standard screen <code class="code">stdscr</code> from the <code class="code">ncurses</code> library is available as window number <code class="code">0</code>. But this should not be used; to allow recursive applications of <code class="code">ncurses</code> always create a new window, wrap it in a panel and delete both when they are no longer needed.</p>
+
+<p>Each window can be wrapped in one panel which is accessed by the same integer. (Window <code class="code">0</code> cannot be used with a panel.)</p>
+
+<p>Coordinates in windows are the same zero based integers as in the corresponding <code class="code">C</code> functions. The interface of functions which <em>return</em> coordinates is slightly different from the <code class="code">C</code> version; they just return lists of integers and you just give the window as argument, e.g., <code class="code">NCurses.getmaxyx(win)</code> returns a list <code class="code">[nrows, ncols]</code> of two integers.</p>
+
+<p>Characters to be written to a window can be given either as <strong class="pkg">GAP</strong> characters like <code class="code">'a'</code> or as integers like <code class="code">INT_CHAR('a') = 97</code>. If you use the integer version you can also add attributes including color settings to it for use with <code class="code">NCurses.waddch</code>.</p>
+
+<p>When writing an application decide about an appropriate terminal setting for your visual mode windows, see <a href="chap2.html#X8499A3A384BF1F2D"><span class="RefLink">2.1-1</span></a> and the utility function <code class="func">NCurses.SetTerm</code> (<a href="chap2.html#X879D81B37A0A4E8F"><span class="RefLink">2.2-2</span></a>) below. Use <code class="code">NCurses.savetty()</code> and <code class="code">NCurses.resetty()</code> to save and restore the previous setting.</p>
+
+<p>We also provide some higher level functionality for displaying marked up text, see <code class="func">NCurses.PutLine</code> (<a href="chap2.html#X83FFD5047ADE716E"><span class="RefLink">2.2-6</span></a>) and <code class="func">NCurses.IsAttributeLine</code> (<a href="chap2.html#X81D1FC927C455AEB"><span class="RefLink">2.2-3</span></a>).</p>
+
+<p>We now describe some utility functions for putting text on a terminal window.</p>
+
+<p><a id="X83ADB4E37C105B8C" name="X83ADB4E37C105B8C"></a></p>
+
+<h5>2.2-1 NCurses.ColorAttr</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.ColorAttr</code>( <var class="Arg">fgcolor</var>, <var class="Arg">bgcolor</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an attribute for setting the foreground and background color to be used on a terminal window (it is a <strong class="pkg">GAP</strong> integer).</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.attrs.has_colors</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>The return value can be used like any other attribute as described in <a href="chap2.html#X793D897483674294"><span class="RefLink">2.1-7</span></a>. The arguments <var class="Arg">fgcolor</var> and <var class="Arg">bgcolor</var> can be given as strings, allowed are those in <code class="code">[ "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white" ]</code>. These are the default foreground colors 0 to 7 on ANSI terminals. Alternatively, the numbers 0 to 7 can be used directly as arguments.</p>
+
+<p>Note that terminals can be configured in a way such that these named colors are not the colors which are actually displayed.</p>
+
+<p>The variable <code class="func">NCurses.attrs.has_colors</code> is set to <code class="keyw">true</code> or <code class="keyw">false</code> if the terminal supports colors or not, respectively. If a terminal does not support colors then <code class="func">NCurses.ColorAttr</code> always returns <code class="code">NCurses.attrs.NORMAL</code>.</p>
+
+<p>For an attribute setting the foreground color with the default background color of the terminal use <code class="code">-1</code> as <var class="Arg">bgcolor</var> or the same as <var class="Arg">fgcolor</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">win := NCurses.newwin(0,0,0,0);; pan := NCurses.new_panel(win);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">defc := NCurses.defaultColors;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.wmove(win, 0, 0);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for a in defc do for b in defc do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.wattrset(win, NCurses.ColorAttr(a, b));</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.waddstr(win, Concatenation(a,"/",b,"\t"));</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   od; od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">if NCurses.IsStdoutATty() then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.update_panels();; NCurses.doupdate();;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.napms(5000);;     # show for 5 seconds</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.endwin();; NCurses.del_panel(pan);; NCurses.delwin(win);;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+</pre></div>
+
+<p><a id="X879D81B37A0A4E8F" name="X879D81B37A0A4E8F"></a></p>
+
+<h5>2.2-2 NCurses.SetTerm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.SetTerm</code>( [<var class="Arg">record</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function provides a unified interface to the various terminal setting functions of <code class="code">ncurses</code> listed in <a href="chap2.html#X8499A3A384BF1F2D"><span class="RefLink">2.1-1</span></a>. The optional argument is a record with components which are assigned to <code class="keyw">true</code> or <code class="keyw">false</code>. Recognised components are: <code class="code">cbreak</code>, <code class="code">echo</code>, <code class="code">nl</code>, <code class="code">intrflush</code>, <code class="code">leaveok</code>, <code class="code">scrollok</code>, <code class="code">keypad</code>, <code class="code">raw</code> (with the obvious meaning if set to <code class="keyw">true</code> or <code class="keyw">false</code>, respectively).</p>
+
+<p>The default, if no argument is given, is <code class="code">rec(cbreak := true, echo := false, nl := false, intrflush := false, leaveok := true, scrollok := false, keypad := true)</code>. (This is a useful setting for many applications.) If there is an argument <var class="Arg">record</var>, then the given components overwrite the corresponding defaults.</p>
+
+<p><a id="X81D1FC927C455AEB" name="X81D1FC927C455AEB"></a></p>
+
+<h5>2.2-3 NCurses.IsAttributeLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.IsAttributeLine</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if the argument describes a string with attributes.</p>
+
+<p>An <em>attribute line</em> describes a string with attributes. It is represented by either a string or a dense list of strings, integers, and Booleans immediately following integers, where at least one list entry must <em>not</em> be a string. (The reason is that we want to be able to distinguish between an attribute line and a list of such lines, and that the case of plain strings is perhaps the most usual one, so we do not want to force wrapping each string in a list.) The integers denote attribute values such as color or font information, the Booleans denote that the attribute given by the preceding integer is set or reset.</p>
+
+<p>If an integer is not followed by a Boolean then it is used as the attribute for the following characters, that is it overwrites all previously set attributes. Note that in some applications the variant with explicit Boolean values is preferable, because such a line can nicely be highlighted just by prepending a <code class="code">NCurses.attrs.STANDOUT</code> attribute.</p>
+
+<p>For an overview of attributes, see <a href="chap2.html#X793D897483674294"><span class="RefLink">2.1-7</span></a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.IsAttributeLine( "abc" );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.IsAttributeLine( [ "abc", "def" ] );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.IsAttributeLine( [ NCurses.attrs.UNDERLINE, true, "abc" ] );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.IsAttributeLine( "" );  NCurses.IsAttributeLine( [] );</span>
+true
+false
+</pre></div>
+
+<p>The <em>empty string</em> is an attribute line whereas the <em>empty list</em> (which is not in <code class="func">IsStringRep</code> (<a href="../../../doc/ref/chap27.html#X7A17EDF8785C9F58"><span class="RefLink">Reference: IsStringRep</span></a>)) is <em>not</em> an attribute line.</p>
+
+<p><a id="X8372F0C57816A29E" name="X8372F0C57816A29E"></a></p>
+
+<h5>2.2-4 NCurses.ConcatenationAttributeLines</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.ConcatenationAttributeLines</code>( <var class="Arg">lines</var>[, <var class="Arg">keep</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an attribute line.</p>
+
+<p>For a list <var class="Arg">lines</var> of attribute lines (see <code class="func">NCurses.IsAttributeLine</code> (<a href="chap2.html#X81D1FC927C455AEB"><span class="RefLink">2.2-3</span></a>)), <code class="code">NCurses.ConcatenationAttributeLines</code> returns the attribute line obtained by concatenating the attribute lines in <var class="Arg">lines</var>.</p>
+
+<p>If the optional argument <var class="Arg">keep</var> is <code class="keyw">true</code> then attributes set in an entry of <var class="Arg">lines</var> are valid also for the following entries of <var class="Arg">lines</var>. Otherwise (in particular if there is no second argument) the attributes are reset to <code class="code">NCurses.attrs.NORMAL</code> between the entries of <var class="Arg">lines</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plain_str:= "hello";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">with_attr:= [ NCurses.attrs.BOLD, "bold" ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.ConcatenationAttributeLines( [ plain_str, plain_str ] );</span>
+"hellohello"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.ConcatenationAttributeLines( [ plain_str, with_attr ] );</span>
+[ "hello", 2097152, "bold" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.ConcatenationAttributeLines( [ with_attr, plain_str ] );</span>
+[ 2097152, "bold", 0, "hello" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.ConcatenationAttributeLines( [ with_attr, with_attr ] );</span>
+[ 2097152, "bold", 0, 2097152, "bold" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.ConcatenationAttributeLines( [ with_attr, with_attr ], true );</span>
+[ 2097152, "bold", 2097152, "bold" ]
+</pre></div>
+
+<p><a id="X7D2EB0BF82C4F25C" name="X7D2EB0BF82C4F25C"></a></p>
+
+<h5>2.2-5 NCurses.RepeatedAttributeLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.RepeatedAttributeLine</code>( <var class="Arg">line</var>, <var class="Arg">width</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an attribute line.</p>
+
+<p>For an attribute line <var class="Arg">line</var> (see <code class="func">NCurses.IsAttributeLine</code> (<a href="chap2.html#X81D1FC927C455AEB"><span class="RefLink">2.2-3</span></a>)) and a positive integer <var class="Arg">width</var>, <code class="code">NCurses.RepeatedAttributeLine</code> returns an attribute line with <var class="Arg">width</var> displayed characters (see <code class="func">NCurses.WidthAttributeLine</code> (<a href="chap2.html#X82C53ACD805EE0C3"><span class="RefLink">2.2-7</span></a>)) that is obtained by concatenating sufficiently many copies of <var class="Arg">line</var> and cutting off a tail if applicable.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.RepeatedAttributeLine( "12345", 23 );</span>
+"12345123451234512345123"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.RepeatedAttributeLine( [ NCurses.attrs.BOLD, "12345" ], 13 );</span>
+[ 2097152, "12345", 0, 2097152, "12345", 0, 2097152, "123" ]
+</pre></div>
+
+<p><a id="X83FFD5047ADE716E" name="X83FFD5047ADE716E"></a></p>
+
+<h5>2.2-6 NCurses.PutLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.PutLine</code>( <var class="Arg">win</var>, <var class="Arg">y</var>, <var class="Arg">x</var>, <var class="Arg">lines</var>[, <var class="Arg">skip</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">lines</var> were written, otherwise <code class="keyw">false</code>.</p>
+
+<p>The argument <var class="Arg">lines</var> can be a list of attribute lines (see <code class="func">NCurses.IsAttributeLine</code> (<a href="chap2.html#X81D1FC927C455AEB"><span class="RefLink">2.2-3</span></a>)) or a single attribute line. This function writes the attribute lines to window <var class="Arg">win</var> at and below of position <var class="Arg">y</var>, <var class="Arg">x</var>.</p>
+
+<p>If the argument <var class="Arg">skip</var> is given, it must be a nonnegative integer. In that case the first <var class="Arg">skip</var> characters of each given line are not written to the window (but the attributes are).</p>
+
+<p><a id="X82C53ACD805EE0C3" name="X82C53ACD805EE0C3"></a></p>
+
+<h5>2.2-7 NCurses.WidthAttributeLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.WidthAttributeLine</code>( <var class="Arg">line</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: number of displayed characters in an attribute line.</p>
+
+<p>For an attribute line <var class="Arg">line</var> (see <code class="func">NCurses.IsAttributeLine</code> (<a href="chap2.html#X81D1FC927C455AEB"><span class="RefLink">2.2-3</span></a>)), the function returns the number of displayed characters of <var class="Arg">line</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.WidthAttributeLine( "abcde" );</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.WidthAttributeLine( [ NCurses.attrs.BOLD, "abc",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       NCurses.attrs.NORMAL, "de" ] );</span>
+5
+</pre></div>
+
+<p><a id="X790715F683BF1E66" name="X790715F683BF1E66"></a></p>
+
+<h5>2.2-8 NCurses.Grid</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.Grid</code>( <var class="Arg">win</var>, <var class="Arg">trow</var>, <var class="Arg">brow</var>, <var class="Arg">lcol</var>, <var class="Arg">rcol</var>, <var class="Arg">rowinds</var>, <var class="Arg">colinds</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function draws a grid of horizontal and vertical lines on the window <var class="Arg">win</var>, using the line drawing characters explained in <a href="chap2.html#X8091936586CCD248"><span class="RefLink">2.1-6</span></a>. The given arguments specify the top and bottom row of the grid, its left and right column, and lists of row and column numbers where lines should be drawn.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fun := function() local win, pan;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     win := NCurses.newwin(0,0,0,0);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     pan := NCurses.new_panel(win);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.Grid(win, 2, 11, 5, 22, [5, 6], [13, 14]);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.PutLine(win, 12, 0, "Press &lt;Enter&gt; to quit");</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.update_panels(); NCurses.doupdate();</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.wgetch(win);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.endwin();</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.del_panel(pan); NCurses.delwin(win);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fun();</span>
+</pre></div>
+
+<p><a id="X82B801587B37D571" name="X82B801587B37D571"></a></p>
+
+<h5>2.2-9 NCurses.WBorder</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.WBorder</code>( <var class="Arg">win</var>[, <var class="Arg">chars</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This is a convenient interface to the <code class="code">ncurses</code> function <code class="code">wborder</code>. It draws a border around the window <var class="Arg">win</var>. If no second argument is given the default line drawing characters are used, see <a href="chap2.html#X8091936586CCD248"><span class="RefLink">2.1-6</span></a>. Otherwise, <var class="Arg">chars</var> must be a list of <strong class="pkg">GAP</strong> characters or integers specifying characters, possibly with attributes. If <var class="Arg">chars</var> has length 8 the characters are used for the left/right/top/bottom sides and top-left/top-right/bottom-left/bottom-right corners. If <var class="Arg">chars</var> contains 2 characters the first is used for the sides and the second for all corners. If <var class="Arg">chars</var> contains just one character it is used for all sides including the corners.</p>
+
+<p><a id="X799C033A7AB582D7" name="X799C033A7AB582D7"></a></p>
+
+<h5>2.2-10 <span class="Heading">Mouse support in <code class="code">ncurses</code> applications</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.UseMouse</code>( <var class="Arg">on</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.GetMouseEvent</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of records</p>
+
+<p><code class="code">ncurses</code> allows on some terminals (<code class="code">xterm</code> and related) to catch mouse events. In principle a subset of events can be caught, see <code class="code">mousemask</code> in <a href="chap2.html#X86675F5F791FEFEF"><span class="RefLink">2.1-8</span></a>. But this does not seem to work well with proper subsets of possible events (probably due to intermediate processes X, window manager, terminal application, ...). Therefore we suggest to catch either all or no mouse events in applications.</p>
+
+<p>This can be done with <code class="func">NCurses.UseMouse</code> with argument <code class="keyw">true</code> to switch on the recognition of mouse events and <code class="keyw">false</code> to switch it off. The function returns a record with components <code class="code">.new</code> and <code class="code">.old</code> which are both set to the status <code class="keyw">true</code> or <code class="keyw">false</code> from after and before the call, respectively. (There does not seem to be a possibility to get the current status without calling <code class="func">NCurses.UseMouse</code>.) If you call the function with argument <code class="keyw">true</code> and the <code class="code">.new</code> component of the result is <code class="keyw">false</code>, then the terminal does not support mouse events.</p>
+
+<p>When the recognition of mouse events is switched on and a mouse event occurs then the key <code class="code">NCurses.keys.MOUSE</code> is found in the input queue, see <code class="code">wgetch</code> in <a href="chap2.html#X7F23F5F48650A78B"><span class="RefLink">2.1-4</span></a>. If this key is read the low level function <code class="code">NCurses.getmouse</code> must be called to fetch further details about the event from the input queue, see <a href="chap2.html#X86675F5F791FEFEF"><span class="RefLink">2.1-8</span></a>. In many cases this can be done by calling the function <code class="func">NCurses.GetMouseEvent</code> which also generates additional information. The return value is a list of records, one for each panel over which the event occured, these panels sorted from top to bottom (so, often you will just need the first entry if there is any). Each of these records has components <code class="code">.win</code>, the corresponding window of the panel, <code class="code">.y</code> and <code class="code">.x</code>, the relative coordinates in window <code class="code">.win</code> where the event occured, and <code class="code">.event</code>, which is bound to one of the strings in <code class="code">NCurses.mouseEvents</code> which describes the event.</p>
+
+<p><em>Suggestion:</em> Always make the use of the mouse optional in your application. Allow the user to switch mouse usage on and off while your application is running. Some users may not like to give mouse control to your application, for example the standard cut and paste functionality cannot be used while mouse events are caught.</p>
+
+<p><a id="X85FB1D7878A322EB" name="X85FB1D7878A322EB"></a></p>
+
+<h5>2.2-11 NCurses.SaveWin</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.SaveWin</code>( <var class="Arg">win</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.StringsSaveWin</code>( <var class="Arg">cont</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.RestoreWin</code>( <var class="Arg">win</var>, <var class="Arg">cont</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.ShowSaveWin</code>( <var class="Arg">cont</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a <strong class="pkg">GAP</strong> object describing the contents of a window.</p>
+
+<p>These functions can be used to save and restore the contents of <code class="code">ncurses</code> windows. <code class="func">NCurses.SaveWin</code> returns a list <code class="code">[nrows, ncols, chars]</code> giving the number of rows, number of columns, and a list of integers describing the content of window <var class="Arg">win</var>. The integers in the latter contain the displayed characters plus the attributes for the display.</p>
+
+<p>The function <code class="func">NCurses.StringsSaveWin</code> translates data <var class="Arg">cont</var> in form of the output of <code class="func">NCurses.SaveWin</code> to a list of <code class="code">nrows</code> strings giving the text of the rows of the saved window, and ignoring the attributes. You can view the result with <code class="func">NCurses.Pager</code> (<a href="chap3.html#X87E1B2787F588CC0"><span class="RefLink">3.1-4</span></a>).</p>
+
+<p>The argument <var class="Arg">cont</var> for <code class="func">NCurses.RestoreWin</code> must be of the same format as the output of <code class="func">NCurses.SaveWin</code>. The content of the saved window is copied to the window <var class="Arg">win</var>, starting from the top-left corner as much as it fits.</p>
+
+<p>The utility <code class="func">NCurses.ShowSaveWin</code> can be used to display the output of <code class="func">NCurses.SaveWin</code> (as much of the top-left corner as fits on the screen).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

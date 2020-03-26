@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (IntPic) - Chapter 6: 
+    Usage of IntPic in connection with the numericalsgps package
+  </title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6_mj.html">[MathJax on]</a></p>
+<p><a id="X7E08032186064BAD" name="X7E08032186064BAD"></a></p>
+<div class="ChapSects"><a href="chap6.html#X7E08032186064BAD">6 <span class="Heading">
+    Usage of <strong class="pkg">IntPic</strong> in connection with the <strong class="pkg">numericalsgps</strong> package
+  </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7B3048667C19F30D">6.1 <span class="Heading">Tikz code for drawing numerical semigroups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7B3048667C19F30D">6.1-1 <span class="Heading">Tikz code for drawing numerical semigroups</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7BF14BF082E52625">6.2 <span class="Heading">Drawing sets of numerical semigroups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X78B4B1D0810D457B">6.2-1 <span class="Heading">Set of numerical semigroups</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7D735F977FDCA8A0">6.2-2 <span class="Heading">Draw a set of numerical semigroups</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">
+    Usage of <strong class="pkg">IntPic</strong> in connection with the <strong class="pkg">numericalsgps</strong> package
+  </span></h3>
+
+<p>This chapter describes functions to be used in connection with the <strong class="pkg">numericalsgps</strong> package. We found it particularly usefull to gain intuition that led to the obtention of the results stated in <a href="chapBib.html#biBDGSRP15">[DGSRP16]</a>.</p>
+
+<p><a id="X7B3048667C19F30D" name="X7B3048667C19F30D"></a></p>
+
+<h4>6.1 <span class="Heading">Tikz code for drawing numerical semigroups</span></h4>
+
+<p><a id="X7B3048667C19F30D" name="X7B3048667C19F30D"></a></p>
+
+<h5>6.1-1 <span class="Heading">Tikz code for drawing numerical semigroups</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TikzCodeForNumericalSemigroup</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The arguments (at most 4) are:</p>
+
+<ol>
+<li><p>a numerical semigroup</p>
+
+</li>
+<li><p>(optional) a list whose elements are either</p>
+
+
+<ul>
+<li><p>lists of integers <em>or</em></p>
+
+</li>
+<li><p>one of the strings "pseudo_frobenius", "min_generators", "frobenius_number", "conductor", "special_gaps", "fundamental_gaps", "small_elements" (the default: used when no list is present) <em>or</em></p>
+
+</li>
+<li><p>the string "ns_table" (the drawing obtained is a table whose top row corresponds to the threshold interval</p>
+
+</li>
+</ul>
+</li>
+<li><p>a record whose fields are</p>
+
+
+<ul>
+<li><p>func -- a function name</p>
+
+</li>
+<li><p>(optional) argument -- an argument (that may be a function name also)</p>
+
+</li>
+</ul>
+</li>
+<li><p>(optional) a positive integer -- if it is bigger than the conductor or biggest minimal generator, it indicates the number of cells - 1 to be drawn and these are drawn in a single line; otherwise, it indicates the maximum number of cells per line.</p>
+
+</li>
+</ol>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ns1 := NumericalSemigroup(3,5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TikzCodeForNumericalSemigroup(ns1,[[3,4],"pseudo_frobenius"],20);</span>
+"%tikz\n\\begin{tikzpicture}[every node/.style={draw,scale=1pt,\nminimum width\
+=20pt,inner sep=3pt,\nline width=0pt,draw=black}]\n\\matrix[row sep=2pt,column\
+ sep=2pt]\n{\\node[]{0};&amp;\n\\node[]{1};&amp;\n\\node[]{2};&amp;\n\\node[fill=red]{3};&amp;\
+\n\\node[fill=red]{4};&amp;\n\\node[]{5};&amp;\n\\node[]{6};&amp;\n\\node[fill=green]{7};&amp;\
+\n\\node[]{8};&amp;\n\\node[]{9};&amp;\n\\node[]{10};&amp;\n\\node[]{11};&amp;\n\\node[]{12};&amp;\
+\n\\node[]{13};&amp;\n\\node[]{14};&amp;\n\\node[]{15};&amp;\n\\node[]{16};&amp;\n\\node[]{17}\
+;&amp;\n\\node[]{18};&amp;\n\\node[]{19};&amp;\n\\node[]{20};\\\\\n};\n\\end{tikzpicture}\
+\n"
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IP_Splash(TikzCodeForNumericalSemigroup(NumericalSemigroup(7,13,19,23),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[[3,4],"small_elements","fundamental_gaps"],20),rec(viewer := "evince"));    </span>
+</pre></div>
+
+<p><br><center><img src="../images/ip_splash_tikz_NS.jpg"></center><br></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ns := NumericalSemigroup(7,11,38,41);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz := TikzCodeForNumericalSemigroup(ns,rec(ns_table:=true,colors:=["blue",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">"red!70", "-red", "black!40"]));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IP_Splash(tkz);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz := TikzCodeForNumericalSemigroup(ns,rec(ns_table:=true));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IP_Splash(tkz);</span>
+</pre></div>
+
+<p><br><center><img src="../images/ip_splash_tikz_NS_table.jpg"></center><br> <br><center><img src="../images/ip_splash_tikz_NS_table_default.jpg"></center><br></p>
+
+<p><a id="X7BF14BF082E52625" name="X7BF14BF082E52625"></a></p>
+
+<h4>6.2 <span class="Heading">Drawing sets of numerical semigroups</span></h4>
+
+<p><a id="X78B4B1D0810D457B" name="X78B4B1D0810D457B"></a></p>
+
+<h5>6.2-1 <span class="Heading">Set of numerical semigroups</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetOfNumericalSemigroups</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function is used to produce lists of numerical semigroups with a fixed genus or Frobenius number. They are filtered and ordered according to some criteria.</p>
+
+<p>The argument is a record of options:</p>
+
+<ol>
+<li><p>set -- a record whose possible fields are genus or frobenius</p>
+
+</li>
+<li><p>(optional) filter -- a record whose possible fields are genus, type and/or multiplicity and/or frobenius and/or embedding_dimension</p>
+
+</li>
+<li><p>(optional) order -- ("genus", "type", "multiplicity", "frobenius", "embedding_dimension")</p>
+
+</li>
+</ol>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ls := SetOfNumericalSemigroups(rec(set:=rec(genus:=6),filter:=rec(type:= 2),</span>
+order:="multiplicity"));;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(ls,MinimalGenerators);</span>
+[ [ 3, 8, 13 ], [ 3, 10, 11 ], [ 4, 7, 9 ], [ 5, 6, 7 ], [ 5, 6, 8 ], 
+  [ 6, 7, 8, 9, 11 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ls := SetOfNumericalSemigroups(rec(set:=rec(genus:=6),filter:=rec(type:= 2),</span>
+order:="frobenius"));;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(ls,MinimalGenerators);</span>
+[ [ 3, 10, 11 ], [ 5, 6, 7 ], [ 5, 6, 8 ], [ 3, 8, 13 ], [ 4, 7, 9 ], 
+  [ 6, 7, 8, 9, 11 ] ]
+</pre></div>
+
+<p><a id="X7D735F977FDCA8A0" name="X7D735F977FDCA8A0"></a></p>
+
+<h5>6.2-2 <span class="Heading">Draw a set of numerical semigroups</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DrawSetOfNumericalSemigroups</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Produces a single image from the images of a set of numerical semigroups.</p>
+
+<p>The arguments (at most 3) are:</p>
+
+<ol>
+<li><p>a list of numerical semigroups (given as a list or each given as argument)</p>
+
+</li>
+<li><p>(optional) an integer that (when present) determines the length of each line</p>
+
+</li>
+<li><p>(optional) a record whose fields are</p>
+
+
+<ul>
+<li><p>(optional) splash -- which (when present) consists of a record of options for the Viz Splash function</p>
+
+</li>
+<li><p>(optional) highlights: a list to be passed to the function that produces the tikz code for each individual semigroup (whose aim is to say which elements are to be highlighted)</p>
+
+</li>
+</ul>
+</li>
+</ol>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ns1 := NumericalSemigroup(3,5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ns2 := NumericalSemigroup(5,7,11);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DrawSetOfNumericalSemigroups(ns1,rec(splash:=                          </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">rec(viewer := "evince"),highlights := </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">["pseudo_frobenius","small_elements","min_generators"]));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DrawSetOfNumericalSemigroups(ns1,ns2,rec(splash:= </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">rec(viewer := "evince"),highlights := </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">["pseudo_frobenius","small_elements","min_generators"]));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DrawSetOfNumericalSemigroups([ns1,ns2],rec(splash:=      </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">rec(viewer := "evince"),highlights :=                    </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">["small_elements","min_generators"]));                   </span>
+</pre></div>
+
+<p><br><center><img src="../images/set_3_5.jpg"></center><br> <br><center><img src="../images/set_3_5_and_5_7_11.jpg"></center><br> <br><center><img src="../images/set_3_5_and_5_7_11_v2.jpg"></center><br></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">frob := 15;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tipo := 2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">set := SetOfNumericalSemigroups(rec(set := rec(frobenius := frob),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">filter := rec(type:= tipo),order := "embedding_dimension"));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DrawSetOfNumericalSemigroups(set,rec(splash:= rec(viewer := "evince"),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">highlights := ["small_elements","min_generators",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">rec(func:= "ForcedIntegersForPseudoFrobenius", </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">argument := "PseudoFrobeniusOfNumericalSemigroup")]));</span>
+</pre></div>
+
+<p><br><center><img src="../images/draw_set_pseudo.jpg"></center><br> The following example helps in the understanding of the colors present in the first line of previous figure.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ns := NumericalSemigroup(4,9,19);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SmallElements(ns);</span>
+[ 0, 4, 8, 9, 12, 13, 16 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MinimalGeneratingSystem(ns);</span>
+[ 4, 9, 19 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ForcedIntegersForPseudoFrobenius(PseudoFrobeniusOfNumericalSemigroup(ns));</span>
+[ [ 1, 2, 3, 5, 6, 7, 14, 15 ], [ 0, 8, 9, 12, 13, 16 ] ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

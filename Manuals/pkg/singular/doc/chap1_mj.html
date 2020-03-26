@@ -1,0 +1,951 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (singular) - Chapter 1: singular: 
+the GAP interface to Singular</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1.html">[MathJax off]</a></p>
+<p><a id="X861CFE957DD2453F" name="X861CFE957DD2453F"></a></p>
+<div class="ChapSects"><a href="chap1_mj.html#X861CFE957DD2453F">1 <span class="Heading"><strong class="pkg">singular</strong>: 
+the <strong class="pkg">GAP</strong> interface to <strong class="pkg">Singular</strong></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X7DFB63A97E67C0A1">1.1 <span class="Heading">Introduction</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7FE24D6E8258CC49">1.1-1 <span class="Heading">Package evolution</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X83FD5A2A8047C857">1.1-2 <span class="Heading">The system <strong class="pkg">Singular</strong></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X783E6C90833FAA5F">1.1-3 <span class="Heading">The system <strong class="pkg">GAP</strong></span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X8360C04082558A12">1.2 <span class="Heading">Installation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7909A9237804CDCE">1.2-1 <span class="Heading">Installing the system
+<strong class="pkg">Singular</strong></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X8158504779874284">1.2-2 <span class="Heading">Installing the system <strong class="pkg">GAP</strong></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7AC4165B7843F037">1.2-3 <span class="Heading">Installing the package
+<strong class="pkg">singular</strong></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X8229A3C4793932BA">1.2-4 sing_exec</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X7E8229C88005E2EA">1.3 <span class="Heading">Interaction with
+<strong class="pkg">Singular</strong></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X79C5E6F27C37DA10">1.3-1 StartSingular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X81FDDDE47EBA9698">1.3-2 SingularHelp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X86C329A285955655">1.3-3 <span class="Heading">Rings and orderings</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X840BA4C9839D3CF4">1.3-4 <span class="Heading">Supported coefficients fields</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X813A17AF85BFACB9">1.3-5 SetTermOrdering</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X84A3CD498011A10C">1.3-6 SingularSetBaseRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X871A5AF87DAE21E6">1.3-7 SingularLibrary</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X876BA78F7CF049C3">1.3-8 SingularInterface</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X79B84D5C7AC98756">1.3-9 SingularType</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X874F7C2F7CF4192E">1.4 <span class="Heading">Interaction with
+<strong class="pkg">Singular</strong> at low level</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X85EEFDDE8111A67B">1.4-1 SingularCommand</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7B8471948055DD90">1.4-2 GapInterface</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X82726C947AFEC357">1.5 <span class="Heading">Other mathematical functions of the package</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7A43611E876B7560">1.5-1 GroebnerBasis</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7A594BFA7B521F98">1.5-2 SINGULARGBASIS</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X83668E317A047D24">1.5-3 HasTrivialGroebnerBasis</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X877960128076E656">1.5-4 GcdUsingSingular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X84AC005C837CE13C">1.5-5 FactorsUsingSingularNC</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X87A0E69B81E52AA2">1.5-6 FactorsUsingSingular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7EAC34C984599470">1.5-7 GeneratorsOfInvariantRing</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X7E4CD3FF8230789C">1.6 <span class="Heading">Algebraic-geometric codes functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X80553C51807FA705">1.6-1 AllPointsOnCurve</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X78E2235083D9FDCC">1.6-2 AGCode</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X8562222580239DA6">1.7 <span class="Heading">Troubleshooting and technical stuff</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7C1724F780B84A6C">1.7-1 <span class="Heading">Supported platforms and underlying <strong class="pkg">GAP</strong> functions</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X82CDC01B7AABF5F5">1.7-2 <span class="Heading">How different versions of <strong class="pkg">GAP</strong> display polynomial rings and polynomials</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7DE6DC637A7FAC93">1.7-3 <span class="Heading">Test file</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X82260C8E82090E87">1.7-4 <span class="Heading">Common problems</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7D38248D79425B28">1.7-5 <span class="Heading">Errors on the <strong class="pkg">Singular</strong> side</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X7C8AE6BD787CD237">1.7-6 <span class="Heading">Sending a report</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X78BE74C97BF4E287">1.7-7 SingularReportInformation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X843C50B18098609A">1.7-8 InfoSingular</a></span>
+</div></div>
+</div>
+
+<h3>1 <span class="Heading"><strong class="pkg">singular</strong>: 
+the <strong class="pkg">GAP</strong> interface to <strong class="pkg">Singular</strong></span></h3>
+
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+
+<h4>1.1 <span class="Heading">Introduction</span></h4>
+
+<p>This is the manual of the <strong class="pkg">GAP</strong> package ``<strong class="pkg">singular</strong>'' that provides an interface from the <strong class="pkg">GAP</strong> computer algebra system to the <strong class="pkg">Singular</strong> computer algebra system.</p>
+
+<p>This package allows the <strong class="pkg">GAP</strong> user to access functions of <strong class="pkg">Singular</strong> from within <strong class="pkg">GAP</strong>, and to apply these functions to the <strong class="pkg">GAP</strong> objects. With this package, the user keeps working with <strong class="pkg">GAP</strong> and, if he needs a function of <strong class="pkg">Singular</strong> that is not present in <strong class="pkg">GAP</strong>, he can use this function via the interface; see the function <code class="func">SingularInterface</code> (<a href="chap1_mj.html#X876BA78F7CF049C3"><span class="RefLink">1.3-8</span></a>).</p>
+
+<p>This package provides also a function that computes Groebner bases of ideals in polynomial rings of <strong class="pkg">GAP</strong>. This function uses the <strong class="pkg">Singular</strong> implementation, which is very fast; see the function <code class="func">GroebnerBasis</code> (<a href="chap1_mj.html#X7A43611E876B7560"><span class="RefLink">1.5-1</span></a>).</p>
+
+<p>The interface is expected to work with every version of <strong class="pkg">GAP</strong> 4, every (not very old) version of <strong class="pkg">Singular</strong>, and on every platform, on which both <strong class="pkg">GAP</strong> and <strong class="pkg">Singular</strong> run; see paragraph <a href="chap1_mj.html#X7C1724F780B84A6C"><span class="RefLink">1.7-1</span></a> for details.</p>
+
+<p>If you have used this package in the preparation of a paper please cite it as described in <span class="URL"><a href="https://www.gap-system.org/Contacts/cite.html">https://www.gap-system.org/Contacts/cite.html</a></span>.</p>
+
+<p>If <strong class="pkg">GAP</strong>, <strong class="pkg">Singular</strong>, and the <strong class="pkg">GAP</strong> package <strong class="pkg">singular</strong> are already installed and working on his computer, the user of this interface needs to read only the subsection <code class="func">sing_exec</code> (<a href="chap1_mj.html#X8229A3C4793932BA"><span class="RefLink">1.2-4</span></a>), the section <a href="chap1_mj.html#X7E8229C88005E2EA"><span class="RefLink">1.3</span></a>, and in case of problems the subsection <a href="chap1_mj.html#X82260C8E82090E87"><span class="RefLink">1.7-4</span></a>.</p>
+
+<p><a id="X7FE24D6E8258CC49" name="X7FE24D6E8258CC49"></a></p>
+
+<h5>1.1-1 <span class="Heading">Package evolution</span></h5>
+
+<p>The work for the package <strong class="pkg">singular</strong> has been started by Willem de Graaf, that planned this package as an interface to the function of <strong class="pkg">Singular</strong> that calculates the Groebner bases. To this purpose, Willem de Graaf wrote the code for the conversion of rings and ideals from <strong class="pkg">GAP</strong> to <strong class="pkg">Singular</strong>, and the code for the conversion of numbers and polynomials in both directions.</p>
+
+<p>Marco Costantini has widened the aim of the package, in order to make it a general interface to each possible function of <strong class="pkg">Singular</strong>: with the function <code class="func">SingularInterface</code> (<a href="chap1_mj.html#X876BA78F7CF049C3"><span class="RefLink">1.3-8</span></a>) it is possible to use from within <strong class="pkg">GAP</strong> any function of <strong class="pkg">Singular</strong>, including user-defined ones and future implementations. To this purpose, Marco Costantini has generalized the previous code for the conversion of objects in the new more general context, has written the code for the conversion of the various other types of objects, and has written the code for the low-level communication between <strong class="pkg">GAP</strong> and <strong class="pkg">Singular</strong>.</p>
+
+<p>David Joyner has developed the code for the algebraic-geometric codes functions, and has written the corresponding section <a href="chap1_mj.html#X7E4CD3FF8230789C"><span class="RefLink">1.6</span></a> of this manual.</p>
+
+<p>Gema M. Diaz has helped with some testing and reports.</p>
+
+<p><a id="X83FD5A2A8047C857" name="X83FD5A2A8047C857"></a></p>
+
+<h5>1.1-2 <span class="Heading">The system <strong class="pkg">Singular</strong></span></h5>
+
+<p><strong class="pkg">Singular</strong> is "A Computer Algebra System for Polynomial Computations" developed by G.-M. Greuel, G. Pfister, and H. Sch\"onemann, at Centre for Computer Algebra, University of Kaiserslautern. The authors of the <strong class="pkg">GAP</strong> package <strong class="pkg">singular</strong> are not involved in the development of the system <strong class="pkg">Singular</strong>, and vice versa.</p>
+
+<p><strong class="pkg">Singular</strong> is not included in this package, and can be obtained for free from <span class="URL"><a href="https://www.singular.uni-kl.de">https://www.singular.uni-kl.de</a></span>. There, one can find also its documentation, installing instructions, the source code if wanted, and support if needed. <strong class="pkg">Singular</strong> is available for several platforms.</p>
+
+<p>A description of <strong class="pkg">Singular</strong>, copied from its manual (paragraph ``2.1 Background''), version 2-0-5, is the following:</p>
+
+<p>" <strong class="pkg">Singular</strong> is a Computer Algebra system for polynomial computations with emphasis on the special needs of commutative algebra, algebraic geometry, and singularity theory. <strong class="pkg">Singular</strong>'s main computational objects are ideals and modules over a large variety of baserings. The baserings are polynomial rings or localizations thereof over a field (e.g., finite fields, the rationals, floats, algebraic extensions, transcendental extensions) or quotient rings with respect to an ideal. <strong class="pkg">Singular</strong> features one of the fastest and most general implementations of various algorithms for computing Groebner resp. standard bases. The implementation includes Buchberger's algorithm (if the ordering is a well ordering) and Mora's algorithm (if the ordering is a tangent cone ordering) as special cases. Furthermore, it provides polynomial factorizations, resultant, characteristic set and gcd computations, syzygy and free-resolution computations, and many more related functionalities. Based on an easy-to-use interactive shell and a C-like programming language, <strong class="pkg">Singular</strong>'s internal functionality is augmented and user-extendible by libraries written in the <strong class="pkg">Singular</strong> programming language. A general and efficient implementation of communication links allows <strong class="pkg">Singular</strong> to make its functionality available to other programs. <strong class="pkg">Singular</strong>'s development started in 1984 with an implementation of Mora's Tangent Cone algorithm in Modula-2 on an Atari computer (K.P. Neuendorf, G. Pfister, H. Schönemann; Humboldt-Universität zu Berlin). The need for a new system arose from the investigation of mathematical problems coming from singularity theory which none of the existing systems was able to compute. In the early 1990s <strong class="pkg">Singular</strong>'s ``home-town'' moved to Kaiserslautern, a general standard basis algorithm was implemented in C, and <strong class="pkg">Singular</strong> was ported to Unix, MS-DOS, Windows NT, and MacOS. Continuous extensions (like polynomial factorization, gcd computations, links) and refinements led in 1997 to the release of <strong class="pkg">Singular</strong> version 1.0 and in 1998 to the release of version 1.2 (much faster standard and Groebner bases computations based on Hilbert series and on improved implementations of the algorithms, libraries for primary decomposition, ring normalization, etc.). "</p>
+
+<p><a id="X783E6C90833FAA5F" name="X783E6C90833FAA5F"></a></p>
+
+<h5>1.1-3 <span class="Heading">The system <strong class="pkg">GAP</strong></span></h5>
+
+<p><strong class="pkg">GAP</strong> stands for "Groups, Algorithms, and Programming", and is developed by several people ("The <strong class="pkg">GAP</strong> Group").</p>
+
+<p><strong class="pkg">GAP</strong> is not included in this package, and can be obtained for free from <span class="URL"><a href="https://www.gap-system.org/">https://www.gap-system.org/</a></span>. There, one can find also its documentation, installing instructions, the source code, and support if needed. The <strong class="pkg">GAP</strong> system will run on any machine with an Unix-like or recent Windows or MacOS operating system and with a reasonable amount of ram and disk space.</p>
+
+<p>A description of <strong class="pkg">GAP</strong>, copied from its web site, is the following: "<strong class="pkg">GAP</strong> is a system for computational discrete algebra, with particular emphasis on Computational Group Theory. <strong class="pkg">GAP</strong> provides a programming language, a library of thousands of functions implementing algebraic algorithms written in the <strong class="pkg">GAP</strong> language as well as large data libraries of algebraic objects. See the web site the overview and the description of the mathematical capabilities. <strong class="pkg">GAP</strong> is used in research and teaching for studying groups and their representations, rings, vector spaces, algebras, combinatorial structures, and more. The system, including source, is distributed freely. You can study and easily modify or extend it for your special use."</p>
+
+<p><a id="X8360C04082558A12" name="X8360C04082558A12"></a></p>
+
+<h4>1.2 <span class="Heading">Installation</span></h4>
+
+<p>In order to use this interface one must have both <strong class="pkg">GAP</strong> version 4 and <strong class="pkg">Singular</strong> installed.</p>
+
+<p><a id="X7909A9237804CDCE" name="X7909A9237804CDCE"></a></p>
+
+<h5>1.2-1 <span class="Heading">Installing the system
+<strong class="pkg">Singular</strong></span></h5>
+
+<p>Follow the <strong class="pkg">Singular</strong> installing instructions.</p>
+
+<p>However, for a Unix system, one needs to download two files:</p>
+
+
+<ul>
+<li><p><code class="file">Singular-&lt;version&gt;-share.tar.gz</code>, that contains architecture independent data like documentation and libraries;</p>
+
+</li>
+<li><p><code class="file">Singular-&lt;version&gt;-&lt;uname&gt;.tar.gz</code>, that contains architecture dependent executables, like the <strong class="pkg">Singular</strong> program (precompiled). &lt;uname&gt; is a description of the processor and operating system for which <strong class="pkg">Singular</strong> is compiled.</p>
+
+</li>
+</ul>
+<p><strong class="pkg">Singular</strong> specific subdirectories will be created in such a way that multiple versions and multiple architecture dependent files of <strong class="pkg">Singular</strong> can peaceably coexist under the same <code class="file">/usr/local/</code> tree.</p>
+
+<p>Before trying the interface, make sure that <strong class="pkg">Singular</strong> is installed and working as stand-alone program.</p>
+
+<p><a id="X8158504779874284" name="X8158504779874284"></a></p>
+
+<h5>1.2-2 <span class="Heading">Installing the system <strong class="pkg">GAP</strong></span></h5>
+
+<p>Follow the <strong class="pkg">GAP</strong> installing instructions.</p>
+
+<p>However, the basic steps of a <strong class="pkg">GAP</strong> installation are:</p>
+
+
+<ul>
+<li><p>Choose your preferred archive format and download the archives.</p>
+
+</li>
+<li><p>Unpack the archives.</p>
+
+</li>
+<li><p>On Unix: Compile <strong class="pkg">GAP</strong>. (Compiled executables for Windows and Mac are in the archives.)</p>
+
+</li>
+<li><p>On Unix: Some packages need further installation for full functionality (which is not available on Windows or Mac).</p>
+
+</li>
+<li><p>Adjust some links/scripts/icons ..., depending on your system, to make the new version of <strong class="pkg">GAP</strong> available to the users of your machine.</p>
+
+</li>
+<li><p>Optional: Run a few tests.</p>
+
+</li>
+<li><p>Optional, but appreciated: Give some feedback on your installation.</p>
+
+</li>
+</ul>
+<p>There is also an experimental Linux binary distribution via remote synchronization with a reference installation, which includes all packages and some optimizations. Furthermore, the Debian GNU/Linux distribution contains .deb-packages with the core part of <strong class="pkg">GAP</strong> and some of the <strong class="pkg">GAP</strong> packages.</p>
+
+<p><a id="X7AC4165B7843F037" name="X7AC4165B7843F037"></a></p>
+
+<h5>1.2-3 <span class="Heading">Installing the package
+<strong class="pkg">singular</strong></span></h5>
+
+<p>The package <strong class="pkg">singular</strong> is installed and loaded as a normal <strong class="pkg">GAP</strong> package: see the <strong class="pkg">GAP</strong> documentation <span class="RefLink">???</span>.</p>
+
+<p>Starting with version 4.4 of <strong class="pkg">GAP</strong>, the package <strong class="pkg">singular</strong> is distributed together with <strong class="pkg">GAP</strong>. Hence, if <strong class="pkg">GAP</strong> is already installed with all the distributed packages, then also the package <strong class="pkg">singular</strong> is installed. However, if the package <strong class="pkg">singular</strong> is not included in your <strong class="pkg">GAP</strong> installation, it can be downloaded and unpacked in the <code class="file">pkg/</code> directory of the <strong class="pkg">GAP</strong> installation. If you don't have write access to the <code class="file">pkg/</code> directory in your main <strong class="pkg">GAP</strong> installation you can use private directories as explained in the <strong class="pkg">GAP</strong> documentation <a href="../../../doc/ref/chap9_mj.html#X7A4973627A5DB27D"><span class="RefLink">Reference: GAP Root Directories</span></a>. The package <strong class="pkg">singular</strong> doesn't require compilation.</p>
+
+<p><a id="X8229A3C4793932BA" name="X8229A3C4793932BA"></a></p>
+
+<h5>1.2-4 sing_exec</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; sing_exec</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; sing_exec_options</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularTempDirectory</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>In order to use the interface, <strong class="pkg">GAP</strong> has to be told where to find <strong class="pkg">Singular</strong>. This can be done in three ways. First, if the <strong class="pkg">Singular</strong> executable file is in the search path, then <strong class="pkg">GAP</strong> will find it. Second, it is possible to edit (before loading the package) one of the first lines of the file <code class="file">singular/gap/singular.g</code> (that comes with this package). Third, it is possible to give the path of the <strong class="pkg">Singular</strong> executable file directly during each <strong class="pkg">GAP</strong> session assigning it to the variable <var class="Arg">sing_exec</var> (after this package has been loaded, and before starting <strong class="pkg">Singular</strong>), as in the example below.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "singular" );</span>
+A GAP interface to Singular, by Marco Costantini and Willem de Graaf
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sing_exec:= "/home/wdg/Singular/2-0-3/ix86-Linux/Singular";;</span>
+</pre></div>
+
+<p>The directory separator is always '<code class="file">/</code>', even under DOS/Windows or MacOS. The value of <var class="Arg">sing_exec</var> must refer to the text-only version of <strong class="pkg">Singular</strong> (<var class="Arg">Singular</var>), and not to the Emacs version (<var class="Arg">ESingular</var>), nor to the terminal window version (<var class="Arg">TSingular</var>).</p>
+
+<p>In a similar way, it is possible to supply <strong class="pkg">Singular</strong> with some command line options (or files to read containing user defined functions), assigning them to the variable <var class="Arg">sing_exec_options</var>. This can be done by editing (before loading the package) one of the first lines of the file <code class="file">singular/gap/singular.g</code> (that comes with this package), or directly during each <strong class="pkg">GAP</strong> session (after this package has been loaded, and before starting <strong class="pkg">Singular</strong>), as in the example below.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Add( sing_exec_options, "--no-rc" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Add( sing_exec_options, "/full_path/my_file" );</span>
+</pre></div>
+
+<p>The variable <var class="Arg">sing_exec_options</var> is initialized to <var class="Arg">[ "-t" ]</var>; the user can add further options, but must keep <var class="Arg">"-t"</var>, which is required. The possible options are described in the <strong class="pkg">Singular</strong> documentation, paragraph ``3.1.6 Command line options''.</p>
+
+<p><strong class="pkg">Singular</strong> is not executed in the current directory, but in a user-specified one, or in a temporary one. It is possible to supply this directory assigning it to the variable <var class="Arg">SingularTempDirectory</var>. This can be done by editing (before loading the package) one of the first lines of the file <code class="file">singular/gap/singular.g</code> (that comes with this package), or directly during each <strong class="pkg">GAP</strong> session (after this package has been loaded, and before starting <strong class="pkg">Singular</strong>), as in the example below. If <var class="Arg">SingularTempDirectory</var> is not assigned, <strong class="pkg">GAP</strong> will create and use a temporary directory, which will be removed when <strong class="pkg">GAP</strong> quits.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularTempDirectory := Directory( "/tmp" );</span>
+dir("/tmp/")
+</pre></div>
+
+<p>On Windows, <strong class="pkg">Singular</strong> version 3 may be not executed directly, but may be executed as <var class="Arg">bash Singular</var>. In this case, the variables <var class="Arg">sing_exec</var>, <var class="Arg">sing_exec_options</var>, <var class="Arg">SingularTempDirectory</var> must reflect this, otherwise Windows complains that <var class="Arg">cygwin1.dll</var> is not found. The following works on my Windows machine.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("singular");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularTempDirectory := Directory("c:/cygwin/bin");</span>
+dir("c:/cygwin/bin/")
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sing_exec := "c:/cygwin/bin/bash.exe";</span>
+"c:/cygwin/bin/bash.exe"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sing_exec_options := [ "Singular", "-t" ];</span>
+[ "Singular", "-t" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StartSingular();</span>
+</pre></div>
+
+<p>Another possibility is to run Gap from within the Cygwin shell. In this case, with a standard installation of Cygwin and <strong class="pkg">Singular</strong>, no change is required,</p>
+
+<p><a id="X7E8229C88005E2EA" name="X7E8229C88005E2EA"></a></p>
+
+<h4>1.3 <span class="Heading">Interaction with
+<strong class="pkg">Singular</strong></span></h4>
+
+<p>The user must load the package <strong class="pkg">singular</strong> with <code class="func">LoadPackage</code> (<a href="../../../doc/ref/chap76_mj.html#X79B373A77B29D1F5"><span class="RefLink">Reference: LoadPackage</span></a>).</p>
+
+<p><a id="X79C5E6F27C37DA10" name="X79C5E6F27C37DA10"></a></p>
+
+<h5>1.3-1 StartSingular</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StartSingular</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CloseSingular</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>After the package <strong class="pkg">singular</strong> has been loaded, <strong class="pkg">Singular</strong> is started automatically when one of the functions of the interface is called. Alternatively, one can start <strong class="pkg">Singular</strong> with the command <var class="Arg">StartSingular</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StartSingular();</span>
+</pre></div>
+
+<p>See <a href="chap1_mj.html#X7C1724F780B84A6C"><span class="RefLink">1.7-1</span></a> for technical details. Explicit use of <var class="Arg">StartSingular</var> is not necessary. If <var class="Arg">StartSingular</var> is called when a previous <strong class="pkg">Singular</strong> session is running, than session will be closed, and a new session will be started.</p>
+
+<p>If at some point <strong class="pkg">Singular</strong> is no longer needed, then it can be closed (in order to save system resources) with the command <var class="Arg">CloseSingular</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseSingular();</span>
+</pre></div>
+
+<p>However, when <strong class="pkg">GAP</strong> exits, it is expected to close Singular, and remove any temporary directory, except in the case of abnormal <strong class="pkg">GAP</strong> termination.</p>
+
+<p><a id="X81FDDDE47EBA9698" name="X81FDDDE47EBA9698"></a></p>
+
+<h5>1.3-2 SingularHelp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularHelp</code>( <var class="Arg">topic</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">topic</var> is a string containing the name of a <strong class="pkg">Singular</strong> topic. This function provides help on that topic using the <strong class="pkg">Singular</strong> help system: see the <strong class="pkg">Singular</strong> documentation, paragraphs ``3.1.3 The online help system'' and ``5.1.43 help''. If <var class="Arg">topic</var> is the empty string "", then the title/index page of the manual is displayed.</p>
+
+<p>This function can be used to display the <strong class="pkg">Singular</strong> documentation referenced in this manual; <var class="Arg">topic</var> must be given without the leading numbers.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularHelp( "" ); # a Mozilla window appears</span>
+#I  // ** Displaying help in browser 'mozilla'.
+// ** Use 'system("--browser", &lt;browser&gt;);' to change browser,
+// ** where &lt;browser&gt; can be: "mozilla", "xinfo", "info", "builtin", "dummy", \
+"emacs".
+</pre></div>
+
+<p>The <strong class="pkg">Singular</strong> function <var class="Arg">system</var> can be accessed via the function <code class="func">SingularInterface</code> (<a href="chap1_mj.html#X876BA78F7CF049C3"><span class="RefLink">1.3-8</span></a>). Some only-text browsers may be not supported by the interface.</p>
+
+<p><a id="X86C329A285955655" name="X86C329A285955655"></a></p>
+
+<h5>1.3-3 <span class="Heading">Rings and orderings</span></h5>
+
+<p>All non-trivial algorithms in <strong class="pkg">Singular</strong> require the prior definition of a (polynomial) ring, that will be called the ``base-ring''. Any polynomial (respectively vector) in <strong class="pkg">Singular</strong> is ordered with respect to a term ordering (or, monomial ordering), that has to be specified together with the declaration of a ring. See the documentation of <strong class="pkg">Singular</strong>, paragraph ``3.3 Rings and orderings'', for further information.</p>
+
+<p>After defining in <strong class="pkg">GAP</strong> a ring, a term ordering can be assigned to it using the function <code class="func">SetTermOrdering</code> (<a href="chap1_mj.html#X813A17AF85BFACB9"><span class="RefLink">1.3-5</span></a>), and <em>after</em> the term ordering is assigned, the interface and <strong class="pkg">Singular</strong> can be told to use this ring as the base-ring, with the function <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>).</p>
+
+<p><a id="X840BA4C9839D3CF4" name="X840BA4C9839D3CF4"></a></p>
+
+<h5>1.3-4 <span class="Heading">Supported coefficients fields</span></h5>
+
+<p>Let <var class="Arg">p</var> be a prime, <var class="Arg">pol</var> an irreducible polynomial, and <var class="Arg">arg</var> an appropriate argument for the given function. The coefficient fields of the base-ring may be of the following form:</p>
+
+
+<ul>
+<li><p><var class="Arg">Rationals</var>,</p>
+
+</li>
+<li><p><var class="Arg">CyclotomicField( arg )</var>,</p>
+
+</li>
+<li><p><var class="Arg">AlgebraicExtension( Rationals, pol )</var>,</p>
+
+</li>
+<li><p><var class="Arg">GaloisField( arg )</var> (both prime and non-prime),</p>
+
+</li>
+<li><p><var class="Arg">AlgebraicExtension( GaloisField( p ), pol )</var>.</p>
+
+</li>
+</ul>
+<p>For some example see those for the function <code class="func">SetTermOrdering</code> (<a href="chap1_mj.html#X813A17AF85BFACB9"><span class="RefLink">1.3-5</span></a>).</p>
+
+<p>Let us remember that <var class="Arg">CyclotomicField</var> and <var class="Arg">GaloisField</var> can be abbreviated respectively to <var class="Arg">CF</var> and <var class="Arg">GF</var>; these forms are used also when <strong class="pkg">GAP</strong> prints cyclotomic or Galois fields. See the <strong class="pkg">GAP</strong> documentation about the functions: <code class="func">CyclotomicField</code> (<a href="../../../doc/ref/chap60_mj.html#X80D21D80850EFA4B"><span class="RefLink">Reference: CyclotomicField for (subfield and) conductor</span></a>), <code class="func">GaloisField</code> (<a href="../../../doc/ref/chap59_mj.html#X8592DBB086A8A9BE"><span class="RefLink">Reference: GaloisField for field size</span></a>), <code class="func">AlgebraicExtension</code> (<a href="../../../doc/ref/chap67_mj.html#X7CDA90537D2BAC8A"><span class="RefLink">Reference: AlgebraicExtension</span></a>), and the chapters: <a href="../../../doc/ref/chap17_mj.html#X87003045878E74DF"><span class="RefLink">Reference: Rational Numbers</span></a>, <a href="../../../doc/ref/chap60_mj.html#X80510B5880521FDC"><span class="RefLink">Reference: Abelian Number Fields</span></a>, <a href="../../../doc/ref/chap59_mj.html#X7893ABF67A028802"><span class="RefLink">Reference: Finite Fields</span></a>, <a href="../../../doc/ref/chap67_mj.html#X85732CEF7ECFCA68"><span class="RefLink">Reference: Algebraic extensions of fields</span></a>.</p>
+
+<p><a id="X813A17AF85BFACB9" name="X813A17AF85BFACB9"></a></p>
+
+<h5>1.3-5 SetTermOrdering</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetTermOrdering</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TermOrdering</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Let <var class="Arg">R</var> be a polynomial ring. The value of <var class="Arg">TermOrdering( R )</var> describes the term ordering of <var class="Arg">R</var>, and can be a string, a list, or a monomial ordering of <strong class="pkg">GAP</strong>. (The term orderings of <strong class="pkg">Singular</strong> are explained in its documentation, paragraphs ``3.3.3 Term orderings'' and ``B.2.1 Introduction to orderings''.)</p>
+
+<p>If this value is a string, for instance <var class="Arg">"lp"</var> (lexicographical ordering), <var class="Arg">"dp"</var> (degree reverse lexicographical ordering), or <var class="Arg">"Dp"</var> (degree lexicographical ordering), this value will be passed to <strong class="pkg">Singular</strong> without being interpreted or parsed by the interface.</p>
+
+<p>If this value is a list, it must be of the form <var class="Arg">[ str_1, d_1, str_2, d_2, ... ]</var>, where each <var class="Arg">str_i</var> is a <strong class="pkg">Singular</strong> ordering given as a string. Each <var class="Arg">d_i</var> must be a number, and specifies the number of variables having that ordering; however, if <var class="Arg">str_i</var> is a weighted order, like <var class="Arg">"wp"</var> (weighted reverse lexicographical ordering) or <var class="Arg">"Wp"</var> (weighted lexicographical ordering), then the corresponding <var class="Arg">d_i</var> must be a list of positive integers that specifies the weight of each variable. The sum of the <var class="Arg">d_i</var>'s (if numbers) or of their lengths (if lists) must be equal to the number of variables of the ring <var class="Arg">R</var>.</p>
+
+<p>This value can also be a monomial ordering of <strong class="pkg">GAP</strong>: currently supported are <var class="Arg">MonomialLexOrdering</var>, <var class="Arg">MonomialGrevlexOrdering</var>, and <var class="Arg">MonomialGrlexOrdering</var> <a href="../../../doc/ref/chap66_mj.html#X86E2ADEA784AD163"><span class="RefLink">Reference: Monomial Orderings</span></a>.</p>
+
+<p><var class="Arg">TermOrdering</var> is a mutable attribute, see the <strong class="pkg">GAP</strong> documentation of <code class="func">DeclareAttribute</code> (<a href="../../../doc/ref/chap13_mj.html#X7A00FC8A7A677A56"><span class="RefLink">Reference: DeclareAttribute</span></a>); if it is changed on the <strong class="pkg">GAP</strong> side, it is necessary thereafter to send again the ring to <strong class="pkg">Singular</strong> with <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>).</p>
+
+<p><var class="Arg">SetTermOrdering</var> can be used to set the term ordering of a ring. It is not mandatory to assign a term ordering: if no term ordering is set, then the default <var class="Arg">"dp"</var> will be used. If it is set, the term ordering must be set <em>before</em> the ring is sent to <strong class="pkg">Singular</strong> with <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>), otherwise, <strong class="pkg">Singular</strong> will ignore that term ordering, and will use the previous value if any, or the default <var class="Arg">"dp"</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R1:= PolynomialRing( Rationals, ["x","y","z"] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetTermOrdering( R1, "lp" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R2:= PolynomialRing( GaloisField(9), 3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetTermOrdering( R2, [ "wp", [1,1,2] ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R3:= PolynomialRing( CyclotomicField(25), ["x","y","z"] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetTermOrdering( R3, MonomialLexOrdering() );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Indeterminate(Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=AlgebraicExtension(Rationals, x^5+4*x+1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R4:= PolynomialRing( F, 6 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetTermOrdering( R4, [ "dp", 1, "wp", [1,1,2], "lp", 2 ] );</span>
+</pre></div>
+
+<p><a id="X84A3CD498011A10C" name="X84A3CD498011A10C"></a></p>
+
+<h5>1.3-6 SingularSetBaseRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularSetBaseRing</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularBaseRing</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">R</var> is a polynomial ring. <var class="Arg">SingularSetBaseRing</var> sets the base-ring in <strong class="pkg">Singular</strong> equal to <var class="Arg">R</var>. This ring will be also kept in <strong class="pkg">GAP</strong> in the variable <var class="Arg">SingularBaseRing</var>. After this assignment, all the functions of the interface will work with this ring. However, for some functions (those having rings, ideals, or modules as arguments) it is not necessary to explicitly set the base ring first, because in these cases the functions arguments contains information about a ring that will be used as a base-ring. This will be specified for each function in the corresponding section of this manual. (Unnecessary use of <var class="Arg">SingularSetBaseRing</var> doesn't harm; forgetting to use <var class="Arg">SingularSetBaseRing</var> produces the problem described in the paragraph <a href="chap1_mj.html#X82260C8E82090E87"><span class="RefLink">1.7-4</span></a>.) The results of the computations may depend on the choice of the base-ring: see an example at <code class="func">FactorsUsingSingular</code> (<a href="chap1_mj.html#X87A0E69B81E52AA2"><span class="RefLink">1.5-6</span></a>), in which the factorization of <span class="SimpleMath">\( x^2 + y^2 \)</span> is calculated.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( Rationals, ["x","y","z"] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularSetBaseRing( R );</span>
+</pre></div>
+
+<p>The value of <var class="Arg">SingularBaseRing</var> when the package is loaded is <var class="Arg">PolynomialRing( GF( 32003 ), 3 )</var>, in order to match the default base-ring of <strong class="pkg">Singular</strong>.</p>
+
+<p><a id="X871A5AF87DAE21E6" name="X871A5AF87DAE21E6"></a></p>
+
+<h5>1.3-7 SingularLibrary</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularLibrary</code>( <var class="Arg">string</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>In <strong class="pkg">Singular</strong> some functionality is provided by separate libraries that must be explicitly loaded in order to be used (see the <strong class="pkg">Singular</strong> documentation, chapter ``D. SINGULAR libraries''), see the example in <code class="func">SingularInterface</code> (<a href="chap1_mj.html#X876BA78F7CF049C3"><span class="RefLink">1.3-8</span></a>).</p>
+
+<p>The argument <var class="Arg">string</var> is a string containing the name of a <strong class="pkg">Singular</strong> library. This function makes sure that this library is loaded into <strong class="pkg">Singular</strong>.</p>
+
+<p>The functions provided by the library <var class="Arg">ring.lib</var> could be not yet supported by the interface.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularLibrary( "general.lib" );</span>
+</pre></div>
+
+<p><a id="X876BA78F7CF049C3" name="X876BA78F7CF049C3"></a></p>
+
+<h5>1.3-8 SingularInterface</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularInterface</code>( <var class="Arg">singcom</var>, <var class="Arg">arguments</var>, <var class="Arg">type_output</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <var class="Arg">SingularInterface</var> provides the general interface that enables to apply the <strong class="pkg">Singular</strong> functions to the <strong class="pkg">GAP</strong> objects. Its arguments are the following:</p>
+
+
+<ul>
+<li><p><var class="Arg">singcom</var> is a <strong class="pkg">Singular</strong> command or function (given as a string).</p>
+
+</li>
+<li><p><var class="Arg">arguments</var> is a list of <strong class="pkg">GAP</strong> objects, <span class="SimpleMath">\(O_1, O_2, ..., O_n\)</span>, that will be used as arguments of <var class="Arg">singcom</var> (it may be the empty list). <var class="Arg">arguments</var> may also be a string: in this case it is assumed that it contains one or more <strong class="pkg">Singular</strong> identifiers, or a <strong class="pkg">Singular</strong> valid expression, or something else meaningful for <strong class="pkg">Singular</strong>, and it is passed to <strong class="pkg">Singular</strong> without parsing or checking on the <strong class="pkg">GAP</strong> side.</p>
+
+</li>
+<li><p><var class="Arg">type_output</var> is the data type (given as a string) in <strong class="pkg">Singular</strong> of the output. The data types are the following (see the <strong class="pkg">Singular</strong> documentation, chapter ``4. Data types''): "bigint", "def", "ideal", "int", "intmat", "intvec", "link", "list", "map", "matrix", "module", "number", "poly", "proc", "qring", "resolution", "ring", "string", "vector" (some of them were not available in previous versions of <strong class="pkg">Singular</strong>). The empty string "" can be used if no output is expected. If in doubt you can use "def" (see the <strong class="pkg">Singular</strong> documentation, paragraph ``4.1 def''). Usually, in the documentation of each <strong class="pkg">Singular</strong> function is given its output type.</p>
+
+</li>
+</ul>
+<p>Of course, the objects in the list <var class="Arg">arguments</var> and the <var class="Arg">type_output</var> must be appropriate for the function <var class="Arg">singcom</var>: no check is done by the interface.</p>
+
+<p>The function <var class="Arg">SingularInterface</var> does the following:</p>
+
+<ol>
+<li><p>converts each object <span class="SimpleMath">\(O_1, O_2, ..., O_n\)</span> in <var class="Arg">arguments</var> into the corresponding object <span class="SimpleMath">\(P_1, P_2, ..., P_n\)</span>, of <strong class="pkg">Singular</strong>,</p>
+
+</li>
+<li><p>sends to <strong class="pkg">Singular</strong> the command to calculate <span class="SimpleMath">\(singcom ( P_1, P_2, ..., P_n )\)</span>,</p>
+
+</li>
+<li><p>gets the output (of type <var class="Arg">type_output</var>) from <strong class="pkg">Singular</strong>,</p>
+
+</li>
+<li><p>converts it to the corresponding Gap object, and returns it to the user.</p>
+
+</li>
+</ol>
+<p>The function <var class="Arg">SingularInterface</var> is oriented towards the kind-of-objects/data-types, and not to the functions of <strong class="pkg">Singular</strong>, because in this way it is much more general. The user can use ``all'' the existing functions of <strong class="pkg">Singular</strong> and the interface is not bounded to the state of implementation of <strong class="pkg">Singular</strong>: future functions and user-defined functions will be automatically supported.</p>
+
+<p>The conversion of objects from Gap to <strong class="pkg">Singular</strong> and from it back to Gap is done using some `ad hoc' functions. Currently, the conversion of objects from <strong class="pkg">GAP</strong> to <strong class="pkg">Singular</strong> is implemented for the following types: "ideal", "int", "intmat", "intvec", "list", "matrix", "module", "number", "poly", "ring", "string", "vector". Objects of other types are not supported, or are even not yet implemented in <strong class="pkg">GAP</strong>.</p>
+
+<p>The conversion of objects from <strong class="pkg">Singular</strong> to <strong class="pkg">GAP</strong> is currently implemented for the following types: "bigint", "def", "ideal", "int", "intmat", "intvec", "list", "matrix", "module", "number", "poly", "proc" (experimental), "string", "vector". Objects of other types are returned as strings.</p>
+
+<p>Before passing polynomials (or numbers, vectors, matrices, or lists of them) to <strong class="pkg">Singular</strong>, it is necessary to have sent the base-ring to <strong class="pkg">Singular</strong> with the function <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>), in order to ensure that <strong class="pkg">Singular</strong> knows about them. This is not necessary if in the input there is a ring, an ideal, or a module (before the polynomials), because these objects contain information about the ring to be used as base-ring. All the input must be relative to at most one ring; furthermore, at most one object of type "ring" can be in the input.</p>
+
+<p>As SingularInterface is a rather general function, it is not guaranteed that it always works, and some functions are not supported. For instance, in <strong class="pkg">Singular</strong> there is the function <var class="Arg">pause</var> that waits until a keystroke is pressed; but the interface instead waits for the <strong class="pkg">Singular</strong> prompt before sending it any new keystroke, and so calling <var class="Arg">pause</var> would hang the interface. However, the unsupported functions like <var class="Arg">pause</var> are only a few, and are not mathematically useful. SingularInterface tries to block calls to known unsupported functions.</p>
+
+<p>Some <strong class="pkg">Singular</strong> functions may return more than one value, see the <strong class="pkg">Singular</strong> documentation, paragraph ``6.2.7 Return type of procedures''. In order to use one of these functions via <var class="Arg">SingularInterface</var>, the type <var class="Arg">type_output</var> must be "list". The output in <strong class="pkg">GAP</strong> will be a list containing the values returned by the <strong class="pkg">Singular</strong> function.</p>
+
+<p>In the next example we compute the primary decomposition of an ideal. Note that for that we need to load the <strong class="pkg">Singular</strong> library <var class="Arg">primdec.lib</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( Rationals, ["x","y","z"] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i:= IndeterminatesOfPolynomialRing(R);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:= i[1];; y:= i[2];; z:= i[3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= (x*y-z)*(x*y*z+y^2*z+x^2*z);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= (x*y-z)*(x*y*z^2+x*y^2*z+x^2*y*z);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I:= Ideal( R, [f,g] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularLibrary( "primdec.lib" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularInterface( "primdecGTZ", [ I ], "def" );</span>
+#I  Singular output of type "list"
+[ [ &lt;two-sided ideal in Rationals[x,y,z], (1 generators)&gt;,
+      &lt;two-sided ideal in Rationals[x,y,z], (1 generators)&gt; ],
+  [ &lt;two-sided ideal in Rationals[x,y,z], (1 generators)&gt;,
+      &lt;two-sided ideal in Rationals[x,y,z], (1 generators)&gt; ],
+  [ &lt;two-sided ideal in Rationals[x,y,z], (2 generators)&gt;,
+      &lt;two-sided ideal in Rationals[x,y,z], (2 generators)&gt; ],
+  [ &lt;two-sided ideal in Rationals[x,y,z], (3 generators)&gt;,
+      &lt;two-sided ideal in Rationals[x,y,z], (2 generators)&gt; ] ]
+</pre></div>
+
+<p>In the next example are calculated the first syzygy module of an ideal, and the resultant of two polynomials with respect a variable. Note that in this case it is not necessary to set the base-ring with <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>), in the first case because the input <var class="Arg">I</var> is of type "ideal", and in the second case because the base-ring was already sent to <strong class="pkg">Singular</strong> in the former case.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( Rationals, ["x","y","z"] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i:= IndeterminatesOfPolynomialRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:= i[1];; y:= i[2];; z:= i[3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= 3*(x+2)^3+y;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= x+y+z;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I:= Ideal( R, [f,g] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := SingularInterface( "syz", [ I ], "module" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfLeftOperatorAdditiveGroup( M );</span>
+[ [ -x-y-z, 3*x^3+18*x^2+36*x+y+24 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularInterface( "resultant", [ f, g, z ], "poly");</span>
+3*x^3+18*x^2+36*x+y+24
+</pre></div>
+
+<p><a id="X79B84D5C7AC98756" name="X79B84D5C7AC98756"></a></p>
+
+<h5>1.3-9 SingularType</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularType</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>to be written</p>
+
+<p><a id="X874F7C2F7CF4192E" name="X874F7C2F7CF4192E"></a></p>
+
+<h4>1.4 <span class="Heading">Interaction with
+<strong class="pkg">Singular</strong> at low level</span></h4>
+
+<p><a id="X85EEFDDE8111A67B" name="X85EEFDDE8111A67B"></a></p>
+
+<h5>1.4-1 SingularCommand</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularCommand</code>( <var class="Arg">precommand</var>, <var class="Arg">command</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>to be written</p>
+
+<p><a id="X7B8471948055DD90" name="X7B8471948055DD90"></a></p>
+
+<h5>1.4-2 GapInterface</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GapInterface</code>( <var class="Arg">func</var>, <var class="Arg">arg</var>, <var class="Arg">out</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>to be written</p>
+
+<p><a id="X82726C947AFEC357" name="X82726C947AFEC357"></a></p>
+
+<h4>1.5 <span class="Heading">Other mathematical functions of the package</span></h4>
+
+<p><a id="X7A43611E876B7560" name="X7A43611E876B7560"></a></p>
+
+<h5>1.5-1 GroebnerBasis</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GroebnerBasis</code>( <var class="Arg">I</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">I</var> is an ideal of a polynomial ring. This function computes a Groebner basis of <var class="Arg">I</var> (that will be returned as a list of polynomials). For this function it is <em>not</em> necessary to set the base-ring with <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>).</p>
+
+<p>As term ordering, <strong class="pkg">Singular</strong> will use the value of <code class="func">TermOrdering</code> (<a href="chap1_mj.html#X813A17AF85BFACB9"><span class="RefLink">1.3-5</span></a>) of the polynomial ring containing <var class="Arg">I</var>. Again, if this value is not set, then the degree reverse lexicographical ordering (<var class="Arg">"dp"</var>) will be used.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( Rationals, ["x","y","z"] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := R.1;; y := R.2;; z := R.3;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:= [ x*y*z -x^2*z, x^2*y*z-x*y^2*z-x*y*z^2, x*y-x*z-y*z ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I:= Ideal( R, r );</span>
+&lt;two-sided ideal in Rationals[x,y,z], (3 generators)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GroebnerBasis( I );</span>
+[ x*y-x*z-y*z, x^2*z-x*z^2-y*z^2, x*z^3+y*z^3, -x*z^3+y^2*z^2-y*z^3 ]
+</pre></div>
+
+<p><a id="X7A594BFA7B521F98" name="X7A594BFA7B521F98"></a></p>
+
+<h5>1.5-2 SINGULARGBASIS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SINGULARGBASIS</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>This variable is a record containing the component <var class="Arg">GroebnerBasis</var>. When the variable SINGULARGBASIS is assigned to the <strong class="pkg">GAP</strong> global variable <var class="Arg">GBASIS</var>, then the computations of Groebner bases via <strong class="pkg">GAP</strong>'s internal function for that, <code class="func">GroebnerBasis</code> (<a href="../../../doc/ref/chap66_mj.html#X7A43611E876B7560"><span class="RefLink">Reference: GroebnerBasis</span></a>), are done by <strong class="pkg">Singular</strong>.</p>
+
+<p><strong class="pkg">Singular</strong> claims that it "features one of the fastest and most general implementations of various algorithms for computing Groebner bases". The <strong class="pkg">GAP</strong>'s internal function claims to be "a na{\"\i}ve implementation of Buchberger's algorithm (which is mainly intended as a teaching tool): it might not be sufficient for serious problems."</p>
+
+<p>(Note in the following example that the Groebner bases calculated by the <strong class="pkg">GAP</strong> internal function are in general not reduced; for reduced bases see the <strong class="pkg">GAP</strong> function <code class="func">ReducedGroebnerBasis</code> (<a href="../../../doc/ref/chap66_mj.html#X7DEF286384967C9E"><span class="RefLink">Reference: ReducedGroebnerBasis</span></a>).)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( Rationals, 3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i:= IndeterminatesOfPolynomialRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pols:= [i[1]+i[2]+i[3], i[1]*i[2]+i[1]*i[3]+i[2]*i[3], i[1]*i[2]*i[3]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o:= MonomialLexOrdering();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GBASIS:= GAPGBASIS;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GroebnerBasis( pols, o ); # This is the internal GAP method.</span>
+[ x+y+z, x*y+x*z+y*z, x*y*z, -y^2-y*z-z^2, z^3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GBASIS:= SINGULARGBASIS;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GroebnerBasis( pols, o ); # This uses Singular via the interface.</span>
+[ z^3, y^2+y*z+z^2, x+y+z ]
+</pre></div>
+
+<p><a id="X83668E317A047D24" name="X83668E317A047D24"></a></p>
+
+<h5>1.5-3 HasTrivialGroebnerBasis</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HasTrivialGroebnerBasis</code>( <var class="Arg">I</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <var class="Arg">HasTrivialGroebnerBasis</var> returns <var class="Arg">true</var> if the Groebner basis of the ideal <var class="Arg">I</var> is trivial, false otherwise. This function can be used if it is not necessary to know the Groebner basis of an ideal, but it suffices to know only whether it is trivial or not.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:= Indeterminate( Rationals, "x" : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:= Indeterminate( Rationals, "y", [ x ] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z:= Indeterminate( Rationals, "z", [ x, y ] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( Rationals, [ x, y, z] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= (x*y-z)*(x*y*z+y^2*z+x^2*z);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= (x*y-z)*(x*y*z^2+x*y^2*z+x^2*y*z);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I:= Ideal( R, [f,g] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasTrivialGroebnerBasis( I );</span>
+false
+</pre></div>
+
+<p><a id="X877960128076E656" name="X877960128076E656"></a></p>
+
+<h5>1.5-4 GcdUsingSingular</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GcdUsingSingular</code>( <var class="Arg">pol_1</var>, <var class="Arg">pol_2</var>, <var class="Arg">...</var>, <var class="Arg">pol_n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GcdUsingSingular</code>( [<var class="Arg">pol_1</var>, <var class="Arg">pol_2</var>, <var class="Arg">...</var>, <var class="Arg">pol_n</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The arguments of this function are (possibly multivariate) polynomials separated by commas, or it is a list of polynomials. This function returns the greatest common divisor of these polynomials. For this function it is <em>necessary</em> for the polynomials to lie in the base-ring, as set by <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( Rationals, ["x","y","z"] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularSetBaseRing( R );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i:= IndeterminatesOfPolynomialRing(R);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:= i[1];; y:= i[2];; z:= i[3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= (x*y-z)*(x*y*z+y^2*z+x^2*z);</span>
+x^3*y*z+x^2*y^2*z+x*y^3*z-x^2*z^2-x*y*z^2-y^2*z^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= (x*y-z)*(x*y*z^2+x*y^2*z+x^2*y*z);</span>
+x^3*y^2*z+x^2*y^3*z+x^2*y^2*z^2-x^2*y*z^2-x*y^2*z^2-x*y*z^3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GcdUsingSingular( f, g );</span>
+-x*y*z+z^2
+</pre></div>
+
+<p><a id="X84AC005C837CE13C" name="X84AC005C837CE13C"></a></p>
+
+<h5>1.5-5 FactorsUsingSingularNC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FactorsUsingSingularNC</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">f</var> is a (possibly multivariate) polynomial. This function returns the factorization of <var class="Arg">f</var> into irreducible factors. The first element in the output is a constant coefficient, and the others may be monic (with respect to the term ordering) polynomials, as returned by <strong class="pkg">Singular</strong>. For this function it is <em>necessary</em> that <var class="Arg">f</var> lies in the base-ring, as set by <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>).</p>
+
+<p>The function does not check that the product of these factors gives <var class="Arg">f</var> (for that use <code class="func">FactorsUsingSingular</code> (<a href="chap1_mj.html#X87A0E69B81E52AA2"><span class="RefLink">1.5-6</span></a>)): <strong class="pkg">Singular</strong> version 2-0-3 contains a bug so that the <strong class="pkg">Singular</strong> function <var class="Arg">factorize</var> may give wrong results (therefore <strong class="pkg">Singular</strong> version at least 2-0-4 is recommended).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( Rationals, ["x","y","z"] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularSetBaseRing( R );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i:= IndeterminatesOfPolynomialRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:= i[1];; y:= i[2];; z:= i[3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= (x*y-z)*(3*x*y*z+4*y^2*z+5*x^2*z);</span>
+5*x^3*y*z+3*x^2*y^2*z+4*x*y^3*z-5*x^2*z^2-3*x*y*z^2-4*y^2*z^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FactorsUsingSingularNC( f );</span>
+[ 1, -5*x^2-3*x*y-4*y^2, -x*y+z, z ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= (x*y-z)*(5/3*x*y*z+4*y^2*z+6*x^2*z);</span>
+6*x^3*y*z+5/3*x^2*y^2*z+4*x*y^3*z-6*x^2*z^2-5/3*x*y*z^2-4*y^2*z^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FactorsUsingSingularNC( f );</span>
+[ 1/3, -18*x^2-5*x*y-12*y^2, -x*y+z, z ]
+</pre></div>
+
+<p><a id="X87A0E69B81E52AA2" name="X87A0E69B81E52AA2"></a></p>
+
+<h5>1.5-6 FactorsUsingSingular</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FactorsUsingSingular</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This does the same as <code class="func">FactorsUsingSingularNC</code> (<a href="chap1_mj.html#X84AC005C837CE13C"><span class="RefLink">1.5-5</span></a>), except that on the <strong class="pkg">GAP</strong> level it is checked that the product of these factors gives <var class="Arg">f</var>. Again it is <em>necessary</em> that <var class="Arg">f</var> lies in the base-ring, as set by <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( Rationals, ["x","y"] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularSetBaseRing( R );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := R.1;; y := R.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FactorsUsingSingular( x^2 + y^2 );</span>
+[ 1, x^2+y^2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( GaussianRationals, ["x","y"] : old);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularSetBaseRing( R );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := R.1;; y := R.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FactorsUsingSingular( x^2 + y^2 );</span>
+[ 1, x+E(4)*y, x-E(4)*y ]
+</pre></div>
+
+<p><a id="X7EAC34C984599470" name="X7EAC34C984599470"></a></p>
+
+<h5>1.5-7 GeneratorsOfInvariantRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneratorsOfInvariantRing</code>( <var class="Arg">R</var>, <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">R</var> is a polynomial ring, and <var class="Arg">G</var> a finite group, which is either a matrix group or a permutation group. If <var class="Arg">G</var> is a matrix group, then its degree must be less than or equal to the number of indeterminates of <var class="Arg">R</var>. If <var class="Arg">G</var> is a permutation group, then its maximal moved point must be less than or equal to the number of indeterminates of <var class="Arg">R</var>. This function computes a list of generators of the invariant ring of <var class="Arg">G</var>, corresponding to its action on <var class="Arg">R</var>. This action is taken to be from the left.</p>
+
+<p>For this function it is <em>not</em> necessary to set the base-ring with <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:=[[1,1,1],[0,1,1],[0,0,1]] * One( GF(3) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:= Group( [m] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( GF(3), 3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfInvariantRing( R, G );</span>
+[ x_3, x_1*x_3+x_2^2+x_2*x_3, x_1^3+x_1^2*x_3-x_1*x_2^2-x_1*x_2*x_3 ]
+</pre></div>
+
+<p><a id="X7E4CD3FF8230789C" name="X7E4CD3FF8230789C"></a></p>
+
+<h4>1.6 <span class="Heading">Algebraic-geometric codes functions</span></h4>
+
+<p>This section of <strong class="pkg">GAP</strong>'s <strong class="pkg">singular</strong> package and the corresponding code were written by David Joyner, <span class="URL"><a href="mailto:wdj@usna.edu">wdj@usna.edu</a></span>, (with help from Christoph Lossen and Marco Costantini). It has been tested with <strong class="pkg">Singular</strong> versrion 2.0.x.</p>
+
+<p>To start off, several new <strong class="pkg">Singular</strong> commands must be loaded. The following command loads the necessary <strong class="pkg">Singular</strong> and <strong class="pkg">GAP</strong> commands, the packages <strong class="pkg">singular</strong> and <strong class="pkg">GUAVA</strong> (if not already loaded), and (re)starts <strong class="pkg">Singular</strong>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadPackage("singular", "contrib/agcode.g");;</span>
+</pre></div>
+
+<p><a id="X80553C51807FA705" name="X80553C51807FA705"></a></p>
+
+<h5>1.6-1 AllPointsOnCurve</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllPointsOnCurve</code>( <var class="Arg">f</var>, <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">\(F\)</span> be a finite and prime field. The function <var class="Arg">AllPointsOnCurve( f, F )</var> computes a list of generators of maximal ideals representing rationals points on a curve <span class="SimpleMath">\(X\)</span> defined by <span class="SimpleMath">\(f(x,y)=0\)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=GF(7);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R2:= PolynomialRing( F, 2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetTermOrdering( R2, "lp" );; # --- the term ordering must be "lp"</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">indet:= IndeterminatesOfPolynomialRing(R2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:= indet[1];; y:= indet[2];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=x^7-y^2-x;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllPointsOnCurve(f,F);</span>
+[ [ x_1 ], [ x_1-Z(7)^0 ], [ x_1+Z(7)^4 ], [ x_1+Z(7)^5 ], [ x_1+Z(7)^0 ], 
+  [ x_1+Z(7) ], [ x_1+Z(7)^2 ] ]
+</pre></div>
+
+<p><a id="X78E2235083D9FDCC" name="X78E2235083D9FDCC"></a></p>
+
+<h5>1.6-2 AGCode</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AGCode</code>( <var class="Arg">f</var>, <var class="Arg">G</var>, <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Let f be a polynomial in x,y over F=GF(p) representing plane curve <span class="SimpleMath">\(X\)</span> defined by <span class="SimpleMath">\(f(x,y)=0\)</span>, where p is a prime (prime powers are not yet supported by the underlying <strong class="pkg">Singular</strong> function). Let G, D be disjoint rational divisors on <span class="SimpleMath">\(X\)</span>, where D is a sum of distinct points, <span class="SimpleMath">\(supp(D)={P_1, ..., P_n}\)</span>. The AG code associated to f, G, D is the F defined to be the image of the evaluation map <span class="SimpleMath">\(f \mapsto (f(P_1),...,f(P_n))\)</span>. The function <var class="Arg">AGCode</var> computes a list of length three, [G, n, k], where G is a generator matrix of the AG code C, n is its length, and k is its dimension.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=GF(7);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R2:= PolynomialRing( F, 2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetTermOrdering( R2, "lp" );; # --- the term ordering must be "lp"</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularSetBaseRing(R2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">indet:= IndeterminatesOfPolynomialRing(R2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:= indet[1];; y:= indet[2];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=x^7-y^2-x;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=[2,2,0,0,0,0,0]; D:=[4..8];</span>
+[ 2, 2, 0, 0, 0, 0, 0 ]
+[ 4 .. 8 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">agc:=AGCode(f,G,D);</span>
+[ [ [ Z(7)^3, Z(7), 0*Z(7), Z(7)^4, Z(7)^5 ],
+      [ 0*Z(7), Z(7)^4, Z(7)^0, Z(7)^5, Z(7)^3 ],
+      [ 0*Z(7), 0*Z(7), Z(7)^3, Z(7), Z(7)^2 ] ], 5, 3 ]
+</pre></div>
+
+<p>This generator matrix can be fed into the <strong class="pkg">GUAVA</strong> command <code class="func">GeneratorMatCode</code> (<a href="../../../pkg/guava-3.15/doc/chap5_mj.html#X83F400A681CFC0D6"><span class="RefLink">GUAVA: GeneratorMatCode</span></a>) to create a linear code in <strong class="pkg">GAP</strong>, which in turn can be fed into the <strong class="pkg">GUAVA</strong> command <code class="func">MinimumDistance</code> (<a href="../../../pkg/guava-3.15/doc/chap4_mj.html#X7B31613D8538BD29"><span class="RefLink">GUAVA: MinimumDistance</span></a>) to compute the minimum distance of the code.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ag_mat:=agc[1];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := GeneratorMatCode( ag_mat, GF(7) );</span>
+a linear [5,3,1..3]2 code defined by generator matrix over GF(7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MinimumDistance(C);</span>
+3
+</pre></div>
+
+<p><a id="X8562222580239DA6" name="X8562222580239DA6"></a></p>
+
+<h4>1.7 <span class="Heading">Troubleshooting and technical stuff</span></h4>
+
+<p><a id="X7C1724F780B84A6C" name="X7C1724F780B84A6C"></a></p>
+
+<h5>1.7-1 <span class="Heading">Supported platforms and underlying <strong class="pkg">GAP</strong> functions</span></h5>
+
+<p>This package has been developed mainly on a Linux platform, with <strong class="pkg">GAP</strong> version 4.4, and <strong class="pkg">Singular</strong> version 2-0-4. A reasonable work has been done to ensure backward compatibility with previous versions of <strong class="pkg">GAP</strong> 4, but some features may be missing. This package has been tested also with some other versions of Singular, including 2-0-3, 2-0-5, and 2-0-6, and on other Unix systems. It has been tested also on Windows, but it is reported to be slower that on Linux.</p>
+
+<p>There is an extension of <strong class="pkg">Singular</strong>, named <strong class="pkg">Plural</strong>, which deals with certain noncommutative polynomial rings; see the <strong class="pkg">Singular</strong> documentation, section ``7. PLURAL''. Currently, <strong class="pkg">GAP</strong> doesn't support these noncommutative polynomial rings. The user of the <strong class="pkg">Singular</strong> may use the features of <strong class="pkg">Plural</strong> by calling the <strong class="pkg">Singular</strong> function <var class="Arg">ncalgebra</var> via <var class="Arg">SingularInterface</var>. In this case, extreme care is needed, because on the <strong class="pkg">GAP</strong> side the polynomial will still be commutative.</p>
+
+<p>For the low-level communication with <strong class="pkg">Singular</strong>, the interface relies on the <strong class="pkg">GAP</strong> function <code class="func">InputOutputLocalProcess</code> (<a href="../../../doc/ref/chap10_mj.html#X820799A3824684AC"><span class="RefLink">Reference: InputOutputLocalProcess</span></a>), and this function is available only in <strong class="pkg">GAP</strong> 4.2 (or newer) on a Unix environment or in <strong class="pkg">GAP</strong> 4.4 (or newer) on Windows; auto-detection is used. In this case, <strong class="pkg">GAP</strong> interacts with a unique continuous session of <strong class="pkg">Singular</strong>.</p>
+
+<p>In the case that the <strong class="pkg">GAP</strong> function <var class="Arg">InputOutputLocalProcess</var> is not available, then the singular interface will use the <strong class="pkg">GAP</strong> function <code class="func">Process</code> (<a href="../../../doc/ref/chap11_mj.html#X7B09033178D1107A"><span class="RefLink">Reference: Process</span></a>). In this case only a limited subset of the functionality of the interface are available: for example <code class="func">StartSingular</code> (<a href="chap1_mj.html#X79C5E6F27C37DA10"><span class="RefLink">1.3-1</span></a>) and <code class="func">GeneratorsOfInvariantRing</code> (<a href="chap1_mj.html#X7EAC34C984599470"><span class="RefLink">1.5-7</span></a>) are not available, but <code class="func">GroebnerBasis</code> (<a href="chap1_mj.html#X7A43611E876B7560"><span class="RefLink">1.5-1</span></a>) is; <code class="func">SingularInterface</code> (<a href="chap1_mj.html#X876BA78F7CF049C3"><span class="RefLink">1.3-8</span></a>) supports less data types. In this case, for each function call, a new session of <strong class="pkg">Singular</strong> is started and quitted.</p>
+
+<p><a id="X82CDC01B7AABF5F5" name="X82CDC01B7AABF5F5"></a></p>
+
+<h5>1.7-2 <span class="Heading">How different versions of <strong class="pkg">GAP</strong> display polynomial rings and polynomials</span></h5>
+
+<p>The way in which <strong class="pkg">GAP</strong> displays polynomials has changed passing from version 4.3 to 4.4 and the way in which <strong class="pkg">GAP</strong> displays polynomial rings has changed passing from version 4.4 to 4.5.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># GAP 4.3 or older</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := PolynomialRing( Rationals, [ "x" ] : new );</span>
+PolynomialRing(..., [ x ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := IndeterminatesOfPolynomialRing( R )[1];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x^2 + x;</span>
+x+x^2
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># GAP 4.4</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := PolynomialRing( Rationals, [ "x" ] : new );</span>
+PolynomialRing(..., [ x ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := IndeterminatesOfPolynomialRing( R )[1];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x^2 + x;</span>
+x^2+x
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># GAP 4.5 or newer</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := PolynomialRing( Rationals, [ "x" ] : new );</span>
+Rationals[x]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := IndeterminatesOfPolynomialRing( R )[1];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x^2 + x;</span>
+x^2+x
+</pre></div>
+
+<p>The examples in this manual use the way of displaying of the newest <strong class="pkg">GAP</strong>.</p>
+
+<p><a id="X7DE6DC637A7FAC93" name="X7DE6DC637A7FAC93"></a></p>
+
+<h5>1.7-3 <span class="Heading">Test file</span></h5>
+
+<p>The following performs a test of the package functionality using a test file <a href="../../../doc/ref/chap7_mj.html#X801051CC86594630"><span class="RefLink">Reference: Test Files</span></a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fn := Filename( DirectoriesPackageLibrary( "singular", "tst" ), "testall.tst" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Test( fn );</span>
+true
+</pre></div>
+
+<p><a id="X82260C8E82090E87" name="X82260C8E82090E87"></a></p>
+
+<h5>1.7-4 <span class="Heading">Common problems</span></h5>
+
+<p>A common error is forgetting to use <code class="func">SingularSetBaseRing</code> (<a href="chap1_mj.html#X84A3CD498011A10C"><span class="RefLink">1.3-6</span></a>). In the next example, <var class="Arg">SingularInterface</var> works only after having used <var class="Arg">SingularSetBaseRing</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=Indeterminate( Rationals );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=AlgebraicExtension( Rationals, a^5+4*a+1 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:=PolynomialRing( F, ["x","y"] : old );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := R.1;; y := R.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularInterface( "lead", [x^3*y+x*y+y^2], "poly" );</span>
+Error, sorry: Singular, or the interface to Singular, or the current
+SingularBaseRing, do not support the object x^3*y+x*y+y^2.
+Did you remember to use 'SingularSetBaseRing' ?
+[...]
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularSetBaseRing( R );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularInterface( "lead", [x^3*y+x*y+y^2], "poly" );</span>
+x^3*y
+</pre></div>
+
+<p>A corresponding problem would happen if the user works directly with <strong class="pkg">Singular</strong> and forgets to define the base-ring at first.</p>
+
+<p>As explained in the <strong class="pkg">GAP</strong> documentation <a href="../../../doc/ref/chap66_mj.html#X7A14A6588268810A"><span class="RefLink">Reference: Polynomials and Rational Functions</span></a>, given a ring <var class="Arg">R</var>, <strong class="pkg">GAP</strong> does not consider <var class="Arg">R</var> as a subset of a polynomial ring over <var class="Arg">R</var>: for example the zero of <var class="Arg">R</var> (<span class="SimpleMath">\(0\)</span>) and the zero of the polynomial ring (<span class="SimpleMath">\(0x^0\)</span>) are different objects. <strong class="pkg">GAP</strong> prints these different objects in the same way, and this fact may be misleading. This is a feature of <strong class="pkg">GAP</strong> independent from the package <strong class="pkg">singular</strong>, but it is important to keep it in mind, as most of the objects used by <strong class="pkg">Singular</strong> are polynomials, or their coefficients.</p>
+
+<p><a id="X7D38248D79425B28" name="X7D38248D79425B28"></a></p>
+
+<h5>1.7-5 <span class="Heading">Errors on the <strong class="pkg">Singular</strong> side</span></h5>
+
+<p>Errors may occur on the <strong class="pkg">Singular</strong> side, for instance using <code class="func">SingularInterface</code> (<a href="chap1_mj.html#X876BA78F7CF049C3"><span class="RefLink">1.3-8</span></a>) if the arguments supplied are not appropriate for the called function. In general, it is still an open problem to find a satisfactory way to handle in <strong class="pkg">GAP</strong> the errors of this kind.</p>
+
+<p>At the moment, when an error on the <strong class="pkg">Singular</strong> side happens, <strong class="pkg">Singular</strong> may print an error message on the so-called ``standard error''; this message may appear on the screen, but it is not logged by the <strong class="pkg">GAP</strong> function <code class="func">LogTo</code> (<a href="../../../doc/ref/chap9_mj.html#X79813A6686894960"><span class="RefLink">Reference: LogTo</span></a>). The interface prints <var class="Arg">No output from Singular</var>, and then the trivial object (of the type specified as the third argument of <var class="Arg">SingularInterface</var>) may be returned.</p>
+
+<p><a id="X7C8AE6BD787CD237" name="X7C8AE6BD787CD237"></a></p>
+
+<h5>1.7-6 <span class="Heading">Sending a report</span></h5>
+
+<p>As every software, also this package may contain bugs. If you find a bug, or a missing feature, or some other problem, or if you have comments and suggestions, or if you need some help, you may do so via our issue tracker at <span class="URL"><a href="https://github.com/gap-packages/singular/issues">https://github.com/gap-packages/singular/issues</a></span>. Please include in the report the code that causes the problem, so that we can replicate the problem.</p>
+
+<p>If appropriate, you can set <code class="func">InfoSingular</code> (<a href="chap1_mj.html#X843C50B18098609A"><span class="RefLink">1.7-8</span></a>) to <var class="Arg">3</var>, to see what happens between <strong class="pkg">GAP</strong> and <strong class="pkg">Singular</strong> (but this may give a lot of output). Note that <code class="func">LogTo</code> (<a href="../../../doc/ref/chap9_mj.html#X79813A6686894960"><span class="RefLink">Reference: LogTo</span></a>) does not log messages written directly on the screen by <strong class="pkg">Singular</strong>.</p>
+
+<p>Every report about this package is welcome, however the probability that your problem will be fixed quickly increases if you read the text ``How to Report Bugs Effectively'', <span class="URL"><a href="https://www.chiark.greenend.org.uk/~sgtatham/bugs.html">https://www.chiark.greenend.org.uk/~sgtatham/bugs.html</a></span> , and send a bug report according to this text.</p>
+
+<p><a id="X78BE74C97BF4E287" name="X78BE74C97BF4E287"></a></p>
+
+<h5>1.7-7 SingularReportInformation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularReportInformation</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <var class="Arg">SingularReportInformation</var> collects a description of the system, which should be included in any bug report.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SingularReportInformation();</span>
+Pkg_Version := "4.04.15";
+Gap_Version := "4.dev";
+Gap_Architecture := "i686-pc-linux-gnu-gcc";
+Gap_BytesPerVariable := 4;
+uname := "Linux 2.4.20 i686";
+Singular_Version: := 2004;
+Singular_Name: := "/usr/local/Singular/2-0-4/ix86-Linux/Singular";
+
+"Pkg_Version := \"4.04.15\";\nGap_Version := \"4.dev\";\nGap_Architecture := \
+\"i686-pc-linux-gnu-gcc\";\nGap_BytesPerVariable := 4;\nuname := \"Linux 2.4.2\
+0 i686\";\nSingular_Version: := 2004;\nSingular_Name: := \"/usr/local/Singular\
+/2-0-4/ix86-Linux/Singular\";\n"
+</pre></div>
+
+<p><a id="X843C50B18098609A" name="X843C50B18098609A"></a></p>
+
+<h5>1.7-8 InfoSingular</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoSingular</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p>This is the info class <a href="../../../doc/ref/chap7_mj.html#X7A9C902479CB6F7C"><span class="RefLink">Reference: Info Functions</span></a> used by the interface. It can be set to levels 0, 1, 2, and 3. At level 0 no information is printed on the screen. At level 1 (default) the interface prints a message about the <var class="Arg">type_output</var>, when "def" is used in <var class="Arg">SingularInterface</var>, see the example at <code class="func">SingularInterface</code> (<a href="chap1_mj.html#X876BA78F7CF049C3"><span class="RefLink">1.3-8</span></a>). At level 2, information on the activities of the interface is printed (e.g., messages when a <strong class="pkg">Singular</strong> session, or a Groebner basis calculation, is started or terminated). At level 3 all strings that <strong class="pkg">GAP</strong> sends to <strong class="pkg">Singular</strong> are printed, as well as all strings that <strong class="pkg">Singular</strong> sends back.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel( InfoSingular, 2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:= SymmetricGroup( 3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= PolynomialRing( GF(2), 3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfInvariantRing( R, G );</span>
+#I  running SingularInterface( "invariant_ring", [ "matrix", "matrix"
+ ], "list" )...
+#I  done SingularInterface.
+[ x_1+x_2+x_3, x_1*x_2+x_1*x_3+x_2*x_3, x_1*x_2*x_3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I:= Ideal( R, last );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GroebnerBasis( I );</span>
+#I  running GroebnerBasis...
+#I  done GroebnerBasis.
+[ x_1+x_2+x_3, x_2^2+x_2*x_3+x_3^2, x_3^3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel( InfoSingular, 1 );</span>
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (tut) - Chapter 4: Functions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
+<p><a id="X86FA580F8055B274" name="X86FA580F8055B274"></a></p>
+<div class="ChapSects"><a href="chap4_mj.html#X86FA580F8055B274">4 <span class="Heading">Functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7D81680E7BB09F45">4.1 <span class="Heading">Writing Functions</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X801EE07E839B31B2">4.2 <span class="Heading">If Statements</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X797E24D67BB804A2">4.3 <span class="Heading">Local Variables</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7981E4197F7113EA">4.4 <span class="Heading">Recursion</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X85B6E21781804BBB">4.5 <span class="Heading">Further Information about Functions</span></a>
+</span>
+</div>
+</div>
+
+<h3>4 <span class="Heading">Functions</span></h3>
+
+<p>You have already seen how to use functions in the <strong class="pkg">GAP</strong> library, i.e., how to apply them to arguments.</p>
+
+<p>In this section you will see how to write functions in the <strong class="pkg">GAP</strong> language. You will also see how to use the <code class="keyw">if</code> statement and declare local variables with the <code class="keyw">local</code> statement in the function definition. Loop constructions via <code class="keyw">while</code> and <code class="keyw">for</code> are discussed further, as are recursive functions.</p>
+
+<p><a id="X7D81680E7BB09F45" name="X7D81680E7BB09F45"></a></p>
+
+<h4>4.1 <span class="Heading">Writing Functions</span></h4>
+
+<p>Writing a function that prints <code class="code">hello, world.</code> on the screen is a simple exercise in <strong class="pkg">GAP</strong>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sayhello:= function()</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">Print("hello, world.\n");</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;</span>
+function(  ) ... end
+</pre></div>
+
+<p>This function when called will only execute the <code class="code">Print</code> statement in the second line. This will print the string <code class="code">hello, world.</code> on the screen followed by a newline character <code class="code">\n</code> that causes the <strong class="pkg">GAP</strong> prompt to appear on the next line rather than immediately following the printed characters.</p>
+
+<p>The function definition has the following syntax.</p>
+
+<p><code class="keyw">function</code><code class="code">( <var class="Arg">arguments</var> ) <var class="Arg">statements</var></code> <code class="keyw">end</code></p>
+
+<p>A function definition starts with the keyword <code class="keyw">function</code> followed by the formal parameter list <var class="Arg">arguments</var> enclosed in parenthesis <code class="code">( )</code>. The formal parameter list may be empty as in the example. Several parameters are separated by commas. Note that there must be <em>no</em> semicolon behind the closing parenthesis. The function definition is terminated by the keyword <code class="keyw">end</code>.</p>
+
+<p>A <strong class="pkg">GAP</strong> function is an expression like an integer, a sum or a list. Therefore it may be assigned to a variable. The terminating semicolon in the example does not belong to the function definition but terminates the assignment of the function to the name <code class="code">sayhello</code>. Unlike in the case of integers, sums, and lists the value of the function <code class="code">sayhello</code> is echoed in the abbreviated fashion <code class="code">function( ) ... end</code>. This shows the most interesting part of a function: its formal parameter list (which is empty in this example). The complete value of <code class="code">sayhello</code> is returned if you use the function <code class="func">Print</code> (<span class="RefLink">Reference: Print</span>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(sayhello, "\n");</span>
+function (  )
+    Print( "hello, world.\n" );
+    return;
+end
+</pre></div>
+
+<p>Note the additional newline character <code class="code">"\n"</code> in the <code class="func">Print</code> (<span class="RefLink">Reference: Print</span>) statement. It is printed after the object <code class="code">sayhello</code> to start a new line. The extra <code class="keyw">return</code> statement is inserted by <strong class="pkg">GAP</strong> to simplify the process of executing the function.</p>
+
+<p>The newly defined function <code class="code">sayhello</code> is executed by calling <code class="code">sayhello()</code> with an empty argument list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sayhello();</span>
+hello, world.
+</pre></div>
+
+<p>However, this is not a typical example as no value is returned but only a string is printed.</p>
+
+<p><a id="X801EE07E839B31B2" name="X801EE07E839B31B2"></a></p>
+
+<h4>4.2 <span class="Heading">If Statements</span></h4>
+
+<p>In the following example we define a function <code class="code">sign</code> which determines the sign of an integer.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sign:= function(n)</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       if n &lt; 0 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          return -1;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       elif n = 0 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          return 0;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          return 1;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end;</span>
+function( n ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sign(0); sign(-99); sign(11);</span>
+0
+-1
+1
+</pre></div>
+
+<p>This example also introduces the <code class="keyw">if</code> statement which is used to execute statements depending on a condition. The <code class="keyw">if</code> statement has the following syntax.</p>
+
+<p><code class="keyw">if</code> <var class="Arg">condition</var> <code class="keyw">then</code> <var class="Arg">statements</var> <code class="keyw">elif</code> <var class="Arg">condition</var> <code class="keyw">then</code> <var class="Arg">statements</var> <code class="keyw">else</code> <var class="Arg">statements</var> <code class="keyw">fi</code></p>
+
+<p>There may be several <code class="keyw">elif</code> parts. The <code class="keyw">elif</code> part as well as the <code class="keyw">else</code> part of the <code class="keyw">if</code> statement may be omitted. An <code class="keyw">if</code> statement is no expression and can therefore not be assigned to a variable. Furthermore an <code class="keyw">if</code> statement does not return a value.</p>
+
+<p>Fibonacci numbers are defined recursively by <span class="SimpleMath">\(f(1) = f(2) = 1\)</span> and <span class="SimpleMath">\(f(n) = f(n-1) + f(n-2)\)</span> for <span class="SimpleMath">\(n \geq 3\)</span>. Since functions in <strong class="pkg">GAP</strong> may call themselves, a function <code class="code">fib</code> that computes Fibonacci numbers can be implemented basically by typing the above equations. (Note however that this is a very inefficient way to compute <span class="SimpleMath">\(f(n)\)</span>.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fib:= function(n)</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      if n in [1, 2] then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         return 1;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         return fib(n-1) + fib(n-2);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end;</span>
+function( n ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fib(15);</span>
+610
+</pre></div>
+
+<p>There should be additional tests for the argument <code class="code">n</code> being a positive integer. This function <code class="code">fib</code> might lead to strange results if called with other arguments. Try inserting the necessary tests into this example.</p>
+
+<p><a id="X797E24D67BB804A2" name="X797E24D67BB804A2"></a></p>
+
+<h4>4.3 <span class="Heading">Local Variables</span></h4>
+
+<p>A function <code class="code">gcd</code> that computes the greatest common divisor of two integers by Euclid's algorithm will need a variable in addition to the formal arguments.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gcd:= function(a, b)</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      local c;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      while b &lt;&gt; 0 do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         c:= b;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         b:= a mod b;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         a:= c;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      od;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      return c;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end;</span>
+function( a, b ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gcd(30, 63);</span>
+3
+</pre></div>
+
+<p>The additional variable <code class="code">c</code> is declared as a <em>local</em> variable in the <code class="keyw">local</code> statement of the function definition. The <code class="keyw">local</code> statement, if present, must be the first statement of a function definition. When several local variables are declared in only one <code class="keyw">local</code> statement they are separated by commas.</p>
+
+<p>The variable <code class="code">c</code> is indeed a local variable, that is local to the function <code class="code">gcd</code>. If you try to use the value of <code class="code">c</code> in the main loop you will see that <code class="code">c</code> has no assigned value unless you have already assigned a value to the variable <code class="code">c</code> in the main loop. In this case the local nature of <code class="code">c</code> in the function <code class="code">gcd</code> prevents the value of the <code class="code">c</code> in the main loop from being overwritten.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c:= 7;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gcd(30, 63);</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c;</span>
+7
+</pre></div>
+
+<p>We say that in a given scope an identifier identifies a unique variable. A <em>scope</em> is a lexical part of a program text. There is the global scope that encloses the entire program text, and there are local scopes that range from the <code class="keyw">function</code> keyword, denoting the beginning of a function definition, to the corresponding <code class="keyw">end</code> keyword. A local scope introduces new variables, whose identifiers are given in the formal argument list and the local declaration of the function. The usage of an identifier in a program text refers to the variable in the innermost scope that has this identifier as its name.</p>
+
+<p><a id="X7981E4197F7113EA" name="X7981E4197F7113EA"></a></p>
+
+<h4>4.4 <span class="Heading">Recursion</span></h4>
+
+<p>We have already seen recursion in the function <code class="code">fib</code> in Section <a href="chap4_mj.html#X801EE07E839B31B2"><span class="RefLink">4.2</span></a>. Here is another, slightly more complicated example.</p>
+
+<p>We will now write a function to determine the number of partitions of a positive integer. A partition of a positive integer is a descending list of numbers whose sum is the given integer. For example <span class="SimpleMath">\([4,2,1,1]\)</span> is a partition of 8. Note that there is just one partition of 0, namely <span class="SimpleMath">\([ ]\)</span>. The complete set of all partitions of an integer <span class="SimpleMath">\(n\)</span> may be divided into subsets with respect to the largest element. The number of partitions of <span class="SimpleMath">\(n\)</span> therefore equals the sum of the numbers of partitions of <span class="SimpleMath">\(n-i\)</span> with elements less than or equal to <span class="SimpleMath">\(i\)</span> for all possible <span class="SimpleMath">\(i\)</span>. More generally the number of partitions of <span class="SimpleMath">\(n\)</span> with elements less than <span class="SimpleMath">\(m\)</span> is the sum of the numbers of partitions of <span class="SimpleMath">\(n-i\)</span> with elements less than <span class="SimpleMath">\(i\)</span> for <span class="SimpleMath">\(i\)</span> less than <span class="SimpleMath">\(m\)</span> and <span class="SimpleMath">\(n\)</span>. This description yields the following function.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nrparts:= function(n)</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local np;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   np:= function(n, m)</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      local i, res;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      if n = 0 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         return 1;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      res:= 0;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      for i in [1..Minimum(n,m)] do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         res:= res + np(n-i, i);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      od;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      return res;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return np(n,n);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;</span>
+function( n ) ... end
+</pre></div>
+
+<p>We wanted to write a function that takes one argument. We solved the problem of determining the number of partitions in terms of a recursive procedure with two arguments. So we had to write in fact two functions. The function <code class="code">nrparts</code> that can be used to compute the number of partitions indeed takes only one argument. The function <code class="code">np</code> takes two arguments and solves the problem in the indicated way. The only task of the function <code class="code">nrparts</code> is to call <code class="code">np</code> with two equal arguments.</p>
+
+<p>We made <code class="code">np</code> local to <code class="code">nrparts</code>. This illustrates the possibility of having local functions in <strong class="pkg">GAP</strong>. It is however not necessary to put it there. <code class="code">np</code> could as well be defined on the main level, but then the identifier <code class="code">np</code> would be bound and could not be used for other purposes, and if it were used the essential function <code class="code">np</code> would no longer be available for <code class="code">nrparts</code>.</p>
+
+<p>Now have a look at the function <code class="code">np</code>. It has two local variables <code class="code">res</code> and <code class="code">i</code>. The variable <code class="code">res</code> is used to collect the sum and <code class="code">i</code> is a loop variable. In the loop the function <code class="code">np</code> calls itself again with other arguments. It would be very disturbing if this call of <code class="code">np</code> was to use the same <code class="code">i</code> and <code class="code">res</code> as the calling <code class="code">np</code>. Since the new call of <code class="code">np</code> creates a new scope with new variables this is fortunately not the case.</p>
+
+<p>Note that the formal parameters <var class="Arg">n</var> and <var class="Arg">m</var> of <code class="code">np</code> are treated like local variables.</p>
+
+<p>(Regardless of the recursive structure of an algorithm it is often cheaper (in terms of computing time) to avoid a recursive implementation if possible (and it is possible in this case), because a function call is not very cheap.)</p>
+
+<p><a id="X85B6E21781804BBB" name="X85B6E21781804BBB"></a></p>
+
+<h4>4.5 <span class="Heading">Further Information about Functions</span></h4>
+
+<p>The function syntax is described in Section <span class="RefLink">Reference: Functions</span>. The <code class="keyw">if</code> statement is described in more detail in Section <span class="RefLink">Reference: If</span>. More about Fibonacci numbers is found in Section <code class="func">Fibonacci</code> (<span class="RefLink">Reference: Fibonacci</span>) and more about partitions in Section <code class="func">Partitions</code> (<span class="RefLink">Reference: Partitions</span>).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

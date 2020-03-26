@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HAPcryst) - Chapter 3: Algorithms of Orbit-Stabilizer Type</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X7F6789767FB36E74" name="X7F6789767FB36E74"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7F6789767FB36E74">3 <span class="Heading">Algorithms of Orbit-Stabilizer Type</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X85CAB2EB85A6E17A">3.1 <span class="Heading">Orbit Stabilizer for Crystallographic Groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BED233684B2F811">3.1-1 OrbitStabilizerInUnitCubeOnRight</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X82BD20307A67C119">3.1-2 OrbitStabilizerInUnitCubeOnRightOnSets</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X82CCCD597C86A08A">3.1-3 OrbitPartInVertexSetsStandardSpaceGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8022CD75819DE536">3.1-4 OrbitPartInFacesStandardSpaceGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86A80FA17A4D6664">3.1-5 OrbitPartAndRepresentativesInFacesStandardSpaceGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81DE08687F0DBCC6">3.1-6 StabilizerOnSetsStandardSpaceGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83C6448679A54F9D">3.1-7 RepresentativeActionOnRightOnSets</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8002407080DB3EA2">3.1-8 <span class="Heading">Getting other orbit parts</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8751429287034F4A">3.1-9 ShiftedOrbitPart</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X82656DE584E8DC5D">3.1-10 TranslationsToOneCubeAroundCenter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X858C787E83A902AB">3.1-11 TranslationsToBox</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Algorithms of Orbit-Stabilizer Type</span></h3>
+
+<p>We introduce a way to calculate a sufficient part of an orbit and the stabilizer of a point.</p>
+
+<p><a id="X85CAB2EB85A6E17A" name="X85CAB2EB85A6E17A"></a></p>
+
+<h4>3.1 <span class="Heading">Orbit Stabilizer for Crystallographic Groups</span></h4>
+
+<p><a id="X7BED233684B2F811" name="X7BED233684B2F811"></a></p>
+
+<h5>3.1-1 OrbitStabilizerInUnitCubeOnRight</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitStabilizerInUnitCubeOnRight</code>( <var class="Arg">group</var>, <var class="Arg">x</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A record containing</p>
+
+
+<ul>
+<li><p><code class="keyw">.stabilizer</code>: the stabilizer of <var class="Arg">x</var>.</p>
+
+</li>
+<li><p><code class="keyw">.orbit</code> set of vectors from <span class="SimpleMath">[0,1)^n</span> which represents the orbit.</p>
+
+</li>
+</ul>
+<p>Let <var class="Arg">x</var> be a rational vector from <span class="SimpleMath">[0,1)^n</span> and <var class="Arg">group</var> a space group in standard form. The function then calculates the part of the orbit which lies inside the cube <span class="SimpleMath">[0,1)^n</span> and the stabilizer of <var class="Arg">x</var>. Observe that every element of the full orbit differs from a point in the returned orbit only by a pure translation.</p>
+
+<p>Note that the restriction to points from <span class="SimpleMath">[0,1)^n</span> makes sense if orbits should be compared and the vector passed to <code class="code">OrbitStabilizerInUnitCubeOnRight</code> should be an element of the returned orbit (part).</p>
+
+
+<div class="example"><pre>
+   
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=SpaceGroup(3,5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitStabilizerInUnitCubeOnRight(S,[1/2,0,9/11]);   </span>
+rec( orbit := [ [ 0, 1/2, 2/11 ], [ 1/2, 0, 9/11 ] ], 
+  stabilizer := Group([ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], 
+          [ 0, 0, 0, 1 ] ] ]) )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitStabilizerInUnitCubeOnRight(S,[0,0,0]);     </span>
+rec( orbit := [ [ 0, 0, 0 ] ], stabilizer := &lt;matrix group with 2 generators&gt; )
+
+</pre></div>
+
+<p>If you are interested in other parts of the orbit, you can use <code class="func">VectorModOne</code> (<a href="chap2.html#X7C0552BA873515B9"><span class="RefLink">2.1-2</span></a>) for the base point and the functions <code class="func">ShiftedOrbitPart</code> (<a href="chap3.html#X8751429287034F4A"><span class="RefLink">3.1-9</span></a>), <code class="func">TranslationsToOneCubeAroundCenter</code> (<a href="chap3.html#X82656DE584E8DC5D"><span class="RefLink">3.1-10</span></a>) and <code class="func">TranslationsToBox</code> (<a href="chap3.html#X858C787E83A902AB"><span class="RefLink">3.1-11</span></a>) for the resulting orbit<br /> Suppose we want to calculate the part of the orbit of <code class="code">[4/3,5/3,7/3]</code> in the cube of sidelength <code class="code">1</code> around this point:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=SpaceGroup(3,5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=[4/3,5/3,7/3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o:=OrbitStabilizerInUnitCubeOnRight(S,VectorModOne(p)).orbit;</span>
+[ [ 1/3, 2/3, 1/3 ], [ 1/3, 2/3, 2/3 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">box:=p+[[-1,1],[-1,1],[-1,1]];</span>
+[ [ 1/3, 8/3, 7/3 ], [ 1/3, 8/3, 7/3 ], [ 1/3, 8/3, 7/3 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o2:=Concatenation(List(o,i-&gt;i+TranslationsToBox(i,box)));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># This is what we looked for. But it is somewhat large:</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(o2);</span>
+54
+</pre></div>
+
+<p><a id="X82BD20307A67C119" name="X82BD20307A67C119"></a></p>
+
+<h5>3.1-2 OrbitStabilizerInUnitCubeOnRightOnSets</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitStabilizerInUnitCubeOnRightOnSets</code>( <var class="Arg">group</var>, <var class="Arg">set</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A record containing</p>
+
+
+<ul>
+<li><p><code class="keyw">.stabilizer</code>: the stabilizer of <var class="Arg">set</var>.</p>
+
+</li>
+<li><p><code class="keyw">.orbit</code> set of sets of vectors from <span class="SimpleMath">[0,1)^n</span> which represents the orbit.</p>
+
+</li>
+</ul>
+<p>Calculates orbit and stabilizer of a set of vectors. Just as <code class="func">OrbitStabilizerInUnitCubeOnRight</code> (<a href="chap3.html#X7BED233684B2F811"><span class="RefLink">3.1-1</span></a>), it needs input from <span class="SimpleMath">[0,1)^n</span>. The returned orbit part <code class="keyw">.orbit</code> is a set of sets such that every element of <code class="keyw">.orbit</code> has a non-trivial intersection with the cube <span class="SimpleMath">[0,1)^n</span>. In general, these sets will not lie inside <span class="SimpleMath">[0,1)^n</span> completely.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=SpaceGroup(3,5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitStabilizerInUnitCubeOnRightOnSets(S,[[0,0,0],[0,1/2,0]]);</span>
+rec( orbit := [ [ [ -1/2, 0, 0 ], [ 0, 0, 0 ] ], 
+                [ [ 0, 0, 0 ], [ 0, 1/2, 0 ] ],
+                [ [ 1/2, 0, 0 ], [ 1, 0, 0 ] ] ],
+  stabilizer := Group([ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], 
+                        [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ] ]) )
+</pre></div>
+
+<p><a id="X82CCCD597C86A08A" name="X82CCCD597C86A08A"></a></p>
+
+<h5>3.1-3 OrbitPartInVertexSetsStandardSpaceGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitPartInVertexSetsStandardSpaceGroup</code>( <var class="Arg">group</var>, <var class="Arg">vertexset</var>, <var class="Arg">allvertices</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: Set of subsets of <var class="Arg">allvertices</var>.</p>
+
+<p>If <var class="Arg">allvertices</var> is a set of vectors and <var class="Arg">vertexset</var> is a subset thereof, then <code class="func">OrbitPartInVertexSetsStandardSpaceGroup</code> returns that part of the orbit of <var class="Arg">vertexset</var> which consists entirely of subsets of <var class="Arg">allvertices</var>. Note that,unlike the other <code class="code">OrbitStabilizer</code> algorithms, this does not require the input to lie in some particular part of the space.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=SpaceGroup(3,5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitPartInVertexSetsStandardSpaceGroup(S,[[0,1,5],[1,2,0]],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">Set([[1,2,0],[2,3,1],[1,2,6],[1,1,0],[0,1,5],[3/5,7,12],[1/17,6,1/2]]));</span>
+[ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [ [ 1, 2, 6 ], [ 2, 3, 1 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitPartInVertexSetsStandardSpaceGroup(S, [[1,2,0]],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">Set([[1,2,0],[2,3,1],[1,2,6],[1,1,0],[0,1,5],[3/5,7,12],[1/17,6,1/2]]));</span>
+[ [ [ 0, 1, 5 ] ], [ [ 1, 1, 0 ] ], [ [ 1, 2, 0 ] ], [ [ 1, 2, 6 ] ], [ [ 2, 3, 1 ] ] ]
+</pre></div>
+
+<p><a id="X8022CD75819DE536" name="X8022CD75819DE536"></a></p>
+
+<h5>3.1-4 OrbitPartInFacesStandardSpaceGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitPartInFacesStandardSpaceGroup</code>( <var class="Arg">group</var>, <var class="Arg">vertexset</var>, <var class="Arg">faceset</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: Set of subsets of <var class="Arg">faceset</var>.</p>
+
+<p>This calculates the orbit of a space group on sets restricted to a set of faces.<br /> If <var class="Arg">faceset</var> is a set of sets of vectors and <var class="Arg">vertexset</var> is an element of <var class="Arg">faceset</var>, then <code class="func">OrbitPartInFacesStandardSpaceGroup</code> returns that part of the orbit of <var class="Arg">vertexset</var> which consists entirely of elements of <var class="Arg">faceset</var>.<br /> Note that,unlike the other <code class="code">OrbitStabilizer</code> algorithms, this does not require the input to lie in some particular part of the space.</p>
+
+<p><a id="X86A80FA17A4D6664" name="X86A80FA17A4D6664"></a></p>
+
+<h5>3.1-5 OrbitPartAndRepresentativesInFacesStandardSpaceGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitPartAndRepresentativesInFacesStandardSpaceGroup</code>( <var class="Arg">group</var>, <var class="Arg">vertexset</var>, <var class="Arg">faceset</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A set of face-matrix pairs .</p>
+
+<p>This is a slight variation of <code class="func">OrbitPartInFacesStandardSpaceGroup</code> (<a href="chap3.html#X8022CD75819DE536"><span class="RefLink">3.1-4</span></a>) that also returns a representative for every orbit element.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=SpaceGroup(3,5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitPartInVertexSetsStandardSpaceGroup(S,[[0,1,5],[1,2,0]],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">Set([[1,2,0],[2,3,1],[1,2,6],[1,1,0],[0,1,5],[3/5,7,12],[1/17,6,1/2]]));</span>
+[ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [ [ 1, 2, 6 ], [ 2, 3, 1 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitPartInFacesStandardSpaceGroup(S,[[0,1,5],[1,2,0]],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">Set( [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [[1/17,6,1/2],[1,2,7]]]));</span>
+[ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitPartAndRepresentativesInFacesStandardSpaceGroup(S,[[0,1,5],[1,2,0]],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">Set( [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [[1/17,6,1/2],[1,2,7]]]));</span>
+[ [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ],
+      [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ] ] ]
+</pre></div>
+
+<p><a id="X81DE08687F0DBCC6" name="X81DE08687F0DBCC6"></a></p>
+
+<h5>3.1-6 StabilizerOnSetsStandardSpaceGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StabilizerOnSetsStandardSpaceGroup</code>( <var class="Arg">group</var>, <var class="Arg">set</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: finite group of affine matrices (OnRight)</p>
+
+<p>Given a set <var class="Arg">set</var> of vectors and a space group <var class="Arg">group</var> in standard form, this method calculates the stabilizer of that set in the full crystallographic group.<br /></p>
+
+
+<div class="example"><pre> 
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=SpaceGroup(3,12);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v:=[ 0, 0,0 ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:=StabilizerOnSetsStandardSpaceGroup(G,[v]);</span>
+&lt;matrix group with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s2:=OrbitStabilizerInUnitCubeOnRight(G,v).stabilizer;</span>
+&lt;matrix group with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s2=s;</span>
+true
+
+</pre></div>
+
+<p><a id="X83C6448679A54F9D" name="X83C6448679A54F9D"></a></p>
+
+<h5>3.1-7 RepresentativeActionOnRightOnSets</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RepresentativeActionOnRightOnSets</code>( <var class="Arg">group</var>, <var class="Arg">set</var>, <var class="Arg">imageset</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: Affine matrix.</p>
+
+<p>Returns an element of the space group <span class="SimpleMath">S</span> which takes the set <var class="Arg">set</var> to the set <var class="Arg">imageset</var>. The group must be in standard form and act on the right.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=SpaceGroup(3,5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RepresentativeActionOnRightOnSets(G, [[0,0,0],[0,1/2,0]],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       [ [ 0, 1/2, 0 ], [ 0, 1, 0 ] ]);</span>
+[ [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 0, 0, -1, 0 ], [ 0, 1, 0, 1 ] ]
+</pre></div>
+
+<p><a id="X8002407080DB3EA2" name="X8002407080DB3EA2"></a></p>
+
+<h5>3.1-8 <span class="Heading">Getting other orbit parts</span></h5>
+
+<p><strong class="pkg">HAPcryst</strong> does not calculate the full orbit but only the part of it having coefficients between <span class="SimpleMath">-1/2</span> and <span class="SimpleMath">1/2</span>. The other parts of the orbit can be calculated using the following functions.</p>
+
+<p><a id="X8751429287034F4A" name="X8751429287034F4A"></a></p>
+
+<h5>3.1-9 ShiftedOrbitPart</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShiftedOrbitPart</code>( <var class="Arg">point</var>, <var class="Arg">orbitpart</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: Set of vectors</p>
+
+<p>Takes each vector in <var class="Arg">orbitpart</var> to the cube unit cube centered in <var class="Arg">point</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ShiftedOrbitPart([0,0,0],[[1/2,1/2,1/3],-[1/2,1/2,1/2],[19,3,1]]);</span>
+[ [ 1/2, 1/2, 1/3 ], [ 1/2, 1/2, 1/2 ], [ 0, 0, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ShiftedOrbitPart([1,1,1],[[1/2,1/2,1/2],-[1/2,1/2,1/2]]);</span>
+[ [ 3/2, 3/2, 3/2 ] ]
+</pre></div>
+
+<p><a id="X82656DE584E8DC5D" name="X82656DE584E8DC5D"></a></p>
+
+<h5>3.1-10 TranslationsToOneCubeAroundCenter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TranslationsToOneCubeAroundCenter</code>( <var class="Arg">point</var>, <var class="Arg">center</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: List of integer vectors</p>
+
+<p>This method returns the list of all integer vectors which translate <var class="Arg">point</var> into the box <var class="Arg">center</var><span class="SimpleMath">+[-1/2,1/2]^n</span></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TranslationsToOneCubeAroundCenter([1/2,1/2,1/3],[0,0,0]);</span>
+[ [ 0, 0, 0 ], [ 0, -1, 0 ], [ -1, 0, 0 ], [ -1, -1, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TranslationsToOneCubeAroundCenter([1,0,1],[0,0,0]);</span>
+[ [ -1, 0, -1 ] ]
+</pre></div>
+
+<p><a id="X858C787E83A902AB" name="X858C787E83A902AB"></a></p>
+
+<h5>3.1-11 TranslationsToBox</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TranslationsToBox</code>( <var class="Arg">point</var>, <var class="Arg">box</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: An iterator of integer vectors or the empty iterator</p>
+
+<p>Given a vector <span class="SimpleMath">v</span> and a list of pairs, this function returns the translation vectors (integer vectors) which take <span class="SimpleMath">v</span> into the box <var class="Arg">box</var>. The box <var class="Arg">box</var> has to be given as a list of pairs.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TranslationsToBox([0,0],[[1/2,2/3],[1/2,2/3]]);</span>
+[  ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TranslationsToBox([0,0],[[-3/2,1/2],[1,4/3]]);</span>
+[ [ -1, 1 ], [ 0, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TranslationsToBox([0,0],[[-3/2,1/2],[2,1]]);</span>
+Error, Box must not be empty called from
+...
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

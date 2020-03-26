@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Browse) - Chapter 3: Utilities using ncurses</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X7F3A63788200AB4F" name="X7F3A63788200AB4F"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7F3A63788200AB4F">3 <span class="Heading">Utilities using <code class="code">ncurses</code></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X84E621798148857D">3.1 <span class="Heading"><code class="code">ncurses</code> utilities</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83E95B4A83BC473E">3.1-1 NCurses.Alert</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X833D321E86528981">3.1-2 NCurses.Select</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X837EFD8A842257EA">3.1-3 NCurses.GetLineFromUser</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X87E1B2787F588CC0">3.1-4 NCurses.Pager</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D5685767D4FCD8E">3.1-5 <span class="Heading">Selection of help matches</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X867BB82985D7953A">3.1-6 <span class="Heading">Selection of package names</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7EF34E0E7FBD3A3B">3.2 <span class="Heading">A Demo Function</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8681359F8064597B">3.2-1 NCurses.Demo</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Utilities using <code class="code">ncurses</code></span></h3>
+
+<p>In this chapter we describe the usage of some example applications of the <code class="code">ncurses</code> interface provided by the <strong class="pkg">Browse</strong> package. They may be of interest by themselves, or they may be used as utility functions within larger applications.</p>
+
+<p><a id="X84E621798148857D" name="X84E621798148857D"></a></p>
+
+<h4>3.1 <span class="Heading"><code class="code">ncurses</code> utilities</span></h4>
+
+<p>If you call the functions <code class="func">NCurses.Alert</code> (<a href="chap3.html#X83E95B4A83BC473E"><span class="RefLink">3.1-1</span></a>), <code class="func">NCurses.Select</code> (<a href="chap3.html#X833D321E86528981"><span class="RefLink">3.1-2</span></a>), <code class="func">NCurses.GetLineFromUser</code> (<a href="chap3.html#X837EFD8A842257EA"><span class="RefLink">3.1-3</span></a>), or <code class="func">NCurses.Pager</code> (<a href="chap3.html#X87E1B2787F588CC0"><span class="RefLink">3.1-4</span></a>) from another <code class="code">ncurses</code> application in visual mode, you should refresh the windows that are still open, by calling <code class="code">NCurses.update_panels</code> and <code class="code">NCurses.doupdate</code> afterwards, see Section <a href="chap2.html#X7D541BDE7BB8BED5"><span class="RefLink">2.1-3</span></a> and <a href="chap2.html#X800D5B6381F0356F"><span class="RefLink">2.1-2</span></a>. Also, if the cursor shall be hidden after that, you should call <code class="code">curs_set</code> with argument <code class="code">0</code>, see Section <a href="chap2.html#X8499A3A384BF1F2D"><span class="RefLink">2.1-1</span></a>, since the cursor is automatically made visible in <code class="code">NCurses.endwin</code>.</p>
+
+<p><a id="X83E95B4A83BC473E" name="X83E95B4A83BC473E"></a></p>
+
+<h5>3.1-1 NCurses.Alert</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.Alert</code>( <var class="Arg">messages</var>, <var class="Arg">timeout</var>[, <var class="Arg">attrs</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the integer corresponding to the character entered, or <code class="keyw">fail</code>.</p>
+
+<p>In visual mode, <code class="func">Print</code> (<a href="../../../doc/ref/chap6.html#X7AFA64D97A1F39A3"><span class="RefLink">Reference: Print</span></a>) cannot be used for messages. An alternative is given by <code class="func">NCurses.Alert</code>.</p>
+
+<p>Let <var class="Arg">messages</var> be either an attribute line or a nonempty list of attribute lines, and <var class="Arg">timeout</var> be a nonnegative integer. <code class="func">NCurses.Alert</code> shows <var class="Arg">messages</var> in a bordered box in the middle of the screen.</p>
+
+<p>If <var class="Arg">timeout</var> is zero then the box is closed after any user input, and the integer corresponding to the entered key is returned. If <var class="Arg">timeout</var> is a positive number <span class="SimpleMath">n</span>, say, then the box is closed after <span class="SimpleMath">n</span> milliseconds, and <code class="keyw">fail</code> is returned.</p>
+
+<p>If <code class="code">timeout</code> is zero and mouse events are enabled (see <code class="func">NCurses.UseMouse</code> (<a href="chap2.html#X799C033A7AB582D7"><span class="RefLink">2.2-10</span></a>)) then the box can be moved inside the window via mouse events.</p>
+
+<p>If the optional argument <var class="Arg">attrs</var> is given, it must be an integer representing attributes such as the components of <code class="code">NCurses.attrs</code> (see Section <a href="chap2.html#X793D897483674294"><span class="RefLink">2.1-7</span></a>) or the return value of <code class="func">NCurses.ColorAttr</code> (<a href="chap2.html#X83ADB4E37C105B8C"><span class="RefLink">2.2-1</span></a>); these attributes are used for the border of the box. The default is <code class="code">NCurses.attrs.NORMAL</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.Alert( "Hello world!", 1000 );</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.Alert( [ "Hello world!",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     [ "Hello ", NCurses.attrs.BOLD, "bold!" ] ], 1500,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     NCurses.ColorAttr( "red", -1 ) + NCurses.attrs.BOLD );</span>
+fail
+</pre></div>
+
+<p><a id="X833D321E86528981" name="X833D321E86528981"></a></p>
+
+<h5>3.1-2 NCurses.Select</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.Select</code>( <var class="Arg">poss</var>[, <var class="Arg">single</var>[, <var class="Arg">none</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: Position or list of positions, or <code class="keyw">false</code>.</p>
+
+<p>This function allows the user to select one or several items from a given list. In the simplest case <var class="Arg">poss</var> is a list of attribute lines (see <code class="func">NCurses.IsAttributeLine</code> (<a href="chap2.html#X81D1FC927C455AEB"><span class="RefLink">2.2-3</span></a>)), each of which should fit on one line. Then <code class="func">NCurses.Select</code> displays these lines and lets the user browse through them. After pressing the <strong class="button">Return</strong> key the index of the highlighted item is returned. Note that attributes in your lines should be switched on and off separately by <code class="keyw">true</code>/<code class="keyw">false</code> entries such that the lines can be nicely highlighted.</p>
+
+<p>The optional argument <var class="Arg">single</var> must be <code class="keyw">true</code> (default) or <code class="keyw">false</code>. In the second case, an arbitrary number of items can be marked and the function returns the list of their indices.</p>
+
+<p>If <var class="Arg">single</var> is <code class="keyw">true</code> a third argument <var class="Arg">none</var> can be given. If it is <code class="keyw">true</code> then it is possible to leave the selection without choosing an item, in this case <code class="keyw">false</code> is returned.</p>
+
+<p>More details can be given to the function by giving a record as argument <var class="Arg">poss</var>. It can have the following components:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">items</code></strong></dt>
+<dd><p>The list of attribute lines as described above.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">single</code></strong></dt>
+<dd><p>Boolean with the same meaning as the optional argument <var class="Arg">single</var>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">none</code></strong></dt>
+<dd><p>Boolean with the same meaning as the optional argument <var class="Arg">none</var>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">size</code></strong></dt>
+<dd><p>The size of the window like the first two arguments of <code class="code">NCurses.newwin</code> (default is <code class="code">[0, 0]</code>, as big as possible), or the string <code class="code">"fit"</code> which means the smallest possible window.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">align</code></strong></dt>
+<dd><p>A substring of <code class="code">"bclt"</code>, which describes the alignment of the window in the terminal. The meaning and the default are the same as for <code class="func">BrowseData.IsBrowseTableCellData</code> (<a href="chap4.html#X82157A2684969A5F"><span class="RefLink">4.2-1</span></a>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">begin</code></strong></dt>
+<dd><p>Top-left corner of the window like the last two arguments of <code class="code">NCurses.newwin</code> (default is <code class="code">[0, 0]</code>, top-left of the screen). This value has priority over the <code class="code">align</code> component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">attribute</code></strong></dt>
+<dd><p>An attribute used for the display of the window (default is <code class="code">NCurses.attrs.NORMAL</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">border</code></strong></dt>
+<dd><p>If the window should be displayed with a border then set to <code class="keyw">true</code> (default is <code class="keyw">false</code>) or to an integer representing attributes such as the components of <code class="code">NCurses.attrs</code> (see Section <a href="chap2.html#X793D897483674294"><span class="RefLink">2.1-7</span></a>) or the return value of <code class="func">NCurses.ColorAttr</code> (<a href="chap2.html#X83ADB4E37C105B8C"><span class="RefLink">2.2-1</span></a>); these attributes are used for the border of the box. The default is <code class="code">NCurses.attrs.NORMAL</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">header</code></strong></dt>
+<dd><p>An attribute line used as header line (the default depends on the settings of <code class="code">single</code> and <code class="code">none</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hint</code></strong></dt>
+<dd><p>An attribute line used as hint in the last line of the window (the default depends on the settings of <code class="code">single</code> and <code class="code">none</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">onSubmitFunction</code></strong></dt>
+<dd><p>A function that is called when the user submits the selection; the argument for this call is the current value of the record <var class="Arg">poss</var>. If the function returns <code class="keyw">true</code> then the selected entries are returned as usual, otherwise the selection window is kept open, waiting for new inputs; if the function returns a nonempty list of attribute lines then these messages are shown using <code class="func">NCurses.Alert</code> (<a href="chap3.html#X83E95B4A83BC473E"><span class="RefLink">3.1-1</span></a>).</p>
+
+</dd>
+</dl>
+<p>If mouse events are enabled (see <code class="func">NCurses.UseMouse</code> (<a href="chap2.html#X799C033A7AB582D7"><span class="RefLink">2.2-10</span></a>)) then the window can be moved on the screen via mouse events, the focus can be moved to an entry, and (if <code class="code">single</code> is <code class="keyw">false</code>) the selection of an entry can be toggled.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">index := NCurses.Select(["Apples", "Pears", "Oranges"]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">index := NCurses.Select(rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                    items := ["Apples", "Pears", "Oranges"],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                    single := false,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                    border := true,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                    begin := [5, 5],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                    size := [8, 60],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                    header := "Choose at least two fruits",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                    attribute := NCurses.ColorAttr("yellow","red"),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                    onSubmitFunction:= function( r )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                      if Length( r.RESULT ) &lt; 2 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                        return [ "Choose at least two fruits" ];</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                      else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                        return true;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                      fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                    end ) );</span>
+</pre></div>
+
+<p><a id="X837EFD8A842257EA" name="X837EFD8A842257EA"></a></p>
+
+<h5>3.1-3 NCurses.GetLineFromUser</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.GetLineFromUser</code>( <var class="Arg">pre</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: User input as string.</p>
+
+<p>This function can be used to get an input string from the user. It opens a one line window and writes the given string <var class="Arg">pre</var> into it. Then it waits for user input. After hitting the <strong class="button">Return</strong> key the typed line is returned as a string to <strong class="pkg">GAP</strong>. If the user exits via hitting the <strong class="button">Esc</strong> key instead of hitting the <strong class="button">Return</strong> key, the function returns <code class="keyw">false</code>. (The <strong class="button">Esc</strong> key may be recognized as input only after a delay of about a second.)</p>
+
+<p>Some simple editing is possible during user input: The <strong class="button">Left</strong>, <strong class="button">Right</strong>, <strong class="button">Home</strong> and <strong class="button">End</strong> keys, the <strong class="button">Insert</strong>/<strong class="button">Replace</strong> keys, and the <strong class="button">Backspace</strong>/<strong class="button">Delete</strong> keys are supported.</p>
+
+<p>Instead of a string, <var class="Arg">pre</var> can also be a record with the component <code class="code">prefix</code>, whose value is the string described above. The following optional components of this record are supported.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">window</code></strong></dt>
+<dd><p>The window with the input field is created relative to this window, the default is <span class="SimpleMath">0</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">begin</code></strong></dt>
+<dd><p>This is a list with the coordinates of the upper left corner of the window with the input field, relative to the window described by the <code class="code">window</code> component; the default is <code class="code">[ y-4, 2 ]</code>, where <code class="code">y</code> is the height of this window.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">default</code></strong></dt>
+<dd><p>This string appears as result when the window is opened, the default is an empty string.</p>
+
+</dd>
+</dl>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">str := NCurses.GetLineFromUser("Your Name: ");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print("Hello ", str, "!\n");</span>
+</pre></div>
+
+<p><a id="X87E1B2787F588CC0" name="X87E1B2787F588CC0"></a></p>
+
+<h5>3.1-4 NCurses.Pager</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.Pager</code>( <var class="Arg">lines</var>[, <var class="Arg">border</var>[, <var class="Arg">ly</var>, <var class="Arg">lx</var>, <var class="Arg">y</var>, <var class="Arg">x</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This is a simple pager utility for displaying and scrolling text. The argument <var class="Arg">lines</var> can be a list of attribute lines (see <code class="func">NCurses.IsAttributeLine</code> (<a href="chap2.html#X81D1FC927C455AEB"><span class="RefLink">2.2-3</span></a>)) or a string (the lines are separated by newline characters) or a record. In case of a record the following components are recognized:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">lines</code></strong></dt>
+<dd><p>The list of attribute lines or a string as described above.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">start</code></strong></dt>
+<dd><p>Line number to start the display.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">size</code></strong></dt>
+<dd><p>The size <code class="code">[ly, lx]</code> of the window like the first two arguments of <code class="code">NCurses.newwin</code> (default is <code class="code">[0, 0]</code>, as big as possible).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">begin</code></strong></dt>
+<dd><p>Top-left corner <code class="code">[y, x]</code> of the window like the last two arguments of <code class="code">NCurses.newwin</code> (default is <code class="code">[0, 0]</code>, top-left of the screen).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">attribute</code></strong></dt>
+<dd><p>An attribute used for the display of the window (default is <code class="code">NCurses.attrs.NORMAL</code>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">border</code></strong></dt>
+<dd><p>Either one of <code class="keyw">true</code>/<code class="keyw">false</code> to show the pager window with or without a standard border. Or it can be string with eight, two or one characters, giving characters to be used for a border, see <code class="func">NCurses.WBorder</code> (<a href="chap2.html#X82B801587B37D571"><span class="RefLink">2.2-9</span></a>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hint</code></strong></dt>
+<dd><p>A text for usage info in the last line of the window.</p>
+
+</dd>
+</dl>
+<p>As an abbreviation the information from <code class="code">border</code>, <code class="code">size</code> and <code class="code">begin</code> can also be specified in optional arguments.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := List([1..100],i-&gt; ["line ",NCurses.attrs.BOLD,String(i)]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.Pager(lines);</span>
+</pre></div>
+
+<p><a id="X7D5685767D4FCD8E" name="X7D5685767D4FCD8E"></a></p>
+
+<h5>3.1-5 <span class="Heading">Selection of help matches</span></h5>
+
+<p>After loading the <strong class="pkg">Browse</strong> package <strong class="pkg">GAP</strong>'s help system behaves slightly different when a request yields several matches. The matches are shown via <code class="func">NCurses.Select</code> (<a href="chap3.html#X833D321E86528981"><span class="RefLink">3.1-2</span></a>), the list can be searched and filtered, and one can choose one match for immediate display. It is possible to not choose a match and the <code class="code">?&lt;nr&gt;</code> syntax still works.</p>
+
+<p>If you want the original behavior call <code class="code">SetUserPreference( "Browse", "SelectHelpMatches", false );</code> in your <strong class="pkg">GAP</strong> session or <code class="file">gap.ini</code> file, see <a href="../../../doc/ref/chap3.html#X7B0AD104839B6C3C"><span class="RefLink">Reference: Configuring User preferences</span></a>.</p>
+
+<p><a id="X867BB82985D7953A" name="X867BB82985D7953A"></a></p>
+
+<h5>3.1-6 <span class="Heading">Selection of package names</span></h5>
+
+<p>The function <code class="func">LoadPackage</code> (<a href="../../../doc/ref/chap76.html#X79B373A77B29D1F5"><span class="RefLink">Reference: LoadPackage</span></a>) shows a list of matches if only a prefix of a package name is given. After loading the <strong class="pkg">Browse</strong> package, <code class="func">NCurses.Select</code> (<a href="chap3.html#X833D321E86528981"><span class="RefLink">3.1-2</span></a>) is used for that, and one can choose a match.</p>
+
+<p>If you want the original behavior call <code class="code">SetUserPreference( "Browse", "SelectPackageName", false );</code> in your <strong class="pkg">GAP</strong> session or <code class="file">gap.ini</code> file, see <a href="../../../doc/ref/chap3.html#X7B0AD104839B6C3C"><span class="RefLink">Reference: Configuring User preferences</span></a>.</p>
+
+<p><a id="X7EF34E0E7FBD3A3B" name="X7EF34E0E7FBD3A3B"></a></p>
+
+<h4>3.2 <span class="Heading">A Demo Function</span></h4>
+
+<p><a id="X8681359F8064597B" name="X8681359F8064597B"></a></p>
+
+<h5>3.2-1 NCurses.Demo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NCurses.Demo</code>( [<var class="Arg">inputs</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Let <var class="Arg">inputs</var> be a list of records, each with the components <code class="code">title</code> (a string), <code class="code">inputblocks</code> (a list of strings, each describing some <strong class="pkg">GAP</strong> statements), and optionally <code class="code">footer</code> (a string) and <code class="code">cleanup</code> (a string describing <strong class="pkg">GAP</strong> statements). The default is <code class="code">NCurses.DemoDefaults</code>.</p>
+
+<p><code class="code">NCurses.Demo</code> lets the user choose an entry from <var class="Arg">inputs</var>, via <code class="func">NCurses.Select</code> (<a href="chap3.html#X833D321E86528981"><span class="RefLink">3.1-2</span></a>), and then executes the <strong class="pkg">GAP</strong> statements in the first entry of the <code class="code">inputblocks</code> list of this entry; these strings, together with the values of <code class="code">title</code> and <code class="code">footer</code>, are shown in a window, at the bottom of the screen. The effects of calls to functions using <code class="code">ncurses</code> are shown in the rest of the screen. After the execution of the statements (which may require user input), the user can continue with the next entry of <code class="code">inputblocks</code>, or return to the <code class="code">inputs</code> selection (and thus cancel the current <code class="code">inputs</code> entry), or return to the execution of the beginning of the current <code class="code">inputs</code> entry. At the end of the current entry of <code class="code">inputs</code>, the user returns to the <code class="code">inputs</code> selection.</p>
+
+<p>The <strong class="pkg">GAP</strong> statements in the <code class="code">cleanup</code> component, if available, are executed whenever the user does not continue; this is needed for deleting panels and windows that are defined in the statements of the current entry.</p>
+
+<p>Note that the <strong class="pkg">GAP</strong> statements are executed in the <em>global</em> scope, that is, they have the same effect as if they would be entered at the <strong class="pkg">GAP</strong> prompt. Initially, <code class="code">NCurses.Demo</code> sets the value of <code class="code">BrowseData.defaults.work.windowParameters</code> to the parameters that describe the part of the screen above the window that shows the inputs; so applications of <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) use automatically the maximal part of the screen as their window. It is recommended to use a screen with at least <span class="SimpleMath">80</span> columns and at least <span class="SimpleMath">37</span> rows.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (IntPic) - Chapter 2: 
+    The IntPic package main function
+  </title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X83A243C47B056636" name="X83A243C47B056636"></a></p>
+<div class="ChapSects"><a href="chap2.html#X83A243C47B056636">2 <span class="Heading">
+    The <strong class="pkg">IntPic</strong> package main function
+  </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X80ABA2918548E108">2.1 <span class="Heading">The main function</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X858D6CD18272C90F">2.1-1 <span class="Heading">Tikz code for arrays of integers</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D3BCADE7903D62D">2.1-2 <span class="Heading">Tikz code for arrays, in a simplified way</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7EF12D7787D2A886">2.2 <span class="Heading">Producing tables</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X816D055F845B0D71">2.2-1 IP_TableWithModularOrder</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">
+    The <strong class="pkg">IntPic</strong> package main function
+  </span></h3>
+
+<p>This chapter consists of two sections, the first of which decribes the main function of the package. The second one can be thought just as an example to produce a table where the integers appear ordered in a non standard way.</p>
+
+<p><a id="X80ABA2918548E108" name="X80ABA2918548E108"></a></p>
+
+<h4>2.1 <span class="Heading">The main function</span></h4>
+
+<p>The function <code class="func">IP_TikzArrayOfIntegers</code> (<a href="chap2.html#X858D6CD18272C90F"><span class="RefLink">2.1-1</span></a>) is the main function of the <span class="URL"><a href="https://gap-packages.github.io/intpic/">IntPic</a></span> package. It aims to produce <code class="code">tikz</code> code for displaying arrays of integers.</p>
+
+<p><a id="X858D6CD18272C90F" name="X858D6CD18272C90F"></a></p>
+
+<h5>2.1-1 <span class="Heading">Tikz code for arrays of integers</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IP_TikzArrayOfIntegers</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The arguments (at most 3) are:</p>
+
+<ol>
+<li><p>(optional)</p>
+
+
+<ul>
+<li><p>a table of integers. In this case, the length of the rows is the maximum of the lengths of the sublists in the table, <em>or</em></p>
+
+</li>
+<li><p>a list of integers and, optionally, an integer which indicates the length of the rows; when the length of the rows is not indicated, a compromise between the width and the height is tried.</p>
+
+</li>
+</ul>
+</li>
+<li><p>a record of options. One of the fields of this record, named <code class="code">highlights</code>, is an array whose entries are the numbers to be highlighted: one color per sublist. See details and other options in Chapter <a href="chap5.html#X7DE2DA167A0098E7"><span class="RefLink">5</span></a>.</p>
+
+</li>
+</ol>
+<p>When no list nor table is present, the smallest range containing all the integers to be highlighted is taken.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rg := [81..89];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">len := 10;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">arr := [Filtered(rg,IsPrime),Filtered(rg,u-&gt;(u mod 2)=0),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        Filtered(rg,u-&gt;(u mod 3)=0)];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz := IP_TikzArrayOfIntegers(rg,len,rec(highlights:=arr));;</span>
+</pre></div>
+
+<p>The aspect of the string <var class="Arg">tkz</var> produced is not very appealing. We show it once, by asking it exlicitly in the next example. In the forthcomming examples we keep using two semicolons to avoid showing this kind of strings.</p>
+
+
+<div class="example"><pre>
+gap&gt; tkz;
+"%tikz\n\\begin{tikzpicture}[every node/.style={draw,scale=1pt,\nminimum width\
+=20pt,inner sep=3pt,\nline width=1pt,draw=black}]\n\\matrix[row sep=2pt,column\
+ sep=2pt]\n{\\node[fill=-red]{86};&amp;\n\\node[fill=green]{87};&amp;\n\\node[fill=-re\
+d]{88};&amp;\n\\node[fill=red]{89};\\\\\n\\node[fill=green]{81};&amp;\n\\node[fill=-re\
+d]{82};&amp;\n\\node[fill=red]{83};&amp;\n\\node[left color=-red,right color=green]{84\
+};&amp;\n\\node[]{85};\\\\\n};\n\\end{tikzpicture}\n"
+</pre></div>
+
+<p>This string can be used at the users wish. In particular, it can be sent to the standard output using the command <code class="func">Print</code> (<a href="../../../doc/ref/chap6.html#X7AFA64D97A1F39A3"><span class="RefLink">Reference: Print</span></a>).</p>
+
+
+<div class="example"><pre>
+gap&gt; Print(tkz);
+%tikz
+\begin{tikzpicture}[every node/.style={draw,scale=1pt,
+minimum width=20pt,inner sep=3pt,
+line width=1pt,draw=black}]
+\matrix[row sep=2pt,column sep=2pt]
+{\node[fill=-red]{86};&amp;
+\node[fill=green]{87};&amp;
+\node[fill=-red]{88};&amp;
+\node[fill=red]{89};\\
+\node[fill=green]{81};&amp;
+\node[fill=-red]{82};&amp;
+\node[fill=red]{83};&amp;
+\node[left color=-red,right color=green]{84};&amp;
+\node[]{85};\\
+};
+\end{tikzpicture}
+</pre></div>
+
+<p>It can now be copied and pasted in a LaTeX document (having the appropriate packages in the preamble). See Chapter <a href="chap4.html#X79BE6CBC7AA29804"><span class="RefLink">4</span></a> for details and alternatives.</p>
+
+<p>The next function uses the previous one, but is called with a simpler argument. It will hopefully be useful for simple drawings. The length of each row and the umber of columns varies. A compromise based on some experiments has been established in order to obtain not too large nor too high images.</p>
+
+<p><a id="X7D3BCADE7903D62D" name="X7D3BCADE7903D62D"></a></p>
+
+<h5>2.1-2 <span class="Heading">Tikz code for arrays, in a simplified way</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IP_SimpleTikzArrayOfIntegers</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The argument is either a list of integers or a matrix of integers. The integers involved are embeded in a range <var class="Arg">rg</var> of minimum length and highlighted by using the list of default colors.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := DivisorsInt(30);</span>
+[ 1, 2, 3, 5, 6, 10, 15, 30 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IP_SimpleTikzArrayOfIntegers(d);;</span>
+</pre></div>
+
+<p><br><center><img src="../images/divs30.jpg"></center><br></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d30 := DivisorsInt(30);</span>
+[ 1, 2, 3, 5, 6, 10, 15, 30 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d40 := DivisorsInt(40);</span>
+[ 1, 2, 4, 5, 8, 10, 20, 40 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz := IP_SimpleTikzArrayOfIntegers([d30,d40]);;</span>
+</pre></div>
+
+<p><br><center><img src="../images/divs3040.jpg"></center><br></p>
+
+<p><a id="X7EF12D7787D2A886" name="X7EF12D7787D2A886"></a></p>
+
+<h4>2.2 <span class="Heading">Producing tables</span></h4>
+
+<p>When the user is interested in tables of a certain kind, it may be a good idea to write some code to produce these tables. The following function (whose code is part of the file <em>ip_tables.gi</em> in the <em>gap</em> folder of this package) is convenient to deal with numerical semigroups with two generators and has been used to produce the images contained in <a href="chapBib.html#biBfengraoab">[DFGSL14]</a>.</p>
+
+<p><a id="X816D055F845B0D71" name="X816D055F845B0D71"></a></p>
+
+<h5>2.2-1 IP_TableWithModularOrder</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IP_TableWithModularOrder</code>( <var class="Arg">o</var>, <var class="Arg">a</var>, <var class="Arg">b</var>, <var class="Arg">depth</var>, <var class="Arg">height</var>, <var class="Arg">rep</var>, <var class="Arg">pos</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The arguments <var class="Arg">rep</var> and <var class="Arg">pos</var> are booleans (<code class="code">true</code> or <code class="code">false</code>). When <var class="Arg">rep</var> is <code class="code">true</code> there is some repetition: the last column is equal to the first, but pushed down some rows. When <var class="Arg">pos</var> is <code class="code">true</code>, no rows below 0 are considered, (contradicting <var class="Arg">depth</var>, if needed).</p>
+
+<p>The first five arguments arguments <var class="Arg">o, a, b,depth</var> and <var class="Arg">height</var> are integers. What they represent is described in what follows. There is assigned some kind of a referential on the constructed table and the fist argument, <var class="Arg">o</var>, stands for the origin. A table with <var class="Arg">b</var> columns (<span class="SimpleMath"><var class="Arg">b</var>+1</span> columns when <var class="Arg">rep</var> is <code class="code">true</code>) is constructed as follows. The row containing the origin is</p>
+
+
+<ul>
+<li><p><span class="SimpleMath"><var class="Arg">o</var>+ [0..<var class="Arg">b</var>-1]*<var class="Arg">a</var></span>, if <var class="Arg">rep</var> is <code class="code">false</code>, <em>or</em></p>
+
+</li>
+<li><p><span class="SimpleMath"><var class="Arg">o</var>+ [0..<var class="Arg">b</var>]*<var class="Arg">a</var></span>, if <var class="Arg">rep</var> is <code class="code">true</code></p>
+
+</li>
+</ul>
+<p>The remaining rows are obtained by adding <var class="Arg">b</var> (the upper ones) or subtracting <var class="Arg">b</var> (the others) to these rows.</p>
+
+<p>Note: when <span class="SimpleMath"><var class="Arg">a</var> &lt; <var class="Arg">b</var></span> are co-prime, this construction provides a representation of the integers as an array.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := 8;; b := 19;;  </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ns := NumericalSemigroup(a,b);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c := ConductorOfNumericalSemigroup(ns);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">origin := 2*c-1;</span>
+251
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ground := [origin..origin+b-1];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">height:=2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">depth:=8;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">  xaxis := [origin];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">  for n in [1..b-1] do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    Add(xaxis, origin+n*a);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">  yaxis := [];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">  for n in [-depth..height] do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    Add(yaxis, origin+n*b);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">table := IP_TableWithModularOrder(origin,a,b,depth,height,false,false);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">arr := [xaxis,yaxis,ground];</span>
+[ [ 251, 259, 267, 275, 283, 291, 299, 307, 315, 323, 331, 339, 347, 355, 
+      363, 371, 379, 387, 395 ], 
+  [ 99, 118, 137, 156, 175, 194, 213, 232, 251, 270, 289 ], [ 251 .. 269 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz:=IP_TikzArrayOfIntegers(table,rec(highlights:=arr));;</span>
+</pre></div>
+
+<p><br><center><img src="../images/table_axis_ground_8_19.jpg"></center><br> The next picture is obtained in the same way. The information that only the shape has interest is given by including the option <code class="code">shape_only:=" "</code>. The variable <code class="code">tkz</code> should be defined in a similar manner to the following one.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz:=IP_TikzArrayOfIntegers(table,rec(highlights:=arr,shape_only:=" ",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">             cell_width := "6",colsep:="1",rowsep:="1",inner_sep:="2",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">             line_color:="black!20"));;</span>
+</pre></div>
+
+<p><br><center><img src="../images/table_axis_ground_shape.jpg"></center><br> Next, a minimum of changes, just to illustrate the effect of <var class="Arg">rep</var> and <var class="Arg">pos</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">table := IP_TableWithModularOrder(origin,a,b,depth,50,true,true);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tkz:=IP_TikzArrayOfIntegers(table,rec(highlights:=arr));;</span>
+</pre></div>
+
+<p><br><center><img src="../images/table_axis_ground_8_19_rep_pos.jpg"></center><br></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

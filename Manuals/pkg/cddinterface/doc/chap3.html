@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (CddInterface) - Chapter 3: Linear Programs</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X825271797BE64406" name="X825271797BE64406"></a></p>
+<div class="ChapSects"><a href="chap3.html#X825271797BE64406">3 <span class="Heading">Linear Programs</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X78544DEC7F939A89">3.1 <span class="Heading">Creating and solving linear programs</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78C17DC0813644BE">3.1-1 Cdd_LinearProgram</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79EB266A8289CE29">3.1-2 Cdd_SolveLinearProgram</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Linear Programs</span></h3>
+
+<p><a id="X78544DEC7F939A89" name="X78544DEC7F939A89"></a></p>
+
+<h4>3.1 <span class="Heading">Creating and solving linear programs</span></h4>
+
+<p><a id="X78C17DC0813644BE" name="X78C17DC0813644BE"></a></p>
+
+<h5>3.1-1 Cdd_LinearProgram</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cdd_LinearProgram</code>( <var class="Arg">P</var>, <var class="Arg">str</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a <em>CddLinearProgram</em> Object</p>
+
+<p>The function takes three variables. The first is a polyhedron <em>poly</em>, the second <em>str</em> should be "max" or "min" and the third <em>obj</em> is the objective function.</p>
+
+<p><a id="X79EB266A8289CE29" name="X79EB266A8289CE29"></a></p>
+
+<h5>3.1-2 Cdd_SolveLinearProgram</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cdd_SolveLinearProgram</code>( <var class="Arg">lp</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list if the program is optimal, otherwise returns the value 0</p>
+
+<p>The function takes a linear program. If the program is optimal, the function returns a list of two entries, the solution vector and the optimal value of the objective, otherwise it returns <var class="Arg">fail</var>.</p>
+
+<p>To illustrate the using of these functions, let us solve the linear program given by:</p>
+
+<p class="pcenter">\textbf{Maximize}\;\;P(x,y)= 1-2x+5y,\;\mathrm{with}</p>
+
+<p class="pcenter">100\leq x \leq 200,80\leq y\leq 170,y \geq -x+200.</p>
+
+<p>We bring the inequalities to the form <span class="Math">b+AX\geq 0</span> and get:</p>
+
+<p class="pcenter">-100+x\geq 0, 200-x \geq 0, -80+y \geq 0, 170 -y \geq 0,-200 +x+y \geq 0.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:= Cdd_PolyhedronByInequalities( [ [ -100, 1, 0 ], [ 200, -1, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ -80, 0, 1 ], [ 170, 0, -1 ], [ -200, 1, 1 ] ] );</span>
+&lt;Polyhedron given by its H-representation&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lp1:= Cdd_LinearProgram( A, "max", [1, -2, 5 ] );</span>
+&lt;Linear program&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( lp1 );</span>
+Linear program given by:
+H-representation
+begin
+   5 X 3  rational
+
+   -100     1     0
+    200    -1     0
+    -80     0     1
+    170     0    -1
+   -200     1     1
+end
+max  [ 1, -2, 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cdd_SolveLinearProgram( lp1 );</span>
+[ [ 100, 170 ], 651 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lp2:= Cdd_LinearProgram( A, "min", [ 1, -2, 5 ] );</span>
+&lt;Linear program&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( lp2 );</span>
+Linear program given by:
+H-representation
+begin
+   5 X 3  rational
+
+   -100     1     0
+    200    -1     0
+    -80     0     1
+    170     0    -1
+   -200     1     1
+end
+min  [ 1, -2, 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cdd_SolveLinearProgram( lp2 );</span>
+[ [ 200, 80 ], 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B:= Cdd_V_Rep( A );</span>
+&lt;Polyhedron given by its V-representation&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( B );</span>
+V-representation
+begin
+   5 X 3  rational
+
+   1  100  170
+   1  100  100
+   1  120   80
+   1  200   80
+   1  200  170
+end
+</pre></div>
+
+<p>So the optimal solution for <span class="Math">\texttt{lp1}</span> is <span class="Math">(x=100,y=170)</span> with optimal value <span class="Math">p=1-2(100)+5(170)=651</span> and for <span class="Math">\texttt{lp2}</span> is <span class="Math">(x=200,y=80)</span> with optimal value <span class="Math">p=1-2(200)+5(80)=1</span>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

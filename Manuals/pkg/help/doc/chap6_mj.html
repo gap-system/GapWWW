@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (HeLP) - Chapter 6: Remarks on technical problems and the implementation</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6.html">[MathJax off]</a></p>
+<p><a id="X7B53A54C823744E9" name="X7B53A54C823744E9"></a></p>
+<div class="ChapSects"><a href="chap6_mj.html#X7B53A54C823744E9">6 <span class="Heading">Remarks on technical problems and the implementation</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7FBC46BC7A5D28AF">6.1 <span class="Heading">Making the HeLP-package run</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X85FD09B67E460537">6.2 <span class="Heading">How much 4ti2 and normaliz is really there?</span></a>
+</span>
+</div>
+</div>
+
+<h3>6 <span class="Heading">Remarks on technical problems and the implementation</span></h3>
+
+<p><a id="X7FBC46BC7A5D28AF" name="X7FBC46BC7A5D28AF"></a></p>
+
+<h4>6.1 <span class="Heading">Making the HeLP-package run</span></h4>
+
+<p>For all basic functionalities of the HeLP-package (using only the solver normaliz) the standard GAP-installation should suffice to make everything work: Get the most recent GAP from the <span class="URL"><a href="http://www.gap-system.org/">GAP-webpage</a></span> by following the instructions on the Download-page. Make sure to also run <code class="keyw">InstPackages.sh</code> as explained there. This should install all packages needed to run HeLP. Just start GAP and type <code class="keyw">LoadPackage("HeLP");</code>. In GAP 4.8.2 the NormalizInterface has to be updated to version 0.9.6 or newer which can be obtained from the <span class="URL"><a href="http://gap-packages.github.io/NormalizInterface//">website</a></span> of the package. For GAP 4.8.3 or newer this should not be necessary anymore.</p>
+
+<p>Here is a checklist what to do, if the package does not work or you also want to use the solver 4ti2:</p>
+
+
+<ul>
+<li><p>Make sure you have sufficiently new versions of the following software:</p>
+
+
+<ul>
+<li><p><span class="URL"><a href="http://www.gap-system.org/">GAP</a></span> (at least 4.8.2)</p>
+
+</li>
+<li><p>the GAP-package <span class="URL"><a href="http://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/">CTblLib</a></span> (at least 1.2.2)</p>
+
+</li>
+<li><p>the GAP-package <span class="URL"><a href="http://gap-packages.github.io/io/">IO</a></span> (at least 4.2; see also the next bullet point if this package can not be loaded)</p>
+
+</li>
+<li><p>the GAP-package <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/">4ti2Interface</a></span> (at least 2015.04.29; this package needs the IO-package)</p>
+
+</li>
+<li><p>the GAP-package <span class="URL"><a href="http://gap-packages.github.io/NormalizInterface//">NormalizInterface</a></span> (at least 0.9.6)</p>
+
+</li>
+</ul>
+</li>
+</ul>
+<p>Usually all these packages should come with a sufficiently recent GAP-installation (4.8.2 or newer) and should be contained in the pkg-folder of the GAP-installation. To see if they are working you can load them by typing <code class="keyw">LoadPackage("[name]");</code> after starting GAP, where <code class="keyw">[name]</code> is the name of the package.</p>
+
+
+<ul>
+<li><p>The IO-package needs a C-part to be compiled. To see if this has already been done on your system, you can enter <code class="keyw">LoadPackage("IO");</code> after starting GAP. If the result is <code class="keyw">fail</code> and the package is contained in the pkg-folder, than most likely the C-part is not yet compiled. For information on installation and in particular on how to compile the C-part, see the <span class="URL"><a href="http://gap-packages.github.io/io/doc/chap0.html">manual</a></span> (in particular Chapter 2) or the README-file of that package.</p>
+
+</li>
+<li><p>The installation of normaliz is possible via the GAP-package <span class="URL"><a href="http://gap-packages.github.io/NormalizInterface//">NormalizInterface</a></span> (at least 0.9.6). Just access the folder in a terminal and do <code class="keyw">./build-normaliz.sh; ./configure; make</code>.</p>
+
+</li>
+<li><p>If you want to use 4ti2, please make sure that <span class="URL"><a href="http://www.4ti2.de">www.4ti2.de</a></span> (Version 1.6.5 or newer) is properly installed. In case of an error-message "The executable 'zsolve' provided by the software 4ti2 was not found." after typing <code class="keyw">LoadPackage("HeLP");</code> either the software is not properly installed or installed in a directory where GAP can not find it, i.e. a directory not contained in the path-variable. The content of this variable can typically be displayed by typing <code class="keyw">echo $PATH</code> (Linux, Mac) <code class="keyw">echo %PATH%</code> (Windows) in a terminal or a command prompt. The manual of 4ti2 contains several pages of information on how to install the program. Note that the installation of 4ti2 requires gcc (g++) and gmp installed (which come with many Linux installations or can be installed using a package manager). Make sure to execute all four commands indicated in the 4ti2 manual (possibly without the <code class="keyw">--prefix=</code>-part):</p>
+
+<p><code class="keyw">./configure --prefix=INSTALLATION-DIRECTORY</code></p>
+
+<p><code class="keyw">make</code></p>
+
+<p><code class="keyw">make check</code></p>
+
+<p><code class="keyw">make install-exec</code></p>
+
+<p>Depending on the settings of your system you might need root privileges (type <code class="keyw">sudo</code> in front of every command) to unpack the files and install them. To check whether the installation worked, you can enter <code class="keyw">zsolve</code> in a terminal. In case one of the required programs (g++ or gmp) was not installed when running <code class="keyw">make</code> for the first time, you might need to run <code class="keyw">make clean</code> and the above commands afterwards again (several times) to compile 4ti2 successfully. If you already have 4ti2 installed in a directory not contained in the path-variable and want to avoid a re-installation, in many cases the following helps:</p>
+
+
+<ul>
+<li><p>Start a terminal and access a path written in your bash or system_bash. Typically <code class="keyw">usr/local/bin</code> should work.</p>
+
+</li>
+<li><p>Run <code class="keyw">ln -s /[PathToZsolve] zsolve</code>, where <code class="keyw">[PathToZsolve]</code> is the path to the executable zsolve. This sets a symlink to the right place. E.g. <code class="keyw">ln -s /opt/4ti2/bin/zsolve zsolve</code> was used on the (Linux) computers in Stuttgart.</p>
+
+</li>
+</ul>
+</li>
+<li><p>In case you use 4ti2, we also recommend to install <span class="URL"><a href="http://cgm.cs.mcgill.ca/~avis/C/lrs.html">lrslib</a></span>, at least version 4.3 (note that version 4.2 or older sometimes produces unwanted behavior). This software provides the 'redund' command, which can be switched on and off within HeLP, but which often leads to better performances (cf. <code class="func">HeLP_UseRedund</code> (<a href="chap3_mj.html#X7A7536D9790C1901"><span class="RefLink">3.5-2</span></a>)). For installation see the User's Guide or the Readme-file on the above mentioned homepage. Usually, after unpacking in a directory contained in the path-variable it should be enough to call</p>
+
+<p><code class="keyw">make all</code></p>
+
+<p>(possibly as root) inside the lrslib-directory.</p>
+
+</li>
+<li><p>If this does not help to get HeLP running, please feel more than welcome to contact one of the maintainers of the package.</p>
+
+</li>
+</ul>
+<p><a id="X85FD09B67E460537" name="X85FD09B67E460537"></a></p>
+
+<h4>6.2 <span class="Heading">How much 4ti2 and normaliz is really there?</span></h4>
+
+<p>The reason, why the programs 4ti2 and normaliz are used in this package, is basically that they can solve systems of linear inequalities efficiently and there exist good GAP-Interfaces for them. However there is only one line of code where a function is called which accesses 4ti2 and a few more for normaliz. Thus the effort of using another solver of inequalities would be not so big, if there is a GAP-Interface for it. If you are aware of such a solver and would like to use it in this package, please contact the authors of this package. We will be happy to help.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

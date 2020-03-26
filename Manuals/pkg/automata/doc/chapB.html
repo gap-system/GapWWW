@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Automata) - Appendix B: 
+      Drawing automata
+    </title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapB"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapA.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapC.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapB_mj.html">[MathJax on]</a></p>
+<p><a id="X82D249F0793E6561" name="X82D249F0793E6561"></a></p>
+<div class="ChapSects"><a href="chapB.html#X82D249F0793E6561">B <span class="Heading">
+      Drawing automata
+    </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB.html#X7988DBAB78EA0C06">B.1 <span class="Heading">
+        Installing some external programs
+      </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB.html#X84C97CA079719B11">B.2 <span class="Heading">
+        Functions to draw automata
+      </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7BC2FDA77FD0237B">B.2-1 DrawAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7896CAD4832C7748">B.2-2 DotForDrawingAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X84DF99868747DD69">B.2-3 DrawSubAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7BB5015378320678">B.2-4 DotStringForDrawingSubAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7870774E83892026">B.2-5 DotStringForDrawingGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB.html#X7E478FDD807853CA">B.2-6 DrawSCCAutomaton</a></span>
+</div></div>
+</div>
+
+<h3>B <span class="Heading">
+      Drawing automata
+    </span></h3>
+
+<p>The drawing of graphs described here uses <code class="code">graphviz</code> <a href="chapBib.html#biBKoutsofiosNorth:2002">[DEG+02]</a>, a software for drawing graphs developed at AT &amp; T Labs, that can be obtained at <span class="URL"><a href="http://www.graphviz.org/">http://www.graphviz.org/</a></span>.</p>
+
+<p><a id="X7988DBAB78EA0C06" name="X7988DBAB78EA0C06"></a></p>
+
+<h4>B.1 <span class="Heading">
+        Installing some external programs
+      </span></h4>
+
+<p>In order to create the drawings you should have <span class="URL"><a href="http://www.graphviz.org/">graphviz</a></span> installed and to view them you should have installed some <code class="code">pdf</code> viewer.</p>
+
+<p><a id="X84C97CA079719B11" name="X84C97CA079719B11"></a></p>
+
+<h4>B.2 <span class="Heading">
+        Functions to draw automata
+      </span></h4>
+
+<p><a id="X7BC2FDA77FD0237B" name="X7BC2FDA77FD0237B"></a></p>
+
+<h5>B.2-1 DrawAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DrawAutomaton</code>( <var class="Arg">A</var>[, <var class="Arg">state_names</var>, <var class="Arg">L</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function draws automaton <var class="Arg">A</var>. The arguments <var class="Arg">state_names</var>, <var class="Arg">L</var> and <var class="Arg">file</var> are optional.</p>
+
+<p>An automaton with <code class="code">n</code> states will be drawn with numbers <code class="code">1</code> to <code class="code">n</code> written inside the corresponding graph node. The argument <var class="Arg">state_names</var> is a list of <code class="code">n</code> strings which will be the new text written inside the corresponding graph node.</p>
+
+<p>The argument <var class="Arg">L</var> is a list of lists of integers, each of which specifies a set of states to be drawn in a different color.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[ [ 2, 3, 0 ], [ 0, 1, 2 ] ],[ 1 ],[ 1, 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DrawAutomaton(x);</span>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DrawAutomaton(x,["st 1", "2", "C"]);</span>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DrawAutomaton(x,["st 1", "2", "C"],[[2],[1,3]]);</span>
+</pre></div>
+
+<p>The output of the three previous <code class="code">DrawAutomaton</code> commands would be the following diagrams, respectively.</p>
+
+<p><br><center><img src="aut2.jpg"></center><br></p>
+
+<p><br><center><img src="aut2_1.jpg"></center><br></p>
+
+<p><br><center><img src="aut2_2.jpg"></center><br></p>
+
+<p><a id="X7896CAD4832C7748" name="X7896CAD4832C7748"></a></p>
+
+<h5>B.2-2 DotForDrawingAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DotForDrawingAutomaton</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function computes the dot code that can be used to display an automaton. This can be done by using the function <code class="func">DrawAutomaton</code> (<a href="chapB.html#X7BC2FDA77FD0237B"><span class="RefLink">B.2-1</span></a>) (if the system is properly configured) or by the user in some independent way. The arguments and options are the same than those of <code class="func">DrawAutomaton</code> (<a href="chapB.html#X7BC2FDA77FD0237B"><span class="RefLink">B.2-1</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DotStringForDrawingAutomaton(x);</span>
+"digraph  Automaton{\n\"1\" -&gt; \"2\" [label=\"a\",color=red];\n\"2\" -&gt; \"3\" \
+[label=\"a\",color=red];\n\"2\" -&gt; \"1\" [label=\"b\",color=blue];\n\"3\" -&gt; \
+\"2\" [label=\"b\",color=blue];\n\"1\" [shape=triangle,peripheries=2, style=fi\
+lled, fillcolor=white];\n\"2\" [shape=doublecircle, style=filled, fillcolor=wh\
+ite];\n\"3\" [shape=doublecircle, style=filled, fillcolor=white];\n}\n"
+      </pre></div>
+
+<p>By using Print (or PrinTo, if one wants to print to a file) the string is displayed as follows:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(last);</span>
+digraph  Automaton{
+"1" -&gt; "2" [label="a",color=red];
+"2" -&gt; "3" [label="a",color=red];
+"2" -&gt; "1" [label="b",color=blue];
+"3" -&gt; "2" [label="b",color=blue];
+"1" [shape=triangle,peripheries=2, style=filled, fillcolor=white];
+"2" [shape=doublecircle, style=filled, fillcolor=white];
+"3" [shape=doublecircle, style=filled, fillcolor=white];
+}
+</pre></div>
+
+<p>The dot code produced for the remaining pictures:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(DotStringForDrawingAutomaton(x,["st 1", "2", "C"]));</span>
+digraph  Automaton{
+"st 1" -&gt; "2" [label="a",color=red];
+"2" -&gt; "C" [label="a",color=red];
+"2" -&gt; "st 1" [label="b",color=blue];
+"C" -&gt; "2" [label="b",color=blue];
+"st 1" [shape=triangle,peripheries=2, style=filled, fillcolor=white];
+"2" [shape=doublecircle, style=filled, fillcolor=white];
+"C" [shape=doublecircle, style=filled, fillcolor=white];
+}
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(DotStringForDrawingAutomaton(x,["st 1", "2", "C"],[[2],[1,3]]));</span>
+digraph  Automaton{
+"st 1" -&gt; "2" [label="a",color=red];
+"2" -&gt; "C" [label="a",color=red];
+"2" -&gt; "st 1" [label="b",color=blue];
+"C" -&gt; "2" [label="b",color=blue];
+"st 1" [shape=triangle,peripheries=2, style=filled, fillcolor=burlywood];
+"2" [shape=doublecircle, style=filled, fillcolor=brown];
+"C" [shape=doublecircle, style=filled, fillcolor=burlywood];
+}
+</pre></div>
+
+<p><a id="X84DF99868747DD69" name="X84DF99868747DD69"></a></p>
+
+<h5>B.2-3 DrawSubAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DrawSubAutomaton</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function tests if automaton <code class="code"> A </code> is a subautomaton of <code class="code"> B </code> in which case draws <code class="code"> B </code> highlighting the edges not in <code class="code"> A </code> by drawing them in a dotted style, while the others are drawn in a plain style.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := Automaton("nondet",5,"abc",[ [ [ 2, 3 ], [ 5 ], [ 1, 4, 5 ], [ 1, 5 ],</span>
+[ 3, 4 ] ], [ [ 1, 4, 5 ], [ ], [ 1 ], [ 1, 3, 5 ], [ 1, 2, 5 ] ], [ [ ],
+[ 2, 4, 5 ], [ 1, 3, 5 ], [ ], [ 2, 3, 4 ] ] ],[ ],[ 2, 3, 4 ]);;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := Automaton("nondet",5,"abc",[ [ [ 2, 3 ], [ 5 ], [ 1, 4, 5 ], [ 1, 5 ],</span>
+[ 3, 4 ] ], [ [ 1, 4, 5 ], [ ], [ 1 ], [ 1, 3, 5 ], [ 1, 2, 5 ] ], [ [ 1, 4, 5 ],
+[ 2, 4, 5 ], [ 1, 3, 5 ], [ 2, 3, 4, 5 ], [ 2, 3, 4 ] ] ],[ 3, 4, 5 ],[ 2, 3, 4 ]);;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DrawSubAutomaton(A,B);</span>
+</pre></div>
+
+<p>The output is as follows, in case the configuration of your computer permits. Otherwise, you may be interested in the dot code, as pshown below.</p>
+
+<p><br><center><img src="subaut.jpg"></center><br></p>
+
+<p><a id="X7BB5015378320678" name="X7BB5015378320678"></a></p>
+
+<h5>B.2-4 DotStringForDrawingSubAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DotStringForDrawingSubAutomaton</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function computes the dot code that can be used to draw automata A, with the subsutomaton B emphasized. It is silently used by the function <code class="func">DrawSubAutomaton</code> (<a href="chapB.html#X84DF99868747DD69"><span class="RefLink">B.2-3</span></a>) (if the system is properly configured) or can be used by the user in some independent way.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DotStringForDrawingSubAutomaton(A,B);</span>
+"digraph  Automaton {\n1 -&gt; 2 [label=\"a\",color=red];\n1 -&gt; 3 [label=\"a\",co\
+lor=red];\n1 -&gt; 1 [label=\"b\",color=blue];\n1 -&gt; 4 [label=\"b\",color=blue];\
+\n1 -&gt; 5 [label=\"b\",color=blue];\n1 -&gt; 1 [label=\"c\",color=green,style = do\
+tted];\n1 -&gt; 4 [label=\"c\",color=green,style = dotted];\n1 -&gt; 5 [label=\"c\",\
+color=green,style = dotted];\n2 -&gt; 5 [label=\"a\",color=red];\n2 -&gt; 2 [label=\
+\"c\",color=green];\n2 -&gt; 4 [label=\"c\",color=green];\n2 -&gt; 5 [label=\"c\",co\
+lor=green];\n3 -&gt; 1 [label=\"a\",color=red];\n3 -&gt; 4 [label=\"a\",color=red];\
+\n3 -&gt; 5 [label=\"a\",color=red];\n3 -&gt; 1 [label=\"b\",color=blue];\n3 -&gt; 1 [l\
+abel=\"c\",color=green];\n3 -&gt; 3 [label=\"c\",color=green];\n3 -&gt; 5 [label=\"c\
+\",color=green];\n4 -&gt; 1 [label=\"a\",color=red];\n4 -&gt; 5 [label=\"a\",color=r\
+ed];\n4 -&gt; 1 [label=\"b\",color=blue];\n4 -&gt; 3 [label=\"b\",color=blue];\n4 -&gt;\
+ 5 [label=\"b\",color=blue];\n4 -&gt; 2 [label=\"c\",color=green,style = dotted];\
+\n4 -&gt; 3 [label=\"c\",color=green,style = dotted];\n4 -&gt; 4 [label=\"c\",color=\
+green,style = dotted];\n4 -&gt; 5 [label=\"c\",color=green,style = dotted];\n5 -&gt;\
+ 3 [label=\"a\",color=red];\n5 -&gt; 4 [label=\"a\",color=red];\n5 -&gt; 1 [label=\"\
+b\",color=blue];\n5 -&gt; 2 [label=\"b\",color=blue];\n5 -&gt; 5 [label=\"b\",color=\
+blue];\n5 -&gt; 2 [label=\"c\",color=green];\n5 -&gt; 3 [label=\"c\",color=green];\n\
+5 -&gt; 4 [label=\"c\",color=green];\n3 [shape=triangle,color=gray];\n4 [shape=tr\
+iangle,color=gray];\n5 [shape=triangle,color=gray];\n2 [shape=doublecircle];\n\
+3 [shape=doublecircle];\n4 [shape=doublecircle];\n1 [shape=circle];\n}\n"
+      </pre></div>
+
+<p>By using Print (or PrinTo, if one wants to print to a file) the string is displayed as follows:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(last);</span>
+digraph  Automaton {
+1 -&gt; 2 [label="a",color=red];
+1 -&gt; 3 [label="a",color=red];
+1 -&gt; 1 [label="b",color=blue];
+1 -&gt; 4 [label="b",color=blue];
+1 -&gt; 5 [label="b",color=blue];
+1 -&gt; 1 [label="c",color=green,style = dotted];
+1 -&gt; 4 [label="c",color=green,style = dotted];
+1 -&gt; 5 [label="c",color=green,style = dotted];
+2 -&gt; 5 [label="a",color=red];
+2 -&gt; 2 [label="c",color=green];
+2 -&gt; 4 [label="c",color=green];
+2 -&gt; 5 [label="c",color=green];
+3 -&gt; 1 [label="a",color=red];
+3 -&gt; 4 [label="a",color=red];
+3 -&gt; 5 [label="a",color=red];
+3 -&gt; 1 [label="b",color=blue];
+3 -&gt; 1 [label="c",color=green];
+3 -&gt; 3 [label="c",color=green];
+3 -&gt; 5 [label="c",color=green];
+4 -&gt; 1 [label="a",color=red];
+4 -&gt; 5 [label="a",color=red];
+4 -&gt; 1 [label="b",color=blue];
+4 -&gt; 3 [label="b",color=blue];
+4 -&gt; 5 [label="b",color=blue];
+4 -&gt; 2 [label="c",color=green,style = dotted];
+4 -&gt; 3 [label="c",color=green,style = dotted];
+4 -&gt; 4 [label="c",color=green,style = dotted];
+4 -&gt; 5 [label="c",color=green,style = dotted];
+5 -&gt; 3 [label="a",color=red];
+5 -&gt; 4 [label="a",color=red];
+5 -&gt; 1 [label="b",color=blue];
+5 -&gt; 2 [label="b",color=blue];
+5 -&gt; 5 [label="b",color=blue];
+5 -&gt; 2 [label="c",color=green];
+5 -&gt; 3 [label="c",color=green];
+5 -&gt; 4 [label="c",color=green];
+3 [shape=triangle,color=gray];
+4 [shape=triangle,color=gray];
+5 [shape=triangle,color=gray];
+2 [shape=doublecircle];
+3 [shape=doublecircle];
+4 [shape=doublecircle];
+1 [shape=circle];
+}
+</pre></div>
+
+<p><a id="X7870774E83892026" name="X7870774E83892026"></a></p>
+
+<h5>B.2-5 DotStringForDrawingGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DotStringForDrawingGraph</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DrawGraph</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Draws a graph specified as an adjacency list <code class="code">G</code>.</p>
+
+
+<div class="example"><pre> 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := [[1,2,3],[5],[3,4],[1],[2,5]];</span>
+[ [ 1, 2, 3 ], [ 5 ], [ 3, 4 ], [ 1 ], [ 2, 5 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(DotStringForDrawingGraph(G));</span>
+digraph Graph__{
+1 -&gt; 1 [style=bold, color=black];
+1 -&gt; 2 [style=bold, color=black];
+1 -&gt; 3 [style=bold, color=black];
+2 -&gt; 5 [style=bold, color=black];
+3 -&gt; 3 [style=bold, color=black];
+3 -&gt; 4 [style=bold, color=black];
+4 -&gt; 1 [style=bold, color=black];
+5 -&gt; 2 [style=bold, color=black];
+5 -&gt; 5 [style=bold, color=black];
+1 [shape=circle];
+2 [shape=circle];
+3 [shape=circle];
+4 [shape=circle];
+5 [shape=circle];
+}
+</pre></div>
+
+<p>The dot code can be used to produce the following picture (which may also be produced by typing <code class="code">DrawGraph(G);</code> <br><center><img src="graph2.jpg"></center><br></p>
+
+<p><a id="X7E478FDD807853CA" name="X7E478FDD807853CA"></a></p>
+
+<h5>B.2-6 DrawSCCAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DrawSCCAutomaton</code>( <var class="Arg">A</var>[, <var class="Arg">state_names</var>, <var class="Arg">L</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Draws automaton <code class="code"> A </code> and highlights it's strongly connected components by drawing the other edges in a dotted style.</p>
+
+<p>The optional arguments <var class="Arg">state_names</var> and <var class="Arg">L</var> are as described in <code class="func">DrawAutomaton</code> (<a href="chapB.html#X7BC2FDA77FD0237B"><span class="RefLink">B.2-1</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rcg := Automaton("det",6,"ab",[ [ 3, 3, 6, 5, 6, 6 ], [ 4, 6, 2, 6, 4, 6 ] ],</span>
+[ ],[ ]);;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(DotStringForDrawingSCCAutomaton(rcg));</span>
+digraph  Automaton{
+"1" -&gt; "3" [label="a",color=red,style = dotted];
+"2" -&gt; "3" [label="a",color=red];
+"3" -&gt; "6" [label="a",color=red,style = dotted];
+"4" -&gt; "5" [label="a",color=red];
+"5" -&gt; "6" [label="a",color=red,style = dotted];
+"6" -&gt; "6" [label="a",color=red,style = dotted];
+"1" -&gt; "4" [label="b",color=blue,style = dotted];
+"2" -&gt; "6" [label="b",color=blue,style = dotted];
+"3" -&gt; "2" [label="b",color=blue];
+"4" -&gt; "6" [label="b",color=blue,style = dotted];
+"5" -&gt; "4" [label="b",color=blue];
+"6" -&gt; "6" [label="b",color=blue,style = dotted];
+"1" [shape=circle, style=filled, fillcolor=white];
+"2" [shape=circle, style=filled, fillcolor=white];
+"3" [shape=circle, style=filled, fillcolor=white];
+"4" [shape=circle, style=filled, fillcolor=white];
+"5" [shape=circle, style=filled, fillcolor=white];
+"6" [shape=circle, style=filled, fillcolor=white];
+}
+</pre></div>
+
+<p>The dot code can be used to produce the following picture (which may also be produced by typing <code class="code">DrawGraph(G);</code> <br><center><img src="sccpoi2.jpg"></center><br></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapA.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapC.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

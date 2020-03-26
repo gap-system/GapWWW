@@ -1,0 +1,530 @@
+
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "AtlasRep t.o.c. file",
+  "description": "JSON schema that defines the format of AtlasRep t.o.c. files",
+
+  "definitions": {
+    "posint": {
+      "type": "integer",
+      "minimum": 1
+    },
+
+    "nonnegint": {
+      "type": "integer",
+      "minimum": 0
+    },
+
+    "crclist": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "minItems": 1
+    },
+
+    "crclist1": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "minItems": 1,
+      "maxItems": 1
+    },
+
+    "GNAN_Description": {
+      "description": "<gapname>, <atlasname>",
+      "type": "array",
+      "items": [ { "type": "string" },
+                 { "type": "string" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "GNAN_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "GNAN" ] },
+                 { "$ref": "#/definitions/GNAN_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "TOC_perm_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "perm" ] },
+                 { "description": "<groupname>G<i>-p<n><id>B<m>.m[<nr>]",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-p[0-9]+([a-z]|[A-Z])*B[0-9]+.m$" },
+                 { "$ref": "#/definitions/crclist" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_matff_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "matff" ] },
+                 { "description": "<groupname>G<i>-f<q>r<dim><id>B<m>.m[<nr>]",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-f[0-9]+r[0-9]+([a-z]|[A-Z])*B[0-9]+.m$" },
+                 { "$ref": "#/definitions/crclist" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_matint_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "matint" ] },
+                 { "description": "<groupname>G<i>-Zr<dim><id>B<m>.g",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-Zr[0-9]+([a-z]|[A-Z])*B[0-9]+.g$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_matalg_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "matalg" ] },
+                 { "description": "<groupname>G<i>-Ar<dim><id>B<m>.g",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-Ar[0-9]+([a-z]|[A-Z])*B[0-9]+.g$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_matmodn_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "matmodn" ] },
+                 { "description": "<groupname>G<i>-Z<n>r<dim><id>B<m>.g",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-Z[0-9]+r[0-9]+([a-z]|[A-Z])*B[0-9]+.g$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_quat_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "quat" ] },
+                 { "description": "<groupname>G<i>-Hr<dim><id>B<m>.g",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-Hr[0-9]+([a-z]|[A-Z])*B[0-9]+.g$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_maxes_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "maxes" ] },
+                 { "description": "<groupname>G<i>-max<k>W<n>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-max[0-9]+W[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_classes_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "classes" ] },
+                 { "description": "<groupname>G<i>-cclsW<n>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-cclsW[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_cyclic_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "cyclic" ] },
+                 { "description": "<groupname>G<i>-cycW<n>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-cycW[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_cyc2ccl_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "cyc2ccl" ] },
+                 { "description": "<groupname>G<i>cycW<n>-cclsW<m>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-cycW[0-9]+-cclsW[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_kernel_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "kernel" ] },
+                 { "description": "<groupname>G<i>-ker<factgroupname>W<n>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-ker([a-z]|[A-Z]|[0-9])+W[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_maxstd_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "maxstd" ] },
+                 { "description": "<groupname>G<i>max<k>W<n>-<subgroupname>G<j>W<m>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+max[0-9]+W[0-9]+-([a-z]|[A-Z]|[0-9])G[0-9]+W[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_out_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "out" ] },
+                 { "description": "<groupname>G<i>-a<outname>W<n>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-a([a-z]|[A-Z]|[0-9])+W[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_switch_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "switch" ] },
+                 { "description": "<groupname>G<i>-G<j>W<n>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-G[0-9]+W[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_find_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "find" ] },
+                 { "description": "<groupname>G<i>-find<j>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-find[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_check_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "check" ] },
+                 { "description": "<groupname>G<i>-check<j>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-check[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_pres_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "pres" ] },
+                 { "description": "<groupname>G<i>-P<j>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-P[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_otherscripts_Description": {
+      "type": "array",
+      "items": [ { "enum": [ "otherscripts" ] },
+                 { "description": "<groupname>G<i>-X<descr>W<n>",
+                   "type": "string",
+                   "pattern": "^([a-z]|[A-Z]|[0-9])+G[0-9]+-X([a-z]|[A-Z]|[0-9])+W[0-9]+$" },
+                 { "$ref": "#/definitions/crclist1" } ],
+      "additionalItems": false,
+      "minItems": 3
+    },
+
+    "TOC_Description": {
+      "description": "<typename>, <filename>, <crc>",
+      "oneOf": [
+        { "$ref": "#/definitions/TOC_perm_Description" },
+        { "$ref": "#/definitions/TOC_matff_Description" },
+        { "$ref": "#/definitions/TOC_matint_Description" },
+        { "$ref": "#/definitions/TOC_matalg_Description" },
+        { "$ref": "#/definitions/TOC_matmodn_Description" },
+        { "$ref": "#/definitions/TOC_quat_Description" },
+        { "$ref": "#/definitions/TOC_maxes_Description" },
+        { "$ref": "#/definitions/TOC_classes_Description" },
+        { "$ref": "#/definitions/TOC_cyclic_Description" },
+        { "$ref": "#/definitions/TOC_cyc2ccl_Description" },
+        { "$ref": "#/definitions/TOC_kernel_Description" },
+        { "$ref": "#/definitions/TOC_maxstd_Description" },
+        { "$ref": "#/definitions/TOC_out_Description" },
+        { "$ref": "#/definitions/TOC_switch_Description" },
+        { "$ref": "#/definitions/TOC_find_Description" },
+        { "$ref": "#/definitions/TOC_check_Description" },
+        { "$ref": "#/definitions/TOC_pres_Description" },
+        { "$ref": "#/definitions/TOC_otherscripts_Description" }
+      ]
+    },
+
+    "TOC_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "TOC" ] },
+                 { "$ref": "#/definitions/TOC_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "GRS_Description": {
+      "description": "<gapname>, <size>",
+      "type": "array",
+      "items": [ { "type": "string" },
+                 { "$ref": "#/definitions/posint" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "GRS_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "GRS" ] },
+                 { "$ref": "#/definitions/GRS_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "MXN_Description": {
+      "description": "<gapname>, <nrMaxes>",
+      "type": "array",
+      "items": [ { "type": "string" },
+                 { "$ref": "#/definitions/posint" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "MXN_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "MXN" ] },
+                 { "$ref": "#/definitions/MXN_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "MXO_Description": {
+      "description": "<gapname>, <sizesMaxes>",
+      "type": "array",
+      "items": [ { "type": "string" },
+                 { "type": "array",
+                   "items": { "$ref": "#/definitions/nonnegint" } } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "MXO_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "MXO" ] },
+                 { "$ref": "#/definitions/MXO_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "MXS_Description": {
+      "description": "<gapname>, <structuresMaxes>",
+      "type": "array",
+      "items": [ { "type": "string" },
+                 { "type": "array",
+                   "items": { "type": "string" } } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "MXS_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "MXS" ] },
+                 { "$ref": "#/definitions/MXS_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "STDCOMP_Description": {
+      "description": "<gapname>, <factorsCompatibility>",
+      "type": "array",
+      "items": [ { "type": "string" },
+                 { "type": "array",
+                   "items": [ { "type": "integer" },
+                              { "type": "string" },
+                              { "type": "integer" },
+                              { "type": "boolean" } ]
+                 } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "STDCOMP_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "STDCOMP" ] },
+                 { "$ref": "#/definitions/STDCOMP_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "RNG_Description": {
+      "description": "<repname>, <descr>",
+      "type": "array",
+      "items": [ { "type": "string" },
+                 { "type": "string" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "RNG_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "RNG" ] },
+                 { "$ref": "#/definitions/RNG_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "TOCEXT_Description": {
+      "description": "<groupname>, <std>, <maxnr>, <files>",
+      "type": "array",
+      "items": [ { "type": "string" },
+                 { "type": "integer" },
+                 { "type": "integer" },
+                 { "type": "array",
+                   "items": { "type": "string" } } ],
+      "additionalItems": false
+    },
+
+    "TOCEXT_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "TOCEXT" ] },
+                 { "$ref": "#/definitions/TOCEXT_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "API_info_intrans": {
+      "type": "array",
+      "items": [ { "enum": [ 0 ] },
+                 { "type": "array",
+                   "items": { "$ref": "#/definitions/posint" } } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "API_info_imprim": {
+      "type": "array",
+      "items": [ { "$ref": "#/definitions/posint" },
+                 { "$ref": "#/definitions/posint" },
+                 { "enum": [ "imprim" ] },
+                 { "type": "string" } ],
+      "additionalItems": false,
+      "minItems": 4
+    },
+
+    "API_info_prim": {
+      "type": "array",
+      "items": [ { "$ref": "#/definitions/posint" },
+                 { "$ref": "#/definitions/posint" },
+                 { "enum": [ "prim" ] },
+                 { "type": "string" }, 
+                 { "oneOf": [ 
+                     { "enum": [ "???" ] },
+                     { "$ref": "#/definitions/posint" }
+                   ] } ],
+      "additionalItems": false,
+      "minItems": 5
+    },
+
+    "API_Description": {
+      "description": "<repname>, <info>",
+      "type": "array",
+      "items": [ { "type": "string" },
+                 { "oneOf": [
+                     { "$ref": "#/definitions/API_info_intrans" },
+                     { "$ref": "#/definitions/API_info_imprim" },
+                     { "$ref": "#/definitions/API_info_prim" }
+                   ]
+                 } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "API_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "API" ] },
+                 { "$ref": "#/definitions/API_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "CHAR_Description": {
+      "description": "<groupname>, <repname>, <char>, <pos>[, <charname>]",
+      "type": "array",
+      "items": [ { "type": "string" },
+                 { "type": "string" },
+                 { "type": "integer" },
+                 { "type": "array",
+                   "items": { "$ref": "#/definitions/posint" } } ],
+      "additionalItems": { "type": "string" },
+      "minItems": 4,
+      "maxItems": 5
+    },
+
+    "CHAR_Entry": {
+      "type": "array",
+      "items": [ { "enum": [ "CHAR" ] },
+                 { "$ref": "#/definitions/CHAR_Description" } ],
+      "additionalItems": false,
+      "minItems": 2
+    },
+
+    "Data_Entry": {
+      "oneOf": [
+        { "$ref": "#/definitions/GNAN_Entry" },
+        { "$ref": "#/definitions/TOC_Entry" },
+        { "$ref": "#/definitions/GRS_Entry" },
+        { "$ref": "#/definitions/MXN_Entry" },
+        { "$ref": "#/definitions/MXO_Entry" },
+        { "$ref": "#/definitions/MXS_Entry" },
+        { "$ref": "#/definitions/STDCOMP_Entry" },
+        { "$ref": "#/definitions/RNG_Entry" },
+        { "$ref": "#/definitions/TOCEXT_Entry" },
+        { "$ref": "#/definitions/API_Entry" },
+        { "$ref": "#/definitions/CHAR_Entry" }
+      ]
+    }
+  },
+
+  "type": "object",
+
+  "properties": {
+    "ID": {
+      "type": "string"
+    },
+    "Version": {
+      "type": "string"
+    },
+    "DataURL": {
+      "type": "string",
+      "format": "uri"
+    },
+    "SelfURL": {
+      "type": "string",
+      "format": "uri"
+    },
+    "LocalDirectory": {
+      "description": "path relative to GAP's pkg directory",
+      "type": "string",
+    }
+    "Data": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Data_Entry" },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+  },
+  "required": [ "ID", "Data" ],
+  "additionalProperties": false
+}
+

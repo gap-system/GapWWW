@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (PatternClass) - Chapter 10:  Miscellaneous functions </title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap10"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap10.html">[MathJax off]</a></p>
+<p><a id="X8308D685809A4E2F" name="X8308D685809A4E2F"></a></p>
+<div class="ChapSects"><a href="chap10_mj.html#X8308D685809A4E2F">10 <span class="Heading"> Miscellaneous functions </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10_mj.html#X81D407EF82C4B194">10.1 <span class="Heading"> Permutation Inclusion Set </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X7E83DB497CCB5CDC">10.1-1 InbetweenPermAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X7A07B52779B59271">10.1-2 InbetweenPermSet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X876ABC5F7822D768">10.1-3 IsSubPerm</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10_mj.html#X7A2B46957AB49125">10.2 <span class="Heading"> Automaton Manipulation </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X85793D54837E38D5">10.2-1 LoopFreeAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X8503A7707FA666C4">10.2-2 LoopVertexFreeAut</a></span>
+</div></div>
+</div>
+
+<h3>10 <span class="Heading"> Miscellaneous functions </span></h3>
+
+<p>This temporary chapter is dedicated to miscellaneous functions that are relevant to some specific ongoing research questions.</p>
+
+<p><a id="X81D407EF82C4B194" name="X81D407EF82C4B194"></a></p>
+
+<h4>10.1 <span class="Heading"> Permutation Inclusion Set </span></h4>
+
+<p>This section is dedicated to the search of the set of permutations which lay in between two permutations. Formally that is <span class="SimpleMath">\( I_{\pi,\rho} = \{\rho : \pi \leq \rho \sigma\} \)</span>.</p>
+
+<p><a id="X7E83DB497CCB5CDC" name="X7E83DB497CCB5CDC"></a></p>
+
+<h5>10.1-1 InbetweenPermAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InbetweenPermAutomaton</code>( <var class="Arg">perm1</var>, <var class="Arg">perm2</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: An automaton which accepts the encoded permutations between <code class="code">perm1</code> and <code class="code">perm2</code> where, <code class="code">perm2</code> is the subpermutation.</p>
+
+<p><code class="code">InbetweenPermAutomaton</code> creates the intersection language between the language of all subpermutations of <code class="code">perm1</code> and the language of superpermutations of <code class="code">perm2</code>.</p>
+
+
+<div class="example"><pre>
+	gap&gt; InbetweenPermAutomaton([3,2,1,4,6,5],[1,2]);
+	&lt; deterministic automaton on 3 letters with 8 states &gt;
+	gap&gt; Display(last);
+	   |  1  2  3  4  5  6  7  8
+	-----------------------------
+	 a |  2  2  1  1  6  3  2  6
+	 b |  2  2  4  2  2  4  5  5
+	 c |  2  2  2  2  2  2  2  7
+	Initial state:    [ 8 ]
+	Accepting states: [ 1, 3 ]
+	gap&gt;  </pre></div>
+
+<p><a id="X7A07B52779B59271" name="X7A07B52779B59271"></a></p>
+
+<h5>10.1-2 InbetweenPermSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InbetweenPermSet</code>( <var class="Arg">perm1</var>, <var class="Arg">perm2</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: A list which contains the permutations between <code class="code">perm1</code> and <code class="code">perm2</code> where, <code class="code">perm2</code> is the subpermutation.</p>
+
+<p>Using <code class="code">InbetweenPermAutomaton</code> we create the set of all permutations laying between the input permutations.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InbetweenPermSet([3,2,1,4,6,5],[1,2]);</span>
+[ [ 1, 2 ], [ 1, 2, 3 ], [ 1, 3, 2 ], [ 2, 1, 3 ], [ 1, 2, 4, 3 ],
+  [ 2, 1, 3, 4 ], [ 2, 1, 4, 3 ], [ 3, 2, 1, 4 ], [ 2, 1, 3, 5, 4 ],
+  [ 3, 2, 1, 4, 5 ], [ 3, 2, 1, 5, 4 ], [ 3, 2, 1, 4, 6, 5 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><a id="X876ABC5F7822D768" name="X876ABC5F7822D768"></a></p>
+
+<h5>10.1-3 IsSubPerm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubPerm</code>( <var class="Arg">perm1</var>, <var class="Arg">perm2</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> if <code class="code">perm2</code> is a subpermutation of <code class="code">perm1</code>.</p>
+
+<p>Creates the automaton accepting all subpermutations of <code class="code">perm1</code> of the same rank or less, and checks whether the automaton accepts the rank encoding of <code class="code">perm2</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubPerm([2,4,6,8,1,3,5,7],[2,3,1]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubPerm([2,4,6,8,1,3,5,7],[3,2,1]);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><a id="X7A2B46957AB49125" name="X7A2B46957AB49125"></a></p>
+
+<h4>10.2 <span class="Heading"> Automaton Manipulation </span></h4>
+
+<p><a id="X85793D54837E38D5" name="X85793D54837E38D5"></a></p>
+
+<h5>10.2-1 LoopFreeAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoopFreeAut</code>( <var class="Arg">aut</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: An automaton without any loops of length 1.</p>
+
+<p><code class="code">LoopFreeAut</code> builds the subautomaton of <code class="code">aut</code> that does not contain any loops of length 1, except for the sink state.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=Automaton("det",4,3,[[2,4,3,3],[4,4,1,4],[3,1,2,4]],[1],[2]);</span>
+&lt; deterministic automaton on 3 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(a);</span>
+   |  1  2  3  4
+-----------------
+ a |  2  4  3  3
+ b |  4  4  1  4
+ c |  3  1  2  4
+Initial state:   [ 1 ]
+Accepting state: [ 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b:=LoopFreeAut(a);</span>
+&lt; deterministic automaton on 3 letters with 5 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(b);</span>
+   |  1  2  3  4  5
+--------------------
+ a |  2  4  5  3  5
+ b |  4  4  1  5  5
+ c |  3  1  2  5  5
+Initial state:   [ 1 ]
+Accepting state: [ 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><a id="X8503A7707FA666C4" name="X8503A7707FA666C4"></a></p>
+
+<h5>10.2-2 LoopVertexFreeAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoopVertexFreeAut</code>( <var class="Arg">aut</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: An automaton without any vertices that had loops of length 1.</p>
+
+<p><code class="code">LoopVertexFreeAut</code> builds the subautomaton that does not contain the vertices and transitions of vertices in <code class="code">aut</code> that have loops of length 1. The function minimalises and determinises the automaton before returning it, which might change the numbering on the vertices, but the returned automaton is isomorphic to the subautomaton of <code class="code">aut</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=Automaton("det",4,3,[[2,4,3,3],[4,4,1,4],[3,1,2,4]],[1],[2]);</span>
+&lt; deterministic automaton on 3 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(a);</span>
+   |  1  2  3  4
+-----------------
+ a |  2  4  3  3
+ b |  4  4  1  4
+ c |  3  1  2  4
+Initial state:   [ 1 ]
+Accepting state: [ 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b:=LoopVertexFreeAut(a);</span>
+&lt; deterministic automaton on 3 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(b);</span>
+   |  1  2  3
+--------------
+ a |  2  2  1
+ b |  2  2  2
+ c |  3  2  2
+Initial state:   [ 3 ]
+Accepting state: [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

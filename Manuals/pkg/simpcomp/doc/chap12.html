@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (simpcomp) - Chapter 12: Forman's discrete Morse theory</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap12"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap11.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap13.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X7E9FD84F822A58D6" name="X7E9FD84F822A58D6"></a></p>
+<div class="ChapSects"><a href="chap12.html#X7E9FD84F822A58D6">12 <span class="Heading">Forman's discrete Morse theory</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12.html#X7B06C0577CF83F43">12.1 <span class="Heading">Functions using discrete Morse theory</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7A4EBD017F4D9747">12.1-1 SCCollapseGreedy</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X797927C68701CB00">12.1-2 SCCollapseLex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X80651CA87E3F067A">12.1-3 SCCollapseRevLex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X80DB575E7FABC370">12.1-4 SCHasseDiagram</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7FC55A3082BC56FD">12.1-5 SCMorseEngstroem</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7E9FA762862B2AA2">12.1-6 SCMorseRandom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X8164E5207F7389EF">12.1-7 SCMorseRandomLex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7C1B8D1C8484754B">12.1-8 SCMorseRandomRevLex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X802863327E29080D">12.1-9 SCMorseSpec</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7AEB02327B49060B">12.1-10 SCMorseUST</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X84C07E9787EDF772">12.1-11 SCSpanningTreeRandom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X78D66254858CE901">12.1-12 SCHomology</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X863AA5D481F78D84">12.1-13 SCHomologyEx</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X8067B00B7C959E2D">12.1-14 SCIsSimplyConnected</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7A291CE27AB5398A">12.1-15 SCIsSimplyConnectedEx</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X79B9F1807D0D9D52">12.1-16 SCIsSphere</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X831FFF748201B589">12.1-17 SCIsManifold</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X86F1B97282A7E01D">12.1-18 SCIsManifoldEx</a></span>
+</div></div>
+</div>
+
+<h3>12 <span class="Heading">Forman's discrete Morse theory</span></h3>
+
+<p>In this chapter a framework is provided to use Forman's discrete Morse theory <a href="chapBib.html#biBForman95DiscrMorseTheoryCellCompl">[For95]</a> within <strong class="pkg">simpcomp</strong>. See Section <a href="chap2.html#X84451D2C879613E6"><span class="RefLink">2.6</span></a> for a brief introduction.</p>
+
+<p>Note: this is not to be confused with Banchoff and Kühnel's theory of regular simplexwise linear functions which is described in Chapter <a href="chap11.html#X78438FF584D18B8A"><span class="RefLink">11</span></a>.</p>
+
+<p><a id="X7B06C0577CF83F43" name="X7B06C0577CF83F43"></a></p>
+
+<h4>12.1 <span class="Heading">Functions using discrete Morse theory</span></h4>
+
+<p><a id="X7A4EBD017F4D9747" name="X7A4EBD017F4D9747"></a></p>
+
+<h5>12.1-1 SCCollapseGreedy</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCCollapseGreedy</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Employs a greedy collapsing algorithm to collapse the simplicial complex <var class="Arg">complex</var>. See also <code class="func">SCCollapseLex</code> (<a href="chap12.html#X797927C68701CB00"><span class="RefLink">12.1-2</span></a>) and <code class="func">SCCollapseRevLex</code> (<a href="chap12.html#X80651CA87E3F067A"><span class="RefLink">12.1-3</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("T^2"){[1..6]}; 
+ [ [ 4, "T^2 (VT)" ], [ 5, "T^2 (VT)" ], [ 9, "T^2 (VT)" ], [ 10, "T^2 (VT)" ],
+   [ 18, "T^2 (VT)" ], [ 20, "(T^2)#2" ] ]
+ gap&gt; torus:=SCLib.Load(last[1][1]);;
+ gap&gt; bdtorus:=SCDifference(torus,SC([torus.Facets[1]]));;
+ gap&gt; coll:=SCCollapseGreedy(bdtorus);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="collapsed version of T^2 (VT) \ unnamed complex 8"
+  Dim=1
+ 
+ /SimplicialComplex]
+ gap&gt; coll.Facets;
+ [ [ 2, 5 ], [ 2, 6 ], [ 2, 7 ], [ 5, 6 ], [ 5, 7 ] ]
+ gap&gt; sphere:=SCBdSimplex(4);;                              
+ gap&gt; bdsphere:=SCDifference(sphere,SC([sphere.Facets[1]]));;
+ gap&gt; coll:=SCCollapseGreedy(bdsphere);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FVector, FacetsEx, IsPure, Name, NumFaces[], 
+                    SkelExs[], Vertices.
+ 
+  Name="collapsed version of S^3_5 \ unnamed complex 12"
+  Dim=0
+  FVector=[ 1 ]
+  IsPure=true
+ 
+ /SimplicialComplex]
+ gap&gt; coll.Facets;                     
+ [ [ 2 ] ]
+ </pre></div>
+
+<p><a id="X797927C68701CB00" name="X797927C68701CB00"></a></p>
+
+<h5>12.1-2 SCCollapseLex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCCollapseLex</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Employs a greedy collapsing algorithm in lexicographical order to collapse the simplicial complex <var class="Arg">complex</var>. See also <code class="func">SCCollapseGreedy</code> (<a href="chap12.html#X7A4EBD017F4D9747"><span class="RefLink">12.1-1</span></a>) and <code class="func">SCCollapseRevLex</code> (<a href="chap12.html#X80651CA87E3F067A"><span class="RefLink">12.1-3</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; s:=SCSurface(1,true);;
+ gap&gt; s:=SCDifference(s,SC([SCFacets(s)[1]]));;
+ gap&gt; coll:=SCCollapseGreedy(s);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="collapsed version of T^2 \ unnamed complex 18"
+  Dim=1
+ 
+ /SimplicialComplex]
+ gap&gt; coll.Facets;
+ [ [ 1, 6 ], [ 1, 7 ], [ 2, 5 ], [ 2, 7 ], [ 5, 7 ], [ 6, 7 ] ]
+ gap&gt; sphere:=SCBdSimplex(4);;                              
+ gap&gt; ball:=SCDifference(sphere,SC([sphere.Facets[1]]));;
+ gap&gt; coll:=SCCollapseLex(ball);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FVector, FacetsEx, IsPure, Name, NumFaces[], 
+                    SkelExs[], Vertices.
+ 
+  Name="collapsed version of S^3_5 \ unnamed complex 22"
+  Dim=0
+  FVector=[ 1 ]
+  IsPure=true
+ 
+ /SimplicialComplex]
+ gap&gt; coll.Facets;                     
+ [ [ 5 ] ]
+ </pre></div>
+
+<p><a id="X80651CA87E3F067A" name="X80651CA87E3F067A"></a></p>
+
+<h5>12.1-3 SCCollapseRevLex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCCollapseRevLex</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Employs a greedy collapsing algorithm in reverse lexicographical order to collapse the simplicial complex <var class="Arg">complex</var>. See also <code class="func">SCCollapseGreedy</code> (<a href="chap12.html#X7A4EBD017F4D9747"><span class="RefLink">12.1-1</span></a>) and <code class="func">SCCollapseLex</code> (<a href="chap12.html#X797927C68701CB00"><span class="RefLink">12.1-2</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; s:=SCSurface(1,true);;
+ gap&gt; s:=SCDifference(s,SC([SCFacets(s)[1]]));;
+ gap&gt; coll:=SCCollapseGreedy(s);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="collapsed version of T^2 \ unnamed complex 28"
+  Dim=1
+ 
+ /SimplicialComplex]
+ gap&gt; coll.Facets;
+ [ [ 1, 3 ], [ 1, 7 ], [ 3, 4 ], [ 3, 5 ], [ 4, 7 ], [ 5, 7 ] ]
+ gap&gt; sphere:=SCBdSimplex(4);;                              
+ gap&gt; ball:=SCDifference(sphere,SC([sphere.Facets[1]]));;
+ gap&gt; coll:=SCCollapseRevLex(ball);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FVector, FacetsEx, IsPure, Name, NumFaces[], 
+                    SkelExs[], Vertices.
+ 
+  Name="collapsed version of S^3_5 \ unnamed complex 32"
+  Dim=0
+  FVector=[ 1 ]
+  IsPure=true
+ 
+ /SimplicialComplex]
+ gap&gt; coll.Facets;                     
+ [ [ 1 ] ]
+ </pre></div>
+
+<p><a id="X80DB575E7FABC370" name="X80DB575E7FABC370"></a></p>
+
+<h5>12.1-4 SCHasseDiagram</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCHasseDiagram</code>( <var class="Arg">c</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: two lists of lists upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>Computes the Hasse diagram of <code class="code">SCSimplicialComplex</code> object <var class="Arg">c</var>. The Hasse diagram is returned as two sets of lists. The first set of lists contains the upward part of the Hasse diagram, the second set of lists contains the downward part of the Hasse diagram.</p>
+
+<p>The <span class="SimpleMath">i</span>-th list of each set of lists represents the incidences between the <span class="SimpleMath">(i-1)</span>-faces and the <span class="SimpleMath">i</span>-faces. The faces are given by their indices of the face lattice.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; HD:=SCHasseDiagram(c);
+ [ [ [ [ 1, 2, 3 ], [ 1, 4, 5 ], [ 2, 4, 6 ], [ 3, 5, 6 ] ], 
+       [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ], [ 3, 4 ] ] ], 
+   [ [ [ 2, 1 ], [ 3, 1 ], [ 4, 1 ], [ 3, 2 ], [ 4, 2 ], [ 4, 3 ] ], 
+       [ [ 4, 2, 1 ], [ 5, 3, 1 ], [ 6, 3, 2 ], [ 6, 5, 4 ] ] ] ]
+ </pre></div>
+
+<p><a id="X7FC55A3082BC56FD" name="X7FC55A3082BC56FD"></a></p>
+
+<h5>12.1-5 SCMorseEngstroem</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCMorseEngstroem</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: two lists of small integer lists upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>Builds a discrete Morse function following the Engstroem method by reducing the input complex to smaller complexes defined by minimal link and deletion operations. See <a href="chapBib.html#biBEngstroem09DiscMorseFuncFourierTrans">[Eng09]</a> for details.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; f:=SCMorseEngstroem(c);
+ [ [ [ 2 ], [ 2, 3 ], [ 2, 4 ], [ 2 .. 4 ], [  ], [ 3 ], [ 4 ], [ 3, 4 ], 
+       [ 1, 3 ], [ 1, 3, 4 ], [ 1 ], [ 1, 4 ], [ 1, 2, 4 ], [ 1, 2 ], 
+       [ 1 .. 3 ] ], [ [ 2 ], [ 1 .. 3 ] ] ]
+ </pre></div>
+
+<p><a id="X7E9FA762862B2AA2" name="X7E9FA762862B2AA2"></a></p>
+
+<h5>12.1-6 SCMorseRandom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCMorseRandom</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: two lists of small integer lists upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>Builds a discrete Morse function following Lutz and Benedetti's random discrete Morse theory approach: Faces are paired with free co-dimension one faces until now free faces remain. Then a critical face is removed at random. See <a href="chapBib.html#biBBenedetti13RandomDMT">[BL14a]</a> for details.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; f:=SCMorseRandom(c);;
+ gap&gt; Size(f[2]);
+ 2
+ </pre></div>
+
+<p><a id="X8164E5207F7389EF" name="X8164E5207F7389EF"></a></p>
+
+<h5>12.1-7 SCMorseRandomLex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCMorseRandomLex</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: two lists of small integer lists upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>Builds a discrete Morse function following Adiprasito, Benedetti and Lutz' lexicographic random discrete Morse theory approach. See <a href="chapBib.html#biBBenedetti13RandomDMT">[BL14a]</a>, <a href="chapBib.html#biBAdiprasito14RDMTII">[BL14b]</a> for details.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c := SCSurface(3,true);;
+ gap&gt; f:=SCMorseRandomLex(c);;
+ gap&gt; Size(f[2]);
+ 8
+ </pre></div>
+
+<p><a id="X7C1B8D1C8484754B" name="X7C1B8D1C8484754B"></a></p>
+
+<h5>12.1-8 SCMorseRandomRevLex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCMorseRandomRevLex</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: two lists of small integer lists upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>Builds a discrete Morse function following Adiprasito, Benedetti and Lutz' reverse lexicographic random discrete Morse theory approach. See <a href="chapBib.html#biBBenedetti13RandomDMT">[BL14a]</a>, <a href="chapBib.html#biBAdiprasito14RDMTII">[BL14b]</a> for details.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c := SCSurface(5,false);;
+ gap&gt; f:=SCMorseRandomRevLex(c);;
+ gap&gt; Size(f[2]);
+ 7
+ </pre></div>
+
+<p><a id="X802863327E29080D" name="X802863327E29080D"></a></p>
+
+<h5>12.1-9 SCMorseSpec</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCMorseSpec</code>( <var class="Arg">complex</var>, <var class="Arg">iter</var>[, <var class="Arg">morsefunc</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>Computes <var class="Arg">iter</var> versions of a discrete Morse function of <var class="Arg">complex</var> using a randomised method specified by <var class="Arg">morsefunc</var> (default choice is <code class="func">SCMorseRandom</code> (<a href="chap12.html#X7E9FA762862B2AA2"><span class="RefLink">12.1-6</span></a>), other randomised methods available are <code class="func">SCMorseRandomLex</code> (<a href="chap12.html#X8164E5207F7389EF"><span class="RefLink">12.1-7</span></a>) <code class="func">SCMorseRandomRevLex</code> (<a href="chap12.html#X7C1B8D1C8484754B"><span class="RefLink">12.1-8</span></a>), and <code class="func">SCMorseUST</code> (<a href="chap12.html#X7AEB02327B49060B"><span class="RefLink">12.1-10</span></a>)). The result is referred to by the Morse spectrum of <var class="Arg">complex</var> and is returned in form of a list containing all Morse vectors sorted by number of critical points together with the actual vector of critical points and how often they ocurred (see <a href="chapBib.html#biBBenedetti13RandomDMT">[BL14a]</a> for details).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCSeriesTorus(2);;
+ gap&gt; f:=SCMorseSpec(c,30);
+ [ [ 4, [ 1, 2, 1 ], 30 ] ]
+ </pre></div>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCSeriesHomologySphere(2,3,5);;
+ gap&gt; f:=SCMorseSpec(c,30,SCMorseRandom);
+ [ [ 6, [ 1, 2, 2, 1 ], 25 ], [ 8, [ 1, 3, 3, 1 ], 5 ] ]
+ gap&gt; f:=SCMorseSpec(c,30,SCMorseRandomLex);
+ [ [ 6, [ 1, 2, 2, 1 ], 30 ] ]
+ gap&gt; f:=SCMorseSpec(c,30,SCMorseRandomRevLex);
+ [ [ 6, [ 1, 2, 2, 1 ], 7 ], [ 8, [ 1, 3, 3, 1 ], 13 ], 
+   [ 10, [ 1, 4, 4, 1 ], 9 ], [ 10, [ 2, 4, 3, 1 ], 1 ] ]
+ gap&gt; f:=SCMorseSpec(c,30,SCMorseUST);
+ [ [ 6, [ 1, 2, 2, 1 ], 18 ], [ 8, [ 1, 3, 3, 1 ], 8 ], 
+   [ 10, [ 1, 4, 4, 1 ], 4 ] ]
+ </pre></div>
+
+<p><a id="X7AEB02327B49060B" name="X7AEB02327B49060B"></a></p>
+
+<h5>12.1-10 SCMorseUST</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCMorseUST</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a random Morse function of a simplicial complex and a list of critical faces.</p>
+
+<p>Builds a random Morse function by removing a uniformly sampled spanning tree from the dual 1-skeleton followed by a collapsing approach. <var class="Arg">complex</var> needs to be a closed weak pseudomanifold for this to work. For details of the algorithm, see <a href="chapBib.html#biBPaixao143SphereRec">[PS15]</a>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; f:=SCMorseUST(c);;
+ gap&gt; Size(f[2]);
+ 2
+ </pre></div>
+
+<p><a id="X84C07E9787EDF772" name="X84C07E9787EDF772"></a></p>
+
+<h5>12.1-11 SCSpanningTreeRandom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCSpanningTreeRandom</code>( <var class="Arg">HD</var>, <var class="Arg">top</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of edges upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>Computes a uniformly sampled spanning tree of the complex belonging to the Hasse diagram <var class="Arg">HD</var> using Wilson's algorithm (see <a href="chapBib.html#biBWilson96UST">[Wil96]</a>). If <var class="Arg">top = true</var> the output is a spanning tree of the dual graph of the underlying complex. If <var class="Arg">top = false</var> the output is a spanning tree of the primal graph (i.e., the <span class="SimpleMath">1</span>-skeleton.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCSurface(1,false);;
+ gap&gt; HD:=SCHasseDiagram(c);;
+ gap&gt; stTop:=SCSpanningTreeRandom(HD,true);
+ [ 15, 2, 6, 12, 7, 8, 1, 3, 11 ]
+ gap&gt; stBot:=SCSpanningTreeRandom(HD,false);
+ [ 9, 5, 3, 6, 11 ]
+ </pre></div>
+
+<p><a id="X78D66254858CE901" name="X78D66254858CE901"></a></p>
+
+<h5>12.1-12 SCHomology</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCHomology</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pairs of the form <code class="code">[ integer, list ]</code> upon success</p>
+
+<p>Computes the homology groups of a given simplicial complex <var class="Arg">complex</var> using <code class="func">SCMorseRandom</code> (<a href="chap12.html#X7E9FA762862B2AA2"><span class="RefLink">12.1-6</span></a>) to obtain a Morse function and <code class="code">SmithNormalFormIntegerMat</code>. Use <code class="func">SCHomologyEx</code> (<a href="chap12.html#X863AA5D481F78D84"><span class="RefLink">12.1-13</span></a>) to use alternative methods to compute discrete Morse functions (such as <code class="func">SCMorseEngstroem</code> (<a href="chap12.html#X7FC55A3082BC56FD"><span class="RefLink">12.1-5</span></a>), or <code class="func">SCMorseUST</code> (<a href="chap12.html#X7AEB02327B49060B"><span class="RefLink">12.1-10</span></a>)) or the Smith normal form.</p>
+
+<p>The output is a list of homology groups of the form <span class="SimpleMath">[H_0,....,H_d]</span>, where <span class="SimpleMath">d</span> is the dimension of <var class="Arg">complex</var>. The format of the homology groups <span class="SimpleMath">H_i</span> is given in terms of their maximal cyclic subgroups, i.e. a homology group <span class="SimpleMath">H_i≅ Z^f + Z / t_1 Z × dots × Z / t_n Z</span> is returned in form of a list <span class="SimpleMath">[ f, [t_1,...,t_n] ]</span>, where <span class="SimpleMath">f</span> is the (integer) free part of <span class="SimpleMath">H_i</span> and <span class="SimpleMath">t_i</span> denotes the torsion parts of <span class="SimpleMath">H_i</span> ordered in weakly increasing size.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCSeriesTorus(2);;
+ gap&gt; f:=SCHomology(c);
+ [ [ 0, [  ] ], [ 2, [  ] ], [ 1, [  ] ] ]
+ </pre></div>
+
+<p><a id="X863AA5D481F78D84" name="X863AA5D481F78D84"></a></p>
+
+<h5>12.1-13 SCHomologyEx</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCHomologyEx</code>( <var class="Arg">c</var>, <var class="Arg">morsechoice</var>, <var class="Arg">smithchoice</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pairs of the form <code class="code">[ integer, list ]</code> upon success, fail otherwise.</p>
+
+<p>Computes the homology groups of a given simplicial complex <var class="Arg">c</var> using the function <var class="Arg">morsechoice</var> for discrete Morse function computations and <var class="Arg">smithchoice</var> for Smith normal form computations.</p>
+
+<p>The output is a list of homology groups of the form <span class="SimpleMath">[H_0,....,H_d]</span>, where <span class="SimpleMath">d</span> is the dimension of <var class="Arg">complex</var>. The format of the homology groups <span class="SimpleMath">H_i</span> is given in terms of their maximal cyclic subgroups, i.e. a homology group <span class="SimpleMath">H_i≅ Z^f + Z / t_1 Z × dots × Z / t_n Z</span> is returned in form of a list <span class="SimpleMath">[ f, [t_1,...,t_n] ]</span>, where <span class="SimpleMath">f</span> is the (integer) free part of <span class="SimpleMath">H_i</span> and <span class="SimpleMath">t_i</span> denotes the torsion parts of <span class="SimpleMath">H_i</span> ordered in weakly increasing size.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCSeriesTorus(2);;
+ gap&gt; f:=SCHomology(c);
+ [ [ 0, [  ] ], [ 2, [  ] ], [ 1, [  ] ] ]
+ </pre></div>
+
+
+<div class="example"><pre>
+ gap&gt; c := SCSeriesHomologySphere(2,3,5);;
+ gap&gt; SCHomologyEx(c,SCMorseRandom,SmithNormalFormIntegerMat); time;
+ [ [ 0, [  ] ], [ 0, [  ] ], [ 0, [  ] ], [ 1, [  ] ] ]
+ 28
+ gap&gt; c := SCSeriesHomologySphere(2,3,5);;
+ gap&gt; SCHomologyEx(c,SCMorseRandomLex,SmithNormalFormIntegerMat); time;
+ [ [ 0, [  ] ], [ 0, [  ] ], [ 0, [  ] ], [ 1, [  ] ] ]
+ 29
+ gap&gt; c := SCSeriesHomologySphere(2,3,5);;
+ gap&gt; SCHomologyEx(c,SCMorseRandomRevLex,SmithNormalFormIntegerMat); time;
+ [ [ 0, [  ] ], [ 0, [  ] ], [ 0, [  ] ], [ 1, [  ] ] ]
+ 29
+ gap&gt; c := SCSeriesHomologySphere(2,3,5);;
+ gap&gt; SCHomologyEx(c,SCMorseEngstroem,SmithNormalFormIntegerMat); time;
+ [ [ 0, [  ] ], [ 0, [  ] ], [ 0, [  ] ], [ 1, [  ] ] ]
+ 65
+ gap&gt; c := SCSeriesHomologySphere(2,3,5);;
+ gap&gt; SCHomologyEx(c,SCMorseUST,SmithNormalFormIntegerMat); time;
+ [ [ 0, [  ] ], [ 0, [  ] ], [ 0, [  ] ], [ 1, [  ] ] ]
+ 72
+ </pre></div>
+
+<p><a id="X8067B00B7C959E2D" name="X8067B00B7C959E2D"></a></p>
+
+<h5>12.1-14 SCIsSimplyConnected</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsSimplyConnected</code>( <var class="Arg">c</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a boolean value upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>Computes if the <code class="code">SCSimplicialComplex</code> object <var class="Arg">c</var> is simply connected. The algorithm is a heuristic method and is described in <a href="chapBib.html#biBPaixao143SphereRec">[PS15]</a>. Internally calls <code class="func">SCIsSimplyConnectedEx</code> (<a href="chap12.html#X7A291CE27AB5398A"><span class="RefLink">12.1-15</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; rp2:=SCSurface(1,false);;
+ gap&gt; SCIsSimplyConnected(rp2);
+ false
+ gap&gt; c:=SCBdCyclicPolytope(8,18);;
+ gap&gt; SCIsSimplyConnected(c);
+ true
+ </pre></div>
+
+<p><a id="X7A291CE27AB5398A" name="X7A291CE27AB5398A"></a></p>
+
+<h5>12.1-15 SCIsSimplyConnectedEx</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsSimplyConnectedEx</code>( <var class="Arg">c</var>[, <var class="Arg">top</var>, <var class="Arg">tries</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a boolean value upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>Computes if the <code class="code">SCSimplicialComplex</code> object <var class="Arg">c</var> is simply connected. The optional boolean argument <var class="Arg">top</var> determines whether a spanning graph in the dual or the primal graph of <var class="Arg">c</var> will be used for a collapsing sequence. The optional positive integer argument <var class="Arg">tries</var> determines the number of times the algorithm will try to find a collapsing sequence. The algorithm is a heuristic method and is described in <a href="chapBib.html#biBPaixao143SphereRec">[PS15]</a>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; rp2:=SCSurface(1,false);;
+ gap&gt; SCIsSimplyConnectedEx(rp2);
+ false
+ gap&gt; c:=SCBdCyclicPolytope(8,18);;
+ gap&gt; SCIsSimplyConnectedEx(c);
+ true
+ </pre></div>
+
+<p><a id="X79B9F1807D0D9D52" name="X79B9F1807D0D9D52"></a></p>
+
+<h5>12.1-16 SCIsSphere</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsSphere</code>( <var class="Arg">c</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a boolean value upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>Determines whether the <code class="code">SCSimplicialComplex</code> object <var class="Arg">c</var> is a topological sphere. In dimension <span class="SimpleMath">≠ 4</span> the algorithm determines whether <var class="Arg">c</var> is PL-homeomorphic to the standard sphere. In dimension <span class="SimpleMath">4</span> the PL type is not specified. The algorithm uses a result due to <a href="chapBib.html#biBKirby77PLStructures">[KS77]</a> stating that, in dimension <span class="SimpleMath">≠ 4</span>, any simply connected homology sphere with PL structure is a standard PL sphere. The function calls <code class="func">SCIsSimplyConnected</code> (<a href="chap12.html#X8067B00B7C959E2D"><span class="RefLink">12.1-14</span></a>) which uses a heuristic method described in <a href="chapBib.html#biBPaixao143SphereRec">[PS15]</a>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdCyclicPolytope(4,20);;
+ gap&gt; SCIsSphere(c);
+ true
+ gap&gt; c:=SCSurface(1,true);;
+ gap&gt; SCIsSphere(c);
+ false
+ </pre></div>
+
+<p><a id="X831FFF748201B589" name="X831FFF748201B589"></a></p>
+
+<h5>12.1-17 SCIsManifold</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsManifold</code>( <var class="Arg">c</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a boolean value upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>The algorithm is a heuristic method and is described in <a href="chapBib.html#biBPaixao143SphereRec">[PS15]</a> in more detail. Internally calls <code class="func">SCIsManifoldEx</code> (<a href="chap12.html#X86F1B97282A7E01D"><span class="RefLink">12.1-18</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdCyclicPolytope(4,20);;
+ gap&gt; SCIsManifold(c);
+ true
+ </pre></div>
+
+<p><a id="X86F1B97282A7E01D" name="X86F1B97282A7E01D"></a></p>
+
+<h5>12.1-18 SCIsManifoldEx</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsManifoldEx</code>( <var class="Arg">c</var>[, <var class="Arg">aut</var>, <var class="Arg">quasi</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a boolean value upon success, <code class="code">fail</code> otherweise.</p>
+
+<p>If the boolean argument <var class="Arg">aut</var> is <code class="code">true</code> the automorphism group is computed and only one link per orbit is checked to be a sphere. If <var class="Arg">aut</var> is not provided symmetry information is only used if the automorphism group is already known. If the boolean argument <var class="Arg">quasi</var> is <code class="code">false</code> the algorithm returns whether or not <var class="Arg">c</var> is a combinatorial manifold. If <var class="Arg">quasi</var> is <code class="code">true</code> the <span class="SimpleMath">4</span>-dimensional links are not verified to be standard PL <span class="SimpleMath">4</span>-spheres and <var class="Arg">c</var> is a combinatorial manifold modulo the smooth Poincare conjecture. By default <var class="Arg">quasi</var> is set to <code class="code">false</code>. The algorithm is a heuristic method and is described in <a href="chapBib.html#biBPaixao143SphereRec">[PS15]</a> in more detail.</p>
+
+<p>See <code class="func">SCBistellarIsManifold</code> (<a href="chap9.html#X7E81340E8469C8EB"><span class="RefLink">9.2-6</span></a>) for an alternative method for manifold verification.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdCyclicPolytope(4,20);;
+ gap&gt; SCIsManifold(c);
+ true
+ </pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap11.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap13.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

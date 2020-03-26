@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (kbmag) - Chapter 2: The Knuth-Bendix program on semigroups, monoids and groups</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X86F080117DE22242" name="X86F080117DE22242"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X86F080117DE22242">2 <span class="Heading">The Knuth-Bendix program on semigroups, monoids and groups</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7F474DEE787325CD">2.1 <span class="Heading">Creating a rewriting system</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8722C57284F51940">2.1-1 KBMAGRewritingSystem</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X85BFCE4B79A782D0">2.2 <span class="Heading">Elementary functions on rewriting systems</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X879AEB2885DB4988">2.2-1 IsKBMAGRewritingSystemRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8006790B86328CE8">2.2-2 IsConfluent</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X832A66088276451E">2.2-3 SemigroupOfRewritingSytem</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8643F8C480036EC6">2.2-4 ExternalWordToInternalWordOfRewritingSystem</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7CF67C5E7F31F19A">2.2-5 Alphabet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X833EAA8C86356F42">2.2-6 Rules</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7AB017987DAE15E7">2.2-7 ResetRewritingSystem</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7BDD01C183CD3234">2.3 <span class="Heading">Setting the ordering</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7E89CFE87973DD14">2.3-1 SetOrderingOfKBMAGRewritingSystem</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7BB411528630D4E9">2.4 <span class="Heading">Control parameters</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X80C0185D8035B7F8">2.4-1 InfoRWS</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C1BF15280B3CE5B">2.4-2 OptionsRecordOfKBMAGRewritingSystem</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X830D97B5805251E0">2.5 <span class="Heading">The Knuth-Bendix program</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8412C40B7B2DC8E0">2.5-1 KnuthBendix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7ED0190D7BDA74D7">2.5-2 ReductionAutomaton</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X8786DA3679BA75C8">2.6 <span class="Heading">The automatic groups program</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X828FA0177E4C5733">2.6-1 AutomaticStructure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82CAA53A7926DA74">2.6-2 WordAcceptor</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X807029A8841FCAF3">2.7 <span class="Heading">Word reduction</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84A3462B826AD47C">2.7-1 IsReducedWord</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7A5773A77C6BAC3F">2.7-2 ReducedWord</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7B8F6EBC87AF42C6">2.8 <span class="Heading">Counting and enumerating irreducible words</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X858ADA3B7A684421">2.8-1 Size</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84F59A2687C62763">2.8-2 Order</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7CD646CD7AA2B718">2.8-3 EnumerateReducedWords</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7981EA28835C7A46">2.8-4 GrowthFunction</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7E98CC0078047A36">2.9 <span class="Heading">Rewriting System Examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8388E29680F31ABD">2.9-1 <span class="Heading">Example 1</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7A18778D836BC971">2.9-2 <span class="Heading">Example 2</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7D680484821C7835">2.9-3 <span class="Heading">Example 3</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X848E4DDE845A6EE9">2.9-4 <span class="Heading">Example 4</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X83FE3ED7852DDFAD">2.9-5 <span class="Heading">Example 5</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">The Knuth-Bendix program on semigroups, monoids and groups</span></h3>
+
+<p><a id="X7F474DEE787325CD" name="X7F474DEE787325CD"></a></p>
+
+<h4>2.1 <span class="Heading">Creating a rewriting system</span></h4>
+
+<p>First the user should be aware of a technicality. The words in a rewriting system created in <strong class="pkg">GAP</strong> for use by <strong class="pkg">KBMag</strong> are defined over an alphabet that consists of the generators of a free monoid, called the <em>word-monoid</em> of the system. Suppose, as before, that the rewriting system is defined from the semigroup, monoid or group <span class="SimpleMath">\(G\)</span> which is a quotient of the free structure <span class="SimpleMath">\(F\)</span>. Then the generators of this alphabet will be in one-one correspondence with the generators (or, when <span class="SimpleMath">\(G\)</span> is a group, the generators and their inverses) of <span class="SimpleMath">\(F\)</span>, but will not be identical to them. This feature was necessary for technical reasons. Most of the user-level functions take and return words in <span class="SimpleMath">\(F\)</span> rather than the alphabet, but they do this by converting from one to the other and back.</p>
+
+<p>User-level functions have also been provided to carry out this conversion explicitly if required.</p>
+
+<p>The user should also be aware of a peculiarity in the way that rewriting sytems are displayed, which is really a hangover from the <strong class="pkg">GAP</strong>3 interface. They are displayed nicely as a record, which gives a useful description of the system, but it does not correspond at all to the way that they are actually stored internally!</p>
+
+<p><a id="X8722C57284F51940" name="X8722C57284F51940"></a></p>
+
+<h5>2.1-1 KBMAGRewritingSystem</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KBMAGRewritingSystem</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>This operation constructs and returns a rewriting system <span class="SimpleMath">\(R\)</span> from a finitely presented semigroup, monoid or group <span class="SimpleMath">\(G\)</span>. When <span class="SimpleMath">\(G\)</span> is a group, the alphabet members of <span class="SimpleMath">\(R\)</span> correspond to the generators of <span class="SimpleMath">\(F\)</span> together with inverses for those generators which are not obviously involutory in <span class="SimpleMath">\(G\)</span>.</p>
+
+<p><a id="X85BFCE4B79A782D0" name="X85BFCE4B79A782D0"></a></p>
+
+<h4>2.2 <span class="Heading">Elementary functions on rewriting systems</span></h4>
+
+<p><a id="X879AEB2885DB4988" name="X879AEB2885DB4988"></a></p>
+
+<h5>2.2-1 IsKBMAGRewritingSystemRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsKBMAGRewritingSystemRep</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;representation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRewritingSystem</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p><code class="code">IsKBMAGRewritingSystemRep</code> returns <code class="code">true</code> if <span class="SimpleMath">\({\sf rws}\)</span> is a rewriting system created by <code class="func">KBMAGRewritingSystem</code> (<a href="chap2_mj.html#X8722C57284F51940"><span class="RefLink">2.1-1</span></a>). The function <code class="func">IsRewritingSystem</code> (<a href="../../../doc/ref/chap38_mj.html#X842C0ED87986F7AA"><span class="RefLink">Reference: IsRewritingSystem</span></a>) will also return <code class="code">true</code> on such a system. (The function <code class="code">IsKnuthBendixRewritingSystem</code> has been considered for inclusion, but is not currently declared.)</p>
+
+<p><a id="X8006790B86328CE8" name="X8006790B86328CE8"></a></p>
+
+<h5>2.2-2 IsConfluent</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsConfluent</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>This library property returns <code class="code">true</code> if <span class="SimpleMath">\({\sf rws}\)</span> is a rewriting system that is known to be confluent.</p>
+
+<p><a id="X832A66088276451E" name="X832A66088276451E"></a></p>
+
+<h5>2.2-3 SemigroupOfRewritingSytem</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemigroupOfRewritingSytem</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FreeStructureOfSystem</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WordMonoidOfRewritingSystem</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The first two library functions return, respectively, the semigroup, monoid or group <span class="SimpleMath">\(G\)</span>, and the free structure <span class="SimpleMath">\(F\)</span>. The third returns the word-monoid of the rewriting system, as defined in section <a href="chap2_mj.html#X7F474DEE787325CD"><span class="RefLink">2.1</span></a>.</p>
+
+<p><a id="X8643F8C480036EC6" name="X8643F8C480036EC6"></a></p>
+
+<h5>2.2-4 ExternalWordToInternalWordOfRewritingSystem</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExternalWordToInternalWordOfRewritingSystem</code>( <var class="Arg">rws</var>, <var class="Arg">w</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InternalWordToExternalWordOfRewritingSystem</code>( <var class="Arg">rws</var>, <var class="Arg">w</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>These are the functions for converting between <em>external words</em>, which are those defined over the free structure <span class="SimpleMath">\(F\)</span> of <span class="SimpleMath">\({\sf rws}\)</span>, and the <em>internal words</em>, which are defined over the word-monoid of <span class="SimpleMath">\({\sf rws}\)</span>.</p>
+
+<p><a id="X7CF67C5E7F31F19A" name="X7CF67C5E7F31F19A"></a></p>
+
+<h5>2.2-5 Alphabet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Alphabet</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This is an ordered list of the generators of the word-monoid of <span class="SimpleMath">\({\sf rws}\)</span>. It will not necessarily be in the normal order of these generators, and it can be re-ordered by the function <code class="func">ReorderAlphabetOfKBMAGRewritingSystem</code> (<a href="chap2_mj.html#X7E89CFE87973DD14"><span class="RefLink">2.3-1</span></a>).</p>
+
+<p><a id="X833EAA8C86356F42" name="X833EAA8C86356F42"></a></p>
+
+<h5>2.2-6 Rules</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Rules</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>This library function returns a list of the <em>reduction rules</em> of <span class="SimpleMath">\({\sf rws}\)</span>. Each rule is a two-element list containing the left and right hand sides of the rule, which are words in the alphabet of <span class="SimpleMath">\({\sf rws}\)</span>.</p>
+
+<p><a id="X7AB017987DAE15E7" name="X7AB017987DAE15E7"></a></p>
+
+<h5>2.2-7 ResetRewritingSystem</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResetRewritingSystem</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function resets the rewriting system <span class="SimpleMath">\({\sf rws}\)</span> back to its form as it was before the application of <code class="func">KnuthBendix</code> (<a href="chap2_mj.html#X8412C40B7B2DC8E0"><span class="RefLink">2.5-1</span></a>) or <code class="func">AutomaticStructure</code> (<a href="chap2_mj.html#X828FA0177E4C5733"><span class="RefLink">2.6-1</span></a>). However, the current ordering and values of control parameters will not be changed. The normal form and reduction algorithms will be unavailable after this call.</p>
+
+<p><a id="X7BDD01C183CD3234" name="X7BDD01C183CD3234"></a></p>
+
+<h4>2.3 <span class="Heading">Setting the ordering</span></h4>
+
+<p><a id="X7E89CFE87973DD14" name="X7E89CFE87973DD14"></a></p>
+
+<h5>2.3-1 SetOrderingOfKBMAGRewritingSystem</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetOrderingOfKBMAGRewritingSystem</code>( <var class="Arg">rws</var>, <var class="Arg">ordering</var>[, <var class="Arg">list</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReorderAlphabetOfKBMAGRewritingSystem</code>( <var class="Arg">rws</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrderingOfKBMAGRewritingSystem</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrderingOfRewritingSystem</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p><code class="code">SetOrderingOfKBMAGRewritingSystem</code> changes the ordering on the words of the rewriting system <span class="SimpleMath">\({\sf rws}\)</span> to <strong class="button">ordering</strong>. <span class="SimpleMath">\({\sf rws}\)</span> is reset when the ordering is changed, so any previously calculated results will be destroyed. <strong class="button">ordering</strong> must be one of the strings <strong class="button">shortlex</strong>, <strong class="button">recursive</strong>, <strong class="button">wtlex</strong> and <strong class="button">wreathprod</strong>. The default is <strong class="button">shortlex</strong>, and this is the ordering of rewriting systems returned by <code class="func">KBMAGRewritingSystem</code> (<a href="chap2_mj.html#X8722C57284F51940"><span class="RefLink">2.1-1</span></a>). The orderings <strong class="button">wtlex</strong> and <strong class="button">wreathprod</strong> require the third parameter, <code class="code">list</code>, which must be a list of positive integers in one-one correspondence with the alphabet of <span class="SimpleMath">\({\sf rws}\)</span> in its current order. They have the effect of attaching weights or levels to the alphabet members, in the cases <strong class="button">wtlex</strong> and <strong class="button">wreathprod</strong>, respectively.</p>
+
+<p>Each of these orderings depends on the order of the alphabet. The current ordering of generators is displayed under the <code class="code">generatorOrder</code> field when <span class="SimpleMath">\({\sf rws}\)</span> is viewed. This ordering can be changed by the function <code class="func">ReorderAlphabetOfKBMAGRewritingSystem</code> . The second parameter <span class="SimpleMath">\(p\)</span> to this function should be a permutation that moves at most <span class="SimpleMath">\(ng\)</span> points, where <span class="SimpleMath">\(ng\)</span> is the number of generators. This permutation is applied to the current list of generators.</p>
+
+<p><code class="func">OrderingOfKBMAGRewritingSystem</code> merely prints out a description of the current ordering.</p>
+
+<p>In the <strong class="button">shortlex</strong> ordering, shorter words come before longer ones, and, for words of equal length, the lexicographically smaller word comes first, using the ordering of the alphabet. The <strong class="button">wtlex</strong> ordering is similar, but instead of using the length of the word as the first criterion, the total weight of the word is used; this is defined as the sum of the weights of the generators in the word. So <strong class="button">shortlex</strong> is the special case of <strong class="button">wtlex</strong> in which all generators have the same nonzero weight.</p>
+
+<p>The <strong class="button">recursive</strong> ordering is the special case of <strong class="button">wreathprod</strong> in which the levels of the <span class="SimpleMath">\(ng\)</span> generators are <span class="SimpleMath">\(1,2,\ldots,ng\)</span>, in the order of the alphabet. We shall not attempt to give a complete definition of these orderings here, but refer the reader instead to pages 46--50 of <a href="chapBib_mj.html#biBSims94">[Sim94]</a>. The <strong class="button">recursive</strong> ordering is the one appropriate for a power-conjugate presentation of a polycyclic group, but where the generators are ordered in the reverse order from the usual convention for polycyclic groups. The confluent presentation will then be the same as the power-conjugate presentation. For example, for the Heisenberg group <span class="SimpleMath">\(\langle x,y,z ~|~ [x,z]=[y,z]=1, [y,x]=z \rangle\)</span>, a good ordering is <strong class="button">recursive</strong> with the order of generators <span class="SimpleMath">\([z^{-1},z,y^{-1},y,x^{-1},x]\)</span>. This example is included as Example 3 in <a href="chap2_mj.html#X7D680484821C7835"><span class="RefLink">2.9-3</span></a> below.</p>
+
+<p>Finally, a method is included for the attribute <code class="func">OrderingOfRewritingSystem</code> which returns the appropriate <strong class="pkg">GAP</strong> ordering on the elements of the word-monoid of <span class="SimpleMath">\({\sf rws}\)</span>. The standard <strong class="pkg">GAP</strong> ordering functions, such as <code class="func">IsLessThanUnder</code> (<a href="../../../doc/ref/chap34_mj.html#X87F51D737C695D41"><span class="RefLink">Reference: IsLessThanUnder</span></a>) can then be used.</p>
+
+<p><a id="X7BB411528630D4E9" name="X7BB411528630D4E9"></a></p>
+
+<h4>2.4 <span class="Heading">Control parameters</span></h4>
+
+<p><a id="X80C0185D8035B7F8" name="X80C0185D8035B7F8"></a></p>
+
+<h5>2.4-1 InfoRWS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoRWS</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p>This `Info' variable can be set to <span class="SimpleMath">\(0,1,2\)</span> or <span class="SimpleMath">\(3\)</span> to control the level of diagnostic output.</p>
+
+<p>The Knuth-Bendix procedure is unusually sensitive to the settings of a number of parameters that control its operation. In some examples, a small change in one of these parameters can mean the difference between obtaining a confluent rewriting system fairly quickly on the one hand, and the procedure running on until it uses all available memory on the other hand.</p>
+
+<p>Unfortunately, it is almost impossible to give even very general guidelines on these settings, although the <strong class="button">wreathprod</strong> orderings appear to be more sensitive than the <strong class="button">shortlex</strong> and <strong class="button">wtlex</strong> orderings. The user can only acquire a feeling for the influence of these parameters by experimentation on a large number of examples.</p>
+
+<p>The control parameters are defined by the user by setting values of certain fields of the <em>options record</em> of a rewriting system.</p>
+
+<p><a id="X7C1BF15280B3CE5B" name="X7C1BF15280B3CE5B"></a></p>
+
+<h5>2.4-2 OptionsRecordOfKBMAGRewritingSystem</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OptionsRecordOfKBMAGRewritingSystem</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the options record <code class="code">OR</code> of the rewriting system <span class="SimpleMath">\({\sf rws}\)</span>. The fields of <code class="code">OR</code> listed below can be set by the user. Be careful to spell them correctly, because otherwise they will have no effect!</p>
+
+
+<ul>
+<li><p><code class="code">OR.maxeqns</code><br /> A positive integer specifying the maximum number of rewriting rules allowed in <span class="SimpleMath">\({\sf rws}\)</span>. The default is <span class="SimpleMath">\(32767\)</span>. If this number is exceeded, then <code class="func">KnuthBendix</code> (<a href="chap2_mj.html#X8412C40B7B2DC8E0"><span class="RefLink">2.5-1</span></a>) or <code class="func">AutomaticStructure</code> (<a href="chap2_mj.html#X828FA0177E4C5733"><span class="RefLink">2.6-1</span></a>) will abort.</p>
+
+</li>
+<li><p><code class="code">OR.tidyint</code><br /> A positive integer, <span class="SimpleMath">\(100\)</span> by default. During the Knuth-Bendix procedure, the search for overlaps is interrupted periodically to tidy up the existing system by removing and/or simplifying rewriting rules that have become redundant. This tidying is done after finding <code class="code">OR.tidyint</code> rules since the last tidying.</p>
+
+</li>
+<li><p><code class="code">OR.confnum</code><br /> A positive integer, <span class="SimpleMath">\(500\)</span> by default. If <code class="code">OR.confnum</code> overlaps are processed in the Knuth-Bendix procedure but no new rules are found, then a fast test for confluence is carried out. This saves a lot of time if the system really is confluent, but usually wastes time if it is not.</p>
+
+</li>
+<li><p><code class="code">OR.maxstoredlen</code><br /> This is a list of two positive integers, <code class="code">maxlhs</code> and <code class="code">maxrhs</code>; the default is that both are infinite. Only those rewriting rules for which the left hand side has length at most <code class="code">maxlhs</code> and the right hand side has length at most <code class="code">maxrhs</code> are stored; longer rules are discarded. In some examples it is essential to impose such limits in order to obtain a confluent rewriting system. Of course, if the Knuth-Bendix procedure halts with such limits imposed, then the resulting system need not be confluent. However, the confluence can then be tested be re-running <code class="func">KnuthBendix</code> (<a href="chap2_mj.html#X8412C40B7B2DC8E0"><span class="RefLink">2.5-1</span></a>) with the limits removed. (To remove the limits, unbind the field.)</p>
+
+</li>
+<li><p><code class="code">OR.maxoverlaplen</code><br /> This is a positive integer, which is infinite by default (when not set). Only those overlaps of total length <code class="code">OR.maxoverlaplen</code> are processed. Similar remarks apply to those for <code class="code">OR.maxstoredlen</code>.</p>
+
+</li>
+<li><p><code class="code">OR.sorteqns</code><br /> This should be <code class="code">true</code> or <code class="code">false</code>, and <code class="code">false</code> is the default. When it is <code class="code">true</code>, the rewriting rules are output in order of increasing length of left hand side. (The default is that they are output in the order that they were found.)</p>
+
+</li>
+<li><p><code class="code">OR.maxoplen</code><br /> This is an integer, which is infinite by default (when not set). When it is set, the rewriting rules are output in order of increasing length of left hand side (as if <code class="code">OR.sorteqns</code> were <code class="code">true</code>), and only those rules having left hand sides of length up to <code class="code">OR.maxoplen</code> are output at all. Again, similar remarks apply to those for <code class="code">OR.maxstoredlen</code>.</p>
+
+</li>
+<li><p><code class="code">OR.maxreducelen</code><br /> A positive integer, <span class="SimpleMath">\(32767\)</span> by default. This is the maximum length that a word is allowed to have during the reduction process. It is only likely to be exceeded when using the <strong class="button">wreathprod</strong> or <strong class="button">recursive</strong> ordering.</p>
+
+</li>
+<li><p><code class="code">OR.maxstates</code>, <code class="code">OR.maxwdiffs</code><br /> These are positive integers, controlling the maximum number of states of the word-reduction automaton used by <code class="func">KnuthBendix</code> (<a href="chap2_mj.html#X8412C40B7B2DC8E0"><span class="RefLink">2.5-1</span></a>), and the maximum number of word-differences allowed when running <code class="func">AutomaticStructure</code> (<a href="chap2_mj.html#X828FA0177E4C5733"><span class="RefLink">2.6-1</span></a>), respectively. These numbers are normally increased automatically when required, so it unusual to want to set these flags. They can be set when either it is desired to limit these parameters (and prevent them being increased automatically), or (as occasionally happens), the number of word-differences increases too rapidly for the program to cope - when this happens, the run is usually doomed to failure anyway.</p>
+
+</li>
+</ul>
+<p><a id="X830D97B5805251E0" name="X830D97B5805251E0"></a></p>
+
+<h4>2.5 <span class="Heading">The Knuth-Bendix program</span></h4>
+
+<p><a id="X8412C40B7B2DC8E0" name="X8412C40B7B2DC8E0"></a></p>
+
+<h5>2.5-1 KnuthBendix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KnuthBendix</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeConfluent</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>These two functions do the same thing, namely to run the external Knuth-Bendix program on the rewriting system <span class="SimpleMath">\({\sf rws}\)</span>. <code class="func">KnuthBendix</code> returns <code class="code">true</code> if it finds a confluent rewriting system and otherwise <code class="code">false</code>. In either case, if it halts normally, then it will update the list of the rewriting rules of <span class="SimpleMath">\({\sf rws}\)</span>, and also store a finite state automaton <code class="code">ReductionAutomaton(rws)</code> that can be used for word reduction, and the counting and enumeration of irreducible words.</p>
+
+<p>All control parameters (as defined in the preceding section) should be set before calling <code class="func">KnuthBendix</code>. <code class="func">KnuthBendix</code> will halt either when it finds a finite confluent system of rewriting rules, or when one of the control parameters (such as <code class="code">OR.maxeqns</code>) requires it to stop. The program can also be made to halt and output manually at any time by hitting the interrupt key (normally `ctrl-C') once. (Hitting it twice has unpredictable consequences, since <strong class="pkg">GAP</strong> may intercept the signal.)</p>
+
+<p>A method is installed to make the library operation <code class="code">MakeConfluent</code> run the <code class="code">KnuthBendix</code> operation.</p>
+
+<p>If <code class="func">KnuthBendix</code> halts without finding a confluent system, but still manages to output the current system and update <span class="SimpleMath">\({\sf rws}\)</span>, then it is possible to use the resulting rewriting system to reduce words, and count and enumerate the irreducible words; it cannot be guaranteed that the irreducible words are all in normal form, however. It is also possible to re-run <code class="func">KnuthBendix</code> on the current system, usually after altering some of the control parameters. In fact, in some more difficult examples, this seems to be the only means of finding a finite confluent system.</p>
+
+<p><a id="X7ED0190D7BDA74D7" name="X7ED0190D7BDA74D7"></a></p>
+
+<h5>2.5-2 ReductionAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReductionAutomaton</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the reduction automaton of <span class="SimpleMath">\({\sf rws}\)</span>. Only expert users will wish to see this explicitly. See the section on finite state automata below for general information on functions for manipulating automata.</p>
+
+<p><a id="X8786DA3679BA75C8" name="X8786DA3679BA75C8"></a></p>
+
+<h4>2.6 <span class="Heading">The automatic groups program</span></h4>
+
+<p><a id="X828FA0177E4C5733" name="X828FA0177E4C5733"></a></p>
+
+<h5>2.6-1 AutomaticStructure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutomaticStructure</code>( <var class="Arg">rws</var>[, <var class="Arg">large</var>, <var class="Arg">filestore</var>, <var class="Arg">diff1</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function runs the external automatic groups program on the rewriting system <span class="SimpleMath">\({\sf rws}\)</span>. It returns <code class="code">true</code> if successful and <code class="code">false</code> otherwise. If successful, it stores three finite state automata <code class="code">FirstWordDifferenceAutomaton(rws)</code>, <code class="code">SecondWordDifferenceAutomaton(rws)</code> and <code class="code">WordAcceptor(rws)</code>: see <code class="func">WordAcceptor</code> (<a href="chap2_mj.html#X82CAA53A7926DA74"><span class="RefLink">2.6-2</span></a>) below. The first two of these are used for word-reduction, and the third for counting and enumeration of irreducible words (i.e. words in normal form).</p>
+
+<p>The three optional parameters to <code class="func">AutomaticStructure</code> are all boolean, and <code class="code">false</code> by default. Setting <code class="code">large</code> to be <code class="code">true</code> results in some of the control parameters (such as <code class="code">maxeqns</code> and <code class="code">tidyint</code>) being set larger than they would be otherwise. This is necessary for examples that require a large amount of space. Setting <code class="code">filestore</code> to be <code class="code">true</code> results in more use being made of temporary files than would be otherwise. This makes the program run slower, but it may be necessary if you are short of core memory. Setting <code class="code">diff1</code> to be <code class="code">true</code> is a more technical option, which is explained more fully in the documentation for the stand-alone <strong class="pkg">KBMag</strong> package. It is not usually necessary or helpful, but it enables one or two examples to complete that would otherwise run out of space.</p>
+
+<p>The <strong class="button">ordering</strong> field of <span class="SimpleMath">\({\sf rws}\)</span> will usually be set to <strong class="button">shortlex</strong> for <code class="func">AutomaticStructure</code> to be applicable. However, it is now possible to use some procedures written by Sarah Rees that work when the ordering is <strong class="button">wtlex</strong> or <strong class="button">wreathprod</strong>. In the latter case, each generator must have the same level as its inverse.</p>
+
+<p>The only control parameters for <span class="SimpleMath">\({\sf rws}\)</span> that are likely to be relevant are <code class="code">maxeqns</code> and <code class="code">maxwdiffs</code>.</p>
+
+<p><a id="X82CAA53A7926DA74" name="X82CAA53A7926DA74"></a></p>
+
+<h5>2.6-2 WordAcceptor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WordAcceptor</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FirstWordDifferenceAutomaton</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SecondWordDifferenceAutomaton</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneralMultiplier</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>These functions return, respectively, the word acceptor, the first and second word-difference automata, and the general multiplier automaton of <span class="SimpleMath">\({\sf rws}\)</span>. They can only be called after a successful call of <code class="code">AutomaticStructure(rws)</code>. All except the word acceptor are <span class="SimpleMath">\(2\)</span>-variable automata that read pairs of words in the alphabet of <span class="SimpleMath">\({\sf rws}\)</span>. Note that the general multiplier has its states labeled, where the different labels represent the accepting states for the different letters in the alphabet of <span class="SimpleMath">\({\sf rws}\)</span>.</p>
+
+<p><a id="X807029A8841FCAF3" name="X807029A8841FCAF3"></a></p>
+
+<h4>2.7 <span class="Heading">Word reduction</span></h4>
+
+<p><a id="X84A3462B826AD47C" name="X84A3462B826AD47C"></a></p>
+
+<h5>2.7-1 IsReducedWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReducedWord</code>( <var class="Arg">rws</var>, <var class="Arg">w</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReducedForm</code>( <var class="Arg">rws</var>, <var class="Arg">w</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>These two functions do the same thing, namely to test whether the word <span class="SimpleMath">\(w\)</span> in the generators of the freestructure <code class="code">FreeStructure(rws)</code> of the rewriting system system <span class="SimpleMath">\({\sf rws}\)</span> is reduced or not, and return <code class="code">true</code> or <code class="code">false</code>.</p>
+
+<p><code class="func">IsReducedWord</code> can only be used after <code class="func">KnuthBendix</code> (<a href="chap2_mj.html#X8412C40B7B2DC8E0"><span class="RefLink">2.5-1</span></a>) or <code class="func">AutomaticStructure</code> (<a href="chap2_mj.html#X828FA0177E4C5733"><span class="RefLink">2.6-1</span></a>) has been run successfully on <span class="SimpleMath">\({\sf rws}\)</span>. In the former case, if <code class="code">KnuthBendix</code> halted without a confluent set of rules, then irreducible words are not necessarily in normal form (but reducible words are definitely not in normal form). If <code class="code">KnuthBendix</code> completes with a confluent rewriting system or <code class="code">AutomaticStructure</code> completes successfully, then it is guaranteed that all irreducible words are in normal form.</p>
+
+<p><a id="X7A5773A77C6BAC3F" name="X7A5773A77C6BAC3F"></a></p>
+
+<h5>2.7-2 ReducedWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedWord</code>( <var class="Arg">rws</var>, <var class="Arg">w</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedForm</code>( <var class="Arg">rws</var>, <var class="Arg">w</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Reduce the word <span class="SimpleMath">\(w\)</span> in the generators of the freestructure <code class="code">FreeStructure(rws)</code> of the rewriting system <span class="SimpleMath">\({\sf rws}\)</span> (or, equivalently, in the generators of the underlying group of <span class="SimpleMath">\({\sf rws}\)</span>), and return the result.</p>
+
+<p><code class="func">ReducedForm</code> can only be used after <code class="func">KnuthBendix</code> (<a href="chap2_mj.html#X8412C40B7B2DC8E0"><span class="RefLink">2.5-1</span></a>) or <code class="func">AutomaticStructure</code> (<a href="chap2_mj.html#X828FA0177E4C5733"><span class="RefLink">2.6-1</span></a>) has been run successfully on <span class="SimpleMath">\({\sf rws}\)</span>. In the former case, if <code class="code">KnuthBendix</code> halted without a confluent set of rules, then the irreducible word returned is not necessarily in normal form. If <code class="code">KnuthBendix</code> completes with a confluent rewriting system or <code class="code">AutomaticStructure</code> completes successfully, then it is guaranteed that all irreducible words are in normal form.</p>
+
+<p><a id="X7B8F6EBC87AF42C6" name="X7B8F6EBC87AF42C6"></a></p>
+
+<h4>2.8 <span class="Heading">Counting and enumerating irreducible words</span></h4>
+
+<p><a id="X858ADA3B7A684421" name="X858ADA3B7A684421"></a></p>
+
+<h5>2.8-1 Size</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Size</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns the number of irreducible words in the rewriting system <span class="SimpleMath">\({\sf rws}\)</span>.</p>
+
+<p><code class="func">Size</code> can only be used after <code class="func">KnuthBendix</code> (<a href="chap2_mj.html#X8412C40B7B2DC8E0"><span class="RefLink">2.5-1</span></a>) or <code class="func">AutomaticStructure</code> (<a href="chap2_mj.html#X828FA0177E4C5733"><span class="RefLink">2.6-1</span></a>) has been run successfully on <span class="SimpleMath">\({\sf rws}\)</span>. In the former case, if <code class="code">KnuthBendix</code> halted without a confluent set of rules, then the number of irreducible words may be greater than the number of words in normal form (which is equal to the order of the underlying group, monoid or semigroup <span class="SimpleMath">\(G\)</span> of <span class="SimpleMath">\({\sf rws}\)</span>). If <code class="code">KnuthBendix</code> completes with a confluent rewriting system or <code class="code">AutomaticStructure</code> completes successfully, then it is guaranteed that <code class="func">Size</code> will return the correct order of <span class="SimpleMath">\(G\)</span>.</p>
+
+<p><a id="X84F59A2687C62763" name="X84F59A2687C62763"></a></p>
+
+<h5>2.8-2 Order</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Order</code>( <var class="Arg">rws</var>, <var class="Arg">w</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The order of the element <span class="SimpleMath">\(w\)</span> of the free structure <code class="code">FreeStructure(rws)</code> of <span class="SimpleMath">\({\sf rws}\)</span> as an element of the group or monoid from which <span class="SimpleMath">\({\sf rws}\)</span> was defined.</p>
+
+<p><code class="func">Order</code> can only be used after <code class="func">KnuthBendix</code> (<a href="chap2_mj.html#X8412C40B7B2DC8E0"><span class="RefLink">2.5-1</span></a>) or <code class="func">AutomaticStructure</code> (<a href="chap2_mj.html#X828FA0177E4C5733"><span class="RefLink">2.6-1</span></a>) has been run successfully on <span class="SimpleMath">\({\sf rws}\)</span>. It is not guaranteed to terminate in the case of infinite order, but it usually seems to do so in practice!</p>
+
+<p><a id="X7CD646CD7AA2B718" name="X7CD646CD7AA2B718"></a></p>
+
+<h5>2.8-3 EnumerateReducedWords</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EnumerateReducedWords</code>( <var class="Arg">rws</var>, <var class="Arg">min</var>, <var class="Arg">max</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Enumerate all irreducible words in the rewriting system <span class="SimpleMath">\({\sf rws}\)</span> that have lengths between <code class="code">min</code> and <code class="code">max</code> (inclusive), which should be non-negative integers. The result is returned as a list of words. The enumeration is by depth-first search of a finite state automaton, and so the words in the list returned are ordered lexicographically (not by <strong class="button">shortlex</strong>).</p>
+
+<p><code class="func">EnumerateReducedWords</code> can only be used after <code class="func">KnuthBendix</code> (<a href="chap2_mj.html#X8412C40B7B2DC8E0"><span class="RefLink">2.5-1</span></a>) or <code class="func">AutomaticStructure</code> (<a href="chap2_mj.html#X828FA0177E4C5733"><span class="RefLink">2.6-1</span></a>) has been run successfully on <span class="SimpleMath">\({\sf rws}\)</span>. In the former case, if <code class="code">KnuthBendix</code> halted without a confluent set of rules, then not all irreducible words in the list returned will necessarily be in normal form. If <code class="code">KnuthBendix</code> completes with a confluent rewriting system or <code class="code">AutomaticStructure</code> completes successfully, then it is guaranteed that all words in the list will be in normal form.</p>
+
+<p><a id="X7981EA28835C7A46" name="X7981EA28835C7A46"></a></p>
+
+<h5>2.8-4 GrowthFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GrowthFunction</code>( <var class="Arg">rws</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the growth function of the set of irreducible words in the rewriting system <span class="SimpleMath">\({\sf rws}\)</span>. This is a rational function, of which the coefficient of <span class="SimpleMath">\(x^n\)</span> in its Taylor expansion is equal to the number of irreducible words of length <span class="SimpleMath">\(n\)</span>.</p>
+
+<p>If the coefficients in this rational function are larger than about <span class="SimpleMath">\(16000\)</span> then strange error messages will appear and <code class="code">fail</code> will be returned.</p>
+
+<p><code class="func">GrowthFunction</code> can only be used after <code class="func">KnuthBendix</code> (<a href="chap2_mj.html#X8412C40B7B2DC8E0"><span class="RefLink">2.5-1</span></a>) or <code class="func">AutomaticStructure</code> (<a href="chap2_mj.html#X828FA0177E4C5733"><span class="RefLink">2.6-1</span></a>) has been run successfully on <span class="SimpleMath">\({\sf rws}\)</span>. In the former case, if <code class="code">KnuthBendix</code> halted without a confluent set of rules, then not all irreducible words in the list returned will necessarily be in normal form. If <code class="code">KnuthBendix</code> completes with a confluent rewriting system or <code class="code">AutomaticStructure</code> completes successfully, then it is guaranteed that all words in the list will be in normal form.</p>
+
+<p><a id="X7E98CC0078047A36" name="X7E98CC0078047A36"></a></p>
+
+<h4>2.9 <span class="Heading">Rewriting System Examples</span></h4>
+
+<p>Here are five examples to illustrate the operations described above.</p>
+
+<p><a id="X8388E29680F31ABD" name="X8388E29680F31ABD"></a></p>
+
+<h5>2.9-1 <span class="Heading">Example 1</span></h5>
+
+<p>We start with a easy example - the alternating group <span class="SimpleMath">\(A_4\)</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup( "a", "b" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := F.1;;  b := F.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := F/[a^2, b^3, (a*b)^3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := KBMAGRewritingSystem( G );</span>
+rec(
+       isRWS := true,
+  generatorOrder := [_g1,_g2,_g3],
+    inverses := [_g1,_g3,_g2],
+    ordering := "shortlex",
+   equations := [
+     [_g2^2,_g3],
+     [_g1*_g2*_g1,_g3*_g1*_g3]
+   ]
+)
+
+</pre></div>
+
+<p>Notice that monoid generators, printed as <code class="code">_g1, _g2, _g3</code>, are used internally. These correspond to the group generators <span class="SimpleMath">\(a, b, b^{-1}\)</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnuthBendix( R );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R;</span>
+rec(
+       isRWS := true,
+ isConfluent := true,
+  generatorOrder := [_g1,_g2,_g3],
+    inverses := [_g1,_g3,_g2],
+    ordering := "shortlex",
+   equations := [
+     [_g1^2,IdWord],
+     [_g2*_g3,IdWord],
+     [_g3*_g2,IdWord],
+     [_g2^2,_g3],
+     [_g3*_g1*_g3,_g1*_g2*_g1],
+     [_g3^2,_g2],
+     [_g2*_g1*_g2,_g1*_g3*_g1],
+     [_g3*_g1*_g2*_g1,_g2*_g1*_g3],
+     [_g1*_g2*_g1*_g3,_g3*_g1*_g2],
+     [_g2*_g1*_g3*_g1,_g3*_g1*_g2],
+     [_g1*_g3*_g1*_g2,_g2*_g1*_g3]
+   ]
+)
+
+</pre></div>
+
+<p>The <em>equations</em> field of <span class="SimpleMath">\(R\)</span> is now a complete system of rewriting rules.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( R );</span>
+12
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EnumerateReducedWords( R, 0, 12 );</span>
+[ &lt;identity ...&gt;, a, a*b, a*b*a, a*b^-1, a*b^-1*a, b, b*a, b*a*b^-1, b^-1, 
+  b^-1*a, b^-1*a*b ]
+
+</pre></div>
+
+<p>We have enumerated all of the elements of the group - note that they are returned as words in the free group <span class="SimpleMath">\(F\)</span>.</p>
+
+<p><a id="X7A18778D836BC971" name="X7A18778D836BC971"></a></p>
+
+<h5>2.9-2 <span class="Heading">Example 2</span></h5>
+
+<p>We construct the Fibonacci group <span class="SimpleMath">\(F(2,5)\)</span>, defined by a semigroup rather than a group presentation. Interestingly these define the same structure (although they would not do so for <span class="SimpleMath">\(F(2,r)\)</span> with <span class="SimpleMath">\(r\)</span> even).</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := FreeSemigroup( 5 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := S.1;;  b := S.2;;  c := S.3;;  d := S.4;;  e := S.5;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := S/[ [a*b,c], [b*c,d], [c*d,e], [d*e,a], [e*a,b] ];</span>
+&lt;fp semigroup on the generators [ s1, s2, s3, s4, s5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := KBMAGRewritingSystem( Q ); </span>
+rec(
+       isRWS := true,
+      silent := true,
+  generatorOrder := [_s1,_s2,_s3,_s4,_s5],
+    inverses := [,,,,],
+    ordering := "shortlex",
+   equations := [
+     [_s1*_s2,_s3],
+     [_s2*_s3,_s4],
+     [_s3*_s4,_s5],
+     [_s4*_s5,_s1],
+     [_s5*_s1,_s2]
+   ]
+)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnuthBendix( R );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( R );</span>
+11
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EnumerateReducedWords( R, 0, 4 );</span>
+[ s1, s1^2, s1^2*s4, s1*s3, s1*s4, s2, s2^2, s2*s5, s3, s4, s5 ]
+
+</pre></div>
+
+<p>Let's do the same thing using the <strong class="button">recursive</strong> ordering.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetOrderingOfKBMAGRewritingSystem( R, "recursive" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnuthBendix( R );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( R ); </span>
+11
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EnumerateReducedWords( R, 0, 11 );</span>
+[ s1, s1^2, s1^3, s1^4, s1^5, s1^6, s1^7, s1^8, s1^9, s1^10, s1^11 ]
+
+</pre></div>
+
+<p><a id="X7D680484821C7835" name="X7D680484821C7835"></a></p>
+
+<h5>2.9-3 <span class="Heading">Example 3</span></h5>
+
+<p>The Heisenberg group is the free <span class="SimpleMath">\(2\)</span>-generator nilpotent group of class <span class="SimpleMath">\(2\)</span>. For <code class="code">KnuthBendix</code> to complete, we need to use the <strong class="button">recursive</strong> ordering, and reverse our initial order of generators. (Alternatively, we could avoid this reversal, by using a <strong class="button">wreathprod</strong> ordering, and setting the levels of the generators to be <span class="SimpleMath">\(6,5,4,3,2,1\)</span>.)</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup("x","y","z");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := F.1;;  y := F.2;;  z := F.3;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := F/[Comm(y,x)*z^-1, Comm(z,x), Comm(z,y)];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := KBMAGRewritingSystem( G );</span>
+rec(
+       isRWS := true,
+  generatorOrder := [_g1,_g2,_g3,_g4,_g5,_g6],
+    inverses := [_g2,_g1,_g4,_g3,_g6,_g5],
+    ordering := "shortlex",
+   equations := [
+     [_g4*_g2*_g3,_g5*_g2],
+     [_g6*_g2,_g2*_g6],
+     [_g6*_g4,_g4*_g6]
+   ]
+)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetOrderingOfKBMAGRewritingSystem( R, "recursive" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReorderAlphabetOfKBMAGRewritingSystem( R, (1,6)(2,5)(3,4) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R;</span>
+rec(
+       isRWS := true,
+  generatorOrder := [_g6,_g5,_g4,_g3,_g2,_g1],
+    inverses := [_g5,_g6,_g3,_g4,_g1,_g2],
+    ordering := "recursive",
+   equations := [
+     [_g4*_g2*_g3,_g5*_g2],
+     [_g6*_g2,_g2*_g6],
+     [_g6*_g4,_g4*_g6]
+   ]
+)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel( InfoRWS, 1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnuthBendix( R );</span>
+#I  Calling external Knuth-Bendix program.
+#System is confluent.
+#Halting with 18 equations.
+#I  External Knuth-Bendix program complete.
+#I  System computed is confluent.
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R;</span>
+rec(
+       isRWS := true,
+ isConfluent := true,
+  generatorOrder := [_g6,_g5,_g4,_g3,_g2,_g1],
+    inverses := [_g5,_g6,_g3,_g4,_g1,_g2],
+    ordering := "recursive",
+   equations := [
+     [_g6*_g5,IdWord],
+     [_g5*_g6,IdWord],
+     [_g4*_g3,IdWord],
+     [_g3*_g4,IdWord],
+     [_g2*_g1,IdWord],
+     [_g1*_g2,IdWord],
+     [_g6*_g2,_g2*_g6],
+     [_g6*_g4,_g4*_g6],
+     [_g4*_g2,_g2*_g4*_g5],
+     [_g5*_g2,_g2*_g5],
+     [_g6*_g1,_g1*_g6],
+     [_g5*_g4,_g4*_g5],
+     [_g6*_g3,_g3*_g6],
+     [_g3*_g1,_g1*_g3*_g5],
+     [_g4*_g1,_g1*_g4*_g6],
+     [_g3*_g2,_g2*_g3*_g6],
+     [_g5*_g1,_g1*_g5],
+     [_g5*_g3,_g3*_g5]
+   ]
+)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( R );</span>
+infinity
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsReducedWord( R, z*y*x );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReducedForm( R, z*y*x );</span>
+x*y*z^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsReducedForm( R, x*y*z^2 );</span>
+true
+
+</pre></div>
+
+<p><a id="X848E4DDE845A6EE9" name="X848E4DDE845A6EE9"></a></p>
+
+<h5>2.9-4 <span class="Heading">Example 4</span></h5>
+
+<p>This is an example of the use of the Knuth-Bendix algorithm to prove the nilpotence of a finitely presented group. (The method is due to Sims, and is described in Chapter 11.8 of <a href="chapBib_mj.html#biBSims94">[Sim94]</a>.) This example is of intermediate difficulty, and demonstrates the necessity of using the <code class="code">maxstoredlen</code> control parameter.</p>
+
+<p>The group is</p>
+
+<p class="center">\[  
+\langle a,b ~|~ [b,a,b], [b,a,a,a,a],  [b,a,a,a,b,a,a] \rangle 
+\]</p>
+
+<p>with left-normed commutators. The first step in the method is to check that there is a maximal nilpotent quotient of the group, for which we could use, for example, the <strong class="pkg">GAP</strong> <code class="func">NilpotentQuotient</code> (<a href="../../../pkg/nq-2.5.4/doc/chap3_mj.html#X8216791583DE512C"><span class="RefLink">nq: NilpotentQuotient</span></a>) command, from the package <strong class="pkg">nq</strong>. We find that there is a maximal such quotient, and it has class <span class="SimpleMath">\(7\)</span>, and the layers going down the lower central series have the abelian structures <span class="SimpleMath">\([0,0], [0], [0], [0], [0], [2], [2]\)</span>.</p>
+
+<p>By using the stand-alone `C' nilpotent quotient program, it is possible to find a power-commutator presentation of this maximal quotient. We now construct a new presentation of the same group, by introducing the generators in this power-commutator presentation, together with their definitions as powers or commutators of earlier generators. It is this new presentation that we use as input for the Knuth-Bendix program. Again we use the <strong class="button">recursive</strong> ordering, but this time we will be careful to introduce the generators in the correct order in the first place!</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup( "h", "g", "f", "e", "d", "c", "b", "a" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := F.1;;  g := F.2;;  f := F.3;;  e := F.4;; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := F.5;;  c := F.6;;  b := F.7;;  a := F.8;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := F/[Comm(b,a)*c^-1, Comm(c,a)*d^-1, Comm(d,a)*e^-1, Comm(e,b)*f^-1, </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           Comm(f,a)*g^-1, Comm(g,b)*h^-1, Comm(g,a), Comm(c,b), Comm(e,a)];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:=KBMAGRewritingSystem(G);</span>
+rec(
+       isRWS := true,
+  generatorOrder := [_g1,_g2,_g3,_g4,_g5,_g6,_g7,_g8,_g9,_g10,
+               _g11,_g12,_g13,_g14,_g15,_g16],
+    inverses := [_g2,_g1,_g4,_g3,_g6,_g5,_g8,_g7,_g10,_g9,
+               _g12,_g11,_g14,_g13,_g16,_g15],
+    ordering := "shortlex",
+   equations := [
+     [_g14*_g16*_g13,_g11*_g16],
+     [_g12*_g16*_g11,_g9*_g16],
+     [_g10*_g16*_g9,_g7*_g16],
+     [_g8*_g14*_g7,_g5*_g14],
+     [_g6*_g16*_g5,_g3*_g16],
+     [_g4*_g14*_g3,_g1*_g14],
+     [_g4*_g16,_g16*_g4],
+     [_g12*_g14,_g14*_g12],
+     [_g8*_g16,_g16*_g8]
+   ]
+)
+
+</pre></div>
+
+<p>A little experimentation reveals that this example works best when only those equations with left and right hand sides of lengths at most <span class="SimpleMath">\(10\)</span> are kept.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetOrderingOfKBMAGRewritingSystem( R, "recursive" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">O := OptionsRecordOfKBMAGRewritingSystem( R );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">O.maxstoredlen := [10,10];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel( InfoRWS, 2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnuthBendix( R );</span>
+  # 60 eqns; total len: lhs, rhs = 129, 143; 25 states; 0 secs.
+  # 68 eqns; total len: lhs, rhs = 364, 326; 28 states; 0 secs.
+  # 77 eqns; total len: lhs, rhs = 918, 486; 45 states; 0 secs.
+  # 91 eqns; total len: lhs, rhs = 728, 683; 58 states; 0 secs.
+  # 102 eqns; total len: lhs, rhs = 1385, 1479; 89 states; 0 secs.
+  . . . .
+  # 310 eqns; total len: lhs, rhs = 4095, 4313; 489 states; 1 secs.
+  # 200 eqns; total len: lhs, rhs = 2214, 2433; 292 states; 1 secs.
+  # 194 eqns; total len: lhs, rhs = 835, 922; 204 states; 1 secs.
+  # 157 eqns; total len: lhs, rhs = 702, 723; 126 states; 1 secs.
+  # 151 eqns; total len: lhs, rhs = 553, 444; 107 states; 1 secs.
+  # 101 eqns; total len: lhs, rhs = 204, 236; 19 states; 1 secs.
+  #No new eqns for some time - testing for confluence
+  #System is not confluent.
+  # 172 eqns; total len: lhs, rhs = 616, 473; 156 states; 1 secs.
+  # 171 eqns; total len: lhs, rhs = 606, 472; 156 states; 1 secs.
+  #No new eqns for some time - testing for confluence
+  #System is not confluent.
+  # 151 eqns; total len: lhs, rhs = 452, 453; 92 states; 1 secs.
+  # 151 eqns; total len: lhs, rhs = 452, 453; 92 states; 1 secs.
+  #No new eqns for some time - testing for confluence
+  #System is not confluent.
+  # 101 eqns; total len: lhs, rhs = 200, 239; 15 states; 1 secs.
+  # 101 eqns; total len: lhs, rhs = 200, 239; 15 states; 1 secs.
+  #No new eqns for some time - testing for confluence
+#System is confluent.
+#Halting with 101 equations.
+WARNING: The monoid defined by the presentation may have changed,
+     since equations have been discarded.
+     If you re-run, include the original equations.
+  #Exit status is 0
+#I  External Knuth-Bendix program complete.
+#WARNING: Because of the control parameters you set, the system may
+# not be confluent. Unbind the parameters and re-run KnuthBendix
+# to check!
+#I  System computed is NOT confluent.
+false
+
+</pre></div>
+
+<p>Now it is essential to re-run with the <code class="code">maxstoredlen</code> limit removed to check that the system really is confluent.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Unbind( O.maxstoredlen );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnuthBendix( R );</span>
+  # 101 eqns; total len: lhs, rhs = 200, 239; 15 states; 0 secs.
+  #No new eqns for some time - testing for confluence
+#System is confluent.
+#Halting with 101 equations.
+#Exit status is 0
+#I  External Knuth-Bendix program complete.
+#I  System computed is confluent.
+true
+
+</pre></div>
+
+<p>In fact, in this case, we did have a confluent set already.</p>
+
+<p>Inspection of the confluent set now reveals it to be precisely a power-commutator presentation of a nilpotent group, and so we have proved that the group we started with really is nilpotent. Of course, this means also that it is equal to its largest nilpotent quotient, of which we already know the structure.</p>
+
+<p><a id="X83FE3ED7852DDFAD" name="X83FE3ED7852DDFAD"></a></p>
+
+<h5>2.9-5 <span class="Heading">Example 5</span></h5>
+
+<p>Our final example illustrates the use of the <code class="code">AutomaticStructure</code> command, which runs the automatic groups programs. The group has a balanced symmetrical presentation with <span class="SimpleMath">\(3\)</span> generators and <span class="SimpleMath">\(3\)</span> relators, and was originally proposed by Heineken as a possible example of a finite group with such a presentation. In fact, the <code class="func">AutomaticStructure</code> (<a href="chap2_mj.html#X828FA0177E4C5733"><span class="RefLink">2.6-1</span></a>) command proves it to be infinite.</p>
+
+<p>This example is of intermediate difficulty, but there is no need to use any special options. It takes a few minutes to run on a WorkStation. It works better with the optional <em>large</em> parameter of <code class="code">AutomaticStructure</code> set to <code class="code">true</code>.</p>
+
+<p>We will not attempt to explain all of the output in detail here; the interested user should consult the documentation for the stand-alone <strong class="pkg">KBMag</strong> package. Roughly speaking, it first runs the Knuth-Bendix program, which does not halt with a confluent rewriting system, but is used instead to construct a word-difference finite state automaton. This in turn is used to construct the word-acceptor and multiplier automata for the group. Sometimes the initial constructions are incorrect, and part of the procedure consists in checking for this, and making corrections. In fact, in this example, the correct automata are considerably smaller than the ones first constructed. The final stage is to run an axiom-checking program, which essentially checks that the automata satisfy the group relations. If this completes successfully, then the correctness of the automata has been proved, and they can be used for correct word-reduction and enumeration in the group.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup( "a", "b", "c" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := F.1;;  b := F.2;;  c := F.3;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := F/[Comm(a,Comm(a,b))*c^-1, Comm(b,Comm(b,c))*a^-1,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           Comm(c,Comm(c,a))*b^-1];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := KBMAGRewritingSystem( G );</span>
+rec(
+       isRWS := true,
+     verbose := true,
+  generatorOrder := [_g1,_g2,_g3,_g4,_g5,_g6],
+    inverses := [_g2,_g1,_g4,_g3,_g6,_g5],
+    ordering := "shortlex",
+   equations := [
+     [_g2*_g4*_g2*_g3*_g1,_g5*_g4*_g2*_g3],
+     [_g4*_g6*_g4*_g5*_g3,_g1*_g6*_g4*_g5],
+     [_g6*_g2*_g6*_g1*_g5,_g3*_g2*_g6*_g1]
+   ]
+)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel( InfoRWS, 1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AutomaticStructure( R, true );</span>
+#I  Calling external automatic groups program.
+#Running Knuth-Bendix Program
+ (pathname)/kbprog -mt 20 -hf 100 -cn 0 -wd -me 262144 -t 500 (filename)
+#Halting with 42317 equations.
+#First word-difference machine with 271 states computed.
+#Second word-difference machine with 271 states computed.
+#System is confluent, or halting factor condition holds.
+
+#Running program to construct word-acceptor and multiplier automata
+ (pathname)/gpmakefsa -l (filename)
+#Word-acceptor with 1106 states computed.
+#General multiplier with 2428 states computed.
+#Validity test on general multiplier succeeded.
+#Running program to verify axioms on the automatic structure
+ (pathname)/gpaxioms -l (filename)
+#General length-2 multiplier with 2820 states computed.
+#Checking inverse and short relations.
+#Checking relation:  _g2*_g4*_g2*_g3*_g1 = _g5*_g4*_g2*_g3
+#Checking relation:  _g4*_g6*_g4*_g5*_g3 = _g1*_g6*_g4*_g5
+#Checking relation:  _g6*_g2*_g6*_g1*_g5 = _g3*_g2*_g6*_g1
+#Axiom checking succeeded.
+#I  Computation was successful - automatic structure computed.
+#Minimal reducible word acceptor with 1058 states computed.
+#Minimal Knuth-Bendix equation fsa with 1891 states computed.
+#Correct diff1 fsa with 271 states computed.
+#Correct diff2 fsa with 271 states computed.
+true
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( R );</span>
+infinity
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order( R, a );</span>
+infinity
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order( R, Comm(a,b) );</span>
+infinity
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,104 @@
+(C) Marc Roeder 2007-2008
+
+	HAPcryst -- A GAP4 extension for HAP calculating 
+		resolutions for Bieberbach groups
+
+			Marc Roeder
+		   (NUI Galway, Ireland)
+
+
+This package is an add-on for Graham Ellis' HAP package. HAPcryst
+implements some functions for crystallographic groups (namely
+OrbitStabilizer-type methods). It is also capable of calculating free
+resolutions for Bieberbach groups.
+
+HAPcryst is distributed under the terms of the GNU General Public
+License version 2.0 or later (at your convenience). See LICENSE
+for the text of version 2 or www.http://gnu.org/copyleft/gpl.html
+
+Please send bug reports to 
+<https://github.com/gap-packages/hapcryst/issues>
+
+
+		Installation
+		------------
+HAPcryst depends on the following packages:
+	hap (as HAPcryst is a extension of HAP)
+	polymaking (which in turn depends on external software)
+	Cryst
+HAPcryst will not load if you don't have a recent version of those
+packages installed.
+The following packages are not required but suggested:
+	Carat
+	CrystCat
+	GAPDoc
+
+1. Download the package archive 
+        HAPcryst<ver>.tar.bz2
+        HAPcryst<ver>.tar.gz
+        HAPcryst<ver>-win.zip
+   (where <ver> is some version number) to the directory pkg/ of the
+   GAP home directory. If you do not have permission to do so, create
+   a directory called gap/pkg in your home directory.
+
+2. change directory to pkg/ and unpack the archive using the according command:
+        tar -xjf HAPcryst<ver>.tar.bz2
+        tar -xzf HAPcryst<ver>.tar.gz
+        unzip HAPcryst<ver>-win.zip
+  (replace <ver> with the version number)
+
+3. start GAP. If you have created the directory gap/pkg in your home
+   directory, use "gap -l '<homedir>/gap;'" where <homedir> is the path of
+   your home directory (use "pwd" to find out what it is, if you don't know)
+
+4. Call gap and type "LoadPackage("hapcryst");" to load HAPcryst. 
+   If GAP returns some error messages, load hap.
+
+5. Run the test file by calling "ReadPackage("hapcryst","tst/testall.g");"
+
+
+Recommendation:
+--------------
+
+Calculating resolutions of Bieberbach groups involves convex hull
+computations. polymake by default uses cdd to compute convex
+hulls. Experiments suggest that lrs is the more suitable algorithm for
+the convex hull computations done in HAPcryst than the standard
+cdd. You can change the behaviour of polymake of by editing the file
+"<homedir>/.polymake/prefer.pl" It should contain a section like this
+(just make sure lrs is before cdd, the position of beneath_beyond does
+not matter):
+
+#########################################
+application polytope;
+
+prefer "*.convex_hull  lrs, beneath_beyond, cdd";
+
+
+
+Documentation
+-------------
+
+The documentation of the package can be found in the doc/ subdirectory.
+A second part of the documentation describes datatypes used in HAPcryst.
+This can be found in the lib/datatypes/doc subdirectory of the HAPcryst 
+main directory 
+
+
+
+Examples
+--------
+
+The directory "examples" contains some code that generates pictures 
+(JavaView applets) of Dirichlet domains of 3 dimensional Bieberbach 
+groups with coloured orbits (of the group acting on the faces of the 
+tessellation of R^3).
+Just say
+
+gap> ReadPackage("hapcryst","examples/3dimBieberbachFD.gap");
+gap> viewFundamentalDomain([0,0,0],1);
+
+for instructions see examples/3dimBieberbacFD.gap in the hapcryst 
+package tree. The functions will also generate pictures of Dirichlet 
+domains for non-Bieberbach groups, but the orientation of the edges 
+show doesn't necessarily make sense any more.

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (hpc) - Chapter 9: Synchronization variables</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap9"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap9_mj.html">[MathJax on]</a></p>
+<p><a id="X84583568784B622A" name="X84583568784B622A"></a></p>
+<div class="ChapSects"><a href="chap9.html#X84583568784B622A">9 <span class="Heading">Synchronization variables</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X84583568784B622A">9.1 <span class="Heading">Synchronization variables</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7B55EA0E8672087C">9.1-1 CreateSyncVar</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X85E910BF7BBF3270">9.1-2 SyncWrite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7B42B29B8441B4F5">9.1-3 SyncRead</a></span>
+</div></div>
+</div>
+
+<h3>9 <span class="Heading">Synchronization variables</span></h3>
+
+<p><a id="X84583568784B622A" name="X84583568784B622A"></a></p>
+
+<h4>9.1 <span class="Heading">Synchronization variables</span></h4>
+
+<p>Synchronization variables (also often called dataflow variables in the literature) are variables that can be written only once; attempts to read the variable block until it has been written to.</p>
+
+<p>Synchronization variables are created with <code class="func">CreateSyncVar</code> (<a href="chap9.html#X7B55EA0E8672087C"><span class="RefLink">9.1-1</span></a>), written with <code class="func">SyncWrite</code> (<a href="chap9.html#X85E910BF7BBF3270"><span class="RefLink">9.1-2</span></a>) and read with <code class="func">SyncRead</code> (<a href="chap9.html#X7B42B29B8441B4F5"><span class="RefLink">9.1-3</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sv := CreateSyncVar();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RunAsyncTask(function()</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     Sleep(10);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     SyncWrite(sv, MakeImmutable([1, 2, 3]));</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SyncRead(sv);</span>
+[ 1, 2, 3 ]
+</pre></div>
+
+<p><a id="X7B55EA0E8672087C" name="X7B55EA0E8672087C"></a></p>
+
+<h5>9.1-1 CreateSyncVar</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateSyncVar</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="func">CreateSyncVar</code> takes no arguments. It returns a new synchronization variable. There is no need to deallocate it; the garbage collector will free the memory and all related resources when it is no longer accessible.</p>
+
+<p><a id="X85E910BF7BBF3270" name="X85E910BF7BBF3270"></a></p>
+
+<h5>9.1-2 SyncWrite</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyncWrite</code>( <var class="Arg">syncvar</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">SyncWrite</code> attempts to assign the value <var class="Arg">obj</var> to <var class="Arg">syncvar</var>. If <var class="Arg">syncvar</var> has been previously assigned a value, the call will fail with a runtime error; otherwise, <var class="Arg">obj</var> will be assigned to <var class="Arg">syncvar</var>.</p>
+
+<p>In order to make sure that the recipient can read the result, the <var class="Arg">obj</var> argument should not be a thread-local object; it should be public, read-only, or shared.</p>
+
+<p><a id="X7B42B29B8441B4F5" name="X7B42B29B8441B4F5"></a></p>
+
+<h5>9.1-3 SyncRead</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyncRead</code>( <var class="Arg">syncvar</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">SyncRead</code> reads the value previously assigned to <var class="Arg">syncvar</var> with <code class="func">SyncWrite</code> (<a href="chap9.html#X85E910BF7BBF3270"><span class="RefLink">9.1-2</span></a>). If no value has been assigned yet, it blocks. It returns the assigned value.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

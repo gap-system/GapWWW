@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (PatternClass) - Chapter 7: Some Permutation Essentials</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7_mj.html">[MathJax on]</a></p>
+<p><a id="X81DB657E7FEF0295" name="X81DB657E7FEF0295"></a></p>
+<div class="ChapSects"><a href="chap7.html#X81DB657E7FEF0295">7 <span class="Heading">Some Permutation Essentials</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X80E3E5BB8156C6A1">7.1 <span class="Heading"> Complement </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X820405DB787A5D32">7.1-1 PermComplement</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X8453836D83A63E54">7.2 <span class="Heading"> Rank Encoding </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F1000E882050AFF">7.2-1 IsRankEncoding</a></span>
+</div></div>
+</div>
+
+<h3>7 <span class="Heading">Some Permutation Essentials</span></h3>
+
+<p>In this chapter we mention a couple functions that are fairly basic but useful tools to work with.</p>
+
+<p><a id="X80E3E5BB8156C6A1" name="X80E3E5BB8156C6A1"></a></p>
+
+<h4>7.1 <span class="Heading"> Complement </span></h4>
+
+<p><a id="X820405DB787A5D32" name="X820405DB787A5D32"></a></p>
+
+<h5>7.1-1 PermComplement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PermComplement</code>( <var class="Arg">perm</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: The permutation that is the complement of <code class="code">perm</code>.</p>
+
+<p>The complement of a permutation <span class="SimpleMath">τ=τ_1...τ_n</span> is the permutation</p>
+
+<p class="pcenter">τ^C=(n+1)-τ_1 (n+1)-τ_2... (n+1)-τ_n</p>
+
+<p>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PermComplement([3,2,8,6,7,1,5,4]);</span>
+[ 6, 7, 1, 3, 2, 8, 4, 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><a id="X8453836D83A63E54" name="X8453836D83A63E54"></a></p>
+
+<h4>7.2 <span class="Heading"> Rank Encoding </span></h4>
+
+<p><a id="X7F1000E882050AFF" name="X7F1000E882050AFF"></a></p>
+
+<h5>7.2-1 IsRankEncoding</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRankEncoding</code>( <var class="Arg">perm</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> if <code class="code">perm</code> is a valid rank encoding of a permutation.</p>
+
+<p><code class="code">IsRankEncoding</code> checkes whether the input list <code class="code">perm</code> is a valid rank encoding by checking whether it is accepted by the bounded class automaton, with the highest rank being set by the highest element in <code class="code">perm</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRankEncoding([3,2,6,4,4,1,2,1]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRankEncoding([3,2,6,4,5,1,2,1]);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

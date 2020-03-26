@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (ZeroMQInterface) - Chapter 2: ZeroMQ Bindings</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X7EDFD3BB831063E7" name="X7EDFD3BB831063E7"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X7EDFD3BB831063E7">2 <span class="Heading">ZeroMQ Bindings</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7D65C84A87343B32">2.1 <span class="Heading">Addresses, transports, and URIs</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82D04A897E0720CC">2.1-1 <span class="Heading">The TCP transport</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X792BDF3F7AB76A99">2.1-2 <span class="Heading">The IPC transport</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7AD7D8897DF0E66D">2.1-3 <span class="Heading">The in-process transport</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7C848DC87D0C1BF0">2.2 <span class="Heading">Creating and closing sockets</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7E37F9DD7F0977F2">2.2-1 ZmqPushSocket</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7B2AB9A47F658EB7">2.2-2 ZmqPullSocket</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X87434250859B8460">2.2-3 ZmqReplySocket</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8590CD6C824FE4FC">2.2-4 ZmqRequestSocket</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X79C8F8B68192DE1D">2.2-5 ZmqPublisherSocket</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86A2F4EA82E1FC10">2.2-6 ZmqSubscriberSocket</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7D5974927C4C3131">2.2-7 ZmqDealerSocket</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7ED409848377791D">2.2-8 ZmqRouterSocket</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X81A5B57F7AFCD80F">2.2-9 ZmqSocket</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X878D7DF3846B3431">2.2-10 ZmqClose</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7BAC106D81E8C8D2">2.2-11 ZmqIsOpen</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X831235C47A0CFA1C">2.2-12 ZmqSocketType</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7E93217181B71A2B">2.3 <span class="Heading">Binding and connecting sockets to addresses</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F4A98227D65B573">2.3-1 ZmqBind</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7D00EE937F96175E">2.3-2 ZmqConnect</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C17743C874D56CF">2.3-3 ZmqAttach</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7CB8FB7F8377B620">2.3-4 ZmqSocketURI</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C91933A84823735">2.3-5 ZmqIsBound</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X795DDB1F7A147DD2">2.3-6 ZmqIsConnected</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X85BF739678B524D3">2.4 <span class="Heading">Sending and receiving messages</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X815164BB7FB0E8AC">2.4-1 ZmqSend</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7CBB221179C79E23">2.4-2 ZmqReceive</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C4EA24A8034D841">2.4-3 ZmqReceiveList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7D448F567EE74050">2.4-4 ZmqReceiveListAsString</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X85638A657FDE7E77">2.4-5 ZmqHasMore</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X836D98B37DD2CD2E">2.4-6 ZmqPoll</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X86C414A57BE2F7A2">2.5 <span class="Heading">Setting and querying socket properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7AD7274784A96783">2.5-1 ZmqSetIdentity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7B35DC33795EDB8F">2.5-2 ZmqGetIdentity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8384175A83EE3F04">2.5-3 ZmqSetSendCapacity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86817EA77EF5A145">2.5-4 ZmqSetReceiveCapacity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F65F8F87E198308">2.5-5 ZmqGetSendCapacity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84D1C61683021D49">2.5-6 ZmqGetReceiveCapacity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X808243357C0466C5">2.5-7 ZmqSetSendBufferSize</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86C7D8DE81F3DAC9">2.5-8 ZmqGetSendBufferSize</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7BFF68F478CB9591">2.5-9 ZmqSetReceiveBufferSize</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X811DDCF3853C299D">2.5-10 ZmqGetReceiveBufferSize</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X79365BF47A15D740">2.5-11 ZmqSubscribe</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7916FAA27F90D773">2.5-12 ZmqUnsubscribe</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">ZeroMQ Bindings</span></h3>
+
+<p>There are experimental bindings to the ZeroMQ library available <span class="URL"><a href="http://www.zeromq.net/">http://www.zeromq.net/</a></span>. This section describes these bindings. Messages in ZeroMQ are sent between endpoints called <em>sockets</em>. Each socket can be <em>bound</em> to an address specified by a URI and other sockets can <em>connect</em> to the same address to exchange messages with that socket.</p>
+
+<p><a id="X7D65C84A87343B32" name="X7D65C84A87343B32"></a></p>
+
+<h4>2.1 <span class="Heading">Addresses, transports, and URIs</span></h4>
+
+<p>Addresses are specified as URIs of one of four different types (TCP, IPC, in-process, PGM/EPGM), each for a different type of transport.</p>
+
+<p><a id="X82D04A897E0720CC" name="X82D04A897E0720CC"></a></p>
+
+<h5>2.1-1 <span class="Heading">The TCP transport</span></h5>
+
+<p>TCP URIs map to POSIX TCP stream sockets. The URI is of the form <code class="code">tcp://&lt;address&gt;:&lt;port&gt;</code> or <code class="code">tcp://*:&lt;port&gt;</code>. Here, <code class="code">address</code> is an internet address, either an IP address or a symbolic address (note that to resolve symbolic addresses, the library may have to consult DNS servers, which can take an indefinite amount of time or even fail). Port is a TCP port number. If a "*" is given instead of an address, this describes the so-called unspecified address; the URI can only be used for binding and will then accept incoming connections from all interfaces (as in binding to "0.0.0.0" in IPv4 or "::" in IPv6).</p>
+
+<p><a id="X792BDF3F7AB76A99" name="X792BDF3F7AB76A99"></a></p>
+
+<h5>2.1-2 <span class="Heading">The IPC transport</span></h5>
+
+<p>The URI for IPC communication is of the form <code class="code">ipc://&lt;path&gt;</code>, where <code class="code">path</code> is an actual path on the file system. Binding to such a URI will create a file in that location.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">socket := ZmqDealerSocket();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqBind(socket, "ipc:///tmp/connector");</span>
+</pre></div>
+
+<p><a id="X7AD7D8897DF0E66D" name="X7AD7D8897DF0E66D"></a></p>
+
+<h5>2.1-3 <span class="Heading">The in-process transport</span></h5>
+
+<p>The in-process transport is used to communicate between threads in order to avoid the overhead of operating system calls. Messages are simply being copied from one thread's memory to the other's. In-process URIs are of the form <code class="code">inproc://&lt;string&gt;</code>, where <code class="code">string</code> is an arbitrary string.</p>
+
+<p><a id="X7C848DC87D0C1BF0" name="X7C848DC87D0C1BF0"></a></p>
+
+<h4>2.2 <span class="Heading">Creating and closing sockets</span></h4>
+
+<p>Sockets are generally being created via calls to <code class="func">ZmqPushSocket</code> (<a href="chap2_mj.html#X7E37F9DD7F0977F2"><span class="RefLink">2.2-1</span></a>), etc. Each such call takes two optional arguments, a URI and an identity. If a URI is given, a call to <code class="func">ZmqAttach</code> (<a href="chap2_mj.html#X7C17743C874D56CF"><span class="RefLink">2.3-3</span></a>) will be performed immediately with the socket and URI. In particular, if the URI is prefixed with a "+" character, then the socket will connect to the address specified by the part after the "+" character; otherwise, it will be bound to the URI.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := ZmqPushSocket("inproc://test");  # binds to inproc://test</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := ZmqPushSocket("+inproc://test"); # connects to inproc://test</span>
+</pre></div>
+
+<p>If an identity is also provided, the library will call <code class="func">ZmqSetIdentity</code> (<a href="chap2_mj.html#X7AD7274784A96783"><span class="RefLink">2.5-1</span></a>) to set the identity (name) for that socket. For a precise description of the behavior of each socket type, please consult the original ZeroMQ documentation for <code class="code">zmq_socket()</code>.</p>
+
+<p><a id="X7E37F9DD7F0977F2" name="X7E37F9DD7F0977F2"></a></p>
+
+<h5>2.2-1 ZmqPushSocket</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqPushSocket</code>( [<var class="Arg">uri</var>[, <var class="Arg">identity</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>A push socket is one end of a unidirectional pipe. Programs can send messages to it, which will be delivered to a matched pull socket at the other end.</p>
+
+<p><a id="X7B2AB9A47F658EB7" name="X7B2AB9A47F658EB7"></a></p>
+
+<h5>2.2-2 ZmqPullSocket</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqPullSocket</code>( [<var class="Arg">uri</var>[, <var class="Arg">identity</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>A pull socket is the other end of a unidirectional pipe.</p>
+
+<p><a id="X87434250859B8460" name="X87434250859B8460"></a></p>
+
+<h5>2.2-3 ZmqReplySocket</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqReplySocket</code>( [<var class="Arg">uri</var>[, <var class="Arg">identity</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>A reply socket provides the server side of a remote-procedure call interaction. It alternates between receiving a message and sending a message to the socket from which the previous one originated. Deviating from that protocol (for example, by sending two messages in succession or receiving two without responding to the first) will result in an error.</p>
+
+<p><a id="X8590CD6C824FE4FC" name="X8590CD6C824FE4FC"></a></p>
+
+<h5>2.2-4 ZmqRequestSocket</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqRequestSocket</code>( [<var class="Arg">uri</var>[, <var class="Arg">identity</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>A request socket provides the client side of a remote-procedure call interaction. It will alternate between sending a message to a connected reply socket and receiving the response.</p>
+
+<p><a id="X79C8F8B68192DE1D" name="X79C8F8B68192DE1D"></a></p>
+
+<h5>2.2-5 ZmqPublisherSocket</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqPublisherSocket</code>( [<var class="Arg">uri</var>[, <var class="Arg">identity</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>A publisher socket is a unidirectional broadcast facility. It will send each outgoing message to all connected subscriber sockets.</p>
+
+<p><a id="X86A2F4EA82E1FC10" name="X86A2F4EA82E1FC10"></a></p>
+
+<h5>2.2-6 ZmqSubscriberSocket</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSubscriberSocket</code>( [<var class="Arg">uri</var>[, <var class="Arg">identity</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>A subscriber socket receives messages from a publisher socket. It can subscribe to only a specific subseet of messages (see the <code class="func">ZmqSubscribe</code> (<a href="chap2_mj.html#X79365BF47A15D740"><span class="RefLink">2.5-11</span></a>) function) or receive all of them.</p>
+
+<p><a id="X7D5974927C4C3131" name="X7D5974927C4C3131"></a></p>
+
+<h5>2.2-7 ZmqDealerSocket</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqDealerSocket</code>( [<var class="Arg">uri</var>[, <var class="Arg">identity</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>A dealer socket is a bidirectional socket. One or more peers can connect to it. Outgoing messages will be sent to those peers in a round-robin fashion (i.e., the first message goes to the first peer, the second to the second peer, and so forth until all peers have received a message and the process begins anew with the first peer). Incoming messages will be received from all peers and processed fairly (i.e., no message will be held indefinitely). Two dealer sockets can be used to create a bidirectional pipe.</p>
+
+<p><a id="X7ED409848377791D" name="X7ED409848377791D"></a></p>
+
+<h5>2.2-8 ZmqRouterSocket</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqRouterSocket</code>( [<var class="Arg">uri</var>[, <var class="Arg">identity</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Router sockets, like dealer sockets, can have multiple peers connected to them. Incoming messages are handled the same way as for dealer sockets. Outgoing messages should be multi-part messages, where the first part of the message is the identity of one of the peers. The message will then be sent only to the peer with that identity. Peers can be dealer, request, or reply sockets.</p>
+
+<p><a id="X81A5B57F7AFCD80F" name="X81A5B57F7AFCD80F"></a></p>
+
+<h5>2.2-9 ZmqSocket</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSocket</code>( <var class="Arg">type</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqSocket</code> is a low-level function that is used by <code class="code">ZmqPushSocket</code> etc. to create sockets. Its argument is a string, one of "PUSH", "PULL", "REP", "REQ", "PUB", "SUB", "DEALER", "ROUTER", and it creates and returns a socket of that type.</p>
+
+<p><a id="X878D7DF3846B3431" name="X878D7DF3846B3431"></a></p>
+
+<h5>2.2-10 ZmqClose</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqClose</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqClose</code> closes <code class="code">socket</code>. Afterwards, it cannot anymore be bound or connected to, nor receive or send messages. Messages already in transit will still be delivered.</p>
+
+<p><a id="X7BAC106D81E8C8D2" name="X7BAC106D81E8C8D2"></a></p>
+
+<h5>2.2-11 ZmqIsOpen</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqIsOpen</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqIsOpen</code> returns true if <code class="code">socket</code> has not been closed yet, false otherwise.</p>
+
+<p><a id="X831235C47A0CFA1C" name="X831235C47A0CFA1C"></a></p>
+
+<h5>2.2-12 ZmqSocketType</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSocketType</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqSocketType</code> returns the string with which the socket was created (see <code class="func">ZmqSocket</code> (<a href="chap2_mj.html#X81A5B57F7AFCD80F"><span class="RefLink">2.2-9</span></a>)).</p>
+
+<p><a id="X7E93217181B71A2B" name="X7E93217181B71A2B"></a></p>
+
+<h4>2.3 <span class="Heading">Binding and connecting sockets to addresses</span></h4>
+
+<p><a id="X7F4A98227D65B573" name="X7F4A98227D65B573"></a></p>
+
+<h5>2.3-1 ZmqBind</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqBind</code>( <var class="Arg">socket</var>, <var class="Arg">uri</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqBind</code> will <em>bind</em> <code class="code">socket</code> to <code class="code">uri</code>. After being bound to the address specified by <code class="code">uri</code>, the socket can be connected to at that address with <code class="func">ZmqConnect</code> (<a href="chap2_mj.html#X7D00EE937F96175E"><span class="RefLink">2.3-2</span></a>).</p>
+
+<p><a id="X7D00EE937F96175E" name="X7D00EE937F96175E"></a></p>
+
+<h5>2.3-2 ZmqConnect</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqConnect</code>( <var class="Arg">socket</var>, <var class="Arg">uri</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqConnect</code> is used to connect <code class="code">socket</code> to another socket that has been bound to <code class="code">uri</code>. Note that you can connect to an address that has not been bound yet; in that case, the connection will be delayed until the binding has occurred.</p>
+
+<p><a id="X7C17743C874D56CF" name="X7C17743C874D56CF"></a></p>
+
+<h5>2.3-3 ZmqAttach</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqAttach</code>( <var class="Arg">socket</var>, <var class="Arg">uri</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqAttach</code> is a unified interface for binding and connecting a socket. If <code class="code">uri</code> begins with a "+" character, then the <code class="func">ZmqConnect</code> (<a href="chap2_mj.html#X7D00EE937F96175E"><span class="RefLink">2.3-2</span></a>) is called with the socket and the rest of the <code class="code">uri</code> string following the "+". Otherwise, <code class="func">ZmqBind</code> (<a href="chap2_mj.html#X7F4A98227D65B573"><span class="RefLink">2.3-1</span></a>) is called with these arguments. The intended use is to construct a network of connections from a list of strings.</p>
+
+<p><a id="X7CB8FB7F8377B620" name="X7CB8FB7F8377B620"></a></p>
+
+<h5>2.3-4 ZmqSocketURI</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSocketURI</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqSocketURI</code> returns the most recent URI to which <code class="code">socket</code> has been bound or connected. Sockets can be bound to or connected to multiple addresses, but only the most recent one is returned.</p>
+
+<p><a id="X7C91933A84823735" name="X7C91933A84823735"></a></p>
+
+<h5>2.3-5 ZmqIsBound</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqIsBound</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqIsBound</code> returns true if the socket has been bound to the address returned by <code class="code">ZmqSocketURI()</code>, false otherwise.</p>
+
+<p><a id="X795DDB1F7A147DD2" name="X795DDB1F7A147DD2"></a></p>
+
+<h5>2.3-6 ZmqIsConnected</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqIsConnected</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqIsBound</code> returns true if the socket has been connected to the address returned by <code class="code">ZmqSocketURI()</code>, false otherwise.</p>
+
+<p><a id="X85BF739678B524D3" name="X85BF739678B524D3"></a></p>
+
+<h4>2.4 <span class="Heading">Sending and receiving messages</span></h4>
+
+<p>ZeroMQ allows the sending and receiving of both string messages and multi-part messages. String messages are sequences of bytes (which can include zero), provided as a GAP string, while multi-part messages are lists of strings, provided as a GAP list. Multi-part messages are largely a convenience feature (e.g., to allow a message to have header parts without the inconvenience of having to encode those in a single string). When sent, multi-part messages will be delivered in their entirety; they can be retrieved one part at a time, but if the first part is available, the last part is available also.</p>
+
+<p><a id="X815164BB7FB0E8AC" name="X815164BB7FB0E8AC"></a></p>
+
+<h5>2.4-1 ZmqSend</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSend</code>( <var class="Arg">socket</var>, <var class="Arg">data</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqSend</code> will send <code class="code">data</code> to <code class="code">socket</code>, according to the routing behavior of the underlying socket mechanism.</p>
+
+<p><a id="X7CBB221179C79E23" name="X7CBB221179C79E23"></a></p>
+
+<h5>2.4-2 ZmqReceive</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqReceive</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqReceive</code> will either retrieve a string message or a single part of a multi-part message from <code class="code">socket</code> and return the result as a GAP string.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := ZmqSocket("inproc://test");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z2 := ZmqSocket("+inproc://test");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSend(z, "notice");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqReceive(z2);</span>
+"notice"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSend(z, ["alpha", "beta"]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqReceive(z2);</span>
+"alpha"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqReceive(z2);</span>
+"beta"
+</pre></div>
+
+<p><a id="X7C4EA24A8034D841" name="X7C4EA24A8034D841"></a></p>
+
+<h5>2.4-3 ZmqReceiveList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqReceiveList</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqReceiveList</code> will retrieve a message in its entirety from <code class="code">socket</code> and return the result as a list of strings.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := ZmqPushSocket("inproc://test");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z2 := ZmqPullSocket("+inproc://test");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSend(z, "notice");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqReceiveList(z2);</span>
+[ "notice" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSend(z, ["alpha", "beta"]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqReceiveList(z2);</span>
+[ "alpha", "beta" ]
+</pre></div>
+
+<p><a id="X7D448F567EE74050" name="X7D448F567EE74050"></a></p>
+
+<h5>2.4-4 ZmqReceiveListAsString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqReceiveListAsString</code>( <var class="Arg">socket</var>, <var class="Arg">separator</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqReceiveListAsString</code> works like <code class="code">ZmqReceiveList</code>, but will return the result a single string, with multiple parts separated by <code class="code">separator</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := ZmqPushSocket("inproc://test");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z2 := ZmqPullSocket("+inproc://test");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSend(z, "notice");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqReceiveListAsString(z2, "::");</span>
+"notice"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSend(z, ["alpha", "beta"]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqReceiveListAsString(z2, "::");</span>
+"alpha::beta"
+</pre></div>
+
+<p><a id="X85638A657FDE7E77" name="X85638A657FDE7E77"></a></p>
+
+<h5>2.4-5 ZmqHasMore</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqHasMore</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqHasMore</code> will return <code class="code">true</code> if a socket has one or more remaining parts of a multi-part message outstanding, <code class="code">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := ZmqPushSocket("inproc://test");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z2 := ZmqPullSocket("+inproc://test");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSend(z, "notice");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqReceive(z2);</span>
+"notice"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqHasMore(z2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSend(z, ["alpha", "beta"]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqReceive(z2);</span>
+"alpha"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqHasMore(z2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqReceive(z2);</span>
+"beta"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqHasMore(z2);</span>
+false
+</pre></div>
+
+<p><a id="X836D98B37DD2CD2E" name="X836D98B37DD2CD2E"></a></p>
+
+<h5>2.4-6 ZmqPoll</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqPoll</code>( <var class="Arg">inputs</var>, <var class="Arg">outputs</var>, <var class="Arg">timeout</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqPoll</code> is a facility to determine if messages can be received from one of the sockets listed in <code class="code">inputs</code> or sent to one of the sockets listed in <code class="code">outputs</code>. It returns a list of indices describing the sockets that at least one message can be received from or sent to. The timeout is an integer. If positive, it describes a duration (in milliseconds) after which it will return. If zero, the function will return immediately. If it is <code class="code">-1</code>, then the function will block indefinitely until at least one message can be retrieved from one of the sockets in <code class="code">inputs</code> or at least one message can be sent to one of the sockets in <code class="code">outputs</code>. If the timeout is non-negative, the result can be the empty list. It is guaranteed to have at least one element otherwise. The indices in the result are in the range <code class="code">[1..Length(inputs)+Length(outputs)</code>. An index <code class="code">i</code> less than or equal to <code class="code">Length(inputs)</code> refers to the socket <code class="code">inputs[i]</code>. An index <code class="code">j</code> in the range <code class="code">[Length(inputs)+1..Length(inputs)+Length(outputs)</code> refers to the socket <code class="code">outputs[j-Length(inputs)]</code>. Multiple indices are listed in ascending order (i.e., they form a GAP set).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">send1 := ZmqPushSocket("inproc://#1");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">recv1 := ZmqPullSocket("+inproc://#1");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">send2 := ZmqPushSocket();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">recv2 := ZmqPullSocket();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSetSendCapacity(send2, 1);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSetReceiveCapacity(recv2, 1);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqBind(send2, "inproc://#2");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqConnect(recv2, "inproc://#2");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSend(send2, "alpha");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqSend(send2, "beta");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZmqPoll([recv1, recv2], [send1, send2], 0);</span>
+[ 2, 3 ]
+</pre></div>
+
+<p>In the example above, the code constructs sockets <code class="code">send2</code> and <code class="code">recv2</code> with a capacity to store at most one outgoing and incoming message, respectively. Then the code sends two messages to <code class="code">send2</code>, one of which will be in the incoming buffer of <code class="code">recv2</code>, and the other will remain in the outgoing buffer of <code class="code">send2</code>. At this point, no more messages can be sent to <code class="code">send2</code>, because its outgoing buffer is at capacity, and <code class="code">recv2</code> has a message that can be received. Conversely, <code class="code">send1</code> can still accept outgoing messages, and <code class="code">recv1</code> has no messages. Thus, the result is the list <code class="code">[2, 3]</code>. The <code class="code">2</code> refers to <code class="code">recv2</code> (as the second socket in the list of inputs), while <code class="code">3</code> refers to <code class="code">send1</code> (as the first socket in the list of outputs).</p>
+
+<p><a id="X86C414A57BE2F7A2" name="X86C414A57BE2F7A2"></a></p>
+
+<h4>2.5 <span class="Heading">Setting and querying socket properties</span></h4>
+
+<p>Sockets have properties that can be set and queried. Most such properties only affect binds and connects that occur after they have been set. Binding or connecting a socket first and then setting a property will not change the behavior of the socket.</p>
+
+<p><a id="X7AD7274784A96783" name="X7AD7274784A96783"></a></p>
+
+<h5>2.5-1 ZmqSetIdentity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSetIdentity</code>( <var class="Arg">socket</var>, <var class="Arg">string</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqSetIdentity</code> can be used to give the socket an identity. An identity is a string of up to 255 characters that should not start with a null character (the null character is reserved for internal use). This identity should be globally unique. Uniqueness is not enforced, however, and undefined behavior may result from different sockets with the same identity interacting.</p>
+
+<p><a id="X7B35DC33795EDB8F" name="X7B35DC33795EDB8F"></a></p>
+
+<h5>2.5-2 ZmqGetIdentity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqGetIdentity</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqGetIdentity</code> returns the current identity of the socket.</p>
+
+<p><a id="X8384175A83EE3F04" name="X8384175A83EE3F04"></a></p>
+
+<h5>2.5-3 ZmqSetSendCapacity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSetSendCapacity</code>( <var class="Arg">socket</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqSetSendCapacity</code> sets the maximum number of messages that a socket can store in its outgoing buffer.</p>
+
+<p><a id="X86817EA77EF5A145" name="X86817EA77EF5A145"></a></p>
+
+<h5>2.5-4 ZmqSetReceiveCapacity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSetReceiveCapacity</code>( <var class="Arg">socket</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqSetReceiveCapacity</code> sets the maximum number of messages that a socket can store in its outgoing buffer.</p>
+
+<p><a id="X7F65F8F87E198308" name="X7F65F8F87E198308"></a></p>
+
+<h5>2.5-5 ZmqGetSendCapacity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqGetSendCapacity</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqGetSendCapacity</code> returns the maximum number of messages that a socket can store in its outgoing buffer.</p>
+
+<p><a id="X84D1C61683021D49" name="X84D1C61683021D49"></a></p>
+
+<h5>2.5-6 ZmqGetReceiveCapacity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqGetReceiveCapacity</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqGetReceiveCapacity</code> returns the maximum number of messages that a socket can store in its incoming buffer.</p>
+
+<p><a id="X808243357C0466C5" name="X808243357C0466C5"></a></p>
+
+<h5>2.5-7 ZmqSetSendBufferSize</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSetSendBufferSize</code>( <var class="Arg">socket</var>, <var class="Arg">size</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqSetSendBufferSize</code> sets the size of the transmission buffer used by the underlying operating system structure for sending data.</p>
+
+<p><a id="X86C7D8DE81F3DAC9" name="X86C7D8DE81F3DAC9"></a></p>
+
+<h5>2.5-8 ZmqGetSendBufferSize</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqGetSendBufferSize</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqGetSendBufferSize</code> returns the size of the transmission buffer used by the underlying operating system structure for sending data.</p>
+
+<p><a id="X7BFF68F478CB9591" name="X7BFF68F478CB9591"></a></p>
+
+<h5>2.5-9 ZmqSetReceiveBufferSize</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSetReceiveBufferSize</code>( <var class="Arg">socket</var>, <var class="Arg">size</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqSetReceiveBufferSize</code> sets the size of the transmission buffer used by the underlying operating system structure for receiving data.</p>
+
+<p><a id="X811DDCF3853C299D" name="X811DDCF3853C299D"></a></p>
+
+<h5>2.5-10 ZmqGetReceiveBufferSize</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqGetReceiveBufferSize</code>( <var class="Arg">socket</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="code">ZmqGetReceiveBufferSize</code> returns the size of the transmission buffer used by the underlying operating system structure for receiving data.</p>
+
+<p><a id="X79365BF47A15D740" name="X79365BF47A15D740"></a></p>
+
+<h5>2.5-11 ZmqSubscribe</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqSubscribe</code>( <var class="Arg">socket</var>, <var class="Arg">prefix</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="code">ZmqSubscribe</code> function can only be used for Subscriber sockets. After calling it, only messages that begin with the given prefix string will be received by the subscriber. All others will be silently discarded. The function can be used multiple times, and then all messages that match any of the prefixes will be received.</p>
+
+<p><a id="X7916FAA27F90D773" name="X7916FAA27F90D773"></a></p>
+
+<h5>2.5-12 ZmqUnsubscribe</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZmqUnsubscribe</code>( <var class="Arg">socket</var>, <var class="Arg">prefix</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="code">ZmqUnsubscribe</code> function removes the given prefix string from the socket's subscription list.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

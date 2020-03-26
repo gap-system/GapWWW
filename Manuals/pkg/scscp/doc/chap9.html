@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (scscp) - Chapter 9: Service functions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap9"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap9_mj.html">[MathJax on]</a></p>
+<p><a id="X80DFB24F8289C323" name="X80DFB24F8289C323"></a></p>
+<div class="ChapSects"><a href="chap9.html#X80DFB24F8289C323">9 <span class="Heading">Service functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X86C808F6826DCEB4">9.1 <span class="Heading">Pinging <strong class="pkg">SCSCP</strong> servers</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X78B08D767F9ADB28">9.1-1 PingSCSCPservice</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X8345DE358064674E">9.1-2 PingStatistic</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X783BD51C84E7EE6E">9.2 <span class="Heading">Info classes for <strong class="pkg">SCSCP</strong></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X831E6A5D8695A3F9">9.2-1 InfoSCSCP</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X82AC628D7880D043">9.2-2 InfoMasterWorker</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X7D89A99F7A9186DE">9.3 <span class="Heading">Other <strong class="pkg">SCSCP</strong> Utilities</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X845DFBDA83AEF6B0">9.3-1 DateISO8601</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X79CE2568789D17D6">9.3-2 CurrentTimestamp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X83A08C8883E5D3E1">9.3-3 Hostname</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X8312112E79686EF6">9.3-4 MemoryUsageByGAPinKbytes</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X844EC26F84D921CE">9.3-5 LastReceivedCallID</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X84F055ED860120D5">9.3-6 IO_PickleToString</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X813EACD27C218E19">9.3-7 IO_UnpickleFromString</a></span>
+</div></div>
+</div>
+
+<h3>9 <span class="Heading">Service functions</span></h3>
+
+<p><a id="X86C808F6826DCEB4" name="X86C808F6826DCEB4"></a></p>
+
+<h4>9.1 <span class="Heading">Pinging <strong class="pkg">SCSCP</strong> servers</span></h4>
+
+<p><a id="X78B08D767F9ADB28" name="X78B08D767F9ADB28"></a></p>
+
+<h5>9.1-1 PingSCSCPservice</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PingSCSCPservice</code>( <var class="Arg">hostname</var>, <var class="Arg">portnumber</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">fail</code></p>
+
+<p>This function returns <code class="keyw">true</code> if the client can establish connection with the SCSCP server at <var class="Arg">hostname</var>:<var class="Arg">portnumber</var>. Otherwise, it returns <code class="keyw">fail</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PingSCSCPservice("localhost",26133);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PingSCSCPservice("localhost",26140);                     </span>
+Error: rec(
+  message := "Connection refused",
+  number := 61 )
+fail
+
+</pre></div>
+
+<p><a id="X8345DE358064674E" name="X8345DE358064674E"></a></p>
+
+<h5>9.1-2 PingStatistic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PingStatistic</code>( <var class="Arg">hostname</var>, <var class="Arg">portnumber</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>The function is similar to the UNIX <code class="code">ping</code>. It tries <var class="Arg">n</var> times to establish connection with the SCSCP server at <var class="Arg">hostname</var>:<var class="Arg">portnumber</var>, and then displays statistical information.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PingStatistic("localhost",26133,1000);</span>
+1000 packets transmitted, 1000 received, 0% packet loss, time 208ms
+min/avg/max = [ 0, 26/125, 6 ]
+
+</pre></div>
+
+<p><a id="X783BD51C84E7EE6E" name="X783BD51C84E7EE6E"></a></p>
+
+<h4>9.2 <span class="Heading">Info classes for <strong class="pkg">SCSCP</strong></span></h4>
+
+<p><a id="X831E6A5D8695A3F9" name="X831E6A5D8695A3F9"></a></p>
+
+<h5>9.2-1 InfoSCSCP</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoSCSCP</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p><code class="func">InfoSCSCP</code> is a special Info class for the <strong class="pkg">SCSCP</strong> package. The amount of information to be displayed can be specified by the user by setting InfoLevel for this class from 0 to 4, and the default value of InfoLevel for the package is specified in the file <code class="file">scscp/config.g</code>. The higher the level is, the more information will be displayed. To change the InfoLevel to <code class="code">k</code>, use the command <code class="code">SetInfoLevel(InfoSCSCP, k)</code>. In the following examples we demonstrate various degrees of output details using Info messages.</p>
+
+<p>Default Info level:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoSCSCP,2);                              </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EvaluateBySCSCP( "WS_Factorial",[10],"localhost",26133); </span>
+#I  Creating a socket ...
+#I  Connecting to a remote socket via TCP/IP ...
+#I  Got connection initiation message
+#I  &lt;?scscp service_name="GAP" service_version="4.dev" service_id="localhost:2\
+6133:286" scscp_versions="1.0 1.1 1.2 1.3" ?&gt;
+#I  Requesting version 1.3 from the server ...
+#I  Server confirmed version 1.3 to the client ...
+#I  Request sent ...
+#I  Waiting for reply ...
+#I  &lt;?scscp start ?&gt;
+#I  &lt;?scscp end ?&gt;
+#I  Got back: object 3628800 with attributes 
+[ [ "call_id", "localhost:26133:286:JL6KRQeh" ] ]
+rec( attributes := [ [ "call_id", "localhost:26133:286:JL6KRQeh" ] ], 
+  object := 3628800 )
+
+</pre></div>
+
+<p>Minimal Info level:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoSCSCP,0);                              </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EvaluateBySCSCP( "WS_Factorial",[10],"localhost",26133);</span>
+rec( attributes := [ [ "call_id", "localhost:26133:286:jzjsp6th" ] ], 
+  object := 3628800 )
+
+</pre></div>
+
+<p>Verbose Info level:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoSCSCP,3);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EvaluateBySCSCP( "WS_Factorial",[10],"localhost",26133);</span>
+#I  Creating a socket ...
+#I  Connecting to a remote socket via TCP/IP ...
+#I  Got connection initiation message
+#I  &lt;?scscp service_name="GAP" service_version="4.dev" service_id="localhost:2\
+6133:286" scscp_versions="1.0 1.1 1.2 1.3" ?&gt;
+#I  Requesting version 1.3 from the server ...
+#I  Server confirmed version 1.3 to the client ...
+#I  Composing procedure_call message: 
+&lt;?scscp start ?&gt;
+&lt;OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0"&gt;
+	&lt;OMATTR&gt;
+		&lt;OMATP&gt;
+			&lt;OMS cd="scscp1" name="call_id"/&gt;
+			&lt;OMSTR&gt;localhost:26133:286:Jok6cQAf&lt;/OMSTR&gt;
+			&lt;OMS cd="scscp1" name="option_return_object"/&gt;
+			&lt;OMSTR&gt;&lt;/OMSTR&gt;
+		&lt;/OMATP&gt;
+		&lt;OMA&gt;
+			&lt;OMS cd="scscp1" name="procedure_call"/&gt;
+			&lt;OMA&gt;
+				&lt;OMS cd="scscp_transient_1" name="WS_Factorial"/&gt;
+				&lt;OMI&gt;10&lt;/OMI&gt;
+			&lt;/OMA&gt;
+		&lt;/OMA&gt;
+	&lt;/OMATTR&gt;
+&lt;/OMOBJ&gt;
+&lt;?scscp end ?&gt;
+#I  Total length 396 characters 
+#I  Request sent ...
+#I  Waiting for reply ...
+#I  &lt;?scscp start ?&gt;
+#I Received message: 
+&lt;OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0"&gt;
+	&lt;OMATTR&gt;
+		&lt;OMATP&gt;
+			&lt;OMS cd="scscp1" name="call_id"/&gt;
+			&lt;OMSTR&gt;localhost:26133:286:Jok6cQAf&lt;/OMSTR&gt;
+		&lt;/OMATP&gt;
+		&lt;OMA&gt;
+			&lt;OMS cd="scscp1" name="procedure_completed"/&gt;
+			&lt;OMI&gt;3628800&lt;/OMI&gt;
+		&lt;/OMA&gt;
+	&lt;/OMATTR&gt;
+&lt;/OMOBJ&gt;
+#I  &lt;?scscp end ?&gt;
+#I  Got back: object 3628800 with attributes 
+[ [ "call_id", "localhost:26133:286:Jok6cQAf" ] ]
+rec( attributes := [ [ "call_id", "localhost:26133:286:Jok6cQAf" ] ], 
+  object := 3628800 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoSCSCP,0);</span>
+
+</pre></div>
+
+<p><a id="X82AC628D7880D043" name="X82AC628D7880D043"></a></p>
+
+<h5>9.2-2 InfoMasterWorker</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoMasterWorker</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p><code class="code">InfoMasterWorker</code> is a special Info class for the Master-Worker skeleton <code class="func">ParListWithSCSCP</code> (<a href="chap8.html#X788208B57D4C497F"><span class="RefLink">8.2-1</span></a>). The amount of information to be displayed can be specified by the user by setting InfoLevel for this class from 0 to 5, and the default value of InfoLevel for the package is specified in the file <code class="file">scscp/config.g</code>. The higher the level is, the more information will be displayed. To change the InfoLevel to <code class="code">k</code>, use the command <code class="code">SetInfoLevel(InfoMasterWorker, k)</code>. In the following examples we demonstrate various degrees of output details using Info messages.</p>
+
+<p>Default Info level:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoMasterWorker,2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ParListWithSCSCP( List( [2..6], n -&gt; SymmetricGroup(n)), "WS_IdGroup" );</span>
+#I  1/5:master --&gt; localhost:26133
+#I  2/5:master --&gt; localhost:26134
+#I  3/5:master --&gt; localhost:26133
+#I  4/5:master --&gt; localhost:26134
+#I  5/5:master --&gt; localhost:26133
+[ [ 2, 1 ], [ 6, 1 ], [ 24, 12 ], [ 120, 34 ], [ 720, 763 ] ]
+
+</pre></div>
+
+<p>Minimal Info level:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoSCSCP,0);       </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoMasterWorker,0);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ParListWithSCSCP( List( [2..6], n -&gt; SymmetricGroup(n)), "WS_IdGroup" );</span>
+[ [ 2, 1 ], [ 6, 1 ], [ 24, 12 ], [ 120, 34 ], [ 720, 763 ] ]
+
+</pre></div>
+
+<p>Verbose Info level:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoMasterWorker,5);                                       </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ParListWithSCSCP( List( [2..6], n -&gt; SymmetricGroup(n)), "WS_IdGroup" );</span>
+#I  1/5:master --&gt; localhost:26133 : SymmetricGroup( [ 1 .. 2 ] )
+#I  2/5:master --&gt; localhost:26134 : SymmetricGroup( [ 1 .. 3 ] )
+#I  localhost:26133 --&gt; 1/5:master : [ 2, 1 ]
+#I  3/5:master --&gt; localhost:26133 : SymmetricGroup( [ 1 .. 4 ] )
+#I  localhost:26134 --&gt; 2/5:master : [ 6, 1 ]
+#I  4/5:master --&gt; localhost:26134 : SymmetricGroup( [ 1 .. 5 ] )
+#I  localhost:26133 --&gt; 3/5:master : [ 24, 12 ]
+#I  5/5:master --&gt; localhost:26133 : SymmetricGroup( [ 1 .. 6 ] )
+#I  localhost:26134 --&gt; 4/5:master : [ 120, 34 ]
+#I  localhost:26133 --&gt; 5/5:master : [ 720, 763 ]
+[ [ 2, 1 ], [ 6, 1 ], [ 24, 12 ], [ 120, 34 ], [ 720, 763 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoMasterWorker,2);</span>
+
+</pre></div>
+
+<p><a id="X7D89A99F7A9186DE" name="X7D89A99F7A9186DE"></a></p>
+
+<h4>9.3 <span class="Heading">Other <strong class="pkg">SCSCP</strong> Utilities</span></h4>
+
+<p><a id="X845DFBDA83AEF6B0" name="X845DFBDA83AEF6B0"></a></p>
+
+<h5>9.3-1 DateISO8601</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DateISO8601</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: string</p>
+
+<p>Returns the current date in the ISO-8601 YYYY-MM-DD format. This is an internal function of the package which is used by the <strong class="pkg">SCSCP</strong> server to generate the transient content dictionary, accordingly to the definition of the <strong class="pkg">OpenMath</strong> symbol <code class="code">meta.CDDate</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DateISO8601();</span>
+"2017-02-05"
+
+</pre></div>
+
+<p><a id="X79CE2568789D17D6" name="X79CE2568789D17D6"></a></p>
+
+<h5>9.3-2 CurrentTimestamp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CurrentTimestamp</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: string</p>
+
+<p>Returns the result of the call to <code class="file">date</code>. This is an internal function of the package which is used to add the timestamp to the <strong class="pkg">SCSCP</strong> service description.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CurrentTimestamp();</span>
+"Tue 30 Jan 2017 11:19:38 BST"
+
+</pre></div>
+
+<p><a id="X83A08C8883E5D3E1" name="X83A08C8883E5D3E1"></a></p>
+
+<h5>9.3-3 Hostname</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Hostname</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: string</p>
+
+<p>Returns the result of the call to <code class="file">hostname</code>. This function may be used in the configuration file <code class="file">scscp/config.g</code> to specify that the default hostname which will be used by the <strong class="pkg">SCSCP</strong> server will be detected automatically using <code class="file">hostname</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Hostname();</span>
+"scscp.gap-system.org"
+
+</pre></div>
+
+<p><a id="X8312112E79686EF6" name="X8312112E79686EF6"></a></p>
+
+<h5>9.3-4 MemoryUsageByGAPinKbytes</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MemoryUsageByGAPinKbytes</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: integer</p>
+
+<p>Returns the current volume of the memory used by <strong class="pkg">GAP</strong> in kylobytes. This is equivalent to calling <code class="file">ps -p &lt;PID&gt; -o vsz</code>, where <code class="code">&lt;PID&gt;</code> is the process ID of the <strong class="pkg">GAP</strong> process. This is an internal function of the package which is used by the <strong class="pkg">SCSCP</strong> server to report its memory usage in the <code class="code">info_memory</code> attribute when being called with the option <code class="code">debuglevel=2</code> (see options in <code class="func">EvaluateBySCSCP</code> (<a href="chap6.html#X7C745B2878E0AC41"><span class="RefLink">6.3-1</span></a>) and <code class="func">NewProcess</code> (<a href="chap6.html#X8712E82B811A4170"><span class="RefLink">6.2-2</span></a>)).</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MemoryUsageByGAPinKbytes();</span>
+649848
+
+</pre></div>
+
+<p><a id="X844EC26F84D921CE" name="X844EC26F84D921CE"></a></p>
+
+<h5>9.3-5 LastReceivedCallID</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LastReceivedCallID</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: string</p>
+
+<p>Returns the call ID contained in the most recently received message. It may contain some useful debugging information; in particular, the call ID for the <strong class="pkg">GAP</strong> <strong class="pkg">SCSCP</strong> client and server contains colon-separated server name, port number, process ID and a random string.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LastReceivedCallID();</span>
+"scscp.gap-system.org:26133:77372:choDZBgA"
+
+</pre></div>
+
+<p><a id="X84F055ED860120D5" name="X84F055ED860120D5"></a></p>
+
+<h5>9.3-6 IO_PickleToString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IO_PickleToString</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: string containing "pickled" object</p>
+
+<p>This function "pickles" or "serialises" the object <var class="Arg">obj</var> using the operation <code class="func">IO_Pickle</code> (<a href="../../../pkg/io-4.6.0/doc/chap5.html#X7E01770481297DF1"><span class="RefLink">IO: IO_Pickle</span></a>) from the <strong class="pkg">IO</strong> package, and writes it to a string, from which it could be later restored using <code class="func">IO_UnpickleFromString</code> (<a href="chap9.html#X813EACD27C218E19"><span class="RefLink">9.3-7</span></a>). This provides a way to design <strong class="pkg">SCSCP</strong> procedures which transmit <strong class="pkg">GAP</strong> objects in the "pickled" format as <strong class="pkg">OpenMath</strong> strings, which may be useful for objects which may be "pickled" by the <strong class="pkg">IO</strong> package but can not be converted to <strong class="pkg">OpenMath</strong> or for which the "pickled" representation is more compact or can be encoded/decoded much faster.</p>
+
+<p>See <code class="func">IO_Pickle</code> (<a href="../../../pkg/io-4.6.0/doc/chap5.html#X7E01770481297DF1"><span class="RefLink">IO: IO_Pickle</span></a>) and <code class="func">IO_Unpickle</code> (<a href="../../../pkg/io-4.6.0/doc/chap5.html#X8228EE63809A6DEF"><span class="RefLink">IO: IO_Unpickle</span></a>) for more details.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := IO_PickleToString( GF( 125 ) );</span>
+"FFIEINTG\&gt;15INTG\&gt;13FAIL"
+
+</pre></div>
+
+<p><a id="X813EACD27C218E19" name="X813EACD27C218E19"></a></p>
+
+<h5>9.3-7 IO_UnpickleFromString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IO_UnpickleFromString</code>( <var class="Arg">s</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: "unpickled" GAP object</p>
+
+<p>This function "unpickles" the string <var class="Arg">s</var> which was created using the function <code class="func">IO_PickleToString</code> (<a href="chap9.html#X84F055ED860120D5"><span class="RefLink">9.3-6</span></a>), using the operation <code class="func">IO_Unpickle</code> (<a href="../../../pkg/io-4.6.0/doc/chap5.html#X8228EE63809A6DEF"><span class="RefLink">IO: IO_Unpickle</span></a>) from the <strong class="pkg">IO</strong> package. See <code class="func">IO_PickleToString</code> (<a href="chap9.html#X84F055ED860120D5"><span class="RefLink">9.3-6</span></a>) for more details and suggestions about its usage.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_UnpickleFromString( f );                    </span>
+GF(5^3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f = IO_UnpickleFromString( IO_PickleToString( f ) ); </span>
+true
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

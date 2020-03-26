@@ -1,0 +1,106 @@
+Dear Reader,
+
+generally, running XGAP under the Windows operating system is not
+supported by the authors. However, here is a report by a user who
+claims that this is indeed possible.
+
+We have not altered his description, so you probably have to
+update some URLs to the latest version of GAP and XGAP.
+
+  Max Neunhoeffer
+
+-----------------------------------------------------------------------
+
+Joe Bohanon <jbohanon2@gmail.com> wrote:
+
+Dear Saad and GAP Forum
+
+It took me a while to figure out how to install XGAP to run in XP, but 
+yes, it is possible.  If you have access to a mac, I'd also recommend 
+CocoaGAP.
+
+I helped one of my colleagues install it on her laptop a few years ago.  
+Here's the e-mail I sent with a few updates.  If anyone has corrections 
+or clarifications, I'd welcome them.
+
+Here's the long list of steps to get XGAP running.  
+
+1. Download Cygwin from http://www.cygwin.com/setup.exe.  Run the program
+and use all the default install locations.  Once you get to where you can
+choose a mirror, the one I've used is about half-way down,
+ftp://mirrors.rcn.net.  It's very fast downloads, unlike some of the other
+foreign servers listed.
+
+2. Once you hit next it brings up a list of things to install.  Already
+checked should be everything critical to run Cygwin, but you need a few
+extra packages.  First, go down to X11 and select everything.  Then hit
+the "View" button, which will list all packages alphabetically.  Get
+"gcc", "gdb" and "make".  Hit next and it will start downloading, then
+installing.  This will probably take a while.  Once finished, run cygwin
+(it should've created a desktop icon or one in the start menu).  The
+commands are exactly the same as UNIX.  If you don't know UNIX, you really
+only need to know that CD changes directory, CD .., moves you one
+directory up, and ls lists the files and folders in the current directory.
+
+3. Now, you need to get GAP downloaded and unpacked.  Get the .zoo file
+from ftp://ftp.gap-system.org/pub/gap/gap4/zoo/gap4r4p6.zoo and the unzoo
+utility from ftp://ftp.gap-system.org/pub/gap/gap4/util/unzoo.c.  Download
+both files into a convenient directory in the c:\cygwin folder and
+navigate to it.  Type "cc -o unzoo -DSYS_IS_UNIX unzoo.c" to get the unzoo
+program compiled.  Then once GAP finishes downloading, type unzoo -x
+gap4r4p6.zoo.  This take a while as well.  I'm pretty sure it will always
+unpack into the location /usr/local/lib/gap4r4.
+
+4. Once GAP is finished installing, you can check to see if it will run by
+navigating to the folder above in the Cygwin shell, then going into /bin.
+You can try running ./gapw95.exe or ./gap.bat.  On mine, I have to use the extra option "-l .." with the first command.
+
+5. Next, download xgap from
+ftp://ftp.gap-system.org/pub/gap/gap4/zoo/packages/xgap4r21.zoo and unpack
+it in the same way.  Move it to the pkg folder.
+
+6. In the Cygwin shell, navigate to /pkg/xgap and type ./configure.  Once
+it finishes type make.  I forget exactly where, but at this point a file
+called "xgap.sh" has been created.  Type ls and if you don't see it, go
+into the "bin" folder and try again.  Anyway, you really want to edit this
+from the Windows interface anyway.  Right-click and choose to open the
+file with wordpad (notepad apparently does not read some of the line break
+characters making it near impossible to edit).  Now scroll down and input
+the following value:
+For GAP_DIR, /usr/local/lib/gap4r4
+For XGAP_PRG, you need to look in the XGAP/bin folder.  The exectuable is
+in a folder that is called something like i686-pc-cygwin-gcc, but it may
+vary.  Then you input something like i686-pc-cygwin-gcc/xgap.exe.
+Save and close the file.
+
+7. Go back to the cygwin shell and navigate to /usr/local/bin, then type
+ln -s /usr/local/lib/gap4r4/pkg/xgap/bin/xgap.sh xgap.  This makes it so
+you don't have to navigate through a ton of folders.
+
+8. Now you need to get X-windows running.  Supposedly there are 3 commands
+to do so, but I've only gotten one to work.  The two that don't (which you
+should try just in case) are xwin.exe and startxwin.bat.  The second one
+does open a shell, but not the graphical thing that the first does.  I
+have gotten xinit to work every time.
+
+9. Type xgap, and it should start running GAP. In X-Windows, the enter
+key isn't bound right. To get commands to execute, you have to hit
+enter, then Ctrl-J (this is something I'd appreciate if someone found a
+work-around for).
+
+10. I also use a program called fvwm. I forget exactly how I installed
+it, but the instructions were straightforward. When you get it installed
+go into X-Windows, and type fvwm (you might have to create a link to
+that program, I don't remember). Then left click in the blank space and
+click "XTERM". Now you have the shell you want. Incidentally, you'll
+also probably want select the option "All Paging Off" from the "Simple
+Config Ops" menu that shows up when you left-click.
+
+There are also examples here:
+http://www-gap.mcs.st-and.ac.uk/Manuals/pkg/xgap/htm/CHAP004.htm
+These are good in case you don't want to draw a full lattice.
+
+Let me know if you can get this working.  If you have trouble I'd be happy
+to try to help.
+
+Joe

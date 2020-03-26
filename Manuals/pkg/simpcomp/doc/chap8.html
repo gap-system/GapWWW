@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (simpcomp) - Chapter 8: (Co-)Homology of simplicial complexes</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap8"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X7B0C706A848A2542" name="X7B0C706A848A2542"></a></p>
+<div class="ChapSects"><a href="chap8.html#X7B0C706A848A2542">8 <span class="Heading">(Co-)Homology of simplicial complexes</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X7DCD23807E4DD2B2">8.1 <span class="Heading">Homology computation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X8762B952823BDEF3">8.1-1 SCBoundaryOperatorMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7E5983748742026D">8.1-2 SCBoundarySimplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F9B47A97F5FA005">8.1-3 SCHomologyBasis</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7C569D9A7868C697">8.1-4 SCHomologyBasisAsSimplices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X858989CE797A8366">8.1-5 SCHomologyInternal</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X86A940277A35331B">8.2 <span class="Heading">Cohomology computation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X8527CC347F606648">8.2-1 SCCoboundaryOperatorMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7926D71A8169629B">8.2-2 SCCohomology</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X85910A6B824D63A4">8.2-3 SCCohomologyBasis</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7A5047E57E150716">8.2-4 SCCohomologyBasisAsSimplices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7A9137847BF96DF3">8.2-5 SCCupProduct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X835E7016826D14A8">8.2-6 SCIntersectionForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X791C2B45872A71CA">8.2-7 SCIntersectionFormParity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7B5F948B84F5E316">8.2-8 SCIntersectionFormDimensionality</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X87375A6978F3C8CD">8.2-9 SCIntersectionFormSignature</a></span>
+</div></div>
+</div>
+
+<h3>8 <span class="Heading">(Co-)Homology of simplicial complexes</span></h3>
+
+<p>By default, <strong class="pkg">simpcomp</strong> uses an algorithm based on discrete Morse theory (see Chapter <a href="chap12.html#X7E9FD84F822A58D6"><span class="RefLink">12</span></a>, <code class="func">SCHomology</code> (<a href="chap7.html#X78D66254858CE901"><span class="RefLink">7.3-9</span></a>)) for its homology computations. However, some additional (co-)homology related functionality cannot be realised using this algorithm. For this, <strong class="pkg">simpcomp</strong> contains an additional (co-)homology algorithm (cf. <code class="func">SCHomologyInternal</code> (<a href="chap8.html#X858989CE797A8366"><span class="RefLink">8.1-5</span></a>)), which will be presented in this chapter.</p>
+
+<p>Furthermore, whenever possible <strong class="pkg">simpcomp</strong> makes use of the <strong class="pkg">GAP</strong> package ''homology'' <a href="chapBib.html#biBDumas04Homology">[DHSW11]</a>, for an alternative method to calculate homology groups (cf. <code class="func">SCHomologyClassic</code> (<a href="chap6.html#X864978877E7D4DA0"><span class="RefLink">6.9-31</span></a>)) which sometimes is much faster than the built-in discrete Morse theory algorithm.</p>
+
+<p><a id="X7DCD23807E4DD2B2" name="X7DCD23807E4DD2B2"></a></p>
+
+<h4>8.1 <span class="Heading">Homology computation</span></h4>
+
+<p>Apart from calculating boundaries of simplices, boundary matrices or the simplicial homology of a given complex, <strong class="pkg">simpcomp</strong> is also able to compute a basis of the homology groups.</p>
+
+<p><a id="X8762B952823BDEF3" name="X8762B952823BDEF3"></a></p>
+
+<h5>8.1-1 SCBoundaryOperatorMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCBoundaryOperatorMatrix</code>( <var class="Arg">complex</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a rectangular matrix upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Calculates the matrix of the boundary operator <span class="SimpleMath">∂_<var class="Arg">k+1</var></span> of a simplicial complex <var class="Arg">complex</var>. Note that each column contains the boundaries of a <var class="Arg">k</var><span class="SimpleMath">+1</span>-simplex as a list of oriented <var class="Arg">k</var>-simplices and that the matrix is stored as a list of row vectors (as usual in GAP).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCFromFacets([[1,2,3],[1,2,6],[1,3,5],[1,4,5],[1,4,6],\
+                       [2,3,4],[2,4,5],[2,5,6],[3,4,6],[3,5,6]]);;
+ gap&gt; mat:=SCBoundaryOperatorMatrix(c,1);
+ [ [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+   [ -1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 ], 
+   [ 0, -1, 0, 0, 0, -1, 0, 0, 0, 1, 1, 1, 0, 0, 0 ], 
+   [ 0, 0, -1, 0, 0, 0, -1, 0, 0, -1, 0, 0, 1, 1, 0 ], 
+   [ 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 1 ], 
+   [ 0, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, -1, 0, -1, -1 ] ]
+ </pre></div>
+
+<p><a id="X7E5983748742026D" name="X7E5983748742026D"></a></p>
+
+<h5>8.1-2 SCBoundarySimplex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCBoundarySimplex</code>( <var class="Arg">simplex</var>, <var class="Arg">orientation</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Calculates the boundary of a given <var class="Arg">simplex</var>. If the flag <var class="Arg">orientation</var> is set to <code class="keyw">true</code>, the function returns the boundary as a list of oriented simplices of the form [ ORIENTATION, SIMPLEX ], where ORIENTATION is either +1 or -1 and a value of +1 means that SIMPLEX is positively oriented and a value of -1 that SIMPLEX is negatively oriented. If <var class="Arg">orientation</var> is set to <code class="keyw">false</code>, an unoriented list of simplices is returned.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCBoundarySimplex([1..5],true);
+ [ [ -1, [ 2, 3, 4, 5 ] ], [ 1, [ 1, 3, 4, 5 ] ], [ -1, [ 1, 2, 4, 5 ] ], 
+   [ 1, [ 1, 2, 3, 5 ] ], [ -1, [ 1, 2, 3, 4 ] ] ]
+ gap&gt; SCBoundarySimplex([1..5],false);
+ [ [ 2, 3, 4, 5 ], [ 1, 3, 4, 5 ], [ 1, 2, 4, 5 ], [ 1, 2, 3, 5 ], 
+   [ 1, 2, 3, 4 ] ]
+ </pre></div>
+
+<p><a id="X7F9B47A97F5FA005" name="X7F9B47A97F5FA005"></a></p>
+
+<h5>8.1-3 SCHomologyBasis</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCHomologyBasis</code>( <var class="Arg">complex</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pairs of the form <code class="code">[ integer, list of linear combinations of simplices ]</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Calculates a set of basis elements for the <var class="Arg">k</var>-dimensional homology group (with integer coefficients) of a simplicial complex <var class="Arg">complex</var>. The entries of the returned list are of the form [ MODULUS, [ BASEELM1, BASEELM2, ...] ], where the value MODULUS is 1 for the basis elements of the free part of the <var class="Arg">k</var>-th homology group and <span class="SimpleMath">q≥ 2</span> for the basis elements of the <span class="SimpleMath">q</span>-torsion part. In contrast to the function <code class="func">SCHomologyBasisAsSimplices</code> (<a href="chap8.html#X7C569D9A7868C697"><span class="RefLink">8.1-4</span></a>) the basis elements are stored as lists of coefficient-index pairs referring to the simplices of the complex, i.e. a basis element of the form <span class="SimpleMath">[ [ λ_1, i], [λ_2, j], dots ] dots</span> encodes the linear combination of simplices of the form <span class="SimpleMath">λ_1*∆_1+λ_2*∆_2</span> with <span class="SimpleMath">∆_1</span>=<code class="code">SCSkel(complex,k)[i]</code>, <span class="SimpleMath">∆_2</span>=<code class="code">SCSkel(complex,k)[j]</code> and so on.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("(S^2xS^1)#RP^3");
+ [ [ 590, "(S^2xS^1)#RP^3" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; SCHomologyBasis(c,1);
+ [ [ 1, [ [ 1, 12 ], [ -1, 7 ], [ 1, 1 ] ] ], 
+   [ 2, [ [ 1, 68 ], [ -1, 69 ], [ -1, 71 ], [ 2, 72 ], [ -2, 73 ] ] ] ]
+ </pre></div>
+
+<p><a id="X7C569D9A7868C697" name="X7C569D9A7868C697"></a></p>
+
+<h5>8.1-4 SCHomologyBasisAsSimplices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCHomologyBasisAsSimplices</code>( <var class="Arg">complex</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pairs of the form <code class="code">[ integer, list of linear combinations of simplices ]</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Calculates a set of basis elements for the <var class="Arg">k</var>-dimensional homology group (with integer coefficients) of a simplicial complex <var class="Arg">complex</var>. The entries of the returned list are of the form [ MODULUS, [ BASEELM1, BASEELM2, ...] ], where the value MODULUS is 1 for the basis elements of the free part of the <var class="Arg">k</var>-th homology group and <span class="SimpleMath">q≥ 2</span> for the basis elements of the <span class="SimpleMath">q</span>-torsion part. In contrast to the function <code class="func">SCHomologyBasis</code> (<a href="chap8.html#X7F9B47A97F5FA005"><span class="RefLink">8.1-3</span></a>) the basis elements are stored as lists of coefficient-simplex pairs, i.e. a basis element of the form <span class="SimpleMath">[ [ λ_1, ∆_1], [λ_2, ∆_2], dots ]</span> encodes the linear combination of simplices of the form <span class="SimpleMath">λ_1*∆_1+λ_2*∆_2 + dots</span>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("(S^2xS^1)#RP^3");
+ [ [ 590, "(S^2xS^1)#RP^3" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; SCHomologyBasisAsSimplices(c,1);
+ [ [ 1, [ [ 1, [ 2, 8 ] ], [ -1, [ 1, 8 ] ], [ 1, [ 1, 2 ] ] ] ], 
+   [ 2, 
+       [ [ 1, [ 11, 12 ] ], [ -1, [ 11, 13 ] ], [ -1, [ 12, 13 ] ], 
+           [ 2, [ 12, 14 ] ], [ -2, [ 13, 14 ] ] ] ] ]
+ </pre></div>
+
+<p><a id="X858989CE797A8366" name="X858989CE797A8366"></a></p>
+
+<h5>8.1-5 SCHomologyInternal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCHomologyInternal</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pairs of the form <code class="code">[ integer, list ]</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>This function computes the reduced simplicial homology with integer coefficients of a given simplicial complex <var class="Arg">complex</var> with integer coefficients. It uses the algorithm described in <a href="chapBib.html#biBDesbrun08DiscDiffFormCompModel">[DKT08]</a>.</p>
+
+<p>The output is a list of homology groups of the form <span class="SimpleMath">[H_0,....,H_d]</span>, where <span class="SimpleMath">d</span> is the dimension of <var class="Arg">complex</var>. The format of the homology groups <span class="SimpleMath">H_i</span> is given in terms of their maximal cyclic subgroups, i.e. a homology group <span class="SimpleMath">H_i≅ Z^f + Z / t_1 Z × dots × Z / t_n Z</span> is returned in form of a list <span class="SimpleMath">[ f, [t_1,...,t_n] ]</span>, where <span class="SimpleMath">f</span> is the (integer) free part of <span class="SimpleMath">H_i</span> and <span class="SimpleMath">t_i</span> denotes the torsion parts of <span class="SimpleMath">H_i</span> ordered in weakly incresing size. See also <code class="func">SCHomology</code> (<a href="chap7.html#X78D66254858CE901"><span class="RefLink">7.3-9</span></a>) and <code class="func">SCHomologyClassic</code> (<a href="chap6.html#X864978877E7D4DA0"><span class="RefLink">6.9-31</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCSurface(1,false);;
+ gap&gt; SCHomologyInternal(c);
+ [ [ 0, [  ] ], [ 0, [ 2 ] ], [ 0, [  ] ] ]
+ </pre></div>
+
+<p><a id="X86A940277A35331B" name="X86A940277A35331B"></a></p>
+
+<h4>8.2 <span class="Heading">Cohomology computation</span></h4>
+
+<p><strong class="pkg">simpcomp</strong> can also compute the cohomology groups of simplicial complexes, bases of these cohomology groups, the cup product of two cocycles and the intersection form of (orientable) 4-manifolds.</p>
+
+<p><a id="X8527CC347F606648" name="X8527CC347F606648"></a></p>
+
+<h5>8.2-1 SCCoboundaryOperatorMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCCoboundaryOperatorMatrix</code>( <var class="Arg">complex</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a rectangular matrix upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Calculates the matrix of the coboundary operator <span class="SimpleMath">d^<var class="Arg">k+1</var></span> as a list of row vectors.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCFromFacets([[1,2,3],[1,2,6],[1,3,5],[1,4,5],[1,4,6],\
+                       [2,3,4],[2,4,5],[2,5,6],[3,4,6],[3,5,6]]);
+ &gt; [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="unnamed complex 2"
+  Dim=2
+ 
+ /SimplicialComplex]
+ gap&gt; mat:=SCCoboundaryOperatorMatrix(c,1);
+ [ [ -1, 1, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 
+   [ -1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0 ], 
+   [ 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0 ], 
+   [ 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0 ], 
+   [ 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0 ], 
+   [ 0, 0, 0, 0, 0, -1, 1, 0, 0, -1, 0, 0, 0, 0, 0 ], 
+   [ 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, -1, 0, 0 ], 
+   [ 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, -1 ], 
+   [ 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 1, 0, -1, 0 ], 
+   [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, -1 ] ]
+ </pre></div>
+
+<p><a id="X7926D71A8169629B" name="X7926D71A8169629B"></a></p>
+
+<h5>8.2-2 SCCohomology</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCCohomology</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pairs of the form <code class="code">[ integer, list ]</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>This function computes the simplicial cohomology groups of a given simplicial complex <var class="Arg">complex</var> with integer coefficients. It uses the algorithm described in <a href="chapBib.html#biBDesbrun08DiscDiffFormCompModel">[DKT08]</a>.</p>
+
+<p>The output is a list of cohomology groups of the form <span class="SimpleMath">[H^0,....,H^d]</span>, where <span class="SimpleMath">d</span> is the dimension of <var class="Arg">complex</var>. The format of the cohomology groups <span class="SimpleMath">H^i</span> is given in terms of their maximal cyclic subgroups, i.e. a cohomology group <span class="SimpleMath">H^i≅ Z^f + Z / t_1 Z × dots × Z / t_n Z</span> is returned in form of a list <span class="SimpleMath">[ f, [t_1,...,t_n] ]</span>, where <span class="SimpleMath">f</span> is the (integer) free part of <span class="SimpleMath">H^i</span> and <span class="SimpleMath">t_i</span> denotes the torsion parts of <span class="SimpleMath">H^i</span> ordered in weakly increasing size.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCFromFacets([[1,2,3],[1,2,6],[1,3,5],[1,4,5],[1,4,6],
+                       [2,3,4],[2,4,5],[2,5,6],[3,4,6],[3,5,6]]);
+ &gt; [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="unnamed complex 4"
+  Dim=2
+ 
+ /SimplicialComplex]
+ gap&gt; SCCohomology(c);
+ [ [ 1, [  ] ], [ 0, [  ] ], [ 0, [ 2 ] ] ]
+ </pre></div>
+
+<p><a id="X85910A6B824D63A4" name="X85910A6B824D63A4"></a></p>
+
+<h5>8.2-3 SCCohomologyBasis</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCCohomologyBasis</code>( <var class="Arg">complex</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pairs of the form <code class="code">[ integer, list of linear combinations of simplices ]</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Calculates a set of basis elements for the <var class="Arg">k</var>-dimensional cohomology group (with integer coefficients) of a simplicial complex <var class="Arg">complex</var>. The entries of the returned list are of the form [ MODULUS, [ BASEELM1, BASEELM2, ...] ], where the value MODULUS is 1 for the basis elements of the free part of the <var class="Arg">k</var>-th homology group and <span class="SimpleMath">q≥ 2</span> for the basis elements of the <span class="SimpleMath">q</span>-torsion part. In contrast to the function <code class="func">SCCohomologyBasisAsSimplices</code> (<a href="chap8.html#X7A5047E57E150716"><span class="RefLink">8.2-4</span></a>) the basis elements are stored as lists of coefficient-index pairs referring to the linear forms dual to the simplices in the <span class="SimpleMath">k</span>-th cochain complex of <var class="Arg">complex</var>, i.e. a basis element of the form <span class="SimpleMath">[ [ λ_1, i], [λ_2, j], dots ] dots</span> encodes the linear combination of simplices (or their dual linear forms in the corresponding cochain complex) of the form <span class="SimpleMath">λ_1*∆_1+λ_2*∆_2</span> with <span class="SimpleMath">∆_1</span>=<code class="code">SCSkel(complex,k)[i]</code>, <span class="SimpleMath">∆_2</span>=<code class="code">SCSkel(complex,k)[j]</code> and so on.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("SU(3)/SO(3)");   
+ [ [ 564, "SU(3)/SO(3) (VT)" ], [ 7277, "SU(3)/SO(3) (VT)" ], 
+   [ 7417, "SU(3)/SO(3) (VT)" ], [ 7418, "SU(3)/SO(3) (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; SCCohomologyBasis(c,3); 
+ [ [ 2, [ [ -9, 259 ], [ 9, 262 ], [ 9, 263 ], [ -9, 270 ], [ 9, 271 ], 
+           [ -9, 273 ], [ -9, 274 ], [ -18, 275 ], [ -9, 276 ], [ 9, 278 ], 
+           [ -9, 279 ], [ -9, 280 ], [ 3, 283 ], [ -3, 285 ], [ 3, 289 ], 
+           [ -3, 294 ], [ 3, 310 ], [ -3, 313 ], [ 3, 316 ], [ -1, 317 ], 
+           [ -6, 318 ], [ 3, 319 ], [ -6, 320 ], [ 6, 321 ], [ 1, 322 ], 
+           [ 3, 325 ], [ -1, 328 ], [ 6, 330 ], [ -2, 331 ], [ 12, 332 ], 
+           [ 7, 333 ], [ -5, 334 ], [ 1, 345 ], [ 3, 355 ], [ -9, 357 ], 
+           [ 9, 358 ], [ 1, 363 ], [ 12, 365 ], [ -9, 366 ], [ -3, 370 ], 
+           [ -1, 371 ], [ -3, 372 ], [ 8, 373 ], [ -1, 374 ], [ 6, 375 ], 
+           [ 9, 376 ], [ 3, 377 ], [ 1, 380 ], [ 3, 383 ], [ -8, 385 ], 
+           [ -9, 386 ], [ -9, 388 ], [ -18, 404 ], [ 9, 410 ], [ -9, 425 ], 
+           [ -18, 426 ], [ -9, 427 ], [ 9, 428 ], [ -9, 429 ], [ 3, 433 ], 
+           [ -3, 435 ], [ -9, 437 ], [ 10, 442 ], [ 12, 445 ], [ 1, 447 ], 
+           [ -19, 448 ], [ 2, 449 ], [ -1, 450 ], [ -9, 451 ], [ 3, 453 ], 
+           [ 1, 455 ], [ 1, 457 ], [ -11, 458 ], [ -9, 459 ], [ 9, 461 ], 
+           [ 9, 462 ], [ -9, 468 ], [ 9, 469 ], [ -18, 471 ], [ -9, 472 ], 
+           [ 9, 474 ], [ -9, 475 ], [ 9, 488 ], [ 9, 495 ], [ -9, 500 ], 
+           [ -3, 504 ], [ 9, 505 ], [ 9, 512 ], [ 9, 515 ], [ 6, 519 ], 
+           [ 18, 521 ], [ -15, 523 ], [ 9, 524 ], [ -3, 525 ], [ 18, 527 ], 
+           [ -18, 528 ], [ 6, 529 ], [ 6, 531 ], [ 12, 532 ] ] ] ]
+ </pre></div>
+
+<p><a id="X7A5047E57E150716" name="X7A5047E57E150716"></a></p>
+
+<h5>8.2-4 SCCohomologyBasisAsSimplices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCCohomologyBasisAsSimplices</code>( <var class="Arg">complex</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pars of the form <code class="code">[ integer, linear combination of simplices ]</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Calculates a set of basis elements for the <var class="Arg">k</var>-dimensional cohomology group (with integer coefficients) of a simplicial complex <var class="Arg">complex</var>. The entries of the returned list are of the form [ MODULUS, [ BASEELM1, BASEELM2, ...] ], where the value MODULUS is 1 for the basis elements of the free part of the <var class="Arg">k</var>-th homology group and <span class="SimpleMath">q≥ 2</span> for the basis elements of the <span class="SimpleMath">q</span>-torsion part. In contrast to the function <code class="func">SCCohomologyBasis</code> (<a href="chap8.html#X85910A6B824D63A4"><span class="RefLink">8.2-3</span></a>) the basis elements are stored as lists of coefficient-simplex pairs referring to the linear forms dual to the simplices in the <span class="SimpleMath">k</span>-th cochain complex of <var class="Arg">complex</var>, i.e. a basis element of the form <span class="SimpleMath">[ [ λ_1, ∆_i], [λ_2, ∆_j], dots ] dots</span> encodes the linear combination of simplices (or their dual linear forms in the corresponding cochain complex) of the form <span class="SimpleMath">λ_1*∆_1+λ_2*∆_2 + dots</span>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("SU(3)/SO(3)");   
+ [ [ 564, "SU(3)/SO(3) (VT)" ], [ 7277, "SU(3)/SO(3) (VT)" ], 
+   [ 7417, "SU(3)/SO(3) (VT)" ], [ 7418, "SU(3)/SO(3) (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; SCCohomologyBasisAsSimplices(c,3);
+ [ [ 2, 
+       [ [ -9, [ 2, 7, 8, 9 ] ], [ 9, [ 2, 7, 8, 12 ] ], 
+           [ 9, [ 2, 7, 8, 13 ] ], [ -9, [ 2, 7, 11, 12 ] ], 
+           [ 9, [ 2, 7, 11, 13 ] ], [ -9, [ 2, 8, 9, 10 ] ], 
+           [ -9, [ 2, 8, 9, 11 ] ], [ -18, [ 2, 8, 9, 12 ] ], 
+           [ -9, [ 2, 8, 9, 13 ] ], [ 9, [ 2, 8, 10, 12 ] ], 
+           [ -9, [ 2, 8, 10, 13 ] ], [ -9, [ 2, 8, 11, 12 ] ], 
+           [ 3, [ 2, 9, 10, 12 ] ], [ -3, [ 2, 9, 11, 12 ] ], 
+           [ 3, [ 3, 4, 5, 7 ] ], [ -3, [ 3, 4, 5, 12 ] ], 
+           [ 3, [ 3, 4, 10, 12 ] ], [ -3, [ 3, 5, 6, 7 ] ], 
+           [ 3, [ 3, 5, 6, 11 ] ], [ -1, [ 3, 5, 6, 13 ] ], 
+           [ -6, [ 3, 5, 7, 8 ] ], [ 3, [ 3, 5, 7, 10 ] ], 
+           [ -6, [ 3, 5, 7, 11 ] ], [ 6, [ 3, 5, 7, 12 ] ], 
+           [ 1, [ 3, 5, 7, 13 ] ], [ 3, [ 3, 5, 8, 12 ] ], 
+           [ -1, [ 3, 5, 9, 13 ] ], [ 6, [ 3, 5, 10, 12 ] ], 
+           [ -2, [ 3, 5, 10, 13 ] ], [ 12, [ 3, 5, 11, 12 ] ], 
+           [ 7, [ 3, 5, 11, 13 ] ], [ -5, [ 3, 5, 12, 13 ] ], 
+           [ 1, [ 3, 6, 9, 13 ] ], [ 3, [ 3, 7, 10, 12 ] ], 
+           [ -9, [ 3, 7, 11, 12 ] ], [ 9, [ 3, 7, 11, 13 ] ], 
+           [ 1, [ 3, 8, 9, 13 ] ], [ 12, [ 3, 8, 10, 12 ] ], 
+           [ -9, [ 3, 8, 10, 13 ] ], [ -3, [ 3, 9, 10, 12 ] ], 
+           [ -1, [ 3, 9, 10, 13 ] ], [ -3, [ 3, 9, 11, 12 ] ], 
+           [ 8, [ 3, 9, 11, 13 ] ], [ -1, [ 3, 9, 12, 13 ] ], 
+           [ 6, [ 3, 10, 11, 12 ] ], [ 9, [ 3, 10, 11, 13 ] ], 
+           [ 3, [ 3, 10, 12, 13 ] ], [ 1, [ 4, 5, 6, 8 ] ], 
+           [ 3, [ 4, 5, 6, 11 ] ], [ -8, [ 4, 5, 6, 13 ] ], 
+           [ -9, [ 4, 5, 7, 8 ] ], [ -9, [ 4, 5, 7, 11 ] ], 
+           [ -18, [ 4, 6, 8, 9 ] ], [ 9, [ 4, 6, 9, 13 ] ], 
+           [ -9, [ 4, 8, 9, 10 ] ], [ -18, [ 4, 8, 9, 12 ] ], 
+           [ -9, [ 4, 8, 9, 13 ] ], [ 9, [ 4, 8, 10, 12 ] ], 
+           [ -9, [ 4, 8, 10, 13 ] ], [ 3, [ 4, 9, 10, 12 ] ], 
+           [ -3, [ 4, 9, 11, 12 ] ], [ -9, [ 4, 9, 12, 13 ] ], 
+           [ 10, [ 5, 6, 7, 8 ] ], [ 12, [ 5, 6, 7, 11 ] ], 
+           [ 1, [ 5, 6, 7, 13 ] ], [ -19, [ 5, 6, 8, 9 ] ], 
+           [ 2, [ 5, 6, 8, 11 ] ], [ -1, [ 5, 6, 8, 12 ] ], 
+           [ -9, [ 5, 6, 8, 13 ] ], [ 3, [ 5, 6, 9, 11 ] ], 
+           [ 1, [ 5, 6, 9, 13 ] ], [ 1, [ 5, 6, 10, 13 ] ], 
+           [ -11, [ 5, 6, 11, 13 ] ], [ -9, [ 5, 7, 8, 9 ] ], 
+           [ 9, [ 5, 7, 8, 12 ] ], [ 9, [ 5, 7, 8, 13 ] ], 
+           [ -9, [ 5, 7, 11, 12 ] ], [ 9, [ 5, 7, 11, 13 ] ], 
+           [ -18, [ 5, 8, 9, 12 ] ], [ -9, [ 5, 8, 9, 13 ] ], 
+           [ 9, [ 5, 8, 10, 12 ] ], [ -9, [ 5, 8, 11, 12 ] ], 
+           [ 9, [ 6, 7, 8, 13 ] ], [ 9, [ 6, 7, 11, 13 ] ], 
+           [ -9, [ 6, 8, 10, 13 ] ], [ -3, [ 6, 9, 11, 12 ] ], 
+           [ 9, [ 6, 9, 11, 13 ] ], [ 9, [ 7, 8, 9, 13 ] ], 
+           [ 9, [ 7, 8, 11, 12 ] ], [ 6, [ 7, 9, 11, 12 ] ], 
+           [ 18, [ 7, 11, 12, 13 ] ], [ -15, [ 8, 9, 10, 12 ] ], 
+           [ 9, [ 8, 9, 10, 13 ] ], [ -3, [ 8, 9, 11, 12 ] ], 
+           [ 18, [ 8, 10, 11, 12 ] ], [ -18, [ 8, 10, 12, 13 ] ], 
+           [ 6, [ 9, 10, 11, 12 ] ], [ 6, [ 9, 10, 12, 13 ] ], 
+           [ 12, [ 9, 11, 12, 13 ] ] ] ] ]
+ </pre></div>
+
+<p><a id="X7A9137847BF96DF3" name="X7A9137847BF96DF3"></a></p>
+
+<h5>8.2-5 SCCupProduct</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCCupProduct</code>( <var class="Arg">complex</var>, <var class="Arg">cocycle1</var>, <var class="Arg">cocycle2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pairs of the form <code class="code">[ ORIENTATION, SIMPLEX ]</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>The cup product is a method of adjoining two cocycles of degree <span class="SimpleMath">p</span> and <span class="SimpleMath">q</span> to form a composite cocycle of degree <span class="SimpleMath">p + q</span>. It endows the cohomology groups of a simplicial complex with the structure of a ring.</p>
+
+<p>The construction of the cup product starts with a product of cochains: if <var class="Arg">cocycle1</var> is a p-cochain and <var class="Arg">cocylce2</var> is a q-cochain of a simplicial complex <var class="Arg">complex</var> (given as list of oriented p- (q-)simplices), then</p>
+
+<p><var class="Arg">cocycle1</var> <span class="SimpleMath">⌣</span> <var class="Arg">cocycle2</var><span class="SimpleMath">(σ) =</span><var class="Arg">cocycle1</var><span class="SimpleMath">(σ ∘ ι_0,1, ... p) ⋅</span> <var class="Arg">cocycle2</var><span class="SimpleMath">(σ ∘ ι_p, p+1 ,..., p + q)</span></p>
+
+<p>where <span class="SimpleMath">σ</span> is a <span class="SimpleMath">p + q</span>-simplex and <span class="SimpleMath">ι_S</span>, <span class="SimpleMath">S ⊂ {0,1,...,p+q }</span> is the canonical embedding of the simplex spanned by <span class="SimpleMath">S</span> into the <span class="SimpleMath">(p + q)</span>-standard simplex.</p>
+
+<p><span class="SimpleMath">σ ∘ ι_0,1, ..., p</span> is called the <span class="SimpleMath">p</span>-th front face and <span class="SimpleMath">σ ∘ ι_p, p+1, ..., p + q</span> is the <span class="SimpleMath">q</span>-th back face of <span class="SimpleMath">σ</span>, respectively.</p>
+
+<p>Note that this function only computes the cup product in the case that <var class="Arg">complex</var> is an orientable weak pseudomanifold of dimension <span class="SimpleMath">2k</span> and <span class="SimpleMath">p = q = k</span>. Furthermore, <var class="Arg">complex</var> must be given in standard labeling, with sorted facet list and <var class="Arg">cocylce1</var> and <var class="Arg">cocylce2</var> must be given in simplex notation and labeled accordingly. Note that the latter condition is usually fulfilled in case the cocycles were computed using <code class="func">SCCohomologyBasisAsSimplices</code> (<a href="chap8.html#X7A5047E57E150716"><span class="RefLink">8.2-4</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("K3");
+ [ [ 7494, "K3_16" ], [ 7513, "K3_17" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;                                     
+ gap&gt; basis:=SCCohomologyBasisAsSimplices(c,2);;
+ gap&gt; SCCupProduct(c,basis[1][2],basis[1][2]);
+ [ [ 1, [ 1, 2, 4, 7, 11 ] ], [ 1, [ 2, 3, 4, 5, 9 ] ] ]
+ gap&gt; SCCupProduct(c,basis[1][2],basis[2][2]);
+ [ [ -1, [ 1, 2, 4, 7, 11 ] ], [ -1, [ 1, 2, 4, 7, 15 ] ], 
+   [ -1, [ 2, 3, 4, 5, 9 ] ] ]
+ </pre></div>
+
+<p><a id="X835E7016826D14A8" name="X835E7016826D14A8"></a></p>
+
+<h5>8.2-6 SCIntersectionForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIntersectionForm</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a square matrix of integer values upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>For <span class="SimpleMath">2k</span>-dimensional orientable manifolds <span class="SimpleMath">M</span> the cup product (see <code class="func">SCCupProduct</code> (<a href="chap8.html#X7A9137847BF96DF3"><span class="RefLink">8.2-5</span></a>)) defines a bilinear form</p>
+
+<p>H<span class="SimpleMath">^k ( M ) ×</span>H<span class="SimpleMath">^k ( M ) -&gt;</span>H<span class="SimpleMath">^2k (M), (a,b) ↦ a ∪ b</span></p>
+
+<p>called the intersection form of <span class="SimpleMath">M</span>. This function returns the intersection form of an orientable combinatorial <span class="SimpleMath">2k</span>-manifold <var class="Arg">complex</var> in form of a matrix <code class="code">mat</code> with respect to the basis of H<span class="SimpleMath">^k (</span><var class="Arg">complex</var>M<span class="SimpleMath">)</span> computed by <code class="func">SCCohomologyBasisAsSimplices</code> (<a href="chap8.html#X7A5047E57E150716"><span class="RefLink">8.2-4</span></a>). The matrix entry <code class="code">mat[i][j]</code> equals the intersection number of the <code class="code">i</code>-th base element with the <code class="code">j</code>-th base element of H<span class="SimpleMath">^k (</span><var class="Arg">complex</var>M<span class="SimpleMath">)</span>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("CP^2");       
+ [ [ 16, "CP^2 (VT)" ], [ 99, "CP^2#CP^2" ], [ 100, "CP^2#-CP^2" ], 
+   [ 400, "CP^2#(S^2xS^2)" ], [ 2486, "Gaifullin CP^2" ], 
+   [ 4401, "(S^3~S^1)#(CP^2)^{#5} (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);; 
+ gap&gt; c1:=SCConnectedSum(c,c);;
+ gap&gt; c2:=SCConnectedSumMinus(c,c);;
+ gap&gt; q1:=SCIntersectionForm(c1);;
+ gap&gt; q2:=SCIntersectionForm(c2);;
+ gap&gt; PrintArray(q1);
+ [ [  1,  0 ],
+   [  0,  1 ] ]
+ gap&gt; PrintArray(q2);
+ [ [   1,   0 ],
+   [   0,  -1 ] ]
+ </pre></div>
+
+<p><a id="X791C2B45872A71CA" name="X791C2B45872A71CA"></a></p>
+
+<h5>8.2-7 SCIntersectionFormParity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIntersectionFormParity</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">0</code> or <code class="code">1</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the parity of the intersection form of a combinatorial manifold <var class="Arg">complex</var> (see <code class="func">SCIntersectionForm</code> (<a href="chap8.html#X835E7016826D14A8"><span class="RefLink">8.2-6</span></a>)). If the intersection for is even (i. e. all diagonal entries are even numbers) <code class="code">0</code> is returned, otherwise <code class="code">1</code> is returned.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("S^2xS^2");
+ [ [ 59, "S^2xS^2" ], [ 134, "S^2xS^2 (VT)" ], [ 135, "S^2xS^2 (VT)" ], 
+   [ 136, "S^2xS^2 (VT)" ], [ 137, "(S^2xS^2)#(S^2xS^2)" ], 
+   [ 360, "(S^2xS^2)#(S^2xS^2) (VT)" ], [ 361, "(S^2xS^2)#(S^2xS^2) (VT)" ], 
+   [ 400, "CP^2#(S^2xS^2)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;    
+ gap&gt; SCIntersectionFormParity(c);
+ 0
+ gap&gt; SCLib.SearchByName("CP^2");       
+ [ [ 16, "CP^2 (VT)" ], [ 99, "CP^2#CP^2" ], [ 100, "CP^2#-CP^2" ], 
+   [ 400, "CP^2#(S^2xS^2)" ], [ 2486, "Gaifullin CP^2" ], 
+   [ 4401, "(S^3~S^1)#(CP^2)^{#5} (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);; 
+ gap&gt; SCIntersectionFormParity(c);
+ 1
+ </pre></div>
+
+<p><a id="X7B5F948B84F5E316" name="X7B5F948B84F5E316"></a></p>
+
+<h5>8.2-8 SCIntersectionFormDimensionality</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIntersectionFormDimensionality</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an integer upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns the dimensionality of the intersection form of a combinatorial manifold <var class="Arg">complex</var>, i. e. the length of a minimal generating set of H<span class="SimpleMath">^k (M)</span> (where <span class="SimpleMath">2k</span> is the dimension of <var class="Arg">complex</var>). See <code class="func">SCIntersectionForm</code> (<a href="chap8.html#X835E7016826D14A8"><span class="RefLink">8.2-6</span></a>) for further details.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("CP^2");       
+ [ [ 16, "CP^2 (VT)" ], [ 99, "CP^2#CP^2" ], [ 100, "CP^2#-CP^2" ], 
+   [ 400, "CP^2#(S^2xS^2)" ], [ 2486, "Gaifullin CP^2" ], 
+   [ 4401, "(S^3~S^1)#(CP^2)^{#5} (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);; 
+ gap&gt; SCIntersectionFormParity(c);
+ 1
+ gap&gt; SCCohomology(c);
+ [ [ 1, [  ] ], [ 0, [  ] ], [ 1, [  ] ], [ 0, [  ] ], [ 1, [  ] ] ]
+ gap&gt; SCIntersectionFormDimensionality(c);
+ 1
+ gap&gt; d:=SCConnectedProduct(c,10);;
+ gap&gt; SCIntersectionFormDimensionality(d);
+ 10
+ </pre></div>
+
+<p><a id="X87375A6978F3C8CD" name="X87375A6978F3C8CD"></a></p>
+
+<h5>8.2-9 SCIntersectionFormSignature</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIntersectionFormSignature</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a triple of integers upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the dimensionality (see <code class="func">SCIntersectionFormDimensionality</code> (<a href="chap8.html#X7B5F948B84F5E316"><span class="RefLink">8.2-8</span></a>)) and the signature of the intersection form of a combinatorial manifold <var class="Arg">complex</var> as a <span class="SimpleMath">3</span>-tuple that contains the dimensionality in the first entry and the number of positive / negative eigenvalues in the second and third entry. See <code class="func">SCIntersectionForm</code> (<a href="chap8.html#X835E7016826D14A8"><span class="RefLink">8.2-6</span></a>) for further details.</p>
+
+<p>Internally calls the <strong class="pkg">GAP</strong>-functions <code class="code">Matrix_CharacteristicPolynomialSameField</code> and <code class="code">CoefficientsOfLaurentPolynomial</code> to compute the number of positive / negative eigenvalues of the intersection form.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("CP^2");       
+ [ [ 16, "CP^2 (VT)" ], [ 99, "CP^2#CP^2" ], [ 100, "CP^2#-CP^2" ], 
+   [ 400, "CP^2#(S^2xS^2)" ], [ 2486, "Gaifullin CP^2" ], 
+   [ 4401, "(S^3~S^1)#(CP^2)^{#5} (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; SCIntersectionFormParity(c);
+ 1
+ gap&gt; SCCohomology(c);
+ [ [ 1, [  ] ], [ 0, [  ] ], [ 1, [  ] ], [ 0, [  ] ], [ 1, [  ] ] ]
+ gap&gt; SCIntersectionFormSignature(c);
+ [ 1, 0, 1 ]
+ gap&gt; d:=SCConnectedSum(c,c);                           
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="CP^2 (VT)#+-CP^2 (VT)"
+  Dim=4
+ 
+ /SimplicialComplex]
+ gap&gt; SCIntersectionFormSignature(d);
+ [ 2, 2, 0 ]
+ gap&gt; d:=SCConnectedSumMinus(c,c);;
+ gap&gt; SCIntersectionFormSignature(d);
+ [ 2, 1, 1 ]
+ </pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (UnitLib) - Chapter 2: UnitLib functions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X855CF0BA834AD584" name="X855CF0BA834AD584"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X855CF0BA834AD584">2 <span class="Heading"><strong class="pkg">UnitLib</strong> functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X8336306D816FFF06">2.1 <span class="Heading">MainFunctions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8392286A85CF8D85">2.1-1 PcNormalizedUnitGroupSmallGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7B0154C97CD03CF9">2.1-2 SavePcNormalizedUnitGroup</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading"><strong class="pkg">UnitLib</strong> functions</span></h3>
+
+<p>Since the main purpose of <strong class="pkg">UnitLib</strong> is the date storage, it has only two main user functions to read the description of <span class="SimpleMath">\(V(KG)\)</span> for the given catalogue number of <span class="SimpleMath">\(G\)</span> in the Small Groups Library of the <strong class="pkg">GAP</strong> system, and to save the description of <span class="SimpleMath">\(V(KG)\)</span> if the user would like to store it for the further usage for the group which is not contained in the library.</p>
+
+<p>To use the <strong class="pkg">UnitLib</strong> package first you need to load it as follows:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("unitlib");</span>
+----------------------------------------------------------------------------
+Loading  UnitLib 3.1.0 (The library of normalized unit groups of modular group algebras)
+by Alexander Konovalov (https://alexk.host.cs.st-andrews.ac.uk) and
+   Elena Yakimenko.
+Homepage: https://gap-packages.github.io/unitlib/
+----------------------------------------------------------------------------
+true
+
+</pre></div>
+
+<p>Under Windows, a warning will be displayed about non-availability of the library of normalized unit groups for groups of orders 128.</p>
+
+<p>Examples below contain some functions from the <strong class="pkg">LAGUNA</strong> package <a href="chapBib_mj.html#biBLaguna">[BKRS]</a>, see their description in the <strong class="pkg">LAGUNA</strong> manual (<a href="../../../pkg/laguna-3.9.0/doc/chap0_mj.html#X7AA6C5737B711C89"><span class="RefLink">LAGUNA: LAGUNA package</span></a>).</p>
+
+<p><a id="X8336306D816FFF06" name="X8336306D816FFF06"></a></p>
+
+<h4>2.1 <span class="Heading">MainFunctions</span></h4>
+
+<p><a id="X8392286A85CF8D85" name="X8392286A85CF8D85"></a></p>
+
+<h5>2.1-1 PcNormalizedUnitGroupSmallGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PcNormalizedUnitGroupSmallGroup</code>( <var class="Arg">s</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: PcGroup</p>
+
+<p>Let <var class="Arg">s</var> be a power of prime <span class="SimpleMath">\(p\)</span> and <var class="Arg">n</var> is an integer from <code class="code">[ 1 .. NrSmallGroups(s) ]</code>. Then <code class="code">PcNormalizedUnitGroupSmallGroup(<var class="Arg">s</var>,<var class="Arg">n</var>)</code> returns the normalized unit group <span class="SimpleMath">\(V(KG)\)</span> of the modular group algebra <span class="SimpleMath">\(KG\)</span>, where <span class="SimpleMath">\(G\)</span> is <code class="code">SmallGroup(<var class="Arg">s</var>,<var class="Arg">n</var>)</code> (see <code class="func">SmallGroup</code> (<a href="../../../pkg/SmallGrp-1.3/doc/chap1_mj.html#X8398F2577B719D99"><span class="RefLink">smallgrp: SmallGroup for group order and index</span></a>)) and <span class="SimpleMath">\(K\)</span> is a field of <span class="SimpleMath">\(p\)</span> elements.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PcNormalizedUnitGroupSmallGroup(128,161);</span>
+&lt;pc group of size 170141183460469231731687303715884105728 with 127 generators&gt;
+
+</pre></div>
+
+<p>The result returned by <code class="code">PcNormalizedUnitGroupSmallGroup</code> is equivalent to the following:</p>
+
+
+<div class="example"><pre>                                                                         
+                                                                         
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := SmallGroup( s, n );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := PrimePGroup( G );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K := GF( p );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KG := GroupRing( K, G );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PcNormalizedUnitGroup( KG );</span>
+                                                                               
+</pre></div>
+
+<p>Nevertheless, <code class="code">PcNormalizedUnitGroupSmallGroup</code> is not just a shortcut for such computation. It reads the description of the normalized unit group from the <strong class="pkg">UnitLib</strong> library and then reconstructs all its necessary attributes and properties. Thus, if you would like to obtain the group algebra <span class="SimpleMath">\(KG\)</span> or the field <span class="SimpleMath">\(K\)</span> and the group <span class="SimpleMath">\(G\)</span>, you should extract them from <span class="SimpleMath">\(V(KG)\)</span>, which should be constructed first.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V:=PcNormalizedUnitGroup(GroupRing(GF(2),SmallGroup(8,3)));</span>
+&lt;pc group of size 128 with 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V1:=PcNormalizedUnitGroupSmallGroup(8,3);                   </span>
+&lt;pc group of size 128 with 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V1=V;     # two isomorphic groups but not identical objects</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IdGroup(V)=IdGroup(V1);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsomorphismGroups(V,V1);</span>
+[ f1, f2, f3, f4, f5, f6, f7 ] -&gt; [ f1, f2, f3, f4, f5, f6, f7 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KG:=UnderlyingGroupRing(V1);  # now the correct way</span>
+&lt;algebra-with-one over GF(2), with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V1=PcNormalizedUnitGroup(KG); # V1 is an attribute of KG</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:=UnderlyingField(KG);</span>
+GF(2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=UnderlyingGroup(KG);     </span>
+&lt;pc group of size 8 with 3 generators&gt;
+
+</pre></div>
+
+<p>Moreover, the original group <span class="SimpleMath">\(G\)</span> can be embedded into the output of the <code class="code">PcNormalizedUnitGroupSmallGroup</code>, as it is shown in the next example:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=Embedding(G,V1); </span>
+[ f1, f2, f3 ] -&gt; [ f1, f2, f4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=List(GeneratorsOfGroup(G), x -&gt; x^f ); </span>
+[ f1, f2, f4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G1:=Subgroup(V1,g);</span>
+Group([ f1, f2, f4 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IdGroup(G1);</span>
+[ 8, 3 ]
+
+</pre></div>
+
+<p>If the first argument <var class="Arg">s</var> (the order of a group) is not a power of prime, an error message will appear. If <var class="Arg">s</var> is &gt;= 243, you will get a warning telling that the library does not contain <span class="SimpleMath">\(V(KG)\)</span> for <span class="SimpleMath">\(G\)</span> of such order, and you can use only data that you already stored in your <code class="file">unitlib/userdata</code> directory with the help of the function <code class="func">SavePcNormalizedUnitGroup</code> (<a href="chap2_mj.html#X7B0154C97CD03CF9"><span class="RefLink">2.1-2</span></a>).</p>
+
+<p>It is worth to mention that for some groups of order 243, the construction of the normalized unit group using <code class="code">PcNormalizedUnitGroupSmallGroup</code> may already require some noticeable amount of time. For example, it took about 166 seconds of CPU time to compute <code class="code">PcNormalizedUnitGroupSmallGroup(243,30)</code> on Intel Xeon 3.4 GHz with 2048 KB cache.</p>
+
+<p><a id="X7B0154C97CD03CF9" name="X7B0154C97CD03CF9"></a></p>
+
+<h5>2.1-2 SavePcNormalizedUnitGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SavePcNormalizedUnitGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParSavePcNormalizedUnitGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: true</p>
+
+<p>Let <var class="Arg">G</var> be a finite <span class="SimpleMath">\(p\)</span>-group of order <span class="SimpleMath">\(s\)</span> from the Small Groups Library of the <strong class="pkg">GAP</strong> system, constructed with the help of <code class="code">SmallGroup(s,n)</code> (see <code class="func">SmallGroup</code> (<a href="../../../pkg/SmallGrp-1.3/doc/chap1_mj.html#X8398F2577B719D99"><span class="RefLink">smallgrp: SmallGroup for group order and index</span></a>)). Then <code class="code">SavePcNormalizedUnitGroup(<var class="Arg">G</var>)</code> creates the file with the name of the form <code class="file">us_n.g</code> in the directory <code class="file">unitlib/userdata</code>, and returns <code class="keyw">true</code> if this file was successfully generated. This file contains the description of the normalized unit group <span class="SimpleMath">\(V(KG)\)</span> of the group algebra of the group <var class="Arg">G</var> over the field of <span class="SimpleMath">\(p\)</span> elements.</p>
+
+<p>If the order of <var class="Arg">G</var> is &gt;= 243, after this you can construct the group <span class="SimpleMath">\(V(KG)\)</span> using <code class="func">PcNormalizedUnitGroupSmallGroup</code> (<a href="chap2_mj.html#X8392286A85CF8D85"><span class="RefLink">2.1-1</span></a>) similarly to the previous section. The preliminary warning will be displayed, telling that for such orders you can use only those groups that were already computed by the user and saved to the <code class="file">unitlib/userdata</code> directory. If there will be no such file there, you will get an error message, otherwise the computation will begin.</p>
+
+<p>If the order of <var class="Arg">G</var> is less than 243, then the file will be created in the <code class="file">unitlib/userdata</code> directory, but <strong class="pkg">UnitLib</strong> will continue to use the file with the same name from the appropriate directory in <code class="file">unitlib/data</code>. You can compare these two files to make it sure that they are the same.</p>
+
+<p><strong class="button">NOTE THAT:</strong></p>
+
+<p>1. The argument should be the underlying group <span class="SimpleMath">\(G\)</span> and not the normalized unit group <span class="SimpleMath">\(V(KG)\)</span>.</p>
+
+<p>2. The argument should be a group from the <strong class="pkg">GAP</strong> Small Groups Library constructed with the help of <code class="code">SmallGroup(s,n)</code>, otherwise the date consistency may be lost.</p>
+
+<p><code class="func">ParSavePcNormalizedUnitGroup</code> works in the same way, but uses the function <code class="code">ParPcNormalizedUnitGroup</code> to parallelise the computation using the <strong class="pkg">GAP</strong> package <strong class="pkg">SCSCP</strong>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SavePcNormalizedUnitGroup( SmallGroup( 256, 56092 ) );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PcNormalizedUnitGroupSmallGroup( 256, 56092 );</span>
+WARNING : the library of V(KG) for groups of order 
+256 is not available yet !!! 
+You can use only groups from the unitlib/userdata directory 
+in case if you already computed their descriptions 
+(See the manual for SavePcNormalizedUnitGroup).
+#I  Description of V(KG) for G=SmallGroup(256,
+56092) accepted, started its generation...
+&lt;pc group of size 
+57896044618658097711785492504343953926634992332820282019728792003956564819968
+  with 255 generators&gt;
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,2057 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (FinInG) - Chapter 12: Generalised Polygons</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap12"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap11_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap13_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap12.html">[MathJax off]</a></p>
+<p><a id="X7E1F10767D2A4D6A" name="X7E1F10767D2A4D6A"></a></p>
+<div class="ChapSects"><a href="chap12_mj.html#X7E1F10767D2A4D6A">12 <span class="Heading">Generalised Polygons</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12_mj.html#X7CC6903E78F24167">12.1 <span class="Heading">Categories</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X8141DFFF7B352E2D">12.1-1 IsGeneralisedPolygon</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X832E75AE7CCC5BB2">12.1-2 <span class="Heading">Subcategories in <code class="code">IsGeneralisedPolygon</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X86C124B3804C7569">12.1-3 IsWeakGeneralisedPolygon</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X8540C04887CF8824">12.1-4 <span class="Heading">Subcategories in <code class="code">IsProjectivePlaneCategory</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7CF10DAE7847939D">12.1-5 <span class="Heading">Subcategories in <code class="code">IsGeneralisedQuadrangle</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7A2ABB0B818E25C5">12.1-6 IsClassicalGeneralisedHexagon</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12_mj.html#X8614D6A779F9B1AA">12.2 <span class="Heading">Generic functions to create generalised polygons</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X849A83597CC78B5F">12.2-1 GeneralisedPolygonByBlocks</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X8751B0FB8500D0B1">12.2-2 GeneralisedPolygonByIncidenceMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7A6169127CE8ABC0">12.2-3 GeneralisedPolygonByElements</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12_mj.html#X864C966D8184A9C0">12.3 <span class="Heading">Attributes and operations for generalised polygons</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X84F59A2687C62763">12.3-1 Order</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X836C15B57968A511">12.3-2 IncidenceGraphAttr</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X815BE6D57D623452">12.3-3 IncidenceGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X81F531BB7DEA127D">12.3-4 IncidenceMatrixOfGeneralisedPolygon</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X83FF6FA0790D5747">12.3-5 CollineationGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X8074EDB381D97984">12.3-6 CollineationAction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7D75521986B958DA">12.3-7 BlockDesignOfGeneralisedPolygon</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12_mj.html#X7A13D5EB82E01576">12.4 <span class="Heading">Elements of generalised polygons</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7E7607CA7D59D086">12.4-1 <span class="Heading">Collections of elements of generalised polygons</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X858ADA3B7A684421">12.4-2 Size</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7E9B2A217DBF2849">12.4-3 <span class="Heading">Creating elements from objects and retrieving objects from elements</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X83B0FA9E7AE3DF01">12.4-4 <span class="Heading">Incidence</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X875BE2957FAF6209">12.4-5 Span</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X8469B54180FE1E4C">12.4-6 Meet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X8154BB13844AA0FD">12.4-7 <span class="Heading">Shadow elements</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7807682E86D3BE10">12.4-8 DistanceBetweenElements</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12_mj.html#X7934EB788049B533">12.5 <span class="Heading">The classical generalised hexagons</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7BF1D2E57B7630CB">12.5-1 <span class="Heading">Trialities of the hyperbolic quadric and generalised hexagons</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7C35384980AA9B77">12.5-2 IsLieGeometry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7A05FF0079F55291">12.5-3 SplitCayleyHexagon</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7E17977384011587">12.5-4 TwistedTrialityHexagon</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X82E9593B8074AECB">12.5-5 VectorSpaceToElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7809B7C183FA7213">12.5-6 ObjectToElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X810D4D6D87069697">12.5-7 UnderlyingObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X87BDB89B7AAFE8AD"><code>12.5-8 \in</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7B1380878358938C">12.5-9 <span class="Heading">Span and meet of elements</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X83FF6FA0790D5747">12.5-10 CollineationGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12_mj.html#X7BA462527B2777BC">12.6 <span class="Heading">Elation generalised quadrangles</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X86BD86C77BAAF887">12.6-1 <span class="Heading">Elation generalised quadrangles and Kantor families</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7CC6903E78F24167">12.6-2 <span class="Heading">Categories</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X820A2D6A84A259FC">12.6-3 <span class="Heading">Kantor families</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7B80E3AC7DEAF948">12.6-4 EGQByKantorFamily</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X80C93974807A342B">12.6-5 <span class="Heading">Representation of elements and underlying objects</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7DCD7EAB839BD97F">12.6-6 <span class="Heading">Elation group and natural action on elements</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X8462F11584736E32">12.6-7 <span class="Heading">Kantor families, q-clans, and elation generalised quadrangles</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X806527387F1D5D42">12.6-8 qClan</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X858A1EA8843BEC13">12.6-9 <span class="Heading">Particular q-clans</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7C59CF8079EA33D3">12.6-10 KantorFamilyByqClan</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X830222B084BF866D">12.6-11 EGQByqClan</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7FAE48497B2F658A">12.6-12 <span class="Heading">BLT-sets, flocks, q-clans, and elation generalised quadrangles</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7A8438537D2F1374">12.6-13 IsEGQByBLTSet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7ECC1871866AC286">12.6-14 BLTSetByqClan</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X84700DDF80B39332">12.6-15 EGQByBLTSet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X79186E29799355BD">12.6-16 DefiningPlanesOfEGQByBLTSet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X80C93974807A342B">12.6-17 <span class="Heading">Representation of elements and underlying objects</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12_mj.html#X7C57B0BD7A2E5877">12.6-18 CollineationSubgroup</a></span>
+</div></div>
+</div>
+
+<h3>12 <span class="Heading">Generalised Polygons</span></h3>
+
+<p>A <em>generalised n-gon</em> is a point/line geometry whose incidence graph is bipartite of diameter <var class="Arg">n</var> and girth <var class="Arg">2n</var>. Although these rank 2 structures are very much a subdomain of <strong class="pkg">GRAPE</strong> and <strong class="pkg">Design</strong>, their significance in finite geometry warrants their inclusion in <strong class="pkg">FinInG</strong>. By the famous theorem of Feit and Higman, a generalised n-gon which has at least three points on every line, must have <span class="SimpleMath">\(n\)</span> in <span class="SimpleMath">\(\{2,3,4,6,8\}\)</span>. The case <span class="SimpleMath">\(n=2\)</span> concerns the complete multipartite graphs, which we disregard. The more interesting cases are accordingly projective planes (<span class="SimpleMath">\(n=3\)</span>), generalised quadrangles (<span class="SimpleMath">\(n=4\)</span>), generalised hexagons (<span class="SimpleMath">\(n=6\)</span>), and generalised octagons (<span class="SimpleMath">\(n=8\)</span>).</p>
+
+<p><strong class="pkg">FinInG</strong> provides some basic functionality to deal with generalised polygons as incidence geometries. A lot of non-trivial interaction with the package <strong class="pkg">GRAPE</strong> has been very useful and even necessary. Currently, generic functions to create generalised polygons, to create elements of generalised polygons, and to explore the elements are implemented. This generic functionality allows the user to construct generalised polygons through many different objects available in GAP and <strong class="pkg">FinInG</strong>. Apart from these generic functions, some particular generalised polygons are available: the classical generalised hexagons and elation generalised quadrangles from different perspectives can be constructed.</p>
+
+<p><a id="X7CC6903E78F24167" name="X7CC6903E78F24167"></a></p>
+
+<h4>12.1 <span class="Heading">Categories</span></h4>
+
+<p><a id="X8141DFFF7B352E2D" name="X8141DFFF7B352E2D"></a></p>
+
+<h5>12.1-1 IsGeneralisedPolygon</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneralisedPolygon</code></td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneralisedPolygonRep</code></td><td class="tdright">( representation )</td></tr></table></div>
+<p>This category is a subcategory of <code class="code">IsIncidenceGeometry</code>, and contains all generalised polygons. Generalised polygons constructed through functions described in this chapter, all belong to <code class="code">IsGeneralisedPolygonRep</code>.</p>
+
+<p><a id="X832E75AE7CCC5BB2" name="X832E75AE7CCC5BB2"></a></p>
+
+<h5>12.1-2 <span class="Heading">Subcategories in <code class="code">IsGeneralisedPolygon</code></span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsProjectivePlaneCategory</code></td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneralisedQuadrangle</code></td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneralisedHexagon</code></td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneralisedOctagon</code></td><td class="tdright">( category )</td></tr></table></div>
+<p>All generalised polygons in <strong class="pkg">FinInG</strong> belong to one of these four categories. It is not possible to construct generalised polygons of which the gonality is not known (or checked). Note that the classical generalised quadrangles (which are the classical polar spaces of rank 2) belong also to <code class="code">IsGeneralisedQuadrangle</code> and that the desarguesian projective planes (which are the projective spaces of dimension 2) also belong to <code class="code">IsProjectivePlaneCategory</code>, but both do not belong to <code class="code">IsGeneralisedPolygonRep</code>.</p>
+
+<p><a id="X86C124B3804C7569" name="X86C124B3804C7569"></a></p>
+
+<h5>12.1-3 IsWeakGeneralisedPolygon</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsWeakGeneralisedPolygon</code></td><td class="tdright">( category )</td></tr></table></div>
+<p><code class="code">IsWeakGeneralisedPolygon</code> is the category for weak generalised polygons.</p>
+
+<p><a id="X8540C04887CF8824" name="X8540C04887CF8824"></a></p>
+
+<h5>12.1-4 <span class="Heading">Subcategories in <code class="code">IsProjectivePlaneCategory</code></span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDesarguesianPlane</code></td><td class="tdright">( category )</td></tr></table></div>
+<p><code class="code">IsDesarguesianPlane</code> is declared as a subcategory of <code class="code">IsProjectivePlaneCategory</code> and <code class="code">IsProjecticeSpace</code>. Projective spaces of dimension 2 constructed using <code class="file">ProjectiveSpace</code> belong to <code class="code">IsDesarguesianPlane</code>.</p>
+
+<p><a id="X7CF10DAE7847939D" name="X7CF10DAE7847939D"></a></p>
+
+<h5>12.1-5 <span class="Heading">Subcategories in <code class="code">IsGeneralisedQuadrangle</code></span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsClassicalGQ</code></td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsElationGQ</code></td><td class="tdright">( category )</td></tr></table></div>
+<p><code class="code">IsClassicalGQ</code> is declared as a subcategory of <code class="code">IsGeneralisedQuadrangle</code> and <code class="code">IsClassicalPolarSpace</code>. All classical polar spaces of rank 2 belong to <code class="code">IsClassicalGQ</code>. <code class="code">IsElationGQ</code> is declared as subcategory of <code class="code">IsGeneralisedQuadrangle</code>. Elation GQs will be discusedd in detail in Section <a href="chap12_mj.html#X7BA462527B2777BC"><span class="RefLink">12.6</span></a></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := SymplecticSpace(3,2);</span>
+W(3, 2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsGeneralisedPolygon(gp);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsGeneralisedQuadrangle(gp);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsClassicalGQ(gp);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsGeneralisedPolygonRep(gp);</span>
+false
+
+</pre></div>
+
+<p><a id="X7A2ABB0B818E25C5" name="X7A2ABB0B818E25C5"></a></p>
+
+<h5>12.1-6 IsClassicalGeneralisedHexagon</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsClassicalGeneralisedHexagon</code></td><td class="tdright">( category )</td></tr></table></div>
+<p><code class="code">IsClassicalGeneralisedHexagon</code> is declared as subcategory of <code class="code">IsGeneralisedHexagon</code> and <code class="code">IsLieGeometry</code>. The so called classical generalised hexagons are the hexagons that come from the triality of the hyperbolic quadric <span class="SimpleMath">\(\mathrm{Q}^+(7,q)\)</span>. The Split Cayley hexagon is embedded in the parabolic quadric <span class="SimpleMath">\(\mathrm{Q}(6,q)\)</span>, or <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span> in even characteristic. The twisted triality hexagon is embedded in the hyperbolic quadric <span class="SimpleMath">\(\mathrm{Q}^+(7,q)\)</span>. The construction of these hexagons in a subcategory of <code class="code">IsLieGeometry</code> means that the usual operations for Lie geometries become applicable. The classical generalised hexagons are in detail discussed in Section <a href="chap12_mj.html#X7934EB788049B533"><span class="RefLink">12.5</span></a></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := SplitCayleyHexagon(3);</span>
+H(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsGeneralisedHexagon(gp);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsClassicalGeneralisedHexagon(gp);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLieGeometry(gp);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsGeneralisedPolygonRep(gp);</span>
+true
+
+</pre></div>
+
+<p><a id="X8614D6A779F9B1AA" name="X8614D6A779F9B1AA"></a></p>
+
+<h4>12.2 <span class="Heading">Generic functions to create generalised polygons</span></h4>
+
+<p><a id="X849A83597CC78B5F" name="X849A83597CC78B5F"></a></p>
+
+<h5>12.2-1 GeneralisedPolygonByBlocks</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneralisedPolygonByBlocks</code>( <var class="Arg">l</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a generalised polygon</p>
+
+<p>The argument <var class="Arg">l</var> is a finite homogeneous list consisting of ordered sets of a common size <span class="SimpleMath">\(n+1\)</span>. This operation will assume that each element of <var class="Arg">l</var> represents a line of the generalised polygon. Its points are assumed to be the union of all elements of <var class="Arg">l</var>. The incidence is assumed to be symmetrised containment. From this information, an incidence graph is computed using <strong class="pkg">GRAPE</strong>. If this graph has diameter <span class="SimpleMath">\(d\)</span> and girth <span class="SimpleMath">\(2d\)</span>, a generalised polygon is returned. The thickness condition is not checked. If <span class="SimpleMath">\(d \in \{3,4,6,8\}\)</span>, a projective plane, a generalised quadrangle, a generalised hexagon, a generalised octagon respectively, is returned. Note that for large input, this operation can be time consuming.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">blocks := [ </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 1, 2, 3, 4, 5 ], [ 1, 6, 7, 8, 9 ], [ 1, 10, 11, 12, 13 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 1, 14, 15, 16, 17 ], [ 1, 18, 19, 20, 21 ], [ 2, 6, 10, 14, 18 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 2, 7, 11, 15, 19 ], [ 2, 8, 12, 16, 20 ], [ 2, 9, 13, 17, 21 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 3, 6, 11, 16, 21 ], [ 3, 7, 10, 17, 20 ], [ 3, 8, 13, 14, 19 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 3, 9, 12, 15, 18 ], [ 4, 6, 12, 17, 19 ], [ 4, 7, 13, 16, 18 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 4, 8, 10, 15, 21 ], [ 4, 9, 11, 14, 20 ], [ 5, 6, 13, 15, 20 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 5, 7, 12, 14, 21 ], [ 5, 8, 11, 17, 18 ], [ 5, 9, 10, 16, 19 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByBlocks( blocks );</span>
+&lt;projective plane order 4&gt;
+
+</pre></div>
+
+<p><a id="X8751B0FB8500D0B1" name="X8751B0FB8500D0B1"></a></p>
+
+<h5>12.2-2 GeneralisedPolygonByIncidenceMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneralisedPolygonByIncidenceMatrix</code>( <var class="Arg">incmat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a generalised polygon</p>
+
+<p>The argument <span class="SimpleMath">\(incmat\)</span> is a matrix representing the incidence matrix of a point line geometry. The points are represented by the columns, the rows represent the lines. From <var class="Arg">incmat</var> a homogeneous list of sets of column entries is derived, which is then passed to <code class="file">GeneralisedPolygonByBlocks</code>. When <var class="Arg">incmat</var> indeed represents a generalised polygon, it is returned. The checks are performed by <code class="file">GeneralisedPolygonByBlocks</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">incmat := [ </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pp := GeneralisedPolygonByIncidenceMatrix( incmat );</span>
+&lt;projective plane order 4&gt;
+
+</pre></div>
+
+<p><a id="X7A6169127CE8ABC0" name="X7A6169127CE8ABC0"></a></p>
+
+<h5>12.2-3 GeneralisedPolygonByElements</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneralisedPolygonByElements</code>( <var class="Arg">pts</var>, <var class="Arg">lns</var>, <var class="Arg">inc</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneralisedPolygonByElements</code>( <var class="Arg">pts</var>, <var class="Arg">lns</var>, <var class="Arg">inc</var>, <var class="Arg">grp</var>, <var class="Arg">act</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a generalised polygon</p>
+
+<p>The argument <var class="Arg">pts</var>, <var class="Arg">lns</var> and <var class="Arg">inc</var> are respectively a set of objects, a set of objects and a function. The function <var class="Arg">inc</var> must represent an incidence relation between objects of <var class="Arg">pts</var> and <var class="Arg">lns</var>. The first version of <code class="file">GeneralisedPolygonByElements</code> will construct an incidence graph, and if this graph has diameter <span class="SimpleMath">\(d\)</span> and girth <span class="SimpleMath">\(2d\)</span>, a generalised polygon is returned. The thickness condition is not checked. If <span class="SimpleMath">\(d \in \{3,4,6,8\}\)</span>, a projective plane, a generalised quadrangle, a generalised hexagon, a generalised octagon respectively, is returned. The argument <var class="Arg">grp</var> is a group, and <var class="Arg">act</var> a function, representing an action of the elements of <var class="Arg">grp</var> on the objects in the lists <var class="Arg">pts</var> and <var class="Arg">lns</var>, preserving the incidence. The second version of <code class="file">GeneralisedPolygonByElements</code> acts as the first version, but uses <var class="Arg">grp</var> and <var class="Arg">act</var> to construct the incidence graph in a more efficient way, so if <var class="Arg">grp</var> is a non trivial group, the construction of the graph will be faster. This operation can typically be used to construct generalised polygons from objects that are available in <strong class="pkg">FinInG</strong>. This difference in time is shown in the first two examples. The third examples shows the construction of the generalised quadrangle <span class="SimpleMath">\(T_2(O)\)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(2,25);</span>
+ProjectiveSpace(2, 25)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pts := Set(Points(pg));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lns := Set(Lines(pg));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">inc := \*;</span>
+&lt;Operation "*"&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByElements(pts,lns,inc);</span>
+&lt;projective plane order 25&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+26427
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">grp := CollineationGroup(pg);</span>
+The FinInG collineation group PGammaL(3,25)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act := OnProjSubspaces;</span>
+function( var, el ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByElements(pts,lns,inc,grp,act);</span>
+&lt;projective plane order 25&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+127
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := 4;</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">conic := Set(Points(ParabolicQuadric(2,q)));</span>
+[ &lt;a point in Q(2, 4)&gt;, &lt;a point in Q(2, 4)&gt;, &lt;a point in Q(2, 4)&gt;, 
+  &lt;a point in Q(2, 4)&gt;, &lt;a point in Q(2, 4)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(3,q);</span>
+ProjectiveSpace(3, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hyp :=  HyperplaneByDualCoordinates(pg,[1,0,0,0]*Z(q)^0);</span>
+&lt;a plane in ProjectiveSpace(3, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">em := NaturalEmbeddingBySubspace(PG(2,q),pg,hyp);</span>
+&lt;geometry morphism from &lt;All elements of ProjectiveSpace(2, 
+4)&gt; to &lt;All elements of ProjectiveSpace(3, 4)&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">O := List(conic,x-&gt;x^em);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := CollineationGroup(pg);</span>
+The FinInG collineation group PGammaL(4,4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">stab := FiningSetwiseStabiliser(group,O);</span>
+#I  Computing adjusted stabilizer chain...
+&lt;projective collineation group with 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">points1 := Set(Filtered(Points(pg),x-&gt;not x in hyp));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tangents := List(conic,x-&gt;TangentSpace(x)^em);</span>
+[ &lt;a line in ProjectiveSpace(3, 4)&gt;, &lt;a line in ProjectiveSpace(3, 4)&gt;, 
+  &lt;a line in ProjectiveSpace(3, 4)&gt;, &lt;a line in ProjectiveSpace(3, 4)&gt;, 
+  &lt;a line in ProjectiveSpace(3, 4)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">planes := List(tangents,x-&gt;Filtered(Planes(x),y-&gt;not y in hyp));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">points2 := Union(planes);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">points3 := [hyp];</span>
+[ &lt;a plane in ProjectiveSpace(3, 4)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">linesa := Union(List(O,x-&gt;Filtered(Lines(x),y-&gt;not y in hyp)));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">linesb := Set(O);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pts := Union(points1,points2,points3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lns := Union(linesa,linesb);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">inc := \*;</span>
+&lt;Operation "*"&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByElements(pts,lns,inc,stab,\^);</span>
+&lt;generalised quadrangle of order [ 4, 4 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+50
+
+</pre></div>
+
+<p><a id="X864C966D8184A9C0" name="X864C966D8184A9C0"></a></p>
+
+<h4>12.3 <span class="Heading">Attributes and operations for generalised polygons</span></h4>
+
+<p>All operations described in this section are applicable on objects in the category <code class="code">IsGeneralisedPolygon</code>.</p>
+
+<p><a id="X84F59A2687C62763" name="X84F59A2687C62763"></a></p>
+
+<h5>12.3-1 Order</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Order</code>( <var class="Arg">gp</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a pair of positive integers</p>
+
+<p>This method returns the parameters <span class="SimpleMath">\((s,t)\)</span> of the generalised polygon <var class="Arg">gp</var>. That is, <span class="SimpleMath">\(s+1\)</span> is the number of points on any line of <var class="Arg">gp</var>, and <span class="SimpleMath">\(t+1\)</span> is the number of lines incident with any point of <var class="Arg">gp</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := TwistedTrialityHexagon(2^3);</span>
+T(8, 2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(gp);</span>
+[ 8, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := HermitianPolarSpace(4,25);</span>
+H(4, 5^2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(gp);</span>
+[ 25, 125 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := EGQByqClan(LinearqClan(3));</span>
+#I  Computed Kantor family. Now computing EGQ...
+&lt;EGQ of order [ 9, 3 ] and basepoint 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(gp);</span>
+[ 9, 3 ]
+
+</pre></div>
+
+<p><a id="X836C15B57968A511" name="X836C15B57968A511"></a></p>
+
+<h5>12.3-2 IncidenceGraphAttr</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IncidenceGraphAttr</code>( <var class="Arg">gp</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>This attribute is declared for objects in <code class="code">IsGeneralisedPolygon</code>. It is a mutable attribute and can be accessed by the operation <code class="file">IncidenceGraph</code>.</p>
+
+<p><a id="X815BE6D57D623452" name="X815BE6D57D623452"></a></p>
+
+<h5>12.3-3 IncidenceGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IncidenceGraph</code>( <var class="Arg">gp</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a graph</p>
+
+<p>The argument <var class="Arg">gp</var> is a generalised polygon. This operation returns the incidence graph of <var class="Arg">gp</var>. If <var class="Arg">gp</var> is constructed using <code class="file">GeneralisedPolygonByBlocks</code>, <code class="file">GeneralisedPolygonByElements</code> or <code class="file">GeneralisedPolygonByIncidenceMatrix</code>, an incidence graph is computed to check the input, and is stored as an attribute. For the particular generalised polygons available in <strong class="pkg">FinInG</strong>, there is no precomputed incidence graph. Note that computing an incidence graph may require some time, especially when the <var class="Arg">gp</var> has no collineation group computed. Therefore, this operation will return an error when <var class="Arg">gp</var> has no collineation group computed. As <code class="file">CollineationGroup</code> is an attribute for objects in <code class="code">IsGeneralisedPolygon</code>, the user should compute the collineation group and then reissue the command to compute the incidence graph.</p>
+
+<p>We should also point out that this method returns a <em>mutable</em> attribute of <var class="Arg">gp</var>, so that acquired information about the incidence graph can be added. For example, the automorphism group of the incidence graph may be computed and stored as a record component after the incidence graph is stored as an attribute of <var class="Arg">gp</var>. Normally, attributes of GAP objects are immutable.</p>
+
+<p>Note that the factor 2 as difference in the order of the collineation group of <span class="SimpleMath">\(Q(4,4)\)</span> and the order of the automorphism group of its incidence graph is easily explained by the fact that the <span class="SimpleMath">\(Q(4,4)\)</span> is self dual.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">blocks := [ </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ 1, 2, 3, 4, 5 ], [ 1, 6, 7, 8, 9 ], [ 1, 10, 11, 12, 13 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ 1, 14, 15, 16, 17 ], [ 1, 18, 19, 20, 21 ], [ 2, 6, 10, 14, 18 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ 2, 7, 11, 15, 19 ], [ 2, 8, 12, 16, 20 ], [ 2, 9, 13, 17, 21 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ 3, 6, 11, 16, 21 ], [ 3, 7, 10, 17, 20 ], [ 3, 8, 13, 14, 19 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ 3, 9, 12, 15, 18 ], [ 4, 6, 12, 17, 19 ], [ 4, 7, 13, 16, 18 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ 4, 8, 10, 15, 21 ], [ 4, 9, 11, 14, 20 ], [ 5, 6, 13, 15, 20 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   [ 5, 7, 12, 14, 21 ], [ 5, 8, 11, 17, 18 ], [ 5, 9, 10, 16, 19 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByBlocks( blocks );</span>
+&lt;projective plane order 4&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">incgraph := IncidenceGraph( gp );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Diameter( incgraph );</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Girth( incgraph );</span>
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">VertexDegrees( incgraph );</span>
+[ 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut := AutGroupGraph( incgraph );</span>
+&lt;permutation group with 9 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayCompositionSeries(aut);</span>
+G (9 gens, size 241920)
+ | Z(2)
+S (5 gens, size 120960)
+ | Z(2)
+S (5 gens, size 60480)
+ | Z(3)
+S (4 gens, size 20160)
+ | A(2,4) = L(3,4)
+1 (0 gens, size 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := ParabolicQuadric(4,4);</span>
+Q(4, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">incgraph := IncidenceGraph( gp );;</span>
+Error, No collineation group computed. Please compute collineation group before compu
+ting incidence graph,n called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 24 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollineationGroup(gp);</span>
+PGammaO(5,4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(last);</span>
+1958400
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">incgraph := IncidenceGraph( gp );;</span>
+#I  Computing incidence graph of generalised polygon...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut := AutGroupGraph( incgraph );</span>
+&lt;permutation group with 10 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(aut);</span>
+3916800
+ 
+</pre></div>
+
+<p><a id="X81F531BB7DEA127D" name="X81F531BB7DEA127D"></a></p>
+
+<h5>12.3-4 IncidenceMatrixOfGeneralisedPolygon</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IncidenceMatrixOfGeneralisedPolygon</code>( <var class="Arg">gp</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a matrix</p>
+
+<p>This method returns the incidence matrix of the generalised polygon via the operation <code class="code">CollapsedAdjacencyMat</code> in the <strong class="pkg">GRAPE</strong> package. The rows of the matrix correspond to the points of <var class="Arg">gp</var>, and the columns correspond to the lines. Note that since this operation relies on <code class="file">IncidenceGraph</code>, for some generalised polygons, it is necessary to compute a collineation group first.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := SymplecticSpace(3,2);</span>
+W(3, 2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollineationGroup(gp);</span>
+PGammaSp(4,2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := IncidenceMatrixOfGeneralisedPolygon(gp);</span>
+#I  Computing incidence graph of generalised polygon...
+[ [ 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ], 
+  [ 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ], 
+  [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], 
+  [ 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], 
+  [ 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 ], 
+  [ 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 ], 
+  [ 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ], 
+  [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0 ], 
+  [ 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0 ], 
+  [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0 ], 
+  [ 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0 ], 
+  [ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1 ], 
+  [ 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1 ], 
+  [ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0 ], 
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1 ] ]
+ 
+</pre></div>
+
+<p><a id="X83FF6FA0790D5747" name="X83FF6FA0790D5747"></a></p>
+
+<h5>12.3-5 CollineationGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollineationGroup</code>( <var class="Arg">gp</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a group</p>
+
+<p>This attribute returns the full collineation group of the generalised polygon <var class="Arg">gp</var>. For some particular generalised polygons, a (subgroup) of the full collineation group can be computed efficiently without computing the incidence graph of <var class="Arg">gp</var>: the full collineation group of classical generalised quadrangles and classical generalised hexagons; and an elation group with relation to a base-point of an elation generalised quadrangle. For generalised polygons constructed by the operations <code class="file">GeneralisedPolygonByBlocks</code>, <code class="file">GeneralisedPolygonByElements</code> or <code class="file">GeneralisedPolygonByIncidenceMatrix</code>, the full collineation group is computed using the full automorphism group of the underlying incidence graph, the latter being computed by the package <strong class="pkg">GRAPE</strong>.</p>
+
+<p>The collineation groups computed for classical generalised quadrangles and classical generalised hexagons are collineation groups in the sense of <strong class="pkg">FinInG</strong>, and come equipped with a NiceMonomorphism. The collineation groups computed in all other cases are permutations groups, acting on the vertices of the underlying incidence graph.</p>
+
+<p>Note that the computation of the automorphism group of the underlying graph can be time consuming, also if the complete collineation group of the generalised polygon has been used as an argument in e.g. <code class="file">GeneralisedPolygonByElements</code>.</p>
+
+<p>The first example illustrates that <code class="file">CollineationGroup</code> is naturally applicable to all classical generalised Polygons.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := PG(2,2);</span>
+ProjectiveSpace(2, 2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollineationGroup(gp);</span>
+The FinInG collineation group PGL(3,2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := EllipticQuadric(5,4);</span>
+Q-(5, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollineationGroup(gp);</span>
+PGammaO-(6,4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := TwistedTrialityHexagon(3^3);</span>
+T(27, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollineationGroup(gp);</span>
+#I  Computing nice monomorphism...
+#I  Found permutation domain...
+3D_4(27)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+40691
+
+</pre></div>
+
+<p>The second example illustrates the computation of collineation groups of generalised polygons constructed using different objects.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [ [ 1, 1, 0, 0, 0, 1, 0 ], [ 1, 0, 0, 1, 1, 0, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 1, 0, 1, 0, 0, 0, 1 ], [ 0, 1, 1, 1, 0, 0, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 0, 1, 0, 0, 1, 0, 1 ], [ 0, 0, 0, 1, 0, 1, 1 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 0, 0, 1, 0, 1, 1, 0 ] ];</span>
+[ [ 1, 1, 0, 0, 0, 1, 0 ], [ 1, 0, 0, 1, 1, 0, 0 ], [ 1, 0, 1, 0, 0, 0, 1 ], 
+  [ 0, 1, 1, 1, 0, 0, 0 ], [ 0, 1, 0, 0, 1, 0, 1 ], [ 0, 0, 0, 1, 0, 1, 1 ], 
+  [ 0, 0, 1, 0, 1, 1, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByIncidenceMatrix(mat);</span>
+&lt;projective plane order 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := CollineationGroup(gp);</span>
+Group([ (3,4)(5,7)(9,10)(13,14), (3,7)(4,5)(11,12)(13,14), (2,3)(6,7)(8,9)
+(12,13), (2,6)(4,5)(11,13)(12,14), (1,2)(4,7)(9,11)(10,12) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := EGQByqClan(FisherqClan(3));</span>
+#I  Computed Kantor family. Now computing EGQ...
+&lt;EGQ of order [ 9, 3 ] and basepoint 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := CollineationGroup(gp);</span>
+#I  Computing incidence graph of generalised polygon...
+#I  Using elation of the collineation group...
+&lt;permutation group of size 26127360 with 8 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(group);</span>
+26127360
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Random(group);</span>
+(1,75,27,191,96,50,9,110,88,53,63,154,115,213,229,19,236,226,49,143,16,266,58,
+245,11,270,57,44)(2,181,116,225,262,223,17)(3,33,187,149,108,120,177,164,167,
+261,198,26,196,276,52,73,94,222,101,176,32,39,43,89,31,280,65,71)(4,250,173,
+112,246,38,142,138,54,208,69,243,197,42,269,242,125,8,134,265,67,206,20,13,29,
+182,205,36)(5,109,129,82,210,277,185,56,104,114,90,68,61,228,132,235,78,257,
+10,238,145,184,241,170,153,263,45,179)(6,159,230,106,147,91,22,137,256,113,
+117,180,7,133,279,100,55,156,168,86,122,131,12,35,273,264,254,152)(14,62,66,
+268,51,233,253,218,172,130,144,25,169,83,234,127,171,221,34,190,21,46,272,224,
+239,267,60,98)(15,40,278,128,160,215,87,178,203,166,247,119,209,84,255,271,
+232,81,193,252,92,95,111,201,107,140,135,258)( [...] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := 4;</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">conic := ParabolicQuadric(2,q);</span>
+Q(2, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nucleus := NucleusOfParabolicQuadric(conic);</span>
+&lt;a point in ProjectiveSpace(2, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">conic := ParabolicQuadric(2,q);</span>
+Q(2, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nucleus := NucleusOfParabolicQuadric(conic);</span>
+&lt;a point in ProjectiveSpace(2, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hyperoval := Union(List(Points(conic)),[nucleus]);</span>
+[ &lt;a point in ProjectiveSpace(2, 4)&gt;, &lt;a point in Q(2, 4)&gt;, 
+  &lt;a point in Q(2, 4)&gt;, &lt;a point in Q(2, 4)&gt;, &lt;a point in Q(2, 4)&gt;, 
+  &lt;a point in Q(2, 4)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(3,q);</span>
+ProjectiveSpace(3, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hyp :=  HyperplaneByDualCoordinates(pg,[1,0,0,0]*Z(q)^0);</span>
+&lt;a plane in ProjectiveSpace(3, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">em := NaturalEmbeddingBySubspace(PG(2,q),pg,hyp);</span>
+&lt;geometry morphism from &lt;All elements of ProjectiveSpace(2, 
+4)&gt; to &lt;All elements of ProjectiveSpace(3, 4)&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">O := List(hyperoval,x-&gt;x^em);</span>
+[ &lt;a point in ProjectiveSpace(3, 4)&gt;, &lt;a point in ProjectiveSpace(3, 4)&gt;, 
+  &lt;a point in ProjectiveSpace(3, 4)&gt;, &lt;a point in ProjectiveSpace(3, 4)&gt;, 
+  &lt;a point in ProjectiveSpace(3, 4)&gt;, &lt;a point in ProjectiveSpace(3, 4)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">points := Set(Filtered(Points(pg),x-&gt;not x in hyp));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := Union(List(O,x-&gt;Filtered(Lines(x),y-&gt;not y in hyp)));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">inc := \*;</span>
+&lt;Operation "*"&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByElements(points,lines,inc);</span>
+&lt;generalised quadrangle of order [ 3, 5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coll := CollineationGroup(gp);</span>
+&lt;permutation group of size 138240 with 8 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(coll);</span>
+138240
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Random(coll);</span>
+(1,29,60,40)(2,42,4,10,3,61,59,19,57,51,58,8)(5,21,17,25,52,13,64,48,44,36,9,
+56)(6,34,41,55,50,45,63,27,20,14,11,24)(7,53,18,46,12,35,62,16,43,23,49,
+26)(15,32,47,31,28,39,54,37,22,38,33,30)(65,74,83,111,66,117,149,104,70,151,
+142,78)(67,135,139,136,68,109,98,125,69,95,120,137)(71,92,73,128,77,106,141,
+105,145,150,88,155)(72,121,158,160,76,143,119,103,138,152,134,84)(75,153,133,
+107,115,122,118,85,154,116,147,91)(79,110,101,159,126,90,157,81,112,100,89,
+108)(80,99,97,86,156,129,144,94,127,114,148,82)(87,132,102,131,123,130,124,96,
+93,113,146,140)
+
+</pre></div>
+
+<p>In the third example, the use of an precomputed automorphism group is illustrated. It speeds up the construction of the underlying graph and the computation of the automorphism group of the underlying graph. However, as is also illustrated in the example, despite that the precomputed automorphism group of the generalised polygon is actually the full collineation group, still some time is needed to compute the automorphism group of the underlying graph. The timings after both <code class="file">CollineationGroup</code> commands are wrong. This is because <strong class="pkg">GRAPE</strong> relies on an external binary to computed the automorphism group of a graph. The generalised quadrangle in this example is known as <span class="SimpleMath">\(T_2^*(O)\)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := 8;</span>
+8
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">conic := ParabolicQuadric(2,q);</span>
+Q(2, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nucleus := NucleusOfParabolicQuadric(conic);</span>
+&lt;a point in ProjectiveSpace(2, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hyperoval := Union(List(Points(conic)),[nucleus]);</span>
+[ &lt;a point in ProjectiveSpace(2, 8)&gt;, &lt;a point in Q(2, 8)&gt;, 
+  &lt;a point in Q(2, 8)&gt;, &lt;a point in Q(2, 8)&gt;, &lt;a point in Q(2, 8)&gt;, 
+  &lt;a point in Q(2, 8)&gt;, &lt;a point in Q(2, 8)&gt;, &lt;a point in Q(2, 8)&gt;, 
+  &lt;a point in Q(2, 8)&gt;, &lt;a point in Q(2, 8)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(3,q);</span>
+ProjectiveSpace(3, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hyp :=  HyperplaneByDualCoordinates(pg,[1,0,0,0]*Z(q)^0);</span>
+&lt;a plane in ProjectiveSpace(3, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">em := NaturalEmbeddingBySubspace(PG(2,q),pg,hyp);</span>
+&lt;geometry morphism from &lt;All elements of ProjectiveSpace(2, 
+8)&gt; to &lt;All elements of ProjectiveSpace(3, 8)&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">O := List(hyperoval,x-&gt;x^em);</span>
+[ &lt;a point in ProjectiveSpace(3, 8)&gt;, &lt;a point in ProjectiveSpace(3, 8)&gt;, 
+  &lt;a point in ProjectiveSpace(3, 8)&gt;, &lt;a point in ProjectiveSpace(3, 8)&gt;, 
+  &lt;a point in ProjectiveSpace(3, 8)&gt;, &lt;a point in ProjectiveSpace(3, 8)&gt;, 
+  &lt;a point in ProjectiveSpace(3, 8)&gt;, &lt;a point in ProjectiveSpace(3, 8)&gt;, 
+  &lt;a point in ProjectiveSpace(3, 8)&gt;, &lt;a point in ProjectiveSpace(3, 8)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">points := Set(Filtered(Points(pg),x-&gt;not x in hyp));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := Union(List(O,x-&gt;Filtered(Lines(x),y-&gt;not y in hyp)));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">inc := \*;</span>
+&lt;Operation "*"&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByElements(points,lines,inc);</span>
+&lt;generalised quadrangle of order [ 7, 9 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+17466
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coll := CollineationGroup(gp);</span>
+&lt;permutation group of size 5419008 with 9 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+69
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := CollineationGroup(pg);</span>
+The FinInG collineation group PGammaL(4,8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">stab := FiningSetwiseStabiliser(group,O);</span>
+#I  Computing adjusted stabilizer chain...
+&lt;projective collineation group with 11 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+2045
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByElements(points,lines,inc,stab,\^);</span>
+&lt;generalised quadrangle of order [ 7, 9 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+394
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coll := CollineationGroup(gp);</span>
+&lt;permutation group of size 5419008 with 9 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+62
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(coll);</span>
+5419008
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(stab);</span>
+5419008
+
+</pre></div>
+
+<p><a id="X8074EDB381D97984" name="X8074EDB381D97984"></a></p>
+
+<h5>12.3-6 CollineationAction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollineationAction</code>( <var class="Arg">group</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a function</p>
+
+<p><var class="Arg">group</var> is a collineation group of a generalised polygon, computed using <code class="file">CollineationGroup</code>. The collineation group of classical generalised polygons will be a collineation group in the sense of <strong class="pkg">FinInG</strong>. The natural action is <code class="file">OnProjectiveSubspaces</code>. The collineation group of any other generalised polygons will be a permutation group. The result of <code class="file">CollineationAction</code> for such a group is a function with input a pair <var class="Arg">(x,g)</var> where <var class="Arg">x</var> is an element of the generalised polygon, and <var class="Arg">g</var> is a collineation of the generalised polygon, so an element of <var class="Arg">group</var>. The example illustrates the use in the generalised quadrangle.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := 4;</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">conic := ParabolicQuadric(2,q);</span>
+Q(2, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nucleus := NucleusOfParabolicQuadric(conic);</span>
+&lt;a point in ProjectiveSpace(2, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hyperoval := Union(List(Points(conic)),[nucleus]);</span>
+[ &lt;a point in ProjectiveSpace(2, 4)&gt;, &lt;a point in Q(2, 4)&gt;, 
+  &lt;a point in Q(2, 4)&gt;, &lt;a point in Q(2, 4)&gt;, &lt;a point in Q(2, 4)&gt;, 
+  &lt;a point in Q(2, 4)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(3,q);</span>
+ProjectiveSpace(3, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hyp :=  HyperplaneByDualCoordinates(pg,[1,0,0,0]*Z(q)^0);</span>
+&lt;a plane in ProjectiveSpace(3, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">em := NaturalEmbeddingBySubspace(PG(2,q),pg,hyp);</span>
+&lt;geometry morphism from &lt;All elements of ProjectiveSpace(2, 
+4)&gt; to &lt;All elements of ProjectiveSpace(3, 4)&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">O := List(hyperoval,x-&gt;x^em);</span>
+[ &lt;a point in ProjectiveSpace(3, 4)&gt;, &lt;a point in ProjectiveSpace(3, 4)&gt;, 
+  &lt;a point in ProjectiveSpace(3, 4)&gt;, &lt;a point in ProjectiveSpace(3, 4)&gt;, 
+  &lt;a point in ProjectiveSpace(3, 4)&gt;, &lt;a point in ProjectiveSpace(3, 4)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">points := Set(Filtered(Points(pg),x-&gt;not x in hyp));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := Union(List(O,x-&gt;Filtered(Lines(x),y-&gt;not y in hyp)));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">inc := \*;</span>
+&lt;Operation "*"&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByElements(points,lines,inc);</span>
+&lt;generalised quadrangle of order [ 3, 5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coll := CollineationGroup(gp);</span>
+&lt;permutation group of size 138240 with 8 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act := CollineationAction(coll);</span>
+function( el, g ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := Random(coll);</span>
+(1,37,45,63,27,19)(2,53,13,64,11,51)(3,33,38,61,31,28)(4,49,6,62,15,60)(5,46,
+47,59,20,17)(7,42,40,57,24,26)(8,58)(9,55)(10,39,41,56,25,23)(12,35,34,54,29,
+32)(14,48,43,52,18,21)(16,44,36,50,22,30)(65,132,90,157,89,105)(66,68,131,143,
+119,103)(67,135,76,123,130,106)(69,133,112,100,81,107)(70,134,150,88,155,
+104)(71,99,79,144,93,149)(72,153,95,120,73,122)(74,125,115,128,140,87)(75,121,
+136,117,113,91)(77,124,98,83,147,146)(78,145,84,118,85,142)(80,92,137,141,108,
+97)(82,86,116,111,138,101)(94,127,126,102,109,96)(110,152,151,154,156,
+129)(114,160,139,158,148,159)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random(Lines(gp));</span>
+&lt;a line in &lt;generalised quadrangle of order [ 3, 5 ]&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act(l,g);</span>
+&lt;a line in &lt;generalised quadrangle of order [ 3, 5 ]&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(gp));</span>
+&lt;a point in &lt;generalised quadrangle of order [ 3, 5 ]&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act(p,g);</span>
+&lt;a point in &lt;generalised quadrangle of order [ 3, 5 ]&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">stab := Stabilizer(coll,p,act);</span>
+&lt;permutation group of size 2160 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(Orbits(stab,List(Points(gp)),act),x-&gt;Length(x));</span>
+[ 45, 18, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(Orbits(stab,List(Lines(gp)),act),x-&gt;Length(x));</span>
+[ 90, 6 ]
+
+</pre></div>
+
+<p><a id="X7D75521986B958DA" name="X7D75521986B958DA"></a></p>
+
+<h5>12.3-7 BlockDesignOfGeneralisedPolygon</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BlockDesignOfGeneralisedPolygon</code>( <var class="Arg">gp</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a block design</p>
+
+<p>This method allows one to use the GAP package <strong class="pkg">DESIGN</strong> to analyse a generalised polygon, so the user must first load this package. The argument <var class="Arg">gp</var> is a generalised polygon, and if it has a collineation group, the block design is computed with this extra information and thus the resulting design is easier to work with. Likewise, if <var class="Arg">gp</var> is an elation generalised quadrangle and it has an elation group, then we use the elation group's action to efficiently compute the block design. We should also point out that this method returns a <em>mutable</em> attribute of <var class="Arg">gp</var>, so that accquired information about the block design can be added. For example, the automorphism group of the block design may be computed after the design is stored as an attribute of <var class="Arg">gp</var>. Normally, attributes of GAP objects are immutable.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("design");</span>
+#W BIND_GLOBAL: variable `BlockDesign' already has a value
+-----------------------------------------------------------------------------
+Loading  DESIGN 1.6 (The Design Package for GAP)
+by Leonard H. Soicher (http://www.maths.qmul.ac.uk/~leonard/).
+Homepage: http://www.designtheory.org/software/gap_design/
+-----------------------------------------------------------------------------
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gh := SplitCayleyHexagon(2);</span>
+H(2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollineationGroup(gh);</span>
+#I  for Split Cayley Hexagon
+#I  Computing nice monomorphism...
+#I  Found permutation domain...
+G_2(2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">des := BlockDesignOfGeneralisedPolygon(gh);</span>
+rec( autSubgroup := &lt;permutation group with 3 generators&gt;, 
+  blocks := [ [ 1, 29, 52 ], [ 1, 34, 36 ], [ 1, 37, 48 ], [ 2, 13, 60 ], 
+      [ 2, 44, 53 ], [ 2, 45, 52 ], [ 3, 17, 35 ], [ 3, 22, 51 ], 
+      [ 3, 23, 48 ], [ 4, 16, 57 ], [ 4, 19, 36 ], [ 4, 54, 56 ], 
+      [ 5, 22, 63 ], [ 5, 31, 57 ], [ 5, 49, 52 ], [ 6, 7, 60 ], 
+      [ 6, 28, 57 ], [ 6, 35, 43 ], [ 7, 26, 27 ], [ 7, 33, 34 ], 
+      [ 8, 9, 53 ], [ 8, 22, 33 ], [ 8, 38, 56 ], [ 9, 25, 61 ], 
+      [ 9, 28, 37 ], [ 10, 18, 53 ], [ 10, 32, 35 ], [ 10, 36, 62 ], 
+      [ 11, 12, 63 ], [ 11, 26, 54 ], [ 11, 37, 42 ], [ 12, 41, 43 ], 
+      [ 12, 44, 50 ], [ 13, 15, 42 ], [ 13, 19, 51 ], [ 14, 15, 31 ], 
+      [ 14, 17, 61 ], [ 14, 34, 50 ], [ 15, 20, 38 ], [ 16, 23, 44 ], 
+      [ 16, 40, 59 ], [ 17, 45, 54 ], [ 18, 24, 26 ], [ 18, 30, 31 ], 
+      [ 19, 25, 41 ], [ 20, 21, 62 ], [ 20, 23, 27 ], [ 21, 28, 55 ], 
+      [ 21, 39, 45 ], [ 24, 29, 59 ], [ 24, 51, 55 ], [ 25, 27, 49 ], 
+      [ 29, 38, 43 ], [ 30, 39, 41 ], [ 30, 46, 48 ], [ 32, 40, 42 ], 
+      [ 32, 47, 49 ], [ 33, 39, 40 ], [ 46, 47, 56 ], [ 46, 58, 60 ], 
+      [ 47, 50, 55 ], [ 58, 59, 61 ], [ 58, 62, 63 ] ], isBlockDesign := true,
+  v := 63 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := GF(3);</span>
+GF(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">id := IdentityMat(2, f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := List( f, t -&gt; t*id );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := qClan(clan,f);</span>
+&lt;q-clan over GF(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByqClan( clan );</span>
+#I  Computed Kantor family. Now computing EGQ...
+&lt;EGQ of order [ 9, 3 ] and basepoint 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasElationGroup( egq );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">design := BlockDesignOfGeneralisedPolygon( egq );;</span>
+#I  Computing orbits on lines of gen. polygon...
+#I  Computing block design of generalised polygon...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aut := AutGroupBlockDesign( design );</span>
+&lt;permutation group with 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NrBlockDesignPoints( design );</span>
+280
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NrBlockDesignBlocks( design );</span>
+112
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayCompositionSeries(aut);</span>
+G (6 gens, size 26127360)
+ | Z(2)
+S (5 gens, size 13063680)
+ | Z(2)
+S (5 gens, size 6531840)
+ | Z(2)
+S (4 gens, size 3265920)
+ | 2A(3,3) = U(4,3) ~ 2D(3,3) = O-(6,3)
+1 (0 gens, size 1)
+
+</pre></div>
+
+<p><a id="X7A13D5EB82E01576" name="X7A13D5EB82E01576"></a></p>
+
+<h4>12.4 <span class="Heading">Elements of generalised polygons</span></h4>
+
+<p><a id="X7E7607CA7D59D086" name="X7E7607CA7D59D086"></a></p>
+
+<h5>12.4-1 <span class="Heading">Collections of elements of generalised polygons</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElementsOfIncidencStructure</code>( <var class="Arg">gp</var>, <var class="Arg">i</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Points</code>( <var class="Arg">gp</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Lines</code>( <var class="Arg">gp</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a collection of elements of a generalised polygon</p>
+
+<p><var class="Arg">gp</var> is any generalised polygon, <var class="Arg">i</var> is a natural number, necessarily <span class="SimpleMath">\(1\)</span> or <span class="SimpleMath">\(2\)</span>. <code class="file">ElementsOfIncidenceStructure</code> returns the elements of type <span class="SimpleMath">\(i\)</span> of <var class="Arg">gp</var>, <code class="file">Points</code> and <code class="file">Lines</code> are the usual shortcuts.</p>
+
+<p><a id="X858ADA3B7A684421" name="X858ADA3B7A684421"></a></p>
+
+<h5>12.4-2 Size</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Size</code>( <var class="Arg">els</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a number</p>
+
+<p><var class="Arg">els</var> is a collection of elements of a generalised polygon. This operation returns the number of element in <var class="Arg">els</var>.</p>
+
+<p><a id="X7E9B2A217DBF2849" name="X7E9B2A217DBF2849"></a></p>
+
+<h5>12.4-3 <span class="Heading">Creating elements from objects and retrieving objects from elements</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ObjectToElement</code>( <var class="Arg">gp</var>, <var class="Arg">obj</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ObjectToElement</code>( <var class="Arg">gp</var>, <var class="Arg">type</var>, <var class="Arg">obj</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingObject</code>( <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a collection of elements of a generalised polygon</p>
+
+<p>To create elements in <var class="Arg">gp</var> (of type <var class="Arg">type</var>), one of the versions of <code class="file">ObjectToElement</code> can be used. It is checked whether <var class="Arg">obj</var> represents an element (of type <var class="Arg">type</var>). To retrieve an underlying object of an element <var class="Arg">el</var>, <code class="file">UnderlyingObject</code> can be used.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [ [ 1, 1, 0, 0, 0, 1, 0 ], [ 1, 0, 0, 1, 1, 0, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 1, 0, 1, 0, 0, 0, 1 ], [ 0, 1, 1, 1, 0, 0, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 0, 1, 0, 0, 1, 0, 1 ], [ 0, 0, 0, 1, 0, 1, 1 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 0, 0, 1, 0, 1, 1, 0 ] ];</span>
+[ [ 1, 1, 0, 0, 0, 1, 0 ], [ 1, 0, 0, 1, 1, 0, 0 ], [ 1, 0, 1, 0, 0, 0, 1 ], 
+  [ 0, 1, 1, 1, 0, 0, 0 ], [ 0, 1, 0, 0, 1, 0, 1 ], [ 0, 0, 0, 1, 0, 1, 1 ], 
+  [ 0, 0, 1, 0, 1, 1, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByIncidenceMatrix(mat);</span>
+&lt;projective plane order 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(gp));</span>
+&lt;a point in &lt;projective plane order 2&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingObject(p);</span>
+7
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random(Lines(gp));</span>
+&lt;a line in &lt;projective plane order 2&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingObject(l);</span>
+[ 4, 6, 7 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ObjectToElement(gp,1,4);</span>
+&lt;a point in &lt;projective plane order 2&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ObjectToElement(gp,2,5);</span>
+Error, &lt;obj&gt; does not represent a line of &lt;gp&gt; called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 18 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ObjectToElement(gp,2,[1,2,3]);</span>
+Error, &lt;obj&gt; does not represent a line of &lt;gp&gt; called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 18 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ObjectToElement(gp,[1,2,6]);</span>
+&lt;a line in &lt;projective plane order 2&gt;&gt;
+
+</pre></div>
+
+<p><a id="X83B0FA9E7AE3DF01" name="X83B0FA9E7AE3DF01"></a></p>
+
+<h5>12.4-4 <span class="Heading">Incidence</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIncident</code>( <var class="Arg">v</var>, <var class="Arg">w</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">v</var>, <var class="Arg">w</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>Let <var class="Arg">v</var> and <var class="Arg">w</var> be two elements of a generalised polygon. It is checked if the ambient geometry of the two elements are identical, and true is returned if and only if the two elements are incident in their ambient geometry.</p>
+
+<p><a id="X875BE2957FAF6209" name="X875BE2957FAF6209"></a></p>
+
+<h5>12.4-5 Span</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Span</code>( <var class="Arg">v</var>, <var class="Arg">w</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a line of a generalised polygon or fail</p>
+
+<p>Let <var class="Arg">v</var> and <var class="Arg">w</var> be two elements of a generalised polygon. It is checked if the ambient geometries of the two elements are identical, and if the two elements are points. If <var class="Arg">v</var> and <var class="Arg">w</var> are incidence with a common line, this line is returned. Otherwise <code class="keyw">fail</code> is returned. For generalised polygons constructed with <code class="code">GeneralisedPolygonByBlocks</code>, <code class="code">GeneralisedPolygonByElements</code> an <code class="code">GeneralisedPolygonByInidenceMatrix</code>, the underlying graph is used. Note that the behaviour of <code class="file">Span</code> is different for elements of generalised polygons that belong to <code class="code">IsLieGeometry</code>, see <a href="chap4_mj.html#X875BE2957FAF6209"><span class="RefLink">4.2-16</span></a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [ [ 1, 1, 0, 0, 0, 1, 0 ], [ 1, 0, 0, 1, 1, 0, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 1, 0, 1, 0, 0, 0, 1 ], [ 0, 1, 1, 1, 0, 0, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 0, 1, 0, 0, 1, 0, 1 ], [ 0, 0, 0, 1, 0, 1, 1 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 0, 0, 1, 0, 1, 1, 0 ] ];</span>
+[ [ 1, 1, 0, 0, 0, 1, 0 ], [ 1, 0, 0, 1, 1, 0, 0 ], [ 1, 0, 1, 0, 0, 0, 1 ], 
+  [ 0, 1, 1, 1, 0, 0, 0 ], [ 0, 1, 0, 0, 1, 0, 1 ], [ 0, 0, 0, 1, 0, 1, 1 ], 
+  [ 0, 0, 1, 0, 1, 1, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByIncidenceMatrix(mat);</span>
+&lt;projective plane order 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(gp));</span>
+&lt;a point in &lt;projective plane order 2&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := Random(Points(gp));</span>
+&lt;a point in &lt;projective plane order 2&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Span(p,q);</span>
+&lt;a line in &lt;projective plane order 2&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ParabolicQuadric(4,3);</span>
+Q(4, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByElements(Set(Points(ps)),Set(Lines(ps)),\*);</span>
+&lt;generalised quadrangle of order [ 3, 3 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(gp));</span>
+&lt;a point in &lt;generalised quadrangle of order [ 3, 3 ]&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := Random(Points(gp));</span>
+&lt;a point in &lt;generalised quadrangle of order [ 3, 3 ]&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Span(p,q);</span>
+#I  &lt;x&gt; and &lt;y&gt; do not span a line of gp
+fail
+
+</pre></div>
+
+<p><a id="X8469B54180FE1E4C" name="X8469B54180FE1E4C"></a></p>
+
+<h5>12.4-6 Meet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Meet</code>( <var class="Arg">v</var>, <var class="Arg">w</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a point of a generalised polygon or fail</p>
+
+<p>Let <var class="Arg">v</var> and <var class="Arg">w</var> be two elements of a generalised polygon. It is checked if the ambient geometries of the two elements are identical, and if the two elements are lines. If <var class="Arg">v</var> and <var class="Arg">w</var> are incidence with a common point, this point is returned. Otherwise <code class="keyw">fail</code> is returned. For generalised polygons constructed with <code class="code">GeneralisedPolygonByBlocks</code>, <code class="code">GeneralisedPolygonByElements</code> an <code class="code">GeneralisedPolygonByInidenceMatrix</code>, the underlying graph is used. Note that the behavior of <code class="file">Meet</code> is different for elements of generalised polygongs that belong to <code class="code">IsLieGeometry</code>, see <a href="chap4_mj.html#X8469B54180FE1E4C"><span class="RefLink">4.2-17</span></a></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [ [ 1, 1, 0, 0, 0, 1, 0 ], [ 1, 0, 0, 1, 1, 0, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 1, 0, 1, 0, 0, 0, 1 ], [ 0, 1, 1, 1, 0, 0, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 0, 1, 0, 0, 1, 0, 1 ], [ 0, 0, 0, 1, 0, 1, 1 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 0, 0, 1, 0, 1, 1, 0 ] ];</span>
+[ [ 1, 1, 0, 0, 0, 1, 0 ], [ 1, 0, 0, 1, 1, 0, 0 ], [ 1, 0, 1, 0, 0, 0, 1 ], 
+  [ 0, 1, 1, 1, 0, 0, 0 ], [ 0, 1, 0, 0, 1, 0, 1 ], [ 0, 0, 0, 1, 0, 1, 1 ], 
+  [ 0, 0, 1, 0, 1, 1, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByIncidenceMatrix(mat);</span>
+&lt;projective plane order 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random(Lines(gp));</span>
+&lt;a line in &lt;projective plane order 2&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := Random(Lines(gp));</span>
+&lt;a line in &lt;projective plane order 2&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Meet(l,m);</span>
+&lt;a point in &lt;projective plane order 2&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ParabolicQuadric(4,3);</span>
+Q(4, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByElements(Set(Points(ps)),Set(Lines(ps)),\*);</span>
+&lt;generalised quadrangle of order [ 3, 3 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random(Lines(gp));</span>
+&lt;a line in &lt;generalised quadrangle of order [ 3, 3 ]&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := Random(Lines(gp));</span>
+&lt;a line in &lt;generalised quadrangle of order [ 3, 3 ]&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Meet(l,m);</span>
+#I  &lt;x&gt; and &lt;y&gt; do meet in a common point of gp
+fail
+
+</pre></div>
+
+<p><a id="X8154BB13844AA0FD" name="X8154BB13844AA0FD"></a></p>
+
+<h5>12.4-7 <span class="Heading">Shadow elements</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShadowOfElement</code>( <var class="Arg">geo</var>, <var class="Arg">v</var>, <var class="Arg">j</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Points</code>( <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Lines</code>( <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElementsIncidentWithElementOfIncidenceStructure</code>( <var class="Arg">el</var>, <var class="Arg">i</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: A collection of elements</p>
+
+<p><var class="Arg">geo</var> is a generalised polygon, <var class="Arg">v</var> must be an element of <var class="Arg">geo</var>, <var class="Arg">j</var> is an integer equal to 1 or 2, since <var class="Arg">geo</var> is a rank two geometry. The operation <code class="file">ShadowOfElement</code> returns the collection of elements of <var class="Arg">geo</var> of type <var class="Arg">j</var>, incident with the element <var class="Arg">v</var>. The operations <code class="file">Points</code> and <code class="file">Lines</code> with argument are the usual shortcuts to <code class="file">ShadowOfElement</code> with <var class="Arg">j</var> respectively equal to 1, 2. The operation <code class="file">ElementsIncidentWithElementOfIncidenceStructure</code> is the usual shortcut to <code class="file">ShadowOfElement</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">blocks := [</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 1, 2, 3, 4, 5 ], [ 1, 6, 7, 8, 9 ], [ 1, 10, 11, 12, 13 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 1, 14, 15, 16, 17 ], [ 1, 18, 19, 20, 21 ], [ 2, 6, 10, 14, 18 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 2, 7, 11, 15, 19 ], [ 2, 8, 12, 16, 20 ], [ 2, 9, 13, 17, 21 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 3, 6, 11, 16, 21 ], [ 3, 7, 10, 17, 20 ], [ 3, 8, 13, 14, 19 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 3, 9, 12, 15, 18 ], [ 4, 6, 12, 17, 19 ], [ 4, 7, 13, 16, 18 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 4, 8, 10, 15, 21 ], [ 4, 9, 11, 14, 20 ], [ 5, 6, 13, 15, 20 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 5, 7, 12, 14, 21 ], [ 5, 8, 11, 17, 18 ], [ 5, 9, 10, 16, 19 ] ];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gp := GeneralisedPolygonByBlocks( blocks ); </span>
+&lt;projective plane order 4&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random(Lines(gp)); </span>
+&lt;a line in &lt;projective plane order 4&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pts := ShadowOfElement(gp,l,1);</span>
+&lt;shadow points in &lt;projective plane order 4&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(pts);</span>
+[ &lt;a point in &lt;projective plane order 4&gt;&gt;, 
+  &lt;a point in &lt;projective plane order 4&gt;&gt;, 
+  &lt;a point in &lt;projective plane order 4&gt;&gt;, 
+  &lt;a point in &lt;projective plane order 4&gt;&gt;, 
+  &lt;a point in &lt;projective plane order 4&gt;&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(gp));</span>
+&lt;a point in &lt;projective plane order 4&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := Lines(p);</span>
+&lt;shadow lines in &lt;projective plane order 4&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(lines);</span>
+[ &lt;a line in &lt;projective plane order 4&gt;&gt;, &lt;a line in &lt;projective plane order 
+    4&gt;&gt;, &lt;a line in &lt;projective plane order 4&gt;&gt;, 
+  &lt;a line in &lt;projective plane order 4&gt;&gt;, &lt;a line in &lt;projective plane order 
+    4&gt;&gt; ]
+
+</pre></div>
+
+<p><a id="X7807682E86D3BE10" name="X7807682E86D3BE10"></a></p>
+
+<h5>12.4-8 DistanceBetweenElements</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DistanceBetweenElements</code>( <var class="Arg">v</var>, <var class="Arg">w</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a number</p>
+
+<p>Let <var class="Arg">v</var> and <var class="Arg">w</var> be two elements of a generalised polygon. It is checked if the ambient geometry of the two elements are identical, and the distance between the two elements in the incidence graph of their ambient geometry is returned.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := ElementaryAbelianGroup(27);</span>
+&lt;pc group of size 27 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flist1 := [ Group(g.1), Group(g.2), Group(g.3), Group(g.1*g.2*g.3) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flist2 := [ Group([g.1, g.2^2*g.3]), Group([g.2, g.1^2*g.3 ]),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            Group([g.3, g.1^2*g.2]), Group([g.1^2*g.2, g.1^2*g.3 ]) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByKantorFamily(g, flist1, flist2);</span>
+&lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(egq));</span>
+&lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := Random(Points(egq));</span>
+&lt;a point of class 3 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DistanceBetweenElements(p,q);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gh := SplitCayleyHexagon(3);</span>
+H(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random(Lines(gh));</span>
+#I  for Split Cayley Hexagon
+#I  Computing nice monomorphism...
+#I  Found permutation domain...
+&lt;a line in H(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := First(Lines(gh),x-&gt;DistanceBetweenElements(l,x)=6);</span>
+&lt;a line in H(3)&gt;
+
+</pre></div>
+
+<p><a id="X7934EB788049B533" name="X7934EB788049B533"></a></p>
+
+<h4>12.5 <span class="Heading">The classical generalised hexagons</span></h4>
+
+<p><a id="X7BF1D2E57B7630CB" name="X7BF1D2E57B7630CB"></a></p>
+
+<h5>12.5-1 <span class="Heading">Trialities of the hyperbolic quadric and generalised hexagons</span></h5>
+
+<p>Consider the hyperbolic quadric <span class="SimpleMath">\(\mathrm{Q}^+(7,q)\)</span>. This is a polar space of rank 4. It is well known that its generators fall into two systems. Each system contains exactly <span class="SimpleMath">\((q^3+q^2+q+1)(q^2+q+1)\)</span> generators, which is equal to the number of points of <span class="SimpleMath">\(\mathrm{Q}^+(7,q)\)</span>. Generators from the same system meet each other in an empty subspace or in a line, Generators from a different system meet each other in a point or a plane. One defines the rank <span class="SimpleMath">\(4\)</span> geometry <span class="SimpleMath">\(\Omega(7,q)\)</span> as follows. The 0-points are the points of <span class="SimpleMath">\(\mathrm{Q}^+(7,q)\)</span>, the 1-points are the generators of the first system, the 2-points are the generators of the second system, and the lines are the lines of <span class="SimpleMath">\(\mathrm{Q}^+(7,q)\)</span>. The incidence is the natural incidence of the underlying projective space. Denote the set of <span class="SimpleMath">\(i\)</span>-points as <span class="SimpleMath">\(P^{(i)}\)</span> , <span class="SimpleMath">\(i=0,1,2\)</span>.</p>
+
+<p>A triality of <span class="SimpleMath">\(\Omega(7,q)\)</span> is a map <span class="SimpleMath">\(\tau: P^{(i)} \rightarrow P^{(i+1)}\)</span> (where <span class="SimpleMath">\(i+1\)</span> is computed modulo 3) preserving the incidence and for which <span class="SimpleMath">\(\tau^3 = 1\)</span>. Note that the image of a line under <span class="SimpleMath">\(\tau\)</span> is determined by the image of the points incident with the line.</p>
+
+<p>An <span class="SimpleMath">\(i\)</span>-point is absolute with respect to a fixed triality if it is incident with its image under the triality. Consequently, a line is absolute with if it is fixed by the triality.</p>
+
+<p>A generalised hexagon can be constructed as geometry of absolute points of one kind and absolute lines with relation to a fixed triality. Note that not all trialities yield (thick) generalised quadrangles. There are different types of trialities, for some of them the absolute geometry is degenerate.</p>
+
+<p>The triality used in <strong class="pkg">FinInG</strong> to construct the classical generalised hexagons is fixed. It is described explicitely in <a href="chapBib_mj.html#biBHVM">[VM98]</a>. To describe the triality, a trilinear form expressing the incidence between <span class="SimpleMath">\(i\)</span>-points of <span class="SimpleMath">\(\Omega(7,q)\)</span> is used. Given the fact that, because of the existence of a triality, the role of the 0, 1 and 2 points are the same, each of the 1 and 2 points can be labelled the same way as the 0-points, which are effectively labelled by 8-tuples <span class="SimpleMath">\((x_0,\ldots,x_7) \in V(8,q)=V\)</span> where each 8-tuples represents a projective point of <span class="SimpleMath">\(\mathrm{Q}^+(7,q)\)</span>.</p>
+
+<p>Consider the hyperbolic quadric determined by the quadratic form <span class="SimpleMath">\(X_0X_4+X_1X_5+X_2X_6+X_3X_7\)</span> . Consider the trilinear map <span class="SimpleMath">\(T\)</span>,</p>
+
+<p><span class="SimpleMath">\(T(x,y,z) = \left|\begin{array}{ccc} x_0 &amp; x_1 &amp; x_2 \\ y_0 &amp; y_1 &amp; y_2 \\ z_0 &amp; z_1 &amp; z_2 \\ \end{array}\right| + \left|\begin{array}{ccc} x_4 &amp; x_5 &amp; x_6 \\ y_4 &amp; y_5 &amp; y_6 \\ z_4 &amp; z_5 &amp; z_6 \\ \end{array}\right| + x_3(z_0y_4+z_1y_5+z_2y_6) + x_7(y_0z_4+y_1z_5+y_2z_6) + y_3(x_0z_4+x_1z_5+x_2z_6) + \\ y_7(z_0x_4+z_1x_5+z_2x_6) + z_3(y_0x_4+y_1x_5+y_2x_6) + z_7(x_0y_4+x_1y_5+x_2y_6) - x_3y_3z_3 - x_7y_7z_7.\)</span></p>
+
+<p>Now a pair <span class="SimpleMath">\((x,y) \in V \times V\)</span> represents an incident 0-1 pair of points if and only if <span class="SimpleMath">\(T(x,y,z)\)</span> vanishes in the variable <span class="SimpleMath">\(z\)</span>, and similarly for any cyclic permutation of the letters <span class="SimpleMath">\(x,y,z\)</span>. So given a <span class="SimpleMath">\(1\)</span>-point <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(T(x,y,z) = 0\)</span>, where <span class="SimpleMath">\(z\)</span> is a variable, and <span class="SimpleMath">\(x\)</span> is an unknown, gives a set of equations representing a generator of <span class="SimpleMath">\(\mathrm{Q}^+(7,q)\)</span> this is the generator of <span class="SimpleMath">\(\mathrm{Q}^+(7,q)\)</span> represented by <span class="SimpleMath">\(y\)</span> as label of a <span class="SimpleMath">\(1\)</span>-point.</p>
+
+<p>Let <span class="SimpleMath">\(\sigma\)</span> be an automorphism of <span class="SimpleMath">\(\mathrm{GF}(q)\)</span> of order <span class="SimpleMath">\(3\)</span>, or the identity. Consider the map</p>
+
+<p><span class="SimpleMath">\(\tau_{\sigma}: P^{(i)} \rightarrow P^{(i+1)}\)</span></p>
+
+<p><span class="SimpleMath">\((x_j) \mapsto (x_j^{\sigma})\)</span>, <span class="SimpleMath">\(j=0\ldots 7\)</span> .</p>
+
+<p>This map clearly preserves <span class="SimpleMath">\(T(x,y,z)\)</span>, so preserves the incidence, and has order three, so it is a triality of <span class="SimpleMath">\(\Omega(7,q)\)</span>. We call an element <span class="SimpleMath">\(p\)</span> absolute with respect to a triality <span class="SimpleMath">\(\tau\)</span> if and only if <span class="SimpleMath">\(p \mathrm{I} p^\tau\)</span> . Consequently, a line is absolute if and only if it is fixed by the triality. Denote the set of <span class="SimpleMath">\(i\)</span>-points that are absolute with respect to the triality as <span class="SimpleMath">\(P_{\mathrm{abs}}^{(i)}\)</span> , and the set of absolute lines with respect to the triality as <span class="SimpleMath">\(L_{\mathrm{abs}}\)</span>. Then a famous theorem of Tits (<a href="chapBib_mj.html#biBTits1959">[Tit59]</a>) says that for the triality <span class="SimpleMath">\(\tau_{\sigma}\)</span> , the point-line geometry <span class="SimpleMath">\(\Gamma^{(i)} = (P^{(i)}_{\mathrm{abs}},L_{\mathrm{abs}},\mathrm{I})\)</span> is a generalised hexagon of order <span class="SimpleMath">\((|K|,|L|)\)</span>, <span class="SimpleMath">\(K\)</span> the field <span class="SimpleMath">\(\mathrm{GF}(q)\)</span> and <span class="SimpleMath">\(L\)</span> the subfield of invariant elements of <span class="SimpleMath">\(K\)</span> under the field automorphism <span class="SimpleMath">\(\sigma\)</span>. Note that a finite field has a field automorphism of order three if and only if its order equals <span class="SimpleMath">\(q^3\)</span>. So, for <span class="SimpleMath">\(K\)</span> equal to <span class="SimpleMath">\(\mathrm{GF}(q)\)</span> and <span class="SimpleMath">\(\sigma=1\)</span>, <span class="SimpleMath">\(\Gamma^{(i)}\)</span> is a generalised hexagon of order <span class="SimpleMath">\(q\)</span>, which is called the <em>split Cayley hexagon of order <span class="SimpleMath">\(q\)</span></em>, denoted <span class="SimpleMath">\(H(q)\)</span>. For <span class="SimpleMath">\(K\)</span> equal to <span class="SimpleMath">\(\mathrm{GF}(q^3)\)</span>, and <span class="SimpleMath">\(\sigma\)</span> a non-trival field automorphism of order <span class="SimpleMath">\(3\)</span>, <span class="SimpleMath">\(\Gamma^{(i)}\)</span> is a generalised hexagon of order <span class="SimpleMath">\((q^3,q)\)</span> , which is called the <em>twisted triality hexagon of order <span class="SimpleMath">\((q^3,q)\)</span> </em>, denoted <span class="SimpleMath">\(T(q^3,q)\)</span> . Note that for a given triality, the hexagons <span class="SimpleMath">\(\Gamma^{(i)}\)</span>, <span class="SimpleMath">\(i=0,1,2\)</span> are isomorphic. Consequently, <span class="SimpleMath">\(\Gamma^{(0)}\)</span> is a point-line geometry of which the point set, line set respectively, is a subset of the points, lines respectively of <span class="SimpleMath">\(\mathrm{Q}^+(7,q)\)</span>. Finally, we mention the following important theorem, which was shown by Tits (<a href="chapBib_mj.html#biBTits1959">[Tit59]</a>): the split Cayley hexagon, obtained by the triliaty with <span class="SimpleMath">\(\sigma=1\)</span>, is contained in the hyperplane with equation <span class="SimpleMath">\(X_3+X_7=0\)</span> , which intersects the hyperbolic quadric in the parabolic quadric <span class="SimpleMath">\(\mathrm{Q}(6,q)\)</span>. The points of the split Cayley hexagon are the points of <span class="SimpleMath">\(\mathrm{Q}(6,q)\)</span>.</p>
+
+<p>This above description of the triality and the associated generalised hexagons, contains sufficient analytical information to implement the split Cayley hexagon and the twisted triality hexagon in an efficient way. The user is allowed to choose a representation for the ambient polar space. For <span class="SimpleMath">\(q=2^h\)</span> the polar spaces <span class="SimpleMath">\(\mathrm{Q}(6,q)\)</span> and <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span> are isomorphic. Consequently, the user may choose <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span> as ambient polar space for the split Cayley hexagon of even order. This embedding in <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span> is called the perfect symplectic embedding of the split Cayley hexagon. Finally, <a href="chapBib_mj.html#biBHVM">[VM98]</a> contains an explicit description of the generators of the collineation groups of both generalised hexagons.</p>
+
+<p><a id="X7C35384980AA9B77" name="X7C35384980AA9B77"></a></p>
+
+<h5>12.5-2 IsLieGeometry</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLieGeometry</code></td><td class="tdright">( category )</td></tr></table></div>
+<p>Recall that the classical generalised hexagons are constructed as an object in <code class="file">IsLieGeometry</code>. This makes most operations described in the appropriate chapters on Lie geometries, projective spaces and polar spaces applicable.</p>
+
+<p><a id="X7A05FF0079F55291" name="X7A05FF0079F55291"></a></p>
+
+<h5>12.5-3 SplitCayleyHexagon</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SplitCayleyHexagon</code>( <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SplitCayleyHexagon</code>( <var class="Arg">f</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SplitCayleyHexagon</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a generalised hexagon</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hexagon := SplitCayleyHexagon( 3 );</span>
+H(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AmbientPolarSpace(hexagon);</span>
+Q(6, 3): -x_1*x_5-x_2*x_6-x_3*x_7+x_4^2=0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ParabolicQuadric(6,3);</span>
+Q(6, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hexagon := SplitCayleyHexagon( ps );</span>
+H(3) in Q(6, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AmbientPolarSpace(hexagon);</span>
+Q(6, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hexagon := SplitCayleyHexagon( 4 );</span>
+H(4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AmbientPolarSpace(hexagon);</span>
+W(5, 4): x1*y4+x2*y5+x3*y6+x4*y1+x5*y2+x6*y3=0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ParabolicQuadric(6,4);</span>
+Q(6, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hexagon := SplitCayleyHexagon( ps );</span>
+H(4) in Q(6, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AmbientPolarSpace(hexagon);</span>
+Q(6, 4)
+
+</pre></div>
+
+<p><a id="X7E17977384011587" name="X7E17977384011587"></a></p>
+
+<h5>12.5-4 TwistedTrialityHexagon</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TwistedTrialityHexagon</code>( <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TwistedTrialityHexagon</code>( <var class="Arg">f</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TwistedTrialityHexagon</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a generalised hexagon</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hexagon := TwistedTrialityHexagon(2^3);</span>
+T(8, 2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AmbientPolarSpace(hexagon);</span>
+&lt;polar space in ProjectiveSpace(
+7,GF(2^3)): x_1*x_5+x_2*x_6+x_3*x_7+x_4*x_8=0 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := HyperbolicQuadric(7,2^3);</span>
+Q+(7, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hexagon := TwistedTrialityHexagon(ps);</span>
+T(8, 2) in Q+(7, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AmbientPolarSpace(hexagon);</span>
+Q+(7, 8)
+
+</pre></div>
+
+<p><a id="X82E9593B8074AECB" name="X82E9593B8074AECB"></a></p>
+
+<h5>12.5-5 VectorSpaceToElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VectorSpaceToElement</code>( <var class="Arg">gh</var>, <var class="Arg">vec</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an element of a classical generlised hexagon</p>
+
+<p>The argument <var class="Arg">vec</var> is one vector or a list of vectors from the underlying vectorspace of <var class="Arg">gh</var>. This operation checks whether <var class="Arg">vec</var> represents a point or a line of <var class="Arg">gh</var>. Note that vectors and matrices in different representations are allowed as argument.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ParabolicQuadric(6,9);</span>
+Q(6, 9)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gh := SplitCayleyHexagon(ps);</span>
+H(9) in Q(6, 9)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vec := [ Z(3)^0, Z(3^2), 0*Z(3), Z(3^2), Z(3^2)^3, Z(3^2)^5, 0*Z(3) ];</span>
+[ Z(3)^0, Z(3^2), 0*Z(3), Z(3^2), Z(3^2)^3, Z(3^2)^5, 0*Z(3) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(gh,vec);</span>
+&lt;a point in H(9) in Q(6, 9)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vec := [ [ Z(3)^0, 0*Z(3), Z(3^2)^7, 0*Z(3), Z(3)^0, Z(3^2)^2, Z(3^2)^2 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(3), Z(3)^0, 0*Z(3), Z(3)^0, 0*Z(3), Z(3^2)^3, 0*Z(3) ] ];</span>
+[ [ Z(3)^0, 0*Z(3), Z(3^2)^7, 0*Z(3), Z(3)^0, Z(3^2)^2, Z(3^2)^2 ], 
+  [ 0*Z(3), Z(3)^0, 0*Z(3), Z(3)^0, 0*Z(3), Z(3^2)^3, 0*Z(3) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := VectorSpaceToElement(gh,vec);</span>
+Error, &lt;x&gt; does not generate an element of &lt;geom&gt; called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 14 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+
+</pre></div>
+
+<p><a id="X7809B7C183FA7213" name="X7809B7C183FA7213"></a></p>
+
+<h5>12.5-6 ObjectToElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ObjectToElement</code>( <var class="Arg">gh</var>, <var class="Arg">obj</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an element of a classical generlised hexagon</p>
+
+<p>The argument <var class="Arg">obj</var> is one vector or a list of vectors from the underlying vectorspace of <var class="Arg">gh</var>. This operation checks whether <var class="Arg">obj</var> represents a point or a line of <var class="Arg">gh</var>. Note that vectors and matrices in different representations are allowed as argument.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := IdentityMat(8,GF(5^3));</span>
+&lt; mutable compressed matrix 8x8 over GF(125) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(5^3));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PolarSpace(form);</span>
+&lt;polar space in ProjectiveSpace(
+7,GF(5^3)): x_1^2+x_2^2+x_3^2+x_4^2+x_5^2+x_6^2+x_7^2+x_8^2=0 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gh := TwistedTrialityHexagon(ps);</span>
+T(125, 5) in Q+(7, 125): x_1^2+x_2^2+x_3^2+x_4^2+x_5^2+x_6^2+x_7^2+x_8^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vec := [ Z(5)^0, Z(5^3)^55, Z(5^3)^99, Z(5^3)^107, Z(5^3)^8, Z(5^3)^35, Z(5^3)^73, </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  Z(5^3)^115 ];</span>
+[ Z(5)^0, Z(5^3)^55, Z(5^3)^99, Z(5^3)^107, Z(5^3)^8, Z(5^3)^35, Z(5^3)^73, 
+  Z(5^3)^115 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := ObjectToElement(gh,vec);</span>
+&lt;a point in T(125, 5) in Q+(7, 125): x_1^2+x_2^2+x_3^2+x_4^2+x_5^2+x_6^2+x_7^2
++x_8^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vec := [ [ Z(5)^0, 0*Z(5), Z(5^3)^76, Z(5^3)^117, Z(5^3)^80, Z(5^3)^19, Z(5^3)^48, </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      Z(5^3)^100 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(5), Z(5)^0, Z(5^3)^115, Z(5^3)^14, Z(5^3)^40, Z(5^3)^67, Z(5^3)^123, </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      Z(5^3)^3 ] ];</span>
+[ [ Z(5)^0, 0*Z(5), Z(5^3)^76, Z(5^3)^117, Z(5^3)^80, Z(5^3)^19, Z(5^3)^48, 
+      Z(5^3)^100 ], 
+  [ 0*Z(5), Z(5)^0, Z(5^3)^115, Z(5^3)^14, Z(5^3)^40, Z(5^3)^67, Z(5^3)^123, 
+      Z(5^3)^3 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := ObjectToElement(gh,vec);</span>
+&lt;a line in T(125, 5) in Q+(7, 125): x_1^2+x_2^2+x_3^2+x_4^2+x_5^2+x_6^2+x_7^2+
+x_8^2&gt;
+
+</pre></div>
+
+<p><a id="X810D4D6D87069697" name="X810D4D6D87069697"></a></p>
+
+<h5>12.5-7 UnderlyingObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingObject</code>( <var class="Arg">gh</var>, <var class="Arg">obj</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a vector or a matrix</p>
+
+<p><a id="X87BDB89B7AAFE8AD" name="X87BDB89B7AAFE8AD"></a></p>
+
+<h5><code>12.5-8 \in</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \in</code>( <var class="Arg">x</var>, <var class="Arg">gh</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: true or false</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := HyperbolicQuadric(7,5^3);</span>
+Q+(7, 125)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gh := TwistedTrialityHexagon(ps);</span>
+T(125, 5) in Q+(7, 125)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">repeat</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">p := Random(Points(ps));</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">until p in gh;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+18399
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p in gh;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := ElementToElement(gh,p);</span>
+&lt;a point in T(125, 5) in Q+(7, 125)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random(Lines(p));</span>
+&lt;a line in Q+(7, 125)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l in gh;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(Lines(q),x-&gt;x in gh);</span>
+[ true, true, true, true, true, true ]
+
+</pre></div>
+
+<p><a id="X7B1380878358938C" name="X7B1380878358938C"></a></p>
+
+<h5>12.5-9 <span class="Heading">Span and meet of elements</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Span</code>( <var class="Arg">x</var>, <var class="Arg">y</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Meet</code>( <var class="Arg">x</var>, <var class="Arg">y</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a subspace of a projective space</p>
+
+<p><var class="Arg">x</var> and <var class="Arg">y</var> are two elements of a classical generalised hexagon. The operation <code class="file">Span</code> returns the projective line spanned by <var class="Arg">x</var> and <var class="Arg">y</var>. The operation <code class="file">Meet</code> returns the intersection of the elements <var class="Arg">x</var> and <var class="Arg">y</var>. Note that the classical generalised hexagons are Lie geometries, so their elements belong to a subcategory of <code class="code">IsSubspaceOfProjectiveSpace</code>. Therefore, the operations <code class="file">Span</code> and <code class="file">Meet</code> behave as described in <a href="chap7_mj.html#X875BE2957FAF6209"><span class="RefLink">7.5-2</span></a> and <a href="chap7_mj.html#X8469B54180FE1E4C"><span class="RefLink">7.5-3</span></a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := SymplecticSpace(5,8);</span>
+W(5, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gh := SplitCayleyHexagon(ps);</span>
+H(8) in W(5, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vec := [ Z(2)^0, Z(2^3)^6, Z(2^3)^5, Z(2^3)^6, Z(2)^0, Z(2^3) ];</span>
+[ Z(2)^0, Z(2^3)^6, Z(2^3)^5, Z(2^3)^6, Z(2)^0, Z(2^3) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(gh,vec);</span>
+&lt;a point in H(8) in W(5, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vec := [ Z(2)^0, Z(2^3)^2, Z(2^3), Z(2^3)^3, Z(2^3)^5, Z(2^3)^5 ];</span>
+[ Z(2)^0, Z(2^3)^2, Z(2^3), Z(2^3)^3, Z(2^3)^5, Z(2^3)^5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := VectorSpaceToElement(gh,vec);</span>
+&lt;a point in H(8) in W(5, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">span := Span(p,q);</span>
+&lt;a line in ProjectiveSpace(5, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementToElement(gh,span);</span>
+&lt;a line in H(8) in W(5, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vec := [ [ Z(2)^0, 0*Z(2), Z(2^3)^6, Z(2)^0, 0*Z(2), Z(2^3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(2), Z(2)^0, Z(2^3)^6, Z(2^3)^4, Z(2^3)^4, 0*Z(2) ] ];</span>
+[ [ Z(2)^0, 0*Z(2), Z(2^3)^6, Z(2)^0, 0*Z(2), Z(2^3) ], 
+  [ 0*Z(2), Z(2)^0, Z(2^3)^6, Z(2^3)^4, Z(2^3)^4, 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := VectorSpaceToElement(gh,vec);</span>
+&lt;a line in H(8) in W(5, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vec := [ [ Z(2)^0, 0*Z(2), Z(2)^0, Z(2^3), 0*Z(2), Z(2^3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(2), Z(2)^0, Z(2)^0, Z(2^3)^2, Z(2^3)^4, Z(2^3)^4 ] ];</span>
+[ [ Z(2)^0, 0*Z(2), Z(2)^0, Z(2^3), 0*Z(2), Z(2^3) ], 
+  [ 0*Z(2), Z(2)^0, Z(2)^0, Z(2^3)^2, Z(2^3)^4, Z(2^3)^4 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := VectorSpaceToElement(gh,vec);</span>
+&lt;a line in H(8) in W(5, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Meet(l,m);</span>
+&lt; empty subspace &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DistanceBetweenElements(l,m);</span>
+6
+
+</pre></div>
+
+<p><a id="X83FF6FA0790D5747" name="X83FF6FA0790D5747"></a></p>
+
+<h5>12.5-10 CollineationGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollineationGroup</code>( <var class="Arg">gh</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a group of collineations</p>
+
+<p><var class="Arg">gh</var> is a classical generalised hexagon. This attribute returns the full collineation group, equipped with a nice monomorphism.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := IdentityMat(7,GF(9));</span>
+&lt; mutable compressed matrix 7x7 over GF(9) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(9));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PolarSpace(form);</span>
+&lt;polar space in ProjectiveSpace(
+6,GF(3^2)): x_1^2+x_2^2+x_3^2+x_4^2+x_5^2+x_6^2+x_7^2=0 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gh := SplitCayleyHexagon(ps);</span>
+H(9) in Q(6, 9): x_1^2+x_2^2+x_3^2+x_4^2+x_5^2+x_6^2+x_7^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := CollineationGroup(gh);</span>
+#I  for Split Cayley Hexagon
+#I  Computing nice monomorphism...
+#I  Found permutation domain...
+&lt;projective collineation group with 18 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+19602
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasNiceMonomorphism(group);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gh := TwistedTrialityHexagon(2^3);</span>
+T(8, 2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := CollineationGroup(gh);</span>
+#I  Computing nice monomorphism...
+#I  Found permutation domain...
+3D_4(8)
+
+</pre></div>
+
+<p><a id="X7BA462527B2777BC" name="X7BA462527B2777BC"></a></p>
+
+<h4>12.6 <span class="Heading">Elation generalised quadrangles</span></h4>
+
+<p><a id="X86BD86C77BAAF887" name="X86BD86C77BAAF887"></a></p>
+
+<h5>12.6-1 <span class="Heading">Elation generalised quadrangles and Kantor families</span></h5>
+
+<p>Suppose <span class="SimpleMath">\(S=(P,B,I)\)</span> is a generalised quadrangle of order <span class="SimpleMath">\((s,t)\)</span> for which there exists a point <span class="SimpleMath">\(p\)</span> and a group of collineations <span class="SimpleMath">\(G\)</span> fixing <span class="SimpleMath">\(p\)</span> and each line through <span class="SimpleMath">\(p\)</span>, with the extra property that <span class="SimpleMath">\(G\)</span> acts regularly on the points not collinear with <span class="SimpleMath">\(p\)</span>. Then <span class="SimpleMath">\(S\)</span> is called an <em>elation generalised quadrangle</em> with base-point <span class="SimpleMath">\(p\)</span> and elation group <span class="SimpleMath">\(G\)</span>, and <span class="SimpleMath">\(G\)</span> has order <span class="SimpleMath">\(s^2t\)</span>. Let <span class="SimpleMath">\(y\)</span> be a fixed point of <span class="SimpleMath">\(S\)</span>, not collinear with <span class="SimpleMath">\(p\)</span>. Denote the <span class="SimpleMath">\(t+1\)</span> lines incident with <span class="SimpleMath">\(p\)</span> as <span class="SimpleMath">\(L_i, i=0 \ldots t\)</span> . Define for each line <span class="SimpleMath">\(L_i\)</span> the unique point-line pair <span class="SimpleMath">\((z_i,M_i)\)</span> such that <span class="SimpleMath">\(L_i I z_i I M_i I y\)</span> . Define the groups <span class="SimpleMath">\(S_i\)</span> as the subgroups of <span class="SimpleMath">\(G\)</span> fixing the lines <span class="SimpleMath">\(M_i\)</span>, and define the groups <span class="SimpleMath">\(S_i^*\)</span> as the subgroups of <span class="SimpleMath">\(G\)</span> fixing the point <span class="SimpleMath">\(z_i\)</span> . Define the set <span class="SimpleMath">\(J = \{S_i: i=0 \ldots t\}\)</span> , and the set <span class="SimpleMath">\(J^* = \{S_i: i=0 \ldots t\}\)</span> . Since <span class="SimpleMath">\(S\)</span> is an elation generalised quadrangle, <span class="SimpleMath">\(J\)</span> is a collection of <span class="SimpleMath">\(t+1\)</span> subgroups of <span class="SimpleMath">\(G\)</span> of order <span class="SimpleMath">\(s\)</span>, and each <span class="SimpleMath">\(S_i^*\)</span> contains has order <span class="SimpleMath">\(st\)</span> and contains <span class="SimpleMath">\(S_i\)</span> as a subgroup. Furthermore, the following two conditions are satisfied.</p>
+
+<p>(K1) <span class="SimpleMath">\(S_iS_j \cap S_k = \{1\}\)</span> , for distinct <span class="SimpleMath">\(i,j,k\)</span>.</p>
+
+<p>(K2) <span class="SimpleMath">\(S_i \cap S_j^* = \{1\}\)</span> , for distinct <span class="SimpleMath">\(i,j\)</span>.</p>
+
+<p>The pair <span class="SimpleMath">\((J,J^*)\)</span> is called a <em>4-gonal family</em> or <em>Kantor family</em> in <span class="SimpleMath">\(G\)</span>.</p>
+
+<p>Remarkably, each Kantor family in a group of order <span class="SimpleMath">\(s^2t\)</span> gives rise to an elation generalised quadrangle. Kantor families and elation generalised quadrangles are equivalent objects, and one of the motivations to study Kantor families in groups was to find examples of non-classical elation generalised quadrangles.</p>
+
+<p>Given a group <span class="SimpleMath">\(G\)</span>, together with a Kantor family <span class="SimpleMath">\((J,J^*)\)</span> , a generalised quadrangle is defined as follows.</p>
+
+<p>The points are of three types:</p>
+
+<p>(i) points of type 1 are the elements of <span class="SimpleMath">\(G\)</span>;</p>
+
+<p>(ii) points of of type 2 are the right cosets <span class="SimpleMath">\(S^*g, s^* \in J^*\)</span></p>
+
+<p>(iii) the unique point of type (iii) is the symbol <span class="SimpleMath">\((\infty)\)</span> .</p>
+
+<p>The lines are of two types:</p>
+
+<p>(a) lines of type (a) are the right cosets <span class="SimpleMath">\(Sg\)</span>, <span class="SimpleMath">\(S \in J\)</span>;</p>
+
+<p>(b) Lines of type (b) are the symbols <span class="SimpleMath">\([S], S \in J\)</span>.</p>
+
+<p>Incidence is defined as follows. A point <span class="SimpleMath">\(g\)</span> of type (i) is incident with each line <span class="SimpleMath">\(Sg, S \in J\)</span> of type (a). A point of type (ii) <span class="SimpleMath">\(S^*g\)</span> is incident the line <span class="SimpleMath">\([S]\)</span> of type (b) and the <span class="SimpleMath">\(t\)</span> lines of type (a) for which <span class="SimpleMath">\(Sh \subset S^*g\)</span> . Finally, the unique point of type (iii) is incident with the lines of type (b), and there are no further incidences.</p>
+
+<p>It is shown, see e.g. the standard work in this field of Payne and Thas <a href="chapBib_mj.html#biBFGQ">[PT84]</a>, that this point-line geoemtry is a generalised quadrangle of order <span class="SimpleMath">\((s,t)\)</span>.</p>
+
+<p><strong class="pkg">FinInG</strong> provides functions to construct elation generalised quadrangles directly from a Kantor family. The constructed generalised quadrangles are generalised polygons in the sense of <strong class="pkg">FinInG</strong>, i.e. all generic operations described in Sections <a href="chap12_mj.html#X864C966D8184A9C0"><span class="RefLink">12.3</span></a> and <a href="chap12_mj.html#X7A13D5EB82E01576"><span class="RefLink">12.4</span></a>.</p>
+
+<p><a id="X7CC6903E78F24167" name="X7CC6903E78F24167"></a></p>
+
+<h5>12.6-2 <span class="Heading">Categories</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEGQByKantorFamily</code></td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsElementOfKantorFamily</code></td><td class="tdright">( category )</td></tr></table></div>
+<p><code class="code">IsEGQByKantorFamily</code> is a subcategory of <code class="code">IsElationGQ</code>. It contains all elations generalised quadrangles that are constructed from a Kantor family. <code class="code">IsElementOfKantorFamily</code> is a subcategory of <code class="code">IsElementOfGeneralisedPolygon</code>. It contains the elements from generalised quadrangles in the category <code class="code">IsEGQByKantorFamily</code>.</p>
+
+<p><a id="X820A2D6A84A259FC" name="X820A2D6A84A259FC"></a></p>
+
+<h5>12.6-3 <span class="Heading">Kantor families</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsKantorFamily</code>( <var class="Arg">g</var>, <var class="Arg">f</var>, <var class="Arg">fstar</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>There is no specific way to construct a Kantor family in <strong class="pkg">FinInG</strong>. However, given a group <span class="SimpleMath">\(G\)</span> and two collections of subgroups, <code class="file">IsKantorFamily</code> will check whether the input satisfies the conditions of a Kantor family. If so, the input can be used directly for the operation <code class="file">EGQByKantorFamily</code>.</p>
+
+<p><a id="X7B80E3AC7DEAF948" name="X7B80E3AC7DEAF948"></a></p>
+
+<h5>12.6-4 EGQByKantorFamily</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EGQByKantorFamily</code>( <var class="Arg">g</var>, <var class="Arg">f</var>, <var class="Arg">fstar</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a generalised quadrangle</p>
+
+<p>Let <var class="Arg">g</var> be a group and <var class="Arg">f</var> and <var class="Arg">fstar</var> two collections of subgroups, satisfying the conditions of a Kantor family. This operation returns the corresponding elation generalised quadrangle. Note that this operation <em>does not</em> check if the input satisfies the conditions to be a Kantor family, it only checks whether the group <var class="Arg">f[i]</var> is a subgroup of the group <var class="Arg">fstar[i]</var>. In the example below, the use of <code class="file">IsKantorFamily</code> is also demonstrated, and some categories are displayed.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := ElementaryAbelianGroup(27);</span>
+&lt;pc group of size 27 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flist1 := [ Group(g.1), Group(g.2), Group(g.3), Group(g.1*g.2*g.3) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flist2 := [ Group([g.1, g.2^2*g.3]), Group([g.2, g.1^2*g.3 ]), </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            Group([g.3, g.1^2*g.2]), Group([g.1^2*g.2, g.1^2*g.3 ]) ];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsKantorFamily( g, flist1, flist2 );</span>
+#I  Checking tangency condition...
+#I  Checking triple condition...
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByKantorFamily(g, flist1, flist2);</span>
+&lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CategoriesOfObject(egq);</span>
+[ "IsIncidenceStructure", "IsIncidenceGeometry", "IsGeneralisedPolygon", 
+  "IsGeneralisedQuadrangle", "IsElationGQ", "IsElationGQByKantorFamily" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(egq));</span>
+&lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CategoriesOfObject(p);</span>
+[ "IsElementOfIncidenceStructure", "IsElementOfIncidenceGeometry", 
+  "IsElementOfGeneralisedPolygon", "IsElementOfKantorFamily" ]
+
+</pre></div>
+
+<p><a id="X80C93974807A342B" name="X80C93974807A342B"></a></p>
+
+<h5>12.6-5 <span class="Heading">Representation of elements and underlying objects</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ObjectToElement</code>( <var class="Arg">egq</var>, <var class="Arg">t</var>, <var class="Arg">obj</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ObjectToElement</code>( <var class="Arg">egq</var>, <var class="Arg">obj</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasePointOfEGQ</code>( <var class="Arg">egq</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingObject</code>( <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>For technical reasons, the underlying objects of the elements of an elation generalised quadrangle constructed from a Kantor family, are not exactly the mathematical objects from the definition. However, these technicalities are almost completely hidden for the user, except for the representation of lines of type (b), which are represented in <strong class="pkg">FinInG</strong> by the elements of the collection <span class="SimpleMath">\(J^*\)</span> (instead of the elements of the collection <span class="SimpleMath">\(J\)</span>). This change from the original definition has no mathematical implications, since there is a bijective correspondence between the elements of <span class="SimpleMath">\(J^*\)</span> and <span class="SimpleMath">\(J\)</span>. Notice also that it is only possible to obtain the base-point of an elation generalised quadrangle constructed from a Kantor family through calling the attribute <code class="file">BasePointOfEGQ</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := ElementaryAbelianGroup(27);</span>
+&lt;pc group of size 27 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flist1 := [ Group(g.1), Group(g.2), Group(g.3), Group(g.1*g.2*g.3) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flist2 := [ Group([g.1, g.2^2*g.3]), Group([g.2, g.1^2*g.3 ]),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            Group([g.3, g.1^2*g.2]), Group([g.1^2*g.2, g.1^2*g.3 ]) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByKantorFamily(g, flist1, flist2);</span>
+&lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := Random(g);</span>
+f1*f2^2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := ObjectToElement(egq,h);</span>
+&lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coset := RightCoset(flist1[1],h);</span>
+RightCoset(Group( [ f1 ] ),f1*f2^2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := ObjectToElement(egq,coset);</span>
+&lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p * l;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := flist2[2];</span>
+&lt;pc group of size 9 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := ObjectToElement(egq,S);</span>
+&lt;a line of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := BasePointOfEGQ(egq);</span>
+&lt;a point of class 3 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m * q;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := List(Lines(p));</span>
+[ &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pts1 := List(Points(m));</span>
+[ &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 3 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pts2 := List(Points(l));</span>
+[ &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(pts2,x-&gt;UnderlyingObject(x));</span>
+[ f2^2, f1*f2^2, f1^2*f2^2, RightCoset(Group( [ f1, f2^2*f3 ] ),f3^2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingObject(q);</span>
+0
+
+</pre></div>
+
+<p><a id="X7DCD7EAB839BD97F" name="X7DCD7EAB839BD97F"></a></p>
+
+<h5>12.6-6 <span class="Heading">Elation group and natural action on elements</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElationGroup</code>( <var class="Arg">egq</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OnKantorFamily</code>( <var class="Arg">g</var>, <var class="Arg">el</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollineationAction</code>( <var class="Arg">g</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>The attribute <code class="file">ElationGroup</code> is naturally set upon creation of an elation generalised quadrangle from a Kantor family. The elements of the elation group act "naturally" on the elements of the elation generalised quadrangle. This natural action is implemented in the action function <code class="file">OnKantorFamily</code>. When <var class="Arg">g</var> is the elation group of an elation generalised quadrangle constructed from a Kantor family, the attribute <code class="file">CollineationAction</code> will return the action function <code class="file">OnKantorFamily</code>. The action function makes use of generic GAP operations possible, as is demonstrated in the example.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := ElementaryAbelianGroup(27);</span>
+&lt;pc group of size 27 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flist1 := [ Group(g.1), Group(g.2), Group(g.3), Group(g.1*g.2*g.3) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flist2 := [ Group([g.1, g.2^2*g.3]), Group([g.2, g.1^2*g.3 ]),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            Group([g.3, g.1^2*g.2]), Group([g.1^2*g.2, g.1^2*g.3 ]) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByKantorFamily(g, flist1, flist2);</span>
+&lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := ElationGroup(egq);</span>
+&lt;pc group of size 27 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollineationAction(group) = OnKantorFamily;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := ObjectToElement(egq,RightCoset(flist1[1],One(g)));</span>
+&lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">stab := Stabilizer(group,l,OnKantorFamily);</span>
+Group([ f1 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pts := List(Points(egq));</span>
+[ &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a point of class 3 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Orbits(group,pts,OnKantorFamily);</span>
+[ [ &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a point of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a point of class 3 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := List(Lines(egq));</span>
+[ &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+  &lt;a line of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Orbits(group,lines,OnKantorFamily);</span>
+[ [ &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt;, 
+      &lt;a line of class 1 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a line of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a line of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a line of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ], 
+  [ &lt;a line of class 2 of &lt;EGQ of order [ 3, 3 ] and basepoint 0&gt;&gt; ] ]
+
+</pre></div>
+
+<p><a id="X8462F11584736E32" name="X8462F11584736E32"></a></p>
+
+<h5>12.6-7 <span class="Heading">Kantor families, q-clans, and elation generalised quadrangles</span></h5>
+
+<p>Let <span class="SimpleMath">\(C=\{A_i: i=1 \ldots q\}\)</span> be a set of <span class="SimpleMath">\(q\)</span> distinct upper triangle <span class="SimpleMath">\(2 \times 2\)</span> matrices over the finite field <span class="SimpleMath">\(\mathrm{GF}(q)\)</span>. Then <span class="SimpleMath">\(C\)</span> is called a <em>q-clan</em> if <span class="SimpleMath">\(A_r - A_t\)</span> is anistropic for <span class="SimpleMath">\(r \neq t\)</span>.</p>
+
+<p>Define <span class="SimpleMath">\(G = \{(\alpha,c,\beta): \alpha,\beta \in GF(q)^2, c \in GF(q)\}\)</span> , and define the binary operator <span class="SimpleMath">\(\times\)</span> as <span class="SimpleMath">\((\alpha,c,\beta) \times (\alpha',c',\beta') = (\alpha + \alpha',c+c'+\beta \cdot \alpha'^{T},\beta + \beta')\)</span> . Then <span class="SimpleMath">\(G,\times\)</span> is a group with center <span class="SimpleMath">\(Z(G)=\{(0,c,0): c \in GF(q)\}\)</span>. Consider a q-clan <span class="SimpleMath">\(C=\{A_i: i=1 \ldots q\}\)</span>, define <span class="SimpleMath">\(K_i = A_i+A_i^T\)</span>. Now define the following subgroups of <span class="SimpleMath">\(G\)</span></p>
+
+<p><span class="SimpleMath">\(A(i) = \{(\alpha,\alpha A_t,\alpha K_t): \alpha \in GF(q)^2, i=1\ldots q\}\)</span> and <span class="SimpleMath">\(A(\infty) = \{(0,0,\gamma): \gamma \in GF(q)^2\}\)</span> , and</p>
+
+<p><span class="SimpleMath">\(A^*(i) = \{(\alpha,b,\alpha K_t): \alpha \in GF(q)^2, b \in GF(q), i=1\ldots q\}\)</span> and <span class="SimpleMath">\(A^*(\infty) = \{(0,b,\gamma): \gamma \in GF(q)^2, b \in GF(q)\}\)</span></p>
+
+<p>Define <span class="SimpleMath">\(J=\{A(i):i=1\ldots q\} \cup \{A(\infty)\}\)</span> and <span class="SimpleMath">\(J^*=\{A^*(i):i=1\ldots q\} \cup \{A^*(\infty)\}\)</span></p>
+
+<p>A combination of results of Payne and Kantor yield the famous theorem that (J,J^*) is a Kantor family in <span class="SimpleMath">\(G\)</span> if and only if <span class="SimpleMath">\(C\)</span> is a q-clan. <strong class="pkg">FinInG</strong> provides functionality to construct q-clans and to construct the corresponding Kantor family. As such, elation generalised quadrangles can directly constructed from q-clans.</p>
+
+<p><a id="X806527387F1D5D42" name="X806527387F1D5D42"></a></p>
+
+<h5>12.6-8 qClan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; qClan</code>( <var class="Arg">list</var>, <var class="Arg">f</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a q-clan.</p>
+
+<p>Given a list <var class="Arg">list</var> of <span class="SimpleMath">\(2 \times\)</span> matrices over the field <var class="Arg">f</var>, it is checked if the matrices in the list satisfy the condition to constitute a q-clan over <span class="SimpleMath">\(f\)</span>. If so, the q-clan is returned.</p>
+
+<p><a id="X858A1EA8843BEC13" name="X858A1EA8843BEC13"></a></p>
+
+<h5>12.6-9 <span class="Heading">Particular q-clans</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LinearqClan</code>( <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FisherThasWalkerKantorBettenqClan</code>( <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KantorMonomialqClan</code>( <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KantorKnuthqClan</code>( <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FisherqClan</code>( <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a q-clan</p>
+
+<p>Some famous q-clans are built in. We refer to ... for more information on these.</p>
+
+<p><a id="X7C59CF8079EA33D3" name="X7C59CF8079EA33D3"></a></p>
+
+<h5>12.6-10 KantorFamilyByqClan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KantorFamilyByqClan</code>( <var class="Arg">clan</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: A Kantor family.</p>
+
+<p>The Kantor family constructed from a q-clan will be a matrix group together with the corresponding collections <span class="SimpleMath">\(J\)</span> and J^* .</p>
+
+<p><a id="X830222B084BF866D" name="X830222B084BF866D"></a></p>
+
+<h5>12.6-11 EGQByqClan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EGQByqClan</code>( <var class="Arg">clan</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: An elation generalised quadrangle constructed from a q-clan.</p>
+
+<p>Given a q-clan <var class="Arg">clan</var>, the operation <code class="file">KantorFamilyByqClan</code> will be used to construct the Kantor family from <var class="Arg">clan</var>, followed by the construction of the elation generalised quadrangle using the operation <code class="file">EGQByKantorFamily</code>. The first example shows also the use of <code class="file">qClan</code>, and shows that a linear q-clan yields a classical generalised quadrangle.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := GF(3);</span>
+GF(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">id := IdentityMat(2, f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list := List( f, t -&gt; t * id );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := qClan(list,f);</span>
+&lt;q-clan over GF(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByqClan(clan);</span>
+#I  Computed Kantor family. Now computing EGQ...
+&lt;EGQ of order [ 9, 3 ] and basepoint 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">incgraph := IncidenceGraph(egq);;</span>
+#I  Computing incidence graph of generalised polygon...
+#I  Using elation of the collineation group...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := AutomorphismGroup(incgraph);</span>
+&lt;permutation group with 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(group);</span>
+26127360
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(CollineationGroup(HermitianPolarSpace(3,9)));</span>
+26127360
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := KantorKnuthqClan(9);</span>
+&lt;q-clan over GF(3^2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByqClan(clan);</span>
+#I  Computed Kantor family. Now computing EGQ...
+&lt;EGQ of order [ 81, 9 ] and basepoint 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := FisherThasWalkerKantorBettenqClan(11);</span>
+&lt;q-clan over GF(11)&gt;
+
+</pre></div>
+
+<p><a id="X7FAE48497B2F658A" name="X7FAE48497B2F658A"></a></p>
+
+<h5>12.6-12 <span class="Heading">BLT-sets, flocks, q-clans, and elation generalised quadrangles</span></h5>
+
+<p>A <em>flock</em> is a partition of the points of a quadratic cone in <span class="SimpleMath">\(\mathrm{PG}(3,q)\)</span> minus its vertex into conics. Each conic is determined by a plane, and each plane is determined uniquely by a triple of elements of the field <span class="SimpleMath">\(\mathrm{GF}(q)\)</span>. So a flock is determined by <span class="SimpleMath">\(q\)</span> such triples. Remarkably, as was shown by J.A. Thas, the conditions for these triples to constitute a flock, are exactly the same conditions for these triples to constitute <span class="SimpleMath">\(q\)</span> upper triangle matrices making a q-clan over <span class="SimpleMath">\(\mathrm{GF}(q)\)</span>. Hence, q-clans and flocks, and thus flocks and elation generalised quadrangles, are equivalent objects.</p>
+
+<p>The quadratic cone can be embedded as a hyperplane section into the parabolic quadric <span class="SimpleMath">\(\mathrm{Q}(4,q)\)</span>. L. Bader, G. Lunardon and J.A. Thas observed that a set of <span class="SimpleMath">\(q\)</span> points of <span class="SimpleMath">\(\mathrm{Q}(4,q)\)</span> can be constructed from the <span class="SimpleMath">\(q\)</span> planes determining the flock, and this set of points satisfies certain geometric conditions. Such a set is called a <em>BLT-set</em>. Dually, a BLT-set corresponds to a set of lines of <span class="SimpleMath">\(\mathrm{W}(3,q)\)</span>. Furthermore, from this BLT-set of lines, it is possible to construct directly an elation generalised quadrangle from carefully selecting points and lines from the symplectic space <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span>. This construction is called the Knarr construction.</p>
+
+<p>Consider the symplectic polar space <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span> and choose a point <span class="SimpleMath">\(P \in W(5,q)\)</span>. Its tangent space is a <span class="SimpleMath">\(4\)</span>-dimensional space <span class="SimpleMath">\(F\)</span>. Embed <span class="SimpleMath">\(\mathrm{W}(3,q)\)</span> in a solid of <span class="SimpleMath">\(F\)</span> not on the point <span class="SimpleMath">\(p\)</span>, and let <span class="SimpleMath">\(L\)</span> be the set of BLT lines. Each line spans with <span class="SimpleMath">\(p\)</span> a plane of <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span>, call these <span class="SimpleMath">\(q\)</span> planes the <em>BLT-planes</em>. Now we can define the points an lines of the elation generalised quadrangle as follows.</p>
+
+<p>Points of type (i) are the points of <span class="SimpleMath">\(W(5,q) \setminus F\)</span>, points of type (ii) are the lines of each BLT-plane not on <span class="SimpleMath">\(p\)</span> and the unique point of type (iii) is the point <span class="SimpleMath">\(p\)</span>. Lines of type (a) are the planes of <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span> meeting a BLT-plane in a line. Note that no plane of <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span> meeting two BLT planes in a line can exist. Lines of type (b) are the BLT-planes. Incidence is the natural incidence (so the incidence inherited) from the polar space <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span>, and this geometry is a elation generalised quadrangle with base-point <span class="SimpleMath">\(p\)</span> and of order <span class="SimpleMath">\((q^2,q)\)</span> .</p>
+
+<p><strong class="pkg">FinInG</strong> provides functions to construct elation generalised quadrangles using this model from BLT-sets, and provides a function to compute a BLT set from a q-clan directly. The advantage of constructing a elation generalised from elements of Lie geometries is the availability of the underlying projective groups and their action on elements of Lie geometries.</p>
+
+<p><a id="X7A8438537D2F1374" name="X7A8438537D2F1374"></a></p>
+
+<h5>12.6-13 IsEGQByBLTSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEGQByBLTSet</code></td><td class="tdright">( category )</td></tr></table></div>
+<p><code class="code">IsEGQByBLTSet</code> is a subcategory of <code class="code">IsElationGQ</code>. It contains all elations generalised quadrangles that are constructed from a BLT set.</p>
+
+<p><a id="X7ECC1871866AC286" name="X7ECC1871866AC286"></a></p>
+
+<h5>12.6-14 BLTSetByqClan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BLTSetByqClan</code>( <var class="Arg">clan</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: A BLT-set.</p>
+
+<p>The BLT-set is a set of points of the parabolic quadric in <span class="SimpleMath">\(PG(4,q)\)</span> with particular equation <span class="SimpleMath">\(2X_1x_5+2X_2X_4+w^{(q+1)/2}=0\)</span> , where <span class="SimpleMath">\(w\)</span> is a primitive element of the underlying field of <var class="Arg">clan</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := KantorKnuthqClan(9);</span>
+&lt;q-clan over GF(3^2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">blt := BLTSetByqClan(clan);</span>
+[ &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := FisherThasWalkerKantorBettenqClan(11);</span>
+&lt;q-clan over GF(11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">blt := BLTSetByqClan(clan);</span>
+[ &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt; ]
+
+</pre></div>
+
+<p><a id="X84700DDF80B39332" name="X84700DDF80B39332"></a></p>
+
+<h5>12.6-15 EGQByBLTSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EGQByBLTSet</code>( <var class="Arg">blt</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: An elation generalised quadrangle.</p>
+
+<p><var class="Arg">blt</var> is a BLT-set, this operation returns an elation generalised quadrangle constructed as described above consisting of elements of <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span>. Notice in the example that computing the full collineation group of the GQ constructed directly from the q-clan (hence a group coset geometry) is substantially slower than computing the full collineation group of the GQ constructed from the BLT-set.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := LinearqClan(3);</span>
+&lt;q-clan over GF(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bltset := BLTSetByqClan( clan);</span>
+[ &lt;a point in Q(4, 3): -x_1*x_5-x_2*x_4+x_3^2=0&gt;, 
+  &lt;a point in Q(4, 3): -x_1*x_5-x_2*x_4+x_3^2=0&gt;, 
+  &lt;a point in Q(4, 3): -x_1*x_5-x_2*x_4+x_3^2=0&gt;, 
+  &lt;a point in Q(4, 3): -x_1*x_5-x_2*x_4+x_3^2=0&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByBLTSet( bltset );</span>
+#I  Now embedding dual BLT-set into W(5,q)...
+#I  Computing elation group...
+&lt;EGQ of order [ 9, 3 ] and basepoint in W(5, 3 ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := BasePointOfEGQ(egq);</span>
+&lt;a point in &lt;EGQ of order [ 9, 3 ] and basepoint in W(5, 3 ) &gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingObject(p);</span>
+&lt;a point in W(5, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random(Lines(egq));</span>
+&lt;a line in &lt;EGQ of order [ 9, 3 ] and basepoint in W(5, 3 ) &gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingObject(l);</span>
+&lt;a plane in W(5, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := ElationGroup(egq);</span>
+&lt;projective collineation group with 5 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(group);</span>
+243
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollineationGroup(egq);</span>
+#I  Using elation group to enumerate elements
+#I  Using elation group to enumerate elements
+#I  Computing incidence graph of generalised polygon...
+#I  Using elation of the collineation group...
+#I  Using elation group to enumerate elements
+&lt;permutation group of size 26127360 with 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+147
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByqClan(clan);</span>
+#I  Computed Kantor family. Now computing EGQ...
+&lt;EGQ of order [ 9, 3 ] and basepoint 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollineationGroup(egq);</span>
+#I  Computing incidence graph of generalised polygon...
+#I  Using elation of the collineation group...
+&lt;permutation group of size 26127360 with 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+1139
+
+</pre></div>
+
+<p><a id="X79186E29799355BD" name="X79186E29799355BD"></a></p>
+
+<h5>12.6-16 DefiningPlanesOfEGQByBLTSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DefiningPlanesOfEGQByBLTSet</code>( <var class="Arg">egq</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>For an elation generalised quadrangle in the category <code class="code">IsEGQByBLTSet</code> (constructed from a BLT-set), the planes of the polar space <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span>, as described in the introduction, determine the generalised quadrangle completely. This attribute returns these <span class="SimpleMath">\(q\)</span> planes of <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := KantorKnuthqClan(9);</span>
+&lt;q-clan over GF(3^2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">blt := BLTSetByqClan(clan);</span>
+[ &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 9): -x_1*x_5-x_2*x_4+Z(3^2)^5*x_3^2=0&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByBLTSet(blt);</span>
+#I  Now embedding dual BLT-set into W(5,q)...
+#I  Computing elation group...
+&lt;EGQ of order [ 81, 9 ] and basepoint in W(5, 9 ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DefiningPlanesOfEGQByBLTSet(egq);</span>
+[ &lt;a plane in W(5, 9)&gt;, &lt;a plane in W(5, 9)&gt;, &lt;a plane in W(5, 9)&gt;, 
+  &lt;a plane in W(5, 9)&gt;, &lt;a plane in W(5, 9)&gt;, &lt;a plane in W(5, 9)&gt;, 
+  &lt;a plane in W(5, 9)&gt;, &lt;a plane in W(5, 9)&gt;, &lt;a plane in W(5, 9)&gt;, 
+  &lt;a plane in W(5, 9)&gt; ]
+
+</pre></div>
+
+<p><a id="X80C93974807A342B" name="X80C93974807A342B"></a></p>
+
+<h5>12.6-17 <span class="Heading">Representation of elements and underlying objects</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ObjectToElement</code>( <var class="Arg">egq</var>, <var class="Arg">t</var>, <var class="Arg">obj</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ObjectToElement</code>( <var class="Arg">egq</var>, <var class="Arg">obj</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingObject</code>( <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>The underlying objects of the elements of an elation generalised quadrangle in the category <code class="code">IsEGQByBLTSet</code> are elements of the polar space <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span> in its standard representation. These elements can be used as underlying object to construct elements of <var class="Arg">egq</var>. The example also demonstrates the use of <code class="file">DistanceBetweenElements</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := FisherThasWalkerKantorBettenqClan(11);</span>
+&lt;q-clan over GF(11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">blt := BLTSetByqClan(clan);</span>
+[ &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 11): Z(11)*x_1*x_5+Z(11)*x_2*x_4+Z(11)^6*x_3^2=0&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByBLTSet(blt);</span>
+#I  Now embedding dual BLT-set into W(5,q)...
+#I  Computing elation group...
+&lt;EGQ of order [ 121, 11 ] and basepoint in W(5, 11 ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">planes := DefiningPlanesOfEGQByBLTSet(egq);</span>
+[ &lt;a plane in W(5, 11)&gt;, &lt;a plane in W(5, 11)&gt;, &lt;a plane in W(5, 11)&gt;, 
+  &lt;a plane in W(5, 11)&gt;, &lt;a plane in W(5, 11)&gt;, &lt;a plane in W(5, 11)&gt;, 
+  &lt;a plane in W(5, 11)&gt;, &lt;a plane in W(5, 11)&gt;, &lt;a plane in W(5, 11)&gt;, 
+  &lt;a plane in W(5, 11)&gt;, &lt;a plane in W(5, 11)&gt;, &lt;a plane in W(5, 11)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := BasePointOfEGQ(egq);</span>
+&lt;a point in &lt;EGQ of order [ 121, 11 ] and basepoint in W(5, 11 ) &gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">up := UnderlyingObject(p);</span>
+&lt;a point in W(5, 11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := SymplecticSpace(5,11);</span>
+W(5, 11)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">uq := VectorSpaceToElement(ps,[1,1,0,0,0,0]*Z(11)^0);</span>
+&lt;a point in W(5, 11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := ObjectToElement(egq,1,uq);</span>
+&lt;a point in &lt;EGQ of order [ 121, 11 ] and basepoint in W(5, 11 ) &gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DistanceBetweenElements(p,q);</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := ObjectToElement(egq,2,planes[1]);</span>
+&lt;a line in &lt;EGQ of order [ 121, 11 ] and basepoint in W(5, 11 ) &gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DistanceBetweenElements(p,l);</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DistanceBetweenElements(q,l);</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">um := VectorSpaceToElement(ps,[[1,0,0,0,1,1],[0,1,0,9,1,0],[0,0,1,9,9,9]]*Z(11)^0);</span>
+&lt;a plane in W(5, 11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := ObjectToElement(egq,2,um);</span>
+&lt;a line in &lt;EGQ of order [ 121, 11 ] and basepoint in W(5, 11 ) &gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DistanceBetweenElements(p,m);</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DistanceBetweenElements(q,m);</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DistanceBetweenElements(l,m);</span>
+2
+
+</pre></div>
+
+<p><a id="X7C57B0BD7A2E5877" name="X7C57B0BD7A2E5877"></a></p>
+
+<h5>12.6-18 CollineationSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollineationSubgroup</code>( <var class="Arg">egq</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>For an elation generalised quadrangle in the category <code class="code">IsEGQByBLTSet</code> (constructed from a BLT set), the planes of the polar space <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span>, as described in the introduction, determine the generalised quadrangle completely. The setwise stabiliser of these planes in the collineation group of <span class="SimpleMath">\(\mathrm{W}(5,q)\)</span> is a subgroup of the completely collineation group of the elation generalised quadrangle, and can be computed much faster than the complete collineation group. This attribute returns this setwise stabiliser. The returned group is equipped with the <code class="file">CollineationACtion</code> attribute. If <code class="file">CollineationSubgroup</code> is computed, this group will be used instead of the elation group to compute the incidence graph.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clan := FisherThasWalkerKantorBettenqClan(5);</span>
+&lt;q-clan over GF(5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">blt := BLTSetByqClan(clan);</span>
+[ &lt;a point in Q(4, 5): Z(5)*x_1*x_5+Z(5)*x_2*x_4+Z(5)^3*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 5): Z(5)*x_1*x_5+Z(5)*x_2*x_4+Z(5)^3*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 5): Z(5)*x_1*x_5+Z(5)*x_2*x_4+Z(5)^3*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 5): Z(5)*x_1*x_5+Z(5)*x_2*x_4+Z(5)^3*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 5): Z(5)*x_1*x_5+Z(5)*x_2*x_4+Z(5)^3*x_3^2=0&gt;, 
+  &lt;a point in Q(4, 5): Z(5)*x_1*x_5+Z(5)*x_2*x_4+Z(5)^3*x_3^2=0&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egq := EGQByBLTSet(blt);</span>
+#I  Now embedding dual BLT-set into W(5,q)...
+#I  Computing elation group...
+&lt;EGQ of order [ 25, 5 ] and basepoint in W(5, 5 ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coll := CollineationSubgroup(egq);</span>
+#I  Computing adjusted stabilizer chain...
+&lt;projective collineation group with 13 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(coll);</span>
+9000000
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act := CollineationAction(coll);</span>
+function( el, x ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbs := Orbits(coll,Points(egq),act);;</span>
+#I  Using elation group to enumerate elements
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(orbs,x-&gt;Length(x));</span>
+[ 1, 3125, 150 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">el := ElationGroup(egq);</span>
+&lt;projective collineation group with 5 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbs := Orbits(el,Points(egq),act);;</span>
+#I  Using elation group to enumerate elements
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(orbs,x-&gt;Length(x));</span>
+[ 1, 3125, 25, 25, 25, 25, 25, 25 ]
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap11_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap13_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

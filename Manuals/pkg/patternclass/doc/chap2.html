@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (PatternClass) - Chapter 2: Token Passing Networks</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X7C769071875E96B2" name="X7C769071875E96B2"></a></p>
+<div class="ChapSects"><a href="chap2.html#X7C769071875E96B2">2 <span class="Heading">Token Passing Networks</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X80EE110279808BD3">2.1 <span class="Heading"> Specific TPN </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85AFF5537F917AEB">2.1-1 Parstacks</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D6D07D980634845">2.1-2 Seqstacks</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81E3656E85CB6EB7">2.1-3 BufferAndStack</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Token Passing Networks</span></h3>
+
+<p>A token passing network is a directed graph with a designated input node and a designated output node. The input node has no incoming edges whereas the output node has no outgoing edges. Also the input node generates a sequence of tokens, labelled 1, 2, 3, ... . These tokens are passed on to the nodes within the graph, where each node, apart from the input and output node, can hold at most one token at any time. The edges do not hold tokens but are there to pass them on. The following must hold if a token <span class="SimpleMath">t</span> moves from the node <span class="SimpleMath">x</span> to the node <span class="SimpleMath">y</span>.</p>
+
+<p>There is an edge from <span class="SimpleMath">x</span> to <span class="SimpleMath">y</span>; <span class="SimpleMath">x</span> is the input node, and the tokens 1, 2, 3, ... , <span class="SimpleMath">t-1</span> have been moved, or <span class="SimpleMath">x</span> is any other node but not the output node; lastly either <span class="SimpleMath">y</span> is the output node or <span class="SimpleMath">y</span> is not the input node and currently is not occupied by a token. <a href="chapBib.html#biBPermGenTPGraph">[ALTd.]</a></p>
+
+<p>Token passing networks, or TPNs, are represented in <strong class="pkg">GAP</strong> as a list. Each entry of the list is the index of the node within the TPN and contains a list of the "destinations", i.e. the end of the edge or arrow where it is directed to.</p>
+
+<p>Here is an example how the input of such a TPN looks in <strong class="pkg">GAP</strong>:</p>
+
+
+<div class="example"><pre>  
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hex:=[[2,3],[4],[5],[3,6],[6],[]];</span>
+[ [ 2, 3 ], [ 4 ], [ 5 ], [ 3, 6 ], [ 6 ], [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p>This list represents the following directed graph: <br><center><img src="img/hex.jpg" WIDTH=243 HEIGHT=98 ></center><br> From this it is visible that the input node is 1, as it has no other node pointing any arrows towards it, and the output node is 6, as it has no destinations (hence the empty list).</p>
+
+<p><a id="X80EE110279808BD3" name="X80EE110279808BD3"></a></p>
+
+<h4>2.1 <span class="Heading"> Specific TPN </span></h4>
+
+<p>In <code class="code">PatternClass</code> there are several functions that define different kinds of specific token passing networks.</p>
+
+<p><a id="X85AFF5537F917AEB" name="X85AFF5537F917AEB"></a></p>
+
+<h5>2.1-1 Parstacks</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Parstacks</code>( <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: A list that represents the directed edges of a token passing network.</p>
+
+<p><code class="code">Parstacks</code> constructs a token passing network with 2 different sized stacks <code class="code">m,n</code> positioned in parallel.</p>
+
+
+<div class="example"><pre>  
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Parstacks(2,2);</span>
+[ [ 2, 4 ], [ 3, 6 ], [ 2 ], [ 5, 6 ], [ 4 ], [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><code class="code">Parstacks(2,2)</code> can be visualised as the following directed graph: <br><center><img src="img/ps22.jpg" WIDTH=244 HEIGHT=282 ></center><br></p>
+
+
+<div class="example"><pre>  
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Parstacks(4,3);</span>
+[ [ 2, 6 ], [ 3, 9 ], [ 2, 4 ], [ 3, 5 ], [ 4 ], [ 7, 9 ], [ 6, 8 ], [ 7 ],
+  [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p>The token passing network below represents the list that was output by <code class="code">Parstacks(4,3)</code>. <br><center><img src="img/ps43.jpg" WIDTH=242 HEIGHT=458 ></center><br></p>
+
+<p><a id="X7D6D07D980634845" name="X7D6D07D980634845"></a></p>
+
+<h5>2.1-2 Seqstacks</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Seqstacks</code>( <var class="Arg">n</var>[, <var class="Arg">m</var>[, <var class="Arg">o</var>[, <var class="Arg">p</var>[, <var class="Arg">...</var>]]]] )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: A list that represents the directed edges of a token passing network.</p>
+
+<p>The token passing network build by <code class="code">Seqstacks</code> contains a series of stacks (as many as you have integers in the arguments list) each of different length (each integer in the argument list).</p>
+
+
+<div class="example"><pre>  
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Seqstacks(2,2);</span>
+[ [ 2 ], [ 3, 4 ], [ 2 ], [ 5, 6 ], [ 4 ], [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><code class="code">Seqstacks(2,2)</code> can be visualised as the following directed graph: <br><center><img src="img/ss22.jpg" WIDTH=281 HEIGHT=130 ></center><br></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Seqstacks(3,1,4);</span>
+[ [ 2 ], [ 3, 5 ], [ 2, 4 ], [ 3 ], [ 4 ], [ 7, 10 ], [ 6, 8 ], [ 7, 9 ], 
+  [ 8 ], [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p>The token passing network containing a series of stacks of length 3, 1 and 4 looks as follows: <br><center><img src="img/ss314.jpg" WIDTH=321 HEIGHT=234 ></center><br></p>
+
+<p><a id="X81E3656E85CB6EB7" name="X81E3656E85CB6EB7"></a></p>
+
+<h5>2.1-3 BufferAndStack</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BufferAndStack</code>( <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: A list that represents the directed edges of a token passing network.</p>
+
+<p><code class="code">BufferAndStack</code> is a token passing network that consists of a buffer of size <code class="code">m</code> which is followed by a single stack of size <code class="code">n</code>.</p>
+
+
+<div class="example"><pre>  
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BufferAndStack(2,2);</span>
+[ [ 2, 3 ], [ 4 ], [ 4 ], [ 5, 6 ], [ 4 ], [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><code class="code">BufferAndStack(2,2)</code> is the following directed graph: <br><center><img src="img/bs22.jpg" WIDTH=308 HEIGHT=132 ></center><br></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BufferAndStack(4,3);</span>
+[ [ 2 .. 5 ], [ 6 ], [ 6 ], [ 6 ], [ 6 ], [ 7, 9 ], [ 6, 8 ], [ 7 ], [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p>The token passing network correlating to the list output by <code class="code">BufferAndStack(4,3)</code> is: <br><center><img src="img/bs43.jpg" WIDTH=303 HEIGHT=253 ></center><br></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

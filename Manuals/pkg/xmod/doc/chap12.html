@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (XMod) - Chapter 12: Utility functions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap12"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap11.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap13.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap12_mj.html">[MathJax on]</a></p>
+<p><a id="X810FFB1C8035C8BE" name="X810FFB1C8035C8BE"></a></p>
+<div class="ChapSects"><a href="chap12.html#X810FFB1C8035C8BE">12 <span class="Heading">Utility functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12.html#X844AFC3A7DD6E190">12.1 <span class="Heading">Inclusion and Restriction Mappings</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7F8E297F7C84DE51">12.1-1 InclusionMappingGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X81D29E737F3D4878">12.1-2 InnerAutomorphismsByNormalSubgroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12.html#X852BD9CA84C2AFF0">12.2 <span class="Heading">Abelian Modules</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X806DEFCC859BB4F1">12.2-1 AbelianModuleObject</a></span>
+</div></div>
+</div>
+
+<h3>12 <span class="Heading">Utility functions</span></h3>
+
+<p>By a utility function we mean a <strong class="pkg">GAP</strong> function which is</p>
+
+
+<ul>
+<li><p>needed by other functions in this package,</p>
+
+</li>
+<li><p>not (as far as we know) provided by the standard <strong class="pkg">GAP</strong> library,</p>
+
+</li>
+<li><p>more suitable for inclusion in the main library than in this package.</p>
+
+</li>
+</ul>
+<p>Sections on <em>Printing Lists</em> and <em>Distinct and Common Representatives</em> were moved to the <strong class="pkg">Utils</strong> package with version 2.56.</p>
+
+<p><a id="X844AFC3A7DD6E190" name="X844AFC3A7DD6E190"></a></p>
+
+<h4>12.1 <span class="Heading">Inclusion and Restriction Mappings</span></h4>
+
+<p>These functions have been moved to the <strong class="pkg">gpd</strong> package, but are still documented here.</p>
+
+<p><a id="X7F8E297F7C84DE51" name="X7F8E297F7C84DE51"></a></p>
+
+<h5>12.1-1 InclusionMappingGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InclusionMappingGroups</code>( <var class="Arg">G</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MappingToOne</code>( <var class="Arg">G</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>This set of utilities concerns mappings. The map <code class="code">incd8</code> is the inclusion of <code class="code">d8</code> in <code class="code">d16</code> used in Section <a href="chap3.html#X7B09A28579707CAF"><span class="RefLink">3.4</span></a>. <code class="code">MappingToOne(G,H)</code> maps the whole of <span class="SimpleMath">G</span> to the identity element in <span class="SimpleMath">H</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( incd8, "\n" );</span>
+[ (11,13,15,17)(12,14,16,18), (11,18)(12,17)(13,16)(14,15) ] -&gt;
+[ (11,13,15,17)(12,14,16,18), (11,18)(12,17)(13,16)(14,15) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imd8 := Image( incd8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MappingToOne( c4, imd8 );</span>
+[ (11,13,15,17)(12,14,16,18) ] -&gt; [ () ]
+
+</pre></div>
+
+<p><a id="X81D29E737F3D4878" name="X81D29E737F3D4878"></a></p>
+
+<h5>12.1-2 InnerAutomorphismsByNormalSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InnerAutomorphismsByNormalSubgroup</code>( <var class="Arg">G</var>, <var class="Arg">N</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGroupOfAutomorphisms</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Inner automorphisms of a group <code class="code">G</code> by the elements of a normal subgroup <code class="code">N</code> are calculated with the first of these functions, usually with <code class="code">G</code> = <code class="code">N</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">autd8 := AutomorphismGroup( d8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">innd8 := InnerAutomorphismsByNormalSubgroup( d8, d8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfGroup( innd8 );</span>
+[ ^(1,2,3,4), ^(1,3) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsGroupOfAutomorphisms( innd8 );</span>
+true
+
+</pre></div>
+
+<p><a id="X852BD9CA84C2AFF0" name="X852BD9CA84C2AFF0"></a></p>
+
+<h4>12.2 <span class="Heading">Abelian Modules</span></h4>
+
+<p><a id="X806DEFCC859BB4F1" name="X806DEFCC859BB4F1"></a></p>
+
+<h5>12.2-1 AbelianModuleObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AbelianModuleObject</code>( <var class="Arg">grp</var>, <var class="Arg">act</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAbelianModule</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AbelianModuleGroup</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AbelianModuleAction</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>An abelian module is an abelian group together with a group action. These are used by the crossed module constructor <code class="func">XModByAbelianModule</code> (<a href="chap2.html#X824631577864961E"><span class="RefLink">2.1-7</span></a>).</p>
+
+<p>The resulting <code class="code">Xabmod</code> is isomorphic to the output from <code class="code">XModByAutomorphismGroup( k4 );</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := (6,7)(8,9);;  y := (6,8)(7,9);;  z := (6,9)(7,8);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">k4a := Group( x, y );;  SetName( k4a, "k4a" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens3a := [ (1,2), (2,3) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s3a := Group( gens3a );;  SetName( s3a, "s3a" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">alpha := GroupHomomorphismByImages( k4a, k4a, [x,y], [y,x] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">beta := GroupHomomorphismByImages( k4a, k4a, [x,y], [x,z] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">auta := Group( alpha, beta );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">acta := GroupHomomorphismByImages( s3a, auta, gens3a, [alpha,beta] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">abmod := AbelianModuleObject( k4a, acta );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Xabmod := XModByAbelianModule( abmod );</span>
+[k4a-&gt;s3a]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Xabmod );</span>
+
+Crossed module [k4a-&gt;s3a] :- 
+: Source group k4a has generators:
+  [ (6,7)(8,9), (6,8)(7,9) ]
+: Range group s3a has generators:
+  [ (1,2), (2,3) ]
+: Boundary homomorphism maps source generators to:
+  [ (), () ]
+: Action homomorphism maps range generators to automorphisms:
+  (1,2) --&gt; { source gens --&gt; [ (6,8)(7,9), (6,7)(8,9) ] }
+  (2,3) --&gt; { source gens --&gt; [ (6,7)(8,9), (6,9)(7,8) ] }
+  These 2 automorphisms generate the group of automorphisms.
+
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap11.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap13.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

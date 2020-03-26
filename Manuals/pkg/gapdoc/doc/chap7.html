@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (GAPDoc) - Chapter 7: Utilities for Bibliographies</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7_mj.html">[MathJax on]</a></p>
+<p><a id="X7EB94CE97ABF7192" name="X7EB94CE97ABF7192"></a></p>
+<div class="ChapSects"><a href="chap7.html#X7EB94CE97ABF7192">7 <span class="Heading">Utilities for Bibliographies</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7A4126EC7BD68F64">7.1 <span class="Heading">Parsing BibTeX Files</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X82555C307FDC1817">7.1-1 ParseBibFiles</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C9F0C337A0A0FF0">7.1-2 NormalizedNameAndKey</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C2B2F65851EAA0B">7.1-3 WriteBibFile</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X783FD118794399DF">7.1-4 LabelsFromBibTeX</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X85C1D50F7E37A99A">7.1-5 InfoBibTools</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7FB8F6BD80D859D1">7.2 <span class="Heading">The BibXMLext Format</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7AC255DE7D2531B6">7.3 <span class="Heading">Utilities for BibXMLext data</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C5548E77ECA29D7">7.3-1 <span class="Heading">Translating BibTeX to BibXMLext</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7A025E0A7A1CD390">7.3-2 HeuristicTranslationsLaTeX2XML.Apply</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X85F33C64787A00B7">7.3-3 StringBibAsXMLext</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X86BD29AE7A453721">7.3-4 ParseBibXMLextString</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7811108C7E5B1709">7.3-5 WriteBibXMLextFile</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X82167F1280F4310E">7.3-6 <span class="Heading">Bibliography Entries as Records</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X786C33ED79F425F1">7.3-7 RecBibXMLEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8067261385905A36">7.3-8 AddHandlerBuildRecBibXMLEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X790A295680F7CD24">7.3-9 StringBibXMLEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C6FF57087016019">7.3-10 TemplateBibXML</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X842336AF7B20048E">7.4 <span class="Heading">Getting BibTeX entries from 
+         <strong class="pkg">MathSciNet</strong></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8009F8A17DDFF9AF">7.4-1 SearchMR</a></span>
+</div></div>
+</div>
+
+<h3>7 <span class="Heading">Utilities for Bibliographies</span></h3>
+
+<p>A standard for collecting references (in particular to mathematical texts) is BibTeX (<span class="URL"><a href="http://www.ctan.org/tex-archive/biblio/bibtex/distribs/doc/">http://www.ctan.org/tex-archive/biblio/bibtex/distribs/doc/</a></span>). A disadvantage of BibTeX is that the format of the data is specified with the use by LaTeX in mind. The data format is less suited for conversion to other document types like plain text or HTML.</p>
+
+<p>In the first section we describe utilities for using data from BibTeX files in <strong class="pkg">GAP</strong>.</p>
+
+<p>In the second section we introduce a new XML based data format BibXMLext for bibliographies which seems better suited for other tasks than using it with LaTeX.</p>
+
+<p>Another section will describe utilities to deal with BibXMLext data in <strong class="pkg">GAP</strong>.</p>
+
+<p><a id="X7A4126EC7BD68F64" name="X7A4126EC7BD68F64"></a></p>
+
+<h4>7.1 <span class="Heading">Parsing BibTeX Files</span></h4>
+
+<p>Here are functions for parsing, normalizing and printing reference lists in BibTeX format. The reference describing this format is <a href="chapBib.html#biBLa85">[Lam85, Appendix B]</a>.</p>
+
+<p><a id="X82555C307FDC1817" name="X82555C307FDC1817"></a></p>
+
+<h5>7.1-1 ParseBibFiles</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParseBibFiles</code>( <var class="Arg">bibfile1</var>[, <var class="Arg">bibfile2</var>[, <var class="Arg">...</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParseBibStrings</code>( <var class="Arg">str1</var>[, <var class="Arg">str2</var>[, <var class="Arg">...</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: list <code class="code">[list of bib-records, list of abbrevs, list of expansions]</code></p>
+
+<p>The first function parses the files <var class="Arg">bibfile1</var> and so on (if a file does not exist the extension <code class="code">.bib</code> is appended) in BibTeX format and returns a list as follows: <code class="code">[entries, strings, texts]</code>. Here <code class="code">entries</code> is a list of records, one record for each reference contained in <var class="Arg">bibfile</var>. Then <code class="code">strings</code> is a list of abbreviations defined by <code class="code">@string</code>-entries in <var class="Arg">bibfile</var> and <code class="code">texts</code> is a list which contains in the corresponding position the full text for such an abbreviation.</p>
+
+<p>The second function does the same, but the input is given as <strong class="pkg">GAP</strong> strings <var class="Arg">str1</var> and so on.</p>
+
+<p>The records in <code class="code">entries</code> store key-value pairs of a BibTeX reference in the form <code class="code">rec(key1 = value1, ...)</code>. The names of the keys are converted to lower case. The type of the reference (i.e., book, article, ...) and the citation key are stored as components <code class="code">.Type</code> and <code class="code">.Label</code>. The records also have a <code class="code">.From</code> field that says that the data are read from a BibTeX source.</p>
+
+<p>As an example consider the following BibTeX file.</p>
+
+
+<div class="example"><pre>
+@string{ j  = "Important Journal" }
+@article{ AB2000, Author=  "Fritz A. First and Sec, X. Y.", 
+TITLE="Short", journal = j, year = 2000 }
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib := ParseBibFiles("doc/test.bib");</span>
+[ [ rec( From := rec( BibTeX := true ), Label := "AB2000", 
+          Type := "article", author := "Fritz A. First and Sec, X. Y."
+            , journal := "Important Journal", title := "Short", 
+          year := "2000" ) ], [ "j" ], [ "Important Journal" ] ]
+</pre></div>
+
+<p><a id="X7C9F0C337A0A0FF0" name="X7C9F0C337A0A0FF0"></a></p>
+
+<h5>7.1-2 NormalizedNameAndKey</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NormalizedNameAndKey</code>( <var class="Arg">namestr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: list of strings and names as lists</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NormalizeNameAndKey</code>( <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>The argument <var class="Arg">namestr</var> must be a string describing an author or a list of authors as described in the BibTeX documentation in <a href="chapBib.html#biBLa85">[Lam85, Appendix B 1.2]</a>. The function <code class="func">NormalizedNameAndKey</code> returns a list of the form [ normalized name string, short key, long key, names as lists]. The first entry is a normalized form of the input where names are written as "lastname, first name initials". The second and third entry are the name parts of a short and long key for the bibliography entry, formed from the (initials of) last names. The fourth entry is a list of lists, one for each name, where a name is described by three strings for the last name, the first name initials and the first name(s) as given in the input.</p>
+
+<p>The function <code class="func">NormalizeNameAndKey</code> gets as argument <var class="Arg">r</var> a record for a bibliography entry as returned by <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>). It substitutes <code class="code">.author</code> and <code class="code">.editor</code> fields of <var class="Arg">r</var> by their normalized form, the original versions are stored in fields <code class="code">.authororig</code> and <code class="code">.editororig</code>.</p>
+
+<p>Furthermore a short and a long citation key is generated and stored in components <code class="code">.printedkey</code> (only if no <code class="code">.key</code> is already bound) and <code class="code">.keylong</code>.</p>
+
+<p>We continue the example from <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib := ParseBibFiles("doc/test.bib");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NormalizedNameAndKey(bib[1][1].author);</span>
+[ "First, F. A. and Sec, X. Y.", "FS", "firstsec", 
+  [ [ "First", "F. A.", "Fritz A." ], [ "Sec", "X. Y.", "X. Y." ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NormalizeNameAndKey(bib[1][1]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib[1][1];</span>
+rec( From := rec( BibTeX := true ), Label := "AB2000", 
+  Type := "article", author := "First, F. A. and Sec, X. Y.", 
+  authororig := "Fritz A. First and Sec, X. Y.", 
+  journal := "Important Journal", keylong := "firstsec2000", 
+  printedkey := "FS00", title := "Short", year := "2000" )
+</pre></div>
+
+<p><a id="X7C2B2F65851EAA0B" name="X7C2B2F65851EAA0B"></a></p>
+
+<h5>7.1-3 WriteBibFile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WriteBibFile</code>( <var class="Arg">bibfile</var>, <var class="Arg">bib</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This is the converse of <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>). Here <var class="Arg">bib</var> either must have a format as list of three lists as it is returned by <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>). Or <var class="Arg">bib</var> can be a record as returned by <code class="func">ParseBibXMLextFiles</code> (<a href="chap7.html#X86BD29AE7A453721"><span class="RefLink">7.3-4</span></a>). A BibTeX file <var class="Arg">bibfile</var> is written and the entries are formatted in a uniform way. All given abbreviations are used while writing this file.</p>
+
+<p>We continue the example from <code class="func">NormalizeNameAndKey</code> (<a href="chap7.html#X7C9F0C337A0A0FF0"><span class="RefLink">7.1-2</span></a>). The command</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WriteBibFile("nicer.bib", bib);</span>
+</pre></div>
+
+<p>produces a file <code class="file">nicer.bib</code> as follows:</p>
+
+
+<div class="example"><pre>
+@string{j = "Important Journal" }
+
+@article{ AB2000,
+  author =           {First, F. A. and Sec, X. Y.},
+  title =            {Short},
+  journal =          j,
+  year =             {2000},
+  authororig =       {Fritz A. First and Sec, X. Y.},
+  keylong =          {firstsec2000},
+  printedkey =       {FS00}
+}
+</pre></div>
+
+<p><a id="X783FD118794399DF" name="X783FD118794399DF"></a></p>
+
+<h5>7.1-4 LabelsFromBibTeX</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LabelsFromBibTeX</code>( <var class="Arg">path</var>, <var class="Arg">keys</var>, <var class="Arg">bibfiles</var>, <var class="Arg">style</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pairs of strings <code class="code">[key, label]</code></p>
+
+<p>This function uses <code class="code">bibtex</code> to determine the ordering of a list of references and a label for each entry which is typeset in a document citing these references.</p>
+
+<p>The argument <var class="Arg">path</var> is a directory specified as string or directory object. The argument <var class="Arg">bibfiles</var> must be a list of files in BibTeX format, each specified by a path relative to the first argument, or an absolute path (starting with <code class="code">'/'</code>) or relative to the <strong class="pkg">GAP</strong> roots (starting with <code class="code">"gap://"</code>). The list <var class="Arg">keys</var> must contain strings which occur as keys in the given BibTeX files. Finally the string <var class="Arg">style</var> must be the name of a bibliography style (like <code class="code">"alpha"</code>).</p>
+
+<p>The list returned by this function contains pairs <code class="code">[key, label]</code> where <code class="code">key</code> is one of the entries of <var class="Arg">keys</var> and <code class="code">label</code> is a string used for citations of the bibliography entry in a document. These pairs are ordered as the reference list produced by BibTeX.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := Filename(DirectoriesPackageLibrary("gapdoc","doc"), "test.bib");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LabelsFromBibTeX(".", ["AB2000"], [f], "alpha");</span>
+[ [ "AB2000", "FS00" ] ]
+</pre></div>
+
+<p><a id="X85C1D50F7E37A99A" name="X85C1D50F7E37A99A"></a></p>
+
+<h5>7.1-5 InfoBibTools</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoBibTools</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p>The default level of this info class is 1. Functions like <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>), <code class="code">StringBibAs...</code> are then printing some information. You can suppress it by setting the level of <code class="func">InfoBibTools</code> to 0. With level 2 there may be some more information for debugging purposes.</p>
+
+<p><a id="X7FB8F6BD80D859D1" name="X7FB8F6BD80D859D1"></a></p>
+
+<h4>7.2 <span class="Heading">The BibXMLext Format</span></h4>
+
+<p>Bibliographical data in BibTeX files have the disadvantage that the actual data are given in LaTeX syntax. This makes it difficult to use the data for anything but for LaTeX, say for representations of the data as plain text or HTML. For example: mathematical formulae are in LaTeX <code class="code">$</code> environments, non-ASCII characters can be specified in many strange ways, and how to specify URLs for links if the output format allows them?</p>
+
+<p>Here we propose an XML data format for bibliographical data which addresses these problems, it is called BibXMLext. In the next section we describe some tools for generating (an approximation to) this data format from BibTeX data, and for using data given in BibXMLext format for various purposes.</p>
+
+<p>The first motivation for this development was the handling of bibliographical data in <strong class="pkg">GAPDoc</strong>, but the format and the tools are certainly useful for other purposes as well.</p>
+
+<p>We started from a DTD <code class="file">bibxml.dtd</code> which is publicly available, say from <span class="URL"><a href="http://bibtexml.sf.net/">http://bibtexml.sf.net/</a></span>. This is essentially a reformulation of the definition of the BibTeX format, including several of some widely used further fields. This has already the advantage that a generic XML parser can check the validity of the data entries, for example for missing compulsary fields in entries. We applied the following changes and extensions to define the DTD for BibXMLext, stored in the file <code class="file">bibxmlext.dtd</code> which can be found in the root directory of this <strong class="pkg">GAPDoc</strong> package (and in Appendix <a href="chapC.html#X7E2788757A1AA098"><span class="RefLink">C</span></a>):</p>
+
+
+<dl>
+<dt><strong class="Mark">names</strong></dt>
+<dd><p>Lists of names in the <code class="code">author</code> and <code class="code">editor</code> fields in BibTeX are difficult to parse. Here they must be given by a sequence of <code class="code">&lt;name&gt;</code>-elements which each contain an optional <code class="code">&lt;first&gt;</code>- and a <code class="code">&lt;last&gt;</code>-element for the first and last names, respectively.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">&lt;M&gt;</code> and <code class="code">&lt;Math&gt;</code></strong></dt>
+<dd><p>These elements enclose mathematical formulae, the content is LaTeX code (without the <code class="code">$</code>). These should be handled in the same way as the elements with the same names in <strong class="pkg">GAPDoc</strong>, see <a href="chap3.html#X7ABF42328467E966"><span class="RefLink">3.8-2</span></a> and <a href="chap3.html#X7AA02845868AA533"><span class="RefLink">3.8-1</span></a>. In particular, simple formulae which have a well defined plain text representation can be given in <code class="code">&lt;M&gt;</code>-elements.</p>
+
+</dd>
+<dt><strong class="Mark">Encoding</strong></dt>
+<dd><p>Note that in XML files we can use the full range of unicode characters, see <span class="URL"><a href="http://www.unicode.org/">http://www.unicode.org/</a></span>. All non-ASCII characters should be specified as unicode characters. This makes dealing with special characters easy for plain text or HTML, only for use with LaTeX some sort of translation is necessary.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">&lt;URL&gt;</code></strong></dt>
+<dd><p>These elements are allowed everywhere in the text and should be represented by links in converted formats which allow this. It is used in the same way as the element with the same name in <strong class="pkg">GAPDoc</strong>, see <a href="chap3.html#X81B3E46F839E1C5B"><span class="RefLink">3.5-5</span></a>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">&lt;Alt Only="..."&gt;</code> and <code class="code">&lt;Alt Not="..."&gt;</code></strong></dt>
+<dd><p>Sometimes information should be given in different ways, depending on the output format of the data. This is possible with the <code class="code">&lt;Alt&gt;</code>-elements with the same definition as in <strong class="pkg">GAPDoc</strong>, see <a href="chap3.html#X850E69017945AE3E"><span class="RefLink">3.9-1</span></a>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">&lt;C&gt;</code></strong></dt>
+<dd><p>This element should be used to protect text from case changes by converters (the extra <code class="code">{}</code> characters in BibTeX title fields).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">&lt;string key="..." value="..."/&gt;</code> and 
+<code class="code">&lt;value key="..."/&gt;</code></strong></dt>
+<dd><p>The <code class="code">&lt;string&gt;</code>-element defines key-value pairs which can be used in any field via the <code class="code">&lt;value&gt;</code>-element (not only for whole fields but also parts of the text).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">&lt;other type="..."&gt;</code></strong></dt>
+<dd><p>This is a generic element for fields which are otherwise not supported. An arbitrary number of them is allowed for each entry, so any kind of additional data can be added to entries.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">&lt;Wrap Name="..."&gt;</code></strong></dt>
+<dd><p>This generic element is allowed inside all fields. This markup will be just ignored (but not the element content) by our standard tools. But it can be a useful hook for introducing arbitrary further markup (and our tools can easily be extended to handle it).</p>
+
+</dd>
+<dt><strong class="Mark">Extra entities</strong></dt>
+<dd><p>The DTD defines the standard XML entities (<a href="chap2.html#X84A95A19801EDE76"><span class="RefLink">2.1-10</span></a> and the entities <code class="code">&amp;nbsp;</code> (non-breakable space), <code class="code">&amp;ndash;</code> and <code class="code">&amp;copyright;</code>. Use <code class="code">&amp;ndash;</code> in page ranges.</p>
+
+</dd>
+</dl>
+<p>For further details of the DTD we refer to the file <code class="file">bibxmlext.dtd</code> itself which is shown in appendix <a href="chapC.html#X7E2788757A1AA098"><span class="RefLink">C</span></a>. That file also recalls some information from the BibTeX documentation on how the standard fields of entries should be used. Which entry types and which fields are supported (and the ordering of the fields which is fixed by a DTD) can be either read off the DTD, or within <strong class="pkg">GAP</strong> one can use the function <code class="func">TemplateBibXML</code> (<a href="chap7.html#X7C6FF57087016019"><span class="RefLink">7.3-10</span></a>) to get templates for the various entry types.</p>
+
+<p>Here is an example of a BibXMLext document:</p>
+
+
+<div class="example"><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE file SYSTEM "bibxmlext.dtd"&gt;
+&lt;file&gt;
+&lt;string key="j" value="Important Journal"/&gt;
+&lt;entry id="AB2000"&gt;&lt;article&gt;
+  &lt;author&gt;
+    &lt;name&gt;&lt;first&gt;Fritz A.&lt;/first&gt;&lt;last&gt;First&lt;/last&gt;&lt;/name&gt;
+    &lt;name&gt;&lt;first&gt;X. Y.&lt;/first&gt;&lt;last&gt;Sec&amp;#x0151;nd&lt;/last&gt;&lt;/name&gt;
+  &lt;/author&gt;  
+  &lt;title&gt;The &lt;Wrap Name="Package"&gt; &lt;C&gt;F&lt;/C&gt;ritz&lt;/Wrap&gt; package for the 
+         formula &lt;M&gt;x^y - l_{{i+1}} \rightarrow \mathbb{R}&lt;/M&gt;&lt;/title&gt;
+  &lt;journal&gt;&lt;value key="j"/&gt;&lt;/journal&gt;
+  &lt;year&gt;2000&lt;/year&gt;
+  &lt;number&gt;13&lt;/number&gt;
+  &lt;pages&gt;13&amp;ndash;25&lt;/pages&gt;
+  &lt;note&gt;Online data at &lt;URL Text="Bla Bla Publisher"&gt;
+                  http://www.publish.com/~ImpJ/123#data&lt;/URL&gt;&lt;/note&gt;
+  &lt;other type="mycomment"&gt;very useful&lt;/other&gt;
+&lt;/article&gt;&lt;/entry&gt;
+&lt;/file&gt;
+
+</pre></div>
+
+<p>There is a standard XML header and a <code class="code">DOCTYPE</code> declaration referring to the <code class="file">bibxmlext.dtd</code> DTD mentioned above. Local entities could be defined in the <code class="code">DOCTYPE</code> tag as shown in the example in <a href="chap2.html#X7BDFF6D37FBED400"><span class="RefLink">2.2-3</span></a>. The actual content of the document is inside a <code class="code">&lt;file&gt;</code>-element, it consists of <code class="code">&lt;string&gt;</code>- and <code class="code">&lt;entry&gt;</code>-elements. Several of the BibXMLext markup features are shown. We will use this input document for some examples below.</p>
+
+<p><a id="X7AC255DE7D2531B6" name="X7AC255DE7D2531B6"></a></p>
+
+<h4>7.3 <span class="Heading">Utilities for BibXMLext data</span></h4>
+
+<p><a id="X7C5548E77ECA29D7" name="X7C5548E77ECA29D7"></a></p>
+
+<h5>7.3-1 <span class="Heading">Translating BibTeX to BibXMLext</span></h5>
+
+<p>First we describe a tool which can translate bibliography entries from BibTeX data to BibXMLext <code class="code">&lt;entry&gt;</code>-elements. It also does some validation of the data. In some cases it is desirable to improve the result by hand afterwards (editing formulae, adding <code class="code">&lt;URL&gt;</code>-elements, translating non-ASCII characters to unicode, ...).</p>
+
+<p>See <code class="func">WriteBibXMLextFile</code> (<a href="chap7.html#X7811108C7E5B1709"><span class="RefLink">7.3-5</span></a>) below for how to write the results to a BibXMLext file.</p>
+
+<p><a id="X7A025E0A7A1CD390" name="X7A025E0A7A1CD390"></a></p>
+
+<h5>7.3-2 HeuristicTranslationsLaTeX2XML.Apply</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HeuristicTranslationsLaTeX2XML.Apply</code>( <var class="Arg">str</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a string</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HeuristicTranslationsLaTeX2XML.ApplyToFile</code>( <var class="Arg">fnam</var>[, <var class="Arg">outnam</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>These utilities translate some LaTeX code into text in UTF-8 encoding. The input is given as a string <var class="Arg">str</var>, or a file name <var class="Arg">fnam</var>, respectively. The first function returns the translated string. The second function with one argument overwrites the given file with the translated text. Optionally, the translated file content can be written to another file, if its name is given as second argument <var class="Arg">outnam</var>.</p>
+
+<p>The record <code class="code">HeuristicTranslationsLaTeX2XML</code> mainly contains translations of LaTeX macros for special characters which were found in hundreds of BibTeX entries from <span class="URL"><a href="http://www.ams.org/mathscinet/">MathSciNet</a></span>. Just look at this record if you want to know how it works. It is easy to extend, and if you have improvements which may be of general interest, please send them to the <strong class="pkg">GAPDoc</strong> author.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := "\\\"u\\'{e}\\`e{\\ss}";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(s, "\n");               </span>
+\"u\'{e}\`e{\ss}
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(HeuristicTranslationsLaTeX2XML.Apply(s),"\n");</span>
+üéèß
+</pre></div>
+
+<p><a id="X85F33C64787A00B7" name="X85F33C64787A00B7"></a></p>
+
+<h5>7.3-3 StringBibAsXMLext</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StringBibAsXMLext</code>( <var class="Arg">bibentry</var>[, <var class="Arg">abbrvs</var>, <var class="Arg">vals</var>][, <var class="Arg">encoding</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a string with XML code, or <code class="keyw">fail</code></p>
+
+<p>The argument <var class="Arg">bibentry</var> is a record representing an entry from a BibTeX file, as returned in the first list of the result of <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>). The optional two arguments <var class="Arg">abbrvs</var> and <var class="Arg">vals</var> can be lists of abbreviations and substitution strings, as returned as second and third list element in the result of <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>). The optional argument <var class="Arg">encoding</var> specifies the character encoding of the string components of <var class="Arg">bibentry</var>. If this is not given it is checked if all strings are valid UTF-8 encoded strings, in that case it is assumed that the encoding is UTF-8, otherwise the latin1 encoding is assumed.</p>
+
+<p>The function <code class="func">StringBibAsXMLext</code> creates XML code of an <code class="code">&lt;entry&gt;</code>-element in <code class="code">BibXMLext</code> format. The result is in UTF-8 encoding and contains some heuristic translations, like splitting name lists, finding places for <code class="code">&lt;C&gt;</code>-elements, putting formulae in <code class="code">&lt;M&gt;</code>-elements, substituting some characters. The result should always be checked and maybe improved by hand. Some validity checks are applied to the given data, for example if all non-optional fields are given. If this check fails the function returns <code class="keyw">fail</code>.</p>
+
+<p>If your BibTeX input contains LaTeX markup for special characters, it can be convenient to translate this input with <code class="func">HeuristicTranslationsLaTeX2XML.Apply</code> (<a href="chap7.html#X7A025E0A7A1CD390"><span class="RefLink">7.3-2</span></a>) or <code class="func">HeuristicTranslationsLaTeX2XML.ApplyToFile</code> (<a href="chap7.html#X7A025E0A7A1CD390"><span class="RefLink">7.3-2</span></a>) before parsing it as BibTeX.</p>
+
+<p>As an example we consider again the short BibTeX file <code class="file">doc/test.bib</code> shown in the example for <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib := ParseBibFiles("doc/test.bib");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">str := StringBibAsXMLext(bib[1][1], bib[2], bib[3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(str, "\n");</span>
+&lt;entry id="AB2000"&gt;&lt;article&gt;
+  &lt;author&gt;
+    &lt;name&gt;&lt;first&gt;Fritz A.&lt;/first&gt;&lt;last&gt;First&lt;/last&gt;&lt;/name&gt;
+    &lt;name&gt;&lt;first&gt;X. Y.&lt;/first&gt;&lt;last&gt;Sec&lt;/last&gt;&lt;/name&gt;
+  &lt;/author&gt;  
+  &lt;title&gt;Short&lt;/title&gt;
+  &lt;journal&gt;&lt;value key="j"/&gt;&lt;/journal&gt;
+  &lt;year&gt;2000&lt;/year&gt;
+&lt;/article&gt;&lt;/entry&gt;
+</pre></div>
+
+<p>The following functions allow parsing of data which are already in BibXMLext format.</p>
+
+<p><a id="X86BD29AE7A453721" name="X86BD29AE7A453721"></a></p>
+
+<h5>7.3-4 ParseBibXMLextString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParseBibXMLextString</code>( <var class="Arg">str</var>[, <var class="Arg">res</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParseBibXMLextFiles</code>( <var class="Arg">fname1</var>[, <var class="Arg">fname2</var>[, <var class="Arg">...</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a record with fields <code class="code">.entries</code>, <code class="code">.strings</code> and <code class="code">.entities</code></p>
+
+<p>The first function gets a string <var class="Arg">str</var> containing a <code class="code">BibXMLext</code> document or a part of it. It returns a record with the three mentioned fields. Here <code class="code">.entries</code> is a list of partial XML parse trees for the <code class="code">&lt;entry&gt;</code>-elements in <var class="Arg">str</var>. The field <code class="code">.strings</code> is a list of key-value pairs from the <code class="code">&lt;string&gt;</code>-elements in <var class="Arg">str</var>. And <code class="code">.strings</code> is a list of name-value pairs of the named entities which were used during the parsing.</p>
+
+<p>The optional argument <var class="Arg">res</var> can be the result of a former call of this function, in that case the newly parsed entries are added to this data structure.</p>
+
+<p>The second function <code class="func">ParseBibXMLextFiles</code> uses the first on the content of all files given by filenames <var class="Arg">fname1</var> and so on. It collects the results in a single record.</p>
+
+<p>As an example we parse the file <code class="file">testbib.xml</code> shown in <a href="chap7.html#X7FB8F6BD80D859D1"><span class="RefLink">7.2</span></a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib := ParseBibXMLextFiles("doc/testbib.xml");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RecNames(bib);</span>
+[ "entries", "strings", "entities" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib.entries;</span>
+[ &lt;BibXMLext entry: AB2000&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib.strings;</span>
+[ [ "j", "Important Journal" ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib.entities[1]; </span>
+[ "amp", "&amp;#38;#38;" ]
+</pre></div>
+
+<p><a id="X7811108C7E5B1709" name="X7811108C7E5B1709"></a></p>
+
+<h5>7.3-5 WriteBibXMLextFile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WriteBibXMLextFile</code>( <var class="Arg">fname</var>, <var class="Arg">bib</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This function writes a BibXMLext file with name <var class="Arg">fname</var>.</p>
+
+<p>There are three possibilities to specify the bibliography entries in the argument <var class="Arg">bib</var>. It can be a list of three lists as returned by <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>). Or it can be just the first of such three lists in which case the other two lists are assumed to be empty. To all entries of the (first) list the function <code class="func">StringBibAsXMLext</code> (<a href="chap7.html#X85F33C64787A00B7"><span class="RefLink">7.3-3</span></a>) is applied and the resulting strings are written to the result file.</p>
+
+<p>The third possibility is that <var class="Arg">bib</var> is a record in the format as returned by <code class="func">ParseBibXMLextString</code> (<a href="chap7.html#X86BD29AE7A453721"><span class="RefLink">7.3-4</span></a>) and <code class="func">ParseBibXMLextFiles</code> (<a href="chap7.html#X86BD29AE7A453721"><span class="RefLink">7.3-4</span></a>). In this case the entries for the BibXMLext file are produced with <code class="func">StringXMLElement</code> (<a href="chap5.html#X835887057D0B4DA8"><span class="RefLink">5.2-2</span></a>), and if <var class="Arg">bib</var><code class="code">.entities</code> is bound then it is tried to resubstitute parts of the string by the given entities with <code class="func">EntitySubstitution</code> (<a href="chap5.html#X786827BF793191B3"><span class="RefLink">5.2-3</span></a>).</p>
+
+<p>As an example we write back the result of the example shown for <code class="func">ParseBibXMLextFiles</code> (<a href="chap7.html#X86BD29AE7A453721"><span class="RefLink">7.3-4</span></a>) to an equivalent XML file.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib := ParseBibXMLextFiles("doc/testbib.xml");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WriteBibXMLextFile("test.xml", bib);</span>
+</pre></div>
+
+<p><a id="X82167F1280F4310E" name="X82167F1280F4310E"></a></p>
+
+<h5>7.3-6 <span class="Heading">Bibliography Entries as Records</span></h5>
+
+<p>For working with BibXMLext entries we find it convenient to first translate the parse tree of an entry, as returned by <code class="func">ParseBibXMLextFiles</code> (<a href="chap7.html#X86BD29AE7A453721"><span class="RefLink">7.3-4</span></a>), to a record with the field names of the entry as components whose value is the content of the field as string. These strings are generated with respect to a result type. The records are generated by the following function which can be customized by the user.</p>
+
+<p><a id="X786C33ED79F425F1" name="X786C33ED79F425F1"></a></p>
+
+<h5>7.3-7 RecBibXMLEntry</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecBibXMLEntry</code>( <var class="Arg">entry</var>[, <var class="Arg">restype</var>][, <var class="Arg">strings</var>][, <var class="Arg">options</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a record with fields as strings</p>
+
+<p>This function generates a content string for each field of a bibliography entry and assigns them to record components. This content may depend on the requested result type and possibly some given options.</p>
+
+<p>The arguments are as follows: <var class="Arg">entry</var> is the parse tree of an <code class="code">&lt;entry&gt;</code> element as returned by <code class="func">ParseBibXMLextString</code> (<a href="chap7.html#X86BD29AE7A453721"><span class="RefLink">7.3-4</span></a>) or <code class="func">ParseBibXMLextFiles</code> (<a href="chap7.html#X86BD29AE7A453721"><span class="RefLink">7.3-4</span></a>). The optional argument <var class="Arg">restype</var> describes the type of the result. This package supports currently the types <code class="code">"BibTeX"</code>, <code class="code">"Text"</code> and <code class="code">"HTML"</code>. The default is <code class="code">"BibTeX"</code>. The optional argument <var class="Arg">strings</var> must be a list of key-value pairs as returned in the component <code class="code">.strings</code> in the result of <code class="func">ParseBibXMLextString</code> (<a href="chap7.html#X86BD29AE7A453721"><span class="RefLink">7.3-4</span></a>). The argument <var class="Arg">options</var> must be a record.</p>
+
+<p>If the entry contains an <code class="code">author</code> field then the result will also contain a component <code class="code">.authorAsList</code> which is a list containing for each author a list with three entries of the form <code class="code">[last name, first name initials, first name]</code> (the third entry means the first name as given in the data). Similarly, an <code class="code">editor</code> field is accompanied by a component <code class="code">.editorAsList</code>.</p>
+
+<p>The following <var class="Arg">options</var> are currently supported.</p>
+
+<p>If <code class="code">options.fullname</code> is bound and set to <code class="keyw">true</code> then the full given first names for authors and editors will be used, the default is to use the initials of the first names. Also, if <code class="code">options.namefirstlast</code> is bound and set to <code class="keyw">true</code> then the names are written in the form "first-name(s) last-name", the default is the form "last-name, first-name(s)".</p>
+
+<p>If <code class="code">options.href</code> is bound and set to <code class="keyw">false</code> then the <code class="code">"BibTeX"</code> type result will not use <code class="code">\href</code> commands. The default is to produce <code class="code">\href</code> commands from <code class="code">&lt;URL&gt;</code>-elements such that LaTeX with the <code class="code">hyperref</code> package can produce links for them.</p>
+
+<p>The content of an <code class="code">&lt;Alt&gt;</code>-element with <code class="code">Only</code>-attribute is included if <var class="Arg">restype</var> is given in the attribute and ignored otherwise, and vice versa in case of a <code class="code">Not</code>-attribute. If <code class="code">options.useAlt</code> is bound, it must be a list of strings to which <var class="Arg">restype</var> is added. Then an <code class="code">&lt;Alt&gt;</code>-element with <code class="code">Only</code>-attribute is evaluated if the intersection of <code class="code">options.useAlt</code> and the types given in the attribute is not empty. In case of a <code class="code">Not</code>-attribute the element is evaluated if this intersection is empty.</p>
+
+<p>If <var class="Arg">restype</var> is <code class="code">"BibTeX"</code> then the string fields in the result will be recoded with <code class="func">Encode</code> (<a href="chap6.html#X818A31567EB30A39"><span class="RefLink">6.2-2</span></a>) and target <code class="code">"LaTeX"</code>. If <code class="code">options.hasLaTeXmarkup</code> is bound and set to <code class="keyw">true</code> (for example, because the data are originally read from BibTeX files), then the target <code class="code">"LaTeXleavemarkup"</code> will be used.</p>
+
+<p>We use again the file shown in the example for <code class="func">ParseBibXMLextFiles</code> (<a href="chap7.html#X86BD29AE7A453721"><span class="RefLink">7.3-4</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib := ParseBibXMLextFiles("doc/testbib.xml");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := bib.entries[1];; strs := bib.strings;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(RecBibXMLEntry(e, "BibTeX", strs), "\n");</span>
+rec(
+  From := rec(
+      BibXML := true,
+      options := rec(
+           ),
+      type := "BibTeX" ),
+  Label := "AB2000",
+  Type := "article",
+  author := "First, F. A. and Sec{\\H o}nd, X. Y.",
+  authorAsList := 
+   [ [ "First", "F. A.", "Fritz A." ], 
+      [ "Sec\305\221nd", "X. Y.", "X. Y." ] ],
+  journal := "Important Journal",
+  mycomment := "very useful",
+  note := 
+   "Online data at \\href {http://www.publish.com/~ImpJ/123#data} {Bla\
+ Bla Publisher}",
+  number := "13",
+  pages := "13{\\textendash}25",
+  printedkey := "FS00",
+  title := 
+   "The  {F}ritz package for the \n         formula $x^y - l_{{i+1}} \
+\\rightarrow \\mathbb{R}$",
+  year := "2000" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(RecBibXMLEntry(e, "HTML", strs).note, "\n");</span>
+Online data at &lt;a href="http://www.publish.com/~ImpJ/123#data"&gt;Bla Bla\
+ Publisher&lt;/a&gt;
+</pre></div>
+
+<p><a id="X8067261385905A36" name="X8067261385905A36"></a></p>
+
+<h5>7.3-8 AddHandlerBuildRecBibXMLEntry</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddHandlerBuildRecBibXMLEntry</code>( <var class="Arg">elementname</var>, <var class="Arg">restype</var>, <var class="Arg">handler</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>The argument <var class="Arg">elementname</var> must be the name of an entry field supported by the BibXMLext format, the name of one of the special elements <code class="code">"C"</code>, <code class="code">"M"</code>, <code class="code">"Math"</code>, <code class="code">"URL"</code> or of the form <code class="code">"Wrap:myname"</code> or any string <code class="code">"mytype"</code> (which then corresponds to entry fields <code class="code">&lt;other type="mytype"&gt;</code>). The string <code class="code">"Finish"</code> has an exceptional meaning, see below.</p>
+
+<p><var class="Arg">restype</var> is a string describing the result type for which the handler is installed, see <code class="func">RecBibXMLEntry</code> (<a href="chap7.html#X786C33ED79F425F1"><span class="RefLink">7.3-7</span></a>).</p>
+
+<p>For both arguments, <var class="Arg">elementname</var> and <var class="Arg">restype</var>, it is also possible to give lists of the described ones for installing several handler at once.</p>
+
+<p>The argument <var class="Arg">handler</var> must be a function with five arguments of the form <var class="Arg">handler</var><code class="code">(entry, r, restype, strings, options)</code>. Here <var class="Arg">entry</var> is a parse tree of a BibXMLext <code class="code">&lt;entry&gt;</code>-element, <var class="Arg">r</var> is a node in this tree for an element <var class="Arg">elementname</var>, and <var class="Arg">restype</var>, <var class="Arg">strings</var> and <var class="Arg">options</var> are as explained in <code class="func">RecBibXMLEntry</code> (<a href="chap7.html#X786C33ED79F425F1"><span class="RefLink">7.3-7</span></a>). The function should return a string representing the content of the node <var class="Arg">r</var>. If <var class="Arg">elementname</var> is of the form <code class="code">"Wrap:myname"</code> the handler is used for elements of form <code class="code">&lt;Wrap Name="myname"&gt;...&lt;/Wrap&gt;</code>.</p>
+
+<p>If <var class="Arg">elementname</var> is <code class="code">"Finish"</code> the handler should look like above except that now <var class="Arg">r</var> is the record generated by <code class="func">RecBibXMLEntry</code> (<a href="chap7.html#X786C33ED79F425F1"><span class="RefLink">7.3-7</span></a>) just before it is returned. Here the handler should return nothing. It can be used to manipulate the record <var class="Arg">r</var>, for example for changing the encoding of the strings or for adding some more components.</p>
+
+<p>The installed handler is called by <code class="code">BuildRecBibXMLEntry(</code><var class="Arg">entry</var>, <var class="Arg">r</var>, <var class="Arg">restype</var>, <var class="Arg">strings</var>, <var class="Arg">options</var><code class="code">)</code>. The string for the whole content of an element can be generated by <code class="code">ContentBuildRecBibXMLEntry(</code><var class="Arg">entry</var>, <var class="Arg">r</var>, <var class="Arg">restype</var>, <var class="Arg">strings</var>, <var class="Arg">options</var><code class="code">)</code>.</p>
+
+<p>We continue the example from <code class="func">RecBibXMLEntry</code> (<a href="chap7.html#X786C33ED79F425F1"><span class="RefLink">7.3-7</span></a>) and install a handler for the <code class="code">&lt;Wrap Name="Package"&gt;</code>-element such that LaTeX puts its content in a sans serif font.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddHandlerBuildRecBibXMLEntry("Wrap:Package", "BibTeX",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">function(entry,  r, restype,  strings, options)</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  return Concatenation("\\textsf{", ContentBuildRecBibXMLEntry(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            entry, r, restype,  strings, options), "}");</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(RecBibXMLEntry(e, "BibTeX", strs).title, "\n");</span>
+The \textsf{ {F}ritz} package for the 
+         formula $x^y - l_{{i+1}} \rightarrow \mathbb{R}$
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(RecBibXMLEntry(e, "Text", strs).title, "\n");  </span>
+The  Fritz package for the 
+         formula x^y - l_{i+1} → R
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddHandlerBuildRecBibXMLEntry("Wrap:Package", "BibTeX", "Ignore");</span>
+</pre></div>
+
+<p><a id="X790A295680F7CD24" name="X790A295680F7CD24"></a></p>
+
+<h5>7.3-9 StringBibXMLEntry</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StringBibXMLEntry</code>( <var class="Arg">entry</var>[, <var class="Arg">restype</var>][, <var class="Arg">strings</var>][, <var class="Arg">options</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a string</p>
+
+<p>The arguments of this function have the same meaning as in <code class="func">RecBibXMLEntry</code> (<a href="chap7.html#X786C33ED79F425F1"><span class="RefLink">7.3-7</span></a>) but the return value is a string representing the bibliography entry in a format specified by <var class="Arg">restype</var> (default is <code class="code">"BibTeX"</code>).</p>
+
+<p>Currently, the following cases for <var class="Arg">restype</var> are supported:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">"BibTeX"</code></strong></dt>
+<dd><p>A string with BibTeX source code is generated.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">"Text"</code></strong></dt>
+<dd><p>A text representation of the text is returned. If <code class="code">options.ansi</code> is bound it must be a record. The components must have names <code class="code">Bib_Label</code>, <code class="code">Bib_author</code>, and so on for all fieldnames. The value of each component is a pair of strings which will enclose the content of the field in the result or the first of these strings in which case the default for the second is <code class="code">TextAttr.reset</code> (see <code class="func">TextAttr</code> (<a href="chap6.html#X785F61E77899580E"><span class="RefLink">6.1-2</span></a>)). If you give an empty record here, some default ANSI color markup will be used.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">"HTML"</code></strong></dt>
+<dd><p>An HTML representation of the bibliography entry is returned. The text from each field is enclosed in markup (mostly <code class="code">&lt;span&gt;</code>-elements) with the <code class="code">class</code> attribute set to the field name. This allows a detailed layout of the code via a style sheet file. If <code class="code">options.MathJax</code> is bound and has the value <code class="keyw">true</code> then formulae are encoded for display on pages with <strong class="pkg">MathJax</strong> support.</p>
+
+</dd>
+</dl>
+<p>We use again the file shown in the example for <code class="func">ParseBibXMLextFiles</code> (<a href="chap7.html#X86BD29AE7A453721"><span class="RefLink">7.3-4</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib := ParseBibXMLextFiles("doc/testbib.xml");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := bib.entries[1];; strs := bib.strings;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ebib := StringBibXMLEntry(e, "BibTeX", strs);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrintFormattedString(ebib);</span>
+@article{ AB2000,
+  author =           {First, F. A. and Sec{\H o}nd, X. Y.},
+  title =            {The  {F}ritz  package  for  the formula $x^y -
+                      l_{{i+1}} \rightarrow \mathbb{R}$},
+  journal =          {Important Journal},
+  number =           {13},
+  year =             {2000},
+  pages =            {13{\textendash}25},
+  note =             {Online          data          at         \href
+                      {http://www.publish.com/~ImpJ/123#data}   {Bla
+                      Bla Publisher}},
+  mycomment =        {very useful},
+  printedkey =       {FS00}
+}
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">etxt := StringBibXMLEntry(e, "Text", strs);;      </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">etxt := SimplifiedUnicodeString(Unicode(etxt), "latin1", "single");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">etxt := Encode(etxt, GAPInfo.TermEncoding);;                        </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrintFormattedString(etxt);</span>
+[FS00]  First,  F.  A.  and Second, X. Y., The Fritz package for the
+formula  x^y  -  l_{i+1}  ?  R, Important Journal, 13 (2000), 13-25,
+(Online        data        at        Bla        Bla        Publisher
+(http://www.publish.com/~ImpJ/123#data)).
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ehtml := StringBibXMLEntry(e, "HTML", strs, rec(MathJax := true));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ehtml := Encode(Unicode(ehtml), GAPInfo.TermEncoding);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrintFormattedString(ehtml);</span>
+&lt;p class='BibEntry'&gt;
+[&lt;span class='BibKey'&gt;FS00&lt;/span&gt;]   
+ &lt;b class='BibAuthor'&gt;First, F. A. and Secőnd, X. Y.&lt;/b&gt;,
+ &lt;i class='BibTitle'&gt;The  Fritz package for the 
+         formula \(x^y - l_{{i+1}} \rightarrow \mathbb{R}\)&lt;/i&gt;,
+ &lt;span class='BibJournal'&gt;Important Journal&lt;/span&gt; 
+(&lt;span class='BibNumber'&gt;13&lt;/span&gt;)
+ (&lt;span class='BibYear'&gt;2000&lt;/span&gt;),
+ &lt;span class='BibPages'&gt;13–25&lt;/span&gt;&lt;br /&gt;
+(&lt;span class='BibNote'&gt;Online data at 
+&lt;a href="http://www.publish.com/~ImpJ/123#data"&gt;Bla Bla 
+Publisher&lt;/a&gt;&lt;/span&gt;).
+&lt;/p&gt;
+
+</pre></div>
+
+<p>The following command may be useful to generate completly new bibliography entries in BibXMLext format. It also informs about the supported entry types and field names.</p>
+
+<p><a id="X7C6FF57087016019" name="X7C6FF57087016019"></a></p>
+
+<h5>7.3-10 TemplateBibXML</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TemplateBibXML</code>( [<var class="Arg">type</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: list of types or string</p>
+
+<p>Without an argument this function returns a list of the supported entry types in BibXMLext documents.</p>
+
+<p>With an argument <var class="Arg">type</var> of one of the supported types the function returns a string which is a template for a corresponding BibXMLext entry. Optional field elements have a <code class="code">*</code> appended. If an element has the word <code class="code">OR</code> appended, then either this element or the next must/can be given, not both. If <code class="code">AND/OR</code> is appended then this and/or the next can/must be given. Elements which can appear several times have a <code class="code">+</code> appended. Places to fill are marked by an <code class="code">X</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TemplateBibXML();</span>
+[ "article", "book", "booklet", "conference", "inbook", 
+  "incollection", "inproceedings", "manual", "mastersthesis", "misc", 
+  "phdthesis", "proceedings", "techreport", "unpublished" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(TemplateBibXML("inbook"));</span>
+&lt;entry id="X"&gt;&lt;inbook&gt;
+  &lt;author&gt;
+    &lt;name&gt;&lt;first&gt;X&lt;/first&gt;&lt;last&gt;X&lt;/last&gt;&lt;/name&gt;+
+  &lt;/author&gt;OR
+  &lt;editor&gt;
+    &lt;name&gt;&lt;first&gt;X&lt;/first&gt;&lt;last&gt;X&lt;/last&gt;&lt;/name&gt;+
+  &lt;/editor&gt;
+  &lt;title&gt;X&lt;/title&gt;
+  &lt;chapter&gt;X&lt;/chapter&gt;AND/OR
+  &lt;pages&gt;X&lt;/pages&gt;
+  &lt;publisher&gt;X&lt;/publisher&gt;
+  &lt;year&gt;X&lt;/year&gt;
+  &lt;volume&gt;X&lt;/volume&gt;*OR
+  &lt;number&gt;X&lt;/number&gt;*
+  &lt;series&gt;X&lt;/series&gt;*
+  &lt;type&gt;X&lt;/type&gt;*
+  &lt;address&gt;X&lt;/address&gt;*
+  &lt;edition&gt;X&lt;/edition&gt;*
+  &lt;month&gt;X&lt;/month&gt;*
+  &lt;note&gt;X&lt;/note&gt;*
+  &lt;key&gt;X&lt;/key&gt;*
+  &lt;annotate&gt;X&lt;/annotate&gt;*
+  &lt;crossref&gt;X&lt;/crossref&gt;*
+  &lt;abstract&gt;X&lt;/abstract&gt;*
+  &lt;affiliation&gt;X&lt;/affiliation&gt;*
+  &lt;contents&gt;X&lt;/contents&gt;*
+  &lt;copyright&gt;X&lt;/copyright&gt;*
+  &lt;isbn&gt;X&lt;/isbn&gt;*OR
+  &lt;issn&gt;X&lt;/issn&gt;*
+  &lt;keywords&gt;X&lt;/keywords&gt;*
+  &lt;language&gt;X&lt;/language&gt;*
+  &lt;lccn&gt;X&lt;/lccn&gt;*
+  &lt;location&gt;X&lt;/location&gt;*
+  &lt;mrnumber&gt;X&lt;/mrnumber&gt;*
+  &lt;mrclass&gt;X&lt;/mrclass&gt;*
+  &lt;mrreviewer&gt;X&lt;/mrreviewer&gt;*
+  &lt;price&gt;X&lt;/price&gt;*
+  &lt;size&gt;X&lt;/size&gt;*
+  &lt;url&gt;X&lt;/url&gt;*
+  &lt;category&gt;X&lt;/category&gt;*
+  &lt;other type="X"&gt;X&lt;/other&gt;*+
+&lt;/inbook&gt;&lt;/entry&gt;
+</pre></div>
+
+<p><a id="X842336AF7B20048E" name="X842336AF7B20048E"></a></p>
+
+<h4>7.4 <span class="Heading">Getting BibTeX entries from 
+         <strong class="pkg">MathSciNet</strong></span></h4>
+
+<p>We provide utilities to access the <span class="URL"><a href="http://www.ams.org/mathscinet/"><strong class="pkg"> MathSciNet</strong></a></span> data base from within GAP. The first condition for this to work is that one of the programs <code class="code">wget</code> or <code class="code">curl</code> is installed on your system. The second is, of course, that you use these functions from a computer which has access to <strong class="pkg">MathSciNet</strong>.</p>
+
+<p>Please note, that the usual license for <strong class="pkg">MathSciNet</strong> access does not allow for automated searches in the database. Therefore, only use the <code class="func">SearchMR</code> (<a href="chap7.html#X8009F8A17DDFF9AF"><span class="RefLink">7.4-1</span></a>) function for single queries, as you would do using your webbrowser.</p>
+
+<p><a id="X8009F8A17DDFF9AF" name="X8009F8A17DDFF9AF"></a></p>
+
+<h5>7.4-1 SearchMR</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SearchMR</code>( <var class="Arg">qurec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SearchMRBib</code>( <var class="Arg">bib</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of strings, a string or <code class="keyw">fail</code></p>
+
+<p>The first function <code class="func">SearchMR</code> provides the same functionality as the Web interface <span class="URL"><a href="http://www.ams.org/mathscinet/"><strong class="pkg"> MathSciNet</strong></a></span>. The query strings must be given as a record, and the following components of this record are recognized: <code class="code">Author</code>, <code class="code">AuthorRelated</code>, <code class="code">Title</code>, <code class="code">ReviewText</code>, <code class="code">Journal</code>, <code class="code">InstitutionCode</code>, <code class="code">Series</code>, <code class="code">MSCPrimSec</code>, <code class="code">MSCPrimary</code>, <code class="code">MRNumber</code>, <code class="code">Anywhere</code>, <code class="code">References</code> and <code class="code">Year</code>.</p>
+
+<p>Furthermore, the component <code class="code">type</code> can be specified. It can be one of <code class="code">"bibtex"</code> (the default if not given), <code class="code">"pdf"</code>, <code class="code">"html"</code> and probably others. In the last cases the function returns a string with the content of the web page returned by <strong class="pkg">MathSciNet</strong>. In the first case the <strong class="pkg">MathSciNet</strong> interface returns a web page with BibTeX entries, for convenience this function returns a list of strings, each containing the BibTeX text for a single result entry.</p>
+
+<p>If a component <code class="code">uri</code> is bound and set to <code class="keyw">true</code> the function does not actually send a request to <strong class="pkg">MathSciNet</strong> but returns a string with the URI that can be called for the request.</p>
+
+<p>The format of a <code class="code">.Year</code> component can be either a four digit number, optionally preceded by one of the characters <code class="code">'&lt;'</code>, <code class="code">'&gt;'</code> or <code class="code">'='</code>, or it can be two four digit numbers separated by a <code class="code">-</code> to specify a year range.</p>
+
+<p>The function <code class="func">SearchMRBib</code> gets a record of a parsed BibTeX entry as input as returned by <code class="func">ParseBibFiles</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>) or <code class="func">ParseBibStrings</code> (<a href="chap7.html#X82555C307FDC1817"><span class="RefLink">7.1-1</span></a>). It tries to generate some sensible input from this information for <code class="func">SearchMR</code> and calls that function.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ll := SearchMR(rec(Author:="Gauss", Title:="Disquisitiones"));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ll2 := List(ll, HeuristicTranslationsLaTeX2XML.Apply);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib := ParseBibStrings(Concatenation(ll2));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bibxml := List(bib[1], StringBibAsXMLext);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bib2 := ParseBibXMLextString(Concatenation(bibxml));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for b in bib2.entries do </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         PrintFormattedString(StringBibXMLEntry(b, "Text")); od;     </span>
+[Gau95]   Gauss,   C.   F.,  Disquisitiones  arithmeticae,  Academia
+Colombiana   de  Ciencias  Exactas,  Físicas  y  Naturales,  Bogotá,
+Colección   Enrique   Pérez   Arbeláez   [Enrique   Pérez   Arbeláez
+Collection],  10  (1995), xliv+495 pages, (Translated from the Latin
+by  Hugo  Barrantes  Campos,  Michael Josephy and Ángel Ruiz Zúñiga,
+With a preface by Ruiz Zúñiga).
+
+[Gau86]  Gauss, C. F., Disquisitiones arithmeticae, Springer-Verlag,
+New  York  (1986),  xx+472  pages, (Translated and with a preface by
+Arthur  A.  Clarke,  Revised  by  William  C.  Waterhouse, Cornelius
+Greither and A. W. Grootendorst and with a preface by Waterhouse).
+
+[Gau66]  Gauss,  C. F., Disquisitiones arithmeticae, Yale University
+Press, New Haven, Conn.-London, Translated into English by Arthur A.
+Clarke, S. J (1966), xx+472 pages.
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

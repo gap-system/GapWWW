@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Browse) - Appendix A: Some Tools for Database Handling</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapA"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapA_mj.html">[MathJax on]</a></p>
+<p><a id="X85D4199E82A7DFA5" name="X85D4199E82A7DFA5"></a></p>
+<div class="ChapSects"><a href="chapA.html#X85D4199E82A7DFA5">A <span class="Heading">Some Tools for Database Handling</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X7A0B84C37CB9DFA3">A.1 <span class="Heading"><strong class="pkg">GAP</strong> Objects for Database Handling</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7999CF7F79ACA240">A.1-1 <span class="Heading">Database Id Enumerators</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7D2804F97EE18BA5">A.1-2 <span class="Heading">Database Attributes</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7B3913E28493563F">A.1-3 <span class="Heading">How to Deal with Database Id Enumerators and
+         Database Attributes</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7AE32F217CF16EDF">A.1-4 DatabaseIdEnumerator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X8573522782D939FE">A.1-5 DatabaseAttributeAdd</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7C8DB23E79567A60">A.1-6 DatabaseAttributeValueDefault</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X80A909727E3C8311">A.1-7 DatabaseIdEnumeratorUpdate</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X812075CE7A01EA04">A.1-8 DatabaseAttributeCompute</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X87A8B19C82E9FF0B">A.1-9 DatabaseAttributeSetData</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X80E9CFA17EE7817A">A.2 <span class="Heading">Using Database Attributes for Browse Tables</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7A2DD7827CBBD735">A.2-1 <span class="Heading">Browse Relevant Components of Database Attributes</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7F25A3E586653911">A.2-2 BrowseTableFromDatabaseIdEnumerator</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X808BDD24857F3904">A.3 <span class="Heading">Example: Database Id Enumerators and Database Attributes</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X8628EF6981A524B3">A.4 <span class="Heading">Example: An Overview of the <strong class="pkg">GAP</strong> Library of Tables of Marks
+</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X844D143980A0E20D">A.4-1 BrowseTomLibInfo</a></span>
+</div></div>
+</div>
+
+<h3>A <span class="Heading">Some Tools for Database Handling</span></h3>
+
+<p>Two aims of the tools described in this appendix are</p>
+
+
+<ul>
+<li><p>speeding up selection functions such as <code class="func">AllCharacterTableNames</code> (<a href="../../../pkg/ctbllib/doc/chap3.html#X7C091641852BB6FE"><span class="RefLink">CTblLib: AllCharacterTableNames</span></a>) for certain data libraries of <strong class="pkg">GAP</strong> (with not too many entries), in the sense that users can extend the list of attributes that are treated in a special way</p>
+
+</li>
+<li><p>and a programmatic extension for rendering overviews of information about the contents of databases, using <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>).</p>
+
+</li>
+</ul>
+<p>The <strong class="pkg">GAP</strong> objects introduced for that are <em>database id enumerators</em> (see <a href="chapA.html#X7999CF7F79ACA240"><span class="RefLink">A.1-1</span></a>) and <em>database attributes</em> (see <a href="chapA.html#X7D2804F97EE18BA5"><span class="RefLink">A.1-2</span></a>).</p>
+
+<p>Contrary to the individual interfaces to the <strong class="pkg">GAP</strong> manuals (see Section <a href="chap6.html#X7CF999297B331E01"><span class="RefLink">6.6</span></a>), the <strong class="pkg">GAP</strong> bibliography (see Section <a href="chap6.html#X846751CC7F54F51D"><span class="RefLink">6.7</span></a>), and the overviews of <strong class="pkg">GAP</strong> packages, <strong class="pkg">GAP</strong> methods, and Conway polynomials available in <strong class="pkg">GAP</strong> (see Section <a href="chap6.html#X86C730A07855238D"><span class="RefLink">6.11</span></a>), the approach that will be described here assumes a special way to access database entries. Thus it depends on the structure of a given database whether the tools described here are useful, or whether an individual interface fits better. Perhaps the example shown in Section <a href="chapA.html#X808BDD24857F3904"><span class="RefLink">A.3</span></a> gives an impression what is possible.</p>
+
+<p><a id="X7A0B84C37CB9DFA3" name="X7A0B84C37CB9DFA3"></a></p>
+
+<h4>A.1 <span class="Heading"><strong class="pkg">GAP</strong> Objects for Database Handling</span></h4>
+
+<p><a id="X7999CF7F79ACA240" name="X7999CF7F79ACA240"></a></p>
+
+<h5>A.1-1 <span class="Heading">Database Id Enumerators</span></h5>
+
+<p>A <em>database id enumerator</em> is a record <var class="Arg">r</var> with at least the following components.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">identifiers</code></strong></dt>
+<dd><p>a list of "identifiers" of the database entries, which provides a bijection with these entries,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">entry</code></strong></dt>
+<dd><p>a function that takes <var class="Arg">r</var> and an entry in the <code class="code">identifiers</code> list, and returns the corresponding database entry,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">attributes</code></strong></dt>
+<dd><p>the record whose components are the database attribute records (see Section <a href="chapA.html#X7D2804F97EE18BA5"><span class="RefLink">A.1-2</span></a>) for <var class="Arg">r</var>; this components is automatically initialized when <var class="Arg">r</var> is created with <code class="func">DatabaseIdEnumerator</code> (<a href="chapA.html#X7AE32F217CF16EDF"><span class="RefLink">A.1-4</span></a>); database attributes can be entered with <code class="func">DatabaseAttributeAdd</code> (<a href="chapA.html#X8573522782D939FE"><span class="RefLink">A.1-5</span></a>).</p>
+
+</dd>
+</dl>
+<p>If the <code class="code">identifiers</code> list may change over the time (because the database is extended or corrected) then the following components are supported. They are used by <code class="func">DatabaseIdEnumeratorUpdate</code> (<a href="chapA.html#X80A909727E3C8311"><span class="RefLink">A.1-7</span></a>).</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">version</code></strong></dt>
+<dd><p>a <strong class="pkg">GAP</strong> object that describes the version of the <code class="code">identifiers</code> component, this can be for example a string describing the time of the last change (this time need not coincide with the time of the last update); the default value (useful only for the case that the <code class="code">identifiers</code> component is never changed) is an empty string,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">update</code></strong></dt>
+<dd><p>a function that takes <var class="Arg">r</var> as its argument, replaces its <code class="code">identifiers</code> and <code class="code">version</code> values by up-to-date versions if necessary (for example by downloading the data), and returns <code class="keyw">true</code> or <code class="keyw">false</code>, depending on whether the update process was successful or not; the default value is <code class="func">ReturnTrue</code> (<a href="../../../doc/ref/chap5.html#X7DB422A2876CCC4D"><span class="RefLink">Reference: ReturnTrue</span></a>),</p>
+
+</dd>
+</dl>
+<p>The following component is optional.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">isSorted</code></strong></dt>
+<dd><p><code class="keyw">true</code> means that the <code class="code">identifiers</code> list is sorted w.r.t. <strong class="pkg">GAP</strong>'s ordering <code class="code">\&lt;</code>; the default is <code class="keyw">false</code>.</p>
+
+</dd>
+</dl>
+<p>The idea behind database id enumerator objects is that such an object defines the set of data covered by database attributes (see Section <a href="chapA.html#X7D2804F97EE18BA5"><span class="RefLink">A.1-2</span></a>), it provides the mapping between identifiers and the actual entries of the database, and it defines when precomputed data of database attributes are outdated.</p>
+
+<p><a id="X7D2804F97EE18BA5" name="X7D2804F97EE18BA5"></a></p>
+
+<h5>A.1-2 <span class="Heading">Database Attributes</span></h5>
+
+<p>A <em>database attribute</em> is a record <var class="Arg">a</var> whose components belong to the aspects of <em>defining</em> the attribute, <em>accessing</em> the attribute's data, <em>computing</em> (and recomputing) data, <em>storing</em> data on files, and <em>checking</em> data. (Additional parameters used for creating browse table columns from database attributes are described in Section <a href="chapA.html#X7A2DD7827CBBD735"><span class="RefLink">A.2-1</span></a>.)</p>
+
+<p>The following components are <em>defining</em>, except <code class="code">description</code> they are mandatory.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">idenumerator</code></strong></dt>
+<dd><p>the database id enumerator to which the attribute <var class="Arg">a</var> is related,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">identifier</code></strong></dt>
+<dd><p>a string that identifies <var class="Arg">a</var> among all database attributes for the underlying database id enumerator (this is used by <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>) and when the data of <var class="Arg">a</var> are entered with <code class="func">DatabaseAttributeSetData</code> (<a href="chapA.html#X87A8B19C82E9FF0B"><span class="RefLink">A.1-9</span></a>), for example when precomputed values are read from a file),</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">description</code></strong></dt>
+<dd><p>a string that describes the attribute in human readable form (currently just for convenience, the default is an empty string).</p>
+
+</dd>
+</dl>
+<p>The following components are used for <em>accessing</em> data. Except <code class="code">type</code>, they are optional, but enough information must be provided in order to make the database attribute meaningful. If an individual <code class="code">attributeValue</code> function is available then this function decides what is needed; for the default function <code class="func">DatabaseAttributeValueDefault</code> (<a href="chapA.html#X7C8DB23E79567A60"><span class="RefLink">A.1-6</span></a>), at least one of the components <code class="code">name</code>, <code class="code">data</code>, <code class="code">datafile</code> must be bound (see <code class="func">DatabaseAttributeValueDefault</code> (<a href="chapA.html#X7C8DB23E79567A60"><span class="RefLink">A.1-6</span></a>) for the behaviour in this case).</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">type</code></strong></dt>
+<dd><p>one of the strings <code class="code">"values"</code> or <code class="code">"pairs"</code>; the format of the component <code class="code">data</code> is different for these cases,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">name</code></strong></dt>
+<dd><p>if bound, a string that is the name of a <strong class="pkg">GAP</strong> function such that the database attribute encodes the values of this function for the database entries; besides the computation of attribute values on demand (see <code class="func">DatabaseAttributeValueDefault</code> (<a href="chapA.html#X7C8DB23E79567A60"><span class="RefLink">A.1-6</span></a>)), this component can be used by selection functions such as <code class="func">OneCharacterTableName</code> (<a href="../../../pkg/ctbllib/doc/chap3.html#X7EC4A57E8393D75C"><span class="RefLink">CTblLib: OneCharacterTableName</span></a>) or <code class="func">AllCharacterTableNames</code> (<a href="../../../pkg/ctbllib/doc/chap3.html#X7C091641852BB6FE"><span class="RefLink">CTblLib: AllCharacterTableNames</span></a>), which take <strong class="pkg">GAP</strong> functions and prescribed return values as their arguments –of course these functions must then be prepared to deal with database attributes.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">data</code></strong></dt>
+<dd><p>if bound, the data for this attribute; if the component <code class="code">type</code> has the value <code class="code">"values"</code> then the value is a list, where the entry at position <var class="Arg">i</var>, if bound, belongs to the <var class="Arg">i</var>-th entry of the <code class="code">identifiers</code> list of <code class="code">idenumerator</code>; if <code class="code">type</code> is <code class="code">"pairs"</code> then the value is a record with the components <code class="code">automatic</code> and <code class="code">nonautomatic</code>, and the values of these components are lists such that each entry is a list of length two whose first entry occurs in the <code class="code">identifiers</code> list of <var class="Arg">a</var><code class="code">.idenumerator</code> and whose second entry encodes the corresponding attribute value,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">datafile</code></strong></dt>
+<dd><p>if bound, the absolute name of a file that contains the data for this attribute,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">attributeValue</code></strong></dt>
+<dd><p>a function that takes <var class="Arg">a</var> and an <code class="code">identifiers</code> entry of its <code class="code">idenumerator</code> value, and returns the attribute value for this identifier; typically this is <em>not</em> a table cell data object that can be shown in a browse table, cf. the <code class="code">viewValue</code> component; the default is <code class="func">DatabaseAttributeValueDefault</code> (<a href="chapA.html#X7C8DB23E79567A60"><span class="RefLink">A.1-6</span></a>) (Note that using individual <code class="code">attributeValue</code> functions, one can deal with database attributes independent of actually stored data, for example without precomputed values, such that the values are computed on demand and afterwards are cached.),</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">dataDefault</code></strong></dt>
+<dd><p>a <strong class="pkg">GAP</strong> object that is regarded as the attribute value for those database entries for which <code class="code">data</code>, <code class="code">datafile</code>, and <code class="code">name</code> do not provide values; the default value is an empty string <code class="code">""</code>,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">eval</code></strong></dt>
+<dd><p>if this component is bound, the value is assumed to be a function that takes <var class="Arg">a</var> and a value from its <code class="code">data</code> component, and returns the actual attribute value; this can be useful if one does not want to create all attribute values in advance, because this would be space or time consuming; another possible aspect of the <code class="code">eval</code> component is that it may be used to strip off comments that are perhaps contained in <code class="code">data</code> entries,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">isSorted</code></strong></dt>
+<dd><p>if this component is bound to <code class="keyw">true</code> and if <code class="code">type</code> is <code class="code">"pairs"</code> then it is assumed that the two lists in the <code class="code">data</code> record of <var class="Arg">a</var> are sorted w.r.t. <strong class="pkg">GAP</strong>'s ordering <code class="code">\&lt;</code>; the default is <code class="keyw">false</code>,</p>
+
+</dd>
+</dl>
+<p>The following optional components are needed for <em>computing</em> (or recomputing) data with <code class="func">DatabaseAttributeCompute</code> (<a href="chapA.html#X812075CE7A01EA04"><span class="RefLink">A.1-8</span></a>). This is useful mainly for databases which can change over the time.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">version</code></strong></dt>
+<dd><p>the <strong class="pkg">GAP</strong> object that is the <code class="code">version</code> component of the <code class="code">idenumerator</code> component at the time when the stored data were entered; this value is used by <code class="func">DatabaseIdEnumeratorUpdate</code> (<a href="chapA.html#X80A909727E3C8311"><span class="RefLink">A.1-7</span></a>) for deciding whether the attribute values are outdated; if <var class="Arg">a</var><code class="code">.datafile</code> is bound then it is assumed that the <code class="code">version</code> component is set when this file is read, for example in the function <code class="func">DatabaseAttributeSetData</code> (<a href="chapA.html#X87A8B19C82E9FF0B"><span class="RefLink">A.1-9</span></a>),</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">update</code></strong></dt>
+<dd><p>a function that takes <var class="Arg">a</var> as its argument, adjusts its data components to the current values of <var class="Arg">a</var><code class="code">.dbidenum</code> if necessary, sets the <code class="code">version</code> component to that of <var class="Arg">a</var><code class="code">.dbidenum</code>, and returns <code class="keyw">true</code> or <code class="keyw">false</code>, depending on whether the update process was successful or not; the default value is <code class="func">ReturnTrue</code> (<a href="../../../doc/ref/chap5.html#X7DB422A2876CCC4D"><span class="RefLink">Reference: ReturnTrue</span></a>),</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">neededAttributes</code></strong></dt>
+<dd><p>a list of attribute <code class="code">identifier</code> strings such that the values of these attributes are needed in the computations for the current one, and therefore these should be updated/recomputed in advance; it is assumed that the <code class="code">neededAttributes</code> components of all database attributes of <var class="Arg">a</var><code class="code">.idenumerator</code> define a partial ordering; the default is an empty list,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">prepareAttributeComputation</code></strong></dt>
+<dd><p>a function with argument <var class="Arg">a</var> that must be called before the computations for the current attribute are started; the default value is <code class="func">ReturnTrue</code> (<a href="../../../doc/ref/chap5.html#X7DB422A2876CCC4D"><span class="RefLink">Reference: ReturnTrue</span></a>),</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">cleanupAfterAttibuteComputation</code></strong></dt>
+<dd><p>a function with argument <var class="Arg">a</var> that must be called after the computations for the current attribute are finished; the default value is <code class="func">ReturnTrue</code> (<a href="../../../doc/ref/chap5.html#X7DB422A2876CCC4D"><span class="RefLink">Reference: ReturnTrue</span></a>), and</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">create</code></strong></dt>
+<dd><p>a function that takes a database attribute and an entry in the <code class="code">identifiers</code> list of its database id enumerator, and returns either the entry that shall be stored in the <code class="code">data</code> component, as the value for the given identifier (if this value shall be stored in the <code class="code">data</code> component of <var class="Arg">a</var>) or the <code class="code">dataDefault</code> component of <var class="Arg">a</var> (if this value shall <em>not</em> be stored); in order to get the actual attribute value, the <code class="code">eval</code> function of <var class="Arg">a</var>, if bound, must be called with the return value. This function may assume that the <code class="code">prepareAttributeComputation</code> function has been called in advance, and that the <code class="code">cleanupAfterAttibuteComputation</code> function will be called later. The <code class="code">create</code> function is <em>not</em> intended to compute an individual attribute value on demand, use a <code class="code">name</code> component for that. (A stored <code class="code">name</code> function is used to provide a default for the <code class="code">create</code> function; without <code class="code">name</code> component, there is no default for <code class="code">create</code>.)</p>
+
+</dd>
+</dl>
+<p>The following optional component is needed for <em>storing</em> data on files.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">string</code></strong></dt>
+<dd><p>if bound, a function that takes the pair consisting of an identifier and the return value of the <code class="code">create</code> function for this identifier, and returns a string that shall represent this value when the data are printed to a file; the default function returns the <code class="func">String</code> (<a href="../../../doc/ref/chap27.html#X81FB5BE27903EC32"><span class="RefLink">Reference: String</span></a>) value of the second argument.</p>
+
+</dd>
+</dl>
+<p>The following optional component is needed for <em>checking</em> stored data.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">check</code></strong></dt>
+<dd><p>a function that takes a string that occurs in the <code class="code">identifiers</code> list of the <code class="code">idenumerator</code> record, and returns <code class="keyw">true</code> if the attribute value stored for this string is reasonable, and something different from <code class="keyw">true</code> if an error was detected. (One could argue that these tests can be performed also when the values are computed, but consistency checks may involve several entries; besides that, checking may be cheaper than recomputing.)</p>
+
+</dd>
+</dl>
+<p><a id="X7B3913E28493563F" name="X7B3913E28493563F"></a></p>
+
+<h5>A.1-3 <span class="Heading">How to Deal with Database Id Enumerators and
+         Database Attributes</span></h5>
+
+<p>The idea is to start with a database id enumerator (see <a href="chapA.html#X7999CF7F79ACA240"><span class="RefLink">A.1-1</span></a>), constructed with <code class="func">DatabaseIdEnumerator</code> (<a href="chapA.html#X7AE32F217CF16EDF"><span class="RefLink">A.1-4</span></a>), and to define database attributes for it (see <a href="chapA.html#X7D2804F97EE18BA5"><span class="RefLink">A.1-2</span></a>), using <code class="func">DatabaseAttributeAdd</code> (<a href="chapA.html#X8573522782D939FE"><span class="RefLink">A.1-5</span></a>). The attribute values can be precomputed and stored on files, or they are computed when the attribute gets defined, or they are computed on demand.</p>
+
+<p>The function <code class="func">DatabaseAttributeCompute</code> (<a href="chapA.html#X812075CE7A01EA04"><span class="RefLink">A.1-8</span></a>) can be used to "refresh" the attribute values, that is, all values or selected values can be recomputed; this can be necessary for example when the underlying database id enumerator gets extended.</p>
+
+<p>In data files, the function <code class="func">DatabaseAttributeSetData</code> (<a href="chapA.html#X87A8B19C82E9FF0B"><span class="RefLink">A.1-9</span></a>) can be used to fill the <code class="code">data</code> component of the attribute.</p>
+
+<p><a id="X7AE32F217CF16EDF" name="X7AE32F217CF16EDF"></a></p>
+
+<h5>A.1-4 DatabaseIdEnumerator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DatabaseIdEnumerator</code>( <var class="Arg">arec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a shallow copy of the record <var class="Arg">arec</var>, extended by default values.</p>
+
+<p>For a record <var class="Arg">arec</var>, <code class="func">DatabaseIdEnumerator</code> checks whether the mandatory components of a database id enumerator (see Section <a href="chapA.html#X7999CF7F79ACA240"><span class="RefLink">A.1-1</span></a>) are present, initializes the <code class="code">attributes</code> component, sets the defaults for unbound optional components (see <a href="chapA.html#X7A2DD7827CBBD735"><span class="RefLink">A.2-1</span></a>), and returns the resulting record.</p>
+
+<p>A special database attribute (see Section <a href="chapA.html#X7D2804F97EE18BA5"><span class="RefLink">A.1-2</span></a>) with <code class="code">identifier</code> value <code class="code">"self"</code> is constructed automatically for the returned record by <code class="func">DatabaseIdEnumerator</code>; its <code class="code">attributeValue</code> function simply returns its second argument (the identifier). The optional components of this attribute are derived from components of the database id enumerator, so these components (see <a href="chapA.html#X7A2DD7827CBBD735"><span class="RefLink">A.2-1</span></a>) are supported for <var class="Arg">arec</var>. A typical use of the <code class="code">"self"</code> attribute is to provide the first column in browse tables constructed by <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>).</p>
+
+<p><a id="X8573522782D939FE" name="X8573522782D939FE"></a></p>
+
+<h5>A.1-5 DatabaseAttributeAdd</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DatabaseAttributeAdd</code>( <var class="Arg">dbidenum</var>, <var class="Arg">arec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For a database id enumerator <var class="Arg">dbidenum</var> and a record <var class="Arg">arec</var>, <code class="func">DatabaseAttributeAdd</code> checks whether the mandatory components of a database attribute, except <code class="code">idenumerator</code>, are present in <var class="Arg">arec</var> (see Section <a href="chapA.html#X7D2804F97EE18BA5"><span class="RefLink">A.1-2</span></a>), sets the <code class="code">idenumerator</code> component, and sets the defaults for unbound optional components (see <a href="chapA.html#X7A2DD7827CBBD735"><span class="RefLink">A.2-1</span></a>).</p>
+
+<p><a id="X7C8DB23E79567A60" name="X7C8DB23E79567A60"></a></p>
+
+<h5>A.1-6 DatabaseAttributeValueDefault</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DatabaseAttributeValueDefault</code>( <var class="Arg">attr</var>, <var class="Arg">id</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the value of the database attribute <var class="Arg">attr</var> at <var class="Arg">id</var>.</p>
+
+<p>For a database attribute <var class="Arg">attr</var> and an entry <var class="Arg">id</var> of the <code class="code">identifiers</code> list of the underlying database id enumerator, <code class="func">DatabaseAttributeValueDefault</code> takes the <code class="code">data</code> entry for <var class="Arg">id</var>, applies the <code class="code">eval</code> function of <var class="Arg">attr</var> to it if available and returns the result.</p>
+
+<p>So the question is how to get the <code class="code">data</code> entry.</p>
+
+<p>First, if the <code class="code">data</code> component of <var class="Arg">attr</var> is not bound then the file given by the <code class="code">datafile</code> component of <var class="Arg">attr</var>, if available, is read, and otherwise <code class="func">DatabaseAttributeCompute</code> (<a href="chapA.html#X812075CE7A01EA04"><span class="RefLink">A.1-8</span></a>) is called; afterwards it is assumed that the <code class="code">data</code> component is bound.</p>
+
+<p>The further steps depend on the <code class="code">type</code> value of <var class="Arg">attr</var>.</p>
+
+<p>If the <code class="code">type</code> value of <var class="Arg">attr</var> is <code class="code">"pairs"</code> then the <code class="code">data</code> entry for <var class="Arg">id</var> is either contained in the <code class="code">automatic</code> or in the <code class="code">nonautomatic</code> list of <var class="Arg">attr</var><code class="code">.data</code>, or it is given by the <code class="code">dataDefault</code> value of <var class="Arg">attr</var>. (So a perhaps available <code class="code">name</code> function is <em>not</em> used to compute the value for a missing <code class="code">data</code> entry.)</p>
+
+<p>If the <code class="code">type</code> value of <var class="Arg">attr</var> is <code class="code">"values"</code> then the <code class="code">data</code> entry for <var class="Arg">id</var> is computed as follows. Let <span class="SimpleMath">n</span> be the position of <var class="Arg">id</var> in the <code class="code">identifiers</code> component of the database id enumerator. If the <span class="SimpleMath">n</span>-th entry of the <code class="code">data</code> component of <var class="Arg">attr</var> is bound then take it; otherwise if the <code class="code">name</code> component is bound then apply it to <var class="Arg">id</var> and take the return value; otherwise take the <code class="code">dataDefault</code> value.</p>
+
+<p>If one wants to introduce a database attribute where this functionality is not suitable then another –more specific– function must be entered as the component <code class="code">attributeValue</code> of such an attribute.</p>
+
+<p><a id="X80A909727E3C8311" name="X80A909727E3C8311"></a></p>
+
+<h5>A.1-7 DatabaseIdEnumeratorUpdate</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DatabaseIdEnumeratorUpdate</code>( <var class="Arg">dbidenum</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code>.</p>
+
+<p>For a database id enumerator <var class="Arg">dbidenum</var> (see Section <a href="chapA.html#X7999CF7F79ACA240"><span class="RefLink">A.1-1</span></a>), <code class="func">DatabaseIdEnumeratorUpdate</code> first calls the <code class="code">update</code> function of <var class="Arg">dbidenum</var>. Afterwards, the <code class="code">update</code> components of those of its <code class="code">attributes</code> records are called for which the <code class="code">version</code> component differs from that of <var class="Arg">dbidenum</var>.</p>
+
+<p>The order in which the database attributes are updates is determined by the <code class="code">neededAttributes</code> component.</p>
+
+<p>The return value is <code class="keyw">true</code> if all these functions return <code class="keyw">true</code>, and <code class="keyw">false</code> otherwise.</p>
+
+<p>When <code class="func">DatabaseIdEnumeratorUpdate</code> has returned <code class="keyw">true</code>, the data described by <var class="Arg">dbidenum</var> and its database attributes are consistent and up to date.</p>
+
+<p><a id="X812075CE7A01EA04" name="X812075CE7A01EA04"></a></p>
+
+<h5>A.1-8 DatabaseAttributeCompute</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DatabaseAttributeCompute</code>( <var class="Arg">dbidenum</var>, <var class="Arg">attridentifier</var>[, <var class="Arg">what</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code>.</p>
+
+<p>This function returns <code class="keyw">false</code> if <var class="Arg">dbidenum</var> is not a database id enumerator, or if it does not have a database attribute with <code class="code">identifier</code> value <var class="Arg">attridentifier</var>, or if this attribute does not have a <code class="code">create</code> function.</p>
+
+<p>Otherwise the <code class="code">prepareAttributeComputation</code> function is called, the <code class="code">data</code> entries for the database attribute are (re)computed, the <code class="code">cleanupAfterAttibuteComputation</code> function is called, and <code class="keyw">true</code> is returned.</p>
+
+<p>The optional argument <var class="Arg">what</var> determines which values are computed. Admissible values are</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">"all"</code></strong></dt>
+<dd><p>all <code class="code">identifiers</code> entries of <var class="Arg">dbidenum</var>,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">"automatic"</code> (the default)</strong></dt>
+<dd><p>the same as <code class="code">"all"</code> if the <code class="code">type</code> value of the database attribute is <code class="code">"values"</code>, otherwise only the values for the <code class="code">"automatic"</code> component are computed,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">"new"</code></strong></dt>
+<dd><p>stored values are not recomputed.</p>
+
+</dd>
+</dl>
+<p><a id="X87A8B19C82E9FF0B" name="X87A8B19C82E9FF0B"></a></p>
+
+<h5>A.1-9 DatabaseAttributeSetData</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DatabaseAttributeSetData</code>( <var class="Arg">dbidenum</var>, <var class="Arg">attridentifier</var>, <var class="Arg">version</var>, <var class="Arg">data</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Let <var class="Arg">dbidenum</var> be a database id enumerator (see Section <a href="chapA.html#X7999CF7F79ACA240"><span class="RefLink">A.1-1</span></a>), <var class="Arg">attridentifier</var> be a string that is the <code class="code">identifier</code> value of a database attribute of <var class="Arg">dbidenum</var>, <var class="Arg">data</var> be the <code class="code">data</code> list or record for the database attribute (depending on its <code class="code">type</code> value), and <var class="Arg">version</var> be the corresponding <code class="code">version</code> value.</p>
+
+<p><code class="func">DatabaseAttributeSetData</code> sets the <code class="code">data</code> and <code class="code">version</code> components of the attribute. This function can be used for example in data files.</p>
+
+<p><a id="X80E9CFA17EE7817A" name="X80E9CFA17EE7817A"></a></p>
+
+<h4>A.2 <span class="Heading">Using Database Attributes for Browse Tables</span></h4>
+
+<p><a id="X7A2DD7827CBBD735" name="X7A2DD7827CBBD735"></a></p>
+
+<h5>A.2-1 <span class="Heading">Browse Relevant Components of Database Attributes</span></h5>
+
+<p>The following optional components of database id enumerators and database attributes are used by <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>).</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">viewLabel</code></strong></dt>
+<dd><p>if bound, a table cell data object (see <code class="func">BrowseData.IsBrowseTableCellData</code> (<a href="chap4.html#X82157A2684969A5F"><span class="RefLink">4.2-1</span></a>)) that gives a <em>short</em> description of the attribute, which is used as the column label in browse tables created with <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>); the default for database attributes is the <code class="code">name</code> component, if bound, and otherwise the <code class="code">identifier</code> component; the default for database id enumerators is the string <code class="code">"name"</code>,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">viewValue</code></strong></dt>
+<dd><p>if bound, a function that takes the output of the <code class="code">attributeValue</code> function and returns a table cell data object (see <code class="func">BrowseData.IsBrowseTableCellData</code> (<a href="chap4.html#X82157A2684969A5F"><span class="RefLink">4.2-1</span></a>)) that is used as the entry of the corresponding column in browse tables created with <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>); the default is <code class="func">String</code> (<a href="../../../doc/ref/chap27.html#X81FB5BE27903EC32"><span class="RefLink">Reference: String</span></a>),</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">viewSort</code></strong></dt>
+<dd><p>if bound, a comparison function that takes two database attribute values and returns <code class="keyw">true</code> if the first value is regarded as smaller than the second when the column corresponding to the attribute in the browse table constructed by <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>) gets sorted, and <code class="keyw">false</code> otherwise; the default is <strong class="pkg">GAP</strong>'s <code class="code">\&lt;</code> operation,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sortParameters</code></strong></dt>
+<dd><p>if bound, a list in the same format as the last argument of <code class="code">BrowseData.SetSortParameters</code>, which is used for the column corresponding to the attribute in the browse table constructed by <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>); the default is an empty list,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">widthCol</code></strong></dt>
+<dd><p>if bound, the width of the column in the browse table constructed by <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>); if a column width is prescribed this way then the function stored in the <code class="code">attributeValue</code> component must return either a list of attribute lines that fit into the column or a plain string (which then gets formatted as required); there is no default for this component, meaning that the column width is computed as the maximum of the widths of the column label and of all entries in the column if no value is bound,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">align</code></strong></dt>
+<dd><p>if bound, the alignment of the values in the column of the browse table constructed by <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>); admissible values are substrings of <code class="code">"bclt"</code>, see <code class="func">BrowseData.IsBrowseTableCellData</code> (<a href="chap4.html#X82157A2684969A5F"><span class="RefLink">4.2-1</span></a>); the default is right and vertically centered, but note that if the <code class="code">viewValues</code> function returns a record (see <code class="func">BrowseData.IsBrowseTableCellData</code> (<a href="chap4.html#X82157A2684969A5F"><span class="RefLink">4.2-1</span></a>)) then the alignment prescribed by this record is preferred,</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">categoryValue</code></strong></dt>
+<dd><p>if bound, a function that is similar to the <code class="code">viewValue</code> component but may return a different value; for example if the column in the browse table belongs to a property and the <code class="code">viewValue</code> function returns something like <code class="code">"+"</code> or <code class="code">"-"</code>, it may be useful that the category rows show a textual description of the property values; the default value is the <code class="code">viewValue</code> component; if the value is a record then its <code class="code">rows</code> component is taken for forming category rows, if the value is an attribute line (see <code class="func">NCurses.IsAttributeLine</code> (<a href="chap2.html#X81D1FC927C455AEB"><span class="RefLink">2.2-3</span></a>)) then there is exactly this category row, and otherwise the value is regarded as a list of attribute lines, which is either concatenated to one category row or turned into individual category rows, depending on the <code class="code">sortParameters</code> value.</p>
+
+</dd>
+</dl>
+<p><a id="X7F25A3E586653911" name="X7F25A3E586653911"></a></p>
+
+<h5>A.2-2 BrowseTableFromDatabaseIdEnumerator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BrowseTableFromDatabaseIdEnumerator</code>( <var class="Arg">dbidenum</var>, <var class="Arg">labelids</var>, <var class="Arg">columnids</var>[, <var class="Arg">header</var>[, <var class="Arg">footer</var>[, <var class="Arg">choice</var>]]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a record that can be used as the input of <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>).</p>
+
+<p>For a database id enumerator <var class="Arg">dbidenum</var> (see Section <a href="chapA.html#X7999CF7F79ACA240"><span class="RefLink">A.1-1</span></a>) and two lists <var class="Arg">labelids</var> and <var class="Arg">columnids</var> of <code class="code">identifier</code> values of database attributes stored in <var class="Arg">dbidenum</var>, <code class="func">BrowseTableFromDatabaseIdEnumerator</code> returns a browse table (see <code class="func">BrowseData.IsBrowseTable</code> (<a href="chap4.html#X81007E2F8552523B"><span class="RefLink">4.2-3</span></a>)) whose columns are given by the values of the specified database attributes. The columns listed in <var class="Arg">labelids</var> are used to provide row label columns of the browse table, the columns listed in <var class="Arg">columnids</var> yield main table columns. <var class="Arg">columnids</var> must be nonempty.</p>
+
+<p>If the optional arguments <var class="Arg">header</var> and <var class="Arg">footer</var> are given then they must be lists or functions or records that are admissible for the <code class="code">header</code> and <code class="code">footer</code> components of the <code class="code">work</code> record of the browse table, see <code class="func">BrowseData.IsBrowseTable</code> (<a href="chap4.html#X81007E2F8552523B"><span class="RefLink">4.2-3</span></a>).</p>
+
+<p>The optional argument <var class="Arg">choice</var>, if given, must be a subset of <var class="Arg">dbidenum</var><code class="code">.identifiers</code>. The rows of the returned browse table are then restricted to this subset.</p>
+
+<p>The returned browse table does not support "Click" events or return values.</p>
+
+<p><a id="X808BDD24857F3904" name="X808BDD24857F3904"></a></p>
+
+<h4>A.3 <span class="Heading">Example: Database Id Enumerators and Database Attributes</span></h4>
+
+<p>As an example for the functions introduced in this appendix, we introduce the <em>database of small integers</em>. For that, we fix a positive integer <span class="SimpleMath">n</span> and consider the integers from <span class="SimpleMath">1</span> to <span class="SimpleMath">n</span> as the entries of our database. Using these integers as their own identifiers, we construct the database id enumerator.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n:= 100;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">smallintenum1:= DatabaseIdEnumerator( rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifiers:= [ 1 .. n ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     entry:= function( dbidenum, id ) return id; end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );;</span>
+</pre></div>
+
+<p>Examples of attributes for this database are the properties whether or not an integer is a prime or a prime power. There are global <strong class="pkg">GAP</strong> functions <code class="func">IsPrimeInt</code> (<a href="../../../doc/ref/chap14.html#X78FDA4437EDCA70C"><span class="RefLink">Reference: IsPrimeInt</span></a>) and <code class="func">IsPrimePowerInt</code> (<a href="../../../doc/ref/chap14.html#X8443125D7FD6F2A6"><span class="RefLink">Reference: IsPrimePowerInt</span></a>) for computing these properties, so we can define these database attributes via a <code class="code">name</code> component; we choose <code class="code">"values"</code> as the <code class="code">type</code> value, so the values (<code class="keyw">true</code> or <code class="keyw">false</code>) are stored in a list of length <span class="SimpleMath">n</span> for each of the two database attributes.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum1, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "primes",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     name:= "IsPrimeInt",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum1, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "prime powers",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     name:= "IsPrimePowerInt",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+</pre></div>
+
+<p>Similarly, we consider the prime factors as a database attribute.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum1, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "factors",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     name:= "Factors",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+</pre></div>
+
+<p>Another example of an attribute of integers is the residue modulo <span class="SimpleMath">11</span>. We do not want to introduce a global <strong class="pkg">GAP</strong> function for computing the value, so we use the <code class="code">create</code> component in order to define the attribute; again, the values (integers from <span class="SimpleMath">0</span> to <span class="SimpleMath">10</span>) are stored in a list of length <span class="SimpleMath">n</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum1, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "residue mod 11",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     create:= function( attr, id ) return id mod 11; end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+</pre></div>
+
+<p>Some integers are values of <code class="func">Factorial</code> (<a href="../../../doc/ref/chap16.html#X87665F748594BF29"><span class="RefLink">Reference: Factorial</span></a>), and we want to record this information and show it in a browse table. For most integers, nothing is stored and shown for this attribute, so we choose the <code class="code">type</code> value <code class="code">"pairs"</code> and precompute the information for the <code class="code">data</code> component. (The default for the <code class="code">dataDefault</code> component is an empty string, which is fine; so we need not prescribe this component.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">factorialdata:= function( n )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     local result, i, f;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     result:= [];  i:= 1;  f:= 1;;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     while f &lt;= n do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       Add( result, [ f, i ] );  i:= i + 1;  f:= f * i;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     od;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     return result;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum1, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "inverse factorial",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "pairs",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     data:= rec( automatic:= factorialdata( n ), nonautomatic:= [] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     isSorted:= true,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+</pre></div>
+
+<p>We use this setup for creating a browse table. The integers are shown as the first column, using the <code class="code">"self"</code> attribute. This attribute can be used as a column of row labels (useful if we want to keep the column visible when one scrolls the table to the right) or as a column in the main table (useful if we want to search for the values); here we choose the former possibility.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t1:= BrowseTableFromDatabaseIdEnumerator( smallintenum1,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          [ "self" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          [ "primes", "prime powers", "factors", "residue mod 11",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            "inverse factorial" ] );;</span>
+</pre></div>
+
+<p>The following session shows some of the features of the browse table.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nop:= [ 14, 14, 14, 14, 14, 14 ];;  # ``do nothing''</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sample_session:= Concatenation(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        # categorize by the first column, expand categories, wait, reset</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        nop, "scsc", nop, "X", nop, "!",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        # sort the residue column, wait, reset</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        "scrrrso", nop, "!",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        # categorize by the inverse factorial column</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        "rscsrdx", nop, "!",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        # and quit the application</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        "qQ" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( sample_session );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.BrowseGeneric( t1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( false );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Unbind( t1.dynamic.replay );</span>
+</pre></div>
+
+<p>(Note that the last statement above is necessary to run the session more than once.) The result is not too bad but we can improve the table, using the optional components of database attributes, as follows.</p>
+
+
+<ul>
+<li><p>The strings <code class="code">"true"</code> and <code class="code">"false"</code> shown for the Boolean valued database attributes can be replaced by the perhaps more suggestive strings <code class="code">"+"</code> and <code class="code">"-"</code> (or perhaps an empty string instead of <code class="code">"-"</code>).</p>
+
+</li>
+<li><p>The alignment of values inside their columns can be customized.</p>
+
+</li>
+<li><p>When the browse table is categorized by a column then the values in this column do usually not provide suitable category rows; we can prescribe individual category values.</p>
+
+</li>
+<li><p>The column labels can be customized.</p>
+
+</li>
+<li><p>Where the lexicographic order is not appropriate for sorting table entries, we can prescribe an individual comparison function.</p>
+
+</li>
+<li><p>Sort parameters can be customized.</p>
+
+</li>
+<li><p>We can prescribe the width of a column, and thus distribute the attribute values for this column to several rows when the values are too long.</p>
+
+</li>
+<li><p>Finally, in the call of <code class="func">BrowseTableFromDatabaseIdEnumerator</code> (<a href="chapA.html#X7F25A3E586653911"><span class="RefLink">A.2-2</span></a>), we can add a header to the browse table.</p>
+
+</li>
+</ul>
+<p>We create a new database id enumerator and the corresponding browse table, in order to be able to compare the behaviour of the two objects. However, we assume that the variables <code class="code">n</code> and <code class="code">factorialdata</code> are already available.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">smallintenum2:= DatabaseIdEnumerator( rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifiers:= [ 1 .. n ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     entry:= function( dbidenum, id ) return id; end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     viewLabel:= "",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum2, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "primes",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     name:= "IsPrimeInt",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     viewLabel:= "prime?",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     viewValue:= value -&gt; BrowseData.ReplacedEntry( value,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ true, false ], [ "+", "-" ] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     sortParameters:= [ "add counter on categorizing", "yes" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     align:= "c",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     categoryValue:= value -&gt; BrowseData.ReplacedEntry( value,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ true, false ], [ "prime", "nonprime" ] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum2, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "prime powers",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     name:= "IsPrimePowerInt",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     viewLabel:= "prime power?",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     viewValue:= value -&gt; BrowseData.ReplacedEntry( value,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ true, false ], [ "+", "-" ] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     sortParameters:= [ "add counter on categorizing", "yes" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     align:= "c",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     categoryValue:= value -&gt; BrowseData.ReplacedEntry( value,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ true, false ], [ "prime power", "not prime power" ] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum2, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "factors",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     name:= "Factors",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     viewLabel:= "factors",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     viewValue:= value -&gt; JoinStringsWithSeparator( List( value, String ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                                                    " * "),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     widthCol:= 10,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum2, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "residue mod 11",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     create:= function( attr, id ) return id mod 11; end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     viewSort:= BrowseData.SortAsIntegers,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     categoryValue:= res -&gt; Concatenation( String( res ), " mod 11" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum2, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "inverse factorial",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "pairs",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     data:= rec( automatic:= factorialdata( n ), nonautomatic:= [] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     isSorted:= true,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     categoryValue:= function( k )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       if k = "" then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         return "(no factorial)";</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         return Concatenation( String( k ), "!" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t2:= BrowseTableFromDatabaseIdEnumerator( smallintenum2,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          [ "self" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          [ "primes", "prime powers", "factors", "residue mod 11",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            "inverse factorial" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          t -&gt; BrowseData.HeaderWithRowCounter( t, "Small integers", n ) );;</span>
+</pre></div>
+
+<p>We run the same session as with the browse table for <code class="code">smallintenum1</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( sample_session );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.BrowseGeneric( t2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( false );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Unbind( t2.dynamic.replay );</span>
+</pre></div>
+
+<p>Another possibility to change the look of the table is to combine the columns for the two Boolean valued database attributes in one column, by showing the string <code class="code">"+"</code> for prime powers, as before, and showing this string in boldface red if the number in question is a prime. We implement this idea in the following database attribute. However, note that this can be a bad idea because text attributes may be not supported in the user's terminal (see Section <a href="chap2.html#X793D897483674294"><span class="RefLink">2.1-7</span></a>), or the user may have difficulties to see or to distinguish colors; also, it must be documented which information is encoded in the table, and the column label might be not sufficient for explaining what the text attributes mean. Alternatively, we could show for example combined symbols such as <code class="code">++</code>, <code class="code">+-</code>, <code class="code">--</code> for primes, prime powers, and non-prime-powers, respectively. (We see that besides these issues, the required <strong class="pkg">GAP</strong> code is more involved than what is needed for the examples above.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum2, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     identifier:= "primes &amp; prime powers",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     create:= function( attr, id )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       if   IsPrimeInt( id ) then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         return 2;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       elif IsPrimePowerInt( id ) then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         return 1;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         return 0;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     viewLabel:= [ NCurses.attrs.BOLD + NCurses.ColorAttr( "red", -1 ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   "prime", NCurses.attrs.NORMAL, " power?" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     viewValue:= value -&gt; BrowseData.ReplacedEntry( value,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 0, 1, 2 ], [ "-", "+",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                        [ NCurses.attrs.BOLD + NCurses.ColorAttr( "red", -1 ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                          true, "+",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                          NCurses.ColorAttr( "red", -1 ), false ] ] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     sortParameters:= [ "add counter on categorizing", "yes" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     align:= "c",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     categoryValue:= value -&gt; BrowseData.ReplacedEntry( value,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ 0, 1, 2 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         [ "not prime power", "prime power, not prime", "prime" ] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t3:= BrowseTableFromDatabaseIdEnumerator( smallintenum2,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          [ "self" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          [ "primes &amp; prime powers", "residue mod 11",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            "inverse factorial" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          t -&gt; BrowseData.HeaderWithRowCounter( t, "Small integers", n ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sample_session2:= Concatenation(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        # categorize by the first column, expand categories, wait, reset</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        nop, "scsc", nop, "X", nop, "!", "Q" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( sample_session2 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.BrowseGeneric( t3 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( false );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Unbind( t3.dynamic.replay );</span>
+</pre></div>
+
+<p>Now we want to consider the database as extendible, that is, we want to be able to increase <span class="SimpleMath">n</span> after constructing the database attributes. For that, we use <span class="SimpleMath">n</span> as the <code class="code">version</code> value of the database id enumerator, and provide <code class="code">version</code> and <code class="code">update</code> components for all attributes.</p>
+
+<p>Again, we start the construction from scratch.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">smallintenum3:= DatabaseIdEnumerator( rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    identifiers:= [ 1 .. n ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    entry:= function( dbidenum, id ) return id; end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    viewLabel:= "",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    version:= n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    update:= function( dbidenum )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        dbidenum.identifiers:= [ 1 .. n ];</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        dbidenum.version:= n;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        return true;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">updateByUnbindData:= function( attr )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     Unbind( attr.data );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     return true;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum3, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    identifier:= "primes",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    name:= "IsPrimeInt",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    viewLabel:= "prime?",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    viewValue:= value -&gt; BrowseData.ReplacedEntry( value,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [ true, false ], [ "+", "-" ] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    sortParameters:= [ "add counter on categorizing", "yes" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    align:= "c",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    categoryValue:= value -&gt; BrowseData.ReplacedEntry( value,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [ true, false ], [ "prime", "nonprime" ] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    version:= n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    update:= updateByUnbindData,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum3, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    identifier:= "prime powers",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    name:= "IsPrimePowerInt",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    viewLabel:= "prime power?",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    viewValue:= value -&gt; BrowseData.ReplacedEntry( value,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [ true, false ], [ "+", "-" ] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    sortParameters:= [ "add counter on categorizing", "yes" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    align:= "c",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    categoryValue:= value -&gt; BrowseData.ReplacedEntry( value,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [ true, false ], [ "prime power", "not prime power" ] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    version:= n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    update:= updateByUnbindData,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum3, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    identifier:= "factors",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    name:= "Factors",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    viewLabel:= "factors",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    viewValue:= value -&gt; JoinStringsWithSeparator( List( value, String ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                                                   " * "),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    widthCol:= 10,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    version:= n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    update:= updateByUnbindData,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum3, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    identifier:= "residue mod 11",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    type:= "values",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    create:= function( attr, id ) return id mod 11; end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    viewSort:= BrowseData.SortAsIntegers,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    categoryValue:= res -&gt; Concatenation( String( res ), " mod 11" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    version:= n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    update:= updateByUnbindData,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseAttributeAdd( smallintenum3, rec(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    identifier:= "inverse factorial",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    type:= "pairs",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    data:= rec( automatic:= factorialdata( n ), nonautomatic:= [] ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    isSorted:= true,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    categoryValue:= function( k )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      if k = "" then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        return "(no factorial)";</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        return Concatenation( String( k ), "!" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    version:= n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    update:= function( attr )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        attr.data.automatic:= factorialdata( n );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        return true;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      end,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    ) );</span>
+</pre></div>
+
+<p>Now we can change the set of database entries by assigning a new value to the variable <code class="code">n</code>, and then calling <code class="func">DatabaseIdEnumeratorUpdate</code> (<a href="chapA.html#X80A909727E3C8311"><span class="RefLink">A.1-7</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n:= 200;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DatabaseIdEnumeratorUpdate( smallintenum3 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t4:= BrowseTableFromDatabaseIdEnumerator( smallintenum3,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ "self" ], [ "primes", "prime powers", "factors", "residue mod 11",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "inverse factorial" ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  t -&gt; BrowseData.HeaderWithRowCounter( t, "Small integers", n ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( sample_session );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.BrowseGeneric( t4 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( false );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Unbind( t4.dynamic.replay );</span>
+</pre></div>
+
+<p><a id="X8628EF6981A524B3" name="X8628EF6981A524B3"></a></p>
+
+<h4>A.4 <span class="Heading">Example: An Overview of the <strong class="pkg">GAP</strong> Library of Tables of Marks
+</span></h4>
+
+<p>The example shown in this section deals with <strong class="pkg">GAP</strong>'s Library of Tables of Marks (the <strong class="pkg">TomLib</strong> package <a href="chapBib.html#biBTomLib">[NMP13]</a>).</p>
+
+<p><a id="X844D143980A0E20D" name="X844D143980A0E20D"></a></p>
+
+<h5>A.4-1 BrowseTomLibInfo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BrowseTomLibInfo</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing.</p>
+
+<p>This function shows the contents of the <strong class="pkg">GAP</strong> Library of Tables of Marks (the <strong class="pkg">TomLib</strong> package, see <a href="chapBib.html#biBTomLib">[NMP13]</a>) in a browse table.</p>
+
+<p>The first call may take substantial time (about <span class="SimpleMath">40</span> seconds), because the data files of the <strong class="pkg">TomLib</strong> package are evaluated. This could be improved by precomputing and caching the values. Another possibility would be to call <code class="func">BrowseTomLibInfo</code> once before creating a <strong class="pkg">GAP</strong> workspace. The subsequent calls are not expensive.</p>
+
+<p>The table rows correspond to the tables of marks, one column of row labels shows the identifier of the table. The columns of the table contain information about the group order, the number of conjugacy classes of subgroups, the identifiers of tables of marks with fusions to and from the given table, and the name of the file that contains the table of marks data.</p>
+
+<p>The full functionality of the function <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) is available.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c:= [ NCurses.keys.ENTER ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n:= [ 14, 14, 14 ];;  # ``do nothing''</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( Concatenation(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "scrrsc",   # categorize the list by source tables of fusions,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "srdd",     # choose a source table,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "x",        # expand the list of targets of fusions</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "!",        # revert the categorization</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "q",        # leave the mode in which a row is selected</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "scrrrrsc", # categorize the list by filenames</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "X",        # expand all categories</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "!",        # revert the categorization</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "scso",     # sort the list by group order</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "!q",       # revert the sorting and selection</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "?",        # open the help window</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "Q",        # close the help window</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "/A5", c,   # search for the first occurrence of "A5"</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       n,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "Q" ) );;   # and quit the browse table</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseTomLibInfo();</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( false );</span>
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

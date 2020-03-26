@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (PERMUT) - Chapter 5: Local Functions in the PERMUT Package</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X83F7986D84F33F6C" name="X83F7986D84F33F6C"></a></p>
+<div class="ChapSects"><a href="chap5.html#X83F7986D84F33F6C">5 <span class="Heading">Local Functions in the <strong class="pkg">PERMUT</strong> Package</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7E8389FD7DE9769C">5.1 <span class="Heading">A Local Function for Supersolubility</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B9F19A37F4A5B35">5.1-1 IsPSupersolvable</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7C4B2A9A7F2D7E0B">5.2 <span class="Heading">Local functions for T-groups, PT-groups, and PST-groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X780657F179FFB7EE">5.2-1 IsCp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82953B4878F88327">5.2-2 IsXp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8304885C78E4A584">5.2-3 IsYp</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X8540D4B679519F8B">5.3 <span class="Heading">Auxiliary Functions for T-groups, PT-groups, and PST-groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8775CAFD80D3FC02">5.3-1 IsAbCp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7A6372D3871E8E55">5.3-2 IsDedekindSylow</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X812C3A017F534CC0">5.3-3 IwasawaTripleWithSubgroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E86B21086879C48">5.3-4 IwasawaTriple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8121A92F7EABEA0C">5.3-5 IsIwasawaSylow</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Local Functions in the <strong class="pkg">PERMUT</strong> Package</span></h3>
+
+<p>In the study of permutability, the usage of local characterisations has become a useful tool to describe the classes of T-groups, PT-groups, and PST-groups. In this chapter we present some local characterisations of these classes and some functions which allow to check whether or not a group given in <strong class="pkg">GAP</strong> satisfies these conditions.</p>
+
+<p>A <em>local</em> description of group-theoretical property consists of expressing it as the conjunction of some properties depending on a prime <span class="SimpleMath">p</span>, usually related to the behaviour of <span class="SimpleMath">p</span>-elements, <span class="SimpleMath">p</span>-subgroups, or <span class="SimpleMath">p</span>-chief factors, for all primes <span class="SimpleMath">p</span>.</p>
+
+<p><a id="X7E8389FD7DE9769C" name="X7E8389FD7DE9769C"></a></p>
+
+<h4>5.1 <span class="Heading">A Local Function for Supersolubility</span></h4>
+
+<p>The <strong class="pkg">GAP</strong> library does not contain methods to check whether a group <span class="SimpleMath">G</span> is <span class="SimpleMath">p</span>-supersoluble, where <span class="SimpleMath">p</span> is a prime number. We include such a function in the <strong class="pkg">PERMUT</strong> package.</p>
+
+<p><a id="X7B9F19A37F4A5B35" name="X7B9F19A37F4A5B35"></a></p>
+
+<h5>5.1-1 IsPSupersolvable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPSupersolvable</code>( <var class="Arg">G</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPSupersoluble</code>( <var class="Arg">G</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function returns <code class="keyw">true</code> if the group <var class="Arg">G</var> is <span class="SimpleMath">p</span>-supersoluble, and <code class="keyw">false</code> otherwise, where <var class="Arg">p</var> is a prime number. This function is not defined in <strong class="pkg">GAP</strong>. The method we have implemented for finite groups includes checking whether the group is supersoluble (in this case, it must return <code class="keyw">true</code>). If the group is not soluble, it computes a chief series and checks whether all chief factors have order <span class="SimpleMath">p</span> or have order not divisible by <span class="SimpleMath">p</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=Group((1,2,3,4,5,6,7), (8,9,10,11,12,13,14), (15,16,17,18,19,20,21),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">(22,23,24,25,26,27,28), (29,30,31,32,33,34,35),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">(1,8,15,22,29)(2,9,16,23,30)(3,10,17,24,31)(4,11,18,25,32)(5,12,19,26,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    33)(6,13,20,27,34)(7,14,21,28,35),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">(1,8)(2,9)(3,10)(4,11)(5,12)(6,13)(7,14)); #C7 wr S5</span>
+&lt;permutation group with 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPSupersolvable(g,7);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPSupersolvable(g,11);</span>
+true
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=DirectProduct(PSL(2,7),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    Group((1,2,3,4,5,6,7,8,9,10,11), (2,5,6,10,4)(3,9,11,8,7)));</span>
+Group([ (3,7,5)(4,8,6), (1,2,6)(3,4,8), (9,10,11,12,13,14,15,16,17,18,19),
+  (10,13,14,18,12)(11,17,19,16,15) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPNilpotent(g,5);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPNilpotent(g,11);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPSupersolvable(g,11);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPNilpotent(g,3);</span>
+false
+</pre></div>
+
+<p><a id="X7C4B2A9A7F2D7E0B" name="X7C4B2A9A7F2D7E0B"></a></p>
+
+<h4>5.2 <span class="Heading">Local functions for T-groups, PT-groups, and PST-groups</span></h4>
+
+<p>The following functions correspond to local description of the classes of soluble T-groups, PT-groups, and PST-groups. Most of the known useful local characterisations of these classes of groups can be seen to be equivalent to one of them, either in the universe or all finite groups or in the universe of all finite <span class="SimpleMath">p</span>-soluble groups. By a local characterisation of a group-theoretical property <span class="SimpleMath">R</span> we mean a group-theoretical property <span class="SimpleMath">R_p</span> for each prime <span class="SimpleMath">p</span> such that a group satisfies <span class="SimpleMath">R</span> if and only if it satisfies <span class="SimpleMath">R_p</span> for all primes <span class="SimpleMath">p</span>.</p>
+
+<p><a id="X780657F179FFB7EE" name="X780657F179FFB7EE"></a></p>
+
+<h5>5.2-1 IsCp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCp</code>( <var class="Arg">G</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function returns <code class="keyw">true</code> if the group <var class="Arg">G</var> satisfies the property <span class="SimpleMath">C_p</span>, where <span class="SimpleMath">p</span> is a prime number, and <code class="keyw">false</code> otherwise.</p>
+
+<p>A group <span class="SimpleMath">G</span> satisfies <span class="SimpleMath">C_p</span> when every subgroup <span class="SimpleMath">H</span> of a Sylow <span class="SimpleMath">p</span>-subgroup <span class="SimpleMath">P</span> of <span class="SimpleMath">G</span> is normal in the corresponding Sylow normaliser <span class="SimpleMath">N_G(P)</span>. This property was introduced by Robinson in <a href="chapBib.html#biBRobinson68">[Rob68]</a>. A group <span class="SimpleMath">G</span> is a soluble PST-group if and only if it satisfies <span class="SimpleMath">C_p</span> for all primes <span class="SimpleMath">p</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=AlternatingGroup(5);</span>
+Alt( [ 1 .. 5 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCp(g,3);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCp(g,5);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCp(g,7);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCp(g,2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(200,44); # semidirect product of Q8 with C5xC5</span>
+&lt;pc group of size 200 with 5 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCp(g,5);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCp(g,2);</span>
+true
+</pre></div>
+
+<p><a id="X82953B4878F88327" name="X82953B4878F88327"></a></p>
+
+<h5>5.2-2 IsXp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsXp</code>( <var class="Arg">G</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function returns <code class="keyw">true</code> if <var class="Arg">G</var> satisfies <span class="SimpleMath">X_p</span>, where <span class="SimpleMath">p</span> is a prime, and <code class="keyw">false</code> otherwise.</p>
+
+<p>A group <span class="SimpleMath">G</span> satisfies <span class="SimpleMath">X_p</span> when for every subgroup <span class="SimpleMath">H</span> of a Sylow <span class="SimpleMath">p</span>-subgroup <span class="SimpleMath">P</span> of <span class="SimpleMath">G</span>, <span class="SimpleMath">H</span> is permutable in <span class="SimpleMath">N_G(P)</span>. This property was introduced by Beidleman, Brewster, and Robinson in <a href="chapBib.html#biBBeidlemanBrewsterRobinson99">[BBR99]</a>. A group <span class="SimpleMath">G</span> is a soluble PT-group if and only if <span class="SimpleMath">G</span> satisfies <span class="SimpleMath">X_p</span> for all primes <span class="SimpleMath">p</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(189,7);</span>
+&lt;pc group of size 189 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsXp(g,3);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsXp(g,7);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPTGroup(g);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCp(g,3);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsTGroup(g);</span>
+false
+</pre></div>
+
+<p><a id="X8304885C78E4A584" name="X8304885C78E4A584"></a></p>
+
+<h5>5.2-3 IsYp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsYp</code>( <var class="Arg">G</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function returns <code class="keyw">true</code> if <var class="Arg">G</var> satisfies <span class="SimpleMath">Y_p</span>, where <span class="SimpleMath">p</span> is a prime, and <code class="keyw">false</code> otherwise.</p>
+
+<p>A group <span class="SimpleMath">G</span> satisfies <span class="SimpleMath">Y_p</span> when for every two subgroups <span class="SimpleMath">H</span> and <span class="SimpleMath">K</span> with <span class="SimpleMath">H≤ K</span>, <span class="SimpleMath">H</span> is S-permutable in <span class="SimpleMath">N_G(P)</span>. This property was introduced by Ballester-Bolinches and Esteban-Romero in <a href="chapBib.html#biBBallesterEsteban02-sylper1">[BBER02]</a>. A group <span class="SimpleMath">G</span> is a soluble PST-group if and only if <span class="SimpleMath">G</span> satisfies <span class="SimpleMath">Y_p</span> for all primes <span class="SimpleMath">p</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(200,43); # semidirect product of D8 with C5xC5</span>
+&lt;pc group of size 200 with 5 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCp(g,2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsXp(g,2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsYp(g,2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=Group((1,2,3)(4,5,6),(1,2));</span>
+Group([ (1,2,3)(4,5,6), (1,2) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsYp(g,3);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsYp(g,2);</span>
+true
+</pre></div>
+
+<p><a id="X8540D4B679519F8B" name="X8540D4B679519F8B"></a></p>
+
+<h4>5.3 <span class="Heading">Auxiliary Functions for T-groups, PT-groups, and PST-groups</span></h4>
+
+<p>The following functions are used to check whether or not a group is a soluble T-group, PT-group, or PST-group.</p>
+
+<p><a id="X8775CAFD80D3FC02" name="X8775CAFD80D3FC02"></a></p>
+
+<h5>5.3-1 IsAbCp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAbCp</code>( <var class="Arg">G</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function returns <code class="keyw">true</code> if <var class="Arg">G</var> has an abelian Sylow <var class="Arg">p</var>-subgroup <var class="Arg">p</var> such that every subgroup of <span class="SimpleMath">P</span> is normal in the Sylow normaliser <span class="SimpleMath">N_G(P)</span>, and <code class="keyw">false</code> otherwise.</p>
+
+<p>This function is used to characterise soluble PST-groups: a group <span class="SimpleMath">G</span> is a soluble PST-group if and only if <span class="SimpleMath">G</span> satisfies <span class="SimpleMath">Y_p</span> for all primes <span class="SimpleMath">p</span>, and a group <span class="SimpleMath">G</span> satisfies <span class="SimpleMath">Y_p</span> if and only if <span class="SimpleMath">G</span> is <span class="SimpleMath">p</span>-nilpotent or <span class="SimpleMath">G</span> has an abelian Sylow <span class="SimpleMath">p</span>-subgroup and satisfies <span class="SimpleMath">C_p</span>. A group <span class="SimpleMath">G</span> satisfies <span class="SimpleMath">C_p</span> if and only if every subgroup of a Sylow <span class="SimpleMath">p</span>-subgroup <span class="SimpleMath">P</span> of <span class="SimpleMath">G</span> is normal in the Sylow normaliser <span class="SimpleMath">N_G(P)</span>. Therefore this function checks whether <span class="SimpleMath">G</span> has an abelian Sylow <span class="SimpleMath">p</span>-subgroup and <span class="SimpleMath">G</span> satisfies <span class="SimpleMath">C_p</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=AlternatingGroup(5);</span>
+Alt( [ 1 .. 5 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAbCp(g,5);</span>
+true
+</pre></div>
+
+<p><a id="X7A6372D3871E8E55" name="X7A6372D3871E8E55"></a></p>
+
+<h5>5.3-2 IsDedekindSylow</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDedekindSylow</code>( <var class="Arg">G</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function returns <code class="keyw">true</code> if a Sylow <var class="Arg">p</var>-subgroup of <var class="Arg">G</var> is Dedekind, else it returns <code class="keyw">false</code>.</p>
+
+<p>A group <span class="SimpleMath">G</span> is Dedekind when every subgroup of <span class="SimpleMath">G</span> is normal. If <span class="SimpleMath">p</span> is a prime, a Dedekind <span class="SimpleMath">p</span>-group (see for example 2.3.12 in <a href="chapBib.html#biBSchmidt94">[Sch94]</a>) is abelian or a direct product of a quaternion group of order <span class="SimpleMath">8</span> and an elementary abelian <span class="SimpleMath">2</span>-group. Obviously, a <span class="SimpleMath">p</span>-group is Dedekind if and only if it is a T-group.</p>
+
+<p>The algorithm used in this function to test whether a non-abelian <span class="SimpleMath">2</span>-group satisfies this condition checks that the Frattini subgroup of a Sylow <span class="SimpleMath">2</span>-subgroup <span class="SimpleMath">P</span> of <span class="SimpleMath">G</span> has order <span class="SimpleMath">2</span> and that the centre of <span class="SimpleMath">P</span> has exponent <span class="SimpleMath">2</span> and index <span class="SimpleMath">4</span>. In this case, it computes the natural epimorphism from <span class="SimpleMath">P</span> to <span class="SimpleMath">P/Z(P)</span> and it checks that the preimages of the generators of <span class="SimpleMath">P/Z(P)</span> under the natural epimorphism have order <span class="SimpleMath">4</span>. If all these conditions hold, then the Sylow <span class="SimpleMath">2</span>-subgroup is Dedekind, otherwise it is not.</p>
+
+<p>This function tries to set the property <code class="func">IsTGroup</code> (<a href="chap4.html#X7930E5AD817BE4B3"><span class="RefLink">4.2-1</span></a>) to <code class="keyw">true</code> or <code class="keyw">false</code> for the Sylow <span class="SimpleMath">p</span>-subgroup.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=DirectProduct(SmallGroup(8,4),CyclicGroup(5));</span>
+&lt;pc group of size 40 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDedekindSylow(g,2);</span>
+true
+</pre></div>
+
+<p><a id="X812C3A017F534CC0" name="X812C3A017F534CC0"></a></p>
+
+<h5>5.3-3 IwasawaTripleWithSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IwasawaTripleWithSubgroup</code>( <var class="Arg">G</var>, <var class="Arg">X</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function returns an Iwasawa triple for a <var class="Arg">p</var>-group <var class="Arg">G</var> such that <var class="Arg">X</var> is a member of it, if such a triple exists, and <code class="keyw">fail</code> otherwise. This function is used as an auxiliary function to compute an Iwasawa triple for a group <var class="Arg">G</var>.</p>
+
+<p>An Iwasawa triple for a <span class="SimpleMath">p</span>-group <span class="SimpleMath">G</span> is a triple <span class="SimpleMath">(X,b,s)</span> such that <span class="SimpleMath">X</span> is an abelian normal subgroup of <span class="SimpleMath">G</span> with cyclic quotient, <span class="SimpleMath">b</span> is a generator of a supplement to <span class="SimpleMath">X</span> in <span class="SimpleMath">G</span>, and <span class="SimpleMath">b</span> induces a power automorphism in <span class="SimpleMath">X</span> of the form <span class="SimpleMath">x-&gt; x^1+p^s</span>. A theorem of Iwasawa states that a <span class="SimpleMath">p</span>-group <span class="SimpleMath">G</span> has a modular subgroup lattice (or, equivalently, <span class="SimpleMath">G</span> has all subgroups permutable) if and only if <span class="SimpleMath">G</span> is a direct product of a quaternion group of order <span class="SimpleMath">8</span> and an elementary abelian <span class="SimpleMath">2</span>-group or <span class="SimpleMath">G</span> has an Iwasawa triple <span class="SimpleMath">(X,b,s)</span> with <span class="SimpleMath">s ≥ 2</span>.</p>
+
+<p>The construction of the Iwasawa triple takes a generator <span class="SimpleMath">b</span> of a cyclic supplement to <span class="SimpleMath">X</span> in <span class="SimpleMath">G</span>. Then we consider a generator <span class="SimpleMath">a</span> of <span class="SimpleMath">X</span> of the largest possible order and find an element <span class="SimpleMath">c</span> of <span class="SimpleMath">⟨ b ⟩</span> and an element <span class="SimpleMath">s</span> such that <span class="SimpleMath">a^c = a^1+p^s</span>. If such an element does not exist, the function returns <code class="keyw">fail</code>. For this element, it checks whether for all generators <span class="SimpleMath">t</span> of <span class="SimpleMath">X</span>, the equality <span class="SimpleMath">t^c = t^1+p^s</span> holds. If this holds, it returns the triple <span class="SimpleMath">(X, c, s)</span>; otherwise it returns <code class="keyw">fail</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e:=ExtraspecialGroup(27,9);</span>
+&lt;pc group of size 27 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IwasawaTripleWithSubgroup(e,Subgroup(e,[e.1,e.3]),3);</span>
+[ Group([ f1, f3 ]), f2, 1 ]
+</pre></div>
+
+<p><a id="X7E86B21086879C48" name="X7E86B21086879C48"></a></p>
+
+<h5>5.3-4 IwasawaTriple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IwasawaTriple</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This function computes an Iwasawa triple for the <span class="SimpleMath">p</span>-group <var class="Arg">G</var>, if it exists. If <var class="Arg">G</var> is not Iwasawa, the function returns <code class="keyw">fail</code>. If <var class="Arg">G</var> is a direct product of an elementary abelian <span class="SimpleMath">2</span>-group and a quaternion group of order <span class="SimpleMath">8</span>, it returns an empty list. If <var class="Arg">G</var> is Iwasawa, then the function returns an Iwasawa triple for <var class="Arg">G</var>. An Iwasawa triple for a group <var class="Arg">G</var> is a triple <span class="SimpleMath">(X, b, s)</span> where <span class="SimpleMath">X</span> is an abelian normal subgroup of <span class="SimpleMath">G</span> such that <span class="SimpleMath">G/X</span> is cyclic, <span class="SimpleMath">b</span> is a generator of a cyclic supplement to <span class="SimpleMath">X</span> in <span class="SimpleMath">G</span>, and <span class="SimpleMath">s</span> is an integer such that for all <span class="SimpleMath">x ∈ X</span>, <span class="SimpleMath">x^b = x^1+p^s</span>. A theorem of Iwasawa states that a <span class="SimpleMath">p</span>-group <span class="SimpleMath">G</span> has a modular subgroup lattice (or, equivalently, <span class="SimpleMath">G</span> has all subgroups permutable) if and only if <span class="SimpleMath">G</span> is a direct product of an elementary abelian <span class="SimpleMath">2</span>-group and a quaternion group of order <span class="SimpleMath">8</span> or <span class="SimpleMath">G</span> has an Iwasawa triple <span class="SimpleMath">(X,b,s)</span> with <span class="SimpleMath">s ≥ 2</span> if <span class="SimpleMath">p = 2</span>.</p>
+
+<p>The method followed to find an Iwasawa triple for non-abelian non-Dedekind groups begins with the whole group <span class="SimpleMath">G</span>. If the group is abelian, it returns the Iwasawa triple <span class="SimpleMath">(G,1,log_pexp(G))</span>. If it is not abelian, it constructs a list <span class="SimpleMath">l</span> formed by <span class="SimpleMath">G</span>. For every element <span class="SimpleMath">N</span> of <span class="SimpleMath">l</span>, it takes the maximal subgroups of <span class="SimpleMath">N</span> which are normal in <span class="SimpleMath">G</span> and give cyclic quotient. If any of these subgroups is a member of an Iwasawa triple, it is computed with the function <code class="func">IwasawaTripleWithSubgroup</code> (<a href="chap5.html#X812C3A017F534CC0"><span class="RefLink">5.3-3</span></a>) and the value is returned. If not, <span class="SimpleMath">N</span> is removed from the <span class="SimpleMath">l</span> and these maximal subgroups of <span class="SimpleMath">N</span> are added to <span class="SimpleMath">l</span>. This follows until an Iwasawa triple is found or the list <span class="SimpleMath">l</span> is empty. Since normal subgroups with cyclic quotient are contained in a unique maximal chain, no subgroup appears twice in this algorithm.</p>
+
+<p>The algorithm also takes into account the fact that a Iwasawa group of exponent <span class="SimpleMath">4</span> must be abelian or a direct product of a quaternion group of order <span class="SimpleMath">8</span> and an elementary abelian <span class="SimpleMath">2</span>-group.</p>
+
+<p>For the trivial group, it returns the triple composed by the trivial group, its identity element, and the prime <span class="SimpleMath">3</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e:=ExtraspecialGroup(27,3);</span>
+&lt;pc group of size 27 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IwasawaTriple(e);</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e:=ExtraspecialGroup(27,9);</span>
+&lt;pc group of size 27 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IwasawaTriple(e);</span>
+[ Group([ f1, f3 ]), f2, 1 ]
+</pre></div>
+
+<p><a id="X8121A92F7EABEA0C" name="X8121A92F7EABEA0C"></a></p>
+
+<h5>5.3-5 IsIwasawaSylow</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIwasawaSylow</code>( <var class="Arg">G</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function returns <code class="keyw">true</code> if <var class="Arg">G</var> has an Iwasawa (modular) Sylow <var class="Arg">p</var>-subgroup, and <code class="keyw">false</code> otherwise.</p>
+
+<p>Recall that a <span class="SimpleMath">p</span>-group <span class="SimpleMath">P</span> has a modular subgroup lattice, or is an Iwasawa group, when all subgroups of <span class="SimpleMath">P</span> are permutable. It is clear that a <span class="SimpleMath">p</span>-group has a modular subgroup lattice if and only if it is a T-group.</p>
+
+<p>The implementation of this function begins by searching for a pair of subgroups that do not permute. In this case, the function returns <code class="keyw">false</code>. The maximum number of pairs to be checked here is controlled by the variable <code class="func">PermutMaxTries</code> (<a href="chap3.html#X85CFBEBB83245E3A"><span class="RefLink">3.2-1</span></a>), which is assigned to <span class="SimpleMath">10</span> by default. If no such pair is found, the algorithm looks for an Iwasawa triple for a Sylow <span class="SimpleMath">p</span>-subgroup <span class="SimpleMath">P</span> of <span class="SimpleMath">G</span>. If there exists one such triple <span class="SimpleMath">(X,b,s)</span> with <span class="SimpleMath">s ≥ 2</span> when <span class="SimpleMath">p = 2</span> or the group is a direct product of a quaternion group of order <span class="SimpleMath">8</span> and an elementary abelian <span class="SimpleMath">2</span>-group, then it returns <code class="keyw">true</code>; else it returns <code class="keyw">false</code>.</p>
+
+<p>The values of the attributes <code class="func">IsPTGroup</code> (<a href="chap4.html#X7CF2634F84EC572B"><span class="RefLink">4.2-2</span></a>) and <code class="func">IsTGroup</code> (<a href="chap4.html#X7930E5AD817BE4B3"><span class="RefLink">4.2-1</span></a>) for <span class="SimpleMath">P</span> are set by the function.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e:=ExtraspecialGroup(27,9);</span>
+&lt;pc group of size 27 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIwasawaSylow(e,3);</span>
+true
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

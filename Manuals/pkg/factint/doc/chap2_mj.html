@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (FactInt) - Chapter 2: The General Factorization Routine</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X7B1A84BB788FC526" name="X7B1A84BB788FC526"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X7B1A84BB788FC526">2 <span class="Heading">The General Factorization Routine</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X83BF2CD28017ABC5">2.1 <span class="Heading">The method for <code class="code">Factors</code></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X833B087D7A83BC7A">2.1-1 Factors</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X866CD23D78460060">2.1-2 FactInt</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X80EB87DD80462F80">2.2 <span class="Heading">Getting information about the factoring process</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8093BB787C2E764B">2.2-1 InfoFactInt</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">The General Factorization Routine</span></h3>
+
+<p><a id="X83BF2CD28017ABC5" name="X83BF2CD28017ABC5"></a></p>
+
+<h4>2.1 <span class="Heading">The method for <code class="code">Factors</code></span></h4>
+
+<p>The <strong class="pkg">FactInt</strong> package provides a better method for the operation <code class="code">Factors</code> for integer arguments, which supersedes the one included in the <strong class="pkg">GAP</strong> Library:</p>
+
+<p><a id="X833B087D7A83BC7A" name="X833B087D7A83BC7A"></a></p>
+
+<h5>2.1-1 Factors</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Factors</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a sorted list of the prime factors of <var class="Arg">n</var>.</p>
+
+<p>The returned factors pass the built-in probabilistic primality test of <strong class="pkg">GAP</strong> (<code class="code">IsProbablyPrimeInt</code>, Baillie-PSW Primality Test; see the <strong class="pkg">GAP</strong> Reference Manual). If the method fails to compute the prime factorization of <var class="Arg">n</var>, an error is signalled. The same holds for all other factorization routines provided by this package. It follows a rough description how the factorization method works:</p>
+
+<p>First of all, the method checks whether <span class="SimpleMath">\(n = b^k \pm 1\)</span> for some <span class="SimpleMath">\(b\)</span>, <span class="SimpleMath">\(k\)</span> and looks for factors corresponding to polynomial factors of <span class="SimpleMath">\(x^k \pm 1\)</span>. Provided that <span class="SimpleMath">\(b\)</span> and <span class="SimpleMath">\(k\)</span> are not too large, the factors that do not correspond to polynomial factors are taken from Richard P. Brent's Factor Tables <a href="chapBib_mj.html#biBBrent04">[Bre04]</a>. The code for accessing these tables has been contributed by Frank Lübeck.</p>
+
+<p>Then the method uses trial division and a number of cheap methods for various common special cases. After the small and other "easy" factors have been found this way, <strong class="pkg">FactInt</strong>'s method searches for "medium-sized" factors using Pollard's Rho (by the library function <code class="code">FactorsRho</code>, see the <strong class="pkg">GAP</strong> Reference Manual), Pollard's <span class="SimpleMath">\(p-1\)</span> (see <code class="func">FactorsPminus1</code> (<a href="chap3_mj.html#X7AF95E2E87F58200"><span class="RefLink">3.2-1</span></a>)), Williams' <span class="SimpleMath">\(p+1\)</span> (see <code class="func">FactorsPplus1</code> (<a href="chap3_mj.html#X8079A0367DE4FC35"><span class="RefLink">3.3-1</span></a>)) and the Elliptic Curves Method (ECM, see <code class="func">FactorsECM</code> (<a href="chap3_mj.html#X87B162F878AD031C"><span class="RefLink">3.4-1</span></a>)) in this order.</p>
+
+<p>If there is still an unfactored part remaining after that, it is factored using the Multiple Polynomial Quadratic Sieve (MPQS, see <code class="func">FactorsMPQS</code> (<a href="chap3_mj.html#X86F8DFB681442E05"><span class="RefLink">3.6-1</span></a>)).</p>
+
+<p>The following options are interpreted:</p>
+
+
+<dl>
+<dt><strong class="Mark"><var class="Arg">TDHints</var></strong></dt>
+<dd><p>A list of additional trial divisors. This is useful only if certain primes <span class="SimpleMath">\(p\)</span> are expected to divide <span class="SimpleMath">\(n\)</span> with probability significantly larger than <span class="SimpleMath">\(\frac{1}{p}\)</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><var class="Arg">RhoSteps</var></strong></dt>
+<dd><p>The number of steps for Pollard's Rho.</p>
+
+</dd>
+<dt><strong class="Mark"><var class="Arg">RhoCluster</var></strong></dt>
+<dd><p>The number of steps between two gcd computations in Pollard's Rho.</p>
+
+</dd>
+<dt><strong class="Mark"><var class="Arg">Pminus1Limit1</var> / <var class="Arg">Pminus1Limit2</var></strong></dt>
+<dd><p>The first- / second stage limit for Pollard's <span class="SimpleMath">\(p-1\)</span> (see <code class="func">FactorsPminus1</code> (<a href="chap3_mj.html#X7AF95E2E87F58200"><span class="RefLink">3.2-1</span></a>)).</p>
+
+</dd>
+<dt><strong class="Mark"><var class="Arg">Pplus1Residues</var></strong></dt>
+<dd><p>The number of residues to be tried by Williams' <span class="SimpleMath">\(p+1\)</span> (see <code class="func">FactorsPplus1</code> (<a href="chap3_mj.html#X8079A0367DE4FC35"><span class="RefLink">3.3-1</span></a>)).</p>
+
+</dd>
+<dt><strong class="Mark"><var class="Arg">Pplus1Limit1</var> / <var class="Arg">Pplus1Limit2</var></strong></dt>
+<dd><p>The first- / second stage limit for Williams' <span class="SimpleMath">\(p+1\)</span> (see <code class="func">FactorsPplus1</code> (<a href="chap3_mj.html#X8079A0367DE4FC35"><span class="RefLink">3.3-1</span></a>)).</p>
+
+</dd>
+<dt><strong class="Mark"><var class="Arg">ECMCurves</var></strong></dt>
+<dd><p>The number of elliptic curves to be tried by the Elliptic Curves Method (ECM) (see <code class="func">FactorsECM</code> (<a href="chap3_mj.html#X87B162F878AD031C"><span class="RefLink">3.4-1</span></a>)). Also admissible: a function that takes the number <span class="SimpleMath">\(n\)</span> to be factored as an argument and returns the desired number of curves to be tried.</p>
+
+</dd>
+<dt><strong class="Mark"><var class="Arg">ECMLimit1</var> / <var class="Arg">ECMLimit2</var></strong></dt>
+<dd><p>The initial first- / second stage limit for ECM (see <code class="func">FactorsECM</code> (<a href="chap3_mj.html#X87B162F878AD031C"><span class="RefLink">3.4-1</span></a>)).</p>
+
+</dd>
+<dt><strong class="Mark"><var class="Arg">ECMDelta</var></strong></dt>
+<dd><p>The increment per curve for the first stage limit in ECM. The second stage limit is adjusted appropriately (see <code class="func">FactorsECM</code> (<a href="chap3_mj.html#X87B162F878AD031C"><span class="RefLink">3.4-1</span></a>)).</p>
+
+</dd>
+<dt><strong class="Mark"><var class="Arg">ECMDeterministic</var></strong></dt>
+<dd><p>If true, ECM chooses its curves deterministically, i.e. repeatable (see <code class="func">FactorsECM</code> (<a href="chap3_mj.html#X87B162F878AD031C"><span class="RefLink">3.4-1</span></a>)).</p>
+
+</dd>
+<dt><strong class="Mark"><var class="Arg">FBMethod</var></strong></dt>
+<dd><p>Specifies which of the factor base methods should be used to do the "hard work". Currently implemented: <code class="code">"CFRAC"</code> and <code class="code">"MPQS"</code> (see <code class="func">FactorsCFRAC</code> (<a href="chap3_mj.html#X7A5C8BC5861CFC8C"><span class="RefLink">3.5-1</span></a>) and <code class="func">FactorsMPQS</code> (<a href="chap3_mj.html#X86F8DFB681442E05"><span class="RefLink">3.6-1</span></a>), respectively). Default: <code class="code">"MPQS"</code>.</p>
+
+</dd>
+</dl>
+<p>For the use of the <strong class="pkg">GAP</strong> Options Stack, see Chapter <em>Options Stack</em> in the <strong class="pkg">GAP</strong> Reference Manual.</p>
+
+<p>Setting <var class="Arg">RhoSteps</var>, <var class="Arg">Pminus1Limit1</var>, <var class="Arg">Pplus1Residues</var>, <var class="Arg">Pplus1Limit1</var>, <var class="Arg">ECMCurves</var> or <var class="Arg">ECMLimit1</var> equal to zero switches the respective method off. The method chooses defaults for all option values that are not explicitly set by the user. The option values are also interpreted by the routines for the particular factorization methods described in the next chapter.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Factors( Factorial(44) + 1 );</span>
+[ 694763, 9245226412016162109253, 413852053257739876455072359 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Factors( 2^997 - 1 );</span>
+[ 167560816514084819488737767976263150405095191554732902607, 
+  79934306053602222928609369601238840619880168466272137576868879760059\
+3002563860297371289151859287894468775962208410650878341385577817736702\
+2158878920741413700868182301410439178049533828082651513160945607018874\
+830040978453228378816647358334681553 ]
+
+</pre></div>
+
+<p>The above method for <code class="code">Factors</code> calls the following function, which is the actual "working horse" of this package:</p>
+
+<p><a id="X866CD23D78460060" name="X866CD23D78460060"></a></p>
+
+<h5>2.1-2 FactInt</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FactInt</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of two lists, where the first list contains the determined prime factors of <var class="Arg">n</var> and the second list contains the remaining unfactored parts of <var class="Arg">n</var>, if there are any.</p>
+
+<p>This function interprets all options which are interpreted by the method for <code class="code">Factors</code> described above. In addition, it interprets the options <var class="Arg">cheap</var> and <var class="Arg">FactIntPartial</var>. If the option <var class="Arg">cheap</var> is set, only usually cheap factorization attempts are made. If the option <var class="Arg">FactIntPartial</var> is set, the factorization process is stopped before invoking the (usually time-consuming) MPQS or CFRAC, if the number of digits of the remaining unfactored part exceeds the bound passed as option value <var class="Arg">MPQSLimit</var> or <var class="Arg">CFRACLimit</var>, respectively.</p>
+
+<p><code class="code">Factors(<var class="Arg">n</var>)</code> is equivalent to <code class="code">FactInt(<var class="Arg">n</var>:<var class="Arg">cheap</var>:=false, <var class="Arg">FactIntPartial</var>:=false)[1]</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FactInt( Factorial(300) + 1 : cheap );</span>
+[ [ 461, 259856122109, 995121825812791, 3909669044842609, 
+      4220826953750952739, 14841043839896940772689086214475144339 ], 
+  [ 104831288231765723173983836560438594053336296629073932563520618687\
+9287645058010688827246061541065631119345674081834085960064144597037243\
+9235869682208979384309498719255615067943353399357029226058930732298505\
+5816977495398426741656633461747046623641451042655247093315505417820370\
+9451745871701742000546384614472756584182478531880962594857275869690727\
+9733563594352516014206081210368516157890709802912711149521530885498556\
+1244667790208245620301404499928532222524585946881528337257061789593197\
+99211283640357942345263781351 ] ]
+
+</pre></div>
+
+<p><a id="X80EB87DD80462F80" name="X80EB87DD80462F80"></a></p>
+
+<h4>2.2 <span class="Heading">Getting information about the factoring process</span></h4>
+
+<p>Optionally, the <strong class="pkg">FactInt</strong> package prints information on the progress of the factorization process:</p>
+
+<p><a id="X8093BB787C2E764B" name="X8093BB787C2E764B"></a></p>
+
+<h5>2.2-1 InfoFactInt</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoFactInt</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FactIntInfo</code>( <var class="Arg">level</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This Info class allows to monitor what happens during the factoring process.</p>
+
+<p>If <code class="code">InfoLevel(InfoFactInt) = 1</code>, then basic information about the factoring techniques used is displayed. If this InfoLevel has value 2, then additionally all "relevant" steps in the factoring algorithms are mentioned. If it is set equal to 3, then large amounts of details of the progress of the factoring process are shown.</p>
+
+<p>Enter <code class="code">FactIntInfo(<var class="Arg">level</var>)</code> to set the <code class="code">InfoLevel</code> of <code class="code">InfoFactInt</code> to the positive integer <var class="Arg">level</var>. The call <code class="code">FactIntInfo(<var class="Arg">level</var>);</code> is equivalent to <code class="code">SetInfoLevel(InfoFactInt,<var class="Arg">level</var>);</code>.</p>
+
+<p>The informational output is usually not literally the same in each factorization attempt to a given integer with given parameters. For a description of the Info mechanism, see Section <em>Info Functions</em> in the <strong class="pkg">GAP</strong> Reference Manual.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

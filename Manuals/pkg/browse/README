@@ -1,0 +1,113 @@
+           README file for the "Browse" GAP4 package by
+                  Thomas Breuer and Frank Lübeck
+
+The newest version of "Browse" is usually contained in the current GAP
+distribution, see
+   http://www.gap-system.org/Download/
+
+To fetch another version follow the hints under "Fetching Browse Separately"
+below.
+
+Installation
+------------
+
+After unpacking the code of "Browse" the installation must be finished
+by compiling  a  module which can be loaded by the GAP kernel. 
+(The Windows distributions of GAP already contain this compiled module,
+nothing needs to be done on those machines.)
+
+To compile the kernel module you need:
+ - a C-compiler
+ - header files for the GNU "ncurses" library
+   (http://www.gnu.org/software/ncurses/ncurses.html)
+ - an already configured and compiled GAP kernel
+
+On most Linux/UNIX machines the ncurses library is installed, but maybe not 
+the header files to compile applications that use ncurses. 
+
+On Debian based Linux machines (Debian/Ubuntu/Mint/....) install (as root) 
+  apt-get install libncurses5-dev libncursesw5-dev 
+and on 64-bit systems maybe also 
+  apt-get install lib32ncurses5-dev lib32ncursesw5-dev
+
+On many rpm-based systems you can install 
+  ncurses-devel ncurses-devel-32bit
+or some similarly named packages with your usual package manager.
+
+Once the header files are available, installation should be easy as follows:
+
+./configure
+make
+
+If Browse is not installed inside the pkg/Browse directory of your GAP
+installation, use 
+
+./configure /path/to/your/GAP
+make
+
+instead.
+
+If you have compiled several GAP kernels using the CONFIGNAME variable
+you can also use it to compile Browse kernel modules for all of them by
+several calls of 
+
+./configure CONFIGNAME=...
+make
+
+The make command takes into account environment variables CFLAGS and LOPTS if 
+you want to specify extra C compiler options or different compiler options
+(the default is CFLAGS=""  and LOPTS="-lpanel -lncurses"), e.g. if your
+header files are not in a standard location.
+
+If you don't have ncurses header files in standard paths (or maybe you don't
+have root access to your machine), you can also compile ncurses yourself
+before compiling the Browse kernel module. 
+(The source code is here: http://ftp.gnu.org/pub/gnu/ncurses/)
+
+Recompiling the  documentation is possible  by the command 'make  manual' in
+the Browse  directory (you  need '(pdf)latex' and  the 'netpbm'  tools). But
+this should not be necessary.
+
+After installation you can load this package into your GAP session with:
+
+  gap> LoadPackage("Browse");
+
+To get an impression of the display capabilities of the package you can run 
+a demo:
+  
+  gap> NCurses.Demo();
+  
+E-mail us  if you have any  questions, remarks, suggestions. Also,  we would
+like to hear about applications of this package.
+
+
+
+Fetching Browse Separately
+--------------------------
+
+To get the newest version of this  GAP 4 package download one of the archive
+files (where 'x.y' stands for the highest available version number)
+    Browse-x.y.tar.gz
+    Browse-x.y.zoo
+    Browse-x.y.tar.bz2
+    Browse-x.y-win.zip      (with text files in DOS/Windows format)
+from http://www.math.rwth-aachen.de/~Browse (or from www.gap-system.org)
+and unpack it using 
+    gunzip Browse-x.y.tar.gz; tar xvf Browse-x.y.tar
+respectively
+    unzoo -x Browse-x.y.zoo
+and so on.
+
+Note that  if you use  a web browser for  downloading the archive  file the
+'gunzip' step above may already be done by the browser, although the name of
+your file may still have the misleading '.gz' extension.
+
+The  unpacking is  done preferably  (but not  necessarily) inside  the 'pkg'
+subdirectory of  your GAP 4  installation. It creates a  subdirectory called
+'Browse'.
+
+
+
+                            Thomas Breuer (Thomas.Breuer@Math.RWTH-Aachen.De)
+                            Frank Lübeck  (Frank.Luebeck@Math.RWTH-Aachen.De)
+

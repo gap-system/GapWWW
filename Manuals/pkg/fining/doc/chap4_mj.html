@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (FinInG) - Chapter 4: Projective Spaces</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
+<p><a id="X83BBAA668672A76D" name="X83BBAA668672A76D"></a></p>
+<div class="ChapSects"><a href="chap4_mj.html#X83BBAA668672A76D">4 <span class="Heading">Projective Spaces</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7862BC887D20B37A">4.1 <span class="Heading">Projective Spaces and basic operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X79B440FF7EFBA661">4.1-1 IsProjectiveSpace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7962DA507C64FCBA">4.1-2 ProjectiveSpace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X84FDF25D797B874B">4.1-3 ProjectiveDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7BCBA564829D9E89">4.1-4 BaseField</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7D544D7985A4572D">4.1-5 UnderlyingVectorSpace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8606750A8586DF8D">4.1-6 AmbientSpace</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X8016E6857D53F2ED">4.2 <span class="Heading">Subspaces of projective spaces</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X82E9593B8074AECB">4.2-1 VectorSpaceToElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8461BCEF862B9A7B">4.2-2 EmptySubspace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X84FDF25D797B874B">4.2-3 ProjectiveDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X87657AEF7E2C50F9">4.2-4 ElementsOfIncidenceStructure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X87E64DA67C3D6661">4.2-5 <span class="Heading">Short names for ElementsOfIncidenceStructure</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7904128479BDFCC9">4.2-6 <span class="Heading">Incidence and containment</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X870D9D9A7F11806F">4.2-7 StandardFrame</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X84E3985A8700B302">4.2-8 Coordinates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7CE4FD76820B503A">4.2-9 DualCoordinatesOfHyperplane</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X86628227863989E5">4.2-10 HyperplaneByDualCoordinates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X801A95907B13F447">4.2-11 EquationOfHyperplane</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8606750A8586DF8D">4.2-12 AmbientSpace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7BCBA564829D9E89">4.2-13 BaseField</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X79730D657AB219DB">4.2-14 Random</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7D3C5D3B7AA4DE28">4.2-15 RandomSubspace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X875BE2957FAF6209">4.2-16 Span</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8469B54180FE1E4C">4.2-17 Meet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E204A78815C46DD">4.2-18 FlagOfIncidenceStructure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7AEFC2C57F10C3A7">4.2-19 IsEmptyFlag</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7A453E0E861F2C94">4.2-20 IsChamberOfIncidenceStructure</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7BD8312C85784503">4.3 <span class="Heading">Shadows of Projective Subspaces</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7FFA08DA85C5251C">4.3-1 ShadowOfElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E86E6417871730C">4.3-2 ShadowOfFlag</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X81A8365A7FE68447">4.3-3 ElementsIncidentWithElementOfIncidenceStructure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E29C31D7CB5DB23">4.3-4 <span class="Heading">Short names for <code class="file">ElementsIncidentWithElementOfIncidenceStructure</code></span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X799F3A2A86F82E5B">4.4 <span class="Heading">Enumerating subspaces of a projective space</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X83ADF8287ED0668E">4.4-1 Iterator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7EF8910F82B45EC7">4.4-2 Enumerator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7EBA57FC7CCF8449">4.4-3 List</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Projective Spaces</span></h3>
+
+<p>In this chapter we describe how to use <strong class="pkg">FinInG</strong> to work with finite projective spaces.</p>
+
+<p><a id="X7862BC887D20B37A" name="X7862BC887D20B37A"></a></p>
+
+<h4>4.1 <span class="Heading">Projective Spaces and basic operations</span></h4>
+
+<p>A <em>projective space</em> is a point-line incidence geometry, satisfying a few well known axioms. An axiomatic treatment can be found in <a href="chapBib_mj.html#biBVY65a">[VY65a]</a> and <a href="chapBib_mj.html#biBVY65b">[VY65b]</a>. In <strong class="pkg">FinInG</strong>, we deal with <em>finite Desarguesian projective spaces</em>. It is well known that these geometries can be described completely using vector spaces over finite fields. The elements of the projective space are all nontrivial subspaces of the vector space. So the projective points are the one-dimensional subspaces, the projective lines are the two-dimensional subspaces, and so on. From the axiomatic point of view, a projective space is a point-line geometry, and has rank at least 2. But a projective line is obtained if we start with a two dimensional vector space. Starting with a one dimensional vector space yields a single projective point. Both examples are not a projective space in the axiomatic point of view, but in <strong class="pkg">FinInG</strong> they are considered as projective spaces.</p>
+
+<p><a id="X79B440FF7EFBA661" name="X79B440FF7EFBA661"></a></p>
+
+<h5>4.1-1 IsProjectiveSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsProjectiveSpace</code></td><td class="tdright">( category )</td></tr></table></div>
+<p>This category is a subcategory of <code class="code">IsLieGeometry</code>, and contains all finite Desarguesian projective spaces.</p>
+
+<p>We refer the reader to <a href="chapBib_mj.html#biBHirschfeldThas">[HT91]</a> for the necessary background theory in case it is not provided in the manual.</p>
+
+<p><a id="X7962DA507C64FCBA" name="X7962DA507C64FCBA"></a></p>
+
+<h5>4.1-2 ProjectiveSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProjectiveSpace</code>( <var class="Arg">d</var>, <var class="Arg">F</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProjectiveSpace</code>( <var class="Arg">d</var>, <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PG</code>( <var class="Arg">d</var>, <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a projective space</p>
+
+<p><var class="Arg">d</var> must be a positive integer. In the first form, <var class="Arg">F</var> is a field and the function returns the projective space of dimension <var class="Arg">d</var> over <var class="Arg">F</var>. In the second form, <var class="Arg">q</var> is a prime power specifying the size of the field. The user may also use an alias, namely, the common abbreviation <code class="code">PG(d, q)</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProjectiveSpace(3,GF(3));</span>
+ProjectiveSpace(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProjectiveSpace(3,3);</span>
+ProjectiveSpace(3, 3)
+ 
+</pre></div>
+
+<p><a id="X84FDF25D797B874B" name="X84FDF25D797B874B"></a></p>
+
+<h5>4.1-3 ProjectiveDimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProjectiveDimension</code>( <var class="Arg">ps</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Dimension</code>( <var class="Arg">ps</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Rank</code>( <var class="Arg">ps</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: the projective dimension of the projective space <var class="Arg">ps</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(5,8);</span>
+ProjectiveSpace(5, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProjectiveDimension(ps);</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension(ps);</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Rank(ps);</span>
+5
+ 
+</pre></div>
+
+<p><a id="X7BCBA564829D9E89" name="X7BCBA564829D9E89"></a></p>
+
+<h5>4.1-4 BaseField</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BaseField</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: returns the base field for the projective space <var class="Arg">ps</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BaseField(ProjectiveSpace(3,81));</span>
+GF(3^4)
+ 
+</pre></div>
+
+<p><a id="X7D544D7985A4572D" name="X7D544D7985A4572D"></a></p>
+
+<h5>4.1-5 UnderlyingVectorSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingVectorSpace</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a vector space</p>
+
+<p>If <var class="Arg">ps</var> is a projective space of dimension <span class="SimpleMath">\(n\)</span> over the field of order <span class="SimpleMath">\(q\)</span>, then this operation simply returns the underlying vector space, i.e. the <span class="SimpleMath">\(n+1\)</span> dimensional vector space over the field of order <span class="SimpleMath">\(q\)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ProjectiveSpace(4,7);</span>
+ProjectiveSpace(4, 7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">vs := UnderlyingVectorSpace(ps);</span>
+( GF(7)^5 )
+ 
+</pre></div>
+
+<p><a id="X8606750A8586DF8D" name="X8606750A8586DF8D"></a></p>
+
+<h5>4.1-6 AmbientSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AmbientSpace</code>( <var class="Arg">ps</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a projective space</p>
+
+<p>The ambient space of a projective space <var class="Arg">ps</var> is the projective space itself. Hence, simply <var class="Arg">ps</var> will be returned.</p>
+
+<p><a id="X8016E6857D53F2ED" name="X8016E6857D53F2ED"></a></p>
+
+<h4>4.2 <span class="Heading">Subspaces of projective spaces</span></h4>
+
+<p>The elements of a projective space <span class="SimpleMath">\(\mathrm{PG}(n,q)\)</span> are the subspaces of a suitable dimension. The empty subspace, also called the trivial subspace, has dimension <span class="SimpleMath">\(-1\)</span> and corresponds to the zero dimensional vector subspace of the underlying vector space of <span class="SimpleMath">\(\mathrm{PG}(n,q)\)</span>, and is hence represented by the zero vector of length <span class="SimpleMath">\(n+1\)</span> over the underlying field <span class="SimpleMath">\(\mathrm{GF}(q)\)</span>. The trivial subspace and the whole projective space are mathematically considered as a subspace of the projective geometry, but not as elements of the incidence geometry, and hence do in <strong class="pkg">FinInG</strong> <strong class="button">not</strong> belong to the category <code class="code">IsSubspaceOfProjectiveSpace</code>.</p>
+
+<p><a id="X82E9593B8074AECB" name="X82E9593B8074AECB"></a></p>
+
+<h5>4.2-1 VectorSpaceToElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VectorSpaceToElement</code>( <var class="Arg">geo</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an element</p>
+
+<p><var class="Arg">geo</var> is a projective space, and <var class="Arg">v</var> is either a row vector (for points) or an <span class="SimpleMath">\(m \times n\)</span> matrix (for an <span class="SimpleMath">\((m-1)\)</span>-subspace of projective space of dimension <span class="SimpleMath">\(n-1\)</span>). In the case that <var class="Arg">v</var> is a matrix, the rows represent generators for the subspace. An exceptional case is when <var class="Arg">v</var> is a zero-vector, in which case the trivial subspace is returned.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ProjectiveSpace(6,7);</span>
+ProjectiveSpace(6, 7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := [3,5,6,0,3,2,3]*Z(7)^0;</span>
+[ Z(7), Z(7)^5, Z(7)^3, 0*Z(7), Z(7), Z(7)^2, Z(7) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(ps,v);</span>
+&lt;a point in ProjectiveSpace(6, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(p);</span>
+[142.131]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ProjectiveSpace(3,4);</span>
+ProjectiveSpace(3, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := [1,1,0,1]*Z(4)^0;</span>
+[ Z(2)^0, Z(2)^0, 0*Z(2), Z(2)^0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(ps,v);</span>
+&lt;a point in ProjectiveSpace(3, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[1,0,0,1],[0,1,1,0]]*Z(4)^0;</span>
+[ [ Z(2)^0, 0*Z(2), 0*Z(2), Z(2)^0 ], [ 0*Z(2), Z(2)^0, Z(2)^0, 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := VectorSpaceToElement(ps,mat);</span>
+&lt;a line in ProjectiveSpace(3, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := VectorSpaceToElement(ps,[]);</span>
+Error, &lt;v&gt; does not represent any element called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 17 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+ 
+</pre></div>
+
+<p><a id="X8461BCEF862B9A7B" name="X8461BCEF862B9A7B"></a></p>
+
+<h5>4.2-2 EmptySubspace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EmptySubspace</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the trivial subspace in the projective <var class="Arg">ps</var></p>
+
+<p>The object returned by this operation is contained in every projective subspace of the projective space <var class="Arg">ps</var>, but is not an element of <var class="Arg">ps</var>. Hence, testing incidence results in an error message.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := EmptySubspace(PG(5,9));</span>
+&lt; empty subspace &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(PG(5,9),[1,0,0,0,0,0]*Z(9)^0);</span>
+&lt;a point in ProjectiveSpace(5, 9)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e*p;</span>
+Error, no method found! For debugging hints type ?Recovery from NoMethodFound
+Error, no 1st choice method found for `*' on 2 arguments called from
+&lt;function "HANDLE_METHOD_NOT_FOUND"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 10 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e in p;</span>
+true
+ 
+</pre></div>
+
+<p><a id="X84FDF25D797B874B" name="X84FDF25D797B874B"></a></p>
+
+<h5>4.2-3 ProjectiveDimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProjectiveDimension</code>( <var class="Arg">sub</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the projective dimension of a subspace of a projective space. The operation <code class="file">ProjectiveDimension</code> is also applicable on the EmptySubspace.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(2,5);</span>
+ProjectiveSpace(2, 5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := [[1,1,0],[0,3,2]]*Z(5)^0;</span>
+[ [ Z(5)^0, Z(5)^0, 0*Z(5) ], [ 0*Z(5), Z(5)^3, Z(5) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := VectorSpaceToElement(ps,v);</span>
+&lt;a line in ProjectiveSpace(2, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProjectiveDimension(line);</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension(line);</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(ps,[1,2,3]*Z(5)^0);</span>
+&lt;a point in ProjectiveSpace(2, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProjectiveDimension(p);</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension(p);</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProjectiveDimension(EmptySubspace(ps));</span>
+-1
+ 
+</pre></div>
+
+<p><a id="X87657AEF7E2C50F9" name="X87657AEF7E2C50F9"></a></p>
+
+<h5>4.2-4 ElementsOfIncidenceStructure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElementsOfIncidenceStructure</code>( <var class="Arg">ps</var>, <var class="Arg">j</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the collection of elements of the projective space <var class="Arg">ps</var> of type <var class="Arg">j</var></p>
+
+<p>For the projective space <var class="Arg">ps</var> of dimension <span class="SimpleMath">\(d\)</span> and the type <var class="Arg">j</var> (where <span class="SimpleMath">\(1 \leq j \leq d\)</span>), this operation returns the collection of <span class="SimpleMath">\(j-1\)</span> dimensional subspaces. An error message is produced when the projective space <var class="Arg">ps</var> has no elements of the required type.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ProjectiveSpace(6,7);</span>
+ProjectiveSpace(6, 7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ps,1);</span>
+&lt;points of ProjectiveSpace(6, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ps,2);</span>
+&lt;lines of ProjectiveSpace(6, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ps,3);</span>
+&lt;planes of ProjectiveSpace(6, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ps,4);</span>
+&lt;solids of ProjectiveSpace(6, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ps,5);</span>
+&lt;proj. 4-subspaces of ProjectiveSpace(6, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ps,6);</span>
+&lt;proj. 5-subspaces of ProjectiveSpace(6, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ps,7);</span>
+Error, &lt;ps&gt; has no elements of type &lt;j&gt; called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 15 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+ 
+</pre></div>
+
+<p><a id="X87E64DA67C3D6661" name="X87E64DA67C3D6661"></a></p>
+
+<h5>4.2-5 <span class="Heading">Short names for ElementsOfIncidenceStructure</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Points</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Lines</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Planes</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Solids</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Hyperplanes</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The elements of <var class="Arg">ps</var> of respective type 1, 2, 3, 4, and the hyperplanes</p>
+
+<p>An error message is produced when the projective space <var class="Arg">ps</var> has no elements of a required type.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(6,13);</span>
+ProjectiveSpace(6, 13)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Points(ps);</span>
+&lt;points of ProjectiveSpace(6, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Lines(ps);</span>
+&lt;lines of ProjectiveSpace(6, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Planes(ps);</span>
+&lt;planes of ProjectiveSpace(6, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Solids(ps);</span>
+&lt;solids of ProjectiveSpace(6, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Hyperplanes(ps);</span>
+&lt;proj. 5-subspaces of ProjectiveSpace(6, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(2,2);</span>
+ProjectiveSpace(2, 2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Hyperplanes(ps);</span>
+&lt;lines of ProjectiveSpace(2, 2)&gt;
+ 
+</pre></div>
+
+<p><a id="X7904128479BDFCC9" name="X7904128479BDFCC9"></a></p>
+
+<h5>4.2-6 <span class="Heading">Incidence and containment</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIncident</code>( <var class="Arg">el1</var>, <var class="Arg">el2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">el1</var>, <var class="Arg">el2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \in</code>( <var class="Arg">el1</var>, <var class="Arg">el2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>Recall that for projective spaces, incidence is symmetrized containment, where the empty subspace and the whole projective space are excluded as arguments for this operation, since they are not considered as elements of the geometry, but both the empty subspace and the whole projective space are allowed as arguments for <code class="file">\in</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ProjectiveSpace(5,9);</span>
+ProjectiveSpace(5, 9)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(ps,[1,1,1,1,0,0]*Z(9)^0);</span>
+&lt;a point in ProjectiveSpace(5, 9)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := VectorSpaceToElement(ps,[[1,1,1,1,0,0],[0,0,0,0,1,0]]*Z(9)^0);</span>
+&lt;a line in ProjectiveSpace(5, 9)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane := VectorSpaceToElement(ps,[[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]*Z(9)^0);</span>
+&lt;a plane in ProjectiveSpace(5, 9)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p * l;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l * p;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIncident(p,l);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p in l;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l in p;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p * plane;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l * plane;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l in plane;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := EmptySubspace(ps);</span>
+&lt; empty subspace &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e * l;</span>
+Error, no method found! For debugging hints type ?Recovery from NoMethodFound
+Error, no 1st choice method found for `*' on 2 arguments called from
+&lt;function "HANDLE_METHOD_NOT_FOUND"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 21 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e in l;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l in ps;</span>
+true
+ 
+</pre></div>
+
+<p><a id="X870D9D9A7F11806F" name="X870D9D9A7F11806F"></a></p>
+
+<h5>4.2-7 StandardFrame</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StandardFrame</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the standard frame of the projective space <var class="Arg">ps</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StandardFrame(PG(5,4));</span>
+[ &lt;a point in ProjectiveSpace(5, 4)&gt;, &lt;a point in ProjectiveSpace(5, 4)&gt;, 
+  &lt;a point in ProjectiveSpace(5, 4)&gt;, &lt;a point in ProjectiveSpace(5, 4)&gt;, 
+  &lt;a point in ProjectiveSpace(5, 4)&gt;, &lt;a point in ProjectiveSpace(5, 4)&gt;, 
+  &lt;a point in ProjectiveSpace(5, 4)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+[ NewRowVector(IsCVecRep,GF(2,2),[Z(2)^0,0*Z(2),0*Z(2),0*Z(2),0*Z(2),0*Z(2),])
+    , NewRowVector(IsCVecRep,GF(2,2),[0*Z(2),Z(2)^0,0*Z(2),0*Z(2),0*Z(2),
+    0*Z(2),]), NewRowVector(IsCVecRep,GF(2,2),[0*Z(2),0*Z(2),Z(2)^0,0*Z(2),
+    0*Z(2),0*Z(2),]), NewRowVector(IsCVecRep,GF(2,2),[0*Z(2),0*Z(2),0*Z(2),
+    Z(2)^0,0*Z(2),0*Z(2),]), NewRowVector(IsCVecRep,GF(2,2),[0*Z(2),0*Z(2),
+    0*Z(2),0*Z(2),Z(2)^0,0*Z(2),]), NewRowVector(IsCVecRep,GF(2,2),[0*Z(2),
+    0*Z(2),0*Z(2),0*Z(2),0*Z(2),Z(2)^0,]), NewRowVector(IsCVecRep,GF(2,2),[
+    Z(2)^0,Z(2)^0,Z(2)^0,Z(2)^0,Z(2)^0,Z(2)^0,]) ]
+ 
+</pre></div>
+
+<p><a id="X84E3985A8700B302" name="X84E3985A8700B302"></a></p>
+
+<h5>4.2-8 Coordinates</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Coordinates</code>( <var class="Arg">p</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the homogeneous coordinates of the projective point <var class="Arg">p</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(PG(5,16)));</span>
+&lt;a point in ProjectiveSpace(5, 16)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Coordinates(p);</span>
+[ Z(2)^0, Z(2^4)^13, Z(2)^0, Z(2^4)^8, Z(2^4)^3, Z(2^4)^7 ]
+ 
+</pre></div>
+
+<p><a id="X7CE4FD76820B503A" name="X7CE4FD76820B503A"></a></p>
+
+<h5>4.2-9 DualCoordinatesOfHyperplane</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DualCoordinatesOfHyperplane</code>( <var class="Arg">hyp</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>The argument <var class="Arg">hyp</var> is a hyperplane of a projective space. This operation returns the dual coordinates of the hyperplane <var class="Arg">hyp</var>, i.e. the list with the coefficients of the equation defining the hyperplane <var class="Arg">hyp</var> as an algebraic variety.</p>
+
+<p><a id="X86628227863989E5" name="X86628227863989E5"></a></p>
+
+<h5>4.2-10 HyperplaneByDualCoordinates</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HyperplaneByDualCoordinates</code>( <var class="Arg">pg</var>, <var class="Arg">list</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a hyperplane of a projective space</p>
+
+<p>The argument <var class="Arg">pg</var> is a projective space, and <var class="Arg">list</var> is the coordinate vector of a point of <var class="Arg">pg</var>. This operation returns the hyperplane that has <var class="Arg">list</var> as the list of coefficients of the equation defining the hyperplane as an algebraic variety.</p>
+
+<p><a id="X801A95907B13F447" name="X801A95907B13F447"></a></p>
+
+<h5>4.2-11 EquationOfHyperplane</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EquationOfHyperplane</code>( <var class="Arg">h</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the equation of the hyperplane <var class="Arg">h</var> of a projective space</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hyperplane := VectorSpaceToElement(PG(3,2),[[1,1,0,0],[0,0,1,0],[0,0,0,1]]*Z(2)^0);</span>
+&lt;a plane in ProjectiveSpace(3, 2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EquationOfHyperplane(hyperplane);</span>
+x_1+x_2
+ 
+</pre></div>
+
+<p><a id="X8606750A8586DF8D" name="X8606750A8586DF8D"></a></p>
+
+<h5>4.2-12 AmbientSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AmbientSpace</code>( <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: returns the ambient space of an element <var class="Arg">el</var> of a projective space</p>
+
+<p>This operation is also applicable on the empty subspace and the whole space.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(3,27);</span>
+ProjectiveSpace(3, 27)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(ps,[1,2,1,0]*Z(3)^3);</span>
+&lt;a point in ProjectiveSpace(3, 27)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AmbientSpace(p);</span>
+ProjectiveSpace(3, 27)
+ 
+</pre></div>
+
+<p><a id="X7BCBA564829D9E89" name="X7BCBA564829D9E89"></a></p>
+
+<h5>4.2-13 BaseField</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BaseField</code>( <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: returns the base field of an element <var class="Arg">el</var> of a projective space</p>
+
+<p>This operation is also applicable on the trivial subspace and the whole space.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(5,8);</span>
+ProjectiveSpace(5, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(ps,[1,1,1,0,0,1]*Z(2));</span>
+&lt;a point in ProjectiveSpace(5, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BaseField(p);</span>
+GF(2^3)
+ 
+</pre></div>
+
+<p><a id="X79730D657AB219DB" name="X79730D657AB219DB"></a></p>
+
+<h5>4.2-14 Random</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Random</code>( <var class="Arg">elements</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a random element from the collection <var class="Arg">elements</var></p>
+
+<p>The collection <var class="Arg">elements</var> is an object in the category <code class="code">IsElementsOfIncidenceStructure</code>, i.e. an object representing the set of elements of a certain incidence structure of a given type. The latter information can be derived e.g. using <code class="code">AmbientSpace</code> and <code class="code">Type</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(9,49);</span>
+ProjectiveSpace(9, 49)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Random(Lines(ps));</span>
+&lt;a line in ProjectiveSpace(9, 49)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Random(Points(ps));</span>
+&lt;a point in ProjectiveSpace(9, 49)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Random(Solids(ps));</span>
+&lt;a solid in ProjectiveSpace(9, 49)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Random(Hyperplanes(ps));</span>
+&lt;a proj. 8-space in ProjectiveSpace(9, 49)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">elts := ElementsOfIncidenceStructure(ps,6);</span>
+&lt;proj. 5-subspaces of ProjectiveSpace(9, 49)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Random(elts);</span>
+&lt;a proj. 5-space in ProjectiveSpace(9, 49)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+[[Z(7)^0,0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7^2)^14,Z(7^2)^44,Z(7^2)^14,
+Z(7)^5,]
+ [0*Z(7),Z(7)^0,0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7^2)^29,Z(7^2)^13,Z(7^2)^19,
+Z(7^2)^27,]
+ [0*Z(7),0*Z(7),Z(7)^0,0*Z(7),0*Z(7),0*Z(7),Z(7^2)^20,Z(7^2)^10,Z(7^2)^18,
+Z(7^2)^27,]
+ [0*Z(7),0*Z(7),0*Z(7),Z(7)^0,0*Z(7),0*Z(7),Z(7),Z(7^2)^30,Z(7^2)^18,Z(7^2)^
+14,]
+ [0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7)^0,0*Z(7),Z(7^2)^10,Z(7^2)^28,Z(7^2)^47,
+Z(7^2)^29,]
+ [0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7)^0,Z(7^2)^9,Z(7^2)^42,Z(7^2)^34,
+Z(7^2)^25,]
+]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps,3);</span>
+&lt;a solid in ProjectiveSpace(9, 49)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+[[Z(7)^0,0*Z(7),0*Z(7),0*Z(7),Z(7^2)^17,Z(7^2)^33,Z(7^2)^4,0*Z(7),Z(7^2),
+Z(7^2)^33,]
+ [0*Z(7),Z(7)^0,0*Z(7),0*Z(7),Z(7^2)^30,Z(7)^2,Z(7)^3,Z(7)^0,Z(7^2)^20,Z(7^2)^
+42,]
+ [0*Z(7),0*Z(7),Z(7)^0,0*Z(7),Z(7^2)^20,Z(7^2)^30,Z(7^2)^11,Z(7^2)^39,Z(7)^3,
+Z(7),]
+ [0*Z(7),0*Z(7),0*Z(7),Z(7)^0,Z(7^2)^21,Z(7)^0,Z(7^2)^11,Z(7^2)^45,Z(7^2),
+Z(7^2)^9,]
+]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps,7);</span>
+&lt;a proj. 7-space in ProjectiveSpace(9, 49)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+[[Z(7)^0,0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7^2)^42,Z(7^2)^
+35,]
+ [0*Z(7),Z(7)^0,0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7^2)^43,Z(7^2),]
+ [0*Z(7),0*Z(7),Z(7)^0,0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7^2)^44,Z(7)^4,]
+ [0*Z(7),0*Z(7),0*Z(7),Z(7)^0,0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7^2)^41,Z(7^2)^
+10,]
+ [0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7)^0,0*Z(7),0*Z(7),0*Z(7),Z(7^2)^37,Z(7^2)^
+12,]
+ [0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7)^0,0*Z(7),0*Z(7),Z(7^2)^11,Z(7^2)^
+39,]
+ [0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7)^0,0*Z(7),Z(7^2)^22,Z(7^2)^
+10,]
+ [0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),0*Z(7),Z(7)^0,Z(7^2)^43,Z(7^2)^
+22,]
+]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps);</span>
+&lt;a plane in ProjectiveSpace(9, 49)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps);</span>
+&lt;a proj. 6-space in ProjectiveSpace(9, 49)&gt;
+ 
+</pre></div>
+
+<p><a id="X7D3C5D3B7AA4DE28" name="X7D3C5D3B7AA4DE28"></a></p>
+
+<h5>4.2-15 RandomSubspace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomSubspace</code>( <var class="Arg">ps</var>, <var class="Arg">i</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomSubspace</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the first variant returns a random element of type <var class="Arg">i</var> of the projective space <var class="Arg">ps</var>. The second variant returns a random element of a random type of the projective space <var class="Arg">ps</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(8,16);</span>
+ProjectiveSpace(8, 16)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps);</span>
+&lt;a point in ProjectiveSpace(8, 16)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps);</span>
+&lt;a proj. 5-space in ProjectiveSpace(8, 16)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps);</span>
+&lt;a proj. 7-space in ProjectiveSpace(8, 16)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps);</span>
+&lt;a proj. 4-space in ProjectiveSpace(8, 16)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps);</span>
+&lt;a plane in ProjectiveSpace(8, 16)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps);</span>
+&lt;a plane in ProjectiveSpace(8, 16)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSubspace(ps);</span>
+&lt;a plane in ProjectiveSpace(8, 16)&gt;
+ 
+</pre></div>
+
+<p><a id="X875BE2957FAF6209" name="X875BE2957FAF6209"></a></p>
+
+<h5>4.2-16 Span</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Span</code>( <var class="Arg">u</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Span</code>( <var class="Arg">list</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an element or the empty subspace or the whole space</p>
+
+<p>When <var class="Arg">u</var> and <var class="Arg">v</var> are elements of a projective space. This function returns the span of the two elements. When <var class="Arg">list</var> is a list of elements of the same projective space, then this function returns the span of all elements in <var class="Arg">list</var>. It is checked whether the elements <var class="Arg">u</var> and <var class="Arg">v</var> are elements of the same projective space. Although the trivial subspace and the whole projective space are not objects in the category <code class="code">IsSubspaceOfProjectiveSpace</code>, they are allowed as arguments for this operation, and also for the second variant of this operation.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ProjectiveSpace(3,3);</span>
+ProjectiveSpace(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Planes(ps));</span>
+&lt;a plane in ProjectiveSpace(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := Random(Planes(ps));</span>
+&lt;a plane in ProjectiveSpace(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := Span(p,q);</span>
+ProjectiveSpace(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s = Span([p,q]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t := Span(EmptySubspace(ps),p);</span>
+&lt;a plane in ProjectiveSpace(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t = p;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Span(ps,p);</span>
+ProjectiveSpace(3, 3)
+ 
+</pre></div>
+
+<p><a id="X8469B54180FE1E4C" name="X8469B54180FE1E4C"></a></p>
+
+<h5>4.2-17 Meet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Meet</code>( <var class="Arg">u</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Meet</code>( <var class="Arg">list</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an element or the empty subspace or the whole space</p>
+
+<p>When <var class="Arg">u</var> and <var class="Arg">v</var> are elements of a projective space. This function returns the intersection of the two elements. When <var class="Arg">list</var> is a list of elements of the same projective space, then this function returns the intersection of all elements in <var class="Arg">list</var>. It is checked whether the elements <var class="Arg">u</var> and <var class="Arg">v</var> are elements of the same projective space. Although the trivial subspace and the whole projective space are not objects in the category <code class="code">IsSubspaceOfProjectiveSpace</code>, they are allowed as arguments for this operation, and also for the second variant of this operation. We remark that the result of a <code class="file">Meet</code> operation can be the empty subspace.</p>
+
+
+<div class="example"><pre>
+ProjectiveSpace(7, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Solids(ps));</span>
+&lt;a solid in ProjectiveSpace(7, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := Random(Solids(ps));</span>
+&lt;a solid in ProjectiveSpace(7, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := Meet(p,q);</span>
+&lt; empty subspace &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(s);</span>
+&lt; empty subspace &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := Random(Hyperplanes(ps));</span>
+&lt;a proj. 6-space in ProjectiveSpace(7, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Meet(p,r);</span>
+&lt;a plane in ProjectiveSpace(7, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Meet(q,r);</span>
+&lt;a plane in ProjectiveSpace(7, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Meet([p,q,r]);</span>
+&lt; empty subspace &gt;
+ 
+</pre></div>
+
+<p><a id="X7E204A78815C46DD" name="X7E204A78815C46DD"></a></p>
+
+<h5>4.2-18 FlagOfIncidenceStructure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FlagOfIncidenceStructure</code>( <var class="Arg">ps</var>, <var class="Arg">els</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the flag of the projetcive space <var class="Arg">ps</var>, determined by the subspaces of <var class="Arg">ps</var> in the list <var class="Arg">els</var>. When <var class="Arg">els</var> is empty, the empty flag is returned.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ProjectiveSpace(12,11);</span>
+ProjectiveSpace(12, 11)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s1 := RandomSubspace(ps,8);</span>
+&lt;a proj. 8-space in ProjectiveSpace(12, 11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s2 := RandomSubspace(s1,6);</span>
+&lt;a proj. 6-space in ProjectiveSpace(12, 11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s3 := RandomSubspace(s2,4);</span>
+&lt;a proj. 4-space in ProjectiveSpace(12, 11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s4 := Random(Solids(s3));</span>
+&lt;a solid in ProjectiveSpace(12, 11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s5 := Random(Points(s4));</span>
+&lt;a point in ProjectiveSpace(12, 11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flag := FlagOfIncidenceStructure(ps,[s1,s3,s2,s5,s4]);</span>
+&lt;a flag of ProjectiveSpace(12, 11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(4,5);</span>
+ProjectiveSpace(4, 5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(ps));</span>
+&lt;a point in ProjectiveSpace(4, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random(Lines(ps));</span>
+&lt;a line in ProjectiveSpace(4, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := Random(Solids(ps));</span>
+&lt;a solid in ProjectiveSpace(4, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flag := FlagOfIncidenceStructure(ps,[v,l,p]);</span>
+Error, &lt;els&gt; does not determine a flag&gt; called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 19 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flag := FlagOfIncidenceStructure(ps,[]);</span>
+&lt;a flag of ProjectiveSpace(4, 5)&gt;
+ 
+</pre></div>
+
+<p><a id="X7AEFC2C57F10C3A7" name="X7AEFC2C57F10C3A7"></a></p>
+
+<h5>4.2-19 IsEmptyFlag</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEmptyFlag</code>( <var class="Arg">flag</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: return true if <var class="Arg">flag</var> is the empty flag</p>
+
+<p><a id="X7A453E0E861F2C94" name="X7A453E0E861F2C94"></a></p>
+
+<h5>4.2-20 IsChamberOfIncidenceStructure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsChamberOfIncidenceStructure</code>( <var class="Arg">flag</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: true if <var class="Arg">flag</var> is a chamber</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(3,13);</span>
+ProjectiveSpace(3, 13)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane := Random(Planes(ps));</span>
+&lt;a plane in ProjectiveSpace(3, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := Random(Lines(plane));</span>
+&lt;a line in ProjectiveSpace(3, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">point := Random(Points(line));</span>
+&lt;a point in ProjectiveSpace(3, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flag := FlagOfIncidenceStructure(ps,[point,line,plane]);</span>
+&lt;a flag of ProjectiveSpace(3, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsChamberOfIncidenceStructure(flag);</span>
+true
+ 
+</pre></div>
+
+<p><a id="X7BD8312C85784503" name="X7BD8312C85784503"></a></p>
+
+<h4>4.3 <span class="Heading">Shadows of Projective Subspaces</span></h4>
+
+<p><a id="X7FFA08DA85C5251C" name="X7FFA08DA85C5251C"></a></p>
+
+<h5>4.3-1 ShadowOfElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShadowOfElement</code>( <var class="Arg">ps</var>, <var class="Arg">el</var>, <var class="Arg">i</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShadowOfElement</code>( <var class="Arg">ps</var>, <var class="Arg">el</var>, <var class="Arg">str</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the elements of type <var class="Arg">i</var> incident with <var class="Arg">el</var>. The second variant determines the type <var class="Arg">i</var> from the position of <var class="Arg">str</var> in the list returned by <code class="file">TypesOfElementsOfIncidenceStructurePlural</code></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(4,3);</span>
+ProjectiveSpace(4, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane := Random(Planes(ps));</span>
+&lt;a plane in ProjectiveSpace(4, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">shadowpoints := ShadowOfElement(ps,plane,1);</span>
+&lt;shadow points in ProjectiveSpace(4, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(shadowpoints);</span>
+[ &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a point in ProjectiveSpace(4, 3)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">shadowlines := ShadowOfElement(ps,plane,2);</span>
+&lt;shadow lines in ProjectiveSpace(4, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(shadowlines);</span>
+[ &lt;a line in ProjectiveSpace(4, 3)&gt;, &lt;a line in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a line in ProjectiveSpace(4, 3)&gt;, &lt;a line in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a line in ProjectiveSpace(4, 3)&gt;, &lt;a line in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a line in ProjectiveSpace(4, 3)&gt;, &lt;a line in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a line in ProjectiveSpace(4, 3)&gt;, &lt;a line in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a line in ProjectiveSpace(4, 3)&gt;, &lt;a line in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a line in ProjectiveSpace(4, 3)&gt; ]
+ 
+</pre></div>
+
+<p><a id="X7E86E6417871730C" name="X7E86E6417871730C"></a></p>
+
+<h5>4.3-2 ShadowOfFlag</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShadowOfFlag</code>( <var class="Arg">ps</var>, <var class="Arg">flag</var>, <var class="Arg">i</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShadowOfFlag</code>( <var class="Arg">ps</var>, <var class="Arg">flag</var>, <var class="Arg">str</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the type <var class="Arg">i</var> shadow elements of the flag <var class="Arg">flag</var>, i.e. the elements of type <var class="Arg">i</var> incident with all elements of <var class="Arg">flag</var>. The second variant determines the type <var class="Arg">i</var> from the position of <var class="Arg">str</var> in the list returned by <code class="file">TypesOfElementsOfIncidenceStructurePlural</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(5,7);</span>
+ProjectiveSpace(5, 7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(ps,[1,0,0,0,0,0]*Z(7)^0);</span>
+&lt;a point in ProjectiveSpace(5, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := VectorSpaceToElement(ps,[[1,0,0,0,0,0],[0,1,0,0,0,0]]*Z(7)^0);</span>
+&lt;a line in ProjectiveSpace(5, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := VectorSpaceToElement(ps,[[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]*Z(7)^0);</span>
+&lt;a plane in ProjectiveSpace(5, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flag := FlagOfIncidenceStructure(ps,[v,l,p]);</span>
+&lt;a flag of ProjectiveSpace(5, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := ShadowOfFlag(ps,flag,4);</span>
+&lt;shadow solids in ProjectiveSpace(5, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := ShadowOfFlag(ps,flag,"solids");</span>
+&lt;shadow solids in ProjectiveSpace(5, 7)&gt;
+ 
+</pre></div>
+
+<p><a id="X81A8365A7FE68447" name="X81A8365A7FE68447"></a></p>
+
+<h5>4.3-3 ElementsIncidentWithElementOfIncidenceStructure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElementsIncidentWithElementOfIncidenceStructure</code>( <var class="Arg">el</var>, <var class="Arg">i</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the elements of type <var class="Arg">i</var> incident with <var class="Arg">el</var>, in other words, the type <var class="Arg">i</var> shadow of the element <var class="Arg">el</var></p>
+
+<p>Internally, the function <code class="file">FlagOfIncidenceStructure</code> is used to create a flag from <var class="Arg">list</var>. This function also performs the checking.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(6,9);</span>
+ProjectiveSpace(6, 9)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := VectorSpaceToElement(ps,[1,0,1,0,0,0,0]*Z(9)^0);</span>
+&lt;a point in ProjectiveSpace(6, 9)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">els := ElementsIncidentWithElementOfIncidenceStructure(p,3);</span>
+&lt;shadow planes in ProjectiveSpace(6, 9)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := VectorSpaceToElement(ps,[[1,1,1,1,0,0,0],[0,0,0,0,1,1,1]]*Z(9)^0);</span>
+&lt;a line in ProjectiveSpace(6, 9)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">els := ElementsIncidentWithElementOfIncidenceStructure(line,1);</span>
+&lt;shadow points in ProjectiveSpace(6, 9)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(els);</span>
+[ &lt;a point in ProjectiveSpace(6, 9)&gt;, &lt;a point in ProjectiveSpace(6, 9)&gt;, 
+  &lt;a point in ProjectiveSpace(6, 9)&gt;, &lt;a point in ProjectiveSpace(6, 9)&gt;, 
+  &lt;a point in ProjectiveSpace(6, 9)&gt;, &lt;a point in ProjectiveSpace(6, 9)&gt;, 
+  &lt;a point in ProjectiveSpace(6, 9)&gt;, &lt;a point in ProjectiveSpace(6, 9)&gt;, 
+  &lt;a point in ProjectiveSpace(6, 9)&gt;, &lt;a point in ProjectiveSpace(6, 9)&gt; ]
+ 
+</pre></div>
+
+<p><a id="X7E29C31D7CB5DB23" name="X7E29C31D7CB5DB23"></a></p>
+
+<h5>4.3-4 <span class="Heading">Short names for <code class="file">ElementsIncidentWithElementOfIncidenceStructure</code></span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Points</code>( <var class="Arg">ps</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Lines</code>( <var class="Arg">ps</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Planes</code>( <var class="Arg">ps</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Solids</code>( <var class="Arg">ps</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Hyperplanes</code>( <var class="Arg">inc</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Points</code>( <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Lines</code>( <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Planes</code>( <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Solids</code>( <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Hyperplanes</code>( <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The elements of the incidence geometry of the according type. If <var class="Arg">ps</var> is not given as an argument, it is deduced from <var class="Arg">v</var> as its ambient geometry.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(6,13);</span>
+ProjectiveSpace(6, 13)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane := Random(Planes(ps));</span>
+&lt;a plane in ProjectiveSpace(6, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Points(plane);</span>
+&lt;shadow points in ProjectiveSpace(6, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Lines(plane);</span>
+&lt;shadow lines in ProjectiveSpace(6, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Solids(plane);</span>
+&lt;shadow solids in ProjectiveSpace(6, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Hyperplanes(plane);</span>
+&lt;shadow lines in ProjectiveSpace(6, 13)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsIncidentWithElementOfIncidenceStructure(plane,6);</span>
+&lt;shadow proj. 5-subspaces in ProjectiveSpace(6, 13)&gt;
+ 
+</pre></div>
+
+<p><a id="X799F3A2A86F82E5B" name="X799F3A2A86F82E5B"></a></p>
+
+<h4>4.4 <span class="Heading">Enumerating subspaces of a projective space</span></h4>
+
+<p><a id="X83ADF8287ED0668E" name="X83ADF8287ED0668E"></a></p>
+
+<h5>4.4-1 Iterator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Iterator</code>( <var class="Arg">subspaces</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an iterator for the collection <var class="Arg">subspaces</var></p>
+
+<p>We refer to the GAP operation <code class="func">Iterator</code> for the definition of an iterator.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(5,7);</span>
+ProjectiveSpace(5, 7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">planes := Planes(pg);</span>
+&lt;planes of ProjectiveSpace(5, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iter := Iterator(planes);</span>
+&lt;iterator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NextIterator(iter);</span>
+&lt;a plane in ProjectiveSpace(5, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NextIterator(iter);</span>
+&lt;a plane in ProjectiveSpace(5, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NextIterator(iter);</span>
+&lt;a plane in ProjectiveSpace(5, 7)&gt;
+ 
+</pre></div>
+
+<p><a id="X7EF8910F82B45EC7" name="X7EF8910F82B45EC7"></a></p>
+
+<h5>4.4-2 Enumerator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Enumerator</code>( <var class="Arg">subspaces</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an enumerator for the collection <var class="Arg">subspaces</var></p>
+
+<p>For complete collections of subspaces of a given type of a projective space, currently, no non-trivial enumerator is installed, i.e. this operation just returns a list containing all elements of the collection <var class="Arg">subspaces</var>. Such a list can, of course, be used as an enumerator, but this might be time consuming.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(3,4);</span>
+ProjectiveSpace(3, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := Lines(pg);</span>
+&lt;lines of ProjectiveSpace(3, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">enum := Enumerator(lines);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(enum);</span>
+357
+ 
+</pre></div>
+
+<p><a id="X7EBA57FC7CCF8449" name="X7EBA57FC7CCF8449"></a></p>
+
+<h5>4.4-3 List</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; List</code>( <var class="Arg">subspaces</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsList</code>( <var class="Arg">subspaces</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the complete list of elements in the collection <var class="Arg">subspaces</var></p>
+
+<p>The operation <code class="file">List</code> will return a complete list, the operation <code class="file">AsList</code> will return an <strong class="pkg">orb</strong> object, representing a complete orbit, i.e. representing in this case a complete list. To obtain the elements explicitly, one has to issue the <code class="file">List</code> operation with as argument the <strong class="pkg">orb</strong> object again. Applying <code class="file">List</code> directly to a collection of subspaces, refers to the enumerator for the collection, while using <code class="file">AsList</code> uses the <strong class="pkg">orb</strong> to compute all subspaces as an orbit.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(3,4);</span>
+ProjectiveSpace(3, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := Lines(pg);</span>
+&lt;lines of ProjectiveSpace(3, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list := List(lines);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(list);</span>
+357
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">aslist := AsList(lines);</span>
+&lt;closed orbit, 357 points&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list2 := List(aslist);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(list2);</span>
+357
+ 
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

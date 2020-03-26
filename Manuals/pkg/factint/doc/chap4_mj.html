@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (FactInt) - Chapter 4: How much Time does a Factorization take?</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
+<p><a id="X85B6B6E4796B99EE" name="X85B6B6E4796B99EE"></a></p>
+<div class="ChapSects"><a href="chap4_mj.html#X85B6B6E4796B99EE">4 <span class="Heading">How much Time does a Factorization take?</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X825FC33479FE2B1D">4.1 <span class="Heading">Timings for the general factorization routine</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X8131C8BD7F637545">4.2 <span class="Heading">Timings for the ECM</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7E2D09BD7AD0D77F">4.3 <span class="Heading">Timings for the MPQS</span></a>
+</span>
+</div>
+</div>
+
+<h3>4 <span class="Heading">How much Time does a Factorization take?</span></h3>
+
+<p><a id="X825FC33479FE2B1D" name="X825FC33479FE2B1D"></a></p>
+
+<h4>4.1 <span class="Heading">Timings for the general factorization routine</span></h4>
+
+<p>A few words in advance: In general, it is not possible to give a precise prediction for the CPU time needed for factoring a given integer. This time depends heavily on the sizes of the factors of the given number and on some other properties which cannot be tested before actually doing the factorization. But nevertheless, rough run time estimates can be given for numbers with factors of given orders of magnitude.</p>
+
+<p>After casting out the small and other "easy" factors -- which should not take more than at most a few minutes for numbers of "reasonable" size -- the general factorization routine uses first ECM (see <code class="func">FactorsECM</code> (<a href="chap3_mj.html#X87B162F878AD031C"><span class="RefLink">3.4-1</span></a>)) for finding factors very roughly up to the third root of the remaining composite and then the MPQS (see <code class="func">FactorsMPQS</code> (<a href="chap3_mj.html#X86F8DFB681442E05"><span class="RefLink">3.6-1</span></a>)) for doing the "rest" of the work. The latter is often the most time-consuming part.</p>
+
+<p>In the sequel, some timings for the ECM and for the MPQS are given. These methods are by far the most important ones with respect to run time statistics (the <span class="SimpleMath">\(p \pm 1\)</span>-methods (see <code class="func">FactorsPminus1</code> (<a href="chap3_mj.html#X7AF95E2E87F58200"><span class="RefLink">3.2-1</span></a>) and <code class="func">FactorsPplus1</code> (<a href="chap3_mj.html#X8079A0367DE4FC35"><span class="RefLink">3.3-1</span></a>)) are only suitable for finding factors with certain properties and CFRAC (see <code class="func">FactorsCFRAC</code> (<a href="chap3_mj.html#X7A5C8BC5861CFC8C"><span class="RefLink">3.5-1</span></a>)) is just a slower predecessor of the MPQS). All absolute timings are given for a Pentium 200 under Windows as a reference machine (this was a fast machine at the time the first version of this package has been written).</p>
+
+<p><a id="X8131C8BD7F637545" name="X8131C8BD7F637545"></a></p>
+
+<h4>4.2 <span class="Heading">Timings for the ECM</span></h4>
+
+<p>The run time of <code class="code">FactorsECM</code> depends mainly on the size of the factors of the input number. On average, finding a 12-digit factor of a 100-digit number takes about 1 min 40 s, finding a 15-digit factor of a 100-digit number takes about 10 min and finding an 18-digit factor of a 100-digit number takes about 50 min. A general rule of thumb is the following: one digit more increases the run time by a bit less than a factor of two. These timings are very rough, and they may vary by a factor of 10 or more. You can compare trying an elliptic curve with throwing a couple of dice, where a success corresponds to the case where all of them show the same side -- it is possible to be successful with the first trial, but it is also possible that this takes much longer. In particular, all trials are independent of one another. In general, ECM is superior to Pollard's Rho for finding factors with at least 10 decimal digits. In the same time needed by Pollard's Rho for finding a 13-digit factor one can reasonably expect to find a 17-digit factor when using ECM, for which Pollard's Rho in turn would need about 100 times as long as ECM. For larger factors this difference grows rapidly. From theory it can be said that finding a 20-digit factor requires about 500 times as much work as finding a 10-digit factor, finding a 30-digit factor requires about 160 times as much work as finding a 20-digit factor and finding a 40-digit factor requires about 80 times as much work as finding a 30-digit factor.</p>
+
+<p>The default parameters are optimized for finding factors with about 15 -- 35 digits. This seems to be a sensible choice, since this is the most important range for the application of ECM. The function <code class="code">FactorsECM</code> usually gives up when the input number <span class="SimpleMath">\(n\)</span> has two factors which are both larger than its third root. This is of course only a "probabilistic" statement. Sometimes -- but seldom -- the remaining composite has 3 factors, 4 factors should occur (almost) never.</p>
+
+<p>The user can of course specify other parameters than the default ones, but giving timings for all possible choices is obviously impossible. The interested reader should follow the references given in the bibliography at the end of this manual for getting information on how many curves with which parameters are usually needed for finding factors of a given size. This depends mainly on the distribution of primes, respectively of numbers with prime factors not exceeding a certain bound.</p>
+
+<p>For benchmarking purposes, the amount of time needed for trying a single curve with given smoothness bounds for a number of given size is suited best. A typical example is the following: one curve with (<var class="Arg">Limit1</var>,<var class="Arg">Limit2</var>) = (100000,10000000) applied to a 100-digit integer requires a total of 10 min 20 s, where 6 min 45 s are spent for the first stage and 3 min 35 s are spent for the second stage. The time needed for the first stage is approximately linear in <var class="Arg">Limit1</var> and the time needed for the second stage is a bit less than linear in <var class="Arg">Limit2</var>.</p>
+
+<p><a id="X7E2D09BD7AD0D77F" name="X7E2D09BD7AD0D77F"></a></p>
+
+<h4>4.3 <span class="Heading">Timings for the MPQS</span></h4>
+
+<p>The run time of <code class="code">FactorsMPQS</code> depends only on the size of the input number, and not on the size of its factors. Rough timings are as follows: 90 s for a 40-digit number, 10 min for a 50-digit number, 2 h for a 60-digit number, 20 h for a 70-digit number and 100 h for a 75-digit number. These timings are much more precise than those given for ECM, but they may also vary by a factor of 2 or 3 depending on whether a good factor base can be found without using a large multiplier or not. A general rule of thumb is the following: 10 digits more cause 10 times as much work. For benchmarking purposes, precise timings for some integers are given: <span class="SimpleMath">\(38!+1\)</span> (45 digits, good factor base with multiplier 1): 2 min 22 s, <span class="SimpleMath">\(40!-1\)</span> (48 digits, not so good factor base even with multiplier 7): 8 min 58 s, cofactor of <span class="SimpleMath">\(1093^{33}+1\)</span> (61 digits, good factor base with multiplier 1): 1 h 12 min.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

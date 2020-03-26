@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (IdRel) - Chapter 2: Rewriting Systems</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X7CA8FCFD81AA1890" name="X7CA8FCFD81AA1890"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X7CA8FCFD81AA1890">2 <span class="Heading">Rewriting Systems</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7875619E84157FC1">2.1 <span class="Heading">Monoid Presentations of FpGroups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X868422B878B0C380">2.1-1 FreeRelatorGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7CBE13927DFF4446">2.1-2 MonoidPresentationFpGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7A1F10597D8FC9A9">2.2 <span class="Heading">Rewriting systems for FpGroups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X858ECE3E807C7363">2.2-1 RewritingSystemFpGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X83BD6C0A80D88C2C">2.2-2 OnePassReduceWord</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F0CD1EB7C220D40">2.2-3 OnePassKB</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X83CBF2BE8478A728">2.3 <span class="Heading">Enumerating elements</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7EDA50068207339D">2.3-1 ElementsOfMonoidPresentation</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Rewriting Systems</span></h3>
+
+<p>This chapter describes functions to construct rewriting systems for finitely presented groups which store rewriting information. The main example used is a presentation of the quaternion group <code class="code">q8</code> with generators <span class="SimpleMath">\(a,b\)</span> and relators <span class="SimpleMath">\([a^4, b^4, abab^{-1}, a^2b^2]\)</span>.</p>
+
+<p><a id="X7875619E84157FC1" name="X7875619E84157FC1"></a></p>
+
+<h4>2.1 <span class="Heading">Monoid Presentations of FpGroups</span></h4>
+
+<p><a id="X868422B878B0C380" name="X868422B878B0C380"></a></p>
+
+<h5>2.1-1 FreeRelatorGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FreeRelatorGroup</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FreeRelatorHomomorphism</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">FreeRelatorGroup</code> returns a free group on the set of relators of the given fp-group <code class="code">G</code>. If <code class="code">HasName(G)</code> is <code class="keyw">true</code> then a name is automatically assigned to the free group.</p>
+
+<p>The function <code class="code">FreeRelatorHomomorphism</code> returns the group homomorphism from the free group on the relators to the free group on the generators of <code class="code">G</code>, mapping each generator to the corresponding word.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup( 2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := F.1;; b:= F.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rels := [ a^4, b^4, a*b*a*b^-1, a^2*b^2];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q8 := F/rels;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( q8, "q8" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">frq8 := FreeRelatorGroup( q8 );</span>
+q8_R 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfGroup( frq8 );</span>
+[ q8_R1, q8_R2, q8_R3, q8_R4]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">frhomq8 := FreeRelatorHomomorphism( q8 );</span>
+[ q8_R1, q8_R2, q8_R3, q8_R4] -&gt; [ f1^4, f2^4, f1*f2*f1*f2^-1, f1^2*f2^2]
+
+</pre></div>
+
+<p><a id="X7CBE13927DFF4446" name="X7CBE13927DFF4446"></a></p>
+
+<h5>2.1-2 MonoidPresentationFpGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MonoidPresentationFpGroup</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ArrangementOfMonoidGenerators</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FreeGroupOfPresentation</code>( <var class="Arg">mon</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GroupRelatorsOfPresentation</code>( <var class="Arg">mon</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InverseRelatorsOfPresentation</code>( <var class="Arg">mon</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomomorphismOfPresentation</code>( <var class="Arg">mon</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>A monoid presentation for a finitely presented group <code class="code">G</code> has two monoid generators <span class="SimpleMath">\(g^+,g^-\)</span> for each group generator <span class="SimpleMath">\(g\)</span>. The relators of the monoid presentation comprise the group relators, and relators <span class="SimpleMath">\(g^+g^-\)</span> specifying the inverses. The function <code class="code">MonoidPresentationFpGroup</code> returns the monoid presentation derived in this way from an fp-presentation.</p>
+
+<p>The function <code class="code">FreeGroupOfPresentation</code> returns the free group on the monoid generators.</p>
+
+<p>The function <code class="code">GroupRelatorsOfPresentation</code> returns those relators of the monoid which correspond to the relators of the group. All negative powers in the group relators are converted to positive powers of the <span class="SimpleMath">\(g^-\)</span>. The function <code class="code">InverseRelatorsOfPresentation</code> returns relators which specify the inverse pairs of the monoid generators.</p>
+
+<p>The function <code class="code">HomomorphismOfPresentation</code> returns the homomorphism from the free group of the monoid presentation to the free group of the group presentation.</p>
+
+<p>The attribute <code class="code">ArrangementOfMonoidGenerators</code> will be discussed before the second example in the next section.</p>
+
+<p>In the example below, the four monoid generators <span class="SimpleMath">\(a^+, b^+, a^-, b^-\)</span> are named <code class="code">q8_M1, q8_M2, q8_M3, q8_M4</code> respectively.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mon := MonoidPresentationFpGroup( q8 );</span>
+monoid presentation with group relators 
+[ q8_M1^4, q8_M2^4, q8_M1*q8_M2*q8_M1*q8_M4, q8_M1^2*q8_M2^2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fgmon := FreeGroupOfPresentation( mon ); </span>
+&lt;free group on the generators [ q8_M1, q8_M2, q8_M3, q8_M4 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">genfgmon := GeneratorsOfGroup( fgmon );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gprels := GroupRelatorsOfPresentation( mon ); </span>
+[ q8_M1^4, q8_M2^4, q8_M1*q8_M2*q8_M1*q8_M4, q8_M1^2*q8_M2^2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">invrels := InverseRelatorsOfPresentation( mon ); </span>
+[ q8_M1*q8_M3, q8_M2*q8_M4, q8_M3*q8_M1, q8_M4*q8_M2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hompres := HomomorphismOfPresentation( mon ); </span>
+[ q8_M1, q8_M2, q8_M3, q8_M4 ] -&gt; [ f1, f2, f1^-1, f2^-1 ]
+
+</pre></div>
+
+<p><a id="X7A1F10597D8FC9A9" name="X7A1F10597D8FC9A9"></a></p>
+
+<h4>2.2 <span class="Heading">Rewriting systems for FpGroups</span></h4>
+
+<p>These functions duplicate the standard Knuth Bendix functions which are available in the <strong class="pkg">GAP</strong> library. There are two reasons for this: (1) these functions were first written before the standard functions were available; (2) we require logged versions of the functions, and these are most conveniently extended versions of the non-logged code.</p>
+
+<p><a id="X858ECE3E807C7363" name="X858ECE3E807C7363"></a></p>
+
+<h5>2.2-1 RewritingSystemFpGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RewritingSystemFpGroup</code>( <var class="Arg">grp</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This function attempts to return a complete rewrite system for the group <code class="code">G</code> obtained from the monoid presentation <code class="code">mon</code>, with a length-lexicographical ordering on the words in <code class="code">fgmon</code>, by applying Knuth-Bendix completion. Such a rewrite system can be obtained for all finite groups. The rewrite rules are (partially) ordered, starting with the inverse relators, followed by the rules which reduce the word length the most.</p>
+
+<p>In our <code class="code">q8</code> example there are 16 rewrite rules in the rewriting system <code class="code">rws</code>:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdcenter"><span class="SimpleMath">\(a^+a^- \to \rm{id}, \quad b^+b^- \to \rm{id}, \quad a^-a^+ \to \rm{id}, \quad b^-b^+ \to \rm{id}, \)</span></td>
+</tr>
+<tr>
+<td class="tdcenter"><span class="SimpleMath">\(a^{+2}b^- \to b^+, \quad a^{+2}b^+ \to b^-, \quad a^{+3} \to a^-, \quad b^{-2} \to a^{+2}, \quad b^-a^- \to a^+b^-, \quad b^-a^+ \to a^+b^+, \)</span></td>
+</tr>
+<tr>
+<td class="tdcenter"><span class="SimpleMath">\(a^-b^- \to a^+b^+, \quad a^{-2} \to a^{+2}, \quad a^-b^+ \to a^+b^-, \quad b^+a^- \to a^+b^+, \quad b^{+2} \to a^{+2}, \quad b^+a^+ \to a^+b^-. \)</span></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rws := RewritingSystemFpGroup( q8 );</span>
+[ [q8_Ml*q8_M3, &lt;identity ...&gt;], [ q8_M2*q8_M4, &lt;identity ...&gt; ], 
+  [q8_M3*q8_Ml, &lt;identity ...&gt;], [ q8_M4*q8_M2, &lt;identity ...&gt; ], 
+  [q8_M1^2*q8_M4, q8_M2], [q8_Ml^2*q8_M2, q8_M4], [ q8_Ml^3, q8_M3 ], 
+  [ q8_M4^2, q8_Ml^2], [ q8_M4*q8_M3, q8_Ml*q8_M4], 
+  [ q8_M4*q8_Ml, q8_Ml*q8_M2], [q8_M3*q8_M4, q8_Ml*q8_M2], 
+  [ q8_M3^2, q8_Ml^2], [q8_M3*q8_M2, q8_Ml*q8_M4], 
+  [ q8_M2*q8_M3, q8_Ml*q8_M2], [q8_M2^2, q8_Ml^2], 
+  [ q8_M2*q8_Ml, q8_Ml*q8_M4] ]
+
+</pre></div>
+
+<p>The default ordering of the <span class="SimpleMath">\(2n\)</span> monoid generators is <span class="SimpleMath">\( [g_1^+,g_2^+,\ldots,g_n^+,g_1^-,g_2^-,\ldots,g_n^-] \)</span>. In the case of the two-generator abelian group <span class="SimpleMath">\(T = \langle a,b ~|~ [a,b] \rangle\)</span> the Knuth-Bendix process starts to generate infinite sets of relations such as <span class="SimpleMath">\(\{ab^ma^{-1} \to b^m,~ m \geqslant 1\}\)</span>. If, using the <code class="code">ArrangementOfMonoidGenerators</code> function, we specify the alternative ordering <span class="SimpleMath">\( [g_1^+,g_1^-,g_2^+,g_2^-] \)</span>, then a finite set of rules is obtained.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup(2);;                  </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T := F/[Comm(a,b)];              </span>
+&lt;fp group of size infinity on the generators [ f1, f2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( T, "T" );                   </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetArrangementOfMonoidGenerators( T, [1,-1,2,-2] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">monT := MonoidPresentationFpGroup(T);              </span>
+monoid presentation with group relators [ T_M2*T_M4*T_M1*T_M3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rwsT := RewritingSystemFpGroup( T );               </span>
+[ [ T_M1*T_M2, &lt;identity ...&gt; ], [ T_M2*T_M1, &lt;identity ...&gt; ], 
+  [ T_M3*T_M4, &lt;identity ...&gt; ], [ T_M4*T_M3, &lt;identity ...&gt; ], 
+  [ T_M4*T_M2, T_M2*T_M4 ], [ T_M4*T_M1, T_M1*T_M4 ], 
+  [ T_M3*T_M2, T_M2*T_M3 ], [ T_M3*T_M1, T_M1*T_M3 ] ]
+
+</pre></div>
+
+<p>The eight rules can be written as follows, showing that the <span class="SimpleMath">\(a^{\pm}\)</span> and <span class="SimpleMath">\(b^{\pm}\)</span> commute:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdcenter"><span class="SimpleMath">\(a^+a^- \to \rm{id}, \quad\quad a^-a^+ \to \rm{id}, \quad\quad b^+b^- \to \rm{id}, \quad\quad b^-b^+ \to \rm{id}, \)</span></td>
+</tr>
+<tr>
+<td class="tdcenter"><span class="SimpleMath">\(b^-a^- \to a^-b^-, \quad b^-a^+ \to a^+b^-, \quad b^+a^- \to a^-b^+, \quad b^+a^+ \to a^+b^+. \)</span></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>The functions called by <code class="code">RewritingSystemFpGroup</code> are as follows.</p>
+
+<p><a id="X83BD6C0A80D88C2C" name="X83BD6C0A80D88C2C"></a></p>
+
+<h5>2.2-2 OnePassReduceWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OnePassReduceWord</code>( <var class="Arg">word</var>, <var class="Arg">rules</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReduceWordKB</code>( <var class="Arg">word</var>, <var class="Arg">rules</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Assuming that <code class="code">word</code> is an element of a free monoid and <code class="code">rules</code> is a list of ordered pairs of such words, the function <code class="code">OnePassReduceWord</code> searches the list of rules until it finds that the left-hand side of a <code class="code">rule</code> is a <code class="code">subword</code> of <code class="code">word</code>, whereupon it replaces that <code class="code">subword</code> with the right-hand side of the matching rule. The search is continued from the next <code class="code">rule</code> in <code class="code">rules</code>, but using the new <code class="code">word</code>. When the end of <code class="code">rules</code> is reached, one pass is considered to have been made and the reduced <code class="code">word</code> is returned. If no matches are found then the original <code class="code">word</code> is returned.</p>
+
+<p>The function <code class="code">ReduceWordKB</code> repeatedly applies the function <code class="code">OnePassReduceWord</code> until the <code class="code">word</code> remaining contains no left-hand side of a <code class="code">rule</code> as a <code class="code">subword</code>. If <code class="code">rules</code> is a complete rewrite system, then the irreducible <code class="code">word</code> that is returned is unique, otherwise the order of the rules in <code class="code">rules</code> will determine which irreducible word is returned. In the example we see that <span class="SimpleMath">\(b^9a^9\)</span> reduces to <span class="SimpleMath">\(ba\)</span> which is not a normal form as we have seen in <a href="chap2_mj.html#X858ECE3E807C7363"><span class="RefLink">2.2-1</span></a>, where <span class="SimpleMath">\(b^+a^+ \to a^+b^-\)</span> is the last rule.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">monrels := Concatenation( gprels, invrels ); </span>
+[ q8_M1^4, q8_M2^4, q8_M1*q8_M2*q8_M1*q8_M4, q8_M1^2*q8_M2^2, q8_M1*q8_M3, 
+  q8_M2*q8_M4, q8_M3*q8_M1, q8_M4*q8_M2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">id := One( monrels[1] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r0 := List( monrels, r -&gt; [ r, id ] ); </span>
+[ [ q8_M1^4, &lt;identity ...&gt; ], [ q8_M2^4, &lt;identity ...&gt; ], 
+  [ q8_M1*q8_M2*q8_M1*q8_M4, &lt;identity ...&gt; ], 
+  [ q8_M1^2*q8_M2^2, &lt;identity ...&gt; ], [ q8_M1*q8_M3, &lt;identity ...&gt; ], 
+  [ q8_M2*q8_M4, &lt;identity ...&gt; ], [ q8_M3*q8_M1, &lt;identity ...&gt; ], 
+  [ q8_M4*q8_M2, &lt;identity ...&gt; ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ap := genfgmon[1];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bp := genfgmon[2];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">am := genfgmon[3];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bm := genfgmon[4];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w0 := bp^9 * ap^9; </span>
+q8_M2^9*q8_M1^9
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w1 := OnePassReduceWord( w0, r0 ); </span>
+q8_M2^5*q8_M1^5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w2 := ReduceWordKB( w0, r0 ); </span>
+q8_M2*q8_M1
+
+</pre></div>
+
+<p><a id="X7F0CD1EB7C220D40" name="X7F0CD1EB7C220D40"></a></p>
+
+<h5>2.2-3 OnePassKB</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OnePassKB</code>( <var class="Arg">rules</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RewriteReduce</code>( <var class="Arg">rules</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KnuthBendix</code>( <var class="Arg">rules</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShorterRule</code>( <var class="Arg">rule1</var>, <var class="Arg">rule2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">OnePassKB</code> implements the main loop of the Knuth-Bendix completion algorithm. Rules are compared with each other; all critical pairs are calculated; and the irreducible critical pairs are orientated with respect to the length-lexicographical ordering and added to the rewrite system.</p>
+
+<p>The function <code class="code">RewriteReduce</code> will remove unnecessary rules from a rewrite system. A rule is deemed to be unnecessary if it is implied by the other rules, i.e. if both sides can be reduced to the same thing by the remaining rules.</p>
+
+<p>The function <code class="code">KnuthBendix</code> implements the Knuth-Bendix algorithm, attempting to complete a rewrite system with respect to a length-lexicographic ordering. It calls first <code class="code">OnePassKB</code>, which adds rules, and then (for efficiency) <code class="code">RewriteReduce</code> which removes any unnecessary ones. This procedure is repeated until <code class="code">OnePassKB</code> adds no more rules. It will not always terminate, but for many examples (all finite groups) it will be successful. The rewrite system returned is complete, that is: it will rewrite any given word in the free monoid to a unique irreducible; there is one irreducible for each element of the quotient monoid; and any two elements of the free monoid which are in the same class will rewrite to the same irreducible.</p>
+
+<p>The function <code class="code">ShorterRule</code> gives an ordering on rules. Rules <span class="SimpleMath">\((g_lg_2,id)\)</span> that identify two generators (or one generator with the inverse of another) come first in the ordering. Otherwise one precedes another if it reduces the length of a word by a greater amount.</p>
+
+<p>One pass of this procedure for our <code class="code">q8</code> example adds 13 relators to the original 8, and these 21 are then reduced to 9. A second pass and reduction gives the list of 16 rules seen above, forming a complete rewrite system for the group. Now <span class="SimpleMath">\(b^9a^9\)</span> correctly reduces to <span class="SimpleMath">\(ab^{-1}\)</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r1 := OnePassKB( r0 );</span>
+[ [ q8_M1^4, &lt;identity ...&gt; ], [ q8_M2^4, &lt;identity ...&gt; ], 
+  [ q8_M1*q8_M2*q8_M1*q8_M4, &lt;identity ...&gt; ], 
+  [ q8_M1^2*q8_M2^2, &lt;identity ...&gt; ], [ q8_M1*q8_M3, &lt;identity ...&gt; ], 
+  [ q8_M2*q8_M4, &lt;identity ...&gt; ], [ q8_M3*q8_M1, &lt;identity ...&gt; ], 
+  [ q8_M4*q8_M2, &lt;identity ...&gt; ], [ q8_M2*q8_M1*q8_M4, q8_M1^3 ], 
+  [ q8_M1*q8_M2^2, q8_M1^3 ], [ q8_M2^2, q8_M1^2 ], [ q8_M1^3, q8_M3 ], 
+  [ q8_M2^3, q8_M4 ], [ q8_M1*q8_M2*q8_M1, q8_M2 ], 
+  [ q8_M2^3, q8_M1^2*q8_M2 ], [ q8_M2^2, q8_M1^2 ], [ q8_M1^2*q8_M2, q8_M4 ], 
+  [ q8_M1^3, q8_M3 ], [ q8_M2*q8_M1*q8_M4, q8_M3 ], [ q8_M1*q8_M2^2, q8_M3 ], 
+  [ q8_M2^3, q8_M4 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( r1 );</span>
+21
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r1 := RewriteReduce( r1 ); </span>
+[ [ q8_M1*q8_M3, &lt;identity ...&gt; ], [ q8_M2^2, q8_M1^2 ], 
+  [ q8_M2*q8_M4, &lt;identity ...&gt; ], [ q8_M3*q8_M1, &lt;identity ...&gt; ], 
+  [ q8_M4*q8_M2, &lt;identity ...&gt; ], [ q8_M1^3, q8_M3 ], 
+  [ q8_M1^2*q8_M2, q8_M4 ], [ q8_M1*q8_M2*q8_M1, q8_M2 ], 
+  [ q8_M2*q8_M1*q8_M4, q8_M3 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( r1 );</span>
+9
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r2 := KnuthBendix( r1 );</span>
+[ [ q8_M1*q8_M3, &lt;identity ...&gt; ], [ q8_M2*q8_M1, q8_M1*q8_M4 ], 
+  [ q8_M2^2, q8_M1^2 ], [ q8_M2*q8_M3, q8_M1*q8_M2 ], 
+  [ q8_M2*q8_M4, &lt;identity ...&gt; ], [ q8_M3*q8_M1, &lt;identity ...&gt; ], 
+  [ q8_M3*q8_M2, q8_M1*q8_M4 ], [ q8_M3^2, q8_M1^2 ], 
+  [ q8_M3*q8_M4, q8_M1*q8_M2 ], [ q8_M4*q8_M1, q8_M1*q8_M2 ], 
+  [ q8_M4*q8_M2, &lt;identity ...&gt; ], [ q8_M4*q8_M3, q8_M1*q8_M4 ], 
+  [ q8_M4^2, q8_M1^2 ], [ q8_M1^3, q8_M3 ], [ q8_M1^2*q8_M2, q8_M4 ], 
+  [ q8_M1^2*q8_M4, q8_M2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( r2 );</span>
+16
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w2 := ReduceWordKB( w0, r2 );</span>
+q8_M1*q8_M4
+
+</pre></div>
+
+<p><a id="X83CBF2BE8478A728" name="X83CBF2BE8478A728"></a></p>
+
+<h4>2.3 <span class="Heading">Enumerating elements</span></h4>
+
+<p><a id="X7EDA50068207339D" name="X7EDA50068207339D"></a></p>
+
+<h5>2.3-1 ElementsOfMonoidPresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElementsOfMonoidPresentation</code>( <var class="Arg">mon</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ElementsOfMonoidPresentation</code> returns a list of normal forms for the elements of the group given by the monoid presentation <code class="code">mon</code>. The normal forms are the least elements in each equivalence class (with respect to length-lex order). When <code class="code">rules</code> is a complete rewrite system for <code class="code">G</code> the list returned is a set of normal forms for the group elements. For <code class="code">q8</code> this list is</p>
+
+<p class="center">\[
+[\; {\rm id},\; a^+,\; b^+,\; a^-,\; b^-,\; a^{+2},\; a^+b^+,\; a^+b^-\; ]. 
+\]</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">elq8 := Elements( q8 );</span>
+[ &lt;identity ...&gt;, f1, f1^3, f2, f1^2*f2, f1^2, f1*f2, f1^3*f2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">elmonq8 := ElementsOfMonoidPresentation( monq8 );</span>
+[ &lt;identity. ..&gt;, q8_Ml, q8_M2, q8_M3, q8_M4, q8_Ml^2, q8_Ml*q8_M2, 
+  q8_Ml*q8_M4 ]
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

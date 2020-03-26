@@ -1,0 +1,1919 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (FinInG) - Appendix A: The structure of FinInG </title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapA"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap13.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapB.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapA_mj.html">[MathJax on]</a></p>
+<p><a id="X7F3345C884CD0268" name="X7F3345C884CD0268"></a></p>
+<div class="ChapSects"><a href="chapA.html#X7F3345C884CD0268">A <span class="Heading">The structure of <strong class="pkg">FinInG</strong> </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X84D6D0EC7989CF5E">A.1 <span class="Heading">The different components</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X83E153B784E17E05">A.2 <span class="Heading">The complete inventory</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X844A8A1F85E6E038">A.2-1 <span class="Heading">Declarations</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X81736D4378BF64FF">A.2-2 <span class="Heading">Functions/Methods</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X835D28F3807174EB">A.3 <span class="Heading">The filter graph(s)</span></a>
+</span>
+</div>
+</div>
+
+<h3>A <span class="Heading">The structure of <strong class="pkg">FinInG</strong> </span></h3>
+
+<p><a id="X84D6D0EC7989CF5E" name="X84D6D0EC7989CF5E"></a></p>
+
+<h4>A.1 <span class="Heading">The different components</span></h4>
+
+<p><strong class="pkg">FinInG</strong> consists of the following components: geometry, liegeometry, group, projectivespace, correlations, polarspace/morphisms, enumerators, diagram, varieties, affinespace/affinegroup, gpolygons, and orbits-stabilisers. Each of these components corresponds with a <em>component.gd</em> and <em>component.gi</em> file. The file <em>component.gi</em> will be dependent on <em>component.gd</em> and all previously loaded <em>.gd</em> files, <em>component1/component2</em> means that both <em>component1.gi</em> and <em>component2.gi</em> depend on the declarations in both <em>component1.gd</em> and <em>component2.gd</em>.</p>
+
+<p><a id="X83E153B784E17E05" name="X83E153B784E17E05"></a></p>
+
+<h4>A.2 <span class="Heading">The complete inventory</span></h4>
+
+<p><a id="X844A8A1F85E6E038" name="X844A8A1F85E6E038"></a></p>
+
+<h5>A.2-1 <span class="Heading">Declarations</span></h5>
+
+
+<div class="example"><pre>
+Operations
+
+geometry.gd: operations
+
+O: IncidenceStructure: [IsList, IsFunction, IsFunction, IsList]
+O: ResidueOfFlag: [IsFlagOfIncidenceStructure]
+O: ElementsOfIncidenceStructure: [IsIncidenceStructure]
+O: ElementsOfIncidenceStructure: [IsIncidenceStructure, IsPosInt]
+O: ElementsOfIncidenceStructure: [IsIncidenceStructure, IsString]
+O: NrElementsOfIncidenceStructure: [IsIncidenceStructure, IsPosInt]
+O: NrElementsOfIncidenceStructure: [IsIncidenceStructure, IsString]
+O: IncidenceGraph: [IsIncidenceStructure]
+O: Points: [IsIncidenceStructure]
+O: Lines: [IsIncidenceStructure]
+O: Planes: [IsIncidenceStructure]
+O: Solids: [IsIncidenceStructure]
+O: FlagOfIncidenceStructure: [IsIncidenceStructure, IsElementOfIncidenceStructureCollection]
+O: FlagOfIncidenceStructure: [IsIncidenceStructure, IsListandIsEmpty]
+O: ChamberOfIncidenceStructure: [IsElementOfIncidenceStructureCollection]
+O: ElementsOfFlag: [IsFlagOfIncidenceStructure]
+O: IsIncident: [IsElementOfIncidenceStructure, IsElementOfIncidenceStructure]
+O: IsIncident: [IsElementOfIncidenceStructure, IsFlagOfIncidenceStructure]
+O: IsIncident: [IsFlagOfIncidenceStructure, IsElementOfIncidenceStructure]
+O: ShadowOfElement: [IsElementOfIncidenceStructure, IsPosInt]
+O: IsCollinear: [IsIncidenceStructure, IsElementOfIncidenceStructure, IsElementOfIncidenceStructure]
+O: Span: [IsElementOfIncidenceStructure, IsElementOfIncidenceStructure]
+O: Meet: [IsElementOfIncidenceStructure, IsElementOfIncidenceStructure]
+O: Type: [IsElementOfIncidenceStructureandIsElementOfIncidenceStructureRep]
+O: Type: [IsElementsOfIncidenceStructureandIsElementsOfIncidenceStructureRep]
+O: Type: [IsFlagOfIncidenceStructureandIsFlagOfIncidenceStructureRep]
+O: Wrap: [IsIncidenceStructure, IsPosInt, IsObject]
+O: Unwrap: [IsElementOfIncidenceStructure]
+O: ObjectToElement: [IsIncidenceStructure, IsPosInt, IsObject]
+O: ObjectToElement: [IsIncidenceStructure, IsObject]
+O: UnderlyingObject: [IsElementOfIncidenceStructure]
+O: ShadowOfElement: [IsIncidenceStructure, IsElementOfIncidenceStructure, IsPosInt]
+O: ShadowOfElement: [IsIncidenceStructure, IsElementOfIncidenceStructure, IsString]
+O: ShadowOfFlag: [IsIncidenceStructure, IsFlagOfIncidenceStructure, IsPosInt]
+O: ShadowOfFlag: [IsIncidenceStructure, IsFlagOfIncidenceStructure, IsString]
+O: ShadowOfFlag: [IsIncidenceStructure, IsList, IsPosInt]
+O: ShadowOfFlag: [IsIncidenceStructure, IsList, IsString]
+O: ElementsIncidentWithElementOfIncidenceStructure: [IsElementOfIncidenceStructure, IsPosInt]
+O: Points: [IsElementOfIncidenceStructure]
+O: Lines: [IsElementOfIncidenceStructure]
+O: Planes: [IsElementOfIncidenceStructure]
+O: Solids: [IsElementOfIncidenceStructure]
+O: Hyperplanes: [IsElementOfIncidenceStructure]
+O: Points: [IsIncidenceStructure, IsElementOfIncidenceStructure]
+O: Lines: [IsIncidenceStructure, IsElementOfIncidenceStructure]
+O: Planes: [IsIncidenceStructure, IsElementOfIncidenceStructure]
+O: Solids: [IsIncidenceStructure, IsElementOfIncidenceStructure]
+O: Hyperplanes: [IsIncidenceStructure, IsElementOfIncidenceStructure]
+
+liegeometry.gd: operations
+
+O: UnderlyingVectorSpace: [IsLieGeometry]
+O: UnderlyingVectorSpace: [IsElementOfLieGeometry]
+O: UnderlyingVectorSpace: [IsFlagOfLieGeometry]
+O: VectorSpaceToElement: [IsLieGeometry, IsRowVector]
+O: VectorSpaceToElement: [IsLieGeometry, Is8BitVectorRep]
+O: VectorSpaceToElement: [IsLieGeometry, IsPlistRep]
+O: VectorSpaceToElement: [IsLieGeometry, Is8BitMatrixRep]
+O: VectorSpaceToElement: [IsLieGeometry, IsGF2MatrixRep]
+O: VectorSpaceToElement: [IsLieGeometry, IsCVecRep]
+O: VectorSpaceToElement: [IsLieGeometry, IsCMatRep]
+O: EmptySubspace: [IsLieGeometry]
+O: RandomSubspace: [IsVectorSpace, IsInt]
+O: IsIncident: [IsEmptySubspace, IsElementOfLieGeometry]
+O: IsIncident: [IsElementOfLieGeometry, IsEmptySubspace]
+O: IsIncident: [IsEmptySubspace, IsLieGeometry]
+O: IsIncident: [IsLieGeometry, IsEmptySubspace]
+O: IsIncident: [IsEmptySubspace, IsEmptySubspace]
+O: Span: [IsEmptySubspace, IsElementOfLieGeometry]
+O: Span: [IsElementOfLieGeometry, IsEmptySubspace]
+O: Span: [IsEmptySubspace, IsLieGeometry]
+O: Span: [IsLieGeometry, IsEmptySubspace]
+O: Span: [IsEmptySubspace, IsEmptySubspace]
+O: Span: [IsList]
+O: Meet: [IsEmptySubspace, IsElementOfLieGeometry]
+O: Meet: [IsElementOfLieGeometry, IsEmptySubspace]
+O: Meet: [IsEmptySubspace, IsLieGeometry]
+O: Meet: [IsLieGeometry, IsEmptySubspace]
+O: Meet: [IsEmptySubspace, IsEmptySubspace]
+O: ElementToElement: [IsLieGeometry, IsElementOfLieGeometry]
+O: ConvertElement: [IsLieGeometry, IsElementOfLieGeometry]
+O: ConvertElementNC: [IsLieGeometry, IsElementOfLieGeometry]
+
+group.gd: operations
+
+O: FindBasePointCandidates: [IsGroup, IsRecord, IsInt]
+O: FindBasePointCandidates: [IsGroup, IsRecord, IsInt, IsObject]
+O: ProjEl: [IsMatrixandIsFFECollColl]
+O: ProjEls: [IsList]
+O: Projectivity: [IsList, IsField]
+O: Projectivity: [IsProjectiveSpace, IsMatrix]
+O: ProjElWithFrob: [IsMatrixandIsFFECollColl, IsMapping]
+O: ProjElWithFrob: [IsMatrixandIsFFECollColl, IsMapping, IsField]
+O: ProjElsWithFrob: [IsList]
+O: ProjElsWithFrob: [IsList, IsField]
+O: CollineationOfProjectiveSpace: [IsList, IsField]
+O: CollineationOfProjectiveSpace: [IsList, IsMapping, IsField]
+O: CollineationOfProjectiveSpace: [IsProjectiveSpace, IsMatrix]
+O: CollineationOfProjectiveSpace: [IsProjectiveSpace, IsMatrix, IsMapping]
+O: CollineationOfProjectiveSpace: [IsProjectiveSpace, IsMapping]
+O: Collineation: [IsProjectiveSpace, IsMatrix]
+O: Collineation: [IsProjectiveSpace, IsMatrix, IsMapping]
+O: ProjectiveSemilinearMap: [IsList, IsMapping, IsField]
+O: ProjectivityByImageOfStandardFrameNC: [IsProjectiveSpace, IsList]
+O: MatrixOfCollineation: [IsProjGrpElWithFrobandIsProjGrpElWithFrobRep]
+O: MatrixOfCollineation: [IsProjGrpElandIsProjGrpElRep]
+O: FieldAutomorphism: [IsProjGrpElWithFrobandIsProjGrpElWithFrobRep]
+O: ActionOnAllProjPoints: [IsProjectiveGroupWithFrob]
+O: SetAsNiceMono: [IsProjectiveGroupWithFrob, IsGroupHomomorphism]
+O: CanonicalGramMatrix: [IsString, IsPosInt, IsField]
+O: CanonicalQuadraticForm: [IsString, IsPosInt, IsField]
+O: SOdesargues: [IsInt, IsPosInt, IsFieldandIsFinite]
+O: GOdesargues: [IsInt, IsPosInt, IsFieldandIsFinite]
+O: SUdesargues: [IsPosInt, IsFieldandIsFinite]
+O: GUdesargues: [IsPosInt, IsFieldandIsFinite]
+O: Spdesargues: [IsPosInt, IsFieldandIsFinite]
+O: GeneralSymplecticGroup: [IsPosInt, IsFieldandIsFinite]
+O: GSpdesargues: [IsPosInt, IsFieldandIsFinite]
+O: DeltaOminus: [IsPosInt, IsFieldandIsFinite]
+O: DeltaOplus: [IsPosInt, IsFieldandIsFinite]
+O: GammaOminus: [IsPosInt, IsFieldandIsFinite]
+O: GammaO: [IsPosInt, IsFieldandIsFinite]
+O: GammaOplus: [IsPosInt, IsFieldandIsFinite]
+O: GammaU: [IsPosInt, IsFieldandIsFinite]
+O: GammaSp: [IsPosInt, IsFieldandIsFinite]
+
+projectivespace.gd: operations
+
+O: ProjectiveSpace: [IsInt, IsField]
+O: ProjectiveSpace: [IsInt, IsPosInt]
+O: IsIncident: [IsSubspaceOfProjectiveSpace, IsProjectiveSpace]
+O: IsIncident: [IsProjectiveSpace, IsSubspaceOfProjectiveSpace]
+O: IsIncident: [IsProjectiveSpace, IsProjectiveSpace]
+O: Hyperplanes: [IsProjectiveSpace]
+O: BaerSublineOnThreePoints:   [ IsSubspaceOfProjectiveSpace,  IsSubspaceOfProjectiveSpace,  IsSubspaceOfProjectiveSpace] 
+O: BaerSubplaneOnQuadrangle:   [ IsSubspaceOfProjectiveSpace,  IsSubspaceOfProjectiveSpace,      IsSubspaceOfProjectiveSpace,  IsSubspaceOfProjectiveSpace ] 
+O: RandomSubspace: [IsProjectiveSpace, IsInt]
+O: RandomSubspace: [IsSubspaceOfProjectiveSpace, IsInt]
+O: RandomSubspace: [IsProjectiveSpace]
+O: Span: [IsProjectiveSpace, IsSubspaceOfProjectiveSpace]
+O: Span: [IsSubspaceOfProjectiveSpace, IsProjectiveSpace]
+O: Span: [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsBool]
+O: Span: [IsList, IsBool]
+O: Meet: [IsSubspaceOfProjectiveSpace, IsProjectiveSpace]
+O: Meet: [IsProjectiveSpace, IsSubspaceOfProjectiveSpace]
+O: Meet: [IsList]
+O: DualCoordinatesOfHyperplane: [IsSubspaceOfProjectiveSpace]
+O: HyperplaneByDualCoordinates: [IsProjectiveSpace, IsList]
+O: ComplementSpace: [IsVectorSpace, IsFFECollColl]
+O: ElationOfProjectiveSpace: [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace]
+O: ProjectiveElationGroup: [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace]
+O: ProjectiveElationGroup: [IsSubspaceOfProjectiveSpace]
+O: HomologyOfProjectiveSpace: [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace,  IsSubspaceOfProjectiveSpace ] 
+O: ProjectiveHomologyGroup: [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace]
+O: SingerCycleMat: [IsInt, IsInt]
+O: SingerCycleCollineation: [IsInt, IsInt]
+
+correlations.gd: operations
+
+O: StandardDualityOfProjectiveSpace: [IsProjectiveSpace]
+O: IdentityMappingOfElementsOfProjectiveSpace: [IsProjectiveSpace]
+O: ActionOnAllPointsHyperplanes: [IsProjGroupWithFrobWithPSIsom]
+O: ProjElWithFrobWithPSIsom:    [IsMatrix and IsFFECollColl,  IsMapping,  IsField] 
+O: ProjElWithFrobWithPSIsom:    [IsMatrix and IsFFECollColl,  IsMapping,  IsField,    IsStandardDualityOfProjectiveSpace] 
+O: ProjElWithFrobWithPSIsom:    [IsMatrix and IsFFECollColl,  IsMapping,  IsField,    IsGeneralMapping and IsSPGeneralMapping and IsOne] 
+O: ProjElsWithFrobWithPSIsom: [IsList, IsField]
+O: SetAsNiceMono:                   [IsProjGroupWithFrobWithPSIsom,  IsGroupHomomorphism] 
+O: CorrelationOfProjectiveSpace: [IsList, IsField]
+O: CorrelationOfProjectiveSpace: [IsList, IsMapping, IsField]
+O: CorrelationOfProjectiveSpace: [IsList, IsField, IsStandardDualityOfProjectiveSpace]
+O: CorrelationOfProjectiveSpace: [IsList, IsField, IsIdentityMappingOfElementsOfProjectiveSpace]
+O: CorrelationOfProjectiveSpace: [IsList, IsMapping, IsField, IsStandardDualityOfProjectiveSpace]
+O: CorrelationOfProjectiveSpace: [IsList, IsMapping, IsField, IsIdentityMappingOfElementsOfProjectiveSpace]
+O: CorrelationOfProjectiveSpace: [IsProjectiveSpace, IsMatrix, IsMapping, IsStandardDualityOfProjectiveSpace]
+O: CorrelationOfProjectiveSpace: [IsProjectiveSpace, IsMatrix, IsMapping, IsIdentityMappingOfElementsOfProjectiveSpace]
+O: Correlation: [IsProjectiveSpace, IsMatrix, IsMapping, IsStandardDualityOfProjectiveSpace]
+O: Correlation: [IsProjectiveSpace, IsMatrix, IsMapping, IsIdentityMappingOfElementsOfProjectiveSpace]
+O: MatrixOfCorrelation: [IsProjGrpElWithFrobWithPSIsomandIsProjGrpElWithFrobWithPSIsomRep]
+O: FieldAutomorphism: [IsProjGrpElWithFrobWithPSIsomandIsProjGrpElWithFrobWithPSIsomRep]
+O: ProjectiveSpaceIsomorphism: [IsProjGrpElWithFrobWithPSIsomandIsProjGrpElWithFrobWithPSIsomRep]
+O: PolarityOfProjectiveSpaceOp: [IsForm]
+O: PolarityOfProjectiveSpace: [IsForm]
+O: PolarityOfProjectiveSpace: [IsMatrix, IsFieldandIsFinite]
+O: PolarityOfProjectiveSpace: [IsMatrix, IsFrobeniusAutomorphism, IsFieldandIsFinite]
+O: HermitianPolarityOfProjectiveSpace: [IsMatrix, IsFieldandIsFinite]
+O: PolarityOfProjectiveSpace: [IsClassicalPolarSpace]
+O: BaseField: [IsPolarityOfProjectiveSpace]
+O: IsAbsoluteElement: [IsElementOfIncidenceStructure, IsPolarityOfProjectiveSpace]
+O: GeometryOfAbsolutePoints: [IsPolarityOfProjectiveSpace]
+O: AbsolutePoints: [IsPolarityOfProjectiveSpace]
+O: PolarSpace: [IsPolarityOfProjectiveSpace]
+
+polarspace.gd: operations
+
+O: PolarSpaceStandard: [IsForm, IsBool]
+O: PolarSpace: [IsForm, IsField, IsGroup, IsFunction]
+O: PolarSpace: [IsForm]
+O: PolarMap: [IsClassicalPolarSpace]
+O: TangentSpace: [IsSubspaceOfClassicalPolarSpace]
+O: TangentSpace: [IsClassicalPolarSpace, IsSubspaceOfProjectiveSpace]
+O: Pole: [IsClassicalPolarSpace, IsSubspaceOfProjectiveSpace]
+O: TypeOfSubspace: [IsClassicalPolarSpace, IsSubspaceOfProjectiveSpace]
+O: CanonicalOrbitRepresentativeForSubspaces: [IsString, IsPosInt, IsField]
+O: RandomSubspace: [IsClassicalPolarSpace, IsPosInt]
+O: NumberOfTotallySingularSubspaces: [IsClassicalPolarSpace, IsPosInt]
+O: EllipticQuadric: [IsPosInt, IsField]
+O: EllipticQuadric: [IsPosInt, IsPosInt]
+O: SymplecticSpace: [IsPosInt, IsField]
+O: SymplecticSpace: [IsPosInt, IsPosInt]
+O: ParabolicQuadric: [IsPosInt, IsField]
+O: ParabolicQuadric: [IsPosInt, IsPosInt]
+O: HyperbolicQuadric: [IsPosInt, IsField]
+O: HyperbolicQuadric: [IsPosInt, IsPosInt]
+O: HermitianPolarSpace: [IsPosInt, IsField]
+O: HermitianPolarSpace: [IsPosInt, IsPosInt]
+O: CanonicalPolarSpace: [IsClassicalPolarSpace]
+O: StandardPolarSpace: [IsClassicalPolarSpace]
+O: Span: [IsSubspaceOfClassicalPolarSpace, IsSubspaceOfClassicalPolarSpace, IsBool]
+
+morphisms.gd: operations
+
+O: GeometryMorphismByFunction:   [ IsAnyElementsOfIncidenceStructure,  IsAnyElementsOfIncidenceStructure,     IsFunction,  IsBool,  IsFunction ] 
+O: GeometryMorphismByFunction:   [ IsAnyElementsOfIncidenceStructure,  IsAnyElementsOfIncidenceStructure,     IsFunction,  IsFunction ] 
+O: GeometryMorphismByFunction:   [ IsAnyElementsOfIncidenceStructure,  IsAnyElementsOfIncidenceStructure,     IsFunction ] 
+O: IsomorphismPolarSpacesProjectionFromNucleus: [IsClassicalPolarSpace, IsClassicalPolarSpace, IsBool]
+O: IsomorphismPolarSpacesNC:  [ IsClassicalPolarSpace,  IsClassicalPolarSpace,  IsBool ]
+O: IsomorphismPolarSpacesNC:                      [ IsClassicalPolarSpace,  IsClassicalPolarSpace ]
+O: IsomorphismPolarSpaces:                      [ IsClassicalPolarSpace,  IsClassicalPolarSpace,  IsBool ]
+O: IsomorphismPolarSpaces:                      [ IsClassicalPolarSpace,  IsClassicalPolarSpace ]
+O: NaturalEmbeddingBySubspace:                      [ IsLieGeometry,  IsLieGeometry,  IsSubspaceOfProjectiveSpace ]
+O: NaturalEmbeddingBySubspaceNC:                      [ IsLieGeometry,  IsLieGeometry,  IsSubspaceOfProjectiveSpace ]
+O: NaturalProjectionBySubspace:                      [ IsClassicalPolarSpace,  IsSubspaceOfClassicalPolarSpace ]
+O: NaturalProjectionBySubspace:                      [ IsProjectiveSpace,  IsSubspaceOfProjectiveSpace ]
+O: NaturalProjectionBySubspaceNC:                      [ IsClassicalPolarSpace,  IsSubspaceOfClassicalPolarSpace ]
+O: NaturalProjectionBySubspaceNC:                      [ IsProjectiveSpace,  IsSubspaceOfProjectiveSpace ]
+O: ShrinkMat: [IsBasis, IsMatrix]
+O: ShrinkMat: [IsField, IsField, IsVector]
+O: ShrinkVec: [IsField, IsField, IsVector]
+O: ShrinkVec: [IsField, IsField, IsVector, IsBasis]
+O: BlownUpProjectiveSpace: [IsBasis, IsProjectiveSpace]
+O: BlownUpProjectiveSpaceBySubfield: [IsField, IsProjectiveSpace]
+O: BlownUpSubspaceOfProjectiveSpace: [IsBasis, IsSubspaceOfProjectiveSpace]
+O: BlownUpSubspaceOfProjectiveSpaceBySubfield: [IsField, IsSubspaceOfProjectiveSpace]
+O: IsDesarguesianSpreadElement: [IsBasis, IsSubspaceOfProjectiveSpace]
+O: IsBlownUpSubspaceOfProjectiveSpace: [IsBasis, IsSubspaceOfProjectiveSpace]
+O: NaturalEmbeddingByFieldReduction:                      [ IsProjectiveSpace,  IsField,  IsBasis ]
+O: NaturalEmbeddingByFieldReduction:                      [ IsProjectiveSpace,  IsField ]
+O: NaturalEmbeddingByFieldReduction:                      [ IsProjectiveSpace,  IsProjectiveSpace ]
+O: NaturalEmbeddingByFieldReduction:                      [ IsProjectiveSpace,  IsProjectiveSpace,  IsBasis ]
+O: BilinearFormFieldReduction: [IsBilinearForm, IsField, IsFFE, IsBasis]
+O: QuadraticFormFieldReduction: [IsQuadraticForm, IsField, IsFFE, IsBasis]
+O: HermitianFormFieldReduction: [IsHermitianForm, IsField, IsFFE, IsBasis]
+O: BilinearFormFieldReduction: [IsBilinearForm, IsField, IsFFE]
+O: QuadraticFormFieldReduction: [IsQuadraticForm, IsField, IsFFE]
+O: HermitianFormFieldReduction: [IsHermitianForm, IsField, IsFFE]
+O: NaturalEmbeddingByFieldReduction: [IsClassicalPolarSpace, IsField, IsFFE, IsBasis, IsBool]
+O: NaturalEmbeddingByFieldReduction: [IsClassicalPolarSpace, IsField, IsFFE, IsBasis]
+O: NaturalEmbeddingByFieldReduction: [IsClassicalPolarSpace, IsField, IsFFE, IsBool]
+O: NaturalEmbeddingByFieldReduction: [IsClassicalPolarSpace, IsField, IsFFE]
+O: NaturalEmbeddingByFieldReduction: [IsClassicalPolarSpace, IsField, IsBool]
+O: NaturalEmbeddingByFieldReduction: [IsClassicalPolarSpace, IsField]
+O: NaturalEmbeddingByFieldReduction: [IsClassicalPolarSpace, IsClassicalPolarSpace, IsBool]
+O: NaturalEmbeddingByFieldReduction: [IsClassicalPolarSpace, IsClassicalPolarSpace]
+O: CanonicalEmbeddingByFieldReduction: [ IsClassicalPolarSpace,  IsField,  IsBool ]
+O: CanonicalEmbeddingByFieldReduction: [ IsClassicalPolarSpace,  IsClassicalPolarSpace,  IsBool ]
+O: NaturalEmbeddingBySubfield:                      [ IsProjectiveSpace,  IsProjectiveSpace ]
+O: NaturalEmbeddingBySubfield:  [ IsClassicalPolarSpace,  IsClassicalPolarSpace,  IsBool ]
+O: NaturalEmbeddingBySubfield:                      [ IsClassicalPolarSpace,  IsClassicalPolarSpace ]
+O: PluckerCoordinates: [IsMatrix]
+O: InversePluckerCoordinates: [IsVector]
+O: PluckerCoordinates: [IsSubspaceOfProjectiveSpace]
+O: KleinCorrespondence: [IsField, IsBool]
+O: KleinCorrespondence: [IsField]
+O: KleinCorrespondence: [IsPosInt, IsBool]
+O: KleinCorrespondence: [IsPosInt]
+O: KleinCorrespondence: [IsClassicalPolarSpace, IsBool]
+O: KleinCorrespondence: [IsClassicalPolarSpace]
+O: KleinCorrespondenceExtended: [IsField, IsBool]
+O: KleinCorrespondenceExtended: [IsField]
+O: KleinCorrespondenceExtended: [IsPosInt, IsBool]
+O: KleinCorrespondenceExtended: [IsPosInt]
+O: KleinCorrespondenceExtended: [IsClassicalPolarSpace, IsBool]
+O: KleinCorrespondenceExtended: [IsClassicalPolarSpace]
+O: NaturalDualitySymplectic: [IsClassicalGQ, IsClassicalGQ, IsBool, IsBool]
+O: NaturalDualityHermitian: [IsClassicalGQ, IsClassicalGQ, IsBool, IsBool]
+O: SelfDualitySymplectic: [IsClassicalGQ, IsBool]
+O: SelfDualityParabolic: [IsClassicalGQ, IsBool]
+O: NaturalDuality: [IsClassicalGQ, IsClassicalGQ, IsBool]
+O: NaturalDuality: [IsClassicalGQ, IsClassicalGQ]
+O: NaturalDuality: [IsClassicalGQ, IsBool]
+O: NaturalDuality: [IsClassicalGQ]
+O: SelfDuality: [IsClassicalGQ, IsBool]
+O: SelfDuality: [IsClassicalGQ]
+O: ProjectiveCompletion: [IsAffineSpace]
+
+enumerators.gd: operations
+
+O: AntonEnumerator: [IsSubspacesOfClassicalPolarSpace]
+O: EnumeratorByOrbit: [IsSubspacesOfClassicalPolarSpace]
+
+diagram.gd: operations
+
+O: CosetGeometry: [IsGroup, IsHomogeneousList]
+O: ParabolicSubgroups: [IsCosetGeometry]
+O: AmbientGroup: [IsCosetGeometry]
+O: FlagToStandardFlag: [IsCosetGeometry, IsFlagOfCosetGeometry]
+O: ResidueOfFlag: [IsFlagOfCosetGeometry]
+O: CanonicalResidueOfFlag: [IsCosetGeometry, IsFlagOfCosetGeometry]
+O: RandomElement: [IsCosetGeometry]
+O: RandomFlag: [IsCosetGeometry]
+O: RandomChamber: [IsCosetGeometry]
+O: AutGroupIncidenceStructureWithNauty: [IsCosetGeometry]
+O: CorGroupIncidenceStructureWithNauty: [IsCosetGeometry]
+O: IsIsomorphicIncidenceStructureWithNauty: [IsCosetGeometry, IsCosetGeometry]
+O: Rk2GeoDiameter: [IsCosetGeometry, IsPosInt]
+O: Rk2GeoGonality: [IsCosetGeometry]
+O: GeometryOfRank2Residue: [IsRank2Residue]
+O: GeometryFromLabelledGraph: [IsObjectandIS_REC]
+O: Rank2Residues: [IsIncidenceGeometry]
+O: MakeRank2Residue: [IsRank2Residue]
+
+varieties.gd: operations
+
+O: AlgebraicVariety: [IsProjectiveSpace, IsList]
+O: AlgebraicVariety: [IsAffineSpace, IsList]
+O: AlgebraicVariety: [IsProjectiveSpace, IsPolynomialRing, IsList]
+O: AlgebraicVariety: [IsAffineSpace, IsPolynomialRing, IsList]
+O: PointsOfAlgebraicVariety: [IsAlgebraicVariety]
+O: Points: [IsAlgebraicVariety]
+O: ProjectiveVariety: [IsProjectiveSpace, IsPolynomialRing, IsList]
+O: ProjectiveVariety: [IsProjectiveSpace, IsList]
+O: HermitianVariety: [IsPosInt, IsField]
+O: HermitianVariety: [IsPosInt, IsPosInt]
+O: HermitianVariety: [IsProjectiveSpace, IsPolynomialRing, IsPolynomial]
+O: HermitianVariety: [IsProjectiveSpace, IsPolynomial]
+O: QuadraticVariety: [IsPosInt, IsField]
+O: QuadraticVariety: [IsPosInt, IsField, IsString]
+O: QuadraticVariety: [IsPosInt, IsPosInt]
+O: QuadraticVariety: [IsPosInt, IsPosInt, IsString]
+O: QuadraticVariety: [IsProjectiveSpace, IsPolynomialRing, IsPolynomial]
+O: QuadraticVariety: [IsProjectiveSpace, IsPolynomial]
+O: PolarSpace: [IsProjectiveVariety]
+O: AffineVariety: [IsAffineSpace, IsPolynomialRing, IsList]
+O: AffineVariety: [IsAffineSpace, IsList]
+O: SegreMap: [IsHomogeneousList]
+O: SegreMap: [IsHomogeneousList, IsField]
+O: SegreVariety: [IsHomogeneousList]
+O: SegreVariety: [IsHomogeneousList, IsField]
+O: PointsOfSegreVariety: [IsSegreVariety]
+O: SegreMap: [IsSegreVariety]
+O: SegreMap: [IsProjectiveSpace, IsProjectiveSpace]
+O: SegreMap: [IsPosInt, IsPosInt, IsField]
+O: SegreMap: [IsPosInt, IsPosInt, IsPosInt]
+O: SegreVariety: [IsProjectiveSpace, IsProjectiveSpace]
+O: SegreVariety: [IsPosInt, IsPosInt, IsField]
+O: SegreVariety: [IsPosInt, IsPosInt, IsPosInt]
+O: VeroneseMap: [IsProjectiveSpace]
+O: VeroneseMap: [IsPosInt, IsField]
+O: VeroneseMap: [IsPosInt, IsPosInt]
+O: VeroneseVariety: [IsProjectiveSpace]
+O: VeroneseVariety: [IsPosInt, IsField]
+O: VeroneseVariety: [IsPosInt, IsPosInt]
+O: PointsOfVeroneseVariety: [IsVeroneseVariety]
+O: VeroneseMap: [IsVeroneseVariety]
+O: GrassmannCoordinates: [IsSubspaceOfProjectiveSpace]
+O: GrassmannMap: [IsPosInt, IsProjectiveSpace]
+O: GrassmannMap: [IsPosInt, IsPosInt, IsPosInt]
+O: GrassmannMap: [IsSubspacesOfProjectiveSpace]
+O: GrassmannMap: [IsGrassmannVariety]
+O: GrassmannVariety: [IsPosInt, IsProjectiveSpace]
+O: GrassmannVariety: [IsPosInt, IsPosInt, IsField]
+O: GrassmannVariety: [IsPosInt, IsPosInt, IsPosInt]
+O: GrassmannVariety: [IsSubspacesOfProjectiveSpace]
+O: PointsOfGrassmannVariety: [IsGrassmannVariety]
+O: ConicOnFivePoints: [IsHomogeneousListand                              IsSubspaceOfProjectiveSpaceCollection ] 
+
+affinespace.gd: operations
+
+O: VectorSpaceTransversal: [IsVectorSpace, IsFFECollColl]
+O: VectorSpaceTransversalElement: [IsVectorSpace, IsFFECollColl, IsVector]
+O: AffineSpace: [IsPosInt, IsField]
+O: AffineSpace: [IsPosInt, IsPosInt]
+O: Hyperplanes: [IsAffineSpace]
+O: AffineSubspace: [IsAffineSpace, IsRowVector]
+O: AffineSubspace: [IsAffineSpace, IsCVecRep]
+O: AffineSubspace: [IsAffineSpace, IsRowVector, IsPlistRep]
+O: AffineSubspace: [IsAffineSpace, IsRowVector, Is8BitMatrixRep]
+O: AffineSubspace: [IsAffineSpace, IsRowVector, IsGF2MatrixRep]
+O: AffineSubspace: [IsAffineSpace, IsCVecRep, IsCMatRep]
+O: RandomSubspace: [IsAffineSpace, IsInt]
+O: IsParallel: [IsSubspaceOfAffineSpace, IsSubspaceOfAffineSpace]
+O: UnderlyingVectorSpace: [IsAffineSpace]
+O: ParallelClass: [IsAffineSpace, IsSubspaceOfAffineSpace]
+O: ParallelClass: [IsSubspaceOfAffineSpace]
+
+affinegroup.gd: operations
+
+
+gpolygons.gd: operations
+
+O: GeneralisedPolygonByBlocks: [IsHomogeneousList]
+O: GeneralisedPolygonByIncidenceMatrix: [IsMatrix]
+O: GeneralisedPolygonByElements: [IsSet, IsSet, IsFunction]
+O: GeneralisedPolygonByElements: [IsSet, IsSet, IsFunction, IsGroup, IsFunction]
+O: DistanceBetweenElements: [IsElementOfGeneralisedPolygon, IsElementOfGeneralisedPolygon]
+O: DistanceBetweenElements: [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace]
+O: BlockDesignOfGeneralisedPolygon: [IsGeneralisedPolygon]
+O: SplitCayleyHexagon: [IsFieldandIsFinite]
+O: SplitCayleyHexagon: [IsPosInt]
+O: SplitCayleyHexagon: [IsClassicalPolarSpace]
+O: TwistedTrialityHexagon: [IsFieldandIsFinite]
+O: TwistedTrialityHexagon: [IsPosInt]
+O: TwistedTrialityHexagon: [IsClassicalPolarSpace]
+O: G2fining: [IsPosInt, IsFieldandIsFinite]
+O: 3D4fining: [IsFieldandIsFinite]
+O: IsKantorFamily: [IsGroup, IsList, IsList]
+O: EGQByKantorFamily: [IsGroup, IsList, IsList]
+O: Wrap: [IsElationGQByKantorFamily, IsPosInt, IsPosInt, IsObject]
+O: IsAnisotropic: [IsFFECollColl, IsFieldandIsFinite]
+O: IsqClan: [IsFFECollCollColl, IsFieldandIsFinite]
+O: qClan: [IsFFECollCollColl, IsField]
+O: LinearqClan: [IsPosInt]
+O: FisherThasWalkerKantorBettenqClan: [IsPosInt]
+O: KantorMonomialqClan: [IsPosInt]
+O: KantorKnuthqClan: [IsPosInt]
+O: FisherqClan: [IsPosInt]
+O: BLTSetByqClan: [IsqClanObjandIsqClanRep]
+O: KantorFamilyByqClan: [IsqClanObjandIsqClanRep]
+O: EGQByqClan: [IsqClanObjandIsqClanRep]
+O: EGQByBLTSet: [IsList, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace]
+O: EGQByBLTSet: [IsList]
+O: FlockGQByqClan: [IsqClanObj]
+
+
+</pre></div>
+
+
+<div class="example"><pre>
+Attributes
+
+geometry.gd: attributes
+
+A: IsChamberOfIncidenceStructure: IsFlagOfIncidenceStructure
+A: IsEmptyFlag: IsFlagOfIncidenceStructure
+A: RankAttr: IsIncidenceStructure
+A: RankAttr: IsFlagOfIncidenceStructure
+A: TypesOfElementsOfIncidenceStructure: IsIncidenceStructure
+A: TypesOfElementsOfIncidenceStructurePlural: IsIncidenceStructure
+A: CollineationGroup: IsIncidenceStructure
+A: CorrelationCollineationGroup: IsIncidenceStructure
+A: CollineationAction: IsIncidenceStructure
+A: CorrelationAction: IsIncidenceStructure
+A: RepresentativesOfElements: IsIncidenceStructure
+A: AmbientGeometry: IsIncidenceStructure
+A: AmbientGeometry: IsFlagOfIncidenceStructure
+A: Size: IsFlagOfIncidenceStructure
+A: AmbientGeometry: IsElementOfIncidenceStructureandIsElementOfIncidenceStructureRep
+A: AmbientGeometry: IsElementsOfIncidenceStructureandIsElementsOfIncidenceStructureRep
+A: AmbientGeometry: IsAllElementsOfIncidenceStructure
+A: CollineationAction: IsGroup
+
+liegeometry.gd: attributes
+
+A: AmbientSpace: IsLieGeometry
+A: AmbientSpace: IsElementOfLieGeometry
+A: ProjectiveDimension: IsLieGeometry
+A: ProjectiveDimension: IsElementOfLieGeometry
+A: ProjectiveDimension: IsEmptySubspace
+A: Dimension: IsLieGeometry
+
+group.gd: attributes
+
+A: Dimension: IsProjectiveGroupWithFrob
+
+projectivespace.gd: attributes
+
+A: ProjectivityGroup: IsProjectiveSpace
+A: SpecialProjectivityGroup: IsProjectiveSpace
+A: Dimension: IsSubspaceOfProjectiveSpace
+A: Dimension: IsEmpty
+A: Coordinates: IsSubspaceOfProjectiveSpace
+A: CoordinatesOfHyperplane: IsSubspaceOfProjectiveSpace
+A: EquationOfHyperplane: IsSubspaceOfProjectiveSpace
+A: StandardFrame: IsProjectiveSpace
+A: StandardFrame: IsSubspaceOfProjectiveSpace
+
+correlations.gd: attributes
+
+A: Dimension: IsProjGroupWithFrobWithPSIsom
+A: GramMatrix: IsPolarityOfProjectiveSpace
+A: CompanionAutomorphism: IsPolarityOfProjectiveSpace
+A: SesquilinearForm: IsPolarityOfProjectiveSpace
+
+polarspace.gd: attributes
+
+A: SesquilinearForm: IsClassicalPolarSpace
+A: QuadraticForm: IsClassicalPolarSpace
+A: AmbientSpace: IsClassicalPolarSpace
+A: SimilarityGroup: IsClassicalPolarSpace
+A: IsometryGroup: IsClassicalPolarSpace
+A: SpecialIsometryGroup: IsClassicalPolarSpace
+A: IsomorphismCanonicalPolarSpace: IsClassicalPolarSpace
+A: IsomorphismCanonicalPolarSpaceWithIntertwiner: IsClassicalPolarSpace
+A: IsCanonicalPolarSpace: IsClassicalPolarSpace
+A: PolarSpaceType: IsClassicalPolarSpace
+A: CompanionAutomorphism: IsClassicalPolarSpace
+A: ClassicalGroupInfo: IsClassicalPolarSpace
+A: EquationForPolarSpace: IsClassicalPolarSpace
+A: NucleusOfParabolicQuadric: IsClassicalPolarSpace
+
+morphisms.gd: attributes
+
+A: Intertwiner: IsGeometryMorphism
+
+enumerators.gd: attributes
+
+
+diagram.gd: attributes
+
+A: DiagramOfGeometry: IsIncidenceGeometry
+A: IsFlagTransitiveGeometry: IsIncidenceGeometry
+A: IsResiduallyConnected: IsIncidenceGeometry
+A: IsConnected: IsIncidenceGeometry
+A: IsFirmGeometry: IsIncidenceGeometry
+A: IsThinGeometry: IsIncidenceGeometry
+A: IsThickGeometry: IsIncidenceGeometry
+A: BorelSubgroup: IsCosetGeometry
+A: StandardFlagOfCosetGeometry: IsCosetGeometry
+A: Rank2Parameters: IsCosetGeometry
+A: OrderVertex: IsVertexOfDiagram
+A: NrElementsVertex: IsVertexOfDiagram
+A: StabiliserVertex: IsVertexOfDiagram
+A: ResidueLabelForEdge: IsEdgeOfDiagram
+A: GirthEdge: IsEdgeOfDiagram
+A: PointDiamEdge: IsEdgeOfDiagram
+A: LineDiamEdge: IsEdgeOfDiagram
+A: ParametersEdge: IsEdgeOfDiagram
+A: GeometryOfDiagram: IsDiagram
+
+varieties.gd: attributes
+
+A: DefiningListOfPolynomials: IsAlgebraicVariety
+A: AmbientSpace: IsAlgebraicVariety
+A: SesquilinearForm: IsHermitianVariety
+A: QuadraticForm: IsQuadraticVariety
+A: Source: IsGeometryMap
+A: Range: IsGeometryMap
+
+affinespace.gd: attributes
+
+A: Dimension: IsAffineSpace
+A: AmbientSpace: IsAffineSpace
+A: AmbientSpace: IsSubspaceOfAffineSpace
+
+affinegroup.gd: attributes
+
+A: AffineGroup: IsAffineSpace
+
+gpolygons.gd: attributes
+
+A: Order: IsGeneralisedPolygon
+A: IncidenceMatrixOfGeneralisedPolygon: IsGeneralisedPolygon
+A: AmbientPolarSpace: IsGeneralisedHexagon
+A: ElationGroup: IsElationGQ
+A: BasePointOfEGQ: IsElationGQ
+A: IsLinearqClan: IsqClanObj
+A: DefiningPlanesOfEGQByBLTSet: IsElationGQByBLTSet
+A: CollineationSubgroup: IsElationGQByBLTSet
+
+
+</pre></div>
+
+
+<div class="example"><pre>
+Properties
+
+geometry.gd: properties
+
+P: IsConfiguration: IsIncidenceStructure
+P: IsConstellation: IsIncidenceStructure
+
+liegeometry.gd: properties
+
+
+group.gd: properties
+
+P: IsProjectivity: IsProjGrpEl
+P: IsProjectivity: IsProjGrpElWithFrob
+P: IsStrictlySemilinear: IsProjGrpEl
+P: IsStrictlySemilinear: IsProjGrpElWithFrob
+P: IsCollineation: IsProjGrpEl
+P: IsCollineation: IsProjGrpElWithFrob
+P: IsProjectivityGroup: IsProjectiveGroupWithFrob
+P: IsCollineationGroup: IsProjectiveGroupWithFrob
+P: CanComputeActionOnPoints: IsProjectiveGroupWithFrob
+
+projectivespace.gd: properties
+
+
+correlations.gd: properties
+
+P: IsCorrelation: IsProjGrpElWithFrobWithPSIsom
+P: IsCorrelation: IsProjGrpElWithFrob
+P: IsCorrelation: IsProjGrpEl
+P: CanComputeActionOnPoints: IsProjGroupWithFrobWithPSIsom
+P: IsProjectivity: IsProjGrpElWithFrobWithPSIsom
+P: IsStrictlySemilinear: IsProjGrpElWithFrobWithPSIsom
+P: IsCollineation: IsProjGrpElWithFrobWithPSIsom
+P: IsProjectivityGroup: IsProjGroupWithFrobWithPSIsom
+P: IsCollineationGroup: IsProjGroupWithFrobWithPSIsom
+P: IsHermitianPolarityOfProjectiveSpace: IsPolarityOfProjectiveSpace
+P: IsSymplecticPolarityOfProjectiveSpace: IsPolarityOfProjectiveSpace
+P: IsOrthogonalPolarityOfProjectiveSpace: IsPolarityOfProjectiveSpace
+P: IsPseudoPolarityOfProjectiveSpace: IsPolarityOfProjectiveSpace
+
+polarspace.gd: properties
+
+P: IsEllipticQuadric: IsClassicalPolarSpace
+P: IsSymplecticSpace: IsClassicalPolarSpace
+P: IsParabolicQuadric: IsClassicalPolarSpace
+P: IsHyperbolicQuadric: IsClassicalPolarSpace
+P: IsHermitianPolarSpace: IsClassicalPolarSpace
+P: IsStandardPolarSpace: IsClassicalPolarSpace
+
+morphisms.gd: properties
+
+
+enumerators.gd: properties
+
+
+diagram.gd: properties
+
+
+varieties.gd: properties
+
+P: IsStandardHermitianVariety: IsHermitianVariety
+P: IsStandardQuadraticVariety: IsQuadraticVariety
+
+affinespace.gd: properties
+
+
+affinegroup.gd: properties
+
+
+gpolygons.gd: properties
+
+P: HasGraphWithUnderlyingObjectsAsVertices: IsGeneralisedPolygon
+
+
+</pre></div>
+
+<p><a id="X81736D4378BF64FF" name="X81736D4378BF64FF"></a></p>
+
+<h5>A.2-2 <span class="Heading">Functions/Methods</span></h5>
+
+
+<div class="example"><pre>
+Functions
+
+geometry.gi: global functions
+
+F: HashFuncForElements
+F: HashFuncForSetElements
+
+liegeometry.gi: global functions
+
+
+group.gi: global functions
+
+F: MakeAllProjectivePoints
+F: IsFiningScalarMatrix
+F: OnProjPoints
+F: OnProjPointsWithFrob
+F: OnProjSubspacesNoFrob
+F: OnProjSubspacesWithFrob
+F: NiceMonomorphismByOrbit
+F: NiceMonomorphismByDomain
+
+projectivespace.gi: global functions
+
+F: OnProjSubspaces
+F: OnSetsProjSubspaces
+
+correlations.gi: global functions
+
+F: OnProjPointsWithFrobWithPSIsom
+F: OnProjSubspacesWithFrobWithPSIsom
+F: OnProjSubspacesExtended
+
+polarspace.gi: global functions
+
+
+morphisms.gi: global functions
+
+
+enumerators.gi: global functions
+
+F: PositionNonZeroFromRight
+F: FG_pos
+F: FG_ffenumber
+F: FG_alpha_power
+F: FG_log_alpha
+F: FG_beta_power
+F: FG_log_beta
+F: FG_norm_one_element
+F: FG_index_of_norm_one_element
+F: PG_element_normalize
+F: FG_evaluate_hyperbolic_quadratic_form
+F: FG_evaluate_hermitian_form
+F: FG_nb_pts_Nbar
+F: FG_nb_pts_S
+F: FG_nb_pts_N
+F: FG_nb_pts_N1
+F: FG_nb_pts_Sbar
+F: FG_herm_nb_pts_N
+F: FG_herm_nb_pts_S
+F: FG_herm_nb_pts_N1
+F: FG_herm_nb_pts_Sbar
+F: FG_N1_unrank
+F: FG_S_unrank
+F: FG_Sbar_unrank
+F: FG_Nbar_unrank
+F: FG_N_unrank
+F: FG_herm_N_unrank
+F: FG_herm_N_rank
+F: FG_herm_S_unrank
+F: FG_herm_S_rank
+F: FG_herm_N1_unrank
+F: FG_herm_N1_rank
+F: FG_herm_Sbar_unrank
+F: FG_herm_Sbar_rank
+F: FG_S_rank
+F: FG_N_rank
+F: FG_N1_rank
+F: FG_Sbar_rank
+F: FG_Nbar_rank
+F: QElementNumber
+F: QplusElementNumber
+F: QminusElementNumber
+F: QNumberElement
+F: QplusNumberElement
+F: QminusNumberElement
+F: HermElementNumber
+F: HermNumberElement
+F: FG_specialresidual
+F: FG_enum_orthogonal
+F: FG_enum_hermitian
+F: FG_enum_symplectic
+
+diagram.gi: global functions
+
+F: OnCosetGeometryElement
+F: DrawDiagram
+F: DrawDiagramWithNeato
+F: Drawing_Diagram
+
+varieties.gi: global functions
+
+
+affinespace.gi: global functions
+
+
+affinegroup.gi: global functions
+
+F: OnAffinePoints
+F: OnAffineNotPoints
+F: OnAffineSubspaces
+
+gpolygons.gi: global functions
+
+F: SplitCayleyPointToPlane5
+F: SplitCayleyPointToPlane
+F: ZeroPointToOnePointsSpaceByTriality
+F: TwistedTrialityHexagonPointToPlaneByTwoTimesTriality
+F: OnKantorFamily
+
+orbits-stabilisers.gi: global functions
+
+
+
+</pre></div>
+
+
+<div class="example"><pre>
+Methods
+
+geometry.gi: methods
+
+M: IncidenceStructure, [ IsList, IsFunction, IsFunction, IsList ],
+M: Rank, [IsIncidenceStructure],
+M: IncidenceGraph, [ IsIncidenceStructure ],
+M: ElementsOfIncidenceStructure, [IsIncidenceStructure, IsPosInt],
+M: ElementsOfIncidenceStructure, [IsIncidenceStructure, IsString],
+M: Iterator, [ IsElementsOfIncidenceStructure ],
+M: Enumerator, [ IsElementsOfIncidenceStructure ],
+M: NrElementsOfIncidenceStructure, [IsIncidenceStructure, IsString],
+M: NrElementsOfIncidenceStructure, [IsIncidenceStructure, IsPosInt],
+M: ChooseHashFunction, [ IsElementOfIncidenceStructure, IsPosInt ],
+M: ChooseHashFunction, [ CategoryCollections(IsElementOfIncidenceStructure), IsPosInt ],
+M: AmbientGeometry, [ IsElementsOfIncidenceStructure and IsElementsOfIncidenceStructureRep ],
+M: AmbientGeometry, [ IsAllElementsOfIncidenceStructure ],
+M: Type, [IsElementsOfIncidenceStructure and IsElementsOfIncidenceStructureRep],
+M: Wrap, [IsIncidenceStructure, IsPosInt, IsObject],
+M: Unwrap, [IsElementOfIncidenceStructure and IsElementOfIncidenceStructureRep],
+M: UnderlyingObject, [ IsElementOfIncidenceStructure and IsElementOfIncidenceStructureRep ],
+M: ObjectToElement, [ IsIncidenceStructure, IsPosInt, IsObject ],
+M: AmbientGeometry, [ IsElementOfIncidenceStructure and IsElementOfIncidenceStructureRep ],
+M: Intersection2, [IsElementOfIncidenceStructure, IsElementOfIncidenceStructure],
+M: Type, [ IsElementOfIncidenceStructure and IsElementOfIncidenceStructureRep ],
+M: \=, [IsElementOfIncidenceStructure, IsElementOfIncidenceStructure],
+M: \&lt;, [IsElementOfIncidenceStructure, IsElementOfIncidenceStructure],
+M: \*, [IsElementOfIncidenceStructure, IsElementOfIncidenceStructure],
+M: IsIncident, [IsElementOfIncidenceStructure, IsElementOfIncidenceStructure],
+M: FlagOfIncidenceStructure, [ IsIncidenceStructure, IsElementOfIncidenceStructureCollection ],
+M: FlagOfIncidenceStructure, [ IsIncidenceStructure, IsList and IsEmpty ],
+M: IsChamberOfIncidenceStructure, [ IsFlagOfIncidenceStructure and IsFlagOfIncidenceStructureRep ],
+M: AmbientGeometry, [ IsFlagOfIncidenceStructure and IsFlagOfIncidenceStructureRep],
+M: ElementsOfFlag, [ IsFlagOfIncidenceStructure and IsFlagOfIncidenceStructureRep ],
+M: Size, [ IsFlagOfIncidenceStructure and IsFlagOfIncidenceStructureRep ],
+M: Rank, [ IsFlagOfIncidenceStructure ],
+M: Type, [ IsFlagOfIncidenceStructure and IsFlagOfIncidenceStructureRep ],
+M: ResidueOfFlag, [ IsFlagOfIncidenceStructure ],
+M: \=, [ IsFlagOfIncidenceStructure, IsFlagOfIncidenceStructure ],
+M: \&lt;, [ IsFlagOfIncidenceStructure, IsFlagOfIncidenceStructure ],
+M: \&lt;, [ IsFlagOfIncidenceStructure, IsElementOfIncidenceStructure ],
+M: \&lt;, [ IsElementOfIncidenceStructure, IsFlagOfIncidenceStructure ],
+M: IsIncident, [ IsElementOfIncidenceStructure, IsFlagOfIncidenceStructure ],
+M: IsIncident, [IsFlagOfIncidenceStructure, IsElementOfIncidenceStructure],
+M: \in, [ IsElementOfIncidenceStructure, IsFlagOfIncidenceStructure ],
+M: ShadowOfElement, [IsIncidenceStructure, IsElementOfIncidenceStructure, IsPosInt],
+M: ShadowOfElement, [IsIncidenceStructure, IsElementOfIncidenceStructure, IsString],
+M: ElementsIncidentWithElementOfIncidenceStructure, [ IsElementOfIncidenceStructure, IsPosInt],
+M: ShadowOfFlag, [IsIncidenceStructure, IsFlagOfIncidenceStructure, IsPosInt],
+M: ShadowOfFlag, [IsIncidenceStructure, IsFlagOfIncidenceStructure, IsString],
+M: ShadowOfFlag, [IsIncidenceStructure, IsList, IsPosInt],
+M: ShadowOfFlag, [IsIncidenceStructure, IsList, IsString],
+M: Iterator, [ IsShadowElementsOfIncidenceStructure ],
+M: ViewObj, [ IsElementOfIncidenceStructure and IsElementOfIncidenceStructureRep ],
+M: ViewObj, [ IsFlagOfIncidenceStructure and IsFlagOfIncidenceStructureRep ],
+M: PrintObj, [ IsElementOfIncidenceStructure and IsElementOfIncidenceStructureRep ],
+M: Display, [ IsElementOfIncidenceStructure and IsElementOfIncidenceStructureRep ],
+M: ViewObj, [ IsAllElementsOfIncidenceStructure ],
+M: PrintObj, [ IsAllElementsOfIncidenceStructure ],
+M: ViewObj, [ IsShadowElementsOfIncidenceStructure ],
+M: ViewObj, [ IsElementsOfIncidenceStructure ],
+M: PrintObj, [ IsElementsOfIncidenceStructure ],
+M: ViewObj, [ IsIncidenceStructure ],
+M: PrintObj, [ IsIncidenceStructure ],
+M: Display, [ IsIncidenceStructure ],
+M: IsConfiguration, [ IsIncidenceStructure],
+M: IsConstellation, [ IsIncidenceStructure],
+
+liegeometry.gi: methods
+
+M: UnderlyingVectorSpace, [ IsLieGeometry],
+M: ProjectiveDimension, [ IsLieGeometry ],
+M: Dimension, [ IsLieGeometry ],
+M: BaseField, [ IsLieGeometry ],
+M: Wrap, [IsLieGeometry, IsPosInt, IsObject],
+M: UnderlyingObject, [IsElementOfLieGeometry],
+M: AmbientSpace, [IsElementOfLieGeometry],
+M: ViewObj, [ IsAllElementsOfLieGeometry and IsAllElementsOfLieGeometryRep ],
+M: PrintObj, [ IsAllElementsOfLieGeometry and IsAllElementsOfLieGeometryRep ],
+M: ViewObj, [ IsElementsOfLieGeometry and IsElementsOfLieGeometryRep ],
+M: PrintObj, [ IsElementsOfLieGeometry and IsElementsOfLieGeometryRep ],
+M: Points, [IsLieGeometry],
+M: Lines, [IsLieGeometry],
+M: Planes, [IsLieGeometry],
+M: Solids, [IsLieGeometry],
+M: EmptySubspace, [IsLieGeometry],
+M: BaseField, [IsEmptySubspace and IsEmptySubspaceRep],
+M: ViewObj, InstallMethod(ViewObj,[IsEmptySubspace],
+M: PrintObj, InstallMethod(PrintObj,[IsEmptySubspace],
+M: Display, InstallMethod(Display,[IsEmptySubspace],
+M: \=, [IsEmptySubspace, IsEmptySubspace],
+M: \in, [ IsEmptySubspace, IsEmptySubspace ],
+M: \in, [ IsEmptySubspace, IsElementOfLieGeometry ],
+M: \in, [ IsElementOfLieGeometry, IsEmptySubspace ],
+M: \in, [ IsEmptySubspace, IsLieGeometry ],
+M: Span, [ IsEmptySubspace, IsElementOfLieGeometry ],
+M: Span, [ IsElementOfLieGeometry, IsEmptySubspace ],
+M: Span, [IsEmptySubspace, IsEmptySubspace],
+M: Meet, [ IsEmptySubspace, IsElementOfLieGeometry ],
+M: Meet, [ IsElementOfLieGeometry, IsEmptySubspace ],
+M: Meet, [IsEmptySubspace, IsEmptySubspace],
+M: Points, [ IsElementOfLieGeometry ],
+M: Points, [ IsLieGeometry, IsElementOfLieGeometry ],
+M: Lines, [ IsElementOfLieGeometry ],
+M: Lines, [ IsLieGeometry, IsElementOfLieGeometry ],
+M: Planes, [ IsElementOfLieGeometry ],
+M: Planes, [ IsLieGeometry, IsElementOfLieGeometry ],
+M: Solids, InstallMethod(Solids,[IsElementOfLieGeometry],
+M: Solids, [ IsLieGeometry, IsElementOfLieGeometry ],
+M: Hyperplanes, [ IsElementOfLieGeometry ],
+M: Hyperplanes, [ IsLieGeometry, IsElementOfLieGeometry ],
+M: ViewObj, [ IsShadowElementsOfLieGeometry and IsShadowElementsOfLieGeometryRep ],
+M: \in, [IsElementOfLieGeometry, IsElementOfLieGeometry],
+M: Random, [ IsSubspacesVectorSpace ],
+M: RandomSubspace, [IsVectorSpace,IsInt],
+M: ElementToElement, [IsLieGeometry, IsElementOfLieGeometry],
+M: ObjectToElement, [IsLieGeometry, IsPosInt, IsObject],
+M: ObjectToElement, [IsLieGeometry, IsObject],
+
+group.gi: methods
+
+M: ProjEl, [IsMatrix and IsFFECollColl],
+M: ProjEls, [IsList],
+M: Projectivity, InstallMethod(Projectivity,[IsMatrixandIsFFECollColl,IsField],
+M: Projectivity, InstallMethod(Projectivity,[IsCMatRepandIsFFECollColl,IsField],
+M: Projectivity, InstallMethod(Projectivity,[IsProjectiveSpace,IsMatrix],
+M: Projectivity, InstallMethod(Projectivity,[IsProjectiveSpace,IsCMatRep],
+M: IsProjectivity, InstallMethod(IsProjectivity,[IsProjGrpEl],
+M: IsProjectivity, InstallMethod(IsProjectivity,[IsProjGrpElWithFrob],
+M: IsStrictlySemilinear, InstallMethod(IsStrictlySemilinear,[IsProjGrpEl],
+M: IsStrictlySemilinear, InstallMethod(IsStrictlySemilinear,[IsProjGrpElWithFrob],
+M: IsCollineation, InstallMethod(IsCollineation,[IsProjGrpEl],
+M: IsCollineation, InstallMethod(IsCollineation,[IsProjGrpElWithFrob],
+M: IsProjectivityGroup, InstallMethod(IsProjectivityGroup,[IsProjectiveGroupWithFrob],
+M: IsCollineationGroup, InstallMethod(IsCollineationGroup,[IsProjectiveGroupWithFrob],
+M: ProjElWithFrob, [IsCMatRep and IsFFECollColl, #changed 19/3/14 to cmat. IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField],
+M: ProjElWithFrob, [IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField],
+M: ProjElWithFrob, [IsCMatRep and IsFFECollColl, #changed 19/3/14. IsRingHomomorphism and IsMultiplicativeElementWithInverse],
+M: ProjElWithFrob, [IsCMatRep and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse],
+M: ProjElsWithFrob, [IsList, IsField],
+M: ProjElsWithFrob, [IsList],
+M: CollineationOfProjectiveSpace, [ IsMatrix and IsFFECollColl, IsField],
+M: CollineationOfProjectiveSpace, InstallMethod(CollineationOfProjectiveSpace,[IsProjectiveSpace,IsMatrix],
+M: CollineationOfProjectiveSpace, InstallMethod(CollineationOfProjectiveSpace,[IsProjectiveSpace,IsMapping],
+M: CollineationOfProjectiveSpace, InstallMethod(CollineationOfProjectiveSpace,[IsProjectiveSpace,IsMatrix,IsMapping],
+M: Collineation, InstallMethod(Collineation,[IsProjectiveSpace,IsMatrix],
+M: Collineation, InstallMethod(Collineation,[IsProjectiveSpace,IsMatrix,IsMapping],
+M: CollineationOfProjectiveSpace, [ IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField],
+M: ProjectiveSemilinearMap, [ IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField],
+M: ProjectivityByImageOfStandardFrameNC, InstallMethod(ProjectivityByImageOfStandardFrameNC,[IsProjectiveSpace,IsList],
+M: MatrixOfCollineation, InstallMethod(MatrixOfCollineation,[IsProjGrpElandIsProjGrpElRep],
+M: MatrixOfCollineation, InstallMethod(MatrixOfCollineation,[IsProjGrpElWithFrobandIsProjGrpElWithFrobRep],
+M: FieldAutomorphism, InstallMethod(FieldAutomorphism,[IsProjGrpElWithFrobandIsProjGrpElWithFrobRep],
+M: Representative, [IsProjGrpEl and IsProjGrpElRep],
+M: BaseField, [IsProjGrpEl and IsProjGrpElRep],
+M: Representative, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: BaseField, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: ViewObj, [IsProjGrpEl and IsProjGrpElRep],
+M: Display, [IsProjGrpEl and IsProjGrpElRep],
+M: PrintObj, [IsProjGrpEl and IsProjGrpElRep],
+M: ViewObj, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: Display, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: PrintObj, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: \=, [IsProjGrpEl and IsProjGrpElRep, IsProjGrpEl and IsProjGrpElRep],
+M: \&lt;, [IsProjGrpEl, IsProjGrpEl],
+M: \=, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep, IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: \&lt;, [IsProjGrpElWithFrob, IsProjGrpElWithFrob],
+M: Order, [IsProjGrpEl and IsProjGrpElRep],
+M: Order, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: IsOne, [IsProjGrpEl and IsProjGrpElRep],
+M: IsOne, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: DegreeFFE, [IsProjGrpEl and IsProjGrpElRep],
+M: DegreeFFE, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: Characteristic, [IsProjGrpEl and IsProjGrpElRep],
+M: Characteristic, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: \*, [IsProjGrpEl and IsProjGrpElRep, IsProjGrpEl and IsProjGrpElRep],
+M: InverseSameMutability, [IsProjGrpEl and IsProjGrpElRep],
+M: InverseMutable, [IsProjGrpEl and IsProjGrpElRep],
+M: OneImmutable, [IsProjGrpEl and IsProjGrpElRep],
+M: OneSameMutability, [IsProjGrpEl and IsProjGrpElRep],
+M: \^, [ IsVector and IsFFECollection and IsMutable, IsFrobeniusAutomorphism ],
+M: \^, [ IsCVecRep and IsFFECollection and IsMutable, IsFrobeniusAutomorphism ],
+M: \^, [ IsVector and IsFFECollection, IsFrobeniusAutomorphism ],
+M: \^, [ IsCVecRep and IsFFECollection, IsFrobeniusAutomorphism ],
+M: \^, [ IsVector and IsFFECollection and IsMutable, IsMapping and IsOne ],
+M: \^, [ IsCVecRep and IsFFECollection and IsMutable, IsMapping and IsOne ],
+M: \^, [ IsVector and IsFFECollection and IsGF2VectorRep, IsFrobeniusAutomorphism ],
+M: \^, [ IsVector and IsFFECollection and IsGF2VectorRep and IsMutable, IsFrobeniusAutomorphism ],
+M: \^, [ IsVector and IsFFECollection and IsGF2VectorRep, IsMapping and IsOne ],
+M: \^, [ IsVector and IsFFECollection and IsGF2VectorRep and IsMutable, IsMapping and IsOne ],
+M: \^, [ IsVector and IsFFECollection and Is8BitVectorRep, IsFrobeniusAutomorphism ],
+M: \^, [ IsVector and IsFFECollection and Is8BitVectorRep and IsMutable, IsFrobeniusAutomorphism ],
+M: \^, [ IsVector and IsFFECollection and Is8BitVectorRep, IsMapping and IsOne ],
+M: \^, [ IsVector and IsFFECollection and Is8BitVectorRep and IsMutable, IsMapping and IsOne ],
+M: \^, [ IsMatrix and IsFFECollColl, IsFrobeniusAutomorphism ],
+M: \^, [ IsCMatRep and IsFFECollColl, IsFrobeniusAutomorphism ],
+M: \^, [ IsMatrix and IsFFECollColl and IsMutable, IsFrobeniusAutomorphism ],
+M: \^, [ IsCMatRep and IsFFECollColl and IsMutable, IsFrobeniusAutomorphism ],
+M: \^, [ IsMatrix and IsFFECollColl, IsMapping and IsOne ],
+M: \^, [ IsCMatRep and IsFFECollColl and IsMutable, IsMapping and IsOne ],
+M: \^, [ IsMatrix and IsFFECollColl, IsMapping and IsOne ],
+M: \^, [ IsCMatRep and IsFFECollColl , IsMapping and IsOne ],
+M: \^, [ IsMatrix and IsFFECollColl and IsGF2MatrixRep, IsFrobeniusAutomorphism ],
+M: \^, [ IsMatrix and IsFFECollColl and IsGF2MatrixRep and IsMutable, IsFrobeniusAutomorphism ],
+M: \^, [ IsMatrix and IsFFECollColl and IsGF2MatrixRep, IsMapping and IsOne ],
+M: \^, [ IsMatrix and IsFFECollColl and IsGF2MatrixRep and IsMutable, IsMapping and IsOne ],
+M: \^, [ IsMatrix and IsFFECollColl and Is8BitMatrixRep, IsFrobeniusAutomorphism ],
+M: \^, [ IsMatrix and IsFFECollColl and Is8BitMatrixRep and IsMutable, IsFrobeniusAutomorphism ],
+M: \^, [ IsMatrix and IsFFECollColl and Is8BitMatrixRep, IsMapping and IsOne ],
+M: \^, [ IsMatrix and IsFFECollColl and Is8BitMatrixRep and IsMutable, IsMapping and IsOne ],
+M: \*, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep, IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: InverseSameMutability, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: InverseMutable, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: OneImmutable, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: OneSameMutability, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: ViewObj, [IsProjectiveGroupWithFrob],
+M: ViewObj, [IsProjectiveGroupWithFrob and IsTrivial],
+M: ViewObj, [IsProjectiveGroupWithFrob and HasGeneratorsOfGroup],
+M: ViewObj, [IsProjectiveGroupWithFrob and HasSize],
+M: ViewObj, [IsProjectiveGroupWithFrob and HasGeneratorsOfGroup and HasSize],
+M: BaseField, [IsProjectiveGroupWithFrob],
+M: Dimension, [IsProjectiveGroupWithFrob],
+M: OneImmutable, # was [IsGroup and IsProjectiveGroupWithFrob], I think might be
+M: CanComputeActionOnPoints, [IsProjectiveGroupWithFrob],
+M: ActionOnAllProjPoints, [ IsProjectiveGroupWithFrob ],
+M: SetAsNiceMono, [IsProjectiveGroupWithFrob, IsGroupHomomorphism and IsInjective],
+M: NiceMonomorphism, [IsProjectivityGroup and CanComputeActionOnPoints and IsHandledByNiceMonomorphism],
+M: NiceMonomorphism, [IsProjectiveGroupWithFrob and IsHandledByNiceMonomorphism],
+M: NiceMonomorphism, [IsProjectiveGroupWithFrob and CanComputeActionOnPoints and IsHandledByNiceMonomorphism], 1,
+M: NiceMonomorphism, [IsProjectiveGroupWithFrob and IsHandledByNiceMonomorphism], 50,
+M: FindBasePointCandidates, [IsProjectivityGroup,IsRecord,IsInt],
+M: FindBasePointCandidates, [IsProjectiveGroupWithFrob,IsRecord,IsInt],
+M: FindBasePointCandidates, [IsProjectiveGroupWithFrob,IsRecord,IsInt,IsObject],
+M: CanonicalGramMatrix, [IsString, IsPosInt, IsField],
+M: CanonicalQuadraticForm, [IsString, IsPosInt, IsField],
+M: SOdesargues, [IsInt, IsPosInt, IsField and IsFinite],
+M: GOdesargues, InstallMethod(GOdesargues,[IsInt,IsPosInt,IsFieldandIsFinite],
+M: SUdesargues, InstallMethod(SUdesargues,[IsPosInt,IsFieldandIsFinite],
+M: GUdesargues, InstallMethod(GUdesargues,[IsPosInt,IsFieldandIsFinite],
+M: Spdesargues, InstallMethod(Spdesargues,[IsPosInt,IsFieldandIsFinite],
+M: GeneralSymplecticGroup, InstallMethod(GeneralSymplecticGroup,[IsPosInt,IsFieldandIsFinite],
+M: GSpdesargues, InstallMethod(GSpdesargues,[IsPosInt,IsFieldandIsFinite],
+M: GammaSp, InstallMethod(GammaSp,[IsPosInt,IsFieldandIsFinite],
+M: DeltaOminus, InstallMethod(DeltaOminus,[IsPosInt,IsFieldandIsFinite],
+M: GammaOminus, InstallMethod(GammaOminus,[IsPosInt,IsFieldandIsFinite],
+M: GammaO, InstallMethod(GammaO,[IsPosInt,IsFieldandIsFinite],
+M: DeltaOplus, InstallMethod(DeltaOplus,[IsPosInt,IsFieldandIsFinite],
+M: GammaOplus, InstallMethod(GammaOplus,[IsPosInt,IsFieldandIsFinite],
+M: GammaU, InstallMethod(GammaU,[IsPosInt,IsFieldandIsFinite],
+
+projectivespace.gi: methods
+
+M: Wrap, [IsProjectiveSpace, IsPosInt, IsObject],
+M: ProjectiveSpace, [ IsInt, IsField ],
+M: ProjectiveSpace, [ IsInt, IsPosInt ],
+M: ViewObj, InstallMethod(ViewObj,[IsProjectiveSpaceandIsProjectiveSpaceRep],
+M: ViewString, [ IsProjectiveSpace and IsProjectiveSpaceRep ],
+M: PrintObj, InstallMethod(PrintObj,[IsProjectiveSpaceandIsProjectiveSpaceRep],
+M: Display, InstallMethod(Display,[IsProjectiveSpaceandIsProjectiveSpaceRep],
+M: \=, [IsProjectiveSpace, IsProjectiveSpace],
+M: Rank, [ IsProjectiveSpace and IsProjectiveSpaceRep ],
+M: BaseField, [IsSubspaceOfProjectiveSpace],
+M: StandardFrame, [IsProjectiveSpace],
+M: RepresentativesOfElements, "for a projective space", [IsProjectiveSpace],
+M: Hyperplanes, [ IsProjectiveSpace ],
+M: TypesOfElementsOfIncidenceStructure, "for a projective space", [IsProjectiveSpace],
+M: TypesOfElementsOfIncidenceStructurePlural, [IsProjectiveSpace],
+M: ElementsOfIncidenceStructure, [IsProjectiveSpace, IsPosInt],
+M: ElementsOfIncidenceStructure, [IsProjectiveSpace],
+M: \=, [ IsAllSubspacesOfProjectiveSpace, IsAllSubspacesOfProjectiveSpace ],
+M: Size, [IsSubspacesOfProjectiveSpace and IsSubspacesOfProjectiveSpaceRep],
+M: \in, [IsElementOfIncidenceStructure, IsElementsOfIncidenceStructure], 1*SUM_FLAGS+3,
+M: \in, [IsElementOfIncidenceStructure, IsAllElementsOfIncidenceStructure], 1*SUM_FLAGS+3,
+M: VectorSpaceToElement, [IsProjectiveSpace, IsCMatRep],
+M: VectorSpaceToElement, [IsProjectiveSpace, IsPlistRep and IsMatrix],
+M: VectorSpaceToElement, [IsProjectiveSpace, IsGF2MatrixRep],
+M: VectorSpaceToElement, [IsProjectiveSpace, Is8BitMatrixRep],
+M: VectorSpaceToElement, [IsProjectiveSpace, IsCVecRep],
+M: VectorSpaceToElement, [IsProjectiveSpace, IsRowVector],
+M: VectorSpaceToElement, [IsProjectiveSpace, Is8BitVectorRep],
+M: UnderlyingVectorSpace, [IsSubspaceOfProjectiveSpace],
+M: ProjectiveDimension, [ IsSubspaceOfProjectiveSpace ],
+M: Dimension, [ IsSubspaceOfProjectiveSpace ],
+M: StandardFrame, [IsSubspaceOfProjectiveSpace],
+M: Coordinates, [IsSubspaceOfProjectiveSpace],
+M: DualCoordinatesOfHyperplane, [IsSubspaceOfProjectiveSpace],
+M: HyperplaneByDualCoordinates, [IsProjectiveSpace,IsList],
+M: EquationOfHyperplane, [IsSubspaceOfProjectiveSpace],
+M: Span, [ IsEmptySubspace, IsProjectiveSpace ],
+M: Span, [ IsProjectiveSpace, IsEmptySubspace ],
+M: Meet, [ IsEmptySubspace, IsProjectiveSpace ],
+M: Meet, [ IsProjectiveSpace, IsEmptySubspace ],
+M: ShadowOfElement, [IsProjectiveSpace, IsSubspaceOfProjectiveSpace, IsPosInt],
+M: Size, [IsShadowSubspacesOfProjectiveSpace and IsShadowSubspacesOfProjectiveSpaceRep ],
+M: CollineationGroup, [ IsProjectiveSpace and IsProjectiveSpaceRep ],
+M: ProjectivityGroup, [ IsProjectiveSpace ],
+M: SpecialProjectivityGroup, [ IsProjectiveSpace ],
+M: \^, [IsElementOfIncidenceStructure, IsProjGrpElWithFrob],
+M: \^, [IsElementOfIncidenceStructure, IsProjGrpElWithFrobWithPSIsom],
+M: AsList, [IsSubspacesOfProjectiveSpace],
+M: Iterator, [IsSubspacesOfProjectiveSpace],
+M: FlagOfIncidenceStructure, [ IsProjectiveSpace, IsSubspaceOfProjectiveSpaceCollection ],
+M: FlagOfIncidenceStructure, [ IsProjectiveSpace, IsList and IsEmpty ],
+M: UnderlyingVectorSpace, [ IsFlagOfProjectiveSpace and IsFlagOfIncidenceStructureRep ],
+M: PrintObj, [ IsFlagOfProjectiveSpace and IsFlagOfIncidenceStructureRep ],
+M: Display, [ IsFlagOfProjectiveSpace and IsFlagOfIncidenceStructureRep ],
+M: ShadowOfFlag, [IsProjectiveSpace, IsFlagOfProjectiveSpace, IsPosInt],
+M: Iterator, [IsShadowSubspacesOfProjectiveSpace and IsShadowSubspacesOfProjectiveSpaceRep ],
+M: \in, [ IsProjectiveSpace, IsSubspaceOfProjectiveSpace ],
+M: \in, [ IsProjectiveSpace, IsEmptySubspace ],
+M: \in, [IsSubspaceOfProjectiveSpace, IsProjectiveSpace],
+M: \in, [IsProjectiveSpace, IsSubspaceOfProjectiveSpace],
+M: IsIncident, [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace],
+M: Span, [IsProjectiveSpace, IsSubspaceOfProjectiveSpace],
+M: Span, [IsSubspaceOfProjectiveSpace, IsProjectiveSpace],
+M: Span, [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace],
+M: Span, [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsBool],
+M: Span, [ IsHomogeneousList and IsSubspaceOfProjectiveSpaceCollection ],
+M: Span, [ IsList ],
+M: Span, [IsList, IsBool],
+M: Meet, [IsProjectiveSpace, IsSubspaceOfProjectiveSpace],
+M: Meet, [IsSubspaceOfProjectiveSpace, IsProjectiveSpace],
+M: Meet, [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace],
+M: Meet, [ IsHomogeneousList and IsSubspaceOfProjectiveSpaceCollection],
+M: Meet, [ IsList ],
+M: RandomSubspace, [IsProjectiveSpace,IsInt],
+M: RandomSubspace, [IsSubspaceOfProjectiveSpace,IsInt],
+M: RandomSubspace, [IsProjectiveSpace],
+M: Random, [ IsSubspacesOfProjectiveSpace ],
+M: Random, [ IsAllSubspacesOfProjectiveSpace ],
+M: Random, [ IsShadowSubspacesOfProjectiveSpace ],
+M: BaerSublineOnThreePoints, [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace],
+M: BaerSubplaneOnQuadrangle, InstallMethod(BaerSubplaneOnQuadrangle,[IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace],
+M: ComplementSpace, [IsVectorSpace, IsFFECollColl],
+M: ElationOfProjectiveSpace, [ IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace ],
+M: ProjectiveElationGroup, [ IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace ],
+M: ProjectiveElationGroup, [ IsSubspaceOfProjectiveSpace ],
+M: HomologyOfProjectiveSpace, [ IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace ],
+M: ProjectiveHomologyGroup, [ IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace ],
+M: SingerCycleMat, InstallMethod(SingerCycleMat,[IsInt,IsInt],
+M: SingerCycleCollineation, InstallMethod(SingerCycleCollineation,[IsInt,IsInt],
+M: IncidenceGraph, [ IsProjectiveSpace ],
+
+correlations.gi: methods
+
+M: IdentityMappingOfElementsOfProjectiveSpace, [IsProjectiveSpace],
+M: StandardDualityOfProjectiveSpace, [IsProjectiveSpace],
+M: IsCollineation, InstallMethod(IsCollineation,[IsProjGrpElWithFrobWithPSIsom],
+M: IsCorrelation, InstallMethod(IsCorrelation,[IsProjGrpElWithFrobWithPSIsom],
+M: IsCorrelation, InstallMethod(IsCorrelation,[IsProjGrpElWithFrob],
+M: IsCorrelation, InstallMethod(IsCorrelation,[IsProjGrpEl],
+M: IsProjectivity, [ IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: IsStrictlySemilinear, [ IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: IsProjectivityGroup, InstallMethod(IsProjectivityGroup,[IsProjGroupWithFrobWithPSIsom],
+M: IsCollineationGroup, InstallMethod(IsCollineationGroup,[IsProjGroupWithFrobWithPSIsom],
+M: ViewObj, [IsStandardDualityOfProjectiveSpace and IsSPMappingByFunctionWithInverseRep],
+M: Display, [IsStandardDualityOfProjectiveSpace and IsSPMappingByFunctionWithInverseRep],
+M: PrintObj, [IsStandardDualityOfProjectiveSpace and IsSPMappingByFunctionWithInverseRep],
+M: \*, [IsStandardDualityOfProjectiveSpace, IsStandardDualityOfProjectiveSpace],
+M: \*, [IsIdentityMappingOfElementsOfProjectiveSpace, IsStandardDualityOfProjectiveSpace],
+M: \*, [IsStandardDualityOfProjectiveSpace, IsIdentityMappingOfElementsOfProjectiveSpace],
+M: \*, [IsIdentityMappingOfElementsOfProjectiveSpace, IsIdentityMappingOfElementsOfProjectiveSpace],
+M: \^, [ IsProjectiveSpaceIsomorphism, IsZeroCyc ],
+M: \=, [IsStandardDualityOfProjectiveSpace, IsStandardDualityOfProjectiveSpace],
+M: \=, [IsStandardDualityOfProjectiveSpace, IsIdentityMappingOfElementsOfProjectiveSpace],
+M: \=, [IsIdentityMappingOfElementsOfProjectiveSpace, IsStandardDualityOfProjectiveSpace],
+M: \=, [IsIdentityMappingOfElementsOfProjectiveSpace, IsIdentityMappingOfElementsOfProjectiveSpace],
+M: ProjElWithFrobWithPSIsom, [IsCMatRep and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField, IsStandardDualityOfProjectiveSpace],
+M: ProjElWithFrobWithPSIsom, [IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField, IsStandardDualityOfProjectiveSpace],
+M: ProjElWithFrobWithPSIsom, [IsCMatRep and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField],
+M: ProjElWithFrobWithPSIsom, [IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField],
+M: ProjElWithFrobWithPSIsom, [IsCMatRep and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField, IsGeneralMappingand IsSPGeneralMapping and IsOne],
+M: ProjElWithFrobWithPSIsom, [IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField, IsGeneralMappingand IsSPGeneralMapping and IsOne],
+M: ViewObj, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: Display, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: PrintObj, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: Representative, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: BaseField, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: BaseField, [IsProjGroupWithFrobWithPSIsom],
+M: \=, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep, IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: IsOne, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: OneImmutable, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: OneImmutable, [IsGroup and IsProjGrpElWithFrobWithPSIsom],
+M: OneSameMutability, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: \^, [ IsCVecRep and IsFFECollection, IsIdentityMappingOfElementsOfProjectiveSpace ],
+M: \^, [ IsVector and IsFFECollection, IsIdentityMappingOfElementsOfProjectiveSpace ],
+M: \^, [ IsVector and IsFFECollection and IsGF2VectorRep, IsIdentityMappingOfElementsOfProjectiveSpace ],
+M: \^, [ IsVector and IsFFECollection and Is8BitVectorRep, IsIdentityMappingOfElementsOfProjectiveSpace ],
+M: \^, [ IsCMatRep and IsFFECollColl, IsStandardDualityOfProjectiveSpace ],
+M: \^, [ IsMatrix and IsFFECollColl, IsStandardDualityOfProjectiveSpace ],
+M: \^, [ IsCMatRep and IsFFECollColl, IsIdentityMappingOfElementsOfProjectiveSpace ],
+M: \^, [ IsMatrix and IsFFECollColl, IsIdentityMappingOfElementsOfProjectiveSpace ],
+M: \^, [ IsSubspaceOfProjectiveSpace, IsIdentityMappingOfElementsOfProjectiveSpace ],
+M: \^, [ IsSubspaceOfProjectiveSpace, IsStandardDualityOfProjectiveSpace ],
+M: \*, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep, IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: \&lt;, [IsProjGrpElWithFrobWithPSIsom, IsProjGrpElWithFrobWithPSIsom],
+M: InverseSameMutability, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: InverseMutable, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: \*, [IsProjGrpElWithFrob and IsProjGrpElWithFrobRep, IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep],
+M: \*, [IsProjGrpElWithFrobWithPSIsom and IsProjGrpElWithFrobWithPSIsomRep, IsProjGrpElWithFrob and IsProjGrpElWithFrobRep],
+M: ProjElsWithFrobWithPSIsom, [IsList, IsField],
+M: CorrelationCollineationGroup, [ IsProjectiveSpace and IsProjectiveSpaceRep ],
+M: CorrelationOfProjectiveSpace, [ IsMatrix and IsFFECollColl, IsField],
+M: CorrelationOfProjectiveSpace, [ IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField],
+M: CorrelationOfProjectiveSpace, [ IsMatrix and IsFFECollColl, IsField, IsStandardDualityOfProjectiveSpace],
+M: CorrelationOfProjectiveSpace, [ IsMatrix and IsFFECollColl, IsField, IsIdentityMappingOfElementsOfProjectiveSpace],
+M: CorrelationOfProjectiveSpace, [ IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField, IsStandardDualityOfProjectiveSpace],
+M: CorrelationOfProjectiveSpace, [ IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsField, IsIdentityMappingOfElementsOfProjectiveSpace],
+M: CorrelationOfProjectiveSpace, [ IsProjectiveSpace, IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsStandardDualityOfProjectiveSpace],
+M: CorrelationOfProjectiveSpace, [ IsProjectiveSpace, IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsIdentityMappingOfElementsOfProjectiveSpace],
+M: Correlation, [ IsProjectiveSpace, IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsStandardDualityOfProjectiveSpace],
+M: Correlation, [ IsProjectiveSpace, IsMatrix and IsFFECollColl, IsRingHomomorphism and IsMultiplicativeElementWithInverse, IsIdentityMappingOfElementsOfProjectiveSpace],
+M: MatrixOfCorrelation, InstallMethod(MatrixOfCorrelation,[IsProjGrpElWithFrobWithPSIsomand IsProjGrpElWithFrobWithPSIsomRep],
+M: FieldAutomorphism, InstallMethod(FieldAutomorphism,[IsProjGrpElWithFrobWithPSIsomand IsProjGrpElWithFrobWithPSIsomRep],
+M: ProjectiveSpaceIsomorphism, InstallMethod(ProjectiveSpaceIsomorphism,[IsProjGrpElWithFrobWithPSIsomand IsProjGrpElWithFrobWithPSIsomRep],
+M: Embedding, [IsProjectiveGroupWithFrob, IsProjGroupWithFrobWithPSIsom],
+M: Dimension, [IsProjGroupWithFrobWithPSIsom],
+M: ActionOnAllPointsHyperplanes, [ IsProjGroupWithFrobWithPSIsom ],
+M: CanComputeActionOnPoints, [IsProjGroupWithFrobWithPSIsom],
+M: SetAsNiceMono, [IsProjGroupWithFrobWithPSIsom, IsGroupHomomorphism and IsInjective],
+M: NiceMonomorphism, [IsProjGroupWithFrobWithPSIsom and CanComputeActionOnPoints and IsHandledByNiceMonomorphism], 50,
+M: NiceMonomorphism, [IsProjGroupWithFrobWithPSIsom and IsHandledByNiceMonomorphism], 50,
+M: ViewObj, [IsProjGroupWithFrobWithPSIsom],
+M: ViewObj, [IsProjGroupWithFrobWithPSIsom and IsTrivial],
+M: ViewObj, [IsProjGroupWithFrobWithPSIsom and HasGeneratorsOfGroup],
+M: ViewObj, [IsProjGroupWithFrobWithPSIsom and HasSize],
+M: ViewObj, [IsProjGroupWithFrobWithPSIsom and HasGeneratorsOfGroup and HasSize],
+M: PolarityOfProjectiveSpaceOp, [IsSesquilinearForm and IsFormRep],
+M: ViewObj, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: PrintObj, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: Display, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: PolarityOfProjectiveSpace, [IsSesquilinearForm and IsFormRep],
+M: PolarityOfProjectiveSpace, [IsMatrix,IsField and IsFinite],
+M: PolarityOfProjectiveSpace, [IsMatrix, IsFrobeniusAutomorphism, IsField and IsFinite],
+M: HermitianPolarityOfProjectiveSpace, [IsMatrix,IsField and IsFinite],
+M: GramMatrix, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: BaseField, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: CompanionAutomorphism, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: SesquilinearForm, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: IsHermitianPolarityOfProjectiveSpace, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: IsOrthogonalPolarityOfProjectiveSpace, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: IsSymplecticPolarityOfProjectiveSpace, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: IsPseudoPolarityOfProjectiveSpace, [IsPolarityOfProjectiveSpace and IsPolarityOfProjectiveSpaceRep],
+M: \^, [ IsSubspaceOfProjectiveSpace, IsPolarityOfProjectiveSpace],
+
+polarspace.gi: methods
+
+M: Wrap, [IsClassicalPolarSpace, IsPosInt, IsObject],
+M: PolarSpace, [ IsSesquilinearForm, IsField, IsGroup, IsFunction ],
+M: PolarSpaceStandard, [ IsSesquilinearForm, IsBool ],
+M: PolarSpaceStandard, [ IsQuadraticForm, IsBool ],
+M: PolarSpace, [ IsSesquilinearForm ],
+M: PolarSpace, [ IsQuadraticForm ],
+M: PolarSpace, [ IsHermitianForm ],
+M: CanonicalOrbitRepresentativeForSubspaces, [IsString, IsPosInt, IsField],
+M: EllipticQuadric, [ IsPosInt, IsField ],
+M: EllipticQuadric, [ IsPosInt, IsPosInt ],
+M: SymplecticSpace, [ IsPosInt, IsField ],
+M: SymplecticSpace, [ IsPosInt, IsPosInt ],
+M: ParabolicQuadric, [ IsPosInt, IsField ],
+M: ParabolicQuadric, [ IsPosInt, IsPosInt ],
+M: HyperbolicQuadric, [ IsPosInt, IsField ],
+M: HyperbolicQuadric, [ IsPosInt, IsPosInt ],
+M: HermitianPolarSpace, [ IsPosInt, IsField ],
+M: HermitianPolarSpace, [ IsPosInt, IsPosInt ],
+M: StandardPolarSpace, [ IsClassicalPolarSpace ],
+M: IsCanonicalPolarSpace, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: CanonicalPolarSpace, [ IsClassicalPolarSpace ],
+M: QuadraticForm, [ IsClassicalPolarSpace ],
+M: PolarSpaceType, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: CompanionAutomorphism, [ IsClassicalPolarSpace ],
+M: ViewObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: ViewString, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: ViewObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsEllipticQuadric],
+M: ViewObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsEllipticQuadric and IsStandardPolarSpace],
+M: ViewString, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsEllipticQuadric and IsStandardPolarSpace],
+M: ViewString, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsEllipticQuadric],
+M: ViewObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsSymplecticSpace],
+M: ViewObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsSymplecticSpace and IsStandardPolarSpace],
+M: ViewString, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsSymplecticSpace and IsStandardPolarSpace],
+M: ViewString, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsSymplecticSpace],
+M: ViewObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsParabolicQuadric ],
+M: ViewObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsParabolicQuadric and IsStandardPolarSpace ],
+M: ViewString, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsParabolicQuadric and IsStandardPolarSpace ],
+M: ViewString, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsParabolicQuadric ],
+M: ViewObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsParabolicQuadric ],
+M: ViewObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHyperbolicQuadric ],
+M: ViewObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHyperbolicQuadric and IsStandardPolarSpace],
+M: ViewString, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHyperbolicQuadric and IsStandardPolarSpace],
+M: ViewString, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHyperbolicQuadric],
+M: ViewObj, [IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHermitianPolarSpace ],
+M: ViewObj, [IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHermitianPolarSpace and IsStandardPolarSpace],
+M: ViewString, [IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHermitianPolarSpace and IsStandardPolarSpace],
+M: ViewString, [IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHermitianPolarSpace],
+M: PrintObj, InstallMethod(PrintObj,[IsClassicalPolarSpaceandIsClassicalPolarSpaceRep],
+M: Display, InstallMethod(Display,[IsClassicalPolarSpaceandIsClassicalPolarSpaceRep],
+M: PrintObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsEllipticQuadric ],
+M: Display, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsEllipticQuadric ],
+M: PrintObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsSymplecticSpace ],
+M: Display, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsSymplecticSpace ],
+M: PrintObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsParabolicQuadric ],
+M: Display, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsParabolicQuadric ],
+M: PrintObj, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHyperbolicQuadric ],
+M: Display, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHyperbolicQuadric ],
+M: PrintObj, [IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHermitianPolarSpace ],
+M: Display, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep and IsHermitianPolarSpace ],
+M: IsomorphismCanonicalPolarSpace, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: IsomorphismCanonicalPolarSpaceWithIntertwiner, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: RankAttr, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: TypesOfElementsOfIncidenceStructure, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: TypesOfElementsOfIncidenceStructurePlural, [IsClassicalPolarSpace],
+M: Order, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: RepresentativesOfElements, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: QUO, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep, IsSubspaceOfClassicalPolarSpace],
+M: Size, [IsSubspacesOfClassicalPolarSpace],
+M: VectorSpaceToElement, [IsClassicalPolarSpace, IsCMatRep],
+M: VectorSpaceToElement, [IsClassicalPolarSpace, IsCVecRep],
+M: VectorSpaceToElement, [IsClassicalPolarSpace, IsPlistRep and IsMatrix],
+M: VectorSpaceToElement, [IsClassicalPolarSpace, IsGF2MatrixRep],
+M: VectorSpaceToElement, [IsClassicalPolarSpace, Is8BitMatrixRep],
+M: VectorSpaceToElement, [IsClassicalPolarSpace, IsRowVector],
+M: VectorSpaceToElement, [IsClassicalPolarSpace, Is8BitVectorRep],
+M: \in, [IsElementOfIncidenceStructure, IsClassicalPolarSpace],
+M: Span, [IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace, IsBool],
+M: Meet, [IsSubspaceOfClassicalPolarSpace, IsSubspaceOfClassicalPolarSpace],
+M: ElementsOfIncidenceStructure, [IsClassicalPolarSpace and IsClassicalPolarSpaceRep, IsPosInt],
+M: ElementsOfIncidenceStructure, [IsClassicalPolarSpace and IsClassicalPolarSpaceRep],
+M: NumberOfTotallySingularSubspaces, [IsClassicalPolarSpace, IsPosInt],
+M: TypeOfSubspace, [ IsClassicalPolarSpace, IsSubspaceOfProjectiveSpace ],
+M: FlagOfIncidenceStructure, [ IsClassicalPolarSpace, IsSubspaceOfProjectiveSpaceCollection ],
+M: FlagOfIncidenceStructure, [ IsClassicalPolarSpace, IsList and IsEmpty ],
+M: ViewObj, [ IsFlagOfClassicalPolarSpace and IsFlagOfIncidenceStructureRep ],
+M: PrintObj, [ IsFlagOfClassicalPolarSpace and IsFlagOfIncidenceStructureRep ],
+M: Display, [ IsFlagOfClassicalPolarSpace and IsFlagOfIncidenceStructureRep ],
+M: RandomSubspace, [ IsClassicalPolarSpace, IsPosInt ],
+M: Random, [ IsSubspacesOfClassicalPolarSpace ],
+M: Iterator, [IsSubspacesOfClassicalPolarSpace],
+M: ShadowOfElement, [IsClassicalPolarSpace, IsSubspaceOfProjectiveSpace, IsPosInt],
+M: Iterator, [ IsShadowSubspacesOfClassicalPolarSpace ],
+M: Size, [IsShadowSubspacesOfClassicalPolarSpace andIsShadowSubspacesOfClassicalPolarSpaceRep ],
+M: IsCollinear, [IsClassicalPolarSpace and IsClassicalPolarSpaceRep, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace],
+M: PolarityOfProjectiveSpace, [IsClassicalPolarSpace],
+M: PolarSpace, [ IsPolarityOfProjectiveSpace ],
+M: GeometryOfAbsolutePoints, [ IsPolarityOfProjectiveSpace ],
+M: AbsolutePoints, [ IsPolarityOfProjectiveSpace ],
+M: AbsolutePoints, [ IsPolarityOfProjectiveSpace ],
+M: PolarMap, [IsClassicalPolarSpace],
+M: CollineationGroup, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: SpecialIsometryGroup, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: IsometryGroup, [ IsClassicalPolarSpace and IsClassicalPolarSpaceRep ],
+M: SimilarityGroup, InstallMethod(SimilarityGroup,[IsClassicalPolarSpaceandIsClassicalPolarSpaceRep],
+M: IsParabolicQuadric, [IsClassicalPolarSpace],
+M: IsParabolicQuadric, [IsClassicalPolarSpace],
+M: IsHyperbolicQuadric, [IsClassicalPolarSpace],
+M: IsHyperbolicQuadric, [IsClassicalPolarSpace],
+M: IsEllipticQuadric, [IsClassicalPolarSpace],
+M: IsEllipticQuadric, [IsClassicalPolarSpace],
+M: IsSymplecticSpace, [IsClassicalPolarSpace],
+M: IsHermitianPolarSpace, [IsClassicalPolarSpace],
+M: DefiningListOfPolynomials, [IsProjectiveVariety and IsClassicalPolarSpace and IsClassicalPolarSpaceRep],
+M: NucleusOfParabolicQuadric, [ IsClassicalPolarSpace ],
+M: TangentSpace, [ IsSubspaceOfClassicalPolarSpace ],
+M: TangentSpace, [ IsClassicalPolarSpace, IsSubspaceOfProjectiveSpace ],
+M: Pole, [ IsClassicalPolarSpace, IsSubspaceOfProjectiveSpace ],
+M: IncidenceGraph, [ IsClassicalPolarSpace ],
+
+morphisms.gi: methods
+
+M: GeometryMorphismByFunction, [ IsAnyElementsOfIncidenceStructure, IsAnyElementsOfIncidenceStructure, IsFunction, IsBool, IsFunction ],
+M: GeometryMorphismByFunction, [ IsAnyElementsOfIncidenceStructure, IsAnyElementsOfIncidenceStructure, IsFunction, IsFunction ],
+M: GeometryMorphismByFunction, [ IsAnyElementsOfIncidenceStructure, IsAnyElementsOfIncidenceStructure, IsFunction ],
+M: ViewObj, [ IsGeometryMorphism ],
+M: PrintObj, [ IsGeometryMorphism ],
+M: Display, [ IsGeometryMorphism ],
+M: ViewObj, [ IsGeometryMorphism and IsMappingByFunctionWithInverseRep ],
+M: ViewObj, [ IsGeometryMorphism and IsMappingByFunctionRep ],
+M: PrintObj, [ IsGeometryMorphism and IsMappingByFunctionRep ],
+M: Display, [ IsGeometryMorphism and IsMappingByFunctionRep ],
+M: ImageElm, [IsGeometryMorphism, IsElementOfIncidenceStructure],
+M: \^, [IsElementOfIncidenceStructure, IsGeometryMorphism],
+M: ImagesSet, [IsGeometryMorphism, IsElementOfIncidenceStructureCollection],
+M: PreImageElm, [IsGeometryMorphism, IsElementOfIncidenceStructure],
+M: PreImagesSet, [IsGeometryMorphism, IsElementOfIncidenceStructureCollection],
+M: NaturalEmbeddingBySubspace, [ IsProjectiveSpace, IsProjectiveSpace, IsSubspaceOfProjectiveSpace ],
+M: NaturalEmbeddingBySubspaceNC, [ IsProjectiveSpace, IsProjectiveSpace, IsSubspaceOfProjectiveSpace ],
+M: NaturalEmbeddingBySubspace, [ IsClassicalPolarSpace, IsClassicalPolarSpace, IsSubspaceOfProjectiveSpace ],
+M: NaturalEmbeddingBySubspaceNC, [ IsClassicalPolarSpace, IsClassicalPolarSpace, IsSubspaceOfProjectiveSpace ],
+M: IsomorphismPolarSpaces, [ IsClassicalPolarSpace, IsClassicalPolarSpace, IsBool ],
+M: IsomorphismPolarSpaces, [ IsClassicalPolarSpace, IsClassicalPolarSpace ],
+M: IsomorphismPolarSpacesNC, [ IsClassicalPolarSpace, IsClassicalPolarSpace, IsBool ],
+M: IsomorphismPolarSpacesNC, [ IsClassicalPolarSpace, IsClassicalPolarSpace ],
+M: ShrinkMat, [ IsBasis, IsMatrix ],
+M: ShrinkMat, [ IsField,IsField, IsMatrix ],
+M: ShrinkVec, [ IsField, IsField, IsVector ],
+M: ShrinkVec, [ IsField, IsField, IsVector, IsBasis ],
+M: BlownUpProjectiveSpace, [ IsBasis, IsProjectiveSpace ],
+M: BlownUpProjectiveSpaceBySubfield, [ IsField, IsProjectiveSpace ],
+M: BlownUpSubspaceOfProjectiveSpace, [ IsBasis, IsSubspaceOfProjectiveSpace ],
+M: BlownUpSubspaceOfProjectiveSpaceBySubfield, [ IsField, IsSubspaceOfProjectiveSpace],
+M: IsDesarguesianSpreadElement, [ IsBasis, IsSubspaceOfProjectiveSpace ],
+M: IsBlownUpSubspaceOfProjectiveSpace, [ IsBasis, IsSubspaceOfProjectiveSpace ],
+M: NaturalEmbeddingByFieldReduction, [ IsProjectiveSpace, IsField, IsBasis ],
+M: NaturalEmbeddingByFieldReduction, [ IsProjectiveSpace, IsField ],
+M: NaturalEmbeddingByFieldReduction, [ IsProjectiveSpace, IsProjectiveSpace, IsBasis ],
+M: NaturalEmbeddingByFieldReduction, [ IsProjectiveSpace, IsProjectiveSpace ],
+M: BilinearFormFieldReduction, [ IsBilinearForm, IsField, IsFFE, IsBasis ],
+M: BilinearFormFieldReduction, [ IsBilinearForm, IsField, IsFFE ],
+M: QuadraticFormFieldReduction, [ IsQuadraticForm, IsField, IsFFE, IsBasis ],
+M: QuadraticFormFieldReduction, [ IsQuadraticForm, IsField, IsFFE ],
+M: HermitianFormFieldReduction, [ IsHermitianForm, IsField, IsFFE, IsBasis ],
+M: HermitianFormFieldReduction, [ IsHermitianForm, IsField, IsFFE ],
+M: NaturalEmbeddingByFieldReduction, [IsClassicalPolarSpace, IsField, IsFFE, IsBasis, IsBool],
+M: NaturalEmbeddingByFieldReduction, [IsClassicalPolarSpace, IsField, IsFFE, IsBasis],
+M: NaturalEmbeddingByFieldReduction, [IsClassicalPolarSpace, IsField, IsFFE, IsBool],
+M: NaturalEmbeddingByFieldReduction, [IsClassicalPolarSpace, IsField, IsFFE],
+M: NaturalEmbeddingByFieldReduction, [IsClassicalPolarSpace, IsField, IsBool],
+M: NaturalEmbeddingByFieldReduction, [IsClassicalPolarSpace, IsField],
+M: NaturalEmbeddingByFieldReduction, [ IsClassicalPolarSpace, IsClassicalPolarSpace ],
+M: NaturalEmbeddingByFieldReduction, [IsClassicalPolarSpace, IsClassicalPolarSpace, IsBool],
+M: NaturalEmbeddingByFieldReduction, [IsClassicalPolarSpace, IsClassicalPolarSpace],
+M: NaturalEmbeddingBySubfield, [ IsProjectiveSpace, IsProjectiveSpace ],
+M: NaturalEmbeddingBySubfield, [ IsClassicalPolarSpace, IsClassicalPolarSpace, IsBool ],
+M: NaturalEmbeddingBySubfield, [ IsClassicalPolarSpace, IsClassicalPolarSpace ],
+M: NaturalProjectionBySubspace, [ IsProjectiveSpace, IsSubspaceOfProjectiveSpace ],
+M: NaturalProjectionBySubspaceNC, [ IsProjectiveSpace, IsSubspaceOfProjectiveSpace ],
+M: QUO, [ IsProjectiveSpace and IsProjectiveSpaceRep, IsSubspaceOfProjectiveSpace],
+M: NaturalProjectionBySubspace, [ IsClassicalPolarSpace, IsSubspaceOfClassicalPolarSpace ],
+M: NaturalProjectionBySubspaceNC, [ IsClassicalPolarSpace, IsSubspaceOfClassicalPolarSpace ],
+M: PluckerCoordinates, [ IsMatrix ],
+M: InversePluckerCoordinates, [ IsVector ],
+M: PluckerCoordinates, [ IsSubspaceOfProjectiveSpace ],
+M: KleinCorrespondence, [ IsField, IsBool ],
+M: KleinCorrespondence, [ IsPosInt ],
+M: KleinCorrespondence, [ IsPosInt, IsBool ],
+M: KleinCorrespondence, [ IsField ],
+M: KleinCorrespondence, [ IsClassicalPolarSpace, IsBool ],
+M: KleinCorrespondence, [ IsClassicalPolarSpace ],
+M: KleinCorrespondenceExtended, [ IsField, IsBool ],
+M: KleinCorrespondenceExtended, [ IsPosInt ],
+M: KleinCorrespondenceExtended, [ IsClassicalPolarSpace, IsBool ],
+M: KleinCorrespondenceExtended, [ IsClassicalPolarSpace ],
+M: NaturalDualitySymplectic, [ IsClassicalGQ, IsClassicalGQ, IsBool, IsBool ],
+M: NaturalDualityHermitian, [ IsClassicalGQ, IsClassicalGQ, IsBool, IsBool ],
+M: NaturalDuality, [ IsClassicalGQ, IsClassicalGQ, IsBool ],
+M: NaturalDuality, [ IsClassicalGQ, IsClassicalGQ ],
+M: NaturalDuality, [ IsClassicalGQ, IsBool ],
+M: NaturalDuality, [ IsClassicalGQ ],
+M: IsomorphismPolarSpacesProjectionFromNucleus, [ IsClassicalPolarSpace, IsClassicalPolarSpace, IsBool ],
+M: SelfDualitySymplectic, [ IsClassicalGQ, IsBool ],
+M: SelfDualityParabolic, [ IsClassicalGQ, IsBool ],
+M: SelfDuality, [ IsClassicalGQ, IsBool ],
+M: SelfDuality, [ IsClassicalGQ ],
+
+enumerators.gi: methods
+
+M: AntonEnumerator, [IsSubspacesOfClassicalPolarSpace],
+M: EnumeratorByOrbit, [ IsSubspacesOfClassicalPolarSpace ],
+M: AsList, [IsSubspacesOfClassicalPolarSpace],
+M: AsSortedList, [IsSubspacesOfClassicalPolarSpace],
+M: AsSSortedList, [IsSubspacesOfClassicalPolarSpace],
+M: Enumerator, [ IsSubspacesOfClassicalPolarSpace ],
+M: Enumerator, [IsShadowSubspacesOfClassicalPolarSpace and IsShadowSubspacesOfClassicalPolarSpaceRep ],
+
+diagram.gi: methods
+
+M: CosetGeometry, InstallMethod(CosetGeometry,"forgroupsandlistofsubgroups",[IsGroup,IsHomogeneousList],
+M: Rank2Residues, InstallMethod(Rank2Residues,[IsIncidenceGeometry],
+M: MakeRank2Residue, InstallMethod(MakeRank2Residue,[IsRank2Residue],
+M: \^, [IsElementOfCosetGeometry, IsMultiplicativeElementWithInverse],
+M: \^, [IsFlagOfCosetGeometry, IsMultiplicativeElementWithInverse],
+M: FlagOfIncidenceStructure, [ IsCosetGeometry, IsElementOfIncidenceStructureCollection ],
+M: FlagOfIncidenceStructure, [ IsCosetGeometry, IsList and IsEmpty ],
+M: \=, InstallOtherMethod(\=,[IsCosetGeometry,IsCosetGeometry ],
+M: ElementsOfIncidenceStructure, InstallMethod(ElementsOfIncidenceStructure,[IsCosetGeometry,IsPosInt],
+M: ElementsOfIncidenceStructure, [IsCosetGeometry],
+M: RandomElement, [IsCosetGeometry],
+M: RandomChamber, [IsCosetGeometry],
+M: RandomFlag, [IsCosetGeometry],
+M: Random, [IsAllElementsOfCosetGeometry],
+M: Size, InstallMethod(Size,[IsElementsOfCosetGeometry],
+M: Wrap, [IsCosetGeometry, IsPosInt, IsObject],
+M: Iterator, [IsElementsOfCosetGeometry],
+M: IsIncident, [IsElementOfCosetGeometry, IsElementOfCosetGeometry],
+M: ParabolicSubgroups, [ IsCosetGeometry ], cg -&gt; cg!.parabolics );
+M: AmbientGroup, [ IsCosetGeometry ], cg -&gt; cg!.group );
+M: BorelSubgroup, [ IsCosetGeometry ], cg -&gt; Intersection(cg!.parabolics) );
+M: IsFlagTransitiveGeometry, [ IsCosetGeometry ],
+M: IsFirmGeometry, [ IsCosetGeometry ],
+M: IsThinGeometry, [ IsCosetGeometry ],
+M: IsThickGeometry, [ IsCosetGeometry ],
+M: IsConnected, [ IsCosetGeometry ],
+M: IsResiduallyConnected, [ IsCosetGeometry ],
+M: StandardFlagOfCosetGeometry, [ IsCosetGeometry ],
+M: FlagToStandardFlag, [ IsCosetGeometry, IsFlagOfCosetGeometry ],
+M: CanonicalResidueOfFlag, [ IsCosetGeometry, IsFlagOfCosetGeometry ],
+M: ResidueOfFlag, [ IsFlagOfCosetGeometry ],
+M: IncidenceGraph, InstallMethod(IncidenceGraph,[IsCosetGeometryandIsHandledByNiceMonomorphism],
+M: IncidenceGraph, InstallMethod(IncidenceGraph,[IsCosetGeometry],
+M: AutGroupIncidenceStructureWithNauty, [ IsCosetGeometry ],
+M: CorGroupIncidenceStructureWithNauty, [ IsCosetGeometry ],
+M: IsIsomorphicIncidenceStructureWithNauty, [ IsCosetGeometry, IsCosetGeometry ],
+M: ViewObj, [ IsDiagram and IsDiagramRep ],
+M: ViewObj, [ IsDiagram and IsDiagramRep and HasGeometryOfDiagram],
+M: ViewObj, [ IsCosetGeometry and IsCosetGeometryRep ],
+M: ViewObj, [ IsFlagOfCosetGeometry ],
+M: PrintObj, [ IsFlagOfCosetGeometry ],
+M: PrintObj, [ IsCosetGeometry and IsCosetGeometryRep ],
+M: ViewObj, [ IsElementsOfCosetGeometry and IsElementsOfCosetGeometryRep ],
+M: PrintObj, InstallMethod(PrintObj,"forcosetgeometry",[IsElementsOfCosetGeometryand IsElementsOfCosetGeometryRep ],
+M: ViewObj, InstallMethod(ViewObj,"forcosetgeometry",[IsElementOfCosetGeometry],
+M: PrintObj, InstallMethod(PrintObj,"forelementofcosetgeometry",[IsElementOfCosetGeometry],
+M: ViewObj, InstallMethod(ViewObj,"forvertexofdiagram",[IsVertexOfDiagramandIsVertexOfDiagramRep],
+M: PrintObj, InstallMethod(PrintObj,"forvertexofdiagram",[IsVertexOfDiagramandIsVertexOfDiagramRep],
+M: ViewObj, InstallMethod(ViewObj,"foredgeofdiagram",[IsEdgeOfDiagramandIsEdgeOfDiagramRep],
+M: PrintObj, InstallMethod(PrintObj,"foredgeofdiagram",[IsEdgeOfDiagramandIsEdgeOfDiagramRep],
+M: ViewObj, InstallMethod(ViewObj,"forrank2residue",[IsRank2ResidueandIsRank2ResidueRep],
+M: PrintObj, InstallMethod(PrintObj,"forrank2residue",[IsRank2ResidueandIsRank2ResidueRep],
+M: \=, InstallMethod(\=,[IsVertexOfDiagramandIsVertexOfDiagramRep, IsVertexOfDiagram and IsVertexOfDiagramRep ],
+M: \=, InstallMethod(\=,[IsEdgeOfDiagramandIsEdgeOfDiagramRep, IsEdgeOfDiagram and IsEdgeOfDiagramRep ],
+M: DiagramOfGeometry, InstallMethod(DiagramOfGeometry,"forflag-transitivecosetgeometry",[IsCosetGeometry],
+M: Display, InstallMethod(Display,[IsDiagramandIsDiagramRep],
+M: DiagramOfGeometry, InstallMethod(DiagramOfGeometry,"foraprojectivespace",[IsProjectiveSpace],
+M: Rk2GeoDiameter, InstallMethod(Rk2GeoDiameter,"foracosetgeometry",[IsCosetGeometry, IsPosInt],
+M: Rk2GeoGonality, InstallMethod(Rk2GeoGonality,"foracosetgeometry",[IsCosetGeometry],
+M: GeometryOfRank2Residue, InstallMethod(GeometryOfRank2Residue,"forarank2residue",[IsRank2Residue],
+M: Rank2Parameters, InstallMethod(Rank2Parameters,"foracosetgeometryofrank2",[IsCosetGeometry],
+M: \&lt;, [ IsElementOfCosetGeometry and IsElementOfCosetGeometryRep, IsElementOfCosetGeometry and IsElementOfCosetGeometryRep ],
+M: DiagramOfGeometry, InstallMethod(DiagramOfGeometry,[IsClassicalPolarSpace],
+
+varieties.gi: methods
+
+M: AlgebraicVariety, [ IsProjectiveSpace, IsPolynomialRing, IsList ],
+M: AlgebraicVariety, [ IsProjectiveSpace, IsList ],
+M: AlgebraicVariety, [ IsAffineSpace, IsPolynomialRing, IsList ],
+M: AlgebraicVariety, [ IsAffineSpace, IsList ],
+M: ProjectiveVariety, [ IsProjectiveSpace, IsPolynomialRing, IsList ],
+M: ProjectiveVariety, [ IsProjectiveSpace, IsList ],
+M: ViewObj, [ IsProjectiveVariety and IsProjectiveVarietyRep ],
+M: PrintObj, [ IsProjectiveVariety and IsProjectiveVarietyRep ],
+M: Display, [ IsProjectiveVariety and IsProjectiveVarietyRep ],
+M: HermitianVariety, [IsPosInt, IsField],
+M: HermitianVariety, [IsPosInt, IsPosInt],
+M: HermitianVariety, [IsProjectiveSpace,IsPolynomialRing, IsPolynomial],
+M: HermitianVariety, [IsProjectiveSpace, IsPolynomial],
+M: ViewObj, [ IsHermitianVariety and IsHermitianVarietyRep ],
+M: PrintObj, [ IsHermitianVariety and IsHermitianVarietyRep ],
+M: Display, [ IsHermitianVariety and IsHermitianVarietyRep ],
+M: QuadraticVariety, [IsProjectiveSpace,IsPolynomialRing, IsPolynomial],
+M: QuadraticVariety, [IsProjectiveSpace, IsPolynomial],
+M: QuadraticVariety, [IsPosInt, IsField, IsString],
+M: QuadraticVariety, [IsPosInt, IsField],
+M: QuadraticVariety, [IsPosInt, IsPosInt],
+M: QuadraticVariety, [IsPosInt, IsPosInt, IsString],
+M: ViewObj, [ IsQuadraticVariety and IsQuadraticVarietyRep ],
+M: PrintObj, [ IsQuadraticVariety and IsQuadraticVarietyRep ],
+M: Display, [ IsQuadraticVariety and IsQuadraticVarietyRep ],
+M: PolarSpace, [IsProjectiveVariety and IsProjectiveVarietyRep],
+M: AffineVariety, [ IsAffineSpace, IsPolynomialRing, IsList ],
+M: AffineVariety, [ IsAffineSpace, IsList ],
+M: AlgebraicVariety, [ IsAffineSpace, IsList ],
+M: ViewObj, [ IsAffineVariety and IsAffineVarietyRep ],
+M: PrintObj, [ IsAffineVariety and IsAffineVarietyRep ],
+M: Display, [ IsAffineVariety and IsAffineVarietyRep ],
+M: \in, [IsElementOfIncidenceStructure, IsAlgebraicVariety],
+M: PointsOfAlgebraicVariety, [IsAlgebraicVariety and IsAlgebraicVarietyRep],
+M: ViewObj, [ IsPointsOfAlgebraicVariety and IsPointsOfAlgebraicVarietyRep ],
+M: PrintObj, [ IsPointsOfAlgebraicVariety and IsPointsOfAlgebraicVarietyRep ],
+M: Points, [IsAlgebraicVariety and IsAlgebraicVarietyRep],
+M: \in, [IsElementOfIncidenceStructure, IsPointsOfAlgebraicVariety], 1*SUM_FLAGS+3,
+M: Iterator, [IsPointsOfAlgebraicVariety],
+M: Enumerator, [IsPointsOfAlgebraicVariety],
+M: AmbientSpace, [IsAlgebraicVariety and IsAlgebraicVarietyRep],
+M: SegreMap, [ IsHomogeneousList ],
+M: SegreMap, [IsHomogeneousList, IsField ],
+M: SegreMap, [IsProjectiveSpace, IsProjectiveSpace ],
+M: SegreMap, [ IsPosInt, IsPosInt, IsField ],
+M: SegreMap, [ IsPosInt, IsPosInt, IsPosInt ],
+M: Source, [ IsSegreMap ],
+M: ViewObj, [ IsSegreMap and IsSegreMapRep ],
+M: PrintObj, [ IsSegreMap and IsSegreMapRep ],
+M: SegreVariety, [IsHomogeneousList],
+M: SegreVariety, [IsHomogeneousList, IsField ],
+M: SegreVariety, [IsProjectiveSpace, IsProjectiveSpace ],
+M: SegreVariety, [ IsPosInt, IsPosInt, IsField ],
+M: SegreVariety, [ IsPosInt, IsPosInt, IsPosInt ],
+M: ViewObj, [ IsSegreVariety and IsSegreVarietyRep ],
+M: PrintObj, [ IsSegreVariety and IsSegreVarietyRep ],
+M: SegreMap, [IsSegreVariety],
+M: PointsOfSegreVariety, [IsSegreVariety and IsSegreVarietyRep],
+M: ViewObj, [ IsPointsOfSegreVariety and IsPointsOfSegreVarietyRep ],
+M: Points, [IsSegreVariety and IsSegreVarietyRep],
+M: Iterator, [IsPointsOfSegreVariety],
+M: Enumerator, [IsPointsOfSegreVariety],
+M: Size, [IsPointsOfSegreVariety],
+M: ImageElm, [IsSegreMap, IsList],
+M: \^, [IsList, IsSegreMap],
+M: ImagesSet, [IsSegreMap, IsList],
+M: VeroneseMap, [IsProjectiveSpace],
+M: ViewObj, [ IsVeroneseMap and IsVeroneseMapRep ],
+M: PrintObj, [ IsVeroneseMap and IsVeroneseMapRep ],
+M: VeroneseVariety, [IsProjectiveSpace],
+M: VeroneseVariety, [ IsPosInt, IsField ],
+M: VeroneseVariety, [ IsPosInt, IsPosInt ],
+M: ViewObj, [ IsVeroneseVariety and IsVeroneseVarietyRep ],
+M: PrintObj, [ IsVeroneseVariety and IsVeroneseVarietyRep ],
+M: VeroneseMap, [IsVeroneseVariety],
+M: PointsOfVeroneseVariety, [IsVeroneseVariety and IsVeroneseVarietyRep],
+M: ViewObj, [ IsPointsOfVeroneseVariety and IsPointsOfVeroneseVarietyRep ],
+M: Points, [IsVeroneseVariety and IsVeroneseVarietyRep],
+M: Iterator, [IsPointsOfVeroneseVariety],
+M: Enumerator, [IsPointsOfVeroneseVariety],
+M: Size, [IsPointsOfVeroneseVariety],
+M: ImageElm, [IsGeometryMap, IsElementOfIncidenceStructure],
+M: \^, [IsElementOfIncidenceStructure, IsGeometryMap],
+M: ImagesSet, [IsGeometryMap, IsElementOfIncidenceStructureCollection],
+M: Source, [ IsGeometryMap ],
+M: Range, [ IsGeometryMap ],
+M: GrassmannCoordinates, [ IsSubspaceOfProjectiveSpace ],
+M: GrassmannMap, [ IsPosInt, IsProjectiveSpace ],
+M: GrassmannMap, [ IsPosInt, IsPosInt, IsPosInt ],
+M: GrassmannMap, [ IsSubspacesOfProjectiveSpace ],
+M: ViewObj, [ IsGrassmannMap and IsGrassmannMapRep ],
+M: PrintObj, [ IsGrassmannMap and IsGrassmannMapRep ],
+M: GrassmannVariety, [ IsPosInt, IsProjectiveSpace ],
+M: GrassmannVariety, [ IsSubspacesOfProjectiveSpace ],
+M: ViewObj, [ IsGrassmannVariety and IsGrassmannVarietyRep ],
+M: PrintObj, [ IsGrassmannVariety and IsGrassmannVarietyRep ],
+M: GrassmannMap, [IsGrassmannVariety],
+M: PointsOfGrassmannVariety, [IsGrassmannVariety and IsGrassmannVarietyRep],
+M: ViewObj, [ IsPointsOfGrassmannVariety and IsPointsOfGrassmannVarietyRep ],
+M: Points, [IsGrassmannVariety and IsGrassmannVarietyRep],
+M: Iterator, [IsPointsOfGrassmannVariety],
+M: Enumerator, [IsPointsOfGrassmannVariety],
+M: Size, [IsPointsOfGrassmannVariety],
+
+affinespace.gi: methods
+
+M: AffineSpace, [ IsPosInt, IsField ],
+M: AffineSpace, [ IsPosInt, IsPosInt ],
+M: ViewObj, InstallMethod(ViewObj,[IsAffineSpaceandIsAffineSpaceRep],
+M: PrintObj, InstallMethod(PrintObj,[IsAffineSpaceandIsAffineSpaceRep],
+M: \=, [IsAffineSpace, IsAffineSpace],
+M: Dimension, [ IsAffineSpace and IsAffineSpaceRep ],
+M: UnderlyingVectorSpace, [ IsAffineSpace and IsAffineSpaceRep ],
+M: AmbientSpace, [IsSubspaceOfAffineSpace],
+M: BaseField, [IsAffineSpace and IsAffineSpaceRep],
+M: BaseField, [IsSubspaceOfAffineSpace],
+M: TypesOfElementsOfIncidenceStructure, [IsAffineSpace],
+M: TypesOfElementsOfIncidenceStructurePlural, [IsAffineSpace],
+M: VectorSpaceTransversalElement, [IsVectorSpace, IsFFECollColl, IsVector],
+M: VectorSpaceTransversal, [IsVectorSpace, IsFFECollColl],
+M: ViewObj, [ IsVectorSpaceTransversal and IsVectorSpaceTransversalRep ],
+M: PrintObj, [ IsVectorSpaceTransversal and IsVectorSpaceTransversalRep ],
+M: Wrap, [IsAffineSpace, IsPosInt, IsObject],
+M: ViewObj, [ IsSubspacesOfAffineSpace and IsSubspacesOfAffineSpaceRep ],
+M: PrintObj, [ IsSubspacesOfAffineSpace and IsAllSubspacesOfProjectiveSpaceRep ],
+M: Display, [ IsSubspaceOfAffineSpace ],
+M: AffineSubspace, [IsAffineSpace, IsRowVector, IsPlistRep and IsMatrix],
+M: AffineSubspace, [IsAffineSpace, IsRowVector],
+M: AffineSubspace, [IsAffineSpace, IsCVecRep],
+M: AffineSubspace, [IsAffineSpace, IsRowVector, Is8BitMatrixRep],
+M: AffineSubspace, [IsAffineSpace, IsRowVector, IsGF2MatrixRep],
+M: AffineSubspace, [IsAffineSpace, IsCVecRep, IsCMatRep],
+M: ObjectToElement, [ IsAffineSpace, IsList],
+M: ObjectToElement, [ IsAffineSpace, IsPosInt, IsList],
+M: RandomSubspace, [ IsAffineSpace, IsInt ],
+M: Random, [ IsSubspacesOfAffineSpace ],
+M: ElementsOfIncidenceStructure, [IsAffineSpace],
+M: ElementsOfIncidenceStructure, [ IsAffineSpace, IsPosInt],
+M: Points, [IsAffineSpace],
+M: Lines, [IsAffineSpace],
+M: Planes, [IsAffineSpace],
+M: Solids, [IsAffineSpace],
+M: Hyperplanes, [IsAffineSpace],
+M: Size, [IsSubspacesOfAffineSpace],
+M: FlagOfIncidenceStructure, [ IsAffineSpace, IsSubspaceOfAffineSpaceCollection ],
+M: FlagOfIncidenceStructure, [ IsAffineSpace, IsList and IsEmpty ],
+M: ViewObj, [ IsFlagOfAffineSpace and IsFlagOfIncidenceStructureRep ],
+M: PrintObj, [ IsFlagOfAffineSpace and IsFlagOfIncidenceStructureRep ],
+M: Display, [ IsFlagOfAffineSpace and IsFlagOfIncidenceStructureRep ],
+M: Enumerator, [ IsVectorSpaceTransversal ],
+M: Enumerator, [ IsSubspacesOfAffineSpace ],
+M: Iterator, [IsSubspacesOfAffineSpace],
+M: \in, [IsSubspaceOfAffineSpace, IsAffineSpace],
+M: \in, [ IsAffineSpace, IsSubspaceOfAffineSpace ],
+M: \in, [IsSubspaceOfAffineSpace, IsSubspaceOfAffineSpace],
+M: IsIncident, [IsSubspaceOfAffineSpace, IsSubspaceOfAffineSpace],
+M: Span, [IsSubspaceOfAffineSpace, IsSubspaceOfAffineSpace],
+M: Meet, [IsSubspaceOfAffineSpace, IsSubspaceOfAffineSpace],
+M: IsParallel, [ IsSubspaceOfAffineSpace, IsSubspaceOfAffineSpace ],
+M: ProjectiveCompletion, [ IsAffineSpace ],
+M: ShadowOfElement, [IsAffineSpace, IsSubspaceOfAffineSpace, IsPosInt],
+M: ShadowOfFlag, [IsAffineSpace, IsFlagOfIncidenceStructure, IsPosInt],
+M: ParallelClass, [IsAffineSpace, IsSubspaceOfAffineSpace],
+M: ParallelClass, [ IsSubspaceOfAffineSpace ],
+M: Iterator, [IsParallelClassOfAffineSpace and IsParallelClassOfAffineSpaceRep ],
+M: Size, [IsShadowSubspacesOfAffineSpace and IsShadowSubspacesOfAffineSpaceRep ],
+M: Iterator, [IsShadowSubspacesOfAffineSpace and IsShadowSubspacesOfAffineSpaceRep ],
+M: ViewObj, [ IsShadowSubspacesOfAffineSpace and IsShadowSubspacesOfAffineSpaceRep ],
+M: ViewObj, [ IsParallelClassOfAffineSpace and IsParallelClassOfAffineSpaceRep ],
+M: Points, InstallMethod(Points,[IsSubspaceOfAffineSpace],
+M: Points, InstallMethod(Points,[IsAffineSpace,IsSubspaceOfAffineSpace],
+M: Lines, InstallMethod(Lines,[IsSubspaceOfAffineSpace],
+M: Lines, InstallMethod(Lines,[IsAffineSpace,IsSubspaceOfAffineSpace],
+M: Planes, InstallMethod(Planes,[IsSubspaceOfAffineSpace],
+M: Planes, InstallMethod(Planes,[IsAffineSpace,IsSubspaceOfAffineSpace],
+M: Solids, InstallMethod(Solids,[IsSubspaceOfAffineSpace],
+M: Solids, InstallMethod(Solids,[IsAffineSpace,IsSubspaceOfAffineSpace],
+M: IncidenceGraph, [ IsAffineSpace ],
+
+affinegroup.gi: methods
+
+M: AffineGroup, [ IsAffineSpace ],
+M: CollineationGroup, [ IsAffineSpace ],
+M: \^, [IsSubspaceOfAffineSpace, IsProjGrpElWithFrob],
+
+gpolygons.gi: methods
+
+M: GeneralisedPolygonByBlocks, [ IsHomogeneousList ],
+M: GeneralisedPolygonByIncidenceMatrix, [ IsMatrix ],
+M: GeneralisedPolygonByElements, [ IsSet, IsSet, IsFunction ],
+M: GeneralisedPolygonByElements, [ IsSet, IsSet, IsFunction, IsGroup, IsFunction ],
+M: ViewObj, [ IsProjectivePlaneCategory and IsGeneralisedPolygonRep],
+M: ViewObj, [ IsGeneralisedQuadrangle and IsGeneralisedPolygonRep],
+M: ViewObj, [ IsGeneralisedHexagon and IsGeneralisedPolygonRep],
+M: ViewObj, [ IsGeneralisedOctagon and IsGeneralisedPolygonRep],
+M: ViewObj, [ IsGeneralisedPolygon and IsGeneralisedPolygonRep],
+M: ViewObj, [ IsWeakGeneralisedPolygon and IsGeneralisedPolygonRep],
+M: Order, [ IsWeakGeneralisedPolygon ],
+M: UnderlyingObject, [ IsElementOfGeneralisedPolygon ],
+M: ObjectToElement, [ IsGeneralisedPolygon and IsGeneralisedPolygonRep, IsPosInt, IsObject],
+M: ObjectToElement, [ IsGeneralisedPolygon and IsGeneralisedPolygonRep, IsObject],
+M: ElementsOfIncidenceStructure, [IsGeneralisedPolygon and IsGeneralisedPolygonRep, IsPosInt],
+M: ElementsOfIncidenceStructure, [IsWeakGeneralisedPolygon and IsGeneralisedPolygonRep, IsPosInt],
+M: Points, [IsGeneralisedPolygon and IsGeneralisedPolygonRep],
+M: Lines, [IsGeneralisedPolygon and IsGeneralisedPolygonRep],
+M: ViewObj, [ IsElementsOfGeneralisedPolygon and IsElementsOfGeneralisedPolygonRep ],
+M: PrintObj, [ IsElementsOfGeneralisedPolygon and IsElementsOfGeneralisedPolygonRep ],
+M: Size, [IsElementsOfGeneralisedPolygon],
+M: Iterator, [ IsElementsOfGeneralisedPolygon and IsElementsOfGeneralisedPolygonRep],
+M: Iterator, [IsShadowElementsOfGeneralisedPolygon and IsShadowElementsOfGeneralisedPolygonRep ],
+M: Random, [ IsElementsOfGeneralisedPolygon and IsElementsOfGeneralisedPolygonRep ],
+M: IsIncident, [IsElementOfGeneralisedPolygon, IsElementOfGeneralisedPolygon],
+M: Span, [ IsElementOfGeneralisedPolygon, IsElementOfGeneralisedPolygon ],
+M: Meet, [ IsElementOfGeneralisedPolygon, IsElementOfGeneralisedPolygon ],
+M: Wrap, [IsGeneralisedPolygon, IsPosInt, IsObject],
+M: TypesOfElementsOfIncidenceStructurePlural, [ IsGeneralisedPolygon and IsGeneralisedPolygonRep ],
+M: ShadowOfElement, [IsGeneralisedPolygon and IsGeneralisedPolygonRep, IsElementOfGeneralisedPolygon, IsPosInt],
+M: ViewObj, [ IsShadowElementsOfGeneralisedPolygon and IsShadowElementsOfGeneralisedPolygonRep ],
+M: Points, [ IsElementOfGeneralisedPolygon ],
+M: Lines, [ IsElementOfGeneralisedPolygon ],
+M: DistanceBetweenElements, [ IsElementOfGeneralisedPolygon, IsElementOfGeneralisedPolygon],
+M: IncidenceGraph, [ IsGeneralisedPolygon ],
+M: IncidenceMatrixOfGeneralisedPolygon, [ IsGeneralisedPolygon ],
+M: CollineationGroup, [ IsGeneralisedPolygon and IsGeneralisedPolygonRep ],
+M: BlockDesignOfGeneralisedPolygon, [ IsGeneralisedPolygon and IsGeneralisedPolygonRep ],
+M: DistanceBetweenElements, [ IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace ],
+M: IncidenceGraph, [ IsDesarguesianPlane ],
+M: DistanceBetweenElements, [ IsSubspaceOfClassicalPolarSpace, IsSubspaceOfClassicalPolarSpace ],
+M: IncidenceGraph, [ IsClassicalGQ ],
+M: Wrap, [IsClassicalGeneralisedHexagon, IsPosInt, IsObject],
+M: SplitCayleyHexagon, [ IsField and IsFinite ],
+M: SplitCayleyHexagon, [ IsPosInt ],
+M: SplitCayleyHexagon, [ IsClassicalPolarSpace ],
+M: TwistedTrialityHexagon, [ IsField and IsFinite ],
+M: TwistedTrialityHexagon, [ IsPosInt ],
+M: TwistedTrialityHexagon, [ IsClassicalPolarSpace ],
+M: Display, [ IsGeneralisedHexagon and IsLieGeometry ],
+M: G2fining, [ IsPosInt, IsField and IsFinite ],
+M: 3D4fining, [ IsField and IsFinite ],
+M: CollineationGroup, [ IsClassicalGeneralisedHexagon],
+M: IncidenceGraph, [ IsClassicalGeneralisedHexagon and IsGeneralisedPolygonRep ],
+M: VectorSpaceToElement, [ IsClassicalGeneralisedHexagon, IsCVecRep],
+M: VectorSpaceToElement, [ IsClassicalGeneralisedHexagon, IsRowVector ],
+M: VectorSpaceToElement, [ IsClassicalGeneralisedHexagon, Is8BitVectorRep ],
+M: VectorSpaceToElement, [ IsClassicalGeneralisedHexagon, IsPlistRep and IsMatrix],
+M: VectorSpaceToElement, [ IsClassicalGeneralisedHexagon, IsGF2MatrixRep],
+M: VectorSpaceToElement, [ IsClassicalGeneralisedHexagon, Is8BitMatrixRep],
+M: VectorSpaceToElement, [ IsClassicalGeneralisedHexagon, IsCMatRep],
+M: \in, [ IsElementOfIncidenceStructure, IsClassicalGeneralisedHexagon ],
+M: ObjectToElement, [ IsClassicalGeneralisedHexagon, IsObject],
+M: ViewObj, [ IsElementOfKantorFamily ],
+M: PrintObj, [ IsElementOfKantorFamily ],
+M: Wrap, [IsElationGQByKantorFamily, IsPosInt, IsPosInt, IsObject],
+M: \=, [IsElementOfKantorFamily, IsElementOfKantorFamily],
+M: \&lt;, [IsElementOfKantorFamily, IsElementOfKantorFamily],
+M: IsKantorFamily, [IsGroup, IsList, IsList],
+M: EGQByKantorFamily, [IsGroup, IsList, IsList],
+M: Display, [ IsElationGQByKantorFamily ],
+M: UnderlyingObject, [ IsElementOfKantorFamily ],
+M: ObjectToElement, [ IsElationGQByKantorFamily, IsPosInt, IsRightCoset ],
+M: ObjectToElement, [ IsElationGQByKantorFamily, IsRightCoset ],
+M: ObjectToElement, [ IsElationGQByKantorFamily, IsPosInt, IsMultiplicativeElementWithInverse ],
+M: ObjectToElement, [ IsElationGQByKantorFamily, IsMultiplicativeElementWithInverse ],
+M: ObjectToElement, [ IsElationGQByKantorFamily, IsPosInt, IsMagmaWithInverses ],
+M: ObjectToElement, [ IsElationGQByKantorFamily, IsMagmaWithInverses ],
+M: IsAnisotropic, [IsFFECollColl, IsField and IsFinite],
+M: IsqClan, [ IsFFECollCollColl, IsField and IsFinite],
+M: qClan, [ IsFFECollCollColl, IsField ],
+M: ViewObj, [ IsqClanObj and IsqClanRep ],
+M: PrintObj, [ IsqClanObj and IsqClanRep ],
+M: AsList, [IsqClanObj and IsqClanRep],
+M: AsSet, [IsqClanObj and IsqClanRep],
+M: BaseField, [IsqClanObj and IsqClanRep],
+M: IsLinearqClan, [ IsqClanObj ],
+M: LinearqClan, [ IsPosInt ],
+M: FisherThasWalkerKantorBettenqClan, [ IsPosInt ],
+M: KantorMonomialqClan, [ IsPosInt ],
+M: KantorKnuthqClan, [ IsPosInt ],
+M: FisherqClan, [ IsPosInt ],
+M: KantorFamilyByqClan, [ IsqClanObj and IsqClanRep ],
+M: EGQByqClan, [ IsqClanObj and IsqClanRep ],
+M: IncidenceGraph, [ IsElationGQ and IsGeneralisedPolygonRep ],
+M: BLTSetByqClan, [ IsqClanObj and IsqClanRep ],
+M: EGQByBLTSet, [IsList, IsSubspaceOfProjectiveSpace, IsSubspaceOfProjectiveSpace],
+M: EGQByBLTSet, [ IsList ],
+M: Display, [ IsElationGQByBLTSet ],
+M: DefiningPlanesOfEGQByBLTSet, [ IsElationGQByBLTSet ],
+M: ObjectToElement, [ IsElationGQByBLTSet, IsPosInt, IsSubspaceOfClassicalPolarSpace],
+M: ObjectToElement, [ IsElationGQByBLTSet, IsSubspaceOfClassicalPolarSpace],
+M: CollineationSubgroup, [ IsElationGQByBLTSet ],
+M: FlockGQByqClan, InstallMethod(FlockGQByqClan,[IsqClanObj],
+
+orbits-stabilisers.gi: methods
+
+M: FiningOrbit, [ IsProjectiveGroupWithFrob, IsElementOfIncidenceStructure, IsFunction],
+M: FiningOrbit, [ IsProjectiveGroupWithFrob, IsSubspaceOfProjectiveSpace ],
+M: FiningOrbit, [ IsProjectiveGroupWithFrob, IsSubspaceOfAffineSpace ],
+M: FiningOrbit, [ IsProjectiveGroupWithFrob, CategoryCollections(IsElementOfIncidenceStructure), IsFunction],
+M: FiningOrbit, [ IsProjectiveGroupWithFrob, CategoryCollections(IsElementOfIncidenceStructure) ],
+M: FiningOrbits, [ IsGroup, IsHomogeneousList, IsFunction],
+M: FiningOrbitsDomain, [ IsGroup, IsElementsOfIncidenceGeometry, IsFunction ],
+M: FiningOrbits, [ IsProjectiveGroupWithFrob, IsSubspaceOfProjectiveSpaceCollection and IsHomogeneousList ],
+M: FiningOrbits, [ IsProjectiveGroupWithFrob, IsSubspaceOfAffineSpaceCollection and IsHomogeneousList ],
+M: FiningOrbits, [ IsProjectiveGroupWithFrob, IsSubspacesOfProjectiveSpace ],
+M: FiningOrbits, [ IsProjectiveGroupWithFrob, IsSubspacesOfAffineSpace ],
+M: FiningOrbits, [ IsProjectiveGroupWithFrob, IsShadowSubspacesOfProjectiveSpace],
+M: FiningOrbits, [ IsProjectiveGroupWithFrob, IsShadowSubspacesOfAffineSpace],
+M: FiningOrbits, [ IsProjectiveGroupWithFrob, IsShadowSubspacesOfClassicalPolarSpace],
+M: FiningOrbits, [ IsProjectiveGroupWithFrob, IsParallelClassOfAffineSpace],
+M: FiningElementStabiliserOp, [ IsGroup, IsElementOfIncidenceStructure, IsFunction],
+M: FiningStabiliser, [ IsProjectiveGroupWithFrob, IsSubspaceOfProjectiveSpace],
+M: FiningStabiliser, [ IsProjectiveGroupWithFrob, IsSubspaceOfAffineSpace],
+M: FiningStabiliserOrb, [IsProjectiveGroupWithFrob, IsSubspaceOfProjectiveSpace],
+M: FiningStabiliserOrb, [IsProjectiveGroupWithFrob, IsSubspaceOfAffineSpace],
+M: FiningSetwiseStabiliser, [IsProjectiveGroupWithFrob, IsSubspaceOfProjectiveSpaceCollection and IsHomogeneousList],
+M: FiningSetwiseStabiliser, [IsProjectiveGroupWithFrob, IsSubspaceOfAffineSpaceCollection and IsHomogeneousList],
+M: FiningStabiliserPerm, InstallMethod(FiningStabiliserPerm,[IsProjectiveGroupWithFrob,IsElementOfIncidenceStructure],
+M: FiningStabiliserPerm2, [IsProjectiveGroupWithFrob, IsElementOfIncidenceStructure],
+M: FixedSubspaces, [IsProjectiveGroupWithFrob, IsProjectiveSpace],
+M: ProjectiveStabiliserGroupOfSubspace, [IsSubspaceOfProjectiveSpace],
+M: StabiliserGroupOfSubspace, [IsSubspaceOfProjectiveSpace],
+M: SpecialProjectiveStabiliserGroupOfSubspace, [IsSubspaceOfProjectiveSpace],
+
+
+</pre></div>
+
+<p><a id="X835D28F3807174EB" name="X835D28F3807174EB"></a></p>
+
+<h4>A.3 <span class="Heading">The filter graph(s)</span></h4>
+
+<p><img src="./graphics/filtergraph.png"></img></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap13.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapB.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

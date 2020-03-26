@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ref) - Chapter 10: Streams</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap10"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chap19.html">19</a>  <a href="chap20.html">20</a>  <a href="chap21.html">21</a>  <a href="chap22.html">22</a>  <a href="chap23.html">23</a>  <a href="chap24.html">24</a>  <a href="chap25.html">25</a>  <a href="chap26.html">26</a>  <a href="chap27.html">27</a>  <a href="chap28.html">28</a>  <a href="chap29.html">29</a>  <a href="chap30.html">30</a>  <a href="chap31.html">31</a>  <a href="chap32.html">32</a>  <a href="chap33.html">33</a>  <a href="chap34.html">34</a>  <a href="chap35.html">35</a>  <a href="chap36.html">36</a>  <a href="chap37.html">37</a>  <a href="chap38.html">38</a>  <a href="chap39.html">39</a>  <a href="chap40.html">40</a>  <a href="chap41.html">41</a>  <a href="chap42.html">42</a>  <a href="chap43.html">43</a>  <a href="chap44.html">44</a>  <a href="chap45.html">45</a>  <a href="chap46.html">46</a>  <a href="chap47.html">47</a>  <a href="chap48.html">48</a>  <a href="chap49.html">49</a>  <a href="chap50.html">50</a>  <a href="chap51.html">51</a>  <a href="chap52.html">52</a>  <a href="chap53.html">53</a>  <a href="chap54.html">54</a>  <a href="chap55.html">55</a>  <a href="chap56.html">56</a>  <a href="chap57.html">57</a>  <a href="chap58.html">58</a>  <a href="chap59.html">59</a>  <a href="chap60.html">60</a>  <a href="chap61.html">61</a>  <a href="chap62.html">62</a>  <a href="chap63.html">63</a>  <a href="chap64.html">64</a>  <a href="chap65.html">65</a>  <a href="chap66.html">66</a>  <a href="chap67.html">67</a>  <a href="chap68.html">68</a>  <a href="chap69.html">69</a>  <a href="chap70.html">70</a>  <a href="chap71.html">71</a>  <a href="chap72.html">72</a>  <a href="chap73.html">73</a>  <a href="chap74.html">74</a>  <a href="chap75.html">75</a>  <a href="chap76.html">76</a>  <a href="chap77.html">77</a>  <a href="chap78.html">78</a>  <a href="chap79.html">79</a>  <a href="chap80.html">80</a>  <a href="chap81.html">81</a>  <a href="chap82.html">82</a>  <a href="chap83.html">83</a>  <a href="chap84.html">84</a>  <a href="chap85.html">85</a>  <a href="chap86.html">86</a>  <a href="chap87.html">87</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap10_mj.html">[MathJax on]</a></p>
+<p><a id="X839725177BF8B5B4" name="X839725177BF8B5B4"></a></p>
+<div class="ChapSects"><a href="chap10.html#X839725177BF8B5B4">10 <span class="Heading">Streams</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7F89070B7CF52DE0">10.1 <span class="Heading">Categories for Streams and the StreamsFamily</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7E974B96785E91A8">10.1-1 IsStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7FE4096F8497B7F2">10.1-2 IsClosedStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7FB4391283847C3A">10.1-3 IsInputStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7C8956BB7FE2A89C">10.1-4 IsInputTextStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7DCD6ADC86CF2472">10.1-5 IsInputTextNone</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7D357CA07E7B1E78">10.1-6 IsOutputStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8248B8A4844CB8AB">10.1-7 IsOutputTextStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7C89CDD47E33E741">10.1-8 IsOutputTextNone</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7F0F9DD47DE16DAB">10.1-9 StreamsFamily</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X8461F4DF7FC20C4B">10.2 <span class="Heading">Operations applicable to All Streams</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X786E5520803FDE00">10.2-1 CloseStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7F0459287E717456">10.2-2 FileDescriptorOfStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X87BC257A78F96828">10.2-3 UNIXSelect</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7D1D33A587BFD93D">10.3 <span class="Heading">Operations for Input Streams</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7A5DC83D7E295568">10.3-1 Read</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7D62F2877F0E45A7">10.3-2 ReadAsFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X79E1E6A57AE58BB8">10.3-3 ReadByte</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7D2CA44C7D110C4F">10.3-4 ReadLine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X85C603D7867430D0">10.3-5 ReadAll</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X81D4FB097F631A79">10.3-6 IsEndOfStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7B646FA3860521D1">10.3-7 PositionStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7A777E1186EB330B">10.3-8 RewindStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7A60AD8C7E0D0507">10.3-9 SeekPositionStream</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7F454EB286947C85">10.4 <span class="Heading">Operations for Output Streams</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7D37C7A07E9C319C">10.4-1 WriteByte</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X79FA85498596CC99">10.4-2 WriteLine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X78C113917936058D">10.4-3 WriteAll</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7F4E090C86AACCF7">10.4-4 <span class="Heading">PrintTo and AppendTo (for streams)</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7BF4E44C7D51E085">10.4-5 LogTo</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7B843516796B2A18">10.4-6 InputLogTo</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X834A6DD17B0E2062">10.4-7 OutputLogTo</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8663FCD57E8BC390">10.4-8 SetPrintFormattingStatus</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X80B5F2E4856D8980">10.5 <span class="Heading">File Streams</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8343D04981128784">10.5-1 InputTextFile</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X83F53291822B7126">10.5-2 OutputTextFile</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X808348977A05477A">10.6 <span class="Heading">User Streams</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X83531E4C7C53544F">10.6-1 InputTextUser</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X83E5FC9487766297">10.6-2 OutputTextUser</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7DAF5B7085F4F893">10.6-3 InputFromUser</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X8028E1D87CE2F059">10.7 <span class="Heading">String Streams</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7ABABCDF7ED81F7F">10.7-1 InputTextString</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7FEDA5167979B74D">10.7-2 OutputTextString</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X8563EF8387236417">10.8 <span class="Heading">Input-Output Streams</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X82822D3D8339F635">10.8-1 IsInputOutputStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X820799A3824684AC">10.8-2 InputOutputLocalProcess</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7CDF48447E823977">10.8-3 ReadAllLine</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X8724699C7D67BA47">10.9 <span class="Heading">Dummy Streams</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7C732324806716C6">10.9-1 InputTextNone</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7CC5C1FC81715E38">10.9-2 OutputTextNone</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7CB5832F8721ADF3">10.10 <span class="Heading">Handling of Streams in the Background</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X81FB42517E3EA96D">10.10-1 InstallCharReadHookFunc</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8492474C7A0B10AD">10.10-2 UnInstallCharReadHookFunc</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X848DD7DC79363341">10.11 <span class="Heading">Comma separated files</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X86FDC1EF82CAD2DA">10.11-1 ReadCSV</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8779DAC585E05A47">10.11-2 PrintCSV</a></span>
+</div></div>
+</div>
+
+<h3>10 <span class="Heading">Streams</span></h3>
+
+<p><em>Streams</em> provide flexible access to <strong class="pkg">GAP</strong>'s input and output processing. An <em>input stream</em> takes characters from some source and delivers them to <strong class="pkg">GAP</strong> which <em>reads</em> them from the stream. When an input stream has delivered all characters it is at <code class="code">end-of-stream</code>. An <em>output stream</em> receives characters from <strong class="pkg">GAP</strong> which <em>writes</em> them to the stream, and delivers them to some destination.</p>
+
+<p>A major use of streams is to provide efficient and flexible access to files. Files can be read and written using <code class="func">Read</code> (<a href="chap9.html#X8373AC6B7D5F9167"><span class="RefLink">9.7-1</span></a>) and <code class="func">AppendTo</code> (<a href="chap9.html#X86956C577FFEE1F9"><span class="RefLink">9.7-3</span></a>), however the former only allows a complete file to be read as <strong class="pkg">GAP</strong> input and the latter imposes a high time penalty if many small pieces of output are written to a large file. Streams allow input files in other formats to be read and processed, and files to be built up efficiently from small pieces of output. Streams may also be used for other purposes, for example to read from and print to <strong class="pkg">GAP</strong> strings, or to read input directly from the user.</p>
+
+<p>Any stream is either a <em>text stream</em>, which translates the <code class="code">end-of-line</code> character (<code class="code">\n</code>) to or from the system's representation of <code class="code">end-of-line</code> (e.g., <em>new-line</em> under UNIX and <em>carriage-return</em>-<em>new-line</em> under DOS), or a <em>binary stream</em>, which does not translate the <code class="code">end-of-line</code> character. The processing of other unprintable characters by text streams is undefined. Binary streams pass them unchanged.</p>
+
+<p>Whereas it is cheap to append to a stream, streams do consume system resources, and only a limited number can be open at any time, therefore it is necessary to close a stream as soon as possible using <code class="func">CloseStream</code> (<a href="chap10.html#X786E5520803FDE00"><span class="RefLink">10.2-1</span></a>). If creating a stream failed then <code class="func">LastSystemError</code> (<a href="chap9.html#X87D278437A916905"><span class="RefLink">9.1-1</span></a>) can be used to get information about the failure.</p>
+
+<p><a id="X7F89070B7CF52DE0" name="X7F89070B7CF52DE0"></a></p>
+
+<h4>10.1 <span class="Heading">Categories for Streams and the StreamsFamily</span></h4>
+
+<p><a id="X7E974B96785E91A8" name="X7E974B96785E91A8"></a></p>
+
+<h5>10.1-1 IsStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStream</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>Streams are <strong class="pkg">GAP</strong> objects and all open streams, input, output, text and binary, lie in this category.</p>
+
+<p><a id="X7FE4096F8497B7F2" name="X7FE4096F8497B7F2"></a></p>
+
+<h5>10.1-2 IsClosedStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsClosedStream</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>When a stream is closed, its type changes to lie in <code class="func">IsClosedStream</code>. This category is used to install methods that trap accesses to closed streams.</p>
+
+<p><a id="X7FB4391283847C3A" name="X7FB4391283847C3A"></a></p>
+
+<h5>10.1-3 IsInputStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInputStream</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>All input streams lie in this category, and support input operations such as <code class="func">ReadByte</code> (<a href="chap10.html#X79E1E6A57AE58BB8"><span class="RefLink">10.3-3</span></a>) (see <a href="chap10.html#X7D1D33A587BFD93D"><span class="RefLink">10.3</span></a>)</p>
+
+<p><a id="X7C8956BB7FE2A89C" name="X7C8956BB7FE2A89C"></a></p>
+
+<h5>10.1-4 IsInputTextStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInputTextStream</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>All <em>text</em> input streams lie in this category. They translate new-line characters read.</p>
+
+<p><a id="X7DCD6ADC86CF2472" name="X7DCD6ADC86CF2472"></a></p>
+
+<h5>10.1-5 IsInputTextNone</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInputTextNone</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>It is convenient to use a category to distinguish dummy streams (see <a href="chap10.html#X8724699C7D67BA47"><span class="RefLink">10.9</span></a>) from others. Other distinctions are usually made using representations</p>
+
+<p><a id="X7D357CA07E7B1E78" name="X7D357CA07E7B1E78"></a></p>
+
+<h5>10.1-6 IsOutputStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOutputStream</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>All output streams lie in this category and support basic operations such as <code class="func">WriteByte</code> (<a href="chap10.html#X7D37C7A07E9C319C"><span class="RefLink">10.4-1</span></a>) (see Section <a href="chap10.html#X7F454EB286947C85"><span class="RefLink">10.4</span></a>).</p>
+
+<p><a id="X8248B8A4844CB8AB" name="X8248B8A4844CB8AB"></a></p>
+
+<h5>10.1-7 IsOutputTextStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOutputTextStream</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>All <em>text</em> output streams lie in this category and translate new-line characters on output.</p>
+
+<p><a id="X7C89CDD47E33E741" name="X7C89CDD47E33E741"></a></p>
+
+<h5>10.1-8 IsOutputTextNone</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOutputTextNone</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>It is convenient to use a category to distinguish dummy streams (see <a href="chap10.html#X8724699C7D67BA47"><span class="RefLink">10.9</span></a>) from others. Other distinctions are usually made using representations</p>
+
+<p><a id="X7F0F9DD47DE16DAB" name="X7F0F9DD47DE16DAB"></a></p>
+
+<h5>10.1-9 StreamsFamily</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StreamsFamily</code></td><td class="tdright">(&nbsp;family&nbsp;)</td></tr></table></div>
+<p>All streams lie in the <code class="func">StreamsFamily</code>.</p>
+
+<p><a id="X8461F4DF7FC20C4B" name="X8461F4DF7FC20C4B"></a></p>
+
+<h4>10.2 <span class="Heading">Operations applicable to All Streams</span></h4>
+
+<p><a id="X786E5520803FDE00" name="X786E5520803FDE00"></a></p>
+
+<h5>10.2-1 CloseStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CloseStream</code>( <var class="Arg">stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>In order to preserve system resources and to flush output streams every stream should be closed as soon as it is no longer used using <code class="func">CloseStream</code>.</p>
+
+<p>It is an error to try to read characters from or write characters to a closed stream. Closing a stream tells the <strong class="pkg">GAP</strong> kernel and/or the operating system kernel that the file is no longer needed. This may be necessary because the <strong class="pkg">GAP</strong> kernel and/or the operating system may impose a limit on how many streams may be open simultaneously.</p>
+
+<p><a id="X7F0459287E717456" name="X7F0459287E717456"></a></p>
+
+<h5>10.2-2 FileDescriptorOfStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FileDescriptorOfStream</code>( <var class="Arg">stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the UNIX file descriptor of the underlying file. This is mainly useful for the <code class="func">UNIXSelect</code> (<a href="chap10.html#X87BC257A78F96828"><span class="RefLink">10.2-3</span></a>) function call. This is as of now only available on UNIX-like operating systems and only for streams to local processes and local files.</p>
+
+<p><a id="X87BC257A78F96828" name="X87BC257A78F96828"></a></p>
+
+<h5>10.2-3 UNIXSelect</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UNIXSelect</code>( <var class="Arg">inlist</var>, <var class="Arg">outlist</var>, <var class="Arg">exclist</var>, <var class="Arg">timeoutsec</var>, <var class="Arg">timeoutusec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>makes the UNIX C-library function <code class="code">select</code> accessible from <strong class="pkg">GAP</strong> for streams. The functionality is as described in the man page (see UNIX file descriptors (integers) for streams. They can be obtained via <code class="func">FileDescriptorOfStream</code> (<a href="chap10.html#X7F0459287E717456"><span class="RefLink">10.2-2</span></a>) for streams to local processes and to local files. The argument <var class="Arg">timeoutsec</var> is a timeout in seconds as in the <code class="code">struct timeval</code> on the C level. The argument <var class="Arg">timeoutusec</var> is analogously in microseconds. The total timeout is the sum of both. If one of those timeout arguments is not a small integer then no timeout is applicable (<code class="keyw">fail</code> is allowed for the timeout arguments).</p>
+
+<p>The return value is the number of streams that are ready, this may be 0 if a timeout was specified. All file descriptors in the three lists that are not yet ready are replaced by <code class="keyw">fail</code> in this function. So the lists are changed!</p>
+
+<p>This function is only available if your operating system has <code class="code">select</code>, which is detected during compilation of <strong class="pkg">GAP</strong>.</p>
+
+<p><a id="X7D1D33A587BFD93D" name="X7D1D33A587BFD93D"></a></p>
+
+<h4>10.3 <span class="Heading">Operations for Input Streams</span></h4>
+
+<p>Two operations normally used to read files: <code class="func">Read</code> (<a href="chap9.html#X8373AC6B7D5F9167"><span class="RefLink">9.7-1</span></a>) and <code class="func">ReadAsFunction</code> (<a href="chap9.html#X7824CB7D7D4BAFBC"><span class="RefLink">9.7-2</span></a>) can also be used to read <strong class="pkg">GAP</strong> input from a stream. The input is immediately parsed and executed. When reading from a stream <var class="Arg">str</var>, the <strong class="pkg">GAP</strong> kernel generates calls to <code class="code">ReadLine(<var class="Arg">str</var>)</code> to supply text to the parser.</p>
+
+<p>Three further operations: <code class="func">ReadByte</code> (<a href="chap10.html#X79E1E6A57AE58BB8"><span class="RefLink">10.3-3</span></a>), <code class="func">ReadLine</code> (<a href="chap10.html#X7D2CA44C7D110C4F"><span class="RefLink">10.3-4</span></a>) and <code class="func">ReadAll</code> (<a href="chap10.html#X85C603D7867430D0"><span class="RefLink">10.3-5</span></a>), support reading characters from an input stream without parsing them. This can be used to read data in any format and process it in <strong class="pkg">GAP</strong>.</p>
+
+<p>Additional operations for input streams support detection of end of stream, and (for those streams for which it is appropriate) random access to the data.</p>
+
+<p><a id="X7A5DC83D7E295568" name="X7A5DC83D7E295568"></a></p>
+
+<h5>10.3-1 Read</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Read</code>( <var class="Arg">input-text-stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>reads the input-text-stream as input until <code class="code">end-of-stream</code> occurs. See <a href="chap9.html#X81A0A4FF842B039B"><span class="RefLink">9.7</span></a> for details.</p>
+
+<p><a id="X7D62F2877F0E45A7" name="X7D62F2877F0E45A7"></a></p>
+
+<h5>10.3-2 ReadAsFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReadAsFunction</code>( <var class="Arg">input-text-stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>reads the input-text-stream as function and returns this function. See <a href="chap9.html#X81A0A4FF842B039B"><span class="RefLink">9.7</span></a> for details.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># a function with local `a' does not change the global one</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := 1;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i := InputTextString( "local a; a := 10; return a*10;" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadAsFunction(i)();</span>
+100
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a;</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># reading it via `Read' does</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i := InputTextString( "a := 10;" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Read(i);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a;</span>
+10
+</pre></div>
+
+<p><a id="X79E1E6A57AE58BB8" name="X79E1E6A57AE58BB8"></a></p>
+
+<h5>10.3-3 ReadByte</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReadByte</code>( <var class="Arg">input-stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="func">ReadByte</code> returns one character (returned as integer) from the input stream <var class="Arg">input-stream</var>. <code class="func">ReadByte</code> returns <code class="keyw">fail</code> if there is no character available, in particular if it is at the end of a file.</p>
+
+<p>If <var class="Arg">input-stream</var> is the input stream of a input/output process, <code class="func">ReadByte</code> may also return <code class="keyw">fail</code> if no byte is currently available.</p>
+
+<p><code class="func">ReadByte</code> is the basic operation for input streams. If a <code class="func">ReadByte</code> method is installed for a user-defined type of stream which does not block, then all the other input stream operations will work (although possibly not at peak efficiency).</p>
+
+<p><code class="func">ReadByte</code> will wait (block) until a byte is available. For instance if the stream is a connection to another process, it will wait for the process to output a byte.</p>
+
+<p><a id="X7D2CA44C7D110C4F" name="X7D2CA44C7D110C4F"></a></p>
+
+<h5>10.3-4 ReadLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReadLine</code>( <var class="Arg">input-stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="func">ReadLine</code> returns one line (returned as string <em>with</em> the newline) from the input stream <var class="Arg">input-stream</var>. <code class="func">ReadLine</code> reads in the input until a newline is read or the end-of-stream is encountered.</p>
+
+<p>If <var class="Arg">input-stream</var> is the input stream of a input/output process, <code class="func">ReadLine</code> may also return <code class="keyw">fail</code> or return an incomplete line if the other process has not yet written any more. It will always wait (block) for at least one byte to be available, but will then return as much input as is available, up to a limit of one line</p>
+
+<p>A default method is supplied for <code class="func">ReadLine</code> which simply calls <code class="func">ReadByte</code> (<a href="chap10.html#X79E1E6A57AE58BB8"><span class="RefLink">10.3-3</span></a>) repeatedly. This is only safe for streams that cannot block. The kernel uses calls to <code class="func">ReadLine</code> to supply input to the parser when reading from a stream.</p>
+
+<p><a id="X85C603D7867430D0" name="X85C603D7867430D0"></a></p>
+
+<h5>10.3-5 ReadAll</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReadAll</code>( <var class="Arg">input-stream</var>[, <var class="Arg">limit</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="func">ReadAll</code> returns all characters as string from the input stream <var class="Arg">stream-in</var>. It waits (blocks) until at least one character is available from the stream, or until there is evidence that no characters will ever be available again. This last indicates that the stream is at end-of-stream. Otherwise, it reads as much input as it can from the stream without blocking further and returns it to the user. If the stream is already at end of file, so that no bytes are available, <code class="keyw">fail</code> is returned. In the case of a file stream connected to a normal file (not a pseudo-tty or named pipe or similar), all the bytes should be immediately available and this function will read the remainder of the file.</p>
+
+<p>With a second argument, at most <var class="Arg">limit</var> bytes will be returned. Depending on the stream a bounded number of additional bytes may have been read into an internal buffer.</p>
+
+<p>A default method is supplied for <code class="func">ReadAll</code> which simply calls <code class="func">ReadLine</code> (<a href="chap10.html#X7D2CA44C7D110C4F"><span class="RefLink">10.3-4</span></a>) repeatedly. This is only really safe for streams which cannot block. Other streams should install a method for <code class="func">ReadAll</code></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i := InputTextString( "1Hallo\nYou\n1" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadByte(i);</span>
+49
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CHAR_INT(last);</span>
+'1'
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadLine(i);</span>
+"Hallo\n"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadLine(i);</span>
+"You\n"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadLine(i);</span>
+"1"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadLine(i);</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadAll(i);</span>
+""
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RewindStream(i);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadAll(i);</span>
+"1Hallo\nYou\n1"
+</pre></div>
+
+<p><a id="X81D4FB097F631A79" name="X81D4FB097F631A79"></a></p>
+
+<h5>10.3-6 IsEndOfStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEndOfStream</code>( <var class="Arg">input-stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="func">IsEndOfStream</code> returns <code class="keyw">true</code> if the input stream is at <em>end-of-stream</em>, and <code class="keyw">false</code> otherwise. Note that <code class="func">IsEndOfStream</code> might return <code class="keyw">false</code> even if the next <code class="func">ReadByte</code> (<a href="chap10.html#X79E1E6A57AE58BB8"><span class="RefLink">10.3-3</span></a>) fails.</p>
+
+<p><a id="X7B646FA3860521D1" name="X7B646FA3860521D1"></a></p>
+
+<h5>10.3-7 PositionStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PositionStream</code>( <var class="Arg">input-stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Some input streams, such as string streams and file streams attached to disk files, support a form of random access by way of the operations <code class="func">PositionStream</code>, <code class="func">SeekPositionStream</code> (<a href="chap10.html#X7A60AD8C7E0D0507"><span class="RefLink">10.3-9</span></a>) and <code class="func">RewindStream</code> (<a href="chap10.html#X7A777E1186EB330B"><span class="RefLink">10.3-8</span></a>). <code class="func">PositionStream</code> returns a non-negative integer denoting the current position in the stream (usually the number of characters <em>before</em> the next one to be read.</p>
+
+<p>If this is not possible, for example for an input stream attached to standard input (normally the keyboard), then <code class="keyw">fail</code> is returned</p>
+
+<p><a id="X7A777E1186EB330B" name="X7A777E1186EB330B"></a></p>
+
+<h5>10.3-8 RewindStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RewindStream</code>( <var class="Arg">input-stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="func">RewindStream</code> attempts to return an input stream to its starting condition, so that all the same characters can be read again. It returns <code class="keyw">true</code> if the rewind succeeds and <code class="keyw">fail</code> otherwise</p>
+
+<p>A default method implements RewindStream using <code class="func">SeekPositionStream</code> (<a href="chap10.html#X7A60AD8C7E0D0507"><span class="RefLink">10.3-9</span></a>).</p>
+
+<p><a id="X7A60AD8C7E0D0507" name="X7A60AD8C7E0D0507"></a></p>
+
+<h5>10.3-9 SeekPositionStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SeekPositionStream</code>( <var class="Arg">input-stream</var>, <var class="Arg">pos</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="func">SeekPositionStream</code> attempts to rewind or wind forward an input stream to the specified position. This is not possible for all streams. It returns <code class="keyw">true</code> if the seek is successful and <code class="keyw">fail</code> otherwise.</p>
+
+<p><a id="X7F454EB286947C85" name="X7F454EB286947C85"></a></p>
+
+<h4>10.4 <span class="Heading">Operations for Output Streams</span></h4>
+
+<p><a id="X7D37C7A07E9C319C" name="X7D37C7A07E9C319C"></a></p>
+
+<h5>10.4-1 WriteByte</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WriteByte</code>( <var class="Arg">output-stream</var>, <var class="Arg">byte</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>writes the next character (given as <em>integer</em>) to the output stream <var class="Arg">output-stream</var>. The function returns <code class="keyw">true</code> if the write succeeds and <code class="keyw">fail</code> otherwise.</p>
+
+<p><code class="func">WriteByte</code> is the basic operation for output streams. If a <code class="func">WriteByte</code> method is installed for a user-defined type of stream, then all the other output stream operations will work (although possibly not at peak efficiency).</p>
+
+<p><a id="X79FA85498596CC99" name="X79FA85498596CC99"></a></p>
+
+<h5>10.4-2 WriteLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WriteLine</code>( <var class="Arg">output-stream</var>, <var class="Arg">string</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>appends <var class="Arg">string</var> to <var class="Arg">output-stream</var>. A final newline is written. The function returns <code class="keyw">true</code> if the write succeeds and <code class="keyw">fail</code> otherwise.</p>
+
+<p>A default method is installed which implements <code class="func">WriteLine</code> by repeated calls to <code class="func">WriteByte</code> (<a href="chap10.html#X7D37C7A07E9C319C"><span class="RefLink">10.4-1</span></a>).</p>
+
+<p><a id="X78C113917936058D" name="X78C113917936058D"></a></p>
+
+<h5>10.4-3 WriteAll</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WriteAll</code>( <var class="Arg">output-stream</var>, <var class="Arg">string</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>appends <var class="Arg">string</var> to <var class="Arg">output-stream</var>. No final newline is written. The function returns <code class="keyw">true</code> if the write succeeds and <code class="keyw">fail</code> otherwise. It will block as long as necessary for the write operation to complete (for example for a child process to clear its input buffer )</p>
+
+<p>A default method is installed which implements <code class="func">WriteAll</code> by repeated calls to <code class="func">WriteByte</code> (<a href="chap10.html#X7D37C7A07E9C319C"><span class="RefLink">10.4-1</span></a>).</p>
+
+<p>When printing or appending to a stream (using <code class="func">PrintTo</code> (<a href="chap9.html#X86956C577FFEE1F9"><span class="RefLink">9.7-3</span></a>), or <code class="func">AppendTo</code> (<a href="chap9.html#X86956C577FFEE1F9"><span class="RefLink">9.7-3</span></a>) or when logging to a stream), the kernel generates a call to <code class="func">WriteAll</code> for each line output.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">str := "";; a := OutputTextString(str,true);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WriteByte(a,INT_CHAR('H'));</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WriteLine(a,"allo");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WriteAll(a,"You\n");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream(a);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(str);</span>
+Hallo
+You
+</pre></div>
+
+<p><a id="X7F4E090C86AACCF7" name="X7F4E090C86AACCF7"></a></p>
+
+<h5>10.4-4 <span class="Heading">PrintTo and AppendTo (for streams)</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrintTo</code>( <var class="Arg">output-stream</var>, <var class="Arg">arg1</var>, <var class="Arg">...</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AppendTo</code>( <var class="Arg">output-stream</var>, <var class="Arg">arg1</var>, <var class="Arg">...</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>These functions work like <code class="func">Print</code> (<a href="chap6.html#X7AFA64D97A1F39A3"><span class="RefLink">6.3-4</span></a>), except that the output is appended to the output stream <var class="Arg">output-stream</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">str := "";; a := OutputTextString(str,true);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AppendTo( a, (1,2,3), ":", Z(3) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream(a);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( str, "\n" );</span>
+(1,2,3):Z(3)
+</pre></div>
+
+<p><a id="X7BF4E44C7D51E085" name="X7BF4E44C7D51E085"></a></p>
+
+<h5>10.4-5 LogTo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LogTo</code>( <var class="Arg">stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>causes the subsequent interaction to be logged to the output stream <var class="Arg">stream</var>. It works in precisely the same way as it does for files (see <code class="func">LogTo</code> (<a href="chap9.html#X79813A6686894960"><span class="RefLink">9.7-4</span></a>)).</p>
+
+<p><a id="X7B843516796B2A18" name="X7B843516796B2A18"></a></p>
+
+<h5>10.4-6 InputLogTo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InputLogTo</code>( <var class="Arg">stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>causes the subsequent input to be logged to the output stream <var class="Arg">stream</var>. It works just like it does for files (see <code class="func">InputLogTo</code> (<a href="chap9.html#X7CAB119378B075B7"><span class="RefLink">9.7-5</span></a>)).</p>
+
+<p><a id="X834A6DD17B0E2062" name="X834A6DD17B0E2062"></a></p>
+
+<h5>10.4-7 OutputLogTo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OutputLogTo</code>( <var class="Arg">stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>causes the subsequent output to be logged to the output stream <var class="Arg">stream</var>. It works just like it does for files (see <code class="func">OutputLogTo</code> (<a href="chap9.html#X7A5591D87EAFA6CC"><span class="RefLink">9.7-6</span></a>)).</p>
+
+<p><a id="X8663FCD57E8BC390" name="X8663FCD57E8BC390"></a></p>
+
+<h5>10.4-8 SetPrintFormattingStatus</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetPrintFormattingStatus</code>( <var class="Arg">stream</var>, <var class="Arg">newstatus</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrintFormattingStatus</code>( <var class="Arg">stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>When text is being sent to an output text stream via <code class="func">PrintTo</code> (<a href="chap9.html#X86956C577FFEE1F9"><span class="RefLink">9.7-3</span></a>), <code class="func">AppendTo</code> (<a href="chap9.html#X86956C577FFEE1F9"><span class="RefLink">9.7-3</span></a>), <code class="func">LogTo</code> (<a href="chap10.html#X7BF4E44C7D51E085"><span class="RefLink">10.4-5</span></a>), etc., it is by default formatted just as it would be were it being printed to the screen. Thus, it is broken into lines of reasonable length at (where possible) sensible places, lines containing elements of lists or records are indented, and so forth. This is appropriate if the output is eventually to be viewed by a human, and harmless if it to passed as input to <strong class="pkg">GAP</strong>, but may be unhelpful if the output is to be passed as input to another program. It is possible to turn off this behaviour for a stream using the <code class="func">SetPrintFormattingStatus</code> operation, and to test whether it is on or off using <code class="func">PrintFormattingStatus</code>.</p>
+
+<p><code class="func">SetPrintFormattingStatus</code> sets whether output sent to the output stream <var class="Arg">stream</var> via <code class="func">PrintTo</code> (<a href="chap9.html#X86956C577FFEE1F9"><span class="RefLink">9.7-3</span></a>), <code class="func">AppendTo</code> (<a href="chap9.html#X86956C577FFEE1F9"><span class="RefLink">9.7-3</span></a>), etc. will be formatted with line breaks and indentation. If the second argument <var class="Arg">newstatus</var> is <code class="keyw">true</code> then output will be so formatted, and if <code class="keyw">false</code> then it will not. If the stream is not a text stream, only <code class="keyw">false</code> is allowed.</p>
+
+<p><code class="func">PrintFormattingStatus</code> returns <code class="keyw">true</code> if output sent to the output text stream <var class="Arg">stream</var> via <code class="func">PrintTo</code> (<a href="chap9.html#X86956C577FFEE1F9"><span class="RefLink">9.7-3</span></a>), <code class="func">AppendTo</code> (<a href="chap9.html#X86956C577FFEE1F9"><span class="RefLink">9.7-3</span></a>), etc. will be formatted with line breaks and indentation, and <code class="keyw">false</code> otherwise. For non-text streams, it returns <code class="keyw">false</code>. If as argument <var class="Arg">stream</var> the string <code class="code">"*stdout*"</code> is given, these functions refer to the formatting status of the standard output (so usually the users terminal screen).</p>
+
+<p>These functions do not influence the behaviour of the low level functions <code class="func">WriteByte</code> (<a href="chap10.html#X7D37C7A07E9C319C"><span class="RefLink">10.4-1</span></a>), <code class="func">WriteLine</code> (<a href="chap10.html#X79FA85498596CC99"><span class="RefLink">10.4-2</span></a>) or <code class="func">WriteAll</code> (<a href="chap10.html#X78C113917936058D"><span class="RefLink">10.4-3</span></a>) which always write without formatting.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := "";; str := OutputTextString(s,false);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrintTo(str,Primes{[1..30]});</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s;</span>
+"[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,\
+ \n  67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113 ]"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(s,"\n");</span>
+[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 
+  67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetPrintFormattingStatus(str, false);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrintTo(str,Primes{[1..30]});</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s;</span>
+"[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,\
+ \n  67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113 ][ 2, 3, 5, 7\
+, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, \
+79, 83, 89, 97, 101, 103, 107, 109, 113 ]"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(s,"\n");</span>
+[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 
+  67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113 ][ 2, 3, 5, 7, 1\
+1, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79,\
+ 83, 89, 97, 101, 103, 107, 109, 113 ]
+</pre></div>
+
+<p><a id="X80B5F2E4856D8980" name="X80B5F2E4856D8980"></a></p>
+
+<h4>10.5 <span class="Heading">File Streams</span></h4>
+
+<p>File streams are streams associated with files. An input file stream reads the characters it delivers from a file, an output file stream prints the characters it receives to a file. The following functions can be used to create such streams. They return <code class="keyw">fail</code> if an error occurred, in this case <code class="func">LastSystemError</code> (<a href="chap9.html#X87D278437A916905"><span class="RefLink">9.1-1</span></a>) can be used to get information about the error.</p>
+
+<p><a id="X8343D04981128784" name="X8343D04981128784"></a></p>
+
+<h5>10.5-1 InputTextFile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InputTextFile</code>( <var class="Arg">filename</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="code">InputTextFile( <var class="Arg">filename</var> )</code> returns an input stream in the category <code class="func">IsInputTextStream</code> (<a href="chap10.html#X7C8956BB7FE2A89C"><span class="RefLink">10.1-4</span></a>) that delivers the characters from the file <var class="Arg">filename</var>. If <var class="Arg">filename</var> ends in <code class="code">.gz</code> and the file is a valid gzipped file, then the file will be transparently uncompressed.</p>
+
+<p><code class="code">InputTextFile</code> is designed for use with text files and automatically handles windows-style line endings. This means it should <em>not</em> be used for binary data. The <code class="func">IO_File</code> (<a href="../../pkg/io-4.7.0/doc/chap4.html#X7EC160D07E815DBB"><span class="RefLink">IO: IO_File mode</span></a>) function from the <strong class="pkg">IO</strong> package should be used to access binary data.</p>
+
+<p><a id="X83F53291822B7126" name="X83F53291822B7126"></a></p>
+
+<h5>10.5-2 OutputTextFile</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OutputTextFile</code>( <var class="Arg">filename</var>, <var class="Arg">append</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="code">OutputTextFile( <var class="Arg">filename</var>, <var class="Arg">append</var> )</code> returns an output stream in the category <code class="code">IsOutputTextFile</code> that writes received characters to the file <var class="Arg">filename</var>. If <var class="Arg">append</var> is <code class="keyw">false</code>, then the file is emptied first, otherwise received characters are added at the end of the file. If <var class="Arg">filename</var> ends in <code class="code">.gz</code> then the file will be written with gzip compression.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># use a temporary directory</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">name := Filename( DirectoryTemporary(), "test" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># create an output stream, append output, and close again</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">output := OutputTextFile( name, true );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AppendTo( output, "Hallo\n", "You\n" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream(output);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># create an input, print complete contents of file, and close</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">input := InputTextFile(name);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( ReadAll(input) );</span>
+Hallo
+You
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream(input);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># append a single line</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">output := OutputTextFile( name, true );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AppendTo( output, "AppendLine\n" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># close output stream to flush the output</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream(output);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># create an input, print complete contents of file, and close</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">input := InputTextFile(name);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( ReadAll(input) );</span>
+Hallo
+You
+AppendLine
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream(input);</span>
+</pre></div>
+
+<p><a id="X808348977A05477A" name="X808348977A05477A"></a></p>
+
+<h4>10.6 <span class="Heading">User Streams</span></h4>
+
+<p>The commands described in this section create streams which accept characters from, or deliver characters to, the user, via the keyboard or the <strong class="pkg">GAP</strong> session display.</p>
+
+<p><a id="X83531E4C7C53544F" name="X83531E4C7C53544F"></a></p>
+
+<h5>10.6-1 InputTextUser</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InputTextUser</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns an input text stream which delivers characters typed by the user (or from the standard input device if it has been redirected). In normal circumstances, characters are delivered one by one as they are typed, without waiting until the end of a line. No prompts are printed.</p>
+
+<p><a id="X83E5FC9487766297" name="X83E5FC9487766297"></a></p>
+
+<h5>10.6-2 OutputTextUser</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OutputTextUser</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns an output stream which delivers characters to the user's display (or the standard output device if it has been redirected). Each character is delivered immediately it is written, without waiting for a full line of output. Text written in this way is <em>not</em> written to the session log (see <code class="func">LogTo</code> (<a href="chap9.html#X79813A6686894960"><span class="RefLink">9.7-4</span></a>)).</p>
+
+<p><a id="X7DAF5B7085F4F893" name="X7DAF5B7085F4F893"></a></p>
+
+<h5>10.6-3 InputFromUser</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InputFromUser</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>prints the <var class="Arg">arg</var> as a prompt, then waits until a text is typed by the user (or from the standard input device if it has been redirected). This text must be a <em>single</em> expression, followed by one <em>enter</em>. This is evaluated (see <code class="func">EvalString</code> (<a href="chap27.html#X7DE4CCD285440659"><span class="RefLink">27.9-5</span></a>)) and the result is returned.</p>
+
+<p><a id="X8028E1D87CE2F059" name="X8028E1D87CE2F059"></a></p>
+
+<h4>10.7 <span class="Heading">String Streams</span></h4>
+
+<p>String streams are streams associated with strings. An input string stream reads the characters it delivers from a string, an output string stream appends the characters it receives to a string. The following functions can be used to create such streams.</p>
+
+<p><a id="X7ABABCDF7ED81F7F" name="X7ABABCDF7ED81F7F"></a></p>
+
+<h5>10.7-1 InputTextString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InputTextString</code>( <var class="Arg">string</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p><code class="code">InputTextString( <var class="Arg">string</var> )</code> returns an input stream that delivers the characters from the string <var class="Arg">string</var>. The <var class="Arg">string</var> is not changed when reading characters from it and changing the <var class="Arg">string</var> after the call to <code class="func">InputTextString</code> has no influence on the input stream.</p>
+
+<p><a id="X7FEDA5167979B74D" name="X7FEDA5167979B74D"></a></p>
+
+<h5>10.7-2 OutputTextString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OutputTextString</code>( <var class="Arg">list</var>, <var class="Arg">append</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns an output stream that puts all received characters into the list <var class="Arg">list</var>. If <var class="Arg">append</var> is <code class="keyw">false</code>, then the list is emptied first, otherwise received characters are added at the end of the list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># read input from a string</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">input := InputTextString( "Hallo\nYou\n" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadLine(input);</span>
+"Hallo\n"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadLine(input);</span>
+"You\n"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># print to a string</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">str := "";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">out := OutputTextString( str, true );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrintTo( out, 1, "\n", (1,2,3,4)(5,6), "\n" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream(out);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( str );</span>
+1
+(1,2,3,4)(5,6)
+</pre></div>
+
+<p><a id="X8563EF8387236417" name="X8563EF8387236417"></a></p>
+
+<h4>10.8 <span class="Heading">Input-Output Streams</span></h4>
+
+<p>Input-output streams capture bidirectional communications between <strong class="pkg">GAP</strong> and another process, either locally or (@as yet unimplemented@) remotely.</p>
+
+<p>Such streams support the basic operations of both input and output streams. They should provide some buffering, allowing output data to be written to the stream, even when input data is waiting to be read, but the amount of this buffering is operating system dependent, and the user should take care not to get too far ahead in writing, or behind in reading, or deadlock may occur.</p>
+
+<p>At present the only type of Input-Output streams that are implemented provide communication with a local child process, using a pseudo-tty.</p>
+
+<p>Like other streams, write operations are blocking, read operations will block to get the first character, but not thereafter.</p>
+
+<p>As far as possible, no translation is done on characters written to, or read from the stream, and no control characters have special effects, but the details of particular pseudo-tty implementations may effect this.</p>
+
+<p><a id="X82822D3D8339F635" name="X82822D3D8339F635"></a></p>
+
+<h5>10.8-1 IsInputOutputStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInputOutputStream</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p><code class="func">IsInputOutputStream</code> is the Category of Input-Output Streams; it returns <code class="keyw">true</code> if the <var class="Arg">obj</var> is an input-output stream and <code class="keyw">false</code> otherwise.</p>
+
+<p><a id="X820799A3824684AC" name="X820799A3824684AC"></a></p>
+
+<h5>10.8-2 InputOutputLocalProcess</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InputOutputLocalProcess</code>( <var class="Arg">dir</var>, <var class="Arg">executable</var>, <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>starts up a slave process, whose executable file is <var class="Arg">executable</var>, with "command line" arguments <var class="Arg">args</var> in the directory <var class="Arg">dir</var>. (Suitable choices for <var class="Arg">dir</var> are <code class="code">DirectoryCurrent()</code> or <code class="code">DirectoryTemporary()</code> (see Section <a href="chap9.html#X85030B35865A1080"><span class="RefLink">9.3</span></a>); <code class="code">DirectoryTemporary()</code> may be a good choice when <var class="Arg">executable</var> generates output files that it doesn't itself remove afterwards.) <code class="func">InputOutputLocalProcess</code> returns an InputOutputStream object. Bytes written to this stream are received by the slave process as if typed at a terminal on standard input. Bytes written to standard output by the slave process can be read from the stream.</p>
+
+<p>When the stream is closed, the signal SIGTERM is delivered to the child process, which is expected to exit.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := DirectoryCurrent();</span>
+dir("./")
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := Filename(DirectoriesSystemPrograms(), "rev");</span>
+"/usr/bin/rev"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := InputOutputLocalProcess(d,f,[]);</span>
+&lt; input/output stream to rev &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WriteLine(s,"The cat sat on the mat");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(ReadLine(s));</span>
+tam eht no tas tac ehT
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := ListWithIdenticalEntries(10000,'x');;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ConvertToStringRep(x);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WriteLine(s,x);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WriteByte(s,INT_CHAR('\n'));</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y := ReadAll(s);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(y);</span>
+4095
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream(s);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s;</span>
+&lt; closed input/output stream to rev &gt;
+</pre></div>
+
+<p><a id="X7CDF48447E823977" name="X7CDF48447E823977"></a></p>
+
+<h5>10.8-3 ReadAllLine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReadAllLine</code>( <var class="Arg">iostream</var>[, <var class="Arg">nofail</var>][, <var class="Arg">IsAllLine</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>For an input/output stream <var class="Arg">iostream</var> <code class="func">ReadAllLine</code> reads until a newline character if any input is found or returns <code class="keyw">fail</code> if no input is found, i.e. if any input is found <code class="func">ReadAllLine</code> is non-blocking.</p>
+
+<p>If the argument <var class="Arg">nofail</var> (which must be <code class="keyw">false</code> or <code class="keyw">true</code>) is provided and it is set to <code class="keyw">true</code> then <code class="func">ReadAllLine</code> will wait, if necessary, for input and never return <code class="keyw">fail</code>.</p>
+
+<p>If the argument <var class="Arg">IsAllLine</var> (which must be a function that takes a string argument and returns either <code class="keyw">true</code> or <code class="keyw">false</code>) then it is used to determine what constitutes a whole line. The default behaviour is equivalent to passing the function</p>
+
+
+<div class="example"><pre>
+line -&gt; 0 &lt; Length(line) and line[Length(line)] = '\n'
+</pre></div>
+
+<p>for the <var class="Arg">IsAllLine</var> argument. The purpose of the <var class="Arg">IsAllLine</var> argument is to cater for the case where the input being read is from an external process that writes a "prompt" for data that does not terminate with a newline.</p>
+
+<p>If the first argument is an input stream but not an input/output stream then <code class="func">ReadAllLine</code> behaves as if <code class="func">ReadLine</code> (<a href="chap10.html#X7D2CA44C7D110C4F"><span class="RefLink">10.3-4</span></a>) was called with just the first argument and any additional arguments are ignored.</p>
+
+<p><a id="X8724699C7D67BA47" name="X8724699C7D67BA47"></a></p>
+
+<h4>10.9 <span class="Heading">Dummy Streams</span></h4>
+
+<p>The following two commands create dummy streams which will consume all characters and never deliver one.</p>
+
+<p><a id="X7C732324806716C6" name="X7C732324806716C6"></a></p>
+
+<h5>10.9-1 InputTextNone</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InputTextNone</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns a dummy input text stream, which delivers no characters, i.e., it is always at end of stream. Its main use is for calls to <code class="func">Process</code> (<a href="chap11.html#X7B09033178D1107A"><span class="RefLink">11.1-1</span></a>) when the started program does not read anything.</p>
+
+<p><a id="X7CC5C1FC81715E38" name="X7CC5C1FC81715E38"></a></p>
+
+<h5>10.9-2 OutputTextNone</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OutputTextNone</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns a dummy output stream, which discards all received characters. Its main use is for calls to <code class="func">Process</code> (<a href="chap11.html#X7B09033178D1107A"><span class="RefLink">11.1-1</span></a>) when the started program does not write anything.</p>
+
+<p><a id="X7CB5832F8721ADF3" name="X7CB5832F8721ADF3"></a></p>
+
+<h4>10.10 <span class="Heading">Handling of Streams in the Background</span></h4>
+
+<p>This section describes a feature of the <strong class="pkg">GAP</strong> kernel that can be used to handle pending streams somehow "in the background". This is only available on operating systems that have <code class="code">select</code>.</p>
+
+<p>Right before <strong class="pkg">GAP</strong> reads a keypress from the keyboard it calls a little subroutine that can handle streams that are ready to be read or ready to be written. This means that <strong class="pkg">GAP</strong> can handle these streams during user input on the command line. Note that this does not work when <strong class="pkg">GAP</strong> is in the middle of some calculation.</p>
+
+<p>This feature is used in the following way. One can install handler functions for reading or writing streams via <code class="func">InstallCharReadHookFunc</code> (<a href="chap10.html#X81FB42517E3EA96D"><span class="RefLink">10.10-1</span></a>). Handlers can be removed via <code class="func">UnInstallCharReadHookFunc</code> (<a href="chap10.html#X8492474C7A0B10AD"><span class="RefLink">10.10-2</span></a>)</p>
+
+<p>Note that handler functions must not return anything and get one integer argument, which refers to an index in one of the following arrays (according to whether the function was installed for input, output or exceptions on the stream). Handler functions usually should not output anything on the standard output because this ruins the command line during command line editing.</p>
+
+<p><a id="X81FB42517E3EA96D" name="X81FB42517E3EA96D"></a></p>
+
+<h5>10.10-1 InstallCharReadHookFunc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallCharReadHookFunc</code>( <var class="Arg">stream</var>, <var class="Arg">mode</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>installs the function <var class="Arg">func</var> as a handler function for the stream <var class="Arg">stream</var>. The argument <var class="Arg">mode</var> decides, for what operations on the stream this function is installed. <var class="Arg">mode</var> must be a string, in which a letter <code class="code">r</code> means "read", <code class="code">w</code> means "write" and <code class="code">x</code> means "exception", according to the <code class="code">select</code> function call in the UNIX C-library (see <code class="code">man select</code> and <code class="func">UNIXSelect</code> (<a href="chap10.html#X87BC257A78F96828"><span class="RefLink">10.2-3</span></a>)). More than one letter is allowed in <var class="Arg">mode</var>. As described above the function is called in a situation when <strong class="pkg">GAP</strong> is reading a character from the keyboard. Handler functions should not use much time to complete.</p>
+
+<p>This functionality only works if the operating system has a <code class="code">select</code> function.</p>
+
+<p><a id="X8492474C7A0B10AD" name="X8492474C7A0B10AD"></a></p>
+
+<h5>10.10-2 UnInstallCharReadHookFunc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnInstallCharReadHookFunc</code>( <var class="Arg">stream</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>uninstalls the function <var class="Arg">func</var> as a handler function for the stream <var class="Arg">stream</var>. All instances are deinstalled, regardless of the mode of operation (read, write, exception).</p>
+
+<p>This functionality only works if the operating system has a <code class="code">select</code> function.</p>
+
+<p><a id="X848DD7DC79363341" name="X848DD7DC79363341"></a></p>
+
+<h4>10.11 <span class="Heading">Comma separated files</span></h4>
+
+<p>In some situations it can be desirable to process data given in the form of a spreadsheet (such as Excel). <strong class="pkg">GAP</strong> can do this using the CSV (comma separated values) format, which spreadsheet programs can usually read in or write out.</p>
+
+<p>The first line of the spreadsheet is used as labels of record components, each subsequent line then corresponds to a record. Entries enclosed in double quotes are considered as strings and are permitted to contain the separation character (usually a comma).</p>
+
+<p><a id="X86FDC1EF82CAD2DA" name="X86FDC1EF82CAD2DA"></a></p>
+
+<h5>10.11-1 ReadCSV</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReadCSV</code>( <var class="Arg">filename</var>[, <var class="Arg">nohead</var>][, <var class="Arg">separator</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function reads in a spreadsheet, saved in CSV format (<em>c</em>omma <em>s</em>eparated <em>v</em>alues) and returns its entries as a list of records. The entries of the first line of the spreadsheet are used to denote the names of the record components. Blanks will be translated into underscore characters. If the parameter <var class="Arg">nohead</var> is given as <code class="keyw">true</code>, instead the record components will be called <code class="code">fieldn</code>. Each subsequent line will create one record. If given, <var class="Arg">separator</var> is the character used to separate fields. Otherwise it defaults to a comma.</p>
+
+<p><a id="X8779DAC585E05A47" name="X8779DAC585E05A47"></a></p>
+
+<h5>10.11-2 PrintCSV</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrintCSV</code>( <var class="Arg">filename</var>, <var class="Arg">list</var>[, <var class="Arg">fields</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function prints a list of records as a spreadsheet in CSV format (which can be read in for example into Excel). The names of the record components will be printed as entries in the first line. If the argument <var class="Arg">fields</var> is given only the record fields listed in this list will be printed and they will be printed in the same arrangement as given in this list. If the option noheader is set to true the line with the record field names will not be printed.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chap19.html">19</a>  <a href="chap20.html">20</a>  <a href="chap21.html">21</a>  <a href="chap22.html">22</a>  <a href="chap23.html">23</a>  <a href="chap24.html">24</a>  <a href="chap25.html">25</a>  <a href="chap26.html">26</a>  <a href="chap27.html">27</a>  <a href="chap28.html">28</a>  <a href="chap29.html">29</a>  <a href="chap30.html">30</a>  <a href="chap31.html">31</a>  <a href="chap32.html">32</a>  <a href="chap33.html">33</a>  <a href="chap34.html">34</a>  <a href="chap35.html">35</a>  <a href="chap36.html">36</a>  <a href="chap37.html">37</a>  <a href="chap38.html">38</a>  <a href="chap39.html">39</a>  <a href="chap40.html">40</a>  <a href="chap41.html">41</a>  <a href="chap42.html">42</a>  <a href="chap43.html">43</a>  <a href="chap44.html">44</a>  <a href="chap45.html">45</a>  <a href="chap46.html">46</a>  <a href="chap47.html">47</a>  <a href="chap48.html">48</a>  <a href="chap49.html">49</a>  <a href="chap50.html">50</a>  <a href="chap51.html">51</a>  <a href="chap52.html">52</a>  <a href="chap53.html">53</a>  <a href="chap54.html">54</a>  <a href="chap55.html">55</a>  <a href="chap56.html">56</a>  <a href="chap57.html">57</a>  <a href="chap58.html">58</a>  <a href="chap59.html">59</a>  <a href="chap60.html">60</a>  <a href="chap61.html">61</a>  <a href="chap62.html">62</a>  <a href="chap63.html">63</a>  <a href="chap64.html">64</a>  <a href="chap65.html">65</a>  <a href="chap66.html">66</a>  <a href="chap67.html">67</a>  <a href="chap68.html">68</a>  <a href="chap69.html">69</a>  <a href="chap70.html">70</a>  <a href="chap71.html">71</a>  <a href="chap72.html">72</a>  <a href="chap73.html">73</a>  <a href="chap74.html">74</a>  <a href="chap75.html">75</a>  <a href="chap76.html">76</a>  <a href="chap77.html">77</a>  <a href="chap78.html">78</a>  <a href="chap79.html">79</a>  <a href="chap80.html">80</a>  <a href="chap81.html">81</a>  <a href="chap82.html">82</a>  <a href="chap83.html">83</a>  <a href="chap84.html">84</a>  <a href="chap85.html">85</a>  <a href="chap86.html">86</a>  <a href="chap87.html">87</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

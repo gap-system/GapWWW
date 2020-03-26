@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (PatternClass) - Chapter 3: Permutation Encoding</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X8696E21E80C1AEC1" name="X8696E21E80C1AEC1"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X8696E21E80C1AEC1">3 <span class="Heading">Permutation Encoding</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X793F8BF48048365F">3.1 <span class="Heading"> Encoding and Decoding </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8143AF3D79F4CC1D">3.1-1 RankEncoding</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7DA97A7B7C8EB18A">3.1-2 RankDecoding</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X832A1FEC7E5491EA">3.1-3 SequencesToRatExp</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Permutation Encoding</span></h3>
+
+<p>A permutation <span class="SimpleMath">\(\pi=\pi_{1} \ldots \pi_{n}\)</span> has rank encoding <span class="SimpleMath">\(p_{1} \ldots p_{n}\)</span> where <span class="SimpleMath">\( p_{i}= |\{j : j \geq i, \pi_{j} \leq \pi_{i} \} | \)</span>. In other words the rank encoded permutation is a sequence of <span class="SimpleMath">\(p_{i}\)</span> with <span class="SimpleMath">\(1\leq i\leq n\)</span>, where <span class="SimpleMath">\(p_{i}\)</span> is the rank of <span class="SimpleMath">\(\pi_{i}\)</span> in <span class="SimpleMath">\(\{\pi_{i},\pi_{i+1},\ldots ,\pi_{n}\}\)</span>. <a href="chapBib_mj.html#biBRegCloSetPerms">[AAR03]</a></p>
+
+<p>The encoding of the permutation 3 2 5 1 6 7 4 8 9 is done as follows:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdcenter">Permutation</td>
+<td class="tdcenter">Encoding</td>
+<td class="tdcenter">Assisting list</td>
+</tr>
+<tr>
+<td class="tdcenter">325167489</td>
+<td class="tdcenter"><span class="SimpleMath">\(\emptyset\)</span></td>
+<td class="tdcenter">123456789</td>
+</tr>
+<tr>
+<td class="tdcenter">25167489</td>
+<td class="tdcenter">3</td>
+<td class="tdcenter">12456789</td>
+</tr>
+<tr>
+<td class="tdcenter">5167489</td>
+<td class="tdcenter">32</td>
+<td class="tdcenter">1456789</td>
+</tr>
+<tr>
+<td class="tdcenter">167489</td>
+<td class="tdcenter">323</td>
+<td class="tdcenter">146789</td>
+</tr>
+<tr>
+<td class="tdcenter">67489</td>
+<td class="tdcenter">3231</td>
+<td class="tdcenter">46789</td>
+</tr>
+<tr>
+<td class="tdcenter">7489</td>
+<td class="tdcenter">32312</td>
+<td class="tdcenter">4789</td>
+</tr>
+<tr>
+<td class="tdcenter">489</td>
+<td class="tdcenter">323122</td>
+<td class="tdcenter">489</td>
+</tr>
+<tr>
+<td class="tdcenter">89</td>
+<td class="tdcenter">3231221</td>
+<td class="tdcenter">89</td>
+</tr>
+<tr>
+<td class="tdcenter">9</td>
+<td class="tdcenter">32312211</td>
+<td class="tdcenter">9</td>
+</tr>
+<tr>
+<td class="tdcenter"><span class="SimpleMath">\(\emptyset\)</span></td>
+<td class="tdcenter">323122111</td>
+<td class="tdcenter"><span class="SimpleMath">\(\emptyset\)</span></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>Decoding a permutation is done in a similar fashion, taking the sequence <span class="SimpleMath">\(p_{1} \ldots p_{n}\)</span> and using the reverse process will lead to the permutation <span class="SimpleMath">\(\pi=\pi_{1} \ldots \pi_{n}\)</span>, where <span class="SimpleMath">\(\pi_{i}\)</span> is determined by finding the number that has rank <span class="SimpleMath">\(p_{i}\)</span> in <span class="SimpleMath">\(\{\pi_{i}, \pi_{i+1}, \ldots , \pi_{n}\}\)</span>.</p>
+
+<p>The sequence 3 2 3 1 2 2 1 1 1 is decoded as:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdcenter">Encoding</td>
+<td class="tdcenter">Permutation</td>
+<td class="tdcenter">Assisting list</td>
+</tr>
+<tr>
+<td class="tdcenter">323122111</td>
+<td class="tdcenter"><span class="SimpleMath">\(\emptyset\)</span></td>
+<td class="tdcenter">123456789</td>
+</tr>
+<tr>
+<td class="tdcenter">23122111</td>
+<td class="tdcenter">3</td>
+<td class="tdcenter">12456789</td>
+</tr>
+<tr>
+<td class="tdcenter">3122111</td>
+<td class="tdcenter">32</td>
+<td class="tdcenter">1456789</td>
+</tr>
+<tr>
+<td class="tdcenter">122111</td>
+<td class="tdcenter">325</td>
+<td class="tdcenter">146789</td>
+</tr>
+<tr>
+<td class="tdcenter">22111</td>
+<td class="tdcenter">3251</td>
+<td class="tdcenter">46789</td>
+</tr>
+<tr>
+<td class="tdcenter">2111</td>
+<td class="tdcenter">32516</td>
+<td class="tdcenter">4789</td>
+</tr>
+<tr>
+<td class="tdcenter">111</td>
+<td class="tdcenter">325167</td>
+<td class="tdcenter">489</td>
+</tr>
+<tr>
+<td class="tdcenter">11</td>
+<td class="tdcenter">3251674</td>
+<td class="tdcenter">89</td>
+</tr>
+<tr>
+<td class="tdcenter">1</td>
+<td class="tdcenter">32516748</td>
+<td class="tdcenter">9</td>
+</tr>
+<tr>
+<td class="tdcenter"><span class="SimpleMath">\(\emptyset\)</span></td>
+<td class="tdcenter">325167489</td>
+<td class="tdcenter"><span class="SimpleMath">\(\emptyset\)</span></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X793F8BF48048365F" name="X793F8BF48048365F"></a></p>
+
+<h4>3.1 <span class="Heading"> Encoding and Decoding </span></h4>
+
+<p><a id="X8143AF3D79F4CC1D" name="X8143AF3D79F4CC1D"></a></p>
+
+<h5>3.1-1 RankEncoding</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RankEncoding</code>( <var class="Arg">p</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: A list that represents the rank encoding of the permutation <code class="code">p</code>.</p>
+
+<p>Using the algorithm above <code class="code">RankEncoding</code> turns the permutation <code class="code">p</code> into a list of integers.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RankEncoding([3, 2, 5, 1, 6, 7, 4, 8, 9]);</span>
+[ 3, 2, 3, 1, 2, 2, 1, 1, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RankEncoding([ 4, 2, 3, 5, 1 ]);                 </span>
+[ 4, 2, 2, 2, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><a id="X7DA97A7B7C8EB18A" name="X7DA97A7B7C8EB18A"></a></p>
+
+<h5>3.1-2 RankDecoding</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RankDecoding</code>( <var class="Arg">e</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: A permutation in list form.</p>
+
+<p>A rank encoded permutation is decoded by using the reversed process from encoding, which is also explained above.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RankDecoding([ 3, 2, 3, 1, 2, 2, 1, 1, 1 ]);</span>
+[ 3, 2, 5, 1, 6, 7, 4, 8, 9 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RankDecoding([ 4, 2, 2, 2, 1 ]);</span>
+[ 4, 2, 3, 5, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><a id="X832A1FEC7E5491EA" name="X832A1FEC7E5491EA"></a></p>
+
+<h5>3.1-3 SequencesToRatExp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SequencesToRatExp</code>( <var class="Arg">list</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: A rational expression that describes all the words in <code class="code">list</code>.</p>
+
+<p>A list of sequences is turned into a rational expression by concatenating each sequence and unifying all of them.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SequencesToRatExp([[ 1, 1, 1, 1, 1 ],[ 2, 1, 2, 2, 1 ],[ 3, 2, 1, 2, 1 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 4, 2, 3, 2, 1 ]]);</span>
+11111U21221U32121U42321
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

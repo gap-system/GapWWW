@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (PERMUT) - Chapter 4: T-groups, PT-groups, and PST-groups</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X7E7EFDD1878F599D" name="X7E7EFDD1878F599D"></a></p>
+<div class="ChapSects"><a href="chap4.html#X7E7EFDD1878F599D">4 <span class="Heading">T-groups, PT-groups, and PST-groups</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7ABC289380DB85BE">4.1 <span class="Heading">"One" functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E15C5F778535A28">4.1-1 OneSubnormalNonNormalSubgroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F5EE21F85A8D14F">4.1-2 OneSubnormalNonPermutableSubgroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D7717657B9C7BEB">4.1-3 OneSubnormalNonSPermutableSubgroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7878496C869CB90C">4.1-4 OneSubnormalNonConjugatePermutableSubgroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B23E3857CA178FE">4.1-5 OneSubnormalNonSNPermutableSubgroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7B13DA0A800D8635">4.2 <span class="Heading">Group properties related to permutability</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7930E5AD817BE4B3">4.2-1 IsTGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CF2634F84EC572B">4.2-2 IsPTGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7BB4D5A782FF5B0E">4.2-3 IsPSTGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8789176282320022">4.2-4 IsCPTGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B9EBEA07DBE246F">4.2-5 IsPSNTGroup</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">T-groups, PT-groups, and PST-groups</span></h3>
+
+<p>This chapter explains the functions to check whether a given group is a T-group, a PT-group, or a PST-group.</p>
+
+<p>Recall that a group <span class="SimpleMath">G</span> is:</p>
+
+
+<dl>
+<dt><strong class="Mark">a T-group</strong></dt>
+<dd><p>when every subnormal subgroup of <span class="SimpleMath">G</span> is normal,</p>
+
+</dd>
+<dt><strong class="Mark">a PT-group</strong></dt>
+<dd><p>when every subnormal subgroup of <span class="SimpleMath">G</span> is permutable,</p>
+
+</dd>
+<dt><strong class="Mark">a PST-group</strong></dt>
+<dd><p>when every subnormal subgroup of <span class="SimpleMath">G</span> is S-permutable.</p>
+
+</dd>
+</dl>
+<p>We also present functions to identify groups in other classes related to these ones.</p>
+
+<p>The "One" functions are defined to provide examples of subgroups or elements showing that a group theoretical property for a group or for a subgroup is false.</p>
+
+<p><a id="X7ABC289380DB85BE" name="X7ABC289380DB85BE"></a></p>
+
+<h4>4.1 <span class="Heading">"One" functions</span></h4>
+
+<p><a id="X7E15C5F778535A28" name="X7E15C5F778535A28"></a></p>
+
+<h5>4.1-1 OneSubnormalNonNormalSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OneSubnormalNonNormalSubgroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p><code class="func">OneSubnormalNonNormalSubgroup</code> returns a subnormal subgroup of defect <span class="SimpleMath">2</span> which is not normal in the group <var class="Arg">G</var>, if such a subgroup exists. If such a subgroup does not exist because the group is a T-group, it returns <code class="keyw">fail</code>.</p>
+
+<p>A T-group is a group in which normality is transitive, that is, if <span class="SimpleMath">H</span> is a normal subgroup of <span class="SimpleMath">K</span> and <span class="SimpleMath">K</span> is a normal subgroup of <span class="SimpleMath">G</span>, then <span class="SimpleMath">H</span> is a normal subgroup of <span class="SimpleMath">G</span>. Finite T-groups are the groups in which every subnormal subgroup is normal.</p>
+
+<p>This function tries to set the property <code class="func">IsTGroup</code> (<a href="chap4.html#X7930E5AD817BE4B3"><span class="RefLink">4.2-1</span></a>) to <code class="keyw">true</code> or <code class="keyw">false</code> according to its result.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(320,152);</span>
+&lt;pc group of size 320 with 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=OneSubnormalNonNormalSubgroup(g);</span>
+Group([ f2, f3, f5, f7 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNormal(g,x);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubnormal(g,x);</span>
+true
+</pre></div>
+
+<p><a id="X7F5EE21F85A8D14F" name="X7F5EE21F85A8D14F"></a></p>
+
+<h5>4.1-2 OneSubnormalNonPermutableSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OneSubnormalNonPermutableSubgroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p><code class="func">OneSubnormalNonPermutableSubgroup</code> returns a subnormal subgroup which is not permutable in the group <var class="Arg">G</var>, if such a subgroup exists. If such a subgroup does not exist because the group is a PT-group, it returns <code class="keyw">fail</code>.</p>
+
+<p>A group <span class="SimpleMath">G</span> is a PT-group when permutability is a transitive relation in <span class="SimpleMath">G</span>, that is, if <span class="SimpleMath">H</span> is a permutable subgroup of <span class="SimpleMath">K</span> and <span class="SimpleMath">K</span> is a permutable subgroup of <span class="SimpleMath">G</span>, then <span class="SimpleMath">H</span> is a permutable subgroupof <span class="SimpleMath">G</span>. This is equivalent in finite groups to affirming that every subnormal subgroup of <span class="SimpleMath">G</span> is permutable.</p>
+
+<p>This function tries to set the property <code class="func">IsPTGroup</code> (<a href="chap4.html#X7CF2634F84EC572B"><span class="RefLink">4.2-2</span></a>) to <code class="keyw">true</code> or <code class="keyw">false</code> according to its result.</p>
+
+<p>Since this function checks all subnormal subgroups for permutability, it may take a long time if there are many subnormal subgroups.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(320,152);</span>
+&lt;pc group of size 320 with 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonPermutableSubgroup(g);</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPTGroup(g);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(8,3);</span>
+&lt;pc group of size 8 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonPermutableSubgroup(g);</span>
+Group([ f1*f3 ])
+</pre></div>
+
+<p><a id="X7D7717657B9C7BEB" name="X7D7717657B9C7BEB"></a></p>
+
+<h5>4.1-3 OneSubnormalNonSPermutableSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OneSubnormalNonSPermutableSubgroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p><code class="func">OneSubnormalNonSPermutableSubgroup</code> returns a subnormal subgroup of defect <span class="SimpleMath">2</span> which is not S-permutable in <var class="Arg">G</var>, if such a subgroup exists. If such a subgroup does not exist because the group is a PST-group, it returns <code class="keyw">fail</code>.</p>
+
+<p>A group <span class="SimpleMath">G</span> is a PST-group when S-permutability (Sylow permutability) is a transitive relation in <span class="SimpleMath">G</span>, that is, if <span class="SimpleMath">H</span> is an S-permutable subgroup of <span class="SimpleMath">K</span> and <span class="SimpleMath">K</span> is an S-permutable subgroup of <span class="SimpleMath">G</span>, then <span class="SimpleMath">H</span> is an S-permutable subgroup of <span class="SimpleMath">G</span>. This is equivalent in finite groups to affirming that every subnormal subgroup of <span class="SimpleMath">G</span> is S-permutable. By a result of Ballester-Bolinches, Esteban-Romero, and Ragland <a href="chapBib.html#biBBallesterEstebanRagland07">[BBERR07]</a>, it is enough to check this last condition for all subnormal subgroups of defect <span class="SimpleMath">2</span>.</p>
+
+<p>This function tries to set the property <code class="func">IsPSTGroup</code> (<a href="chap4.html#X7BB4D5A782FF5B0E"><span class="RefLink">4.2-3</span></a>) to <code class="keyw">true</code> or <code class="keyw">false</code> according to its result.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=AlternatingGroup(4);</span>
+Alt( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonSPermutableSubgroup(g);</span>
+Group([ (1,2)(3,4) ])
+</pre></div>
+
+<p><a id="X7878496C869CB90C" name="X7878496C869CB90C"></a></p>
+
+<h5>4.1-4 OneSubnormalNonConjugatePermutableSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OneSubnormalNonConjugatePermutableSubgroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This function finds a subnormal subgroup <span class="SimpleMath">H</span> which does not permute with all its conjugates, if such a subgroup exist; otherwise, it returns <code class="keyw">fail</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=AlternatingGroup(4);</span>
+Alt( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonConjugatePermutableSubgroup(g);</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=DihedralGroup(16);</span>
+&lt;pc group of size 16 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonConjugatePermutableSubgroup(g);</span>
+Group([ f1*f4 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonConjugatePermutableSubgroup(g);</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonPermutableSubgroup(g);</span>
+Group([ (1,2)(3,4) ])
+</pre></div>
+
+<p><a id="X7B23E3857CA178FE" name="X7B23E3857CA178FE"></a></p>
+
+<h5>4.1-5 OneSubnormalNonSNPermutableSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OneSubnormalNonSNPermutableSubgroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This attribute returns a subnormal subgroup <span class="SimpleMath">H</span> of the soluble group <span class="SimpleMath">G</span> such that <span class="SimpleMath">H</span> does not permute with a system normaliser if such a subgroup exists; otherwise, it returns <code class="keyw">fail</code>. This system normaliser is obtained with the function <code class="func">SystemNormalizer</code> (<a href="../../../pkg/format-1.4a/htm/CHAP004.htm"><span class="RefLink">FORMAT: SystemNormalizer</span></a>) of the <strong class="pkg">Format</strong> package.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonSNPermutableSubgroup(g);</span>
+Group([ (1,3)(2,4) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=Group((1,2,3)(4,5,6),(1,2));</span>
+Group([ (1,2,3)(4,5,6), (1,2) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonSNPermutableSubgroup(g);</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonSPermutableSubgroup(g); </span>
+Group([ (1,2,3)(4,6,5) ])
+</pre></div>
+
+<p><a id="X7B13DA0A800D8635" name="X7B13DA0A800D8635"></a></p>
+
+<h4>4.2 <span class="Heading">Group properties related to permutability</span></h4>
+
+<p>The next function names correspond to properties.</p>
+
+<p><a id="X7930E5AD817BE4B3" name="X7930E5AD817BE4B3"></a></p>
+
+<h5>4.2-1 IsTGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>This function returns <code class="keyw">true</code> if <var class="Arg">G</var> is a T-group, and <code class="keyw">false</code> otherwise.</p>
+
+<p>T-groups are the groups in which normality is a transitive relation, that is, if <span class="SimpleMath">H</span> is a subgroup of <span class="SimpleMath">K</span> and <span class="SimpleMath">K</span> is a subgroup of <span class="SimpleMath">G</span>, then <span class="SimpleMath">H</span> is a subgroup of <span class="SimpleMath">G</span>. In the finite case, they are the groups in which every subnormal subgroup is normal.</p>
+
+<p>For soluble groups, the algorithm checks that for every prime <span class="SimpleMath">p</span> dividing its order, <span class="SimpleMath">G</span> is <span class="SimpleMath">p</span>-nilpotent and has a Dedekind Sylow <span class="SimpleMath">p</span>-subgroup or <span class="SimpleMath">G</span> has an abelian Sylow <span class="SimpleMath">p</span>-subgroup <span class="SimpleMath">P</span> and every subgroup of <span class="SimpleMath">P</span> is normal in <span class="SimpleMath">N_G(P)</span>.</p>
+
+<p>For insoluble groups, the function checks whether the group is an SC-group with the function <code class="func">IsSCGroup</code> (<a href="chap7.html#X7E01D1C47814DA3C"><span class="RefLink">7.1-4</span></a>), because PT-groups are SC-groups. Since the methods for insoluble groups depend on the computation of a chief series with the function <code class="func">ChiefSeries</code> (<a href="../../../doc/ref/chap39.html#X7BDD116F7833800F"><span class="RefLink">Reference: ChiefSeries</span></a>), they might not be available if the group is not given as a permutation group. Then it is checked that every subnormal subgroup of defect <span class="SimpleMath">2</span> is normal with the help of the function <code class="func">OneSubnormalNonNormalSubgroup</code> (<a href="chap4.html#X7E15C5F778535A28"><span class="RefLink">4.1-1</span></a>). The methods based on the ideas of <a href="chapBib.html#biBBallesterBeidlemanHeineken03-illinois">[BBBH03a]</a>, <a href="chapBib.html#biBBallesterBeidlemanHeineken03-commalg">[BBBH03b]</a>, and <a href="chapBib.html#biBBeidlemanHeineken03-jgt">[BH03]</a> have not been implemented so far because they require the computation of quotients by all normal subgroups, which could be a time-consuming task.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(40,4);</span>
+&lt;pc group of size 40 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsTGroup(g);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(3);</span>
+Sym( [ 1 .. 3 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsTGroup(g);</span>
+true
+</pre></div>
+
+<p><a id="X7CF2634F84EC572B" name="X7CF2634F84EC572B"></a></p>
+
+<h5>4.2-2 IsPTGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPTGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>This property takes the value <code class="keyw">true</code> if <var class="Arg">G</var> is a PT-group, and the value <code class="keyw">false</code> otherwise.</p>
+
+<p>For a soluble group <span class="SimpleMath">G</span>, the function checks whether for all primes <span class="SimpleMath">p</span>, <span class="SimpleMath">G</span> is <span class="SimpleMath">p</span>-nilpotent and has an Iwasawa Sylow <span class="SimpleMath">p</span>-subgroup or <span class="SimpleMath">G</span> has an abelian Sylow <span class="SimpleMath">p</span>-subgroup and it satisfies the property <span class="SimpleMath">C_p</span> (that is, every subgroup of a Sylow <span class="SimpleMath">p</span>-subgroup <span class="SimpleMath">P</span> of <span class="SimpleMath">G</span> is normal in the Sylow normaliser <span class="SimpleMath">N_G(P)</span>).</p>
+
+<p>For insoluble groups, the function checks that the group is an SC-group with the function <code class="func">IsSCGroup</code> (<a href="chap7.html#X7E01D1C47814DA3C"><span class="RefLink">7.1-4</span></a>), because PT-groups are SC-groups. Since the methods for insoluble groups depend on the computation of a chief series with the function <code class="func">ChiefSeries</code> (<a href="../../../doc/ref/chap39.html#X7BDD116F7833800F"><span class="RefLink">Reference: ChiefSeries</span></a>), they might not be available if the group is not given as a permutation group. Then it uses the function <code class="func">OneSubnormalNonPermutableSubgroup</code> (<a href="chap4.html#X7F5EE21F85A8D14F"><span class="RefLink">4.1-2</span></a>) to check whether or not every subnormal subgroup is permutable. The methods based on the ideas of <a href="chapBib.html#biBBallesterBeidlemanHeineken03-illinois">[BBBH03a]</a>, <a href="chapBib.html#biBBallesterBeidlemanHeineken03-commalg">[BBBH03b]</a>, and <a href="chapBib.html#biBBeidlemanHeineken03-jgt">[BH03]</a> have not been implemented so far because they require the computation of quotients by all normal subgroups, which could be a time-consuming task.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(1323,37);</span>
+&lt;pc group of size 1323 with 5 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPTGroup(g);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsTGroup(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonNormalSubgroup(g);</span>
+Group([ f2*f3, f4, f5 ])
+</pre></div>
+
+<p><a id="X7BB4D5A782FF5B0E" name="X7BB4D5A782FF5B0E"></a></p>
+
+<h5>4.2-3 IsPSTGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPSTGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>This function returns true if the group <var class="Arg">G</var> is a PST-group, and false otherwise.</p>
+
+<p>A finite group <span class="SimpleMath">G</span> is a PST-group if S-permutability (Sylow-permutability) is a transitive relation in <span class="SimpleMath">G</span>, that is, if <span class="SimpleMath">H</span> is S-permutable in <span class="SimpleMath">K</span> and <span class="SimpleMath">K</span> is S-permutable in <span class="SimpleMath">G</span>, then <span class="SimpleMath">H</span> is S-permutable in <span class="SimpleMath">G</span>. This is equivalent to affirming that every subnormal subgroup of <span class="SimpleMath">G</span> is S-permutable in <span class="SimpleMath">G</span>.</p>
+
+<p>For a soluble group <span class="SimpleMath">G</span>, the function checks whether for all primes <span class="SimpleMath">p</span>, <span class="SimpleMath">G</span> is <span class="SimpleMath">p</span>-nilpotent, or <span class="SimpleMath">G</span> has an abelian Sylow <span class="SimpleMath">p</span>-subgroup and <span class="SimpleMath">G</span> satisfies the property <span class="SimpleMath">C_p</span> (that is, every subgroup of a Sylow <span class="SimpleMath">p</span>-subgroup <span class="SimpleMath">P</span> of <span class="SimpleMath">G</span> is normal in the Sylow normaliser <span class="SimpleMath">N_G(P)</span>)</p>
+
+<p>For insoluble groups, the function checks whether the group is an SC-group with the function <code class="func">IsSCGroup</code> (<a href="chap7.html#X7E01D1C47814DA3C"><span class="RefLink">7.1-4</span></a>), because PST-groups are SC-groups. Since the methods for insoluble groups depend on the computation of a chief series with the function <code class="func">ChiefSeries</code> (<a href="../../../doc/ref/chap39.html#X7BDD116F7833800F"><span class="RefLink">Reference: ChiefSeries</span></a>), they might not be available if the group is not given as a permutation group. Then it uses the function <code class="func">OneSubnormalNonSPermutableSubgroup</code> (<a href="chap4.html#X7D7717657B9C7BEB"><span class="RefLink">4.1-3</span></a>) to check whether or not every subnormal subgroup of defect <span class="SimpleMath">2</span> is S-permutable. The methods based on the ideas of <a href="chapBib.html#biBBallesterBeidlemanHeineken03-illinois">[BBBH03a]</a>, <a href="chapBib.html#biBBallesterBeidlemanHeineken03-commalg">[BBBH03b]</a>, and <a href="chapBib.html#biBBeidlemanHeineken03-jgt">[BH03]</a> have not been implemented so far because they require the computation of quotients by all normal subgroups, which could be a time-consuming task.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(24,6);</span>
+&lt;pc group of size 24 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPSTGroup(g);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPTGroup(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonPermutableSubgroup(g);</span>
+Group([ f1*f3, f4 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(24,6);</span>
+&lt;pc group of size 24 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPSTGroup(g);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPTGroup(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubnormalNonPermutableSubgroup(g);</span>
+Group([ f1*f3, f4 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneSubgroupNotPermutingWith(g,last);</span>
+Group([ f1*f2 ])
+</pre></div>
+
+<p><a id="X8789176282320022" name="X8789176282320022"></a></p>
+
+<h5>4.2-4 IsCPTGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCPTGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>This property returns true if every subnormal subgroup of <var class="Arg">G</var> permutes with all its conjugates, and false otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCPTGroup(g);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPTGroup(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPSTGroup(g);</span>
+false
+</pre></div>
+
+<p><a id="X7B9EBEA07DBE246F" name="X7B9EBEA07DBE246F"></a></p>
+
+<h5>4.2-5 IsPSNTGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPSNTGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>This property takes the value <code class="keyw">true</code> if every subnormal subgroup of the soluble group <span class="SimpleMath">G</span> permutes with every system normaliser of <span class="SimpleMath">G</span>, and <code class="keyw">false</code> otherwise. If the function is applied to an insoluble group, it gives an error.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=Group((1,2,3)(4,5,6),(1,3));</span>
+Group([ (1,2,3)(4,5,6), (1,3) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPSTGroup(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPSNTGroup(g);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCPTGroup(g);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(16,7);</span>
+&lt;pc group of size 16 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPSTGroup(g);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCPTGroup(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPSNTGroup(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCPTGroup(g);</span>
+true
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

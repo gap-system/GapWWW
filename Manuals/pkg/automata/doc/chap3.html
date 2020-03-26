@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Automata) - Chapter 3: Rational languages</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X833D315483172905" name="X833D315483172905"></a></p>
+<div class="ChapSects"><a href="chap3.html#X833D315483172905">3 <span class="Heading">Rational languages</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7C144D368043DE01">3.1 <span class="Heading">Rational Expressions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X801EC6F38568426D">3.1-1 RationalExpression</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7EE5A70F7F237C41">3.1-2 RatExpOnnLetters</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DA59CBE8571796C">3.1-3 RandomRatExp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E3AA84784019E6C">3.1-4 SizeRatExp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DDB46817D6E79BE">3.1-5 IsRationalExpression</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8773359880149A98">3.1-6 AlphabetOfRatExp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84B9922B7C006158">3.1-7 AlphabetOfRatExpAsList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X786A096681CAC3CD">3.1-8 CopyRatExp</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7FB9270D7E8FABF3">3.2 <span class="Heading">Comparison of rational expressions</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X83A280D47DB3A033">3.3 <span class="Heading">Operations with rational languages</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8206BD4E82A81D8F">3.3-1 UnionRatExp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E29107587611CE2">3.3-2 ProductRatExp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83D8DAE6862C8A96">3.3-3  StarRatExp</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Rational languages</span></h3>
+
+<p>Rational languages are conveniently represented through rational expressions. These are finite expressions involving letters of the alphabet; <code class="code">concatenation</code>, corresponding to the <em>product</em>; the symbol <code class="code">U</code>, corresponding to the <em>union</em>; and the symbol <code class="code">*</code>, corresponding to the Kleene's star.</p>
+
+<p><a id="X7C144D368043DE01" name="X7C144D368043DE01"></a></p>
+
+<h4>3.1 <span class="Heading">Rational Expressions</span></h4>
+
+<p>The expressions <code class="code">@</code> and <code class="code">"empty\_set"</code> are used to represent the empty word and the empty set respectively.</p>
+
+<p><a id="X801EC6F38568426D" name="X801EC6F38568426D"></a></p>
+
+<h5>3.1-1 RationalExpression</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RationalExpression</code>( <var class="Arg">expr</var>[, <var class="Arg">alph</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>A rational expression can be created using the function <code class="code">RationalExpression</code>. <var class="Arg">expr</var> is a string representing the desired expression literally and <var class="Arg">alph</var> (may or may not be present) is the alphabet of the expression. Of course <var class="Arg">alph</var> must not contain the symbols '@', '(', ')', '*' nor 'U'. When <var class="Arg">alph</var> is not present, the alphabet of the rational expression is the set of symbols (other than '"', etc...) occurring in the expression. (The alphabet is then ordered with the alphabetical order.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RationalExpression("abUc");</span>
+abUc
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RationalExpression("ab*Uc");</span>
+ab*Uc
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RationalExpression("001U1*");</span>
+001U1*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RationalExpression("001U1*","012");</span>
+001U1*
+</pre></div>
+
+<p><a id="X7EE5A70F7F237C41" name="X7EE5A70F7F237C41"></a></p>
+
+<h5>3.1-2 RatExpOnnLetters</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RatExpOnnLetters</code>( <var class="Arg">n</var>, <var class="Arg">operation</var>, <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This is another way to construct a rational expression over an alphabet. The user may specify the alphabet or just give the number <span class="SimpleMath">n</span> of letters (in this case the alphabet <span class="SimpleMath">{a,b,c,...}</span> is considered). <var class="Arg">operation</var> is the name of an operation, the possibilities being: <code class="code">product</code>, <code class="code">union</code> or <code class="code">star</code>. <var class="Arg">list</var> is a list of rational expressions, a rational expression in the case of ``star'', or a list consisting of an integer when the rational expression is a single letter. The empty list <code class="code">[ ]</code> and <code class="code">empty\_set</code> are other possibilities for <code class="code">list</code>. An example follows</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RatExpOnnLetters(2,"star",RatExpOnnLetters(2,"product",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[RatExpOnnLetters(2,[],[1]),RatExpOnnLetters(2,"union",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[RatExpOnnLetters(2,[],[1]),RatExpOnnLetters(2,[],[2])])]));      </span>
+(a(aUb))*
+</pre></div>
+
+<p>The empty word and the empty set are the rational expressions:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RatExpOnnLetters(2,[],[]);         </span>
+@
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RatExpOnnLetters(2,[],"empty_set");</span>
+empty_set
+</pre></div>
+
+<p><a id="X7DA59CBE8571796C" name="X7DA59CBE8571796C"></a></p>
+
+<h5>3.1-3 RandomRatExp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomRatExp</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given the number of symbols of the alphabet and (possibly) a factor <span class="SimpleMath">m</span> which is intended to increase the randomality of the expression, returns a pseudo random rational expression over that alphabet.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomRatExp(2);</span>
+b*(@Ua)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomRatExp("01");</span>
+empty_set
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomRatExp("01");</span>
+(0U1)*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomRatExp("01",7);</span>
+0*1(@U0U1)
+</pre></div>
+
+<p><a id="X7E3AA84784019E6C" name="X7E3AA84784019E6C"></a></p>
+
+<h5>3.1-4 SizeRatExp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SizeRatExp</code>( <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the size, i.e. the number of symbols of the alphabet, of the rational expression <var class="Arg">r</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=RationalExpression("0*1(@U0U1)");</span>
+0*1(@U0U1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SizeRatExp(a);</span>
+5
+</pre></div>
+
+<p><a id="X7DDB46817D6E79BE" name="X7DDB46817D6E79BE"></a></p>
+
+<h5>3.1-5 IsRationalExpression</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRationalExpression</code>( <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Tests whether an object is a rational expression.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := RationalExpression("1(0U1)U@");</span>
+1(0U1)U@
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRatExpOnnLettersObj(r) and IsRationalExpressionRep(r);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRationalExpression(RandomRatExp("01"));</span>
+true
+</pre></div>
+
+<p><a id="X8773359880149A98" name="X8773359880149A98"></a></p>
+
+<h5>3.1-6 AlphabetOfRatExp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlphabetOfRatExp</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the number of symbols in the alphabet of the rational expression <code class="code">R</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RandomRatExp(2);</span>
+a*(ba*U@)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfRatExp(r);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RandomRatExp("01");</span>
+1*(01*U@)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfRatExp(r);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=RandomTransformation(3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b:=RandomTransformation(3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RandomRatExp([a,b]);</span>
+(Transformation( [ 1, 1, 3 ] )UTransformation( [ 1, 1, 2 ] ))*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfRatExp(r);</span>
+2
+</pre></div>
+
+<p><a id="X84B9922B7C006158" name="X84B9922B7C006158"></a></p>
+
+<h5>3.1-7 AlphabetOfRatExpAsList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlphabetOfRatExpAsList</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the alphabet of the rational expression <code class="code">R</code> always as a list. If the alphabet of the rational expression is given by means of an integer less than 27 it returns the list <code class="code">"abcd...."</code>, otherwise returns <code class="code">[ "a1", "a2", "a3", "a4", ... ]</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RandomRatExp(2);</span>
+(aUb)((aUb)(bU@)U@)U@
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfRatExpAsList(r);</span>
+"ab"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RandomRatExp("01");</span>
+1*(0U@)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfRatExpAsList(r);</span>
+"01"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RandomRatExp(30);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfRatExpAsList(r);</span>
+[ "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10", "a11", 
+"a12", "a13", "a14", "a15", "a16", "a17", "a18", "a19", "a20", "a21", 
+"a22", "a23", "a24", "a25", "a26", "a27", "a28", "a29", "a30" ]
+</pre></div>
+
+<p><a id="X786A096681CAC3CD" name="X786A096681CAC3CD"></a></p>
+
+<h5>3.1-8 CopyRatExp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyRatExp</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns a new rational expression, which is a copy of <code class="code">R</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=RandomRatExp(2);</span>
+a*(bU@)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CopyRatExp(r);</span>
+a*(bU@)
+</pre></div>
+
+<p><a id="X7FB9270D7E8FABF3" name="X7FB9270D7E8FABF3"></a></p>
+
+<h4>3.2 <span class="Heading">Comparison of rational expressions</span></h4>
+
+<p>The way two rational expressions <code class="code">r1</code> and <code class="code">r2</code> are compared through the < operator is the following: the empty set is lesser than everything else; if r1 and r2 are letters, then the lesser is taken from the order in the alphabet; if r1 is a letter an r2 a product, union or star, then r1 is lesser than r2; a star expression is considered to be lesser than a product or union expression and a product lesser than a union; to compare two star expressions we compare the expressions under the stars; to compare two product or union expressions we compare the subexpressions of each expression from left to right;</p>
+
+<p><a id="X83A280D47DB3A033" name="X83A280D47DB3A033"></a></p>
+
+<h4>3.3 <span class="Heading">Operations with rational languages</span></h4>
+
+<p>Only operations with rational languages over the same alphabet are allowed.</p>
+
+<p>We may compute expressions for the <code class="code">product</code>, <code class="code">union</code> and <code class="code">star</code> (i.e., submonoid generated by) of rational sets. In some cases, simpler expressions representing the same set are returned. Note that that two simplifications are always made, namely, rU"empty_set" = r and r@ = r . Of course, these operations may be used to construct more complex expressions. For rational expressions we have the functions <code class="code">UnionRatExp</code>, <code class="code">ProductRatExp</code>, <code class="code">StarRatExp</code>, that return respectively rational expressions for the <em>union</em> and <em>product</em> of the languages given by the rational expressions <code class="code">r</code> and <code class="code">s</code> and the <code class="code">star</code> of the language given by the rational expression <code class="code">r</code>.</p>
+
+<p><a id="X8206BD4E82A81D8F" name="X8206BD4E82A81D8F"></a></p>
+
+<h5>3.3-1 UnionRatExp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionRatExp</code>( <var class="Arg">r</var>, <var class="Arg">s</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><a id="X7E29107587611CE2" name="X7E29107587611CE2"></a></p>
+
+<h5>3.3-2 ProductRatExp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProductRatExp</code>( <var class="Arg">r</var>, <var class="Arg">s</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><a id="X83D8DAE6862C8A96" name="X83D8DAE6862C8A96"></a></p>
+
+<h5>3.3-3  StarRatExp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227;  StarRatExp</code>( <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The expression <code class="code">(a(aUb))*</code> may be produced in the following way</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r1 := RatExpOnnLetters(2,[],[1]); </span>
+a
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r2 := RatExpOnnLetters(2,[],[2]);</span>
+b
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r3 := UnionRatExp(r1,r2);</span>
+aUb
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r4 := ProductRatExp(r1,r3);</span>
+a(aUb)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r5 := StarRatExp(r4);</span>
+(a(aUb))*
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

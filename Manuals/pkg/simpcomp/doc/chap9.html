@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (simpcomp) - Chapter 9: Bistellar flips</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap9"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X82F1CE7A79A3CA47" name="X82F1CE7A79A3CA47"></a></p>
+<div class="ChapSects"><a href="chap9.html#X82F1CE7A79A3CA47">9 <span class="Heading">Bistellar flips</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X8729B87B848E3F89">9.1 <span class="Heading">Theory</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X7A441E547D1CE96E">9.2 <span class="Heading">Functions for bistellar flips</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X85678B4D7A378F1C">9.2-1 SCBistellarOptions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X80BDA87D86E67B02">9.2-2 SCEquivalent</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7AE1CB2C81028966">9.2-3 SCExamineComplexBistellar</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7AEB9242837CCE5D">9.2-4 SCIntFunc.SCChooseMove</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X79FBFD6A7F2CC7E7">9.2-5 SCIsKStackedSphere</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7E81340E8469C8EB">9.2-6 SCBistellarIsManifold</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7FB6219B85C96C66">9.2-7 SCIsMovableComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7AD9737B7BAF4816">9.2-8 SCMove</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X87B1CBC97FC5C120">9.2-9 SCMoves</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7E70D44179ED6A78">9.2-10 SCRMoves</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X8176063785DC4C35">9.2-11 SCRandomize</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X85D69E4F84E8E7D9">9.2-12 SCReduceAsSubcomplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7FF4BBEC8574C58F">9.2-13 SCReduceComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X814D9AE287F64F74">9.2-14 SCReduceComplexEx</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X8714A0A578A281C0">9.2-15 SCReduceComplexFast</a></span>
+</div></div>
+</div>
+
+<h3>9 <span class="Heading">Bistellar flips</span></h3>
+
+<p><a id="X8729B87B848E3F89" name="X8729B87B848E3F89"></a></p>
+
+<h4>9.1 <span class="Heading">Theory</span></h4>
+
+<p>Since two combinatorial manifolds are already considered distinct to each other as soon as they are not combinatorially isomorphic, a topological PL-manifold is represented by a whole class of combinatorial manifolds. Thus, a frequent question when working with combinatorial manifolds is whether two such objects are PL-homeomorphic or not. One possibility to approach this problem, i. e. to find combinatorially distinct members of the class of a PL-manifold, is a heuristic algorithm using the concept of bistellar moves.<br /> <br /> <strong class="button">Definition</strong> (Bistellar moves <a href="chapBib.html#biBPachner87KonstrMethKombHomeo">[Pac87]</a>)<br /> Let <span class="SimpleMath">M</span> be a combinatorial <span class="SimpleMath">d</span>-manifold (<span class="SimpleMath">d</span>-pseudomanifold), <span class="SimpleMath">γ = ⟨ v_0 , ... , v_k ⟩</span> a <span class="SimpleMath">k</span>-face and <span class="SimpleMath">δ = ⟨ w_0 , ... , w_d-k ⟩</span> a <span class="SimpleMath">(d-k+1)</span>-tuple of vertices of <span class="SimpleMath">M</span> that does not span a <span class="SimpleMath">(d-k)</span>-face in <span class="SimpleMath">M</span>, <span class="SimpleMath">0 ≤ k ≤ d</span>, such that <span class="SimpleMath">{ v_0 , ..., v_k } ∩ { w_0 , ... , w_d-k } = ∅</span> and <span class="SimpleMath">{ v_0 , ... , v_k, w_0 , ... w_k-d }</span> spans exactly <span class="SimpleMath">d-k+1</span> facets. Then the operation<br /> <br /> <span class="SimpleMath">κ_(γ,δ) ( M ) = M ∖ (γ ⋆ ∂ δ) ∪ (∂ γ ⋆ δ)</span><br /> <br /> is called a <em>bistellar <span class="SimpleMath">(d-k)</span>-move</em>.<br /> <br /> In other words: If there exists a bouquet <span class="SimpleMath">D ⊂ M</span> of <span class="SimpleMath">d-k+1</span> facets on a subset of vertices <span class="SimpleMath">W ⊂ V</span> of order <span class="SimpleMath">d+2</span> with a common <span class="SimpleMath">k</span>-face <span class="SimpleMath">γ</span> and the complement <span class="SimpleMath">δ</span> of the vertices of <span class="SimpleMath">γ</span> in <span class="SimpleMath">W</span> does not span a <span class="SimpleMath">(d-k)</span>-face in <span class="SimpleMath">M</span> we can remove <span class="SimpleMath">D</span> and replace it by a bouquet of <span class="SimpleMath">k+1</span> facets <span class="SimpleMath">E ⊂ M</span> with vertex set <span class="SimpleMath">W</span> with a common face spanned by <span class="SimpleMath">δ</span>. By construction <span class="SimpleMath">∂ D = ∂ E</span> and the altered complex is again a combinatorial <span class="SimpleMath">d</span>-manifold (<span class="SimpleMath">d</span>-pseudomanifold). See Fig. 11 for a bistellar <span class="SimpleMath">1</span>-move of a <span class="SimpleMath">2</span>-dimensional complex, see Fig. 12 for all bistellar moves in dimension <span class="SimpleMath">3</span>.</p>
+
+<p>A bistellar <span class="SimpleMath">0</span>-move is a <em>stellar subdivision</em>, i. e. the subdivision of a facet <span class="SimpleMath">δ</span> into <span class="SimpleMath">d+1</span> new facets by introducing a new vertex at the center of <span class="SimpleMath">δ</span> (cf. Fig. 12 on the left). In particular, the vertex set of a combinatorial manifold (pseudomanifold) is not invariant under bistellar moves. For any bistellar <span class="SimpleMath">(d-k)</span>-move <span class="SimpleMath">κ_(γ,δ)</span> we have an inverse bistellar <span class="SimpleMath">k</span>-move <span class="SimpleMath">κ^-1_(γ,δ) = κ_(δ,γ)</span> such that <span class="SimpleMath">κ_(δ,γ) ( κ_(γ,δ) (M)) = M</span>. If for two combinatorial manifolds <span class="SimpleMath">M</span> and <span class="SimpleMath">N</span> there exist a sequence of bistellar moves that transforms one into the other, <span class="SimpleMath">M</span> and <span class="SimpleMath">N</span> are called <em>bistellarly equivalent</em>. So far bistellar moves are local operations on combinatorial manifolds that change its combinatorial type. However, the strength of the concept in combinatorial topology is a consequence of the following<br /> <br /> <strong class="button">Theorem</strong> (Bistellar moves <a href="chapBib.html#biBPachner87KonstrMethKombHomeo">[Pac87]</a>)<br /> Two combinatorial manifolds (pseudomanifolds) <span class="SimpleMath">M</span> and <span class="SimpleMath">N</span> are PL homeomorphic if and only if they are bistellarly equivalent.<br /> <br /> Unfortunately Pachners theorem does not guarantee that the search for a connecting sequence of bistellar moves between <span class="SimpleMath">M</span> and <span class="SimpleMath">N</span> terminates. Hence, using bistellar moves, we can not prove that <span class="SimpleMath">M</span> and <span class="SimpleMath">N</span> are not PL-homeomorphic. However, there is a very effective simulated annealing approach that is able to give a positive answer in a lot of cases. The heuristic was first implemented by Bjoerner and Lutz in <a href="chapBib.html#biBBjoerner00SimplMnfBistellarFlips">[BL00]</a>. The functions presented in this chapter are based on this code which can be used for several tasks:</p>
+
+<p>In many cases the heuristic reduces a given triangulation but does not reach a minimal triangulation after a reasonable amount of flips. Thus, we usually can not expect the algorithm to terminate. However, in some cases the program normally stops after a small number of flips:</p>
+
+<p>Technical note: Since bistellar flips do not respect the combinatorial properties of a complex, no attention to the original vertex labels is payed, i. e. the flipped complex will be relabeled whenever its vertex labels become different from the standard labeling (for example after every reverse 0-move).</p>
+
+<p><a id="X7A441E547D1CE96E" name="X7A441E547D1CE96E"></a></p>
+
+<h4>9.2 <span class="Heading">Functions for bistellar flips</span></h4>
+
+<p><a id="X85678B4D7A378F1C" name="X85678B4D7A378F1C"></a></p>
+
+<h5>9.2-1 SCBistellarOptions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCBistellarOptions</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>Record of global variables to adjust output an behavior of bistellar moves in <code class="func">SCIntFunc.SCChooseMove</code> (<a href="chap9.html#X7AEB9242837CCE5D"><span class="RefLink">9.2-4</span></a>) and <code class="func">SCReduceComplexEx</code> (<a href="chap9.html#X814D9AE287F64F74"><span class="RefLink">9.2-14</span></a>) respectively.</p>
+
+<ol>
+<li><p><code class="code">BaseRelaxation</code>: determines the length of the relaxation period. Default: <span class="SimpleMath">3</span></p>
+
+</li>
+<li><p><code class="code">BaseHeating</code>: determines the length of the heating period. Default: <span class="SimpleMath">4</span></p>
+
+</li>
+<li><p><code class="code">Relaxation</code>: value of the current relaxation period. Default: <span class="SimpleMath">0</span></p>
+
+</li>
+<li><p><code class="code">Heating</code>: value of the current heating period. Default: <span class="SimpleMath">0</span></p>
+
+</li>
+<li><p><code class="code">MaxRounds</code>: maximal over all number of bistellar flips that will be performed. Default: <span class="SimpleMath">500000</span></p>
+
+</li>
+<li><p><code class="code">MaxInterval</code>: maximal number of bistellar flips that will be performed without a change of the <span class="SimpleMath">f</span>-vector of the moved complex. Default: <span class="SimpleMath">100000</span></p>
+
+</li>
+<li><p><code class="code">Mode</code>: flip mode, <span class="SimpleMath">0</span>=reducing, <span class="SimpleMath">1</span>=comparing, <span class="SimpleMath">2</span>=reduce as sub-complex, <span class="SimpleMath">3</span>=randomize. Default: <span class="SimpleMath">0</span></p>
+
+</li>
+<li><p><code class="code">WriteLevel</code>: <span class="SimpleMath">0</span>=no output, <span class="SimpleMath">1</span>=storing of every vertex minimal complex to user library, <span class="SimpleMath">2</span>=e-mail notification. Default: <span class="SimpleMath">1</span></p>
+
+</li>
+<li><p><code class="code">MailNotifyIntervall</code>: (minimum) number of seconds between two e-mail notifications. Default: <span class="SimpleMath">24 ⋅ 60 ⋅ 60</span> (one day)</p>
+
+</li>
+<li><p><code class="code">MaxIntervalIsManifold</code>: maximal number of bistellar flips that will be performed without a change of the <span class="SimpleMath">f</span>-vector of a vertex link while trying to prove that the complex is a combinatorial manifold. Default: <span class="SimpleMath">5000</span></p>
+
+</li>
+<li><p><code class="code">MaxIntervalRandomize := 50</code>: number of flips performed to create a randomized sphere. Default: <span class="SimpleMath">50</span></p>
+
+</li>
+</ol>
+
+<div class="example"><pre>
+ gap&gt; SCBistellarOptions.BaseRelaxation;
+ 3
+ gap&gt; SCBistellarOptions.BaseHeating;
+ 4
+ gap&gt; SCBistellarOptions.Relaxation;
+ 0
+ gap&gt; SCBistellarOptions.Heating;
+ 0
+ gap&gt; SCBistellarOptions.MaxRounds;
+ 500000
+ gap&gt; SCBistellarOptions.MaxInterval;
+ 100000
+ gap&gt; SCBistellarOptions.Mode;
+ 0
+ gap&gt; SCBistellarOptions.WriteLevel;
+ 0
+ gap&gt; SCBistellarOptions.MailNotifyInterval;
+ 86400
+ gap&gt; SCBistellarOptions.MaxIntervalIsManifold;
+ 5000
+ gap&gt; SCBistellarOptions.MaxIntervalRandomize;
+ 50
+ </pre></div>
+
+<p><a id="X80BDA87D86E67B02" name="X80BDA87D86E67B02"></a></p>
+
+<h5>9.2-2 SCEquivalent</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCEquivalent</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code> upon success, <code class="keyw">fail</code> or a list of type <code class="code">[ fail, SCSimplicialComplex, Integer, facet list]</code> otherwise.</p>
+
+<p>Checks if the simplicial complex <var class="Arg">complex1</var> (which has to fulfill the weak pseudomanifold property with empty boundary) can be reduced to the simplicial complex <var class="Arg">complex2</var> via bistellar moves, i. e. if <var class="Arg">complex1</var> and <var class="Arg">complex2</var> are <span class="SimpleMath">PL</span>-homeomorphic. Note that in general the problem is undecidable. In this case <code class="keyw">fail</code> is returned.</p>
+
+<p>It is recommended to use a minimal triangulation <var class="Arg">complex2</var> for the check if possible.</p>
+
+<p>Internally calls <code class="func">SCReduceComplexEx</code> (<a href="chap9.html#X814D9AE287F64F74"><span class="RefLink">9.2-14</span></a>) <code class="code">(complex1,complex2,1,SCIntFunc.SCChooseMove);</code></p>
+
+
+<div class="example"><pre>
+ gap&gt; SCBistellarOptions.WriteLevel:=0;; # do not save complexes to disk
+ gap&gt; obj:=SC([[1,2],[2,3],[3,4],[4,5],[5,6],[6,1]]);; # hexagon
+ gap&gt; refObj:=SCBdSimplex(2);; # triangle as a (minimal) reference object
+ gap&gt; SCEquivalent(obj,refObj);
+ #I  SCReduceComplexEx: complexes are bistellarly equivalent.
+ true
+ </pre></div>
+
+<p><a id="X7AE1CB2C81028966" name="X7AE1CB2C81028966"></a></p>
+
+<h5>9.2-3 SCExamineComplexBistellar</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCExamineComplexBistellar</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex passed as argument with additional properties upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the face lattice, the <span class="SimpleMath">f</span>-vector, the AS-determinant, the dimension and the maximal vertex label of <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; obj:=SC([[1,2],[2,3],[3,4],[4,5],[5,6],[6,1]]);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="unnamed complex 7"
+  Dim=1
+ 
+ /SimplicialComplex]
+ gap&gt; SCExamineComplexBistellar(obj);
+ [SimplicialComplex
+ 
+  Properties known: AltshulerSteinberg, BoundaryEx, Dim, FVector, 
+                    FacetsEx, HasBoundary, IsPseudoManifold, IsPure, 
+                    Name, NumFaces[], SkelExs[], Vertices.
+ 
+  Name="unnamed complex 7"
+  Dim=1
+  AltshulerSteinberg=0
+  FVector=[ 6, 6 ]
+  HasBoundary=false
+  IsPseudoManifold=true
+  IsPure=true
+ 
+ /SimplicialComplex]
+ </pre></div>
+
+<p><a id="X7AEB9242837CCE5D" name="X7AEB9242837CCE5D"></a></p>
+
+<h5>9.2-4 SCIntFunc.SCChooseMove</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIntFunc.SCChooseMove</code>( <var class="Arg">dim</var>, <var class="Arg">moves</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a bistellar move, i. e. a pair of lists upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Since the problem of finding a bistellar flip sequence that reduces a simplicial complex is undecidable, we have to use an heuristic approach to choose the next move.</p>
+
+<p>The implemented strategy <code class="code">SCIntFunc.SCChooseMove</code> first tries to directly remove vertices, edges, <span class="SimpleMath">i</span>-faces in increasing dimension etc. If this is not possible it inserts high dimensional faces in decreasing co-dimension. To do this in an efficient way a number of parameters have to be adjusted, namely <code class="code">SCBistellarOptions.BaseHeating</code> and <code class="code">SCBistellarOptions.BaseRelaxation</code>. See <code class="func">SCBistellarOptions</code> (<a href="chap9.html#X85678B4D7A378F1C"><span class="RefLink">9.2-1</span></a>) for further options.</p>
+
+<p>If this strategy does not work for you, just implement a customized strategy and pass it to <code class="func">SCReduceComplexEx</code> (<a href="chap9.html#X814D9AE287F64F74"><span class="RefLink">9.2-14</span></a>).</p>
+
+<p>See <code class="func">SCRMoves</code> (<a href="chap9.html#X7E70D44179ED6A78"><span class="RefLink">9.2-10</span></a>) for further information.</p>
+
+<p><a id="X79FBFD6A7F2CC7E7" name="X79FBFD6A7F2CC7E7"></a></p>
+
+<h5>9.2-5 SCIsKStackedSphere</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsKStackedSphere</code>( <var class="Arg">complex</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Checks, whether the given simplicial complex <var class="Arg">complex</var> that must be a PL <span class="SimpleMath">d</span>-sphere is a <var class="Arg">k</var>-stacked sphere with <span class="SimpleMath">1≤ k≤ ⌊fracd+22⌋</span> using a randomized algorithm based on bistellar moves (see <a href="chapBib.html#biBEffenberger09StackPolyTightTrigMnf">[Eff11b]</a>, <a href="chapBib.html#biBEffenberger10Diss">[Eff11a]</a>). Note that it is not checked whether <var class="Arg">complex</var> is a PL sphere -- if not, the algorithm will not succeed. Returns a list upon success: the first entry is a boolean, where <code class="keyw">true</code> means that the complex is <code class="code">k</code>-stacked and <code class="keyw">false</code> means that the complex cannot be <var class="Arg">k</var>-stacked. A value of -1 means that the question could not be decided. The second argument contains a simplicial complex that, in case of success, contains the trigangulated <span class="SimpleMath">(d+1)</span>-ball <span class="SimpleMath">B</span> with <span class="SimpleMath">∂ B=S</span> and <span class="SimpleMath">operatornameskel_d-k(B)=operatornameskel_d-k(S)</span>, where <span class="SimpleMath">S</span> denotes the simplicial complex passed in <var class="Arg">complex</var>.</p>
+
+<p>Internally calls <code class="func">SCReduceComplexEx</code> (<a href="chap9.html#X814D9AE287F64F74"><span class="RefLink">9.2-14</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("S^4~S^1");
+ [ [ 463, "S^4~S^1 (VT)" ], [ 1474, "S^4~S^1 (VT)" ], [ 1475, "S^4~S^1 (VT)" ],
+   [ 2477, "S^4~S^1 (VT)" ], [ 4395, "S^4~S^1 (VT)" ], 
+   [ 4396, "S^4~S^1 (VT)" ], [ 4397, "S^4~S^1 (VT)" ], 
+   [ 4398, "S^4~S^1 (VT)" ], [ 4399, "S^4~S^1 (VT)" ], 
+   [ 4402, "S^4~S^1 (VT)" ], [ 4403, "S^4~S^1 (VT)" ], 
+   [ 4404, "S^4~S^1 (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; l:=SCLink(c,1);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="lk([ 1 ]) in S^4~S^1 (VT)"
+  Dim=4
+ 
+ /SimplicialComplex]
+ gap&gt; SCIsKStackedSphere(l,1);
+ #I  SCIsKStackedSphere: checking if complex is a 1-stacked sphere...
+ #I  SCIsKStackedSphere: try 1/1
+ #I  SCIsKStackedSphere: complex is a 1-stacked sphere.
+ [ true, [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="Filled 1-stacked sphere (lk([ 1 ]) in S^4~S^1 (VT))"
+      Dim=5
+     
+     /SimplicialComplex] ]
+ </pre></div>
+
+<p><a id="X7E81340E8469C8EB" name="X7E81340E8469C8EB"></a></p>
+
+<h5>9.2-6 SCBistellarIsManifold</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCBistellarIsManifold</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Tries to prove that a closed simplicial <span class="SimpleMath">d</span>-pseudomanifold is a combinatorial manifold by reducing its vertex links to the boundary of the d-simplex.</p>
+
+<p><code class="keyw">false</code> is returned if it can be proven that there exists a vertex link which is not PL-homeomorphic to the standard PL-sphere, <code class="keyw">true</code> is returned if all vertex links are bistellarly equivalent to the boundary of the simplex, <code class="keyw">fail</code> is returned if the algorithm does not terminate after the number of rounds indicated by <code class="code">SCBistellarOptions.MaxIntervallIsManifold</code>.</p>
+
+<p>Internally calls <code class="func">SCReduceComplexEx</code> (<a href="chap9.html#X814D9AE287F64F74"><span class="RefLink">9.2-14</span></a>) <code class="code">(link,SCEmpty(),0,SCIntFunc.SCChooseMove);</code> for every link of <var class="Arg">complex</var>. Note that <code class="keyw">false</code> is returned in case of a bounded manifold.</p>
+
+<p>See <code class="func">SCIsManifoldEx</code> (<a href="chap12.html#X86F1B97282A7E01D"><span class="RefLink">12.1-18</span></a>) and <code class="func">SCIsManifold</code> (<a href="chap12.html#X831FFF748201B589"><span class="RefLink">12.1-17</span></a>) for alternative methods for manifold verification.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdCrossPolytope(3);;
+ gap&gt; SCBistellarIsManifold(c);
+ true
+ </pre></div>
+
+<p><a id="X7FB6219B85C96C66" name="X7FB6219B85C96C66"></a></p>
+
+<h5>9.2-7 SCIsMovableComplex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsMovableComplex</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Checks if a simplicial complex <var class="Arg">complex</var> can be modified by bistellar moves, i. e. if it is a pure simplicial complex which fulfills the weak pseudomanifold property with empty boundary.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdCrossPolytope(3);;
+ gap&gt; SCIsMovableComplex(c);
+ true
+ </pre></div>
+
+<p>Complex with non-empty boundary:</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SC([[1,2],[2,3],[3,4],[3,1]]);;
+ gap&gt; SCIsMovableComplex(c);
+ false
+ </pre></div>
+
+<p><a id="X7AD9737B7BAF4816" name="X7AD9737B7BAF4816"></a></p>
+
+<h5>9.2-8 SCMove</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCMove</code>( <var class="Arg">c</var>, <var class="Arg">move</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Applies the bistellar move <var class="Arg">move</var> to a simplicial complex <var class="Arg">c</var>. <var class="Arg">move</var> is given as a <span class="SimpleMath">(r+1)</span>-tuple together with a <span class="SimpleMath">(d+1-r)</span>-tuple if <span class="SimpleMath">d</span> is the dimension of <var class="Arg">c</var> and if <var class="Arg">move</var> is a <span class="SimpleMath">r</span>-move. See <code class="func">SCRMoves</code> (<a href="chap9.html#X7E70D44179ED6A78"><span class="RefLink">9.2-10</span></a>) for detailed information about bistellar <span class="SimpleMath">r</span>-moves.</p>
+
+<p>Note: <var class="Arg">move</var> and <var class="Arg">c</var> should be given in standard labeling to ensure a correct result.</p>
+
+
+<div class="example"><pre>
+ gap&gt; obj:=SC([[1,2],[2,3],[3,4],[4,1]]);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="unnamed complex 5"
+  Dim=1
+ 
+ /SimplicialComplex]
+ gap&gt; moves:=SCMoves(obj);
+ [ [ [ [ 1, 2 ], [  ] ], [ [ 1, 4 ], [  ] ], [ [ 2, 3 ], [  ] ], 
+       [ [ 3, 4 ], [  ] ] ], 
+   [ [ [ 1 ], [ 2, 4 ] ], [ [ 2 ], [ 1, 3 ] ], [ [ 3 ], [ 2, 4 ] ], 
+       [ [ 4 ], [ 1, 3 ] ] ] ]
+ gap&gt; obj:=SCMove(obj,last[2][1]);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, NumFaces[], SkelExs[], 
+                    Vertices.
+ 
+  Name="unnamed complex 6"
+  Dim=1
+ 
+ /SimplicialComplex]
+ </pre></div>
+
+<p><a id="X87B1CBC97FC5C120" name="X87B1CBC97FC5C120"></a></p>
+
+<h5>9.2-9 SCMoves</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCMoves</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of list of pairs of lists upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>See <code class="func">SCRMoves</code> (<a href="chap9.html#X7E70D44179ED6A78"><span class="RefLink">9.2-10</span></a>) for further information.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdCrossPolytope(3);;
+ gap&gt; moves:=SCMoves(c);
+ [ [ [ [ 1, 3, 5 ], [  ] ], [ [ 1, 3, 6 ], [  ] ], [ [ 1, 4, 5 ], [  ] ], 
+       [ [ 1, 4, 6 ], [  ] ], [ [ 2, 3, 5 ], [  ] ], [ [ 2, 3, 6 ], [  ] ], 
+       [ [ 2, 4, 5 ], [  ] ], [ [ 2, 4, 6 ], [  ] ] ], 
+   [ [ [ 1, 3 ], [ 5, 6 ] ], [ [ 1, 4 ], [ 5, 6 ] ], [ [ 1, 5 ], [ 3, 4 ] ], 
+       [ [ 1, 6 ], [ 3, 4 ] ], [ [ 2, 3 ], [ 5, 6 ] ], [ [ 2, 4 ], [ 5, 6 ] ], 
+       [ [ 2, 5 ], [ 3, 4 ] ], [ [ 2, 6 ], [ 3, 4 ] ], [ [ 3, 5 ], [ 1, 2 ] ], 
+       [ [ 3, 6 ], [ 1, 2 ] ], [ [ 4, 5 ], [ 1, 2 ] ], [ [ 4, 6 ], [ 1, 2 ] ] ]
+     , [  ] ]
+ </pre></div>
+
+<p><a id="X7E70D44179ED6A78" name="X7E70D44179ED6A78"></a></p>
+
+<h5>9.2-10 SCRMoves</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCRMoves</code>( <var class="Arg">complex</var>, <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of pairs of the form <code class="code">[ list, list ]</code>, <code class="keyw">fail</code> otherwise.</p>
+
+<p>A bistellar <span class="SimpleMath">r</span>-move of a <span class="SimpleMath">d</span>-dimensional combinatorial manifold <var class="Arg">complex</var> is a <span class="SimpleMath">r</span>-face <span class="SimpleMath">m_1</span> together with a <span class="SimpleMath">d-r</span>-tuple <span class="SimpleMath">m_2</span> where <span class="SimpleMath">m_1</span> is a common face of exactly <span class="SimpleMath">(d+1-r)</span> facets and <span class="SimpleMath">m_2</span> is not a face of <var class="Arg">complex</var>.</p>
+
+<p>The <span class="SimpleMath">r</span>-move removes all facets containing <span class="SimpleMath">m_1</span> and replaces them by the <span class="SimpleMath">(r+1)</span> faces obtained by uniting <span class="SimpleMath">m_2</span> with any subset of <span class="SimpleMath">m_1</span> of order <span class="SimpleMath">r</span>.</p>
+
+<p>The resulting complex is PL-homeomorphic to <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdCrossPolytope(3);;
+ gap&gt; moves:=SCRMoves(c,1);
+ [ [ [ 1, 3 ], [ 5, 6 ] ], [ [ 1, 4 ], [ 5, 6 ] ], [ [ 1, 5 ], [ 3, 4 ] ], 
+   [ [ 1, 6 ], [ 3, 4 ] ], [ [ 2, 3 ], [ 5, 6 ] ], [ [ 2, 4 ], [ 5, 6 ] ], 
+   [ [ 2, 5 ], [ 3, 4 ] ], [ [ 2, 6 ], [ 3, 4 ] ], [ [ 3, 5 ], [ 1, 2 ] ], 
+   [ [ 3, 6 ], [ 1, 2 ] ], [ [ 4, 5 ], [ 1, 2 ] ], [ [ 4, 6 ], [ 1, 2 ] ] ]
+ </pre></div>
+
+<p><a id="X8176063785DC4C35" name="X8176063785DC4C35"></a></p>
+
+<h5>9.2-11 SCRandomize</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCRandomize</code>( <var class="Arg">complex</var>[[, <var class="Arg">rounds</var>][, <var class="Arg">allowedmoves</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a simplicial complex upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Randomizes the given simplicial complex <var class="Arg">complex</var> via bistellar moves chosen at random. By passing the optional array <var class="Arg">allowedmoves</var>, which has to be a dense array of integer values of length <code class="code">SCDim(complex)</code>, certain moves can be allowed or forbidden in the proccess. An entry <code class="code">allowedmoves[i]=1</code> allows <span class="SimpleMath">(i-1)</span>-moves and an entry <code class="code">allowedmoves[i]=0</code> forbids <span class="SimpleMath">(i-1)</span>-moves in the randomization process.</p>
+
+<p>With optional positive integer argument <var class="Arg">rounds</var>, the amount of randomization can be controlled. The higher the value of <var class="Arg">rounds</var>, the more bistellar moves will be randomly performed on <var class="Arg">complex</var>. Note that the argument <var class="Arg">rounds</var> overrides the global setting <code class="code">SCBistellarOptions.MaxIntervalRandomize</code> (this value is used, if <var class="Arg">rounds</var> is not specified). Internally calls <code class="func">SCReduceComplexEx</code> (<a href="chap9.html#X814D9AE287F64F74"><span class="RefLink">9.2-14</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCRandomize(SCBdSimplex(4));
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="Randomized S^3_5"
+  Dim=3
+ 
+ /SimplicialComplex]
+ gap&gt; c.F;
+ [ 16, 65, 98, 49 ]
+ </pre></div>
+
+<p><a id="X85D69E4F84E8E7D9" name="X85D69E4F84E8E7D9"></a></p>
+
+<h5>9.2-12 SCReduceAsSubcomplex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCReduceAsSubcomplex</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">SCBistellarOptions.WriteLevel=0</code>: a triple of the form <code class="code">[ boolean, simplicial complex, rounds performed ]</code> upon termination of the algorithm.</p>
+
+<p><code class="code">SCBistellarOptions.WriteLevel=1</code>: A library of simplicial complexes with a number of complexes from the reducing process and (upon termination) a triple of the form <code class="code">[ boolean, simplicial complex, rounds performed ]</code>.</p>
+
+<p><code class="code">SCBistellarOptions.WriteLevel=2</code>: A mail in case a smaller version of <var class="Arg">complex1</var> was found, a library of simplicial complexes with a number of complexes from the reducing process and (upon termination) a triple of the form <code class="code">[ boolean, simplicial complex, rounds performed ]</code>.</p>
+
+<p>Returns <code class="keyw">fail</code> upon an error.</p>
+
+<p>Reduces a simplicial complex <var class="Arg">complex1</var> (satisfying the weak pseudomanifold property with empty boundary) as a sub-complex of the simplicial complex <var class="Arg">complex2</var>.</p>
+
+<p>Main application: Reduce a sub-complex of the cross polytope without introducing diagonals.</p>
+
+<p>Internally calls <code class="func">SCReduceComplexEx</code> (<a href="chap9.html#X814D9AE287F64F74"><span class="RefLink">9.2-14</span></a>) <code class="code">(complex1,complex2,2,SCIntFunc.SCChooseMove);</code></p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCFromFacets([[1,3],[3,5],[4,5],[4,1]]);;
+ gap&gt; SCBistellarOptions.WriteLevel:=0;; # do not save complexes                      
+ gap&gt; SCReduceAsSubcomplex(c,SCBdCrossPolytope(3));
+ [ true, [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="unnamed complex 36"
+      Dim=1
+     
+     /SimplicialComplex], 1 ]
+</pre></div>
+
+<p><a id="X7FF4BBEC8574C58F" name="X7FF4BBEC8574C58F"></a></p>
+
+<h5>9.2-13 SCReduceComplex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCReduceComplex</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">SCBistellarOptions.WriteLevel=0</code>: a triple of the form <code class="code">[ boolean, simplicial complex, rounds performed ]</code> upon termination of the algorithm.</p>
+
+<p><code class="code">SCBistellarOptions.WriteLevel=1</code>: A library of simplicial complexes with a number of complexes from the reducing process and (upon termination) a triple of the form <code class="code">[ boolean, simplicial complex, rounds performed ]</code>.</p>
+
+<p><code class="code">SCBistellarOptions.WriteLevel=2</code>: A mail in case a smaller version of <var class="Arg">complex1</var> was found, a library of simplicial complexes with a number of complexes from the reducing process and (upon termination) a triple of the form <code class="code">[ boolean, simplicial complex, rounds performed ]</code>.</p>
+
+<p>Returns <code class="keyw">fail</code> upon an error..</p>
+
+<p>Reduces a pure simplicial complex <var class="Arg">complex</var> satisfying the weak pseudomanifold property via bistellar moves. Internally calls <code class="func">SCReduceComplexEx</code> (<a href="chap9.html#X814D9AE287F64F74"><span class="RefLink">9.2-14</span></a>) <code class="code">(complex,SCEmpty(),0,SCIntFunc.SCChooseMove);</code></p>
+
+
+<div class="example"><pre>
+ gap&gt; obj:=SC([[1,2],[2,3],[3,4],[4,5],[5,6],[6,1]]);; # hexagon
+ gap&gt; SCBistellarOptions.WriteLevel:=0;; # do not save complexes                      
+ gap&gt; tmp := SCReduceComplex(obj);
+ [ true, [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="unnamed complex 27"
+      Dim=1
+     
+     /SimplicialComplex], 3 ]
+ </pre></div>
+
+<p><a id="X814D9AE287F64F74" name="X814D9AE287F64F74"></a></p>
+
+<h5>9.2-14 SCReduceComplexEx</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCReduceComplexEx</code>( <var class="Arg">complex</var>, <var class="Arg">refComplex</var>, <var class="Arg">mode</var>, <var class="Arg">choosemove</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">SCBistellarOptions.WriteLevel=0</code>: a triple of the form <code class="code">[ boolean, simplicial complex, rounds ]</code> upon termination of the algorithm.</p>
+
+<p><code class="code">SCBistellarOptions.WriteLevel=1</code>: A library of simplicial complexes with a number of complexes from the reducing process and (upon termination) a triple of the form <code class="code">[ boolean, simplicial complex, rounds ]</code>.</p>
+
+<p><code class="code">SCBistellarOptions.WriteLevel=2</code>: A mail in case a smaller version of <var class="Arg">complex1</var> was found, a library of simplicial complexes with a number of complexes from the reducing process and (upon termination) a triple of the form <code class="code">[ boolean, simplicial complex, rounds ]</code>.</p>
+
+<p>Returns <code class="keyw">fail</code> upon an error.</p>
+
+<p>Reduces a pure simplicial complex <var class="Arg">complex</var> satisfying the weak pseudomanifold property via bistellar moves <var class="Arg">mode = 0</var>, compares it to the simplicial complex <var class="Arg">refComplex</var> (<var class="Arg">mode = 1</var>) or reduces it as a sub-complex of <var class="Arg">refComplex</var> (<var class="Arg">mode = 2</var>).</p>
+
+<p><var class="Arg">choosemove</var> is a function containing a flip strategy, see also <code class="func">SCIntFunc.SCChooseMove</code> (<a href="chap9.html#X7AEB9242837CCE5D"><span class="RefLink">9.2-4</span></a>).</p>
+
+<p>The currently smallest complex is stored to the variable <code class="code">minComplex</code>, the currently smallest <span class="SimpleMath">f</span>-vector to <code class="code">minF</code>. Note that in general the algorithm will not stop until the maximum number of rounds is reached. You can adjust the maximum number of rounds via the property <code class="func">SCBistellarOptions</code> (<a href="chap9.html#X85678B4D7A378F1C"><span class="RefLink">9.2-1</span></a>). The number of rounds performed is returned in the third entry of the triple returned by this function.</p>
+
+<p>This function is called by</p>
+
+<ol>
+<li><p><code class="func">SCReduceComplex</code> (<a href="chap9.html#X7FF4BBEC8574C58F"><span class="RefLink">9.2-13</span></a>),</p>
+
+</li>
+<li><p><code class="func">SCEquivalent</code> (<a href="chap9.html#X80BDA87D86E67B02"><span class="RefLink">9.2-2</span></a>),</p>
+
+</li>
+<li><p><code class="func">SCReduceAsSubcomplex</code> (<a href="chap9.html#X85D69E4F84E8E7D9"><span class="RefLink">9.2-12</span></a>),</p>
+
+</li>
+<li><p><code class="func">SCBistellarIsManifold</code> (<a href="chap9.html#X7E81340E8469C8EB"><span class="RefLink">9.2-6</span></a>).</p>
+
+</li>
+<li><p><code class="func">SCRandomize</code> (<a href="chap9.html#X8176063785DC4C35"><span class="RefLink">9.2-11</span></a>).</p>
+
+</li>
+</ol>
+<p>Please see <code class="func">SCMailIsPending</code> (<a href="chap15.html#X857AEAAB85BD7513"><span class="RefLink">15.2-3</span></a>) for further information about the email notification system in case <code class="code">SCBistellarOptions.WriteLevel</code> is set to <span class="SimpleMath">2</span>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdCrossPolytope(4);;
+ gap&gt; SCBistellarOptions.WriteLevel:=0;; # do not save complexes                      
+ gap&gt; SCReduceComplexEx(c,SCEmpty(),0,SCIntFunc.SCChooseMove);
+ [ true, [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="unnamed complex 13"
+      Dim=3
+     
+     /SimplicialComplex], 7 ]
+ gap&gt; SCReduceComplexEx(c,SCEmpty(),0,SCIntFunc.SCChooseMove);
+ [ true, [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="unnamed complex 18"
+      Dim=3
+     
+     /SimplicialComplex], 9 ]
+ gap&gt; SCMailSetAddress("johndoe@somehost");   
+ true
+ gap&gt; SCMailIsEnabled();                     
+ true
+ gap&gt; SCReduceComplexEx(c,SCEmpty(),0,SCIntFunc.SCChooseMove);
+ [ true, [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="unnamed complex 23"
+      Dim=3
+     
+     /SimplicialComplex], 7 ]
+ </pre></div>
+
+<p>Content of sent mail:</p>
+
+
+<div class="example"><pre> 
+ Greetings master,
+ 
+ this is simpcomp 2.1.10 running on comp01.maths.fancytown.edu
+
+ I have been working hard for 0 seconds and have a message for you, see below.
+ 
+ #### START MESSAGE ####
+ 
+ SCReduceComplex:
+ 
+ Computed locally minimal complex after 7 rounds:
+ 
+ [SimplicialComplex
+ 
+  Properties known: Boundary, Chi, Date, Dim, F, Faces, Facets, G, H,
+  HasBoundary, Homology, IsConnected, IsManifold, IsPM, Name, SCVertices,
+  Vertices.
+ 
+  Name="ReducedComplex_5_vertices_7"
+  Dim=3
+  Chi=0
+  F=[ 5, 10, 10, 5 ]
+  G=[ 0, 0 ]
+  H=[ 1, 1, 1, 1 ]
+  HasBoundary=false
+  Homology=[ [ 0, [ ] ], [ 0, [ ] ], [ 0, [ ] ], [ 1, [ ] ] ]
+  IsConnected=true
+  IsPM=true
+ 
+ /SimplicialComplex]
+ 
+ ##### END MESSAGE #####
+ 
+ That's all, I hope this is good news! Have a nice day.
+ </pre></div>
+
+<p><a id="X8714A0A578A281C0" name="X8714A0A578A281C0"></a></p>
+
+<h5>9.2-15 SCReduceComplexFast</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCReduceComplexFast</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a simplicial complex upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Same as <code class="func">SCReduceComplex</code> (<a href="chap9.html#X7FF4BBEC8574C58F"><span class="RefLink">9.2-13</span></a>), but calls an external binary provided with the simpcomp package.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

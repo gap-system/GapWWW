@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (simpcomp) - Chapter 4: Functions and operations for the GAP object type SCPolyhedralComplex</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X840691C285AB3AAD" name="X840691C285AB3AAD"></a></p>
+<div class="ChapSects"><a href="chap4.html#X840691C285AB3AAD">4 <span class="Heading">Functions and operations for the GAP object type <code class="code">SCPolyhedralComplex</code></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7D35F510803714A8">4.1 <span class="Heading">Computing properties of objects of type 
+<code class="code">SCPolyhedralComplex</code></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7BDD568184E3419D">4.1-1 SCFacets</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87DC942881235E25">4.1-2 SCFacetsEx</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X849B0CD0796298EA">4.1-3 SCVertices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83D02BCD7D19FC6F">4.1-4 SCVerticesEx</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7B69B61E867E748E">4.2 <span class="Heading">Vertex labelings and label operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C02CB9E8422EEE8">4.2-1 SCLabelMax</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7FC2186B7D346BD3">4.2-2 SCLabelMin</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X826E9B4482AF2671">4.2-3 SCLabels</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81C8A7EC84F5DEE9">4.2-4 SCName</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7A812340843BCED3">4.2-5 SCReference</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B6011907B74EDDA">4.2-6 SCRelabel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78E22E3B787DDE90">4.2-7 SCRelabelStandard</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83276FCB844628EC">4.2-8 SCRelabelTransposition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X84AA5E217F1EAE23">4.2-9 SCRename</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87184048876229F3">4.2-10 SCSetReference</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80A64720826EA264">4.2-11 SCUnlabelFace</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8188E7BE7E9BEF7E">4.3 <span class="Heading">Operations on objects of type <code class="code">SCPolyhedralComplex</code></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X84646E6786FB7993">4.3-1 SCAntiStar</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X874059937F4C709B">4.3-2 SCLink</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7EFA115B7B26F9AD">4.3-3 SCLinks</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78B725AD7E747A63">4.3-4 SCStar</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83F3E7487A1EF355">4.3-5 SCStars</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Functions and operations for the GAP object type <code class="code">SCPolyhedralComplex</code></span></h3>
+
+<p>In the following all operations for the <strong class="pkg">GAP</strong> object type <code class="code">SCPolyhedralComplex</code> are listed. I. e. for the following operations only one method is implemented to deal with all geometric objects derived from this object type.</p>
+
+<p><a id="X7D35F510803714A8" name="X7D35F510803714A8"></a></p>
+
+<h4>4.1 <span class="Heading">Computing properties of objects of type 
+<code class="code">SCPolyhedralComplex</code></span></h4>
+
+<p>The following functions compute basic properties of objects of type <code class="code">SCPolyhedralComplex</code> (and thus also of objects of type <code class="code">SCSimplicialComplex</code> and <code class="code">SCNormalSurface</code>). None of these functions alter the complex. All properties are returned as immutable objects (this ensures data consistency of the cached properties of a simplicial complex). Use <code class="code">ShallowCopy</code> or the internal <strong class="pkg">simpcomp</strong> function <code class="code">SCIntFunc.DeepCopy</code> to get a mutable copy.</p>
+
+<p>Note: every object is internally stored with the standard vertex labeling from <span class="SimpleMath">1</span> to <span class="SimpleMath">n</span> and a maptable to restore the original vertex labeling. Thus, we have to relabel some of the complex properties (facets, etc...) whenever we want to return them to the user. As a consequence, some of the functions exist twice, one of them with the appendix "Ex". These functions return the standard labeling whereas the other ones relabel the result to the original labeling.</p>
+
+<p><a id="X7BDD568184E3419D" name="X7BDD568184E3419D"></a></p>
+
+<h5>4.1-1 SCFacets</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCFacets</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a facet list upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns the facets of a simplicial complex in the original vertex labeling.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SC([[2,3],[3,4],[4,2]]);;
+ gap&gt; SCFacets(c);
+ [ [ 2, 3 ], [ 2, 4 ], [ 3, 4 ] ]
+ </pre></div>
+
+<p><a id="X87DC942881235E25" name="X87DC942881235E25"></a></p>
+
+<h5>4.1-2 SCFacetsEx</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCFacetsEx</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a facet list upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns the facets of a simplicial complex as they are stored, i. e. with standard vertex labeling from 1 to n.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SC([[2,3],[3,4],[4,2]]);;
+ gap&gt; SCFacetsEx(c);
+ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ]
+ </pre></div>
+
+<p><a id="X849B0CD0796298EA" name="X849B0CD0796298EA"></a></p>
+
+<h5>4.1-3 SCVertices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCVertices</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of vertex labels of <var class="Arg">complex</var> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns the vertex labels of a simplicial complex <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; sphere:=SC([["x",45,[1,1]],["x",45,["b",3]],["x",[1,1],
+   ["b",3]],[45,[1,1],["b",3]]]);;
+ gap&gt; SCVerticesEx(sphere);
+ [ 1 .. 4 ]
+ gap&gt; SCVertices(sphere);
+ [ 45, [ 1, 1 ], "x", [ "b", 3 ] ]
+ </pre></div>
+
+<p><a id="X83D02BCD7D19FC6F" name="X83D02BCD7D19FC6F"></a></p>
+
+<h5>4.1-4 SCVerticesEx</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCVerticesEx</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <span class="SimpleMath">[ 1, ... , n ]</span> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns <span class="SimpleMath">[1, ... , n ]</span>, where <span class="SimpleMath">n</span> is the number of vertices of a simplicial complex <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SC([[1,4,5],[4,9,8],[12,13,14,15,16,17]]);;
+ gap&gt; SCVerticesEx(c);
+ [ 1 .. 11 ]
+ </pre></div>
+
+<p><a id="X7B69B61E867E748E" name="X7B69B61E867E748E"></a></p>
+
+<h4>4.2 <span class="Heading">Vertex labelings and label operations</span></h4>
+
+<p>This section focuses on functions operating on the labels of a complex such as the name or the vertex labeling.</p>
+
+<p>Internally, <strong class="pkg">simpcomp</strong> uses the standard labeling <span class="SimpleMath">[1, ... , n]</span>. It is recommended to use simple vertex labels like integers and, whenever possible, the standard labeling, see also <code class="func">SCRelabelStandard</code> (<a href="chap4.html#X78E22E3B787DDE90"><span class="RefLink">4.2-7</span></a>).</p>
+
+<p><a id="X7C02CB9E8422EEE8" name="X7C02CB9E8422EEE8"></a></p>
+
+<h5>4.2-1 SCLabelMax</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCLabelMax</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: vertex label of <var class="Arg">complex</var> (an integer, a short list, a character, a short string) upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>The maximum over all vertex labels is determined by the <strong class="pkg">GAP</strong> function <code class="code">MaximumList</code>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; SCRelabel(c,[10,100,100000,3500]);;
+ gap&gt; SCLabelMax(c);
+ 100000
+ </pre></div>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; SCRelabel(c,["a","bbb",5,[1,1]]);;
+ gap&gt; SCLabelMax(c);
+ "bbb"
+ </pre></div>
+
+<p><a id="X7FC2186B7D346BD3" name="X7FC2186B7D346BD3"></a></p>
+
+<h5>4.2-2 SCLabelMin</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCLabelMin</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: vertex label of <var class="Arg">complex</var> (an integer, a short list, a character, a short string) upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>The minimum over all vertex labels is determined by the <strong class="pkg">GAP</strong> function <code class="code">MinimumList</code>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; SCRelabel(c,[10,100,100000,3500]);;
+ gap&gt; SCLabelMin(c);
+ 10
+ </pre></div>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; SCRelabel(c,["a","bbb",5,[1,1]]);;
+ gap&gt; SCLabelMin(c);
+ 5
+ </pre></div>
+
+<p><a id="X826E9B4482AF2671" name="X826E9B4482AF2671"></a></p>
+
+<h5>4.2-3 SCLabels</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCLabels</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of vertex labels of <var class="Arg">complex</var> (a list of integers, short lists, characters, short strings, ...) upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns the vertex labels of <var class="Arg">complex</var> as a list. This is a synonym of <code class="func">SCVertices</code> (<a href="chap4.html#X849B0CD0796298EA"><span class="RefLink">4.1-3</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCFromFacets(Combinations(["a","b","c","d"],3));;
+ gap&gt; SCLabels(c);
+ [ "a", "b", "c", "d" ]
+ </pre></div>
+
+<p><a id="X81C8A7EC84F5DEE9" name="X81C8A7EC84F5DEE9"></a></p>
+
+<h5>4.2-4 SCName</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCName</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a string upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns the name of a simplicial complex <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(5);;
+ gap&gt; SCName(c);
+ "S^4_6"
+ </pre></div>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SC([[1,2],[2,3],[3,1]]);;
+ gap&gt; SCName(c);
+ "unnamed complex 2"
+ </pre></div>
+
+<p><a id="X7A812340843BCED3" name="X7A812340843BCED3"></a></p>
+
+<h5>4.2-5 SCReference</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCReference</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a string upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns a literature reference of a polyhedral complex <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCLib.Load(253);;
+ gap&gt; SCReference(c);
+ "F.H.Lutz: 'The Manifold Page', http://www.math.tu-berlin.de/diskregeom/stella\
+ r/"
+ gap&gt; c:=SC([[1,2],[2,3],[3,1]]);;
+ gap&gt; SCReference(c);
+ #I  SCReference: complex lacks reference.
+ fail
+ </pre></div>
+
+<p><a id="X7B6011907B74EDDA" name="X7B6011907B74EDDA"></a></p>
+
+<h5>4.2-6 SCRelabel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCRelabel</code>( <var class="Arg">complex</var>, <var class="Arg">maptable</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p><var class="Arg">maptable</var> has to be a list of length <span class="SimpleMath">n</span> where <span class="SimpleMath">n</span> is the number of vertices of <var class="Arg">complex</var>. The function maps the <span class="SimpleMath">i</span>-th entry of <var class="Arg">maptable</var> to the <span class="SimpleMath">i</span>-th entry of the current vertex labels. If <var class="Arg">complex</var> has the standard vertex labeling <span class="SimpleMath">[1, ... , n]</span> the vertex label <span class="SimpleMath">i</span> is mapped to <var class="Arg">maptable[i]</var>.</p>
+
+<p>Note that the elements of <var class="Arg">maptable</var> must admit a total ordering. Hence, following Section 4.11 of the <strong class="pkg">GAP</strong> manual, they must be members of one of the following families: rationals <code class="code">IsRat</code>, cyclotomics <code class="code">IsCyclotomic</code>, finite field elements <code class="code">IsFFE</code>, permutations <code class="code">IsPerm</code>, booleans <code class="code">IsBool</code>, characters <code class="code">IsChar</code> and lists (strings) <code class="code">IsList</code>.</p>
+
+<p>Internally the property ``SCVertices'' of <var class="Arg">complex</var> is replaced by <var class="Arg">maptable.</var></p>
+
+
+<div class="example"><pre>
+ gap&gt; list:=SCLib.SearchByAttribute("F[1]=12");; 
+ gap&gt; c:=SCLib.Load(list[1][1]);;
+ gap&gt; SCVertices(c);
+ [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+ gap&gt; SCRelabel(c,["a","b","c","d","e","f","g","h","i","j","k","l"]);
+ true
+ gap&gt; SCLabels(c);
+ [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" ]
+ </pre></div>
+
+<p><a id="X78E22E3B787DDE90" name="X78E22E3B787DDE90"></a></p>
+
+<h5>4.2-7 SCRelabelStandard</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCRelabelStandard</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Maps vertex labels <span class="SimpleMath">v_1 , ... , v_n</span> of <var class="Arg">complex</var> to <span class="SimpleMath">[1 , ... , n]</span>. Internally the property "SCVertices" is replaced by <span class="SimpleMath">[1 , ... , n]</span>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; list:=SCLib.SearchByAttribute("F[1]=12");; 
+ gap&gt; c:=SCLib.Load(list[1][1]);;
+ gap&gt; SCRelabel(c,[4..15]);
+ true
+ gap&gt; SCVertices(c);
+ [ 4 .. 15 ]
+ gap&gt; SCRelabelStandard(c);
+ true
+ gap&gt; SCLabels(c);
+ [ 1 .. 12 ]
+ </pre></div>
+
+<p><a id="X83276FCB844628EC" name="X83276FCB844628EC"></a></p>
+
+<h5>4.2-8 SCRelabelTransposition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCRelabelTransposition</code>( <var class="Arg">complex</var>, <var class="Arg">pair</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Permutes vertex labels of a single pair of vertices. <var class="Arg">pair</var> has to be a list of length <span class="SimpleMath">2</span> and a sublist of the property ``SCVertices''.</p>
+
+<p>The function is equivalent to <code class="func">SCRelabel</code> (<a href="chap4.html#X7B6011907B74EDDA"><span class="RefLink">4.2-6</span></a>) with <var class="Arg">maptable</var> <span class="SimpleMath">= [ SCVertices[1] , ... , SCVertices[j] , ... , SCVertices[i] , dots , SCVertices[n]]</span> if <var class="Arg">pair</var> <span class="SimpleMath">= [ SCVertices[j] , SCVertices[i]]</span>, <span class="SimpleMath">j ≤ i</span>, <span class="SimpleMath">j ≠ i</span>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; SCVertices(c);
+ [ 1 .. 4 ]
+ gap&gt; SCRelabelTransposition(c,[1,2]);;
+ gap&gt; SCLabels(c);
+ [ 2, 1, 3, 4 ]
+ </pre></div>
+
+<p><a id="X84AA5E217F1EAE23" name="X84AA5E217F1EAE23"></a></p>
+
+<h5>4.2-9 SCRename</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCRename</code>( <var class="Arg">complex</var>, <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Renames a polyhedral complex. The argument <var class="Arg">name</var> has to be given in form of a string.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(5);;
+ gap&gt; SCName(c);
+ "S^4_6"
+ gap&gt; SCRename(c,"mySphere");
+ true
+ gap&gt; SCName(c);
+ "mySphere"
+ </pre></div>
+
+<p><a id="X87184048876229F3" name="X87184048876229F3"></a></p>
+
+<h5>4.2-10 SCSetReference</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCSetReference</code>( <var class="Arg">complex</var>, <var class="Arg">ref</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Sets the literature reference of a polyhedral complex. The argument <var class="Arg">ref</var> has to be given in form of a string.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(5);;
+ gap&gt; SCReference(c);
+ #I  SCReference: complex lacks reference.
+ fail
+ gap&gt; SCSetReference(c,"my 5-sphere in my cool paper");
+ true
+ gap&gt; SCReference(c);
+ "my 5-sphere in my cool paper"
+ </pre></div>
+
+<p><a id="X80A64720826EA264" name="X80A64720826EA264"></a></p>
+
+<h5>4.2-11 SCUnlabelFace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCUnlabelFace</code>( <var class="Arg">complex</var>, <var class="Arg">face</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the standard labeling of <var class="Arg">face</var> in <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; SCRelabel(c,["a","bbb",5,[1,1]]);;
+ gap&gt; SCUnlabelFace(c,["a","bbb",5]);
+ [ 1, 2, 3 ]
+ </pre></div>
+
+<p><a id="X8188E7BE7E9BEF7E" name="X8188E7BE7E9BEF7E"></a></p>
+
+<h4>4.3 <span class="Heading">Operations on objects of type <code class="code">SCPolyhedralComplex</code></span></h4>
+
+<p>The following functions perform operations on objects of type <code class="code">SCPolyhedralComplex</code> and all of its subtypes. Most of them return simplicial complexes. Thus, this section is closely related to the Sections <a href="chap6.html#X7F4308DB7C3699D1"><span class="RefLink">6.6</span></a> (for objects of type <code class="code">SCSimplicialComplex</code>), ''Generate new complexes from old''. However, the data generated here is rather seen as an intrinsic attribute of the original complex and not as an independent complex.</p>
+
+<p><a id="X84646E6786FB7993" name="X84646E6786FB7993"></a></p>
+
+<h5>4.3-1 SCAntiStar</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCAntiStar</code>( <var class="Arg">complex</var>, <var class="Arg">face</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise .</p>
+
+<p>Computes the anti star of <var class="Arg">face</var> (a face given as a list of vertices or a scalar interpreted as vertex) in <var class="Arg">complex</var>, i. e. the complement of <var class="Arg">face</var> in <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("RP^2");     
+ [ [ 3, "RP^2 (VT)" ], [ 645, "RP^2xS^1" ] ]
+ gap&gt; rp2:=SCLib.Load(last[1][1]);;
+ gap&gt; SCVertices(rp2);
+ [ 1, 2, 3, 4, 5, 6 ]
+ gap&gt; SCAntiStar(rp2,1);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="ast([ 1 ]) in RP^2 (VT)"
+  Dim=2
+ 
+ /SimplicialComplex]
+ gap&gt; last.Facets;
+ [ [ 2, 3, 4 ], [ 2, 4, 5 ], [ 2, 5, 6 ], [ 3, 4, 6 ], [ 3, 5, 6 ] ]
+ </pre></div>
+
+<p><a id="X874059937F4C709B" name="X874059937F4C709B"></a></p>
+
+<h5>4.3-2 SCLink</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCLink</code>( <var class="Arg">complex</var>, <var class="Arg">face</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the link of <var class="Arg">face</var> (a face given as a list of vertices or a scalar interpreted as vertex) in a polyhedral complex <var class="Arg">complex</var>, i. e. all facets containing <var class="Arg">face</var>, reduced by <var class="Arg">face</var>. if <var class="Arg">complex</var> is pure, the resulting complex is of dimension dim(<var class="Arg">complex</var>) - dim(<var class="Arg">face</var>) <span class="SimpleMath">-1</span>. If <var class="Arg">face</var> is not a face of <var class="Arg">complex</var> the empty complex is returned.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("RP^2");     
+ [ [ 3, "RP^2 (VT)" ], [ 645, "RP^2xS^1" ] ]
+ gap&gt; rp2:=SCLib.Load(last[1][1]);;
+ gap&gt; SCVertices(rp2);
+ [ 1, 2, 3, 4, 5, 6 ]
+ gap&gt; SCLink(rp2,[1]);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="lk([ 1 ]) in RP^2 (VT)"
+  Dim=1
+ 
+ /SimplicialComplex]
+ gap&gt; last.Facets;
+ [ [ 2, 3 ], [ 2, 6 ], [ 3, 5 ], [ 4, 5 ], [ 4, 6 ] ]
+ </pre></div>
+
+<p><a id="X7EFA115B7B26F9AD" name="X7EFA115B7B26F9AD"></a></p>
+
+<h5>4.3-3 SCLinks</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCLinks</code>( <var class="Arg">complex</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of simplicial complexes of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the link of all <var class="Arg">k</var>-faces of the polyhedral complex <var class="Arg">complex</var> and returns them as a list of simplicial complexes. Internally calls <code class="func">SCLink</code> (<a href="chap4.html#X874059937F4C709B"><span class="RefLink">4.3-2</span></a>) for every <var class="Arg">k</var>-face of <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(4);;
+ gap&gt; SCLinks(c,0);
+ [ [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 1 ]) in S^3_5"
+      Dim=2
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 2 ]) in S^3_5"
+      Dim=2
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 3 ]) in S^3_5"
+      Dim=2
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 4 ]) in S^3_5"
+      Dim=2
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 5 ]) in S^3_5"
+      Dim=2
+     
+     /SimplicialComplex] ]
+ gap&gt; SCLinks(c,1);
+ [ [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 1, 2 ]) in S^3_5"
+      Dim=1
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 1, 3 ]) in S^3_5"
+      Dim=1
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 1, 4 ]) in S^3_5"
+      Dim=1
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 1, 5 ]) in S^3_5"
+      Dim=1
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 2, 3 ]) in S^3_5"
+      Dim=1
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 2, 4 ]) in S^3_5"
+      Dim=1
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 2, 5 ]) in S^3_5"
+      Dim=1
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 3, 4 ]) in S^3_5"
+      Dim=1
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 3, 5 ]) in S^3_5"
+      Dim=1
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="lk([ 4, 5 ]) in S^3_5"
+      Dim=1
+     
+     /SimplicialComplex] ]
+ </pre></div>
+
+<p><a id="X78B725AD7E747A63" name="X78B725AD7E747A63"></a></p>
+
+<h5>4.3-4 SCStar</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCStar</code>( <var class="Arg">complex</var>, <var class="Arg">face</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise .</p>
+
+<p>Computes the star of <var class="Arg">face</var> (a face given as a list of vertices or a scalar interpreted as vertex) in a polyhedral complex <var class="Arg">complex</var>, i. e. the set of facets of <var class="Arg">complex</var> that contain <var class="Arg">face</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("RP^2");     
+ [ [ 3, "RP^2 (VT)" ], [ 645, "RP^2xS^1" ] ]
+ gap&gt; rp2:=SCLib.Load(last[1][1]);;
+ gap&gt; SCVertices(rp2);
+ [ 1, 2, 3, 4, 5, 6 ]
+ gap&gt; SCStar(rp2,1);
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="star([ 1 ]) in RP^2 (VT)"
+  Dim=2
+ 
+ /SimplicialComplex]
+ gap&gt; last.Facets;
+ [ [ 1, 2, 3 ], [ 1, 2, 6 ], [ 1, 3, 5 ], [ 1, 4, 5 ], [ 1, 4, 6 ] ]
+ </pre></div>
+
+<p><a id="X83F3E7487A1EF355" name="X83F3E7487A1EF355"></a></p>
+
+<h5>4.3-5 SCStars</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCStars</code>( <var class="Arg">complex</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of simplicial complexes of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the star of all <var class="Arg">k</var>-faces of the polyhedral complex <var class="Arg">complex</var> and returns them as a list of simplicial complexes. Internally calls <code class="func">SCStar</code> (<a href="chap4.html#X78B725AD7E747A63"><span class="RefLink">4.3-4</span></a>) for every <var class="Arg">k</var>-face of <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("T^2"){[1..6]};
+ [ [ 4, "T^2 (VT)" ], [ 5, "T^2 (VT)" ], [ 9, "T^2 (VT)" ], [ 10, "T^2 (VT)" ],
+   [ 18, "T^2 (VT)" ], [ 20, "(T^2)#2" ] ]
+ gap&gt; torus:=SCLib.Load(last[1][1]);; # the minimal 7-vertex torus
+ gap&gt; SCStars(torus,0); # 7 2-discs as vertex stars
+ [ [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="star([ 1 ]) in T^2 (VT)"
+      Dim=2
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="star([ 2 ]) in T^2 (VT)"
+      Dim=2
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="star([ 3 ]) in T^2 (VT)"
+      Dim=2
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="star([ 4 ]) in T^2 (VT)"
+      Dim=2
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="star([ 5 ]) in T^2 (VT)"
+      Dim=2
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="star([ 6 ]) in T^2 (VT)"
+      Dim=2
+     
+     /SimplicialComplex], [SimplicialComplex
+     
+      Properties known: Dim, FacetsEx, Name, Vertices.
+     
+      Name="star([ 7 ]) in T^2 (VT)"
+      Dim=2
+     
+     /SimplicialComplex] ]
+ </pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

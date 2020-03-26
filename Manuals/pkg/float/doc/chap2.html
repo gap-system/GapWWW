@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (FLOAT) - Chapter 2: Float package</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X7E12358984CA3111" name="X7E12358984CA3111"></a></p>
+<div class="ChapSects"><a href="chap2.html#X7E12358984CA3111">2 <span class="Heading">Float package</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7B4092CA7ABB93B0">2.1 <span class="Heading">A sample run</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">Float package</span></h3>
+
+<p><a id="X7B4092CA7ABB93B0" name="X7B4092CA7ABB93B0"></a></p>
+
+<h4>2.1 <span class="Heading">A sample run</span></h4>
+
+<p>The extended floating-point capabilities of <strong class="pkg">GAP</strong> are installed by loading the package via <code class="code">LoadPackage("float");</code> and selecting new floating-point handlers via <code class="code">SetFloats(MPFR)</code>, <code class="code">SetFloats(MPFI)</code>, <code class="code">SetFloats(MPC)</code> or<code class="code">SetFloats(CXSC)</code>, depending on whether high-precision real, interval or complex arithmetic are desired, or whether a fast package containing all four real/complex element/interval arithmetic is desired:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("float");</span>
+Loading FLOAT 0.7.0 ...
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetFloats(MPFR); # floating-point</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := 4*Atan(1.0);</span>
+.314159e1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Sin(x);</span>
+.169569e-30
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetFloats(MPFR,1000); # 1000 bits</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := 4*Atan(1.0);</span>
+.314159e1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Sin(x);</span>
+.125154e-300
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">String(x,300);</span>
+".3141592653589793238462643383279502884197169399375105820974944592307816406286\
+208998628034825342117067982148086513282306647093844609550582231725359408128481\
+117450284102701938521105559644622948954930381964428810975665933446128475648233\
+78678316527120190914564856692346034861045432664821339360726024914127e1"
+gap&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetFloats(MPFI); # intervals</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := 4*Atan(1.0);</span>
+.314159e1(99)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AbsoluteDiameter(x); Sup(x); Inf(x);</span>
+.100441e-29
+.314159e1
+.314159e1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Sin(x);</span>
+-.140815e-29(97)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">0.0 in last;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1.0; # exact representation</span>
+.1e1(∞)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IncreaseInterval(last,0.001); # now only 8 significant bits</span>
+.1e1(8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IncreaseInterval(last,-0.002); # now becomes empty</span>
+∅
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MinimalPolynomial(Rationals,Sqrt(2.0));</span>
+-2*x_1^2+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cyc(last);</span>
+E(8)-E(8)^3
+gap&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetFloats(MPC); # complex numbers</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z := 5.0-1.0i;</span>
+.5e1-.1e1i
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">(1+1.0i)*last^4*(239+1.0i);</span>
+.228488e6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Exp(6.2835i);</span>
+.1e1+.314693e-3i
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

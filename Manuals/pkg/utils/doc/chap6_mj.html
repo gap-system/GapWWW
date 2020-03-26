@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Utils) - Chapter 6: Iterators</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6.html">[MathJax off]</a></p>
+<p><a id="X85A3F00985453F95" name="X85A3F00985453F95"></a></p>
+<div class="ChapSects"><a href="chap6_mj.html#X85A3F00985453F95">6 <span class="Heading">Iterators</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7BB5350081B27D17">6.1 <span class="Heading">Some iterators for groups and their isomorphisms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7F8B54D1806C762D">6.1-1 AllIsomorphismsIterator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X831DA5AE8437578F">6.1-2 AllSubgroupsIterator</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X85413EED812C6497">6.2 <span class="Heading">Operations on iterators</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X87395A9181A35301">6.2-1 CartesianIterator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7C95E27987A812EA">6.2-2 UnorderedPairsIterator</a></span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">Iterators</span></h3>
+
+<p><a id="X7BB5350081B27D17" name="X7BB5350081B27D17"></a></p>
+
+<h4>6.1 <span class="Heading">Some iterators for groups and their isomorphisms</span></h4>
+
+<p>The motivation for adding these operations is partly to give a simple example of an iterator for a list that does not yet exist, and need not be created.</p>
+
+<p><a id="X7F8B54D1806C762D" name="X7F8B54D1806C762D"></a></p>
+
+<h5>6.1-1 AllIsomorphismsIterator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllIsomorphismsIterator</code>( <var class="Arg">G</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllIsomorphismsNumber</code>( <var class="Arg">G</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllIsomorphisms</code>( <var class="Arg">G</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The main <strong class="pkg">GAP</strong> library contains functions producing complete lists of group homomorphisms such as <code class="code">AllHomomorphisms</code>; <code class="code">AllEndomorphisms</code> and <code class="code">AllAutomorphisms</code>. Here we add the missing <code class="code">AllIsomorphisms(G,H)</code> for a list of isomorphisms from <span class="SimpleMath">\(G\)</span> to <span class="SimpleMath">\(H\)</span>. The method is simple -- find one isomorphism <span class="SimpleMath">\(G \to H\)</span> and compose this with all the automorphisms of <span class="SimpleMath">\(G\)</span>. In all these cases it may not be desirable to construct a list of homomorphisms, but just implement an iterator, and that is what is done here. The operation <code class="code">AllIsomorphismsNumber</code> returns the number of isomorphisms iterated over (this is, of course, just the order of the automorphisms group). The operation <code class="code">AllIsomorphisms</code> produces the list or isomorphisms.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := SmallGroup( 6,1);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iter := AllIsomorphismsIterator( G, s3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NextIterator( iter );</span>
+[ f1, f2 ] -&gt; [ (6,7), (5,6,7) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := AllIsomorphismsNumber( G, s3 );</span>
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllIsomorphisms( G, s3 );</span>
+[ [ f1, f2 ] -&gt; [ (6,7), (5,6,7) ], [ f1, f2 ] -&gt; [ (5,7), (5,6,7) ], 
+  [ f1, f2 ] -&gt; [ (5,6), (5,7,6) ], [ f1, f2 ] -&gt; [ (6,7), (5,7,6) ], 
+  [ f1, f2 ] -&gt; [ (5,7), (5,7,6) ], [ f1, f2 ] -&gt; [ (5,6), (5,6,7) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iter := AllIsomorphismsIterator( G, s3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for h in iter do Print( ImageElm( h, G.1 ) = (6,7), ", " ); od;</span>
+true, false, false, true, false, false,
+
+</pre></div>
+
+<p><a id="X831DA5AE8437578F" name="X831DA5AE8437578F"></a></p>
+
+<h5>6.1-2 AllSubgroupsIterator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllSubgroupsIterator</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The manual entry for the operation <code class="code">AllSubgroups</code> states that it is only intended to be used on small examples in a classroom situation. Access to all subgroups was required by the <strong class="pkg">XMod</strong> package, so this iterator was introduced here. It used the operations <code class="code">LatticeSubgroups(G)</code> and <code class="code">ConjugacyClassesSubgroups(lat)</code>, and then iterates over the entries in these classes.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c3c3 := Group( (1,2,3), (4,5,6) );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iter := AllSubgroupsIterator( c3c3 );</span>
+&lt;iterator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">while not IsDoneIterator(iter) do Print(NextIterator(iter),"\n"); od;</span>
+Group( () )
+Group( [ (4,5,6) ] )
+Group( [ (1,2,3) ] )
+Group( [ (1,2,3)(4,5,6) ] )
+Group( [ (1,3,2)(4,5,6) ] )
+Group( [ (4,5,6), (1,2,3) ] )
+
+</pre></div>
+
+<p><a id="X85413EED812C6497" name="X85413EED812C6497"></a></p>
+
+<h4>6.2 <span class="Heading">Operations on iterators</span></h4>
+
+<p>This section considers ways of producing an iterator from one or more iterators. It may be that operations equivalent to these are available elsewhere in the library -- if so, the ones here can be removed in due course.</p>
+
+<p><a id="X87395A9181A35301" name="X87395A9181A35301"></a></p>
+
+<h5>6.2-1 CartesianIterator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CartesianIterator</code>( <var class="Arg">iter1</var>, <var class="Arg">iter2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>This iterator returns all pairs <span class="SimpleMath">\([x,y]\)</span> where <span class="SimpleMath">\(x\)</span> is the output of a first iterator and <span class="SimpleMath">\(y\)</span> is the output of a second iterator.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">it1 := Iterator( [ 1, 2, 3 ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">it2 := Iterator( [ 4, 5, 6 ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iter := CartesianIterator( it1, it2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">while not IsDoneIterator(iter) do Print(NextIterator(iter),"\n"); od;</span>
+[ 1, 4 ]
+[ 1, 5 ]
+[ 1, 6 ]
+[ 2, 4 ]
+[ 2, 5 ]
+[ 2, 6 ]
+[ 3, 4 ]
+[ 3, 5 ]
+[ 3, 6 ]
+
+</pre></div>
+
+<p><a id="X7C95E27987A812EA" name="X7C95E27987A812EA"></a></p>
+
+<h5>6.2-2 UnorderedPairsIterator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnorderedPairsIterator</code>( <var class="Arg">iter</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>This operation returns pairs <span class="SimpleMath">\([x,y]\)</span> where <span class="SimpleMath">\(x,y\)</span> are output from a given iterator <code class="code">iter</code>. Unlike the output from <code class="code">CartesianIterator(iter,iter)</code>, unordered pairs are returned. In the case <span class="SimpleMath">\(L = [1,2,3,\ldots]\)</span> the pairs are ordered as <span class="SimpleMath">\([1,1],[1,2],[2,2],[1,3],[2,3],[3,3],\ldots\)</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := [6,7,8,9];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iterL := IteratorList( L );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pairsL := UnorderedPairsIterator( iterL );;                              </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">while not IsDoneIterator(pairsL) do Print(NextIterator(pairsL),"\n"); od;</span>
+[ 6, 6 ]
+[ 6, 7 ]
+[ 7, 7 ]
+[ 6, 8 ]
+[ 7, 8 ]
+[ 8, 8 ]
+[ 6, 9 ]
+[ 7, 9 ]
+[ 8, 9 ]
+[ 9, 9 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iter4 := IteratorList( [ 4 ] );</span>
+&lt;iterator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pairs4 := UnorderedPairsIterator(iter4);</span>
+&lt;iterator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NextIterator( pairs4 );</span>
+[ 4, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDoneIterator( pairs4 );</span>
+true
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

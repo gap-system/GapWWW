@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (IdRel) - Chapter 4: Monoid Polynomials</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
+<p><a id="X83B25026816C87CE" name="X83B25026816C87CE"></a></p>
+<div class="ChapSects"><a href="chap4_mj.html#X83B25026816C87CE">4 <span class="Heading">Monoid Polynomials</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7E8CE44085FE959D">4.1 <span class="Heading">Construction of monoid polynomials</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7DE231F282DB8660">4.1-1 MonoidPolyFromCoeffsWords</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X84B1F4CC79983A94">4.2 <span class="Heading">Components of a polynomial</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X810C636178EA42D0">4.2-1 Terms</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X85C78946877C1FF5">4.2-2 Monic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X82E04F1086DAAA43">4.2-3 AddTermMonoidPoly</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X832341AB7A04BA45">4.3 <span class="Heading">Monoid Polynomial Operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X86C2C49080691991">4.3-1 Length</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7A80EA5C7AEA68B1">4.4 <span class="Heading">Reduction of a Monoid Polynomial</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7979DE308676398D">4.4-1 ReduceMonoidPoly</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Monoid Polynomials</span></h3>
+
+<p>This chapter describes functions to compute with elements of a free noncommutative algebra. The elements of the algebra are sums of rational multiples of words in a free monoid. These are called <em>monoid polynomials</em>, and are stored as lists of pairs <code class="code">[coefficient, word]</code>.</p>
+
+<p><a id="X7E8CE44085FE959D" name="X7E8CE44085FE959D"></a></p>
+
+<h4>4.1 <span class="Heading">Construction of monoid polynomials</span></h4>
+
+<p><a id="X7DE231F282DB8660" name="X7DE231F282DB8660"></a></p>
+
+<h5>4.1-1 MonoidPolyFromCoeffsWords</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MonoidPolyFromCoeffsWords</code>( <var class="Arg">coeffs</var>, <var class="Arg">words</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MonoidPoly</code>( <var class="Arg">terms</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroMonoidPoly</code>( <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>There are two ways to input a monoid polynomial: by listing the coefficients and then the words; or by listing the terms as a list of pairs <code class="code">[coefficient, word]</code>. If a word occurs more than once in the input list, the coefficients will be added so that the terms of the monoid polynomial recorded do not contain any duplicates. The zero monoid polynomial is the polynomial with no terms.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rels := RelatorsOfFpGroup( q8 );</span>
+[ f1^4, f2^4, f1*f2*f1*f2^-1, f1^2*f2^2 ] 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">freeq8 := FreeGroupOfFpGroup( q8 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens := GeneratorsOfGroup( freeq8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">famfree := ElementsFamily( FamilyObj( freeq8 ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">famfree!.monoidPolyFam := MonoidPolyFam;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cg := [6,7];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := MonoidPolyFromCoeffsWords( cg, gens );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( pg, "\n" ); </span>
+7*f2 + 6*f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cr := [3,4,-5,-2];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pr := MonoidPolyFromCoeffsWords( cr, rels );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( pr, "\n" );</span>
+4*f2^4 - 5*f1*f2*f1*f2^-1 - 2*f1^2*f2^2 + 3*f1^4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( ZeroMonoidPoly( freeq8 ), "\n" );</span>
+zero monpoly
+
+</pre></div>
+
+<p><a id="X84B1F4CC79983A94" name="X84B1F4CC79983A94"></a></p>
+
+<h4>4.2 <span class="Heading">Components of a polynomial</span></h4>
+
+<p><a id="X810C636178EA42D0" name="X810C636178EA42D0"></a></p>
+
+<h5>4.2-1 Terms</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Terms</code>( <var class="Arg">poly</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Coeffs</code>( <var class="Arg">poly</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Words</code>( <var class="Arg">poly</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeadTerm</code>( <var class="Arg">poly</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeadCoeffMonoidPoly</code>( <var class="Arg">poly</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">Terms</code> returns the terms of a polynomial as a list of pairs of the form <code class="code">[word, coefficient]</code>. The function <code class="code">Coeffs</code> returns the coefficients of a polynomial as a list, and the function <code class="code">Words</code> returns the words of a polynomial as a list. The function <code class="code">LeadTerm</code> returns the term of the polynomial whose word component is the largest with respect to the length-lexicographical ordering. The function <code class="code">LeadCoeffMonoidPoly</code> returns the coefficient of the leading term of a polynomial.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Coeffs( pr );</span>
+[ 4, -5, -2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Terms( pr );</span>
+[ [ 4, f2^4 ], [ -5, f1*f2*f1*f2^-1 ], [ -2, f1^2*f2^2 ], [ 3, f1^4 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Words( pr );</span>
+[ f2^4, f1*f2*f1*f2^-1, f1^2*f2^2, f1^4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeadTerm( pr );</span>
+[ 4, f2^4]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeadCoeffMonoidPoly( pr );</span>
+4
+
+</pre></div>
+
+<p><a id="X85C78946877C1FF5" name="X85C78946877C1FF5"></a></p>
+
+<h5>4.2-2 Monic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Monic</code>( <var class="Arg">poly</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>A monoid polynomial is called <em>monic</em> if the coefficient of its leading polynomial is one. The function <code class="code">Monic</code> converts a polynomial into a monic polynomial by dividing all the coefficients by the leading coefficient.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mpr := Monic( pr );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( mpr, "\n" );</span>
+f2^4 - 5/4*f1*f2*f1*f2^-1 - 1/2*f1^2*f2^2 + 3/4*f1^4
+
+</pre></div>
+
+<p><a id="X82E04F1086DAAA43" name="X82E04F1086DAAA43"></a></p>
+
+<h5>4.2-3 AddTermMonoidPoly</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddTermMonoidPoly</code>( <var class="Arg">poly</var>, <var class="Arg">coeff</var>, <var class="Arg">word</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AddTermMonoidPoly</code> adds a new term, given by its coeffiecient and word, to an existing polynomial.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">w := gens[1]^gens[2];</span>
+f2^-1*f1*f2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cw := 3/4;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">wpg:= AddTermMonoidPoly( pg, cw, w);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( wpg, "\n" );</span>
+3/4*f2^-1*f1*f2 + 7*f2 + 6*f1
+
+</pre></div>
+
+<p><a id="X832341AB7A04BA45" name="X832341AB7A04BA45"></a></p>
+
+<h4>4.3 <span class="Heading">Monoid Polynomial Operations</span></h4>
+
+<p>Tests for equality and arithmetic operations are performed in the usual way.</p>
+
+<p>The operation <code class="code">poly1 = poly2</code> returns <code class="keyw">true</code> if the monoid polynomials have the same terms, and <code class="keyw">false</code> otherwise. Multiplication of a monoid polynomial (on the left or right) by a coefficient; the addition or subtraction of two monoid polynomials; multiplication (on the right) of a monoid polynomial by a word; and multiplication of two monoid polynomials; are all implemented.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ pg = pg, pg = pr ];</span>
+[ true, false ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">prcw := pr*cw;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( prcw, "\n" );</span>
+3*f2^4 - 15/4*f1*f2*f1*f2^-1 - 3/2*f1^2*f2^2 + 9/4*f1^4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cwpr := cw*pr;; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( cwpr, "\n" ); </span>
+3*f2^4 - 15/4*f1*f2*f1*f2^-1 - 3/2*f1^2*f2^2 + 9/4*f1^4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ pr = prcw, prcw = cwpr ];</span>
+[ false, true ] 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( pg + pr, "\n" );</span>
+4*f2^4 - 5*f1*f2*f1*f2^-1 - 2*f1^2*f2^2 + 3*f1^4 + 7*f2 + 6*f1 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( pg - pr, "\n" );</span>
+- 4*f2^4 + 5*f1*f2*f1*f2^-1 + 2*f1^2*f2^2 - 3*f1^4 + 7*f2 + 6*f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( pg * w, "\n" );</span>
+6*f1*f2^-1*f1*f2 + 7*f1*f2 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( pg * pr, "\n" );</span>
+28*f2^5 - 35*(f2*f1)^2*f2^-1 - 14*f2*f1^2*f2^2 + 21*f2*f1^4 + 24*f1*f2^4 - 
+30*f1^2*f2*f1*f2^-1 - 12*f1^3*f2^2 + 18*f1^5
+
+</pre></div>
+
+<p><a id="X86C2C49080691991" name="X86C2C49080691991"></a></p>
+
+<h5>4.3-1 Length</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Length</code>( <var class="Arg">poly</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>This function returns the number of distinct terms in the monoid polynomial.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( pr );</span>
+4
+
+</pre></div>
+
+<p>The boolean function <code class="code">poly1 &gt; poly2</code> returns <code class="keyw">true</code> if the first polynomial has more terms than the second. If the polynomials are the same length it will compare their leading terms. If the leading word of the first is lengthlexicographically greater than the leading word of the second, or if the words are equal but the coefficient of the first is greater than the coefficient of the second then true is returned. If the leading terms are equal then the next terms are compared in the same way. If all terms are the same then <code class="keyw">false</code> is returned.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ pr &gt; 3*pr, pr &gt; pg ];</span>
+[ false, true ] 
+
+</pre></div>
+
+<p><a id="X7A80EA5C7AEA68B1" name="X7A80EA5C7AEA68B1"></a></p>
+
+<h4>4.4 <span class="Heading">Reduction of a Monoid Polynomial</span></h4>
+
+<p><a id="X7979DE308676398D" name="X7979DE308676398D"></a></p>
+
+<h5>4.4-1 ReduceMonoidPoly</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReduceMonoidPoly</code>( <var class="Arg">poly</var>, <var class="Arg">rules</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Recall that the words of a monoid polynomial are elements of a free monoid. Given a rewrite system (set of rules) on the free monoid the words can be reduced. This allows us to simulate calculation in monoid rings where the monoid is given by a complete presentation. This function reduces the words of the polynomial (elements of the free monoid) with respect to the complete rewrite system. The words of the reduced polynomial are normal forms for the elements of the monoid presented by that rewite system. The list of rules <code class="code">r2</code> is displayed in section 2.3.3.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := genfgmon;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mp1 := MonoidPolyFromCoeffsWords( </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          [9,-7,5], [M[1]*M[3], M[2]^3, M[4]*M[3]*M[2]] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( mp1, "\n" ); </span>
+5*q8_M4*q8_M3*q8_M2 - 7*q8_M2^3 + 9*q8_M1*q8_M3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rmp1 := ReduceMonoidPoly( mp1, r2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( rmp1, "\n" ); </span>
+ - 7*q8_M4 + 5*q8_M1 + 9*&lt;identity ...&gt;
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

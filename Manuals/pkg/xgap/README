@@ -1,0 +1,187 @@
+The GAP 4 package 'XGAP'
+------------------------
+
+XGAP provides a graphical user interface for GAP based on the X Window system.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Installing XGAP
+
+Installing XGAP should be easy once you have installed GAP itself. We
+assume here that you want to install XGAP in its standard location,
+which is in the ``pkg'' subdirectory of the main GAP4 installation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Overview
+
+You have to perform the following steps to install XGAP:
+
+-- Get the sources
+-- Unpack the sources
+-- Use the <configure> script to adjust everything to your specific system
+-- Compile the C part of XGAP
+-- Edit a certain startup script (if necessary) and install it in 
+   an executable location in your system
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+What you need to install XGAP
+
+Being a graphical user interface to GAP, XGAP of course needs
+graphics. At the moment this means that you need the X window system in the 
+Version 11 Release 5 or newer. On the other hand the type of Unix you use 
+should not matter. Please file an issue report on
+  https://github.com/gap-packages/xgap/issues
+if you encounter problems with certain system configurations.
+Note that usage on 
+a computer running Microsoft Windows is not officially supported. 
+See the file `xgap/README.Windows' for a report how it could
+still work on Windows. 
+
+Because XGAP contains a C-part you need a C compiler.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Getting and unpacking the sources
+
+In most cases, the XGAP package will already be included in the main
+distribution. However, you can also download the sources of the latest
+version from
+
+https://gap-packages.github.io/xgap/
+
+You need only one file with the name `xgap-4.30.tar.gz`
+which is in the subdirectory for the packages.
+You now change your current directory to the `pkg' subdirectory of the 
+location where you installed
+GAP
+Now you extract the sources for the XGAP package:
+
+# tar xzvf xgap-4.30.tar.gz
+...
+
+The <tar> utility unpacks the files and stores them into the apropriate
+subdirectories. XGAP resides completely in the following subdirectory
+(assuming standard location):
+
+gap4r8/pkg/xgap
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Configuring and Compiling the C part
+
+You have to change your current working directory to the ``xgap''
+subdirectory. You do this by
+
+# cd xgap
+
+if your current working directory is the one, where you used
+<tar>. There you invoke the <configure> script by:
+
+# ./configure
+creating cache ./config.cache
+checking for make... make
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking target system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler (gcc  ) works... yes
+checking whether the C compiler (gcc  ) is a cross-compiler... no
+checking whether we are using GNU C... yes
+...
+updating cache ./config.cache
+creating ./config.status
+creating Makefile
+creating xgap.sh
+
+$\ldots$ indicate omissions. 
+This script tries to determine, which kind of operating system and
+libraries you have installed and configures the source
+accordingly. Normally this should produce some output but no error
+messages. 
+
+Note that you can add ``CONFIGNAME=default64'' after the <./configure>
+command (with ``default64'' replaced by a configuration name you used
+to compile GAP with) to compile for a different than the standard
+configuration.
+
+The last step of the script produces some makefiles which are
+used to compile the code. You do this by typing
+
+# make
+mkdir -p bin/x86_64-unknown-linux-gnu-gcc
+cp cnf/configure.out bin/x86_64-unknown-linux-gnu-gcc/configure
+( cd bin/x86_64-unknown-linux-gnu-gcc ; CC=gcc ./configure  )
+checking for gcc... gcc
+checking whether the C compiler works... yes
+...
+creating ./config.status
+creating Makefile
+creating config.h
+( cd bin/x86_64-unknown-linux-gnu-gcc ; make CC=gcc )
+make[1]: Entering directory 
+`/scratch/neunhoef/4.0/pkg/xgap/bin/x86_64-unknown-linux-gnu-gcc'
+gcc -I. -g -O2   -o xcmds.o -c ../../src.x11/xcmds.c
+...
+make[1]: Leaving directory \                    # line broken for this manual!
+     `/usr/local/lib/gap4/pkg/xgap/bin/i686-unknown-linux2.0.34-gcc'
+
+(a few lines were broken for typesetting purposes in this manual, the
+position is marked by a backslash) 
+
+Now all C sources are compiled and a binary executable is built. It is
+stored in a subdirectory of the ``bin'' subdirectory in your ``xgap''
+directory. The name of this location has something to do with your
+installation. It could for example be
+
+bin/x86_64-unknown-linux-gnu-gcc/xgap
+
+if you compile on a 64-bit Linux system using the GNU-C-Compiler.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Installing the Startup Script
+
+To make the startup of XGAP more convenient there is a startup script
+which contains also some configuration information like the position of
+your GAP installation. It is in the ``xgap'' directory
+and is called ``xgap.sh''. This file is automatically generated
+by the `configure' script and normally you should *not* have to change 
+anything in it. Just copy it to some location that people have in their
+``PATH'' environment variable, for example to ``/usr/local/bin''.
+This completes the installation.
+
+If you want to change anything in the installation, you
+can also edit the script until the line
+
+##  STOP EDITING HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+You can specify the directory where GAP is installed (``GAP_DIR''), the
+name of the GAP-executable (``GAP_PRG'') and the name of the
+XGAP-executable (``XGAP_PRG''). The first three are exactly the same
+things that you could edit in the main GAP startup script. After that
+you have the possibility to control the behaviour of the XGAP startup
+script. You can specify whether XGAP goes into the background
+(``DAEMON'') and whether it prints out information about its parameters
+(``VERBOSE''). Note that it is possible to combine ``DAEMON=YES'' and
+``VERBOSE=YES'' because the script actually runs in the foreground and
+only the C program is put into the background.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Installing in a different than the standard location
+
+It could happen that you do not want to install XGAP in its
+standard location, perhaps because you do not want to bother your
+system administrator and have no access to the GAP directory. In
+this case you can unpack XGAP in any other location within a
+``pkg'' directory with the <tar> command as described above. Let us
+call this directory ``pkg'' for the moment. You get an ``xgap''
+subdirectory with all the files of XGAP in it. You follow the
+standard procedure with one exception:
+
+In the ``./configure'' command, add the following option:
+
+./configure --with-gaproot=/usr/local/lib/gap4r8
+
+if ``/usr/local/lib/gap4r8'' is the location of the main GAP installation.
+
+You can find out where the main GAP4 installation is by starting 
+GAP as usual and looking at the variable `GAPInfo.RootPaths' 
+within GAP.

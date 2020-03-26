@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (simpcomp) - Chapter 10: Simplicial blowups</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap10"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X7E1BE673859191F0" name="X7E1BE673859191F0"></a></p>
+<div class="ChapSects"><a href="chap10.html#X7E1BE673859191F0">10 <span class="Heading">Simplicial blowups</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X8729B87B848E3F89">10.1 <span class="Heading">Theory</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X83227BC7841E0899">10.2 <span class="Heading">Functions related to simplicial blowups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X80BB246E818412B1">10.2-1 SCBlowup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7EC03E0C7EA8AA00">10.2-2 SCMappingCylinder</a></span>
+</div></div>
+</div>
+
+<h3>10 <span class="Heading">Simplicial blowups</span></h3>
+
+<p><a id="X8729B87B848E3F89" name="X8729B87B848E3F89"></a></p>
+
+<h4>10.1 <span class="Heading">Theory</span></h4>
+
+<p>In this chapter functions are provided to perform simplicial blowups as well as the resolution of isolated singularities of certain types of combinatorial <span class="SimpleMath">4</span>-manifolds. As of today singularities where the link is homeomorphic to <span class="SimpleMath">RP^3</span>, <span class="SimpleMath">S^2 × S^1</span>, <span class="SimpleMath">S^2 dtimes S^1</span> and the lens spaces <span class="SimpleMath">L(k,1)</span> are supported. In addition, the program provides the possibility to hand over additional types of mapping cylinders to cover other types of singularities.</p>
+
+<p>Please note that the program is based on a heuristic algorithm using bistellar moves. Hence, the search for a suitable sequence of bistellar moves to perform the blowup does not always terminate. However, especially in the case of ordinary double points (singularities of type <span class="SimpleMath">RP^3</span>), a lot of blowups have already been successful. For a very short introduction to simplicial blowups see <a href="chap2.html#X7E1BE673859191F0"><span class="RefLink">2.8</span></a>, for further information see <a href="chapBib.html#biBSpreer09CombPorpsOfK3">[SK11]</a>.</p>
+
+<p><a id="X83227BC7841E0899" name="X83227BC7841E0899"></a></p>
+
+<h4>10.2 <span class="Heading">Functions related to simplicial blowups</span></h4>
+
+<p><a id="X80BB246E818412B1" name="X80BB246E818412B1"></a></p>
+
+<h5>10.2-1 SCBlowup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCBlowup</code>( <var class="Arg">pseudomanifold</var>, <var class="Arg">singularity</var>[, <var class="Arg">mappingCyl</var>] )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>If <code class="code">singularity</code> is an ordinary double point of a combinatorial <span class="SimpleMath">4</span>-pseudomanifold <var class="Arg">pseudomanifold</var> (lk(<code class="code">singularity</code><span class="SimpleMath">) = RP^3</span>) the blowup of <code class="code">pseudomanifold</code> at <code class="code">singularity</code> is computed. If it is a singularity of type <span class="SimpleMath">S^2 × S^1</span>, <span class="SimpleMath">S^2 dtimes S^1</span> or <span class="SimpleMath">L(k,1)</span>, <span class="SimpleMath">k ≤ 4</span>, the canonical resolution of <code class="code">singularity</code> is computed using the bounded complexes provided in the source code below.</p>
+
+<p>If the optional argument <code class="code">mappingCyl</code> of type <code class="code">SCIsSimplicialComplex</code> is given, this complex will be used to to resolve the singularity <code class="code">singularity</code>.</p>
+
+<p>Note that bistellar moves do not necessarily preserve any orientation. Thus, the orientation of the blowup has to be checked in order to verify which type of blowup was performed. Normally, repeated computation results in both versions.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("Kummer variety");
+ [ [ 7493, "4-dimensional Kummer variety (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;                
+ gap&gt; d:= SCBlowup(c,1);
+ #I  SCBlowup: checking if singularity is a combinatorial manifold...
+ #I  SCBlowup: ...true
+ #I  SCBlowup: checking type of singularity...
+ #I  SCReduceComplexEx: complexes are bistellarly equivalent.
+ #I  SCBlowup: ...ordinary double point (supported type).
+ #I  SCBlowup: starting blowup...
+ #I  SCBlowup: map boundaries...
+ #I  SCBlowup: boundaries not isomorphic, initializing bistellar moves...
+ #I  SCBlowup: found complex with smaller boundary: f = [ 15, 74, 118, 59 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 14, 70, 112, 56 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 14, 69, 110, 55 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 14, 68, 108, 54 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 13, 65, 104, 52 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 13, 64, 102, 51 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 13, 63, 100, 50 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 13, 62, 98, 49 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 13, 61, 96, 48 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 12, 57, 90, 45 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 12, 56, 88, 44 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 12, 55, 86, 43 ].
+ #I  SCBlowup: found complex with smaller boundary: f = [ 11, 51, 80, 40 ].
+ #I  SCBlowup: found complex with isomorphic boundaries.
+ #I  SCBlowup: ...boundaries mapped succesfully.
+ #I  SCBlowup: build complex...
+ #I  SCBlowup: ...done.
+ #I  SCBlowup: ...blowup completed.
+ #I  SCBlowup: You may now want to reduce the complex via 'SCReduceComplex'.
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="unnamed complex 2735 \ star([ 1 ]) in unnamed complex 2735 cup unnamed \
+ complex 2739 cup unnamed complex 2737"
+  Dim=4
+ 
+ /SimplicialComplex]
+ </pre></div>
+
+
+<div class="example"><pre> 
+ gap&gt; # resolving the singularities of a 4 dimensional Kummer variety
+ gap&gt; SCLib.SearchByName("Kummer variety");
+ [ [ 7488, "4-dimensional Kummer variety (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; for i in [1..16] do
+        for j in SCLabels(c) do 
+          lk:=SCLink(c,j);
+          if lk.Homology = [[0],[0],[0],[1]] then continue; fi; 
+          singularity := j; break;
+        od;
+        c:=SCBlowup(c,singularity); 
+      od;
+ gap&gt; d.IsManifold;
+ true
+ gap&gt; d.Homology;
+ [ [ 0, [ ] ], [ 0, [ ] ], [ 22, [ ] ], [ 0, [ ] ], [ 1, [ ] ] ]
+ </pre></div>
+
+<p><a id="X7EC03E0C7EA8AA00" name="X7EC03E0C7EA8AA00"></a></p>
+
+<h5>10.2-2 SCMappingCylinder</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCMappingCylinder</code>( <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Generates a bounded version of <span class="SimpleMath">CP^2</span> (a so-called mapping cylinder for a simplicial blowup, compare <a href="chapBib.html#biBSpreer09CombPorpsOfK3">[SK11]</a>) with boundary <span class="SimpleMath">L(</span><code class="code">k</code><span class="SimpleMath">,1)</span>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; mapCyl:=SCMappingCylinder(3);;
+ gap&gt; mapCyl.Homology;              
+ [ [ 0, [  ] ], [ 0, [  ] ], [ 1, [  ] ], [ 0, [  ] ], [ 0, [  ] ] ]
+ gap&gt; l31:=SCBoundary(mapCyl);;
+ gap&gt; l31.Homology;
+ [ [ 0, [  ] ], [ 0, [ 3 ] ], [ 0, [  ] ], [ 1, [  ] ] ]
+ </pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

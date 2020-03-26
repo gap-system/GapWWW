@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Smallsemi) - Chapter 3: Extended Examples</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X7CDC63A27F7790AA" name="X7CDC63A27F7790AA"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X7CDC63A27F7790AA">3 <span class="Heading">Extended Examples</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X80DFE0117B7A7C24">3.1 <span class="Heading">Lists, Enumerators and Iterators of Semigroups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X790CB8D686E0A336">3.1-1 <span class="Heading">Precomputed properties</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X804593297D7EEF68">3.1-2 <span class="Heading">User functions</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E4F0756878EB958">3.1-3 <span class="Heading">Semigroups of order 8</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X8772952F7B2CFDE1">3.2 <span class="Heading">Identifying Semigroups</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">Extended Examples</span></h3>
+
+<p>The main features of the library can be summarized in three points: it provides a complete set of semigroups up to isomorphism and anti-isomorphism of sizes up to 8; it carries a vast amount of precomputed information about these semigroups; and there is an identification function which takes a semigroup with at most 8 elements and returns a map to the equivalent one from the library.</p>
+
+<p>These features lead to different ways of using the library. It is impossible to describe - or even to anticipate - all possible types of usage. Most problems will admit multiple solutions. We find it difficult to predict which will be most effective. The examples in this chapter should give an idea of the differences in the various functions and help you to find an alternative if a computation uses more time or memory than you have available.</p>
+
+<p>Let us go step by step through some ways to use the library showing which tools are provided.</p>
+
+<p><a id="X80DFE0117B7A7C24" name="X80DFE0117B7A7C24"></a></p>
+
+<h4>3.1 <span class="Heading">Lists, Enumerators and Iterators of Semigroups</span></h4>
+
+<p>At first one could want to search through the stored semigroups for one or all semigroups with a certain property. Going through all the semigroups can take a long time. Just to create all the 1.8 billion semigroups as objects in <strong class="pkg">GAP</strong> takes around a day on a modern PC. Doing a simple test on all the semigroups in the library might take another day. Performing complicated tests easily takes weeks. To avoid this, many properties of the semigroups were precomputed. Semigroups with or without a precomputed property can be accessed as quickly as simply creating the same number of semigroups. (Note that timings of two calls to the same command may vary and, of course, heavily depend on your machine.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># obtain a list of all semigroups with 6 elements</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllSmallSemigroups( 6 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+2636
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># obtain a list of all commutative semigroups with 7 elements  </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllSmallSemigroups( 7, IsCommutative, true );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+2957
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># compare the numbers of semigroups in the two lists</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NrSmallSemigroups( 6 ); NrSmallSemigroups( 7, IsCommutative, true );</span>
+15973
+17291
+</pre></div>
+
+<p>(In all the examples in this section the info messages which are given by default when data is loaded are turned off via <code class="code">SetInfoLevel(InfoSmallSemi,0)</code>.)</p>
+
+<p>We provide three commands that can be used if one is interested in all semigroups with some properties. These are <code class="func">AllSmallSemigroups</code> (<a href="chap4_mj.html#X81DC0FE28043C9B0"><span class="RefLink">4.5-1</span></a>), <code class="func">EnumeratorOfSmallSemigroups</code> (<a href="chap4_mj.html#X831E543E83DDFDEA"><span class="RefLink">4.5-2</span></a>), and <code class="func">IteratorOfSmallSemigroups</code> (<a href="chap4_mj.html#X7D6BFDE17A9BEEC3"><span class="RefLink">4.5-11</span></a>). Which one is best to use depends a lot on the situation. Here we attempt to provide some insight about the essential differences.</p>
+
+<p><a id="X790CB8D686E0A336" name="X790CB8D686E0A336"></a></p>
+
+<h5>3.1-1 <span class="Heading">Precomputed properties</span></h5>
+
+<p>We start with examples using only precomputed information. In this case there is essentially no advantage of calling an iterator instead of an enumerator. Thus only <code class="func">AllSmallSemigroups</code> (<a href="chap4_mj.html#X81DC0FE28043C9B0"><span class="RefLink">4.5-1</span></a>) and <code class="func">EnumeratorOfSmallSemigroups</code> (<a href="chap4_mj.html#X831E543E83DDFDEA"><span class="RefLink">4.5-2</span></a>) will be considered.</p>
+
+<p>We first compare the memory usage and the setup time. Assume we are interested in the commutative semigroups with at most 7 elements.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list := AllSmallSemigroups([1..7],IsCommutativeSemigroup,true);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time; # the time needed will always depend on your machine</span>
+3180
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">enum := EnumeratorOfSmallSemigroups([1..7],IsCommutativeSemigroup,true);</span>
+&lt;enumerator of semigroups of sizes [ 1 .. 7 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+8
+</pre></div>
+
+<p>The enumerator stores the information, which semigroups it contains, but only creates the semigroups when asked for them explicitly.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># now the semigroups have to be created ...</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for sg in enum do</span>
+# do nothing, the semigroup will be created anyway
+od;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+3428
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># ... and again if you want to look through them another time ...</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for sg in enum do</span>
+od;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+3437
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># ... not so for the list of semigroups though</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for sg in list do</span>
+od;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+4
+</pre></div>
+
+<p>There are several reasons why one would nevertheless prefer an enumerator, one is the smaller need for memory. While the number of semigroups in this example is rather moderate (compared with all the semigroups in the library) the difference is remarkable:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nr := Length(enum);</span>
+17291
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MemoryUsage(enum);                                 </span>
+70507
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MemoryUsage(list); # this will take a while ...</span>
+19089280
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># ... but you can get a close approximation much faster</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sg := OneSmallSemigroup(7,IsCommutativeSemigroup,true);</span>
+&lt;small semigroup of size 7&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nr*MemoryUsage(sg);</span>
+19020100
+</pre></div>
+
+<p>As said before the advantage of the enumerator comes from the fact that the members of it are created anew every time they are called. This means on the other hand that information that is computed is not stored.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsZeroSemigroup(list[3]); # a semigroup from the list ...</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownPropertiesOfObject(list[3]); # ... can store new information</span>
+[ "IsEmpty", "IsTrivial", "IsNonTrivial", "IsFinite", "IsDuplicateFree", 
+  "IsAssociative", "IsCommutativeSemigroup", "IsZeroSemigroup" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsZeroSemigroup(enum[3]); # semigroups in the enumerator ...</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownPropertiesOfObject(enum[3]); # ... are created anew in every call </span>
+[ "IsEmpty", "IsTrivial", "IsNonTrivial", "IsFinite", "IsDuplicateFree", 
+  "IsAssociative", "IsCommutativeSemigroup" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># but if it turns out this is the semigroup you want to analyse, just do</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sg := enum[3];</span>
+</pre></div>
+
+<p>Observe that in the last example the semigroup from the enumerator knew about the property that was used to create the enumerator. The enumerator stores this knowledge and passes it on whenever a member is called.</p>
+
+<p>Another reason to prefer an enumerator is that one might only be interested in some of the elements it contains. This could become clear after analysing some of the elements and then there is no time wasted in creating all semigroups in the enumerator. Or possibly creating the enumerator involving precomputed properties was just the first step. As described in Section <a href="chap4_mj.html#X82F9C36C86006857"><span class="RefLink">4.5</span></a> enumerators themselves can be given as argument to get to a more restricted class of semigroups. This leads us to the next part of this section.</p>
+
+<p><a id="X804593297D7EEF68" name="X804593297D7EEF68"></a></p>
+
+<h5>3.1-2 <span class="Heading">User functions</span></h5>
+
+<p>We now come to examples dealing with properties that are not precomputed - including user defined functions. This makes <code class="func">IteratorOfSmallSemigroups</code> (<a href="chap4_mj.html#X7D6BFDE17A9BEEC3"><span class="RefLink">4.5-11</span></a>) interesting again. Assume you want to work with bands (<code class="func">IsBand</code> (<a href="chap4_mj.html#X7C8DB14587D1B55A"><span class="RefLink">4.2-5</span></a>)) of order 8 having 1 Green's <span class="SimpleMath">\(D\)</span>-class (see <a href="../../../doc/ref/chap51_mj.html#X80C6C718801855E9"><span class="RefLink">Reference: Green's Relations</span></a>). You might feel tempted to implement a function testing a semigroup for this combination of properties.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">isFascinatingSemigroup := function(sgrp)</span>
+local dclasses;
+dclasses := GreensDClasses(sgrp);
+return IsBand(sgrp) and Length(dclasses) = 1;
+end;
+</pre></div>
+
+<p>But then the precomputed property <code class="func">IsBand</code> (<a href="chap4_mj.html#X7C8DB14587D1B55A"><span class="RefLink">4.2-5</span></a>) is hidden inside your function and a call like <code class="code">AllSmallSemigroups(8,isFascinatingSemigroup,true)</code> would take days to complete.</p>
+
+<p>The following finds the same semigroups more efficiently:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list:=AllSmallSemigroups(8,IsBand,true,x-&gt;Size(GreensDClasses(x)),1);</span>
+[ &lt;small semigroup of size 8&gt;, &lt;small semigroup of size 8&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+49211
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">enum:=EnumeratorOfSmallSemigroups(8,IsBand,true,x-&gt;Size(GreensDClasses(x)),1);</span>
+&lt;enumerator of semigroups of size 8&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+48723
+</pre></div>
+
+<p>Observe that the enumerator lost its advantage of returning the answer faster because not all properties are precomputed. Thus all bands have to be constructed to test their number of <span class="SimpleMath">\(D\)</span>-classes. As the number of such semigroups is small, <code class="func">AllSmallSemigroups</code> (<a href="chap4_mj.html#X81DC0FE28043C9B0"><span class="RefLink">4.5-1</span></a>) is the better choice in this example - remember that the semigroups from the enumerator have to be recreated in every call. Often one does not have this kind of knowledge beforehand. Even for a large number of semigroups the enumerator still has the advantage of using far less memory as it stores only the IDs of the semigroups. Before explaining more about this let us for a moment go back to the semigroups from the previous example. It turns out they are the 2 non-equivalent rectangular bands (<code class="func">IsRectangularBand</code> (<a href="chap4_mj.html#X7E9B674D781B072C"><span class="RefLink">4.2-22</span></a>)) with 8 elements.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ForAll(list,IsRectangularBand);</span>
+true
+</pre></div>
+
+<p>As a last example in this subsection we look at semigroups from the library that are not nilpotent. As there are quite some of these we will first try an enumerator. The obvious call seems to be</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">enum1 := EnumeratorOfSmallSemigroups([1..7],IsNilpotentSemigroup,false);</span>
+&lt;enumerator of semigroups of sizes [ 2, 3, 4, 5, 6, 7 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+103403
+</pre></div>
+
+<p>However, we would like to include the semigroups of order 8 as well. As <code class="func">IsNilpotentSemigroup</code> (<a href="chap4_mj.html#X780ADE31828F0848"><span class="RefLink">4.2-20</span></a>) is not a precomputed property in the current version of <strong class="pkg">Smallsemi</strong> this would take a long time. Here, additional knowledge, about the way the semigroups are stored in the library, is helpful. The description of <code class="func">NilpotencyDegree</code> (<a href="chap4_mj.html#X7D1C336E7B0A059C"><span class="RefLink">4.2-34</span></a>) contains information on the IDs of all 3-nilpotent semigroups of order 8. We can create an enumerator without those semigroups doing the following:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># all 8 element semigroups that are not 3-nilpotent</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">enum2 := EnumeratorOfSmallSemigroupsByIds([8],[[1..11433106]]);</span>
+&lt;enumerator of semigroups of size 8&gt;
+</pre></div>
+
+<p>Out of this enumerator the subclass of not nilpotent semigroups can be extracted.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">enum3 := EnumeratorOfSmallSemigroups(enum2,IsNilpotentSemigroup,false);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># This still takes quite a while though</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+1931140
+</pre></div>
+
+<p>You can avoid the waiting time at setup by using an iterator instead of an enumerator. An iterator does not know how many elements it contains, one can always just access the next element - if such exists - and one cannot go back. (Making copies of an iterator can help to circumvent this problem.) On the other hand one could in the above example start investigating the first couple of elements right away.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iter := IteratorOfSmallSemigroups(enum2,IsNilpotentSemigroup,false);</span>
+&lt;iterator of semigroups of size 8&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for i in [1..100000] do </span>
+NextIterator(iter);
+od;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+30785
+</pre></div>
+
+<p>But even if you know you want to inspect all the semigroups having a property which is not precomputed, an iterator has the advantage that it does not create the semigroups before you can actually work with them. To create an enumerator all semigroups in question will be created and - as said before - every element is created anew when it is accessed. An iterator on the other hand creates the semigroups in question one-by-one and returns the next one having the property. This makes a big difference if the number of semigroups one is interested in is big like in the example of not nilpotent semigroups of size 8. In the former example with the rectangular bands it would not play a role and the disadvantages of an iterator would prevail.</p>
+
+<p>As you can see the number of semigroups you are interested in is even more important in the case of user defined functions than it was in the previous section about precomputed properties. Sometimes you might have a rough idea about the numbers - or even a very good one - to base your choice on. Otherwise the best approach seems to consist of two steps. First, create an enumerator involving all precomputed properties (try to find as many implied properties as possible). Then work with an iterator, call the semigroups one-by-one and store them in a separate list if you think you might want to look at them again at a later stage.</p>
+
+<p><a id="X7E4F0756878EB958" name="X7E4F0756878EB958"></a></p>
+
+<h5>3.1-3 <span class="Heading">Semigroups of order 8</span></h5>
+
+<p>When using enumerators and iterators of semigroups of order 8 there are some limitations. In a 32-bit system the number of semigroups of order 8 exceeds the maximal length of a list in <strong class="pkg">GAP</strong>. The following will work in a 64-bit system, but not on a 32-bit system.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EnumeratorOfSmallSemigroups(8);</span>
+</pre></div>
+
+<p>In all other cases there is currently no difference between 32-bit and 64-bit systems. Hence the following will fail in any case.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EnumeratorOfSmallSemigroups(8,IsCommutativeSemigroup,false);</span>
+</pre></div>
+
+<p>Note though that an enumerator of semigroups of order 8 can be created if one of the required properties is precomputed and takes <code class="code">true</code> as value. This fact was used in the previous subsection, when creating the enumerator of all bands of order 8 having 1 Green's <span class="SimpleMath">\(D\)</span>-class.</p>
+
+<p>One could try to circumvent the described problem by using a iterator. The command</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iter := IteratorOfSmallSemigroups(8,IsCommutativeSemigroup,false);</span>
+&lt;iterator of semigroups of size 8&gt;
+</pre></div>
+
+<p>will succeed. But running through the elements in the iterator can take a long time since the precomputed information is not utilized. A better idea in the current version of <strong class="pkg">Smallsemi</strong> is to divide the enumerator into smaller pieces by restricting the range of IDs considered at once to at most <span class="SimpleMath">\(2^{28}-1\)</span> (the maximal length of a list in a 32-bit <strong class="pkg">GAP</strong>) or possibly by a smaller value, depending on the amount of memory you have available. For example start with</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">enum1 := EnumeratorOfSmallSemigroupsByIds([8],[[1..2^24-1]]);</span>
+&lt;enumerator of semigroups of size 8&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">enum2 := EnumeratorOfSmallSemigroups(enum1, IsCommutativeSemigroup, false);</span>
+&lt;enumerator of semigroups of size 8&gt;
+</pre></div>
+
+<p>Thanks go to Michal Stolorz for the idea of circumventing the current performance issue for enumerators of small semigroups of order 8 by splitting it in the described way.</p>
+
+<p><a id="X8772952F7B2CFDE1" name="X8772952F7B2CFDE1"></a></p>
+
+<h4>3.2 <span class="Heading">Identifying Semigroups</span></h4>
+
+<p>The data in <strong class="pkg">Smallsemi</strong> is as a big catalogue of all structural types of semigroups with at most 8 elements making it possible to refer to the types by their catalogue number, that is by their ID. With <code class="func">IdSmallSemigroup</code> (<a href="chap4_mj.html#X788211A07D67C282"><span class="RefLink">4.1-6</span></a>) one can find the ID of the structural type of a particular semigroup with at most 8 elements.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t1 := RandomTransformation(3);</span>
+Transformation( [ 1, 3, 1 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t2 := RandomTransformation(3);</span>
+Transformation( [ 1, 2, 3 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sgrp := SemigroupByGenerators([t1,t2]);</span>
+&lt;semigroup with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(sgrp);</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IdSmallSemigroup(sgrp);</span>
+[ 3, 8 ]
+</pre></div>
+
+<p>Moreover, one can draw conclusions about a semigroup of size at most 8 using the precomputed information about the equivalent semigroup from the library. The precomputed properties are all invariant under isomorphism and anti-isomorphism. This is most useful in the case where there is no method in <strong class="pkg">GAP</strong> to decide the property in the original representation of the semigroup.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># use the semigroup from the previous example</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCommutative(sgrp); # no need to use the library for this</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># for the following there exists no method for a trans-</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># formation semigroup; access the precomputed information instead </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMultSemigroupOfNearRing(SmallSemigroup([3,8]));</span>
+false
+</pre></div>
+
+<p><code class="func">EquivalenceSmallSemigroup</code> (<a href="chap4_mj.html#X79D38A3886C7431D"><span class="RefLink">4.1-7</span></a>) even provides an isomorphism or anti-isomorphism to a semigroup from the library. This means one can map elements between the semigroups. Remember that an isomorphism is returned whenever one exists. This allows to distinguish between structure types up to isomorphism. Note though, that no information about subsets - like the set of idempotents or a generating set - is precomputed for semigroups in the library. If an operation has a method for the semigroup in the original representation, it is usually more sensible to simply call this.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t1 := RandomTransformation(3);</span>
+Transformation( [ 2, 2, 1 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t2 := RandomTransformation(3);</span>
+Transformation( [ 2, 1, 1 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sgrp := SemigroupByGenerators([t1,t2]);</span>
+&lt;semigroup with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(sgrp);</span>
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">map := EquivalenceSmallSemigroup(sgrp); </span>
+MappingByFunction( &lt;semigroup with 2 generators&gt;, &lt;small semigroup of size 
+6&gt;, function( x ) ... end )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RespectsMultiplication(map); # verify that this is an anti-isomorphism</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MinimalGeneratingSet(Range(map));</span>
+[ s2, s4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreImage(map,last); # get a minimal generating set of &lt;sgrp&gt;</span>
+[ Transformation( [ 1, 1, 2 ] ), Transformation( [ 2, 1, 1 ] ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Idempotents(Range(map));</span>
+[ s1, s3, s5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreImage(map,last); # in the same way you can get the idempotents ...</span>
+[ Transformation( [ 1, 1, 1 ] ), Transformation( [ 1, 2, 2 ] ), 
+  Transformation( [ 2, 2, 2 ] ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Idempotents(sgrp); # ... but this can be done directly instead </span>
+[ Transformation( [ 1, 1, 1 ] ), Transformation( [ 1, 2, 2 ] ), 
+  Transformation( [ 2, 2, 2 ] ) ]
+&lt;/Log&gt; 
+
+If for a certain application you are interested in the semigroups up
+to isomorphism you can still use the IDs from
+&lt;Package&gt;Smallsemi&lt;/Package&gt;. Simply mark the ID with &lt;M&gt;*&lt;/M&gt;, or
+however else you denote the dual of a semigroup, to refer to the
+semigroup being anti-isomorphic to the one in the library having the
+same ID. For all semigroups &lt;Ref Prop="IsSelfDualSemigroup"/&gt; is
+precomputed. This will help to decide whether a semigroup and its dual
+are actually non-isomorphic.
+&lt;/Section&gt;
+
+&lt;!--
+&lt;Section&gt;&lt;Heading&gt;Exotic Application&lt;/Heading&gt;
+
+We finish this chapter with another example emphasizing the variety of 
+possilbe usages. Assume you are interested in the lattices of a given order.
+It is well known that the lattices of order &lt;M&gt;n&lt;/M&gt; are in one-one 
+correspondence with the semilattices of order &lt;M&gt;n-1&lt;/M&gt;. Semilattices on the
+other hand are nothing else but commutative bands.
+&lt;Log&gt;&lt;![CDATA[
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := 6; # say you want the different types of lattices with 6 elements</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">semilattices := AllSmallSemigroups(n-1,IsBand,true,IsCommutative,true);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(semilattices);</span>
+15
+</pre></div>
+
+<p>--&gt;</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

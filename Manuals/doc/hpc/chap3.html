@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (hpc) - Chapter 3: How HPC-GAP organizes shared memory: Regions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X8076353A830B11B6" name="X8076353A830B11B6"></a></p>
+<div class="ChapSects"><a href="chap3.html#X8076353A830B11B6">3 <span class="Heading">How HPC-GAP organizes shared memory: Regions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7E2199568017C74F">3.1 <span class="Heading">Thread-local regions</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7B697BA17A813E7D">3.2 <span class="Heading">Shared regions</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X83627591876D3FF3">3.3 <span class="Heading">Ordering of shared regions</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8239FDC583A4E39D">3.4 <span class="Heading">The public region</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7E0116957AFB982D">3.5 <span class="Heading">The read-only region</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X87315FA584A37637">3.6 <span class="Heading">Migrating objects between regions</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X79A959BF7C24234F">3.7 <span class="Heading">Region names</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X827637EE7A69AFCD">3.8 <span class="Heading">Controlling access to regions</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7BE832987B1DC975">3.9 <span class="Heading">Functions relating to regions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X851C5F3C82F6F5AE">3.9-1 NewRegion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83864D427DE991F2">3.9-2 NewLibraryRegion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FB0BE4C78CA85DA">3.9-3 NewSystemRegion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X825A881A7A39C5C3">3.9-4 NewKernelRegion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86C54C9278FE00F4">3.9-5 NewInternalRegion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A7FFA847E090257">3.9-6 NewSpecialRegion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86BEBBAF855AA26A">3.9-7 RegionOf</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X87421870782B33C7">3.9-8 RegionPrecedence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D5982617A3027BD">3.9-9 ShareObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79E455D27E12C5B4">3.9-10 ShareLibraryObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X867DE843791EEF65">3.9-11 ShareSystemObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E7540D17EADF97A">3.9-12 ShareKernelObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X792DAE2C83BD1554">3.9-13 ShareInternalObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X82F3B2597E0EC15E">3.9-14 ShareSpecialObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8508A72B7C215FA5">3.9-15 ShareSingleObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X87A1962578CDA61D">3.9-16 ShareSingleLibraryObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8352EF8B83390656">3.9-17 ShareSingleSystemObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B5A471982EFD292">3.9-18 ShareSingleKernelObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85C5F5A67DAFD919">3.9-19 ShareSingleInternalObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CB671AE7A411314">3.9-20 ShareSingleSpecialObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81A356DD84E76A8A">3.9-21 MigrateObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BAE5A7282793684">3.9-22 MigrateSingleObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E4B54BF837E81C0">3.9-23 LockAndMigrateObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D1943AF793296F7">3.9-24 IncorporateObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X876843717F4437CB">3.9-25 AtomicIncorporateObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X784C978D801191E2">3.9-26 AdoptObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X834DDB388600E9FA">3.9-27 AdoptSingleObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X867CDC9285D30DE8">3.9-28 LockAndAdoptObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C71A88487762733">3.9-29 CopyRegion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8222929685E9959A">3.9-30 IsPublic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86B2EEF67C3378F0">3.9-31 IsThreadLocal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80A11F3C84DB512E">3.9-32 IsShared</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X827A26A67C99316C">3.9-33 HaveReadAccess</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X794206E5845006EA">3.9-34 HaveWriteAccess</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F53D70285AF37B4">3.9-35 MakeReadOnlyObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7EC9341A865BCC35">3.9-36 MakeReadOnlySingleObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X860008F57EFE21C4">3.9-37 IsReadOnlyObj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F1E2F707F72371E">3.9-38 SetRegionName</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8427E1537ADC4575">3.9-39 ClearRegionName</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7959FC997CC9177C">3.9-40 RegionName</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80D0DFAB7F7241E8">3.9-41 ViewShared</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FD39BCC8526AC53">3.9-42 UNSAFE_VIEW</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FD1B1B785E24734">3.9-43 <span class="Heading">The <code class="code">atomic</code> statement.</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8789D7A57CFC13BC">3.10 <span class="Heading">Atomic functions</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X78883D5E83B4425F">3.11 <span class="Heading">Write-once functionality</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83AD36A68503CF70">3.11-1 BindOnce</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8673539F7DA79110">3.11-2 TestBindOnce</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BAEC41C87E1DC43">3.11-3 BindOnceExpr</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81B15A9C8795DF59">3.11-4 TestBindOnceExpr</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7897092C86AE17D7">3.11-5 StrictBindOnce</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">How HPC-GAP organizes shared memory: Regions</span></h3>
+
+<p>HPC-GAP allows multiple threads to access data shared between them; to avoid common concurrency errors, such as race conditions, it partitions GAP objects into regions. Access to regions is regulated so that no two threads can modify objects in the same region at the same time and so that objects that are being read by one thread cannot concurrently be modified by another.</p>
+
+<p><a id="X7E2199568017C74F" name="X7E2199568017C74F"></a></p>
+
+<h4>3.1 <span class="Heading">Thread-local regions</span></h4>
+
+<p>Each thread has an associated thread-local region. When a thread implicitly or explicitly creates a new object, that object initially belongs to the thread's thread-local region.</p>
+
+<p>Only the thread can read or modify objects in its thread-local region. For other threads to access an object, that object has to be migrated into a different region first.</p>
+
+<p><a id="X7B697BA17A813E7D" name="X7B697BA17A813E7D"></a></p>
+
+<h4>3.2 <span class="Heading">Shared regions</span></h4>
+
+<p>Shared regions are explicitly created through the <code class="func">ShareObj</code> (<a href="chap3.html#X7D5982617A3027BD"><span class="RefLink">3.9-9</span></a>) and <code class="func">ShareSingleObj</code> (<a href="chap3.html#X8508A72B7C215FA5"><span class="RefLink">3.9-15</span></a>) primitives (see below). Multiple threads can access them concurrently, but accessing them requires that a thread uses an <code class="code">atomic</code> statement to acquire a read or write lock beforehand.</p>
+
+<p>See the section on <code class="code">atomic</code> statements (<a href="chap3.html#X7FD1B1B785E24734"><span class="RefLink">3.9-43</span></a>) for details.</p>
+
+<p><a id="X83627591876D3FF3" name="X83627591876D3FF3"></a></p>
+
+<h4>3.3 <span class="Heading">Ordering of shared regions</span></h4>
+
+<p>Shared regions are by default ordered; each shared region has an associated numeric precedence level. Regions can generally only be locked in order of descending precedence. The purpose of this mechanism is to avoid accidental deadlocks.</p>
+
+<p>The ordering requirement can be overridden in two ways: regions with a negative precedence are excluded from it. This exception should be used with care, as it can lead to deadlocks.</p>
+
+<p>Alternatively, two or more regions can be locked simultaneously via the <code class="code">atomic</code> statement. In this case, the ordering of these regions relative to each other can be arbitrary.</p>
+
+<p><a id="X8239FDC583A4E39D" name="X8239FDC583A4E39D"></a></p>
+
+<h4>3.4 <span class="Heading">The public region</span></h4>
+
+<p>A special public region contains objects that only permit atomic operations. These include, in particular, all immutable objects (immutable in the sense that their in-memory representation cannot change).</p>
+
+<p>All threads can access objects in the public region at all times without needing to acquire a read- or write-lock beforehand.</p>
+
+<p><a id="X7E0116957AFB982D" name="X7E0116957AFB982D"></a></p>
+
+<h4>3.5 <span class="Heading">The read-only region</span></h4>
+
+<p>The read-only region is another special region that contains objects that are only meant to be read; attempting to modify an object in that region will result in a runtime error. To obtain a modifiable copy of such an object, the <code class="func">CopyRegion</code> (<a href="chap3.html#X7C71A88487762733"><span class="RefLink">3.9-29</span></a>) primitive can be used.</p>
+
+<p><a id="X87315FA584A37637" name="X87315FA584A37637"></a></p>
+
+<h4>3.6 <span class="Heading">Migrating objects between regions</span></h4>
+
+<p>Objects can be migrated between regions using a number of functions. In order to migrate an object, the current thread must have exclusive access to that object; the object must be in its thread-local region or it must be in a shared region for which the current thread holds a write lock.</p>
+
+<p>The <code class="func">ShareObj</code> (<a href="chap3.html#X7D5982617A3027BD"><span class="RefLink">3.9-9</span></a>) and <code class="func">ShareSingleObj</code> (<a href="chap3.html#X8508A72B7C215FA5"><span class="RefLink">3.9-15</span></a>) functions create a new shared region and migrate their respective argument to that region; <code class="code">ShareObj</code> will also migrate all subobjects that are within the same region, while <code class="code">ShareSingleObj</code> will leave the subobjects unaffected.</p>
+
+<p>The <code class="func">MigrateObj</code> (<a href="chap3.html#X81A356DD84E76A8A"><span class="RefLink">3.9-21</span></a>) and <code class="func">MigrateSingleObj</code> (<a href="chap3.html#X7BAE5A7282793684"><span class="RefLink">3.9-22</span></a>) functions migrate objects to an existing region. The first argument of either function is the object to be migrated; the second is either a region (as returned by the <code class="func">RegionOf</code> (<a href="chap3.html#X86BEBBAF855AA26A"><span class="RefLink">3.9-7</span></a>) function) or an object whose containing region the first argument is to be migrated to.</p>
+
+<p>The current thread needs exclusive access to the target region (denoted by the second argument) for the operation to succeed. If successful, the first argument will be in the same region as the second argument afterwards. In the case of <code class="func">MigrateObj</code> (<a href="chap3.html#X81A356DD84E76A8A"><span class="RefLink">3.9-21</span></a>), all subobjects within the same region as the first argument will also be migrated to the target region.</p>
+
+<p>Finally, <code class="func">AdoptObj</code> (<a href="chap3.html#X784C978D801191E2"><span class="RefLink">3.9-26</span></a>) and <code class="func">AdoptSingleObj</code> (<a href="chap3.html#X834DDB388600E9FA"><span class="RefLink">3.9-27</span></a>) are special cases of <code class="func">MigrateObj</code> (<a href="chap3.html#X81A356DD84E76A8A"><span class="RefLink">3.9-21</span></a>) and <code class="func">MigrateSingleObj</code> (<a href="chap3.html#X7BAE5A7282793684"><span class="RefLink">3.9-22</span></a>), where the target region is the thread-local region of the current thread.</p>
+
+<p>To migrate objects to the read-only region, one can use <code class="func">MakeReadOnlyObj</code> (<a href="chap3.html#X7F53D70285AF37B4"><span class="RefLink">3.9-35</span></a>) and <code class="func">MakeReadOnlySingleObj</code> (<a href="chap3.html#X7EC9341A865BCC35"><span class="RefLink">3.9-36</span></a>). The first migrates its argument and all its subjobjects that are within the same region to the read-only region; the second migrates only the argument itself, but not its subobjects.</p>
+
+<p>It is generally not possible to migrate objects explicitly to the public region; only objects with purely atomic operations can be made public and that is done automatically when they are created.</p>
+
+<p>The exception are immutable objects. When <code class="func">MakeImmutable</code> (<span class="RefLink">Reference: MakeImmutable</span>) is used, its argument is automatically moved to the public region.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionOf(MakeImmutable([1,2,3]));</span>
+&lt;public region&gt;
+</pre></div>
+
+<p><a id="X79A959BF7C24234F" name="X79A959BF7C24234F"></a></p>
+
+<h4>3.7 <span class="Heading">Region names</span></h4>
+
+<p>Regions can be given names, either explicitly via <code class="func">SetRegionName</code> (<a href="chap3.html#X7F1E2F707F72371E"><span class="RefLink">3.9-38</span></a>) or when they are created via <code class="func">ShareObj</code> (<a href="chap3.html#X7D5982617A3027BD"><span class="RefLink">3.9-9</span></a>) and <code class="func">ShareSingleObj</code> (<a href="chap3.html#X8508A72B7C215FA5"><span class="RefLink">3.9-15</span></a>). Thread-local regions, the public, and the readonly region are given names by default.</p>
+
+<p>Multiple regions can have the same name.</p>
+
+<p><a id="X827637EE7A69AFCD" name="X827637EE7A69AFCD"></a></p>
+
+<h4>3.8 <span class="Heading">Controlling access to regions</span></h4>
+
+<p>If either GAP code or a kernel primitive attempts to access an object that it is not allowed to access according to these semantics, either a "write guard error" (for a failed write access) or a "read guard error" (for a failed read access) will be raised. The global variable <code class="code">LastInaccessible</code> will contain the object that caused such an error.</p>
+
+<p>One exception is that threads can modify objects in regions that they have only read access (but not write access) to using write-once functions - see section <a href="chap3.html#X78883D5E83B4425F"><span class="RefLink">3.11</span></a>.</p>
+
+<p>To inspect objects whose contents lie in other regions (and therefore cannot be displayed by <code class="func">PrintObj</code> (<span class="RefLink">Reference: PrintObj</span>) or <code class="func">ViewObj</code> (<span class="RefLink">Reference: ViewObj</span>), the functions <code class="func">ViewShared</code> (<a href="chap3.html#X80D0DFAB7F7241E8"><span class="RefLink">3.9-41</span></a>) and <code class="func">UNSAFE_VIEW</code> (<a href="chap3.html#X7FD39BCC8526AC53"><span class="RefLink">3.9-42</span></a>) can be used.</p>
+
+<p><a id="X7BE832987B1DC975" name="X7BE832987B1DC975"></a></p>
+
+<h4>3.9 <span class="Heading">Functions relating to regions</span></h4>
+
+<p><a id="X851C5F3C82F6F5AE" name="X851C5F3C82F6F5AE"></a></p>
+
+<h5>3.9-1 NewRegion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewRegion</code>( [<var class="Arg">name</var>, ]<var class="Arg">prec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="func">NewRegion</code> creates a new shared region. If the optional argument <var class="Arg">name</var> is provided, then the name of the new region will be set to <var class="Arg">name</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NewRegion("example region");</span>
+&lt;region: example region&gt;
+</pre></div>
+
+<p><code class="func">NewRegion</code> will create a region with a high precedence level. It is intended to be called by user code. The exact precedence level can be adjusted with <var class="Arg">prec</var>, which must be an integer in the range <code class="code">[-1000..1000]</code>; <var class="Arg">prec</var> will be added to the normal precedence level.</p>
+
+<p><a id="X83864D427DE991F2" name="X83864D427DE991F2"></a></p>
+
+<h5>3.9-2 NewLibraryRegion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewLibraryRegion</code>( [<var class="Arg">name</var>, ]<var class="Arg">prec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">NewLibraryRegion</code> functions like <code class="func">NewRegion</code> (<a href="chap3.html#X851C5F3C82F6F5AE"><span class="RefLink">3.9-1</span></a>), except that the precedence of the region it creates is below that of <code class="func">NewRegion</code> (<a href="chap3.html#X851C5F3C82F6F5AE"><span class="RefLink">3.9-1</span></a>). It is intended to be used by user libraries and GAP packages.</p>
+
+<p><a id="X7FB0BE4C78CA85DA" name="X7FB0BE4C78CA85DA"></a></p>
+
+<h5>3.9-3 NewSystemRegion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewSystemRegion</code>( [<var class="Arg">name</var>, ]<var class="Arg">prec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">NewSystemRegion</code> functions like <code class="func">NewRegion</code> (<a href="chap3.html#X851C5F3C82F6F5AE"><span class="RefLink">3.9-1</span></a>), except that the precedence of the region it creates is below that of <code class="func">NewLibraryRegion</code> (<a href="chap3.html#X83864D427DE991F2"><span class="RefLink">3.9-2</span></a>). It is intended to be used by the standard GAP library.</p>
+
+<p><a id="X825A881A7A39C5C3" name="X825A881A7A39C5C3"></a></p>
+
+<h5>3.9-4 NewKernelRegion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewKernelRegion</code>( [<var class="Arg">name</var>, ]<var class="Arg">prec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">NewKernelRegion</code> functions like <code class="func">NewRegion</code> (<a href="chap3.html#X851C5F3C82F6F5AE"><span class="RefLink">3.9-1</span></a>), except that the precedence of the region it creates is below that of <code class="func">NewSystemRegion</code> (<a href="chap3.html#X7FB0BE4C78CA85DA"><span class="RefLink">3.9-3</span></a>). It is intended to be used by the GAP kernel, and GAP library code that interacts closely with the kernel.</p>
+
+<p><a id="X86C54C9278FE00F4" name="X86C54C9278FE00F4"></a></p>
+
+<h5>3.9-5 NewInternalRegion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewInternalRegion</code>( [<var class="Arg">name</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">NewInternalRegion</code> functions like <code class="func">NewRegion</code> (<a href="chap3.html#X851C5F3C82F6F5AE"><span class="RefLink">3.9-1</span></a>), except that the precedence of the region it creates is the lowest available. It is intended to be used for regions that are self-contained; i.e. no function that uses such a region may lock another region while accessing it. The precedence level of an internal region cannot be adjusted.</p>
+
+<p><a id="X7A7FFA847E090257" name="X7A7FFA847E090257"></a></p>
+
+<h5>3.9-6 NewSpecialRegion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewSpecialRegion</code>( [<var class="Arg">name</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">NewLibraryRegion</code> (<a href="chap3.html#X83864D427DE991F2"><span class="RefLink">3.9-2</span></a>) functions like <code class="func">NewRegion</code> (<a href="chap3.html#X851C5F3C82F6F5AE"><span class="RefLink">3.9-1</span></a>), except that the precedence of the region it creates is negative. It is thus exempt from normal ordering and deadlock checks.</p>
+
+<p><a id="X86BEBBAF855AA26A" name="X86BEBBAF855AA26A"></a></p>
+
+<h5>3.9-7 RegionOf</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RegionOf</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionOf(1/2);</span>
+&lt;public region&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionOf([1,2,3]);</span>
+&lt;region: thread region #0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionOf(ShareObj([1,2,3]));</span>
+&lt;region 0x45deaa0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionOf(ShareObj([1,2,3]));</span>
+&lt;region 0x45deaa0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionOf(ShareObj([1,2,3], "test region"));</span>
+&lt;region: test region&gt;
+</pre></div>
+
+<p>Note that the unique number that each region is identified with is system-specific and can change each time the code is being run. Region objects returned by <code class="code">RegionOf</code> can be compared:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionOf([1,2,3]) = RegionOf([4,5,6]);</span>
+true
+</pre></div>
+
+<p>The result in this example is true because both lists are in the same thread-local region.</p>
+
+<p><a id="X87421870782B33C7" name="X87421870782B33C7"></a></p>
+
+<h5>3.9-8 RegionPrecedence</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RegionPrecedence</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">RegionPrecedence</code> will return the precedence of the region of <var class="Arg">obj</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionPrecedence(NewRegion("Test"));</span>
+30000
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionPrecedence(NewRegion("Test2", 1));</span>
+30001
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionPrecedence(NewLibraryRegion("LibTest", -1));</span>
+19999
+</pre></div>
+
+<p><a id="X7D5982617A3027BD" name="X7D5982617A3027BD"></a></p>
+
+<h5>3.9-9 ShareObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareObj</code>( <var class="Arg">obj</var>[[, <var class="Arg">name</var>], <var class="Arg">prec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">ShareObj</code> function creates a new shared region and migrates the object and all its subobjects to that region. If the optional argument <var class="Arg">name</var> is provided, then the name of the new region is set to <var class="Arg">name</var>.</p>
+
+<p><code class="func">ShareObj</code> will create a region with a high precedence level. It is intended to be called by user code. The actual precedence level can be adjusted by the optional <var class="Arg">prec</var> argument in the same way as for <code class="func">NewRegion</code> (<a href="chap3.html#X851C5F3C82F6F5AE"><span class="RefLink">3.9-1</span></a>).</p>
+
+<p><a id="X79E455D27E12C5B4" name="X79E455D27E12C5B4"></a></p>
+
+<h5>3.9-10 ShareLibraryObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareLibraryObj</code>( <var class="Arg">obj</var>[[, <var class="Arg">name</var>], <var class="Arg">prec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ShareLibraryObj</code> functions like <code class="func">ShareObj</code> (<a href="chap3.html#X7D5982617A3027BD"><span class="RefLink">3.9-9</span></a>), except that the precedence of the region it creates is below that of <code class="func">ShareObj</code> (<a href="chap3.html#X7D5982617A3027BD"><span class="RefLink">3.9-9</span></a>). It is intended to be used by user libraries and GAP packages.</p>
+
+<p><a id="X867DE843791EEF65" name="X867DE843791EEF65"></a></p>
+
+<h5>3.9-11 ShareSystemObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareSystemObj</code>( <var class="Arg">obj</var>[[, <var class="Arg">name</var>], <var class="Arg">prec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ShareSystemObj</code> functions like <code class="func">ShareObj</code> (<a href="chap3.html#X7D5982617A3027BD"><span class="RefLink">3.9-9</span></a>), except that the precedence of the region it creates is below that of <code class="func">ShareLibraryObj</code> (<a href="chap3.html#X79E455D27E12C5B4"><span class="RefLink">3.9-10</span></a>). It is intended to be used by the standard GAP library.</p>
+
+<p><a id="X7E7540D17EADF97A" name="X7E7540D17EADF97A"></a></p>
+
+<h5>3.9-12 ShareKernelObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareKernelObj</code>( <var class="Arg">obj</var>[[, <var class="Arg">name</var>], <var class="Arg">prec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ShareKernelObj</code> functions like <code class="func">ShareObj</code> (<a href="chap3.html#X7D5982617A3027BD"><span class="RefLink">3.9-9</span></a>), except that the precedence of the region it creates is below that of <code class="func">ShareSystemObj</code> (<a href="chap3.html#X867DE843791EEF65"><span class="RefLink">3.9-11</span></a>). It is intended to be used by the GAP kernel, and GAP library code that interacts closely with the kernel.</p>
+
+<p><a id="X792DAE2C83BD1554" name="X792DAE2C83BD1554"></a></p>
+
+<h5>3.9-13 ShareInternalObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareInternalObj</code>( <var class="Arg">obj</var>[, <var class="Arg">name</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ShareInternalObj</code> functions like <code class="func">ShareObj</code> (<a href="chap3.html#X7D5982617A3027BD"><span class="RefLink">3.9-9</span></a>), except that the precedence of the region it creates is the lowest available. It is intended to be used for regions that are self-contained; i.e. no function that uses such a region may lock another region while accessing it.</p>
+
+<p><a id="X82F3B2597E0EC15E" name="X82F3B2597E0EC15E"></a></p>
+
+<h5>3.9-14 ShareSpecialObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareSpecialObj</code>( <var class="Arg">obj</var>[, <var class="Arg">name</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ShareLibraryObj</code> (<a href="chap3.html#X79E455D27E12C5B4"><span class="RefLink">3.9-10</span></a>) functions like <code class="func">ShareObj</code> (<a href="chap3.html#X7D5982617A3027BD"><span class="RefLink">3.9-9</span></a>), except that the precedence of the region it creates is negative. It is thus exempt from normal ordering and deadlock checks.</p>
+
+<p><a id="X8508A72B7C215FA5" name="X8508A72B7C215FA5"></a></p>
+
+<h5>3.9-15 ShareSingleObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareSingleObj</code>( <var class="Arg">obj</var>[[, <var class="Arg">name</var>], <var class="Arg">prec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">ShareSingleObj</code> function creates a new shared region and migrates the object, but not its subobjects, to that region. If the optional argument <var class="Arg">name</var> is provided, then the name of the new region is set to <var class="Arg">name</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := [ [1, 2], [3, 4] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ShareSingleObj(m);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic readonly m do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     Display([ IsShared(m), IsShared(m[1]), IsShared(m[2]) ]);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   od;</span>
+[ true, false, false ]
+</pre></div>
+
+<p><code class="func">ShareSingleObj</code> will create a region with a high precedence level. It is intended to be called by user code. The actual precedence level can be adjusted by the optional <var class="Arg">prec</var> argument in the same way as for <code class="func">NewRegion</code> (<a href="chap3.html#X851C5F3C82F6F5AE"><span class="RefLink">3.9-1</span></a>).</p>
+
+<p><a id="X87A1962578CDA61D" name="X87A1962578CDA61D"></a></p>
+
+<h5>3.9-16 ShareSingleLibraryObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareSingleLibraryObj</code>( <var class="Arg">obj</var>[[, <var class="Arg">name</var>], <var class="Arg">prec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ShareSingleLibraryObj</code> functions like <code class="func">ShareSingleObj</code> (<a href="chap3.html#X8508A72B7C215FA5"><span class="RefLink">3.9-15</span></a>), except that the precedence of the region it creates is below that of <code class="func">ShareSingleObj</code> (<a href="chap3.html#X8508A72B7C215FA5"><span class="RefLink">3.9-15</span></a>). It is intended to be used by user libraries and GAP packages.</p>
+
+<p><a id="X8352EF8B83390656" name="X8352EF8B83390656"></a></p>
+
+<h5>3.9-17 ShareSingleSystemObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareSingleSystemObj</code>( <var class="Arg">obj</var>[[, <var class="Arg">name</var>], <var class="Arg">prec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ShareSingleSystemObj</code> functions like <code class="func">ShareSingleObj</code> (<a href="chap3.html#X8508A72B7C215FA5"><span class="RefLink">3.9-15</span></a>), except that the precedence of the region it creates is below that of <code class="func">ShareSingleLibraryObj</code> (<a href="chap3.html#X87A1962578CDA61D"><span class="RefLink">3.9-16</span></a>). It is intended to be used by the standard GAP library.</p>
+
+<p><a id="X7B5A471982EFD292" name="X7B5A471982EFD292"></a></p>
+
+<h5>3.9-18 ShareSingleKernelObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareSingleKernelObj</code>( <var class="Arg">obj</var>[[, <var class="Arg">name</var>], <var class="Arg">prec</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ShareSingleKernelObj</code> functions like <code class="func">ShareSingleObj</code> (<a href="chap3.html#X8508A72B7C215FA5"><span class="RefLink">3.9-15</span></a>), except that the precedence of the region it creates is below that of <code class="func">ShareSingleSystemObj</code> (<a href="chap3.html#X8352EF8B83390656"><span class="RefLink">3.9-17</span></a>). It is intended to be used by the GAP kernel, and GAP library code that interacts closely with the kernel.</p>
+
+<p><a id="X85C5F5A67DAFD919" name="X85C5F5A67DAFD919"></a></p>
+
+<h5>3.9-19 ShareSingleInternalObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareSingleInternalObj</code>( <var class="Arg">obj</var>[, <var class="Arg">name</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ShareSingleInternalObj</code> functions like <code class="func">ShareSingleObj</code> (<a href="chap3.html#X8508A72B7C215FA5"><span class="RefLink">3.9-15</span></a>), except that the precedence of the region it creates is the lowest available. It is intended to be used for regions that are self-contained; i.e. no function that uses such a region may lock another region while accessing it.</p>
+
+<p><a id="X7CB671AE7A411314" name="X7CB671AE7A411314"></a></p>
+
+<h5>3.9-20 ShareSingleSpecialObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShareSingleSpecialObj</code>( <var class="Arg">obj</var>[, <var class="Arg">name</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ShareSingleLibraryObj</code> (<a href="chap3.html#X87A1962578CDA61D"><span class="RefLink">3.9-16</span></a>) functions like <code class="func">ShareSingleObj</code> (<a href="chap3.html#X8508A72B7C215FA5"><span class="RefLink">3.9-15</span></a>), except that the precedence of the region it creates is negative. It is thus exempt from normal ordering and deadlock checks.</p>
+
+<p><a id="X81A356DD84E76A8A" name="X81A356DD84E76A8A"></a></p>
+
+<h5>3.9-21 MigrateObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MigrateObj</code>( <var class="Arg">obj</var>, <var class="Arg">target</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">MigrateObj</code> function migrates <var class="Arg">obj</var> (and all subobjects contained within the same region) to the region denoted by the <var class="Arg">target</var> argument. Here, <var class="Arg">target</var> can either be a region object returned by <code class="func">RegionOf</code> (<a href="chap3.html#X86BEBBAF855AA26A"><span class="RefLink">3.9-7</span></a>) or a normal gap object. If <var class="Arg">target</var> is a normal gap object, <var class="Arg">obj</var> will be migrated to the region containing <code class="code">target</code>.</p>
+
+<p>For the operation to succeed, the current thread must have exclusive access to the target region and the object being migrated.</p>
+
+<p><a id="X7BAE5A7282793684" name="X7BAE5A7282793684"></a></p>
+
+<h5>3.9-22 MigrateSingleObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MigrateSingleObj</code>( <var class="Arg">obj</var>, <var class="Arg">target</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">MigrateSingleObj</code> function works like <code class="func">MigrateObj</code> (<a href="chap3.html#X81A356DD84E76A8A"><span class="RefLink">3.9-21</span></a>), except that it does not migrate the subobjects of <code class="code">obj</code>.</p>
+
+<p><a id="X7E4B54BF837E81C0" name="X7E4B54BF837E81C0"></a></p>
+
+<h5>3.9-23 LockAndMigrateObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LockAndMigrateObj</code>( <var class="Arg">obj</var>, <var class="Arg">target</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">LockAndMigrateObj</code> function works like <code class="func">MigrateObj</code> (<a href="chap3.html#X81A356DD84E76A8A"><span class="RefLink">3.9-21</span></a>), except that it will automatically try to acquire a lock for the region containing <var class="Arg">target</var> if it does not have one already.</p>
+
+<p><a id="X7D1943AF793296F7" name="X7D1943AF793296F7"></a></p>
+
+<h5>3.9-24 IncorporateObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IncorporateObj</code>( <var class="Arg">target</var>, <var class="Arg">index</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">IncorporateObj</code> function allows convenient migration to a shared list or record. If <var class="Arg">target</var> is a list, then <code class="func">IncorporateObj</code> is equivalent to:</p>
+
+
+<div class="example"><pre>
+IncorporateObj := function(target, index, value)
+  atomic value do
+    target[index] := MigrateObj(value, target)
+  od;
+end;
+</pre></div>
+
+<p>If <var class="Arg">target</var> is a record, then it is equivalent to:</p>
+
+
+<div class="example"><pre>
+IncorporateObj := function(target, index, value)
+  atomic value do
+    target.(index) := MigrateObj(value, target)
+  od;
+end;
+</pre></div>
+
+<p>The intended purpose is the population of a shared list or record with values after its creation. Example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list := ShareObj([]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic list do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IncorporateObj(list, 1, [1,2,3]);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IncorporateObj(list, 2, [4,5,6]);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IncorporateObj(list, 3, [7,8,9]);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ViewShared(list);</span>
+[ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ]
+</pre></div>
+
+<p>Using plain assignment would leave the newly created lists in the thread-local region.</p>
+
+<p><a id="X876843717F4437CB" name="X876843717F4437CB"></a></p>
+
+<h5>3.9-25 AtomicIncorporateObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AtomicIncorporateObj</code>( <var class="Arg">target</var>, <var class="Arg">index</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">AtomicIncorporateObj</code> extends <code class="func">IncorporateObj</code> (<a href="chap3.html#X7D1943AF793296F7"><span class="RefLink">3.9-24</span></a>) by also locking the target. I.e., for a list, it is equivalent to:</p>
+
+
+<div class="example"><pre>
+AtomicIncorporateObj := function(target, index, value)
+  atomic target, value do
+    target[index] := MigrateObj(value, target)
+  od;
+end;
+</pre></div>
+
+<p>If <code class="code">target</code> is a record, then it is equivalent to:</p>
+
+
+<div class="example"><pre>
+AtomicIncorporateObj := function(target, index, value)
+  atomic value do
+    target.(index) := MigrateObj(value, target)
+  od;
+end;
+</pre></div>
+
+<p><a id="X784C978D801191E2" name="X784C978D801191E2"></a></p>
+
+<h5>3.9-26 AdoptObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdoptObj</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">AdoptObj</code> function migrates <var class="Arg">obj</var> (and all its subobjects contained within the same region) to the thread's current region. It requires exclusive access to <var class="Arg">obj</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := ShareObj([1,2,3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsThreadLocal(l);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic l do AdoptObj(l); od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsThreadLocal(l);</span>
+true
+</pre></div>
+
+<p><a id="X834DDB388600E9FA" name="X834DDB388600E9FA"></a></p>
+
+<h5>3.9-27 AdoptSingleObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdoptSingleObj</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">AdoptSingleObj</code> function works like <code class="func">AdoptObj</code> (<a href="chap3.html#X784C978D801191E2"><span class="RefLink">3.9-26</span></a>), except that it does not migrate the subobjects of <var class="Arg">obj</var>.</p>
+
+<p><a id="X867CDC9285D30DE8" name="X867CDC9285D30DE8"></a></p>
+
+<h5>3.9-28 LockAndAdoptObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LockAndAdoptObj</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">LockAndAdoptObj</code> function works like <code class="func">AdoptObj</code> (<a href="chap3.html#X784C978D801191E2"><span class="RefLink">3.9-26</span></a>), except that it will attempt acquire an exclusive lock for the region containing <var class="Arg">obj</var> if it does not have one already.</p>
+
+<p><a id="X7C71A88487762733" name="X7C71A88487762733"></a></p>
+
+<h5>3.9-29 CopyRegion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyRegion</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">CopyRegion</code> function performs a structural copy of <var class="Arg">obj</var>. The resulting objects will be located in the current thread's thread-local region. The function returns the copy as its result.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := MakeReadOnlyObj([1,2,3]);</span>
+[ 1, 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l2 := CopyRegion(l);</span>
+[ 1, 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionOf(l) = RegionOf(l2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj(l, l2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l = l2;</span>
+true
+</pre></div>
+
+<p><a id="X8222929685E9959A" name="X8222929685E9959A"></a></p>
+
+<h5>3.9-30 IsPublic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPublic</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">IsPublic</code> function returns true if its argument is an object in the public region, false otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPublic(1/2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPublic([1,2,3]);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPublic(ShareObj([1,2,3]));</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPublic(MakeImmutable([1,2,3]));</span>
+true
+</pre></div>
+
+<p><a id="X86B2EEF67C3378F0" name="X86B2EEF67C3378F0"></a></p>
+
+<h5>3.9-31 IsThreadLocal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsThreadLocal</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">IsThreadLocal</code> function returns true if its argument is an object in the current thread's thread-local region, false otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsThreadLocal([1,2,3]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsThreadLocal(ShareObj([1,2,3]));</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsThreadLocal(1/2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegionOf(1/2);</span>
+&lt;public region&gt;
+</pre></div>
+
+<p><a id="X80A11F3C84DB512E" name="X80A11F3C84DB512E"></a></p>
+
+<h5>3.9-32 IsShared</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsShared</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">IsShared</code> function returns true if its argument is an object in a shared region. Note that if the current thread does not hold a lock on that shared region, another thread can migrate <var class="Arg">obj</var> to a different region before the result is being evaluated; this can lead to race conditions. The function is intended primarily for debugging, not to build actual program logic around.</p>
+
+<p><a id="X827A26A67C99316C" name="X827A26A67C99316C"></a></p>
+
+<h5>3.9-33 HaveReadAccess</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HaveReadAccess</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">HaveReadAccess</code> function returns true if the current thread has read access to <var class="Arg">obj</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HaveReadAccess([1,2,3]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := ShareObj([1,2,3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HaveReadAccess(l);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic readonly l do t := HaveReadAccess(l); od;; t;</span>
+true
+</pre></div>
+
+<p><a id="X794206E5845006EA" name="X794206E5845006EA"></a></p>
+
+<h5>3.9-34 HaveWriteAccess</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HaveWriteAccess</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">HaveWriteAccess</code> function returns true if the current thread has write access to <var class="Arg">obj</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HaveWriteAccess([1,2,3]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := ShareObj([1,2,3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HaveWriteAccess(l);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic readwrite l do t := HaveWriteAccess(l); od;; t;</span>
+true
+</pre></div>
+
+<p><a id="X7F53D70285AF37B4" name="X7F53D70285AF37B4"></a></p>
+
+<h5>3.9-35 MakeReadOnlyObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeReadOnlyObj</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">MakeReadOnlyObj</code> function migrates <var class="Arg">obj</var> and all its subobjects that are within the same region as <var class="Arg">obj</var> to the read-only region. It returns <var class="Arg">obj</var>.</p>
+
+<p><a id="X7EC9341A865BCC35" name="X7EC9341A865BCC35"></a></p>
+
+<h5>3.9-36 MakeReadOnlySingleObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeReadOnlySingleObj</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">MakeReadOnlySingleObj</code> function migrates <var class="Arg">obj</var>, but not any of its subobjects, to the read-only region. It returns <var class="Arg">obj</var>.</p>
+
+<p><a id="X860008F57EFE21C4" name="X860008F57EFE21C4"></a></p>
+
+<h5>3.9-37 IsReadOnlyObj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReadOnlyObj</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">IsReadOnlyObj</code> function returns <code class="keyw">true</code> if <var class="Arg">obj</var> is in the read-only region, <code class="keyw">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsReadOnlyObj([1,2,3]);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsReadOnlyObj(MakeImmutable([1,2,3]));</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsReadOnlyObj(MakeReadOnlyObj([1,2,3]));</span>
+true
+</pre></div>
+
+<p><a id="X7F1E2F707F72371E" name="X7F1E2F707F72371E"></a></p>
+
+<h5>3.9-38 SetRegionName</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetRegionName</code>( <var class="Arg">obj</var>, <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">SetRegionName</code> function sets the name of the region of <var class="Arg">obj</var> to <var class="Arg">name</var>.</p>
+
+<p><a id="X8427E1537ADC4575" name="X8427E1537ADC4575"></a></p>
+
+<h5>3.9-39 ClearRegionName</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClearRegionName</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">ClearRegionName</code> function clears the name of the region of <var class="Arg">obj</var> to <var class="Arg">name</var>.</p>
+
+<p><a id="X7959FC997CC9177C" name="X7959FC997CC9177C"></a></p>
+
+<h5>3.9-40 RegionName</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RegionName</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">RegionName</code> function returns the name of the region of <var class="Arg">obj</var>. If that region does not have a name, <code class="keyw">fail</code> will be returned.</p>
+
+<p><a id="X80D0DFAB7F7241E8" name="X80D0DFAB7F7241E8"></a></p>
+
+<h5>3.9-41 ViewShared</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ViewShared</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">ViewShared</code> function allows the inspection of objects in shared regions. It will try to lock the region and then call <code class="code">ViewObj(obj)</code>. If it cannot acquire a lock for the region, it will simply display the normal description of the object.</p>
+
+<p><a id="X7FD39BCC8526AC53" name="X7FD39BCC8526AC53"></a></p>
+
+<h5>3.9-42 UNSAFE_VIEW</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UNSAFE_VIEW</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <code class="func">UNSAFE_VIEW</code> function allows the inspection of any object in the system, regardless of whether the current thread has access to the region containing it. It should be used with care: If the object inspected is being modified by another thread concurrently, the resulting behavior is undefined.</p>
+
+<p>Moreover, the function works by temporarily disabling read and write guards for regions, so other threads may corrupt memory rather than producing errors.</p>
+
+<p>It is generally safe to use if all threads but the current one are paused.</p>
+
+<p><a id="X7FD1B1B785E24734" name="X7FD1B1B785E24734"></a></p>
+
+<h5>3.9-43 <span class="Heading">The <code class="code">atomic</code> statement.</span></h5>
+
+<p>The <code class="code">atomic</code> statement ensures exclusive or read-only access to one or more shared regions for statements within its scope. It has the following syntax:</p>
+
+
+<div class="example"><pre>
+atomic ([readwrite|readonly] expr (, expr)* )* do
+  statements
+od;
+</pre></div>
+
+<p>Each expression is evaluated and the region containing the resulting object is locked with either a read-write or read-only lock, depending on the keyword preceding the expression. If neither the <code class="code">readwrite</code> nor the <code class="code">readonly</code> keyword was provided, read-write locks are used by default. Examples:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := ShareObj([1,2,3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic readwrite l do l[3] := 9; od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic l do l[2] := 4; od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic readonly l do Display(l); od;</span>
+[ 1, 4, 9 ]
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := ShareObj([1,2,3,4,5]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l2 := ShareObj([6,7,8]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">atomic readwrite l, readonly l2 do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     for i in [1..3] do l[i] := l2[i]; od;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     l3 := AdoptObj(l);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l3;</span>
+[ 6, 7, 8, 4, 5 ]
+</pre></div>
+
+<p>Atomic statements must observe region ordering. That means that the highest precedence level of a region locked by an atomic statement must be less than the lowest precedene level of a region that is locked by the same thread at the time the atomic statement is executed.</p>
+
+<p><a id="X8789D7A57CFC13BC" name="X8789D7A57CFC13BC"></a></p>
+
+<h4>3.10 <span class="Heading">Atomic functions</span></h4>
+
+<p>Instead of atomic regions, entire functions can be declared to be atomic. This has the same effect as though the function's body were enclosed in an atomic statement. Function arguments can be declared either <code class="code">readwrite</code> or <code class="code">readonly</code>; they will be locked in the same way as for a lock statement. If a function argument is preceded by neither <code class="code">readwrite</code> nor <code class="code">readonly</code>, the corresponding object will not be locked. Example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddAtomic := atomic function(readwrite list, readonly item)</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     Add(list, item);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end;</span>
+</pre></div>
+
+<p><a id="X78883D5E83B4425F" name="X78883D5E83B4425F"></a></p>
+
+<h4>3.11 <span class="Heading">Write-once functionality</span></h4>
+
+<p>There is an exception to the rule that objects can only be modified if a thread has write access to a region. A limited sets of objects can be modified using the "bind once" family of functions. These allow the modifications of objects to which a thread has read access in a limited fashion.</p>
+
+<p>For reasons of implementation symmetry, these functions can also be used on the atomic versions of these objects.</p>
+
+<p>Implementation note: The functionality is not currently available for component objects.</p>
+
+<p><a id="X83AD36A68503CF70" name="X83AD36A68503CF70"></a></p>
+
+<h5>3.11-1 BindOnce</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BindOnce</code>( <var class="Arg">obj</var>, <var class="Arg">index</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">BindOnce</code> modifies <var class="Arg">obj</var>, which can be a positional object, atomic positional object, component object, or atomic component object. It inspects <code class="code">obj![index]</code> for the positional versions or <code class="code">obj!.(index)</code> for the component versions. If the respective element is not yet bound, <var class="Arg">value</var> is assigned to that element. Otherwise, no modification happens. The test and modification occur as one atomic step. The function returns the value of the element; i.e. the old value if the element was bound and <var class="Arg">value</var> if it was unbound.</p>
+
+<p>The intent of this function is to allow concurrent initialization of objects, where multiple threads may attempt to set a value concurrently. Only one will succeed; all threads can then use the return value of <code class="func">BindOnce</code> as the definitive value of the element. It also allows for the lazy initialization of objects in the read-only region.</p>
+
+<p>The current thread needs to have at least read access to <var class="Arg">obj</var>, but does not require write access.</p>
+
+<p><a id="X8673539F7DA79110" name="X8673539F7DA79110"></a></p>
+
+<h5>3.11-2 TestBindOnce</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TestBindOnce</code>( <var class="Arg">obj</var>, <var class="Arg">index</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TestBindOnce</code> works like <code class="func">BindOnce</code> (<a href="chap3.html#X83AD36A68503CF70"><span class="RefLink">3.11-1</span></a>), except that it returns <code class="keyw">true</code> if the value could be bound and <code class="keyw">false</code> otherwise.</p>
+
+<p><a id="X7BAEC41C87E1DC43" name="X7BAEC41C87E1DC43"></a></p>
+
+<h5>3.11-3 BindOnceExpr</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BindOnceExpr</code>( <var class="Arg">obj</var>, <var class="Arg">index</var>, <var class="Arg">expr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">BindOnceExpr</code> works like <code class="func">BindOnce</code> (<a href="chap3.html#X83AD36A68503CF70"><span class="RefLink">3.11-1</span></a>), except that it evaluates the parameterless function <var class="Arg">expr</var> to determine the value. It will only evaluate <var class="Arg">expr</var> if the element is not bound.</p>
+
+<p>For positional objects, the implementation works as follows:</p>
+
+
+<div class="example"><pre>
+BindOnceExprPosObj := function(obj, index, expr)
+  if not IsBound(obj![index]) then
+    return BindOnce(obj, index, expr());
+  else
+    return obj![index]);
+  fi;
+end;
+</pre></div>
+
+<p>The implementation for component objects works analogously.</p>
+
+<p>The intent is to avoid unnecessary computations if the value is already bound. Note that this cannot be avoided entirely, because <code class="code">obj![index]</code> or <code class="code">obj!.(index)</code> can be bound while <var class="Arg">expr</var> is evaluated, but it can minimize such occurrences.</p>
+
+<p><a id="X81B15A9C8795DF59" name="X81B15A9C8795DF59"></a></p>
+
+<h5>3.11-4 TestBindOnceExpr</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TestBindOnceExpr</code>( <var class="Arg">obj</var>, <var class="Arg">index</var>, <var class="Arg">expr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">TestBindOnceExpr</code> works like <code class="func">BindOnceExpr</code> (<a href="chap3.html#X7BAEC41C87E1DC43"><span class="RefLink">3.11-3</span></a>), except that it returns <code class="keyw">true</code> if the value could be bound and <code class="keyw">false</code> otherwise.</p>
+
+<p><a id="X7897092C86AE17D7" name="X7897092C86AE17D7"></a></p>
+
+<h5>3.11-5 StrictBindOnce</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StrictBindOnce</code>( <var class="Arg">obj</var>, <var class="Arg">index</var>, <var class="Arg">expr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">StrictBindOnce</code> works like <code class="func">BindOnce</code> (<a href="chap3.html#X83AD36A68503CF70"><span class="RefLink">3.11-1</span></a>), except that it raises an error if the element is already bound. This is intended for cases where a read-only object is initialized, but where another thread trying to initialize it concurrently would be an error.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

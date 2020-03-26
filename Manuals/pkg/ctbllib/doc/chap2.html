@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (CTblLib) - Chapter 2: Tutorial for the GAP Character Table Library</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X80D9421C7E7658E3" name="X80D9421C7E7658E3"></a></p>
+<div class="ChapSects"><a href="chap2.html#X80D9421C7E7658E3">2 <span class="Heading">Tutorial for the <strong class="pkg">GAP</strong> Character Table Library</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X86B0A67F80B53925">2.1 <span class="Heading">Concepts used in the <strong class="pkg">GAP</strong> Character Table Library</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X84930B2D7849E019">2.2 <span class="Heading">Accessing a Character Table from the Library</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8658DC3A83B5A98B">2.2-1 <span class="Heading">Accessing a Character Table via a name</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7AA474817D17BF49">2.2-2 <span class="Heading">Accessing a Character Table via properties</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C6BFB4384CAFFC8">2.2-3 <span class="Heading">Accessing a Character Table via a Table of Marks</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E6AF18C7F139F54">2.2-4 <span class="Heading">Accessing a Character Table relative to another Character Table
+</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7CD1E9AA871848EC">2.2-5 <span class="Heading">Different character tables for the same group</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X8458D3927F73D1A5">2.3 <span class="Heading">Examples of Using the <strong class="pkg">GAP</strong> Character Table Library</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87AC9A4181AC369C">2.3-1 <span class="Heading">Example: Ambivalent Simple Groups</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8356E9EA789743B9">2.3-2 <span class="Heading">Example: Simple <span class="SimpleMath">p</span>-pure Groups</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7EFF15917BE38DBD">2.3-3 <span class="Heading">Example: Simple Groups with only one <span class="SimpleMath">p</span>-Block</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A1EEEAF7B65AF12">2.3-4 <span class="Heading">Example:The Sylow <span class="SimpleMath">3</span> subgroup of <span class="SimpleMath">3.O'N</span></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X86223F23831B8C51">2.3-5 <span class="Heading">Example: Primitive Permutation Characters of <span class="SimpleMath">2.A_6</span></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X807197D17F38CABF">2.3-6 <span class="Heading">Example: A Permutation Character of <span class="SimpleMath">Fi_23</span></span></a>
+</span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Tutorial for the <strong class="pkg">GAP</strong> Character Table Library</span></h3>
+
+<p>This chapter gives an overview of the basic functionality provided by the <strong class="pkg">GAP</strong> Character Table Library. The main concepts and interface functions are presented in the sections <a href="chap2.html#X86B0A67F80B53925"><span class="RefLink">2.1</span></a> and <a href="chap2.html#X84930B2D7849E019"><span class="RefLink">2.2</span></a>, Section <a href="chap2.html#X8458D3927F73D1A5"><span class="RefLink">2.3</span></a> shows a few small examples.</p>
+
+<p><a id="X86B0A67F80B53925" name="X86B0A67F80B53925"></a></p>
+
+<h4>2.1 <span class="Heading">Concepts used in the <strong class="pkg">GAP</strong> Character Table Library</span></h4>
+
+<p>The main idea behind working with the <strong class="pkg">GAP</strong> Character Table Library is to deal with character tables of groups but <em>without</em> having access to these groups. This situation occurs for example if one extracts information from the printed <strong class="pkg">Atlas</strong> of Finite Groups (<a href="chapBib.html#biBCCN85">[CCNPW85]</a>).</p>
+
+<p>This restriction means first of all that we need a way to access the character tables, see Section <a href="chap2.html#X84930B2D7849E019"><span class="RefLink">2.2</span></a> for that. Once we have such a character table, we can compute all those data about the underlying group <span class="SimpleMath">G</span>, say, that are determined by the character table. Chapter <a href="../../../doc/ref/chap71.html#X7F9D58208241D35E"><span class="RefLink">Reference: Attributes and Properties for Groups and Character Tables</span></a> lists such attributes and properties. For example, it can be computed from the character table of <span class="SimpleMath">G</span> whether <span class="SimpleMath">G</span> is solvable or not.</p>
+
+<p>Questions that cannot be answered using only the character table of <span class="SimpleMath">G</span> can perhaps be treated using additional information. For example, the structure of subgroups of <span class="SimpleMath">G</span> is in general not determined by the character table of <span class="SimpleMath">G</span>, but the character table may yield partial information. Two examples can be found in the sections <a href="chap2.html#X7A1EEEAF7B65AF12"><span class="RefLink">2.3-4</span></a> and <a href="chap2.html#X807197D17F38CABF"><span class="RefLink">2.3-6</span></a>.</p>
+
+<p>In the character table context, the role of homomorphisms between two groups is taken by <em>class fusions</em>. Monomorphisms correspond to subgroup fusions, epimorphisms correspond to factor fusions. Given two character tables of a group <span class="SimpleMath">G</span> and a subgroup <span class="SimpleMath">H</span> of <span class="SimpleMath">G</span>, one can in general compute only <em>candidates</em> for the class fusion of <span class="SimpleMath">H</span> into <span class="SimpleMath">G</span>, for example using <code class="func">PossibleClassFusions</code> (<a href="../../../doc/ref/chap73.html#X7883271F7F26356E"><span class="RefLink">Reference: PossibleClassFusions</span></a>). Note that <span class="SimpleMath">G</span> may contain several nonconjugate subgroups isomorphic with <span class="SimpleMath">H</span>, which may have different class fusions.</p>
+
+<p>One can often reduce a question about a group <span class="SimpleMath">G</span> to a question about its maximal subgroups. In the character table context, it is often sufficient to know the character table of <span class="SimpleMath">G</span>, the character tables of its maximal subgroups, and their class fusions into <span class="SimpleMath">G</span>. We are in this situation if the attribute <code class="func">Maxes</code> (<a href="chap3.html#X8150E63F7DBDF252"><span class="RefLink">3.7-1</span></a>) is set in the character table of <span class="SimpleMath">G</span>.</p>
+
+<p><em>Summary:</em> The character theoretic approach that is supported by the <strong class="pkg">GAP</strong> Character Table Library, that is, an approach without explicitly using the underlying groups, has the advantages that it can be used to answer many questions, and that these computations are usually cheap, compared to computations with groups. Disadvantages are that this approach is not always successful, and that answers are often "nonconstructive" in the sense that one can show the existence of something without getting one's hands on it.</p>
+
+<p><a id="X84930B2D7849E019" name="X84930B2D7849E019"></a></p>
+
+<h4>2.2 <span class="Heading">Accessing a Character Table from the Library</span></h4>
+
+<p>As stated in Section <a href="chap2.html#X86B0A67F80B53925"><span class="RefLink">2.1</span></a>, we must define how character tables from the <strong class="pkg">GAP</strong> Character Table Library can be accessed.</p>
+
+<p><a id="X8658DC3A83B5A98B" name="X8658DC3A83B5A98B"></a></p>
+
+<h5>2.2-1 <span class="Heading">Accessing a Character Table via a name</span></h5>
+
+<p>The most common way to access a character table from the <strong class="pkg">GAP</strong> Character Table Library is to call <code class="func">CharacterTable</code> (<a href="chap3.html#X86C06F408706F27A"><span class="RefLink">3.1-2</span></a>) with argument a string that is an <em>admissible name</em> for the character table. Typical admissible names are similar to the group names used in the <strong class="pkg">Atlas</strong> of Finite Groups <a href="chapBib.html#biBCCN85">[CCNPW85]</a>. One of these names is the <code class="func">Identifier</code> (<a href="../../../doc/ref/chap71.html#X79C40EE97890202F"><span class="RefLink">Reference: Identifier (for character tables)</span></a>) value of the character table, this name is used by <strong class="pkg">GAP</strong> when it prints library character tables.</p>
+
+<p>For example, an admissible name for the character table of an almost simple group is the <strong class="pkg">Atlas</strong> name, such as <code class="code">A5</code>, <code class="code">M11</code>, or <code class="code">L2(11).2</code>. Other names may be admissible, for example <code class="code">S6</code> is admissible for the symmetric group on six points, which is called <span class="SimpleMath">A_6.2_1</span> in the <strong class="pkg">Atlas</strong>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CharacterTable( "J1" );</span>
+CharacterTable( "J1" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CharacterTable( "L2(11)" );</span>
+CharacterTable( "L2(11)" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CharacterTable( "S5" );</span>
+CharacterTable( "A5.2" )
+</pre></div>
+
+<p><a id="X7AA474817D17BF49" name="X7AA474817D17BF49"></a></p>
+
+<h5>2.2-2 <span class="Heading">Accessing a Character Table via properties</span></h5>
+
+<p>If one does not know an admissible name of the character table of a group one is interested in, or if one does not know whether ths character table is available at all, one can use <code class="func">AllCharacterTableNames</code> (<a href="chap3.html#X7C091641852BB6FE"><span class="RefLink">3.1-3</span></a>) to compute a list of identifiers of all available character tables with given properties. Analogously, <code class="func">OneCharacterTableName</code> (<a href="chap3.html#X7EC4A57E8393D75C"><span class="RefLink">3.1-4</span></a>) can be used to compute one such identifier.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllCharacterTableNames( Size, 120 );</span>
+[ "2.A5", "2.A6M2", "2xA5", "A5.2", "A6.2_1M3", "D120", "L2(25)M3" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OneCharacterTableName( NrConjugacyClasses, n -&gt; n &lt;= 4 );</span>
+"S3"
+</pre></div>
+
+<p>For certain filters, such as <code class="func">Size</code> (<a href="../../../doc/ref/chap30.html#X858ADA3B7A684421"><span class="RefLink">Reference: Size</span></a>) and <code class="func">NrConjugacyClasses</code> (<a href="../../../doc/ref/chap39.html#X8733F87B7E4C9903"><span class="RefLink">Reference: NrConjugacyClasses</span></a>), the computations are fast because the values for all library tables are precomputed. See <code class="func">AllCharacterTableNames</code> (<a href="chap3.html#X7C091641852BB6FE"><span class="RefLink">3.1-3</span></a>) for an overview of these filters.</p>
+
+<p>The function <code class="func">BrowseCTblLibInfo</code> (<a href="chap3.html#X7A038A267CD17032"><span class="RefLink">3.5-2</span></a>) provides an interactive overview of available character tables, which allows one for example to search also for substrings in identifiers of character tables. This function is available only if the <strong class="pkg">Browse</strong> package has been loaded.</p>
+
+<p><a id="X7C6BFB4384CAFFC8" name="X7C6BFB4384CAFFC8"></a></p>
+
+<h5>2.2-3 <span class="Heading">Accessing a Character Table via a Table of Marks</span></h5>
+
+<p>Let <span class="SimpleMath">G</span> be a group whose table of marks is available via the <strong class="pkg">TomLib</strong> package (see <a href="chapBib.html#biBTomLib">[NMP11]</a> for how to access tables of marks from this library) then the <strong class="pkg">GAP</strong> Character Table Library contains the character table of <span class="SimpleMath">G</span>, and one can access this table by using the table of marks as an argument of <code class="func">CharacterTable</code> (<a href="chap3.html#X87110C1584D09BE4"><span class="RefLink">3.2-2</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tom:= TableOfMarks( "M11" );</span>
+TableOfMarks( "M11" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:= CharacterTable( tom );</span>
+CharacterTable( "M11" )
+</pre></div>
+
+<p><a id="X7E6AF18C7F139F54" name="X7E6AF18C7F139F54"></a></p>
+
+<h5>2.2-4 <span class="Heading">Accessing a Character Table relative to another Character Table
+</span></h5>
+
+<p>If one has already a character table from the <strong class="pkg">GAP</strong> Character Table Library that belongs to the group <span class="SimpleMath">G</span>, say, then names of related tables can be found as follows.</p>
+
+<p>The value of the attribute <code class="func">Maxes</code> (<a href="chap3.html#X8150E63F7DBDF252"><span class="RefLink">3.7-1</span></a>), if known, is the list of identifiers of the character tables of all classes of maximal subgroups of <span class="SimpleMath">G</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:= CharacterTable( "M11" );</span>
+CharacterTable( "M11" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasMaxes( t );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Maxes( t );</span>
+[ "A6.2_3", "L2(11)", "3^2:Q8.2", "A5.2", "2.S4" ]
+</pre></div>
+
+<p>If the <code class="func">Maxes</code> (<a href="chap3.html#X8150E63F7DBDF252"><span class="RefLink">3.7-1</span></a>) value of the character table with identifier <span class="SimpleMath">id</span>, say, is known then the character table of the groups in the <span class="SimpleMath">i</span>-th class of maximal subgroups can be accessed via the "relative name" <span class="SimpleMath">id</span><code class="code">M</code><span class="SimpleMath">i</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CharacterTable( "M11M2" );</span>
+CharacterTable( "L2(11)" )
+</pre></div>
+
+<p>The value of the attribute <code class="func">NamesOfFusionSources</code> (<a href="../../../doc/ref/chap73.html#X7F6569D5786A9D49"><span class="RefLink">Reference: NamesOfFusionSources</span></a>) is the list of identifiers of those character tables which store class fusions to <span class="SimpleMath">G</span>. So these character tables belong to subgroups of <span class="SimpleMath">G</span> and groups that have <span class="SimpleMath">G</span> as a factor group.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NamesOfFusionSources( t );</span>
+[ "A5.2", "A6.2_3", "P48/G1/L1/V1/ext2", "P48/G1/L1/V2/ext2", 
+  "L2(11)", "2.S4", "3^5:M11", "3^6.M11", "3^2:Q8.2", "M11N2", "5:4", 
+  "11:5" ]
+</pre></div>
+
+<p>The value of the attribute <code class="func">ComputedClassFusions</code> (<a href="../../../doc/ref/chap73.html#X7F71402285B7DE8E"><span class="RefLink">Reference: ComputedClassFusions</span></a>) is the list of records whose <code class="code">name</code> components are the identifiers of those character tables to which class fusions are stored. So these character tables belong to overgroups and factor groups of <span class="SimpleMath">G</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( ComputedClassFusions( t ), r -&gt; r.name );</span>
+[ "A11", "M12", "M23", "HS", "McL", "ON", "3^5:M11", "B" ]
+</pre></div>
+
+<p><a id="X7CD1E9AA871848EC" name="X7CD1E9AA871848EC"></a></p>
+
+<h5>2.2-5 <span class="Heading">Different character tables for the same group</span></h5>
+
+<p>The <strong class="pkg">GAP</strong> Character Table Library may contain several different character tables of a given group, in the sense that the rows and columns are sorted differently.</p>
+
+<p>For example, the <strong class="pkg">Atlas</strong> table of the alternating group <span class="SimpleMath">A_5</span> is available, and since <span class="SimpleMath">A_5</span> is isomorphic with the groups PSL<span class="SimpleMath">(2, 4)</span> and PSL<span class="SimpleMath">(2, 5)</span>, two more character tables of <span class="SimpleMath">A_5</span> can be constructed in a natural way. The three tables are of course permutation isomorphic. The first two are sorted in the same way, but the rows and columns of the third one are sorted differently.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t1:= CharacterTable( "A5" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t2:= CharacterTable( "PSL", 2, 4 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t3:= CharacterTable( "PSL", 2, 5 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TransformingPermutationsCharacterTables( t1, t2 );</span>
+rec( columns := (), group := Group([ (4,5) ]), rows := () )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TransformingPermutationsCharacterTables( t1, t3 );</span>
+rec( columns := (2,4)(3,5), group := Group([ (2,3) ]), 
+  rows := (2,5,3,4) )
+</pre></div>
+
+<p>Another situation where several character tables for the same group are available is that a group contains several classes of isomorphic maximal subgroups such that the class fusions are different.</p>
+
+<p>For example, the Mathieu group <span class="SimpleMath">M_12</span> contains two classes of maximal subgroups of index <span class="SimpleMath">12</span>, which are isomorphic with <span class="SimpleMath">M_11</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:= CharacterTable( "M12" );</span>
+CharacterTable( "M12" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mx:= Maxes( t );</span>
+[ "M11", "M12M2", "A6.2^2", "M12M4", "L2(11)", "3^2.2.S4", "M12M7", 
+  "2xS5", "M8.S4", "4^2:D12", "A4xS3" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s1:= CharacterTable( mx[1] );</span>
+CharacterTable( "M11" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s2:= CharacterTable( mx[2] );</span>
+CharacterTable( "M12M2" )
+</pre></div>
+
+<p>The class fusions into <span class="SimpleMath">M_12</span> are stored on the library tables of the maximal subgroups. The groups in the first class of <span class="SimpleMath">M_11</span> type subgroups contain elements in the classes <code class="code">4B</code>, <code class="code">6B</code>, and <code class="code">8B</code> of <span class="SimpleMath">M_12</span>, and the groups in the second class contain elements in the classes <code class="code">4A</code>, <code class="code">6A</code>, and <code class="code">8A</code>. Note that according to the <strong class="pkg">Atlas</strong> (see <a href="chapBib.html#biBCCN85">[CCNPW85, p. 33]</a>), the permutation characters of the action of <span class="SimpleMath">M_12</span> on the cosets of <span class="SimpleMath">M_11</span> type subgroups from the two classes of maximal subgroups are <code class="code">1a + 11a</code> and <code class="code">1a + 11b</code>, respectively.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GetFusionMap( s1, t );</span>
+[ 1, 3, 4, 7, 8, 10, 12, 12, 15, 14 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GetFusionMap( s2, t );</span>
+[ 1, 3, 4, 6, 8, 10, 11, 11, 14, 15 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( t );</span>
+M12
+
+      2   6  4  6  1  2  5  5  1  2  1  3  3   1   .   .
+      3   3  1  1  3  2  .  .  .  1  1  .  .   .   .   .
+      5   1  1  .  .  .  .  .  1  .  .  .  .   1   .   .
+     11   1  .  .  .  .  .  .  .  .  .  .  .   .   1   1
+
+         1a 2a 2b 3a 3b 4a 4b 5a 6a 6b 8a 8b 10a 11a 11b
+     2P  1a 1a 1a 3a 3b 2b 2b 5a 3b 3a 4a 4b  5a 11b 11a
+     3P  1a 2a 2b 1a 1a 4a 4b 5a 2a 2b 8a 8b 10a 11a 11b
+     5P  1a 2a 2b 3a 3b 4a 4b 1a 6a 6b 8a 8b  2a 11a 11b
+    11P  1a 2a 2b 3a 3b 4a 4b 5a 6a 6b 8a 8b 10a  1a  1a
+
+X.1       1  1  1  1  1  1  1  1  1  1  1  1   1   1   1
+X.2      11 -1  3  2 -1 -1  3  1 -1  . -1  1  -1   .   .
+X.3      11 -1  3  2 -1  3 -1  1 -1  .  1 -1  -1   .   .
+X.4      16  4  . -2  1  .  .  1  1  .  .  .  -1   A  /A
+X.5      16  4  . -2  1  .  .  1  1  .  .  .  -1  /A   A
+X.6      45  5 -3  .  3  1  1  . -1  . -1 -1   .   1   1
+X.7      54  6  6  .  .  2  2 -1  .  .  .  .   1  -1  -1
+X.8      55 -5  7  1  1 -1 -1  .  1  1 -1 -1   .   .   .
+X.9      55 -5 -1  1  1  3 -1  .  1 -1 -1  1   .   .   .
+X.10     55 -5 -1  1  1 -1  3  .  1 -1  1 -1   .   .   .
+X.11     66  6  2  3  . -2 -2  1  . -1  .  .   1   .   .
+X.12     99 -1  3  .  3 -1 -1 -1 -1  .  1  1  -1   .   .
+X.13    120  . -8  3  .  .  .  .  .  1  .  .   .  -1  -1
+X.14    144  4  .  . -3  .  . -1  1  .  .  .  -1   1   1
+X.15    176 -4  . -4 -1  .  .  1 -1  .  .  .   1   .   .
+
+A = E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9
+  = (-1+Sqrt(-11))/2 = b11
+</pre></div>
+
+<p>Permutation equivalent library tables are related to each other. In the above example, the table <code class="code">s2</code> is a <em>duplicate</em> of <code class="code">s1</code>, and there are functions for making the relations explicit.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDuplicateTable( s2 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IdentifierOfMainTable( s2 );</span>
+"M11"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IdentifiersOfDuplicateTables( s1 );</span>
+[ "HSM9", "M12M2", "ONM11" ]
+</pre></div>
+
+<p>See Section <a href="chap3.html#X7E5CFB187E313B11"><span class="RefLink">3.6</span></a> for details about duplicate character tables.</p>
+
+<p><a id="X8458D3927F73D1A5" name="X8458D3927F73D1A5"></a></p>
+
+<h4>2.3 <span class="Heading">Examples of Using the <strong class="pkg">GAP</strong> Character Table Library</span></h4>
+
+<p>The sections <a href="chap2.html#X87AC9A4181AC369C"><span class="RefLink">2.3-1</span></a>, <a href="chap2.html#X8356E9EA789743B9"><span class="RefLink">2.3-2</span></a>, and <a href="chap2.html#X7EFF15917BE38DBD"><span class="RefLink">2.3-3</span></a> show how the function <code class="func">AllCharacterTableNames</code> (<a href="chap3.html#X7C091641852BB6FE"><span class="RefLink">3.1-3</span></a>) can be used to search for character tables with certain properties. The <strong class="pkg">GAP</strong> Character Table Library serves as a tool for finding and checking conjectures in these examples.</p>
+
+<p>In Section <a href="chap2.html#X807197D17F38CABF"><span class="RefLink">2.3-6</span></a>, a question about a subgroup of the sporadic simple Fischer group <span class="SimpleMath">G = Fi_23</span> is answered using only character tables from the <strong class="pkg">GAP</strong> Character Table Library.</p>
+
+<p>More examples can be found in <a href="chapBib.html#biBGMN">[BGLMN10]</a>, <a href="chapBib.html#biBAmbigFus">[Brea]</a>, <a href="chapBib.html#biBctblpope">[Bred]</a>, <a href="chapBib.html#biBProbGenArxiv">[Brec]</a>, <a href="chapBib.html#biBAuto">[Bree]</a>.</p>
+
+<p><a id="X87AC9A4181AC369C" name="X87AC9A4181AC369C"></a></p>
+
+<h5>2.3-1 <span class="Heading">Example: Ambivalent Simple Groups</span></h5>
+
+<p>A group <span class="SimpleMath">G</span> is called <em>ambivalent</em> if each element in <span class="SimpleMath">G</span> is <span class="SimpleMath">G</span>-conjugate to its inverse. Equivalently, <span class="SimpleMath">G</span> is ambivalent if all its characters are real-valued. We are interested in simple ambivalent groups. Since ambivalence is invariant under permutation equivalence, we may omit duplicate character tables.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">isambivalent:= tbl -&gt; PowerMap( tbl, -1 )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                           = [ 1 .. NrConjugacyClasses( tbl ) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllCharacterTableNames( IsSimple, true, IsDuplicateTable, false,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                           isambivalent, true );</span>
+[ "3D4(2)", "A10", "A14", "A5", "A6", "J1", "J2", "L2(101)", 
+  "L2(109)", "L2(113)", "L2(121)", "L2(125)", "L2(13)", "L2(16)", 
+  "L2(17)", "L2(25)", "L2(29)", "L2(32)", "L2(37)", "L2(41)", 
+  "L2(49)", "L2(53)", "L2(61)", "L2(64)", "L2(73)", "L2(8)", 
+  "L2(81)", "L2(89)", "L2(97)", "O7(5)", "O8+(2)", "O8+(3)", 
+  "O8+(7)", "O8-(2)", "O8-(3)", "O9(3)", "S10(2)", "S12(2)", "S4(4)", 
+  "S4(5)", "S4(8)", "S4(9)", "S6(2)", "S6(4)", "S6(5)", "S8(2)" ]
+</pre></div>
+
+<p><a id="X8356E9EA789743B9" name="X8356E9EA789743B9"></a></p>
+
+<h5>2.3-2 <span class="Heading">Example: Simple <span class="SimpleMath">p</span>-pure Groups</span></h5>
+
+<p>A group <span class="SimpleMath">G</span> is called <em><span class="SimpleMath">p</span>-pure</em> for a prime integer <span class="SimpleMath">p</span> that divides <span class="SimpleMath">|G|</span> if the centralizer orders of nonidentity <span class="SimpleMath">p</span>-elements in <span class="SimpleMath">G</span> are <span class="SimpleMath">p</span>-powers. Equivalently, <span class="SimpleMath">G</span> is <span class="SimpleMath">p</span>-pure if <span class="SimpleMath">p</span> divides <span class="SimpleMath">|G|</span> and each element in <span class="SimpleMath">G</span> of order divisible by <span class="SimpleMath">p</span> is a <span class="SimpleMath">p</span>-element. (This property was studied by L. Héthelyi in 2002.)</p>
+
+<p>We are interested in small nonabelian simple <span class="SimpleMath">p</span>-pure groups.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">isppure:= function( p )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     return tbl -&gt; Size( tbl ) mod p = 0 and</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       ForAll( OrdersClassRepresentatives( tbl ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">               n -&gt; n mod p &lt;&gt; 0 or IsPrimePowerInt( n ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for i in [ 2, 3, 5, 7, 11, 13 ] do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     Print( i, "\n",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       AllCharacterTableNames( IsSimple, true, IsAbelian, false,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           IsDuplicateTable, false, isppure( i ), true ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       "\n" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   od;</span>
+2
+[ "A5", "A6", "L2(16)", "L2(17)", "L2(31)", "L2(32)", "L2(64)", 
+  "L2(8)", "L3(2)", "L3(4)", "Sz(32)", "Sz(8)" ]
+3
+[ "A5", "A6", "L2(17)", "L2(19)", "L2(27)", "L2(53)", "L2(8)", 
+  "L2(81)", "L3(2)", "L3(4)" ]
+5
+[ "A5", "A6", "A7", "L2(11)", "L2(125)", "L2(25)", "L2(49)", "L3(4)", 
+  "M11", "M22", "S4(7)", "Sz(32)", "Sz(8)", "U4(2)", "U4(3)" ]
+7
+[ "A7", "A8", "A9", "G2(3)", "HS", "J1", "J2", "L2(13)", "L2(49)", 
+  "L2(8)", "L2(97)", "L3(2)", "L3(4)", "M22", "O8+(2)", "S6(2)", 
+  "Sz(8)", "U3(3)", "U3(5)", "U4(3)", "U6(2)" ]
+11
+[ "A11", "A12", "A13", "Co2", "HS", "J1", "L2(11)", "L2(121)", 
+  "L2(23)", "L5(3)", "M11", "M12", "M22", "M23", "M24", "McL", "ON", 
+  "Suz", "U5(2)", "U6(2)" ]
+13
+[ "2E6(2)", "2F4(2)'", "3D4(2)", "A13", "A14", "A15", "F4(2)", 
+  "Fi22", "G2(3)", "G2(4)", "L2(13)", "L2(25)", "L2(27)", "L3(3)", 
+  "L4(3)", "O7(3)", "O8+(3)", "S4(5)", "S6(3)", "Suz", "Sz(8)", 
+  "U3(4)" ]
+</pre></div>
+
+<p>Looking at these examples, we may observe that the alternating group <span class="SimpleMath">A_n</span> of degree <span class="SimpleMath">n</span> is <span class="SimpleMath">2</span>-pure iff <span class="SimpleMath">n ∈ { 4, 5, 6 }</span>, <span class="SimpleMath">3</span>-pure iff <span class="SimpleMath">n ∈ { 3, 4, 5, 6 }</span>, and <span class="SimpleMath">p</span>-pure, for <span class="SimpleMath">p ≥ 5</span>, iff <span class="SimpleMath">n ∈ { p, p+1, p+2 }</span>.</p>
+
+<p>Also, the Suzuki groups <span class="SimpleMath">Sz(q)</span> are <span class="SimpleMath">2</span>-pure since the centralizers of nonidentity <span class="SimpleMath">2</span>-elements are contained in Sylow <span class="SimpleMath">2</span>-subgroups.</p>
+
+<p>From the inspection of the generic character table(s) of <span class="SimpleMath">PSL(2, q)</span>, we see that <span class="SimpleMath">PSL(2, p^d)</span> is <span class="SimpleMath">p</span>-pure Additionally, exactly the following cases of <span class="SimpleMath">l</span>-purity occur, for a prime <span class="SimpleMath">l</span>.</p>
+
+
+<ul>
+<li><p><span class="SimpleMath">q</span> is even and <span class="SimpleMath">q-1</span> or <span class="SimpleMath">q+1</span> is a power of <span class="SimpleMath">l</span>.</p>
+
+</li>
+<li><p>For <span class="SimpleMath">q ≡ 1 mod 4</span>, <span class="SimpleMath">(q+1)/2</span> is a power of <span class="SimpleMath">l</span> or <span class="SimpleMath">q-1</span> is a power of <span class="SimpleMath">l = 2</span>.</p>
+
+</li>
+<li><p>For <span class="SimpleMath">q ≡ 3 mod 4</span>, <span class="SimpleMath">(q-1)/2</span> is a power of <span class="SimpleMath">l</span> or <span class="SimpleMath">q+1</span> is a power of <span class="SimpleMath">l = 2</span>.</p>
+
+</li>
+</ul>
+<p><a id="X7EFF15917BE38DBD" name="X7EFF15917BE38DBD"></a></p>
+
+<h5>2.3-3 <span class="Heading">Example: Simple Groups with only one <span class="SimpleMath">p</span>-Block</span></h5>
+
+<p>Are there nonabelian simple groups with only one <span class="SimpleMath">p</span>-block, for some prime <span class="SimpleMath">p</span>?</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fun:= function( tbl )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     local result, p, bl;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     result:= false;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     for p in Set( Factors( Size( tbl ) ) ) do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       bl:= PrimeBlocks( tbl, p );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       if Length( bl.defect ) = 1 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         result:= true;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         Print( "only one block: ", Identifier( tbl ), ", p = ", p, "\n" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     od;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     return result;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllCharacterTableNames( IsSimple, true, IsAbelian, false,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                           IsDuplicateTable, false, fun, true );</span>
+only one block: M22, p = 2
+only one block: M24, p = 2
+[ "M22", "M24" ]
+</pre></div>
+
+<p>We see that the sporadic simple groups <span class="SimpleMath">M_22</span> and <span class="SimpleMath">M_24</span> have only one <span class="SimpleMath">2</span>-block.</p>
+
+<p><a id="X7A1EEEAF7B65AF12" name="X7A1EEEAF7B65AF12"></a></p>
+
+<h5>2.3-4 <span class="Heading">Example:The Sylow <span class="SimpleMath">3</span> subgroup of <span class="SimpleMath">3.O'N</span></span></h5>
+
+<p>We want to determine the structure of the Sylow <span class="SimpleMath">3</span>-subgroups of the triple cover <span class="SimpleMath">G = 3.O'N</span> of the sporadic simple O'Nan group <span class="SimpleMath">O'N</span>. The Sylow <span class="SimpleMath">3</span>-subgroup of <span class="SimpleMath">O'N</span> is an elementary abelian group of order <span class="SimpleMath">3^4</span>, since the Sylow <span class="SimpleMath">3</span> normalizer in <span class="SimpleMath">O'N</span> has the structure <span class="SimpleMath">3^4:2^1+4D_10</span> (see <a href="chapBib.html#biBCCN85">[CCNPW85, p. 132]</a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CharacterTable( "ONN3" );</span>
+CharacterTable( "3^4:2^(1+4)D10" )
+</pre></div>
+
+<p>Let <span class="SimpleMath">P</span> be a Sylow <span class="SimpleMath">3</span>-subgroup of <span class="SimpleMath">G</span>. Then <span class="SimpleMath">P</span> is not abelian, since the centralizer order of any preimage of an element of order three in the simple factor group of <span class="SimpleMath">G</span> is not divisible by <span class="SimpleMath">3^5</span>. Moreover, the exponent of <span class="SimpleMath">P</span> is three.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">3t:= CharacterTable( "3.ON" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orders:= OrdersClassRepresentatives( 3t );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ord3:= PositionsProperty( orders, x -&gt; x = 3 );</span>
+[ 2, 3, 7 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sizes:= SizesCentralizers( 3t ){ ord3 };</span>
+[ 1382446517760, 1382446517760, 3240 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( 3t );</span>
+1382446517760
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Collected( Factors( sizes[3] ) );</span>
+[ [ 2, 3 ], [ 3, 4 ], [ 5, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">9 in orders;</span>
+false
+</pre></div>
+
+<p>So both the centre and the Frattini subgroup of <span class="SimpleMath">P</span> are equal to the centre of <span class="SimpleMath">G</span>, hence <span class="SimpleMath">P</span> is an extraspecial group <span class="SimpleMath">3^1+4_+</span>.</p>
+
+<p><a id="X86223F23831B8C51" name="X86223F23831B8C51"></a></p>
+
+<h5>2.3-5 <span class="Heading">Example: Primitive Permutation Characters of <span class="SimpleMath">2.A_6</span></span></h5>
+
+<p>It is often interesting to compute the primitive permutation characters of a group <span class="SimpleMath">G</span>, that is, the characters of the permutation actions of <span class="SimpleMath">G</span> on the cosets of its maximal subgroups. These characters can be computed for example when the character tables of <span class="SimpleMath">G</span>, the character tables of its maximal subgroups, and the class fusions from these character tables into the table of <span class="SimpleMath">G</span> are known.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tbl:= CharacterTable( "2.A6" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasMaxes( tbl );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">maxes:= Maxes( tbl );</span>
+[ "2.A5", "2.A6M2", "3^2:8", "2.Symm(4)", "2.A6M5" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mx:= List( maxes, CharacterTable );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">prim1:= List( mx, s -&gt; TrivialCharacter( s )^tbl );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( tbl,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     rec( chars:= prim1, centralizers:= false, powermap:= false ) );</span>
+2.A6
+
+       1a 2a 4a 3a 6a 3b 6b 8a 8b 5a 10a 5b 10b
+
+Y.1     6  6  2  3  3  .  .  .  .  1   1  1   1
+Y.2     6  6  2  .  .  3  3  .  .  1   1  1   1
+Y.3    10 10  2  1  1  1  1  2  2  .   .  .   .
+Y.4    15 15  3  3  3  .  .  1  1  .   .  .   .
+Y.5    15 15  3  .  .  3  3  1  1  .   .  .   .
+</pre></div>
+
+<p>These permutation characters are the ones listed in <a href="chapBib.html#biBCCN85">[CCNPW85, p. 4]</a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PermCharInfo( tbl, prim1 ).ATLAS;</span>
+[ "1a+5a", "1a+5b", "1a+9a", "1a+5a+9a", "1a+5b+9a" ]
+</pre></div>
+
+<p>Alternatively, one can compute the primitive permutation characters from the table of marks if this table and the fusion into it are known.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tom:= TableOfMarks( tbl );</span>
+TableOfMarks( "2.A6" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">allperm:= PermCharsTom( tbl, tom );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">prim2:= allperm{ MaximalSubgroupsTom( tom )[1] };;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( tbl,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     rec( chars:= prim2, centralizers:= false, powermap:= false ) );</span>
+2.A6
+
+       1a 2a 4a 3a 6a 3b 6b 8a 8b 5a 10a 5b 10b
+
+Y.1     6  6  2  3  3  .  .  .  .  1   1  1   1
+Y.2     6  6  2  .  .  3  3  .  .  1   1  1   1
+Y.3    10 10  2  1  1  1  1  2  2  .   .  .   .
+Y.4    15 15  3  .  .  3  3  1  1  .   .  .   .
+Y.5    15 15  3  3  3  .  .  1  1  .   .  .   .
+</pre></div>
+
+<p>We see that the two approaches yield the same permutation characters, but the two lists are sorted in a different way. The latter is due to the fact that the rows of the table of marks are ordered in a way that is not compatible with the ordering of maximal subgroups for the character table. Moreover, there is no way to choose the fusion from the character table to the table of marks in such a way that the two lists of permutation characters would become equal. The component <code class="code">perm</code> in the <code class="func">FusionToTom</code> (<a href="chap3.html#X7B1AAED68753B1BE"><span class="RefLink">3.2-4</span></a>) record of the character table describes the incompatibility.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FusionToTom( tbl );</span>
+rec( map := [ 1, 2, 5, 4, 8, 3, 7, 11, 11, 6, 13, 6, 13 ], 
+  name := "2.A6", perm := (4,5), 
+  text := "fusion map is unique up to table autom." )
+</pre></div>
+
+<p><a id="X807197D17F38CABF" name="X807197D17F38CABF"></a></p>
+
+<h5>2.3-6 <span class="Heading">Example: A Permutation Character of <span class="SimpleMath">Fi_23</span></span></h5>
+
+<p>Let <span class="SimpleMath">x</span> be a <code class="code">3B</code> element in the sporadic simple Fischer group <span class="SimpleMath">G = Fi_23</span>. The normalizer <span class="SimpleMath">M</span> of <span class="SimpleMath">x</span> in <span class="SimpleMath">G</span> is a maximal subgroup of the type <span class="SimpleMath">3^{1+8}_+.2^{1+6}_-.3^{1+2}_+.2S_4</span>. We are interested in the distribution of the elements of the normal subgroup <span class="SimpleMath">N</span> of the type <span class="SimpleMath">3^{1+8}_+</span> in <span class="SimpleMath">M</span> to the conjugacy classes of <span class="SimpleMath">G</span>.</p>
+
+<p>This information can be computed from the permutation character <span class="SimpleMath">π = 1_N^G</span>, so we try to compute this permutation character. We have <span class="SimpleMath">π = (1_N^M)^G</span>, and <span class="SimpleMath">1_N^M</span> can be computed as the inflation of the regular character of the factor group <span class="SimpleMath">M/N</span> to <span class="SimpleMath">M</span>. Note that the character tables of <span class="SimpleMath">G</span> and <span class="SimpleMath">M</span> are available, as well as the class fusion of <span class="SimpleMath">M</span> in <span class="SimpleMath">G</span>, and that <span class="SimpleMath">N</span> is the largest normal <span class="SimpleMath">3</span>-subgroup of <span class="SimpleMath">M</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:= CharacterTable( "Fi23" );</span>
+CharacterTable( "Fi23" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mx:= Maxes( t );</span>
+[ "2.Fi22", "O8+(3).3.2", "2^2.U6(2).2", "S8(2)", "S3xO7(3)", 
+  "2..11.m23", "3^(1+8).2^(1+6).3^(1+2).2S4", "Fi23M8", "A12.2", 
+  "(2^2x2^(1+8)).(3xU4(2)).2", "2^(6+8):(A7xS3)", "S4xS6(2)", 
+  "S4(4).4", "L2(23)" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:= CharacterTable( mx[7] );</span>
+CharacterTable( "3^(1+8).2^(1+6).3^(1+2).2S4" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n:= ClassPositionsOfPCore( m, 3 );</span>
+[ 1 .. 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= m / n;</span>
+CharacterTable( "3^(1+8).2^(1+6).3^(1+2).2S4/[ 1, 2, 3, 4, 5, 6 ]" )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">reg:= 0 * [ 1 .. NrConjugacyClasses( f ) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">reg[1]:= Size( f );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">infl:= reg{ GetFusionMap( m, f ) };</span>
+[ 165888, 165888, 165888, 165888, 165888, 165888, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ind:= Induced( m, t, [ infl ] );</span>
+[ ClassFunction( CharacterTable( "Fi23" ), 
+    [ 207766624665600, 0, 0, 0, 603832320, 127567872, 6635520, 
+      663552, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, 0, 0, 0 ] ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PermCharInfo( t, ind ).contained;</span>
+[ [ 1, 0, 0, 0, 864, 1538, 3456, 13824, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PositionsProperty( OrdersClassRepresentatives( t ), x -&gt; x = 3 );</span>
+[ 5, 6, 7, 8 ]
+</pre></div>
+
+<p>Thus <span class="SimpleMath">N</span> contains <span class="SimpleMath">864</span> elements in the class <code class="code">3A</code>, <span class="SimpleMath">1538</span> elements in the class <code class="code">3B</code>, and so on.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

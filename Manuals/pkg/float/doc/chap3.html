@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (FLOAT) - Chapter 3: Polynomials</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X826D8334845549EC" name="X826D8334845549EC"></a></p>
+<div class="ChapSects"><a href="chap3.html#X826D8334845549EC">3 <span class="Heading">Polynomials</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7BDA2E7C85ECC18C">3.1 <span class="Heading">The Floats pseudo-field</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X788CDC24834012D7">3.2 <span class="Heading">Roots of polynomials</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7C9EF7E27EFA3288">3.3 <span class="Heading">Finding integer relations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85DEB4B584870F67">3.3-1 PSLQ</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X83445BFB7901B88F">3.4 <span class="Heading">LLL lattice reduction</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">Polynomials</span></h3>
+
+<p><a id="X7BDA2E7C85ECC18C" name="X7BDA2E7C85ECC18C"></a></p>
+
+<h4>3.1 <span class="Heading">The Floats pseudo-field</span></h4>
+
+<p>Polynomials with floating-point coefficients may be manipulated in <strong class="pkg">GAP</strong>; though they behave, in subtle ways, quite differently than polynomials over rings.</p>
+
+<p>The "pseudo-field" of floating-point numbers is an object in <strong class="pkg">GAP</strong>, called <code class="code">FLOAT_PSEUDOFIELD</code>. (It is not really a field, e.g. because addition of floating-point numbers in not associative). It may be used to create indeterminates, for example as</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Indeterminate(FLOAT_PSEUDOFIELD,"x");</span>
+x
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">2*x^2+3;</span>
+2.0*x^2+3.0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Value(last,10);</span>
+203.0
+</pre></div>
+
+<p><a id="X788CDC24834012D7" name="X788CDC24834012D7"></a></p>
+
+<h4>3.2 <span class="Heading">Roots of polynomials</span></h4>
+
+<p>The Jenkins-Traub algorithm has been implemented, in arbitrary precision for MPFR and MPC.</p>
+
+<p>Furthermore, CXSC can provide complex enclosures for the roots of a complex polynomial.</p>
+
+<p><a id="X7C9EF7E27EFA3288" name="X7C9EF7E27EFA3288"></a></p>
+
+<h4>3.3 <span class="Heading">Finding integer relations</span></h4>
+
+<p>The PSLQ algorithm has been implemented by Steve A. Linton, as an external contribution to <strong class="pkg">Float</strong>. This algorithm receives as input a vector of floats <span class="SimpleMath">x</span> and a required precision <span class="SimpleMath">ϵ</span>, and seeks an integer vector <span class="SimpleMath">v</span> such that <span class="SimpleMath">|x⋅ v|&lt;ϵ</span>. The implementation follows quite closely the original article <a href="chapBib.html#biBMR1836930">[BB01]</a>.</p>
+
+<p><a id="X85DEB4B584870F67" name="X85DEB4B584870F67"></a></p>
+
+<h5>3.3-1 PSLQ</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PSLQ</code>( <var class="Arg">x</var>, <var class="Arg">epsilon</var>[, <var class="Arg">gamma</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PSLQ_MP</code>( <var class="Arg">x</var>, <var class="Arg">epsilon</var>[, <var class="Arg">gamma</var>[, <var class="Arg">beta</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: An integer vector <span class="SimpleMath">v</span> with <span class="SimpleMath">|x⋅ v|&lt;ϵ</span>.</p>
+
+<p>The PSLQ algorithm by Bailey and Broadhurst (see <a href="chapBib.html#biBMR1836930">[BB01]</a>) searches for an integer relation between the entries in <span class="SimpleMath">x</span>.</p>
+
+<p><span class="SimpleMath">β</span> and <span class="SimpleMath">γ</span> are algorithm tuning parameters, and default to <span class="SimpleMath">4/10</span> and <span class="SimpleMath">2/sqrt(3)</span> respectively.</p>
+
+<p>The second form implements the "Multi-pair" variant of the algorithm, which is better suited to parallelization.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PSLQ([1.0,(1+Sqrt(5.0))/2],1.e-2);</span>
+[ 55, -34 ] # Fibonacci numbers
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RootsFloat([1,-4,2]*1.0);</span>
+[ 0.292893, 1.70711 ] # roots of 2x^2-4x+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PSLQ(List([0..2],i-&gt;last[1]^i),1.e-7);</span>
+[ 1, -4, 2 ] # a degree-2 polynomial fitting well
+</pre></div>
+
+<p><a id="X83445BFB7901B88F" name="X83445BFB7901B88F"></a></p>
+
+<h4>3.4 <span class="Heading">LLL lattice reduction</span></h4>
+
+<p>A faster implementation of the LLL lattice reduction algorithm has also been implemented. It is accessible via the commands <code class="code">FPLLLReducedBasis(m)</code> and <code class="code">FPLLLShortestVector(m)</code>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

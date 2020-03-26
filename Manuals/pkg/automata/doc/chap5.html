@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Automata) - Chapter 5: Some functions involving automata</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X7919AA9384EBC6A5" name="X7919AA9384EBC6A5"></a></p>
+<div class="ChapSects"><a href="chap5.html#X7919AA9384EBC6A5">5 <span class="Heading">Some functions involving automata</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X8050E142796E0CBF">5.1 <span class="Heading">From one type to another</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X81E06D518428CA3C">5.1-1 EpsilonToNFA</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X81DC84E17A170270">5.1-2 EpsilonToNFASet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X871F807D79CE148C">5.1-3 EpsilonCompactedAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X83B0473278DC14F3">5.1-4 ReducedNFA</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X87D0F9F17F2BEB57">5.1-5 NFAtoDFA</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B61945581FE4AC6">5.1-6 FuseSymbolsAut</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X862A34E9801BEB25">5.2 <span class="Heading">Minimalization of an automaton</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B5B5B10868FB525">5.2-1 UsefulAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X83C26846866AEE46">5.2-2 MinimalizedAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F7AE088808A5D00">5.2-3  MinimalAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F484D5A781BB643">5.2-4 AccessibleStates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X804A6BC979DA6E61">5.2-5 AccessibleAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7BAACCAF7E2D213B">5.2-6 IntersectionLanguage</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8460C44386EE6225">5.2-7 AutomatonAllPairsPaths</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Some functions involving automata</span></h3>
+
+<p>This chapter describes some functions involving automata. It starts with functions to obtain equivalent automata of other type. Then the minimalization is considered.</p>
+
+<p><a id="X8050E142796E0CBF" name="X8050E142796E0CBF"></a></p>
+
+<h4>5.1 <span class="Heading">From one type to another</span></h4>
+
+<p>Recall that two automata are said to be equivalent when they recognize the same language. Next we have functions which have as input automata of one type and as output equivalent automata of another type.</p>
+
+<p><a id="X81E06D518428CA3C" name="X81E06D518428CA3C"></a></p>
+
+<h5>5.1-1 EpsilonToNFA</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EpsilonToNFA</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><var class="Arg">A</var> is an automaton with <span class="SimpleMath">ϵ</span>-transitions. Returns a NFA recognizing the same language.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Automaton("epsilon",3,"ab@",[ [ [ 3 ], [ 1 ], [ 1, 2 ] ], [ [ ], [ ], [ 1, 3 ] ], [ [ 1, 3 ], [ 1 ], [ 3 ] ] ],[ 1, 2, 3 ],[ 1, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(x);</span>
+   |  1          2       3
+---------------------------------
+ a | [ 3 ]      [ 1 ]   [ 1, 2 ]   
+ b |                    [ 1, 3 ]   
+ @ | [ 1, 3 ]   [ 1 ]   [ 3 ]      
+Initial states:   [ 1, 2, 3 ]
+Accepting states: [ 1, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(EpsilonToNFA(x));</span>
+   |  1       2          3
+------------------------------------
+ a | [ 3 ]   [ 1, 3 ]   [ 1 .. 3 ]   
+ b |                    [ 1, 3 .. 3 ]      
+Initial states:   [ 1 .. 3 ]
+Accepting states: [ 1, 2, 3 ]
+</pre></div>
+
+<p><a id="X81DC84E17A170270" name="X81DC84E17A170270"></a></p>
+
+<h5>5.1-2 EpsilonToNFASet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EpsilonToNFASet</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><var class="Arg">A</var> is an automaton with <span class="SimpleMath">ϵ</span>-transitions. Returns a NFA recognizing the same language. This function differs from <code class="func">EpsilonToNFA</code> (<a href="chap5.html#X81E06D518428CA3C"><span class="RefLink">5.1-1</span></a>) in that it is faster for smaller automata, or automata with few epsilon transitions, but slower in the really hard cases.</p>
+
+<p><a id="X871F807D79CE148C" name="X871F807D79CE148C"></a></p>
+
+<h5>5.1-3 EpsilonCompactedAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EpsilonCompactedAut</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><var class="Arg">A</var> is an automaton with <span class="SimpleMath">ϵ</span>-transitions. Returns an <span class="SimpleMath">ϵ</span>NFA with each strongly-connected component of the epsilon-transitions digraph of <var class="Arg">A</var> identified with a single state and recognizing the same language.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Automaton("epsilon",3,"ab@",[ [ [ ], [ 1 ], [ 1 ] ], [ [ 2 ], [ ], [ ] ], [ [ 2 ], [ 1, 2, 3 ], [ 1, 3 ] ] ],[ 3 ],[ 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(x);</span>
+   |  1       2             3
+------------------------------------
+ a |         [ 1 ]         [ 1 ]      
+ b | [ 2 ]                            
+ @ | [ 2 ]   [ 1, 2, 3 ]   [ 1, 3 ]   
+Initial state:    [ 3 ]
+Accepting states: [ 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(EpsilonCompactedAut(x));</span>
+   |  1
+-----------
+ a | [ 1 ]   
+ b | [ 1 ]   
+ @ |         
+Initial state:   [ 1 ]
+Accepting state: [ 1 ]
+</pre></div>
+
+<p><a id="X83B0473278DC14F3" name="X83B0473278DC14F3"></a></p>
+
+<h5>5.1-4 ReducedNFA</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedNFA</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><var class="Arg">A</var> is a non deterministic automaton (without <span class="SimpleMath">ϵ</span>-transitions). Returns an NFA accepting the same language as its input but with possibly fewer states (it quotients out by the smallest right-invariant partition of the states). A paper describing the algorithm is in preparation.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Automaton("nondet",5,"ab",[ [ [ 2, 5 ], [ 2, 5 ], [ 4 ], [ 5 ], [ 3 ] ], [ [ 1 , 2 ], [ 1, 2, 3, 4 ], [ 1, 2, 3, 5 ], [ 2, 5 ], [ 2, 3 ] ] ],[ 1 ],[ 2, 3, 5 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(x);</span>
+   |  1          2                3                4          5
+----------------------------------------------------------------------
+ a | [ 2, 5 ]   [ 2, 5 ]         [ 4 ]            [ 5 ]      [ 3 ]      
+ b | [ 1, 2 ]   [ 1, 2, 3, 4 ]   [ 1, 2, 3, 5 ]   [ 2, 5 ]   [ 2, 3 ]   
+Initial state:    [ 1 ]
+Accepting states: [ 2, 3, 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(ReducedNFA(x));</span>
+   |  1          2          3                4                5
+----------------------------------------------------------------------
+ a | [ 3 ]      [ 1 ]      [ 2 ]            [ 1, 4 ]         [ 1, 4 ]   
+ b | [ 3, 4 ]   [ 1, 4 ]   [ 1, 3, 4, 5 ]   [ 2, 3, 4, 5 ]   [ 4, 5 ]   
+Initial state:    [ 5 ]
+Accepting states: [ 1, 3, 4 ]
+</pre></div>
+
+<p><a id="X87D0F9F17F2BEB57" name="X87D0F9F17F2BEB57"></a></p>
+
+<h5>5.1-5 NFAtoDFA</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NFAtoDFA</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given an NFA, these synonym functions, compute the equivalent DFA, using the powerset construction, according to the algorithm presented in the report of the AMoRE <a href="chapBib.html#biBAMORE:95">[MMP+95]</a> program. The returned automaton is dense deterministic</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=RandomAutomaton("nondet",3,2);;Display(x);</span>
+   |  1       2    3
+---------------------------
+ a | [ 2 ]        [ 1, 3 ]
+ b |              [ 2, 3 ]
+Initial states:   [ 1, 3 ]
+Accepting states: [ 1, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(NFAtoDFA(x));</span>
+   |  1  2  3
+--------------
+ a |  2  2  1
+ b |  3  3  3
+Initial state:    [ 1 ]
+Accepting states: [ 1, 2, 3 ]
+</pre></div>
+
+<p><a id="X7B61945581FE4AC6" name="X7B61945581FE4AC6"></a></p>
+
+<h5>5.1-6 FuseSymbolsAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FuseSymbolsAut</code>( <var class="Arg">A</var>, <var class="Arg">s1</var>, <var class="Arg">s2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given an automaton <var class="Arg">A</var> and integers <var class="Arg">s1</var> and <var class="Arg">s2</var> which, returns an NFA obtained by replacing all transitions through <var class="Arg">s2</var> by transitions through <var class="Arg">s1</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=RandomAutomaton("det",3,2);;Display(x);</span>
+   |  1  2  3
+--------------
+ a |  2  3
+ b |     1
+Initial state:    [ 3 ]
+Accepting states: [ 1, 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(FuseSymbolsAut(x,1,2));</span>
+   |  1       2          3
+---------------------------
+ a | [ 2 ]   [ 1, 3 ]
+Initial state:    [ 3 ]
+Accepting states: [ 1, 2, 3 ]
+</pre></div>
+
+<p><a id="X862A34E9801BEB25" name="X862A34E9801BEB25"></a></p>
+
+<h4>5.2 <span class="Heading">Minimalization of an automaton</span></h4>
+
+<p>The algorithm used to minimalize a dense deterministic automaton (i.e., to compute a dense minimal automaton recognizing the same language) is based on an algorithm due to Hopcroft (see <a href="chapBib.html#biBAHU:74">[AHU74]</a>). It is well known (see <a href="chapBib.html#biBHU:69">[HU69]</a>) that it suffices to reduce the automaton given and remove the inaccessible states. Again, the documentation for the computer program AMoRE <a href="chapBib.html#biBAMORE:95">[MMP+95]</a> has been very useful.</p>
+
+<p><a id="X7B5B5B10868FB525" name="X7B5B5B10868FB525"></a></p>
+
+<h5>5.2-1 UsefulAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UsefulAutomaton</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given an automaton <var class="Arg">A</var> (deterministic or not), outputs a dense DFA <var class="Arg">B</var> whose states are all reachable and such that <var class="Arg">A</var> and <var class="Arg">B</var> are equivalent.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=RandomAutomaton("det",4,2);;Display(x);</span>
+   |  1  2  3  4
+-----------------
+ a |     3  4
+ b |  1  4
+Initial state:    [ 3 ]
+Accepting states: [ 2, 3, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(UsefulAutomaton(x));</span>
+   |  1  2  3
+--------------
+ a |  2  3  3
+ b |  3  3  3
+Initial state:    [ 1 ]
+Accepting states: [ 1, 2 ]
+</pre></div>
+
+<p><a id="X83C26846866AEE46" name="X83C26846866AEE46"></a></p>
+
+<h5>5.2-2 MinimalizedAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinimalizedAut</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the minimal automaton equivalent to <var class="Arg">A</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=RandomAutomaton("det",4,2);;Display(x);</span>
+   |  1  2  3  4
+-----------------
+ a |     3  4
+ b |  1  2  3
+Initial state:    [ 4 ]
+Accepting states: [ 2, 3, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(MinimalizedAut(x));</span>
+   |  1  2
+-----------
+ a |  2  2
+ b |  2  2
+Initial state:   [ 1 ]
+Accepting state: [ 1 ]
+</pre></div>
+
+<p><a id="X7F7AE088808A5D00" name="X7F7AE088808A5D00"></a></p>
+
+<h5>5.2-3  MinimalAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227;  MinimalAutomaton</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns the minimal automaton equivalent to <var class="Arg">A</var>, but stores it so that future computations of this automaton just return the stored automaton.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=RandomAutomaton("det",4,2);;Display(x);</span>
+   |  1  2  3  4
+-----------------
+ a |     2  4
+ b |     3  4
+Initial state:    [ 4 ]
+Accepting states: [ 1, 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(MinimalAutomaton(x));</span>
+   |  1
+--------
+ a |  1
+ b |  1
+Initial state:   [ 1 ]
+Accepting state:
+</pre></div>
+
+<p><a id="X7F484D5A781BB643" name="X7F484D5A781BB643"></a></p>
+
+<h5>5.2-4 AccessibleStates</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AccessibleStates</code>( <var class="Arg">aut</var>[, <var class="Arg">p</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Computes the list of states of the automaton <var class="Arg">aut</var> which are accessible from state <var class="Arg">p</var>. When <var class="Arg">p</var> is not given, returns the states which are accessible from any initial state.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=RandomAutomaton("det",4,2);;Display(x);</span>
+   |  1  2  3  4
+-----------------
+ a |     1  2  4
+ b |     2  4
+Initial state:    [ 2 ]
+Accepting states: [ 1, 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AccessibleStates(x,3);</span>
+[ 1, 2, 3, 4 ]
+</pre></div>
+
+<p><a id="X804A6BC979DA6E61" name="X804A6BC979DA6E61"></a></p>
+
+<h5>5.2-5 AccessibleAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AccessibleAutomaton</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>If <var class="Arg">A</var> is a deterministic automaton, not necessarily dense, an equivalent dense deterministic accessible automaton is returned. (The function <code class="code">UsefulAutomaton</code> is called.)</p>
+
+<p>If <var class="Arg">A</var> is not deterministic with a single initial state, an equivalent accessible automaton is returned.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=RandomAutomaton("det",4,2);;Display(x);</span>
+   |  1  2  3  4
+-----------------
+ a |  1  3
+ b |  1  3  4
+Initial state:    [ 2 ]
+Accepting states: [ 3, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(AccessibleAutomaton(x));</span>
+   |  1  2  3  4
+-----------------
+ a |  2  4  4  4
+ b |  2  3  4  4
+Initial state:    [ 1 ]
+Accepting states: [ 2, 3 ]
+</pre></div>
+
+<p><a id="X7BAACCAF7E2D213B" name="X7BAACCAF7E2D213B"></a></p>
+
+<h5>5.2-6 IntersectionLanguage</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntersectionLanguage</code>( <var class="Arg">A1</var>, <var class="Arg">A2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntersectionAutomaton</code>( <var class="Arg">A1</var>, <var class="Arg">A2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Computes an automaton that recognizes the intersection of the languages given (through automata or rational expressions by) <var class="Arg">A1</var> and <var class="Arg">A2</var>. When the arguments are deterministic automata, is the same as ProductAutomaton, but works for all kinds of automata. Note that the language of the product of two automata is precisely the intersection of the languages of the automata.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=RandomAutomaton("det",3,2);;Display(x);</span>
+   |  1  2  3
+--------------
+ a |  2  3
+ b |     1
+Initial state:    [ 3 ]
+Accepting states: [ 1, 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=RandomAutomaton("det",3,2);;Display(y);</span>
+   |  1  2  3
+--------------
+ a |     1
+ b |  1  3
+Initial state:    [ 3 ]
+Accepting states: [ 1, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(IntersectionLanguage(x,y));</span>
+   |  1  2
+-----------
+ a |  2  2
+ b |  2  2
+Initial state:   [ 1 ]
+Accepting state: [ 1 ]
+</pre></div>
+
+<p><a id="X8460C44386EE6225" name="X8460C44386EE6225"></a></p>
+
+<h5>5.2-7 AutomatonAllPairsPaths</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutomatonAllPairsPaths</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given an automaton <var class="Arg">A</var>, with <code class="code">n</code> states, outputs a <code class="code">n</code> x <code class="code">n</code> matrix P, such that P[i][j] is the list of simple paths from state i to state j in <var class="Arg">A</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=RandomAutomaton("det",3,2);</span>
+&lt; deterministic automaton on 2 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AutomatonAllPairsPaths(a);</span>
+[ [ [ [ 1, 1 ] ], [  ], [  ] ], [ [ [ 2, 1 ] ], [ [ 2, 2 ] ], [  ] ],
+  [ [ [ 3, 2, 1 ] ], [ [ 3, 2 ] ], [ [ 3, 3 ] ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(a);</span>
+   |  1  2  3
+--------------
+ a |     1  2
+ b |  1  2  3
+Initial state:    [ 3 ]
+Accepting states: [ 1, 2 ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

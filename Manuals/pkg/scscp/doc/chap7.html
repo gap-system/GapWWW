@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (scscp) - Chapter 7: Examples of SCSCP usage</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7_mj.html">[MathJax on]</a></p>
+<p><a id="X879574BC87EE2203" name="X879574BC87EE2203"></a></p>
+<div class="ChapSects"><a href="chap7.html#X879574BC87EE2203">7 <span class="Heading">Examples of <strong class="pkg">SCSCP</strong> usage</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X875D36D286CFC465">7.1 <span class="Heading">Providing services with the SCSCP package</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7AE719DF7E2083BA">7.2 <span class="Heading">Identifying groups of order 512</span></a>
+</span>
+</div>
+</div>
+
+<h3>7 <span class="Heading">Examples of <strong class="pkg">SCSCP</strong> usage</span></h3>
+
+<p>In this chapter we are going to demonstrate some examples of communication between client and server using the SCSCP.</p>
+
+<p><a id="X875D36D286CFC465" name="X875D36D286CFC465"></a></p>
+
+<h4>7.1 <span class="Heading">Providing services with the SCSCP package</span></h4>
+
+<p>You can try to run the SCSCP server with the configuration file <code class="file">scscp/example/myserver.g</code>. To do this, go to that directory and enter <code class="code">gap myserver.g</code>. After this you will see some information messages and finally the server will start to wait for the connection. The final part of the startup screen may look as follows:</p>
+
+
+<div class="example"><pre>
+
+#I  Installed SCSCP procedure Factorial
+#I  Installed SCSCP procedure WS_Factorial
+#I  Installed SCSCP procedure GroupIdentificationService
+#I  Installed SCSCP procedure IdGroup512ByCode
+#I  Installed SCSCP procedure WS_IdGroup
+#I  Installed SCSCP procedure WS_Karatsuba
+#I  Installed SCSCP procedure EvaluateOpenMathCode
+#I  Ready to accept TCP/IP connections at localhost:26133 ...
+#I  Waiting for new client connection at localhost:26133 ...
+
+</pre></div>
+
+<p>See further self-explanatory comments in the file <code class="file">scscp/example/myserver.g</code>. There also some test files in the directory <code class="file">scscp/tst/</code> supplied with detailed comments. First, you may use demonstration files, preliminary turning on the demonstration mode as it is explained in these files, or just executing step by step each command from <code class="file">scscp/tst/demo.g</code> and <code class="file">scscp/tst/omdemo.g</code>. Then you can try to use files <code class="file">scscp/tst/id512.g</code>, <code class="file">scscp/tst/idperm.g</code> and <code class="file">scscp/tst/factor.g</code> for further tests of <strong class="pkg">SCSCP</strong> services.</p>
+
+<p><a id="X7AE719DF7E2083BA" name="X7AE719DF7E2083BA"></a></p>
+
+<h4>7.2 <span class="Heading">Identifying groups of order 512</span></h4>
+
+<p>We will give an example guiding you through all steps of creation of your own <strong class="pkg">SCSCP</strong> service.</p>
+
+<p>The <strong class="pkg">GAP</strong> Small Group Library does not provide identification for groups of order 512 using the function <code class="code">IdGroup</code>:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IdGroup( DihedralGroup( 256 ) );</span>
+[ 256, 539 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IdGroup(DihedralGroup(512)); </span>
+Error, the group identification for groups of size 512 is not available 
+called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 71 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput"></span>
+
+</pre></div>
+
+<p>However, the <strong class="pkg">GAP</strong> package <strong class="pkg">ANUPQ</strong> <a href="chapBib.html#biBANUPQ">[GNO]</a> has a function <code class="code">IdStandardPresented512Group</code> that does this work as demonstrated below:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("anupq");</span>
+---------------------------------------------------------------------------
+Loading    ANUPQ (ANU p-Quotient) 3.1.4
+GAP code by  Greg Gamble &lt;Greg.Gamble@uwa.edu.au&gt; (address for correspondence)
+           Werner Nickel (http://www.mathematik.tu-darmstadt.de/~nickel/)
+           [uses ANU pq binary (C code program) version: 1.9]
+C code by  Eamonn O'Brien (http://www.math.auckland.ac.nz/~obrien)
+Co-maintained by Max Horn &lt;max.horn@math.uni-giessen.de&gt;
+
+            For help, type: ?ANUPQ
+---------------------------------------------------------------------------
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := DihedralGroup( 512 );            </span>
+&lt;pc group of size 512 with 9 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := PqStandardPresentation( G );</span>
+&lt;fp group on the generators [ f1, f2, f3, f4, f5, f6, f7, f8, f9 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := PcGroupFpGroup( F );</span>
+&lt;pc group of size 512 with 9 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IdStandardPresented512Group( H );</span>
+[ 512, 2042 ]
+
+</pre></div>
+
+<p>The package <strong class="pkg">ANUPQ</strong> requires <strong class="pkg">UNIX</strong> environment and it is natural to provide an identification service for groups of order 512 to make it available for other platforms.</p>
+
+<p>Now we need to decide how the client will transmit a group to the server. Can we encode this group in <strong class="pkg">OpenMath</strong>? But there is no content dictionary for PcGroups. Should we convert it to a permutation representation to be able to use existing content dictionaries? But then the resulting <strong class="pkg">OpenMath</strong> code will be not compact. However, the <strong class="pkg">SCSCP</strong> protocol provides enough freedom for the user to select its own data representation, and since we are linking together two copies of the same system, we may use the <em>pcgs code</em> to pass the data to the server (see <code class="func">CodePcGroup</code> (<a href="../../../doc/ref/chap46.html#X8041C2D88721EEA9"><span class="RefLink">Reference: CodePcGroup</span></a>).</p>
+
+<p>First we create a function which accepts the integer number that is the code for pcgs of a group of order 512 and returns the number of this group in the GAP Small Groups library:</p>
+
+
+<div class="example"><pre>
+
+IdGroup512ByCode := function( code )
+local G, F, H;
+G := PcGroupCode( code, 512 );
+F := PqStandardPresentation( G );
+H := PcGroupFpGroup( F );
+return IdStandardPresented512Group( H );
+end;
+
+</pre></div>
+
+<p>After such function was created on the server, we need to make it "visible" as an <strong class="pkg">SCSCP</strong> procedure:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallSCSCPprocedure("IdGroup512", IdGroup512ByCode );</span>
+InstallSCSCPprocedure : procedure IdGroup512 installed. 
+
+</pre></div>
+
+<p>Note that this function assumes that the argument is a valid code for some group of order 512, and we wish the client to make it sure that this is the case. To do this, and also for the client's convenience, we provide the client's counterpart for this service. Here the group must be a pc-group of order 512, otherwise an error message will appear.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IdGroup512 := function( G )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   local code, result;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   if Size( G ) &lt;&gt; 512 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     Error( "G must be a group of order 512 \n" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   code := CodePcGroup( G );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   result := EvaluateBySCSCP( "IdGroup512ByCode", [ code ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                              "localhost", 26133 );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   return result.object;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end;;</span>
+
+</pre></div>
+
+<p>Now the client can call the function <code class="code">IdGroup512</code>, and the procedure of getting result is as much straightforward as using <code class="code">IdGroup</code> for those groups where it works:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IdGroup512(DihedralGroup(512));</span>
+[ 512, 2042 ]
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

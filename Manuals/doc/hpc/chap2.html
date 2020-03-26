@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (hpc) - Chapter 2: Variables in HPC-GAP</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X8000D4CD7F4F5594" name="X8000D4CD7F4F5594"></a></p>
+<div class="ChapSects"><a href="chap2.html#X8000D4CD7F4F5594">2 <span class="Heading">Variables in HPC-GAP</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7D9044767BEB1523">2.1 <span class="Heading">Global variables</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7D93681D7B5E8DCD">2.2 <span class="Heading">Thread-local variables</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7FE1310180B55506">2.2-1 MakeThreadLocal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81F4832C7ED44627">2.2-2 BindThreadLocal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8606D69B82B8AE84">2.2-3 BindThreadLocalConstructor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C508AFD8115AEB0">2.2-4 ThreadVar</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Variables in HPC-GAP</span></h3>
+
+<p>Variables with global scope have revised semantics in HPC-GAP in order to address concurrency issues. The normal semantics of global variables that are only accessed by a single thread remain unaltered.</p>
+
+<p><a id="X7D9044767BEB1523" name="X7D9044767BEB1523"></a></p>
+
+<h4>2.1 <span class="Heading">Global variables</span></h4>
+
+<p>Global variables in HPC-GAP can be accessed by all threads concurrently without explicit synchronization. Concurrent access is safe, but it is not deterministic. If multiple threads attempt to modify the same global variable simultaneously, the resulting value of the variable is random; it will be one of the values assigned by a thread, but it is impossible to predict with certainty which specific one will be assigned.</p>
+
+<p><a id="X7D93681D7B5E8DCD" name="X7D93681D7B5E8DCD"></a></p>
+
+<h4>2.2 <span class="Heading">Thread-local variables</span></h4>
+
+<p>HPC-GAP supports the notion of thread-local variables. Thread-local variables are (after being declared as such) accessed and modified like global variables. However, unlike global variables, each thread can assign a distinct value to a thread-local variable.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MakeThreadLocal("x");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := 1;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WaitTask(RunTask(function() x := 2; end));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x;</span>
+1
+</pre></div>
+
+<p>As can be seen here, the assignment to <code class="code">x</code> in a separate thread does not overwrite the value of <code class="code">x</code> in the main thread.</p>
+
+<p><a id="X7FE1310180B55506" name="X7FE1310180B55506"></a></p>
+
+<h5>2.2-1 MakeThreadLocal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeThreadLocal</code>( <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">MakeThreadLocal</code> makes the variable described by the string <var class="Arg">name</var> a thread-local variable. It normally does not give it an initial value; either explicit per-thread assignment or a call to <code class="func">BindThreadLocal</code> (<a href="chap2.html#X81F4832C7ED44627"><span class="RefLink">2.2-2</span></a>) or <code class="func">BindThreadLocalConstructor</code> (<a href="chap2.html#X8606D69B82B8AE84"><span class="RefLink">2.2-3</span></a>) to provide a default value is necessary.</p>
+
+<p>If a global variable with the same name exists and is bound at the time of the call, its value will be used as the default value as though <code class="func">BindThreadLocal</code> (<a href="chap2.html#X81F4832C7ED44627"><span class="RefLink">2.2-2</span></a>) had been called with that value as its second argument.</p>
+
+<p><a id="X81F4832C7ED44627" name="X81F4832C7ED44627"></a></p>
+
+<h5>2.2-2 BindThreadLocal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BindThreadLocal</code>( <var class="Arg">name</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">BindThreadLocal</code> gives the thread-local variable described by the string <var class="Arg">name</var> the default value <var class="Arg">obj</var>. The first time the thread-local variable is accessed in a thread thereafter, it will yield <var class="Arg">obj</var> as its value if it hasn't been assigned a specific value yet.</p>
+
+<p><a id="X8606D69B82B8AE84" name="X8606D69B82B8AE84"></a></p>
+
+<h5>2.2-3 BindThreadLocalConstructor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BindThreadLocalConstructor</code>( <var class="Arg">name</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">BindThreadLocal</code> (<a href="chap2.html#X81F4832C7ED44627"><span class="RefLink">2.2-2</span></a>) gives the thread-local variable described by the string <var class="Arg">name</var> the constructor <var class="Arg">func</var>. The first time the thread-local variable is accessed in a thread thereafter, it will yield <var class="Arg">func()</var> as its value if it hasn't been assigned a specific value yet.</p>
+
+<p><a id="X7C508AFD8115AEB0" name="X7C508AFD8115AEB0"></a></p>
+
+<h5>2.2-4 ThreadVar</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ThreadVar</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>All thread-local variables are stored in the thread-local record <code class="func">ThreadVar</code>. Thus, if <code class="code">x</code> is a thread-local variable, using <code class="code">ThreadVar.x</code> is the same as using <code class="code">x</code>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

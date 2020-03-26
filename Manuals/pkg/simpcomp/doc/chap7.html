@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (simpcomp) - Chapter 7: Functions and operations for SCNormalSurface</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X8071FAE8806ACAA2" name="X8071FAE8806ACAA2"></a></p>
+<div class="ChapSects"><a href="chap7.html#X8071FAE8806ACAA2">7 <span class="Heading">Functions and operations for <code class="code">SCNormalSurface</code></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7C63CE8578FBB0C7">7.1 <span class="Heading">Creating an <code class="code">SCNormalSurface</code> object</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7A59063180BD5969">7.1-1 SCNSEmpty</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X86C51E1F7CFA39F9">7.1-2 SCNSFromFacets</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X78F4044683236A97">7.1-3 SCNS</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8266FAFC7C6B8685">7.1-4 SCNSSlicing</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7E853EF97A3D0220">7.2 <span class="Heading">Generating new objects from discrete normal surfaces</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X80F13BB484B3E9B2">7.2-1 SCCopy</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7A180D487B8941C5">7.2-2 SCNSTriangulation</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X83A1885E876D7483">7.3 <span class="Heading">Properties of <code class="code">SCNormalSurface</code> objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X82C9F57780C0B7F8">7.3-1 SCConnectedComponents</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X82351AAE793DCB68">7.3-2 SCDim</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X788BAE187D584103">7.3-3 SCEulerCharacteristic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81F8071385FD9C1D">7.3-4 SCFVector</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F8B561C823DDDBA">7.3-5 SCFaceLattice</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AE0029985BD0775">7.3-6 SCFaceLatticeEx</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X79F60850875BB683">7.3-7 SCFpBettiNumbers</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X806E6A4C7CD30A96">7.3-8 SCGenus</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X78D66254858CE901">7.3-9 SCHomology</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81AF20DC814B51A6">7.3-10 SCIsConnected</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X860375D980E9A801">7.3-11 SCIsEmpty</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X78C860DC851167F7">7.3-12 SCIsOrientable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8026B46F8236124D">7.3-13 SCSkel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X84ACF7D580FE8B76">7.3-14 SCSkelEx</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X84CBD2F780A1F63C">7.3-15 SCTopologicalType</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81DA367A813F7599">7.3-16 SCUnion</a></span>
+</div></div>
+</div>
+
+<h3>7 <span class="Heading">Functions and operations for <code class="code">SCNormalSurface</code></span></h3>
+
+<p><a id="X7C63CE8578FBB0C7" name="X7C63CE8578FBB0C7"></a></p>
+
+<h4>7.1 <span class="Heading">Creating an <code class="code">SCNormalSurface</code> object</span></h4>
+
+<p>This section contains functions to construct discrete normal surfaces that are slicings from a list of <span class="SimpleMath">2</span>-dimensional facets (triangles and quadrilaterals) or combinatorial <span class="SimpleMath">3</span>-manifolds.</p>
+
+<p>For a very short introduction to the theory of discrete normal surfaces and slicings see Section <a href="chap2.html#X7BE7221B7C38B27D"><span class="RefLink">2.4</span></a> and Section <a href="chap2.html#X86275D5979B4B531"><span class="RefLink">2.5</span></a>, for an introduction to the <strong class="pkg">GAP</strong> object type <code class="code">SCNormalSurface</code> see <a href="chap5.html#X80F19FA07C71EDDC"><span class="RefLink">5.4</span></a>, for more information see the article <a href="chapBib.html#biBSpreer10NormSurfsCombSlic">[Spr11b]</a>.</p>
+
+<p><a id="X7A59063180BD5969" name="X7A59063180BD5969"></a></p>
+
+<h5>7.1-1 SCNSEmpty</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCNSEmpty</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: discrete normal surface of type <code class="code">SCNormalSurface</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Generates an empty complex (of dimension <span class="SimpleMath">-1</span>), i. e. an object of type <code class="code">SCNormalSurface</code> with empty facet list.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCNSEmpty();
+ [NormalSurface
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="empty normal surface"
+  Dim=-1
+ 
+ /NormalSurface]
+ </pre></div>
+
+<p><a id="X86C51E1F7CFA39F9" name="X86C51E1F7CFA39F9"></a></p>
+
+<h5>7.1-2 SCNSFromFacets</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCNSFromFacets</code>( <var class="Arg">facets</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: discrete normal surface of type <code class="code">SCNormalSurface</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Constructor for a discrete normal surface from a facet list, see <code class="func">SCFromFacets</code> (<a href="chap6.html#X7B5A874584FF34A7"><span class="RefLink">6.1-1</span></a>) for details.</p>
+
+
+<div class="example"><pre>
+ gap&gt; sl:=SCNSFromFacets([[1,2,3],[1,2,4,5],[1,3,4,6],[2,3,5,6],[4,5,6]]);
+ [NormalSurface
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="unnamed complex 86"
+  Dim=2
+ 
+ /NormalSurface]
+ </pre></div>
+
+<p><a id="X78F4044683236A97" name="X78F4044683236A97"></a></p>
+
+<h5>7.1-3 SCNS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCNS</code>( <var class="Arg">facets</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: discrete normal surface of type <code class="code">SCNormalSurface</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Internally calls <code class="func">SCNSFromFacets</code> (<a href="chap7.html#X86C51E1F7CFA39F9"><span class="RefLink">7.1-2</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; sl:=SCNS([[1,2,3],[1,2,4,5],[1,3,4,6],[2,3,5,6],[4,5,6]]);
+ [NormalSurface
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="unnamed complex 87"
+  Dim=2
+ 
+ /NormalSurface]
+ </pre></div>
+
+<p><a id="X8266FAFC7C6B8685" name="X8266FAFC7C6B8685"></a></p>
+
+<h5>7.1-4 SCNSSlicing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCNSSlicing</code>( <var class="Arg">complex</var>, <var class="Arg">slicing</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: discrete normal surface of type <code class="code">SCNormalSurface</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes a slicing defined by a partition <var class="Arg">slicing</var> of the set of vertices of the <span class="SimpleMath">3</span>-dimensional combinatorial pseudomanifold <var class="Arg">complex</var>. In particular, <var class="Arg">slicing</var> has to be a pair of lists of vertex labels and has to contain all vertex labels of <var class="Arg">complex</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByAttribute("F=[ 10, 35, 50, 25 ]");
+ [ [ 19, "S^3 (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;                       
+ gap&gt; sl:=SCNSSlicing(c,[[1..5],[6..10]]);    
+ [NormalSurface
+ 
+  Properties known: ConnectedComponents, Dim, EulerCharacteristic, FVector, Fac\
+ etsEx, Genus, IsConnected, IsOrientable, NSTriangulation, Name, TopologicalTyp\
+ e, Vertices.
+ 
+  Name="slicing [ [ 1, 2, 3, 4, 5 ], [ 6, 7, 8, 9, 10 ] ] of S^3 (VT)"
+  Dim=2
+  FVector=[ 17, 36, 12, 9 ]
+  EulerCharacteristic=2
+  IsOrientable=true
+  TopologicalType="S^2"
+ 
+ /NormalSurface]
+ gap&gt; sl.Facets;
+ [ [ [ 1, 6 ], [ 1, 8 ], [ 1, 9 ] ], [ [ 1, 6 ], [ 1, 8 ], [ 3, 6 ], [ 3, 8 ] ]
+     , [ [ 1, 6 ], [ 1, 9 ], [ 4, 6 ], [ 4, 9 ] ], 
+   [ [ 1, 6 ], [ 3, 6 ], [ 4, 6 ] ], [ [ 1, 8 ], [ 1, 9 ], [ 1, 10 ] ], 
+   [ [ 1, 8 ], [ 1, 10 ], [ 3, 8 ], [ 3, 10 ] ], 
+   [ [ 1, 9 ], [ 1, 10 ], [ 2, 9 ], [ 2, 10 ] ], 
+   [ [ 1, 9 ], [ 2, 9 ], [ 4, 9 ] ], [ [ 1, 10 ], [ 2, 10 ], [ 3, 10 ] ], 
+   [ [ 2, 7 ], [ 2, 9 ], [ 2, 10 ] ], 
+   [ [ 2, 7 ], [ 2, 9 ], [ 4, 7 ], [ 4, 9 ] ], 
+   [ [ 2, 7 ], [ 2, 10 ], [ 5, 7 ], [ 5, 10 ] ], 
+   [ [ 2, 7 ], [ 4, 7 ], [ 5, 7 ] ], [ [ 2, 10 ], [ 3, 10 ], [ 5, 10 ] ], 
+   [ [ 3, 6 ], [ 3, 8 ], [ 5, 6 ], [ 5, 8 ] ], [ [ 3, 6 ], [ 4, 6 ], [ 5, 6 ] ]
+     , [ [ 3, 8 ], [ 3, 10 ], [ 5, 8 ], [ 5, 10 ] ], 
+   [ [ 4, 6 ], [ 4, 7 ], [ 4, 9 ] ], [ [ 4, 6 ], [ 4, 7 ], [ 5, 6 ], [ 5, 7 ] ]
+     , [ [ 5, 6 ], [ 5, 7 ], [ 5, 8 ] ], [ [ 5, 7 ], [ 5, 8 ], [ 5, 10 ] ] ]
+ gap&gt; sl:=SCNSSlicing(c,[[1,3,5,7,9],[2,4,6,8,10]]);    
+ [NormalSurface
+ 
+  Properties known: ConnectedComponents, Dim, EulerCharacteristic, FVector, Fac\
+ etsEx, Genus, IsConnected, IsOrientable, NSTriangulation, Name, TopologicalTyp\
+ e, Vertices.
+ 
+  Name="slicing [ [ 1, 3, 5, 7, 9 ], [ 2, 4, 6, 8, 10 ] ] of S^3 (VT)"
+  Dim=2
+  FVector=[ 25, 50, 0, 25 ]
+  EulerCharacteristic=0
+  IsOrientable=true
+  TopologicalType="T^2"
+ 
+ /NormalSurface]
+ gap&gt; sl.Facets;                           
+ [ [ [ 1, 2 ], [ 1, 4 ], [ 3, 2 ], [ 3, 4 ] ], 
+   [ [ 1, 2 ], [ 1, 4 ], [ 9, 2 ], [ 9, 4 ] ], 
+   [ [ 1, 2 ], [ 1, 10 ], [ 3, 2 ], [ 3, 10 ] ], 
+   [ [ 1, 2 ], [ 1, 10 ], [ 9, 2 ], [ 9, 10 ] ], 
+   [ [ 1, 4 ], [ 1, 6 ], [ 3, 4 ], [ 3, 6 ] ], 
+   [ [ 1, 4 ], [ 1, 6 ], [ 9, 4 ], [ 9, 6 ] ], 
+   [ [ 1, 6 ], [ 1, 8 ], [ 3, 6 ], [ 3, 8 ] ], 
+   [ [ 1, 6 ], [ 1, 8 ], [ 9, 6 ], [ 9, 8 ] ], 
+   [ [ 1, 8 ], [ 1, 10 ], [ 3, 8 ], [ 3, 10 ] ], 
+   [ [ 1, 8 ], [ 1, 10 ], [ 9, 8 ], [ 9, 10 ] ], 
+   [ [ 3, 2 ], [ 3, 4 ], [ 5, 2 ], [ 5, 4 ] ], 
+   [ [ 3, 2 ], [ 3, 10 ], [ 5, 2 ], [ 5, 10 ] ], 
+   [ [ 3, 4 ], [ 3, 6 ], [ 5, 4 ], [ 5, 6 ] ], 
+   [ [ 3, 6 ], [ 3, 8 ], [ 5, 6 ], [ 5, 8 ] ], 
+   [ [ 3, 8 ], [ 3, 10 ], [ 5, 8 ], [ 5, 10 ] ], 
+   [ [ 5, 2 ], [ 5, 4 ], [ 7, 2 ], [ 7, 4 ] ], 
+   [ [ 5, 2 ], [ 5, 10 ], [ 7, 2 ], [ 7, 10 ] ], 
+   [ [ 5, 4 ], [ 5, 6 ], [ 7, 4 ], [ 7, 6 ] ], 
+   [ [ 5, 6 ], [ 5, 8 ], [ 7, 6 ], [ 7, 8 ] ], 
+   [ [ 5, 8 ], [ 5, 10 ], [ 7, 8 ], [ 7, 10 ] ], 
+   [ [ 7, 2 ], [ 7, 4 ], [ 9, 2 ], [ 9, 4 ] ], 
+   [ [ 7, 2 ], [ 7, 10 ], [ 9, 2 ], [ 9, 10 ] ], 
+   [ [ 7, 4 ], [ 7, 6 ], [ 9, 4 ], [ 9, 6 ] ], 
+   [ [ 7, 6 ], [ 7, 8 ], [ 9, 6 ], [ 9, 8 ] ], 
+   [ [ 7, 8 ], [ 7, 10 ], [ 9, 8 ], [ 9, 10 ] ] ]
+ </pre></div>
+
+<p><a id="X7E853EF97A3D0220" name="X7E853EF97A3D0220"></a></p>
+
+<h4>7.2 <span class="Heading">Generating new objects from discrete normal surfaces</span></h4>
+
+<p><strong class="pkg">simpcomp</strong> provides the possibility to copy and / or triangulate normal surfaces. Note that other constructions like the connected sum or the cartesian product do not make sense for (embedded) normal surfaces in general.</p>
+
+<p><a id="X80F13BB484B3E9B2" name="X80F13BB484B3E9B2"></a></p>
+
+<h5>7.2-1 SCCopy</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCCopy</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: discrete normal surface of type <code class="code">SCNormalSurface</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Copies a <strong class="pkg">GAP</strong> object of type <code class="code">SCNormalSurface</code> (cf. <code class="func">SCCopy</code>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; sl:=SCNSSlicing(SCBdSimplex(4),[[1],[2..5]]);
+ [NormalSurface
+ 
+  Properties known: ConnectedComponents, Dim, EulerCharacteristic, FVector, Fac\
+ etsEx, Genus, IsConnected, IsOrientable, NSTriangulation, Name, TopologicalTyp\
+ e, Vertices.
+ 
+  Name="slicing [ [ 1 ], [ 2, 3, 4, 5 ] ] of S^3_5"
+  Dim=2
+  FVector=[ 4, 6, 4 ]
+  EulerCharacteristic=2
+  IsOrientable=true
+  TopologicalType="S^2"
+ 
+ /NormalSurface]
+ gap&gt; sl_2:=SCCopy(sl);                          
+ [NormalSurface
+ 
+  Properties known: ConnectedComponents, Dim, EulerCharacteristic, FVector, Fac\
+ etsEx, Genus, IsConnected, IsOrientable, NSTriangulation, Name, TopologicalTyp\
+ e, Vertices.
+ 
+  Name="slicing [ [ 1 ], [ 2, 3, 4, 5 ] ] of S^3_5"
+  Dim=2
+  FVector=[ 4, 6, 4 ]
+  EulerCharacteristic=2
+  IsOrientable=true
+  TopologicalType="S^2"
+ 
+ /NormalSurface]
+ gap&gt; IsIdenticalObj(sl,sl_2);                     
+ false
+ </pre></div>
+
+<p><a id="X7A180D487B8941C5" name="X7A180D487B8941C5"></a></p>
+
+<h5>7.2-2 SCNSTriangulation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCNSTriangulation</code>( <var class="Arg">sl</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes a simplicial subdivision of a slicing <var class="Arg">sl</var> without introducing new vertices. The subdivision is stored as a property of <var class="Arg">sl</var> and thus is returned as an immutable object. Note that symmetry may be lost during the computation.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByAttribute("F=[ 10, 35, 50, 25 ]");
+ [ [ 19, "S^3 (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; sl:=SCNSSlicing(c,[[1,3,5,7,9],[2,4,6,8,10]]);;
+ gap&gt; sl.F; 
+ [ 25, 50, 0, 25 ]
+ gap&gt; sc:=SCNSTriangulation(sl);;
+ gap&gt; sc.F;
+ [ 25, 75, 50 ]
+ </pre></div>
+
+<p><a id="X83A1885E876D7483" name="X83A1885E876D7483"></a></p>
+
+<h4>7.3 <span class="Heading">Properties of <code class="code">SCNormalSurface</code> objects</span></h4>
+
+<p>Although some properties of a discrete normal surface can be computed by using the functions for simplicial complexes, there is a variety of properties needing specially designed functions. See below for a list.</p>
+
+<p><a id="X82C9F57780C0B7F8" name="X82C9F57780C0B7F8"></a></p>
+
+<h5>7.3-1 SCConnectedComponents</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCConnectedComponents</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of simplicial complexes of type <code class="code">SCNormalSurface</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes all connected components of an arbitrary normal surface.</p>
+
+
+<div class="example"><pre>
+ gap&gt; sl:=SCNSSlicing(SCBdCrossPolytope(4),[[1,2],[3..8]]);
+ [NormalSurface
+ 
+  Properties known: ConnectedComponents, Dim, EulerCharacteristic, FVector, Fac\
+ etsEx, IsConnected, IsOrientable, NSTriangulation, Name, TopologicalType, Vert\
+ ices.
+ 
+  Name="slicing [ [ 1, 2 ], [ 3, 4, 5, 6, 7, 8 ] ] of Bd(\beta^4)"
+  Dim=2
+  FVector=[ 12, 24, 16 ]
+  EulerCharacteristic=4
+  IsOrientable=true
+  TopologicalType="S^2 U S^2"
+ 
+ /NormalSurface]
+ gap&gt; cc:=SCConnectedComponents(sl);
+ [ [NormalSurface
+     
+      Properties known: Dim, EulerCharacteristic, FVector, FacetsEx, Genus, IsC\
+ onnected, IsOrientable, NSTriangulation, Name, TopologicalType, Vertices.
+     
+      Name="unnamed complex 302_cc_#1"
+      Dim=2
+      FVector=[ 6, 12, 8 ]
+      EulerCharacteristic=2
+      IsOrientable=true
+      TopologicalType="S^2"
+     
+     /NormalSurface], [NormalSurface
+     
+      Properties known: Dim, EulerCharacteristic, FVector, FacetsEx, Genus, IsC\
+ onnected, IsOrientable, NSTriangulation, Name, TopologicalType, Vertices.
+     
+      Name="unnamed complex 302_cc_#2"
+      Dim=2
+      FVector=[ 6, 12, 8 ]
+      EulerCharacteristic=2
+      IsOrientable=true
+      TopologicalType="S^2"
+     
+     /NormalSurface] ]
+ </pre></div>
+
+<p><a id="X82351AAE793DCB68" name="X82351AAE793DCB68"></a></p>
+
+<h5>7.3-2 SCDim</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCDim</code>( <var class="Arg">sl</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an integer upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the dimension of a discrete normal surface (which is always <span class="SimpleMath">2</span> if the slicing <var class="Arg">sl</var> is not empty).</p>
+
+
+<div class="example"><pre>
+ gap&gt; sl:=SCNSEmpty();;                                                    
+ gap&gt; SCDim(sl);                                                         
+ -1
+ gap&gt; sl:=SCNSFromFacets([[1,2,3],[1,2,4,5],[1,3,4,6],[2,3,5,6],[4,5,6]]);;
+ gap&gt; SCDim(sl);                                                         
+ 2
+ </pre></div>
+
+<p><a id="X788BAE187D584103" name="X788BAE187D584103"></a></p>
+
+<h5>7.3-3 SCEulerCharacteristic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCEulerCharacteristic</code>( <var class="Arg">sl</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an integer upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the Euler characteristic of a discrete normal surface <var class="Arg">sl</var>, cf. <code class="func">SCEulerCharacteristic</code>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; list:=SCLib.SearchByName("S^2xS^1");;  
+ gap&gt; c:=SCLib.Load(list[1][1]);;             
+ gap&gt; sl:=SCNSSlicing(c,[[1..5],[6..10]]);;
+ gap&gt; SCEulerCharacteristic(sl);                 
+ 4
+ </pre></div>
+
+<p><a id="X81F8071385FD9C1D" name="X81F8071385FD9C1D"></a></p>
+
+<h5>7.3-4 SCFVector</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCFVector</code>( <var class="Arg">sl</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <span class="SimpleMath">1</span>, <span class="SimpleMath">3</span> or <span class="SimpleMath">4</span> tuple of (non-negative) integer values upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the <span class="SimpleMath">f</span>-vector of a discrete normal surface, i. e. the number of vertices, edges, triangles and quadrilaterals of <var class="Arg">sl</var>, cf. <code class="func">SCFVector</code>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; list:=SCLib.SearchByName("S^2xS^1");;
+ gap&gt; c:=SCLib.Load(list[1][1]);;             
+ gap&gt; sl:=SCNSSlicing(c,[[1..5],[6..10]]);;
+ gap&gt; SCFVector(sl);                 
+ [ 20, 40, 16, 8 ]
+ </pre></div>
+
+<p><a id="X7F8B561C823DDDBA" name="X7F8B561C823DDDBA"></a></p>
+
+<h5>7.3-5 SCFaceLattice</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCFaceLattice</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of facet lists upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the face lattice of a discrete normal surface <var class="Arg">sl</var> in the original labeling. Triangles and quadrilaterals are stored separately (cf. <code class="func">SCSkel</code> (<a href="chap6.html#X8026B46F8236124D"><span class="RefLink">6.9-54</span></a>)).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(4);;              
+ gap&gt; sl:=SCNSSlicing(c,[[1,2],[3..5]]);;
+ gap&gt; SCFaceLattice(sl);                            
+ [ [ [ [ 1, 3 ] ], [ [ 1, 4 ] ], [ [ 1, 5 ] ], [ [ 2, 3 ] ], [ [ 2, 4 ] ], 
+       [ [ 2, 5 ] ] ], 
+   [ [ [ 1, 3 ], [ 1, 4 ] ], [ [ 1, 3 ], [ 1, 5 ] ], [ [ 1, 3 ], [ 2, 3 ] ], 
+       [ [ 1, 4 ], [ 1, 5 ] ], [ [ 1, 4 ], [ 2, 4 ] ], [ [ 1, 5 ], [ 2, 5 ] ], 
+       [ [ 2, 3 ], [ 2, 4 ] ], [ [ 2, 3 ], [ 2, 5 ] ], [ [ 2, 4 ], [ 2, 5 ] ] ]
+     , [ [ [ 1, 3 ], [ 1, 4 ], [ 1, 5 ] ], [ [ 2, 3 ], [ 2, 4 ], [ 2, 5 ] ] ], 
+   [ [ [ 1, 3 ], [ 1, 4 ], [ 2, 3 ], [ 2, 4 ] ], 
+       [ [ 1, 3 ], [ 1, 5 ], [ 2, 3 ], [ 2, 5 ] ], 
+       [ [ 1, 4 ], [ 1, 5 ], [ 2, 4 ], [ 2, 5 ] ] ] ]
+ gap&gt; sl.F;
+ [ 6, 9, 2, 3 ]
+ </pre></div>
+
+<p><a id="X7AE0029985BD0775" name="X7AE0029985BD0775"></a></p>
+
+<h5>7.3-6 SCFaceLatticeEx</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCFaceLatticeEx</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of face lists upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the face lattice of a discrete normal surface <var class="Arg">sl</var> in the standard labeling. Triangles and quadrilaterals are stored separately (cf. <code class="func">SCSkelEx</code> (<a href="chap6.html#X84ACF7D580FE8B76"><span class="RefLink">6.9-55</span></a>)).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(4);;              
+ gap&gt; sl:=SCNSSlicing(c,[[1,2],[3..5]]);;
+ gap&gt; SCFaceLatticeEx(sl);                            
+ [ [ [ 1 ], [ 2 ], [ 3 ], [ 4 ], [ 5 ], [ 6 ] ], 
+   [ [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 3 ], [ 2, 5 ], [ 3, 6 ], [ 4, 5 ], 
+       [ 4, 6 ], [ 5, 6 ] ], [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], 
+   [ [ 1, 2, 4, 5 ], [ 1, 3, 4, 6 ], [ 2, 3, 5, 6 ] ] ]
+ gap&gt; sl.F;
+ [ 6, 9, 2, 3 ]
+ </pre></div>
+
+<p><a id="X79F60850875BB683" name="X79F60850875BB683"></a></p>
+
+<h5>7.3-7 SCFpBettiNumbers</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCFpBettiNumbers</code>( <var class="Arg">sl</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of non-negative integers upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the Betti numbers modulo <var class="Arg">p</var> of a slicing <var class="Arg">sl</var>. Internally, <var class="Arg">sl</var> is triangulated (using <code class="func">SCNSTriangulation</code> (<a href="chap7.html#X7A180D487B8941C5"><span class="RefLink">7.2-2</span></a>)) and the Betti numbers are computed via <code class="func">SCFpBettiNumbers</code> using the triangulation.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("(S^2xS^1)#20");       
+ [ [ 7619, "(S^2xS^1)#20" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; c.F;
+ [ 27, 298, 542, 271 ]
+ gap&gt; sl:=SCNSSlicing(c,[[1..13],[14..27]]);;
+ gap&gt; SCFpBettiNumbers(sl,2);
+ [ 2, 14, 2 ]
+ </pre></div>
+
+<p><a id="X806E6A4C7CD30A96" name="X806E6A4C7CD30A96"></a></p>
+
+<h5>7.3-8 SCGenus</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCGenus</code>( <var class="Arg">sl</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a non-negative integer upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the genus of a discrete normal surface <var class="Arg">sl</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("(S^2xS^1)#20");
+ [ [ 7619, "(S^2xS^1)#20" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;               
+ gap&gt; c.F;                               
+ [ 27, 298, 542, 271 ]
+ gap&gt; sl:=SCNSSlicing(c,[[1..12],[13..27]]);;
+ gap&gt; SCIsConnected(sl);
+ true
+ gap&gt; SCGenus(sl);                     
+ 7
+ </pre></div>
+
+<p><a id="X78D66254858CE901" name="X78D66254858CE901"></a></p>
+
+<h5>7.3-9 SCHomology</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCHomology</code>( <var class="Arg">sl</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of homology groups upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the homology of a slicing <var class="Arg">sl</var>. Internally, <var class="Arg">sl</var> is triangulated (cf. <code class="func">SCNSTriangulation</code> (<a href="chap7.html#X7A180D487B8941C5"><span class="RefLink">7.2-2</span></a>)) and simplicial homology is computed via <code class="func">SCHomology</code> using the triangulation.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("(S^2xS^1)#20");       
+ [ [ 7619, "(S^2xS^1)#20" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; c.F;
+ [ 27, 298, 542, 271 ]
+ gap&gt; sl:=SCNSSlicing(c,[[1..12],[13..27]]);;   
+ gap&gt; sl.Homology;
+ [ [ 0, [  ] ], [ 14, [  ] ], [ 1, [  ] ] ]
+ gap&gt; sl:=SCNSSlicing(c,[[1..13],[14..27]]);;
+ gap&gt; sl.Homology;                       
+ [ [ 1, [  ] ], [ 14, [  ] ], [ 2, [  ] ] ]
+ </pre></div>
+
+<p><a id="X81AF20DC814B51A6" name="X81AF20DC814B51A6"></a></p>
+
+<h5>7.3-10 SCIsConnected</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsConnected</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Checks if a normal surface <var class="Arg">complex</var> is connected.</p>
+
+
+<div class="example"><pre>
+ gap&gt; list:=SCLib.SearchByAttribute("Dim=3 and F[1]=10");;
+ gap&gt; c:=SCLib.Load(list[1][1]);
+ [SimplicialComplex
+ 
+  Properties known: AltshulerSteinberg, AutomorphismGroup, 
+                    AutomorphismGroupSize, AutomorphismGroupStructure, 
+                    AutomorphismGroupTransitivity, ConnectedComponents, 
+                    Dim, DualGraph, EulerCharacteristic, FVector, 
+                    FacetsEx, GVector, GeneratorsEx, HVector, 
+                    HasBoundary, HasInterior, Homology, Interior, 
+                    IsCentrallySymmetric, IsConnected, 
+                    IsEulerianManifold, IsManifold, IsOrientable, 
+                    IsPseudoManifold, IsPure, IsStronglyConnected, 
+                    MinimalNonFacesEx, Name, Neighborliness, 
+                    NumFaces[], Orientation, Reference, SkelExs[], 
+                    Vertices.
+ 
+  Name="S^3 (VT)"
+  Dim=3
+  AltshulerSteinberg=0
+  AutomorphismGroupSize=200
+  AutomorphismGroupStructure="(D10 x D10) : C2"
+  AutomorphismGroupTransitivity=1
+  EulerCharacteristic=0
+  FVector=[ 10, 35, 50, 25 ]
+  GVector=[ 5, 5 ]
+  HVector=[ 6, 11, 6, 1 ]
+  HasBoundary=false
+  HasInterior=true
+  Homology=[ [ 0, [ ] ], [ 0, [ ] ], [ 0, [ ] ], [ 1, [ ] ] ]
+  IsCentrallySymmetric=false
+  IsConnected=true
+  IsEulerianManifold=true
+  IsOrientable=true
+  IsPseudoManifold=true
+  IsPure=true
+  IsStronglyConnected=true
+  Neighborliness=1
+ 
+ /SimplicialComplex]
+ gap&gt; sl:=SCNSSlicing(c,[[1..5],[6..10]]);
+ [NormalSurface
+ 
+  Properties known: ConnectedComponents, Dim, EulerCharacteristic, FVector, Fac\
+ etsEx, Genus, IsConnected, IsOrientable, NSTriangulation, Name, TopologicalTyp\
+ e, Vertices.
+ 
+  Name="slicing [ [ 1, 2, 3, 4, 5 ], [ 6, 7, 8, 9, 10 ] ] of S^3 (VT)"
+  Dim=2
+  FVector=[ 17, 36, 12, 9 ]
+  EulerCharacteristic=2
+  IsOrientable=true
+  TopologicalType="S^2"
+ 
+ /NormalSurface]
+ gap&gt; SCIsConnected(sl);
+ true
+ </pre></div>
+
+<p><a id="X860375D980E9A801" name="X860375D980E9A801"></a></p>
+
+<h5>7.3-11 SCIsEmpty</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsEmpty</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Checks if a normal surface <var class="Arg">complex</var> is the empty complex, i. e. a <code class="code">SCNormalSurface</code> object with empty facet list.</p>
+
+
+<div class="example"><pre>
+ gap&gt; sl:=SCNS([]);;
+ gap&gt; SCIsEmpty(sl);
+ true
+ </pre></div>
+
+<p><a id="X78C860DC851167F7" name="X78C860DC851167F7"></a></p>
+
+<h5>7.3-12 SCIsOrientable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsOrientable</code>( <var class="Arg">sl</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Checks if a discrete normal surface <var class="Arg">sl</var> is orientable.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(4);;
+ gap&gt; sl:=SCNSSlicing(c,[[1,2],[3,4,5]]);
+ [NormalSurface
+ 
+  Properties known: ConnectedComponents, Dim, EulerCharacteristic, FVector, Fac\
+ etsEx, Genus, IsConnected, IsOrientable, NSTriangulation, Name, TopologicalTyp\
+ e, Vertices.
+ 
+  Name="slicing [ [ 1, 2 ], [ 3, 4, 5 ] ] of S^3_5"
+  Dim=2
+  FVector=[ 6, 9, 2, 3 ]
+  EulerCharacteristic=2
+  IsOrientable=true
+  TopologicalType="S^2"
+ 
+ /NormalSurface]
+ gap&gt; SCIsOrientable(sl);
+ true
+ </pre></div>
+
+<p><a id="X8026B46F8236124D" name="X8026B46F8236124D"></a></p>
+
+<h5>7.3-13 SCSkel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCSkel</code>( <var class="Arg">sl</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a face list (of <var class="Arg">k+1</var>tuples) or a list of face lists upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes all faces of cardinality <var class="Arg">k+1</var> in the original labeling: <var class="Arg">k</var> <span class="SimpleMath">= 0</span> computes the vertices, <var class="Arg">k</var> <span class="SimpleMath">= 1</span> computes the edges, <var class="Arg">k</var> <span class="SimpleMath">= 2</span> computes the triangles, <var class="Arg">k</var> <span class="SimpleMath">= 3</span> computes the quadrilaterals.</p>
+
+<p>If <var class="Arg">k</var> is a list (necessarily a sublist of <code class="code">[ 0,1,2,3 ]</code>) all faces of all cardinalities contained in <var class="Arg">k</var> are computed.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(4);;              
+ gap&gt; sl:=SCNSSlicing(c,[[1],[2..5]]);;
+ gap&gt; SCSkel(sl,1);                            
+ [ [ [ 1, 2 ], [ 1, 3 ] ], [ [ 1, 2 ], [ 1, 4 ] ], [ [ 1, 2 ], [ 1, 5 ] ], 
+   [ [ 1, 3 ], [ 1, 4 ] ], [ [ 1, 3 ], [ 1, 5 ] ], [ [ 1, 4 ], [ 1, 5 ] ] ]
+ </pre></div>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(4);;              
+ gap&gt; sl:=SCNSSlicing(c,[[1],[2..5]]);;
+ gap&gt; SCSkel(sl,3);                            
+ [  ]
+ gap&gt; sl:=SCNSSlicing(c,[[1,2],[3..5]]);;
+ gap&gt; SCSkelEx(sl,3);                            
+ [ [ 1, 2, 4, 5 ], [ 1, 3, 4, 6 ], [ 2, 3, 5, 6 ] ]
+ </pre></div>
+
+<p><a id="X84ACF7D580FE8B76" name="X84ACF7D580FE8B76"></a></p>
+
+<h5>7.3-14 SCSkelEx</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCSkelEx</code>( <var class="Arg">sl</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a face list (of <var class="Arg">k+1</var>tuples) or a list of face lists upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes all faces of cardinality <var class="Arg">k+1</var> in the standard labeling: <var class="Arg">k</var> <span class="SimpleMath">= 0</span> computes the vertices, <var class="Arg">k</var> <span class="SimpleMath">= 1</span> computes the edges, <var class="Arg">k</var> <span class="SimpleMath">= 2</span> computes the triangles, <var class="Arg">k</var> <span class="SimpleMath">= 3</span> computes the quadrilaterals.</p>
+
+<p>If <var class="Arg">k</var> is a list (necessarily a sublist of <code class="code">[ 0,1,2,3 ]</code>) all faces of all cardinalities contained in <var class="Arg">k</var> are computed.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(4);;              
+ gap&gt; sl:=SCNSSlicing(c,[[1],[2..5]]);;
+ gap&gt; SCSkelEx(sl,1);                            
+ [ [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 3 ], [ 2, 4 ], [ 3, 4 ] ]
+ </pre></div>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(4);;              
+ gap&gt; sl:=SCNSSlicing(c,[[1],[2..5]]);;
+ gap&gt; SCSkelEx(sl,3);                            
+ [  ]
+ gap&gt; sl:=SCNSSlicing(c,[[1,2],[3..5]]);;
+ gap&gt; SCSkelEx(sl,3);                            
+ [ [ 1, 2, 4, 5 ], [ 1, 3, 4, 6 ], [ 2, 3, 5, 6 ] ]
+ </pre></div>
+
+<p><a id="X84CBD2F780A1F63C" name="X84CBD2F780A1F63C"></a></p>
+
+<h5>7.3-15 SCTopologicalType</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCTopologicalType</code>( <var class="Arg">sl</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a string upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Determines the topological type of <var class="Arg">sl</var> via the classification theorem for closed compact surfaces. If <var class="Arg">sl</var> is not connected, the topological type of each connected component is computed.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("(S^2xS^1)#20");      
+ [ [ 7619, "(S^2xS^1)#20" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; c.F;
+ [ 27, 298, 542, 271 ]
+ gap&gt; for i in [1..26] do sl:=SCNSSlicing(c,[[1..i],[i+1..27]]); Print(sl.TopologicalType,"\n"); od;                                           
+ S^2
+ S^2
+ S^2
+ S^2
+ S^2 U S^2
+ S^2 U S^2
+ S^2
+ (T^2)#3
+ (T^2)#5
+ (T^2)#4
+ (T^2)#3
+ (T^2)#7
+ (T^2)#7 U S^2
+ (T^2)#7 U S^2
+ (T^2)#7 U S^2
+ (T^2)#8 U S^2
+ (T^2)#7 U S^2
+ (T^2)#8
+ (T^2)#6
+ (T^2)#6
+ (T^2)#5
+ (T^2)#3
+ (T^2)#2
+ T^2
+ S^2
+ S^2
+ </pre></div>
+
+<p><a id="X81DA367A813F7599" name="X81DA367A813F7599"></a></p>
+
+<h5>7.3-16 SCUnion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCUnion</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: normal surface of type <code class="code">SCNormalSurface</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Forms the union of two normal surfaces <var class="Arg">complex1</var> and <var class="Arg">complex2</var> as the normal surface formed by the union of their facet sets. The two arguments are not altered. Note: for the union process the vertex labelings of the complexes are taken into account, see also <code class="func">Operation Union (SCNormalSurface, SCNormalSurface)</code> (<a href="chap5.html#X8462E960847F8B83"><span class="RefLink">5.6-1</span></a>). Facets occurring in both arguments are treated as one facet in the new complex.</p>
+
+
+<div class="example"><pre>
+ gap&gt; list:=SCLib.SearchByAttribute("Dim=3 and F[1]=10");;
+ gap&gt; c:=SCLib.Load(list[1][1]);
+ [SimplicialComplex
+ 
+  Properties known: AltshulerSteinberg, AutomorphismGroup, 
+                    AutomorphismGroupSize, AutomorphismGroupStructure, 
+                    AutomorphismGroupTransitivity, ConnectedComponents, 
+                    Dim, DualGraph, EulerCharacteristic, FVector, 
+                    FacetsEx, GVector, GeneratorsEx, HVector, 
+                    HasBoundary, HasInterior, Homology, Interior, 
+                    IsCentrallySymmetric, IsConnected, 
+                    IsEulerianManifold, IsManifold, IsOrientable, 
+                    IsPseudoManifold, IsPure, IsStronglyConnected, 
+                    MinimalNonFacesEx, Name, Neighborliness, 
+                    NumFaces[], Orientation, Reference, SkelExs[], 
+                    Vertices.
+ 
+  Name="S^3 (VT)"
+  Dim=3
+  AltshulerSteinberg=0
+  AutomorphismGroupSize=200
+  AutomorphismGroupStructure="(D10 x D10) : C2"
+  AutomorphismGroupTransitivity=1
+  EulerCharacteristic=0
+  FVector=[ 10, 35, 50, 25 ]
+  GVector=[ 5, 5 ]
+  HVector=[ 6, 11, 6, 1 ]
+  HasBoundary=false
+  HasInterior=true
+  Homology=[ [ 0, [ ] ], [ 0, [ ] ], [ 0, [ ] ], [ 1, [ ] ] ]
+  IsCentrallySymmetric=false
+  IsConnected=true
+  IsEulerianManifold=true
+  IsOrientable=true
+  IsPseudoManifold=true
+  IsPure=true
+  IsStronglyConnected=true
+  Neighborliness=1
+ 
+ /SimplicialComplex]
+ gap&gt; sl1:=SCNSSlicing(c,[[1..5],[6..10]]);;
+ gap&gt; sl2:=sl1+10;;
+ gap&gt; sl3:=SCUnion(sl1,sl2);;
+ gap&gt; SCTopologicalType(sl3);
+ "S^2 U S^2"
+ </pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

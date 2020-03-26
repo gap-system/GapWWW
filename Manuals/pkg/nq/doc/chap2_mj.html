@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (nq) - Chapter 2: General remarks</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X7A696C2A78E88D1A" name="X7A696C2A78E88D1A"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X7A696C2A78E88D1A">2 <span class="Heading">General remarks</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7E33A61A831C0068">2.1 <span class="Heading">Commutators and the Lower Central Series</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X8463EF6A821FFB69">2.2 <span class="Heading">Nilpotent groups</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X8268F8197E6BD786">2.3 <span class="Heading">Nilpotent presentations </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7DAF9CC17F6B868D">2.4 <span class="Heading">A sketch of the algorithm</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X84EF796487BC1822">2.5 <span class="Heading">Identical Relations</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X861A2C6385F6BCF5">2.6 <span class="Heading">Expression Trees</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7E27CA7F7E797520">2.7 <span class="Heading">A word about the implementation</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X79E150AA823439A8">2.8 <span class="Heading">The input format of the standalone</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">General remarks</span></h3>
+
+<p>In this chapter we define notation used throughout this manual and recollect basic facts about nilpotent groups. We also provide some background information about the functionality implemented in this package.</p>
+
+<p><a id="X7E33A61A831C0068" name="X7E33A61A831C0068"></a></p>
+
+<h4>2.1 <span class="Heading">Commutators and the Lower Central Series</span></h4>
+
+<p>The <em>commutator</em> of two elements <span class="SimpleMath">\(h_1\)</span> and <span class="SimpleMath">\(h_2\)</span> of a group <span class="SimpleMath">\(G\)</span> is the element <span class="SimpleMath">\(h_1^{-1}h_2^{-1}h_1h_2\)</span> and is denoted by <span class="SimpleMath">\([h_1,h_2]\)</span>. It satisfies the equation <span class="SimpleMath">\(h_1h_2 = h_2h_1[h_1,h_2]\)</span> and can be interpreted as the correction term that has to be introduced into a word if two elements of a group are interchanged. Iterated commutators are written in <em>left-normed fashion</em>: <span class="SimpleMath">\([h_1,h_2,\ldots,h_{n-1},h_n]=[[h_1,h_2,\ldots,h_{n-1}],h_n]\)</span>.</p>
+
+<p>The <em>lower central series</em> of <span class="SimpleMath">\(G\)</span> is defined inductively as <span class="SimpleMath">\(\gamma_1(G) = G, \gamma_i(G) = [\gamma_{i-1}(G),G]\)</span> for <span class="SimpleMath">\(i \ge 2\)</span>. Each term in the lower central series is a normal (even fully invariant) subgroup of <span class="SimpleMath">\(G\)</span>. The factors of the lower central series are abelian groups. On each factor the induced action of <span class="SimpleMath">\(G\)</span> via conjugation is the trivial action.</p>
+
+<p>The factor <span class="SimpleMath">\(\gamma_k(G)/\gamma_{k+1}(G)\)</span> is generated by the elements <span class="SimpleMath">\([g,h]\gamma_{k+1}(G),\)</span> where <span class="SimpleMath">\(g\)</span> runs through a set of (representatives of) generators for <span class="SimpleMath">\(G/\gamma_2(G)\)</span> and <span class="SimpleMath">\(h\)</span> runs through a set of (representatives of) generators for <span class="SimpleMath">\(\gamma_{k-1}(G)/\gamma_k(G).\)</span> Therefore, each factor of the lower central series is finitely generated if <span class="SimpleMath">\(G\)</span> is finitely generated.</p>
+
+<p>If one factor of the lower central series is finite, then all subsequent factors are finite. Then the exponent of the <span class="SimpleMath">\(k+1\)</span>-th factor is a divisor of the exponent of the <span class="SimpleMath">\(k\)</span>-th factor of the lower central series. In particular, the exponents of all factors of the lower central series are bounded by the exponent of the first finite factor of the lower central series.</p>
+
+<p><a id="X8463EF6A821FFB69" name="X8463EF6A821FFB69"></a></p>
+
+<h4>2.2 <span class="Heading">Nilpotent groups</span></h4>
+
+<p>A group <span class="SimpleMath">\(G\)</span> is called <em>nilpotent</em> if there is a positive integer <span class="SimpleMath">\(c\)</span> such that all <span class="SimpleMath">\((c+1)\)</span>-fold commutators are trivial in <span class="SimpleMath">\(G.\)</span> The smallest integer with this property is called the <em>nilpotency class</em> of <span class="SimpleMath">\(G\)</span>. In terms of the lower central series a group <span class="SimpleMath">\(G \not= 1\)</span> has nilpotency class <span class="SimpleMath">\(c\)</span> if and only if <span class="SimpleMath">\(\gamma_{c}(G) \not= 1\)</span> and <span class="SimpleMath">\(\gamma_{c+1}(G) = 1\)</span>.</p>
+
+<p>Examples of nilpotent groups are finite <span class="SimpleMath">\(p\)</span>-groups, the group of unitriangular matrices over a ring with one and the factor groups of a free group modulo the terms of its lower central series.</p>
+
+<p>Finiteness of a nilpotent group can be decided by the group's commutator factor group. A nilpotent group is finite if and only if its commutator factor group is finite. A group whose commutator factor group is finite can only have finite nilpotent quotient groups.</p>
+
+<p>By refining the lower central series of a finitely generated nilpotent group one can obtain a (sub)normal series <span class="SimpleMath">\(G_1&gt;G_2&gt;...&gt;G_{k+1}=1\)</span> with cyclic (central) factors. Therefore, every finitely generated nilpotent group is <em>polycyclic</em>. Such a <em>polycyclic series</em> gives rise to a polycyclic generating sequence by choosing a generator <span class="SimpleMath">\(a_i\)</span> for each cyclic factor <span class="SimpleMath">\(G_i/G_{i+1}\)</span>. Let <span class="SimpleMath">\(I\)</span> be the set of indices such that <span class="SimpleMath">\(G_i/G_{i+1}\)</span> is finite. A simple induction argument shows that every element of the group can be written uniquely as a <em>normal word</em> <span class="SimpleMath">\(a_1^{e_1}\ldots a_n^{e_n}\)</span> with integers <span class="SimpleMath">\(e_i\)</span> and <span class="SimpleMath">\(0\leq e_i&lt;m_i\)</span> for <span class="SimpleMath">\(i\in I\)</span>.</p>
+
+<p><a id="X8268F8197E6BD786" name="X8268F8197E6BD786"></a></p>
+
+<h4>2.3 <span class="Heading">Nilpotent presentations </span></h4>
+
+<p>From a polycyclic generating sequence one can obtain a <em>polycyclic presentation</em> for the group. The following set of power and commutator relations is a defining set of relations. The <em>power relations</em> express <span class="SimpleMath">\(a_i^{m_i}\)</span> in terms of the generators <span class="SimpleMath">\(a_{i+1},\ldots,a_n\)</span> whenever <span class="SimpleMath">\(G_i/G_{i+1}\)</span> is finite with order <span class="SimpleMath">\(m_i\)</span>. The <em>commutator relations</em> are obtained by expressing <span class="SimpleMath">\([a_j,a_i]\)</span> for <span class="SimpleMath">\(j&gt;i\)</span> as a word in the generators <span class="SimpleMath">\(a_{i+1},\ldots,a_n\)</span>. If the polycyclic series is obtained from refining the lower central series, then <span class="SimpleMath">\([a_j,a_i]\)</span> is even a word in <span class="SimpleMath">\(a_{j+1},\ldots,a_n\)</span>. In this case we obtain a nilpotent presentation.</p>
+
+<p>To be more precise, a <em>nilpotent presentation</em> is given on a finite number of generators <span class="SimpleMath">\(a_1,\ldots,a_n\)</span>. Let <span class="SimpleMath">\(I\)</span> be the set of indices such that <span class="SimpleMath">\(G_i/G_{i+1}\)</span> is finite. Let <span class="SimpleMath">\(m_i\)</span> be the order of <span class="SimpleMath">\(G_i/G_{i+1}\)</span> for <span class="SimpleMath">\(i\in I\)</span>. Then a nilpotent presentation has the form</p>
+
+<p class="center">\[
+\langle a,\ldots,a_n | 
+    a_i^{m_i}   = w_{ii}(a_{i+1},\ldots,a_n) 
+               \mbox{ for } i\in I;\; 
+    [a_j,a_i] = w_{ij}(a_{j+1},\ldots,a_n)
+               \mbox{ for } 1\leq i &lt; j\leq n\rangle
+\]</p>
+
+<p>Here, <span class="SimpleMath">\(w_{ij}(a_k,\ldots,a_n)\)</span> denotes a group word in the generators <span class="SimpleMath">\(a_k,\ldots,a_n\)</span>.</p>
+
+<p>In a group given by a polycyclic presentation each element in the group can be written as a <em>normal word</em> <span class="SimpleMath">\(a_1^{e_1}\ldots a_n^{e_n}\)</span> with <span class="SimpleMath">\(e_i \in \mathbb{Z}\)</span> and <span class="SimpleMath">\(0 \leq e_i &lt; m_i\)</span> for <span class="SimpleMath">\(i \in I\)</span>. A procedure called <em>collection</em> can be used to convert an arbitrary word in the generators into an equivalent normal word. In general, the resulting normal word need not be unique. The result of collecting a word may depend on the steps chosen during the collection procedure. A polycyclic presentation with the property that two different normal words are never equivalent is called <em>consistent</em>. A polycyclic presentation derived from a polycyclic series as above is consistent. The following example shows an inconsistent polycyclic presentation</p>
+
+<p class="center">\[\langle a,b\mid a^2, b^a = b^2 \rangle \]</p>
+
+<p>as <span class="SimpleMath">\(b = baa = ab^2a = a^2b^4 = b^4\)</span> which implies <span class="SimpleMath">\(b^3=1\)</span>. Here we have the equivalent normal words <span class="SimpleMath">\(b^3\)</span> and the empty word. It can be proved that consistency can be checked by collecting a finite number of words in the given generating set in two essentially different ways and checking if the resulting normal forms are the same in both cases. See Chapter 9 of the book <a href="chapBib_mj.html#biBSims94">[Sim94]</a> for an introduction to polycyclic groups and polycyclic presentations.</p>
+
+<p>For computations in a polycyclic group one chooses a consistent polycyclic presentation as it offers a simple solution to the word problem: Equality between two words is decided by collecting both words to their respective normal forms and comparing the normal forms. Nilpotent groups and nilpotent presentations are special cases of polycyclic groups and polycyclic presentations. Nilpotent presentations allow specially efficient collection methods. The package <strong class="pkg">Polycyclic</strong> provides algorithms to compute with polycyclic groups given by a polycyclic presentation.</p>
+
+<p>However, inconsistent nilpotent presentations arise naturally in the nilpotent quotient algorithm. There is an algorithm based on the test words for consistency mentioned above to modify the arising inconsistent presentations suitably to obtain a consistent one for the same group.</p>
+
+<p><a id="X7DAF9CC17F6B868D" name="X7DAF9CC17F6B868D"></a></p>
+
+<h4>2.4 <span class="Heading">A sketch of the algorithm</span></h4>
+
+<p>The input for the ANU NQ in its simplest form is a finite presentation <span class="SimpleMath">\(\langle X|R\rangle\)</span> for a group <span class="SimpleMath">\(G\)</span>. The first step of the algorithm determines a nilpotent presentation for the commutator quotient of <span class="SimpleMath">\(G\)</span>. This is a presentation of the class-<span class="SimpleMath">\(1\)</span> quotient of <span class="SimpleMath">\(G\)</span>. Call its generators <span class="SimpleMath">\(a_1,...,a_d\)</span>. It also determines a homomorphism of <span class="SimpleMath">\(G\)</span> onto the commutator quotient and describes it by specifying the image of each generator in <span class="SimpleMath">\(X\)</span> as a word in the <span class="SimpleMath">\(a_i\)</span>.</p>
+
+<p>For the general step assume that the algorithm has computed a nilpotent presentation for the class-<span class="SimpleMath">\(c\)</span> quotient of <span class="SimpleMath">\(G\)</span> and that <span class="SimpleMath">\(a_1,...,a_d\)</span> are the generators introduced in the first step of the algorithm. Furthermore, there is a map from X into the class-<span class="SimpleMath">\(c\)</span> quotient describing the epimorphism from <span class="SimpleMath">\(G\)</span> onto <span class="SimpleMath">\(G/\gamma_{c+1}(G)\)</span>.</p>
+
+<p>Let <span class="SimpleMath">\(b_1,...b_k\)</span> be the generators from the last step of the algorithm, the computation of <span class="SimpleMath">\(\gamma_c(G)/\gamma_{c+1}(G)\)</span>. This means that <span class="SimpleMath">\(b_1,...b_k\)</span> generate <span class="SimpleMath">\(\gamma_c(G)/\gamma_{c+1}(G)\)</span>. Then the commutators <span class="SimpleMath">\([b_j,a_i]\)</span> generate <span class="SimpleMath">\(\gamma_{c+1}(G)/\gamma_{c+2}(G)\)</span>. The algorithm introduces new, central generators <span class="SimpleMath">\(c_{ij}\)</span> into the presentation, adds the relations <span class="SimpleMath">\([b_j,a_i] = c_{ij}\)</span> and modifies the existing relations by appending suitable words in the <span class="SimpleMath">\(c_{ij}\)</span>, called <em>tails</em>, to the right hand sides of the power and commutator relations. The resulting presentation is a nilpotent presentation for the <em>nilpotent cover</em> of <span class="SimpleMath">\(G/\gamma_{c+1}(G)\)</span>. The nilpotent cover is the largest central extension of <span class="SimpleMath">\(G/\gamma_{c+1}(G)\)</span> generated by <span class="SimpleMath">\(d\)</span> elements. It is is uniquely determined up to isomorphism.</p>
+
+<p>The resulting presentation of the nilpotent cover is in general inconsistent. Consistency is achieved by running the consistency test. This results in relations among the generators <span class="SimpleMath">\(c_{ij}\)</span> which can be used to eliminate some of those generators or introduce power relations. After this has been done we have a consistent nilpotent presentation for the nilpotent cover of <span class="SimpleMath">\(G/\gamma_{c+1}(G)\)</span>.</p>
+
+<p>Furthermore, the nilpotent cover need not satisfy the relations of <span class="SimpleMath">\(G\)</span>. In other words, the epimorphism from <span class="SimpleMath">\(G\)</span> onto <span class="SimpleMath">\(G/\gamma_{c+1}(G)\)</span> cannot be lifted to an epimorphism onto the nilpotent cover. Applying the epimorphism to each relator of <span class="SimpleMath">\(G\)</span> and collecting the resulting words of the nilpotent cover yields a set of words in the <span class="SimpleMath">\(c_{ij}\)</span>. This gives further relations between the <span class="SimpleMath">\(c_{ij}\)</span> which leads to further eliminations or modifications of the power relations for the <span class="SimpleMath">\(c_{ij}\)</span>.</p>
+
+<p>After this, the inductive step of the ANU NQ is complete and a consistent nilpotent presentation for <span class="SimpleMath">\(G/\gamma_{c+2}(G)\)</span> is obtained together with an epimorphism from <span class="SimpleMath">\(G\)</span> onto the class-<span class="SimpleMath">\((c+1)\)</span> quotient.</p>
+
+<p>Chapter 11 of the book <a href="chapBib_mj.html#biBSims94">[Sim94]</a> discusses a nilpotent quotient algorithm. A description of the implementation in the ANU NQ is contained in <a href="chapBib_mj.html#biBNickel96">[Nic96]</a></p>
+
+<p><a id="X84EF796487BC1822" name="X84EF796487BC1822"></a></p>
+
+<h4>2.5 <span class="Heading">Identical Relations</span></h4>
+
+<p>Let <span class="SimpleMath">\(w\)</span> be a word in free generators <span class="SimpleMath">\(x_1,\ldots,x_n\)</span>. A group <span class="SimpleMath">\(G\)</span> satisfies the relation <span class="SimpleMath">\(w=1\)</span> <em>identically</em> if each map from <span class="SimpleMath">\(x_1,\ldots,x_n\)</span> into <span class="SimpleMath">\(G\)</span> maps <span class="SimpleMath">\(w\)</span> to the identity element of <span class="SimpleMath">\(G\)</span>. We also say that <span class="SimpleMath">\(G\)</span> satisfies the <em>identical relation</em> <span class="SimpleMath">\(w=1\)</span> or satisfies the <em>law</em> <span class="SimpleMath">\(w=1\)</span>. In slight abuse of notation, we call the elements <span class="SimpleMath">\(x_1,\ldots,x_n\)</span> <em>identical</em> generators.</p>
+
+<p>Common examples of identical relations are: A group of nilpotency class at most <span class="SimpleMath">\(c\)</span> satisfies the law <span class="SimpleMath">\([x_1,\ldots,x_{c+1}]=1\)</span>. A group that satisfies the law <span class="SimpleMath">\([x,y,\ldots,y]=1\)</span> where <span class="SimpleMath">\(y\)</span> occurs <span class="SimpleMath">\(n\)</span>-times, is called an <span class="SimpleMath">\(n\)</span>-Engel group. A group that satisfies the law <span class="SimpleMath">\(x^d=1\)</span> is a group of exponent <span class="SimpleMath">\(d\)</span>.</p>
+
+<p>To describe finitely presented groups that satisfy one or more laws, we extend a common notation for finitely presented groups by specifying the identical generators as part of the generator list, separated from the group generators by a semicolon: For example</p>
+
+<p class="center">\[
+\langle a,b,c; x,y | x^5, [x,y,y,y]\rangle
+\]</p>
+
+<p>is a group on 3 generators <span class="SimpleMath">\(a,b,c\)</span> of exponent <span class="SimpleMath">\(5\)</span> satisfying the 3rd Engel law. The presentation above is equivalent to a presentation on 3 generators with an infinite set of relators, where the set of relators consists of all fifth powers of words in the generators and all commutators <span class="SimpleMath">\([x,y,y,y]\)</span> where <span class="SimpleMath">\(x\)</span> and <span class="SimpleMath">\(y\)</span> run through all words in the generators <span class="SimpleMath">\(a,b,c\)</span>. The standalone programme accepts the notation introduced above as a description of its input. In <strong class="pkg">GAP 4</strong> finitely presented groups are specified in a different way, see <code class="func">NilpotentQuotient</code> (<a href="chap3_mj.html#X8216791583DE512C"><span class="RefLink">3.1-1</span></a>) for a description.</p>
+
+<p>This notation can also be used in words that mix group and identical generators as in the following example:</p>
+
+<p class="center">\[
+\langle a,b,c; x | [x,c], [a,x,x,x] \rangle
+\]</p>
+
+<p>The first relator specifies a law which says that <span class="SimpleMath">\(c\)</span> commutes with all elements of the group. The second turns <span class="SimpleMath">\(a\)</span> into a third right Engel element.</p>
+
+<p>An element <span class="SimpleMath">\(a\)</span> is called <em>a right <span class="SimpleMath">\(n\)</span>-th Engel element</em> or <em>a right <span class="SimpleMath">\(n\)</span>-Engel element</em> if it satisfies the commutator law <span class="SimpleMath">\([a,x,...,x]=1\)</span> where the identical generator <span class="SimpleMath">\(x\)</span> occurs <span class="SimpleMath">\(n\)</span>-times. Likewise, an element <span class="SimpleMath">\(b\)</span> is called an <em>left <span class="SimpleMath">\(n\)</span>-th Engel element</em> or <em>left <span class="SimpleMath">\(n\)</span>-Engel element</em> if it satisfies the commutator law <span class="SimpleMath">\([x,b,b,...b]=1\)</span>.</p>
+
+<p>Let <span class="SimpleMath">\(G\)</span> be a nilpotent group. Then <span class="SimpleMath">\(G\)</span> satisfies a given law if the law is satisfied by a certain finite set of instances given by Higman's Lemma, see <a href="chapBib_mj.html#biBHigman59">[Hig59]</a>. The ANU NQ uses Higman's Lemma to obtain a finite presentation for groups that satisfy one or several identical relations.</p>
+
+<p><a id="X861A2C6385F6BCF5" name="X861A2C6385F6BCF5"></a></p>
+
+<h4>2.6 <span class="Heading">Expression Trees</span></h4>
+
+<p>Expressions involving commutators play an important role in the context of nilpotent groups. Expanding an iterated commutator produces a complicated and long expression. For example,</p>
+
+<p class="center">\[
+          [x,y,z] = y^{-1}x^{-1}yxz^{-1}x^{-1}y^{-1}xyz.
+\]</p>
+
+<p>Evaluating a commutator <span class="SimpleMath">\([a,b]\)</span> is done efficiently by computing the equation <span class="SimpleMath">\((ba)^{-1}ab\)</span>. Therefore, for each commutator we need to perform two multiplications and one inversion. Evaluating <span class="SimpleMath">\([x,y,z]\)</span> needs four multiplications and two inversions. Evaluation of an iterated commutator with <span class="SimpleMath">\(n\)</span> components takes <span class="SimpleMath">\(2n-1\)</span> multiplications and <span class="SimpleMath">\(n-1\)</span> inversions. The expression on the right hand side above needs <span class="SimpleMath">\(9\)</span> multiplications and <span class="SimpleMath">\(5\)</span> inversions which is clearly much more expensive than evaluating the commutator directly.</p>
+
+<p>Assuming that no cancellations occur, expanding an iterated commutator with n components produces a word with <span class="SimpleMath">\(2^{n+1}-2^{n-1}-2\)</span> factors half of which are inverses. A similar effect occurs whenever a compact expression is expanded into a word in generators and inverses, for example <span class="SimpleMath">\((ab)^{49}\)</span>.</p>
+
+<p>Therefore, it is important not to expand expressions into a word in generators and inverses. For this purpose we provide a mechanism which we call here <em>expression trees</em>. An expression tree preserves the structure of a given expression. It is a (binary) tree in which each node is assigned an operation and whose leaves are generators of a free group or integers. For example, the expression <span class="SimpleMath">\([(xy)^2, z]\)</span> is stored as a tree whose top node is a commutator node. The right subtree is just a generator node (corresponding to <span class="SimpleMath">\(z\)</span>). The left subtree is a power node whose subtrees are a product node on the left and an integer node on the right. An expression tree can involve products, powers, conjugates and commutators. However, the list of available operations can be extended.</p>
+
+<p>Evaluation of an expression tree is done recursively and requires as many operations as there are nodes in the tree. An expression tree can be evaluated in a specific group by the function <code class="func">EvaluateExpTree</code> (<a href="chap3_mj.html#X879956307B67A136"><span class="RefLink">3.2-2</span></a>).</p>
+
+<p>A presentation specified by expression trees is a record with the components <code class="file">.generators</code> and <code class="file">.relations</code>. See section <a href="chap3_mj.html#X861A2C6385F6BCF5"><span class="RefLink">3.2</span></a> for a description of the functions that produce and manipulate expression trees.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "nq" );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens := ExpressionTrees( 2 );</span>
+[ x1, x2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r1 := LeftNormedComm( [gens[1],gens[2],gens[2]] );</span>
+Comm( x1, x2, x2 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r2 := LeftNormedComm( [gens[1],gens[2],gens[2],gens[1]] );</span>
+Comm( x1, x2, x2, x1 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pres := rec( generators := gens, relations := [r1,r2] );</span>
+rec( generators := [ x1, x2 ], 
+relations := [ Comm( x1, x2, x2 ), Comm( x1, x2, x2, x1 ) ] )
+</pre></div>
+
+<p><a id="X7E27CA7F7E797520" name="X7E27CA7F7E797520"></a></p>
+
+<h4>2.7 <span class="Heading">A word about the implementation</span></h4>
+
+<p>The ANU NQ is written in C, but not in ANSI C. I hope to make one of the next versions ANSI compliable. However, it uses a fairly restricted subset of the language so that it should be easy to compile it in new environments. The code is 64-bit clean. If you have difficulties with porting it to a new environment, let me know and I'll be happy to assist if time permits.</p>
+
+<p>The program has two collectors: a simple collector from the left as described in <a href="chapBib_mj.html#biBLS90">[LGS90]</a> and a combinatorial from the left collector as described in <a href="chapBib_mj.html#biBVL90a">[VL90]</a>. The combinatorial collector is always faster than the simple collector, therefore, it is the collector used by this package by default. This can be changed by modifying the global variable <code class="func">NqDefaultOptions</code> (<a href="chap3_mj.html#X7DFBFD1580BF024A"><span class="RefLink">3.4-2</span></a>).</p>
+
+<p>In a polycyclic group with generators that do not have power relations, exponents may become arbitrarily large. Experience shows that this happens rarely in the computations done by the ANU NQ. Exponents are represented by 32-bit integers. The collectors perform an overflow check and abort the computation if an overflow occurred. In a GNU environment the program can be compiled using the `long long' 64-bit integer type. For this uncomment the relevant line in src/Makefile and recompile the program.</p>
+
+<p>As part of the step that enforces consistency and the relations of the group, the ANU NQ performs computations with integer matrices and converts them to Hermite Normal Form. The algorithm used here is a variation of the Kanan-Bachem algorithm based on the GNU multiple precision package GNU MP <a href="chapBib_mj.html#biBGNUMP">[GMP]</a>. Experience shows that the integer matrices are usually fairly sparse and Kanan-Bachem seems to be sufficient in this context. However, the implementation might benefit from a more efficient strategy for computing Hermite Normal Forms. This is a topic for further investigations.</p>
+
+<p>As the program does not compute the Smith Normal Form for each factor of the lower central series but the Hermite Normal Form, it does not necessarily obtain a minimal generating set for each factor of the lower central series. The following is a simple example of this behaviour. We take the presentation</p>
+
+<p class="center">\[
+\langle x, y | x^2 = y \rangle
+\]</p>
+
+<p>The group is clearly isomorphic to the additive group of the integers. Applying the ANU NQ to this presentation gives the following nilpotent presentation:</p>
+
+<p class="center">\[
+  \langle A,B | A^2 = B, [B,A] \rangle
+\]</p>
+
+<p>A nilpotent presentation on a minimal generating set would be the presentation of the free group on one generator:</p>
+
+<p class="center">\[
+  \langle A | \; \rangle
+\]</p>
+
+<p><a id="X79E150AA823439A8" name="X79E150AA823439A8"></a></p>
+
+<h4>2.8 <span class="Heading">The input format of the standalone</span></h4>
+
+<p>The input format for finite presentations resembles the way many people write down a presentation on paper. Here are some examples of presentations that the ANU NQ accepts:</p>
+
+
+<pre class="normal">
+
+
+    &lt; a, b | &gt;                       # free group of rank 2
+
+    &lt; a, b, c; x, y | 
+                [a,b,c],             # a left normed commutator
+                [b,c,c,c]^6,         # another one raised to a power
+                a^2 = c^-3*a^2*c^3,  # a relation
+                a^(b*c) = a,         # a conjugate relation
+                (a*[b,(a*c)])^6,     # something that looks complicated
+                [x,y,y,y,y],         # an identical relation
+                [c,x,x,x,x,x]        # c is a fifth right Engel element
+    &gt;
+
+
+</pre>
+
+<p>A presentation starts with '&lt;' followed by a list of generators separated by commas. Generator names are strings that contain only upper and lower case letters, digits, dots and underscores and that do not start with a digit. The list of generator names is separated from the list of relators/relations by the symbol '<span class="SimpleMath">\(\mid\)</span>'. The list of generators can be followed by a list of identical generators separated by a semicolon. Relators and relations are separated by commas and can be mixed arbitrarily. Parentheses can be used in order to group subexpressions together. Square brackets can be used in order to form left normed commutators. The symbols '*' and '^' can be used to form products and powers, respectively. The presentation finishes with the symbol '&gt;'. A comment starts with the symbol '#' and finishes at the end of the line. The file src/presentation.c contains a complete grammar for the presentations accepted by the ANU NQ.</p>
+
+<p>Typically, the input for the standalone is put into a file by using a standard text editor. The file can be passed as an argument to the function <code class="func">NilpotentQuotient</code> (<a href="chap3_mj.html#X8216791583DE512C"><span class="RefLink">3.1-1</span></a>). It is also possible to put a presentation in the standalone's input format into a string and use the string as argument for <code class="func">NilpotentQuotient</code> (<a href="chap3_mj.html#X8216791583DE512C"><span class="RefLink">3.1-1</span></a>).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (DeepThought) - Chapter 1: The Deep Thought algorithm</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X83D5BFC3847045B8" name="X83D5BFC3847045B8"></a></p>
+<div class="ChapSects"><a href="chap1.html#X83D5BFC3847045B8">1 <span class="Heading">The Deep Thought algorithm</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7A5FAA018026C0B7">1.1 <span class="Heading">Category DTObj</span></a>
+</span>
+</div>
+</div>
+
+<h3>1 <span class="Heading">The Deep Thought algorithm</span></h3>
+
+<p>Polycyclic and, especially, finitely generated nilpotent groups exhibit a rich structure allowing a special approach towards multiplication using polynomials. The so-called Deep Thought algorithm introduced in <a href="chapBib.html#biBLGS">[LGS98]</a> computes these polynomials in practice for a suitable presentation of a finitely generated nilpotent group. Such a presentation is of the following form</p>
+
+<p class="pcenter"> \langle a_1, \ldots, a_n \mid a_i^{s_i} = a_{i+1}^{c_{i, i, i+1}} \cdots a_n^{c_{i, i, n}}, 1 \leq i \leq n, a_j a_i = a_i a_j a_{j+1}^{c_{i, j, j+1}} \cdots a_n^{c_{i, j, n}}, 1 \leq i &lt; j \leq n \rangle </p>
+
+<p>with <span class="Math">s_i \in \mathbb{N} \cup \{ \infty \}</span> and <span class="Math">c_{i, j, k} \in \mathbb{Z}</span>. If <span class="Math">s_i = \infty</span>, then the power relation <span class="Math">a_i^{s_i}</span> is skipped.</p>
+
+<p>Let <span class="Math">G</span> denote the group presented by the above presentation. Then every element in <span class="Math">G</span> can be written uniquely in a so-called normal form. That is, if <span class="Math">G_i := \langle a_i, \ldots, a_n \rangle</span> and <span class="Math">r_i := | G_i : G_{i+1}|</span>, <span class="Math">1 \leq i \leq n</span>, are the relative orders, then for certain <span class="Math">e_i \in \mathbb{Z}</span> each element can be written as</p>
+
+<p class="pcenter"> a_1^{e_1} \cdots a_n^{e_n} </p>
+
+<p>with <span class="Math">0 \leq e_i &lt; r_i</span> if <span class="Math">r_i &lt; \infty</span>. A presentation is called confluent if and only if <span class="Math">s_i = r_i</span> for all <span class="Math">1 \leq i \leq n</span>. If a presentation is not confluent, not all functions provided in this package are applicable, see function <code class="code">DTP_DTapplicability</code>. For more theoretical background see for example the documentation of the <strong class="pkg">GAP</strong> package <strong class="pkg">Polycyclic</strong>.</p>
+
+<p>The Deep Thought algorithm computes rational polynomials <span class="Math">f_1, \ldots, f_n</span> in <span class="Math">2n</span> indeterminates such that if <span class="Math"> x := a_1^{x_1} \cdots a_n^{x_n} </span> and <span class="Math">y := a_1^{y_1} \cdots a_n^{y_n} </span> are two elements (in normal form or not with <span class="Math">x_1, \ldots, x_n, y_1, \ldots, y_n \in \mathbb{Z}</span>), then their product <span class="Math">xy</span> is given by</p>
+
+<p class="pcenter">a_1^{f_1(x_1, \ldots, x_n, y_1, \ldots, y_n)} \cdots a_n^{f_n(x_1, \ldots, x_n, y_1, \ldots, y_n)}.</p>
+
+<p>If the collector is confluent, also the normal form of the product can be computed. Otherwise this is not possible. Moreover, there exists a second version of the Deep Thought algorithms which computes <span class="Math">n^2</span> polynomials <span class="Math">f_{rs}</span>, <span class="Math">1 \leq r, s \leq n</span>, suitable for multiplications of the form</p>
+
+<p class="pcenter">(a_1^{x_1} \cdots a_n^{x_n}) \cdot a_s^{y_s} = a_1^{f_{1s}(x_1, \ldots, x_n, y_s)} \cdots a_n^{f_{ns}(x_1, \ldots, x_n, y_s)} </p>
+
+<p>for <span class="Math">1 \leq s \leq n</span>. Each general multiplication can be expressed using these special multiplications. Depending on the presentation, polynomials of one version may be more efficient for computations than the polynomials of the other version. For a suggestion on which polynomials to use for a given presentation, see <code class="code">DTP_DTapplicability</code>. In the following, Deep Thought type <span class="Math">f_r</span> refers to the Deep Thought algorithm which uses <span class="Math">n</span> polynomials and type <span class="Math">f_{rs}</span> refers to the Deep Thought algorithm using <span class="Math">n^2</span> polynomials.</p>
+
+<p>In order to work with the Deep Thought functions, the group presentation is expected to be given as a collector <code class="code">coll</code>, as defined in the <strong class="pkg">GAP</strong> package <strong class="pkg">Polycyclic</strong>. Moreover, the <strong class="pkg">Polycyclic</strong> package introduces the structure of exponent vectors <code class="code">expvec</code>, which will be used also in this package to represent group elements. In the following text, a group element <span class="Math">a_1^{x_1} \cdots a_n^{x_n}</span> is identified with its exponent vector in form of the list <code class="code">[x_1, ..., x_n]</code>. For example, if <code class="code">expvec1, expvec2</code> are exponent vectors of elements in the same group, then <code class="code">expvec1 * expvec2</code> describes the multiplication of the corresponding group elements, and so on. Note that generally exponent vectors are not assumed to represent normal forms.</p>
+
+<p><a id="X7A5FAA018026C0B7" name="X7A5FAA018026C0B7"></a></p>
+
+<h4>1.1 <span class="Heading">Category DTObj</span></h4>
+
+<p>This package uses the category <code class="code">DTObj</code>. A <code class="code">DTObj</code> is a <code class="code">IsFromTheLeftCollectorRep</code> with certain further list entries to store the Deep Thought polynomials of a collector together with some additional information. That is, the functions <code class="code">DTP_DTpols_r</code> and <code class="code">DTP_DTpols_rs</code> return a <code class="code">DTObj</code> which has entries as <code class="code">IsFromTheLeftCollectorRep</code> and additionally:</p>
+
+
+<ul>
+<li><p><code class="code">DTObj![PC_DTPPolynomials]</code>: Deep Thought polynomials in form of (nested) lists</p>
+
+</li>
+<li><p><code class="code">DTObj![PC_DTPOrders]</code>: list containing orders of group generators if the collector is confluent</p>
+
+</li>
+<li><p><code class="code">DTObj![PC_DTPConfluent]</code>: boolean value indicating whether the collector is confluent or not</p>
+
+</li>
+</ul>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

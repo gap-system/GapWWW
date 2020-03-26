@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Forms) - Chapter 5: Morphisms of forms</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X7B9AF2E784EB8481" name="X7B9AF2E784EB8481"></a></p>
+<div class="ChapSects"><a href="chap5.html#X7B9AF2E784EB8481">5 <span class="Heading">Morphisms of forms</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X784D3B338055EC9D">5.1 <span class="Heading">Morphisms of sesquilinear forms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X807E16A383D2E04C">5.1-1 <span class="Heading">Hermitian forms</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8042784984331FF4">5.1-2 <span class="Heading">Alternating forms</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F1255F77B6874E3">5.1-3 <span class="Heading">Bilinear forms</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X79453E2B7DDE1412">5.1-4 <span class="Heading">Degenerate forms</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X87C0B98C8669A34A">5.2 <span class="Heading">Morphisms of quadratic forms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C738FBB80F533AC">5.2-1 <span class="Heading">Singular forms</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X790B24568376AACE">5.3 <span class="Heading">Operations based on morphisms of forms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X78CCFB957A6153F5">5.3-1 BaseChangeToCanonical</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X87A6F5C979551677">5.3-2 BaseChangeHomomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7DFEFA2C7945A5AD">5.3-3 IsometricCanonicalForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C7D92267EFE71DB">5.3-4 ScalarOfSimilarity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85FA387280DAEA69">5.3-5 WittIndex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X853AF8D97E00F1DB">5.3-6 IsEllipticForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B73832A786FEC21">5.3-7 IsParabolicForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85551B28798B07C7">5.3-8 IsHyperbolicForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85F7092783AA2968">5.3-9 TypeOfForm</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Morphisms of forms</span></h3>
+
+<p>In this chapter we give a very brief overview on morphisms of sesquilinear and quadratic forms. The reader can find more in the texts: Cameron <a href="chapBib.html#biBCameron">[Cam00]</a>, Taylor <a href="chapBib.html#biBTaylor">[Tay92]</a>, Aschbacher <a href="chapBib.html#biBAschbacher">[Asc00]</a>, or Kleidman and Liebeck <a href="chapBib.html#biBKleidmanLiebeck">[KL90]</a>.</p>
+
+<p>In this chapter we consider an <span class="SimpleMath">n</span>-dimensional vector space <span class="SimpleMath">V</span> over a finite field. Suppose that <span class="SimpleMath">f</span> is a sesquilinear form or a quadratic form on <span class="SimpleMath">V</span>, then we call the pair <span class="SimpleMath">(V,f)</span> a <em>formed vector space</em>.</p>
+
+<p><a id="X784D3B338055EC9D" name="X784D3B338055EC9D"></a></p>
+
+<h4>5.1 <span class="Heading">Morphisms of sesquilinear forms</span></h4>
+
+<p>Consider two formed vector spaces <span class="SimpleMath">(V,f)</span> and <span class="SimpleMath">(W,g)</span> over the same field <span class="SimpleMath">F</span>, where both <span class="SimpleMath">f</span> and <span class="SimpleMath">g</span> are sesquilinear forms. Suppose that <span class="SimpleMath">ϕ</span> is a linear map from <span class="SimpleMath">V</span> to <span class="SimpleMath">W</span>. The map <span class="SimpleMath">ϕ</span> is an <em>isometry</em> from the formed space <span class="SimpleMath">(V,f)</span> to the formed space <span class="SimpleMath">(W,g)</span> if for all <span class="SimpleMath">v,w ∈ V</span> we have</p>
+
+<p class="pcenter">
+
+
+
+f(v,w) = f'(φ(v),φ(w))</p>
+
+<p>The map <span class="SimpleMath">ϕ</span> is a <em>similarity</em> from the formed space <span class="SimpleMath">(V,f)</span> to the formed space <span class="SimpleMath">(W,g)</span> if for all <span class="SimpleMath">v,w ∈ V</span> we have</p>
+
+<p class="pcenter">
+
+
+
+f(v,w) = λ (f'(φ(v),φ(w)))
+</p>
+
+<p>for some non-zero <span class="SimpleMath">λ ∈ F</span>. Finally, the map <span class="SimpleMath">ϕ</span> is a <em>semi-similarity</em> from the formed space <span class="SimpleMath">(V,f)</span> to the formed space <span class="SimpleMath">(W,g)</span> if for all <span class="SimpleMath">v,w</span> in <span class="SimpleMath">V</span> we have</p>
+
+<p class="pcenter">
+
+
+
+f(v,w) = λ f'(φ(v),φ(w))<sup>α</sup></p>
+
+<p>for some non-zero <span class="SimpleMath">λ</span> in <span class="SimpleMath">F</span> and a field automorphism <span class="SimpleMath">α</span> of <span class="SimpleMath">F</span>.</p>
+
+<p>One of the objectives of studying maps between formed vector spaces is the classification of sesquilinear forms on a vector space <span class="SimpleMath">V</span>, where it is sufficient to classify non-degenerate forms. The following results are well known.</p>
+
+<p>It can be proved that (see for example Section 6.3 of <a href="chapBib.html#biBCameron">[Cam00]</a>):</p>
+
+
+<ul>
+<li><p>all non-degenerate alternating forms of a given vector space over a given finite field are similar,</p>
+
+</li>
+<li><p>all non-degenerate hermitian forms of a given vector space over a given finite field are similar, and,</p>
+
+</li>
+<li><p>the non-degenerate symmetric bilinear forms on a vector space over a field with odd characteristic come in three flavours, two of which occur when the dimension of the vector space is even, one of which occurs when the dimension of the vector space is odd.</p>
+
+</li>
+</ul>
+<p>In principle, within each similarity class, different isometry classes can occur, but we will see that in most cases, each similarity class contains exactly one isometry class.</p>
+
+<p>Given a sesquilinear form <span class="SimpleMath">f</span> over a vector space <span class="SimpleMath">V</span>, <strong class="pkg">Forms</strong> provides functionality to compute the linear map φ from <span class="SimpleMath">V</span> to itself (or, equivalently, a matrix describing a change of basis), such that <span class="SimpleMath">f</span> is mapped to its canonical representative in its isometry class. In the next sections, we describe the representative(s) of the similarity class(es) used in <strong class="pkg">Forms</strong>, and, when necessary, the different isometry classes, for each of the three reflexive sesquilinear forms. The easiest cases are the hermitian and alternating cases.</p>
+
+<p><a id="X807E16A383D2E04C" name="X807E16A383D2E04C"></a></p>
+
+<h5>5.1-1 <span class="Heading">Hermitian forms</span></h5>
+
+<p>We suppose that <span class="SimpleMath">f</span> is a non-degenerate hermitian form on a vector space <span class="SimpleMath">V</span> over the finite field <span class="SimpleMath">F</span>, with involutory field automorphism <span class="SimpleMath">α</span>. It can be proved (see <a href="chapBib.html#biBKleidmanLiebeck">[KL90]</a>) that any vector space equipped with a non-degenerate hermitian form <span class="SimpleMath">f</span> contains an orthogonal basis such that f(e<SUB>i</SUB>,e<SUB>j</SUB>)=1 for each basisvector e<SUB>i</SUB>. Hence <span class="SimpleMath">(V,f)</span> is isometric with <span class="SimpleMath">(V,f')</span> with <span class="SimpleMath">f'</span> the non-degenerate hermitian form with the identity matrix over <span class="SimpleMath">F</span>. The Witt index of <span class="SimpleMath">f</span> equals <span class="SimpleMath">n/2</span> when <span class="SimpleMath">n</span> is even and <span class="SimpleMath">(n-1)/2</span> when <span class="SimpleMath">n</span> is odd.</p>
+
+<p><a id="X8042784984331FF4" name="X8042784984331FF4"></a></p>
+
+<h5>5.1-2 <span class="Heading">Alternating forms</span></h5>
+
+<p>We suppose that <span class="SimpleMath">f</span> is a non-degenerate alternating bilinear form on a vector space <span class="SimpleMath">V</span> over a finite field <span class="SimpleMath">F</span>. As already mentioned in Section <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a>, non-degenerate alternating forms only exist on even dimensional vector spaces. Restricting to a two dimensional vector space, it is clear immediately that the Gram matrix of <span class="SimpleMath">f</span> must be</p>
+
+<p><table style="color:#000"><tr> <td><table border=0 cellpadding=0 cellspacing=0px style="border-left:1px solid #000; border-right:1px solid #000; color:#000"><tr> <td style ="border-top:1px solid #000; border-bottom:1px solid #000;"> </td><td><table border=0 cellpadding=0 cellspacing=0 style="color:#000;"> <tr> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>r</td> </tr> <tr> <td align="center" valign="center" width=30>-r</td> <td align="center" valign="center" width=30>0</td> </tr> </table></td><td style ="border-top:1px solid #000; border-bottom:1px solid #000;"> </td></tr></table></td> </tr></table> for some non-zero <span class="SimpleMath">r ∈ F</span>. If we rescale one of the basisvectors, which induces an isometry, then we see that there always exists a basis such that <span class="SimpleMath">r=1</span>. We call a two dimensional vector space equipped with a non-degenerate alternating form a <em>symplectic hyperbolic line</em>, and it is proved (see Theorem 6.7 of <a href="chapBib.html#biBCameron">[Cam00]</a>) that the formed space <span class="SimpleMath">(V,f)</span> can be written as an orthogonal direct sum of symplectic hyperbolic planes. Hence, up to isometry, there is only one non-degenerate alternating form of an even dimensional vector space, and we choose as canonical representative the alternating form with Gram matrix</p>
+
+<p><table style="color:#000"><tr> <td><table border=0 cellpadding=0 cellspacing=0px style="border-left:1px solid #000; border-right:1px solid #000; color:#000"><tr> <td style ="border-top:1px solid #000; border-bottom:1px solid #000;"> </td><td><table border=0 cellpadding=0 cellspacing=0 style="color:#000;"> <tr> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>1</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>...</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> </tr> <tr> <td align="center" valign="center" width=30>-1</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>...</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> </tr> <tr> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>1</td> <td align="center" valign="center" width=30>...</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> </tr> <tr> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>-1</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>...</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> </tr> <tr> <td align="center" valign="center" width=30>:</td> <td align="center" valign="center" width=30>:</td> <td align="center" valign="center" width=30>:</td> <td align="center" valign="center" width=30>:</td> <td align="center" valign="center" width=30><sup><big>·</big></sup>·<sub><big>·</big></sub></td> <td align="center" valign="center" width=30>:</td> <td align="center" valign="center" width=30>:</td> </tr> <tr> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>...</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>1</td> </tr> <tr> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>...</td> <td align="center" valign="center" width=30>-1</td> <td align="center" valign="center" width=30>0</td> </tr> </table></td><td style ="border-top:1px solid #000; border-bottom:1px solid #000;"> </td></tr></table></td> </tr></table> The Witt index of <span class="SimpleMath">f</span> equals <span class="SimpleMath">n/2</span>.</p>
+
+<p><a id="X7F1255F77B6874E3" name="X7F1255F77B6874E3"></a></p>
+
+<h5>5.1-3 <span class="Heading">Bilinear forms</span></h5>
+
+<p>We suppose that <span class="SimpleMath">f</span> is a non-degenerate symmetric bilinear form on a vector space <span class="SimpleMath">V</span> over a finite field <span class="SimpleMath">F</span> with odd characteristic. We call a two dimensional vector space a <em>hyperbolic line</em> if it contains a non-zero vector <span class="SimpleMath">v</span> such that <span class="SimpleMath">f(v,v) = 0</span>. It is proved (see Proposition 6.9 of <a href="chapBib.html#biBCameron">[Cam00]</a>) that any two hyperbolic lines are isometric, and we choose as canonical representative the orthogonal form with Gram matrix <!-- matrix expression begin --> <table style="color:#000"><tr> <td><table border=0 cellpadding=0 cellspacing=0px style="border-left:1px solid #000; border-right:1px solid #000; color:#000"><tr> <td style ="border-top:1px solid #000; border-bottom:1px solid #000;"> </td><td><table border=0 cellpadding=0 cellspacing=0 style="color:#000;"> <tr> <td align="center" valign="center" width=30>0</td> <td align="center" valign="center" width=30>1</td> </tr> <tr> <td align="center" valign="center" width=30>1</td> <td align="center" valign="center" width=30>0</td> </tr> </table></td><td style ="border-top:1px solid #000; border-bottom:1px solid #000;"> </td></tr></table></td> </tr></table> <!-- matrix expression end --></p>
+
+<p>It can be proved (see Theorem 6.10 of <a href="chapBib.html#biBCameron">[Cam00]</a>) that the formed space <span class="SimpleMath">(V,f)</span> can be written as the orthogonal direct sum of hyperbolic lines and one subspace <span class="SimpleMath">U</span> of dimension at most two. The behaviour of <span class="SimpleMath">f</span> on the subspace <span class="SimpleMath">U</span> determines the similarity class of <span class="SimpleMath">f</span>. We describe the three occurring cases, to describe the chosen canonical form, we use the polynomial rather than the Gram matrix.</p>
+
+
+<ul>
+<li><p>If the dimension of <span class="SimpleMath">U</span> is zero, then <span class="SimpleMath">(V,f)</span> is the orthogonal direct sum of hyperbolic lines, and hence <span class="SimpleMath">(V,f)</span> is isometric to the formed space <span class="SimpleMath">(V,f')</span>, where the Gram matrix of <span class="SimpleMath">f'</span> consists of blocks as described above. The chosen canonical form has polynomial</p>
+
+<p><center>x<sub>1</sub> x<sub>2</sub> + ... + x<sub>n<font face="symbol">-</font >1</sub>x<sub>n</sub></center> Note that the dimension of the vector space <span class="SimpleMath">V</span> is necessarily even. We call <span class="SimpleMath">f</span> <em>hyperbolic</em> (see also Section <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a>). It follows also that in this similarity class, there is only one isometry class. The Witt index of <span class="SimpleMath">f</span> equals <span class="SimpleMath">n/2</span>.</p>
+
+</li>
+<li><p>If the dimension of <span class="SimpleMath">U</span> is one, then necessarily the polynomial of <span class="SimpleMath">f</span> equals</p>
+
+<p><center>μ x<sub>1</sub><sup>2</sup> + x<sub>2</sub> x<sub>3</sub> + ... + x<sub>n<font face="symbol">-</font >1</sub>x<sub>n</sub></center> for some <span class="SimpleMath">μ ∈ F</span>, and the dimension of the vector space <span class="SimpleMath">V</span> is odd. We call <span class="SimpleMath">f</span> <em>parabolic</em> (see also Section <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a>). It is clear that if <span class="SimpleMath">μ</span> is a square in <span class="SimpleMath">F</span>, then rescaling the first basis vector yields a polynomial</p>
+
+<p><center>x<sub>1</sub><sup>2</sup> + x<sub>2</sub> x<sub>3</sub> + ... + x<sub>n<font face="symbol">-</font >1</sub>x<sub>n</sub></center> which we choose as the canonical form for this similarity class. If <span class="SimpleMath">μ</span> is a non-square, a rescaling of x<sub>2</sub>,x<sub>4</sub>,...,x<sub>n<font face="symbol">-</font >1</sub> yields a polynomial</p>
+
+<p><center>μ(x<sub>1</sub><sup>2</sup> + x<sub>2</sub> x<sub>3</sub> + ... + x<sub>n<font face="symbol">-</font >1</sub>x<sub>n</sub>)</center> which represents now a bilinear form that is <strong class="button">similar but not isometric</strong> to the given one. Hence, the parabolic similarity class contains two isometry classes. The Witt index of <span class="SimpleMath">f</span> equals <span class="SimpleMath">(n-1)/2</span>.</p>
+
+</li>
+<li><p>Suppose at last that the dimension of <span class="SimpleMath">U</span> is two. We may suppose that <span class="SimpleMath">U</span> is not a hyperbolic line. It is not too difficult to see that a suitable base change yields the polynomial</p>
+
+<p><center>μx<sub>1</sub><sup>2</sup> + x<sub>2</sub><sup>2</sup> + x<sub>3</sub> x<sub>4</sub> + ... + x<sub>n<font face="symbol">-</font>1</sub>x<sub>n</sub></center> for a non-square <span class="SimpleMath">μ ∈ F</span>, and the dimension of the vector space <span class="SimpleMath">V</span> is even. We call <span class="SimpleMath">f</span> <em>elliptic</em>. The Witt index of <span class="SimpleMath">f</span> equals <span class="SimpleMath">(n-2)/2</span>.</p>
+
+</li>
+</ul>
+<p><a id="X79453E2B7DDE1412" name="X79453E2B7DDE1412"></a></p>
+
+<h5>5.1-4 <span class="Heading">Degenerate forms</span></h5>
+
+<p>Suppose that <span class="SimpleMath">f</span> is a degenerate sesquilinear form on the vector space <span class="SimpleMath">V</span>, then Rad(f) is a non-trivial subspace of the vector space <span class="SimpleMath">V</span>. The vector space <span class="SimpleMath">V</span> can be written as the orthogonal direct sum of a subspace <span class="SimpleMath">W</span> and Rad(f), and the restriction of <span class="SimpleMath">f</span> to <span class="SimpleMath">W</span> is a non-degenerate sesquilinear form on <span class="SimpleMath">W</span>. Hence, <span class="SimpleMath">f</span> is isometric with a sesquilinear form having Gram matrix <!-- matrix expression begin --> <table style="color:#000"><tr> <td><table border=0 cellpadding=0 cellspacing=0px style="border-left:1px solid #000; border-right:1px solid #000; color:#000"><tr> <td style ="border-top:1px solid #000; border-bottom:1px solid #000;"> </td><td><table border=0 cellpadding=0 cellspacing=0 style="color:#000;"> <tr> <td align="center" valign="center" width=30>M</td> <td align="center" valign="center" width=30>A</td> </tr> <tr> <td align="center" valign="center" width=30>B</td> <td align="center" valign="center" width=30>C</td> </tr> </table></td><td style ="border-top:1px solid #000; border-bottom:1px solid #000;"> </td></tr></table></td> </tr></table> <!-- matrix expression end --></p>
+
+<p>where <span class="SimpleMath">M</span> is the Gram matrix of a non-degenerate sesquilinear form and <span class="SimpleMath">A,B</span> and <span class="SimpleMath">C</span> are appropriate zero matrices. As explained in Section <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a>, the form <span class="SimpleMath">f</span> induces a non-degenerate form <span class="SimpleMath">g</span> on the vector space V/Rad(f). The computed matrix <span class="SimpleMath">M</span> can be taken as Gram matrix for the form <span class="SimpleMath">g</span>. As defined in Section <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a>, the Witt index of the degenerate form <span class="SimpleMath">f</span> is the Witt index of the non-degenerate inducedform <span class="SimpleMath">g</span>. The dimension of the maximal isotropic subspaces with relation to <span class="SimpleMath">f</span> is the sum of the Witt index and the dimension of the radical.</p>
+
+<p><a id="X87C0B98C8669A34A" name="X87C0B98C8669A34A"></a></p>
+
+<h4>5.2 <span class="Heading">Morphisms of quadratic forms</span></h4>
+
+<p>Consider two formed vector spaces <span class="SimpleMath">(V,f)</span> and <span class="SimpleMath">(W,g)</span> over the same field <span class="SimpleMath">F</span>, where both <span class="SimpleMath">f</span> and <span class="SimpleMath">g</span> are quadratic forms. Suppose that φ is a linear map from <span class="SimpleMath">V</span> to <span class="SimpleMath">W</span>. The map φ is an <em>isometry</em> from the formed space <span class="SimpleMath">(V,f)</span> to the formed space <span class="SimpleMath">(W,g)</span> if for all <span class="SimpleMath">v,w</span> in <span class="SimpleMath">V</span> we have</p>
+
+<p class="pcenter">
+
+
+
+f(v) = f'(φ(v)).</p>
+
+<p>The map <span class="SimpleMath">ϕ</span> is a <em>similarity</em> from the formed space <span class="SimpleMath">(V,f)</span> to a formed space <span class="SimpleMath">(W,g)</span> if for all <span class="SimpleMath">v,w</span> in <span class="SimpleMath">V</span> we have</p>
+
+<p class="pcenter">
+
+
+
+f(v) = λ (f'(φ(v)))
+</p>
+
+<p>for some non-zero <span class="SimpleMath">λ ∈ F</span>. Finally, the map <span class="SimpleMath">ϕ</span> is a <em>semi-similarity</em> from the formed space <span class="SimpleMath">(V,f)</span> to the formed space <span class="SimpleMath">(W,g)</span> if for all <span class="SimpleMath">v,w</span> in <span class="SimpleMath">V</span> we have</p>
+
+<p class="pcenter">
+
+
+
+f(v) = λ f'(φ(v))^α
+</p>
+
+<p>for some non-zero <span class="SimpleMath">λ ∈ F</span> and a field automorphism <span class="SimpleMath">α</span> of <span class="SimpleMath">F</span>.</p>
+
+<p>Also in this case, one of the objectives of studying maps between formed vector spaces is the classification of quadratic forms of the same vector space <span class="SimpleMath">V</span>, where it is sufficient to classify non-singular forms.</p>
+
+<p>Since there is a one-to-one relationship between quadratic forms in odd characteristic and orthogonal bilinear forms in odd characteristic, we suppose in this section that <span class="SimpleMath">f</span> is a quadratic form in even characteristic. We call a two dimensional vector space a <em>hyperbolic line</em> if it contains a non-zero vector such that <span class="SimpleMath">f(v) = 0</span>. It is proved (see Proposition 6.9 of <a href="chapBib.html#biBCameron">[Cam00]</a>) that any two hyperbolic lines are isometric, and we choose as canonical representative the quadratic form with polynomial x<sub>1</sub>x<sub>2</sub>. As in the case of the orthogonal bilinear forms, it can be proved (see Theorem 6.10 of <a href="chapBib.html#biBCameron">[Cam00]</a>) that <span class="SimpleMath">(V,f)</span> can be written as the orthogonal direct sum of hyperbolic lines and one subspace <span class="SimpleMath">U</span> of dimension at most two. The behaviour of <span class="SimpleMath">f</span> on the subspace <span class="SimpleMath">U</span> determines the similarity class of <span class="SimpleMath">f</span>. The classification of quadratic forms in even characteristic is analogous to the one in odd characteristic.</p>
+
+
+<ul>
+<li><p>If the dimension of <span class="SimpleMath">U</span> is zero, then <span class="SimpleMath">(V,f)</span> is the orthogonal direct sum of hyperbolic lines, and hence <span class="SimpleMath">(V,f)</span> is isometric to the formed space <span class="SimpleMath">(V,f')</span>, with polynomial</p>
+
+<p><center>x<sub>1</sub> x<sub>2</sub> + ... + x<sub>n<font face="symbol">-</font >1</sub>x<sub>n</sub>,</center> which is chosen as the canonical form. Note that the dimension of the vector space <span class="SimpleMath">V</span> is necessarily even. We call <span class="SimpleMath">f</span> <em>hyperbolic</em> (see also Section <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a>). It follows also that in this similarity class, there is only one isometry class. The Witt index of <span class="SimpleMath">f</span> equals <span class="SimpleMath">n/2</span>.</p>
+
+</li>
+<li><p>If the dimension of <span class="SimpleMath">U</span> is one, then necessarily the polynomial of <span class="SimpleMath">f</span> equals</p>
+
+<p><center>μ x<sub>1</sub><sup>2</sup> + x<sub>2</sub> x<sub>3</sub> + ... + x<sub>n<font face="symbol">-</font >1</sub>x<sub>n</sub></center> for some <span class="SimpleMath">μ ∈ F</span>, and the dimension of the vector space <span class="SimpleMath">V</span> is odd. We call <span class="SimpleMath">f</span> <em>parabolic</em> (see also Section <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a>). Since every element is a square in even characteristic, rescaling the first basis vector yields <span class="SimpleMath">μ=1</span> The Witt index of <span class="SimpleMath">f</span> equals <span class="SimpleMath">(n-1)/2</span>.</p>
+
+</li>
+<li><p>Suppose at last that the dimension of <span class="SimpleMath">U</span> is two. We may suppose that <span class="SimpleMath">U</span> is not a hyperbolic line. It is not difficult to see that a suitable base change yields the polynomial</p>
+
+<p><center>d x<sub>1</sub><sup>2</sup> + x<sub>1</sub>x<sub>2</sub> + x<sub>2</sub><sup>2</sup> + x<sub>3</sub> x<sub>4</sub> + ... + x<sub>n<font face="symbol">-</font>1</sub>x<sub>n</sub></center> for an element of category 1, this is, an element <span class="SimpleMath">d</span> such that <span class="SimpleMath">Tr(d)=1</span> with <span class="SimpleMath">Tr(d)</span> the trace map from <span class="SimpleMath">F</span> to <span class="SimpleMath">GF(2)</span>. Furthermore, an easy argument shows that an appropriate base change allows to choose any element of category 1 for <span class="SimpleMath">d</span>. It follows also that the dimension of the vector space <span class="SimpleMath">V</span> is even. We call <span class="SimpleMath">f</span> <em>elliptic</em> (see also Section <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a>). The Witt index of <span class="SimpleMath">f</span> equals <span class="SimpleMath">(n-2)/2</span>.</p>
+
+</li>
+</ul>
+<p>Hence, non-singular quadratic forms in even characteristic come in three similarity classes, which is analogous to the odd characteristic case, and each similarity class contains only one isometry class, which is different than in the odd characteristic case</p>
+
+<p>Suppose that <span class="SimpleMath">f</span> is a singular quadratic form on the <span class="SimpleMath">n</span>-dimensional vector space <span class="SimpleMath">V</span>, then Rad(f) is a non-trivial subspace of the vector space <span class="SimpleMath">V</span>. The vector space <span class="SimpleMath">V</span> can be written as the orthogonal direct sum of a subspace <span class="SimpleMath">W</span> and Rad(f), and the restriction of <span class="SimpleMath">f</span> to <span class="SimpleMath">W</span> is a non-singular quadratic form on <span class="SimpleMath">W</span>. Hence, <span class="SimpleMath">f</span> is isometric with a quadratic form with one of the three above polynomials. The dimension of the maximal isotropic subspaces is the sum of the Witt index and the dimension of the radical.</p>
+
+<p><a id="X7C738FBB80F533AC" name="X7C738FBB80F533AC"></a></p>
+
+<h5>5.2-1 <span class="Heading">Singular forms</span></h5>
+
+<p>Suppose that <span class="SimpleMath">f</span> is a singular quadratic form on the vector space <span class="SimpleMath">V</span>, then Rad(f) is a non-trivial subspace of the vector space <span class="SimpleMath">V</span>. The vector space <span class="SimpleMath">V</span> can be written as the orthogonal direct sum of a subspace <span class="SimpleMath">W</span> and Rad(f), and the restriction of <span class="SimpleMath">f</span> to <span class="SimpleMath">W</span> is a non-singular quadratic form on <span class="SimpleMath">W</span>. Hence, <span class="SimpleMath">f</span> is isometric with a quadratic form having Gram matrix <!-- matrix expression begin --> <table style="color:#000"><tr> <td><table border=0 cellpadding=0 cellspacing=0px style="border-left:1px solid #000; border-right:1px solid #000; color:#000"><tr> <td style ="border-top:1px solid #000; border-bottom:1px solid #000;"> </td><td><table border=0 cellpadding=0 cellspacing=0 style="color:#000;"> <tr> <td align="center" valign="center" width=30>M</td> <td align="center" valign="center" width=30>A</td> </tr> <tr> <td align="center" valign="center" width=30>B</td> <td align="center" valign="center" width=30>C</td> </tr> </table></td><td style ="border-top:1px solid #000; border-bottom:1px solid #000;"> </td></tr></table></td> </tr></table> <!-- matrix expression end --></p>
+
+<p>where <span class="SimpleMath">M</span> is the Gram matrix of a non-singular quadratic form and <span class="SimpleMath">A,B</span> and <span class="SimpleMath">C</span> are appropriate zero matrices. As explained in Section <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a>, the form <span class="SimpleMath">f</span> induces a non-singular form <span class="SimpleMath">g</span> on the vector space V/Rad(f). The computed matrix <span class="SimpleMath">M</span> can be taken as Gram matrix for the form <span class="SimpleMath">g</span>. As defined in Section <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a>, the Witt index of the singular form <span class="SimpleMath">f</span> is the Witt index of the non-singular induced form <span class="SimpleMath">g</span>. The dimension of the maximal isotropic subspaces with relation to <span class="SimpleMath">f</span> is the sum of the Witt index and the dimension of the radical.</p>
+
+<p><a id="X790B24568376AACE" name="X790B24568376AACE"></a></p>
+
+<h4>5.3 <span class="Heading">Operations based on morphisms of forms</span></h4>
+
+<p><a id="X78CCFB957A6153F5" name="X78CCFB957A6153F5"></a></p>
+
+<h5>5.3-1 BaseChangeToCanonical</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BaseChangeToCanonical</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a transition matrix <var class="Arg">b</var> from one basis to another</p>
+
+<p>The argument <var class="Arg">f</var> is a sesquilinear or quadratic form. For every isometry class of forms, there is a canonical representative, as described in Section <a href="chap5.html#X784D3B338055EC9D"><span class="RefLink">5.1</span></a>. If <var class="Arg">M</var> is the Gram matrix of the form <var class="Arg">f</var>, then this method returns an invertible matrix <var class="Arg">b</var> such that <var class="Arg">b * M * TransposedMat(b)</var> is the Gram matrix of the canonical representative. That is, <var class="Arg">b</var> is the <em>transition matrix</em> from a basis of the underlying vector space of <var class="Arg">f</var> to another basis.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gf := GF(3);</span>
+GF(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gram := [</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[0,0,0,1,0,0], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[0,0,0,0,1,0],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[0,0,0,0,0,1],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[-1,0,0,0,0,0],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[0,-1,0,0,0,0],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[0,0,-1,0,0,0]] * One(gf);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix( gram, gf );</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := BaseChangeToCanonical( form );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( b * gram * TransposedMat(b) );</span>
+ . 1 . . . .
+ 2 . . . . .
+ . . . 1 . .
+ . . 2 . . .
+ . . . . . 1
+ . . . . 2 . 
+</pre></div>
+
+<p><a id="X87A6F5C979551677" name="X87A6F5C979551677"></a></p>
+
+<h5>5.3-2 BaseChangeHomomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BaseChangeHomomorphism</code>( <var class="Arg">b</var>, <var class="Arg">gf</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: the inner automorphism of GL(d,q) associated to the transition matrix <var class="Arg">b</var>.</p>
+
+<p>The argument <var class="Arg">b</var> must be an invertible matrix of size <span class="SimpleMath">d</span> over the finite field <var class="Arg">gf</var> of order <span class="SimpleMath">q</span>. This method returns the inner automorphism of GL(d,q) induces by conjugation by <span class="SimpleMath">b</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gl:=GL(3,3);</span>
+GL(3,3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">go:=GO(3,3);</span>
+GO(0,3,3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := PreservedSesquilinearForms(go)[1]; </span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gram := GramMatrix( form );  </span>
+[ [ 0*Z(3), Z(3), 0*Z(3) ], [ Z(3), 0*Z(3), 0*Z(3) ], 
+  [ 0*Z(3), 0*Z(3), Z(3)^0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := BaseChangeToCanonical(form);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom := BaseChangeHomomorphism(b, GF(3));</span>
+^[ [ 0*Z(3), Z(3)^0, 0*Z(3) ], [ Z(3), Z(3), Z(3)^0 ], 
+  [ Z(3)^0, Z(3), 0*Z(3) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">newgo := Image(hom, go); </span>
+Group(
+[ 
+  [ [ Z(3)^0, Z(3)^0, 0*Z(3) ], [ 0*Z(3), Z(3), 0*Z(3) ], 
+      [ Z(3), Z(3)^0, Z(3) ] ], 
+  [ [ Z(3)^0, Z(3), 0*Z(3) ], [ Z(3), Z(3), Z(3)^0 ], 
+      [ 0*Z(3), Z(3)^0, 0*Z(3) ] ] ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens := GeneratorsOfGroup(newgo);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">canonical := b * gram * TransposedMat(b);</span>
+[ [ Z(3)^0, 0*Z(3), 0*Z(3) ], [ 0*Z(3), 0*Z(3), Z(3) ], 
+  [ 0*Z(3), Z(3), 0*Z(3) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ForAll(gens, y -&gt; y * canonical * TransposedMat(y) = canonical);</span>
+true 
+</pre></div>
+
+<p><a id="X7DFEFA2C7945A5AD" name="X7DFEFA2C7945A5AD"></a></p>
+
+<h5>5.3-3 IsometricCanonicalForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsometricCanonicalForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: the canonical form isometric to the sesquilinear or quadratic form <var class="Arg">f</var>.</p>
+
+<p>The argument <var class="Arg">f</var> is a sesquilinear or quadratic form. For every isometry class of forms, there is a canonical representative, as described in Section <a href="chap5.html#X784D3B338055EC9D"><span class="RefLink">5.1</span></a>, which is the returned form.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [ [ Z(8) , 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 0*Z(2), Z(2)^0, Z(2^3)^5, 0*Z(2), 0*Z(2) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), Z(2)^0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2), 0*Z(2) ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat,GF(8));</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iso := IsometricCanonicalForm(form);</span>
+&lt; parabolic quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(form);</span>
+Parabolic quadratic form
+Gram Matrix:
+z = Z(8)
+ z^1   .   .   .   .
+   .   1 z^5   .   .
+   .   .   .   .   .
+   .   .   .   .   1
+   .   .   .   .   .
+Witt Index: 2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(iso);</span>
+Parabolic quadratic form
+Gram Matrix:
+ 1 . . . .
+ . . 1 . .
+ . . . . .
+ . . . . 1
+ . . . . .
+Witt Index: 2 
+</pre></div>
+
+<p><a id="X7C7D92267EFE71DB" name="X7C7D92267EFE71DB"></a></p>
+
+<h5>5.3-4 ScalarOfSimilarity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ScalarOfSimilarity</code>( <var class="Arg">M</var>, <var class="Arg">form</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a finite field element</p>
+
+<p>Recall that a similarity of a form <span class="SimpleMath">f</span> on a vector space <span class="SimpleMath">V</span>, is a linear transformation <span class="SimpleMath">g</span> of <span class="SimpleMath">V</span> where there exists some nonzero scalar <span class="SimpleMath">c</span> such that for all <span class="SimpleMath">v,w</span> in <span class="SimpleMath">V</span>,</p>
+
+<p class="pcenter">
+f(u<sup>g</sup>,v<sup>g</sup>) = c f(u,v)</p>
+
+<p>This operation finds for a particular matrix <var class="Arg">M</var>, giving rise to a similarity of the sesquilinear form <var class="Arg">form</var>, the said scalar <span class="SimpleMath">c</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gram := [ [ 0*Z(3), Z(3)^0, 0*Z(3), 0*Z(3), 0*Z(3), 0*Z(3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ Z(3)^0, 0*Z(3), 0*Z(3), 0*Z(3), 0*Z(3), 0*Z(3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(3), 0*Z(3), 0*Z(3), Z(3)^0, 0*Z(3), 0*Z(3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(3), 0*Z(3), Z(3)^0, 0*Z(3), 0*Z(3), 0*Z(3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(3), 0*Z(3), 0*Z(3), 0*Z(3), 0*Z(3), Z(3)^0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(3), 0*Z(3), 0*Z(3), 0*Z(3), Z(3)^0, 0*Z(3) ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix( gram, GF(3) );</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := [ [ Z(3)^0, Z(3)^0, Z(3), 0*Z(3), Z(3)^0, Z(3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ Z(3), Z(3), Z(3)^0, 0*Z(3), Z(3)^0, Z(3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(3), Z(3), 0*Z(3), Z(3), 0*Z(3), 0*Z(3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ 0*Z(3), Z(3), Z(3)^0, Z(3), Z(3), Z(3) ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ Z(3)^0, Z(3)^0, Z(3), Z(3), Z(3)^0, Z(3)^0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  [ Z(3)^0, 0*Z(3), Z(3), Z(3)^0, Z(3), Z(3) ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ScalarOfSimilarity( m, form );</span>
+Z(3)
+ 
+</pre></div>
+
+<p><a id="X85FA387280DAEA69" name="X85FA387280DAEA69"></a></p>
+
+<h5>5.3-5 WittIndex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WittIndex</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: the Witt index of the form <var class="Arg">f</var>.</p>
+
+<p>The argument <var class="Arg">f</var> is a sesquilinear or quadratic form on the vector space <span class="SimpleMath">V</span>. When <var class="Arg">f</var> is degenerate, respectively singular, its Witt index is defined as the Witt index of the induced non-degenerate, respectively non-singular form on the vector space V/Rad(f), see Sections <a href="chap3.html#X874CD5E0802FEB50"><span class="RefLink">3.1</span></a> and <a href="chap3.html#X864CAF8881067D8A"><span class="RefLink">3.2</span></a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[0,0,1,0,0],[0,0,0,0,0],[-1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]*Z(7)^0;</span>
+[ [ 0*Z(7), 0*Z(7), Z(7)^0, 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7) ], 
+  [ Z(7)^3, 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(7));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WittIndex(form);</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RadicalOfForm(form);</span>
+&lt;vector space over GF(7), with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension(last);</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := IdentityMat(6,GF(5));</span>
+[ [ Z(5)^0, 0*Z(5), 0*Z(5), 0*Z(5), 0*Z(5), 0*Z(5) ], 
+  [ 0*Z(5), Z(5)^0, 0*Z(5), 0*Z(5), 0*Z(5), 0*Z(5) ], 
+  [ 0*Z(5), 0*Z(5), Z(5)^0, 0*Z(5), 0*Z(5), 0*Z(5) ], 
+  [ 0*Z(5), 0*Z(5), 0*Z(5), Z(5)^0, 0*Z(5), 0*Z(5) ], 
+  [ 0*Z(5), 0*Z(5), 0*Z(5), 0*Z(5), Z(5)^0, 0*Z(5) ], 
+  [ 0*Z(5), 0*Z(5), 0*Z(5), 0*Z(5), 0*Z(5), Z(5)^0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat,GF(5));</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WittIndex(form);</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := IdentityMat(6,GF(7));</span>
+[ [ Z(7)^0, 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), Z(7)^0, 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), Z(7)^0, 0*Z(7), 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), Z(7)^0, 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7), Z(7)^0, 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7), 0*Z(7), Z(7)^0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat,GF(7));</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WittIndex(form);</span>
+2
+
+</pre></div>
+
+<p><a id="X853AF8D97E00F1DB" name="X853AF8D97E00F1DB"></a></p>
+
+<h5>5.3-6 IsEllipticForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEllipticForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>The argument <var class="Arg">f</var> is a sesquilinear or quadratic form on the vector space <span class="SimpleMath">V</span>. This operation returns <var class="Arg">true</var> is and only if <var class="Arg">f</var> is elliptic; that is, it is orthogonal of minus type, or in other words, has even dimension and non-maximal Witt index (see Section <a href="chap5.html#X7F1255F77B6874E3"><span class="RefLink">5.1-3</span></a> for sesquilinear forms and Section <a href="chap5.html#X87C0B98C8669A34A"><span class="RefLink">5.2</span></a> for quadratic forms). If <var class="Arg">f</var> is degenerate, respectively singular, then this operation refers to the inuced non-degenerate, respectively non-singular form induced on the vector space V/Rad(f).</p>
+
+<p><a id="X7B73832A786FEC21" name="X7B73832A786FEC21"></a></p>
+
+<h5>5.3-7 IsParabolicForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsParabolicForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>The argument <var class="Arg">f</var> is a sesquilinear or quadratic form on the vector space <span class="SimpleMath">V</span>. This operation returns <var class="Arg">true</var> is and only if <var class="Arg">f</var> is parabolic; that is, it is orthogonal of neutral type, or in other words, it has odd dimension (see Section <a href="chap5.html#X7F1255F77B6874E3"><span class="RefLink">5.1-3</span></a> for sesquilinear forms and Section <a href="chap5.html#X87C0B98C8669A34A"><span class="RefLink">5.2</span></a> for quadratic forms). If <var class="Arg">f</var> is degenerate, respectively singular, then this operation refers to the inuced non-degenerate, respectively non-singular form induced on the vector space V/Rad(f).</p>
+
+<p><a id="X85551B28798B07C7" name="X85551B28798B07C7"></a></p>
+
+<h5>5.3-8 IsHyperbolicForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHyperbolicForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: true or false.</p>
+
+<p>The argument <var class="Arg">f</var> is a sesquilinear or quadratic form on the vector space <span class="SimpleMath">V</span>. This operation returns <var class="Arg">true</var> is and only if <var class="Arg">f</var> is hyperbolic; that is, it is orthogonal of plus type, or in other words, has even dimension and maximal Witt index (see Section <a href="chap5.html#X7F1255F77B6874E3"><span class="RefLink">5.1-3</span></a> for sesquilinear forms and Section <a href="chap5.html#X87C0B98C8669A34A"><span class="RefLink">5.2</span></a> for quadratic forms). If <var class="Arg">f</var> is degenerate, respectively singular, then this operation refers to the inuced non-degenerate, respectively non-singular form induced on the vector space V/Rad(f).</p>
+
+<p><a id="X85F7092783AA2968" name="X85F7092783AA2968"></a></p>
+
+<h5>5.3-9 TypeOfForm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TypeOfForm</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a number.</p>
+
+<p>The argument <var class="Arg">f</var> is a sesquilinear or quadratic form on the vector space <span class="SimpleMath">V</span> with radical <span class="SimpleMath">R</span>, a <span class="SimpleMath">k</span>-dimensional space. Then <var class="Arg">f</var> induces a non-degenerate/non-singular form <span class="SimpleMath">g</span> on <span class="SimpleMath">V/R</span>. When <span class="SimpleMath">R</span> is the trivial vector space, the form <span class="SimpleMath">g</span> is just the given form <var class="Arg">f</var>. This opertion returns</p>
+
+
+<ul>
+<li><p>0 when <span class="SimpleMath">g</span> is symplecitc or parabolic;</p>
+
+</li>
+<li><p>+1 when <span class="SimpleMath">g</span> is hyperbolic;</p>
+
+</li>
+<li><p>-1 when <span class="SimpleMath">g</span> is elliptic;</p>
+
+</li>
+<li><p>-1/2 when <span class="SimpleMath">g</span> is hermitian in odd dimension;</p>
+
+</li>
+<li><p>+1/2 when <span class="SimpleMath">g</span> is hermitian in even dimension;</p>
+
+</li>
+<li><p>an error message when <var class="Arg">f</var> is a pseudo form.</p>
+
+</li>
+</ul>
+<p>Note that no method is installed for the trivial form. The methods for this operation rely on <code class="file">IsParabolicForm</code>, <code class="file">IsHyperbolicForm</code> and <code class="file">IsEllipticForm</code> for orthogonal bilinear forms and quadratic forms.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[0,0,0,-1],[0,0,3,0],[0,-3,0,0],[1,0,0,0]]*Z(25)^0;</span>
+[ [ 0*Z(5), 0*Z(5), 0*Z(5), Z(5)^2 ], [ 0*Z(5), 0*Z(5), Z(5)^3, 0*Z(5) ], 
+  [ 0*Z(5), Z(5), 0*Z(5), 0*Z(5) ], [ Z(5)^0, 0*Z(5), 0*Z(5), 0*Z(5) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(25));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDegenerateForm(form);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TypeOfForm(form);</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := IdentityMat(3,GF(7));</span>
+[ [ Z(7)^0, 0*Z(7), 0*Z(7) ], [ 0*Z(7), Z(7)^0, 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), Z(7)^0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := QuadraticFormByMatrix(mat,GF(7));</span>
+&lt; quadratic form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSingularForm(form);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TypeOfForm(form);</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[0,1,0,0],[-1,0,0,0],[0,0,0,0],[0,0,0,0]]*Z(5)^0;</span>
+[ [ 0*Z(5), Z(5)^0, 0*Z(5), 0*Z(5) ], [ Z(5)^2, 0*Z(5), 0*Z(5), 0*Z(5) ], 
+  [ 0*Z(5), 0*Z(5), 0*Z(5), 0*Z(5) ], [ 0*Z(5), 0*Z(5), 0*Z(5), 0*Z(5) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(5));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDegenerateForm(form);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TypeOfForm(form);</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]]*Z(7)^0;</span>
+[ [ Z(7)^0, 0*Z(7), 0*Z(7), 0*Z(7) ], [ 0*Z(7), Z(7)^0, 0*Z(7), 0*Z(7) ], 
+  [ 0*Z(7), 0*Z(7), 0*Z(7), Z(7)^0 ], [ 0*Z(7), 0*Z(7), Z(7)^0, 0*Z(7) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(7));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDegenerateForm(form);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TypeOfForm(form);</span>
+-1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := IdentityMat(3,GF(9));</span>
+[ [ Z(3)^0, 0*Z(3), 0*Z(3) ], [ 0*Z(3), Z(3)^0, 0*Z(3) ], 
+  [ 0*Z(3), 0*Z(3), Z(3)^0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := HermitianFormByMatrix(mat,GF(9));</span>
+&lt; hermitian form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDegenerateForm(form);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TypeOfForm(form);</span>
+-1/2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := [[0,0,0,1],[0,1,0,0],[0,0,1,0],[1,0,0,0]]*Z(8)^0;</span>
+[ [ 0*Z(2), 0*Z(2), 0*Z(2), Z(2)^0 ], [ 0*Z(2), Z(2)^0, 0*Z(2), 0*Z(2) ], 
+  [ 0*Z(2), 0*Z(2), Z(2)^0, 0*Z(2) ], [ Z(2)^0, 0*Z(2), 0*Z(2), 0*Z(2) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">form := BilinearFormByMatrix(mat,GF(8));</span>
+&lt; bilinear form &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDegenerateForm(form);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TypeOfForm(form);</span>
+Error, &lt;f&gt; is a pseudo form and has no defined type called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 30 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

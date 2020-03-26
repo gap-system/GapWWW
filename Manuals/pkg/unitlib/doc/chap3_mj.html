@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (UnitLib) - Chapter 3: Implementation Details</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X7AB84A0B83B2C1F1" name="X7AB84A0B83B2C1F1"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X7AB84A0B83B2C1F1">3 <span class="Heading">Implementation Details</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7AE826977E0CD714">3.1 <span class="Heading">Saving the data</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X8134F0157BE00ABA">3.2 <span class="Heading">Reading the data</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">Implementation Details</span></h3>
+
+<p>In this chapter we describe the approach used to store the normalized unit group of the group algebra in the library, and to reconstruct the group <span class="SimpleMath">\(V(KG)\)</span> from the stored information.</p>
+
+<p><a id="X7AE826977E0CD714" name="X7AE826977E0CD714"></a></p>
+
+<h4>3.1 <span class="Heading">Saving the data</span></h4>
+
+<p>To compute the pc-presentation of the normalized unit group of the modular group algebra of a finite <span class="SimpleMath">\(p\)</span>-group we used the function <code class="code">PcNormalizedUnitGroup</code> from the <strong class="pkg">LAGUNA</strong> package. It uses the algorithm descibed in <a href="chapBib_mj.html#biBBovdi">[Bov98]</a>. See the <strong class="pkg">LAGUNA</strong> manual <a href="chapBib_mj.html#biBLaguna">[BKRS]</a> for more details.</p>
+
+<p>When this group is computed, the main idea is to use <strong class="pkg">GAP</strong> function <code class="code">CodePcGroup</code> that returns the code for the polycyclic generating sequence of the group, and then to create the group from this code using the <strong class="pkg">GAP</strong> function <code class="code">PcGroupCode</code>.</p>
+
+<p>The resulting code could be very long, and to compress it we used the <strong class="pkg">GAP</strong> function <code class="code">HexStringInt</code> than returns a string that represents the code with hexa-decimal digits (using A-F as digits 10-15). The inverse translation then can be performed with the <strong class="pkg">GAP</strong> function <code class="code">IntHexString</code>. This allowed to save almost 20 MB of space on groups of order 128 and reduce the total size of their database to 90 MB.</p>
+
+<p>For groups of order 128 we decided to compress the library with the <code class="file">gzip</code> program, and then uncompress each file "on fly" when it is requested. This allowed us to reduce the size of their part in the library from 90 to 12 MB, which is already quite reasonable. Of course, there is some little overhead arising from the uncompression and subsequent translation from hexa-decimal notation, but it is neglectible comparatively with the total time of the computation of <span class="SimpleMath">\(V(KG)\)</span> from scratch.</p>
+
+<p>There is one more thing that needs to be stored together with this code to make it sure that we will correctly identify the underlying group <span class="SimpleMath">\(G\)</span> of the group algebra <span class="SimpleMath">\(KG\)</span> with its image in the pc-presentation of the normalized unit group <span class="SimpleMath">\(V(KG)\)</span>.</p>
+
+<p>The group <span class="SimpleMath">\(G\)</span> is extracted from the <strong class="pkg">GAP</strong> Small Groups Library, so it is always the same, unless its description in the library will be changed (and it will be an important task of <strong class="pkg">UnitLib</strong> maintaner to update the package in this case!), and here we are safe from inconsistencies.</p>
+
+<p>But the next stage is the computation of generators of the normalized unit group <span class="SimpleMath">\(V(KG)\)</span>, and the first step is the dimension basis of the group <span class="SimpleMath">\(G\)</span>, that can be computed using the <strong class="pkg">LAGUNA</strong> function <code class="code">DimensionBasis</code>. To avoid the influence of possible changes in <strong class="pkg">GAP</strong> or usage of random methods, we store (in compacted form) the information about the dimension basis of <span class="SimpleMath">\(G\)</span> in the <strong class="pkg">UnitLib</strong>.</p>
+
+<p>All further procedures are implemented inside the <strong class="pkg">LAGUNA</strong> package, and their result is uniquely determined and predictable.</p>
+
+<p>For the reader interested in more details, the package contains the file <code class="file">unitlib/lib/genlib.g</code> with the function <code class="code">CreatePcNormalizedUnitGroupsLibrary</code>, that creates library files for groups of a given prime power order, and the file <code class="file">unitlib/lib/genpar.g</code> with the function <code class="code">ParCreatePcNormalizedUnitGroupsLibrary</code>, which is the parallel version of the previous function and must be used with the <strong class="pkg">ParGAP</strong> package <a href="chapBib_mj.html#biBParGAP">[Coo]</a>.</p>
+
+<p><a id="X8134F0157BE00ABA" name="X8134F0157BE00ABA"></a></p>
+
+<h4>3.2 <span class="Heading">Reading the data</span></h4>
+
+<p>To reconstruct the normalized unit group <span class="SimpleMath">\(V(KG)\)</span> from the library, we need only to know the catalogue number of the underlying group <span class="SimpleMath">\(G\)</span> in the <strong class="pkg">GAP</strong> Small Groups Library.</p>
+
+<p>We use the same numbering as in the <strong class="pkg">GAP</strong> Small Group Library, so <strong class="pkg">UnitLib</strong> finds the appropriate library file(s) and reads from it the code for the polycyclic generating sequence of <span class="SimpleMath">\(V(KG)\)</span> and the information about the dimension basis of <span class="SimpleMath">\(G\)</span> used for the computation of this code.</p>
+
+<p>Then <span class="SimpleMath">\(V(KG)\)</span> is created from the code using the <strong class="pkg">GAP</strong> function <code class="func">PcGroupCode</code> (<a href="../../../doc/ref/chap46_mj.html#X826BFDA07A707C54"><span class="RefLink">Reference: PcGroupCode</span></a>). We also create <span class="SimpleMath">\(G\)</span> using the <strong class="pkg">GAP</strong> Small Groups Library.</p>
+
+<p>Now to "glue" the group <span class="SimpleMath">\(V(KG)\)</span> with the underlying group <span class="SimpleMath">\(G\)</span> properly, the value of the attribute <code class="func">DimensionBasis</code> (<a href="../../../pkg/laguna-3.9.0/doc/chap4_mj.html#X7D7CD02F803FFC08"><span class="RefLink">LAGUNA: DimensionBasis</span></a>) of <span class="SimpleMath">\(G\)</span> is set in accordance with the data retrieved from the library. This will guarantee the correct construction of <code class="func">NaturalBijectionToPcNormalizedUnitGroup</code> (<a href="../../../pkg/laguna-3.9.0/doc/chap4_mj.html#X7E08F6E87C586A36"><span class="RefLink">LAGUNA: NaturalBijectionToPcNormalizedUnitGroup</span></a>) and <code class="func">NaturalBijectionToNormalizedUnitGroup</code> (<a href="../../../pkg/laguna-3.9.0/doc/chap4_mj.html#X83715EF37B9FA94A"><span class="RefLink">LAGUNA: NaturalBijectionToNormalizedUnitGroup</span></a>) by the <strong class="pkg">LAGUNA</strong> package.</p>
+
+<p>It remains now to make only several technical steps, such as constructing the group algebra <span class="SimpleMath">\(KG\)</span> over the appropriate field <span class="SimpleMath">\(K\)</span>, and storing <span class="SimpleMath">\(KG\)</span> in the attribute <code class="func">UnderlyingGroupRing</code> (<a href="../../../pkg/laguna-3.9.0/doc/chap4_mj.html#X82DCA8A57D0D1114"><span class="RefLink">LAGUNA: UnderlyingGroupRing</span></a>) of <span class="SimpleMath">\(V(KG)\)</span> and <span class="SimpleMath">\(V(KG)\)</span> in the attribute <code class="func">PcNormalizedUnitGroup</code> (<a href="../../../pkg/laguna-3.9.0/doc/chap4_mj.html#X7D40E42A7B678598"><span class="RefLink">LAGUNA: PcNormalizedUnitGroup</span></a>) of <span class="SimpleMath">\(KG\)</span>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

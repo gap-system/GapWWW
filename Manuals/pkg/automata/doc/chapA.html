@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Automata) - Appendix A: Directed graphs</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapA"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapB.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapA_mj.html">[MathJax on]</a></p>
+<p><a id="X82FB3D357E1BE288" name="X82FB3D357E1BE288"></a></p>
+<div class="ChapSects"><a href="chapA.html#X82FB3D357E1BE288">A <span class="Heading">Directed graphs</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X82FB3D357E1BE288">A.1 <span class="Heading">Directed graphs</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X86CF9F66788B2A24">A.1-1 RandomDiGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X868EE741872B932D">A.1-2 VertexInDegree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X84DF2E8E7A7B32C6">A.1-3 VertexOutDegree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7FA6FAAE7AA8715D">A.1-4 AutoVertexDegree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7BA5F1DF7DA89DC5">A.1-5 ReversedGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7F23780E7A12A79E">A.1-6 AutoConnectedComponents</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7D5288C982F92481">A.1-7 GraphStronglyConnectedComponents</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X859B7C517AFBD198">A.1-8 UnderlyingMultiGraphOfAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X78CF8E507E100C62">A.1-9 UnderlyingGraphOfAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X78869D478792B3AD">A.1-10 DiGraphToRelation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7D63604A8413AAAF">A.1-11 MSccAutomaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7971EE367B6B7F36">A.1-12 AutoIsAcyclicGraph</a></span>
+</div></div>
+</div>
+
+<h3>A <span class="Heading">Directed graphs</span></h3>
+
+<p>Automata are frequently described through directed labeled graphs. This appendix on directed graphs (digraphs) is devoted to some functions designed with the purpose of being used as auxiliary functions to deal with automata, but may have independent interest.</p>
+
+<p><a id="X82FB3D357E1BE288" name="X82FB3D357E1BE288"></a></p>
+
+<h4>A.1 <span class="Heading">Directed graphs</span></h4>
+
+<p>A directed graph with <span class="SimpleMath">n</span> vertices is represented by an adjacency list. For example, the list <code class="code">G = [[2,4],[3],[1,4],[]]</code> represents a directed graph with <code class="code">4 (= Length(G))</code> vertices; the sublist in position <code class="code">i</code> is the list of endpoints of the edges beginning in vertex <span class="SimpleMath">i</span>. <br><center><img src="graph.gif"></center><br></p>
+
+<p><a id="X86CF9F66788B2A24" name="X86CF9F66788B2A24"></a></p>
+
+<h5>A.1-1 RandomDiGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomDiGraph</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Produces a pseudo random digraph with <span class="SimpleMath">n</span> vertices</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomDiGraph(4);</span>
+[ [  ], [ 1, 2, 4 ], [  ], [  ] ]
+</pre></div>
+
+<p><a id="X868EE741872B932D" name="X868EE741872B932D"></a></p>
+
+<h5>A.1-2 VertexInDegree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VertexInDegree</code>( <var class="Arg">DG</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Computes the in degree of the vertex <var class="Arg">v</var> of the directed graph <var class="Arg">DG</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:= [ [ 1 ], [ 1, 2, 4 ], [  ], [ 1, 2, 3 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">VertexInDegree(G,2);</span>
+2
+</pre></div>
+
+<p><a id="X84DF2E8E7A7B32C6" name="X84DF2E8E7A7B32C6"></a></p>
+
+<h5>A.1-3 VertexOutDegree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VertexOutDegree</code>( <var class="Arg">DG</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Computes the out degree of the vertex <var class="Arg">v</var> of the directed graph <var class="Arg">DG</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=[ [ 1 ], [ 1, 2, 4 ], [  ], [ 1, 2, 3 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">VertexOutDegree(G,2);</span>
+3
+</pre></div>
+
+<p><a id="X7FA6FAAE7AA8715D" name="X7FA6FAAE7AA8715D"></a></p>
+
+<h5>A.1-4 AutoVertexDegree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutoVertexDegree</code>( <var class="Arg">DG</var>, <var class="Arg">v</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Computes the degree of the vertex <var class="Arg">v</var> of the directed graph <var class="Arg">DG</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=[ [ 1 ], [ 1, 2, 4 ], [  ], [ 1, 2, 3 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AutoVertexDegree(G,2);</span>
+5
+</pre></div>
+
+<p><a id="X7BA5F1DF7DA89DC5" name="X7BA5F1DF7DA89DC5"></a></p>
+
+<h5>A.1-5 ReversedGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReversedGraph</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Computes the reversed graph of the directed graph G. It is the graph obtained from G by reversing the edges.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=[ [  ], [ 4 ], [ 2 ], [ 1, 4 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReversedGraph(G);</span>
+[ [ 4 ], [ 3 ], [  ], [ 2, 4 ] ]
+</pre></div>
+
+<p>We say that a digraph is connected when for every pair of vertices there is a path consisting of directed or reversed edges from one vertex to the other.</p>
+
+<p><a id="X7F23780E7A12A79E" name="X7F23780E7A12A79E"></a></p>
+
+<h5>A.1-6 AutoConnectedComponents</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutoConnectedComponents</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Computes a list of the connected components of the digraph</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=[ [  ], [ 1, 4, 5, 6 ], [  ], [ 1, 3, 5, 6 ], [ 2, 3 ], [ 2, 4, 6 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AutoConnectedComponents(G);</span>
+[ [ 1, 2, 3, 4, 5, 6 ] ]
+</pre></div>
+
+<p>Two vertices of a digraph belong to a strongly connected component if there is a directed path from each one to the other.</p>
+
+<p><a id="X7D5288C982F92481" name="X7D5288C982F92481"></a></p>
+
+<h5>A.1-7 GraphStronglyConnectedComponents</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GraphStronglyConnectedComponents</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Produces the strongly connected components of the digraph <var class="Arg">G</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=[ [  ], [ 4 ], [  ], [ 4, 6 ], [  ], [ 1, 4, 5, 6 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Set(GraphStronglyConnectedComponents(G));</span>
+[ [ 1 ], [ 2 ], [ 3 ], [ 5 ], [ 6, 4 ] ]
+</pre></div>
+
+<p><a id="X859B7C517AFBD198" name="X859B7C517AFBD198"></a></p>
+
+<h5>A.1-8 UnderlyingMultiGraphOfAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingMultiGraphOfAutomaton</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><var class="Arg">A</var> is an automaton. The output is the underlying directed multi-graph.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := Automaton("det",3,"ab",[ [ 0, 3, 0 ], [ 1, 2, 3 ] ],[ 1 ],[ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(a);</span>
+   |  1  2  3  
+--------------
+ a |     3     
+ b |  1  2  3  
+Initial state:   [ 1 ]
+Accepting state: [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingMultiGraphOfAutomaton(a);</span>
+[ [ 1 ], [ 3, 2 ], [ 3 ] ]
+</pre></div>
+
+<p><a id="X78CF8E507E100C62" name="X78CF8E507E100C62"></a></p>
+
+<h5>A.1-9 UnderlyingGraphOfAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingGraphOfAutomaton</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><var class="Arg">A</var> is an automaton. The output is the underlying directed graph.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := Automaton("det",3,"ab",[ [ 2, 3, 0 ], [ 0, 1, 3 ] ],[ 2 ],[ 1, 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(a);</span>
+   |  1  2  3  
+--------------
+ a |  2  3     
+ b |     1  3  
+Initial state:    [ 2 ]
+Accepting states: [ 1, 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingGraphOfAutomaton(a);</span>
+[ [ 2 ], [ 1, 3 ], [ 3 ] ]
+</pre></div>
+
+<p><a id="X78869D478792B3AD" name="X78869D478792B3AD"></a></p>
+
+<h5>A.1-10 DiGraphToRelation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiGraphToRelation</code>( <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the relation corresponding to the digraph. Note that a directed graph may be seen in a natural way as a binary relation on the set of vertices.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=[ [  ], [  ], [ 4 ], [ 4 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DiGraphToRelation(G);</span>
+[ [ 3, 4 ], [ 4, 4 ] ]
+</pre></div>
+
+<p><a id="X7D63604A8413AAAF" name="X7D63604A8413AAAF"></a></p>
+
+<h5>A.1-11 MSccAutomaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MSccAutomaton</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Produces an automaton where, in each strongly connected component, edges labeled by inverses are added. (M stands for modified.)</p>
+
+<p>This construction is useful in Finite Semigroup Theory.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := Automaton("det",3,"ab",[ [ 0, 2, 0 ], [ 1, 2, 0 ] ],[ 3 ],[ 1, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(a);</span>
+   |  1  2  3  
+--------------
+ a |     2     
+ b |  1  2     
+Initial state:    [ 3 ]
+Accepting states: [ 1, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MSccAutomaton(a);</span>
+&lt; deterministic automaton on 4 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+   |  1  2  3  
+--------------
+ a |     2     
+ b |  1  2     
+ A |     2     
+ B |  1  2     
+Initial state:    [ 3 ]
+Accepting states: [ 1, 3 ]
+</pre></div>
+
+<p><a id="X7971EE367B6B7F36" name="X7971EE367B6B7F36"></a></p>
+
+<h5>A.1-12 AutoIsAcyclicGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutoIsAcyclicGraph</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The argument is a graph's list of adjacencies and this function returns true if the argument is an acyclic graph and false otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := [ [  ], [ 3 ], [ 2 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AutoIsAcyclicGraph(last);</span>
+false
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapB.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

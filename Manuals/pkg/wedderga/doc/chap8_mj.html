@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Wedderga) - Chapter 8: Applications of the Wedderga package</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap8"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap8.html">[MathJax off]</a></p>
+<p><a id="X83FD4D318127261B" name="X83FD4D318127261B"></a></p>
+<div class="ChapSects"><a href="chap8_mj.html#X83FD4D318127261B">8 <span class="Heading">Applications of the Wedderga package</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X8582FB957C58DFB3">8.1 <span class="Heading">Coding theory applications</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7AE55D3C7BFCF3A9">8.1-1 CodeWordByGroupRingElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7C8BBBDB78A1678E">8.1-2 CodeByLeftIdeal</a></span>
+</div></div>
+</div>
+
+<h3>8 <span class="Heading">Applications of the Wedderga package</span></h3>
+
+<p><a id="X8582FB957C58DFB3" name="X8582FB957C58DFB3"></a></p>
+
+<h4>8.1 <span class="Heading">Coding theory applications</span></h4>
+
+<p><a id="X7AE55D3C7BFCF3A9" name="X7AE55D3C7BFCF3A9"></a></p>
+
+<h5>8.1-1 CodeWordByGroupRingElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CodeWordByGroupRingElement</code>( <var class="Arg">F</var>, <var class="Arg">S</var>, <var class="Arg">a</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The code word of length the length of <var class="Arg">S</var> associated to the group ring element <var class="Arg">a</var>.</p>
+
+<p>The input <var class="Arg">F</var> should be a finite field. The input <var class="Arg">S</var> is a fixed ordering of a group <span class="SimpleMath">\(G\)</span> and <var class="Arg">a</var> is an element in the group algebra <span class="SimpleMath">\(FG\)</span>.</p>
+
+<p>Each element <span class="SimpleMath">\(c\)</span> in <span class="SimpleMath">\(FG\)</span> is of the form <span class="SimpleMath">\( c=\sum_{i=1}^n f_i g_i\)</span>, where we fix an ordering <span class="SimpleMath">\(\{g_1,g_2,...,g_n \}\)</span> of the group elements of <span class="SimpleMath">\(G\)</span> and <span class="SimpleMath">\(f_i\in F\)</span>. If we look at <span class="SimpleMath">\(c\)</span> as a codeword, we will write <span class="SimpleMath">\([f_1 f_2 ... f_n]\)</span>. (<a href="chap9_mj.html#X856D7975810BF987"><span class="RefLink">9.23</span></a>).</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=DihedralGroup(8);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=GF(3);;          </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FG:=GroupRing(F,G);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=AsList(FG)[27];</span>
+(Z(3)^0)*&lt;identity&gt; of ...+(Z(3)^0)*f1+(Z(3)^0)*f2+(Z(3)^0)*f3+(Z(3)^
+0)*f1*f2+(Z(3)^0)*f2*f3+(Z(3))*f1*f2*f3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=AsSet(G);</span>
+[ &lt;identity&gt; of ..., f1, f2, f3, f1*f2, f1*f3, f2*f3, f1*f2*f3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CodeWordByGroupRingElement(F,S,a);</span>
+[ Z(3)^0, Z(3)^0, Z(3)^0, Z(3)^0, Z(3)^0, 0*Z(3), Z(3)^0, Z(3) ]
+
+</pre></div>
+
+<p><a id="X7C8BBBDB78A1678E" name="X7C8BBBDB78A1678E"></a></p>
+
+<h5>8.1-2 CodeByLeftIdeal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CodeByLeftIdeal</code>( <var class="Arg">F</var>, <var class="Arg">G</var>, <var class="Arg">S</var>, <var class="Arg">I</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: All code words of length the length of <var class="Arg">S</var> associated to the group ring elements in the ideal <var class="Arg">I</var> of <var class="Arg">FG</var>.</p>
+
+<p>The input <var class="Arg">F</var> should be a finite field. The input <var class="Arg">S</var> is a fixed ordering of a group <span class="SimpleMath">\(G\)</span> and <var class="Arg">I</var> is a left ideal of the group algebra <span class="SimpleMath">\(FG\)</span>.</p>
+
+<p>Each element <span class="SimpleMath">\(c\)</span> in <span class="SimpleMath">\(FG\)</span> is of the form <span class="SimpleMath">\( c=\sum_{i=1}^n f_i g_i\)</span>, where we fix an ordering <span class="SimpleMath">\(\{g_1,g_2,...,g_n \}\)</span> of the group elements of <span class="SimpleMath">\(G\)</span> and <span class="SimpleMath">\(f_i\in F\)</span>. If we look at <span class="SimpleMath">\(c\)</span> as a codeword, we will write <span class="SimpleMath">\([f_1 f_2 ... f_n]\)</span>. (<a href="chap9_mj.html#X856D7975810BF987"><span class="RefLink">9.23</span></a>).</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=DihedralGroup(8);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=GF(3);;          </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FG:=GroupRing(F,G);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=AsSet(G);</span>
+[ &lt;identity&gt; of ..., f1, f2, f3, f1*f2, f1*f3, f2*f3, f1*f2*f3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H:=StrongShodaPairs(G)[5][1];</span>
+Group([ f1*f2*f3, f3 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:=StrongShodaPairs(G)[5][2];</span>
+Group([ f1*f2 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N:=Normalizer(G,K);</span>
+Group([ f1*f2*f3, f3 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">epi:=NaturalHomomorphismByNormalSubgroup(N,K);</span>
+[ f1*f2*f3, f3 ] -&gt; [ f1, f1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QHK:=Image(epi,H);</span>
+Group([ f1, f1 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gq:=MinimalGeneratingSet(QHK)[1];</span>
+f1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C:=CyclotomicClasses(Size(F),Index(H,K))[2];</span>
+[ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e:=PrimitiveIdempotentsNilpotent(FG,H,K,C,[epi,gq]);   </span>
+[ (Z(3)^0)*&lt;identity&gt; of ...+(Z(3))*f3+(Z(3)^0)*f1*f2+(Z(3))*f1*f2*f3, 
+  (Z(3)^0)*&lt;identity&gt; of ...+(Z(3))*f3+(Z(3))*f1*f2+(Z(3)^0)*f1*f2*f3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FGe := LeftIdealByGenerators(FG,[e[1]]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V := VectorSpace(F,CodeByLeftIdeal(F,G,S,FGe));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := Basis(V);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("guava");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">code := GeneratorMatCode(B,F);</span>
+a linear [8,2,1..4]4..5 code defined by generator matrix over GF(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MinimumDistance(code);</span>
+4
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

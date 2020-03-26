@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Loops) - Chapter 3: How the Package Works</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X7A6DF65E826B8CFF" name="X7A6DF65E826B8CFF"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X7A6DF65E826B8CFF">3 <span class="Heading">How the Package Works</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X86F02BBD87FEA1C6">3.1 <span class="Heading">Representing Quasigroups</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X807D76EF81B9D061">3.2 <span class="Heading">Conversions between magmas, quasigroups, loops and groups</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X87E49ED884FA6DC4">3.3 <span class="Heading">Calculating with Quasigroups</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7D75C7A6787AF72A">3.4 <span class="Heading">Naming, Viewing and Printing Quasigroups and their Elements</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A7EB1B579273D07">3.4-1 <span class="Heading">SetQuasigroupElmName and SetLoopElmName</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">How the Package Works</span></h3>
+
+<p>The package consists of three complementary components:</p>
+
+
+<ul>
+<li><p>the core algorithms for quasigroup theoretical notions (see Chapters <a href="chap4_mj.html#X7AA4B9C0877550ED"><span class="RefLink">4</span></a>, <a href="chap5_mj.html#X7B9F619279641FAA"><span class="RefLink">5</span></a>, <a href="chap6_mj.html#X794A04C5854D352B"><span class="RefLink">6</span></a> and <a href="chap7_mj.html#X7910E575825C713E"><span class="RefLink">7</span></a>),</p>
+
+</li>
+<li><p>algorithms for specific varieties of loops, mostly for Moufang loops (see Chapter <a href="chap8_mj.html#X85AFC9C47FD3C03F"><span class="RefLink">8</span></a>),</p>
+
+</li>
+<li><p>the library of small loops (see Chapter <a href="chap9_mj.html#X7BF3EE6E7953560D"><span class="RefLink">9</span></a>).</p>
+
+</li>
+</ul>
+<p>Although we do not explain the algorithms in detail here, we describe the general philosophy so that users can anticipate the capabilities and behavior of <strong class="pkg">LOOPS</strong>.</p>
+
+<p><a id="X86F02BBD87FEA1C6" name="X86F02BBD87FEA1C6"></a></p>
+
+<h4>3.1 <span class="Heading">Representing Quasigroups</span></h4>
+
+<p>Since permutation representation in the usual sense is impossible for nonassociative structures, and since the theory of nonassociative presentations is not well understood, we resorted to multiplication tables to represent quasigroups in <strong class="pkg">GAP</strong>. (In order to save storage space, we sometimes use one multiplication table to represent several quasigroups, for instance when a quasigroup is a subquasigroup of another quasigroup. See Section <a href="chap4_mj.html#X7DE8405B82BC36A9"><span class="RefLink">4.1</span></a> for more details.)</p>
+
+<p>Consequently, the package is intended primarily for quasigroups and loops of small order, say up to 1000.</p>
+
+<p>The <strong class="pkg">GAP</strong> categories <code class="code">IsQuasigroupElement</code>, <code class="code">IsLoopElement</code>, <code class="code">IsQuasigroup</code> and <code class="code">IsLoop</code> are declared in <strong class="pkg">LOOPS</strong> as follows:</p>
+
+
+<pre class="normal">
+
+DeclareCategory( "IsQuasigroupElement", IsMultiplicativeElement );
+DeclareRepresentation( "IsQuasigroupElmRep",
+    IsPositionalObjectRep and IsMultiplicativeElement, [1] );
+DeclareCategory( "IsLoopElement",
+    IsQuasigroupElement and IsMultiplicativeElementWithInverse );
+DeclareRepresentation( "IsLoopElmRep",
+    IsPositionalObjectRep and IsMultiplicativeElementWithInverse, [1] );
+## latin (auxiliary category for GAP to tell apart IsMagma and IsQuasigroup)
+DeclareCategory( "IsLatinMagma", IsObject );
+DeclareCategory( "IsQuasigroup", IsMagma and IsLatinMagma );
+DeclareCategory( "IsLoop", IsQuasigroup and
+    IsMultiplicativeElementWithInverseCollection);
+
+</pre>
+
+<p><a id="X807D76EF81B9D061" name="X807D76EF81B9D061"></a></p>
+
+<h4>3.2 <span class="Heading">Conversions between magmas, quasigroups, loops and groups</span></h4>
+
+<p>Whether an object is considered a magma, quasigroup, loop or group is a matter of declaration in <strong class="pkg">LOOPS</strong>. Loops are automatically quasigroups, and both groups and quasigroups are automatically magmas. All standard <strong class="pkg">GAP</strong> commands for magmas are therefore available for quasigroups and loops.</p>
+
+<p>In <strong class="pkg">GAP</strong>, functions of the type <code class="code">AsSomething(<var class="Arg">X</var>)</code> convert the domain <var class="Arg">X</var> into <code class="code">Something</code>, if possible, without changing the underlying domain <var class="Arg">X</var>. For example, if <var class="Arg">X</var> is declared as magma but is associative and has neutral element and inverses, <code class="code">AsGroup(<var class="Arg">X</var>)</code> returns the corresponding group with the underlying domain <var class="Arg">X</var>.</p>
+
+<p>We have opted for a more general kind of conversions in <strong class="pkg">LOOPS</strong> (starting with version 2.1.0), using functions of the type <code class="code">IntoSomething(<var class="Arg">X</var>)</code>. The two main features that distinguish <code class="code">IntoSomething</code> from <code class="code">AsSomething</code> are:</p>
+
+
+<ul>
+<li><p>The function <code class="code">IntoSomething(<var class="Arg">X</var>)</code> does not necessarily return the same domain as <var class="Arg">X</var>. The reason is that <var class="Arg">X</var> can be a group, for instance, defined on one of many possible domains, while <code class="code">IntoLoop(<var class="Arg">X</var>)</code> must result in a loop, and hence be defined on a subset of some interval <span class="SimpleMath">\(1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(n\)</span> (see Section <a href="chap6_mj.html#X8731D818827C08F3"><span class="RefLink">6.1</span></a>).</p>
+
+</li>
+<li><p>In some special situations, the function <code class="code">IntoSomething(<var class="Arg">X</var>)</code> allows to convert <var class="Arg">X</var> into <code class="code">Something</code> even though <var class="Arg">X</var> does not have all the properties of <code class="code">Something</code>. For instance, every quasigroup is isotopic to a loop, so it makes sense to allow the conversion <code class="code">IntoLoop(<var class="Arg">Q</var>)</code> even if the quasigroup <var class="Arg">Q</var> does not posses a neutral element.</p>
+
+</li>
+</ul>
+<p>Details of all conversions in <strong class="pkg">LOOPS</strong> can be found in Section <a href="chap4_mj.html#X7BC2D8877A943D74"><span class="RefLink">4.10</span></a>.</p>
+
+<p><a id="X87E49ED884FA6DC4" name="X87E49ED884FA6DC4"></a></p>
+
+<h4>3.3 <span class="Heading">Calculating with Quasigroups</span></h4>
+
+<p>Although the quasigroups are ultimately represented by multiplication tables, the algorithms are efficient because nearly all calculations are delegated to groups. The connection between quasigroups and groups is facilitated via translations (see Section <a href="chap2_mj.html#X7EC01B437CC2B2C9"><span class="RefLink">2.2</span></a>), and we illustrate it with a few examples: <br /></p>
+
+<p><strong class="button">Example:</strong> This example shows how properties of quasigroups can be translated into properties of translations in a straightforward way. Let <span class="SimpleMath">\(Q\)</span> be a quasigroup. We ask if <span class="SimpleMath">\(Q\)</span> is associative. We can either test if <span class="SimpleMath">\((xy)z=x(yz)\)</span> for every <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(z\)</span> in <span class="SimpleMath">\(Q\)</span>, or we can ask if <span class="SimpleMath">\(L_{xy}=L_xL_y\)</span> for every <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span> in <span class="SimpleMath">\(Q\)</span>. Note that since <span class="SimpleMath">\(L_{xy}\)</span>, <span class="SimpleMath">\(L_x\)</span> and <span class="SimpleMath">\(L_y\)</span> are elements of a permutation group, we do not have to refer directly to the multiplication table once the left translations of <span class="SimpleMath">\(Q\)</span> are known. <br /></p>
+
+<p><strong class="button">Example:</strong> This example shows how properties of loops can be translated into properties of translations in a way that requires some theory. A <em>left Bol loop</em> is a loop satisfying <span class="SimpleMath">\(x(y(xz)) = (x(yx))z\)</span>. We claim (without proof) that a loop <span class="SimpleMath">\(Q\)</span> is left Bol if and only if <span class="SimpleMath">\(L_xL_yL_x\)</span> is a left translation for every <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span> in <span class="SimpleMath">\(Q\)</span>. <br /></p>
+
+<p><strong class="button">Example:</strong> This example shows that many properties of loops become purely group-theoretical once they are expressed in terms of translations. A loop is <em>simple</em> if it has no nontrivial congruences. It is possible to show that a loop is simple if and only if its multiplication group is a primitive permutation group. <br /></p>
+
+<p>The main idea of the package is therefore to:</p>
+
+
+<ul>
+<li><p>calculate the translations and the associated permutation groups when they are needed,</p>
+
+</li>
+<li><p>store them as attributes,</p>
+
+</li>
+<li><p>use them in algorithms as often as possible.</p>
+
+</li>
+</ul>
+<p><a id="X7D75C7A6787AF72A" name="X7D75C7A6787AF72A"></a></p>
+
+<h4>3.4 <span class="Heading">Naming, Viewing and Printing Quasigroups and their Elements</span></h4>
+
+<p><strong class="pkg">GAP</strong> displays information about objects in two modes: the <code class="code">View</code> mode (default, short), and the <code class="code">Print</code> mode (longer). Moreover, when the name of an object is set, the name is always shown, no matter which display mode is used.</p>
+
+<p>Only loops contained in the libraries of <strong class="pkg">LOOPS</strong> are named. For instance, the loop obtained via <code class="code">MoufangLoop(32,4)</code>, the 4th Moufang loop of order 32, is named "Moufang loop 32/4'' and is shown as <code class="code">&lt;Moufang loop 32/4&gt;</code>.</p>
+
+<p>A generic quasigroup of order <span class="SimpleMath">\(n\)</span> is displayed as <code class="code">&lt;quasigroup of order n&gt;</code>. Similarly, a loop of order <span class="SimpleMath">\(n\)</span> appears as <code class="code">&lt;loop of order n&gt;</code>.</p>
+
+<p>The displayed information of a generic loop is enhanced if more information about the loop becomes available. For instance, when it is established that a loop of order 12 has the left alternative property, the loop will be shown as <code class="code">&lt;left alternative loop of order 12&gt;</code> until a stronger property is obtained. Which property is diplayed is governed by the filters built into <strong class="pkg">LOOPS</strong> (see Appendix <a href="chapB_mj.html#X84EFA4C07D4277BB"><span class="RefLink">B</span></a>).</p>
+
+<p><a id="X7A7EB1B579273D07" name="X7A7EB1B579273D07"></a></p>
+
+<h5>3.4-1 <span class="Heading">SetQuasigroupElmName and SetLoopElmName</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetQuasigroupElmName</code>( <var class="Arg">Q</var>, <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetLoopElmName</code>( <var class="Arg">Q</var>, <var class="Arg">name</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The above functions change the names of elements of a quasigroup (resp. loop) <var class="Arg">Q</var> to <var class="Arg">name</var>.</p>
+
+<p>By default, elements of a quasigroup appear as <code class="code">qi</code> and elements of a loop appear as <code class="code">li</code> in both display modes, where <code class="code">i</code> is a positive integer. The neutral element of a loop is always indexed by 1.<br /></p>
+
+<p>For quasigroups and loops in the <code class="code">Print</code> mode, we display the multiplication table (if it is known), otherwise we display the elements. <br /></p>
+
+<p>In the following example, <code class="code">L</code> is a loop with two elements.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L;</span>
+&lt;loop of order 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( L );</span>
+&lt;loop with multiplication table [ [ 1,  2 ], [  2,  1 ] ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Elements( L );</span>
+[ l1, l2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetLoopElmName( L, "loop_element" );; Elements( L );</span>
+[ loop_element1, loop_element2 ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

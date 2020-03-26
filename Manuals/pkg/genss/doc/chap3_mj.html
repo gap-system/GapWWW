@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (genss) - Chapter 3: Stabiliser Chains</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X8064DE868377020F" name="X8064DE868377020F"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X8064DE868377020F">3 <span class="Heading">Stabiliser Chains</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7B480F377A18AD40">3.1 <span class="Heading">Computing stabiliser chains</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80747C9A7FEB36BE">3.1-1 StabilizerChain</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X784758907BD66D57">3.2 <span class="Heading">Options for the computation of stabiliser chains</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80C443DB7F951958">3.2-1 GENSS_IsOneProjective</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7BBF7C748660197B">3.3 <span class="Heading">How base points are chosen</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X814A0FEE7B677BF7">3.3-1 FindBasePointCandidates</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7F17287C81771245">3.4 <span class="Heading">Using stabiliser chains</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7BAA7E4478F5CFA9">3.4-1 SiftGroupElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C88F18C79DF9005">3.4-2 SiftGroupElementSLP</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82EFC40987B17368">3.4-3 StrongGenerators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FC7256285A2110A">3.4-4 NrStrongGenerators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7956F37981FD2F48">3.4-5 BaseStabilizerChain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X858ADA3B7A684421">3.4-6 Size</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79730D657AB219DB">3.4-7 Random</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X87BDB89B7AAFE8AD"><code>3.4-8 \in</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X84103D1A854F6E73">3.4-9 IsProved</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X837389DA857F0596">3.4-10 GroupIteratorByStabilizerChain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8639DF037FAB2E96">3.4-11 SetStabilizerChain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C12BF8B7976B1FC">3.4-12 StoredStabilizerChain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B0B01C4875F2CB8">3.4-13 StabChainOp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7952DA8183229C8C">3.4-14 SiftBaseImage</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7DB069EA7A77DD4D">3.4-15 SLPChainStabilizerChain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7DE1ACFA81002A5E">3.4-16 GroupHomomorphismByImagesNCStabilizerChain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80BB35D380A972BB">3.4-17 FindShortGeneratorsOfSubgroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X87B01CDA7D44C5A2">3.4-18 Stab</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Stabiliser Chains</span></h3>
+
+<p>This chapter describes the core functionality of the package. It mainly covers how to use <strong class="pkg">genss</strong> to compute stabiliser chains for <strong class="pkg">GAP</strong> groups and use them to do sifting.</p>
+
+<p><a id="X7B480F377A18AD40" name="X7B480F377A18AD40"></a></p>
+
+<h4>3.1 <span class="Heading">Computing stabiliser chains</span></h4>
+
+<p>The main tool to compute a stabiliser chain is the following operation. It has many options and can be customised in a very flexible way.</p>
+
+<p><a id="X80747C9A7FEB36BE" name="X80747C9A7FEB36BE"></a></p>
+
+<h5>3.1-1 StabilizerChain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StabilizerChain</code>( <var class="Arg">G</var>[, <var class="Arg">opt</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a stabiliser chain object or <code class="keyw">fail</code></p>
+
+<p>This operation computes a stabiliser chain for the group <var class="Arg">G</var> using a randomised Schreier-Sims algorithm. The second argument <var class="Arg">opt</var> is an optional options record. See Section <a href="chap3_mj.html#X784758907BD66D57"><span class="RefLink">3.2</span></a> below for an explanation of the possible components.</p>
+
+<p>Note that this is a Monte Carlo algorithm in most cases, so there is a small error probability. However, the only error possible is that some of the subgroups in the stabiliser chain are proper subgroups of the actual point stabilisers. So the resulting group order is always a divisor of the actual group order and if the two are equal, then the stabiliser chain is proved to be correct. In particular, if the group object <var class="Arg">G</var> for some reason already knows the group order, then this procedure always returns a correct and proven stabiliser chain for <var class="Arg">G</var>.</p>
+
+<p><a id="X784758907BD66D57" name="X784758907BD66D57"></a></p>
+
+<h4>3.2 <span class="Heading">Options for the computation of stabiliser chains</span></h4>
+
+<p>The options record for the <code class="func">StabilizerChain</code> (<a href="chap3_mj.html#X80747C9A7FEB36BE"><span class="RefLink">3.1-1</span></a>) can contain the following components, which are used to control the behaviour of the computation of a stabiliser chain for the group <var class="Arg">G</var>. Note that for most of these components there are default values to be found in the global <code class="code">GENSS</code> record. You can change these defaults there if you want but you should know what you are doing. An explicitly given value in the options record always takes precedence over the default value.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">Base</code></strong></dt>
+<dd><p>This component can either be bound to an existing stabilizer chain object or to a list of points. In both cases this indicates that the base of the stabilizer chain or the list of points respectively are known to be a base for the group <var class="Arg">G</var>. In the first case the corresponding action functions are taken from the stabiliser chain, in the second case one should usually bind the component <code class="code">BaseOps</code> to a list of equal length containing the action functions corresponding to the base points.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">BaseOps</code></strong></dt>
+<dd><p>If the <code class="code">Base</code> component is bound to a list of points the <code class="code">BaseOps</code> component must be a list of equal length containing the corresponding action functions. If the <code class="code">BaseOps</code> component is unbound, a list with identical entries <code class="code">OnLines</code> is used in projective mode and <code class="code">OnPoints</code> in non-projective mode (see component <code class="code">Projective</code> below).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Cand</code></strong></dt>
+<dd><p>The <code class="code">Cand</code> component can be bound to a record <code class="code">r</code>which contains candidates for base points in the following way. The <code class="code">r.points</code> component contains the list of points, the <code class="code">r.ops</code> component contains a list of equal length with the corresponding action functions. The points and actions specified in the <code class="code">Cand</code> component are tried as possible base points for <var class="Arg">G</var> (and its stabilisers) first before other points are guessed (see <code class="func">FindBasePointCandidates</code> (<a href="chap3_mj.html#X814A0FEE7B677BF7"><span class="RefLink">3.3-1</span></a>)). If a point is fixed under all generators it is not used, unless the component <code class="code">Reduced</code> is explicitly set to <code class="keyw">false</code> (see below). If the component <code class="code">StrictlyUseCandidates</code> is <code class="keyw">false</code> (the default, see below), the algorithm tries to use other points of an already found orbit before considering the next candidate specified by <code class="code">Cand</code>. This is usually sensible because for an already enumerated orbit we have a natural bound on the length of the suborbits for the point stabiliser in this orbit.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">DeterministicVerification</code></strong></dt>
+<dd><p>Set this component to <code class="keyw">true</code> to switch on a deterministic verification routine after the randomised Schreier-Sims procedure. This is not yet implemented.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ErrorBound</code></strong></dt>
+<dd><p>Set this component to a rational number between 0 and 1. It will be an upper bound for the error probability. That is, the error probability of the Monte Carlo verification at the end will be less than this rational number. This component overrides everything you specify in the <code class="code">random</code> or <code class="code">VerifyElements</code> components.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">FailInsteadOfError</code></strong></dt>
+<dd><p>If no short enough orbit is found during the computation, the procedure stops with an error message. If you would rather like it to return <code class="keyw">fail</code> then set this component to <code class="keyw">true</code>. This option can be used to try an stabiliser chain computation automatically and give up before you run out of memory.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ImmediateVerificationElements</code></strong></dt>
+<dd><p>Whenever the randomised Schreier-Sims procedure has first computed generators for a stabiliser in the chain and has computed a stabiliser chain for that stabiliser recursively, an immediate verification is done. This is to spot early on that the group found is in fact a proper subgroup of the stabiliser. This verification is done by creating a few more random elements of that stabiliser and sifting them through the newly created stabiliser chain. Each such element has a chance of at least <span class="SimpleMath">\(1/2\)</span> to spot this. The number of random elements used is stored in the component <code class="code">ImmediateVerificationElements</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">InitialHashSize</code></strong></dt>
+<dd><p>Set this component to the initial tree hash size for orbit computations in the stabiliser chain.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">IsOne</code></strong></dt>
+<dd><p>The default for this computation is the <code class="func">IsOne</code> (<a href="../../../doc/ref/chap31_mj.html#X814D78347858EC13"><span class="RefLink">Reference: IsOne</span></a>) operation in the <strong class="pkg">GAP</strong> library. Whenever in the stabiliser chain computation it has to be tested whether or not a group element is equal to the identity, the function stored in the <code class="code">IsOne</code> component is called. The rationale behind this is that you can compute a stabiliser chain for a factor group of the group object <var class="Arg">G</var>. For example, if you set the <code class="code">IsOne</code> component to <code class="func">GENSS_IsOneProjective</code> (<a href="chap3_mj.html#X80C443DB7F951958"><span class="RefLink">3.2-1</span></a>) for a matrix group <var class="Arg">G</var>, scalar multiples of the identity are considered to be equal to the identity. You will have to specify the base points explicitly using the <code class="code">Cand</code> and <code class="code">StrictlyUseCandidates</code> component (see above and below) to only use actions having the normal subgroup in its kernel. A shortcut for computing stabiliser chains of projective groups (matrix group modulo scalars) is to set the <code class="code">Projective</code> component (see below) and switch to projective mode.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">LimitShortOrbCandidates</code></strong></dt>
+<dd><p>The integer value of this component limits the number of candidates considered for the finding of short orbits. See the <code class="code">TryShortOrbit</code> and <code class="code">TryBirthdayParadox</code> components.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">NrRandElsBirthdayParadox</code></strong></dt>
+<dd><p>The method using the birthday paradox to find short orbits uses at most as many random group elements to estimate the orbit size as this component says. See the <code class="code">TryBirthdayParadox</code> component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">NumberPrevOrbitPoints</code></strong></dt>
+<dd><p>After an orbit for the stabiliser chain has been enumerated, the randomised Schreier-Sims method first tries <code class="code">NumberPrevOrbitPoints</code> from this orbit as next base points. Note that this is not done if the <code class="code">StrictlyUseCandidates</code> component is set to <code class="keyw">true</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">OrbitLengthLimit</code></strong></dt>
+<dd><p>This component is an absolute upper bound for the length of all orbits in the stabiliser chain. If an orbit enumeration reaches this limit, the stabiliser chain computation is aborted.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">OrbitLimitBirthdayParadox</code></strong></dt>
+<dd><p>During the method to find short orbits using the birthday paradox (see component <code class="code">TryBirthdayParadox</code>) only orbits whose final estimated length is less than <code class="code">OrbitLimitBirthdayParadox</code> are used.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">OrbitLimitImmediatelyTake</code></strong></dt>
+<dd><p>During the method to find short orbits using the birthday paradox (see component <code class="code">TryBirthdayParadox</code>) an orbit is immediately used if its currently estimated length is less than <code class="code">OrbitLimitImmediatelyTake</code>, even if the estimate is not yet very reliable.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">OrbitsWithLog</code></strong></dt>
+<dd><p>This component defaults to <code class="keyw">true</code> in which case the orbit objects for the stabiliser chain have a log to allow to make the Schreier trees shallow by adding generators. If you set this to <code class="keyw">false</code>, no logs are written and the Schreier trees could potentially be deep. This will make sifting slower. Usually you should not touch this option. The only reason for setting it to <code class="keyw">false</code> could be if you need that the Schreier trees are not changed after their initial creation, even if new generators are added to the stabiliser chain.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Projective</code></strong></dt>
+<dd><p>Set this component to <code class="keyw">true</code> if you want to compute a stabiliser chain for a projective group given as a matrix group. Elements which are scalar multiples of each other will be considered to be equal. This is achieved by only considering projective actions. Note that in this case a known size of the group object cannot be used, since this size is the order of the matrix group!</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">random</code></strong></dt>
+<dd><p>The <code class="code">random</code> component is there as a compatibility option. It behaves exactly as for the stabiliser chain methods in the <strong class="pkg">GAP</strong> library. It must be set to a number between <span class="SimpleMath">\(0\)</span> and <span class="SimpleMath">\(1000\)</span> indicating a lower bound for the probability of a correct answer, where the value <span class="SimpleMath">\(a\)</span> means <span class="SimpleMath">\(a/10\)</span>%. Note that currently <span class="SimpleMath">\(1000\)</span> is not yet implemented since there is no working deterministic verification routine.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">RandomElmFunc</code></strong></dt>
+<dd><p>If this component is bound then it must be bound to a function taking no arguments and returning uniformly distributed random elements in the group for which the stabiliser chain is to be computed. All random elements used for the stabiliser chain will then be created by calling this function.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">RandomStabGens</code></strong></dt>
+<dd><p>This component contains the number of random stabiliser elements that are generated initially to generate a new stabiliser in the chain.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Reduced</code></strong></dt>
+<dd><p>If this component is bound to <code class="keyw">true</code>, then no orbits of length <span class="SimpleMath">\(1\)</span> are allowed in the stabiliser chain. That is, no points are taken as base points that are fixed under all generators of the current stabiliser. Set this component to <code class="keyw">false</code> to allow for orbits of length <span class="SimpleMath">\(1\)</span>, for example if you want the stabiliser chain to run through a prescribed base.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Report</code></strong></dt>
+<dd><p>The number in the <code class="code">Report</code> component is taken as the <code class="code">Report</code> component in all orbit enumerations. That is, every <code class="code">Report</code> newly found elements in the orbit a message is printed saying how far the computation has gone.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ShortOrbitsInitialLimit</code></strong></dt>
+<dd><p>See the <code class="code">TryShortOrbit</code> component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ShortOrbitsNrRandoms</code></strong></dt>
+<dd><p>See the <code class="code">TryShortOrbit</code> component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ShortOrbitsOrbLimit</code></strong></dt>
+<dd><p>See the <code class="code">TryShortOrbit</code> component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Size</code></strong></dt>
+<dd><p>If the <code class="code">Size</code> component is set to a positive integer it is taken as the size of the group <var class="Arg">G</var>. This information allows to verify the stabiliser chain simply by looking at its size. If the group object knows its size already (and the <code class="code">Projective</code> component was not set to <code class="keyw">true</code>), then the stored size of the group is automatically taken into account, such that one does not have to use this option.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">StabGenAddSlots</code></strong></dt>
+<dd><p>The value of the <code class="code">StabGenAddSlots</code> component is directly handed over to the product replacer object which is used to generate random elements to find stabiliser generators.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">StabGenMaxDepth</code></strong></dt>
+<dd><p>The value of the <code class="code">StabGenMaxDepth</code> component is directly handed over to the product replacer object which is used to generate random elements to find stabiliser generators.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">StabGenScrambleFactor</code></strong></dt>
+<dd><p>The value of the <code class="code">StabGenScrambleFactor</code> component is directly handed over to the product replacer object which is used to generate random elements to find stabiliser generators.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">StabGenScramble</code></strong></dt>
+<dd><p>The value of the <code class="code">StabGenScramble</code> component is directly handed over to the product replacer object which is used to generate random elements to find stabiliser generators.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">StrictlyUseCandidates</code></strong></dt>
+<dd><p>If this component is set to <code class="keyw">true</code> (default is <code class="keyw">false</code>) then only the given candidate points are taken as possible base points. In particular, the procedure does not take additional points of the previous orbit as candidates for base points (see component <code class="code">NumberPrevOrbitPoints</code> ). Use this option in combination to <code class="code">Reduced</code> set to <code class="keyw">false</code> to enforce a certain known base.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">TryBirthdayParadox</code></strong></dt>
+<dd><p>The method to try to find short orbits using the birthday paradox is used up to <code class="code">TryBirthdayParadox</code> times for each new base point. This method uses the Murray/O'Brien heuristics to find candidates for short orbits and then uses statistics using the birthday paradox to estimate the orbit lengths. As soon as a point is found whose orbit is either estimated to be smaller than <code class="code">OrbitLimitBirthdayParadox</code> with a solid statistical estimate or is estimated to be smaller than <code class="code">OrbitLimitImmediatelyTake</code> with a weak statistical estimate, this point is taken as the next base point.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">TryShortOrbit</code></strong></dt>
+<dd><p>The method to try to find short orbits using the standard Murray/O'Brien heuristics is used up to <code class="code">TryShortOrbit</code> times for each new base point. This method uses the heuristics to find candicates for short orbits using <code class="code">ShortOrbitsNrRandoms</code> random group elements. It then enumerates all these orbits up to the limit <code class="code">ShortOrbitsInitialLimit</code>. If any of them closes the corresponding candidate is taken as the next base point. Otherwise half of the points are thrown away and the limit is doubled. This goes on until either an orbit closes or the limit grows over <code class="code">ShortOrbitsOrbLimit</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">VerifyElements</code></strong></dt>
+<dd><p>This component can be used to set it to the number of random elements that are used in the end to verify the stabiliser chain statistically. Usually the user specifies the component <code class="code">ErrorBound</code> instead and <code class="code">VerifyElements</code> is then computed automatically from that. However, if no <code class="code">ErrorBound</code> is given, the <code class="code">VerifyElements</code> component takes precedence over the <code class="code">random</code> component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">VeryShortOrbLimit</code></strong></dt>
+<dd><p>The very first method tried to find the next base point is to enumerate the orbit of the first and the last basis vector and of one random vector up to the limit <code class="code">VeryShortOrbLimit</code>. If the orbit closes before this limit is reached, the corresponding vector is immediately taken.</p>
+
+</dd>
+</dl>
+<p><a id="X80C443DB7F951958" name="X80C443DB7F951958"></a></p>
+
+<h5>3.2-1 GENSS_IsOneProjective</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GENSS_IsOneProjective</code>( <var class="Arg">x</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>This function tests whether or not the matrix <var class="Arg">x</var> is a scalar multiple of the identity matrix. This function is useful for projective action.</p>
+
+<p><a id="X7BBF7C748660197B" name="X7BBF7C748660197B"></a></p>
+
+<h4>3.3 <span class="Heading">How base points are chosen</span></h4>
+
+<p>This section explains some internal details of how base points are chosen during a stabiliser chain computations. As a user, you can probably safely skip this section and ignore it altogether. However, in situations where thes stabiliser chain computation is more difficult (for example if it is difficult to find short orbits), then it can be helpful to know about these details.</p>
+
+<p>Whenever the stabiliser chain computation needs to set up a new layer in the stabiliser chain it needs a new base point. The first method it tries is to take a point in the previous orbit one layer up, since for these points we have a natural upper limit for the orbit length, namely the orbit length in the layer above. If this does not work (either there is no higher layer or more than the first <code class="code">NumberPrevOrbitPoints</code> (see stabiliser chain options in Section <a href="chap3_mj.html#X784758907BD66D57"><span class="RefLink">3.2</span></a>) in that orbit are fixed by the current group or <code class="code">StrictlyUseCandidates</code> is <code class="keyw">true</code>), it is checked whether or not there is another known candidate for a base point.</p>
+
+<p>Note that if the user supplies candidates for the base points and operations (see component <code class="code">Cand</code> in the stabiliser chain options in Section <a href="chap3_mj.html#X784758907BD66D57"><span class="RefLink">3.2</span></a>), then it is entirely possible that all base points come from these candidates and the mechanisms described in this sections are not used at all.</p>
+
+<p>However, if the procedure runs out of base points, it needs a way to find new candidates. This is done using the following operation:</p>
+
+<p><a id="X814A0FEE7B677BF7" name="X814A0FEE7B677BF7"></a></p>
+
+<h5>3.3-1 FindBasePointCandidates</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindBasePointCandidates</code>( <var class="Arg">g</var>, <var class="Arg">opt</var>, <var class="Arg">i</var>, <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="code">Cand</code> record</p>
+
+<p>This operation returns base point candidates in the form of a record as for the <code class="code">Cand</code> option for stabiliser chain computations (see Section <a href="chap3_mj.html#X784758907BD66D57"><span class="RefLink">3.2</span></a>).</p>
+
+<p>There are various methods installed to this end which all might fail and call <code class="code">TryNextMethod();</code>. We do not document the details of these methods here but only give an overview. For permutation groups the choice of candidates is very straightforward, one simply takes a few integers with the usual action <code class="code">OnPoints</code>. For matrix group finding a reasonably short orbit is more difficult. The system first handles the case of a scalar group which is easy. Then it hopes to find a "very short orbit" defined by the component <code class="code">VeryShortOrbLimit</code> in the stabiliser chain computation options. If this fails the birthday paradoxon method is used to find an estimate for a reasonably short orbit amoung candidates coming from the Murray and O'Brien heuristics. If this fails the same heuristics are used but various orbits are enumerated up to a certain point decreasing the number of orbits as the limit goes up. If all fails some of the candidates from the heuristics are simply tried with brute force. The whole computation can fail if some upper orbit length limit is reached (see component <code class="code">OrbitLengthLimit</code> in the stabiliser chain computation options).</p>
+
+<p><a id="X7F17287C81771245" name="X7F17287C81771245"></a></p>
+
+<h4>3.4 <span class="Heading">Using stabiliser chains</span></h4>
+
+<p>The most important thing one can do with a stabiliser chain is sifting. This is done with one of the next to operations:</p>
+
+<p><a id="X7BAA7E4478F5CFA9" name="X7BAA7E4478F5CFA9"></a></p>
+
+<h5>3.4-1 SiftGroupElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SiftGroupElement</code>( <var class="Arg">S</var>, <var class="Arg">el</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>The first argument <var class="Arg">S</var> must be a stabiliser chain object and the second argument <var class="Arg">el</var> a group element (not necessarily contained in the group described by <var class="Arg">S</var>). The result is a record describing the result of the sifting process. The component <code class="code">rem</code> contains the remainder of the sifting process. If <var class="Arg">el</var> is contained in the group described by <var class="Arg">S</var>, then the remainder is equal to the identity. Note that if the <code class="code">IsOne</code>-component of the options record for the stabiliser chain <var class="Arg">S</var> is different from the <code class="func">IsOne</code> (<a href="../../../doc/ref/chap31_mj.html#X814D78347858EC13"><span class="RefLink">Reference: IsOne</span></a>) operation then the <code class="code">rem</code> component is equal to the identity according to that test. The result of this test (<code class="keyw">true</code> or <code class="keyw">false</code>) is stored in the component <code class="code">isone</code> of the resulting record. This means, that this component indicates whether or not the sifting was successful. The component <code class="code">S</code> is bound to the stabiliser chain object corresponding to the layer in which the sifting stopped. If it ran through the whole chain this component is bound to <code class="keyw">false</code>. The component <code class="code">preS</code> is always bound to the previous layer, which is the lowest layer if the sifting was successful.</p>
+
+<p><a id="X7C88F18C79DF9005" name="X7C88F18C79DF9005"></a></p>
+
+<h5>3.4-2 SiftGroupElementSLP</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SiftGroupElementSLP</code>( <var class="Arg">S</var>, <var class="Arg">el</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This operation behaves exactly as <code class="func">SiftGroupElement</code> (<a href="chap3_mj.html#X7BAA7E4478F5CFA9"><span class="RefLink">3.4-1</span></a>) except that in the successful case the component <code class="code">slp</code> of the resulting record is additionally bound to a straight line program which expresses the element <var class="Arg">el</var> in terms of the strong generators of the stabiliser chain (see <code class="func">StrongGenerators</code> (<a href="chap3_mj.html#X82EFC40987B17368"><span class="RefLink">3.4-3</span></a>)).</p>
+
+<p><a id="X82EFC40987B17368" name="X82EFC40987B17368"></a></p>
+
+<h5>3.4-3 StrongGenerators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StrongGenerators</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of group elements</p>
+
+<p>This operation returns the strong generators of the stabiliser chain <var class="Arg">S</var>. This means that each stabiliser in the stabiliser chain is generated by the subset of the set of strong generators which fix the corresponding points. Note that each layer of the stabiliser chain uses some subset of these strong generators as generators for the orbit object of that layer.</p>
+
+<p>Note further that this operation called for the objects describing the lower layers of the stabiliser chain always returns all strong generators for the whole stabiliser chain (top layer).</p>
+
+<p><a id="X7FC7256285A2110A" name="X7FC7256285A2110A"></a></p>
+
+<h5>3.4-4 NrStrongGenerators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrStrongGenerators</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a positive integer</p>
+
+<p>This operation returns the number of strong generators of the stabiliser chain <var class="Arg">S</var> (see <code class="func">StrongGenerators</code> (<a href="chap3_mj.html#X82EFC40987B17368"><span class="RefLink">3.4-3</span></a>)).</p>
+
+<p><a id="X7956F37981FD2F48" name="X7956F37981FD2F48"></a></p>
+
+<h5>3.4-5 BaseStabilizerChain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BaseStabilizerChain</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This operation returns the base of the stabiliser chain <var class="Arg">S</var> in form of a record, which can be used as the <code class="code">Cand</code> component for a stabiliser chain computation. That is, two components are bound, the <code class="code">points</code> component is a list of base points and the <code class="code">ops</code> component is a corresponding list of action functions.</p>
+
+<p><a id="X858ADA3B7A684421" name="X858ADA3B7A684421"></a></p>
+
+<h5>3.4-6 Size</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Size</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a positive integer</p>
+
+<p>This operation returns the size (i.e. order) of the group described by the stabiliser chain <var class="Arg">S</var>. This is simply the product of the lengths of the orbits in the chain.</p>
+
+<p><a id="X79730D657AB219DB" name="X79730D657AB219DB"></a></p>
+
+<h5>3.4-7 Random</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Random</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a group element</p>
+
+<p>This operation can be called with a stabiliser chain object <var class="Arg">S</var> or with a group object, if this group object has a stored stabiliser chain (see <code class="func">SetStabilizerChain</code> (<a href="chap3_mj.html#X8639DF037FAB2E96"><span class="RefLink">3.4-11</span></a>)). The method will randomly choose transversal elements and thus produce a uniformly distributed random element of the group.</p>
+
+<p><a id="X87BDB89B7AAFE8AD" name="X87BDB89B7AAFE8AD"></a></p>
+
+<h5><code>3.4-8 \in</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \in</code>( <var class="Arg">x</var>, <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>This operation tests whether or not the group element <var class="Arg">x</var> lies in the group described by the stabiliser chain <var class="Arg">S</var> by sifting (see <code class="func">SiftGroupElement</code> (<a href="chap3_mj.html#X7BAA7E4478F5CFA9"><span class="RefLink">3.4-1</span></a>)). The argument <var class="Arg">S</var> can also be a group object with a stored stabiliser chain (see <code class="func">SetStabilizerChain</code> (<a href="chap3_mj.html#X8639DF037FAB2E96"><span class="RefLink">3.4-11</span></a>)). Note that this operation can be called with the <code class="keyw">in</code> keyword using infix notation.</p>
+
+<p><a id="X84103D1A854F6E73" name="X84103D1A854F6E73"></a></p>
+
+<h5>3.4-9 IsProved</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsProved</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>This operation returns whether or not the stabiliser chain <var class="Arg">S</var> is proved to be correct. If it has only been verified by randomised methods, <code class="code">false</code> is returned. At the time of this writing the only possible deterministic verification is if the size of the group is known before the stabiliser chain computation begins.</p>
+
+<p><a id="X837389DA857F0596" name="X837389DA857F0596"></a></p>
+
+<h5>3.4-10 GroupIteratorByStabilizerChain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GroupIteratorByStabilizerChain</code>( <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an iterator</p>
+
+<p>This operation returns an iterator object which runs through the elements of the group described by the stabiliser chain object <var class="Arg">S</var>. The usual operations <code class="func">NextIterator</code> (<a href="../../../doc/ref/chap30_mj.html#X879F62F77D1D1179"><span class="RefLink">Reference: NextIterator</span></a>) and <code class="func">IsDoneIterator</code> (<a href="../../../doc/ref/chap30_mj.html#X8055FC557B5D899E"><span class="RefLink">Reference: IsDoneIterator</span></a>) as well as the <code class="keyw">for</code> loop construction can be used with this object. The iterator is implemented using the stored transversals in the Schreier trees of the stabiliser chain.</p>
+
+<p><a id="X8639DF037FAB2E96" name="X8639DF037FAB2E96"></a></p>
+
+<h5>3.4-11 SetStabilizerChain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetStabilizerChain</code>( <var class="Arg">g</var>, <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Once the user is convinced that the stabiliser chain <var class="Arg">S</var> describes the group <var class="Arg">g</var> correctly, he can call this operation to store the stabiliser chain together with the group object. From then on, additional methods using the stabiliser chain (for example <code class="func">Size</code> (<a href="chap3_mj.html#X858ADA3B7A684421"><span class="RefLink">3.4-6</span></a>), <code class="func">Random</code> (<a href="chap3_mj.html#X79730D657AB219DB"><span class="RefLink">3.4-7</span></a>) and <code class="func">\in</code> (<a href="chap3_mj.html#X87BDB89B7AAFE8AD"><span class="RefLink">3.4-8</span></a>) above) become applicable for the group object. Note that if a stabiliser chain is known to be correct (for example if the group knew its size beforehand), then the stabiliser chain is stored with the group automatically when it is constructed, which makes the explicit storing of the stabiliser chain unnecessary.</p>
+
+<p>The stored stabiliser chain of a group object can be used using <code class="func">StoredStabilizerChain</code> (<a href="chap3_mj.html#X7C12BF8B7976B1FC"><span class="RefLink">3.4-12</span></a>).</p>
+
+<p><a id="X7C12BF8B7976B1FC" name="X7C12BF8B7976B1FC"></a></p>
+
+<h5>3.4-12 StoredStabilizerChain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StoredStabilizerChain</code>( <var class="Arg">g</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: a stabiliser chain</p>
+
+<p>This attribute for a group object <var class="Arg">g</var> contains a stored stabiliser chain for the group. See <code class="func">SetStabilizerChain</code> (<a href="chap3_mj.html#X8639DF037FAB2E96"><span class="RefLink">3.4-11</span></a>) for details.</p>
+
+<p><a id="X7B0B01C4875F2CB8" name="X7B0B01C4875F2CB8"></a></p>
+
+<h5>3.4-13 StabChainOp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StabChainOp</code>( <var class="Arg">p</var>, <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <strong class="pkg">GAP</strong> stabiliser chain</p>
+
+<p>This method computes a standard <strong class="pkg">GAP</strong> library stabiliser chain for the permutation group <var class="Arg">p</var> using the fact that <var class="Arg">S</var> is a known correct stabiliser chain for <var class="Arg">p</var>. If all base points in <var class="Arg">S</var> are positive integers and all actions are equal to <code class="code">OnPoints</code>, then the same base points are taken for the new stabiliser chain.</p>
+
+<p><a id="X7952DA8183229C8C" name="X7952DA8183229C8C"></a></p>
+
+<h5>3.4-14 SiftBaseImage</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SiftBaseImage</code>( <var class="Arg">S</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>This operation sifts an image <var class="Arg">l</var> of the base points of the stabiliser chain <var class="Arg">S</var>. This means that the elements of the list <var class="Arg">l</var> must be images of the base points under the actions in the various layers of the stabiliser chain. The sifting procedure using the orbits and Schreier trees in the stabiliser chain decides if this base image is one for a group element of the group described by <var class="Arg">S</var> and returns <code class="code">true</code> or <code class="code">false</code> accordingly.</p>
+
+<p>This operation is mostly used internally.</p>
+
+<p><a id="X7DB069EA7A77DD4D" name="X7DB069EA7A77DD4D"></a></p>
+
+<h5>3.4-15 SLPChainStabilizerChain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SLPChainStabilizerChain</code>( <var class="Arg">S</var>, <var class="Arg">gens</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This operation assumes that <var class="Arg">S</var> is a stabiliser chain that correctly describes the group generated by the generators <var class="Arg">gens</var>. It returns a list of straight line programs expressing successively the stabilisers in the chain, each in terms of the generators of the previous, the first in terms of <var class="Arg">gens</var>. This list is stored in the component <code class="code">slps</code> of the resulting record. The sizes of the groups in the chain are stored in the component <code class="code">sizes</code> of the resulting record.</p>
+
+<p>The operations, functions and methods described below use stabiliser chains internally:</p>
+
+<p><a id="X7DE1ACFA81002A5E" name="X7DE1ACFA81002A5E"></a></p>
+
+<h5>3.4-16 GroupHomomorphismByImagesNCStabilizerChain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GroupHomomorphismByImagesNCStabilizerChain</code>( <var class="Arg">g</var>, <var class="Arg">h</var>, <var class="Arg">images</var>, <var class="Arg">opt1</var>, <var class="Arg">opt2</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a group homomorphism</p>
+
+<p>This function creates a group homomorphism object from the group <var class="Arg">g</var> into the group object <var class="Arg">h</var>, mapping the generators of the group <var class="Arg">g</var> to the elements <var class="Arg">images</var> which must lie in <var class="Arg">h</var>. This mapping must be a group homomorphism, note that this is not checked!</p>
+
+<p>The homomorphism is computed by computing stabiliser chains on both sides such that elements can be mapped in both directions simply be sifting and expressing them in terms of the strong generators. This is where the two arguments <var class="Arg">opts1</var> and <var class="Arg">opts2</var> come into play. The former is used as the options record for the stabiliser computation in <var class="Arg">g</var> and the latter for the one in the group generated by <var class="Arg">images</var>.</p>
+
+<p><a id="X80BB35D380A972BB" name="X80BB35D380A972BB"></a></p>
+
+<h5>3.4-17 FindShortGeneratorsOfSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindShortGeneratorsOfSubgroup</code>( <var class="Arg">g</var>, <var class="Arg">u</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This is an additional method for matrix or permutation groups implementing the operation <code class="func">FindShortGeneratorsOfSubgroup</code> (<a href="../../../pkg/orb-4.8.2/doc/chap7_mj.html#X80BB35D380A972BB"><span class="RefLink">orb: FindShortGeneratorsOfSubgroup</span></a>) from the <strong class="pkg">orb</strong> package using stabiliser chains. Both arguments must be groups and <var class="Arg">u</var> must be a subgroup of <var class="Arg">g</var>. The resulting record contains two components <code class="code">gens</code> and <code class="code">slp</code>, where the first is a list of generators for the group <var class="Arg">u</var> and the second is a straight line program expressing <code class="code">gens</code> in terms of the generators of <var class="Arg">g</var>. This operation aims to find short words in the generators of <var class="Arg">g</var> to use as generators for <var class="Arg">u</var>.</p>
+
+<p><a id="X87B01CDA7D44C5A2" name="X87B01CDA7D44C5A2"></a></p>
+
+<h5>3.4-18 Stab</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Stab</code>( <var class="Arg">g</var>, <var class="Arg">x</var>, <var class="Arg">op</var>[, <var class="Arg">opt</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a record or <code class="keyw">fail</code></p>
+
+<p>This operation aims to compute the point stabiliser of the group <var class="Arg">g</var> acting via the action function <var class="Arg">op</var> of the point <var class="Arg">x</var>. The optional last argument is an options record. The general approach of this procedure is to go back and forth between enumerating a part of the orbit and trying to produce random elements in the stabiliser using the already enumerated part of the orbit. Random elements in the stabiliser are produced by using product replacement in <var class="Arg">g</var> to produce random elements of <var class="Arg">g</var> and then using the Schreier tree of the orbit to map them back into the stabiliser. If this works, the resulting random elements are distributed uniformly in the point stabiliser.</p>
+
+<p>This routine is a Monte Carlo procedure. If sufficiently many random elements of the stabiliser have been produced and did not increase its size, the program concludes that the whole stabiliser is found and returns a record describing it. Otherwise it returns <code class="keyw">fail</code> after some time.</p>
+
+<p>The resulting record has the stabiliser in the component <code class="code">stab</code>, its size estimate in the component <code class="code">size</code>, a stabiliser chain for <code class="code">stab</code> in the component <code class="code">stabilizerchain</code> and a boolean value in the component <code class="code">proof</code> indicating whether or not the result is certain.</p>
+
+<p>We do not document all possible options in the options record here, since we want to allow for the possibility to change these in later versions. The most important component in the options record is the component <code class="code">ErrorBound</code> which must be bound to a rational number between 0 and 1 and which is an upper bound for the error probability.</p>
+
+<p>Please note again that two types of errors can occur in this program: The first is that the correct point stabiliser is not found but only a proper subgroup of it. The second is that the stabiliser chain computation to estimate its size went wrong and returns an incorrect stabiliser chain.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

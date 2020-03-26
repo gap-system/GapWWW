@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (ANUPQ) - Chapter 3: Infrastructure</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X7917EFDF7AC06F04" name="X7917EFDF7AC06F04"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X7917EFDF7AC06F04">3 <span class="Heading">Infrastructure</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X833D58248067E13B">3.1 <span class="Heading">Loading the ANUPQ Package</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X83DE155A79C38DBE">3.2 <span class="Heading">The ANUPQData Record</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B90E89782BDA6D7">3.2-1 ANUPQData</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FBB2F457E4BD6AB">3.2-2 ANUPQDirectoryTemporary</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X83E5C7CF7D8739DF">3.3 <span class="Heading">Setting the Verbosity of ANUPQ via Info and InfoANUPQ</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CBC9B458497BFF1">3.3-1 InfoANUPQ</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X810FFB1C8035C8BE">3.4 <span class="Heading">Utility Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8771393B7F53F534">3.4-1 PqLeftNormComm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A567432879510A6">3.4-2 PqGAPRelators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F3C5D1C7EC36EAE">3.4-3 PqParseWord</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7BB0EB607F337265">3.4-4 PqExample</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X823C93FC7B87F5BC">3.4-5 AllPqExamples</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E3E4B047DC2E323">3.4-6 GrepPqExamples</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8104B2BA872EFCCB">3.4-7 ToPQLog</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X818175EF85CAA807">3.5 <span class="Heading">Attributes and a Property for fp and pc p-groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X87DC922A78EB0DD6">3.5-1 NuclearRank</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7BA20FA07B166B37">3.6 <span class="Heading">Hints and Warnings regarding the use of Options</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81F4AAE084C34B4B">3.6-1 ANUPQWarnOfOtherOptions</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Infrastructure</span></h3>
+
+<p>Most of the details in this chapter are of a technical nature; the user need only skim over this chapter on a first reading. Mostly, it is enough to know that</p>
+
+
+<ul>
+<li><p>you must do a <code class="code">LoadPackage("anupq");</code> before you can expect to use a command defined by the <strong class="pkg">ANUPQ</strong> package (details are in Section <a href="chap3_mj.html#X833D58248067E13B"><span class="RefLink"><span class="Heading">Loading the ANUPQ Package</span></span></a>);</p>
+
+</li>
+<li><p>partial results of <strong class="pkg">ANUPQ</strong> commands and some other data are stored in the <code class="code">ANUPQData</code> global variable (details are in Section <a href="chap3_mj.html#X83DE155A79C38DBE"><span class="RefLink"><span class="Heading">The ANUPQData Record</span></span></a>);</p>
+
+</li>
+<li><p>doing <code class="code">SetInfoLevel(InfoANUPQ, <var class="Arg">n</var>);</code> for <var class="Arg">n</var> greater than the default value 1 will give progressively more information of what is going on "behind the scenes" (details are in Section <a href="chap3_mj.html#X83E5C7CF7D8739DF"><span class="RefLink"><span class="Heading">Setting the Verbosity of ANUPQ via Info and InfoANUPQ</span></span></a>);</p>
+
+</li>
+<li><p>in Section <a href="chap3_mj.html#X810FFB1C8035C8BE"><span class="RefLink"><span class="Heading">Utility Functions</span></span></a> we describe some utility functions and functions that run examples from the collection of examples of this package;</p>
+
+</li>
+<li><p>in Section <a href="chap3_mj.html#X818175EF85CAA807"><span class="RefLink"><span class="Heading">Attributes and a Property for fp and pc p-groups</span></span></a> we describe the attributes and property <code class="code">NuclearRank</code>, <code class="code">MultiplicatorRank</code> and <code class="code">IsCapable</code>; and</p>
+
+</li>
+<li><p>in Section <a href="chap3_mj.html#X7BA20FA07B166B37"><span class="RefLink"><span class="Heading">Hints and Warnings regarding the use of Options</span></span></a> we describe some troubleshooting strategies. Also this section explains the utility of setting <code class="code">ANUPQWarnOfOtherOptions := true;</code> (particularly for novice users) for detecting misspelt options and diagnosing other option usage problems.</p>
+
+</li>
+</ul>
+<p><a id="X833D58248067E13B" name="X833D58248067E13B"></a></p>
+
+<h4>3.1 <span class="Heading">Loading the ANUPQ Package</span></h4>
+
+<p>To use the <strong class="pkg">ANUPQ</strong> package, as with any <strong class="pkg">GAP</strong> package, it must be requested explicitly. This is done by calling</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage( "anupq" );</span>
+---------------------------------------------------------------------------
+Loading    ANUPQ (ANU p-Quotient) 3.1
+GAP code by  Greg Gamble &lt;Greg.Gamble@uwa.edu.au&gt; (address for
+correspondence)
+           Werner Nickel (http://www.mathematik.tu-darmstadt.de/~nickel/)
+           [uses ANU pq binary (C code program) version: 1.9]
+C code by  Eamonn O'Brien (https://www.math.auckland.ac.nz/~obrien)
+Co-maintained by Max Horn &lt;max.horn@uni-siegen.de&gt;
+
+            For help, type: ?ANUPQ
+---------------------------------------------------------------------------
+true
+</pre></div>
+
+<p>Note that since the <strong class="pkg">ANUPQ</strong> package uses the <code class="code">AutomorphimGroupPGroup</code> function of the <strong class="pkg">AutPGrp</strong> package and, in any case, often needs other <strong class="pkg">AutPGrp</strong> functions when computing descendants, the user must ensure that the <strong class="pkg">AutPGrp</strong> package is also installed, at least version 1.5. If the <strong class="pkg">AutPGrp</strong> package is not installed, the <strong class="pkg">ANUPQ</strong> package will <code class="keyw">fail</code> to load.</p>
+
+<p>Also, if <strong class="pkg">GAP</strong> cannot find a working <code class="code">pq</code> binary, the call to <code class="code">LoadPackage</code> will return <code class="keyw">fail</code>.</p>
+
+<p>If you want to load the <strong class="pkg">ANUPQ</strong> package by default, you can put the <code class="code">LoadPackage</code> command into your <code class="code">gap.ini</code> file (see Section <a href="../../../doc/ref/chap3_mj.html#X7FD66F977A3B02DF"><span class="RefLink">Reference: The gap.ini and gaprc files</span></a> in the <strong class="pkg">GAP</strong> Reference Manual). By the way, the novice user of the <strong class="pkg">ANUPQ</strong> package should probably also append the line</p>
+
+
+<div class="example"><pre>
+ANUPQWarnOfOtherOptions := true;
+</pre></div>
+
+<p>to their <code class="code">gap.ini</code> file, somewhere after the <code class="code">LoadPackage( "anupq" );</code> command (see <code class="func">ANUPQWarnOfOtherOptions</code> (<a href="chap3_mj.html#X81F4AAE084C34B4B"><span class="RefLink">3.6-1</span></a>)).</p>
+
+<p><a id="X83DE155A79C38DBE" name="X83DE155A79C38DBE"></a></p>
+
+<h4>3.2 <span class="Heading">The ANUPQData Record</span></h4>
+
+<p>This section contains fairly technical details which may be skipped on an initial reading.</p>
+
+<p><a id="X7B90E89782BDA6D7" name="X7B90E89782BDA6D7"></a></p>
+
+<h5>3.2-1 ANUPQData</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ANUPQData</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>is a <strong class="pkg">GAP</strong> record in which the essential data for an <strong class="pkg">ANUPQ</strong> session within <strong class="pkg">GAP</strong> is stored; its fields are:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">binary</code></strong></dt>
+<dd><p>the path of the <code class="code">pq</code> binary;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">tmpdir</code></strong></dt>
+<dd><p>the path of the temporary directory used by the <code class="code">pq</code> binary and <strong class="pkg">GAP</strong> (i.e. the directory in which all the <code class="code">pq</code>'s temporary files are created) (also see <code class="func">ANUPQDirectoryTemporary</code> (<a href="chap3_mj.html#X7FBB2F457E4BD6AB"><span class="RefLink">3.2-2</span></a>) below);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">outfile</code></strong></dt>
+<dd><p>the full path of the default <code class="code">pq</code> output file;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">SPimages</code></strong></dt>
+<dd><p>the full path of the file <code class="code">GAP_library</code> to which the <code class="code">pq</code> program writes its Standard Presentation images;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">version</code></strong></dt>
+<dd><p>the version of the current <code class="code">pq</code> binary;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ni</code></strong></dt>
+<dd><p>a data record used by non-interactive functions (see below and Chapter <a href="chap4_mj.html#X7C51F26D839279FF"><span class="RefLink"><span class="Heading">Non-interactive ANUPQ functions</span></span></a>);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">io</code></strong></dt>
+<dd><p>list of data records for <code class="code">PqStart</code> (see below and <code class="func">PqStart</code> (<a href="chap5_mj.html#X83B2EC237F37623C"><span class="RefLink">5.1-1</span></a>)) processes;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">topqlogfile</code></strong></dt>
+<dd><p>name of file logged to by <code class="code">ToPQLog</code> (see <code class="func">ToPQLog</code> (<a href="chap3_mj.html#X8104B2BA872EFCCB"><span class="RefLink">3.4-7</span></a>)); and</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">logstream</code></strong></dt>
+<dd><p>stream of file logged to by <code class="code">ToPQLog</code> (see <code class="func">ToPQLog</code> (<a href="chap3_mj.html#X8104B2BA872EFCCB"><span class="RefLink">3.4-7</span></a>)).</p>
+
+</dd>
+</dl>
+<p>Each time an interactive <strong class="pkg">ANUPQ</strong> process is initiated via <code class="code">PqStart</code> (see <code class="func">PqStart</code> (<a href="chap5_mj.html#X83B2EC237F37623C"><span class="RefLink">5.1-1</span></a>)), an identifying number <var class="Arg">ioIndex</var> is generated for the interactive process and a record <code class="code">ANUPQData.io[<var class="Arg">ioIndex</var>]</code> with some or all of the fields listed below is created. Whenever a non-interactive function is called (see Chapter <a href="chap4_mj.html#X7C51F26D839279FF"><span class="RefLink"><span class="Heading">Non-interactive ANUPQ functions</span></span></a>), the record <code class="code">ANUPQData.ni</code> is updated with fields that, if bound, have exactly the same purpose as for a <code class="code">ANUPQData.io[<var class="Arg">ioIndex</var>]</code> record.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">stream</code></strong></dt>
+<dd><p>the IOStream opened for interactive <strong class="pkg">ANUPQ</strong> process <var class="Arg">ioIndex</var> or non-interactive <strong class="pkg">ANUPQ</strong> function;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">group</code></strong></dt>
+<dd><p>the group given as first argument to <code class="code">PqStart</code>, <code class="code">Pq</code>, <code class="code">PqEpimorphism</code>, <code class="code">PqDescendants</code> or <code class="code">PqStandardPresentation</code> (or any synonymous methods);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">haspcp</code></strong></dt>
+<dd><p>is bound and set to <code class="keyw">true</code> when a pc presentation is first set inside the <code class="code">pq</code> program (e.g. by <code class="code">PqPcPresentation</code> or <code class="code">PqRestorePcPresentation</code> or a higher order function like <code class="code">Pq</code>, <code class="code">PqEpimorphism</code>, <code class="code">PqPCover</code>, <code class="code">PqDescendants</code> or <code class="code">PqStandardPresentation</code> that does a <code class="code">PqPcPresentation</code> operation, but <em>not</em> <code class="code">PqStart</code> which only starts up an interactive <strong class="pkg">ANUPQ</strong> process);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">gens</code></strong></dt>
+<dd><p>a list of the generators of the group <code class="code">group</code> as strings (the same as those passed to the <code class="code">pq</code> program);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">rels</code></strong></dt>
+<dd><p>a list of the relators of the group <code class="code">group</code> as strings (the same as those passed to the <code class="code">pq</code> program);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">name</code></strong></dt>
+<dd><p>the name of the group whose pc presentation is defined by a call to the <code class="code">pq</code> program (according to the <code class="code">pq</code> program -- unless you have used the <code class="code">GroupName</code> option (see e.g. <code class="func">Pq</code> (<a href="chap4_mj.html#X86DD32D5803CF2C8"><span class="RefLink">4.1-1</span></a>)) or applied the function <code class="code">SetName</code> (see <code class="func">SetName</code> (<a href="../../../doc/ref/chap12_mj.html#X7F14EF9D81432113"><span class="RefLink">Reference: Name</span></a>)) to the group, the "generic" name <code class="code">"[grp]"</code> is set as a default);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">gpnum</code></strong></dt>
+<dd><p>if not a null string, the "number" (i.e. the unique label assigned by the <code class="code">pq</code> program) of the last descendant processed;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">class</code></strong></dt>
+<dd><p>the largest lower exponent-<span class="SimpleMath">\(p\)</span> central class of a quotient group of the group (usually <code class="code">group</code>) found by a call to the <code class="code">pq</code> program;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">forder</code></strong></dt>
+<dd><p>the factored order of the quotient group of largest lower exponent-<span class="SimpleMath">\(p\)</span> central class found for the group (usually <code class="code">group</code>) by a call to the <code class="code">pq</code> program (this factored order is given as a list <code class="code">[p,n]</code>, indicating an order of <span class="SimpleMath">\(p^n\)</span>);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">pcoverclass</code></strong></dt>
+<dd><p>the lower exponent-<span class="SimpleMath">\(p\)</span> central class of the <span class="SimpleMath">\(p\)</span>-covering group of a <span class="SimpleMath">\(p\)</span>-quotient of the group (usually <code class="code">group</code>) found by a call to the <code class="code">pq</code> program;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">workspace</code></strong></dt>
+<dd><p>the workspace set for the <code class="code">pq</code> process (either given as a second argument to <code class="code">PqStart</code>, or set by default to 10000000);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">menu</code></strong></dt>
+<dd><p>the current menu of the <code class="code">pq</code> process (the <code class="code">pq</code> program is managed by various menus, the details of which the user shouldn't normally need to know about -- the <code class="code">menu</code> field remembers which menu the <code class="code">pq</code> process is currently "in");</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">outfname</code></strong></dt>
+<dd><p>is the file to which <code class="code">pq</code> output is directed, which is always <code class="code">ANUPQData.outfile</code>, except when option <code class="code">SetupFile</code> is used with a non-interactive function, in which case <code class="code">outfname</code> is set to <code class="code">"PQ_OUTPUT"</code>;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">pQuotient</code></strong></dt>
+<dd><p>is set to the value returned by <code class="code">Pq</code> (see <code class="func">Pq</code> (<a href="chap4_mj.html#X86DD32D5803CF2C8"><span class="RefLink">4.1-1</span></a>)) (the field <code class="code">pQepi</code> is also set at the same time);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">pQepi</code></strong></dt>
+<dd><p>is set to the value returned by <code class="code">PqEpimorphism</code> (see <code class="func">PqEpimorphism</code> (<a href="chap4_mj.html#X7ADE5DDB87B99CC0"><span class="RefLink">4.1-2</span></a>)) (the field <code class="code">pQuotient</code> is also set at the same time);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">pCover</code></strong></dt>
+<dd><p>is set to the value returned by <code class="code">PqPCover</code> (see <code class="func">PqPCover</code> (<a href="chap4_mj.html#X81C3CE1E850DA252"><span class="RefLink">4.1-3</span></a>));</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">SP</code></strong></dt>
+<dd><p>is set to the value returned by <code class="code">PqStandardPresentation</code> or <code class="code">StandardPresentation</code> (see <code class="func">PqStandardPresentation</code> (<a href="chap5_mj.html#X805F32618005C087"><span class="RefLink">5.3-4</span></a>)) when called interactively, for process <var class="Arg">i</var> (the field <code class="code">SPepi</code> is also set at the same time);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">SPepi</code></strong></dt>
+<dd><p>is set to the value returned by <code class="code">EpimorphismPqStandardPresentation</code> or <code class="code">EpimorphismStandardPresentation</code> (see <code class="func">EpimorphismPqStandardPresentation</code> (<a href="chap5_mj.html#X791392977B2D692D"><span class="RefLink">5.3-5</span></a>)) when called interactively, for process <var class="Arg">i</var> (the field <code class="code">SP</code> is also set at the same time);</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">descendants</code></strong></dt>
+<dd><p>is set to the value returned by <code class="code">PqDescendants</code> (see <code class="func">PqDescendants</code> (<a href="chap4_mj.html#X80985CC479CD9FA3"><span class="RefLink">4.4-1</span></a>));</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">treepos</code></strong></dt>
+<dd><p>if set by a call to <code class="code">PqDescendantsTreeCoclassOne</code> (see <code class="func">PqDescendantsTreeCoclassOne</code> (<a href="chapA_mj.html#X805E6B418193CF2D"><span class="RefLink">A.4-1</span></a>)), it contains a record with fields <code class="code">class</code>, <code class="code">node</code> and <code class="code">ndes</code> being the information that determines the last descendant with a non-zero number of descendants processed;</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">xgapsheet</code></strong></dt>
+<dd><p>if set by a call to <code class="code">PqDescendantsTreeCoclassOne</code> (see <code class="func">PqDescendantsTreeCoclassOne</code> (<a href="chapA_mj.html#X805E6B418193CF2D"><span class="RefLink">A.4-1</span></a>)) during an <strong class="pkg">XGAP</strong> session, it contains the <strong class="pkg">XGAP</strong> <code class="code">Sheet</code> on which the descendants tree is displayed; and</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">nextX</code></strong></dt>
+<dd><p>if set by a call to <code class="code">PqDescendantsTreeCoclassOne</code> (see <code class="func">PqDescendantsTreeCoclassOne</code> (<a href="chapA_mj.html#X805E6B418193CF2D"><span class="RefLink">A.4-1</span></a>)) during an <strong class="pkg">XGAP</strong> session, it contains a list of integers, the <var class="Arg">i</var>th entry of which is the <var class="Arg">x</var>-coordinate of the next node (representing a descendant) for the <var class="Arg">i</var>th class.</p>
+
+</dd>
+</dl>
+<p><a id="X7FBB2F457E4BD6AB" name="X7FBB2F457E4BD6AB"></a></p>
+
+<h5>3.2-2 ANUPQDirectoryTemporary</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ANUPQDirectoryTemporary</code>( <var class="Arg">dir</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>calls the UNIX command <code class="code">mkdir</code> to create <var class="Arg">dir</var>, which must be a string, and if successful a directory object for <var class="Arg">dir</var> is both assigned to <code class="code">ANUPQData.tmpdir</code> and returned. The field <code class="code">ANUPQData.outfile</code> is also set to be a file in <code class="code">ANUPQData.tmpdir</code>, and on exit from <strong class="pkg">GAP</strong> <var class="Arg">dir</var> is removed. Most users will never need this command; by default, <strong class="pkg">GAP</strong> typically chooses a "random" subdirectory of <code class="code">/tmp</code> for <code class="code">ANUPQData.tmpdir</code> which may occasionally have limits on what may be written there. <code class="code">ANUPQDirectoryTemporary</code> permits the user to choose a directory (object) where one is not so limited.</p>
+
+<p><a id="X83E5C7CF7D8739DF" name="X83E5C7CF7D8739DF"></a></p>
+
+<h4>3.3 <span class="Heading">Setting the Verbosity of ANUPQ via Info and InfoANUPQ</span></h4>
+
+<p><a id="X7CBC9B458497BFF1" name="X7CBC9B458497BFF1"></a></p>
+
+<h5>3.3-1 InfoANUPQ</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoANUPQ</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p>The input to and the output from the <code class="code">pq</code> program is, by default, not displayed. However the user may choose to see some, or all, of this input/output. This is done via the <code class="code">Info</code> mechanism (see Section <a href="../../../doc/ref/chap7_mj.html#X7A9C902479CB6F7C"><span class="RefLink">Reference: Info Functions</span></a> in the <strong class="pkg">GAP</strong> Reference Manual). For this purpose, there is the <var class="Arg">InfoClass</var> <code class="code">InfoANUPQ</code>. If the <code class="code">InfoLevel</code> of <code class="code">InfoANUPQ</code> is high enough each line of <code class="code">pq</code> input/output is directed to a call to <code class="code">Info</code> and will be displayed for the user to see. By default, the <code class="code">InfoLevel</code> of <code class="code">InfoANUPQ</code> is 1, and it is recommended that you leave it at this level, or higher. Messages that the user should presumably want to see and output from the <code class="code">pq</code> program influenced by the value of the option <code class="code">OutputLevel</code> (see the options listed in Section <code class="func">Pq</code> (<a href="chap4_mj.html#X86DD32D5803CF2C8"><span class="RefLink">4.1-1</span></a>)), other than timing and memory usage are directed to <code class="code">Info</code> at <code class="code">InfoANUPQ</code> level 1.</p>
+
+<p>To turn off <em>all</em> <code class="code">InfoANUPQ</code> messaging, set the <code class="code">InfoANUPQ</code> level to 0.</p>
+
+<p>There are five other user-intended <code class="code">InfoANUPQ</code> levels: 2, 3, 4, 5 and 6.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoANUPQ, 2);</span>
+</pre></div>
+
+<p>enables the display of most timing and memory usage data from the <code class="code">pq</code> program, and also the number of identity instances when the <code class="code">Identities</code> option is used. (Some timing and memory usage data, particularly when profuse in quantity, is <code class="code">Info</code>-ed at <code class="code">InfoANUPQ</code> level 3 instead.) Note that the the <strong class="pkg">GAP</strong> functions <code class="code">time</code> and <code class="code">Runtime</code> (see <code class="func">Runtime</code> (<a href="../../../doc/ref/chap7_mj.html#X7E32B27F81870D24"><span class="RefLink">Reference: Runtime</span></a>) in the <strong class="pkg">GAP</strong> Reference Manual) count the time spent by <strong class="pkg">GAP</strong> and <em>not</em> the time spent by the (external) <code class="code">pq</code> program.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoANUPQ, 3);</span>
+</pre></div>
+
+<p>enables the display of output of the nature of the first two <code class="code">InfoANUPQ</code> that was not directly invoked by the user (e.g. some commands require <strong class="pkg">GAP</strong> to discover something about the current state known to the <code class="code">pq</code> program). The identity instances processed under the <code class="code">Identities</code> option are also displayed at this level. In some cases, the <code class="code">pq</code> program produces a lot of output despite the fact that the <code class="code">OutputLevel</code> (see <a href="chap6_mj.html#X87EE6DD67C9996A3"><span class="RefLink">6.2</span></a>) is unset or is set to 0; such output is also <code class="code">Info</code>-ed at <code class="code">InfoANUPQ</code> level 3.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoANUPQ, 4);</span>
+</pre></div>
+
+<p>enables the display of all the commands directed to the <code class="code">pq</code> program, behind a "<code class="code">ToPQ&gt; </code>" prompt (so that you can distinguish it from the output from the <code class="code">pq</code> program). See Section <a href="chap3_mj.html#X7BA20FA07B166B37"><span class="RefLink"><span class="Heading">Hints and Warnings regarding the use of Options</span></span></a> for an example of how this can be a useful troubleshooting tool.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoANUPQ, 5);</span>
+</pre></div>
+
+<p>enables the display of the <code class="code">pq</code> program's prompts for input. Finally,</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoANUPQ, 6);</span>
+</pre></div>
+
+<p>enables the display of all other output from the <code class="code">pq</code> program, namely the banner and menus. However, the timing data printed when the <code class="code">pq</code> program exits can never be observed.</p>
+
+<p><a id="X810FFB1C8035C8BE" name="X810FFB1C8035C8BE"></a></p>
+
+<h4>3.4 <span class="Heading">Utility Functions</span></h4>
+
+<p><a id="X8771393B7F53F534" name="X8771393B7F53F534"></a></p>
+
+<h5>3.4-1 PqLeftNormComm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqLeftNormComm</code>( <var class="Arg">elts</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns for a list of elements of some group (e.g. <var class="Arg">elts</var> may be a list of words in the generators of a free or fp group) the left normed commutator of <var class="Arg">elts</var>, e.g. if <var class="Arg">w1</var>, <var class="Arg">w2</var>, <var class="Arg">w3</var> are such elements then <code class="code">PqLeftNormComm( [<var class="Arg">w1</var>, <var class="Arg">w2</var>, <var class="Arg">w3</var>] );</code> is equivalent to <code class="code">Comm( Comm( <var class="Arg">w1</var>, <var class="Arg">w2</var> ), <var class="Arg">w3</var> );</code>.</p>
+
+<p><em>Note:</em> <var class="Arg">elts</var> must contain at least two elements.</p>
+
+<p><a id="X7A567432879510A6" name="X7A567432879510A6"></a></p>
+
+<h5>3.4-2 PqGAPRelators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqGAPRelators</code>( <var class="Arg">group</var>, <var class="Arg">rels</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns a list of words that <strong class="pkg">GAP</strong> understands, given a list <var class="Arg">rels</var> of strings in the string representations of the generators of the fp group <var class="Arg">group</var> prepared as a list of relators for the <code class="code">pq</code> program.</p>
+
+<p><em>Note:</em> The <code class="code">pq</code> program does not use <code class="code">/</code> to indicate multiplication by an inverse and uses square brackets to represent (left normed) commutators. Also, even though the <code class="code">pq</code> program accepts relations, all elements of <var class="Arg">rels</var> <em>must</em> be in relator form, i.e. a relation of form <code class="code"><var class="Arg">w1</var> = <var class="Arg">w2</var></code> must be written as <code class="code"><var class="Arg">w1</var>*(<var class="Arg">w2</var>)^-1</code>.</p>
+
+<p>Here is an example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup("a", "b");</span>
+&lt;free group on the generators [ a, b ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PqGAPRelators(F, [ "a*b^2", "[a,b]^2*a", "([a,b,a,b,b]*a*b)^2*a" ]);</span>
+[ a*b^2, a^-1*b^-1*a*b*a^-1*b^-1*a*b*a, b^-1*a^-1*b^-1*a^-1*b*a*b^-1*a*b*a^
+    -1*b*a^-1*b^-1*a*b*a*b^-1*a^-1*b^-1*a^-1*b*a*b^-1*a*b^-1*a^-1*b*a^-1*b^
+    -1*a*b*a*b*a^-1*b*a*b^-1*a*b*a^-1*b*a^-1*b^-1*a*b*a*b^-1*a^-1*b^-1*a^
+    -1*b*a*b^-1*a*b^-1*a^-1*b*a^-1*b^-1*a*b*a*b^2*a*b*a ]
+</pre></div>
+
+<p><a id="X7F3C5D1C7EC36EAE" name="X7F3C5D1C7EC36EAE"></a></p>
+
+<h5>3.4-3 PqParseWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqParseWord</code>( <var class="Arg">word</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>parses a <var class="Arg">word</var>, a string representing a word in the pc generators <code class="code">x1,...,x<var class="Arg">n</var></code>, through <strong class="pkg">GAP</strong>. This function is provided as a rough-and-ready check of <var class="Arg">word</var> for syntax errors. A syntax error will cause the entering of a <code class="code">break</code>-loop, in which the error message may or may not be meaningful (depending on whether the syntax error gets caught at the <strong class="pkg">GAP</strong> or kernel level).</p>
+
+<p><em>Note:</em> The reason the generators <em>must</em> be <code class="code">x1,...,x<var class="Arg">n</var></code> is that these are the pc generator names used by the <code class="code">pq</code> program (as distinct from the generator names for the group provided by the user to a function like <code class="code">Pq</code> that invokes the <code class="code">pq</code> program).</p>
+
+<p><a id="X7BB0EB607F337265" name="X7BB0EB607F337265"></a></p>
+
+<h5>3.4-4 PqExample</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqExample</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqExample</code>( <var class="Arg">example</var>[, <var class="Arg">PqStart</var>][, <var class="Arg">Display</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqExample</code>( <var class="Arg">example</var>[, <var class="Arg">PqStart</var>][, <var class="Arg">filename</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>With no arguments, or with single argument <code class="code">"index"</code>, or a string <var class="Arg">example</var> that is not the name of a file in the <code class="code">examples</code> directory, an index of available examples is displayed.</p>
+
+<p>With just the one argument <var class="Arg">example</var> that is the name of a file in the <code class="code">examples</code> directory, the example contained in that file is executed in its simplest form. Some examples accept options which you may use to modify some of the options used in the commands of the example. To find out which options an example accepts, use one of the mechanisms for displaying the example described below.</p>
+
+<p>Some examples have both non-interactive and interactive forms; those that are non-interactive only have a name ending in <code class="code">-ni</code>; those that are interactive only have a name ending in <code class="code">-i</code>; examples with names ending in <code class="code">.g</code> also have only one form; all other examples have both non-interactive and interactive forms and for these giving <code class="code">PqStart</code> as second argument invokes <code class="code">PqStart</code> initially and makes the appropriate adjustments so that the example is executed or displayed using interactive functions.</p>
+
+<p>If <code class="code">PqExample</code> is called with last (second or third) argument <code class="code">Display</code> then the example is displayed without being executed. If the last argument is a non-empty string <var class="Arg">filename</var> then the example is also displayed without being executed but is also written to a file with that name. Passing an empty string as last argument has the same effect as passing <code class="code">Display</code>.</p>
+
+<p><em>Note:</em> The variables used in <code class="code">PqExample</code> are local to the running of <code class="code">PqExample</code>, so there's no danger of having some of your variables over-written. However, they are not completely lost either. They are saved to a record <code class="code">ANUPQData.examples.vars</code>, i.e. if <code class="code">F</code> is a variable used in the example then you will be able to access it after <code class="code">PqExample</code> has finished as <code class="code">ANUPQData.examples.vars.F</code>.</p>
+
+<p><a id="X823C93FC7B87F5BC" name="X823C93FC7B87F5BC"></a></p>
+
+<h5>3.4-5 AllPqExamples</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllPqExamples</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns a list of all currently available examples in default UNIX-listing (i.e. alphabetic) order.</p>
+
+<p><a id="X7E3E4B047DC2E323" name="X7E3E4B047DC2E323"></a></p>
+
+<h5>3.4-6 GrepPqExamples</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GrepPqExamples</code>( <var class="Arg">string</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>runs the UNIX command <code class="code">grep <var class="Arg">string</var></code> over the <strong class="pkg">ANUPQ</strong> examples and returns the list of examples for which there is a match. The actual matches are <code class="code">Info</code>-ed at <code class="code">InfoANUPQ</code> level 2.</p>
+
+<p><a id="X8104B2BA872EFCCB" name="X8104B2BA872EFCCB"></a></p>
+
+<h5>3.4-7 ToPQLog</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToPQLog</code>( [<var class="Arg">filename</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>With string argument <var class="Arg">filename</var>, <code class="code">ToPQLog</code> opens the file with name <var class="Arg">filename</var> for logging; all commands written to the <code class="code">pq</code> binary (that are <code class="code">Info</code>-ed behind a "<code class="code">ToPQ&gt; </code>" prompt at <code class="code">InfoANUPQ</code> level 4) are then also written to that file (but without prompts). With no argument, <code class="code">ToPQLog</code> stops logging to whatever file was being logged to. If a file was already being logged to, that file is closed and the file with name <var class="Arg">filename</var> is opened for logging.</p>
+
+<p><a id="X818175EF85CAA807" name="X818175EF85CAA807"></a></p>
+
+<h4>3.5 <span class="Heading">Attributes and a Property for fp and pc p-groups</span></h4>
+
+<p><a id="X87DC922A78EB0DD6" name="X87DC922A78EB0DD6"></a></p>
+
+<h5>3.5-1 NuclearRank</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NuclearRank</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MultiplicatorRank</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCapable</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>return the nuclear rank of <var class="Arg">G</var>, <span class="SimpleMath">\(p\)</span>-multiplicator rank of <var class="Arg">G</var>, and whether <var class="Arg">G</var> is capable (i.e. <code class="keyw">true</code> if it is, or <code class="keyw">false</code> if it is not), respectively.</p>
+
+<p>These attributes and property are set automatically if <var class="Arg">G</var> is one of the following:</p>
+
+
+<ul>
+<li><p>an fp group returned by <code class="code">PqStandardPresentation</code> or <code class="code">StandardPresentation</code> (see <code class="func">PqStandardPresentation</code> (<a href="chap4_mj.html#X86C9575D7CB65FBB"><span class="RefLink">4.2-1</span></a>));</p>
+
+</li>
+<li><p>the image (fp group) of the epimorphism returned by an <code class="code">EpimorphismPqStandardPresentation</code> or <code class="code">EpimorphismStandardPresentation</code> call (see <code class="func">EpimorphismPqStandardPresentation</code> (<a href="chap4_mj.html#X828C06D083C0D089"><span class="RefLink">4.2-2</span></a>)); or</p>
+
+</li>
+<li><p>one of the pc groups of the list of descendants returned by <code class="code">PqDescendants</code> (see <code class="func">PqDescendants</code> (<a href="chap4_mj.html#X80985CC479CD9FA3"><span class="RefLink">4.4-1</span></a>)).</p>
+
+</li>
+</ul>
+<p>If <var class="Arg">G</var> is an fp group or a pc <span class="SimpleMath">\(p\)</span>-group and not one of the above and the attribute or property has not otherwise been set for <var class="Arg">G</var>, then <code class="code">PqStandardPresentation</code> is called to set all three of <code class="code">NuclearRank</code>, <code class="code">MultiplicatorRank</code> and <code class="code">IsCapable</code>, before returning the value of the attribute or property actually called. Such a group <var class="Arg">G</var> must know in advance that it is a <span class="SimpleMath">\(p\)</span>-group; this is the case for the groups returned by the functions <code class="code">Pq</code> and <code class="code">PqPCover</code>, and the image group of the epimorphism returned by <code class="code">PqEpimorphism</code>. Otherwise, if you know the group to be a <span class="SimpleMath">\(p\)</span>-group, then this can be set by typing</p>
+
+
+<div class="example"><pre>
+SetIsPGroup( G, true );
+</pre></div>
+
+<p>or by invoking <code class="code">IsPGroup( <var class="Arg">G</var> )</code>. Note that for an fp group <var class="Arg">G</var>, the latter may result in a coset enumeration which might not terminate in a reasonable time.</p>
+
+<p><em>Note:</em> For <var class="Arg">G</var> such that <code class="code">HasNuclearRank(<var class="Arg">G</var>) = true</code>, <code class="code">IsCapable(<var class="Arg">G</var>)</code> is equivalent to (the truth or falsity of) <code class="code">NuclearRank( <var class="Arg">G</var> ) = 0</code>.</p>
+
+<p><a id="X7BA20FA07B166B37" name="X7BA20FA07B166B37"></a></p>
+
+<h4>3.6 <span class="Heading">Hints and Warnings regarding the use of Options</span></h4>
+
+<p>On a first reading we recommend you skip this section and come back to it if and when you run into trouble.</p>
+
+<p><em>Note:</em> By "options" we refer to <strong class="pkg">GAP</strong> options. The <code class="code">pq</code> program also uses the term "option"; to distinguish the two usages of "option", in this manual we use the term <em>menu item</em> to refer to what the <code class="code">pq</code> program refers to as an "option".</p>
+
+<p>Options are passed to the <strong class="pkg">ANUPQ</strong> interface functions in either of the two usual mechanisms provided by <strong class="pkg">GAP</strong>, namely:</p>
+
+
+<ul>
+<li><p>options may be set globally using the function <code class="code">PushOptions</code> (see Chapter <a href="../../../doc/ref/chap8_mj.html#X7FD84061873F72A2"><span class="RefLink">Reference: Options Stack</span></a> in the <strong class="pkg">GAP</strong> Reference Manual); or</p>
+
+</li>
+<li><p>options may be appended to the argument list of any function call, separated by a colon from the argument list (see Chapter <a href="../../../doc/ref/chap4_mj.html#X78C70489791FDF43"><span class="RefLink">Reference: Function Calls</span></a> in the <strong class="pkg">GAP</strong> Reference Manual), in which case they are then passed on recursively to any subsequent inner function call, which may in turn have options of their own.</p>
+
+</li>
+</ul>
+<p>Particularly, when one is using the interactive functions of Chapter <a href="chap5_mj.html#X842C13C27B941744"><span class="RefLink"><span class="Heading">Interactive ANUPQ functions</span></span></a>, one should, in general, avoid using the global method of passing options. In fact, it is recommended that prior to calling <code class="code">PqStart</code> the <code class="code">OptionsStack</code> be empty. The essential problem with setting options globally using the function <code class="code">PushOptions</code> is that options pushed onto <code class="code">OptionsStack</code>, in this way, (generally) remain there until an explicit <code class="code">PopOptions()</code> call is made.</p>
+
+<p>In contrast, options passed in the usual way behind a colon following a function's arguments (see <a href="../../../doc/ref/chap4_mj.html#X867D54987EF86D1D"><span class="RefLink">Reference: Function Call With Options</span></a> in the <strong class="pkg">GAP</strong> Reference Manual) are local, and disappear from <code class="code">OptionsStack</code> after the function has executed successfully. If the function does <em>not</em> execute successfully, i.e. it runs into error and the user <code class="keyw">quit</code>s the resulting <code class="code">break</code> loop (see Section <a href="../../../doc/ref/chap6_mj.html#X8593B49F8705B486"><span class="RefLink">Reference: Break Loops</span></a> in the Reference Manual) rather than attempting to repair the problem and typing <code class="code">return;</code> then, unless the error at the kernel level, the <code class="code">OptionsStack</code> is reset. If an error is detected inside the kernel (hopefully, this should occur only rarely, if at all) then the options of that function will <em>not</em> be cleared from <code class="code">OptionsStack</code>; in such cases:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResetOptionsStack();</span>
+#I  Options stack is already empty
+</pre></div>
+
+<p>is usually necessary (see Chapter <code class="func">ResetOptionsStack</code> (<a href="../../../doc/ref/chap8_mj.html#X83D1190984DA3B85"><span class="RefLink">Reference: ResetOptionsStack</span></a>) in the <strong class="pkg">GAP</strong> Reference Manual), which recursively calls <code class="code">PopOptions()</code> until <code class="code">OptionsStack</code> is empty, or as in the above case warns you that the <code class="code">OptionsStack</code> is already empty.</p>
+
+<p>Note that a function, that is passed options after the colon, will also see any global options or any options passed down recursively from functions calling that function, unless those options are over-ridden by options passed via the function. Also, note that duplication of option names for different programs may lead to misinterpretations, and mis-spelled options will not be "seen".</p>
+
+<p>The non-interactive functions of Chapter <a href="chap4_mj.html#X7C51F26D839279FF"><span class="RefLink"><span class="Heading">Non-interactive ANUPQ functions</span></span></a> that have <code class="code">Pq</code> somewhere in their name provide an alternative method of passing options as additional arguments. This has the advantages that options can be abbreviated and mis-spelled options will be trapped.</p>
+
+<p><a id="X81F4AAE084C34B4B" name="X81F4AAE084C34B4B"></a></p>
+
+<h5>3.6-1 ANUPQWarnOfOtherOptions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ANUPQWarnOfOtherOptions</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>is a global variable that is by default <code class="keyw">false</code>. If it is set to <code class="keyw">true</code> then any function provided by the <strong class="pkg">ANUPQ</strong> function that recognises at least one option, will warn you of "other" options, i.e. options that the function does not recognise. These warnings are emitted at <code class="code">InfoWarning</code> or <code class="code">InfoANUPQ</code> level 1. This is useful for detecting mis-spelled options. Here is an example using the function <code class="code">Pq</code> (first described in Chapter <a href="chap4_mj.html#X7C51F26D839279FF"><span class="RefLink"><span class="Heading">Non-interactive ANUPQ functions</span></span></a>):</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoANUPQ, 1);        # Set InfoANUPQ to default level</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ANUPQWarnOfOtherOptions := true;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># The following makes entry into break loops very ``quiet'' ...</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OnBreak := function() Where(0); end;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup( "a", "b" );</span>
+&lt;free group on the generators [ a, b ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( F : Prime := 2, Classbound := 1 );</span>
+#I  ANUPQ Warning: Options: [ "Classbound" ] ignored
+#I  (invalid for generic function: `Pq').
+user interrupt at
+moreOfline := ReadLine( iostream );
+Entering break read-eval-print loop ...
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+</pre></div>
+
+<p>Here we mistyped <code class="code">ClassBound</code> as <code class="code">Classbound</code>, and after seeing the <code class="code">Info</code>-ed warning that <code class="code">Classbound</code> was ignored, we typed a <var class="Arg">control</var>-C (that's the "<code class="code">user interrupt at</code>" message) which took us into a break loop. Since the <code class="code">Pq</code> command was not able to finish, the options <code class="code">Prime</code> and <code class="code">Classbound</code>, in particular, will still be on the <code class="code">OptionsStack</code>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">OptionsStack;</span>
+[ rec( Prime := 2, Classbound := 1 ), 
+  rec( Prime := 2, Classbound := 1, PqEpiOrPCover := "pQuotient" ) ]
+</pre></div>
+
+<p>The option <code class="code">PqEpiOrPCover</code> is a behind-the-scenes option that need not concern the user. On <code class="keyw">quit</code>ting the <code class="code">break</code>-loop the <code class="code">OptionsStack</code> is reset and a warning telling you this is emitted:</p>
+
+
+<div class="example"><pre>
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit; # to get back to the `gap&gt;' prompt</span>
+#I  Options stack has been reset
+</pre></div>
+
+<p>Above, we altered <code class="code">OnBreak</code> (see <code class="func">OnBreak</code> (<a href="../../../doc/ref/chap6_mj.html#X82EBF01181C3C859"><span class="RefLink">Reference: OnBreak</span></a>) in the Reference manual) to reduce the back-tracing on entry into a break loop. We now restore <code class="code">OnBreak</code> to its usual value.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OnBreak := Where;;</span>
+</pre></div>
+
+<p><em>Notes</em></p>
+
+<p>In cases where functions recursively call others with options (e.g. when using <code class="code">PqExample</code> with options), setting <code class="code">ANUPQWarnOfOtherOptions := true</code> may give rise to spurious "other" option detections.</p>
+
+<p>It is recommended that the novice user set <code class="code">ANUPQWarnOfOtherOptions</code> to <code class="keyw">true</code> in their <code class="code">gap.ini</code> file (see Section <a href="chap3_mj.html#X833D58248067E13B"><span class="RefLink"><span class="Heading">Loading the ANUPQ Package</span></span></a>).</p>
+
+<p><em>Other Troubleshooting Strategies</em></p>
+
+<p>There are some other strategies which may have helped us to see our error above. The function <code class="code">Pq</code> recognises the option <code class="code">OutputLevel</code> (see <a href="chap6_mj.html#X87EE6DD67C9996A3"><span class="RefLink">6.2</span></a>); if this option is set to at least 1, the <code class="code">pq</code> program provides information on each class quotient as it is generated:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ANUPQWarnOfOtherOptions := false;; # Set back to normal</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup( "a", "b" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( F : Prime := 2, Classbound := 1, OutputLevel := 1 ); </span>
+#I  Lower exponent-2 central series for [grp]
+#I  Group: [grp] to lower exponent-2 central class 1 has order 2^2
+#I  Group: [grp] to lower exponent-2 central class 2 has order 2^5
+#I  Group: [grp] to lower exponent-2 central class 3 has order 2^10
+#I  Group: [grp] to lower exponent-2 central class 4 has order 2^18
+#I  Group: [grp] to lower exponent-2 central class 5 has order 2^32
+#I  Group: [grp] to lower exponent-2 central class 6 has order 2^55
+#I  Group: [grp] to lower exponent-2 central class 7 has order 2^96
+#I  Group: [grp] to lower exponent-2 central class 8 has order 2^167
+#I  Group: [grp] to lower exponent-2 central class 9 has order 2^294
+#I  Group: [grp] to lower exponent-2 central class 10 has order 2^520
+#I  Group: [grp] to lower exponent-2 central class 11 has order 2^932
+#I  Group: [grp] to lower exponent-2 central class 12 has order 2^1679
+[... output truncated ...]
+</pre></div>
+
+<p>After seeing the information for the class 2 quotient we may have got the idea that the <code class="code">Classbound</code> option was not recognised and may have realised that this was due to a mis-spelling. The above will ordinarily cause the available space to be exhausted, necessitating user-intervention by typing <var class="Arg">control</var>-C and <code class="code">quit;</code> (to escape the break loop); otherwise <code class="code">Pq</code> terminates when the class reaches 63 (the default value of <code class="code">ClassBound</code>).</p>
+
+<p>If you have some familiarity with "keyword" command input to the <code class="code">pq</code> binary, then setting the level of <code class="code">InfoANUPQ</code> to 4 would also have indicated a problem:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResetOptionsStack(); # Necessary, if a break-loop was entered above</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoANUPQ, 4);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( F : Prime := 2, Classbound := 1 );</span>
+#I  ToPQ&gt; 7  #to (Main) p-Quotient Menu
+#I  ToPQ&gt; 1  #define group
+#I  ToPQ&gt; name [grp]
+#I  ToPQ&gt; prime 2
+#I  ToPQ&gt; class 63
+#I  ToPQ&gt; exponent 0
+#I  ToPQ&gt; output 0
+#I  ToPQ&gt; generators { a,b }
+#I  ToPQ&gt; relators   {  };
+[... output truncated ...]
+</pre></div>
+
+<p>Here the line "<code class="code">#I ToPQ&gt; class 63</code>" indicates that a directive to set the classbound to 63 was sent to the <code class="code">pq</code> program.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

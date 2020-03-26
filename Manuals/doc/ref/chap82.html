@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ref) - Chapter 82: An Example – Designing Arithmetic Operations</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap82"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chap19.html">19</a>  <a href="chap20.html">20</a>  <a href="chap21.html">21</a>  <a href="chap22.html">22</a>  <a href="chap23.html">23</a>  <a href="chap24.html">24</a>  <a href="chap25.html">25</a>  <a href="chap26.html">26</a>  <a href="chap27.html">27</a>  <a href="chap28.html">28</a>  <a href="chap29.html">29</a>  <a href="chap30.html">30</a>  <a href="chap31.html">31</a>  <a href="chap32.html">32</a>  <a href="chap33.html">33</a>  <a href="chap34.html">34</a>  <a href="chap35.html">35</a>  <a href="chap36.html">36</a>  <a href="chap37.html">37</a>  <a href="chap38.html">38</a>  <a href="chap39.html">39</a>  <a href="chap40.html">40</a>  <a href="chap41.html">41</a>  <a href="chap42.html">42</a>  <a href="chap43.html">43</a>  <a href="chap44.html">44</a>  <a href="chap45.html">45</a>  <a href="chap46.html">46</a>  <a href="chap47.html">47</a>  <a href="chap48.html">48</a>  <a href="chap49.html">49</a>  <a href="chap50.html">50</a>  <a href="chap51.html">51</a>  <a href="chap52.html">52</a>  <a href="chap53.html">53</a>  <a href="chap54.html">54</a>  <a href="chap55.html">55</a>  <a href="chap56.html">56</a>  <a href="chap57.html">57</a>  <a href="chap58.html">58</a>  <a href="chap59.html">59</a>  <a href="chap60.html">60</a>  <a href="chap61.html">61</a>  <a href="chap62.html">62</a>  <a href="chap63.html">63</a>  <a href="chap64.html">64</a>  <a href="chap65.html">65</a>  <a href="chap66.html">66</a>  <a href="chap67.html">67</a>  <a href="chap68.html">68</a>  <a href="chap69.html">69</a>  <a href="chap70.html">70</a>  <a href="chap71.html">71</a>  <a href="chap72.html">72</a>  <a href="chap73.html">73</a>  <a href="chap74.html">74</a>  <a href="chap75.html">75</a>  <a href="chap76.html">76</a>  <a href="chap77.html">77</a>  <a href="chap78.html">78</a>  <a href="chap79.html">79</a>  <a href="chap80.html">80</a>  <a href="chap81.html">81</a>  <a href="chap82.html">82</a>  <a href="chap83.html">83</a>  <a href="chap84.html">84</a>  <a href="chap85.html">85</a>  <a href="chap86.html">86</a>  <a href="chap87.html">87</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap81.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap83.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap82_mj.html">[MathJax on]</a></p>
+<p><a id="X7E485C967A5778C9" name="X7E485C967A5778C9"></a></p>
+<div class="ChapSects"><a href="chap82.html#X7E485C967A5778C9">82 <span class="Heading">An Example – Designing Arithmetic Operations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap82.html#X7EA9422E7ACA7276">82.1 <span class="Heading">New Arithmetic Operations vs. New Objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap82.html#X7BE9D84482B421F9">82.2 <span class="Heading">Designing new Multiplicative Objects</span></a>
+</span>
+</div>
+</div>
+
+<h3>82 <span class="Heading">An Example – Designing Arithmetic Operations</span></h3>
+
+<p>In this chapter, we give a –hopefully typical– example of extending <strong class="pkg">GAP</strong> by new objects with prescribed arithmetic operations (for a simple approach that may be useful to get started though does not permit to exploit all potential features, see also <code class="func">ArithmeticElementCreator</code> (<a href="chap80.html#X87A88E3D7F6E2A7C"><span class="RefLink">80.9-1</span></a>)).</p>
+
+<p><a id="X7EA9422E7ACA7276" name="X7EA9422E7ACA7276"></a></p>
+
+<h4>82.1 <span class="Heading">New Arithmetic Operations vs. New Objects</span></h4>
+
+<p>A usual procedure in mathematics is the definition of new operations for given objects; here are a few typical examples. The Lie bracket defines an interesting new multiplicative structure on a given (associative) algebra. Forming a group ring can be viewed as defining a new addition for the elements of the given group, and extending the multiplication to sums of group elements in a natural way. Forming the exterior algebra of a given vector space can be viewed as defining a new multiplication for the vectors in a natural way.</p>
+
+<p><strong class="pkg">GAP</strong> does <em>not</em> support such a procedure. The main reason for this is that in <strong class="pkg">GAP</strong>, the multiplication in a group, a ring etc. is always written as <code class="code">*</code>, and the addition in a vector space, a ring etc.  is always written as <code class="code">+</code>. Therefore it is not possible to define the Lie bracket as a "second multiplication" for the elements of a given algebra; in fact, the multiplication in Lie algebras in <strong class="pkg">GAP</strong> is denoted by <code class="code">*</code>. Analogously, constructing the group ring as sketched above is impossible if an addition is already defined for the elements; note the difference between the usual addition of matrices and the addition in the group ring of a matrix group! (See Chapter <a href="chap65.html#X825897DC7A16E07D"><span class="RefLink">65</span></a> for an example.) Similarly, there is already a multiplication defined for row vectors (yielding the standard scalar product), hence these vectors cannot be regarded as elements of the exterior algebra of the space.</p>
+
+<p>In situations such as the ones mentioned above, <strong class="pkg">GAP</strong>'s way to deal with the structures in question is the following. Instead of defining <em>new</em> operations for the <em>given</em> objects, <em>new</em> objects are created to which the <em>given</em> arithmetic operations <code class="code">*</code> and <code class="code">+</code> are then made applicable.</p>
+
+<p>With this construction, matrix Lie algebras consist of matrices that are different from the matrices with associative multiplication; technically, the type of a matrix determines how it is multiplied with other matrices (see <code class="func">IsMatrix</code> (<a href="chap24.html#X7E1AE46B862B185F"><span class="RefLink">24.2-1</span></a>)). A matrix with the Lie bracket as its multiplication can be created with the function <code class="func">LieObject</code> (<a href="chap64.html#X87F121978775AF48"><span class="RefLink">64.1-1</span></a>) from a matrix with the usual associative multiplication.</p>
+
+<p>Group rings (more general: magma rings, see Chapter <a href="chap65.html#X825897DC7A16E07D"><span class="RefLink">65</span></a>) can be constructed with <code class="func">FreeMagmaRing</code> (<a href="chap65.html#X7B9AF0A47F44E4B4"><span class="RefLink">65.1-1</span></a>) from a coefficient ring and a group. The elements of the group are not contained in such a group ring, one has to use an embedding map for creating a group ring element that corresponds to a given group element.</p>
+
+<p>It should be noted that the <strong class="pkg">GAP</strong> approach to the construction of Lie algebras from associative algebras is generic in the sense that all objects in the filter <code class="func">IsLieObject</code> (<a href="chap64.html#X83E5DD4381D9A65D"><span class="RefLink">64.1-2</span></a>) use the same methods for their addition, multiplication etc., by delegating to the "underlying" objects of the associative algebra, no matter what these objects actually are. Analogously, also the construction of group rings is generic.</p>
+
+<p><a id="X7BE9D84482B421F9" name="X7BE9D84482B421F9"></a></p>
+
+<h4>82.2 <span class="Heading">Designing new Multiplicative Objects</span></h4>
+
+<p>The goal of this section is to implement objects with a prescribed multiplication. Let us assume that we are given a field <span class="SimpleMath">F</span>, and that we want to define a new multiplication <span class="SimpleMath">*</span> on <span class="SimpleMath">F</span> that is given by <span class="SimpleMath">a * b = a b - a - b + 2</span>; here <span class="SimpleMath">a b</span> denotes the ordinary product in <span class="SimpleMath">F</span>.</p>
+
+<p>By the discussion in Section <a href="chap82.html#X7EA9422E7ACA7276"><span class="RefLink">82.1</span></a>, we know that we cannot define a new multiplication on <span class="SimpleMath">F</span> itself but have to create new objects.</p>
+
+<p>We want to distinguish these new objects from all other <strong class="pkg">GAP</strong> objects, in order to describe for example the situation that two of our objects shall be multiplied. This distinction is made via the <em>type</em> of the objects. More precisely, we declare a new <em>filter</em>, a function that will return <code class="keyw">true</code> for our new objects, and <code class="keyw">false</code> for all other <strong class="pkg">GAP</strong> objects. This can be done by calling <code class="func">DeclareFilter</code> (<a href="chap13.html#X846EA18A7D36626C"><span class="RefLink">13.8-2</span></a>), but since our objects will know about the value already when they are constructed, the filter can be created with <code class="func">DeclareCategory</code> (<a href="chap13.html#X879DE2A17A6C6E92"><span class="RefLink">13.3-5</span></a>) or <code class="func">NewCategory</code> (<a href="chap13.html#X87F68F887B44DBBD"><span class="RefLink">13.3-4</span></a>).</p>
+
+
+<div class="example"><pre>
+DeclareCategory( "IsMyObject", IsObject );
+</pre></div>
+
+<p>The idea is that the new multiplication will be installed only for objects that "lie in the category <code class="code">IsMyObject</code>".</p>
+
+<p>The next question is what internal data our new objects store, and how they are accessed. The easiest solution is to store the "underlying" object from the field <span class="SimpleMath">F</span>. <strong class="pkg">GAP</strong> provides two general possibilities how to store this, namely record-like and list-like structures (for examples, see <a href="chap79.html#X866E223484649E5A"><span class="RefLink">79.2</span></a> and <a href="chap79.html#X834893D07FAA6FD2"><span class="RefLink">79.3</span></a>). We decide to store the data in a list-like structure, at position 1. This <em>representation</em> is declared as follows.</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsMyObjectListRep", IsPositionalObjectRep, [ 1 ] );
+</pre></div>
+
+<p>Of course we can argue that this declaration is superfluous because <em>all</em> objects in the category <code class="code">IsMyObject</code> will be represented this way; it is possible to proceed like that, but often (in more complicated situations) it turns out to be useful that several representations are available for "the same element".</p>
+
+<p>For creating the type of our objects, we need to specify to which <em>family</em> (see <a href="chap13.html#X846063757EC05986"><span class="RefLink">13.1</span></a>) the objects shall belong. For the moment, we need not say anything about relations to other <strong class="pkg">GAP</strong> objects, thus the only requirement is that all new objects lie in the <em>same</em> family; therefore we create a <em>new</em> family. Also we are not interested in properties that some of our objects have and others do not have, thus we need only one type, and store it in a global variable.</p>
+
+
+<div class="example"><pre>
+MyType:= NewType( NewFamily( "MyFamily" ),
+                  IsMyObject and IsMyObjectListRep );
+</pre></div>
+
+<p>The next step is to write a function that creates a new object. It may look as follows.</p>
+
+
+<div class="example"><pre>
+MyObject:= val -&gt; Objectify( MyType, [ Immutable( val ) ] );
+</pre></div>
+
+<p>Note that we store an <em>immutable copy</em> of the argument in the returned object; without doing so, for example if the argument would be a mutable matrix then the corresponding new object would be changed whenever the matrix is changed (see <a href="chap12.html#X7F0C119682196D65"><span class="RefLink">12.6</span></a> for more details about mutability).</p>
+
+<p>Having entered the above <strong class="pkg">GAP</strong> code, we can create some of our objects.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:= MyObject( 3 );  b:= MyObject( 5 );</span>
+&lt;object&gt;
+&lt;object&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a![1];  b![1];</span>
+3
+5
+</pre></div>
+
+<p>But clearly a lot is missing. Besides the fact that the desired multiplication is not yet installed, we see that also the way how the objects are printed is not satisfactory.</p>
+
+<p>Let us improve the latter first. There are two <strong class="pkg">GAP</strong> functions <code class="func">View</code> (<a href="chap6.html#X851902C583B84CDC"><span class="RefLink">6.3-3</span></a>) and <code class="func">Print</code> (<a href="chap6.html#X7AFA64D97A1F39A3"><span class="RefLink">6.3-4</span></a>) for showing objects on the screen. <code class="func">View</code> (<a href="chap6.html#X851902C583B84CDC"><span class="RefLink">6.3-3</span></a>) is thought to show a short and human readable form of the object, and <code class="func">Print</code> (<a href="chap6.html#X7AFA64D97A1F39A3"><span class="RefLink">6.3-4</span></a>) is thought to show a not necessarily short form that is <strong class="pkg">GAP</strong> readable whenever this makes sense. We decide to show <code class="code">a</code> as <code class="code"><var class="Arg">3</var></code> by <code class="func">View</code> (<a href="chap6.html#X851902C583B84CDC"><span class="RefLink">6.3-3</span></a>), and to show the construction <code class="code">MyObject( 3 )</code> by <code class="func">Print</code> (<a href="chap6.html#X7AFA64D97A1F39A3"><span class="RefLink">6.3-4</span></a>); the methods are installed for the underlying operations <code class="func">ViewObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>) and <code class="func">PrintObj</code> (<a href="chap6.html#X815BF22186FD43C9"><span class="RefLink">6.3-5</span></a>).</p>
+
+
+<div class="example"><pre>
+InstallMethod( ViewObj,
+    "for object in `IsMyObject'",
+    [ IsMyObject and IsMyObjectListRep ],
+    function( obj )
+    Print( "&lt;", obj![1], "&gt;" );
+    end );
+
+InstallMethod( PrintObj,
+    "for object in `IsMyObject'",
+    [ IsMyObject and IsMyObjectListRep ],
+    function( obj )
+    Print( "MyObject( ", obj![1], " )" );
+    end );
+</pre></div>
+
+<p>This is the result of the above installations.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a; Print( a, "\n" );</span>
+&lt;3&gt;
+MyObject( 3 )
+</pre></div>
+
+<p>And now we try to install the multiplication.</p>
+
+
+<div class="example"><pre>
+InstallMethod( \*,
+    "for two objects in `IsMyObject'",
+    [ IsMyObject and IsMyObjectListRep,
+      IsMyObject and IsMyObjectListRep ],
+    function( a, b )
+    return MyObject( a![1] * b![1] - a![1] - b![1] + 2 );
+    end );
+</pre></div>
+
+<p>When we enter the above code, <strong class="pkg">GAP</strong> runs into an error. This is due to the fact that the operation <code class="func">\*</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>) is declared for two arguments that lie in the category <code class="func">IsMultiplicativeElement</code> (<a href="chap31.html#X797D3B2A7A2B2F53"><span class="RefLink">31.14-10</span></a>). One could circumvent the check whether the method matches the declaration of the operation, by calling <code class="func">InstallOtherMethod</code> (<a href="chap78.html#X7D2C12DB841CE539"><span class="RefLink">78.3-2</span></a>) instead of <code class="func">InstallMethod</code> (<a href="chap78.html#X837EFDAB7BEF290B"><span class="RefLink">78.3-1</span></a>). But it would make sense if our objects would lie in <code class="func">IsMultiplicativeElement</code> (<a href="chap31.html#X797D3B2A7A2B2F53"><span class="RefLink">31.14-10</span></a>), for example because some generic methods for objects with multiplication would be available then, such as powering by positive integers via repeated squaring. So we want that <code class="code">IsMyObject</code> implies <code class="func">IsMultiplicativeElement</code> (<a href="chap31.html#X797D3B2A7A2B2F53"><span class="RefLink">31.14-10</span></a>). The easiest way to achieve such implications is to use the implied filter as second argument of the <code class="func">DeclareCategory</code> (<a href="chap13.html#X879DE2A17A6C6E92"><span class="RefLink">13.3-5</span></a>) call; but since we do not want to start anew, we can also install the implication afterwards.</p>
+
+
+<div class="example"><pre>
+InstallTrueMethod( IsMultiplicativeElement, IsMyObject );
+</pre></div>
+
+<p>Afterwards, installing the multiplication works without problems. Note that <code class="code">MyType</code> and therefore also <code class="code">a</code> and <code class="code">b</code> are <em>not</em> affected by this implication, so we construct them anew.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MyType:= NewType( NewFamily( "MyFamily" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                     IsMyObject and IsMyObjectListRep );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:= MyObject( 3 );;  b:= MyObject( 5 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a*b;  a^27;</span>
+&lt;9&gt;
+&lt;134217729&gt;
+</pre></div>
+
+<p>Powering the new objects by negative integers is not possible yet, because <strong class="pkg">GAP</strong> does not know how to compute the inverse of an element <span class="SimpleMath">a</span>, say, which is defined as the unique element <span class="SimpleMath">a'</span> such that both <span class="SimpleMath">a a'</span> and <span class="SimpleMath">a' a</span> are "the unique multiplicative neutral element that belongs to <span class="SimpleMath">a</span>".</p>
+
+<p>And also this neutral element, if it exists, cannot be computed by <strong class="pkg">GAP</strong> in our current situation. It does, however, make sense to ask for the multiplicative neutral element of a given magma, and for inverses of elements in the magma.</p>
+
+<p>But before we can form domains of our objects, we must define when two objects are regarded as equal; note that this is necessary in order to decide about the uniqueness of neutral and inverse elements. In our situation, equality is defined in the obvious way. For being able to form sets of our objects, also an ordering via <code class="func">\&lt;</code> (<a href="chap31.html#X7EF67D047F03CA6F"><span class="RefLink">31.11-1</span></a>) is defined for them.</p>
+
+
+<div class="example"><pre>
+InstallMethod( \=,
+    "for two objects in `IsMyObject'",
+    [ IsMyObject and IsMyObjectListRep,
+      IsMyObject and IsMyObjectListRep ],
+    function( a, b )
+    return a![1] = b![1];
+    end );
+
+InstallMethod( \&lt;,
+    "for two objects in `IsMyObject'",
+    [ IsMyObject and IsMyObjectListRep,
+      IsMyObject and IsMyObjectListRep ],
+    function( a, b )
+    return a![1] &lt; b![1];
+    end );
+</pre></div>
+
+<p>Let us look at an example. We start with finite field elements because then the domains are finite, hence the generic methods for such domains will have a chance to succeed.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:= MyObject( Z(7) );</span>
+&lt;Z(7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:= Magma( a );</span>
+&lt;magma with 1 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e:= MultiplicativeNeutralElement( m );</span>
+&lt;Z(7)^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">elms:= AsList( m );</span>
+[ &lt;Z(7)&gt;, &lt;Z(7)^2&gt;, &lt;Z(7)^5&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ForAll( elms, x -&gt; ForAny( elms, y -&gt; x*y = e and y*x = e ) );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( elms, x -&gt; First( elms, y -&gt; x*y = e and y*x = e ) );   </span>
+[ &lt;Z(7)^5&gt;, &lt;Z(7)^2&gt;, &lt;Z(7)&gt; ]
+</pre></div>
+
+<p>So a multiplicative neutral element exists, in fact all elements in the magma <code class="code">m</code> are invertible. But what about the following.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b:= MyObject( Z(7)^0 );  m:= Magma( a, b );</span>
+&lt;Z(7)^0&gt;
+&lt;magma with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">elms:= AsList( m );</span>
+[ &lt;Z(7)^0&gt;, &lt;Z(7)&gt;, &lt;Z(7)^2&gt;, &lt;Z(7)^5&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e:= MultiplicativeNeutralElement( m );</span>
+&lt;Z(7)^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ForAll( elms, x -&gt; ForAny( elms, y -&gt; x*y = e and y*x = e ) );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( elms, x -&gt; b * x );</span>
+[ &lt;Z(7)^0&gt;, &lt;Z(7)^0&gt;, &lt;Z(7)^0&gt;, &lt;Z(7)^0&gt; ]
+</pre></div>
+
+<p>Here we found a multiplicative neutral element, but the element <code class="code">b</code> does not have an inverse. If an addition would be defined for our elements then we would say that <code class="code">b</code> behaves like a zero element.</p>
+
+<p>When we started to implement the new objects, we said that we wanted to define the new multiplication for elements of a given field <span class="SimpleMath">F</span>. In principle, the current implementation would admit also something like <code class="code">MyObject( 2 ) * MyObject( Z(7) )</code>. But if we decide that our initial assumption holds, we may define the identity and the inverse of the object <code class="code">&lt;a&gt;</code> as <code class="code">&lt;2*e&gt;</code> and <code class="code">&lt;a/(a-e)&gt;</code>, respectively, where <code class="code">e</code> is the identity element in <span class="SimpleMath">F</span> and <code class="code">/</code> denotes the division in <span class="SimpleMath">F</span>; note that the element <code class="code">&lt;e&gt;</code> is not invertible, and that the above definitions are determined by the multiplication defined for our objects. Further note that after the installations shown below, also <code class="code">One( MyObject( 1 ) )</code> is defined.</p>
+
+<p>(For technical reasons, we do not install the intended methods for the attributes <code class="func">One</code> (<a href="chap31.html#X8046262384895B2A"><span class="RefLink">31.10-2</span></a>) and <code class="func">Inverse</code> (<a href="chap31.html#X78EE524E83624057"><span class="RefLink">31.10-8</span></a>) but for the operations <code class="func">OneOp</code> (<a href="chap31.html#X8046262384895B2A"><span class="RefLink">31.10-2</span></a>) and <code class="func">InverseOp</code> (<a href="chap31.html#X78EE524E83624057"><span class="RefLink">31.10-8</span></a>). This is because for certain kinds of objects –mainly matrices– one wants to support a method to compute a <em>mutable</em> identity or inverse, and the attribute needs only a method that takes this object, makes it immutable, and then returns this object. As stated above, we only want to deal with immutable objects, so this distinction is not really interesting for us.)</p>
+
+<p>A more interesting point to note is that we should mark our objects as likely to be invertible, since we add the possibility to invert them. Again, this could have been part of the declaration of <code class="code">IsMyObject</code>, but we may also formulate an implication for the existing category.</p>
+
+
+<div class="example"><pre>
+InstallTrueMethod( IsMultiplicativeElementWithInverse, IsMyObject );
+
+InstallMethod( OneOp,
+    "for an object in `IsMyObject'",
+    [ IsMyObject and IsMyObjectListRep ],
+    a -&gt; MyObject( 2 * One( a![1] ) ) );
+
+InstallMethod( InverseOp,
+    "for an object in `IsMyObject'",
+    [ IsMyObject and IsMyObjectListRep ],
+    a -&gt; MyObject( a![1] / ( a![1] - One( a![1] ) ) ) );
+</pre></div>
+
+<p>Now we can form groups of our (nonzero) elements.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MyType:= NewType( NewFamily( "MyFamily" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                  IsMyObject and IsMyObjectListRep );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:= MyObject( Z(7) );</span>
+&lt;Z(7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b:= MyObject( 0*Z(7) );  g:= Group( a, b );</span>
+&lt;0*Z(7)&gt;
+&lt;group with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( g );</span>
+6
+</pre></div>
+
+<p>We are completely free to define an <em>addition</em> for our elements, a natural one is given by <code class="code">&lt;a&gt; + &lt;b&gt; = &lt;a+b-1&gt;</code>. As we did for the multiplication, we first change <code class="code">IsMyObject</code> such that the additive structure is also known.</p>
+
+
+<div class="example"><pre>
+InstallTrueMethod( IsAdditiveElementWithInverse, IsMyObject );
+</pre></div>
+
+<p>Next we install the methods for the addition, and those to compute the additive neutral element and the additive inverse.</p>
+
+
+<div class="example"><pre>
+InstallMethod( \+,
+    "for two objects in `IsMyObject'",
+    [ IsMyObject and IsMyObjectListRep,
+      IsMyObject and IsMyObjectListRep ],
+    function( a, b )
+    return MyObject( a![1] + b![1] - 1 );
+    end );
+
+InstallMethod( ZeroOp,
+    "for an object in `IsMyObject'",
+    [ IsMyObject and IsMyObjectListRep ],
+    a -&gt; MyObject( One( a![1] ) ) );
+
+InstallMethod( AdditiveInverseOp,
+    "for an object in `IsMyObject'",
+    [ IsMyObject and IsMyObjectListRep ],
+    a -&gt; MyObject( a![1] / ( a![1] - One( a![1] ) ) ) );
+</pre></div>
+
+<p>Let us try whether the addition works.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MyType:= NewType( NewFamily( "MyFamily" ),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                  IsMyObject and IsMyObjectListRep );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:= MyObject( Z(7) );;  b:= MyObject( 0*Z(7) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:= AdditiveMagma( a, b );</span>
+&lt;additive magma with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( m );</span>
+7
+</pre></div>
+
+<p>Similar as installing a multiplication automatically makes powering by integers available, multiplication with integers becomes available with the addition.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">2 * a;</span>
+&lt;Z(7)^5&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a+a;</span>
+&lt;Z(7)^5&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MyObject( 2*Z(7)^0 ) * a;</span>
+&lt;Z(7)&gt;
+</pre></div>
+
+<p>In particular we see that this multiplication does <em>not</em> coincide with the multiplication of two of our objects, that is, an integer <em>cannot</em> be used as a shorthand for one of the new objects in a multiplication.</p>
+
+<p>(It should be possible to create a <em>field</em> with the new multiplication and addition. Currently this fails, due to missing methods for computing several kinds of generators from field generators, for computing the characteristic in the case that the family does not know this in advance, for checking with <code class="func">AsField</code> (<a href="chap58.html#X7C193B7D7AFB29BE"><span class="RefLink">58.1-9</span></a>) whether a domain is in fact a field, for computing the closure as a field.)</p>
+
+<p>It should be emphasized that the mechanism described above may be not suitable for the situation that one wants to consider many different multiplications "on the same set of objects", since the installation of a new multiplication requires the declaration of at least one new filter and the installation of several methods. But the design of <strong class="pkg">GAP</strong> is not suitable for such dynamic method installations.</p>
+
+<p>Turning this argument the other way round, the implementation of the new arithmetics defined by the above multiplication and addition is available for any field <span class="SimpleMath">F</span>, one need not repeat it for each field one is interested in.</p>
+
+<p>Similar to the above situation, the construction of a magma ring <span class="SimpleMath">RM</span> from a coefficient ring <span class="SimpleMath">R</span> and a magma <span class="SimpleMath">M</span> is implemented only once, since the definition of the arithmetic operations depends only on the given multiplication of <span class="SimpleMath">M</span> and not on <span class="SimpleMath">M</span> itself. So the addition is not implemented for the elements in <span class="SimpleMath">M</span> or –more precisely– for an isomorphic copy. In some sense, the addition is installed "for the multiplication", and as mentioned in Section <a href="chap82.html#X7EA9422E7ACA7276"><span class="RefLink">82.1</span></a>, there is only one multiplication <code class="func">\*</code> (<a href="chap31.html#X8481C9B97B214C23"><span class="RefLink">31.12-1</span></a>) in <strong class="pkg">GAP</strong>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap81.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap83.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chap19.html">19</a>  <a href="chap20.html">20</a>  <a href="chap21.html">21</a>  <a href="chap22.html">22</a>  <a href="chap23.html">23</a>  <a href="chap24.html">24</a>  <a href="chap25.html">25</a>  <a href="chap26.html">26</a>  <a href="chap27.html">27</a>  <a href="chap28.html">28</a>  <a href="chap29.html">29</a>  <a href="chap30.html">30</a>  <a href="chap31.html">31</a>  <a href="chap32.html">32</a>  <a href="chap33.html">33</a>  <a href="chap34.html">34</a>  <a href="chap35.html">35</a>  <a href="chap36.html">36</a>  <a href="chap37.html">37</a>  <a href="chap38.html">38</a>  <a href="chap39.html">39</a>  <a href="chap40.html">40</a>  <a href="chap41.html">41</a>  <a href="chap42.html">42</a>  <a href="chap43.html">43</a>  <a href="chap44.html">44</a>  <a href="chap45.html">45</a>  <a href="chap46.html">46</a>  <a href="chap47.html">47</a>  <a href="chap48.html">48</a>  <a href="chap49.html">49</a>  <a href="chap50.html">50</a>  <a href="chap51.html">51</a>  <a href="chap52.html">52</a>  <a href="chap53.html">53</a>  <a href="chap54.html">54</a>  <a href="chap55.html">55</a>  <a href="chap56.html">56</a>  <a href="chap57.html">57</a>  <a href="chap58.html">58</a>  <a href="chap59.html">59</a>  <a href="chap60.html">60</a>  <a href="chap61.html">61</a>  <a href="chap62.html">62</a>  <a href="chap63.html">63</a>  <a href="chap64.html">64</a>  <a href="chap65.html">65</a>  <a href="chap66.html">66</a>  <a href="chap67.html">67</a>  <a href="chap68.html">68</a>  <a href="chap69.html">69</a>  <a href="chap70.html">70</a>  <a href="chap71.html">71</a>  <a href="chap72.html">72</a>  <a href="chap73.html">73</a>  <a href="chap74.html">74</a>  <a href="chap75.html">75</a>  <a href="chap76.html">76</a>  <a href="chap77.html">77</a>  <a href="chap78.html">78</a>  <a href="chap79.html">79</a>  <a href="chap80.html">80</a>  <a href="chap81.html">81</a>  <a href="chap82.html">82</a>  <a href="chap83.html">83</a>  <a href="chap84.html">84</a>  <a href="chap85.html">85</a>  <a href="chap86.html">86</a>  <a href="chap87.html">87</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

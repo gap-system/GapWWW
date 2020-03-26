@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (PERMUT) - Chapter 7: Other Functions in the PERMUT Package</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7.html">[MathJax off]</a></p>
+<p><a id="X840872AB823EB3DB" name="X840872AB823EB3DB"></a></p>
+<div class="ChapSects"><a href="chap7_mj.html#X840872AB823EB3DB">7 <span class="Heading">Other Functions in the <strong class="pkg">PERMUT</strong> Package</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X86FA580F8055B274">7.1 <span class="Heading">Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X81EA23787BCD8633">7.1-1 AllSubnormalSubgroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X858C07DA815A2E9A">7.1-2 PrimesDividingSize</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7B07AAD37F7CEDEB">7.1-3 SylowSubgroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7E01D1C47814DA3C">7.1-4 IsSCGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X798736C17DD23F8A">7.1-5 IsSylowTowerGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X81FCDD7C7A5D1658">7.1-6 Permutizer</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7D47DF77826C1BE0">7.1-7 AllGeneratorsCyclicPGroup</a></span>
+</div></div>
+</div>
+
+<h3>7 <span class="Heading">Other Functions in the <strong class="pkg">PERMUT</strong> Package</span></h3>
+
+<p>In this chapter we define some miscellaneous functions which have appeared in the context of permutability, or some functions which have been used for some of the functions of the package.</p>
+
+<p><a id="X86FA580F8055B274" name="X86FA580F8055B274"></a></p>
+
+<h4>7.1 <span class="Heading">Functions</span></h4>
+
+<p><a id="X81EA23787BCD8633" name="X81EA23787BCD8633"></a></p>
+
+<h5>7.1-1 AllSubnormalSubgroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllSubnormalSubgroups</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This function computes all subnormal subgroups of <var class="Arg">G</var>. The method used to obtain this list consists in beginning with the list of all normal subgroups of <var class="Arg">G</var> and by adding all normal subgroups of the subgroups in the list until no new subnormal subgroups appear. This computes the complete list of subgroups, not only a representative of each conjugacy class as other functions do.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllSubnormalSubgroups(g);</span>
+[ Sym( [ 1 .. 4 ] ), Group([ (2,4,3), (1,4)(2,3), (1,3)(2,4) ]), Group([ (1,4)
+  (2,3), (1,3)(2,4) ]), Group(()), Group([ (1,3)(2,4) ]), Group([ (1,2)
+  (3,4) ]), Group([ (1,4)(2,3) ]) ]
+</pre></div>
+
+<p><a id="X858C07DA815A2E9A" name="X858C07DA815A2E9A"></a></p>
+
+<h5>7.1-2 PrimesDividingSize</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrimesDividingSize</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This attribute gives a list of primes dividing the size of the finite group <var class="Arg">G</var>, without repetitions. Its code has been borrowed from the <strong class="pkg">GAP</strong> manual.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrimesDividingSize(g);</span>
+[ 2, 3 ]
+</pre></div>
+
+<p><a id="X7B07AAD37F7CEDEB" name="X7B07AAD37F7CEDEB"></a></p>
+
+<h5>7.1-3 SylowSubgroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SylowSubgroups</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This attribute returns a list composed by one Sylow subgroup for every prime dividing the size of <var class="Arg">G</var>. If <var class="Arg">G</var> is soluble, then it returns a Sylow system or Sylow basis of <var class="Arg">G</var> by means of the function <code class="func">SylowSystem</code> (<a href="../../../doc/ref/chap39_mj.html#X832E8E6B8347B13F"><span class="RefLink">Reference: SylowSystem</span></a>) (a set composed of a Sylow subgroup for each prime dividing the order of <var class="Arg">G</var> permuting in pairs).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SylowSubgroups(g);</span>
+[ Group([ (1,2), (3,4), (1,3)(2,4) ]), Group([ (1,2,3) ]) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s5:=SymmetricGroup(5);</span>
+Sym( [ 1 .. 5 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SylowSubgroups(s5);</span>
+[ Group([ (1,2), (3,4), (1,3)(2,4) ]), Group([ (1,2,3) ]), Group([ (1,2,3,4,
+   5) ]) ]
+</pre></div>
+
+<p><a id="X7E01D1C47814DA3C" name="X7E01D1C47814DA3C"></a></p>
+
+<h5>7.1-4 IsSCGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSCGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>This property is <code class="keyw">true</code> if <var class="Arg">G</var> is an SC-group, and <code class="keyw">false</code> otherwise. A group <var class="Arg">G</var> is an SC-group if all its chief factors are simple. Note that a soluble group <var class="Arg">G</var> is an SC-group if and only if <var class="Arg">G</var> is supersoluble. The method used to check this property uses the chief series if its is available or the group is not soluble.</p>
+
+<p>Since the methods for insoluble groups might on the computation of a chief series with the function <code class="func">ChiefSeries</code> (<a href="../../../doc/ref/chap39_mj.html#X7BDD116F7833800F"><span class="RefLink">Reference: ChiefSeries</span></a>), they might not be available if the group is not given as a permutation group.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSCGroup(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=GL(2,5);</span>
+GL(2,5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSCGroup(g);</span>
+true
+</pre></div>
+
+<p><a id="X798736C17DD23F8A" name="X798736C17DD23F8A"></a></p>
+
+<h5>7.1-5 IsSylowTowerGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSylowTowerGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>This property takes the value <code class="keyw">true</code> if <span class="SimpleMath">\(G\)</span> has a Sylow tower of supersoluble type, and <code class="keyw">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSylowTowerGroup(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SmallGroup(75,1);</span>
+&lt;pc group of size 75 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSylowTowerGroup(g);</span>
+true
+</pre></div>
+
+<p><a id="X81FCDD7C7A5D1658" name="X81FCDD7C7A5D1658"></a></p>
+
+<h5>7.1-6 Permutizer</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Permutizer</code>( <var class="Arg">G</var>, <var class="Arg">U</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Permutiser</code>( <var class="Arg">G</var>, <var class="Arg">U</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The permutiser of a subgroup <var class="Arg">U</var> of a group <var class="Arg">G</var> is the subgroup generated by all cyclic subgroups of <var class="Arg">G</var> which permute with <var class="Arg">U</var>. If <var class="Arg">U</var> is permutable in <var class="Arg">G</var> (in particular, if <var class="Arg">U</var> is normal in <var class="Arg">G</var>), then its permutizer coincides with <var class="Arg">G</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=SymmetricGroup(4);</span>
+Sym( [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Permutizer(g,Subgroup(g,[(1,2,3)]));</span>
+Group([ (1,2,3), (2,3) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(last);</span>
+6
+</pre></div>
+
+<p><a id="X7D47DF77826C1BE0" name="X7D47DF77826C1BE0"></a></p>
+
+<h5>7.1-7 AllGeneratorsCyclicPGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllGeneratorsCyclicPGroup</code>( <var class="Arg">g</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This auxiliary function returns the list of all generators of the cyclic <span class="SimpleMath">\(p\)</span>-group generated by the <span class="SimpleMath">\(p\)</span>-element <span class="SimpleMath">\(g\)</span>. Here <span class="SimpleMath">\(p\)</span> is a prime number. Since this function is not intended to be used in interactive mode, no check is done that the argument is a <span class="SimpleMath">\(p\)</span>-element.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllGeneratorsCyclicPGroup((1,2,3,4,5,6,7,8,9),3);</span>
+[ (1,2,3,4,5,6,7,8,9), (1,3,5,7,9,2,4,6,8), (1,5,9,4,8,3,7,2,6),
+  (1,6,2,7,3,8,4,9,5), (1,8,6,4,2,9,7,5,3), (1,9,8,7,6,5,4,3,2) ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

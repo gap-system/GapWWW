@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (ANUPQ) - Chapter 7: Installing the ANUPQ Package</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7.html">[MathJax off]</a></p>
+<p><a id="X7FB487238298CF42" name="X7FB487238298CF42"></a></p>
+<div class="ChapSects"><a href="chap7_mj.html#X7FB487238298CF42">7 <span class="Heading">Installing the ANUPQ Package</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X854577C8800DC7C2">7.1 <span class="Heading">Testing your ANUPQ installation</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X82906B5184C61063">7.2 <span class="Heading">Running the pq program as a standalone</span></a>
+</span>
+</div>
+</div>
+
+<h3>7 <span class="Heading">Installing the ANUPQ Package</span></h3>
+
+<p>The ANU <code class="code">pq</code> program is written in C and the package can be installed under UNIX and in environments similar to UNIX. In particular it is known to work on Linux and Mac OS X, and also on Windows equipped with cygwin.</p>
+
+<p>The current version of the <strong class="pkg">ANUPQ</strong> package requires <strong class="pkg">GAP</strong> 4.8, and version 1.2 of the <strong class="pkg">AutPGrp</strong> package. However, we recommend using at least <strong class="pkg">GAP</strong> 4.6 and <strong class="pkg">AutPGrp</strong> 1.5.</p>
+
+<p>To install the <strong class="pkg">ANUPQ</strong> package, move the file <code class="code">anupq-<var class="Arg">XXX</var>.tar.gz</code> for some version number <var class="Arg">XXX</var> into the <code class="code">pkg</code> directory in which you plan to install <strong class="pkg">ANUPQ</strong>. Usually, this will be the directory <code class="code">pkg</code> in the hierarchy of your version of <strong class="pkg">GAP</strong>; it is however also possible to keep an additional <code class="code">pkg</code> directory in your private directories. The only essential difference with installing <strong class="pkg">ANUPQ</strong> in a <code class="code">pkg</code> directory different to the <strong class="pkg">GAP</strong> home directory is that one must start <strong class="pkg">GAP</strong> with the <code class="code">-l</code> switch (see Section <a href="../../../doc/ref/chap3_mj.html#X782751D5858A6EAF"><span class="RefLink">Reference: Command Line Options</span></a>), e.g. if your private <code class="code">pkg</code> directory is a subdirectory of <code class="code">mygap</code> in your home directory you might type:</p>
+
+
+<div class="example"><pre>
+gap -l ";myhomedir/mygap"
+</pre></div>
+
+<p>where <var class="Arg">myhomedir</var> is the path to your home directory, which may be replaced by a tilde. The empty path before the semicolon is filled in by the default path of the <strong class="pkg">GAP</strong> home directory.</p>
+
+<p>Then, in your chosen <code class="code">pkg</code> directory, unpack <code class="code">anupq-<var class="Arg">XXX</var>.tar.gz</code> by</p>
+
+
+<div class="example"><pre>
+tar xf anupq-&lt;XXX&gt;.tar.gz
+</pre></div>
+
+<p>Change to the newly created <code class="code">anupq</code> directory. Now you need to call <code class="code">configure</code>. If you installed <strong class="pkg">ANUPQ</strong> into the main <code class="code">pkg</code> directory, call</p>
+
+
+<div class="example"><pre>
+./configure
+</pre></div>
+
+<p>If you installed ANUPQ in another directory than the usual 'pkg' subdirectory, instead call</p>
+
+
+<div class="example"><pre>
+./configure --with-gaproot=&lt;path&gt;
+</pre></div>
+
+<p>where <var class="Arg">path</var> is the path to the <strong class="pkg">GAP</strong> home directory. (You can also call</p>
+
+
+<div class="example"><pre>
+./configure --help
+</pre></div>
+
+<p>for further options.)</p>
+
+<p>What this does is look for a file <code class="code">sysinfo.gap</code> in the root directory of <strong class="pkg">GAP</strong> in order to determine an architecture name for the subdirectory of <code class="code">bin</code> in which to put the compiled <code class="code">pq</code> binary. This only makes sense if <strong class="pkg">GAP</strong> was compiled for the same architecture that <code class="code">pq</code> will be. If you have a shared file system mounted across different architectures, then you should run <code class="code">configure</code> and <code class="code">make</code> for <strong class="pkg">ANUPQ</strong> for each architecture immediately after compiling <strong class="pkg">GAP</strong> on the same architecture.</p>
+
+<p>If you had to install the package in your own directory but wish to use the system <strong class="pkg">GAP</strong> then you will need to find out what <var class="Arg">path</var> is. To do this, start up <strong class="pkg">GAP</strong> and find out what <strong class="pkg">GAP</strong>'s root path is from finding the value of the variable <code class="code">GAPInfo.RootPaths</code>, e.g.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GAPInfo.RootPaths;</span>
+[ "/usr/local/lib/gap4r4/" ]
+</pre></div>
+
+<p>would tell you to use <code class="code">/usr/local/lib/gap4r4</code> for <var class="Arg">path</var>.</p>
+
+<p>The <code class="code">configure</code> command will fetch the architecture type for which <strong class="pkg">GAP</strong> has been compiled last and create a <code class="code">Makefile</code>. You can now simply call</p>
+
+
+<div class="example"><pre>
+make
+</pre></div>
+
+<p>to compile the binary and to install it in the appropriate place.</p>
+
+<p>The path of <strong class="pkg">GAP</strong> (see <em>Note</em> below) used by the <code class="code">pq</code> binary (the value <code class="code">GAP</code> is set to in the <code class="code">make</code> command) may be over-ridden by setting the environment variable <code class="code">ANUPQ_GAP_EXEC</code>. These values are only of interest when the <code class="code">pq</code> program is run as a standalone; however, the <code class="code">testPq</code> script assumes you have set one of these correctly (see Section <a href="chap7_mj.html#X854577C8800DC7C2"><span class="RefLink"><span class="Heading">Testing your ANUPQ installation</span></span></a>). When the <code class="code">pq</code> program is started from <strong class="pkg">GAP</strong> communication occurs via an iostream, so that the <code class="code">pq</code> binary does not actually need to know a valid path for <strong class="pkg">GAP</strong> is this case.</p>
+
+<p><em>Note.</em> By "path of <strong class="pkg">GAP</strong>" we mean the path of the command used to invoke <strong class="pkg">GAP</strong> (which should be a script, e.g. the <code class="code">gap.sh</code> script generated in the <code class="code">bin</code> directory for the version of <strong class="pkg">GAP</strong> when <strong class="pkg">GAP</strong> was compiled). The usual strategy is to copy the <code class="code">gap.sh</code> script to a standard location, e.g. <code class="code">/usr/local/bin/gap</code>. It is a mistake to copy the <strong class="pkg">GAP</strong> executable <code class="code">gap</code> (in a directory with name of form <code class="code">bin/<var class="Arg">compile-platform</var></code>) to the standard location, since direct invocation of the executable results in <strong class="pkg">GAP</strong> starting without being able to find its own library (a fatal error).</p>
+
+<p><a id="X854577C8800DC7C2" name="X854577C8800DC7C2"></a></p>
+
+<h4>7.1 <span class="Heading">Testing your ANUPQ installation</span></h4>
+
+<p>Now it is time to test the installation. After doing <code class="code">configure</code> and <code class="code">make</code> you will have a <code class="code">testPq</code> script. The script assumes that, if the environment variable <code class="code">ANUPQ_GAP_EXEC</code> is set, it is a correct path for <strong class="pkg">GAP</strong>, or otherwise that the <code class="code">make</code> call that compiled the <code class="code">pq</code> program set <code class="code">GAP</code> to a correct path for <strong class="pkg">GAP</strong> (see Section <a href="chap7_mj.html#X82906B5184C61063"><span class="RefLink"><span class="Heading">Running the pq program as a standalone</span></span></a> for more details). To run the tests, just type:</p>
+
+
+<div class="example"><pre>
+./testPq
+</pre></div>
+
+<p>Some of the tests the script runs take a while. Please be patient. The script checks that you not only have a correct <strong class="pkg">GAP</strong> (at least version 4.4) installation that includes the <strong class="pkg">AutPGrp</strong> package, but that the <strong class="pkg">ANUPQ</strong> package and its <code class="code">pq</code> binary interact correctly. You should see something like the following output:</p>
+
+
+<div class="example"><pre>
+Made dir: /tmp/testPq
+Testing installation of ANUPQ Package (version 3.1)
+ 
+The first two tests check that the pq C program compiled ok.
+Testing the pq binary ... OK.
+Testing the pq binary's stack size ... OK.
+The pq C program compiled ok! We test it's the right one below.
+ 
+The next tests check that you have the right version of GAP
+for the ANUPQ package and that GAP is finding
+the right versions of the ANUPQ and AutPGrp packages.
+ 
+Checking GAP ...
+ pq binary made with GAP set to: /usr/local/bin/gap
+ Starting GAP to determine version and package availability ...
+  GAP version (4.6.5) ... OK.
+  GAP found ANUPQ package (version 3.1) ... good.
+  GAP found pq binary (version 1.9) ... good.
+  GAP found AutPGrp package (version 1.5) ... good.
+ GAP is OK.
+ 
+Checking the link between the pq binary and GAP ... OK.
+Testing the standard presentation part of the pq binary ... OK.
+Doing p-group generation (final GAP/ANUPQ) test ... OK.
+Tests complete.
+Removed dir: /tmp/testPq
+Enjoy using your functional ANUPQ package!
+</pre></div>
+
+<p><a id="X82906B5184C61063" name="X82906B5184C61063"></a></p>
+
+<h4>7.2 <span class="Heading">Running the pq program as a standalone</span></h4>
+
+<p>When the <code class="code">pq</code> program is run as a standalone it sometimes needs to call <strong class="pkg">GAP</strong> to compute stabilisers of subgroups; in doing so, it first checks the value of the environment variable <code class="code">ANUPQ_GAP_EXEC</code>, and uses that, if set, or otherwise the value of <code class="code">GAP</code> it was compiled with, as the path for <strong class="pkg">GAP</strong>. If you ran <code class="code">testPq</code> (see Section <a href="chap7_mj.html#X854577C8800DC7C2"><span class="RefLink"><span class="Heading">Testing your ANUPQ installation</span></span></a>) and you got both <strong class="pkg">GAP</strong> is <code class="code">OK</code> and the link between the <code class="code">pq</code> binary and <strong class="pkg">GAP</strong> is <code class="code">OK</code>, you should be fine. Otherwise heed the recommendations of the error messages you get and run the <code class="code">testPq</code> until all tests are passed.</p>
+
+<p>It is especially important that the <strong class="pkg">GAP</strong>, whose path you gave, should know where to find the <strong class="pkg">ANUPQ</strong> and <strong class="pkg">AutPGrp</strong> packages. To ensure this the path should be to a shell script that invokes <strong class="pkg">GAP</strong>. If you needed to install the needed packages in your own directory (because, say, you are not a system administrator) then you should create your own shell script that runs <strong class="pkg">GAP</strong> with a correct setting of the <code class="code">-l</code> option and set the path used by the <code class="code">pq</code> binary to the path of that script. To create the script that runs <strong class="pkg">GAP</strong> it is easiest to copy the system one and edit it, e.g. start by executing the following UNIX commands (skip the second step if you already have a <code class="code">bin</code> directory; <code class="code">you@unix&gt;</code> is your UNIX prompt):</p>
+
+
+<div class="example"><pre>
+you@unix&gt; cd
+you@unix&gt; mkdir bin
+you@unix&gt; cd bin
+you@unix&gt; which gap
+/usr/local/bin/gap
+you@unix&gt; cp /usr/local/bin/gap mygap
+you@unix&gt; chmod +x mygap
+</pre></div>
+
+<p>At the second-last step use the path of <strong class="pkg">GAP</strong> returned by <code class="code">which gap</code>. Now hopefully you will have a copy of the script that runs the system <strong class="pkg">GAP</strong> in <code class="code">mygap</code>. Now use your favourite editor to edit the <code class="code">-l</code> part of the last line of <code class="code">mygap</code> which should initially look something like:</p>
+
+
+<div class="example"><pre>
+exec $GAP_DIR/bin/$GAP_PRG -m $GAP_MEM -o 970m -l $GAP_DIR $*
+</pre></div>
+
+<p>so that it becomes (the tilde is a UNIX abbreviation for your home directory):</p>
+
+
+<div class="example"><pre>
+exec $GAP_DIR/bin/$GAP_PRG -m $GAP_MEM -o 970m -l "$GAP_DIR;~/gapstuff" $*
+</pre></div>
+
+<p>assuming that your personal <strong class="pkg">GAP</strong> <code class="code">pkg</code> directory is a subdirectory of <code class="code">gapstuff</code> in your home directory. Finally, to let the <code class="code">pq</code> program know where <strong class="pkg">GAP</strong> is and also know where your <code class="code">pkg</code> directory is that contains <strong class="pkg">ANUPQ</strong>, set the environment variable <code class="code">ANUPQ_GAP_EXEC</code> to the complete (i.e. absolute) path of your <code class="code">mygap</code> script (do not use the tilde abbreviation).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

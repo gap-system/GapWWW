@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (LieAlgDB) - Chapter 2: The families of Lie algebras included in the database</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X7DD822827FAF0B46" name="X7DD822827FAF0B46"></a></p>
+<div class="ChapSects"><a href="chap2.html#X7DD822827FAF0B46">2 <span class="Heading">The families of Lie algebras included in the database</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X79B7688E808E0460">2.1 <span class="Heading">Non-solvable Lie algebras</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8527F9157C850557">2.1-1 NonSolvableLieAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X82F0F10285A94949">2.1-2 <span class="Heading">Dimension 1 and 2</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X78C35F937D99AB14">2.1-3 <span class="Heading">Dimension 3</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X812516C97F0A1A4C">2.1-4 <span class="Heading">Dimension 4</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X865565C08312F7B0">2.1-5 <span class="Heading">Dimension 5</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7FC5F0DB7A8CD1D0">2.1-6 <span class="Heading">Dimension 6</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85CFDCF687153158">2.1-7 AllNonSolvableLieAlgebras</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B54426D7B43CEF8">2.1-8 AllSimpleLieAlgebras</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X8697F2028731A29F">2.2 <span class="Heading">Solvable and nilpotent Lie algebras</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81FDF3D17E495C6A">2.2-1 SolvableLieAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7DA312A97A6242B4">2.2-2 NilpotentLieAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8217183E7C19FA16">2.2-3 AllSolvableLieAlgebras</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X86629DF87C2AEB4E">2.2-4 AllNilpotentLieAlgebras</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8770350D84304182">2.2-5 NrNilpotentLieAlgebras</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8068FF417F93FCD2">2.2-6 LieAlgebraIdentification</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">The families of Lie algebras included in the database</span></h3>
+
+<p>Here we describe the functions that access the classifications of Lie algebras that are stored in the package. A function below either returns a single Lie algebra, depending on a list of parameters, or a collection. It is important to note that two calls of the function <var class="Arg">NonSolvableLieAlgebra</var>, <var class="Arg">SolvableLieAlgebra</var>, or <var class="Arg">NilpotentLieAlgebra</var> may return isomorphic Lie algebras even if the parameters are different (see the description of the parameter list for each of the functions). If, however, the output of a function is a collection, then the members of this collection are pairwise non-isomorphic.</p>
+
+<p>The Lie algebras in the database are stored in the form of structure constant tables. Usually the size of a family of Lie algebras in the database is small enough so that the entries of the structure constant tables can be stored without any compression. However the number of nilpotent Lie algebras with dimension at least 7 is very large, and so the structure constant tables are compressed as follows. If <span class="Math">L</span> is such a Lie algebra, then we fix a basis <span class="Math">B=\{b_1,\ldots,b_n\}</span> and consider the coefficients of the products <span class="Math">[b_i,b_j]</span> where <span class="Math">j&gt;i</span>. We concatenate these coefficient sequences and consider the long sequence so obtained as a number written in base <span class="Math">p</span>. Then we convert this number to base 62 and write it down using the digits <span class="Math">0,\ldots,9,a\ldots,z,A\ldots,Z</span>. Then this string is stored in the files <var class="Arg">gap/nilpotent/nilpotent_data*.gi</var>. See the function <var class="Arg">ReadStringToNilpotentLieAlgebra</var> in the file <var class="Arg">gap/nilpotent/nilpotent.gi</var> for the precise details.</p>
+
+<p><a id="X79B7688E808E0460" name="X79B7688E808E0460"></a></p>
+
+<h4>2.1 <span class="Heading">Non-solvable Lie algebras</span></h4>
+
+<p>The package contains the list of non-solvable Lie algebras over finite fields up to dimension 6. The classification follows the one in <a href="chapBib.html#biBStrade">[Str]</a>.</p>
+
+<p><a id="X8527F9157C850557" name="X8527F9157C850557"></a></p>
+
+<h5>2.1-1 NonSolvableLieAlgebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NonSolvableLieAlgebra</code>( <var class="Arg">F</var>, <var class="Arg">pars</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p><var class="Arg">F</var> is an arbitrary finite field, <var class="Arg">pars</var> is a list of parameters with length between 1 and 4. The output is a non-solvable Lie algebra corresponding to the parameters, which is displayed as a string that describes the algebra following <a href="chapBib.html#biBStrade">[Str]</a>. The first entry of <var class="Arg">pars</var> is the dimension of the algebra, and the possible additional entries of <var class="Arg">pars</var> describe the algebra if there are more algebras with dimension <var class="Arg">pars[1]</var>.</p>
+
+<p>The possible values of <var class="Arg">pars</var> are as follows.</p>
+
+<p><a id="X82F0F10285A94949" name="X82F0F10285A94949"></a></p>
+
+<h5>2.1-2 <span class="Heading">Dimension 1 and 2</span></h5>
+
+<p>There are no non-solvable Lie algebras with dimension less than 3, and so if <var class="Arg">pars[1]</var> is less than 3 then <var class="Arg">NonSolvableLieAlgebra</var> returns an error message.</p>
+
+<p><a id="X78C35F937D99AB14" name="X78C35F937D99AB14"></a></p>
+
+<h5>2.1-3 <span class="Heading">Dimension 3</span></h5>
+
+<p>There is just one non-solvable Lie algebra over an arbitrary finite field <var class="Arg">F</var> (see Section <a href="chap3.html#X78C35F937D99AB14"><span class="RefLink">3.2</span></a>) which is returned by <var class="Arg">NonSolvableLieAlgebra( F, [3] )</var>.</p>
+
+<p><a id="X812516C97F0A1A4C" name="X812516C97F0A1A4C"></a></p>
+
+<h5>2.1-4 <span class="Heading">Dimension 4</span></h5>
+
+<p>If <var class="Arg">F</var> has odd characteristic then there is a unique non-solvable Lie algebra with dimension 4 over <var class="Arg">F</var> and this algebra is returned by <var class="Arg">NonSolvableLieAlgebra( F, [4] )</var>. If <var class="Arg">F</var> has characteristic 2, then there are two distinct Lie algebras and they are returned by <var class="Arg">NonSolvableLieAlgebra( F, [4,i] )</var> for <var class="Arg">i=1, 2</var>. See Section <a href="chap3.html#X812516C97F0A1A4C"><span class="RefLink">3.3</span></a> for a description of the algebras.</p>
+
+<p><a id="X865565C08312F7B0" name="X865565C08312F7B0"></a></p>
+
+<h5>2.1-5 <span class="Heading">Dimension 5</span></h5>
+
+<p>If <var class="Arg">F</var> has characteristic 2 then there are 5 isomorphism classes of non-solvable Lie algebras over <var class="Arg">F</var> and they are described in Section <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.4-1</span></a>. The possible values of <var class="Arg">pars</var> are as follows.</p>
+
+
+<ul>
+<li><p><var class="Arg">[5,1]</var>: the Lie algebra in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.4-1</span></a>(1).</p>
+
+</li>
+<li><p><var class="Arg">[5,2,i]</var>: <var class="Arg">i=0, 1</var>; the Lie algebras in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.4-1</span></a>(2).</p>
+
+</li>
+<li><p><var class="Arg">[5,3,i]</var>: <var class="Arg">i=0, 1</var>; the Lie algebras in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.4-1</span></a>(3).</p>
+
+</li>
+</ul>
+<p>If the characteristic of <var class="Arg">F</var> is odd, then the list of Lie algebras is as follows (see Section <a href="chap3.html#X80DAF658844AF393"><span class="RefLink">3.4-2</span></a>).</p>
+
+
+<ul>
+<li><p><var class="Arg">[5,1,i]</var>: <var class="Arg">i=1, 0</var>; the Lie algebras that occur in <a href="chap3.html#X80DAF658844AF393"><span class="RefLink">3.4-2</span></a>(1).</p>
+
+</li>
+<li><p><var class="Arg">[5,2]</var>: the Lie algebra in <a href="chap3.html#X80DAF658844AF393"><span class="RefLink">3.4-2</span></a>(2).</p>
+
+</li>
+<li><p><var class="Arg">[5,3]</var>: this algebra only exists if the characteristic of <var class="Arg">F</var> is 3 or 5. In the former case the algebra is the one in <a href="chap3.html#X80DAF658844AF393"><span class="RefLink">3.4-2</span></a>(3), while in the latter it is in <a href="chap3.html#X80DAF658844AF393"><span class="RefLink">3.4-2</span></a>(4).</p>
+
+</li>
+</ul>
+<p><a id="X7FC5F0DB7A8CD1D0" name="X7FC5F0DB7A8CD1D0"></a></p>
+
+<h5>2.1-6 <span class="Heading">Dimension 6</span></h5>
+
+<p>The 6-dimensional non-solvable Lie algebras are described in Section <a href="chap3.html#X7FC5F0DB7A8CD1D0"><span class="RefLink">3.5</span></a>. If <var class="Arg">F</var> has characteristic 2, then the possible values of <var class="Arg">pars</var> is as follows.</p>
+
+
+<ul>
+<li><p><var class="Arg">[6,1]</var>: the Lie algebra in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.5-1</span></a>(1).</p>
+
+</li>
+<li><p><var class="Arg">[6,2]</var>: the Lie algebra in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.5-1</span></a>(2).</p>
+
+</li>
+<li><p><var class="Arg">[6,3,i]</var>: <var class="Arg">i=0, 1</var>; the two Lie algebras <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.5-1</span></a>(3).</p>
+
+</li>
+<li><p><var class="Arg">[6,4,x]</var>: <var class="Arg">x=0, 1, 2, 3</var> or <var class="Arg">x</var> is a field element. In this case <var class="Arg">AllNonSolvableLieAlgebras</var> returns one of the Lie algebras in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.5-1</span></a>(4). If <var class="Arg">x=0, 1, 2, 3</var> then the Lie algebra corresponding to the <var class="Arg">(x+1)</var>-th matrix of <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.5-1</span></a>(4) is returned. If <var class="Arg">x</var> is a field element, then a Lie algebra is returned which corresponds to the 5th matrix in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.5-1</span></a>(4).</p>
+
+</li>
+<li><p><var class="Arg">[6,5]</var>: the Lie algebra in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.5-1</span></a>(5).</p>
+
+</li>
+<li><p><var class="Arg">[6,6,1], [6,6,2], [6,6,3,x], [6,6,4,x]</var>: <var class="Arg">x</var> is a field element; the Lie algebras in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.5-1</span></a>(6). The third and fourth entries of <var class="Arg">pars</var> determine the isomorphism type of the radical as a solvable Lie algebra. More precisely, if the third argument <var class="Arg">pars[3]</var> is 1 or 2 then the radical is isomorphic to <var class="Arg">SolvableLieAlgebra( F,[3,pars[3]] )</var>. If the third argument <var class="Arg">pars[3]</var> is 3 or 4 then the radical is isomorphic to <var class="Arg">SolvableLieAlgebra( F,[3,pars[3],pars[4]] )</var>; see <code class="func">SolvableLieAlgebra</code> (<a href="chap2.html#X81FDF3D17E495C6A"><span class="RefLink">2.2-1</span></a>).</p>
+
+</li>
+<li><p><var class="Arg">[6,7]</var>: the Lie algebra in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.5-1</span></a>(7).</p>
+
+</li>
+<li><p><var class="Arg">[6,8]</var>: the Lie algebra in <a href="chap3.html#X783B7FC180919CBC"><span class="RefLink">3.5-1</span></a>(8).</p>
+
+</li>
+</ul>
+<p>If the characteristic of <var class="Arg">F</var> is odd, then the possible values of <var class="Arg">pars</var> are the following (see Sections <a href="chap3.html#X7CC42FD178D384FD"><span class="RefLink">3.5-2</span></a>, <a href="chap3.html#X7F4B0CC87A7715A5"><span class="RefLink">3.5-3</span></a>, and <a href="chap3.html#X81DD369B7F4E033B"><span class="RefLink">3.5-4</span></a>).</p>
+
+
+<ul>
+<li><p><var class="Arg">[6,1]</var>: the Lie algebra in <a href="chap3.html#X7CC42FD178D384FD"><span class="RefLink">3.5-2</span></a>(1).</p>
+
+</li>
+<li><p><var class="Arg">[6,2]</var>: the Lie algebra in <a href="chap3.html#X7CC42FD178D384FD"><span class="RefLink">3.5-2</span></a>(2).</p>
+
+</li>
+<li><p><var class="Arg">[6,3,1], [6,3,2], [6,3,3,x], [6,3,4,x]</var>: <var class="Arg">x</var> is a field element; the Lie algebras in <a href="chap3.html#X7CC42FD178D384FD"><span class="RefLink">3.5-2</span></a>(3). The third and fourth entries of <var class="Arg">pars</var> determine the isomorphism type of the radical as a solvable Lie algebra. More precisely, if the third argument <var class="Arg">pars[3]</var> is 1 or 2 then the radical is isomorphic to <var class="Arg">SolvableLieAlgebra( F,[3,pars[3]] )</var>. If the third argument <var class="Arg">pars[3]</var> is 3 or 4 then the radical is isomorphic to <var class="Arg">SolvableLieAlgebra( F,[3,pars[3],pars[4]] )</var>; see <code class="func">SolvableLieAlgebra</code> (<a href="chap2.html#X81FDF3D17E495C6A"><span class="RefLink">2.2-1</span></a>).</p>
+
+</li>
+<li><p><var class="Arg">[6,4]</var>: the Lie algebra in <a href="chap3.html#X7CC42FD178D384FD"><span class="RefLink">3.5-2</span></a>(4).</p>
+
+</li>
+<li><p><var class="Arg">[6,5]</var>: the Lie algebra in <a href="chap3.html#X7CC42FD178D384FD"><span class="RefLink">3.5-2</span></a>(5).</p>
+
+</li>
+<li><p><var class="Arg">[6,6]</var>: the Lie algebra in <a href="chap3.html#X7CC42FD178D384FD"><span class="RefLink">3.5-2</span></a>(6).</p>
+
+</li>
+<li><p><var class="Arg">[6,7]</var>: the Lie algebra in <a href="chap3.html#X7CC42FD178D384FD"><span class="RefLink">3.5-2</span></a>(7).</p>
+
+</li>
+</ul>
+<p>If the characteristic is 3 or 5 then there are additional families. In characteristic 3, these families are as follows.</p>
+
+
+<ul>
+<li><p><var class="Arg">[6,8,x]</var>: <var class="Arg">x</var> is a field element; returns one of the Lie algebras in <a href="chap3.html#X7F4B0CC87A7715A5"><span class="RefLink">3.5-3</span></a>(1).</p>
+
+</li>
+<li><p><var class="Arg">[6,9]</var>: the Lie algebra in <a href="chap3.html#X7F4B0CC87A7715A5"><span class="RefLink">3.5-3</span></a>(2).</p>
+
+</li>
+<li><p><var class="Arg">[6,10]</var>: the Lie algebra in <a href="chap3.html#X7F4B0CC87A7715A5"><span class="RefLink">3.5-3</span></a>(3).</p>
+
+</li>
+<li><p><var class="Arg">[6,11,i]</var>: <var class="Arg">i=0, 1</var>; one of the two Lie algebras in <a href="chap3.html#X7F4B0CC87A7715A5"><span class="RefLink">3.5-3</span></a>(4).</p>
+
+</li>
+<li><p><var class="Arg">[6,12]</var>: the first Lie algebra in <a href="chap3.html#X7F4B0CC87A7715A5"><span class="RefLink">3.5-3</span></a>(5).</p>
+
+</li>
+<li><p><var class="Arg">[6,13]</var>: the second Lie algebra <a href="chap3.html#X7F4B0CC87A7715A5"><span class="RefLink">3.5-3</span></a>(5).</p>
+
+</li>
+</ul>
+<p>If the characteristic is 5, then the additional Lie algebras are the following.</p>
+
+
+<ul>
+<li><p><var class="Arg">[6,8]</var>: the Lie algebra in <a href="chap3.html#X81DD369B7F4E033B"><span class="RefLink">3.5-4</span></a>(1).</p>
+
+</li>
+<li><p><var class="Arg">[6,9]</var>: the Lie algebra in <a href="chap3.html#X81DD369B7F4E033B"><span class="RefLink">3.5-4</span></a>(2).</p>
+
+</li>
+</ul>
+<p><a id="X85CFDCF687153158" name="X85CFDCF687153158"></a></p>
+
+<h5>2.1-7 AllNonSolvableLieAlgebras</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllNonSolvableLieAlgebras</code>( <var class="Arg">F</var>, <var class="Arg">dim</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">F</var> is an arbitrary finite field, and <var class="Arg">dim</var> is at most 6. A collection is returned whose members form a complete and irredundant list of representatives of the isomorphism types of the non-solvable Lie algebras over <var class="Arg">F</var> with dimension <var class="Arg">dim</var>. In order to obtain the algebras contained in the collection, one can use the functions <var class="Arg">AsList</var>, <var class="Arg">Enumerator</var>, <var class="Arg">Iterator</var>, as illustrated by the following example.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := AllNonSolvableLieAlgebras( GF(4), 4 );</span>
+&lt;Collection of nonsolvable Lie algebras with dimension 4 over GF(2^2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"> e := Enumerator( L );</span>
+&lt;enumerator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for i in e do Print( Dimension( LieSolvableRadical( i )), "\n" ); od;</span>
+0
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsList( L );</span>
+[ W(1;2), W(1;2)^{(1)}+GF(4) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension( LieCenter( last[2] ));</span>
+1
+</pre></div>
+
+<p>As the output of <var class="Arg">AllNonSolvableLieAlgebras</var> is a collection, the user can efficiently access the classification of <span class="Math">d</span>-dimensional non-solvable Lie algebras over a given field, even if the classification contains a large number of algebras. For instance, there are 95367431640638 non-solvable Lie algebras over <span class="Math">GF(5^{20})</span>. Clearly one cannot expect to be able to handle a list containing all these algebras; it is, however, possible to work with the collection of these Lie algebras, as follows.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := AllNonSolvableLieAlgebras( GF(5^20), 6 );</span>
+&lt;Collection of nonsolvable Lie algebras with dimension 6 over GF(5^20)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := Enumerator( L );</span>
+&lt;enumerator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( last );</span>
+95367431640638
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension( LieDerivedSubalgebra( e[462468528345] ));</span>
+5
+</pre></div>
+
+<p>We note that we could not enumerate the non-solvable Lie algebras of dimension 6 over finite fields of characteristic 3, and so the function <var class="Arg">Enumerator</var> cannot be used in that context. You can, however, use the functions <var class="Arg">Iterator</var> and <var class="Arg">AsList</var> as follows.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := AllNonSolvableLieAlgebras( GF(3), 6 );</span>
+&lt;Collection of nonsolvable Lie algebras with dimension 6 over GF(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"> e := Iterator( L );</span>
+&lt;iterator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dims := [];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for i in e do Add( dims, Dimension( LieSolvableRadical( i ))); od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dims;</span>
+[ 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsList( L );</span>
+[ sl(2,3)+sl(2,3), sl(2,GF(9)), sl(2,3)+solv([ 1 ]), sl(2,3)+solv([ 2 ]), 
+  sl(2,3)+solv([ 3, 0*Z(3) ]), sl(2,3)+solv([ 3, Z(3)^0 ]), 
+  sl(2,3)+solv([ 3, Z(3) ]), sl(2,3)+solv([ 4, 0*Z(3) ]), 
+  sl(2,3)+solv([ 4, Z(3) ]), sl(2,3)+solv([ 4, Z(3)^0 ]), sl(2,3):(V(1)+V(0)),
+  sl(2,3):V(2), sl(2,3):H, sl(2,3):&lt;x,y,z|[x,y]=y,[x,z]=z&gt;, 
+  sl(2,3):V(2,0*Z(3)), sl(2,3):V(2,Z(3)), W(1;1):O(1;1), W(1;1):O(1;1)*, 
+  sl(2,3).H(0), sl(2,3).H(1), sl(2,3).(GF(3)+GF(3)+GF(3))(1), 
+  sl(2,3).(GF(3)+GF(3)+GF(3))(2) ]
+</pre></div>
+
+<p><a id="X7B54426D7B43CEF8" name="X7B54426D7B43CEF8"></a></p>
+
+<h5>2.1-8 AllSimpleLieAlgebras</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllSimpleLieAlgebras</code>( <var class="Arg">F</var>, <var class="Arg">dim</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">F</var> is a finite field, and <var class="Arg">dim</var> is either an integer not greater than 6, or, if <var class="Arg">F=GF(2)</var>, then <var class="Arg">dim</var> is not greater than 9. The output is a list of simple Lie algebras over <var class="Arg">F</var> of dimension <var class="Arg">dim</var>. If <var class="Arg">dim</var> is at most 6, then the classification by Strade <a href="chapBib.html#biBStrade">[Str]</a> is used. If <var class="Arg">F=GF(2)</var> and <var class="Arg">dim</var> is between 7 and 9, then the Lie algebras in <a href="chapBib.html#biBVL">[VL06]</a> are returned (see Section <a href="chap3.html#X8411625F7E7DA71D"><span class="RefLink">3.6</span></a>). The algebras in the list are pairwise non-isomorphic. Note that the output of this function is a list and not a collection, and the package does not contain a function called <var class="Arg">SimpleLieAlgebra</var>.</p>
+
+<p><a id="X8697F2028731A29F" name="X8697F2028731A29F"></a></p>
+
+<h4>2.2 <span class="Heading">Solvable and nilpotent Lie algebras</span></h4>
+
+<p>The package contains the classification of solvable Lie algebras of dimensions 2, 3 and 4 (taken from <a href="chapBib.html#biBwdg05">[dG05]</a>), and the classification of nilpotent Lie algebras of dimensions 5 and 6 (from <a href="chapBib.html#biBcdgs10">[CdGS11]</a>). The classifications are complemented by a function for identifying a given Lie algebra as a member of the list. This function also returns an explicit isomorphism. In Section <a href="chap3.html#X79FBD14A7959B5D2"><span class="RefLink">3.7</span></a> the list is given of the multiplication tables of the solvable and nilpotent Lie algebras, corresponding to the functions in this section.</p>
+
+<p><a id="X81FDF3D17E495C6A" name="X81FDF3D17E495C6A"></a></p>
+
+<h5>2.2-1 SolvableLieAlgebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SolvableLieAlgebra</code>( <var class="Arg">F</var>, <var class="Arg">pars</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">F</var> is an arbitrary field, <var class="Arg">pars</var> is a list of parameters with length between <code class="keyw">2</code> and <code class="keyw">4</code>. The first entry of <var class="Arg">pars</var> is the dimension of the algebra, which has to be 2, 3, or 4. If the dimension is 3, or 4, then the second entry of <var class="Arg">pars</var> is the number of the Lie algebra with which it appears in the list of <a href="chapBib.html#biBwdg05">[dG05]</a>. If the dimension is 2, then there are only two (isomorphism classes of) solvable Lie algebras. In this case, if the second entry is 1, then the abelian Lie algebra is returned, if it is 2, then the unique non-abelian solvable Lie algebra of dimension 2 is returned. A Lie algebra in the list of <a href="chapBib.html#biBwdg05">[dG05]</a> can have one or two parameters. In that case the list <var class="Arg">pars</var> also has to contain the parameters.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SolvableLieAlgebra( Rationals, [4,6,1,2] );</span>
+&lt;Lie algebra of dimension 4 over Rationals&gt;
+</pre></div>
+
+<p><a id="X7DA312A97A6242B4" name="X7DA312A97A6242B4"></a></p>
+
+<h5>2.2-2 NilpotentLieAlgebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NilpotentLieAlgebra</code>( <var class="Arg">F</var>, <var class="Arg">pars</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">F</var> is an arbitrary field, <var class="Arg">pars</var> is a list of parameters with length between <code class="keyw">2</code> and <code class="keyw">3</code>. The first entry of <var class="Arg">pars</var> is the dimension of the algebra, which has to be 5 or 6. The second entry of <var class="Arg">pars</var> is the number of the Lie algebra with which it appears in the list of Section <a href="chap3.html#X79FBD14A7959B5D2"><span class="RefLink">3.7</span></a>. A Lie algebra in the list of Section <a href="chap3.html#X79FBD14A7959B5D2"><span class="RefLink">3.7</span></a> can have one parameter. In that case the list <var class="Arg">pars</var> also has to contain the parameter.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NilpotentLieAlgebra( GF(3^7), [ 6, 24, Z(3^7)^101 ] );</span>
+&lt;Lie algebra of dimension 6 over GF(3^7)&gt;
+</pre></div>
+
+<p><a id="X8217183E7C19FA16" name="X8217183E7C19FA16"></a></p>
+
+<h5>2.2-3 AllSolvableLieAlgebras</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllSolvableLieAlgebras</code>( <var class="Arg">F</var>, <var class="Arg">dim</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">F</var> is an arbitrary finite field, and <var class="Arg">dim</var> is at most 4. A collection of all solvable Lie algebras over <var class="Arg">F</var> of dimension <var class="Arg">dim</var> is returned. The output does not contain isomorphic Lie algebras. The order in which the Lie algebras appear in the list is always the same. It is possible to construct an enumerator from the output collection for all of the valid choices of the parameters. See <var class="Arg">AllNonSolvableLieAlgebra</var> for a more detailed description of usage.</p>
+
+<p><a id="X86629DF87C2AEB4E" name="X86629DF87C2AEB4E"></a></p>
+
+<h5>2.2-4 AllNilpotentLieAlgebras</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllNilpotentLieAlgebras</code>( <var class="Arg">F</var>, <var class="Arg">dim</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">F</var> is a finite field, and <var class="Arg">dim</var> not greater than 9. Further, if <var class="Arg">dim=9</var> or <var class="Arg">dim=8</var>, then <var class="Arg">F</var> must be <var class="Arg">GF(2)</var>; if <var class="Arg">dim=7</var> then <var class="Arg">F</var> must be one of <var class="Arg">GF(2)</var>, <var class="Arg">GF(3)</var>, <var class="Arg">GF(5)</var> and if <var class="Arg">dim≤6</var> then <var class="Arg">F</var> can be an arbitrary finite field. A collection of all nilpotent Lie algebras over <var class="Arg">F</var> of dimension <var class="Arg">dim</var> is returned. If <var class="Arg">dim</var> is not greater than 6 then the collection of nilpotent Lie algebras is determined by <a href="chapBib.html#biBcdgs10">[CdGS11]</a>, otherwise the classification can be found in <a href="chapBib.html#biBsch">[Sch05]</a>. The output does not contain isomorphic Lie algebras. The order in which the Lie algebras appear in the collection is always the same. It is possible to construct an enumerator from the output collection for all of the valid choices of the parameters. See <var class="Arg">AllNonSolvableLieAlgebra</var> for a more detailed description of usage.</p>
+
+<p><a id="X8770350D84304182" name="X8770350D84304182"></a></p>
+
+<h5>2.2-5 NrNilpotentLieAlgebras</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrNilpotentLieAlgebras</code>( <var class="Arg">F</var>, <var class="Arg">dim</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">F</var> is a finite field, and <var class="Arg">dim</var> is an integer. The restrictions for <var class="Arg">F</var> and <var class="Arg">dim</var> are the same as in the function <var class="Arg">AllNilpotentLieAlgebras</var>. The number of nilpotent Lie algebras over <var class="Arg">F</var> of dimension <var class="Arg">dim</var> is returned.</p>
+
+<p><a id="X8068FF417F93FCD2" name="X8068FF417F93FCD2"></a></p>
+
+<h5>2.2-6 LieAlgebraIdentification</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LieAlgebraIdentification</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a solvable Lie algebra of dimension 2,3, or 4, or it is a nilpotent Lie algebra of dimension 5 or 6. This function returns a record with three fields.</p>
+
+
+<ul>
+<li><p><var class="Arg">name</var> This is a string containing the name of the Lie algebra. It starts with a capital L if it is a solvable Lie algebra of dimension 2,3,4. It starts with a capital N if it is a nilpotent Lie algebra of dimension 5 or 6. A name like</p>
+
+
+<pre class="normal">
+"N6_24( GF(3^7), Z(3^7) )"
+</pre>
+
+<p>means that the input Lie algebra is isomorphic to the Lie algebra with number 24 in the list of 6-dimensional nilpotent Lie algebras. Furthermore the field is given and the value of the parameters (if there are any).</p>
+
+</li>
+<li><p><var class="Arg">parameters</var> This contains the parameters that appear in the name of the algebra.</p>
+
+</li>
+<li><p><var class="Arg">isomorphism</var> This is an isomorphism of the input Lie algebra to the Lie algebra from the classification with the given name.</p>
+
+</li>
+</ul>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SolvableLieAlgebra( Rationals, [4,14,3] );</span>
+&lt;Lie algebra of dimension 4 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"> LieAlgebraIdentification( L );</span>
+rec( isomorphism := CanonicalBasis( &lt;Lie algebra of dimension 
+    4 over Rationals&gt; ) -&gt; [ v.3, (-1)*v.2, v.1, (1/3)*v.4 ], 
+  name := "L4_14( Rationals, 1/3 )", parameters := [ 1/3 ] )
+</pre></div>
+
+<p>In the example we see that the program finds a different parameter, than the one with which the Lie algebra was constructed. The explanation is that some parametric classes of Lie algebras contain isomorphic Lie algebras, for different values of the parameters. In that case the identification function makes its own choice.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

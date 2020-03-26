@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (JupyterViz) - Chapter 2: Using the high-level API</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X83888F2D8472E029" name="X83888F2D8472E029"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X83888F2D8472E029">2 <span class="Heading">Using the high-level API</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X78078AC381F666C7">2.1 <span class="Heading">Charts and Plots</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7827F05D814CFB10">2.2 <span class="Heading">Options for charts and plots</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X815691877F8C800C">2.3 <span class="Heading">Graphs</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X8109348A84B8A4D4">2.4 <span class="Heading">Options for graphs</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">Using the high-level API</span></h3>
+
+<p><a id="X78078AC381F666C7" name="X78078AC381F666C7"></a></p>
+
+<h4>2.1 <span class="Heading">Charts and Plots</span></h4>
+
+<p>This section covers the <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>) function in the high-level API, which is used for showing charts and plots. If invoked in a Jupyter Notebook, it will show the resulting visualization in the appropriate output cell of the notebook. If invoked from the <strong class="pkg">GAP</strong> command line, it will use the system default web browser to show the resulting visualization, from which the user can save a permanent copy, print it, etc. This section covers that function through a series of examples, but you can see full details in the function reference in Chapter <a href="chap7_mj.html#X7ECCCA82839EA283"><span class="RefLink">7</span></a>.</p>
+
+<p>To plot a list of numbers as a single data series, just pass the list to <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>).</p>
+
+
+<div class="example"><pre>
+Plot( [ 6.2, 0.3, 9.1, 8.8 ] );
+</pre></div>
+
+<p><img width="500" src="plot-1.png"/></p>
+
+<p>Notice that the default <span class="SimpleMath">\(x\)</span> values for the data are the sequence <code class="code">[1..n]</code>, where <span class="SimpleMath">\(n\)</span> is the length of the data. You can specify the <span class="SimpleMath">\(x\)</span> values manually, like so:</p>
+
+
+<div class="example"><pre>
+Plot( [ 1 .. 4 ], [ 6.2, 0.3, 9.1, 8.8 ] );
+</pre></div>
+
+<p>This is useful if you have a scatter plot of data to make, or if your <span class="SimpleMath">\(x\)</span> values are not numbers at all.</p>
+
+
+<div class="example"><pre>
+Plot( [ "Mon", "Tue", "Wed", "Thu" ], [ 6.2, 0.3, 9.1, 8.8 ] );
+</pre></div>
+
+<p><img width="500" src="plot-2.png"/></p>
+
+<p>It is also permissible to send in a list of <span class="SimpleMath">\((x,y)\)</span> pairs rather than placing the <span class="SimpleMath">\(x\)</span>s and <span class="SimpleMath">\(y\)</span>s in separate lists. This would do the same as the previous:</p>
+
+
+<div class="example"><pre>
+Plot( [ [ "Mon", 6.2 ], [ "Tue", 0.3 ], [ "Wed", 9.1 ], [ "Thu", 8.8 ] ] );
+</pre></div>
+
+<p>You can also pass a single-variable numeric function to have it plotted.</p>
+
+
+<div class="example"><pre>
+Plot( x -&gt; x^0.5 );
+</pre></div>
+
+<p><img width="500" src="plot-3.png"/></p>
+
+<p>It assumes a small domain of positive integers, which you can customize as follows. Note that the <span class="SimpleMath">\(x\)</span> values are passed just as before, but in place of the <span class="SimpleMath">\(y\)</span> values, we pass the function that computes them.</p>
+
+
+<div class="example"><pre>
+Plot( [1..50], NrSmallGroups );
+</pre></div>
+
+<p><img height="350" src="01plotfunction.png"/></p>
+
+<p>You can append a final parameter to the <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>) command, a record containing a set of options. Here is an example of using that options record to choose the visualization tool, title, and axis labels. Section <a href="chap2_mj.html#X7827F05D814CFB10"><span class="RefLink">2.2</span></a> covers options in detail; this is only a preview.</p>
+
+
+<div class="example"><pre>
+Plot( [1..50], n -&gt; Length( DivisorsInt( n ) ),
+      rec(
+          tool := "chartjs",
+          title := "Number of divisors of some small integers",
+          xaxis := "n",
+          yaxis := "number of divisors of n"
+      )
+);
+</pre></div>
+
+<p><img height="300" src="02plotoptions.png"/></p>
+
+<p>You can also put multiple data series (or functions) on the same plot. Let's pretend you wanted to compare the number of divisors of <span class="SimpleMath">\(n\)</span> with the number of groups of order <span class="SimpleMath">\(n\)</span> for the first 50 positive integers <span class="SimpleMath">\(n\)</span>.</p>
+
+<p>To do so, take each call you would make to <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>) to make the separate plots, and place those arguments in a list. Pass both lists to <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>) to combine the plots, as shown below. You can put the options record in either list. Options specified earlier take precedence if there's a conflict.</p>
+
+
+<div class="example"><pre>
+# We're combining Plot( [1..50], NrSmallGroups );
+# with Plot( [1..50], n -&gt; Length( DivisorsInt( n ) ) );
+# and adding some options:
+Plot(
+    [ [1..50], NrSmallGroups,
+      rec( title := "Comparison", tool := "anychart" ) ],
+    [ [1..50], n -&gt; Length( DivisorsInt( n ) ) ]
+);
+</pre></div>
+
+<p><img height="350" src="03dataseries.png"/></p>
+
+<p>The default plot type is "line", as you've been seeing in the preceding examples. You can also choose "bar", "column", "pie", and others. Let's use a pie chart to show the relative sizes of the conjugacy classes in a group.</p>
+
+
+<div class="example"><pre>
+G := Group( (1,2,3,4,5,6,7), (1,2) );;
+CCs := List( ConjugacyClasses( G ), Set );;
+Plot(
+    # x values are class labels; we'll use the first element in the class
+    List( CCs, C -&gt; PrintString( C[1] ) ),
+    # y values are class sizes; these determine the size of pie slices
+    List( CCs, Length ),
+    # ask for a pie chart with enough height that we can read the legend
+    rec( type := "pie", height := 500 )
+);
+</pre></div>
+
+<p><img height="350" src="04charttypes.png"/></p>
+
+<p><a id="X7827F05D814CFB10" name="X7827F05D814CFB10"></a></p>
+
+<h4>2.2 <span class="Heading">Options for charts and plots</span></h4>
+
+<p>The options record passed as the final parameter to <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>) (or as the final element in each list passed to <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>), if you are plotting multiple series on the same plot) can have the following entries.</p>
+
+
+<ul>
+<li><p><code class="code">tool</code> - the visualization tool to use to make the plot, as a string. The default is "plotly". The full list of tools is available in Section <a href="chap1_mj.html#X8376A2517DEBB867"><span class="RefLink">1.2</span></a>.</p>
+
+</li>
+<li><p><code class="code">type</code> - the type of chart, as a string, the default for which is "line". Which types are available depends on which tool you are using, though it is safe to assume that most common chart types (line, bar, pie) are supported by all tools. Section <a href="chap3_mj.html#X860FD2F97E9F936B"><span class="RefLink">3.4</span></a> contains links to the documentation for each tool, so that you might see its full list of capabilities.</p>
+
+</li>
+<li><p><code class="code">height</code> - the height in pixels of the visualization to produce. A sensible default is provided, which varies by tool.</p>
+
+</li>
+<li><p><code class="code">width</code> - the width in pixels of the visualization to produce. If omitted, the tool usually fills the width available. In a Jupyter Notebook output cell, this is the width of the cell. A visualization shown outside of a Jupyter notebook will take up the entire width of the web page in which it is displayed.</p>
+
+</li>
+<li><p><code class="code">title</code> - the title to place at the top of the chart, as a string. Can be omitted.</p>
+
+</li>
+<li><p><code class="code">xaxis</code> - the text to write below the <span class="SimpleMath">\(x\)</span> axis, as a string. Can be omitted.</p>
+
+</li>
+<li><p><code class="code">yaxis</code> - the text to write to the left of the <span class="SimpleMath">\(y\)</span> axis, as a string. Can be omitted.</p>
+
+</li>
+<li><p><code class="code">name</code> - this option should be specified in the options object for each separate data series, as opposed to just once for the entire plot. It assigns a string name to that data series, typically included in the chart's legend.</p>
+
+</li>
+</ul>
+<p><a id="X815691877F8C800C" name="X815691877F8C800C"></a></p>
+
+<h4>2.3 <span class="Heading">Graphs</span></h4>
+
+<p>This section covers the <code class="func">PlotGraph</code> (<a href="chap7_mj.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>) function in the high-level API, which is used for drawing graphs. If invoked in a Jupyter Notebook, it will show the resulting visualization in the appropriate output cell of the notebook. If invoked from the <strong class="pkg">GAP</strong> command line, it will use the system default web browser to show the resulting visualization. This section covers that function through a series of examples, but you can see full details in the function reference in Chapter <a href="chap7_mj.html#X7ECCCA82839EA283"><span class="RefLink">7</span></a>.</p>
+
+<p>You can make a graph by calling <code class="func">PlotGraph</code> (<a href="chap7_mj.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>) on a list of edges, each of which is a pair (a list of length two).</p>
+
+
+<div class="example"><pre>
+PlotGraph( [ [ "start", "option1" ], [ "start", "option2" ],
+             [ "option1", "end" ], [ "option2", "end" ] ] );
+</pre></div>
+
+<p><img height="180" src="graph-1.png"/></p>
+
+<p>Vertex names can be strings, as shown above, or any <strong class="pkg">GAP</strong> data; they will be converted to strings using <code class="code">PrintString</code>. As you can see, the set of vertices is assumed to be the set of things mentioned in the edges. But you can specify the vertex set separately.</p>
+
+<p>For example, if you wanted to graph the divisibility relation on a set of integers, some elements may not be included in any edge.</p>
+
+
+<div class="example"><pre>
+PlotGraph( [ 2 .. 10 ],
+           [ [ 2, 4 ], [ 2, 6 ], [ 2, 8 ], [ 2, 10 ],
+             [ 3, 6 ], [ 3, 9 ], [ 4, 8 ], [ 5, 10 ] ] );
+</pre></div>
+
+<p><img height="350" src="graph-2.png"/></p>
+
+<p>But for anything other than a small graph, specifying the vertex or edge set manually may be inconvenient. Thus if you have a vertex set, you can create the edge set by passing a binary relation as a <strong class="pkg">GAP</strong> function. Here is an example to create a subgroup lattice.</p>
+
+
+<div class="example"><pre>
+G := Group( (1,2,3), (1,2) );
+S := function ( H, G )
+    return IsSubgroup( G, H ) and H &lt;&gt; G;
+end;
+PlotGraph( AllSubgroups( G ), S );
+</pre></div>
+
+<p><img height="240" src="graph-3.png"/></p>
+
+<p>But all three of the graphs just shown would be better if they had directed edges. And we might want to organize them differently in the view, perhaps even with some colors, etc. To this end, you can pass an options parameter as the final parameter to <code class="func">PlotGraph</code> (<a href="chap7_mj.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>), just as you could for <code class="func">Plot</code> (<a href="chap7_mj.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>).</p>
+
+
+<div class="example"><pre>
+G := Group( (1,2,3), (1,2) );
+S := function ( H, G )
+    return IsSubgroup( G, H ) and H &lt;&gt; G;
+end;
+PlotGraph( AllSubgroups( G ), S,
+    rec( directed := true, layout := "grid", arrowscale := 3 ) );
+</pre></div>
+
+<p><img height="240" src="graph-4.png"/></p>
+
+<p>The next section covers all options in detail.</p>
+
+<p><a id="X8109348A84B8A4D4" name="X8109348A84B8A4D4"></a></p>
+
+<h4>2.4 <span class="Heading">Options for graphs</span></h4>
+
+<p>The options record passed as the final parameter to <code class="func">PlotGraph</code> (<a href="chap7_mj.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>) can have the following entries.</p>
+
+
+<ul>
+<li><p><code class="code">tool</code> - the visualization tool to use to make the plot, as a string. The default is "cytoscape". The full list of tools is available in Section <a href="chap1_mj.html#X8376A2517DEBB867"><span class="RefLink">1.2</span></a>.</p>
+
+</li>
+<li><p><code class="code">layout</code> - the name of the layout algorithm to use, as a string. Permitted values vary by tool. Currently cytoscape supports "preset" (meaning you must have specified the nodes' positions manually), "cose" (virtual-spring-based automatic layout), "random", "grid", "circle", "concentric" (multiple concentric circles), and "breadthfirst" (a hierarchy).</p>
+
+</li>
+<li><p><code class="code">vertexwidth</code> and <code class="code">vertexheight</code> - the dimensions of each vertex.</p>
+
+</li>
+<li><p><code class="code">vertexcolor</code> - the color of the vertices in the graph. This should be a string representing an HTML color, such as "#ccc" or "red".</p>
+
+</li>
+<li><p><code class="code">edgewidth</code> - the thickness of each edge.</p>
+
+</li>
+<li><p><code class="code">edgecolor</code> - the color of each edge and its corresponding arrow. This should be a string representing an HTML color, such as "#ccc" or "red".</p>
+
+</li>
+<li><p><code class="code">directed</code> - a boolean defaulting to false, whether to draw arrows to visually indicate that the graph is a directed graph</p>
+
+</li>
+<li><p><code class="code">arrowscale</code> - a multiplier to increase or decrease the size of arrows in a directed graph.</p>
+
+</li>
+<li><p><code class="code">height</code> - the height in pixels of the visualization to produce. A sensible default is provided, which varies by tool.</p>
+
+</li>
+<li><p><code class="code">width</code> - the width in pixels of the visualization to produce. If omitted, the tool usually fills the width available. In a Jupyter Notebook output cell, this is the width of the cell. A visualization shown outside of a Jupyter notebook will take up the entire width of the web page in which it is displayed.</p>
+
+</li>
+</ul>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

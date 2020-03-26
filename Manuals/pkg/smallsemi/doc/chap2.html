@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Smallsemi) - Chapter 2: The Data in the Library</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X7E933CC381DA3D7C" name="X7E933CC381DA3D7C"></a></p>
+<div class="ChapSects"><a href="chap2.html#X7E933CC381DA3D7C">2 <span class="Heading">The Data in the Library</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7A8F62A38080168D">2.1 <span class="Heading">Creation of the Semigroups</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X79038EE8873A1B4B">2.2 <span class="Heading">Storing the Semigroups</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">The Data in the Library</span></h3>
+
+<p>In this chapter we outline how the semigroups in the library were found, exactly what semigroups are available, how they are stored, and how further information regarding the properties of these semigroups is handled.</p>
+
+<p><a id="X7A8F62A38080168D" name="X7A8F62A38080168D"></a></p>
+
+<h4>2.1 <span class="Heading">Creation of the Semigroups</span></h4>
+
+<p>This section describes which semigroups are contained in the library and how they were determined.</p>
+
+<p>The purpose of the library is to provide one semigroup of every `structural type'. The semigroups are represented by their multiplication table. Usually, say, for groups, `stuctural type' means 'up to isomorphism' which corresponds to relabelling the elements. Roughly speaking, transposing the multiplicationable of a semigroup does not alter its important structure features either. More precisely, the usual description of the structure of a semigroup using Green's relations is invariant under these operations. So, we consider two semigroups to be of the same structure if they are isomorphic or anti-isomorphic. We will refer to semigroups that are isomorphic or anti-isomorphic as <em>equivalent</em>. The vast number of non-equivalent semigroups with small numbers of elements (see Table <a href="chap1.html#X7DFB63A97E67C0A1"><span class="RefLink">1.</span></a>) limits us to providing the semigroups with at most 8 elements.</p>
+
+<p>The problem of constructing semigroups up to isomorphism and anti-isomorphism has been considered by many authors. For very small orders, that is 1 to 5, all the semigroups up to isomorphism and anti-isomorphism were computed by hand <a href="chapBib.html#biBtamura1">[THA+55]</a> and <a href="chapBib.html#biBtamura2">[Tam54]</a>. The first instance of the use of computers to find all semigroups up to isomorphism and anti-isomorphism is described in Forsythe <a href="chapBib.html#biBFor55">[For55]</a>. Subsequently, the number of semigroups with 6 elements was found by Plemmons <a href="chapBib.html#biBPle67">[Ple67]</a>, with 7 elements by Jürgensen and Wick <a href="chapBib.html#biBJW77">[JW77]</a>, with 8 by Satoh, Yama and Tokizawa <a href="chapBib.html#biBSZT94">[SYT94]</a>, and with 9 by Distler, Kelsey, and Mitchell in 2008. Even if the authors could store their results they had no means to make them publically available. Plemmons, for example, explicitly states that he had all multiplication tables for semigroups of size 6 on magnetic tape. Jürgensen and Wick back in 1977 did not store the semigroups of size 7 because of their large number. The tables for semigroups with 8 elements use up several gigabytes of disk space (while the compressed library files in <strong class="pkg">Smallsemi</strong> need only 22 MB).</p>
+
+<p>Trying to recreate the results from the existing literature, it quickly becomes obvious that even some 15 years later, with considerably more computing power available, the task of obtaining all semigroups with 8 elements is still by no means trivial. Our technique was to find all associative multiplication tables up to isomorphism and anti-isomorphism using a combination of <strong class="pkg">GAP</strong> and the Contraint Satisfaction Problem (CSP) solver Minion <a href="chapBib.html#biBminion">[GJM06]</a>. More specific details on the search will be available in a later version of <strong class="pkg">Smallsemi</strong>.</p>
+
+<p><a id="X79038EE8873A1B4B" name="X79038EE8873A1B4B"></a></p>
+
+<h4>2.2 <span class="Heading">Storing the Semigroups</span></h4>
+
+<p>As discussed in the previous section, we store data relating to the multiplication table of one representative of every class of equivalent semigroups with 1 to 8 elements.</p>
+
+<p>The tables for semigroups with 2 to 7 elements are stored in the files <code class="file">data2.gl.gz</code> to <code class="file">data7.gl.gz</code> in the directory <code class="file">data/data2to7</code>.</p>
+
+<p>For semigroups of size 8 the data is contained in the directories <code class="file">data/data8-3nil</code> and <code class="file">data/data8</code>. The former contains the data relating to 3-nilpotent semigroups (see <code class="func">NilpotencyDegree</code> (<a href="chap4.html#X7D1C336E7B0A059C"><span class="RefLink">4.2-34</span></a>)) and the latter the data for all the remaining semigroups of size 8.</p>
+
+<p>The tables of non-3-nilpotent semigroups are partitioned into files <code class="file">8diag&lt;entries in the diagonal&gt;.gl.gz</code> with respect to their diagonals. For example, <code class="file">8diag12345678.gl.gz</code> contains tables for all the bands of order 8.</p>
+
+<p>Any 3-nilpotent semigroup has a unique minimal generating set containing those elements that do not appear in the table. We only require the subtable with entries corresponding to the product of two generators, as all other products are zero. Thus if <span class="SimpleMath">m</span> is the number of generators, we retain information regarding the entries of an <span class="SimpleMath">m × m</span> table. However, we do not store all the tables in this case. The <span class="SimpleMath">m × m</span> tables can be sorted into ranges and then the first table and the number of tables in the range are stored. For every diagonal there is a file <code class="file">diag&lt;entries in the diagonal&gt;.gl.gz</code> containing the first tables of each range and a separate file named <code class="file">diag&lt;entries in the diagonal&gt;pos.gl.gz</code> containing the lengths of these ranges.</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdleft">class</td>
+<td class="tdleft">file names</td>
+<td class="tdright">data size</td>
+<td class="tdright">- gzipped</td>
+<td class="tdright">compression factor</td>
+</tr>
+<tr>
+<td class="tdleft">sizes 2-7</td>
+<td class="tdleft"><code class="file">data&lt;size&gt;.gl</code></td>
+<td class="tdright">39 MB</td>
+<td class="tdright">680 KB</td>
+<td class="tdright">58</td>
+</tr>
+<tr>
+<td class="tdleft">size 8, not 3-nilpotent</td>
+<td class="tdleft"><code class="file">8diag&lt;diagonal&gt;.gl</code></td>
+<td class="tdright">613 MB</td>
+<td class="tdright">10 MB</td>
+<td class="tdright">61</td>
+</tr>
+<tr>
+<td class="tdleft">size 8, 3-nilpotent</td>
+<td class="tdleft"><code class="file">diag&lt;diagonal&gt;.gl</code></td>
+<td class="tdright">974 MB</td>
+<td class="tdright">11 MB</td>
+<td class="tdright">89</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>All together the <strong class="pkg">GAP</strong> library files take just under 22 MB of disk space after compression while allowing fast recovering of the data. The compression rates demonstrated in the table above were achieved using <code class="code">gzip</code> with the highest possible compression (-9 switch) as well as careful analysis and intensive testing of how best to structure the data in the files.</p>
+
+<p>The semigroups in the library satisfying certain standard properties have been identified and this information is stored in the files <code class="file">info1.g.gz</code> to <code class="file">info8.g.gz</code>. To find out what properties have been considered see <code class="func">PrecomputedSmallSemisInfo</code> (<a href="chap4.html#X79AFE7FC81C0DF37"><span class="RefLink">4.5-19</span></a>).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (JupyterViz) - Chapter 4: Using general tools (HTML, canvas, D3)</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X87D903D77FD35AED" name="X87D903D77FD35AED"></a></p>
+<div class="ChapSects"><a href="chap4.html#X87D903D77FD35AED">4 <span class="Heading">Using general tools (HTML, canvas, D3)</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X856317C47839F0C0">4.1 <span class="Heading">Why these tools are present</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7D65933280120650">4.2 <span class="Heading">Post-processing visualizations</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X85EA7D2579837F4D">4.3 <span class="Heading">Injecting JavaScript into general tools</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7836DDAA82B6A536">4.3-1 <span class="Heading">Example: Native HTML Canvas</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C06E0117C8EF31B">4.3-2 <span class="Heading">Example: Plain HTML</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7A2554B0847DD027">4.3-3 <span class="Heading">Example: D3</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Using general tools (HTML, canvas, D3)</span></h3>
+
+<p><a id="X856317C47839F0C0" name="X856317C47839F0C0"></a></p>
+
+<h4>4.1 <span class="Heading">Why these tools are present</span></h4>
+
+<p>These general tools can be used as building blocks to create other custom visualization tools. As a first example, the canvas tool installs an HTML canvas element and then lets you draw arbitrary shapes on it with JavaScript code. As a second example, some of the high-level tools this package imports were built on top of D3, a foundational visualization toolkit, which you can access directly.</p>
+
+<p>First, we cover an as-yet-unmentioned feature of <code class="func">CreateVisualization</code> (<a href="chap7.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) that lets us make use of such general tools.</p>
+
+<p><a id="X7D65933280120650" name="X7D65933280120650"></a></p>
+
+<h4>4.2 <span class="Heading">Post-processing visualizations</span></h4>
+
+<p>The <code class="func">CreateVisualization</code> (<a href="chap7.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) function takes an optional second parameter, a string of JavaScript code to be run once the visualization has been rendered. For example, if the visualization library you were using did not support adding borders around a visualization, but you wanted to add one, you could add it by writing one line of JavaScript code to run after the visualization was rendered.</p>
+
+
+<div class="example"><pre>
+CreateVisualization(
+    rec(
+        # put your data here, as in previous sections
+    ),
+    "visualization.style.border = '5px solid black'"
+)
+</pre></div>
+
+<p>This holds for any visualization tool, not just AnyChart. In the code given in the second parameter, two variables will be defined for your use: <code class="code">element</code> refers to the HTML element inside of which the visualization was built and <code class="code">visualization</code> refers to the HTML element of the visualization itself, as produced by the toolkit you chose. When used in a Jupyter Notebook, <code class="code">element</code> is the output cell itself.</p>
+
+<p>Now that we know that we can run arbitrary JavaScript code on a visualization once it's been produced, we can call <code class="func">CreateVisualization</code> (<a href="chap7.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>) to produce rather empty results, then fill them using our own JavaScript code. The next section explains how this could be done to create custom visualizations.</p>
+
+<p><a id="X85EA7D2579837F4D" name="X85EA7D2579837F4D"></a></p>
+
+<h4>4.3 <span class="Heading">Injecting JavaScript into general tools</span></h4>
+
+<p><a id="X7836DDAA82B6A536" name="X7836DDAA82B6A536"></a></p>
+
+<h5>4.3-1 <span class="Heading">Example: Native HTML Canvas</span></h5>
+
+<p>You can create a blank canvas, then use the existing JavaScript canvas API to draw on it. This example is trivial, but more complex examples are possible.</p>
+
+
+<div class="example"><pre>
+CreateVisualization(
+    rec( tool := "canvas", height := 300 ),
+    """
+    // visualization is the canvas element
+    var context = visualization.getContext( '2d' );
+    // draw an X
+    context.beginPath();
+    context.moveTo( 0, 0 );
+    context.lineTo( 100, 100 );
+    context.moveTo( 100, 0 );
+    context.lineTo( 0, 100 );
+    context.stroke();
+    """
+);
+</pre></div>
+
+<p><img width="200" src="canvas-example.png"/></p>
+
+<p><a id="X7C06E0117C8EF31B" name="X7C06E0117C8EF31B"></a></p>
+
+<h5>4.3-2 <span class="Heading">Example: Plain HTML</span></h5>
+
+<p>This is the degenerate example of a visualization. It does not create any visualization, but lets you specify arbitrary HTML content instead. It is provided here merely as a convenient way to insert HTML into the notebook.</p>
+
+
+<div class="example"><pre>
+CreateVisualiation(
+    rec(
+        tool := "html",
+        data := rec(
+            html := "&lt;i&gt;Any&lt;/i&gt; HTML can go here.  Tables, buttons, whatever."
+        )
+    ),
+    """
+    // Here you could install event handlers on tools created above.
+    // For example, if you had created a button with id="myButton":
+    var button = document.getElementById( "myButton" );
+    button.addEventListener( "click", function () {
+        alert( "My button was clicked." );
+    } );
+    """
+);
+</pre></div>
+
+<p>When writing such JavaScript code, note that the Jupyter Notebook has access to a useful function that this package has installed, <code class="code">runGAP</code>. Its signature is <code class="code">runGAP(stringToEvaluate,callback)</code> and the following code shows an example of how you could call it from JavaScript in the notebook.</p>
+
+
+<div class="example"><pre>
+runGAP( "2^100;", function ( result, error ) {
+    if ( result )
+        alert( "2^100 = " + result );
+    else
+        alert( "GAP gave this error: " + error );
+} );
+</pre></div>
+
+<p>This function is not available if running this package outside of a Jupyter Notebook.</p>
+
+<p><a id="X7A2554B0847DD027" name="X7A2554B0847DD027"></a></p>
+
+<h5>4.3-3 <span class="Heading">Example: D3</span></h5>
+
+<p>While D3 is one of the most famous and powerful JavaScript visualization libraries, it does not have a JSON interface. Consequently, we can interact with D3 only through the JavaScript code passed in the second parameter to <code class="func">CreateVisualization</code> (<a href="chap7.html#X7BFFD8B7808F5BDA"><span class="RefLink">7.2-5</span></a>). This makes it much less convenient, but we include it in this package for those who need it.</p>
+
+
+<div class="example"><pre>
+CreateVisualization(
+    rec( tool := "d3" ),
+    """
+    // arbitrary JavaScript code can go here to interact with D3, like so:
+    d3.select( visualization ).append( "circle" )
+        .attr( "r", 50 ).attr( "cx", 55 ).attr( "cy", 55 )
+        .style( "stroke", "red" ).style( "fill", "pink" );
+    """
+);
+</pre></div>
+
+<p><img width="200" src="d3-example.png"/></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

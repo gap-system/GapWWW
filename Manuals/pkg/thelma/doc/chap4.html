@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (thelma) - Chapter 4: Networks of Threshold Elements</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X7BA69E617DE465FE" name="X7BA69E617DE465FE"></a></p>
+<div class="ChapSects"><a href="chap4.html#X7BA69E617DE465FE">4 <span class="Heading">Networks of Threshold Elements</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X82EB5BE77F9F686A">4.1 <span class="Heading">Basic Operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X780C027786A8E34B">4.1-1 NeuralNetwork</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X79B24B8F79161064">4.1-2 IsNeuralNetwork</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C93C473784D1676">4.1-3 OutputOfNeuralNetwork</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7BA69E617DE465FE">4.2 <span class="Heading">Networks of Threshold Elements</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X786FB7237D875561">4.2-1 BooleanFunctionByNeuralNetwork</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C6E4221828E6609">4.2-2 BooleanFunctionByNeuralNetworkDASG</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Networks of Threshold Elements</span></h3>
+
+<p>Not all Boolean functions can be realized by a single threshold element. However, all of them can be realized by a multi-layered network of threshold elements, with a number of threshold elements on a first layer and conjunction or a disjunction on the second layer. In this chapter we will decribe some functions regarding such networks.</p>
+
+<p><a id="X82EB5BE77F9F686A" name="X82EB5BE77F9F686A"></a></p>
+
+<h4>4.1 <span class="Heading">Basic Operations</span></h4>
+
+<p>In this section we describe some operations, similar to the ones described in Section <a href="chap3.html#X82EB5BE77F9F686A"><span class="RefLink">3.1</span></a>.</p>
+
+<p><a id="X780C027786A8E34B" name="X780C027786A8E34B"></a></p>
+
+<h5>4.1-1 NeuralNetwork</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NeuralNetwork</code>( <var class="Arg">InnerLayer</var>, <var class="Arg">OuterLayer</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For the list of threshold elements <code class="code">InnerLayer</code> and the Boolean variable <code class="code">OuterLayer</code>, which can be either <code class="code">true</code> (for disjunction), <code class="code">false</code> (for conjunction), or <code class="code">fail</code> (if there is only one layer) the function <code class="code">NeuralNetwork</code> returns a neural network built from this inputs.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">te1:=ThresholdElement([1,1],1);</span>
+&lt; threshold element with weight vector [ 1, 1 ] and threshold 1 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">te2:=ThresholdElement([-1,-2],-2);</span>
+&lt; threshold element with weight vector [ -1, -2 ] and threshold -2 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">inner:=[te1,te2];</span>
+[ &lt; threshold element with weight vector [ 1, 1 ] and threshold 1 &gt;,
+  &lt; threshold element with weight vector [ -1, -2 ] and threshold -2 &gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nn:=NeuralNetwork(inner,false);</span>
+&lt; neural network with
+2 threshold elements on inner layer and conjunction on outer level &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+Inner Layer:
+[ [[ 1, 1 ], 1], [[ -1, -2 ], -2] ]
+Outer Layer: conjunction
+Neural Network realizes the function f :
+Boolean function of 2 variables.
+[ 0, 0 ] || 0
+[ 0, 1 ] || 1
+[ 1, 0 ] || 1
+[ 1, 1 ] || 0
+Sum of Products:[ 1, 2 ]
+
+</pre></div>
+
+<p><a id="X79B24B8F79161064" name="X79B24B8F79161064"></a></p>
+
+<h5>4.1-2 IsNeuralNetwork</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsNeuralNetwork</code>( <var class="Arg">Obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For the object <code class="code">Obj</code> the function <code class="code">IsNeuralNetwork</code> returns <code class="code">true</code> if <code class="code">Obj</code> is a neural network (see <code class="func">NeuralNetwork</code> (<a href="chap4.html#X780C027786A8E34B"><span class="RefLink">4.1-1</span></a>)), and <code class="code">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">## Consider the neural network &lt;C&gt;nn&lt;/C&gt; from the previous example.</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNeuralNetwork(nn);</span>
+true
+
+</pre></div>
+
+<p><a id="X7C93C473784D1676" name="X7C93C473784D1676"></a></p>
+
+<h5>4.1-3 OutputOfNeuralNetwork</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OutputOfNeuralNetwork</code>( <var class="Arg">NNetwork</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For the neural network <code class="code">NNetwork</code> the function <code class="code">OutputOfNeuralNetwork</code> returns the Boolean function, realized by <code class="code">NNetwork</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=OutputOfNeuralNetwork(nn);</span>
+&lt; Boolean function of 2 variables &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+Boolean function of 2 variables.
+[ 0, 0 ] || 0
+[ 0, 1 ] || 1
+[ 1, 0 ] || 1
+[ 1, 1 ] || 0
+
+</pre></div>
+
+<p><a id="X7BA69E617DE465FE" name="X7BA69E617DE465FE"></a></p>
+
+<h4>4.2 <span class="Heading">Networks of Threshold Elements</span></h4>
+
+<p>In this section we consider the networks of threshold elements.</p>
+
+<p><a id="X786FB7237D875561" name="X786FB7237D875561"></a></p>
+
+<h5>4.2-1 BooleanFunctionByNeuralNetwork</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BooleanFunctionByNeuralNetwork</code>( <var class="Arg">Func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For the Boolean function <code class="code">Func</code> the function <code class="code">BooleanFunctionByNeuralNetwork</code> returns a two-layered neural network, which realizes <code class="code">Func</code> (see <code class="func">NeuralNetwork</code> (<a href="chap4.html#X780C027786A8E34B"><span class="RefLink">4.1-1</span></a>)). The realization of this function is based on the algorithm proposed in <a href="chapBib.html#biBGecheRobotyshyn83">[GPR83]</a>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Indeterminate(GF(2),"x");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Indeterminate(GF(2),"y");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z:=Indeterminate(GF(2),"z");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PolynomialToBooleanFunction(x*y+z,3);</span>
+&lt; Boolean function of 3 variables &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nn:=BooleanFunctionByNeuralNetwork(f);</span>
+&lt; neural network with
+2 threshold elements on inner layer and disjunction on outer level &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+Inner Layer:
+[ [[ -1, -2, 4 ], 2], [[ 1, 2, -3 ], 3] ]
+Outer Layer: disjunction
+Neural Network realizes the function f :
+Boolean function of 3 variables.
+[ 0, 0, 0 ] || 0
+[ 0, 0, 1 ] || 1
+[ 0, 1, 0 ] || 0
+[ 0, 1, 1 ] || 1
+[ 1, 0, 0 ] || 0
+[ 1, 0, 1 ] || 1
+[ 1, 1, 0 ] || 1
+[ 1, 1, 1 ] || 0
+Sum of Products:[ 1, 3, 5, 6 ]
+
+</pre></div>
+
+<p><a id="X7C6E4221828E6609" name="X7C6E4221828E6609"></a></p>
+
+<h5>4.2-2 BooleanFunctionByNeuralNetworkDASG</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BooleanFunctionByNeuralNetworkDASG</code>( <var class="Arg">Func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For the Boolean function <code class="code">Func</code> the function <code class="code">BooleanFunctionByNeuralNetworkDASG</code> returns a two-layered neural network which realizes <code class="code">Func</code> (see <code class="func">NeuralNetwork</code> (<a href="chap4.html#X780C027786A8E34B"><span class="RefLink">4.1-1</span></a>)). The realization of this function is based on decomposition of <code class="code">Func</code> by the non-unate variables with the biggest influence. The DASG algorithm (DASG - Decomposition Algorithm for Synthesis and Generalization) was proposed in <a href="chapBib.html#biBSubirats2008">[SJF08]</a>, however we use a slightly modified version of this algorithm.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=LogicFunction(3,2,[0,0,0,0,0,1,1,0]);</span>
+&lt; Boolean function of 3 variables &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nn:=BooleanFunctionByNeuralNetworkDASG(f);</span>
+&lt; neural network with 2 threshold elements on inner layer and conjunction on outer level &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+Inner Layer:
+[ [[ 1, 4, 2 ], 3], [[ 1, -4, -2 ], -3] ]
+Outer Layer: conjunction
+Neural Network realizes the function f :
+Boolean function of 3 variables.
+[ 0, 0, 0 ] || 0
+[ 0, 0, 1 ] || 0
+[ 0, 1, 0 ] || 0
+[ 0, 1, 1 ] || 0
+[ 1, 0, 0 ] || 0
+[ 1, 0, 1 ] || 1
+[ 1, 1, 0 ] || 1
+[ 1, 1, 1 ] || 0
+Sum of Products:[ 5, 6 ]
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

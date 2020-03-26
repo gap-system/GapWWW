@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (HAPcryst) - Chapter 4: Resolutions of  Crystallographic Groups</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
+<p><a id="X852C41A77C759D82" name="X852C41A77C759D82"></a></p>
+<div class="ChapSects"><a href="chap4_mj.html#X852C41A77C759D82">4 <span class="Heading">Resolutions of  Crystallographic Groups</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7F48638F817A14B0">4.1 <span class="Heading">Fundamental Domains</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X79F4F7938116201E">4.1-1 FundamentalDomainStandardSpaceGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7A07AB55831F212F">4.1-2 FundamentalDomainBieberbachGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X86A09AC4842827C9">4.1-3 FundamentalDomainFromGeneralPointAndOrbitPartGeometric</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X824BC99584F5F865">4.1-4 IsFundamentalDomainStandardSpaceGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7D79DD6E87BCC1DC">4.1-5 IsFundamentalDomainBieberbachGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X78D68F6087238F97">4.2 <span class="Heading">Face Lattice and Resolution</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7CA87AA478007468">4.2-1 ResolutionBieberbachGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E854FC47F9E479E">4.2-2 FaceLatticeAndBoundaryBieberbachGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X79A0B28A7FAE31B9">4.2-3 ResolutionFromFLandBoundary</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Resolutions of  Crystallographic Groups</span></h3>
+
+<p><a id="X7F48638F817A14B0" name="X7F48638F817A14B0"></a></p>
+
+<h4>4.1 <span class="Heading">Fundamental Domains</span></h4>
+
+<p>Let <span class="SimpleMath">\(S\)</span> be a crystallographic group. A Fundamental domain is a closed convex set containing a system of representatives for the Orbits of <span class="SimpleMath">\(S\)</span> in its natural action on euclidian space.<br /> There are two algorithms for calculating fundamental domains in <strong class="pkg">HAPcryst</strong>. One uses the geometry and relies on having the standard rule for evaluating the scalar product (i.e. the gramian matrix is the identity). The other one is independent of the gramian matrix but does only work for Bieberbach groups, while the first ("geometric") algorithm works for arbitrary crystallographic groups given a point with trivial stabilizer.</p>
+
+<p><a id="X79F4F7938116201E" name="X79F4F7938116201E"></a></p>
+
+<h5>4.1-1 FundamentalDomainStandardSpaceGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FundamentalDomainStandardSpaceGroup</code>( [<var class="Arg">v</var>, ]<var class="Arg">G</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FundamentalDomainStandardSpaceGroup</code>( <var class="Arg">v</var>, <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="keyw">PolymakeObject</code></p>
+
+<p>Let <var class="Arg">G</var> be an <code class="keyw">AffineCrystGroupOnRight</code> and <var class="Arg">v</var> a vector. A fundamental domain containing <var class="Arg">v</var> is calculated and returned as a <code class="keyw">PolymakeObject</code>. The vector <var class="Arg">v</var> is used as the starting point for a Dirichlet-Voronoi construction. If no <var class="Arg">v</var> is given, the origin is used as starting point if it has trivial stabiliser. Otherwise an error is cast. <br /></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fd:=FundamentalDomainStandardSpaceGroup([1/2,0,1/5],SpaceGroup(3,9));</span>
+&lt;polymake object&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Polymake(fd,"N_VERTICES");</span>
+24
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fd:=FundamentalDomainStandardSpaceGroup(SpaceGroup(3,9));</span>
+&lt;polymake object&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Polymake(fd,"N_VERTICES");</span>
+8
+</pre></div>
+
+<p><a id="X7A07AB55831F212F" name="X7A07AB55831F212F"></a></p>
+
+<h5>4.1-2 FundamentalDomainBieberbachGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FundamentalDomainBieberbachGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FundamentalDomainBieberbachGroup</code>( <var class="Arg">v</var>, <var class="Arg">G</var>[, <var class="Arg">gram</var>] )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="keyw">PolymakeObject</code></p>
+
+<p>Given a starting vector <var class="Arg">v</var> and a Bieberbach group <var class="Arg">G</var> in standard form, this method calculates the Dirichlet domain with respect to <var class="Arg">v</var>. If <var class="Arg">gram</var> is not supplied, the average gramian matrix is used (see <code class="func">GramianOfAverageScalarProductFromFiniteMatrixGroup</code> (<a href="chap2_mj.html#X7A94DAE679AD73E3"><span class="RefLink">2.3-1</span></a>)). It is not tested if <var class="Arg">gram</var> is symmetric and positive definite. It is also not tested, if the product defined by <var class="Arg">gram</var> is invariant under the point group of <var class="Arg">G</var>.</p>
+
+<p>The behaviour of this function is influenced by the option <code class="keyw">ineqThreshold</code>. The algorithm calculates approximations to a fundamental domain by iteratively adding inequalities. For an approximating polyhedron, every vertex is tested to find new inequalities. When all vertices have been considered or the number of new inequalities already found exceeds the value of <code class="keyw">ineqThreshold</code>, a new approximating polyhedron in calculated. The default for <code class="keyw">ineqThreshold</code> is 200. Roughly speaking, a large threshold means shifting work from <code class="keyw">polymake</code> to <strong class="pkg">GAP</strong>, a small one means more calls of (and work for) <code class="keyw">polymake</code>.</p>
+
+<p>If the value of <code class="func">InfoHAPcryst</code> (<a href="chap1_mj.html#X78B0A21E7FD0F3BB"><span class="RefLink">1.3-1</span></a>) is 2 or more, for each approximation the number of vertices of the approximation, the number of vertices that have to be considered during the calculation, the number of facets, and new inequalities is shown.</p>
+
+<p>Note that the algorithm chooses vertices in random order and also writes inequalities for <code class="keyw">polymake</code> in random order.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a0:=[[ 1, 0, 0, 0, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ 0, 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, -1, -1, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ -1/2, 0, 0, 1/6, 0, 0, 1 ] </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a1:=[[ 0, -1, 0, 0, 0, 0, 0 ],[ 0, 0, -1, 0, 0, 0, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [ 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [ 0, 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [ 0, 0, 0, 0, 1/3, -1/3, 1 ] </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">trans:=List(Group((1,2,3,4,5,6)),g-&gt;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          TranslationOnRightFromVector(Permuted([1,0,0,0,0,0],g)));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=AffineCrystGroupOnRight(Concatenation(trans,[a0,a1]));</span>
+&lt;matrix group with 8 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoHAPcryst,2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FundamentalDomainBieberbachGroup(S:ineqThreshold:=10);</span>
+#I  v: 104/104 f:15
+#I  new: 201
+#I  v: 961/961 f:58
+#I  new: 20
+#I  v: 1143/805 f:69
+#I  new: 12
+#I  v: 1059/555 f:64
+#I  new: 15
+#I  v: 328/109 f:33
+#I  new: 12
+#I  v: 336/58 f:32
+#I  new: 0
+&lt;polymake object&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FundamentalDomainBieberbachGroup(S:ineqThreshold:=1000);</span>
+#I  v: 104/104 f:15
+#I  new: 149
+#I  v: 635/635 f:41
+#I  new: 115
+#I  v: 336/183 f:32
+#I  new: 0
+#I  out of inequalities
+&lt;polymake object&gt;
+</pre></div>
+
+<p><a id="X86A09AC4842827C9" name="X86A09AC4842827C9"></a></p>
+
+<h5>4.1-3 FundamentalDomainFromGeneralPointAndOrbitPartGeometric</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FundamentalDomainFromGeneralPointAndOrbitPartGeometric</code>( <var class="Arg">v</var>, <var class="Arg">orbit</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="keyw">PolymakeObject</code></p>
+
+<p>This uses an alternative algorithm based on geometric considerations. It is not used in any of the high-level methods. Let <var class="Arg">v</var> be a vector and <var class="Arg">orbit</var> a sufficiently large part of the orbit of <var class="Arg">v</var> under a crystallographic group with standard- orthogonal point group (satisfying <span class="SimpleMath">\(A^t=A^-1\)</span>). A geometric algorithm is then used to calculate the Dirichlet domain with respect to <var class="Arg">v</var>. This also works for crystallographic groups which are not Bieberbach. The point <var class="Arg">v</var> has to have trivial stabilizer.<br /> The intersection of the full orbit with the unit cube around <var class="Arg">v</var> is sufficiently large.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=SpaceGroup(3,9);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v:=[0,0,0];</span>
+[ 0, 0, 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbit:=OrbitStabilizerInUnitCubeOnRight(G,v).orbit;</span>
+[ [ 0, 0, 0 ], [ 0, 0, 1/2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fd:=FundamentalDomainFromGeneralPointAndOrbitPartGeometric(v,orbit);</span>
+&lt;polymake object&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Polymake(fd,"N_VERTICES");</span>
+8
+</pre></div>
+
+<p><a id="X824BC99584F5F865" name="X824BC99584F5F865"></a></p>
+
+<h5>4.1-4 IsFundamentalDomainStandardSpaceGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFundamentalDomainStandardSpaceGroup</code>( <var class="Arg">poly</var>, <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>This tests if a <code class="keyw">PolymakeObject</code> <var class="Arg">poly</var> is a fundamental domain for the affine crystallographic group <var class="Arg">G</var> in standard form.<br /> The function tests the following: First, does the orbit of any vertex of <var class="Arg">poly</var> have a point inside <var class="Arg">poly</var> (if this is the case, <code class="code">false</code> is returned). Second: Is every facet of <var class="Arg">poly</var> the image of a different facet under a group element which does not fix <var class="Arg">poly</var>. If this is satisfied, <code class="code">true</code> is returned.</p>
+
+<p><a id="X7D79DD6E87BCC1DC" name="X7D79DD6E87BCC1DC"></a></p>
+
+<h5>4.1-5 IsFundamentalDomainBieberbachGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFundamentalDomainBieberbachGroup</code>( <var class="Arg">poly</var>, <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: true, false or fail</p>
+
+<p>This tests if a <code class="keyw">PolymakeObject</code> <var class="Arg">poly</var> is a fundamental domain for the affine crystallographic group <var class="Arg">G</var> in standard form and if this group is torsion free (ie a Bieberbach group)<br /> It returns <code class="keyw">true</code> if <var class="Arg">G</var> is torsion free and <var class="Arg">poly</var> is a fundamental domain for <var class="Arg">G</var>. If <var class="Arg">poly</var> is not a fundamental domain, <code class="keyw">false</code> is returned regardless of the structure of <var class="Arg">G</var>. And if <var class="Arg">G</var> is not torsion free, the method returns <code class="keyw">fail</code>. If <var class="Arg">G</var> is polycyclic, torsion freeness is tested using a representation as pcp group. Otherwise the stabilisers of the faces of the fundamental domain <var class="Arg">poly</var> are calculated (<var class="Arg">G</var> is torsion free if and only if it all these stabilisers are trivial).</p>
+
+<p><a id="X78D68F6087238F97" name="X78D68F6087238F97"></a></p>
+
+<h4>4.2 <span class="Heading">Face Lattice and Resolution</span></h4>
+
+<p>For Bieberbach groups (torsion free crystallographic groups), the following functions calcualte free resolutions. This calculation is done by finding a fundamental domain for the group. For a description of the <code class="keyw">HapResolution</code> datatype, see the <strong class="pkg">Hap</strong> data types documentation or the experimental datatypes documentation <a href="../../../pkg/hapcryst/lib/datatypes/doc/chap1_mj.html#X7C6DD73E7BB931AB"><span class="RefLink">HAPprog: Resolutions in Hap</span></a></p>
+
+<p><a id="X7CA87AA478007468" name="X7CA87AA478007468"></a></p>
+
+<h5>4.2-1 ResolutionBieberbachGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResolutionBieberbachGroup</code>( <var class="Arg">G</var>[, <var class="Arg">v</var>] )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="keyw">HAPresolution</code></p>
+
+<p>Let <var class="Arg">G</var> be a Bieberbach group given as an <code class="keyw">AffineCrystGroupOnRight</code> and <var class="Arg">v</var> a vector. Then a Dirichlet domain with respect to <var class="Arg">v</var> is calculated using <code class="func">FundamentalDomainBieberbachGroup</code> (<a href="chap4_mj.html#X7A07AB55831F212F"><span class="RefLink">4.1-2</span></a>). From this domain, a resolution is calculated using <code class="func">FaceLatticeAndBoundaryBieberbachGroup</code> (<a href="chap4_mj.html#X7E854FC47F9E479E"><span class="RefLink">4.2-2</span></a>) and <code class="func">ResolutionFromFLandBoundary</code> (<a href="chap4_mj.html#X79A0B28A7FAE31B9"><span class="RefLink">4.2-3</span></a>). If <var class="Arg">v</var> is not given, the origin is used.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:=ResolutionBieberbachGroup(SpaceGroup(3,9));</span>
+Resolution of length 3 in characteristic
+0 for SpaceGroupOnRightBBNWZ( 3, 2, 2, 2, 2 ) .
+No contracting homotopy available.
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List([0..3],Dimension(R));</span>
+[ 1, 3, 3, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:=ResolutionBieberbachGroup(SpaceGroup(3,9),[1/2,0,0]);</span>
+Resolution of length 3 in characteristic
+0 for SpaceGroupOnRightBBNWZ( 3, 2, 2, 2, 2 ) .
+No contracting homotopy available.
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List([0..3],Dimension(R));</span>
+[ 6, 12, 7, 1 ]
+
+</pre></div>
+
+<p><a id="X7E854FC47F9E479E" name="X7E854FC47F9E479E"></a></p>
+
+<h5>4.2-2 FaceLatticeAndBoundaryBieberbachGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FaceLatticeAndBoundaryBieberbachGroup</code>( <var class="Arg">poly</var>, <var class="Arg">group</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: Record with entries <code class="keyw">.hasse</code> and <code class="keyw">.elts</code> representing a part of the hasse diagram and a lookup table of group elements</p>
+
+<p>Let <var class="Arg">group</var> be a torsion free <code class="keyw">AffineCrystGroupOnRight</code> (that is, a Bieberbach group). Given a <code class="keyw">PolymakeObject</code> <var class="Arg">poly</var> representing a fundamental domain for <var class="Arg">group</var>, this method uses <strong class="pkg">polymaking</strong> to calculate the face lattice of <var class="Arg">poly</var>. From the set of faces, a system of representatives for <var class="Arg">group</var>- orbits is chosen. For each representative, the boundary is then calculated. The list <code class="keyw">.elts</code> contains elements of <var class="Arg">group</var> (in fact, it is even a set). The structure of the returned list <code class="keyw">.hasse</code> is as follows:</p>
+
+
+<ul>
+<li><p>The <span class="SimpleMath">\(i\)</span>-th entry contains a system of representatives for the <span class="SimpleMath">\(i-1\)</span> dimensional faces of <var class="Arg">poly</var>.</p>
+
+</li>
+<li><p>Each face is represented by a pair of lists <code class="code">[vertices,boundary]</code>. The list of integers <code class="code">vertices</code> represents the vertices of <var class="Arg">poly</var> which are contained in this face. The enumeration is chosen such that an <code class="code">i</code> in the list represents the <span class="SimpleMath">\(i\)</span>-th entry of the list <code class="code">Polymake(poly,"VERTICES");</code></p>
+
+</li>
+<li><p>The list <code class="code">boundary</code> represents the boundary of the respective face. It is a list of pairs of integers <code class="code">[j,g]</code>. The first entry lies between <span class="SimpleMath">\(-n\)</span> and <span class="SimpleMath">\(n\)</span>, where <span class="SimpleMath">\(n\)</span> is the number of faces of dimension <span class="SimpleMath">\(i-1\)</span>. This entry represents a face of dimension <span class="SimpleMath">\(i-1\)</span> (or its additive inverse as a module generator). The second entry <code class="code">g</code> is the position of the matrix in <code class="keyw">.elts</code>.</p>
+
+</li>
+</ul>
+<p>This representation is compatible with the representation of free <span class="SimpleMath">\(\mathbb Z G\)</span> modules in <strong class="pkg">Hap</strong> and this method essentially calculates a free resolution of <var class="Arg">group</var>. If the value of <code class="func">InfoHAPcryst</code> (<a href="chap1_mj.html#X78B0A21E7FD0F3BB"><span class="RefLink">1.3-1</span></a>) is 2 or more, additional information about the number of faces in every codimension, the number of orbits of the group on the free module generated by those faces, and the time it took to calculate the orbit decomposition is output.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoHAPcryst,2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=SpaceGroup(3,165);</span>
+SpaceGroupOnRightBBNWZ( 3, 6, 1, 1, 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fd:=FundamentalDomainBieberbachGroup(G);</span>
+&lt;polymake object&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fl:=FaceLatticeAndBoundaryBieberbachGroup(fd,G);;</span>
+#I  1(4/8): 0:00:00.004
+#I  2(5/18): 0:00:00.000
+#I  3(2/12): 0:00:00.000
+#I  Face lattice done ( 0:00:00.004). Calculating boundary
+#I  done ( 0:00:00.004) Reformating...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RecNames(fl);</span>
+[ "hasse", "elts", "groupring" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fl.groupring;</span>
+&lt;free left module over Integers, and ring-with-one, with 10 generators&gt;
+</pre></div>
+
+<p><a id="X79A0B28A7FAE31B9" name="X79A0B28A7FAE31B9"></a></p>
+
+<h5>4.2-3 ResolutionFromFLandBoundary</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResolutionFromFLandBoundary</code>( <var class="Arg">fl</var>, <var class="Arg">group</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: Free resolution</p>
+
+<p>If <var class="Arg">fl</var> is the record output by <code class="func">FaceLatticeAndBoundaryBieberbachGroup</code> (<a href="chap4_mj.html#X7E854FC47F9E479E"><span class="RefLink">4.2-2</span></a>) and <var class="Arg">group</var> is the corresponding group, this function returns a <code class="keyw">HapResolution</code>. Of course, <var class="Arg">fl</var> has to be generated from a fundamental domain for <var class="Arg">group</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=SpaceGroup(3,165);</span>
+SpaceGroupOnRightBBNWZ( 3, 6, 1, 1, 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fd:=FundamentalDomainBieberbachGroup(G);</span>
+&lt;polymake object&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fl:=FaceLatticeAndBoundaryBieberbachGroup(fd,G);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResolutionFromFLandBoundary(fl,G);</span>
+Resolution of length 3 in characteristic
+0 for SpaceGroupOnRightBBNWZ( 3, 6, 1, 1, 4 ) .
+No contracting homotopy available.
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResolutionFromFLandBoundary(fl,G);</span>
+Resolution of length 3 in characteristic
+0 for SpaceGroupOnRightBBNWZ( 3, 6, 1, 1, 4 ) .
+No contracting homotopy available.
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List([0..4],Dimension(last));</span>
+[ 2, 5, 4, 1, 0 ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

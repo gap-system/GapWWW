@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (orb) - Chapter 9: Orbit enumeration by suborbits</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap9"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap9_mj.html">[MathJax on]</a></p>
+<p><a id="X7CC7EC257DD466E3" name="X7CC7EC257DD466E3"></a></p>
+<div class="ChapSects"><a href="chap9.html#X7CC7EC257DD466E3">9 <span class="Heading">Orbit enumeration by suborbits</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X819508B17A733D53">9.1 <span class="Heading"><code class="code">OrbitBySuborbits</code> and its resulting objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X79B161FD84AB8C68">9.1-1 OrbitBySuborbit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X86CCD9B98156155E">9.1-2 OrbitBySuborbitKnownSize</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X83C66D4A8603CA56">9.1-3 Size</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7EBEA64D7A5F78E3">9.1-4 Seed</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X80B78B657E77A485">9.1-5 SuborbitsDb</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7B5E783478A337C9">9.1-6 WordsToSuborbits</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7926C96485985614">9.1-7 Memory</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X840AFA7987535AC5">9.1-8 Stabilizer</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7F496D9B7C44DAAB">9.1-9 StabWords</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X802068267DACF3F6">9.1-10 SavingFactor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X79DB081F827B53CB">9.1-11 TotalLength</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X81ABF8407AF16C34">9.1-12 Representatives</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X79552A1086449062">9.1-13 SavingFactor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7A96D6D37F0EC46A">9.1-14 OrigSeed</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X7FD5374278E83A36">9.2 <span class="Heading">Preparation functions for <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>)</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X830E221D84E44A64">9.2-1 OrbitBySuborbitBootstrapForVectors</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X799056597EA62513">9.2-2 OrbitBySuborbitBootstrapForLines</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7919B1AB7D68780D">9.2-3 OrbitBySuborbitBootstrapForSpaces</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X80F036B378A3FD32">9.3 <span class="Heading">Data structures for orbit-by-suborbits</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7CFD48C17B48CDDD">9.3-1 IsOrbitBySuborbitSetup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X855663F5790EA2D0">9.3-2 <span class="Heading">The global record <code class="code">ORB</code></span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X8696CFD08768508D">9.4 <span class="Heading">Lists of orbit-by-suborbit objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7FB77D827E31AE24">9.4-1 InitOrbitBySuborbitList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X87CB441882F43F62">9.4-2 IsVectorInOrbitBySuborbitList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7D82CE2579A50B2C">9.4-3 OrbitsFromSeedsToOrbitList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X83A306918461D700">9.4-4 VerifyDisjointness</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7ED405017E3A56CD">9.4-5 Memory</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7D52885787865E81">9.4-6 TotalLength</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7C4255287D394742">9.4-7 Size</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7BFE12DE85CCE143">9.4-8 SavingFactor</a></span>
+</div></div>
+</div>
+
+<h3>9 <span class="Heading">Orbit enumeration by suborbits</span></h3>
+
+<p>The code described in this chapter is quite complicated and one has to understand quite a lot of theory to use it. The reason for this is that a lot of preparatory data has to be found and supplied by the user in order for this code to run at all. Also the situations in which it can be used are quite special. However, in such a situation, the user is rewarded with impressive performance.</p>
+
+<p>The main reference for the theory is <a href="chapBib.html#biBMNW">[MNW07]</a>. We briefly recall the basic setup: Let <span class="SimpleMath">G</span> be a group acting from the right on some set <span class="SimpleMath">X</span>. Let <span class="SimpleMath">k</span> be a natural number, set <span class="SimpleMath">X_{k+1} := X</span>, and let</p>
+
+<p class="pcenter"> U_1 &lt; U_2 &lt; \ldots &lt; U_k &lt; U_{{k+1}} = G </p>
+
+<p>be a chain of "helper" subgroups. Further, for <span class="SimpleMath">1 ≤ i ≤ k</span> let <span class="SimpleMath">X_i</span> be a <span class="SimpleMath">U_i</span> set and let <span class="SimpleMath">π_i : X_{i+1} -&gt; X_i</span> be a homomorphism of <span class="SimpleMath">U_i</span>-sets.</p>
+
+<p>This chapter starts with a section about the main orbit enumeration function and the corresponding preparation functions. It then proceeds with a section on the used data structures, which will necessarily be rather technical. Finally, the chapter concludes with a section on higher level data structures like lists of orbit-by-suborbit objects and their administration. Note that there are quite a few examples in Chapter <a href="chap11.html#X7A489A5D79DA9E5C"><span class="RefLink">11</span></a>.</p>
+
+<p><a id="X819508B17A733D53" name="X819508B17A733D53"></a></p>
+
+<h4>9.1 <span class="Heading"><code class="code">OrbitBySuborbits</code> and its resulting objects</span></h4>
+
+<p><a id="X79B161FD84AB8C68" name="X79B161FD84AB8C68"></a></p>
+
+<h5>9.1-1 OrbitBySuborbit</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitBySuborbit</code>( <var class="Arg">setup</var>, <var class="Arg">p</var>, <var class="Arg">j</var>, <var class="Arg">l</var>, <var class="Arg">i</var>, <var class="Arg">percentage</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an orbit-by-suborbit object</p>
+
+<p>This is the main function in the whole business. All notations from the beginning of this Chapter <a href="chap9.html#X7CC7EC257DD466E3"><span class="RefLink">9</span></a> remain in place. The argument <var class="Arg">setup</var> must be a setup record lying in the filter <code class="func">IsOrbitBySuborbitSetup</code> (<a href="chap9.html#X7CFD48C17B48CDDD"><span class="RefLink">9.3-1</span></a>) described in detail in Section <a href="chap9.html#X80F036B378A3FD32"><span class="RefLink">9.3</span></a> and produced for example by <code class="func">OrbitBySuborbitBootstrapForVectors</code> (<a href="chap9.html#X830E221D84E44A64"><span class="RefLink">9.2-1</span></a>) or <code class="func">OrbitBySuborbitBootstrapForLines</code> (<a href="chap9.html#X799056597EA62513"><span class="RefLink">9.2-2</span></a>) described below. In particular, it contains all the generators for <span class="SimpleMath">G</span> and the helper subgroups acting on the various sets. The argument <var class="Arg">p</var> must be the starting point of the orbit. Note that the function possibly does not take <var class="Arg">p</var> itself as starting point but rather its <span class="SimpleMath">U_k</span>-minimalisation, which is a point in the same <span class="SimpleMath">U_k</span>-orbit as <var class="Arg">p</var>. This information is important for the resulting stabiliser and words representing the <span class="SimpleMath">U_k</span>-suborbits.</p>
+
+<p>The integers <var class="Arg">j</var>, <var class="Arg">l</var>, and <var class="Arg">i</var>, for which <span class="SimpleMath">k+1 ge <var class="Arg">j</var> ge <var class="Arg">l</var> &gt; <var class="Arg">i</var> ge 1</span> must hold, determine the running mode. <var class="Arg">j</var> indicates in which set <span class="SimpleMath">X_j</span> the point <var class="Arg">p</var> lies and thus in which set the orbit enumeration takes place, with <span class="SimpleMath">j=k+1</span> indicating the original set <span class="SimpleMath">X</span>. The value <var class="Arg">l</var> indicates which group to use for orbit enumeration. So the result will be a <span class="SimpleMath">U_l</span> orbit, with <span class="SimpleMath"><var class="Arg">l</var>=<var class="Arg">k</var>+1</span> indicating a <span class="SimpleMath">G</span>-orbit. Finally, the value <var class="Arg">i</var> indicates which group to use for the "by suborbit" part, that is, the orbit will be enumerated "by <span class="SimpleMath">U_<var class="Arg">i</var></span>-orbits". Note that nearly all possible combinations of these parameters actually occur, because this function is also used in the "on-the-fly" precomputation happening behind the scenes. The most common usage of this function for the user is <span class="SimpleMath"><var class="Arg">j</var>=<var class="Arg">l</var>=<var class="Arg">k</var>+1</span> and <span class="SimpleMath"><var class="Arg">i</var>=k</span>.</p>
+
+<p>Finally, the integer <var class="Arg">percentage</var> says, how much of the full orbit should be enumerated, the value is in percent, thus <span class="SimpleMath">100</span> means the full orbit. Usually, only values greater than <span class="SimpleMath">50</span> are sensible, because one can only prove the size of the orbit after enumerating at least half of it.</p>
+
+<p>The result is an "orbit-by-suborbit" object. For such an object in particular the operations <code class="func">Size</code> (<a href="chap9.html#X83C66D4A8603CA56"><span class="RefLink">9.1-3</span></a>), <code class="func">Seed</code> (<a href="chap9.html#X7EBEA64D7A5F78E3"><span class="RefLink">9.1-4</span></a>), <code class="func">SuborbitsDb</code> (<a href="chap9.html#X80B78B657E77A485"><span class="RefLink">9.1-5</span></a>), <code class="func">WordsToSuborbits</code> (<a href="chap9.html#X7B5E783478A337C9"><span class="RefLink">9.1-6</span></a>), <code class="func">Memory</code> (<a href="chap9.html#X7926C96485985614"><span class="RefLink">9.1-7</span></a>), <code class="func">Stabilizer</code> (<a href="chap9.html#X840AFA7987535AC5"><span class="RefLink">9.1-8</span></a>), and <code class="func">Seed</code> (<a href="chap9.html#X7EBEA64D7A5F78E3"><span class="RefLink">9.1-4</span></a>) are defined, see below.</p>
+
+<p><a id="X86CCD9B98156155E" name="X86CCD9B98156155E"></a></p>
+
+<h5>9.1-2 OrbitBySuborbitKnownSize</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitBySuborbitKnownSize</code>( <var class="Arg">setup</var>, <var class="Arg">p</var>, <var class="Arg">j</var>, <var class="Arg">l</var>, <var class="Arg">i</var>, <var class="Arg">percentage</var>, <var class="Arg">knownsize</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an orbit-by-suborbit object</p>
+
+<p>Basically does the same as <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>) but does not compute the stabiliser by evaluating Schreier words. Instead, the size of the orbit to enumerate must already be known and be given in the argument <var class="Arg">knownsize</var>. The other arguments are as for the function <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>).</p>
+
+<p><a id="X83C66D4A8603CA56" name="X83C66D4A8603CA56"></a></p>
+
+<h5>9.1-3 Size</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Size</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the number of points in the orbit-by-suborbit <var class="Arg">orb</var>.</p>
+
+<p><a id="X7EBEA64D7A5F78E3" name="X7EBEA64D7A5F78E3"></a></p>
+
+<h5>9.1-4 Seed</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Seed</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a point in the orbit</p>
+
+<p>Returns the starting point of the orbit-by-suborbit <var class="Arg">orb</var>. It is the <span class="SimpleMath">U_i</span>-minimalisation of the starting point given to <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>).</p>
+
+<p><a id="X80B78B657E77A485" name="X80B78B657E77A485"></a></p>
+
+<h5>9.1-5 SuborbitsDb</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SuborbitsDb</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a database of suborbits</p>
+
+<p>Returns the data base of suborbits of the orbit-by-suborbit object <var class="Arg">orb</var>. In particular, such a database object has methods for the operations <code class="func">Memory</code> (<a href="chap9.html#X7926C96485985614"><span class="RefLink">9.1-7</span></a>), <code class="func">TotalLength</code> (<a href="chap9.html#X79DB081F827B53CB"><span class="RefLink">9.1-11</span></a>), and <code class="func">Representatives</code> (<a href="chap9.html#X81ABF8407AF16C34"><span class="RefLink">9.1-12</span></a>). For descriptions see below.</p>
+
+<p><a id="X7B5E783478A337C9" name="X7B5E783478A337C9"></a></p>
+
+<h5>9.1-6 WordsToSuborbits</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WordsToSuborbits</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of words</p>
+
+<p>Returns a list of words in the groups <span class="SimpleMath">U_*</span> reaching each of the suborbits in the orbit-by-suborbit <var class="Arg">orb</var>. Here a word is a list of integers. Positive numbers index generators in following numbering: The first few numbers are numbers of generators of <span class="SimpleMath">U_1</span> the next few adjacent numbers index the generators of <span class="SimpleMath">U_2</span> and so on until the generators of <span class="SimpleMath">G</span> in the end. Negative numbers indicate the corresponding inverses of these generators.</p>
+
+<p>Note that <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>) takes the <span class="SimpleMath">U_i</span>-minimalisation of the starting point as its starting point and the words here are all relative to this new starting point.</p>
+
+<p><a id="X7926C96485985614" name="X7926C96485985614"></a></p>
+
+<h5>9.1-7 Memory</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Memory</code>( <var class="Arg">ob</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the amount of memory needed by the object <var class="Arg">ob</var>, which can be either an orbit-by-suborbit object, a suborbit database object, or an object in the filter <code class="func">IsOrbitBySuborbitSetup</code> (<a href="chap9.html#X7CFD48C17B48CDDD"><span class="RefLink">9.3-1</span></a>). The amount of memory used is given in bytes. Note that this includes all hashes, databases, and preparatory data of substantial size. For orbit-by-suborbits the memory needed for the precomputation is not included, ask the setup object for that.</p>
+
+<p><a id="X840AFA7987535AC5" name="X840AFA7987535AC5"></a></p>
+
+<h5>9.1-8 Stabilizer</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Stabilizer</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a permutation group</p>
+
+<p>Returns the stabiliser of the starting point of the orbit-by-suborbit in <var class="Arg">orb</var> in form of a permutation group, using the given faithful permutation representation in the setup record.</p>
+
+<p>Note that <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>) takes the <span class="SimpleMath">U_i</span>-minimalisation of the starting point as its starting point and the stabiliser returned here is the one of this new starting point.</p>
+
+<p><a id="X7F496D9B7C44DAAB" name="X7F496D9B7C44DAAB"></a></p>
+
+<h5>9.1-9 StabWords</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StabWords</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of words</p>
+
+<p>Returns generators for the stabiliser of the starting point of the orbit-by-suborbit in <var class="Arg">orb</var> in form of words as described with the operation <code class="func">WordsToSuborbits</code> (<a href="chap9.html#X7B5E783478A337C9"><span class="RefLink">9.1-6</span></a>). Note again that <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>) takes the <span class="SimpleMath">U_i</span>-minimalisation of the starting point as its starting point and the stabiliser returned here is the one of this new starting point.</p>
+
+<p><a id="X802068267DACF3F6" name="X802068267DACF3F6"></a></p>
+
+<h5>9.1-10 SavingFactor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SavingFactor</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the quotient of the total number of points stored in the orbit-by-suborbit <var class="Arg">orb</var> and the total number of <span class="SimpleMath">U</span>-minimal points stored. Note that the memory for the precomputations is not considered here!</p>
+
+<p>The following operations apply to orbit-by-suborbit database objects:</p>
+
+<p><a id="X79DB081F827B53CB" name="X79DB081F827B53CB"></a></p>
+
+<h5>9.1-11 TotalLength</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TotalLength</code>( <var class="Arg">db</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the total number of points stored in all suborbits in the orbit-by-suborbit database <var class="Arg">db</var>.</p>
+
+<p><a id="X81ABF8407AF16C34" name="X81ABF8407AF16C34"></a></p>
+
+<h5>9.1-12 Representatives</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Representatives</code>( <var class="Arg">db</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a list of points</p>
+
+<p>Returns a list of representatives of the suborbits stored in the orbit-by-suborbit database <var class="Arg">db</var>.</p>
+
+<p><a id="X79552A1086449062" name="X79552A1086449062"></a></p>
+
+<h5>9.1-13 SavingFactor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SavingFactor</code>( <var class="Arg">db</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the quotient of the total number of points stored in the suborbit database <var class="Arg">db</var> and the total number of <span class="SimpleMath">U</span>-minimal points stored. Note that the memory for the precomputations is not considered here!</p>
+
+<p><a id="X7A96D6D37F0EC46A" name="X7A96D6D37F0EC46A"></a></p>
+
+<h5>9.1-14 OrigSeed</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrigSeed</code>( <var class="Arg">orb</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a point</p>
+
+<p>Returns the original starting point for the orbit, not yet minimalised.</p>
+
+<p><a id="X7FD5374278E83A36" name="X7FD5374278E83A36"></a></p>
+
+<h4>9.2 <span class="Heading">Preparation functions for <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>)</span></h4>
+
+<p><a id="X830E221D84E44A64" name="X830E221D84E44A64"></a></p>
+
+<h5>9.2-1 OrbitBySuborbitBootstrapForVectors</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitBySuborbitBootstrapForVectors</code>( <var class="Arg">gens</var>, <var class="Arg">permgens</var>, <var class="Arg">sizes</var>, <var class="Arg">codims</var>, <var class="Arg">opt</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a setup record in the filter <code class="func">IsOrbitBySuborbitSetup</code> (<a href="chap9.html#X7CFD48C17B48CDDD"><span class="RefLink">9.3-1</span></a>)</p>
+
+<p>All notations from the beginning of this Chapter <a href="chap9.html#X7CC7EC257DD466E3"><span class="RefLink">9</span></a> remain in place. This function is for the action of matrices on row vectors, so all generators must be matrices. The set <span class="SimpleMath">X</span> thus is a row space usually over a finite field and the sets <span class="SimpleMath">X_i</span> are quotient spaces. The matrix generators for the various groups have to be adjusted with a base change, such that the canonical projection onto <span class="SimpleMath">X_i</span> is just to take the first few entries in a vector, which means, that the submodules divided out are generated by the last standard basis vectors.</p>
+
+<p>The first argument <var class="Arg">gens</var> must be a list of lists of generators. The outer list must have length <span class="SimpleMath">k+1</span> with entry <span class="SimpleMath">i</span> being a list of matrices generating <span class="SimpleMath">U_i</span>, given in the action on <span class="SimpleMath">X=X_{k+1}</span>. The above mentioned base change must have been done. The second argument <var class="Arg">permgens</var> must be an analogous list with generator lists for the <span class="SimpleMath">U_i</span>. These representations are used to compute membership and group orders of stabilisers. In its simplest form, <var class="Arg">permgens</var> is a list of permutation representations of the same degree, giving a set of generators for each individual group <span class="SimpleMath">U_i</span>. Alternatively, if for some <span class="SimpleMath">U_i</span>, <span class="SimpleMath">i &gt; 1</span>, it is required that the stabilizer of its action is to be calculated as a matrix group, generators of <span class="SimpleMath">U_i</span> in some matrix representation may be supplied. However, it is then mandatory that for all <span class="SimpleMath">1 &lt; i ≤ k+1</span> the generator lists have the following format: The <span class="SimpleMath">i</span>-th entry of <var class="Arg">permgens</var> is a list concatenating the generator lists of <span class="SimpleMath">U_1</span> up to <span class="SimpleMath">U_i</span> (in this order) all of whose elements are in either some permutation or some matrix representation. Note that currently, the generators of <span class="SimpleMath">U_1</span> need to be always given in a permutation representation. The argument <var class="Arg">sizes</var> must be a list of length <span class="SimpleMath">k+1</span> and entry <span class="SimpleMath">i</span> must be the group order of <span class="SimpleMath">U_i</span> (again with <span class="SimpleMath">U_{k+1}</span> being <span class="SimpleMath">G</span>). Finally, the argument <var class="Arg">codims</var> must be a list of length <span class="SimpleMath">k</span> containing integers with the <span class="SimpleMath">i</span>th entry being the codimension of the <span class="SimpleMath">U_i</span>-invariant subspace <span class="SimpleMath">Y_i</span> of <span class="SimpleMath">X</span> with <span class="SimpleMath">X_i = X/Y_i</span>. These codimensions must not decrease for obvious reasons, but some of them may be equal. The last argument <var class="Arg">opt</var> is an options record. See below for possible entries.</p>
+
+<p>The function does all necessary steps to fill a setup record (see <a href="chap9.html#X80F036B378A3FD32"><span class="RefLink">9.3</span></a>) to be used with <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>). For details see the code.</p>
+
+<p>Currently, the following components in the options record <var class="Arg">opt</var> have a meaning:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">regvecfachints</code></strong></dt>
+<dd><p>If bound it must be a list. In position <span class="SimpleMath">i</span> for <span class="SimpleMath">i&gt;1</span> there may be a list of vectors in the <span class="SimpleMath">i</span>-th quotient space <span class="SimpleMath">X_i</span> that can be used to distinguish the left <span class="SimpleMath">U_{i-1}</span> cosets in <span class="SimpleMath">U_i</span>. All vectors in this list are tried and the first one that actually works is used.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">regvecfullhints</code></strong></dt>
+<dd><p>If bound it must be a list. In position <span class="SimpleMath">i</span> for <span class="SimpleMath">i&gt;1</span> there may be a list of vectors in the full space <span class="SimpleMath">X</span> that can be used to distinguish the left <span class="SimpleMath">U_{i-1}</span> cosets in <span class="SimpleMath">U_i</span>. All vectors in this list are tried and the first one that actually works is used.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">stabchainrandom</code></strong></dt>
+<dd><p>If bound the value is copied into the <code class="code">stabchainrandom</code> component of the setup record.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">nostabchainfullgroup</code></strong></dt>
+<dd><p>If bound it must be <code class="keyw">true</code> or <code class="keyw">false</code>. If it is unbound or set to <code class="keyw">true</code>, no stabilizer chain is computed for the group <span class="SimpleMath">U_k+1</span>. Its default value is <code class="keyw">false</code>.</p>
+
+</dd>
+</dl>
+<p><a id="X799056597EA62513" name="X799056597EA62513"></a></p>
+
+<h5>9.2-2 OrbitBySuborbitBootstrapForLines</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitBySuborbitBootstrapForLines</code>( <var class="Arg">gens</var>, <var class="Arg">permgens</var>, <var class="Arg">sizes</var>, <var class="Arg">codims</var>, <var class="Arg">opt</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a setup record in the filter <code class="func">IsOrbitBySuborbitSetup</code> (<a href="chap9.html#X7CFD48C17B48CDDD"><span class="RefLink">9.3-1</span></a>)</p>
+
+<p>All notations from the beginning of this Chapter <a href="chap9.html#X7CC7EC257DD466E3"><span class="RefLink">9</span></a> remain in place. This does exactly the same as <code class="func">OrbitBySuborbitBootstrapForVectors</code> (<a href="chap9.html#X830E221D84E44A64"><span class="RefLink">9.2-1</span></a>) except that it handles the case of matrices acting on one-dimensional subspaces. Those one-dimensional subspaces are represented by normalised vectors, where a vector is normalised if its first non-vanishing entry is equal to <span class="SimpleMath">1</span>.</p>
+
+<p><a id="X7919B1AB7D68780D" name="X7919B1AB7D68780D"></a></p>
+
+<h5>9.2-3 OrbitBySuborbitBootstrapForSpaces</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitBySuborbitBootstrapForSpaces</code>( <var class="Arg">gens</var>, <var class="Arg">permgens</var>, <var class="Arg">sizes</var>, <var class="Arg">codims</var>, <var class="Arg">spcdim</var>, <var class="Arg">opt</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a setup record in the filter <code class="func">IsOrbitBySuborbitSetup</code> (<a href="chap9.html#X7CFD48C17B48CDDD"><span class="RefLink">9.3-1</span></a>)</p>
+
+<p>All notations from the beginning of this Chapter <a href="chap9.html#X7CC7EC257DD466E3"><span class="RefLink">9</span></a> remain in place. This does exactly the same as <code class="func">OrbitBySuborbitBootstrapForVectors</code> (<a href="chap9.html#X830E221D84E44A64"><span class="RefLink">9.2-1</span></a>) except that it handles the case of matrices acting on <var class="Arg">spcdim</var>-dimensional subspaces. Those subspaces are represented by fully echelonised bases.</p>
+
+<p><a id="X80F036B378A3FD32" name="X80F036B378A3FD32"></a></p>
+
+<h4>9.3 <span class="Heading">Data structures for orbit-by-suborbits</span></h4>
+
+<p>The description in this section is necessarily technical. It is meant more as extended annotations to the source code than as user documentation. Usually it should not be necessary for the user to know the details presented here. The function <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>) needs an information record of the following form:</p>
+
+<p><a id="X7CFD48C17B48CDDD" name="X7CFD48C17B48CDDD"></a></p>
+
+<h5>9.3-1 IsOrbitBySuborbitSetup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOrbitBySuborbitSetup</code>( <var class="Arg">ob</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>Objects in this category are also in <code class="code">IsComponentObjRep</code>. We describe the components, refering to the setup at the beginning of this Chapter <a href="chap9.html#X7CC7EC257DD466E3"><span class="RefLink">9</span></a>.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">k</code></strong></dt>
+<dd><p>The number of helper subgroups.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">size</code></strong></dt>
+<dd><p>A list of length <span class="SimpleMath">k+1</span> containing the orders of the groups <span class="SimpleMath">U_i</span>, including <span class="SimpleMath">U_{k+1} = G</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">index</code></strong></dt>
+<dd><p>A list of length <span class="SimpleMath">k</span> with the index <span class="SimpleMath">[U_i:U_{i-1}]</span> in position <span class="SimpleMath">i</span> (<span class="SimpleMath">U_0 = {1}</span>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">els</code></strong></dt>
+<dd><p>A list of length <span class="SimpleMath">k+1</span> containing generators of the groups in their action on various sets. In position <span class="SimpleMath">i</span> we store all the generators for all groups acting on <span class="SimpleMath">X_i</span>, that is for the groups <span class="SimpleMath">U_1, ..., U_i</span> (where position <span class="SimpleMath">k+1</span> includes the generators for <span class="SimpleMath">G</span>. In each position the generators of all those groups are concatentated starting with <span class="SimpleMath">U_1</span> and ending with <span class="SimpleMath">U_i</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">elsinv</code></strong></dt>
+<dd><p>The inverses of all the elements in the <code class="code">els</code> component in the same arrangement.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">trans</code></strong></dt>
+<dd><p>A list of length <span class="SimpleMath">k</span> in which position <span class="SimpleMath">i</span> for <span class="SimpleMath">i&gt;1</span> contains a list of words in the generators for a transversal of <span class="SimpleMath">U_{i-1}</span> in <span class="SimpleMath">U_i</span> (with <span class="SimpleMath">U_0 = 1</span>).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">pifunc</code></strong></dt>
+<dd><p>Projection functions. This is a list of length <span class="SimpleMath">k+1</span> containing in position <span class="SimpleMath">j</span> a list of length <span class="SimpleMath">j-1</span> containing in position <span class="SimpleMath">i</span> a <strong class="pkg">GAP</strong> function doing the projection <span class="SimpleMath">X_j -&gt; X_i</span>. These <strong class="pkg">GAP</strong> functions take two arguments, namely the point to map and secondly the value of the <code class="code">pi</code> component at positions <code class="code">[j][i]</code>. Usually <code class="code">pifunc</code> is just the slicing operator in <strong class="pkg">GAP</strong> and <code class="code">pi</code> contains the components to project onto as a range object.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">pi</code></strong></dt>
+<dd><p>See the description of the <code class="code">pifunc</code> component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">op</code></strong></dt>
+<dd><p>A list of <span class="SimpleMath">k+1</span> <strong class="pkg">GAP</strong> operation functions, each taking a point <span class="SimpleMath">p</span> and a generator <span class="SimpleMath">g</span> in the action given by the index and returning <span class="SimpleMath">pg</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">info</code></strong></dt>
+<dd><p>A list of length <span class="SimpleMath">k</span> containing a hash table with the minimalisation lookup data. These hash tables grow during orbit enumerations as precomputations are done behind the scenes.</p>
+
+<p><code class="code">info[1]</code> contains precomputation data for <span class="SimpleMath">X_1</span>. Assume <span class="SimpleMath">x ∈ X_1</span> to be <span class="SimpleMath">U_1</span>-minimal. For all <span class="SimpleMath">z ∈ xU_1</span> with <span class="SimpleMath">z ≠ x</span> we store the number of an element in the <code class="code">wordcache</code> mapping <span class="SimpleMath">z</span> to <span class="SimpleMath">x</span>. For <span class="SimpleMath">z=x</span> we store a record with two components <code class="code">gens</code> and <code class="code">size</code>, where <code class="code">gens</code> stores generators for the stabiliser Stab<span class="SimpleMath">_{U_1}(x)</span> as words in the group generators and <code class="code">size</code> stores the size of that stabiliser.</p>
+
+<p><code class="code">info[i]</code> for <span class="SimpleMath">i&gt;1</span> contains precomputation data for <span class="SimpleMath">X_i</span>. Assume <span class="SimpleMath">x ∈ X_i</span> to be <span class="SimpleMath">U_i</span>-minimal. For all <span class="SimpleMath">U_{i-1}</span>-minimal <span class="SimpleMath">z ∈ xU_i ∖ xU_{i-1}</span> we store the number of an element in <code class="code">trans[i]</code> mapping <span class="SimpleMath">z</span> into <span class="SimpleMath">xU_{i-1}</span>. For all <span class="SimpleMath">U_{i-1}</span>-minimal <span class="SimpleMath">z ∈ xU_{i-1}</span> with <span class="SimpleMath">z ≠ x</span> we store the negative of the number of a word in <code class="code">wordcache</code> that is in the generators of <span class="SimpleMath">U_{i-1}</span> and maps <span class="SimpleMath">z</span> to <span class="SimpleMath">x</span>. For <span class="SimpleMath">z=x</span> we store the stabiliser information as in the case <span class="SimpleMath">i=1</span>.</p>
+
+<p>This information together with the information in the following componente allows the minimalisation function to do its job.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">cosetrecog</code></strong></dt>
+<dd><p>A list of length <span class="SimpleMath">k</span> beginning with the index <span class="SimpleMath">1</span>. The entry at position <span class="SimpleMath">i</span> is bound to a function taking <span class="SimpleMath">3</span> arguments, namely <span class="SimpleMath">i</span> itself, a word in the group generators of <span class="SimpleMath">U_1, ..., U_k</span> which lies in <span class="SimpleMath">U_i</span>, and the setup record. The function computes the number <code class="code">j</code> of an element in <code class="code">trans[i]</code>, such that the element of <span class="SimpleMath">U_i</span> described by the word lies in <code class="code">trans[i][j] U_{{i-1}}</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">cosetinfo</code></strong></dt>
+<dd><p>A list of things that can be used by the functions in <code class="code">cosetrecog</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">suborbnr</code></strong></dt>
+<dd><p>A list of length <span class="SimpleMath">k</span> that contains in position <span class="SimpleMath">i</span> the number of <span class="SimpleMath">U_i</span>-orbits in <span class="SimpleMath">X_i</span> archived in <code class="code">info[i]</code> during precomputation.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sumstabl</code></strong></dt>
+<dd><p>A list of length <span class="SimpleMath">k</span> that contains in position <span class="SimpleMath">i</span> the sum of the point stabiliser sizes of all <span class="SimpleMath">U_i</span>-orbits <span class="SimpleMath">X_i</span> archived in <code class="code">info[i]</code> during precomputation.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">permgens</code></strong></dt>
+<dd><p>A list of length <span class="SimpleMath">k+1</span> containing in position <span class="SimpleMath">i</span> generators for <span class="SimpleMath">U_1, ..., U_i</span> in a faithful permutation representation of <span class="SimpleMath">U_i</span>. Generators fit to the generators in <code class="code">els</code>. For the variant <code class="func">OrbitBySuborbitKnownSize</code> (<a href="chap9.html#X86CCD9B98156155E"><span class="RefLink">9.1-2</span></a>) the <span class="SimpleMath">k+1</span> entry can be unbound.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">permgensinv</code></strong></dt>
+<dd><p>The inverses of the generators in <code class="code">permgens</code> in the same arrangement.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sample</code></strong></dt>
+<dd><p>A list of length <span class="SimpleMath">k+1</span> containing sample points in the sets <span class="SimpleMath">X_i</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">stabchainrandom</code></strong></dt>
+<dd><p>The value is used as the value for the <code class="code">random</code> option for <code class="code">StabChain</code> calculations to determine stabiliser sizes. Note that the algorithms are randomized if you use this feature with a value smaller than <span class="SimpleMath">1000</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wordhash</code></strong></dt>
+<dd><p>A hash to quickly recognise already used words. For every word in the hash the position of that word in the <code class="code">wordcache</code> list is stored as value in the hash.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">wordcache</code></strong></dt>
+<dd><p>A list of words in the wordcache for indexing purposes.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hashlen</code></strong></dt>
+<dd><p>Initial length of hash tables used for the enumeration of lists of <span class="SimpleMath">U_i</span>-minimal points.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">staborblenlimit</code></strong></dt>
+<dd><p>This contains the limit, up to which orbits of stabilisers are computed using word action. After this limit, the stabiliser elements are actually evaluated in the group.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">stabsizelimitnostore</code></strong></dt>
+<dd><p>If the stabiliser in the quotient is larger than this limit, the suborbit is not stored.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">cache</code></strong></dt>
+<dd><p>A linked list cache object (see <code class="func">LinkedListCache</code> (<a href="chap5.html#X7FF40AE981FE6F75"><span class="RefLink">5.2-1</span></a>)) to store already computed transversal elements. The cache nodes are referenced in the <code class="code">transcache</code> component and are stored in the cache <code class="code">cache</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">transcache</code></strong></dt>
+<dd><p>This is a list of lists of weak pointer objects. The weak pointer object at position <code class="code">[i][j]</code> holds references to cache nodes of transversal elements of <span class="SimpleMath">U_i-1</span> in <span class="SimpleMath">U_i</span> in representation <span class="SimpleMath">j</span>.</p>
+
+</dd>
+</dl>
+<p><a id="X855663F5790EA2D0" name="X855663F5790EA2D0"></a></p>
+
+<h5>9.3-2 <span class="Heading">The global record <code class="code">ORB</code></span></h5>
+
+<p>In this section we describe the global record <code class="code">ORB</code>, which contains some entries that can tune the behaviour of the orbit-by-suborbit functions. The record has the following components:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">MINSHASHLEN</code></strong></dt>
+<dd><p>This positive integer is the initial value of the hash size when enumerating orbits of stored stabilisers to find all or search through <span class="SimpleMath">U_{i-1}</span>-minimal vectors in an <span class="SimpleMath">U_i</span>-orbit. The default value is <span class="SimpleMath">1000</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ORBITBYSUBORBITDEPTH</code></strong></dt>
+<dd><p>This integer indicates how many recursive calls to <code class="code">OrbitBySubOrbitInner</code> have been done. The initial value is <span class="SimpleMath">0</span> to indicate that no such call has happened. This variable is necessary since the minimalisation routine sometimes uses <code class="code">OrbitBySubOrbitInner</code> recursively to complete some precomputation "on the fly" during some other orbit-by-suborbit enumeration. This component is always set to <span class="SimpleMath">0</span> automatically when calling <code class="func">OrbitBySuborbit</code> (<a href="chap9.html#X79B161FD84AB8C68"><span class="RefLink">9.1-1</span></a>) or <code class="func">OrbitBySuborbitKnownSize</code> (<a href="chap9.html#X86CCD9B98156155E"><span class="RefLink">9.1-2</span></a>) so the user should usually not have to worry about it at all.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">PATIENCEFORSTAB</code></strong></dt>
+<dd><p>This integer indicates how many Schreier generators for the stabiliser are tried before assuming that the stabiliser is complete. Whenever a new generator for the stabiliser is found that increases the size of the currently known stabiliser, the count is reset to <span class="SimpleMath">0</span> that is, only when <code class="code">ORB.PATIENCEFORSTAB</code> unsuccessful Schreier generators have been tried no more Schreier generators are created. The default value for this component is <span class="SimpleMath">1000</span>. This feature is purely heuristical and therefore this value has to be adjusted for some orbit enumerations.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">PLEASEEXITNOW</code></strong></dt>
+<dd><p>This value is usually set to <code class="keyw">false</code>. Setting it to <code class="keyw">true</code> in a break loop tells the orbit-by-suborbit routines to exit gracefully at the next possible time. Simply leaving such a break loop with <code class="keyw">quit;</code> is not safe, since the routines might be in the process of updating precomputation data and the data structures might be left corrupt. Always use this component to leave an orbit enumeration prematurely.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">REPORTSUBORBITS</code></strong></dt>
+<dd><p>This positive integer governs how often information messages about newly found suborbits are printed. The default value is <span class="SimpleMath">1000</span> saying that after every <span class="SimpleMath">1000</span> suborbits a message is printed, if the info level is at its default value <span class="SimpleMath">1</span>. If the info level is increased, then this component does no longer affect the printing and all found suborbits are reported.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">TRIESINQUOTIENT</code> and <code class="code">TRIESINWHOLESPACE</code></strong></dt>
+<dd><p>The bootstrap routines <code class="func">OrbitBySuborbitBootstrapForVectors</code> (<a href="chap9.html#X830E221D84E44A64"><span class="RefLink">9.2-1</span></a>), <code class="func">OrbitBySuborbitBootstrapForLines</code> (<a href="chap9.html#X799056597EA62513"><span class="RefLink">9.2-2</span></a>) and <code class="func">OrbitBySuborbitBootstrapForSpaces</code> (<a href="chap9.html#X7919B1AB7D68780D"><span class="RefLink">9.2-3</span></a>) all need to compute transversals of one helper subgroup in the next one. They use orbit enumerations in various spaces to achieve this. The component <code class="code">TRIESINQUOTIENT</code> must be a non-negative integer and indicates how often a random vector in the corresponding quotient space is tried to find an orbit that can distinguish between cosets. The other component <code class="code">TRIESINWHOLESPACE</code> also must be a non-negative integer and indicates how often a random vector in the whole space is tried. The default values are <span class="SimpleMath">3</span> and <span class="SimpleMath">20</span> resepectively.</p>
+
+</dd>
+</dl>
+<p><a id="X8696CFD08768508D" name="X8696CFD08768508D"></a></p>
+
+<h4>9.4 <span class="Heading">Lists of orbit-by-suborbit objects</span></h4>
+
+<p>There are a few functions that help to administrate lists of orbit-by-suborbits.</p>
+
+<p><a id="X7FB77D827E31AE24" name="X7FB77D827E31AE24"></a></p>
+
+<h5>9.4-1 InitOrbitBySuborbitList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InitOrbitBySuborbitList</code>( <var class="Arg">setup</var>, <var class="Arg">nrrandels</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of orbit-by-suborbits object</p>
+
+<p>Creates an object that stores a list of orbit-by-suborbits. The argument <var class="Arg">setup</var> must be an orbit-by-suborbit setup record and <var class="Arg">nrrandels</var> must be an integer. It indicates how many random elements in <span class="SimpleMath">G</span> should be used to do a probabilistic check for membership in case an orbit-by-suborbit is only partially known.</p>
+
+<p><a id="X87CB441882F43F62" name="X87CB441882F43F62"></a></p>
+
+<h5>9.4-2 IsVectorInOrbitBySuborbitList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsVectorInOrbitBySuborbitList</code>( <var class="Arg">v</var>, <var class="Arg">obsol</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">fail</code> or an integer</p>
+
+<p>Checks probabilistically, if the element <var class="Arg">v</var> lies in one of the partially enumerated orbit-by-suborbits in the orbit-by-suborbit list object <var class="Arg">obsol</var>. If yes, the number of that orbit-by-suborbit is returned and the answer is guaranteed to be correct. If the answer is <code class="keyw">fail</code> there is a small probability that the point actually lies in one of the orbits but this could not be shown.</p>
+
+<p><a id="X7D82CE2579A50B2C" name="X7D82CE2579A50B2C"></a></p>
+
+<h5>9.4-3 OrbitsFromSeedsToOrbitList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbitsFromSeedsToOrbitList</code>( <var class="Arg">obsol</var>, <var class="Arg">li</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Takes the elements in the list <var class="Arg">li</var> as seeds for orbit-by-suborbits. For each such seed it is first checked whether it lies in one of the orbit-by-suborbits in <var class="Arg">obsol</var>, which must be an orbit-by-suborbit list object. If not found, 51% of the orbit-by-suborbit of the seed is enumerated and added to the list <var class="Arg">obsol</var>.</p>
+
+<p>This function is a good way to quickly enumerate a greater number of orbit-by-suborbits.</p>
+
+<p><a id="X83A306918461D700" name="X83A306918461D700"></a></p>
+
+<h5>9.4-4 VerifyDisjointness</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VerifyDisjointness</code>( <var class="Arg">obsol</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code></p>
+
+<p>This function checks deterministically, whether the orbit-by-suborbits in the orbit-by-suborbit list object <var class="Arg">obsol</var> are disjoint or not and returns the corresponding boolean value. This is not a Monte-Carlo algorithm. If the answer is <code class="keyw">false</code>, the function writes out, which orbits are in fact identical.</p>
+
+<p><a id="X7ED405017E3A56CD" name="X7ED405017E3A56CD"></a></p>
+
+<h5>9.4-5 Memory</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Memory</code>( <var class="Arg">obsol</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the total memory used for all orbit-by-suborbits in the orbit-by-suborbit-list <var class="Arg">obsol</var>. Precomputation data is not included, ask the setup object instead.</p>
+
+<p><a id="X7D52885787865E81" name="X7D52885787865E81"></a></p>
+
+<h5>9.4-6 TotalLength</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TotalLength</code>( <var class="Arg">obsol</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the total number of points stored in all orbit-by-suborbits in the orbit-by-suborbit-list <var class="Arg">obsol</var>.</p>
+
+<p><a id="X7C4255287D394742" name="X7C4255287D394742"></a></p>
+
+<h5>9.4-7 Size</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Size</code>( <var class="Arg">obsol</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the total number of points in the orbit-by-suborbit-list <var class="Arg">obsol</var>.</p>
+
+<p><a id="X7BFE12DE85CCE143" name="X7BFE12DE85CCE143"></a></p>
+
+<h5>9.4-8 SavingFactor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SavingFactor</code>( <var class="Arg">obsol</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the quotient of the total number of points stored in all orbit-by-suborbits in the orbit-by-suborbit-list <var class="Arg">obsol</var> and the total number of <span class="SimpleMath">U</span>-minimal points stored, which is the average saving factor considering all orbit-by-suborbits together. Note that the memory for the precomputations is not considered here!</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

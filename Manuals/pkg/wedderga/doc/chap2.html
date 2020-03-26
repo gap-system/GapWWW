@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Wedderga) - Chapter 2: Wedderburn decomposition</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X87273420791F220E" name="X87273420791F220E"></a></p>
+<div class="ChapSects"><a href="chap2.html#X87273420791F220E">2 <span class="Heading">Wedderburn decomposition</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7C902C667D137851">2.1 <span class="Heading">Wedderburn decomposition of a group algebra</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7F1779ED8777F3E7">2.1-1 WedderburnDecomposition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8710F98A85F0DD29">2.1-2 WedderburnDecompositionInfo</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7D06959F7D444C55">2.2 <span class="Heading">Simple quotients</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8349114C83161C2D">2.2-1 SimpleAlgebraByCharacter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X876FD2367E64462D">2.2-2 SimpleAlgebraByCharacterInfo</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X812D667D7D913EB5">2.2-3 SimpleAlgebraByStrongSP</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X858152C882129A0B">2.2-4 SimpleAlgebraByStrongSPInfo</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Wedderburn decomposition</span></h3>
+
+<p><a id="X7C902C667D137851" name="X7C902C667D137851"></a></p>
+
+<h4>2.1 <span class="Heading">Wedderburn decomposition of a group algebra</span></h4>
+
+<p><a id="X7F1779ED8777F3E7" name="X7F1779ED8777F3E7"></a></p>
+
+<h5>2.1-1 WedderburnDecomposition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WedderburnDecomposition</code>( <var class="Arg">FG</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A list of simple algebras.</p>
+
+<p>The input <var class="Arg">FG</var> should be a group algebra of a finite group <span class="SimpleMath">G</span> over the field <span class="SimpleMath">F</span>, where <span class="SimpleMath">F</span> is either an abelian number field (i.e. a subfield of a finite cyclotomic extension of the rationals) or a finite field of characteristic coprime with the order of <span class="SimpleMath">G</span>.</p>
+
+<p>The function returns the list of all <em>Wedderburn components</em> (<a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a>) of the group algebra <var class="Arg">FG</var>. If <span class="SimpleMath">F</span> is an abelian number field then each Wedderburn component is given as a matrix algebra of a <em>cyclotomic algebra</em> (<a href="chap9.html#X8099A8C784255672"><span class="RefLink">9.11</span></a>). If <span class="SimpleMath">F</span> is a finite field then the Wedderburn components are given as matrix algebras over finite fields.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecomposition( GroupRing( GF(5), DihedralGroup(16) ) );</span>
+[ ( GF(5)^[ 1, 1 ] ), ( GF(5)^[ 1, 1 ] ), ( GF(5)^[ 1, 1 ] ),
+  ( GF(5)^[ 1, 1 ] ), ( GF(5)^[ 2, 2 ] ), ( GF(5^2)^[ 2, 2 ] ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecomposition( GroupRing( Rationals, DihedralGroup(16) ) );</span>
+[ Rationals, Rationals, Rationals, Rationals, ( Rationals^[ 2, 2 ] ),
+  &lt;crossed product with center NF(8,[ 1, 7 ]) over AsField( NF(8,
+    [ 1, 7 ]), CF(8) ) of a group of size 2&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecomposition( GroupRing( CF(5), DihedralGroup(16) ) );</span>
+[ CF(5), CF(5), CF(5), CF(5), ( CF(5)^[ 2, 2 ] ),
+  &lt;crossed product with center NF(40,[ 1, 31 ]) over AsField( NF(40,
+    [ 1, 31 ]), CF(40) ) of a group of size 2&gt; ]
+
+</pre></div>
+
+<p>The previous examples show that if <span class="SimpleMath">D_16</span> denotes the dihedral group of order <span class="SimpleMath">16</span> then the <em>Wedderburn decomposition</em> (<a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a>) of <span class="SimpleMath">F_5 D_16</span>, <span class="SimpleMath">ℚ D_16</span> and <span class="SimpleMath">ℚ (ξ_5) D_16</span> are respectively</p>
+
+<p class="pcenter">
+  \mathbb F_5 D_{16} = 4 \mathbb F_5 \oplus M_2( \mathbb F_5 ) \oplus M_2( \mathbb F_{25} ),  
+  </p>
+
+<p class="pcenter">
+  ℚ D_{16} = 4 ℚ \oplus M_2( ℚ ) \oplus (K(\xi_8)/K,t),
+  </p>
+
+<p>and</p>
+
+<p class="pcenter">
+  ℚ (\xi_5) D_{16} = 4 ℚ (\xi_5) \oplus M_2( ℚ (\xi_5) ) \oplus (F(\xi_{40})/F,t),  
+  </p>
+
+<p>where <span class="SimpleMath">(K(ξ_8)/K,t)</span> is a <em>cyclotomic algebra</em> (<a href="chap9.html#X8099A8C784255672"><span class="RefLink">9.11</span></a>) with the centre <span class="SimpleMath">K=NF(8,[ 1, 7 ])= ℚ (sqrt2)</span>, <span class="SimpleMath">(F(ξ_40)/F,t) = ℚ (sqrt2,ξ_5)</span> is a cyclotomic algebra with centre <span class="SimpleMath">F=NF(40,[ 1, 31 ])</span> and <span class="SimpleMath">ξ_n</span> denotes a <span class="SimpleMath">n</span>-th root of unity.</p>
+
+<p>Two more examples:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecomposition( GroupRing( Rationals, SmallGroup(48,15) ) );</span>
+[ Rationals, Rationals, Rationals, Rationals, 
+  &lt;crossed product with center Rationals over CF(3) of a group of size 2&gt;, 
+  &lt;crossed product with center Rationals over GaussianRationals of a group of \
+size 2&gt;, &lt;crossed product with center Rationals over CF(3) of a group of size 
+    2&gt;, &lt;crossed product with center NF(8,[ 1, 7 ]) over AsField( NF(8,
+    [ 1, 7 ]), CF(8) ) of a group of size 2&gt;, ( CF(3)^[ 2, 2 ] ), 
+  &lt;crossed product with center Rationals over CF(12) of a group of size 4&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecomposition( GroupRing( CF(3), SmallGroup(48,15) ) );</span>
+[ CF(3), CF(3), CF(3), CF(3), ( CF(3)^[ 2, 2 ] ), 
+  &lt;crossed product with center CF(3) over AsField( CF(3), CF(
+    12) ) of a group of size 2&gt;, ( CF(3)^[ 2, 2 ] ), 
+  &lt;crossed product with center NF(24,[ 1, 7 ]) over AsField( NF(24,
+    [ 1, 7 ]), CF(24) ) of a group of size 2&gt;, ( CF(3)^[ 2, 2 ] ), 
+  ( CF(3)^[ 2, 2 ] ), ( &lt;crossed product with center CF(3) over AsField( CF(
+    3), CF(12) ) of a group of size 2&gt;^[ 2, 2 ] ) ]
+
+</pre></div>
+
+<p>In some cases, in characteristic zero, some entries of the output of <code class="func">WedderburnDecomposition</code> do not provide full matrix algebras over a <em>cyclotomic algebra</em> (<a href="chap9.html#X8099A8C784255672"><span class="RefLink">9.11</span></a>), but "fractional matrix algebras". That entry is not an algebra that can be used as a <strong class="pkg">GAP</strong> object. Instead it is a pair formed by a rational giving the "size" of the matrices and a crossed product. See <a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a> for a theoretical explanation of this phenomenon. In this case a warning message is displayed.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG:=GroupRing(Rationals,SmallGroup(240,89));</span>
+&lt;algebra-with-one over Rationals, with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecomposition(QG);</span>
+Wedderga: Warning!!!
+Some of the Wedderburn components displayed are FRACTIONAL MATRIX ALGEBRAS!!!
+
+[ Rationals, Rationals, &lt;crossed product with center Rationals over CF(
+    5) of a group of size 4&gt;, ( Rationals^[ 4, 4 ] ), ( Rationals^[ 4, 4 ] ),
+  ( Rationals^[ 5, 5 ] ), ( Rationals^[ 5, 5 ] ), ( Rationals^[ 6, 6 ] ),
+  &lt;crossed product with center NF(12,[ 1, 11 ]) over AsField( NF(12,
+    [ 1, 11 ]), NF(60,[ 1, 11 ]) ) of a group of size 4&gt;,
+  [ 3/2, &lt;crossed product with center NF(8,[ 1, 7 ]) over AsField( NF(8,
+        [ 1, 7 ]), NF(40,[ 1, 31 ]) ) of a group of size 4&gt; ] ]  
+
+</pre></div>
+
+<p><a id="X8710F98A85F0DD29" name="X8710F98A85F0DD29"></a></p>
+
+<h5>2.1-2 WedderburnDecompositionInfo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WedderburnDecompositionInfo</code>( <var class="Arg">FG</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A list with each entry a numerical description of a <em>cyclotomic algebra</em> (<a href="chap9.html#X8099A8C784255672"><span class="RefLink">9.11</span></a>).</p>
+
+<p>The input <var class="Arg">FG</var> should be a group algebra of a finite group <span class="SimpleMath">G</span> over the field <span class="SimpleMath">F</span>, where <span class="SimpleMath">F</span> is either an abelian number field (i.e. a subfield of a finite cyclotomic extension of the rationals) or a finite field of characteristic coprime to the order of <span class="SimpleMath">G</span>.</p>
+
+<p>This function is a numerical counterpart of <code class="func">WedderburnDecomposition</code> (<a href="chap2.html#X7F1779ED8777F3E7"><span class="RefLink">2.1-1</span></a>).</p>
+
+<p>It returns a list formed by lists of lengths 2, 4 or 5.</p>
+
+<p>The lists of length 2 are of the form</p>
+
+<p class="pcenter">
+         [n,F],
+         </p>
+
+<p>where <span class="SimpleMath">n</span> is a positive integer and <span class="SimpleMath">F</span> is a field. It represents the <span class="SimpleMath">n× n</span> matrix algebra <span class="SimpleMath">M_n(F)</span> over the field <span class="SimpleMath">F</span>.</p>
+
+<p>The lists of length 4 are of the form</p>
+
+<p class="pcenter">
+         [n,F,k,[d,\alpha,\beta]],
+         </p>
+
+<p>where <span class="SimpleMath">F</span> is a field and <span class="SimpleMath">n,k,d,α,β</span> are non-negative integers, satisfying the conditions mentioned in Section <a href="chap9.html#X84A142407B7565E0"><span class="RefLink">9.12</span></a>. It represents the <span class="SimpleMath">n× n</span> matrix algebra <span class="SimpleMath">M_n(A)</span> over the cyclic algebra</p>
+
+<p class="pcenter">
+         A=F(\xi_k)[u | \xi_k^u = \xi_k^{\alpha}, u^d = \xi_k^{\beta}],
+         </p>
+
+<p>where <span class="SimpleMath">ξ_k</span> is a primitive <span class="SimpleMath">k</span>-th root of unity.</p>
+
+<p>The lists of length 5 are of the form</p>
+
+<p class="pcenter">
+           [n,F,k,[d_i,\alpha_i,\beta_i]_{i=1}^m, [\gamma_{i,j}]_{1\le i &lt; j \le m} ],
+           </p>
+
+<p>where <span class="SimpleMath">F</span> is a field and <span class="SimpleMath">n,k,d_i,α_i,β_i,γ_i,j</span> are non-negative integers. It represents the <span class="SimpleMath">n× n</span> matrix algebra <span class="SimpleMath">M_n(A)</span> over the <em>cyclotomic algebra</em> (<a href="chap9.html#X8099A8C784255672"><span class="RefLink">9.11</span></a>)</p>
+
+<p class="pcenter">
+          A = F(\xi_k)[g_1,\ldots,g_m \mid 
+          \xi_k^{g_i} = \xi_k^{\alpha_i}, g_i^{d_i}=\xi_k^{\beta_i}, 
+                        g_jg_i=\xi_k^{\gamma_{ij}} g_i g_j],
+          </p>
+
+<p>where <span class="SimpleMath">ξ_k</span> is a primitive <span class="SimpleMath">k</span>-th root of unity (see <a href="chap9.html#X84A142407B7565E0"><span class="RefLink">9.12</span></a>).</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecompositionInfo( GroupRing( Rationals, DihedralGroup(16) ) );</span>
+[ [ 1, Rationals ], [ 1, Rationals ], [ 1, Rationals ], [ 1, Rationals ],
+  [ 2, Rationals ], [ 1, NF(8,[ 1, 7 ]), 8, [ 2, 7, 0 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecompositionInfo( GroupRing( CF(5), DihedralGroup(16) ) );</span>
+[ [ 1, CF(5) ], [ 1, CF(5) ], [ 1, CF(5) ], [ 1, CF(5) ], [ 2, CF(5) ],
+  [ 1, NF(40,[ 1, 31 ]), 8, [ 2, 7, 0 ] ] ]
+
+</pre></div>
+
+<p>The interpretation of the previous example gives rise to the following <em>Wedderburn decompositions</em> (<a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a>), where <span class="SimpleMath">D_16</span> is the dihedral group of order 16 and <span class="SimpleMath">ξ_5</span> is a primitive <span class="SimpleMath">5</span>-th root of unity.</p>
+
+<p class="pcenter">
+  ℚ D_{16} = 4 ℚ \oplus M_2( ℚ ) \oplus M_2( ℚ (\sqrt{2})).  
+  </p>
+
+<p class="pcenter">
+  ℚ (\xi_5) D_{16} = 4 ℚ (\xi_5) \oplus 
+                 M_2( ℚ (\xi_5)) \oplus 
+                 M_2( ℚ (\xi_5,\sqrt{2})).  
+  </p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=FreeGroup("a","b");;a:=F.1;;b:=F.2;;rel:=[a^8,a^4*b^2,b^-1*a*b*a];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q16:=F/rel;; QQ16:=GroupRing( Rationals, Q16 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QS4:=GroupRing( Rationals, SymmetricGroup(4) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecomposition(QQ16);</span>
+[ Rationals, Rationals, Rationals, Rationals, ( Rationals^[ 2, 2 ] ),
+  &lt;crossed product with center NF(8,[ 1, 7 ]) over AsField( NF(8,
+    [ 1, 7 ]), CF(8) ) of a group of size 2&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecomposition( QS4 );</span>
+[ Rationals, Rationals, &lt;crossed product with center Rationals over CF(
+    3) of a group of size 2&gt;, ( Rationals^[ 3, 3 ] ), ( Rationals^[ 3, 3 ] ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecompositionInfo(QQ16);</span>
+[ [ 1, Rationals ], [ 1, Rationals ], [ 1, Rationals ], [ 1, Rationals ], 
+  [ 2, Rationals ], [ 1, NF(8,[ 1, 7 ]), 8, [ 2, 7, 4 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecompositionInfo(QS4);  </span>
+[ [ 1, Rationals ], [ 1, Rationals ], [ 1, Rationals, 3, [ 2, 2, 0 ] ], 
+  [ 3, Rationals ], [ 3, Rationals ] ]
+
+</pre></div>
+
+<p>In the previous example we computed the Wedderburn decomposition of the rational group algebra <span class="SimpleMath">ℚ Q_16</span> of the quaternion group of order <span class="SimpleMath">16</span> and the rational group algebra <span class="SimpleMath">ℚ S_4</span> of the symmetric group on four letters. For the two group algebras we used both <code class="func">WedderburnDecomposition</code> (<a href="chap2.html#X7F1779ED8777F3E7"><span class="RefLink">2.1-1</span></a>) and <code class="func">WedderburnDecompositionInfo</code>.</p>
+
+<p>The output of <code class="func">WedderburnDecomposition</code> (<a href="chap2.html#X7F1779ED8777F3E7"><span class="RefLink">2.1-1</span></a>) shows that</p>
+
+<p class="pcenter">
+  ℚ Q_{16} = 4 ℚ \oplus M_2( ℚ ) \oplus A,
+  </p>
+
+<p class="pcenter">
+  ℚ S_{4} = 2 ℚ \oplus 2 M_3( ℚ ) \oplus B,
+  </p>
+
+<p>where <span class="SimpleMath">A</span> and <span class="SimpleMath">B</span> are <em>crossed products</em> (<a href="chap9.html#X7FB21779832CE1CB"><span class="RefLink">9.6</span></a>) with coefficients in the cyclotomic fields <span class="SimpleMath">ℚ (ξ_8)</span> and <span class="SimpleMath">ℚ (ξ_3)</span> respectively. This output can be used as a <strong class="pkg">GAP</strong> object, but it does not give clear information on the structure of the algebras <span class="SimpleMath">A</span> and <span class="SimpleMath">B</span>.</p>
+
+<p>The numerical information displayed by <code class="func">WedderburnDecompositionInfo</code> means that</p>
+
+<p class="pcenter">
+  A = ℚ (\xi|\xi^8=1)[g | \xi^g = \xi^7 = \xi^{-1}, g^2 = \xi^4 = -1],
+  </p>
+
+<p class="pcenter">
+  B = ℚ (\xi|\xi^3=1)[g | \xi^g = \xi^2 = \xi^{-1}, g^2 = 1].
+  </p>
+
+<p>Both <span class="SimpleMath">A</span> and <span class="SimpleMath">B</span> are quaternion algebras over its centre which is <span class="SimpleMath">ℚ (ξ+ξ^-1)</span> and the former is equal to <span class="SimpleMath">ℚ (sqrt2)</span> and <span class="SimpleMath">ℚ</span> respectively.</p>
+
+<p>In <span class="SimpleMath">B</span>, one has <span class="SimpleMath">(g+1)(g-1)=0</span>, while <span class="SimpleMath">g</span> is neither <span class="SimpleMath">1</span> nor <span class="SimpleMath">-1</span>. This shows that <span class="SimpleMath">B=M_2( ℚ )</span>. However the relation <span class="SimpleMath">g^2=-1</span> in <span class="SimpleMath">A</span> shows that</p>
+
+<p class="pcenter">
+  A=ℚ (\sqrt{2})[i,g|i^2=g^2=-1,ig=-gi]
+  </p>
+
+<p>and so <span class="SimpleMath">A</span> is a division algebra with centre <span class="SimpleMath">ℚ (sqrt2)</span>, which is a subalgebra of the algebra of Hamiltonian quaternions. This could be deduced also using well known methods on cyclic algebras (see e.g. <a href="chapBib.html#biBR">[Rei03]</a>).</p>
+
+<p>The next example shows the output of <code class="code">WedderburnDecompositionInfo</code> for <span class="SimpleMath">ℚ G</span> and <span class="SimpleMath">ℚ (ξ_3) G</span>, where <span class="SimpleMath">G=SmallGroup(48,15)</span>. The user can compare it with the output of <code class="func">WedderburnDecomposition</code> (<a href="chap2.html#X7F1779ED8777F3E7"><span class="RefLink">2.1-1</span></a>) for the same group in the previous section. Notice that the last entry of the <em>Wedderburn decomposition</em> (<a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a>) of <span class="SimpleMath">ℚ G</span> is not given as a matrix algebra of a cyclic algebra. However, the corresponding entry of <span class="SimpleMath">ℚ (ξ_3) G</span> is a matrix algebra of a cyclic algebra.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecompositionInfo( GroupRing( Rationals, SmallGroup(48,15) ) );</span>
+[ [ 1, Rationals ], [ 1, Rationals ], [ 1, Rationals ], [ 1, Rationals ], 
+  [ 1, Rationals, 3, [ 2, 2, 0 ] ], [ 1, Rationals, 4, [ 2, 3, 0 ] ], 
+  [ 1, Rationals, 6, [ 2, 5, 0 ] ], [ 1, NF(8,[ 1, 7 ]), 8, [ 2, 7, 0 ] ], 
+  [ 2, CF(3) ], [ 1, Rationals, 12, [ [ 2, 5, 3 ], [ 2, 7, 0 ] ], [ [ 3 ] ] ] 
+ ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecompositionInfo( GroupRing( CF(3), SmallGroup(48,15) ) );</span>
+[ [ 1, CF(3) ], [ 1, CF(3) ], [ 1, CF(3) ], [ 1, CF(3) ], 
+  [ 2, CF(3), 3, [ 1, 1, 0 ] ], [ 1, CF(3), 4, [ 2, 3, 0 ] ], 
+  [ 2, CF(3), 6, [ 1, 1, 0 ] ], [ 1, NF(24,[ 1, 7 ]), 8, [ 2, 7, 0 ] ], 
+  [ 2, CF(3) ], [ 2, CF(3) ], [ 2, CF(3), 12, [ 2, 7, 0 ] ] ]
+
+</pre></div>
+
+<p>In some cases some of the first entries of the output of <code class="func">WedderburnDecompositionInfo</code> are not integers and so the correspoding <em>Wedderburn components</em> (<a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a>) are given as "fractional matrix algebras" of <em>cyclotomic algebras</em> (<a href="chap9.html#X8099A8C784255672"><span class="RefLink">9.11</span></a>). See <a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a> for a theoretical explanation of this phenomenon. In that case a warning message will be displayed during the first call of <code class="code">WedderburnDecompositionInfo</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG:=GroupRing(Rationals,SmallGroup(240,89));</span>
+&lt;algebra-with-one over Rationals, with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WedderburnDecompositionInfo(QG);</span>
+Wedderga: Warning!!! 
+Some of the Wedderburn components displayed are FRACTIONAL MATRIX ALGEBRAS!!!
+
+[ [ 1, Rationals ], [ 1, Rationals ], [ 1, Rationals, 10, [ 4, 3, 5 ] ],
+  [ 4, Rationals ], [ 4, Rationals ], [ 5, Rationals ], [ 5, Rationals ],
+  [ 6, Rationals ], [ 1, NF(12,[ 1, 11 ]), 10, [ 4, 3, 5 ] ],
+  [ 3/2, NF(8,[ 1, 7 ]), 10, [ 4, 3, 5 ] ] ]
+
+</pre></div>
+
+<p>The interpretation of the output in the previous example gives rise to the following <em>Wedderburn decomposition</em> (<a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a>) of <span class="SimpleMath">ℚ G</span> for <span class="SimpleMath">G</span> the small group <span class="SimpleMath">[240,89]</span>:</p>
+
+<p class="pcenter">
+    ℚ G = 2 ℚ \oplus 2 M_4( ℚ ) \oplus 
+           2 M_5( ℚ ) \oplus M_6( ℚ ) \oplus A \oplus B \oplus C
+    </p>
+
+<p>where</p>
+
+<p class="pcenter">
+    A = ℚ (\xi_{10})[u|\xi_{10}^u = \xi_{10}^3, u^4 = -1],
+    </p>
+
+<p><span class="SimpleMath">B</span> is an algebra of degree <span class="SimpleMath">(4*2 )/2 = 4</span> which is <em>Brauer equivalent</em> (<a href="chap9.html#X7A24D5407F72C633"><span class="RefLink">9.5</span></a>) to</p>
+
+<p class="pcenter">
+    B_1 = ℚ (\xi_{60})[u,v|\xi_{60}^u = \xi_{60}^{13}, 
+                          u^4 = \xi_{60}^5, 
+                          \xi_{60}^v = \xi_{60}^{11}, v^2 = 1, vu=uv],
+    </p>
+
+<p>and <span class="SimpleMath">C</span> is an algebra of degree <span class="SimpleMath">(4*2)*3/4 = 6</span> which is <em>Brauer equivalent</em> (<a href="chap9.html#X7A24D5407F72C633"><span class="RefLink">9.5</span></a>) to</p>
+
+<p class="pcenter">
+    C_1 = ℚ (\xi_{60})[u,v|\xi_{60}^u = \xi_{60}^7, 
+                          u^4 = \xi_{60}^5, 
+                          \xi_{60}^v = \xi_{60}^{31}, v^2 = 1, vu=uv].
+    </p>
+
+<p>The precise description of <span class="SimpleMath">B</span> and <span class="SimpleMath">C</span> requires the usage of "ad hoc" arguments.</p>
+
+<p><a id="X7D06959F7D444C55" name="X7D06959F7D444C55"></a></p>
+
+<h4>2.2 <span class="Heading">Simple quotients</span></h4>
+
+<p><a id="X8349114C83161C2D" name="X8349114C83161C2D"></a></p>
+
+<h5>2.2-1 SimpleAlgebraByCharacter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimpleAlgebraByCharacter</code>( <var class="Arg">FG</var>, <var class="Arg">chi</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A simple algebra.</p>
+
+<p>The first input <var class="Arg">FG</var> should be a <em>semisimple group algebra</em> (<a href="chap9.html#X7FDD93FB79ADCC91"><span class="RefLink">9.2</span></a>) over a finite group <span class="SimpleMath">G</span> and the second input should be an irreducible character of <span class="SimpleMath">G</span>.</p>
+
+<p>The output is a matrix algebra of a <em>cyclotomic algebras</em> (<a href="chap9.html#X8099A8C784255672"><span class="RefLink">9.11</span></a>) which is isomorphic to the unique <em>Wedderburn component</em> (<a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a>) <span class="SimpleMath">A</span> of <var class="Arg">FG</var> such that <span class="SimpleMath">χ(A)ne 0</span>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A5 := AlternatingGroup(5);</span>
+Alt( [ 1 .. 5 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimpleAlgebraByCharacter( GroupRing( Rationals , A5 ) , Irr( A5 ) [3] );</span>
+( NF(5,[ 1, 4 ])^[ 3, 3 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimpleAlgebraByCharacter( GroupRing( GF(7) , A5 ) , Irr( A5 ) [3] );</span>
+( GF(7^2)^[ 3, 3 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=SmallGroup(128,100);               </span>
+&lt;pc group of size 128 with 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">chi4:=Filtered(Irr(G),x-&gt;Degree(x)=4);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(chi4,x-&gt;SimpleAlgebraByCharacter(GroupRing(Rationals,G),x));</span>
+[ ( &lt;crossed product with center NF(8,[ 1, 3 ]) over AsField( NF(8,
+    [ 1, 3 ]), CF(8) ) of a group of size 2&gt;^[ 2, 2 ] ), 
+  ( &lt;crossed product with center NF(8,[ 1, 3 ]) over AsField( NF(8,
+    [ 1, 3 ]), CF(8) ) of a group of size 2&gt;^[ 2, 2 ] ), 
+  ( &lt;crossed product with center NF(8,[ 1, 3 ]) over AsField( NF(8,
+    [ 1, 3 ]), CF(8) ) of a group of size 2&gt;^[ 2, 2 ] ), 
+  ( &lt;crossed product with center NF(8,[ 1, 3 ]) over AsField( NF(8,
+    [ 1, 3 ]), CF(8) ) of a group of size 2&gt;^[ 2, 2 ] ) ]
+
+</pre></div>
+
+<p><a id="X876FD2367E64462D" name="X876FD2367E64462D"></a></p>
+
+<h5>2.2-2 SimpleAlgebraByCharacterInfo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimpleAlgebraByCharacterInfo</code>( <var class="Arg">FG</var>, <var class="Arg">chi</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The numerical description of the output of <code class="func">SimpleAlgebraByCharacter</code> (<a href="chap2.html#X8349114C83161C2D"><span class="RefLink">2.2-1</span></a>).</p>
+
+<p>The first input <var class="Arg">FG</var> is a <em>semisimple group algebra</em> (<a href="chap9.html#X7FDD93FB79ADCC91"><span class="RefLink">9.2</span></a>) over a finite group <span class="SimpleMath">G</span> and the second input is an irreducible character of <span class="SimpleMath">G</span>.</p>
+
+<p>The output is the numerical description <a href="chap9.html#X84A142407B7565E0"><span class="RefLink">9.12</span></a> of the <em>cyclotomic algebra</em> (<a href="chap9.html#X8099A8C784255672"><span class="RefLink">9.11</span></a>) which is isomorphic to the unique <em>Wedderburn component</em> (<a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a>) <span class="SimpleMath">A</span> of <var class="Arg">FG</var> such that <span class="SimpleMath">χ(A)ne 0</span>.</p>
+
+<p>See <a href="chap9.html#X84A142407B7565E0"><span class="RefLink">9.12</span></a> for the interpretation of the numerical information given by the output.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=SmallGroup(128,100);</span>
+&lt;pc group of size 128 with 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG:=GroupRing(Rationals,G);</span>
+&lt;algebra-with-one over Rationals, with 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">chi4:=Filtered(Irr(G),x-&gt;Degree(x)=4);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(chi4,x-&gt;SimpleAlgebraByCharacterInfo(QG,x));</span>
+[ [ 2, NF(8,[ 1, 3 ]), 8, [ 2, 3, 0 ] ], [ 2, NF(8,[ 1, 3 ]), 8, [ 2, 3, 0 ] ], 
+  [ 2, NF(8,[ 1, 3 ]), 8, [ 2, 3, 4 ] ], [ 2, NF(8,[ 1, 3 ]), 8, [ 2, 3, 4 ] ] ]
+
+</pre></div>
+
+<p><a id="X812D667D7D913EB5" name="X812D667D7D913EB5"></a></p>
+
+<h5>2.2-3 SimpleAlgebraByStrongSP</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimpleAlgebraByStrongSP</code>( <var class="Arg">QG</var>, <var class="Arg">K</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimpleAlgebraByStrongSPNC</code>( <var class="Arg">QG</var>, <var class="Arg">K</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimpleAlgebraByStrongSP</code>( <var class="Arg">FG</var>, <var class="Arg">K</var>, <var class="Arg">H</var>, <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimpleAlgebraByStrongSPNC</code>( <var class="Arg">FG</var>, <var class="Arg">K</var>, <var class="Arg">H</var>, <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A simple algebra.</p>
+
+<p>In the three-argument version the input must be formed by a <em>semisimple rational group algebra</em> <var class="Arg">QG</var> (see <a href="chap9.html#X7FDD93FB79ADCC91"><span class="RefLink">9.2</span></a>) and two subgroups <var class="Arg">K</var> and <var class="Arg">H</var> of <span class="SimpleMath">G</span> which form a <em>strong Shoda pair</em> (<a href="chap9.html#X7E3479527BAE5B9E"><span class="RefLink">9.15</span></a>) of <span class="SimpleMath">G</span>.</p>
+
+<p>The three-argument version returns the Wedderburn component (<a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a>) of the rational group algebra <var class="Arg">QG</var> realized by the strong Shoda pair (<var class="Arg">K</var>,<var class="Arg">H</var>).</p>
+
+<p>In the four-argument version the first argument is a semisimple finite group algebra <var class="Arg">FG</var>, <var class="Arg">(K,H)</var> is a strong Shoda pair of <span class="SimpleMath">G</span> and the fourth input data is either a generating <span class="SimpleMath">q</span>-cyclotomic class modulo the index of <var class="Arg">H</var> in <var class="Arg">K</var> or a representative of a generating <span class="SimpleMath">q</span>-cyclotomic class modulo the index of <var class="Arg">H</var> in <var class="Arg">K</var> (see <a href="chap9.html#X800D8C5087D79DC8"><span class="RefLink">9.19</span></a>).</p>
+
+<p>The four-argument version returns the Wedderburn component (<a href="chap9.html#X84BB4A6081EAE905"><span class="RefLink">9.3</span></a>) of the finite group algebra <var class="Arg">FG</var> realized by the strong Shoda pair (<var class="Arg">K</var>,<var class="Arg">H</var>) and the cyclotomic class <var class="Arg">C</var> (or the cyclotomic class containing <var class="Arg">C</var>).</p>
+
+<p>The versions ending in NC do not check if (<var class="Arg">K</var>,<var class="Arg">H</var>) is a strong Shoda pair of <span class="SimpleMath">G</span>. In the four-argument version it is also not checked whether <var class="Arg">C</var> is either a generating <span class="SimpleMath">q</span>-cyclotomic class modulo the index of <var class="Arg">H</var> in <var class="Arg">K</var> or an integer coprime to the index of <var class="Arg">H</var> in <var class="Arg">K</var>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=FreeGroup("a","b");; a:=F.1;; b:=F.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=F/[ a^16, b^2*a^8, b^-1*a*b*a^9 ];; a:=G.1;; b:=G.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:=Subgroup(G,[a]);; H:=Subgroup(G,[]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG:=GroupRing( Rationals, G );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FG:=GroupRing( GF(7), G );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimpleAlgebraByStrongSP( QG, K, H );</span>
+&lt;crossed product over CF(16) of a group of size 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimpleAlgebraByStrongSP( FG, K, H, [1,7] );</span>
+( GF(7)^[ 2, 2 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimpleAlgebraByStrongSP( FG, K, H, 1 );</span>
+( GF(7)^[ 2, 2 ] )
+
+</pre></div>
+
+<p><a id="X858152C882129A0B" name="X858152C882129A0B"></a></p>
+
+<h5>2.2-4 SimpleAlgebraByStrongSPInfo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimpleAlgebraByStrongSPInfo</code>( <var class="Arg">QG</var>, <var class="Arg">K</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimpleAlgebraByStrongSPInfoNC</code>( <var class="Arg">QG</var>, <var class="Arg">K</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimpleAlgebraByStrongSPInfo</code>( <var class="Arg">FG</var>, <var class="Arg">K</var>, <var class="Arg">H</var>, <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimpleAlgebraByStrongSPInfoNC</code>( <var class="Arg">FG</var>, <var class="Arg">K</var>, <var class="Arg">H</var>, <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A numerical description of one simple algebra.</p>
+
+<p>In the three-argument version the input must be formed by a <em>semisimple rational group algebra</em> (<a href="chap9.html#X7FDD93FB79ADCC91"><span class="RefLink">9.2</span></a>) <var class="Arg">QG</var> and two subgroups <var class="Arg">K</var> and <var class="Arg">H</var> of <span class="SimpleMath">G</span> which form a <em>strong Shoda pair</em> (<a href="chap9.html#X7E3479527BAE5B9E"><span class="RefLink">9.15</span></a>) of <span class="SimpleMath">G</span>. It returns the numerical information describing the Wedderburn component (<a href="chap9.html#X84A142407B7565E0"><span class="RefLink">9.12</span></a>) of the rational group algebra <var class="Arg">QG</var> realized by a the strong Shoda pair (<var class="Arg">K</var>,<var class="Arg">H</var>).</p>
+
+<p>In the four-argument version the first input is a semisimple finite group algebra <var class="Arg">FG</var>, <var class="Arg">(K,H)</var> is a strong Shoda pair of <span class="SimpleMath">G</span> and the fourth input data is either a generating <span class="SimpleMath">q</span>-cyclotomic class modulo the index of <var class="Arg">H</var> in <var class="Arg">K</var> or a representative of a generating <span class="SimpleMath">q</span>-cyclotomic class modulo the index of <var class="Arg">H</var> in <var class="Arg">K</var> (<a href="chap9.html#X800D8C5087D79DC8"><span class="RefLink">9.19</span></a>). It returns a pair of positive integers <span class="SimpleMath">[n,r]</span> which represent the <span class="SimpleMath">n× n</span> matrix algebra over the field of order <span class="SimpleMath">r</span> which is isomorphic to the Wedderburn component of <var class="Arg">FG</var> realized by a the strong Shoda pair (<var class="Arg">K</var>,<var class="Arg">H</var>) and the cyclotomic class <var class="Arg">C</var> (or the cyclotomic class containing the integer <var class="Arg">C</var>).</p>
+
+<p>The versions ending in NC do not check if (<var class="Arg">K</var>,<var class="Arg">H</var>) is a strong Shoda pair of <span class="SimpleMath">G</span>. In the four-argument version it is also not checked whether <var class="Arg">C</var> is either a generating <span class="SimpleMath">q</span>-cyclotomic class modulo the index of <var class="Arg">H</var> in <var class="Arg">K</var> or an integer coprime with the index of <var class="Arg">H</var> in <var class="Arg">K</var>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=FreeGroup("a","b");; a:=F.1;; b:=F.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=F/[ a^16, b^2*a^8, b^-1*a*b*a^9 ];; a:=G.1;; b:=G.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:=Subgroup(G,[a]);; H:=Subgroup(G,[]);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QG:=GroupRing( Rationals, G );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FG:=GroupRing( GF(7), G );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimpleAlgebraByStrongSP( QG, K, H );</span>
+&lt;crossed product over CF(16) of a group of size 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimpleAlgebraByStrongSPInfo( QG, K, H );</span>
+[ 1, NF(16,[ 1, 7 ]), 16, [ [ 2, 7, 8 ] ], [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimpleAlgebraByStrongSPInfo( FG, K, H, [1,7] );</span>
+[ 2, 7 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimpleAlgebraByStrongSPInfo( FG, K, H, 1 );</span>
+[ 2, 7 ]
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

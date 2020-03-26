@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (groupoids) - Chapter 7: Technical Notes</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7_mj.html">[MathJax on]</a></p>
+<p><a id="X7F2BA6DC7AD84FBC" name="X7F2BA6DC7AD84FBC"></a></p>
+<div class="ChapSects"><a href="chap7.html#X7F2BA6DC7AD84FBC">7 <span class="Heading">Technical Notes</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7C5B725A7AED3C8D">7.1 <span class="Heading">Many object structures</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7A4760E887C9C968">7.2 <span class="Heading">Many object homomorphisms</span></a>
+</span>
+</div>
+</div>
+
+<h3>7 <span class="Heading">Technical Notes</span></h3>
+
+<p>This short chapter is included for the benefit of anyone wishing to implement some other variety of many-object structures, for example <em>ringoids</em>, which are rings with many objects; <em>Lie groupoids</em>, which are Lie groups with many objects; and so on.</p>
+
+<p><a id="X7C5B725A7AED3C8D" name="X7C5B725A7AED3C8D"></a></p>
+
+<h4>7.1 <span class="Heading">Many object structures</span></h4>
+
+<p>Structures with many objects, and their elements, are defined in a manner similar to the single object case. For elements we have:</p>
+
+
+<ul>
+<li><p><code class="code">DeclareCategory( "IsMultiplicativeElementWithObjects", IsMultiplicativeElement ); </code></p>
+
+</li>
+<li><p><code class="code">DeclareCategory( "IsMultiplicativeElementWithObjectsAndOnes", IsMultiplicativeElementWithObjects ); </code></p>
+
+</li>
+<li><p><code class="code">DeclareCategory( "IsMultiplicativeElementWithObjectsAndInverses", IsMultiplicativeElementWithObjectsAndOnes ); </code></p>
+
+</li>
+<li><p><code class="code">DeclareCategory( "IsGroupoidElement", </code></p>
+
+<p><code class="code">IsMultiplicativeElementWithObjectsAndInverses ); </code></p>
+
+</li>
+</ul>
+<p>as well as various category collections. For the various structures we have:</p>
+
+
+<ul>
+<li><p><code class="code">DeclareCategory( "IsDomainWithObjects", IsDomain ); </code></p>
+
+</li>
+<li><p><code class="code">DeclareCategory( "IsMagmaWithObjects", IsDomainWithObjects and IsMultiplicativeElementWithObjectsCollection );</code></p>
+
+</li>
+<li><p><code class="code">DeclareCategory( "IsSemigroupWithObjects", IsMagmaWithObjects and IsAssociative ); </code></p>
+
+</li>
+<li><p><code class="code">DeclareCategory( "IsMonoidWithObjects", IsSemigroupWithObjects and IsMultiplicativeElementWithObjectsAndOnesCollection ); </code></p>
+
+<p><code class="code">IsMultiplicativeElementWithObjectsAndInversesCollection ); </code></p>
+
+</li>
+<li><p><code class="code">DeclareCategory( "IsGroupoid", IsMonoidWithObjects and IsGroupoidElementCollection ); </code></p>
+
+</li>
+</ul>
+<p>Among the groupoids constructed earlier are the single piece <code class="code">Gd8</code> and the five component union <code class="code">U5</code>:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CategoriesOfObject( Gd8 );</span>
+[ "IsListOrCollection", "IsCollection", "IsExtLElement", 
+  "CategoryCollections(IsExtLElement)", "IsExtRElement", 
+  "CategoryCollections(IsExtRElement)", 
+  "CategoryCollections(IsMultiplicativeElement)", "IsGeneralizedDomain", 
+  "IsMagma", "IsDomainWithObjects", 
+  "CategoryCollections(IsMultiplicativeElementWithObjects)", 
+  "CategoryCollections(IsMultiplicativeElementWithObjectsAndOnes)", 
+  "CategoryCollections(IsMultiplicativeElementWithObjectsAndInverses)\
+", "CategoryCollections(IsGroupoidElement)", "IsMagmaWithObjects", 
+  "IsMagmaWithObjectsAndOnes", "IsMagmaWithObjectsAndInverses", 
+  "IsGroupoid" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FamilyObj( Gd8 );     ## these numbers vary from one run to another</span>
+NewFamily( "GroupoidFamily", [ 2722 ], [ 53, 54, 79, 80, 81, 82, 92, 93, 116, 
+  117, 119, 120, 123, 205, 501, 2690, 2703, 2707, 2711, 2715, 2718, 2720, 
+  2721, 2722 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownAttributesOfObject( Gd8 ); </span>
+[ "Name", "Size", "ObjectList", "GeneratorsOfMagmaWithObjects", 
+  "GeneratorsOfGroupoid" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownTruePropertiesOfObject( Gd8 ); </span>
+[ "IsNonTrivial", "IsFinite", "IsDuplicateFree", "IsAssociative", 
+  "IsSinglePieceDomain", "IsDirectProductWithCompleteDigraphDomain" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RepresentationsOfObject( Gd8 );</span>
+[ "IsComponentObjectRep", "IsAttributeStoringRep", "IsMWOSinglePieceRep" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RepresentationsOfObject( U5 ); </span>
+[ "IsComponentObjectRep", "IsAttributeStoringRep", "IsPiecesRep" ]
+
+</pre></div>
+
+<p>Similarly, for arrows, we have:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ a78, e2 ];</span>
+[ [m2 : -7 -&gt; -8], [(1,3) : -8 -&gt; -7] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CategoriesOfObject(a78);</span>
+[ "IsExtLElement", "IsExtRElement", "IsMultiplicativeElement", 
+  "IsMultiplicativeElementWithObjects" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FamilyObj( a78 );     ## again these numbers vary</span>
+NewFamily( "MultiplicativeElementWithObjectsFamily", [ 2702 ], 
+[ 79, 80, 81, 82, 116, 119, 122, 2702 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CategoriesOfObject(e2); </span>
+[ "IsExtLElement", "IsExtRElement", "IsMultiplicativeElement", 
+  "IsMultiplicativeElementWithObjects", 
+  "IsMultiplicativeElementWithObjectsAndOnes", 
+  "IsMultiplicativeElementWithObjectsAndInverses", 
+  "IsGroupoidElement" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FamilyObj( e2 );        </span>
+NewFamily( "GroupoidElementFamily", [ 2714 ], 
+[ 79, 80, 81, 82, 116, 119, 122, 2702, 2706, 2710, 2714 ] )
+
+</pre></div>
+
+<p><a id="X7A4760E887C9C968" name="X7A4760E887C9C968"></a></p>
+
+<h4>7.2 <span class="Heading">Many object homomorphisms</span></h4>
+
+<p>Homomorphisms of structures with many objects have a similar heirarchy. A few examples:</p>
+
+
+<ul>
+<li><p><code class="code">DeclareCategory( "IsGeneralMappingWithObjects", IsGeneralMapping ); </code></p>
+
+</li>
+<li><p><code class="code">DeclareSynonymAttr( "IsMagmaWithObjectsGeneralMapping", IsGeneralMappingWithObjects and RespectsMultiplication ); </code></p>
+
+</li>
+<li><p><code class="code">DeclareSynonymAttr( "IsMagmaWithObjectsHomomorphism", IsMagmaWithObjectsGeneralMapping and IsMapping ); </code></p>
+
+</li>
+<li><p><code class="code">DeclareCategory("IsGroupoidHomomorphism",IsMagmaWithObjectsHomomorphism); </code></p>
+
+</li>
+</ul>
+<p>Two forms of representation are used: for mappings to a single piece; and for unions of such mappings:</p>
+
+
+<ul>
+<li><p><code class="code">DeclareRepresentation( "IsMappingToSinglePieceRep", IsMagmaWithObjectsHomomorphism and IsAttributeStoringRep and IsGeneralMapping, [ "Source", "Range", "SinglePieceMappingData" ] ); </code></p>
+
+</li>
+<li><p><code class="code">DeclareRepresentation( "IsMappingWithObjectsRep", IsMagmaWithObjectsHomomorphism and IsAttributeStoringRep and IsGeneralMapping, [ "Source", "Range", "PiecesOfMapping" ] ); </code></p>
+
+</li>
+</ul>
+<p>In previous chapters, <code class="code">hom1</code> was an endofunction on <code class="code">M78</code>; <code class="code">homd8</code> was a homomorphism from <code class="code">Gd8</code> to <code class="code">Gs3</code>; and <code class="code">aut3</code> was an automorphism of <code class="code">Ga4</code>. All homomorphisms have family <code class="code">GeneralMappingWithObjectsFamily</code>. Perhaps it would be better to have separate families for each structure?</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FamilyObj(hom1);</span>
+NewFamily( "GeneralMappingWithObjectsFamily", [ 2726 ], 
+[ 79, 80, 81, 82, 116, 119, 122, 126, 130, 149, 412, 2726 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownAttributesOfObject( hom1 );</span>
+[ "Range", "Source", "SinglePieceMappingData" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownTruePropertiesOfObject( hom1 );</span>
+[ "CanEasilyCompareElements", "CanEasilySortElements", "IsTotal", 
+  "IsSingleValued", "RespectsMultiplication", "IsGeneralMappingToSinglePiece",
+  "IsGeneralMappingFromSinglePiece", "IsInjectiveOnObjects", 
+  "IsSurjectiveOnObjects" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CategoriesOfObject( homd8 );</span>
+[ "IsExtLElement", "IsExtRElement", "IsMultiplicativeElement", 
+  "IsMultiplicativeElementWithOne", "IsMultiplicativeElementWithInverse", 
+  "IsAssociativeElement", "IsGeneralMapping", "IsGeneralMappingWithObjects", 
+  "IsGroupoidHomomorphism" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownAttributesOfObject( homd8 );</span>
+[ "Range", "Source", "SinglePieceMappingData", "ImagesOfObjects", "ImageElementsOfRays", 
+  "ObjectTransformationOfGroupoidHomomorphism", "RootGroupHomomorphism" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownAttributesOfObject( aut3 );</span>
+[ "Order", "Range", "Source", "SinglePieceMappingData", "ImagesOfObjects", 
+  "ImageElementsOfRays", "ObjectTransformationOfGroupoidHomomorphism", 
+  "RootGroupHomomorphism" ]
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

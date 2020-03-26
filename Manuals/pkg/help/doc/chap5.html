@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HeLP) - Chapter 5: Background</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X84AF2F1D7D4E7284" name="X84AF2F1D7D4E7284"></a></p>
+<div class="ChapSects"><a href="chap5.html#X84AF2F1D7D4E7284">5 <span class="Heading">Background</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7CAEB4DF8506EBF9">5.1 <span class="Heading">The Zassenhaus Conjecture and the Prime Graph Question</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7E2BFEC182B09895">5.2 <span class="Heading">Partial augmentations and the structure of HeLP sol</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X8663389F87B9CE62">5.3 <span class="Heading">The HeLP equations</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7BA77C9F86ADD546">5.4 <span class="Heading">The Wagner test</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X85810FF37EB3F4B4">5.5 <span class="Heading">s-constant characters</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X79BE759E7F35150E">5.6 <span class="Heading">Known results about the Zassenhaus Conjecture and the Prime Graph Question</span></a>
+</span>
+</div>
+</div>
+
+<h3>5 <span class="Heading">Background</span></h3>
+
+<p>In this chapter we give a brief overview of the Zassenhaus Conjecture and the Prime Graph Questions and the techniques used in this package. For a more detailed exposition see <a href="chapBib.html#biBBaMaHeLPArticle">[BM18]</a>.</p>
+
+<p><a id="X7CAEB4DF8506EBF9" name="X7CAEB4DF8506EBF9"></a></p>
+
+<h4>5.1 <span class="Heading">The Zassenhaus Conjecture and the Prime Graph Question</span></h4>
+
+<p>Let <span class="Math">G</span> be a finite group and let <span class="SimpleMath">ZG</span> denote its integral group ring. Let <span class="SimpleMath">mathrmV(ZG)</span> be the group of units of augmentation one, aka. normalized units. An element of the unit group of <span class="SimpleMath">ZG</span> is called a torsion element, if it has finite order.</p>
+
+<p>When the first versions of this package were published in 2015-2017 a long standing conjecture of H.J. Zassenhaus asserted that every normalized torsion unit of <span class="SimpleMath">ZG</span> is conjugate within <span class="SimpleMath">QG</span> ("rationally conjugate") to an element of <span class="SimpleMath">G</span>, see <a href="chapBib.html#biBZas">[Zas74]</a> or <a href="chapBib.html#biBSehgalBook2">[Seh93]</a>, Section 37. This was the first of his three famous conjectures about integral group rings and the only one which remained open at the time, hence it is referred to as the Zassenhaus Conjecture (ZC).</p>
+
+<p>In October 2017 counterexamples to the Zassenhaus Conjecture were found by F. Eisele and L. Margolis <a href="chapBib.html#biBEiMa18">[EM18]</a>.</p>
+
+<p>Considering the difficulty of the problem W. Kimmerle raised the question, whether the Prime Graph of the normalized units of <span class="SimpleMath">ZG</span> coincides with that one of <span class="SimpleMath">G</span> (cf. <a href="chapBib.html#biBAri">[Kim07]</a> Problem 21). This is the so called Prime Graph Question (PQ). The prime graph of a group is the loop-free, undirected graph having as vertices those primes <span class="SimpleMath">p</span>, for which there is an element of order <span class="SimpleMath">p</span> in the group. Two vertices <span class="SimpleMath">p</span> and <span class="SimpleMath">q</span> are joined by an edge, provided there is an element of order <span class="SimpleMath">pq</span> in the group. In the light of this description, the Prime Graph Question asks, whether there exists an element of order <span class="Math">pq</span> in <span class="SimpleMath">G</span> provided there exists an element of order <span class="Math">pq</span> in <span class="SimpleMath">mathrmV(ZG)</span> for every pair of primes <span class="Math">(p, q)</span>.</p>
+
+<p>In general, by a result of J. A. Cohn and D. Livingstone <a href="chapBib.html#biBCohnLivingstone">[CL65]</a>, Corollary 4.1, and a result of M. Hertweck <a href="chapBib.html#biBHertweckSolvable">[Her08a]</a>, the following is known about the possible orders of torsion units in integral group rings:</p>
+
+<p><em>Theorem:</em> The exponents of <span class="Math">\mathrm{V}(\mathbb{Z}G)</span> and <span class="Math">G</span> coincide. Moreover, if <span class="Math">G</span> is solvable, any torsion unit in <span class="Math">\mathrm{V}(\mathbb{Z}G)</span> has the same order as some element in <span class="Math">G.</span></p>
+
+<p><a id="X7E2BFEC182B09895" name="X7E2BFEC182B09895"></a></p>
+
+<h4>5.2 <span class="Heading">Partial augmentations and the structure of HeLP sol</span></h4>
+
+<p>For a finite group <span class="SimpleMath">G</span> and an element <span class="SimpleMath">x ∈ G</span> let <span class="SimpleMath">x^G</span> denote the conjugacy class of <span class="SimpleMath">x</span> in <span class="SimpleMath">G</span>. The partial augmentation with respect to <span class="SimpleMath">x</span> or rather the conjugacy class of <span class="SimpleMath">x</span> is the map <span class="SimpleMath">ε_x</span> sending an element <span class="SimpleMath">u</span> to the sum of the coefficients at elements of the conjugacy class of <span class="SimpleMath">x</span>, i.e.</p>
+
+<p class="pcenter"> \varepsilon_x \colon \mathbb{Z}G \to \mathbb{Z}, \ \ \sum\limits_{g \in G} z_g g \mapsto \sum\limits_{g \in x^G} z_g. </p>
+
+<p>Let <span class="SimpleMath">u</span> be a torsion element in <span class="SimpleMath">mathrmV(ZG)</span>. By results of G. Higman, S.D. Berman and M. Hertweck the following is known for the partial augmentations of <span class="Math">u</span>:</p>
+
+<p><em>Theorem:</em> (<a href="chapBib.html#biBSehgalBook2">[Seh93]</a>, Proposition (1.4); <a href="chapBib.html#biBHertweckBrauer">[Her07]</a>, Theorem 2.3) <span class="Math">\varepsilon_1(u) = 0</span> if <span class="Math">u \not= 1</span> and <span class="Math">\varepsilon_x(u) = 0</span> if the order of <span class="Math">x</span> does not divides the order of <span class="Math">u</span>.</p>
+
+<p>Partial augmentations are connected to (ZC) and (PQ) via the following result, which is due to Z. Marciniak, J. Ritter, S. Sehgal and A. Weiss <a href="chapBib.html#biBMRSW">[MRSW87]</a>, Theorem 2.5:</p>
+
+<p><em>Theorem:</em> A torsion unit <span class="SimpleMath">u ∈ mathrmV(ZG)</span> of order <span class="Math">k</span> is rationally conjugate to an element of <span class="Math">G</span> if and only if all partial augmentations of <span class="SimpleMath">u^d</span> vanish, except one (which then is necessarily 1) for all divisors <span class="SimpleMath">d</span> of <span class="SimpleMath">k</span>.</p>
+
+<p>The last statement also explains the structure of the variable <code class="keyw">HeLP_sol</code>. In <code class="keyw">HeLP_sol[k]</code> the possible partial augmentations for an element of order <span class="Math">k</span> and all powers <span class="SimpleMath">u^d</span> for <span class="SimpleMath">d</span> dividing <span class="SimpleMath">k</span> (except for <span class="SimpleMath">d=k</span>) are stored, sorted ascending w.r.t. order of the element <span class="SimpleMath">u^d</span>. For instance, for <span class="SimpleMath">k = 12</span> an entry of <code class="keyw">HeLP_sol[12]</code> might be of the following form:</p>
+
+<p><code class="keyw">[ [ 1 ],[ 0, 1 ],[ -2, 2, 1 ],[ 1, -1, 1 ],[ 0, 0, 0, 1, -1, 0, 1, 0, 0 ] ]</code>.</p>
+
+<p>The first sublist <code class="keyw">[ 1 ]</code> indicates that the element <span class="SimpleMath">u^6</span> of order 2 has the partial augmentation 1 at the only class of elements of order 2, the second sublist <code class="keyw">[ 0, 1 ]</code> indicates that <span class="SimpleMath">u^4</span> of order 3 has partial augmentation 0 at the first class of elements of order 3 and 1 at the second class. The third sublist <code class="keyw">[ -2, 2, 1 ]</code> states that the element <span class="SimpleMath">u^3</span> of order 4 has partial augmentation -2 at the class of elements of order 2 while 2 and 1 are the partial augmentations at the two classes of elements of order 4 respectively, and so on. Note that this format provides all necessary information on the partial augmentations of <span class="SimpleMath">u</span> and its powers by the above restrictions on the partial augmentations.</p>
+
+<p>For more details on when the variable <code class="keyw">HeLP_sol</code> is modified or reset and how to influence this behavior see Section <a href="chap4.html#X84ED1F0D7A47B055"><span class="RefLink">4.2</span></a> and <code class="func">HeLP_ChangeCharKeepSols</code> (<a href="chap3.html#X7BB9009482784E90"><span class="RefLink">3.4-1</span></a>).</p>
+
+<p><a id="X8663389F87B9CE62" name="X8663389F87B9CE62"></a></p>
+
+<h4>5.3 <span class="Heading">The HeLP equations</span></h4>
+
+<p>Denote by <span class="Math">x^G</span> the conjugacy class of an element <span class="Math">x</span> in <span class="Math">G</span>. Let <span class="Math">u</span> be a torsion unit in <span class="Math">\mathrm{V}(\mathbb{Z}G)</span> of order <span class="Math">k</span> and <span class="Math">D</span> an ordinary representation of <span class="Math">G</span> over a field contained in <span class="Math">\mathbb{C}</span> with character <span class="Math">\chi</span>. Then <span class="Math">D(u)</span> is a matrix of finite order and thus diagonalizable over <span class="Math">\mathbb{C}</span>. Let <span class="Math">\zeta</span> be a primitive <span class="Math">k</span>-th root of unity, then the multiplicity <span class="Math">\mu_l(u,\chi)</span> of <span class="Math">\zeta^l</span> as an eigenvalue of <span class="Math">D(u)</span> can be computed via Fourier inversion and equals</p>
+
+<p class="pcenter"> \mu_l(u,\chi) = \frac{1}{k} \sum_{1 \not= d \mid k} {\rm{Tr}}_{\mathbb{Q}(\zeta^d)/\mathbb{Q}}(\chi(u^d)\zeta^{-dl}) + \frac{1}{k} \sum_{x^G} \varepsilon_x(u) {\rm{Tr}}_{\mathbb{Q}(\zeta)/\mathbb{Q}}(\chi(x)\zeta^{-l}).</p>
+
+<p>As this multiplicity is a non-negative integer, we have the constraints</p>
+
+<p class="pcenter">\mu_l(u,\chi) \in \mathbb{Z}_{\geq 0}</p>
+
+<p>for all ordinary characters <span class="Math">\chi</span> and all <span class="Math">l</span>. This formula was given by I.S. Luthar and I.B.S. Passi <a href="chapBib.html#biBLP">[LP89]</a>.</p>
+
+<p>Later M. Hertweck showed that it may also be used for a representation over a field of characteristic <span class="Math">p &gt; 0</span> with Brauer character <span class="Math">\varphi</span>, if <span class="Math">p</span> is coprime to <span class="Math">k</span> <a href="chapBib.html#biBHertweckBrauer">[Her07]</a>, § 4. In that case one has to ignore the <span class="Math">p</span>-singular conjugacy classes (i.e. the classes of elements with an order divisible by <span class="Math">p</span>) and the above formula becomes</p>
+
+<p class="pcenter"> \mu_l(u,\varphi) = \frac{1}{k} \sum_{1 \not= d \mid k} {\rm{Tr}}_{\mathbb{Q}(\zeta^d)/\mathbb{Q}}(\varphi(u^d)\zeta^{-dl}) + \frac{1}{k} \sum_{x^G,\ p \nmid o(x)} \varepsilon_x(u) {\rm{Tr}}_{\mathbb{Q}(\zeta)/\mathbb{Q}}(\varphi(x)\zeta^{-l}).</p>
+
+<p>Again, as this multiplicity is a non-negative integer, we have the constraints</p>
+
+<p class="pcenter">\mu_l(u,\varphi) \in \mathbb{Z}_{\geq 0}</p>
+
+<p>for all Brauer characters <span class="Math">\varphi</span> and all <span class="Math">l</span>.</p>
+
+<p>These equations allow to build a system of integral inequalities for the partial augmentations of <span class="Math">u</span>. Solving these inequalities is exactly what the HeLP method does to obtain restrictions on the possible values of the partial augmentations of <span class="Math">u</span>. Note that some of the <span class="Math">\varepsilon_x(u)</span> are a priori zero by the results in the above sections.</p>
+
+<p>For <span class="Math">p</span>-solvable groups representations over fields of characteristic <span class="Math">p</span> can not give any new information compared to ordinary representations by the Fong-Swan-Rukolaine Theorem <a href="chapBib.html#biBCR1">[CR90]</a>, Theorem 22.1.</p>
+
+<p><a id="X7BA77C9F86ADD546" name="X7BA77C9F86ADD546"></a></p>
+
+<h4>5.4 <span class="Heading">The Wagner test</span></h4>
+
+<p>We also included a result motivated by a theorem R. Wagner proved 1995 in his Diplomarbeit <a href="chapBib.html#biBWa">[Wag95]</a>. This result gives a further restriction on the partial augmentations of torsion units. Though the results was actually available before Wagner's work, cf. <a href="chapBib.html#biBBovdiHertweck">[BH08]</a> Remark 6, we named the test after him, since he was the first to use the HeLP-method on a computer. We included it into the functions <code class="func">HeLP_ZC</code> (<a href="chap2.html#X81AF79A587054306"><span class="RefLink">2.1-1</span></a>), <code class="func">HeLP_PQ</code> (<a href="chap2.html#X813A10398218E9EE"><span class="RefLink">2.2-1</span></a>), <code class="func">HeLP_AllOrders</code> (<a href="chap3.html#X8727639883F787C5"><span class="RefLink">3.3-1</span></a>), <code class="func">HeLP_AllOrdersPQ</code> (<a href="chap3.html#X7C00E1567BFF1757"><span class="RefLink">3.3-2</span></a>) and <code class="func">HeLP_WagnerTest</code> (<a href="chap3.html#X79349D80830FA89B"><span class="RefLink">3.7-1</span></a>) and call it "Wagner test".</p>
+
+<p><em>Theorem:</em> For a torsion unit <span class="SimpleMath">u ∈ mathrmV(ZG)</span>, a group element <span class="Math">s</span>, a prime <span class="Math">p</span> and a natural number <span class="Math">j</span> we have</p>
+
+<p class="pcenter"> \sum\limits_{x^{p^j} \sim s} \varepsilon_x(u) \equiv \varepsilon_s(u^{p^j}) \ \ \ {\rm{mod}} \ \ p. </p>
+
+<p>Combining the Theorem with the HeLP-method may only give new insight, if <span class="Math">p^j</span> is a proper divisor of the order of <span class="Math">u</span>. Wagner did obtain this result for <span class="Math">s = 1</span>, when <span class="Math">\varepsilon_s(u) = 0</span> by the Berman-Higman Theorem. In the case that <span class="Math">u</span> is of prime power order this is a result of J.A. Cohn and D. Livingstone <a href="chapBib.html#biBCohnLivingstone">[CL65]</a>.</p>
+
+<p><a id="X85810FF37EB3F4B4" name="X85810FF37EB3F4B4"></a></p>
+
+<h4>5.5 <span class="Heading">s-constant characters</span></h4>
+
+<p>If one is interested in units of mixed order <span class="Math">s*t</span> for two primes <span class="Math">s</span> and <span class="Math">t</span> (e.g. if one studies the Prime Graph Question) an idea to make the HeLP method more efficient was introduced by V. Bovdi and A. Konovalov in <a href="chapBib.html#biBBKHS">[BK10]</a>, page 4. Assume one has several conjugacy classes of elements of order <span class="Math">s</span>, and a character taking the same value on all of these classes. Then the coefficient of every of these conjugacy classes in the system of inequalities of this character, which is obtained via the HeLP method, is the same. Also the constant terms of the inequalities do not depend on the partial augmentations of elements of order <span class="Math">s</span>. Thus for such characters one can reduce the number of variables in the inequalities by replacing all the partial augmentations on classes of elements of order <span class="Math">s</span> by their sum. To obtain the formulas for the multiplicities of the HeLP method one does not need the partial augmentations of elements of order <span class="Math">s</span>. Characters having the above property are called <span class="Math">s</span>-constant. In this way the existence of elements of order <span class="Math">s*t</span> can be excluded in a quite efficient way without doing calculations for elements of order <span class="Math">s</span>.</p>
+
+<p>There is also the concept of <span class="Math">(s,t)</span>-constant characters, being constant on both, the conjugacy classes of elements of order <span class="Math">s</span> and on the conjugacy classes of elements of order <span class="Math">t</span>. The implementation of this is however not yet part of this package.</p>
+
+<p><a id="X79BE759E7F35150E" name="X79BE759E7F35150E"></a></p>
+
+<h4>5.6 <span class="Heading">Known results about the Zassenhaus Conjecture and the Prime Graph Question</span></h4>
+
+<p>A survey on topics touched on by this package has been written in 2018 <a href="chapBib.html#biBMadRSurvey">[MdR18]</a>. The counterexamples to the Zassenhaus Conjecture are of the form <span class="Math">(C_{pq} \times C_{pq}) \rtimes A</span> where <span class="Math">p</span> and <span class="Math">q</span> are certain primes and <span class="Math">A</span> is an abelian group with a specified action <a href="chapBib.html#biBEiMa18">[EM18]</a>.</p>
+
+<p>In December 2019, to the best of our knowledge, the following positive results were available for the Zassenhaus Conjecture and the Prime Graph Question:</p>
+
+<p>For the Zassenhaus Conjecture only the following reduction is available:</p>
+
+<p><em>Theorem:</em> Assume the Zassenhaus Conjecture holds for a group <span class="Math">G</span>. Then (ZC) holds for <span class="Math">G \times C_2</span> <a href="chapBib.html#biBHoefertKimmerle">[HK06]</a>, Corollary 3.3, and <span class="Math">G \times \Pi</span>, where <span class="Math">\Pi</span> denotes a nilpotent group of order prime to the order of <span class="Math">G</span> <a href="chapBib.html#biBHertweckEdinb">[Her08b]</a>, Proposition 8.1.</p>
+
+<p>With this reductions in mind the Zassenhaus Conjecture is known for:</p>
+
+
+<ul>
+<li><p>Nilpotent groups <a href="chapBib.html#biBWeiss91">[Wei91]</a>,</p>
+
+</li>
+<li><p>Cyclic-By-Abelian groups <a href="chapBib.html#biBCyclicByAbelian">[CMdR13]</a>,</p>
+
+</li>
+<li><p>Groups containing a normal Sylow subgroup with abelian complement <a href="chapBib.html#biBHertweckColloq">[Her06]</a>,</p>
+
+</li>
+<li><p>Frobenius groups whose order is divisible by at most two different primes <a href="chapBib.html#biBJuriaansMilies">[JPM00]</a>,</p>
+
+</li>
+<li><p>Groups <span class="Math">X \rtimes A</span>, where <span class="Math">X</span> and <span class="Math">A</span> are abelian and <span class="Math">A</span> is of prime order <span class="Math">p</span> such that <span class="Math">p</span> is smaller then any prime divisor of the order of <span class="Math">X</span> <a href="chapBib.html#biBMRSW">[MRSW87]</a>,</p>
+
+</li>
+<li><p>Groups with an abelian normal subgroup of index 2 <a href="chapBib.html#biBLutharPassi1992">[LP92]</a>,</p>
+
+</li>
+<li><p>Some more special classes of metabelian groups <a href="chapBib.html#biBMargolisdelRioCW1">[MR18]</a> and <a href="chapBib.html#biBMargolisdelRioCW3">[MdR19]</a>,</p>
+
+</li>
+<li><p>Direct products of an abelian group and a Frobenius group with complement of odd order <a href="chapBib.html#biBBaechleKimmerleSerrano18">[BKS18]</a>,</p>
+
+</li>
+<li><p>All groups of order up to 143 <a href="chapBib.html#biBBaHeKoMaSi">[BHK+18]</a>,</p>
+
+</li>
+<li><p>The non-abelian simple groups <span class="Math">A_5</span> <a href="chapBib.html#biBLP">[LP89]</a>, <span class="Math">A_6 \simeq PSL(2,9)</span> <a href="chapBib.html#biBHerA6">[Her08c]</a>, <span class="Math">PSL(2,7)</span>, <span class="Math">PSL(2,11)</span>, <span class="Math">PSL(2,13)</span> <a href="chapBib.html#biBHertweckBrauer">[Her07]</a>, <span class="Math">PSL(2,8)</span>, <span class="Math">PSL(2,17)</span> <a href="chapBib.html#biBKonovalovKimmiStAndrews">[KK15]</a> <a href="chapBib.html#biBGildea">[Gil13]</a>, <span class="Math">PSL(2,19)</span>, <span class="Math">PSL(2,23)</span> <a href="chapBib.html#biBBaMaM10">[BM17b]</a>, <span class="Math">PSL(2,25)</span>, <span class="Math">PSL(2,31)</span>, <span class="Math">PSL(2,32)</span> <a href="chapBib.html#biBBaMa4prII">[BM19b]</a> and some extensions of these groups. Also for all <span class="Math">PSL(2,p)</span> where <span class="Math">p</span> is a fermat or a Mersenne prime <a href="chapBib.html#biBFermatMersenne">[MdRS19]</a>,</p>
+
+</li>
+<li><p>For the following non-solvable and non-simple groups: <span class="Math">S_5</span> <a href="chapBib.html#biBHertweckBrauer">[Her07]</a>, <span class="Math">GL(2,5)</span> and the covering group of <span class="Math">S_5</span> <a href="chapBib.html#biBBovdiHertweck">[BH08]</a> and the groups <span class="Math">SL(2,p)</span> and <span class="Math">SL(2,p^2)</span> for any prime <span class="Math">p</span> <a href="chapBib.html#biBdelRioSerrano19">[dRS19]</a>.</p>
+
+</li>
+</ul>
+<p>For the Prime Graph Question the following strong reduction was obtained in <a href="chapBib.html#biBKonovalovKimmiStAndrews">[KK15]</a>:</p>
+
+<p><em>Theorem:</em> Assume the Prime Graph Question holds for all almost simple images of a group <span class="Math">G</span>. Then (PQ) also holds for <span class="Math">G.</span></p>
+
+<p>Here a group <span class="Math">G</span> is called almost simple, if it is sandwiched between the inner automorphism group and the whole automorphism group of a non-abelian simple group <span class="Math">S</span>. I.e. <span class="Math">Inn(S) \leq G \leq Aut(S).</span> Keeping this reduction in mind (PQ) is known for:</p>
+
+
+<ul>
+<li><p>Solvable groups <a href="chapBib.html#biBKimmiPQ">[Kim06]</a>,</p>
+
+</li>
+<li><p>Groups whose socle is isomorphic to an alternating group, <a href="chapBib.html#biBLP">[LP89]</a><a href="chapBib.html#biBHerA6">[Her08c]</a><a href="chapBib.html#biBSalimA7A8">[Sal11]</a><a href="chapBib.html#biBSalimA9A10">[Sal13]</a><a href="chapBib.html#biBBaMaM10">[BM17b]</a><a href="chapBib.html#biBBaCa">[BC17]</a><a href="chapBib.html#biBBaMaAn">[BM19a]</a>,</p>
+
+</li>
+<li><p>Groups whose socle is isomorphic to a group <span class="Math">PSL(2,p)</span> or <span class="Math">PSL(2,p^2)</span>, where <span class="Math">p</span> denotes a prime, <a href="chapBib.html#biBHertweckBrauer">[Her07]</a>, <a href="chapBib.html#biBBaMa4prI">[BM17a]</a>.</p>
+
+</li>
+<li><p>A group with sporadic simple socle which is not the O'Nan group or the Monster <a href="chapBib.html#biBKonovalovM11">[BK07a]</a><a href="chapBib.html#biBKonovalovMcL">[BK07b]</a><a href="chapBib.html#biBBovdiKonovalovM12">[BKS07]</a><a href="chapBib.html#biBBovdiKonovalovConway">[BKL11]</a><a href="chapBib.html#biBBovdiKonovalovSuz">[BKM08]</a><a href="chapBib.html#biBBovdiKonovalovM23">[BK08]</a><a href="chapBib.html#biBBovdiKonovalovHe">[BGK09]</a><a href="chapBib.html#biBBJK">[BJK11]</a><a href="chapBib.html#biBBovdiKonovalovM24">[BK12]</a><a href="chapBib.html#biBBovdiKonovalovRu">[BK09]</a><a href="chapBib.html#biBKonovalovM22">[BKL08]</a> <a href="chapBib.html#biBBKHS">[BK10]</a><a href="chapBib.html#biBKonovalovKimmiStAndrews">[KK15]</a><a href="chapBib.html#biBMargolisConway">[Mar19]</a><a href="chapBib.html#biBBaMaAn">[BM19a]</a><a href="chapBib.html#biBCaMaBrauerTree">[CM19]</a>,</p>
+
+</li>
+<li><p>Almost simple groups whose order is divisible by at most three different primes <a href="chapBib.html#biBKonovalovKimmiStAndrews">[KK15]</a> and <a href="chapBib.html#biBBaMaM10">[BM17b]</a>. This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.</p>
+
+</li>
+<li><p>Many almost simple groups whose order is divisible by four different primes <a href="chapBib.html#biBBaMa4prI">[BM17a]</a><a href="chapBib.html#biBBaMa4prII">[BM19b]</a>,</p>
+
+</li>
+<li><p>Many groups from the GAP character table library <a href="chapBib.html#biBCaMaBrauerTree">[CM19]</a>.</p>
+
+</li>
+</ul>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

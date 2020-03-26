@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Guarana) - Chapter 3: Mal'cev collection
+	</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X7989E7D27B142919" name="X7989E7D27B142919"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X7989E7D27B142919">3 <span class="Heading">Mal'cev collection
+	</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7D3DC4ED855DC13C">3.1 <span class="Heading">The main functions
+		</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C7C33FB789E7F50">3.1-1 MalcevCollectorConstruction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X78FA4EF079BEA275">3.1-2 GUARANA.Tr_n_O1</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86FA27828711BB51">3.1-3 GUARANA.F_2c_Aut1</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79D925AD7AFF1202">3.1-4 MalcevGElementByExponents</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79730D657AB219DB">3.1-5 Random</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7857704878577048">3.1-6 *</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7DD44FEE7DE4E810">3.1-7 GUARANA.AverageRuntimeCollec</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X81CAD2F27B2066C4">3.2 <span class="Heading">An example application
+  	</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">Mal'cev collection
+	</span></h3>
+
+<p>Let <span class="SimpleMath">\(G\)</span> be an infinite polycyclic group. It is well-known that there exist a normal <span class="SimpleMath">\(T\)</span>-group <span class="SimpleMath">\(N\)</span> and a <span class="SimpleMath">\(T\)</span>-group <span class="SimpleMath">\(C\)</span> such that <span class="SimpleMath">\(H=CN\)</span> is normal of finite index in <span class="SimpleMath">\(G\)</span> and <span class="SimpleMath">\(H/N\)</span> is free abelian of finite rank <a href="chapBib_mj.html#biBSeg83">[Seg83]</a>. In this chapter we present an effective collection method for an infinite polycyclic group which is given by a polycyclic presentation with respect to a polycyclic sequence <span class="SimpleMath">\(P\)</span> going through the normal series <span class="SimpleMath">\(1 \le N \le H \le G\)</span>. This polycyclic sequence <span class="SimpleMath">\(P\)</span> must be chosen as follows. Let <span class="SimpleMath">\((n_1,\dots,n_l)\)</span> be a Mal'cev basis of <span class="SimpleMath">\(N\)</span> and let <span class="SimpleMath">\((c_1N,\dots,c_k N)\)</span> be a basis for the free abelian group <span class="SimpleMath">\(CN/N\)</span>. Then <span class="SimpleMath">\((c_1,\dots,c_k,n_1,\dots,n_l)\)</span> is a polycyclic sequence for <span class="SimpleMath">\(H=CN\)</span>. Further there exists <span class="SimpleMath">\(f_1,\dots, f_j \in G\)</span> such that <span class="SimpleMath">\((f_1 H, \dots, f_j H)\)</span> is a polycyclic sequence for <span class="SimpleMath">\(G/H\)</span>. Now we set</p>
+
+<p class="center">\[P = (f_1,\dots,f_j, c_1, \dots , c_k, n_1, \dots, n_l )\]</p>
+
+<p><a id="X7D3DC4ED855DC13C" name="X7D3DC4ED855DC13C"></a></p>
+
+<h4>3.1 <span class="Heading">The main functions
+		</span></h4>
+
+<p><a id="X7C7C33FB789E7F50" name="X7C7C33FB789E7F50"></a></p>
+
+<h5>3.1-1 MalcevCollectorConstruction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MalcevCollectorConstruction</code>( <var class="Arg">G</var>, <var class="Arg">inds</var>, <var class="Arg">C</var>, <var class="Arg">CC</var>, <var class="Arg">N</var>, <var class="Arg">NN</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns a Mal'cev collector for the infinite polycyclically presented group <span class="SimpleMath">\(G\)</span>. The group <span class="SimpleMath">\(G\)</span> must be given with respect to a polycyclic sequence <span class="SimpleMath">\((g_1,\dots,g_r, c_{r+1}, \dots, c_{r+s}, n_{r+s+1}, \dots, n_{r+s+t})\)</span> with the following properties:</p>
+
+
+<ul>
+<li><p>(a) <span class="SimpleMath">\((n_{r+s+1}, \dots, n_{r+s+t})\)</span> is a Mal'cev basis for the <span class="SimpleMath">\(T\)</span>-group <span class="SimpleMath">\(N \leq G\)</span>,</p>
+
+</li>
+<li><p>(b) <span class="SimpleMath">\((c_{r+1}N, \dots, c_{r+s}N)\)</span> is a basis for the free-abelian group <span class="SimpleMath">\(CN/N\)</span> where <span class="SimpleMath">\(C \leq G\)</span> is a <span class="SimpleMath">\(T\)</span>-group generated by <span class="SimpleMath">\(c_{r+1}, \dots, c_{r+s}\)</span>,</p>
+
+</li>
+<li><p>(c) <span class="SimpleMath">\((g_1 CN, \dots, g_r CN)\)</span> is a polycyclic sequence for the finite group <span class="SimpleMath">\(G/CN\)</span>.</p>
+
+</li>
+</ul>
+<p>The list <var class="Arg">inds</var> is equal to <span class="SimpleMath">\([ [1,\dots,r],[r+1,\dots,r+s],[r+s+1,\dots,r+s+t]]\)</span>. The group <span class="SimpleMath">\(CC\)</span> is isomorphic to <span class="SimpleMath">\(C\)</span> via <var class="Arg">CC</var>!.bijection and given by a polycyclic presentation with respect to a Mal'cev basis starting with <span class="SimpleMath">\(c_{r+1}, \dots, c_{r+s}\)</span>. The group <span class="SimpleMath">\(NN\)</span> is isomorphic to <span class="SimpleMath">\(N\)</span> via <var class="Arg">NN</var>!.bijection. and given by a polycyclic presentation with respect to the Mal'cev basis <span class="SimpleMath">\(( n_{r+s+1}, \dots, n_{r+s+t})\)</span>.</p>
+
+<p><a id="X78FA4EF079BEA275" name="X78FA4EF079BEA275"></a></p>
+
+<h5>3.1-2 GUARANA.Tr_n_O1</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GUARANA.Tr_n_O1</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GUARANA.Tr_n_O2</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>for a positive integer <var class="Arg">n</var> these functions construct polycyclically presented groups that can be used to test the Mal'cev collector. They return a list which can be used as input for the function MalcevCollectorConstruction. The constructed groups are isomorphic to triangular matrix groups of dimension <var class="Arg">n</var> over the ring <span class="SimpleMath">\(O_1\)</span>, respectively <span class="SimpleMath">\(O_2\)</span>. The ring <span class="SimpleMath">\(O_1\)</span>, respectively <span class="SimpleMath">\(O_2\)</span>, is the maximal order of <span class="SimpleMath">\(\Q(\theta_i)\)</span> where <span class="SimpleMath">\(\theta_1\)</span>, respectively <span class="SimpleMath">\(\theta_2\)</span>, is a zero of the polynomial <span class="SimpleMath">\(p_1(x) = x^2-3\)</span>, respectively <span class="SimpleMath">\(p_2(x)=x^3 -x^2 +4\)</span>.</p>
+
+<p><a id="X86FA27828711BB51" name="X86FA27828711BB51"></a></p>
+
+<h5>3.1-3 GUARANA.F_2c_Aut1</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GUARANA.F_2c_Aut1</code>( <var class="Arg">c</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GUARANA.F_3c_Aut1</code>( <var class="Arg">c</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>for a positive integer <var class="Arg">c</var> these functions construct polycyclically presented groups that can be used to test the Mal'cev collector. They return a list which can be used as input for the function MalcevCollectorConstruction. These groups are constructed as follows: Let <span class="SimpleMath">\(F_{n,c}\)</span> be the free nilpotent of class <span class="SimpleMath">\(c\)</span> group on <span class="SimpleMath">\(n\)</span> generators. An automorphism <span class="SimpleMath">\(\varphi\)</span> of the free group <span class="SimpleMath">\(F_n\)</span> naturally induces an automorphism <span class="SimpleMath">\(\bar{\varphi}\)</span> of <span class="SimpleMath">\(F_{n,c}\)</span>. We use the automorphism <span class="SimpleMath">\(\varphi_1\)</span> of <span class="SimpleMath">\(F_2\)</span> which maps <span class="SimpleMath">\(f_1\)</span> to <span class="SimpleMath">\(f_2^{-1}\)</span> and <span class="SimpleMath">\(f_2\)</span> to <span class="SimpleMath">\(f_1 f_2^3\)</span> and the automorphism <span class="SimpleMath">\(\varphi_2\)</span> of <span class="SimpleMath">\(F_3\)</span> mapping <span class="SimpleMath">\(f_1\)</span> to <span class="SimpleMath">\(f_2^{-1}\)</span>, <span class="SimpleMath">\(f_2\)</span> to <span class="SimpleMath">\(f_3^{-1}\)</span> and <span class="SimpleMath">\(f_3\)</span> to <span class="SimpleMath">\(f_2^{-3}f_1^{-1}\)</span> for our construction. The returned group F_2c_Aut1, respectively F_3c_Aut2, is isomorphic to the semidirect product <span class="SimpleMath">\(\langle \varphi_1 \rangle \ltimes F_{2,c}\)</span>, respectively <span class="SimpleMath">\(\langle \varphi_2 \rangle \ltimes F_{3,c}\)</span>.</p>
+
+<p><a id="X79D925AD7AFF1202" name="X79D925AD7AFF1202"></a></p>
+
+<h5>3.1-4 MalcevGElementByExponents</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MalcevGElementByExponents</code>( <var class="Arg">malCol</var>, <var class="Arg">exps</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For a Mal'cev collector <var class="Arg">malCol</var> of a group <span class="SimpleMath">\(G\)</span> and an exponent vector <var class="Arg">exps</var> with integer entries, this functions returns the group element of <span class="SimpleMath">\(G\)</span>, which has exponents <var class="Arg">exps</var> with respect to the polycyclic sequence underlying <var class="Arg">malCol</var>.</p>
+
+<p><a id="X79730D657AB219DB" name="X79730D657AB219DB"></a></p>
+
+<h5>3.1-5 Random</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Random</code>( <var class="Arg">malCol</var>, <var class="Arg">range</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For a Mal'cev collector <var class="Arg">malCol</var> this function returns the output of MalcevGElementByExponents( <var class="Arg">malCol</var>, <var class="Arg">exps</var> ), where <var class="Arg">exps</var> is an exponent vector whose entries are randomly chosen integers between -<var class="Arg">range</var> and <var class="Arg">range</var>.</p>
+
+<p><a id="X7857704878577048" name="X7857704878577048"></a></p>
+
+<h5>3.1-6 *</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; *</code>( <var class="Arg">g</var>, <var class="Arg">h</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns the product of group elements which are defined with respect to a Mal'cev collector by the the function MalcevGElementByExponents.</p>
+
+<p><a id="X7DD44FEE7DE4E810" name="X7DD44FEE7DE4E810"></a></p>
+
+<h5>3.1-7 GUARANA.AverageRuntimeCollec</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GUARANA.AverageRuntimeCollec</code>( <var class="Arg">malCol</var>, <var class="Arg">ranges</var>, <var class="Arg">no</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>For a Mal'cev collector <var class="Arg">malCol</var>, a list of positive integers <var class="Arg">ranges</var> and a positive integer <var class="Arg">no</var> this function computes for each number <var class="Arg">r</var> in <var class="Arg">ranges</var> the average runtime of <var class="Arg">no</var> multiplications of two random elements of <var class="Arg">malCol</var> of range <var class="Arg">r</var>, as generated by Random( <var class="Arg">malCol</var>, <var class="Arg">r</var> ).</p>
+
+<p><a id="X81CAD2F27B2066C4" name="X81CAD2F27B2066C4"></a></p>
+
+<h4>3.2 <span class="Heading">An example application
+  	</span></h4>
+
+
+<div class="example"><pre>
+		gap&gt; ll := GUARANA.Tr_n_O1( 3 );
+		[ Pcp-group with orders [ 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+		  [ [ 1 .. 3 ], [ 4 .. 6 ], [ 7 .. 12 ] ],
+		  Pcp-group with orders [ 0, 0, 0, 0, 0, 0 ],
+		  Pcp-group with orders [ 0, 0, 0, 0, 0, 0 ],
+		  Pcp-group with orders [ 0, 0, 0 ], Pcp-group with orders [ 0, 0, 0 ] ]
+		gap&gt; malCol := MalcevCollectorConstruction( ll );
+		&lt;&lt;Malcev collector&gt;&gt;
+		  F : [ 2, 2, 2 ]
+		  C : &lt;&lt;Malcev object of dimension 3&gt;&gt;
+		  N : &lt;&lt;Malcev object of dimension 6&gt;&gt;
+		
+		gap&gt; exps_g := [ 1, 1, 1, -3, -2, 1, -2, -1, 0, 3, -1,3 ];
+		[ 1, 1, 1, -3, -2, 1, -2, -1, 0, 3, -1, 3 ]
+		gap&gt; exps_h := [ 1, 0, 1, -1, 0, 2, 0, 4, -1, 5, 9,-5 ];
+		[ 1, 0, 1, -1, 0, 2, 0, 4, -1, 5, 9, -5 ]
+		gap&gt; g := MalcevGElementByExponents( malCol, exps_g );
+		[ 1, 1, 1, -3, -2, 1, -2, -1, 0, 3, -1, 3 ]
+		gap&gt; h := MalcevGElementByExponents( malCol, exps_h );
+		[ 1, 0, 1, -1, 0, 2, 0, 4, -1, 5, 9, -5 ]
+		
+		gap&gt; k := g*h;
+		[ 0, 1, 0, -4, -2, 3, -7, 0, -37, -16, -352, -212 ]
+				
+		gap&gt; Random( malCol, 10 );
+		[ 0, 0, 1, 9, 5, 5, 2, -2, 7, -10, 7, -6 ]
+		
+		</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

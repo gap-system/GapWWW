@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (tut) - Chapter 3: Lists and Records</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X7863DAFD78E5DFB6" name="X7863DAFD78E5DFB6"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7863DAFD78E5DFB6">3 <span class="Heading">Lists and Records</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X81ECC2077D88E112">3.1 <span class="Heading">Plain Lists</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7DD65BEA7EDB0CD7">3.2 <span class="Heading">Identical Lists</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8614C8207D57AD7A">3.3 <span class="Heading">Immutability</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X83BE0C20875DD285">3.4 <span class="Heading">Sets</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X79596BDE7CAF8491">3.5 <span class="Heading">Ranges</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7CC5B0347F8EC820">3.6 <span class="Heading">For and While Loops</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X879CFE0985DBA041">3.7 <span class="Heading">List Operations</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X851A7DD07866323F">3.8 <span class="Heading">Vectors and Matrices</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7CF7BBD58135B981">3.9 <span class="Heading">Plain Records</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X800A5E8681E28E2D">3.10 <span class="Heading">Further Information about Lists</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">Lists and Records</span></h3>
+
+<p>Modern mathematics, especially algebra, is based on set theory. When sets are represented in a computer, they inadvertently turn into lists. That's why we start our survey of the various objects <strong class="pkg">GAP</strong> can handle with a description of lists and their manipulation. <strong class="pkg">GAP</strong> regards sets as a special kind of lists, namely as lists without holes or duplicates whose entries are ordered with respect to the precedence relation <code class="code">&lt;</code>.</p>
+
+<p>After the introduction of the basic manipulations with lists in <a href="chap3.html#X81ECC2077D88E112"><span class="RefLink">3.1</span></a>, some difficulties concerning identity and mutability of lists are discussed in <a href="chap3.html#X7DD65BEA7EDB0CD7"><span class="RefLink">3.2</span></a> and <a href="chap3.html#X8614C8207D57AD7A"><span class="RefLink">3.3</span></a>. Sets, ranges, row vectors, and matrices are introduced as special kinds of lists in <a href="chap3.html#X83BE0C20875DD285"><span class="RefLink">3.4</span></a>, <a href="chap3.html#X79596BDE7CAF8491"><span class="RefLink">3.5</span></a>, <a href="chap3.html#X851A7DD07866323F"><span class="RefLink">3.8</span></a>. Handy list operations are shown in <a href="chap3.html#X879CFE0985DBA041"><span class="RefLink">3.7</span></a>. Finally we explain how to use records in <a href="chap3.html#X7CF7BBD58135B981"><span class="RefLink">3.9</span></a>.</p>
+
+<p><a id="X81ECC2077D88E112" name="X81ECC2077D88E112"></a></p>
+
+<h4>3.1 <span class="Heading">Plain Lists</span></h4>
+
+<p>A <em>list</em> is a collection of objects separated by commas and enclosed in brackets. Let us for example construct the list <code class="code">primes</code> of the first ten prime numbers.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes:= [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];</span>
+[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 ]
+</pre></div>
+
+<p>The next two primes are 31 and 37. They may be appended to the existing list by the function <code class="code">Append</code> which takes the existing list as its first and another list as a second argument. The second argument is appended to the list <code class="code">primes</code> and no value is returned. Note that by appending another list the object <code class="code">primes</code> is changed.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Append(primes, [31, 37]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes;</span>
+[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37 ]
+</pre></div>
+
+<p>You can as well add single new elements to existing lists by the function <code class="code">Add</code> which takes the existing list as its first argument and a new element as its second argument. The new element is added to the list <code class="code">primes</code> and again no value is returned but the list <code class="code">primes</code> is changed.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Add(primes, 41);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes;</span>
+[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41 ]
+</pre></div>
+
+<p>Single elements of a list are referred to by their position in the list. To get the value of the seventh prime, that is the seventh entry in our list <code class="code">primes</code>, you simply type</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes[7];</span>
+17
+</pre></div>
+
+<p>This value can be handled like any other value, for example multiplied by 2 or assigned to a variable. On the other hand this mechanism allows one to assign a value to a position in a list. So the next prime 43 may be inserted in the list directly after the last occupied position of <code class="code">primes</code>. This last occupied position is returned by the function <code class="code">Length</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(primes);</span>
+13
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes[14]:= 43;</span>
+43
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes;</span>
+[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43 ]
+</pre></div>
+
+<p>Note that this operation again has changed the object <code class="code">primes</code>. The next position after the end of a list is not the only position capable of taking a new value. If you know that 71 is the 20th prime, you can enter it right now in the 20th position of <code class="code">primes</code>. This will result in a list with holes which is however still a list and now has length 20.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes[20]:= 71;</span>
+71
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes;</span>
+[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,,,,,, 71 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(primes);</span>
+20
+</pre></div>
+
+<p>The list itself however must exist before a value can be assigned to a position of the list. This list may be the empty list <code class="code">[ ]</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lll[1]:= 2;</span>
+Error, Variable: 'lll' must have a value
+
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lll:= []; lll[1]:= 2;</span>
+[  ]
+2
+</pre></div>
+
+<p>Of course existing entries of a list can be changed by this mechanism, too. We will not do it here because <code class="code">primes</code> then may no longer be a list of primes. Try for yourself to change the 17 in the list into a 9.</p>
+
+<p>To get the position of 17 in the list <code class="code">primes</code> use the function <code class="func">Position</code> (<span class="RefLink">Reference: Position</span>) which takes the list as its first argument and the element as its second argument and returns the position of the first occurrence of the element 17 in the list <code class="code">primes</code>. If the element is not contained in the list then <code class="func">Position</code> (<span class="RefLink">Reference: Position</span>) will return the special object <code class="keyw">fail</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Position(primes, 17);</span>
+7
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Position(primes, 20);</span>
+fail
+</pre></div>
+
+<p>In all of the above changes to the list <code class="code">primes</code>, the list has been automatically resized. There is no need for you to tell <strong class="pkg">GAP</strong> how big you want a list to be. This is all done dynamically.</p>
+
+<p>It is not necessary for the objects collected in a list to be of the same type.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lll:= [true, "This is a String",,, 3];</span>
+[ true, "This is a String",,, 3 ]
+</pre></div>
+
+<p>In the same way a list may be part of another list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lll[3]:= [4,5,6];; lll;</span>
+[ true, "This is a String", [ 4, 5, 6 ],, 3 ]
+</pre></div>
+
+<p>A list may even be part of itself.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lll[4]:= lll;</span>
+[ true, "This is a String", [ 4, 5, 6 ], ~, 3 ]
+</pre></div>
+
+<p>Now the tilde in the fourth position of <code class="code">lll</code> denotes the object that is currently printed. Note that the result of the last operation is the actual value of the object <code class="code">lll</code> on the right hand side of the assignment. In fact it is identical to the value of the whole list <code class="code">lll</code> on the left hand side of the assignment.</p>
+
+<p>A <em>string</em> is a special type of list, namely a dense list of <em>characters</em>, where <em>dense</em> means that the list has no holes. Here, <em>characters</em> are special <strong class="pkg">GAP</strong> objects representing an element of the character set of the operating system. The input of printable characters is by enclosing them in single quotes <code class="code">'</code>. A string literal can either be entered as the list of characters or by writing the characters between doublequotes <code class="code">"</code>. Strings are handled specially by <code class="func">Print</code> (<span class="RefLink">Reference: Print</span>). You can learn much more about strings in the reference manual.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s1 := ['H','a','l','l','o',' ','w','o','r','l','d','.'];</span>
+"Hallo world."
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s1 = "Hallo world.";</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s1[7];</span>
+'w'
+</pre></div>
+
+<p>Sublists of lists can easily be extracted and assigned using the operator <code class="code"><var class="Arg">list</var>{ <var class="Arg">positions</var> }</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sl := lll{ [ 1, 2, 3 ] };</span>
+[ true, "This is a String", [ 4, 5, 6 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sl{ [ 2, 3 ] } := [ "New String", false ];</span>
+[ "New String", false ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sl;</span>
+[ true, "New String", false ]
+</pre></div>
+
+<p>This way you get a new list whose <span class="SimpleMath">i</span>-th entry is that element of the original list whose position is the <span class="SimpleMath">i</span>-th entry of the argument in the curly braces.</p>
+
+<p><a id="X7DD65BEA7EDB0CD7" name="X7DD65BEA7EDB0CD7"></a></p>
+
+<h4>3.2 <span class="Heading">Identical Lists</span></h4>
+
+<p>This second section about lists is dedicated to the subtle difference between <em>equality</em> and <em>identity</em> of lists. It is really important to understand this difference in order to understand how complex data structures are realized in <strong class="pkg">GAP</strong>. This section applies to all <strong class="pkg">GAP</strong> objects that have subobjects, e.g., to lists and to records. After reading the section <a href="chap3.html#X7CF7BBD58135B981"><span class="RefLink">3.9</span></a> about records you should return to this section and translate it into the record context.</p>
+
+<p>Two lists are <em>equal</em> if all their entries are equal. This means that the equality operator <code class="code">=</code> returns <code class="keyw">true</code> for the comparison of two lists if and only if these two lists are of the same length and for each position the values in the respective lists are equal.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">numbers := primes;; numbers = primes;</span>
+true
+</pre></div>
+
+<p>We assigned the list <code class="code">primes</code> to the variable <code class="code">numbers</code> and, of course they are equal as they have both the same length and the same entries. Now we will change the third number to 4 and compare the result again with <code class="code">primes</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">numbers[3]:= 4;; numbers = primes;</span>
+true
+</pre></div>
+
+<p>You see that <code class="code">numbers</code> and <code class="code">primes</code> are still equal, check this by printing the value of <code class="code">primes</code>. The list <code class="code">primes</code> is no longer a list of primes! What has happened? The truth is that the lists <code class="code">primes</code> and <code class="code">numbers</code> are not only equal but they are also <em>identical</em>. <code class="code">primes</code> and <code class="code">numbers</code> are two variables pointing to the same list. If you change the value of the subobject <code class="code">numbers[3]</code> of <code class="code">numbers</code> this will also change <code class="code">primes</code>. Variables do <em>not</em> point to a certain block of storage memory but they do point to an object that occupies storage memory. So the assignment <code class="code">numbers := primes</code> did <em>not</em> create a new list in a different place of memory but only created the new name <code class="code">numbers</code> for the same old list of primes.</p>
+
+<p>From this we see that <em>the same object can have several names.</em></p>
+
+<p>If you want to change a list with the contents of <code class="code">primes</code> independently from <code class="code">primes</code> you will have to make a copy of <code class="code">primes</code> by the function <code class="code">ShallowCopy</code> which takes an object as its argument and returns a copy of the argument. (We will first restore the old value of <code class="code">primes</code>.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes[3]:= 5;; primes;</span>
+[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,,,,,, 71 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">numbers:= ShallowCopy(primes);; numbers = primes;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">numbers[3]:= 4;; numbers = primes;</span>
+false
+</pre></div>
+
+<p>Now <code class="code">numbers</code> is no longer equal to <code class="code">primes</code> and <code class="code">primes</code> still is a list of primes. Check this by printing the values of <code class="code">numbers</code> and <code class="code">primes</code>.</p>
+
+<p>Lists and records can be changed this way because <strong class="pkg">GAP</strong> objects of these types have subobjects. To clarify this statement consider the following assignments.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i:= 1;; j:= i;; i:= i+1;; </span>
+</pre></div>
+
+<p>By adding 1 to <code class="code">i</code> the value of <code class="code">i</code> has changed. What happens to <code class="code">j</code>? After the second statement <code class="code">j</code> points to the same object as <code class="code">i</code>, namely to the integer 1. The addition does <em>not</em> change the object <code class="code">1</code> but creates a new object according to the instruction <code class="code">i+1</code>. It is actually the assignment that changes the value of <code class="code">i</code>. Therefore <code class="code">j</code> still points to the object <code class="code">1</code>. Integers (like permutations and booleans) have no subobjects. Objects of these types cannot be changed but can only be replaced by other objects. And a replacement does not change the values of other variables. In the above example an assignment of a new value to the variable <code class="code">numbers</code> would also not change the value of <code class="code">primes</code>.</p>
+
+<p>Finally try the following examples and explain the results.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l:= [];; l:= [l];</span>
+[ [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l[1]:= l;</span>
+[ ~ ]
+</pre></div>
+
+<p>Now return to Section <a href="chap3.html#X81ECC2077D88E112"><span class="RefLink">3.1</span></a> and find out whether the functions <code class="func">Add</code> (<span class="RefLink">Reference: Add</span>) and <code class="func">Append</code> (<span class="RefLink">Reference: Append</span>) change their arguments.</p>
+
+<p><a id="X8614C8207D57AD7A" name="X8614C8207D57AD7A"></a></p>
+
+<h4>3.3 <span class="Heading">Immutability</span></h4>
+
+<p><strong class="pkg">GAP</strong> has a mechanism that protects lists against changes like the ones that have bothered us in Section <a href="chap3.html#X7DD65BEA7EDB0CD7"><span class="RefLink">3.2</span></a>. The function <code class="func">Immutable</code> (<span class="RefLink">Reference: Immutable</span>) takes as argument a list and returns an immutable copy of it, i.e., a list which looks exactly like the old one, but has two extra properties: (1) The new list is immutable, i.e., the list itself and its subobjects cannot be changed. (2) In constructing the copy, every part of the list that can be changed has been copied, so that changes to the old list will not affect the new one. In other words, the new list has no mutable subobjects in common with the old list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list := [ 1, 2, "three", [ 4 ] ];; copy := Immutable( list );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list[3][5] := 'w';; list; copy;</span>
+[ 1, 2, "threw", [ 4 ] ]
+[ 1, 2, "three", [ 4 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">copy[3][5] := 'w';</span>
+List Assignment: &lt;list&gt; must be a mutable list
+not in any function
+Entering break read-eval-print loop ...
+you can 'quit;' to quit to outer loop, or
+you can 'return;' and ignore the assignment to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+</pre></div>
+
+<p>As a consequence of these rules, in the immutable copy of a list which contains an already immutable list as subobject, this immutable subobject need not be copied, because it is unchangeable. Immutable lists are useful in many complex <strong class="pkg">GAP</strong> objects, for example as generator lists of groups. By making them immutable, <strong class="pkg">GAP</strong> ensures that no generators can be added to the list, removed or exchanged. Such changes would of course lead to serious inconsistencies with other knowledge that may already have been calculated for the group.</p>
+
+<p>A converse function to <code class="func">Immutable</code> (<span class="RefLink">Reference: Immutable</span>) is <code class="func">ShallowCopy</code> (<span class="RefLink">Reference: ShallowCopy</span>), which produces a new mutable list whose <span class="SimpleMath">i</span>-th entry is the <span class="SimpleMath">i</span>-th entry of the old list. The single entries are not copied, they are just placed in the new list. If the old list is immutable, and hence the list entries are immutable themselves, the result of <code class="func">ShallowCopy</code> (<span class="RefLink">Reference: ShallowCopy</span>) is mutable only on the top level.</p>
+
+<p>It should be noted that also other objects than lists can appear in mutable or immutable form. Records (see Section <a href="chap3.html#X7CF7BBD58135B981"><span class="RefLink">3.9</span></a>) provide another example.</p>
+
+<p><a id="X83BE0C20875DD285" name="X83BE0C20875DD285"></a></p>
+
+<h4>3.4 <span class="Heading">Sets</span></h4>
+
+<p><strong class="pkg">GAP</strong> knows several special kinds of lists. A <em>set</em> in <strong class="pkg">GAP</strong> is a list that contains no holes (such a list is called <em>dense</em>) and whose elements are strictly sorted w.r.t. <code class="code">&lt;</code>; in particular, a set cannot contain duplicates. (More precisely, the elements of a set in <strong class="pkg">GAP</strong> are required to lie in the same <em>family</em>, but roughly this means that they can be compared using the <code class="code">&lt;</code> operator.)</p>
+
+<p>This provides a natural model for mathematical sets whose elements are given by an explicit enumeration.</p>
+
+<p><strong class="pkg">GAP</strong> also calls a set a <em>strictly sorted list</em>, and the function <code class="func">IsSSortedList</code> (<span class="RefLink">Reference: IsSSortedList</span>) tests whether a given list is a set. It returns a boolean value. For almost any list whose elements are contained in the same family, there exists a corresponding set. This set is constructed by the function <code class="func">Set</code> (<span class="RefLink">Reference: Set</span>) which takes the list as its argument and returns a set obtained from this list by ignoring holes and duplicates and by sorting the elements.</p>
+
+<p>The elements of the sets used in the examples of this section are strings.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fruits:= ["apple", "strawberry", "cherry", "plum"];</span>
+[ "apple", "strawberry", "cherry", "plum" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSSortedList(fruits);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fruits:= Set(fruits);</span>
+[ "apple", "cherry", "plum", "strawberry" ]
+</pre></div>
+
+<p>Note that the original list <code class="code">fruits</code> is not changed by the function <code class="func">Set</code> (<span class="RefLink">Reference: Set</span>). We have to make a new assignment to the variable <code class="code">fruits</code> in order to make it a set.</p>
+
+<p>The operator <code class="keyw">in</code> is used to test whether an object is an element of a set. It returns a boolean value <code class="keyw">true</code> or <code class="keyw">false</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">"apple" in fruits;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">"banana" in fruits;</span>
+false
+</pre></div>
+
+<p>The operator <code class="keyw">in</code> can also be applied to ordinary lists. It is however much faster to perform a membership test for sets since sets are always sorted and a binary search can be used instead of a linear search. New elements may be added to a set by the function <code class="func">AddSet</code> (<span class="RefLink">Reference: AddSet</span>) which takes the set <code class="code">fruits</code> as its first argument and an element as its second argument and adds the element to the set if it wasn't already there. Note that the object <code class="code">fruits</code> is changed.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddSet(fruits, "banana");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fruits;  #  The banana is inserted in the right place.</span>
+[ "apple", "banana", "cherry", "plum", "strawberry" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddSet(fruits, "apple");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fruits;  #  fruits has not changed.</span>
+[ "apple", "banana", "cherry", "plum", "strawberry" ]
+</pre></div>
+
+<p>Note that inserting new elements into a set with <code class="func">AddSet</code> (<span class="RefLink">Reference: AddSet</span>) is usually more expensive than simply adding new elements at the end of a list.</p>
+
+<p>Sets can be intersected by the function <code class="func">Intersection</code> (<span class="RefLink">Reference: Intersection</span>) and united by the function <code class="func">Union</code> (<span class="RefLink">Reference: Union</span>) which both take two sets as their arguments and return the intersection resp. union of the two sets as a new object.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">breakfast:= ["tea", "apple", "egg"];</span>
+[ "tea", "apple", "egg" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Intersection(breakfast, fruits);</span>
+[ "apple" ]
+</pre></div>
+
+<p>The arguments of the functions <code class="func">Intersection</code> (<span class="RefLink">Reference: Intersection</span>) and <code class="func">Union</code> (<span class="RefLink">Reference: Union</span>) could be ordinary lists, while their result is always a set. Note that in the preceding example at least one argument of <code class="func">Intersection</code> (<span class="RefLink">Reference: Intersection</span>) was not a set. The functions <code class="func">IntersectSet</code> (<span class="RefLink">Reference: IntersectSet</span>) and <code class="func">UniteSet</code> (<span class="RefLink">Reference: UniteSet</span>) also form the intersection resp. union of two sets. They will however not return the result but change their first argument to be the result. Try them carefully.</p>
+
+<p><a id="X79596BDE7CAF8491" name="X79596BDE7CAF8491"></a></p>
+
+<h4>3.5 <span class="Heading">Ranges</span></h4>
+
+<p>A <em>range</em> is a finite arithmetic progression of integers. This is another special kind of list. A range is described by the first two values and the last value of the arithmetic progression which are given in the form <code class="code">[<var class="Arg">first</var>,<var class="Arg">second</var>..<var class="Arg">last</var>]</code>. In the usual case of an ascending list of consecutive integers the second entry may be omitted.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[1..999999];     #  a range of almost a million numbers</span>
+[ 1 .. 999999 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[1, 2..999999];  #  this is equivalent</span>
+[ 1 .. 999999 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[1, 3..999999];  #  here the step is 2</span>
+[ 1, 3 .. 999999 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( last );</span>
+500000
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ 999999, 999997 .. 1 ];</span>
+[ 999999, 999997 .. 1 ]
+</pre></div>
+
+<p>This compact printed representation of a fairly long list corresponds to a compact internal representation. The function <code class="func">IsRange</code> (<span class="RefLink">Reference: IsRange</span>) tests whether an object is a range, the function <code class="func">ConvertToRangeRep</code> (<span class="RefLink">Reference: ConvertToRangeRep</span>) changes the representation of a list that is in fact a range to this compact internal representation.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:= [-2,-1,0,1,2,3,4,5];</span>
+[ -2, -1, 0, 1, 2, 3, 4, 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRange( a );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ConvertToRangeRep( a );;  a;</span>
+[ -2 .. 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a[1]:= 0;; IsRange( a );</span>
+false
+</pre></div>
+
+<p>Note that this change of representation does <em>not</em> change the value of the list <code class="code">a</code>. The list <code class="code">a</code> still behaves in any context in the same way as it would have in the long representation.</p>
+
+<p><a id="X7CC5B0347F8EC820" name="X7CC5B0347F8EC820"></a></p>
+
+<h4>3.6 <span class="Heading">For and While Loops</span></h4>
+
+<p>Given a list <code class="code">pp</code> of permutations we can form their product by means of a <code class="keyw">for</code> loop instead of writing down the product explicitly.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pp:= [ (1,3,2,6,8)(4,5,9), (1,6)(2,7,8), (1,5,7)(2,3,8,6),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">          (1,8,9)(2,3,5,6,4), (1,9,8,6,3,4,7,2)];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">prod:= ();        </span>
+()
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for p in pp do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      prod:= prod*p;    </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">prod;        </span>
+(1,8,4,2,3,6,5,9)
+</pre></div>
+
+<p>First a new variable <code class="code">prod</code> is initialized to the identity permutation <code class="code">()</code>. Then the loop variable <code class="code">p</code> takes as its value one permutation after the other from the list <code class="code">pp</code> and is multiplied with the present value of <code class="code">prod</code> resulting in a new value which is then assigned to <code class="code">prod</code>.</p>
+
+<p>The <code class="keyw">for</code> loop has the following syntax</p>
+
+<p><code class="keyw">for</code> <var class="Arg">var</var> <code class="keyw">in</code> <var class="Arg">list</var> <code class="keyw">do</code> <var class="Arg">statements</var> <code class="keyw">od</code><code class="code">;</code></p>
+
+<p>The effect of the <code class="keyw">for</code> loop is to execute the <var class="Arg">statements</var> for every element of the <var class="Arg">list</var>. A <code class="keyw">for</code> loop is a statement and therefore terminated by a semicolon. The list of <var class="Arg">statements</var> is enclosed by the keywords <code class="keyw">do</code> and <code class="keyw">od</code> (reverse <code class="keyw">do</code>). A <code class="keyw">for</code> loop returns no value. Therefore we had to ask explicitly for the value of <code class="code">prod</code> in the preceding example.</p>
+
+<p>The <code class="keyw">for</code> loop can loop over any kind of list, even a list with holes. In many programming languages the <code class="keyw">for</code> loop has the form</p>
+
+<p><code class="code">for <var class="Arg">var</var> from <var class="Arg">first</var> to <var class="Arg">last</var> do <var class="Arg">statements</var> od;</code></p>
+
+<p>In <strong class="pkg">GAP</strong> this is merely a special case of the general <code class="keyw">for</code> loop as defined above where the <var class="Arg">list</var> in the loop body is a range (see <a href="chap3.html#X79596BDE7CAF8491"><span class="RefLink">3.5</span></a>):</p>
+
+<p><code class="keyw">for</code> <var class="Arg">var</var> <code class="keyw">in</code> <code class="code">[<var class="Arg">first</var>..<var class="Arg">last</var>]</code> <code class="keyw">do</code> <var class="Arg">statements</var> <code class="keyw">od</code><code class="code">;</code></p>
+
+<p>You can for instance loop over a range to compute the factorial <span class="SimpleMath">15!</span> of the number <span class="SimpleMath">15</span> in the following way.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ff:= 1;</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for i in [1..15] do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      ff:= ff * i;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ff;</span>
+1307674368000
+</pre></div>
+
+<p>The <code class="keyw">while</code> loop has the following syntax</p>
+
+<p><code class="keyw">while</code> <var class="Arg">condition</var> <code class="keyw">do</code> <var class="Arg">statements</var> <code class="keyw">od</code><code class="code">;</code></p>
+
+<p>The <code class="keyw">while</code> loop loops over the <var class="Arg">statements</var> as long as the <var class="Arg">condition</var> evaluates to <code class="keyw">true</code>. Like the <code class="keyw">for</code> loop the <code class="keyw">while</code> loop is terminated by the keyword <code class="keyw">od</code> followed by a semicolon.</p>
+
+<p>We can use our list <code class="code">primes</code> to perform a very simple factorization. We begin by initializing a list <code class="code">factors</code> to the empty list. In this list we want to collect the prime factors of the number 1333. Remember that a list has to exist before any values can be assigned to positions of the list. Then we will loop over the list <code class="code">primes</code> and test for each prime whether it divides the number. If it does we will divide the number by that prime, add it to the list <code class="code">factors</code> and continue.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n:= 1333;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">factors:= [];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for p in primes do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      while n mod p = 0 do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         n:= n/p;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         Add(factors, p);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      od;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">factors;</span>
+[ 31, 43 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n;</span>
+1
+</pre></div>
+
+<p>As <code class="code">n</code> now has the value 1 all prime factors of 1333 have been found and <code class="code">factors</code> contains a complete factorization of 1333. This can of course be verified by multiplying 31 and 43.</p>
+
+<p>This loop may be applied to arbitrary numbers in order to find prime factors. But as <code class="code">primes</code> is not a complete list of all primes this loop may fail to find all prime factors of a number greater than 2000, say. You can try to improve it in such a way that new primes are added to the list <code class="code">primes</code> if needed.</p>
+
+<p>You have already seen that list objects may be changed. This of course also holds for the list in a loop body. In most cases you have to be careful not to change this list, but there are situations where this is quite useful. The following example shows a quick way to determine the primes smaller than 1000 by a sieve method. Here we will make use of the function <code class="code">Unbind</code> to delete entries from a list, and the <code class="code">if</code> statement covered in <a href="chap4.html#X801EE07E839B31B2"><span class="RefLink">4.2</span></a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes:= [];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">numbers:= [2..1000];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for p in numbers do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      Add(primes, p);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      for n in numbers do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         if n mod p = 0 then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            Unbind(numbers[n-1]);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      od;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   od;</span>
+</pre></div>
+
+<p>The inner loop removes all entries from <code class="code">numbers</code> that are divisible by the last detected prime <code class="code">p</code>. This is done by the function <code class="code">Unbind</code> which deletes the binding of the list position <code class="code">numbers[n-1]</code> to the value <code class="code">n</code> so that afterwards <code class="code">numbers[n-1]</code> no longer has an assigned value. The next element encountered in <code class="code">numbers</code> by the outer loop necessarily is the next prime.</p>
+
+<p>In a similar way it is possible to enlarge the list which is looped over. This yields a nice and short orbit algorithm for the action of a group, for example.</p>
+
+<p>More about <code class="keyw">for</code> and <code class="keyw">while</code> loops can be found in the sections <span class="RefLink">Reference: While</span> and <span class="RefLink">Reference: For</span>.</p>
+
+<p><a id="X879CFE0985DBA041" name="X879CFE0985DBA041"></a></p>
+
+<h4>3.7 <span class="Heading">List Operations</span></h4>
+
+<p>There is a more comfortable way than that given in the previous section to compute the product of a list of numbers or permutations.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Product([1..15]);</span>
+1307674368000
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Product(pp);</span>
+(1,8,4,2,3,6,5,9)
+</pre></div>
+
+<p>The function <code class="func">Product</code> (<span class="RefLink">Reference: Product</span>) takes a list as its argument and computes the product of the elements of the list. This is possible whenever a multiplication of the elements of the list is defined. So <code class="func">Product</code> (<span class="RefLink">Reference: Product</span>) executes a loop over all elements of the list.</p>
+
+<p>There are other often used loops available as functions. Guess what the function <code class="func">Sum</code> (<span class="RefLink">Reference: Sum</span>) does. The function <code class="func">List</code> (<span class="RefLink">Reference: list element operation</span>) may take a list and a function as its arguments. It will then apply the function to each element of the list and return the corresponding list of results. A list of cubes is produced as follows with the function <code class="code">cubed</code> from Section <a href="chap4.html#X86FA580F8055B274"><span class="RefLink">4</span></a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cubed:= x -&gt; x^3;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List([2..10], cubed);</span>
+[ 8, 27, 64, 125, 216, 343, 512, 729, 1000 ]
+</pre></div>
+
+<p>To add all these cubes we might apply the function <code class="func">Sum</code> (<span class="RefLink">Reference: Sum</span>) to the last list. But we may as well give the function <code class="code">cubed</code> to <code class="func">Sum</code> (<span class="RefLink">Reference: Sum</span>) as an additional argument.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Sum(last) = Sum([2..10], cubed);</span>
+true
+</pre></div>
+
+<p>The primes less than 30 can be retrieved out of the list <code class="code">primes</code> from Section <a href="chap3.html#X81ECC2077D88E112"><span class="RefLink">3.1</span></a> by the function <code class="func">Filtered</code> (<span class="RefLink">Reference: Filtered</span>). This function takes the list <code class="code">primes</code> and a property as its arguments and will return the list of those elements of <code class="code">primes</code> which have this property. Such a property will be represented by a function that returns a boolean value. In this example the property of being less than 30 can be represented by the function <code class="code">x -&gt; x &lt; 30</code> since <code class="code">x &lt; 30</code> will evaluate to <code class="keyw">true</code> for values <code class="code">x</code> less than 30 and to <code class="keyw">false</code> otherwise.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Filtered(primes, x -&gt; x &lt; 30);</span>
+[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 ]
+</pre></div>
+
+<p>We have already mentioned the operator <code class="code">{ }</code> that forms sublists. It takes a list of positions as its argument and will return the list of elements from the original list corresponding to these positions.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">primes{ [1 .. 10] };</span>
+[ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 ]
+</pre></div>
+
+<p>Finally we mention the function <code class="func">ForAll</code> (<span class="RefLink">Reference: ForAll</span>) that checks whether a property holds for all elements of a list. It takes as its arguments a list and a function that returns a boolean value. <code class="func">ForAll</code> (<span class="RefLink">Reference: ForAll</span>) checks whether the function returns <code class="keyw">true</code> for all elements of the list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list:= [ 1, 2, 3, 4 ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ForAll( list, x -&gt; x &gt; 0 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ForAll( list, x -&gt; x in primes );</span>
+false
+</pre></div>
+
+<p>You will find more predefined <code class="keyw">for</code> loops in chapter <span class="RefLink">Reference: Lists</span>.</p>
+
+<p><a id="X851A7DD07866323F" name="X851A7DD07866323F"></a></p>
+
+<h4>3.8 <span class="Heading">Vectors and Matrices</span></h4>
+
+<p>This section describes how <strong class="pkg">GAP</strong> uses lists to represent row vectors and matrices. A <em>row vector</em> is a dense list of elements from a common field. A <em>matrix</em> is a dense list of row vectors over a common field and of equal length.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v:= [3, 6, 2, 5/2];;  IsRowVector(v);</span>
+true
+</pre></div>
+
+<p>Row vectors may be added and multiplied by scalars from their field. Multiplication of row vectors of equal length results in their scalar product.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">2 * v;  v * 1/3;</span>
+[ 6, 12, 4, 5 ]
+[ 1, 2, 2/3, 5/6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v * v;   # the scalar product of `v' with itself</span>
+221/4
+</pre></div>
+
+<p>Note that the expression <code class="code">v * 1/3</code> is actually evaluated by first multiplying <code class="code">v</code> by 1 (which yields again <code class="code">v</code>) and by then dividing by 3. This is also an allowed scalar operation. The expression <code class="code">v/3</code> would result in the same value.</p>
+
+<p>Such arithmetical operations (if the results are again vectors) result in <em>mutable</em> vectors except if the operation is binary and both operands are immutable; thus the vectors shown in the examples above are all mutable.</p>
+
+<p>So if you want to produce a mutable list with 100 entries equal to 25, you can simply say <code class="code">25 + 0 * [ 1 .. 100 ]</code>. Note that ranges are also vectors (over the rationals), and that <code class="code">[ 1 .. 100 ]</code> is mutable.</p>
+
+<p>A matrix is a dense list of row vectors of equal length.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:= [[1,-1, 1],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [2, 0,-1],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        [1, 1, 1]];</span>
+[ [ 1, -1, 1 ], [ 2, 0, -1 ], [ 1, 1, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m[2][1];</span>
+2
+</pre></div>
+
+<p>Syntactically a matrix is a list of lists. So the number 2 in the second row and the first column of the matrix <code class="code">m</code> is referred to as the first element of the second element of the list <code class="code">m</code> via <code class="code">m[2][1]</code>.</p>
+
+<p>A matrix may be multiplied by scalars, row vectors and other matrices. (If the row vectors and matrices involved in such a multiplication do not have suitable dimensions then the "missing" entries are treated as zeros, so the results may look unexpectedly in such cases.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[1, 0, 0] * m;</span>
+[ 1, -1, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[1, 0, 0, 2] * m;</span>
+[ 1, -1, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m * [1, 0, 0];</span>
+[ 1, 2, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m * [1, 0, 0, 2];</span>
+[ 1, 2, 1 ]
+</pre></div>
+
+<p>Note that multiplication of a row vector with a matrix will result in a linear combination of the rows of the matrix, while multiplication of a matrix with a row vector results in a linear combination of the columns of the matrix. In the latter case the row vector is considered as a column vector.</p>
+
+<p>A vector or matrix of integers can also be multiplied with a finite field scalar and vice versa. Such products result in a matrix over the finite field with the integers mapped into the finite field in the obvious way. Finite field matrices are nicer to read when they are <code class="code">Display</code>ed rather than <code class="code">Print</code>ed. (Here we write <code class="code">Z(q)</code> to denote a primitive root of the finite field with <code class="code">q</code> elements.)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m * One( GF(5) ) );</span>
+ 1 4 1
+ 2 . 4
+ 1 1 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m^2 * Z(2) + m * Z(4) );</span>
+z = Z(4)
+ z^1 z^1 z^2
+   1   1 z^2
+ z^1 z^1 z^2
+</pre></div>
+
+<p>Submatrices can easily be extracted using the expression <code class="code"><var class="Arg">mat</var>{<var class="Arg">rows</var>}{<var class="Arg">columns</var>}</code>. They can also be assigned to, provided the big matrix is mutable (which it is not if it is the result of an arithmetical operation, see above).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sm := m{ [ 1, 2 ] }{ [ 2, 3 ] };</span>
+[ [ -1, 1 ], [ 0, -1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sm{ [ 1, 2 ] }{ [2] } := [[-2],[0]];;  sm;</span>
+[ [ -1, -2 ], [ 0, 0 ] ]
+</pre></div>
+
+<p>The first curly brackets contain the selection of rows, the second that of columns.</p>
+
+<p>Matrices appear not only in linear algebra, but also as group elements, provided they are invertible. Here we have the opportunity to meet a group-theoretical function, namely <code class="func">Order</code> (<span class="RefLink">Reference: Order</span>), which computes the order of a group element.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order( m * One( GF(5) ) );</span>
+8
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order( m );</span>
+infinity
+</pre></div>
+
+<p>For matrices whose entries are more complex objects, for example rational functions, <strong class="pkg">GAP</strong>'s <code class="func">Order</code> (<span class="RefLink">Reference: Order</span>) methods might not be able to prove that the matrix has infinite order, and one gets the following warning.</p>
+
+
+<div class="example"><pre>
+#I  Order: warning, order of &lt;mat&gt; might be infinite
+</pre></div>
+
+<p>In such a case, if the order of the matrix really is infinite, you will have to interrupt <strong class="pkg">GAP</strong> by pressing <code class="code"><var class="Arg">ctl</var>-C</code> (followed by <code class="code"><var class="Arg">ctl</var>-D</code> or <code class="code">quit;</code> to leave the break loop).</p>
+
+<p>To prove that the order of <code class="code">m</code> is infinite, we also could look at the minimal polynomial of <code class="code">m</code> over the rationals.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= MinimalPolynomial( Rationals, m );;  Factors( f );</span>
+[ x_1-2, x_1^2+3 ]
+</pre></div>
+
+<p><code class="func">Factors</code> (<span class="RefLink">Reference: Factors</span>) returns a list of irreducible factors of the polynomial <code class="code">f</code>. The first irreducible factor <span class="SimpleMath">X-2</span> reveals that 2 is an eigenvalue of <code class="code">m</code>, hence its order cannot be finite.</p>
+
+<p><a id="X7CF7BBD58135B981" name="X7CF7BBD58135B981"></a></p>
+
+<h4>3.9 <span class="Heading">Plain Records</span></h4>
+
+<p>A record provides another way to build new data structures. Like a list a record contains subobjects. In a record the elements, the so-called <em>record components</em>, are not indexed by numbers but by names.</p>
+
+<p>In this section you will see how to define and how to use records. Records are changed by assignments to record components or by unbinding record components.</p>
+
+<p>Initially a record is defined as a comma separated list of assignments to its record components.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">date:= rec(year:= 1997,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">              month:= "Jul",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">              day:= 14);</span>
+rec( day := 14, month := "Jul", year := 1997 )
+</pre></div>
+
+<p>The value of a record component is accessible by the record name and the record component name separated by one dot as the record component selector.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">date.year;</span>
+1997
+</pre></div>
+
+<p>Assignments to new record components are possible in the same way. The record is automatically resized to hold the new component.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">date.time:= rec(hour:= 19, minute:= 23, second:= 12);</span>
+rec( hour := 19, minute := 23, second := 12 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">date;</span>
+rec( day := 14, month := "Jul", 
+  time := rec( hour := 19, minute := 23, second := 12 ), year := 1997 )
+</pre></div>
+
+<p>Records are objects that may be changed. An assignment to a record component changes the original object. The remarks made in Sections <a href="chap3.html#X7DD65BEA7EDB0CD7"><span class="RefLink">3.2</span></a> and <a href="chap3.html#X8614C8207D57AD7A"><span class="RefLink">3.3</span></a> about identity and mutability of lists are also true for records.</p>
+
+<p>Sometimes it is interesting to know which components of a certain record are bound. This information is available from the function <code class="func">RecNames</code> (<span class="RefLink">Reference: RecNames</span>), which takes a record as its argument and returns a list of names of all bound components of this record as a list of strings.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RecNames(date);</span>
+[ "time", "year", "month", "day" ]
+</pre></div>
+
+<p>Now return to Sections <a href="chap3.html#X7DD65BEA7EDB0CD7"><span class="RefLink">3.2</span></a> and <a href="chap3.html#X8614C8207D57AD7A"><span class="RefLink">3.3</span></a> and find out what these sections mean for records.</p>
+
+<p><a id="X800A5E8681E28E2D" name="X800A5E8681E28E2D"></a></p>
+
+<h4>3.10 <span class="Heading">Further Information about Lists</span></h4>
+
+<p>(The following cross-references point to the <strong class="pkg">GAP</strong> Reference Manual.)</p>
+
+<p>You will find more about lists, sets, and ranges in Chapter <span class="RefLink">Reference: Lists</span>, in particular more about identical lists in Section <span class="RefLink">Reference: Identical Lists</span>. A more detailed description of strings is contained in Chapter <span class="RefLink">Reference: Strings and Characters</span>. Fields are described in Chapter <span class="RefLink">Reference: Fields and Division Rings</span>, some known fields in <strong class="pkg">GAP</strong> are described in Chapters <span class="RefLink">Reference: Rational Numbers</span>, <span class="RefLink">Reference: Abelian Number Fields</span>, and <span class="RefLink">Reference: Finite Fields</span>. Row vectors and matrices are described in more detail in Chapters <span class="RefLink">Reference: Row Vectors</span> and <span class="RefLink">Reference: Matrices</span>; note that <strong class="pkg">GAP</strong> supports also linear algebra for objects which are <em>not</em> lists, see Chapter <span class="RefLink">Reference: Vector and Matrix Objects</span>. Vector spaces are described in Chapter <span class="RefLink">Reference: Vector Spaces</span>, further matrix related structures are described in Chapters <span class="RefLink">Reference: Matrix Groups</span>, <span class="RefLink">Reference: Algebras</span>, and <span class="RefLink">Reference: Lie Algebras</span>.</p>
+
+<p>You will find more list operations in Chapter <span class="RefLink">Reference: Lists</span>.</p>
+
+<p>Records and functions for records are described in detail in Chapter <span class="RefLink">Reference: Records</span>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Loops) - Chapter 4: Creating Quasigroups and Loops</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
+<p><a id="X7AA4B9C0877550ED" name="X7AA4B9C0877550ED"></a></p>
+<div class="ChapSects"><a href="chap4_mj.html#X7AA4B9C0877550ED">4 <span class="Heading">Creating Quasigroups and Loops</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7DE8405B82BC36A9">4.1 <span class="Heading">About Cayley Tables</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7827BF877AA87246">4.2 <span class="Heading">Testing Cayley Tables</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X81179355869B9DFE">4.2-1 <span class="Heading">IsQuasigroupTable and IsQuasigroupCayleyTable</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7AAE48507A471069">4.2-2 <span class="Heading">IsLoopTable and IsLoopCayleyTable</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7BA749CA7DB4EA87">4.3 <span class="Heading">Canonical and Normalized Cayley Tables</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7971CCB87DAFF7B9">4.3-1 CanonicalCayleyTable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7B816D887F46E6B7">4.3-2 CanonicalCopy</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X821A2F9E85FAD8BF">4.3-3 NormalizedQuasigroupTable</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7C2372BB8739C5A2">4.4 <span class="Heading">Creating Quasigroups and Loops From Cayley Tables</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X860135BB85F2DB19">4.4-1 <span class="Heading">QuasigroupByCayleyTable and LoopByCayleyTable</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X849944F17E2B37F8">4.5 <span class="Heading">Creating Quasigroups and Loops from a File</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X81A1DB918057933E">4.5-1 <span class="Heading">QuasigroupFromFile and LoopFromFile</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X820E67F88319C38B">4.6 <span class="Heading">Creating Quasigroups and Loops From Sections</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7F94C8DD7E1A3470">4.6-1 CayleyTableByPerms</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7EC1EB0D7B8382A1">4.6-2 <span class="Heading">QuasigroupByLeftSection and LoopByLeftSection</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X80B436ED7CC0749E">4.6-3 <span class="Heading">QuasigroupByRightSection and LoopByRightSection</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X85ABE99E84E5B0E8">4.7 <span class="Heading">Creating Quasigroups and Loops From Folders</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X83168E62861F70AB">4.7-1 <span class="Heading">QuasigroupByRightFolder and LoopByRightFolder</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X8759431780AC81A9">4.8 <span class="Heading">Creating Quasigroups and Loops By Nuclear Extensions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X784733C67AA6B2FA">4.8-1 NuclearExtension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X79AEE93E7E15B802">4.8-2 LoopByExtension</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7AE29A1A7AA5C25A">4.9 <span class="Heading">Random Quasigroups and Loops</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8271C0F5786B6FA9">4.9-1 <span class="Heading">RandomQuasigroup and RandomLoop</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X817132C887D3FD3A">4.9-2 RandomNilpotentLoop</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7BC2D8877A943D74">4.10 <span class="Heading">Conversions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X84575A4B78CC545E">4.10-1 IntoQuasigroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X79CEA57C850C7070">4.10-2 PrincipalLoopIsotope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7A59C36683118E5A">4.10-3 IntoLoop</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7B5C6C64831B866E">4.10-4 IntoGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X79B7327C79029086">4.11 <span class="Heading">Products of Quasigroups and Loops</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X861BA02C7902A4F4">4.11-1 DirectProduct</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7865FC8D7854C2E3">4.12 <span class="Heading">Opposite Quasigroups and Loops</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X87B6AED47EE2BCD3">4.12-1 <span class="Heading">Opposite, OppositeQuasigroup and OppositeLoop</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Creating Quasigroups and Loops</span></h3>
+
+<p>In this chapter we describe several ways in which quasigroups and loops can be created in <strong class="pkg">LOOPS</strong>.</p>
+
+<p><a id="X7DE8405B82BC36A9" name="X7DE8405B82BC36A9"></a></p>
+
+<h4>4.1 <span class="Heading">About Cayley Tables</span></h4>
+
+<p>Let <span class="SimpleMath">\(X=\{x_1,\dots,x_n\}\)</span> be a set and <span class="SimpleMath">\(\cdot\)</span> a binary operation on <span class="SimpleMath">\(X\)</span>. Then an <span class="SimpleMath">\(n\)</span> by <span class="SimpleMath">\(n\)</span> array with rows and columns bordered by <span class="SimpleMath">\(x_1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(x_n\)</span>, in this order, is a <em>Cayley table</em>, or a <em>multiplication table</em> of <span class="SimpleMath">\(\cdot\)</span>, if the entry in the row <span class="SimpleMath">\(x_i\)</span> and column <span class="SimpleMath">\(x_j\)</span> is <span class="SimpleMath">\(x_i\cdot x_j\)</span>.</p>
+
+<p>A Cayley table is a <em>quasigroup table</em> if it is a latin square, i.e., if every entry <span class="SimpleMath">\(x_i\)</span> appears in every column and every row exactly once.</p>
+
+<p>An unfortunate feature of multiplication tables in practice is that they are often not bordered, that is, it is up to the reader to figure out what is meant. Throughout this manual and in <strong class="pkg">LOOPS</strong>, we therefore make the following assumption: <em>All distinct entries in a quasigroup table must be positive integers, say <span class="SimpleMath">\(x_1 &lt; x_2 &lt; \cdots &lt; x_n\)</span>, and if no border is specified, we assume that the table is bordered by <span class="SimpleMath">\(x_1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(x_n\)</span>, in this order.</em> Note that we do not assume that the distinct entries <span class="SimpleMath">\(x_1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(x_n\)</span> form the interval <span class="SimpleMath">\(1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(n\)</span>. The significance of this observation will become clear in Chapter <a href="chap6_mj.html#X794A04C5854D352B"><span class="RefLink">6</span></a>.</p>
+
+<p>Finally, we say that a quasigroup table is a <em>loop table</em> if the first row and the first column are the same, and if the entries in the first row are ordered in an ascending fashion.</p>
+
+<p><a id="X7827BF877AA87246" name="X7827BF877AA87246"></a></p>
+
+<h4>4.2 <span class="Heading">Testing Cayley Tables</span></h4>
+
+<p><a id="X81179355869B9DFE" name="X81179355869B9DFE"></a></p>
+
+<h5>4.2-1 <span class="Heading">IsQuasigroupTable and IsQuasigroupCayleyTable</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsQuasigroupTable</code>( <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsQuasigroupCayleyTable</code>( <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> if <var class="Arg">T</var> is a quasigroup table as defined above, else <code class="code">false</code>.</p>
+
+<p><a id="X7AAE48507A471069" name="X7AAE48507A471069"></a></p>
+
+<h5>4.2-2 <span class="Heading">IsLoopTable and IsLoopCayleyTable</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLoopTable</code>( <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLoopCayleyTable</code>( <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> if <var class="Arg">T</var> is a loop table as defined above, else <code class="code">false</code>.<br /></p>
+
+<p><strong class="button">Remark:</strong>The package <strong class="pkg">GUAVA</strong> also contains operations dealing with latin squares. In particular, <code class="code">IsLatinSquare</code> is declared in <strong class="pkg">GUAVA</strong>.</p>
+
+<p><a id="X7BA749CA7DB4EA87" name="X7BA749CA7DB4EA87"></a></p>
+
+<h4>4.3 <span class="Heading">Canonical and Normalized Cayley Tables</span></h4>
+
+<p><a id="X7971CCB87DAFF7B9" name="X7971CCB87DAFF7B9"></a></p>
+
+<h5>4.3-1 CanonicalCayleyTable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CanonicalCayleyTable</code>( <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: Canonical Cayley table constructed from Cayley table <var class="Arg">T</var> by replacing entries <span class="SimpleMath">\(x_i\)</span> with <span class="SimpleMath">\(i\)</span>.</p>
+
+<p>A Cayley table is said to be <em>canonical</em> if it is based on elements <span class="SimpleMath">\(1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(n\)</span>. Although we do not assume that every quasigroup table is canonical, it is often desirable to present quasigroup tables in canonical way.</p>
+
+<p><a id="X7B816D887F46E6B7" name="X7B816D887F46E6B7"></a></p>
+
+<h5>4.3-2 CanonicalCopy</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CanonicalCopy</code>( <var class="Arg">Q</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A canonical copy of the quasigroup or loop <var class="Arg">Q</var>.</p>
+
+<p>This is a shorthand for <code class="code">QuasigroupByCayleyTable(CanonicalCayleyTable(<var class="Arg">Q</var>)</code> when <var class="Arg">Q</var> is a declared quasigroup, and <code class="code">LoopByCayleyTable(CanonicalCayleyTable(<var class="Arg">Q</var>)</code> when <var class="Arg">Q</var> is a loop.</p>
+
+<p><a id="X821A2F9E85FAD8BF" name="X821A2F9E85FAD8BF"></a></p>
+
+<h5>4.3-3 NormalizedQuasigroupTable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NormalizedQuasigroupTable</code>( <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A normalized version of the Cayley table <var class="Arg">T</var>.</p>
+
+<p>A given Cayley table <var class="Arg">T</var> is normalized in three steps as follows: first, <code class="code">CanonicalCayleyTable</code> is called to rename entries to <span class="SimpleMath">\(1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(n\)</span>, then the columns of <var class="Arg">T</var> are permuted so that the first row reads <span class="SimpleMath">\(1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(n\)</span>, and finally the rows of <var class="Arg">T</var> are permuted so that the first column reads <span class="SimpleMath">\(1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(n\)</span>.</p>
+
+<p><a id="X7C2372BB8739C5A2" name="X7C2372BB8739C5A2"></a></p>
+
+<h4>4.4 <span class="Heading">Creating Quasigroups and Loops From Cayley Tables</span></h4>
+
+<p><a id="X860135BB85F2DB19" name="X860135BB85F2DB19"></a></p>
+
+<h5>4.4-1 <span class="Heading">QuasigroupByCayleyTable and LoopByCayleyTable</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuasigroupByCayleyTable</code>( <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoopByCayleyTable</code>( <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The quasigroup (resp. loop) with quasigroup table (resp. loop table) <var class="Arg">T</var>.</p>
+
+<p>Since <code class="code">CanonicalCayleyTable</code> is called within the above operation, the resulting quasigroup will have Cayley table with distinct entries <span class="SimpleMath">\(1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(n\)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ct := CanonicalCayleyTable( [[5,3],[3,5]] );</span>
+[ [ 2, 1 ], [ 1, 2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NormalizedQuasigroupTable( ct );</span>
+[ [ 1, 2 ], [ 2, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoopByCayleyTable( last );</span>
+&lt;loop of order 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ IsQuasigroupTable( ct ), IsLoopTable( ct ) ];</span>
+[ true, false ]
+</pre></div>
+
+<p><a id="X849944F17E2B37F8" name="X849944F17E2B37F8"></a></p>
+
+<h4>4.5 <span class="Heading">Creating Quasigroups and Loops from a File</span></h4>
+
+<p>Typing a large multiplication table manually is tedious and error-prone. We have therefore included a general method in <strong class="pkg">LOOPS</strong> that reads multiplication tables of quasigroups from a file.</p>
+
+<p>Instead of writing a separate algorithm for each common format, our algorithm relies on the user to provide a bit of information about the input file. Here is an outline of the algorithm, with file named <var class="Arg">filename</var> and a string <var class="Arg">del</var> as input (in essence, the characters of <var class="Arg">del</var> will be ignored while reading the file):</p>
+
+
+<ul>
+<li><p>read the entire content of <var class="Arg">filename</var> into a string <var class="Arg">s</var>,</p>
+
+</li>
+<li><p>replace all end-of-line characters in <var class="Arg">s</var> by spaces,</p>
+
+</li>
+<li><p>replace by spaces all characters of <var class="Arg">s</var> that appear in <var class="Arg">del</var>,</p>
+
+</li>
+<li><p>split <var class="Arg">s</var> into maximal substrings without spaces, called <em>chunks</em> here,</p>
+
+</li>
+<li><p>let <span class="SimpleMath">\(n\)</span> be the number of distinct chunks,</p>
+
+</li>
+<li><p>if the number of chunks is not <span class="SimpleMath">\(n^2\)</span>, report error,</p>
+
+</li>
+<li><p>construct the multiplication table by assigning numerical values <span class="SimpleMath">\(1\)</span>, <span class="SimpleMath">\(\dots\)</span>, <span class="SimpleMath">\(n\)</span> to chunks, depending on their position among distinct chunks.</p>
+
+</li>
+</ul>
+<p>The following examples clarify the algorithm and document its versatility. All examples are of the form <span class="SimpleMath">\(F+D\Longrightarrow T\)</span>, meaning that an input file containing <span class="SimpleMath">\(F\)</span> together with the deletion string <span class="SimpleMath">\(D\)</span> produce multiplication table <span class="SimpleMath">\(T\)</span>. <br /></p>
+
+<p><strong class="button">Example:</strong> Data does not have to be arranged into an array of any kind.</p>
+
+<p class="center">\[
+        \begin{array}{cccc}
+                0&amp;1&amp;2&amp;1\\
+                2&amp;0&amp;2&amp; \\
+                0&amp;1&amp; &amp;
+        \end{array}\quad + \quad "" \quad \Longrightarrow\quad
+        \begin{array}{ccc}
+                1&amp;2&amp;3\\
+                2&amp;3&amp;1\\
+                3&amp;1&amp;2
+        \end{array}
+\]</p>
+
+<p><strong class="button">Example:</strong> Chunks can be any strings.</p>
+
+<p class="center">\[
+        \begin{array}{cc}
+                {\rm red}&amp;{\rm green}\\
+                {\rm green}&amp;{\rm red}\\
+        \end{array}\quad + \quad ""  \quad \Longrightarrow\quad
+        \begin{array}{cc}
+                1&amp; 2\\
+                2&amp; 1
+        \end{array}
+\]</p>
+
+<p><strong class="button">Example:</strong> A typical table produced by <strong class="pkg">GAP</strong> is easily parsed by deleting brackets and commas.</p>
+
+<p class="center">\[
+        [ [0, 1], [1, 0] ] \quad + \quad "[,]"  \quad \Longrightarrow\quad
+        \begin{array}{cc}
+                1&amp; 2\\
+                2&amp; 1
+        \end{array}
+\]</p>
+
+<p><strong class="button">Example:</strong> A typical TeX table with rows separated by lines is also easily converted. Note that we have to use <span class="SimpleMath">\(\backslash\backslash\)</span> to ensure that every occurrence of <span class="SimpleMath">\(\backslash\)</span> is deleted, since <span class="SimpleMath">\(\backslash\backslash\)</span> represents the character <span class="SimpleMath">\(\backslash\)</span> in <strong class="pkg">GAP</strong></p>
+
+<p class="center">\[
+        \begin{array}{lll}
+                x\&amp;&amp; y\&amp;&amp;\ z\backslash\backslash\cr
+                y\&amp;&amp; z\&amp;&amp;\ x\backslash\backslash\cr
+                z\&amp;&amp; x\&amp;&amp;\ y
+        \end{array}
+         \quad + \quad "\backslash\backslash\&amp;" \quad \Longrightarrow\quad
+        \begin{array}{ccc}
+                1&amp;2&amp;3\cr
+                2&amp;3&amp;1\cr
+                3&amp;1&amp;2
+        \end{array}
+\]</p>
+
+<p><a id="X81A1DB918057933E" name="X81A1DB918057933E"></a></p>
+
+<h5>4.5-1 <span class="Heading">QuasigroupFromFile and LoopFromFile</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuasigroupFromFile</code>( <var class="Arg">filename</var>, <var class="Arg">del</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoopFromFile</code>( <var class="Arg">filename</var>, <var class="Arg">del</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The quasigroup (resp. loop) whose multiplication table data is in file <var class="Arg">filename</var>, ignoring the characters contained in the string <var class="Arg">del</var>.</p>
+
+<p><a id="X820E67F88319C38B" name="X820E67F88319C38B"></a></p>
+
+<h4>4.6 <span class="Heading">Creating Quasigroups and Loops From Sections</span></h4>
+
+<p><a id="X7F94C8DD7E1A3470" name="X7F94C8DD7E1A3470"></a></p>
+
+<h5>4.6-1 CayleyTableByPerms</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CayleyTableByPerms</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: If <var class="Arg">P</var> is a set of <span class="SimpleMath">\(n\)</span> permutations of an <span class="SimpleMath">\(n\)</span>-element set <span class="SimpleMath">\(X\)</span>, returns Cayley table <span class="SimpleMath">\(C\)</span> such that <span class="SimpleMath">\(C[i][j] = X[j]^{P[i]}\)</span>.</p>
+
+<p>The cardinality of the underlying set is determined by the moved points of the first permutation in <var class="Arg">P</var>, unless the first permutation is the identity permutation, in which case the second permutation is used.</p>
+
+<p>In particular, if <var class="Arg">P</var> is the left section of a quasigroup <var class="Arg">Q</var>, <code class="code">CayleyTableByPerms(<var class="Arg">Q</var>)</code> returns the multiplication table of <var class="Arg">Q</var>.</p>
+
+<p><a id="X7EC1EB0D7B8382A1" name="X7EC1EB0D7B8382A1"></a></p>
+
+<h5>4.6-2 <span class="Heading">QuasigroupByLeftSection and LoopByLeftSection</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuasigroupByLeftSection</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoopByLeftSection</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: If <var class="Arg">P</var> is a set of permutations corresponding to the left translations of a quasigroup (resp. loop), returns the corresponding quasigroup (resp. loop).</p>
+
+<p>The order of permutations in <var class="Arg">P</var> is important in the quasigroup case, but it is disregarded in the loop case, since then the order of rows in the corresponding multiplication table is determined by the presence of the neutral element.</p>
+
+<p><a id="X80B436ED7CC0749E" name="X80B436ED7CC0749E"></a></p>
+
+<h5>4.6-3 <span class="Heading">QuasigroupByRightSection and LoopByRightSection</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuasigroupByRightSection</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoopByRightSection</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>These are the dual operations to <code class="code">QuasigroupByLeftSection</code> and <code class="code">LoopByLeftSection</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := Subloop( MoufangLoop( 12, 1 ), [ 3 ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ls := LeftSection( S );</span>
+[ (), (1,3,5), (1,5,3) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CayleyTableByPerms( ls );</span>
+[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CayleyTable( LoopByLeftSection( ls ) );</span>
+[ [ 1, 2, 3 ], [ 2, 3, 1 ], [ 3, 1, 2 ] ]
+</pre></div>
+
+<p><a id="X85ABE99E84E5B0E8" name="X85ABE99E84E5B0E8"></a></p>
+
+<h4>4.7 <span class="Heading">Creating Quasigroups and Loops From Folders</span></h4>
+
+<p>Let <span class="SimpleMath">\(G\)</span> be a group, <span class="SimpleMath">\(H\)</span> a subgroup of <span class="SimpleMath">\(G\)</span>, and <span class="SimpleMath">\(T\)</span> a right transversal to <span class="SimpleMath">\(H\)</span> in <span class="SimpleMath">\(G\)</span>. Let <span class="SimpleMath">\(\tau:G\to T\)</span> be defined by <span class="SimpleMath">\(x\in H\tau(x)\)</span>. Then the operation <span class="SimpleMath">\(\circ\)</span> defined on the right cosets <span class="SimpleMath">\(Q = \{Ht|t\in T\}\)</span> by <span class="SimpleMath">\(Hs\circ Ht = H\tau(st)\)</span> turns <span class="SimpleMath">\(Q\)</span> into a quasigroup if and only if <span class="SimpleMath">\(T\)</span> is a right transversal to all conjugates <span class="SimpleMath">\(g^{-1}Hg\)</span> of <span class="SimpleMath">\(H\)</span> in <span class="SimpleMath">\(G\)</span>. (In fact, every quasigroup <span class="SimpleMath">\(Q\)</span> can be obtained in this way by letting <span class="SimpleMath">\(G={\rm Mlt}_\rho(Q)\)</span>, <span class="SimpleMath">\(H={\rm Inn}_\rho(Q)\)</span> and <span class="SimpleMath">\(T=\{R_x|x\in Q\}\)</span>.)</p>
+
+<p>We call the triple <span class="SimpleMath">\((G,H,T)\)</span> a <em>right quasigroup (or loop) folder</em>.</p>
+
+<p><a id="X83168E62861F70AB" name="X83168E62861F70AB"></a></p>
+
+<h5>4.7-1 <span class="Heading">QuasigroupByRightFolder and LoopByRightFolder</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuasigroupByRightFolder</code>( <var class="Arg">G</var>, <var class="Arg">H</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoopByRightFolder</code>( <var class="Arg">G</var>, <var class="Arg">H</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The quasigroup (resp. loop) from the right folder (<var class="Arg">G</var>, <var class="Arg">H</var>, <var class="Arg">T</var>).</p>
+
+<p><strong class="button">Remark:</strong> We do not support the dual operations for left sections since, by default, actions in <strong class="pkg">GAP</strong> act on the right. <br /></p>
+
+<p>Here is a simple example in which <span class="SimpleMath">\(T\)</span> is actually the right section of the resulting loop.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T := [ (), (1,2)(3,4,5), (1,3,5)(2,4), (1,4,3)(2,5), (1,5,4)(2,3) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := Group( T );; H := Stabilizer( G, 1 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoopByRightFolder( G, H, T );</span>
+&lt;loop of order 5&gt;
+</pre></div>
+
+<p><a id="X8759431780AC81A9" name="X8759431780AC81A9"></a></p>
+
+<h4>4.8 <span class="Heading">Creating Quasigroups and Loops By Nuclear Extensions</span></h4>
+
+<p>Let <span class="SimpleMath">\(K\)</span>, <span class="SimpleMath">\(F\)</span> be loops. Then a loop <span class="SimpleMath">\(Q\)</span> is an <em>extension</em> of <span class="SimpleMath">\(K\)</span> by <span class="SimpleMath">\(F\)</span> if <span class="SimpleMath">\(K\)</span> is a normal subloop of <span class="SimpleMath">\(Q\)</span> such that <span class="SimpleMath">\(Q/K\)</span> is isomorphic to <span class="SimpleMath">\(F\)</span>. An extension <span class="SimpleMath">\(Q\)</span> of <span class="SimpleMath">\(K\)</span> by <span class="SimpleMath">\(F\)</span> is <em>nuclear</em> if <span class="SimpleMath">\(K\)</span> is an abelian group and <span class="SimpleMath">\(K\le N(Q)\)</span>.</p>
+
+<p>A map <span class="SimpleMath">\(\theta:F\times F\to K\)</span> is a <em>cocycle</em> if <span class="SimpleMath">\(\theta(1,x) = \theta(x,1) = 1\)</span> for every <span class="SimpleMath">\(x\in F\)</span>.</p>
+
+<p>The following theorem holds for loops <span class="SimpleMath">\(Q\)</span>, <span class="SimpleMath">\(F\)</span> and an abelian group <span class="SimpleMath">\(K\)</span>: <span class="SimpleMath">\(Q\)</span> is a nuclear extension of <span class="SimpleMath">\(K\)</span> by <span class="SimpleMath">\(F\)</span> if and only if there is a cocycle <span class="SimpleMath">\(\theta:F\times F\to K\)</span> and a homomorphism <span class="SimpleMath">\(\varphi:F\to{\rm Aut}(Q)\)</span> such that <span class="SimpleMath">\(K\times F\)</span> with multiplication <span class="SimpleMath">\((a,x)(b,y) = (a\varphi_x(b)\theta(x,y),xy)\)</span> is isomorphic to <span class="SimpleMath">\(Q\)</span>.</p>
+
+<p><a id="X784733C67AA6B2FA" name="X784733C67AA6B2FA"></a></p>
+
+<h5>4.8-1 NuclearExtension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NuclearExtension</code>( <var class="Arg">Q</var>, <var class="Arg">K</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The data necessary to construct <var class="Arg">Q</var> as a nuclear extension of the subloop <var class="Arg">K</var> by <var class="Arg">Q</var><span class="SimpleMath">\(/\)</span><var class="Arg">K</var>, namely <span class="SimpleMath">\([K, F, \varphi, \theta]\)</span> as above. Note that <var class="Arg">K</var> must be a commutative subloop of the nucleus of <var class="Arg">Q</var>.</p>
+
+<p>If <span class="SimpleMath">\(n=|F|\)</span> and <span class="SimpleMath">\(m=|\)</span><var class="Arg">K</var><span class="SimpleMath">\(|\)</span>, the cocycle <span class="SimpleMath">\(\theta\)</span> is returned as an <span class="SimpleMath">\(n\times n\)</span> array with entries in <span class="SimpleMath">\(\{1,\dots,m\}\)</span>, and the homomorphism <span class="SimpleMath">\(\varphi\)</span> is returned as a list of length <span class="SimpleMath">\(n\)</span> of permutations of <span class="SimpleMath">\(\{1,\dots,m\}\)</span>.</p>
+
+<p><a id="X79AEE93E7E15B802" name="X79AEE93E7E15B802"></a></p>
+
+<h5>4.8-2 LoopByExtension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoopByExtension</code>( <var class="Arg">K</var>, <var class="Arg">F</var>, <var class="Arg">f</var>, <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The extension of an abelian group <var class="Arg">K</var> by a loop <var class="Arg">F</var>, using action <var class="Arg">f</var> and cocycle <var class="Arg">t</var>. The arguments must be formatted as the output of <code class="code">NuclearExtension</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := IntoLoop( Group( (1,2) ) );</span>
+&lt;loop of order 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K := DirectProduct( F, F );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := [ (), (2,3) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">theta := [ [ 1, 1 ], [ 1, 3 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoopByExtension( K, F, phi, theta );</span>
+&lt;loop of order 8&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAssociative( last );</span>
+false
+</pre></div>
+
+<p><a id="X7AE29A1A7AA5C25A" name="X7AE29A1A7AA5C25A"></a></p>
+
+<h4>4.9 <span class="Heading">Random Quasigroups and Loops</span></h4>
+
+<p>An algorithm is said to select a latin square of order <span class="SimpleMath">\(n\)</span> <em>at random</em> if every latin square of order <span class="SimpleMath">\(n\)</span> is returned by the algorithm with the same probability. Selecting a latin square at random is a nontrivial problem.</p>
+
+<p>In <a href="chapBib_mj.html#biBJaMa">[JM96]</a>, Jacobson and Matthews defined a random walk on the space of latin squares and so-called improper latin squares that visits every latin square with the same probability. The diameter of the space is no more than <span class="SimpleMath">\(4(n-1)^3\)</span> in the sense that no more than <span class="SimpleMath">\(4(n-1)^3\)</span> properly chosen steps are needed to travel from one latin square of order <span class="SimpleMath">\(n\)</span> to another.</p>
+
+<p>The Jacobson-Matthews algorithm can be used to generate random quasigroups as follows: (i) select any latin square of order <span class="SimpleMath">\(n\)</span>, for instance the canonical multiplication table of the cyclic group of order <span class="SimpleMath">\(n\)</span>, (ii) perform sufficiently many steps of the random walk, stopping at a proper or improper latin square, (iii) if necessary, perform a few more steps to end up with a proper latin square. Upon normalizing the resulting latin square, we obtain a random loop of order <span class="SimpleMath">\(n\)</span>.</p>
+
+<p>By the above result, it suffices to use about <span class="SimpleMath">\(n^3\)</span> steps to arrive at any latin square of order <span class="SimpleMath">\(n\)</span> from the initial latin square. In fact, a smaller number of steps is probably sufficient.</p>
+
+<p><a id="X8271C0F5786B6FA9" name="X8271C0F5786B6FA9"></a></p>
+
+<h5>4.9-1 <span class="Heading">RandomQuasigroup and RandomLoop</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomQuasigroup</code>( <var class="Arg">n</var>[, <var class="Arg">iter</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomLoop</code>( <var class="Arg">n</var>[, <var class="Arg">iter</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A random quasigroup (resp. loop) of order <var class="Arg">n</var> using the Jacobson-Matthews algorithm. If the optional argument <var class="Arg">iter</var> is omitted, <var class="Arg">n</var><span class="SimpleMath">\({}^3\)</span> steps are used. Otherwise <var class="Arg">iter</var> steps are used.</p>
+
+<p>If <var class="Arg">iter</var> is small, the Cayley table of the returned quasigroup (resp. loop) will be close to the canonical Cayley table of the cyclic group of order <var class="Arg">n</var>.</p>
+
+<p><a id="X817132C887D3FD3A" name="X817132C887D3FD3A"></a></p>
+
+<h5>4.9-2 RandomNilpotentLoop</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomNilpotentLoop</code>( <var class="Arg">lst</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A random nilpotent loop as follows (see Section <a href="chap6_mj.html#X821F40748401D698"><span class="RefLink">6.9</span></a> for more information on nilpotency): <var class="Arg">lst</var> must be a list of positive integers and/or finite abelian groups. If <code class="code"><var class="Arg">lst</var>=[a1]</code> and <code class="code">a1</code> is an integer, a random abelian group of order <code class="code">a1</code> is returned, else <code class="code">a1</code> is an abelian group and <code class="code">AsLoop(a1)</code> is returned. If <code class="code"><var class="Arg">lst</var>= [a1,...,am]</code>, a random central extension of <code class="code">RandomNilpotentLoop([a1])</code> by <code class="code">RandomNilpotentLoop([a2,...,am])</code> is returned.</p>
+
+<p>To determine the nilpotency class <span class="SimpleMath">\(c\)</span> of the resulting loop, assume that <var class="Arg">lst</var> has length at least 2, contains only integers bigger than 1, and let <span class="SimpleMath">\(m\)</span> be the last entry of <var class="Arg">lst</var>. If <span class="SimpleMath">\(m&gt;2\)</span> then <span class="SimpleMath">\(c\)</span> is equal to <code class="code">Length(<var class="Arg">lst</var>)</code>, else <span class="SimpleMath">\(c\)</span> is equal to <code class="code">Length(<var class="Arg">lst</var>)-1</code>.</p>
+
+<p><a id="X7BC2D8877A943D74" name="X7BC2D8877A943D74"></a></p>
+
+<h4>4.10 <span class="Heading">Conversions</span></h4>
+
+<p><strong class="pkg">LOOPS</strong> contains methods that convert between magmas, quasigroups, loops and groups, provided such conversions are possible. Each of the conversion methods <code class="code">IntoQuasigroup</code>, <code class="code">IntoLoop</code> and <code class="code">IntoGroup</code> returns <code class="code">fail</code> if the requested conversion is not possible. <br /></p>
+
+<p><strong class="button">Remark:</strong> Up to version 2.0.0 of <strong class="pkg">LOOPS</strong>, we supported <code class="code">AsQuasigroup</code>, <code class="code">AsLoop</code> and <code class="code">AsGroup</code> in place of <code class="code">IntoQuasigroup</code>, <code class="code">IntoLoop</code> and <code class="code">IntoGroup</code>, respectively. We have changed the terminology starting with version 2.1.0 in order to comply with <strong class="pkg">GAP</strong> naming rules for <code class="code">AsSomething</code>, as explained in Chapter <a href="chap3_mj.html#X7A6DF65E826B8CFF"><span class="RefLink">3</span></a>. Finally, the method <code class="code">AsGroup</code> is a core method of <strong class="pkg">GAP</strong> that returns an fp group if its argument is an associative loop.</p>
+
+<p><a id="X84575A4B78CC545E" name="X84575A4B78CC545E"></a></p>
+
+<h5>4.10-1 IntoQuasigroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntoQuasigroup</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: If <var class="Arg">M</var> is a declared magma that happens to be a quasigroup, the corresponding quasigroup is returned. If <var class="Arg">M</var> is already declared as a quasigroup, <var class="Arg">M</var> is returned.</p>
+
+<p><a id="X79CEA57C850C7070" name="X79CEA57C850C7070"></a></p>
+
+<h5>4.10-2 PrincipalLoopIsotope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrincipalLoopIsotope</code>( <var class="Arg">M</var>, <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An isomorphic copy of the principal isotope <span class="SimpleMath">\((\)</span><var class="Arg">M</var>,<span class="SimpleMath">\(\circ)\)</span> via the transposition <span class="SimpleMath">\((1\)</span>,<var class="Arg">f</var><span class="SimpleMath">\(\cdot\)</span><var class="Arg">g</var><span class="SimpleMath">\()\)</span>. An isomorphic copy is returned rather than <span class="SimpleMath">\((\)</span><var class="Arg">M</var>,<span class="SimpleMath">\(\circ)\)</span> because in <strong class="pkg">LOOPS</strong> all loops have to have neutral element labeled as <span class="SimpleMath">\(1\)</span>.</p>
+
+<p>Given a quasigroup <span class="SimpleMath">\(M\)</span> and two of its elements <span class="SimpleMath">\(f\)</span>, <span class="SimpleMath">\(g\)</span>, the principal loop isotope <span class="SimpleMath">\(x\circ y = R_g^{-1}(x)\cdot L_f^{-1}(y)\)</span> turns <span class="SimpleMath">\((M,\circ)\)</span> into a loop with neutral element <span class="SimpleMath">\(f\cdot g\)</span> (see Section <a href="chap2_mj.html#X791066ED7DD9F254"><span class="RefLink">2.6</span></a>).</p>
+
+<p><a id="X7A59C36683118E5A" name="X7A59C36683118E5A"></a></p>
+
+<h5>4.10-3 IntoLoop</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntoLoop</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: If <var class="Arg">M</var> is a declared magma that happens to be a quasigroup (but not necessarily a loop!), a loop is returned as follows: If <var class="Arg">M</var> is already declared as a loop, <var class="Arg">M</var> is returned. Else, if <var class="Arg">M</var> possesses a neutral element <span class="SimpleMath">\(e\)</span> and if <span class="SimpleMath">\(f\)</span> is the first element of <var class="Arg">M</var>, then an isomorphic copy of <var class="Arg">M</var> via the transposition <span class="SimpleMath">\((e,f)\)</span> is returned. If <var class="Arg">M</var> does not posses a neutral element, <code class="code">PrincipalLoopIsotope(<var class="Arg">M</var>, <var class="Arg">M.1</var>, <var class="Arg">M.1</var>)</code> is returned.<br /></p>
+
+<p><strong class="button">Remark:</strong> One could obtain a loop from a declared magma <var class="Arg">M</var> in yet another way, by normalizing the Cayley table of <var class="Arg">M</var>. The three approaches can result in nonisomorphic loops in general.</p>
+
+<p><a id="X7B5C6C64831B866E" name="X7B5C6C64831B866E"></a></p>
+
+<h5>4.10-4 IntoGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntoGroup</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: If <var class="Arg">M</var> is a declared magma that happens to be a group, the corresponding group is returned as follows: If <var class="Arg">M</var> is already declared as a group, <var class="Arg">M</var> is returned, else <code class="code">RightMultiplicationGroup(IntoLoop(<var class="Arg">M</var>))</code> is returned, which is a permutation group isomorphic to <var class="Arg">M</var>.</p>
+
+<p><a id="X79B7327C79029086" name="X79B7327C79029086"></a></p>
+
+<h4>4.11 <span class="Heading">Products of Quasigroups and Loops</span></h4>
+
+<p><a id="X861BA02C7902A4F4" name="X861BA02C7902A4F4"></a></p>
+
+<h5>4.11-1 DirectProduct</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DirectProduct</code>( <var class="Arg">Q1</var>, <var class="Arg">...</var>, <var class="Arg">Qn</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: If each <var class="Arg">Qi</var> is either a declared quasigroup, declared loop or a declared group, the direct product of <var class="Arg">Q1</var>, <span class="SimpleMath">\(\dots\)</span>, <var class="Arg">Qn</var> is returned. If every <var class="Arg">Qi</var> is a declared group, a group is returned; if every <var class="Arg">Qi</var> is a declared loop, a loop is returned; otherwise a quasigroup is returned.</p>
+
+<p><a id="X7865FC8D7854C2E3" name="X7865FC8D7854C2E3"></a></p>
+
+<h4>4.12 <span class="Heading">Opposite Quasigroups and Loops</span></h4>
+
+<p>When <span class="SimpleMath">\(Q\)</span> is a quasigroup with multiplication <span class="SimpleMath">\(\cdot\)</span>, the <em>opposite quasigroup</em> of <span class="SimpleMath">\(Q\)</span> is a quasigroup with the same underlying set as <span class="SimpleMath">\(Q\)</span> and with multiplication <span class="SimpleMath">\(*\)</span> defined by <span class="SimpleMath">\(x*y=y\cdot x\)</span>.</p>
+
+<p><a id="X87B6AED47EE2BCD3" name="X87B6AED47EE2BCD3"></a></p>
+
+<h5>4.12-1 <span class="Heading">Opposite, OppositeQuasigroup and OppositeLoop</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Opposite</code>( <var class="Arg">Q</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OppositeQuasigroup</code>( <var class="Arg">Q</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OppositeLoop</code>( <var class="Arg">Q</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The opposite of the quasigroup (resp. loop) <var class="Arg">Q</var>. Note that if <code class="code">OppositeQuasigroup(<var class="Arg">Q</var>)</code> or <code class="code">OppositeLoop(<var class="Arg">Q</var>)</code> are called, then the returned quasigroup or loop is not stored as an attribute of <var class="Arg">Q</var>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

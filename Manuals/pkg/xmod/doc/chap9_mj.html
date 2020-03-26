@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (XMod) - Chapter 9: Crossed cubes and Cat\(^3\)-groups</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap9"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap9.html">[MathJax off]</a></p>
+<p><a id="X8637AC3D861E241A" name="X8637AC3D861E241A"></a></p>
+<div class="ChapSects"><a href="chap9_mj.html#X8637AC3D861E241A">9 <span class="Heading">Crossed cubes and Cat<span class="SimpleMath">\(^3\)</span>-groups</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X7CC52AF4840F478E">9.1 <span class="Heading">Functions for (pre-)cat<span class="SimpleMath">\(^3\)</span>-groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7828496F7D72E232">9.1-1 Cat3Group</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7F5AFE34786D9A86">9.1-2 Front3DimensionalGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X80E074E37D02B2F6">9.2 <span class="Heading">Enumerating cat<span class="SimpleMath">\(^3\)</span>-groups with a given source</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X83E4A7367DD13598">9.2-1 AllCat3GroupTriples</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X7F8538B580847268">9.3 <span class="Heading">
+Definition and constructions for cat<span class="SimpleMath">\(^n\)</span>-groups and their morphisms 
+</span></a>
+</span>
+</div>
+</div>
+
+<h3>9 <span class="Heading">Crossed cubes and Cat<span class="SimpleMath">\(^3\)</span>-groups</span></h3>
+
+<p>The term <em>4d-group</em> refers to a set of equivalent categories of which the most common are the categories of <em>crossed cubes</em> and <em>cat<span class="SimpleMath">\(^3\)</span>-groups</em>. A <em>4d-mapping</em> is a function between two 4d-groups which preserves all the structure.</p>
+
+<p>The material in this chapter should be considered very experimental. As yet there are no functions for crossed cubes.</p>
+
+<p><a id="X7CC52AF4840F478E" name="X7CC52AF4840F478E"></a></p>
+
+<h4>9.1 <span class="Heading">Functions for (pre-)cat<span class="SimpleMath">\(^3\)</span>-groups</span></h4>
+
+<p>We shall use the following standard orientation of a cat<span class="SimpleMath">\(^3\)</span>-group <span class="SimpleMath">\(\calE\)</span> on a group <span class="SimpleMath">\(G\)</span>. <span class="SimpleMath">\(\calE\)</span> contains <span class="SimpleMath">\(8\)</span> groups; <span class="SimpleMath">\(12\)</span> cat<span class="SimpleMath">\(^1\)</span>-groups and <span class="SimpleMath">\(6\)</span> cat<span class="SimpleMath">\(^2\)</span>-groups forming the vertices; edges and faces of a cube, as shown in the following diagram.</p>
+
+<p class="center">\[
+
+\vcenter{\xymatrix{
+ &amp; H \ar[dddd] &lt;+0.5ex&gt; \ar[dddd] &lt;+0.0ex&gt;
+     \ar[rrrr] &lt;+0.5ex&gt; \ar[rrrr] &lt;+0.0ex&gt;
+     \ar[dr] &lt;+0.6ex&gt; 
+   &amp; &amp; &amp; &amp; N \ar[llll] &lt;+0.6ex&gt; 
+             \ar[dddd] &lt;+0.6ex&gt; \ar[dddd] &lt;+0.0ex&gt;
+             \ar[dr] &lt;+0.6ex&gt; 
+           &amp; \\
+ &amp; &amp; G \ar[dddd] &lt;+0.5ex&gt; \ar[dddd] &lt;+0.0ex&gt;
+       \ar[rrrr] &lt;+0.5ex&gt; \ar[rrrr] &lt;+0.0ex&gt; 
+       \ar[ul] &lt;+0.5ex&gt; \ar[ul] &lt;+0.0ex&gt; 
+     &amp; &amp; &amp; &amp;  R \ar[llll] &lt;+0.6ex&gt; 
+                \ar[dddd] &lt;+0.5ex&gt; \ar[dddd] &lt;+0.0ex&gt; 
+                \ar[ul] &lt;+0.5ex&gt; \ar[ul] &lt;+0.0ex&gt;    \\
+ &amp; &amp; &amp; &amp; &amp; &amp; \\
+ &amp; &amp; &amp; &amp; &amp; &amp; \\
+ &amp; M \ar[uuuu] &lt;+0.6ex&gt; 
+     \ar[rrrr] &lt;+0.5ex&gt; \ar[rrrr] &lt;+0.0ex&gt; 
+     \ar[dr] &lt;+0.6ex&gt;  
+   &amp; &amp; &amp; &amp; L \ar[uuuu] &lt;+0.6ex&gt; 
+             \ar[llll] &lt;+0.6ex&gt;
+             \ar[dr] &lt;+0.6ex&gt;  
+           &amp; \\ 
+ &amp; &amp; Q \ar[uuuu] &lt;+0.6ex&gt; 
+       \ar[rrrr] &lt;+0.5ex&gt; \ar[rrrr] &lt;+0.0ex&gt; 
+       \ar[ul] &lt;+0.5ex&gt; \ar[ul] &lt;+0.0ex&gt;  
+     &amp; &amp; &amp; &amp; P \ar[uuuu] &lt;+0.6ex&gt;
+               \ar[llll] &lt;+0.6ex&gt;  
+               \ar[ul] &lt;+0.5ex&gt; \ar[ul] &lt;+0.0ex&gt;  \\ 
+}}
+
+\]</p>
+
+<p>By definition, <span class="SimpleMath">\(\calE\)</span> is generated by three commuting cat<span class="SimpleMath">\(^1\)</span>-groups <span class="SimpleMath">\((G \Rightarrow R), (G \Rightarrow Q)\)</span> and <span class="SimpleMath">\((G \Rightarrow H)\)</span>, but it is more convenient to think of <span class="SimpleMath">\(\calE\)</span> as generated by two cat<span class="SimpleMath">\(^2\)</span>-groups</p>
+
+
+<ul>
+<li><p><em>front</em><span class="SimpleMath">\((\calE)\)</span>, generated by <span class="SimpleMath">\((G \Rightarrow R)\)</span> and <span class="SimpleMath">\((G \Rightarrow Q)\)</span>;</p>
+
+</li>
+<li><p><em>left</em><span class="SimpleMath">\((\calE)\)</span>, generated by <span class="SimpleMath">\((G \Rightarrow Q)\)</span> and <span class="SimpleMath">\((G \Rightarrow H)\)</span>.</p>
+
+</li>
+</ul>
+<p>Because the tail, head and embedding maps all commute, it follows that <em>up</em><span class="SimpleMath">\((\calE)\)</span>, generated by <span class="SimpleMath">\((G \Rightarrow H)\)</span> and <span class="SimpleMath">\((G \Rightarrow R)\)</span>, is a third cat<span class="SimpleMath">\(^2\)</span>-group. The three remaining faces (cat<span class="SimpleMath">\(^2\)</span>-groups) <em>right</em><span class="SimpleMath">\((\calE)\)</span>, <em>down</em><span class="SimpleMath">\((\calE)\)</span> and <em>back</em><span class="SimpleMath">\((\calE)\)</span> are then easily constructed. We shall always use the order [<em>front,up,left,right,down,back</em>] for the six faces.</p>
+
+<p><a id="X7828496F7D72E232" name="X7828496F7D72E232"></a></p>
+
+<h5>9.1-1 Cat3Group</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat3Group</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat3Group</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCat3Group</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat3GroupByPreCat2Groups</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The global functions <code class="code">Cat3Group</code> and <code class="code">PreCat3Group</code> are normally take as arguments a pair of cat<span class="SimpleMath">\(^2\)</span>-groups or a trio of cat<span class="SimpleMath">\(^1\)</span>-groups. In subsection <code class="func">AllCat2GroupsIterator</code> (<a href="chap8_mj.html#X7EFCF9697E845B2C"><span class="RefLink">8.5-2</span></a>) the list of pairs <code class="code">CatnGroupLists(d12).pairs</code> contains the three entries <code class="code">[6,8],[8,11]</code> and <code class="code">[6,11]</code>. It follows that the sixth, eighth and eleventh cat<span class="SimpleMath">\(^1\)</span>-groups for <code class="code">d12</code> generate a cat<span class="SimpleMath">\(^3\)</span>-group.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">all1 := AllCat1Groups( d12 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C68 := Cat2Group( all1[6], all1[8] );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C811 := Cat2Group( all1[8], all1[11] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C3Ga := Cat3Group( C68, C811 );</span>
+cat3-group with generating (pre-)cat1-groups:
+1 : [d12 =&gt; Group( [ (), (1,6)(2,5)(3,4) ] )]
+2 : [d12 =&gt; Group( [ (1,4)(2,5)(3,6), (1,3)(4,6) ] )]
+3 : [d12 =&gt; Group( [ (1,5,3)(2,6,4), (1,4)(2,3)(5,6) ] )]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C3Gb := Cat3Group( all1[6], all1[8], all1[11] );</span>
+cat3-group with generating (pre-)cat1-groups:
+1 : [d12 =&gt; Group( [ (), (1,6)(2,5)(3,4) ] )]
+2 : [d12 =&gt; Group( [ (1,4)(2,5)(3,6), (1,3)(4,6) ] )]
+3 : [d12 =&gt; Group( [ (1,5,3)(2,6,4), (1,4)(2,3)(5,6) ] )]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C3Ga = C3Gb;</span>
+true
+
+</pre></div>
+
+<p><a id="X7F5AFE34786D9A86" name="X7F5AFE34786D9A86"></a></p>
+
+<h5>9.1-2 Front3DimensionalGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Front3DimensionalGroup</code>( <var class="Arg">C3</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Up3DimensionalGroup</code>( <var class="Arg">C3</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Left3DimensionalGroup</code>( <var class="Arg">C3</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Right3DimensionalGroup</code>( <var class="Arg">C3</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Down3DimensionalGroup</code>( <var class="Arg">C3</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Back3DimensionalGroup</code>( <var class="Arg">C3</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The six faces of a cat<span class="SimpleMath">\(^3\)</span>-group are stored as these attributes.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C116 := Cat2Group( all1[11], all1[6] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Up3DimensionalGroup( C3Ga ) = C116;</span>
+true
+
+</pre></div>
+
+<p><a id="X80E074E37D02B2F6" name="X80E074E37D02B2F6"></a></p>
+
+<h4>9.2 <span class="Heading">Enumerating cat<span class="SimpleMath">\(^3\)</span>-groups with a given source</span></h4>
+
+<p>Once the list <code class="code">CatnGroupLists(G).pairs</code> has been obtained we may seek all triples <span class="SimpleMath">\([i,j],[j,k]\)</span> and <span class="SimpleMath">\([k,i]\)</span> or <span class="SimpleMath">\([i,k]\)</span> of pairs in this list and then, for each such triple, construct a cat<span class="SimpleMath">\(^3\)</span>-group generated by the <span class="SimpleMath">\(i\)</span>-th, <span class="SimpleMath">\(j\)</span>-th and <span class="SimpleMath">\(k\)</span>-th cat<span class="SimpleMath">\(^1\)</span>-group on <span class="SimpleMath">\(G\)</span>.</p>
+
+<p><a id="X83E4A7367DD13598" name="X83E4A7367DD13598"></a></p>
+
+<h5>9.2-1 AllCat3GroupTriples</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllCat3GroupTriples</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllCat3GroupsNumber</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllCat3Groups</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllCat3GroupsUpToIsomorphism</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The list of triples returned by the operation <code class="code">AllCat3GroupTriples</code> is saved as <code class="code">CatnGroupLists(G).cat3triples</code>. The length of this list is the number of cat<span class="SimpleMath">\(^3\)</span>-groups on <span class="SimpleMath">\(G\)</span>, and is saved as <code class="code">CatnGroupNumbers(G).cat3</code>.</p>
+
+<p>As yet there is no operation <code class="code">AllCat3GroupsUpToIsomorphism(G)</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">triples := AllCat3GroupTriples( d12 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CatnGroupNumbers( d12 ).cat3; </span>
+94
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">triples[46];</span>
+[ 5, 7, 11 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">all1 := AllCat1Groups( d12 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cat3Group( all1[5], all1[7], all1[11] );</span>
+cat3-group with generating (pre-)cat1-groups:
+1 : [d12 =&gt; Group( [ (), (1,4)(2,3)(5,6) ] )]
+2 : [d12 =&gt; Group( [ (1,4)(2,5)(3,6), (2,6)(3,5) ] )]
+3 : [d12 =&gt; Group( [ (1,5,3)(2,6,4), (1,4)(2,3)(5,6) ] )]
+
+</pre></div>
+
+<p><a id="X7F8538B580847268" name="X7F8538B580847268"></a></p>
+
+<h4>9.3 <span class="Heading">
+Definition and constructions for cat<span class="SimpleMath">\(^n\)</span>-groups and their morphisms 
+</span></h4>
+
+<p>In this chapter and the previous one we are interested in cat<span class="SimpleMath">\(^2\)</span>-groups and cat<span class="SimpleMath">\(^3\)</span>-groups, and it is convenient in this section to give the more general definition. There are three equivalent descriptions of a cat<span class="SimpleMath">\(^n\)</span>-group.</p>
+
+<p>A <em>cat<span class="SimpleMath">\(^n\)</span>-group</em> consists of the following.</p>
+
+
+<ul>
+<li><p><span class="SimpleMath">\(2^n\)</span> groups <span class="SimpleMath">\(G_A\)</span>, one for each subset <span class="SimpleMath">\(A\)</span> of <span class="SimpleMath">\([n]\)</span>, the <em>vertices</em> of an <span class="SimpleMath">\(n\)</span>-cube.</p>
+
+</li>
+<li><p>Group homomorphisms forming <span class="SimpleMath">\(n2^{n-1}\)</span> commuting cat<span class="SimpleMath">\(^1\)</span>-groups,</p>
+
+<p class="center">\[
+\calC_{A,i} ~=~ (e_{A,i};\; t_{A,i},\; h_{A,i} \ :\  
+G_A \to G_{A \setminus \{i\}}), 
+\quad\mbox{for all} \quad A \subseteq [n],~ i \in A,  
+\]</p>
+
+<p>the <em>edges</em> of the cube.</p>
+
+</li>
+<li><p>These cat<span class="SimpleMath">\(^1\)</span>-groups combine (in sets of <span class="SimpleMath">\(4\)</span>) to form <span class="SimpleMath">\(n(n-1)2^{n-3}\)</span> cat<span class="SimpleMath">\(^2\)</span>-groups <span class="SimpleMath">\(\calC_{A,\{i,j\}}\)</span> for all <span class="SimpleMath">\(\{i,j\} \subseteq A \subseteq [n],~ i \neq j\)</span>, the <em>faces</em> of the cube.</p>
+
+</li>
+</ul>
+<p>Note that, since the <span class="SimpleMath">\(t_{A,i}, h_{A,i}\)</span> and <span class="SimpleMath">\(e_{A,i}\)</span> commute, composite homomorphisms <span class="SimpleMath">\(t_{A,B}, h_{A,B} : G_A \to G_{A \setminus B}\)</span> and <span class="SimpleMath">\(e_{A,B} : G_{A \setminus B} \to G_A\)</span> are well defined for all <span class="SimpleMath">\(B \subseteq A \subseteq [n]\)</span>.</p>
+
+<p>Secondly, we give the simplest of the three descriptions, again adapted from Ellis-Steiner <a href="chapBib_mj.html#biBell:st">[ES87]</a>.</p>
+
+<p>A cat<span class="SimpleMath">\(^n\)</span>-group <span class="SimpleMath">\(\calC\)</span> consists of <span class="SimpleMath">\(2^n\)</span> groups <span class="SimpleMath">\(G_A\)</span>, one for each subset <span class="SimpleMath">\(A\)</span> of <span class="SimpleMath">\([n]\)</span>, and <span class="SimpleMath">\(3n\)</span> homomorphisms</p>
+
+<p class="center">\[
+t_{[n],i}, h_{[n],i} : G_{[n]} \to G_{[n] \setminus \{i\}},~ 
+ e_{[n],i} : G_{[n] \setminus \{i\}} \to G_{[n]}, 
+\]</p>
+
+<p>satisfying the following axioms for all <span class="SimpleMath">\(1 \leqslant i \leqslant n\)</span>,}</p>
+
+
+<ul>
+<li><p>the <span class="SimpleMath">\(\calC_{[n],i} ~=~ (e_{[n],i};\; t_{[n],i},\; h_{[n],i} \ :\ G_{[n]} \to G_{[n] \setminus \{i\}})~\)</span> are <em>commuting</em> cat<span class="SimpleMath">\(^1\)</span>-groups, so that:</p>
+
+</li>
+<li><p><span class="SimpleMath">\( (e_1 \circ t_1) \circ (e_2 \circ t_2) = (e_2 \circ t_2) \circ (e_1 \circ t_1), \quad (e_1 \circ h_1) \circ (e_2 \circ h_2) = (e_2 \circ h_2) \circ (e_1 \circ h_1), \)</span></p>
+
+</li>
+<li><p><span class="SimpleMath">\( (e_1 \circ t_1) \circ (e_2 \circ h_2) = (e_2 \circ h_2) \circ (e_1 \circ t_1), \quad (e_2 \circ t_2) \circ (e_1 \circ h_1) = (e_1 \circ h_1) \circ (e_2 \circ t_2). \)</span></p>
+
+</li>
+</ul>
+<p>Our third description defines a cat<span class="SimpleMath">\(^n\)</span>-group as a "cat<span class="SimpleMath">\(^1\)</span>-group of cat<span class="SimpleMath">\(^{(n-1)}\)</span>-groups".</p>
+
+<p>A <em>cat<span class="SimpleMath">\(^n\)</span>-group</em> <span class="SimpleMath">\(\calC\)</span> consists of two cat<span class="SimpleMath">\(^{(n-1)}\)</span>-groups:</p>
+
+
+<ul>
+<li><p><span class="SimpleMath">\(\calA\)</span> with groups <span class="SimpleMath">\(G_A,\; A \subseteq [n-1]\)</span>, and homomorphisms <span class="SimpleMath">\(\ddot{t}_{A,i}, \ddot{h}_{A,i}, \ddot{e}_{A,i}\)</span>,</p>
+
+</li>
+<li><p><span class="SimpleMath">\(\calB\)</span> with groups <span class="SimpleMath">\(H_B,\; B \subseteq [n-1]\)</span>, and homomorphisms <span class="SimpleMath">\(\dot{t}_{B,i}, \dot{h}_{B,i}, \dot{e}_{B,i}\)</span>, and</p>
+
+</li>
+<li><p>cat<span class="SimpleMath">\(^{(n-1)}\)</span>-morphisms <span class="SimpleMath">\(t,h : \calA \to \calB\)</span> and <span class="SimpleMath">\(e : \calB \to \calA\)</span> subject to the following conditions:</p>
+
+<p class="center">\[
+(t \circ e) ~\mbox{and}~ (h \circ e)  
+~\mbox{are the identity mapping on}~ \calB, \qquad
+[\ker t, \ker h] = \{ 1_{\calA} \}.
+\]</p>
+
+</li>
+</ul>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

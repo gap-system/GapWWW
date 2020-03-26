@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (CddInterface) - Chapter 1: Introduction</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X78B6806682EA4E0D">1.1 <span class="Heading">Why CddInterface</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X811322537C6ADBBE">1.2 <span class="Heading">H-representation and V-representation of polyhedra</span></a>
+</span>
+</div>
+</div>
+
+<h3>1 <span class="Heading">Introduction</span></h3>
+
+<p><a id="X78B6806682EA4E0D" name="X78B6806682EA4E0D"></a></p>
+
+<h4>1.1 <span class="Heading">Why CddInterface</span></h4>
+
+<p>We know that every convex polyhedron has two representations, one as the intersection of finite halfspaces and the other as Minkowski sum of the convex hull of finite points and the nonnegative hull of finite directions. These are called <span class="Math">H</span>-representation and <span class="Math">V</span>-representation, respectively. CddInterface is a gap interface to the C package <code class="code">cddlib</code> which among other things can translate between these two representations.</p>
+
+<p><a id="X811322537C6ADBBE" name="X811322537C6ADBBE"></a></p>
+
+<h4>1.2 <span class="Heading">H-representation and V-representation of polyhedra</span></h4>
+
+<p>Let us start by introducing the <span class="Math">H</span>-representation. Let <var class="Arg">A</var> be <var class="Arg">m x d</var> matrix and let <var class="Arg">b</var> be a column <var class="Arg">m</var>-vector. The <span class="Math">H</span>-representation of the polyhedron defined by the system <code class="code">b+Ax &gt;= 0</code> of <var class="Arg">m</var> inequalities and <var class="Arg">d</var> variables <var class="Arg">x= (x_1,...,x_d)</var> is as follows:</p>
+
+
+<div class="example"><pre>
+H-representation
+linearity t, [i_1, i_2, ...,i_t]
+begin
+  m x (d+1) numbertype
+  b  A
+end
+</pre></div>
+
+<p>The linearity line is added when we want to specify that some rows of the system <span class="Math">b+Ax</span> are equalities. That is, <span class="Math">k\in \{i_1, i_2, \dots,i_t\}</span> means that the row <span class="Math">k</span> of the system <span class="Math">b+Ax</span> is specified to be equality.</p>
+
+<p>For example, the <span class="Math">H</span>-representation of the polyhedron defined by the following system:</p>
+
+<p><span class="Math">4-3x_1+6x_2-5x_4 = 0, 1+2x_1-2x_2-7x_3 \geq 0, -3x_2+5x_4 = 0;</span></p>
+
+<p>is the following:</p>
+
+
+<div class="example"><pre>
+H-representation
+linearity 2, [1, 3]
+begin
+3 x 5 rational
+  4 -3  6  0 -5
+  1  2 -2 -7  0
+  0  0 -3  0  5
+end
+</pre></div>
+
+<p>Next we define Polyhedra <span class="Math">V</span>-format. Let <var class="Arg">P</var> be represented by <var class="Arg">n</var> gerating points and <var class="Arg">s</var> generating directions (rays) as</p>
+
+<p class="pcenter">P = \mathrm{conv}(v_1 , \dots , v_n ) + \mathrm{nonneg}(r_{n+1} , \dots , r_{n+s} ).</p>
+
+<p>Then the Polyhedra <span class="Math">V</span>-format is for <var class="Arg">P</var> is:</p>
+
+
+<div class="example"><pre>
+V-representation
+linearity t, [i_1, i_2,...,i_t]
+begin
+(n+s) x (d+1) numbertype
+  1  v_1
+  :   :
+  1  v_n
+  0  r_{n+1}
+  :   :
+  0  r_{n+s}
+end
+</pre></div>
+
+<p>In the above format the generating points and generating rays may appear mixed in arbitrary order. Linearity for <span class="Math">V</span>-representation specifies a subset of generators whose coefficients are relaxed to be free. That is, <span class="Math">k \in \{i_1 , i_2 , . . . , i_t \}</span> specifies that the <span class="Math">k</span>-th generator is specified to be free. This means for each such a ray <span class="Math">r_k</span> , the line generated by <span class="Math">r_k</span> is in the polyhedron, and for each such a vertex <span class="Math">v_k</span> , its coefficient is no longer nonnegative but still the coefficients for all <span class="Math">v_i</span>’s must sum up to one.</p>
+
+<p>For example the <span class="Math">V</span>-representation of the polyhedron defined as</p>
+
+<p class="pcenter">P:= \mathrm{conv}( (2,3), (-2,-3), (-1,2) ) + \mathrm{nonneg}(\; (1,2) , (-1,-2), (1,1)\;)</p>
+
+
+<div class="example"><pre>
+V-representation
+linearity 2, [ 1, 3 ]
+begin
+ 4 x 3 rational
+ 1   2   3
+ 1  -1   2
+ 0   1   2
+ 0   1   1
+end
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

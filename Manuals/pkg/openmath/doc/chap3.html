@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (openmath) - Chapter 3: Extending the OpenMath package</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X795882BD7DC3B2E4" name="X795882BD7DC3B2E4"></a></p>
+<div class="ChapSects"><a href="chap3.html#X795882BD7DC3B2E4">3 <span class="Heading">Extending the <strong class="pkg">OpenMath</strong> package</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X85022B8D7CFA7B03">3.1 <span class="Heading">Exploring the range of supported symbols</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7BF61AF183A25921">3.2 <span class="Heading">Adding support for private content dictionaries and symbols</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">Extending the <strong class="pkg">OpenMath</strong> package</span></h3>
+
+<p><a id="X85022B8D7CFA7B03" name="X85022B8D7CFA7B03"></a></p>
+
+<h4>3.1 <span class="Heading">Exploring the range of supported symbols</span></h4>
+
+<p>The <strong class="pkg">OpenMath</strong> package supports such basic <strong class="pkg">OpenMath</strong> objects as integers ( &lt;OMI&gt; ), character strings ( &lt;OMSTR&gt; ) and variables ( &lt;OMVAR&gt; ). Besides that, it supports a number of <strong class="pkg">OpenMath</strong> content dictionaries (some of them only partially, dependently on their relevance to <strong class="pkg">GAP</strong>). To see which symbols from which content dictionaries are supported for the conversion from <strong class="pkg">OpenMath</strong> to <strong class="pkg">GAP</strong>, explore the global record <code class="code">OMsymRecord</code>. Its components have names of appropriate CDs, and subcomponents of each component have names of symbols from the corresponding CD. If the value of the component is not equal to <code class="keyw">fail</code>, then it contains the function or the object which is used for conversion. The following example of the entry for the <code class="code">nums1</code> CD demonstrates a combination of all possible cases:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( OMsymRecord.nums1 );          </span>
+rec(
+  NaN := nan,
+  based_integer := fail,
+  e := 2.718281828459045,
+  gamma := fail,
+  i := E(4),
+  infinity := infinity,
+  pi := 3.141592653589793,
+  rational := function ( x )
+        return OMgapId( [ OMgap2ARGS( x ), x[1] / x[2] ] )[2];
+    end )
+
+</pre></div>
+
+<p><code class="code">OMsymRecord</code> contains all symbols for which conversion from <strong class="pkg">OpenMath</strong> to <strong class="pkg">GAP</strong> is supported except some special symbols related with errors and special procedures from the <strong class="pkg">SCSCP</strong> package which are treated separately.</p>
+
+<p>To check quickly if <strong class="pkg">GAP</strong> can parse a given <strong class="pkg">OpenMath</strong> object, copy the <strong class="pkg">OpenMath</strong> code and paste it directly into standard input after the following command:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:= InputTextUser();; g := OMGetObject(s); CloseStream(s);</span>
+
+</pre></div>
+
+<p>The main tool for the conversion from <strong class="pkg">GAP</strong> to <strong class="pkg">OpenMath</strong> is <code class="code">OMPut( &lt;writer&gt;, &lt;object&gt; )</code>. A number of methods for <code class="code">OMPut</code> are installed in the file <code class="file">openmath/gap/omput.gi</code>.</p>
+
+<p>To check quickly whether the object may be converted to <strong class="pkg">OpenMath</strong>, call <code class="code">OMprint</code> for that object, for example:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OMPrint( [ [1..10], ZmodnZObj(2,6), (1,2) ] );                </span>
+&lt;OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0"&gt;
+	&lt;OMA&gt;
+		&lt;OMS cd="list1" name="list"/&gt;
+		&lt;OMA&gt;
+			&lt;OMS cd="interval1" name="integer_interval"/&gt;
+			&lt;OMI&gt;1&lt;/OMI&gt;
+			&lt;OMI&gt;10&lt;/OMI&gt;
+		&lt;/OMA&gt;
+		&lt;OMA&gt;
+			&lt;OMS cd="integer2" name="class"/&gt;
+			&lt;OMI&gt;2&lt;/OMI&gt;
+			&lt;OMI&gt;6&lt;/OMI&gt;
+		&lt;/OMA&gt;
+		&lt;OMA&gt;
+			&lt;OMS cd="permut1" name="permutation"/&gt;
+			&lt;OMI&gt;2&lt;/OMI&gt;
+			&lt;OMI&gt;1&lt;/OMI&gt;
+		&lt;/OMA&gt;
+	&lt;/OMA&gt;
+&lt;/OMOBJ&gt;
+
+</pre></div>
+
+<p>The package is in the continuous development and will support even more symbols in the future. In the meantime, if you will have any requests for the support for particular symbols, please contact Alexander Konovalov.</p>
+
+<p><a id="X7BF61AF183A25921" name="X7BF61AF183A25921"></a></p>
+
+<h4>3.2 <span class="Heading">Adding support for private content dictionaries and symbols</span></h4>
+
+<p>There is also a way for the user to extend the package adding support for private and experimental CDs or separate symbols. We allocated the directory <code class="file">openmath/private</code> for this purposes, and currently it contain the file <code class="file">private.g</code> for conversions from <strong class="pkg">OpenMath</strong> to <strong class="pkg">GAP</strong> and the file <code class="file">private.gi</code> for conversions from <strong class="pkg">GAP</strong> to <strong class="pkg">OpenMath</strong> for some symbols from private CDs contained in the <code class="file">openmath/cds</code> directory.</p>
+
+<p>In particular, we extended the package with the following private <strong class="pkg">OpenMath</strong> symbols:</p>
+
+
+<ul>
+<li><p><code class="code">group1.group_by_generators</code> which allows us to input and output groups given by their generators as this is a natural way to create groups in <strong class="pkg">GAP</strong>;</p>
+
+</li>
+<li><p><code class="code">semigroup1.semigroup_by_generators</code> and <code class="code">monoid1.monoid_by_generators</code> following the same considerations for semigroups and monoids;</p>
+
+</li>
+<li><p><code class="code">pcgroup1.pcgroup_by_pcgscode</code> for PcGroups given by their pcgs code and order;</p>
+
+</li>
+<li><p><code class="code">record1.record</code> for records as they are important data structures which we want to pass in a straightforward manner between different <strong class="pkg">GAP</strong> instances;</p>
+
+</li>
+<li><p><code class="code">transform1.transformation</code> to support transformations, transformation semigroups and their automorphism groups.</p>
+
+</li>
+</ul>
+<p>The file <code class="file">private.g</code> is loaded from <code class="file">openmath/gap/new.g</code>, and the <code class="file">private.gi</code> is loaded from <code class="file">openmath/gap/read.g</code>. If the user would like to add own code, this may be done either by adding it to these files or by placing additional files in <code class="file">openmath/private</code> directory and load them similarly to <code class="file">private.g</code> and <code class="file">private.gi</code>. We will welcome user's contributions in the form of the code to support existing content dictionaries from the <strong class="pkg">OpenMath</strong> web site or private content dictionaries, if they may be interesting for a wider community.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

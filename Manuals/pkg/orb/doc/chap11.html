@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (orb) - Chapter 11: Examples</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap11"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap10.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap11_mj.html">[MathJax on]</a></p>
+<p><a id="X7A489A5D79DA9E5C" name="X7A489A5D79DA9E5C"></a></p>
+<div class="ChapSects"><a href="chap11.html#X7A489A5D79DA9E5C">11 <span class="Heading">Examples</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X7D5456AC85A830A4">11.1 <span class="Heading">The Mathieu group <span class="SimpleMath">M_{11}</span> acting in 
+    dimension <span class="SimpleMath">24</span></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X790F22B67C56A49F">11.2 <span class="Heading">The Fischer group <span class="SimpleMath">Fi_{23}</span> acting in 
+    dimension <span class="SimpleMath">1494</span>
+    </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X7D7BDBF87E7C45ED">11.3 <span class="Heading">The Conway group <span class="SimpleMath">Co_1</span> acting in 
+    dimension <span class="SimpleMath">24</span>
+    </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X781209EE7C9D3E0E">11.4 <span class="Heading">The Baby Monster <span class="SimpleMath">B</span> acting on its 2A involutions</span></a>
+</span>
+</div>
+</div>
+
+<h3>11 <span class="Heading">Examples</span></h3>
+
+<p>To actually run an orbit enumeration by suborbits, we have to collect some insight into the structure of the group under consideration and into its representation theory. In general, preparing the input data is more of an art than a science. The mathematical details are described in <a href="chapBib.html#biBMNW">[MNW07]</a>.</p>
+
+<p>In Section <a href="chap11.html#X7D5456AC85A830A4"><span class="RefLink">11.1</span></a> we present a small example of the usage of the orbit-by-suborbit machinery. We use the sporadic simple Mathieu group <span class="SimpleMath">M_{11}</span> acting projectively on its irreducible module of dimension 24 over the field with 3 elements.</p>
+
+<p>In Section <a href="chap11.html#X790F22B67C56A49F"><span class="RefLink">11.2</span></a> we present another example of the usage of the orbit-by-suborbit programs. In this example we determine 35 of the 36 double coset representatives of the sporadic simple Fischer group <span class="SimpleMath">Fi_{23}</span> with respect to its seventh maximal subgroup.</p>
+
+<p>In Section <a href="chap11.html#X7D7BDBF87E7C45ED"><span class="RefLink">11.3</span></a> we present a bigger example of the usage of the orbit-by-suborbit machinery. In this example the orbit lengths of the sporadic simple Conway group <span class="SimpleMath">Co_{1}</span> acting in in its irreducible projective representation over the field with <span class="SimpleMath">5</span> elements in dimension <span class="SimpleMath">24</span> are determined, which were previously unknown. These orbit lengths were needed to rule out a case in <a href="chapBib.html#biBLongOrbits">[Mal06]</a>.</p>
+
+<p>In Section <a href="chap11.html#X781209EE7C9D3E0E"><span class="RefLink">11.4</span></a> we present as an extended worked example how to enumerate the smallest non-trivial orbit of the sporadic simple Baby Monster group <span class="SimpleMath">B</span>. We give a log of a <strong class="pkg">GAP</strong> session with explanations in between, being intended to illustrate a few of the tools which are available in the <strong class="pkg">orb</strong> package as well as in related packages. Actually, the <strong class="pkg">orb</strong> package has also been applied to two much larger permutation actions of <span class="SimpleMath">B</span>, namely its action on its 2B involutions, having degree <span class="SimpleMath">≈ 1.2⋅ 10^13</span>, and its action on the cosets of a maximal subgroup isomorphic to <span class="SimpleMath">Fi_23</span>, having degree <span class="SimpleMath">≈ 1.0⋅ 10^15</span>; for details see <a href="chapBib.html#biBMueBMCo2">[M\t08]</a> and <a href="chapBib.html#biBMNW">[MNW07]</a>, respectively.</p>
+
+<p>Note that for all this to work you have to acquire and install the packages <strong class="pkg">IO</strong>, <strong class="pkg">cvec</strong>, and <strong class="pkg">atlasrep</strong>, and for Section <a href="chap11.html#X781209EE7C9D3E0E"><span class="RefLink">11.4</span></a> you additionally need the packages <strong class="pkg">chop</strong> and <strong class="pkg">genss</strong>.</p>
+
+<p><a id="X7D5456AC85A830A4" name="X7D5456AC85A830A4"></a></p>
+
+<h4>11.1 <span class="Heading">The Mathieu group <span class="SimpleMath">M_{11}</span> acting in 
+    dimension <span class="SimpleMath">24</span></span></h4>
+
+<p>The example in this section is very small but our intention is that everything can still be analysed and looked at more or less by hand. We want to enumerate orbits of the Mathieu group <span class="SimpleMath">M_{11}</span> acting projectively on its irreducible module of dimension 24 over the field with 3 elements. All the files for this example are located in the <code class="file">examples/m11PF3d24</code> subdirectory of the <strong class="pkg">orb</strong> package. Then you simply run the example in the following way:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadPackage("orb","examples/m11PF3d24/M11OrbitOnPF3d24.g");</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o := OrbitBySuborbit(setup,v,3,3,2,100);</span>
+...
+#I  OrbitBySuborbit found 100% of a U3-orbit of size 7 920
+...
+</pre></div>
+
+<p>Everything works instantly as it would have without the orbit-by-suborbits method. (Depending on whether the matrix and permutation generators for <span class="SimpleMath">M_{11}</span> are already stored locally, some time might be needed to fetch them.) The details of this computation can be directly read off from the code in the file <code class="file">M11OrbitOnPF3d24.g</code>:</p>
+
+
+<div class="example"><pre>
+LoadPackage("orb");
+LoadPackage("io");
+LoadPackage("cvec");
+LoadPackage("atlasrep");
+
+SetInfoLevel(InfoOrb,2);
+pgens := AtlasGenerators([ "M11", [ "M11G1-p11B0.m1", "M11G1-p11B0.m2" ], 1, 11 ]).generators;
+
+gens := AtlasGenerators([ "M11", [ "M11G1-f3r24B0.m1", "M11G1-f3r24B0.m2" ], 1, 3 ]).generators;
+cgens := List(gens,CMat);
+basech := CVEC_ReadMatFromFile(Filename(DirectoriesPackageLibrary("orb",""),
+          "examples/m11PF3d24/m11basech.cmat"));
+basechi := basech^-1;
+cgens := List(cgens,x-&gt;basech*x*basechi);
+
+ReadPackage("orb","examples/m11PF3d24/m11slps.g");
+pgu2 := ResultOfStraightLineProgram(s2,pgens);
+pgu1 := ResultOfStraightLineProgram(s1,pgu2);
+cu2 := ResultOfStraightLineProgram(s2,cgens);
+cu1 := ResultOfStraightLineProgram(s1,cu2);
+
+setup := OrbitBySuborbitBootstrapForLines(
+         [cu1,cu2,cgens],[pgu1,pgu2,pgens],[20,720,7920],[5,11],rec());
+setup!.stabchainrandom := 900;
+
+v := ZeroMutable(cgens[1][1]);
+Randomize(v);
+ORB_NormalizeVector(v); 
+
+Print("Now do\n  o := OrbitBySuborbit(setup,v,3,3,2,100);\n");
+</pre></div>
+
+<p>We are using two helper subgroups <span class="SimpleMath">U_1 &lt; U_2 &lt; M_11</span>, where <span class="SimpleMath">U_2≅ A_6.2</span> is the largest maximal subgroup of <span class="SimpleMath">M_11</span>, having order <span class="SimpleMath">720</span>, and <span class="SimpleMath">U_2≅ 5:4</span> is a maximal subgroup of <span class="SimpleMath">U_2</span> of order <span class="SimpleMath">20</span>, see <a href="chapBib.html#biBCCN85">[CCN+85]</a> or the <strong class="pkg">CTblLib</strong> package. The quotient spaces we use for the helper subgroups have dimensions <span class="SimpleMath">5</span> and <span class="SimpleMath">11</span> respectively. Straight line programs to compute generators of the helper subgroups in terms of the given generators of <span class="SimpleMath">M_11</span>, and an appropriate basis exhibiting the quotients, have already been computed, and are stored in the files <code class="file">m11slps.g</code> and <code class="file">m11basech.cmat</code>, respectively. (In Section <a href="chap11.html#X781209EE7C9D3E0E"><span class="RefLink">11.4</span></a> we show in detail how such straight line programs and suitable bases can be found using the tools available in in the <strong class="pkg">orb</strong> package.) The command <code class="file">OrbitBySuborbitBootstrapForLines</code> invokes the precomputation, and in particular says that we want to use projective action.</p>
+
+<p><a id="X790F22B67C56A49F" name="X790F22B67C56A49F"></a></p>
+
+<h4>11.2 <span class="Heading">The Fischer group <span class="SimpleMath">Fi_{23}</span> acting in 
+    dimension <span class="SimpleMath">1494</span>
+    </span></h4>
+
+<p>The example in this section shows how to compute 35 of the 36 double coset representatives of the Fischer group <span class="SimpleMath">Fi_{23}</span> with respect to its seventh maximal subgroup <span class="SimpleMath">H≅ 3_+^{1+8}.2_-^{1+6}.3_+^{1+2}.2S_4</span>, which has order <span class="SimpleMath">3265173504≈ 3.2⋅ 10^9</span> and index <span class="SimpleMath">[Fi_{23}: H]=1252451200 ≈ 1.3 ⋅ 10^9</span>, see <a href="chapBib.html#biBCCN85">[CCN+85]</a> or the <strong class="pkg">CTblLib</strong> package. All the files for this example are located in the <code class="file">examples/fi23m7</code> subdirectory of the <strong class="pkg">orb</strong> package. You simply run the example in the following way:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadPackage("orb","examples/fi23m7/GOrbitByKOrbitsPrepare.g");</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadPackage("orb","examples/fi23m7/GOrbitByKOrbitsSearch35.g");</span>
+...
+</pre></div>
+
+<p>We will not go into the details of the computation here, but they can be read off directly from the code in the files in that directory. In the first part, run by the file <code class="file">GOrbitByKOrbitsPrepare.g</code>, we prepare the necessary input data, by using similar techniques as described at length in Section <a href="chap11.html#X781209EE7C9D3E0E"><span class="RefLink">11.4</span></a>. (Actually, this example has been dealt with before the advent of the packages <strong class="pkg">chop</strong> and <strong class="pkg">genss</strong>, hence we are using appropriate private code instead.) We are using two helper subgroups <span class="SimpleMath">U_1 &lt; U_2 &lt; H &lt; Fi_{23}</span>, being <span class="SimpleMath">3</span>-subgroups of <span class="SimpleMath">H</span> of order <span class="SimpleMath">81</span> and <span class="SimpleMath">6561</span>, respectively. The 1494-dimensional irreducible representation of <span class="SimpleMath">Fi_{23}</span> over the field with 2 elements contains a vector that is fixed by <span class="SimpleMath">H</span>, such that the action on its <span class="SimpleMath">Fi_{23}</span>-orbit is isomorphic to the action on the cosets of <span class="SimpleMath">H</span>.</p>
+
+<p>The second part, in the file <code class="file">GOrbitByKOrbitsSearch35.g</code>, is the actual enumeration of <span class="SimpleMath">H</span>-orbits:</p>
+
+
+<div class="example"><pre>
+setup := OrbitBySuborbitBootstrapForVectors(
+         [cu1gens,cu2gens,cngens],[u1gensp,u2gensp,ngensp],
+         [81,6561,3265173504],[10,30],rec());
+obsol := InitOrbitBySuborbitList(setup,40);
+l := Orb(cggens,v,OnRight,rec(schreier := true));
+Enumerate(l,100000);
+OrbitsFromSeedsToOrbitList(obsol,l);
+origseeds := List(obsol,OrigSeed); 
+positions :=  List(origseeds,x-&gt;Position(l,x));
+words := List(positions,x-&gt;TraceSchreierTreeForward(l,x));
+</pre></div>
+
+<p>Note that this computation finds only 35 of the 36 double coset representatives. The last corresponds to a very short suborbit which is very difficult to find. Knowing the number of missing points, we guess the stabiliser in <span class="SimpleMath">H</span> of a missing representative, and find the latter amongst the fixed points of the stabiliser. We can then choose the one which lies in the <span class="SimpleMath">G</span>-orbit we have nearly enumerated above.</p>
+
+<p>These double coset representatives were needed to determine the 2-modular character table of <span class="SimpleMath">Fi_{23}</span>. Details of this can be found in <a href="chapBib.html#biBFi23mod2">[HNN06]</a>.</p>
+
+<p><a id="X7D7BDBF87E7C45ED" name="X7D7BDBF87E7C45ED"></a></p>
+
+<h4>11.3 <span class="Heading">The Conway group <span class="SimpleMath">Co_1</span> acting in 
+    dimension <span class="SimpleMath">24</span>
+    </span></h4>
+
+<p>The example in this section shows how to compute all suborbit lengths of the Conway group <span class="SimpleMath">Co_1</span>, in its irreducible projective action on a module of dimension 24 over the field with 5 elements. All the files for this example are located in the <code class="file">examples/co1F5d24</code> subdirectory of the <strong class="pkg">orb</strong> package. Then you simply run the example in the following way:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadPackage("orb","examples/co1F5d24/Co1OrbitOnPF5d24.g");</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadPackage("orb","examples/co1F5d24/Co1OrbitOnPF5d24.findall.g");</span>
+...
+</pre></div>
+
+<p>We will not go into the details of the first part of the computation here, as they are very similar to those reproduced in Section <a href="chap11.html#X7D5456AC85A830A4"><span class="RefLink">11.1</span></a>, and can be directly read off from the code in the file <code class="file">Co1OrbitOnPF5d24.g</code>: We are using three helper subgroups <span class="SimpleMath">U_1 &lt; U_2 &lt; U_3 &lt; Co_1</span>, where <span class="SimpleMath">Co_1</span> has order <span class="SimpleMath">4157776806543360000≈ 4.2⋅ 10^18</span>, see <a href="chapBib.html#biBCCN85">[CCN+85]</a> or the <strong class="pkg">CTblLib</strong> package, and where <span class="SimpleMath">U_3≅ 2_+^{1+8}.O_8(2)</span> is the fifth maximal subgroup of <span class="SimpleMath">Co_1</span>, having order <span class="SimpleMath">89181388800≈ 8.9⋅ 10^10</span>, while <span class="SimpleMath">U_2≅ [2^8]: S_6(2)</span> is a maximal subgroup of <span class="SimpleMath">U_3</span> of order <span class="SimpleMath">371589120≈ 3.7⋅ 10^8</span>, and <span class="SimpleMath">U_1≅ 2^6: L_3(2)</span> is a maximal subgroup of <span class="SimpleMath">S_6(2)</span> of order <span class="SimpleMath">10752≈ 1.1⋅ 10^4</span>. The projective action comes from the irreducible 24-dimensional linear representation of the Schur cover <span class="SimpleMath">2.Co_1</span> of <span class="SimpleMath">Co_1</span>, which by <a href="chapBib.html#biBJansen">[Jan05]</a> is the smallest faithful representation of <span class="SimpleMath">2.Co_1</span> over the field GF(5), and the quotient spaces we use for the helper subgroups have dimensions <span class="SimpleMath">8</span>, <span class="SimpleMath">8</span> and <span class="SimpleMath">16</span> respectively.</p>
+
+<p>The details of the second part can be directly read off from the code in the file <code class="file">Co1OrbitOnPF5d24.findall.g</code>:</p>
+
+
+<div class="example"><pre>
+oo := InitOrbitBySuborbitList(setup,80);
+l := MakeRandomLines(v,1000);
+OrbitsFromSeedsToOrbitList(oo,l);
+intervecs := CVEC_ReadMatFromFile(Filename(DirectoriesPackageLibrary("orb",""),
+             "examples/co1F5d24/co1interestingvecs.cmat"));
+OrbitsFromSeedsToOrbitList(oo,intervecs);
+Length(oo!.obsos);
+Sum(oo!.obsos,Size);
+(5^24-1)/(5-1);
+</pre></div>
+
+<p>Note that this example needs about 2GB of main memory on a 32bit machine and probably nearly 4GB on a 64bit machine. However, the orbit lengths were previously unknown before they were computed with this program. The orbit lengths were needed to rule out a case in <a href="chapBib.html#biBLongOrbits">[Mal06]</a>.</p>
+
+<p><a id="X781209EE7C9D3E0E" name="X781209EE7C9D3E0E"></a></p>
+
+<h4>11.4 <span class="Heading">The Baby Monster <span class="SimpleMath">B</span> acting on its 2A involutions</span></h4>
+
+<p>The example in this section shows how to enumerate the smallest non-trivial orbit of the Baby Monster group <span class="SimpleMath">B</span>. All the files for this example are located in the <code class="file">examples/bmF2d4370</code> subdirectory of the <strong class="pkg">orb</strong> package. You may simply run the example in the following way:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadPackage("orb","examples/bmF2d4370/BMOrbitOnF2d4370partI.g");</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadPackage("orb","examples/bmF2d4370/BMOrbitOnF2d4370partII.g");</span>
+... 
+</pre></div>
+
+<p>In the sequel we comment in detail on how the necessary input data actually is prepared. We begin by loading the packages we are going to use.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("orb");</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("io");</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("cvec");</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("atlasrep");</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("chop");</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("genss");</span>
+...  
+</pre></div>
+
+<p>The one-point stabilisers associated to the smallest non-trivial orbit of <span class="SimpleMath">B</span> are its largest maximal subgroups <span class="SimpleMath">E ≅ 2.^2E_6(2).2</span>, which are the centralisers of its 2A involutions. Here <span class="SimpleMath">E</span> is a bicyclic extension of the twisted Lie type group <span class="SimpleMath">^2E_6(2)</span>, and has index <span class="SimpleMath">[B: E]=13571955000 ≈ 1.4 ⋅ 10^10</span>, see <a href="chapBib.html#biBCCN85">[CCN+85]</a> or the <strong class="pkg">CTblLib</strong> package.</p>
+
+<p>We first try to find a matrix representation of <span class="SimpleMath">B</span> such that the <span class="SimpleMath">B</span>-orbit we look for is realised as a set of vectors in the underlying vector space. The smallest faithful representation of <span class="SimpleMath">B</span> over the field GF(2), by <a href="chapBib.html#biBJansen">[Jan05]</a> having dimension 4370, springs to mind. Explicit matrices in terms of standard generators in the sense of <a href="chapBib.html#biBWil96">[Wil96]</a> are available in <a href="chapBib.html#biBAGR">[Wil]</a>, and are accessibe through the <strong class="pkg">atlasrep</strong> package. Moreover, we find generators of <span class="SimpleMath">E</span> by applying a straight line program, also available in the <strong class="pkg">atlasrep</strong> package, expressing generators of <span class="SimpleMath">E</span> in terms of the generators of <span class="SimpleMath">B</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens := AtlasGenerators([ "B", [ "BG1-f2r4370B0.m1", "BG1-f2r4370B0.m2" ], 1, 2 ]).generators;</span>
+[ &lt;an immutable 4370x4370 matrix over GF2&gt;, 
+  &lt;an immutable 4370x4370 matrix over GF2&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bgens := List(gens,CMat);</span>
+[ &lt;cmat 4370x4370 over GF(2,1)&gt;, &lt;cmat 4370x4370 over GF(2,1)&gt; ] 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">slpbtoe := AtlasStraightLineProgram([ "B", "BG1-max1W1", 1 ]).program;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egens := ResultOfStraightLineProgram(slpbtoe,bgens);</span>
+[ &lt;cmat 4370x4370 over GF(2,1)&gt;, &lt;cmat 4370x4370 over GF(2,1)&gt; ] 
+</pre></div>
+
+<p>We look for a non-zero vector being fixed by both generators of <span class="SimpleMath">E</span>. It turns out that the latter have a common fixed space of dimension 1. Then, since <span class="SimpleMath">E</span> is a maximal subgroup, the stabiliser in <span class="SimpleMath">B</span> of the non-zero vector <span class="SimpleMath">v</span> in that fixed space coincides with <span class="SimpleMath">E</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := egens[1]-egens[1]^0;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nsx := NullspaceMat(x);</span>
+&lt;immutable cmat 2202x4370 over GF(2,1)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y := nsx * (egens[2]-egens[2]^0);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nsy := NullspaceMat(y);</span>
+&lt;immutable cmat 1x2202 over GF(2,1)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := nsy[1]*nsx;</span>
+&lt;immutable cvec over GF(2,1) of length 4370&gt; 
+</pre></div>
+
+<p>Storing eight elements of GF(2) into 1 byte, to store a vector of length 4370 needs 547 bytes plus some organisational overhead resulting in about 580 bytes, hence to store the full <span class="SimpleMath">B</span>-orbit of <span class="SimpleMath">v</span> we need <span class="SimpleMath">580 ⋅ [B: E] ≈ 7.9 ⋅ 10^12</span> bytes. Hence we try to find helper subgroups suitable to achieve a saving factor of <span class="SimpleMath">≈ 10^4</span>, i. e. allowing to store only one out of <span class="SimpleMath">≈ 10^4</span> vectors. To this end, we look for a pair <span class="SimpleMath">U_1&lt;U_2</span> of helper subgroups such that <span class="SimpleMath">|U_2| ≈ 10^5</span>, where we take into account that typically the overall saving factor achieved is somewhat smaller than the order of the largest helper subgroup.</p>
+
+<p>By <a href="chapBib.html#biBCCN85">[CCN+85]</a>, and a few computations with subgroup fusions using the <strong class="pkg">CTblLib</strong> package, the derived subgroup <span class="SimpleMath">E' ≅ 2.^2E_6(2)</span> of <span class="SimpleMath">E</span> turns out to possess maximal subgroups <span class="SimpleMath">2 × Fi_{22}</span> and <span class="SimpleMath">2.Fi_{22}</span>, where <span class="SimpleMath">Fi_{22}</span> denotes one of the sporadic simple Fischer groups, and where the former constitute a unique conjugacy class with associated normalizers in <span class="SimpleMath">E</span> of shape <span class="SimpleMath">2 × Fi_{22}.2</span>, while the latter consist of two conjugacy classes being self-normalising and interchanged by <span class="SimpleMath">E</span>.</p>
+
+<p>Now <span class="SimpleMath">Fi_{22}</span> has a unique conjugacy class of maximal subgroups <span class="SimpleMath">M_{12}</span>, where the latter denotes one of the sporadic simple Mathieu groups; the subgroups <span class="SimpleMath">M_{12}</span> lift to a unique conjugacy class of subgroups <span class="SimpleMath">M_{12}</span> of <span class="SimpleMath">2.Fi_{22}</span>, which turn out to constitute a conjugacy class of subgroups of <span class="SimpleMath">E</span> different from the subgroups <span class="SimpleMath">M_{12}</span> being contained in <span class="SimpleMath">Fi_{22}</span>. Anyway, we have <span class="SimpleMath">|M_{12}|=95040</span>, hence <span class="SimpleMath">U_2=M_{12}</span> seems to be a good candidate for the larger helper subgroup. In particular, there is a unique conjugacy class of maximal subgroups <span class="SimpleMath">L_2(11)</span> of <span class="SimpleMath">M_{12}</span>, and since <span class="SimpleMath">|L_2(11)|=660</span> and <span class="SimpleMath">[M_{12}: L_2(11)]=144</span> letting <span class="SimpleMath">U_1=L_2(11)</span> seems to be a good candidate for the smaller helper subgroup. Recall that <span class="SimpleMath">U_1</span> and <span class="SimpleMath">U_2</span> are useful helper subgroups only if we are able to find suitable quotient modules allowing for the envisaged saving factor.</p>
+
+<p>To find <span class="SimpleMath">U_1</span> and <span class="SimpleMath">U_2</span>, we first try to find a subgroup <span class="SimpleMath">Fi_{22}</span> or <span class="SimpleMath">2.Fi_{22}</span> of <span class="SimpleMath">E</span>. We start a random search, aiming at finding standard generators of either <span class="SimpleMath">Fi_{22}</span> or <span class="SimpleMath">2.Fi_{22}</span>, and we use <code class="code">GeneratorsWithMemory</code> in order to be able to express the generators found as words in the generators of <span class="SimpleMath">E</span>. To accelerate computations we first construct a small representation of <span class="SimpleMath">E</span>; by <a href="chapBib.html#biBJansen">[Jan05]</a> the smallest faithful irreducible representation of <span class="SimpleMath">Fi_{22}</span> over GF(2) has dimension 78, hence we cannot do better for <span class="SimpleMath">E</span>; note that the latter is a representation of <span class="SimpleMath">overlineE:=E/Z(E) ≅ ^2E_6(2).2</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoChop,2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := Module(egens);</span>
+&lt;module of dim. 4370 over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := Chop(m);</span>
+...
+rec( ischoprecord := true, 
+  db := [ &lt;abs. simple module of dim. 78 over GF(2)&gt;, 
+          &lt;trivial module of dim. 1 over GF(2)&gt;, 
+          &lt;abs. simple module of dim. 1702 over GF(2)&gt;, 
+          &lt;abs. simple module of dim. 572 over GF(2)&gt; ], 
+  mult := [ 5, 4, 2, 1 ], acs := [ 1, 2, 3, 1, 4, 1, 1, 2, 2, 3, 1, 2 ], 
+  module := &lt;reducible module of dim. 4370 over GF(2)&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i := Position(List(r.db,Dimension),78);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egens78 := GeneratorsWithMemory(RepresentingMatrices(r.db[i]));</span>
+[ &lt;&lt;immutable cmat 78x78 over GF(2,1)&gt; with mem&gt;, 
+  &lt;&lt;immutable cmat 78x78 over GF(2,1)&gt; with mem&gt; ] 
+</pre></div>
+
+<p>By <a href="chapBib.html#biBAGR">[Wil]</a>, standard generators <span class="SimpleMath">a,b</span> of <span class="SimpleMath">Fi_{22}</span> are given as follows: <span class="SimpleMath">a</span> is an element of the 2A conjugacy class of <span class="SimpleMath">Fi_{22}</span>, and <span class="SimpleMath">b</span>, <span class="SimpleMath">ab</span>, and <span class="SimpleMath">(ab)^4bab(abb)^2</span> have order 13, 11, and 12, respectively; standard generators of <span class="SimpleMath">2.Fi_{22}</span> are lifts of standard generators of <span class="SimpleMath">Fi_{22}</span> having the same order fingerprint. The 2A conjugacy class of <span class="SimpleMath">Fi_{22}</span> fuses into the 2A conjugacy class of <span class="SimpleMath">overlineE</span>, where the latter is obtained as the 11-th power of the unique conjugacy class of elements of order 22, and <span class="SimpleMath">overlineE</span> has only one conjugacy class of elements of order 13.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o := Orb(egens78,StripMemory(egens78[1])^0,OnRight,rec(schreier := true,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            lookingfor := function(o,x) return Order(x)=22; end));</span>
+&lt;open orbit, 1 points with Schreier tree looking for sth.&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Enumerate(o);</span>
+&lt;open orbit, 393 points with Schreier tree looking for sth.&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">word := TraceSchreierTreeForward(o,PositionOfFound(o));</span>
+[ 1, 2, 1, 2, 2, 1, 2, 2, 1, 2, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g2a := Product(egens78{word})^11;</span>
+&lt;&lt;immutable cmat 78x78 over GF(2,1)&gt; with mem&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o := Orb(egens78,StripMemory(egens78[1])^0,OnRight,rec(schreier := true,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            lookingfor := function(o,x) return Order(x)=13; end));</span>
+&lt;open orbit, 1 points with Schreier tree looking for sth.&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Enumerate(o);</span>
+&lt;open orbit, 144 points with Schreier tree looking for sth.&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">word := TraceSchreierTreeForward(o,PositionOfFound(o));</span>
+[ 1, 2, 1, 2, 1, 2, 1, 2, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := Product(egens78{word});</span>
+&lt;&lt;immutable cmat 78x78 over GF(2,1)&gt; with mem&gt; 
+</pre></div>
+
+<p>We search through the <span class="SimpleMath">overlineE</span>-conjugates of <code class="code">g2a</code> until we find a conjugate <span class="SimpleMath">a</span> together with <span class="SimpleMath">b</span> fulfilling the defining conditions of standard generators of <span class="SimpleMath">Fi_{22}</span>, and moreover fulfilling the relations of the associated presentation of <span class="SimpleMath">Fi_{22}</span> available in <a href="chapBib.html#biBAGR">[Wil]</a>.</p>
+
+<p>To find conjugates, we use the product replacement algorithm to produce pseudo random elements of <span class="SimpleMath">overlineE</span>. Assuming a genuine random search, the success probability of this approach is as follows: Letting <span class="SimpleMath">overlineE':=E'/Z(E') ≅ ^2E_6(2)</span>, out of the <span class="SimpleMath">|overlineE'|/|C_overlineE'}(g2a)|</span> conjugates of <code class="code">g2a</code> there are <span class="SimpleMath">|C_{ overlineE' }(b)|/|C_{ overlineE' }(Fi_{22})| =|C_{ overlineE' }(b)|</span> elements together with the fixed element <span class="SimpleMath">b</span> giving standard generators of <span class="SimpleMath">Fi_{22}</span>. Since <span class="SimpleMath">Fi_{22}</span> has two conjugacy classes of elements of order 13, and there are three conjugacy classes of subgroups <span class="SimpleMath">Fi_{22}</span> of <span class="SimpleMath">overlineE'</span>, the success probability is <span class="SimpleMath">6 ⋅ |C_{ overlineE' }(g2a)| ⋅ |C_{ overlineE' }(b)|/|overlineE'| ≈ 2 ⋅ 10^-5</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pr := ProductReplacer(egens78,rec(maxdepth := 150));</span>
+&lt;product replacer nrgens=2 slots=12 scramble=100 maxdepth=150 steps=0 (rattle)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i := 0;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">repeat</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     i := i + 1; </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     x := Next(pr);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     a := g2a^x;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   until IsOne((a*b)^11) and IsOne(((a*b)^4*b*a*b*(a*b*b)^2)^12) and</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IsOne((a*b^2)^21) and IsOne(Comm(a,b)^3) and </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IsOne(Comm(a,b^2)^3) and IsOne(Comm(a,b^3)^3) and</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IsOne(Comm(a,b^4)^2) and IsOne(Comm(a,b^5)^3) and</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IsOne(Comm(a,b*a*b^2)^3) and IsOne(Comm(a,b^-1*a*b^-2)^2) and</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IsOne(Comm(a,b*a*b^5)^2) and IsOne(Comm(a,b^2*a*b^5)^2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i;</span>
+53271 
+</pre></div>
+
+<p>Note that the initial state of the random number generator does influence this randomised result: it may very well be that you see some other value for <span class="SimpleMath">i</span>.</p>
+
+<p>Due to a presentation being available we have proved that the elements found generate a subgroup <span class="SimpleMath">Fi_{22}</span>. If we had not had a presentation at hand, we might only have been able to find elements fulfilling the defining conditions of standard generators of <span class="SimpleMath">Fi_{22}</span>, but still generating a subgroup of another isomorphism type. In that case, for further checks we can use the following tools: We try to find a short orbit of vectors, and using a randomized Schreier-Sims algorithm gives a lower bound for the order of the group seen. However, we can use the action on the orbit to get a homomorphism into a permutation group, allowing to prove that the group generated indeed has <span class="SimpleMath">Fi_{22}</span> as a quotient.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := StabilizerChain(Group(a,b),rec(TryShortOrbit := 30,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                                       OrbitLengthLimit := 5000));</span>
+...
+&lt;stabchain size=64561751654400 orblen=3510 layer=1 SchreierDepth=8&gt;
+ &lt;stabchain size=18393661440 orblen=2816 layer=2 SchreierDepth=7&gt;
+  &lt;stabchain size=6531840 orblen=1680 layer=3 SchreierDepth=7&gt;
+   &lt;stabchain size=3888 orblen=243 layer=4 SchreierDepth=5&gt;
+    &lt;stabchain size=16 orblen=16 layer=5 SchreierDepth=2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(S)=Size(CharacterTable("Fi22"));</span>
+true 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Group(ActionOnOrbit(S!.orb,[a,b]));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayCompositionSeries(p);</span>
+G (2 gens, size 64561751654400)
+ | Fi(22)
+1 (0 gens, size 1) 
+</pre></div>
+
+<p>We now return to our original representation.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInfoLevel(InfoSLP,2); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">slpetofi22 := SLPOfElms([a,b]);</span>
+&lt;straight line program&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(LinesOfStraightLineProgram(slpetofi22));</span>
+278
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SlotUsagePattern(slpetofi22);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fgens := ResultOfStraightLineProgram(slpetofi22,egens);</span>
+...
+[ &lt;cmat 4370x4370 over GF(2,1)&gt;, &lt;cmat 4370x4370 over GF(2,1)&gt; ] 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := fgens[1];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := fgens[2];; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOne(b^13);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOne((a*b)^11);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOne((a*b^2)^21);</span>
+true 
+</pre></div>
+
+<p>By construction the group generated by <span class="SimpleMath">a,b</span> is <span class="SimpleMath">Fi_{22}</span> or <span class="SimpleMath">2 × Fi_{22}</span> or <span class="SimpleMath">2.Fi_{22}</span>. Note that due to different seeds in the random number generator it is in fact possible at this stage that you have created a different group as displayed here! In our outcome, since <span class="SimpleMath">a</span> has even order, and both <span class="SimpleMath">b</span> and <span class="SimpleMath">ab</span> have odd order, we cannot possibly have <span class="SimpleMath">2 × Fi_{22}</span>; and by the presentation of <span class="SimpleMath">2.Fi_{22}</span> available in <a href="chapBib.html#biBAGR">[Wil]</a> the order of <span class="SimpleMath">ab^2</span> being 21 implies that we cannot possibly have <span class="SimpleMath">2.Fi_{22}</span> either. Hence we indeed have found standard generators of <span class="SimpleMath">Fi_{22}</span>. If we had hit one of the cases <span class="SimpleMath">2 × Fi_{22}</span> or <span class="SimpleMath">2.Fi_{22}</span>, we could just continue the above search until we find a subgroup <span class="SimpleMath">Fi_{22}</span>, or using the above order fingerprint we could easily modify the elements found to obtain standard generators of either <span class="SimpleMath">Fi_{22}</span> or <span class="SimpleMath">2.Fi_{22}</span>.</p>
+
+<p>Now, standard generators of <span class="SimpleMath">U_2=M_{12}</span> in terms of standard generators of <span class="SimpleMath">Fi_{22}</span>, and generators of <span class="SimpleMath">U_1=L_2(11)</span> in terms of standard generators of <span class="SimpleMath">M_{12}</span> are accessible in the <strong class="pkg">atlasrep</strong> package. Note that if we had found a subgroup <span class="SimpleMath">2.Fi_{22}</span> above, since <span class="SimpleMath">M_{12}</span> lifts to a subgroup <span class="SimpleMath">2 × M_{12}</span> of <span class="SimpleMath">2.Fi_{22}</span>, it would again be easy to find standard generators of <span class="SimpleMath">M_{12}</span> from the generators of <span class="SimpleMath">M_{12}</span> or <span class="SimpleMath">2 × M_{12}</span> respectively provided by the <strong class="pkg">atlasrep</strong> package. Anyway, the next task is to find good quotient modules such that the helper subgroups have longish orbits on vectors. To this end, we restrict to <span class="SimpleMath">M_{12}</span> and compute the radical series of the restricted module.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">slpfi22tom12 := AtlasStraightLineProgram([ "Fi22", "F22G1-max14W1", 1 ]).program;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">slpm12tol211 := AtlasStraightLineProgram([ "M12", "M12G1-max5W1", 1 ]).program;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mgens := ResultOfStraightLineProgram(slpfi22tom12,fgens);</span>
+[ &lt;cmat 4370x4370 over GF(2,1)&gt;, &lt;cmat 4370x4370 over GF(2,1)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lgens := ResultOfStraightLineProgram(slpm12tol211,mgens);</span>
+[ &lt;cmat 4370x4370 over GF(2,1)&gt;, &lt;cmat 4370x4370 over GF(2,1)&gt; ] 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := Module(mgens);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := Chop(m);;</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rad := RadicalSeries(m,r.db);</span>
+...
+rec( 
+  db := [ &lt;abs. simple module of dim. 144 over GF(2)&gt;, 
+          &lt;abs. simple module of dim. 44 over GF(2)&gt;, 
+          &lt;simple module of dim. 32 over GF(2) splitting field degree 2&gt;, 
+          &lt;abs. simple module of dim. 10 over GF(2)&gt;, 
+          &lt;trivial module of dim. 1 over GF(2)&gt; ],
+  module := &lt;reducible module of dim. 4370 over GF(2)&gt;,
+  basis := &lt;immutable cmat 4370x4370 over GF(2,1)&gt;,
+  ibasis := &lt;immutable cmat 4370x4370 over GF(2,1)&gt;,
+  cfposs := [ [ [ 1 .. 144 ], [ 145 .. 288 ], [ 289 .. 432 ], [ 433 .. 576 ],
+...
+  isotypes := [ [ 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3,
+                  3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 ],
+...
+  isradicalrecord := true ) 
+</pre></div>
+
+<p>We observe that there are faithful irreducible quotients of dimensions 10, 32, 44, and 144. Since we look for a quotient module such that <span class="SimpleMath">M_{12}</span> has many regular orbits on vectors, we ignore the irreducible module of dimension 10. We consider the one of dimension 32.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i := Position(List(rad.db,Dimension),32);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mgens32 := RepresentingMatrices(rad.db[i]);</span>
+[ &lt;immutable cmat 32x32 over GF(2,1)&gt;, &lt;immutable cmat 32x32 over GF(2,1)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitStatisticOnVectorSpace(mgens32,95040,30);</span>
+Found length     95040, have now   24 orbits, average length: 93060 
+</pre></div>
+
+<p>This is excellent indeed. Hence we pick a summand of dimension 32 in the first radical layer, and apply the associated base change to all the generators.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bgens := List(bgens,x-&gt;rad.basis*x*rad.ibasis);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egens := List(egens,x-&gt;rad.basis*x*rad.ibasis);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fgens := List(fgens,x-&gt;rad.basis*x*rad.ibasis);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mgens := List(mgens,x-&gt;rad.basis*x*rad.ibasis);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lgens := List(lgens,x-&gt;rad.basis*x*rad.ibasis);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">j := Position(rad.isotypes[1],i);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := rad.cfposs[1][j];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Append(l,Difference([1..4370],l));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bgens := List(bgens,x-&gt;ORB_PermuteBasisVectors(x,l));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egens := List(egens,x-&gt;ORB_PermuteBasisVectors(x,l));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fgens := List(fgens,x-&gt;ORB_PermuteBasisVectors(x,l));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mgens := List(mgens,x-&gt;ORB_PermuteBasisVectors(x,l));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lgens := List(lgens,x-&gt;ORB_PermuteBasisVectors(x,l));; </span>
+</pre></div>
+
+<p>We consider the irreducible quotient module of <span class="SimpleMath">M_{12}</span> of dimension 32, whose restriction to <span class="SimpleMath">L_2(11)</span> turns out to be is semisimple. The irreducible quotients of dimension 10 are too small to have too many regular orbits, but the direct sum of two of them turns out to work fine.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lgens32 := List(lgens,x-&gt;ExtractSubMatrix(x,[1..32],[1..32]));</span>
+[ &lt;cmat 32x32 over GF(2,1)&gt;, &lt;cmat 32x32 over GF(2,1)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := Module(lgens32);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := Chop(m);</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">soc := SocleSeries(m,r.db);</span>
+...
+rec( issoclerecord := true,
+  db := [ &lt;simple module of dim. 10 over GF(2) splitting field degree 2&gt;,
+          &lt;trivial module of dim. 1 over GF(2)&gt;,
+          &lt;abs. simple module of dim. 10 over GF(2)&gt; ],
+  module := &lt;reducible module of dim. 32 over GF(2)&gt;,
+  basis := &lt;cmat 32x32 over GF(2,1)&gt;, ibasis := &lt;cmat 32x32 over GF(2,1)&gt;,
+  cfposs := [ [ [ 1 .. 10 ], [ 11 ], [ 12 ], [ 13 .. 22 ], [ 23 .. 32 ] ] ],
+  isotypes := [ [ 1, 2, 2, 3, 3 ] ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i := Position(List(soc.db,x-&gt;[Dimension(x),DegreeOfSplittingField(x)]),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                                [10,1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">j := Position(soc.isotypes[1],i);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Concatenation(soc.cfposs[1]{[j,j+1]});;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lgens32 := List(lgens32,x-&gt;soc.basis*x*soc.ibasis);</span>
+[ &lt;cmat 32x32 over GF(2,1)&gt;, &lt;cmat 32x32 over GF(2,1)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lgens20 := List(lgens32,x-&gt;ExtractSubMatrix(x,l,l));</span>
+[ &lt;cmat 20x20 over GF(2,1)&gt;, &lt;cmat 20x20 over GF(2,1)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitStatisticOnVectorSpace(lgens20,660,30);</span>
+Found length       660, have now 4401 orbits, average length: 598 
+</pre></div>
+
+<p>We apply the appropriate base change to all the generators.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t := ORB_EmbedBaseChangeTopLeft(soc.basis,4370);</span>
+&lt;cmat 4370x4370 over GF(2,1)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ti := ORB_EmbedBaseChangeTopLeft(soc.ibasis,4370);</span>
+&lt;cmat 4370x4370 over GF(2,1)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bgens := List(bgens,x-&gt;t*x*ti);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egens := List(egens,x-&gt;t*x*ti);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fgens := List(fgens,x-&gt;t*x*ti);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mgens := List(mgens,x-&gt;t*x*ti);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lgens := List(lgens,x-&gt;t*x*ti);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Append(l,Difference([1..4370],l));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bgens := List(bgens,x-&gt;ORB_PermuteBasisVectors(x,l));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egens := List(egens,x-&gt;ORB_PermuteBasisVectors(x,l));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fgens := List(fgens,x-&gt;ORB_PermuteBasisVectors(x,l));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mgens := List(mgens,x-&gt;ORB_PermuteBasisVectors(x,l));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lgens := List(lgens,x-&gt;ORB_PermuteBasisVectors(x,l));; </span>
+</pre></div>
+
+<p>Having reached the ultimate choice of basis, we recreate the fixed vector <code class="code">v</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := egens[1]-egens[1]^0;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nsx := NullspaceMat(x);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y := nsx * (egens[2]-egens[2]^0);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nsy := NullspaceMat(y);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := nsy[1]*nsx;; </span>
+</pre></div>
+
+<p>Finally we need small faithful permutation representations of the helper subgroups.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mgens32 := List(mgens,x-&gt;ExtractSubMatrix(x,[1..32],[1..32]));</span>
+[ &lt;cmat 32x32 over GF(2,1)&gt;, &lt;cmat 32x32 over GF(2,1)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := StabilizerChain(Group(mgens32),rec(TryShortOrbit := 10));</span>
+...
+&lt;stabchain size=95040 orblen=3960 layer=1 SchreierDepth=7&gt;
+ &lt;stabchain size=24 orblen=24 layer=2 SchreierDepth=4&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Group(ActionOnOrbit(S!.orb,mgens32));</span>
+&lt;permutation group with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i := SmallerDegreePermutationRepresentation(p);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pp := Group(List(GeneratorsOfGroup(p),x-&gt;ImageElm(i,x)));</span>
+&lt;permutation group with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m12 := MathieuGroup(12);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">i := IsomorphismGroups(pp,m12);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mpermgens := List(GeneratorsOfGroup(pp),x-&gt;ImageElm(i,x));</span>
+[ (5,7)(6,11)(8,9)(10,12), (1,10,3)(2,11,12)(4,5,6)(7,9,8) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lpermgens := ResultOfStraightLineProgram(slpm12tol211,mpermgens);</span>
+[ (1,8)(2,5)(3,9)(4,7)(6,11)(10,12), (1,8,3)(2,7,12)(4,6,9)(5,11,10) ] 
+</pre></div>
+
+<p>We could just go on from here, however, sometimes it is useful to save all the created data to disk.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := IO_File("data.gp","w");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,"seed");; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,v);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,"generators");; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,bgens);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,egens);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,fgens);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,mgens);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,lgens);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,"permutations");; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,mpermgens);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Pickle(f,lpermgens);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Close(f);; </span>
+</pre></div>
+
+<p>This can be loaded again, in particular into a new <strong class="pkg">GAP</strong> session, as follows.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("orb");;</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("cvec");;</span>
+...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := IO_File("data.gp");</span>
+&lt;file fd=4 rbufsize=65536 rpos=1 rdata=0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Unpickle(f);</span>
+"seed"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v:=IO_Unpickle(f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Unpickle(f);</span>
+"generators"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">bgens := IO_Unpickle(f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">egens := IO_Unpickle(f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">fgens := IO_Unpickle(f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mgens := IO_Unpickle(f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lgens := IO_Unpickle(f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Unpickle(f);</span>
+"permutations"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mpermgens := IO_Unpickle(f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lpermgens := IO_Unpickle(f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_Close(f);; </span>
+</pre></div>
+
+<p>Now we are prepared to actually run the orbit enumeration. Note that for the following memory estimates we assume that we are running things on a 64bit machine. On a 32bit machine the overhead is smaller. We expect that all the vectors in the smaller quotient of dimension 20 will enumerated; needing 3 bytes per vector for the actual data which results in 40 bytes including overhead, this amounts to <span class="SimpleMath">40 ⋅ 2^20 ≈ 42</span> MB of memory space. Since <span class="SimpleMath">2^32 ≈ 4.3 ⋅ 10^9</span> is less than <span class="SimpleMath">[B: E]</span>, we also expect that the larger quotient of dimension 32 will be enumerated completely, by <span class="SimpleMath">L_2(11)</span>-orbits; needing 4 bytes per vector for the actual data resulting in 40 bytes including overhead, and assuming a saving factor as suggested by <code class="code">OrbitStatisticOnVectorSpace</code> yields an estimated memory requirement of <span class="SimpleMath">40 ⋅ 2^32 ⋅ 1/598 ≈ 287</span> MB. For the large <span class="SimpleMath">B</span>-orbit, being enumerated by <span class="SimpleMath">M_{12}</span>-orbits, we similarly get an estimated memory requirement of <span class="SimpleMath">584 ⋅ [B: E] ⋅ 1/93060 ≈ 85</span> MB.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">setup := OrbitBySuborbitBootstrapForVectors(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            [lgens,mgens,bgens],[lpermgens,mpermgens,[(),()]],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            [660,95040,4154781481226426191177580544000000],[20,32],rec());</span>
+#I  Calculating stabilizer chain for whole group...
+#I  Trying smaller degree permutation representation for U2...
+#I  Trying smaller degree permutation representation for U1...
+#I  Enumerating permutation base images of U_1...
+#I  Looking for U1-coset-recognising U2-orbit in factor space...
+#I  OrbitBySuborbit found 100% of a U2-orbit of size 95 040
+#I  Found 144 suborbits (need 144)
+&lt;setup for an orbit-by-suborbit enumeration, k=2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o := OrbitBySuborbitKnownSize(setup,v,3,3,2,51,13571955000);</span>
+#I  OrbitBySuborbit found 100% of a U2-orbit of size 1
+#I  OrbitBySuborbit found 100% of a U2-orbit of size 23 760
+...
+#I  OrbitBySuborbit found 51% of a U3-orbit of size 13 571 955 000
+&lt;orbit-by-suborbit size=13571955000 stabsize=306129918735099415756800 (
+51%) saving factor=56404&gt; 
+</pre></div>
+
+<p>Indeed the saving factor actually achieved is smaller than the best possible estimate given above, but it still has the same order of magnitude.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap10.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

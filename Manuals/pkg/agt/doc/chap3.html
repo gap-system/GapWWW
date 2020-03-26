@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (AGT) - Chapter 3: Spectra of graphs</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X7A25E43B7F2F7119" name="X7A25E43B7F2F7119"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7A25E43B7F2F7119">3 <span class="Heading">Spectra of graphs</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X811034AF832F8BE9">3.1 <span class="Heading">Eigenvalues of regular graphs</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79AA0FEA8307F6C1">3.1-1 LeastEigenvalueInterval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A778BA880361164">3.1-2 SecondEigenvalueInterval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86F1FC147DB0DEE5">3.1-3 LeastEigenvalueFromSRGParameters</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8778AC2E87B8DAD6">3.1-4 SecondEigenvalueFromSRGParameters</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80A9778F8468A4DD">3.1-5 LeastEigenvalueMultiplicity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8740396B80617B47">3.1-6 SecondEigenvalueMultiplicity</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Spectra of graphs</span></h3>
+
+<p>In this chapter we give methods for investigating the eigenvalues of a graph.</p>
+
+<p>Let <span class="SimpleMath">Γ</span> be a graph of order <span class="SimpleMath">v</span>. The <em>adjacency matrix</em> of <span class="SimpleMath">Γ</span>, <span class="SimpleMath">A(Γ)</span>, is the <span class="SimpleMath">v× v</span> matrix indexed by <span class="SimpleMath">V(Γ)</span> such that <span class="SimpleMath">A(Γ)_xy=1</span> if <span class="SimpleMath">xy∈ E(Γ)</span>, and <span class="SimpleMath">A(Γ)_xy=0</span> otherwise.</p>
+
+<p>The <em>spectrum</em> of <span class="SimpleMath">Γ</span>, <span class="SimpleMath">Spec(Γ)</span>, is the multiset of eigenvalues of its adjacency matrix, and an <em>eigenvalue of </em><span class="SimpleMath">Γ</span> is a member of <span class="SimpleMath">Spec(Γ)</span>. The <em>multiplicity</em> of an eigenvalue <span class="SimpleMath">α</span> of <span class="SimpleMath">Γ</span> is the number of times <span class="SimpleMath">α</span> appears in <span class="SimpleMath">Spec(Γ)</span>. For information on most of the objects and results discussed in this chapter, see <a href="chapBib.html#biBBH_2011">[BH11]</a>.</p>
+
+<p><a id="X811034AF832F8BE9" name="X811034AF832F8BE9"></a></p>
+
+<h4>3.1 <span class="Heading">Eigenvalues of regular graphs</span></h4>
+
+<p>In this section, we introduce methods for investigating eigenvalues of regular graphs. The input for these methods will be a specific graph or the parameters of a graph.</p>
+
+<p>Let <span class="SimpleMath">Γ</span> be a regular graph with parameters <span class="SimpleMath">(v,k)</span>. Then <span class="SimpleMath">Γ</span> has largest eigenvalue <span class="SimpleMath">k</span> (see <a href="chapBib.html#biBBH_2011">[BH11]</a>). Therefore we do not implement a "LargestEigenvalue" function for regular graphs.</p>
+
+<p>Let <span class="SimpleMath">Γ</span> be a strongly regular graph with parameters <span class="SimpleMath">(v,k,a,b)</span>. The eigenvalues of <span class="SimpleMath">Γ</span> and their corresponding multiplicites are uniquely determined by the parameters <span class="SimpleMath">(v,k,a,b)</span> (see <a href="chapBib.html#biBBH_2011">[BH11]</a>). Using this knowledge, we provide methods which take as input feasible strongly regular graph parameters <span class="SimpleMath">(v,k,a,b)</span>. We also give methods which return an exact representation of the eigenvalues of a strongly regular graph with parameters <span class="SimpleMath">(v,k,a,b)</span>, and their multiplicities.</p>
+
+<p><a id="X79AA0FEA8307F6C1" name="X79AA0FEA8307F6C1"></a></p>
+
+<h5>3.1-1 LeastEigenvalueInterval</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeastEigenvalueInterval</code>( <var class="Arg">gamma</var>, <var class="Arg">eps</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeastEigenvalueInterval</code>( <var class="Arg">parms</var>, <var class="Arg">eps</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list.</p>
+
+<p>Given a graph <var class="Arg">gamma</var> and rational number <var class="Arg">eps</var>, this function returns an interval containing the least eigenvalue of <var class="Arg">gamma</var>.</p>
+
+<p>Given feasible strongly regular graph parameters <var class="Arg">parms</var> and rational number <var class="Arg">eps</var>, this function returns an interval containing the least eigenvalue of a strongly regular graph with parameters <var class="Arg">parms</var>.</p>
+
+<p>The interval returned is in the form of a list, <var class="Arg">[y,z]</var> of rationals <span class="SimpleMath"><var class="Arg">y</var>≤ <var class="Arg">z</var></span> with the property that <span class="SimpleMath"><var class="Arg">z</var>-<var class="Arg">y</var>≤ <var class="Arg">eps</var></span>. If the eigenvalue is rational this function will return a list <var class="Arg">[y,z]</var>, where <span class="SimpleMath"><var class="Arg">y</var>=<var class="Arg">z</var></span>.</p>
+
+
+<div class="example"><pre>
+    
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gamma:=EdgeOrbitsGraph(Group((1,2,3,4,5)),[[1,2],[2,1]]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeastEigenvalueInterval(gamma,1/10);            </span>
+[ -13/8, -25/16 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">parms:=SRGParameters(gamma);</span>
+[ 5, 2, 0, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeastEigenvalueInterval(parms,1/10);         </span>
+[ -13/8, -25/16 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeastEigenvalueInterval(JohnsonGraph(7,3),1/20);</span>
+[ -3, -3 ]
+    
+  </pre></div>
+
+<p><a id="X7A778BA880361164" name="X7A778BA880361164"></a></p>
+
+<h5>3.1-2 SecondEigenvalueInterval</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SecondEigenvalueInterval</code>( <var class="Arg">gamma</var>, <var class="Arg">eps</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SecondEigenvalueInterval</code>( <var class="Arg">parms</var>, <var class="Arg">eps</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list.</p>
+
+<p>Given a regular graph <var class="Arg">gamma</var> and rational number <var class="Arg">eps</var>, this function returns an interval containing the second largest eigenvalue of <var class="Arg">gamma</var>.</p>
+
+<p>Given feasible strongly regular graph parameters <var class="Arg">parms</var> and rational number <var class="Arg">eps</var>, this function returns an interval containing the second largest eigenvalue of a strongly regular graph with parameters <var class="Arg">parms</var>.</p>
+
+<p>The interval returned is in the form of a list, <var class="Arg">[y,z]</var> of rationals <span class="SimpleMath"><var class="Arg">y</var>≤ <var class="Arg">z</var></span> with the property that <span class="SimpleMath"><var class="Arg">z</var>-<var class="Arg">y</var>≤ <var class="Arg">eps</var></span>. If the eigenvalue is rational this function will return a list <var class="Arg">[y,z]</var>, where <span class="SimpleMath"><var class="Arg">y</var>=<var class="Arg">z</var></span>.</p>
+
+
+<div class="example"><pre>
+    
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gamma:=EdgeOrbitsGraph(Group((1,2,3,4,5)),[[1,2],[2,1]]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SecondEigenvalueInterval(gamma,1/10);           </span>
+[ 9/16, 5/8 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">parms:=SRGParameters(gamma);</span>
+[ 5, 2, 0, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SecondEigenvalueInterval(parms,1/10);           </span>
+[ 9/16, 5/8 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SecondEigenvalueInterval(JohnsonGraph(7,3),1/20);</span>
+[ 5, 5 ]
+    
+  </pre></div>
+
+<p><a id="X86F1FC147DB0DEE5" name="X86F1FC147DB0DEE5"></a></p>
+
+<h5>3.1-3 LeastEigenvalueFromSRGParameters</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeastEigenvalueFromSRGParameters</code>( [<var class="Arg">v</var>, <var class="Arg">k</var>, <var class="Arg">a</var>, <var class="Arg">b</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: An integer or an element of a cyclotomic field.</p>
+
+<p>Given feasible strongly regular graph parameters <var class="Arg">[v, k, a, b]</var> this function returns the least eigenvalue of a strongly regular graph with parameters <span class="SimpleMath">(<var class="Arg">v,k,a,b</var>)</span>. If the eigenvalue is integer, the object returned is an integer. If the eigenvalue is irrational, the object returned lies in a cyclotomic field.</p>
+
+
+<div class="example"><pre>
+    
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeastEigenvalueFromSRGParameters([5,2,0,1]); </span>
+E(5)^2+E(5)^3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeastEigenvalueFromSRGParameters([10,3,0,1]);</span>
+-2
+    
+  </pre></div>
+
+<p><a id="X8778AC2E87B8DAD6" name="X8778AC2E87B8DAD6"></a></p>
+
+<h5>3.1-4 SecondEigenvalueFromSRGParameters</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SecondEigenvalueFromSRGParameters</code>( [<var class="Arg">v</var>, <var class="Arg">k</var>, <var class="Arg">a</var>, <var class="Arg">b</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: An integer or an element of a cyclotomic field.</p>
+
+<p>Given feasible strongly regular graph parameters <var class="Arg">[v, k, a, b]</var>, this function returns the second largest eigenvalue of a strongly regular graph with parameters <span class="SimpleMath">(<var class="Arg">v,k,a,b</var>)</span>. If the eigenvalue is integer, the object returned is an integer. If the eigenvalue is irrational, the object returned lies in a cyclotomic field.</p>
+
+
+<div class="example"><pre>
+    
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SecondEigenvalueFromSRGParameters([5,2,0,1]);</span>
+E(5)+E(5)^4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SecondEigenvalueFromSRGParameters([10,3,0,1]);</span>
+1
+    
+  </pre></div>
+
+<p><a id="X80A9778F8468A4DD" name="X80A9778F8468A4DD"></a></p>
+
+<h5>3.1-5 LeastEigenvalueMultiplicity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeastEigenvalueMultiplicity</code>( [<var class="Arg">v</var>, <var class="Arg">k</var>, <var class="Arg">a</var>, <var class="Arg">b</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An integer.</p>
+
+<p>Given feasible strongly regular graph parameters <var class="Arg">[v, k, a, b]</var> this function returns the multiplicity of the least eigenvalue of a strongly regular graph with parameters <span class="SimpleMath">(<var class="Arg">v,k,a,b</var>)</span>.</p>
+
+
+<div class="example"><pre>
+    
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeastEigenvalueMultiplicity([16,9,4,6]); </span>
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeastEigenvalueMultiplicity([25,12,5,6]);</span>
+12
+    
+  </pre></div>
+
+<p><a id="X8740396B80617B47" name="X8740396B80617B47"></a></p>
+
+<h5>3.1-6 SecondEigenvalueMultiplicity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SecondEigenvalueMultiplicity</code>( [<var class="Arg">v</var>, <var class="Arg">k</var>, <var class="Arg">a</var>, <var class="Arg">b</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An integer.</p>
+
+<p>Given feasible strongly regular graph parameters <var class="Arg">[v, k, a, b]</var> this function returns the multiplicity of the second eigenvalue of a strongly regular graph with parameters <span class="SimpleMath">(<var class="Arg">v,k,a,b</var>)</span>.</p>
+
+
+<div class="example"><pre>
+    
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SecondEigenvalueMultiplicity([16,9,4,6]); </span>
+9
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SecondEigenvalueMultiplicity([25,12,5,6]);</span>
+12
+    
+  </pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

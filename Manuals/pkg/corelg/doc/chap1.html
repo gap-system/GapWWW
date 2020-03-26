@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (CoReLG) - Chapter 1: Introduction</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7A0F3100829CD1E1">1.1 <span class="Heading">The simple real Lie algebras</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X80030DB07E5F4FBF">1.2 <span class="Heading">Cartan subalgebras and more</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X8295733081A2BFF8">1.3 <span class="Heading">Nilpotent orbits</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7C0A369A841F5BC9">1.4 <span class="Heading">On base fields</span></a>
+</span>
+</div>
+</div>
+
+<h3>1 <span class="Heading">Introduction</span></h3>
+
+<p><strong class="pkg">CoReLG</strong> (Computing with Real Lie Groups) is a <strong class="pkg">GAP</strong> package for computing with (semi-)simple real Lie algebras. Various capabilities of the package have to do with the action of the adjoint group of a real Lie algebra (such as the nilpotent orbits, and non-conjugate Cartan subalgebras). CoReLG is also the acronym of the EU funded Marie Curie project carried out by the first author of the package at the University of Trento.</p>
+
+<p>The simple real Lie algebras have been classified, and this classification is the main theoretical tool that we use, as it determines the objects that we work with. In Section <a href="chap1.html#X7A0F3100829CD1E1"><span class="RefLink">1.1</span></a> we give a brief account of this classification. We refer to the standard works in the literature (e.g., <a href="chapBib.html#biBknapp">[Kna02]</a>) for an in-depth discussion. The algorithms of this package are described in <a href="chapBib.html#biBhdwdg12">[DG13]</a> and <a href="chapBib.html#biBdfg12">[DFG13]</a>.</p>
+
+<p>We remark that the package still is under development, and its functionality is continuously extended. The package <strong class="pkg">SLA</strong>, <a href="chapBib.html#biBsla">[Gra12]</a>, is required.</p>
+
+<p><a id="X7A0F3100829CD1E1" name="X7A0F3100829CD1E1"></a></p>
+
+<h4>1.1 <span class="Heading">The simple real Lie algebras</span></h4>
+
+<p>Let <span class="SimpleMath">mathfrakg^c</span> denote a complex simple Lie algebra. Then there are two types of simple real Lie algebras associated to <span class="SimpleMath">mathfrakg^c</span>: the <em>realification</em> of <span class="SimpleMath">mathfrakg^c</span> (this means that <span class="SimpleMath">mathfrakg^c</span> is viewed as an algebra over <span class="SimpleMath">R</span>, of dimension <span class="SimpleMath">2dim mathfrakg^c</span>), and the <em>real forms</em> <span class="SimpleMath">mathfrakg</span> of <span class="SimpleMath">mathfrakg^c</span> (this means that <span class="SimpleMath">mathfrakg⊗_RC</span> is isomorphic to <span class="SimpleMath">mathfrakg^c</span>). It is straightforward to construct the realification of <span class="SimpleMath">mathfrakg^c</span>; so in the rest of this section we concentrate on the real forms of <span class="SimpleMath">mathfrakg^c</span>.</p>
+
+<p>A Lie algebra is said to be <em>compact</em> if its Killing form is negative definite. The complex Lie algebra <span class="SimpleMath">mathfrakg^c</span> has a unique (up to isomorphism) compact real form <span class="SimpleMath">mathfraku</span>. In the sequel we fix the compact form <span class="SimpleMath">mathfraku</span>. Then <span class="SimpleMath">mathfrakg^c = mathfraku + imath mathfraku</span>, where <span class="SimpleMath">imath</span> is the complex unit; so we get an antilinear map <span class="SimpleMath">τ : mathfrakg^c-&gt; mathfrakg^c</span> by <span class="SimpleMath">τ(x+ imath y) = x- imath y</span>, where <span class="SimpleMath">x,y∈ mathfraku</span>. This is called the <em>conjugation</em> of <span class="SimpleMath">mathfrakg^c</span> with respect to <span class="SimpleMath">mathfraku</span>.</p>
+
+<p>Now let <span class="SimpleMath">θ</span> be an automorphism of <span class="SimpleMath">mathfrakg^c</span> of order 2, commuting with <span class="SimpleMath">τ</span>. Then <span class="SimpleMath">θ</span> stabilises <span class="SimpleMath">mathfraku</span>, so the latter is the direct sum of the <span class="SimpleMath">± 1</span>-eigenspaces of <span class="SimpleMath">θ</span>, say <span class="SimpleMath">mathfraku = mathfraku_1 ⊕ mathfraku_-1</span>. Set <span class="SimpleMath">mathfrakk = mathfraku_1</span> and <span class="SimpleMath">mathfrakp = imathfraku_-1</span>. Then <span class="SimpleMath">mathfrakg =mathfrakg(θ)= mathfrakk ⊕ mathfrakp</span> is a real form of <span class="SimpleMath">mathfrakg^c</span>. Regarding this construction we remark the following:</p>
+
+
+<ul>
+<li><p><span class="SimpleMath">mathfrakg = mathfrakk⊕ mathfrakp</span> is called a <em>Cartan decomposition</em>. It is unique up to inner automorphisms of <span class="SimpleMath">mathfrakg</span>.</p>
+
+</li>
+<li><p>The map <span class="SimpleMath">θ</span> is a <em>Cartan involution</em>; it is the identity on <span class="SimpleMath">mathfrakk</span> and acts as multiplication by <span class="SimpleMath">-1</span> on <span class="SimpleMath">mathfrakp</span>)</p>
+
+</li>
+<li><p><span class="SimpleMath">mathfrakk</span> is compact, and it is a maximal compact subalgebra of <span class="SimpleMath">mathfrakg</span>.</p>
+
+</li>
+<li><p>Two real forms are isomorphic if and only if the corresponding Cartan involutions are conjugate in the automorphism group of <span class="SimpleMath">mathfrakg^c</span>.</p>
+
+</li>
+<li><p>The automorphism <span class="SimpleMath">θ</span> is described by two pieces of data: a list of signs <span class="SimpleMath">(s_1,...,s_r)</span> of length equal to the rank <span class="SimpleMath">r</span> of <span class="SimpleMath">mathfrakg</span>, and a permutation <span class="SimpleMath">π</span> of <span class="SimpleMath">1,..., r</span>, leaving the list of signs invariant. Let <span class="SimpleMath">α_1,..., α_r</span> denote the simple roots of <span class="SimpleMath">mathfrakg^c</span> with corresponding canonical generators <span class="SimpleMath">x_i, y_i, h_i</span>. Then <span class="SimpleMath">θ(x_i) = s_i x_π(i)</span>, <span class="SimpleMath">θ(y_i) = s_i y_π(i)</span>, <span class="SimpleMath">θ(h_i) = h_π(i)</span>.</p>
+
+</li>
+</ul>
+<p><a id="X80030DB07E5F4FBF" name="X80030DB07E5F4FBF"></a></p>
+
+<h4>1.2 <span class="Heading">Cartan subalgebras and more</span></h4>
+
+<p>Let <span class="SimpleMath">mathfrakg</span> be a real form of the complex Lie algebra <span class="SimpleMath">mathfrakg^c</span>, with Cartan decomposition <span class="SimpleMath">mathfrakg = mathfrakk⊕ mathfrakp</span>. A Cartan subalgebra <span class="SimpleMath">mathfrakh</span> of <span class="SimpleMath">mathfrakg</span> is <em>standard</em> (with respect to this Cartan decomposition) if <span class="SimpleMath">mathfrakh = (mathfrakh∩ mathfrakk)⊕ (mathfrakh∩mathfrakp)</span>, or, equivalently, when <span class="SimpleMath">mathfrakh</span> is stable under the Cartan involution <span class="SimpleMath">θ</span>.</p>
+
+<p>It is a fact that every Cartan subalgebra of <span class="SimpleMath">mathfrakg</span> is conjugate by an inner automorphism to a standard one (<a href="chapBib.html#biBknapp">[Kna02]</a>, Proposition 6.59). Moreover, there is a finite number of non-conjugate (by inner automorphisms) Cartan subalgebras of <span class="SimpleMath">mathfrakg</span> (<a href="chapBib.html#biBknapp">[Kna02]</a>, Proposition 6.64). A standard Cartan subalgebra <span class="SimpleMath">mathfrakh</span> is said to be <em>maximally compact</em> if the dimension of <span class="SimpleMath">mathfrakh∩ mathfrakk</span> is maximal (among all standard Cartan subalgebras). It is called <em>maximally non-compact</em> if the dimension of <span class="SimpleMath">mathfrakh∩ mathfrakp</span> is maximal. We have that all maximally compact Cartan subalgebras are conjugate via the inner automorphism group. The same holds for all maximally non-compact Cartan subalgebras (<a href="chapBib.html#biBknapp">[Kna02]</a>, Proposition 6.61).</p>
+
+<p>A subspace of <span class="SimpleMath">mathfrakp</span> is said to be a <em>Cartan subspace</em> if it consists of commuting elements. If <span class="SimpleMath">mathfrakh</span> is a maximally non-compact standard Cartan subalgebra, then <span class="SimpleMath">mathfrakc = mathfrakh∩ mathfrakp</span> is a Cartan subspace. The other Cartan subalgebras (i.e., representatives of the conjugacy classes of the Cartan subalgebras under the inner automorphism group) can be constructed such that their intersection with <span class="SimpleMath">mathfrakp</span> is contained in <span class="SimpleMath">mathfrakc</span>.</p>
+
+<p>Every standard Cartan subalgebra <span class="SimpleMath">mathfrakh</span> of <span class="SimpleMath">mathfrakg</span> yields a corresponding root system <span class="SimpleMath">Φ</span> of <span class="SimpleMath">mathfrakg^c</span>. Let <span class="SimpleMath">α∈Φ</span>, then a short argument shows that <span class="SimpleMath">α∘θ</span> (where <span class="SimpleMath">α∘θ (h) = α(θ(h))</span> for <span class="SimpleMath">h∈ mathfrakh</span>) is also a root (i.e., lies in <span class="SimpleMath">Φ</span>). This way we get an automorphism of order 2 of the root system <span class="SimpleMath">Φ</span>.</p>
+
+<p>Now let <span class="SimpleMath">mathfrakh</span> be a maximally compact standard Cartan subalgebra of <span class="SimpleMath">mathfrakg</span>, with root system <span class="SimpleMath">Φ</span>. Then it can be shown that there is a basis of simple roots <span class="SimpleMath">∆⊂Φ</span> which is <span class="SimpleMath">θ</span>-stable. Write <span class="SimpleMath">∆ = {α_1,...,α_r}</span>, and let <span class="SimpleMath">x_i,y_i,h_i</span> be a corresponding set of canonical generators. Then there is a sequence of signs <span class="SimpleMath">(s_1,...,s_r)</span> and a permutation <span class="SimpleMath">π</span> of <span class="SimpleMath">1,...,r</span> such that <span class="SimpleMath">θ(x_i) = s_i x_π(i)</span>. Now we encode this information in the Dynkin diagram of <span class="SimpleMath">Φ</span>. If <span class="SimpleMath">s_i=-1</span> then we paint the node corresponding to <span class="SimpleMath">α_i</span> black. Also, if <span class="SimpleMath">π(i)=j ≠ i</span> then the nodes corresponding to <span class="SimpleMath">α_i</span>, <span class="SimpleMath">α_j</span> are connected by an arrow. The resulting diagram is called a <em>Vogan diagram</em> of <span class="SimpleMath">mathfrakg</span>. It determines the real form <span class="SimpleMath">mathfrakg</span> up to isomorphism. The signs <span class="SimpleMath">s_i</span> are not uniquely determined. However, it is possible to make a ``canonical'' choice for the signs so that the Vogan diagram is uniquely determined.</p>
+
+<p>Now let <span class="SimpleMath">mathfrakh</span> be a maximally non-compact standard Cartan subalgebra of <span class="SimpleMath">mathfrakg</span>, with root system <span class="SimpleMath">Φ</span>. Then, in general, there is no basis of simple roots which is stable under <span class="SimpleMath">θ</span>. However we can still define a diagram, in the following way. Let <span class="SimpleMath">mathfrakc = mathfrakh∩ mathfrakp</span> be the Cartan subspace contained in <span class="SimpleMath">mathfrakh</span>. Let <span class="SimpleMath">Φ_c = { α∈ Φ ∣ α∘θ = α} = { α∈ Φ ∣ α(mathfrakc) = 0}</span> be the set of <em>compact roots </em>. Then there is a choice of positive roots <span class="SimpleMath">Φ^+</span> such that <span class="SimpleMath">α∘θ ∈ Φ^-</span> for all <em>non-compact</em> positive roots <span class="SimpleMath">α∈ Φ^+</span>. Let <span class="SimpleMath">∆</span> denote the basis of simple roots corresponding to <span class="SimpleMath">Φ^+</span>. A theorem due to Satake says that there is a bijection <span class="SimpleMath">τ : ∆-&gt; ∆</span> such that <span class="SimpleMath">τ(α) = α</span> if <span class="SimpleMath">α∈ Φ_c</span>, and for non-compact <span class="SimpleMath">α∈∆</span> we have <span class="SimpleMath">α∘θ = -τ(α) - ∑_γ∈∆_c c_α,γ γ</span>, where <span class="SimpleMath">∆_c = ∆ ∩ Φ_c</span> and the <span class="SimpleMath">c_α,γ</span> are non-negative integers. Now we take the Dynkin diagram corresponding to <span class="SimpleMath">∆</span>, where the nodes corresponding to the compact roots are painted black, and the nodes corresponding to a pair <span class="SimpleMath">α,τ(α)</span>, if they are unequal, are joined by arrows. The resulting diagram is called the <em>Satake diagram</em> of <span class="SimpleMath">mathfrakg</span>. It determines the real form <span class="SimpleMath">mathfrakg</span> up to isomorphism.</p>
+
+<p><a id="X8295733081A2BFF8" name="X8295733081A2BFF8"></a></p>
+
+<h4>1.3 <span class="Heading">Nilpotent orbits</span></h4>
+
+<p>By <span class="SimpleMath">G^c</span>, <span class="SimpleMath">G</span> we denote the adjoint groups of <span class="SimpleMath">mathfrakg^c</span> and <span class="SimpleMath">mathfrakg</span> respectively. The nilpotent <span class="SimpleMath">G^c</span>-orbits in <span class="SimpleMath">mathfrakg^c</span> have been classified by so-called weighted Dynkin diagrams. A nilpotent <span class="SimpleMath">G^c</span>-orbit in <span class="SimpleMath">mathfrakg^c</span> may have no intersection with the real form <span class="SimpleMath">mathfrakg</span>. On the other hand, when it does have an intersection, then this may split into several <span class="SimpleMath">G</span>-orbits.</p>
+
+<p>Let <span class="SimpleMath">e</span> be an element of a nilpotent <span class="SimpleMath">G</span>-orbit in <span class="SimpleMath">mathfrakg</span>. By the Jacobson-Morozov theorem, <span class="SimpleMath">e</span> lies in an <span class="SimpleMath">mathfraksl_2</span>-triple <span class="SimpleMath">(e,h,f)</span>; here this means that <span class="SimpleMath">[h,e]=2e</span>, <span class="SimpleMath">[h,f]=-2f</span>, and <span class="SimpleMath">[e,f]=h</span>. The triple is called a <em>real Cayley triple</em> if <span class="SimpleMath">θ(e) = -f</span>, <span class="SimpleMath">θ(f)=-e</span> and <span class="SimpleMath">θ(h) = -h</span>, where <span class="SimpleMath">θ</span> is the Cartan involution of <span class="SimpleMath">mathfrakg</span>. Every nilpotent orbit has a representative lying in a real Cayley triple.</p>
+
+<p><a id="X7C0A369A841F5BC9" name="X7C0A369A841F5BC9"></a></p>
+
+<h4>1.4 <span class="Heading">On base fields</span></h4>
+
+<p>To define a Lie algebra by a multiplication table over the reals, it usually suffices to take a subfield of the real field as base field. However, the algorithms contained in this package very often need a Chevalley basis of the Lie algebra at hand, which is defined only over the complex field. Computations with such a Chevalley basis take place behind the scenes, and the result is again defined over the reals. However, the computations would not be possible if the Lie algebra is just defined over (a subfield of) the reals. For this reason, we require that the base field contains the imaginary unit <var class="Arg">E(4)</var>.</p>
+
+<p>Furthermore, in many algorithms it is necessary to take square roots of elements of the base field. So the ideal base field would contain the imaginary unit, as well as being closed under taking square roots. However, such a field is difficult to construct and to work with on a computer. For this reason we have provided the field <var class="Arg">SqrtField</var> containing the square roots of all rational numbers. Mathematically, this is the field <span class="SimpleMath">Q^sqrt}(imath)</span> with <span class="SimpleMath">Q^sqrt}=Q({sqrtp∣ p a prime})</span> and <span class="SimpleMath">imath=sqrt-1∈C</span>. Clearly, <span class="SimpleMath">Q^sqrt}(imath)</span> is an infinite extension of the rationals <span class="SimpleMath">Q</span>, and every <span class="SimpleMath">f</span> in <span class="SimpleMath">Q^sqrt}(imath)</span> can be uniquely written as <span class="SimpleMath">f=∑_j=1^m r_i sqrtk_j</span> for Gaussian rationals <span class="SimpleMath">r_i∈Q(imath)</span> and pairwise distinct squarefree positive integers <span class="SimpleMath">k_1,...,k_m</span>. Thus, <span class="SimpleMath">f</span> can be described efficiently by its coefficient vector <span class="SimpleMath">[[r_1,k_1],...,[r_j,k_j]]</span>. We comment on our implementation of <span class="SimpleMath">Q^sqrt}(imath)</span> in Chapter <a href="chap2.html#X83DD4ACD87694138"><span class="RefLink">2</span></a>.</p>
+
+<p>Although it is possible to try most functions of the package using the base field <var class="Arg">CF(4)</var>, for example, it is likely that many computations will result in an error, because of the lack of square roots in that field. Many more computations are possible over <var class="Arg">SqrtField</var>, but also in that case, of course, a computation may result in an error because we cannot construct a particular square root. Also, computations over <var class="Arg">SqrtField</var> tend to be significantly slower than over, say, <var class="Arg">CF(4)</var>; see the next example. But that is a price we have to pay (at least, in order to be able to do some computations).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:=RealFormById("E",8,2);</span>
+&lt;Lie algebra of dimension 248 over SqrtField&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">allCSA := CartanSubalgebrasOfRealForm(L);;time;</span>
+67224
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:=RealFormById("E",8,2,CF(4));</span>
+&lt;Lie algebra of dimension 248 over GaussianRationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">allCSA := CartanSubalgebrasOfRealForm(L);;time;</span>
+7301
+# We remark that both computations are exactly the same; 
+# the difference in timing is caused by the fact that 
+# arithmetic over SqrtField is slower.
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

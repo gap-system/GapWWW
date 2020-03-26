@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (GAPDoc) - Appendix C: The File bibxmlext.dtd</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapC"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapB.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapC_mj.html">[MathJax on]</a></p>
+<p><a id="X7E2788757A1AA098" name="X7E2788757A1AA098"></a></p>
+<div class="ChapSects"><a href="chapC.html#X7E2788757A1AA098">C <span class="Heading">The File <code class="file">bibxmlext.dtd</code></span></a>
+</div>
+
+<h3>C <span class="Heading">The File <code class="file">bibxmlext.dtd</code></span></h3>
+
+<p>For easier reference we repeat here the complete content of the file <code class="file">bibxmlext.dtd</code> which is explained in <a href="chap7.html#X7FB8F6BD80D859D1"><span class="RefLink">7.2</span></a>.</p>
+
+
+<div class="example"><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!--
+  - (C) Frank Lübeck (http://www.math.rwth-aachen.de/~Frank.Luebeck)
+  -
+  - The BibXMLext data format.
+  - 
+  - This DTD expresses XML markup similar to the BibTeX language
+  - specified for LaTeX, or actually its content model.
+  -
+  - It is a variation of a file bibxml.dtd developed by the project
+  -   http://bibtexml.sf.net/
+  - 
+  - For documentation on BibTeX, see
+  -   http://www.ctan.org/tex-archive/biblio/bibtex/distribs/doc/
+  -
+  - A previous version of the code originally developed by
+  - Vidar Bronken Gundersen, http://bibtexml.sf.net/
+  - Reuse and repurposing is approved as long as this
+  - notification appears with the code.
+  -
+--&gt;
+
+&lt;!-- ..................................................................... --&gt;
+&lt;!-- Main structure --&gt;
+
+&lt;!-- key-value pairs as in BibTeX @string entries are put in empty elements
+     (but here they can be used for parts of an entry field as well)       --&gt;
+&lt;!ELEMENT string EMPTY&gt;
+&lt;!ATTLIST string
+   key        CDATA     #REQUIRED 
+   value      CDATA     #REQUIRED &gt;
+   
+&lt;!-- entry may contain one of the bibliographic types. --&gt;
+&lt;!ELEMENT entry ( article | book | booklet |
+                         manual | techreport |
+                         mastersthesis | phdthesis |
+                         inbook | incollection |
+                         proceedings | inproceedings |
+                         conference |
+                         unpublished | misc ) &gt;
+&lt;!ATTLIST entry
+   id         CDATA     #REQUIRED &gt;
+
+&lt;!-- file is the documents top element. --&gt;
+&lt;!ELEMENT file  ( string | entry )* &gt;
+
+
+&lt;!-- ..................................................................... --&gt;
+&lt;!-- Parameter entities --&gt;
+
+&lt;!-- these are additional elements often used, but not included in the
+     standard BibTeX distribution, these must be added to the
+     bibliography styles, otherwise these fields will be omitted by
+     the formatter, we allow an arbitrary number of 'other' elements
+     to specify any further information   --&gt;
+
+&lt;!ENTITY   %  n.user " abstract?, affiliation?,
+                        contents?, copyright?,
+                        (isbn | issn)?, 
+                        keywords?, language?, lccn?, 
+                        location?, mrnumber?, mrclass?, mrreviewer?,
+                        price?, size?, url?, category?, other* "&gt;
+
+&lt;!ENTITY   %  n.common "key?, annotate?, crossref?,
+                        %n.user;"&gt;
+
+&lt;!-- content model used more than once --&gt;
+
+&lt;!ENTITY   %  n.InProceedings "author, title, booktitle,
+                    year, editor?, 
+                    (volume | number)?,
+                    series?, pages?, address?, 
+                    month?, organization?, publisher?,
+                    note?, %n.common;"&gt;
+
+&lt;!ENTITY   %  n.PHDThesis "author, title, school,
+                    year, type?, address?, month?,
+                    note?, %n.common;"&gt;
+
+&lt;!-- ..................................................................... --&gt;
+&lt;!-- Entries in the BibTeX database --&gt;
+
+&lt;!-- [article] An article from a journal or magazine.
+  -  Required fields: author, title, journal, year.
+  -  Optional fields: volume, number, pages, month, note. --&gt;
+&lt;!ELEMENT   article    (author, title, journal,
+               year, volume?, number?, pages?,
+               month?, note?, %n.common;)
+&gt;
+
+&lt;!-- [book] A book with an explicit publisher.  
+  -  Required fields: author or editor, title, publisher, year.
+  -  Optional fields: volume or number, series, address,
+  -     edition, month, note. --&gt;
+&lt;!ELEMENT   book    ((author | editor), title,
+               publisher, year, (volume | number)?,
+               series?, address?, edition?, month?,
+               note?, %n.common;)
+&gt;
+	   
+&lt;!-- [booklet] A work that is printed and bound, but without a named
+  -  publisher or sponsoring institution  
+  -  Required field: title.
+  -  Optional fields: author, howpublished, address, month, year, note. --&gt;
+&lt;!ELEMENT   booklet    (author?, title,
+               howpublished?, address?, month?, 
+               year?, note?, %n.common;)
+&gt;
+
+&lt;!-- [conference] The same as INPROCEEDINGS,
+  -  included for Scribe compatibility. --&gt;
+&lt;!ELEMENT   conference      (%n.InProceedings;)
+&gt;
+
+&lt;!-- [inbook] A part of a book, which may be a chapter (or section or
+  -  whatever) and/or a range of pages.  
+  -  Required fields: author or editor, title, chapter and/or pages,
+  -     publisher, year.
+  -  Optional fields: volume or number, series, type, address,
+  -     edition, month, note. --&gt;
+&lt;!ELEMENT   inbook    ((author | editor), title,
+               ((chapter, pages?) | pages),
+               publisher, year, (volume |
+               number)?, series?, type?,
+               address?, edition?, month?, 
+               note?, %n.common;)
+&gt;
+
+&lt;!--
+  - &gt; I want to express that the elements a and/or b are legal that is one
+  - &gt; of them or both must be present in the document instance (see the
+  - &gt; element content for BibTeX entry `InBook').
+  - &gt; How do I specify this in my DTD?
+  - 
+  - Dave Peterson:
+  -  in content model:   ((a , b?) | b)          if order matters
+  -                      ((a , b?) | (b , a?))   otherwise
+--&gt;
+
+&lt;!-- [incollection] A part of a book having its own title.
+  -  Required fields: author, title, booktitle, publisher, year.
+  -  Optional fields: editor, volume or number, series, type,
+  -     chapter, pages, address, edition, month, note. --&gt;
+&lt;!ELEMENT   incollection    (author, title,
+               booktitle, publisher, year,
+               editor?, (volume | number)?,
+               series?, type?, chapter?, 
+               pages?, address?, edition?, 
+               month?, note?,
+               %n.common;)
+&gt;
+
+&lt;!-- [inproceedings] An article in a conference proceedings.
+  -  Required fields: author, title, booktitle, year.
+  -  Optional fields: editor, volume or number, series, pages,
+  -     address, month, organization, publisher, note. --&gt;
+&lt;!ELEMENT   inproceedings      (%n.InProceedings;)
+&gt;
+
+&lt;!-- [manual] Technical documentation  
+  -  Required field: title.
+  -  Optional fields: author, organization, address,
+  -     edition, month, year, note. --&gt;
+&lt;!ELEMENT   manual    (author?, title,
+               organization?, address?, edition?,
+               month?, year?, note?, %n.common;)
+&gt;
+
+&lt;!-- [mastersthesis] A Master's thesis.  
+  -  Required fields: author, title, school, year.
+  -  Optional fields: type, address, month, note. --&gt;
+&lt;!ELEMENT   mastersthesis      (%n.PHDThesis;)
+&gt;
+
+&lt;!-- [misc] Use this type when nothing else fits.  
+  -  Required fields: none.
+  -  Optional fields: author, title, howpublished, month, year, note. --&gt;
+&lt;!ELEMENT   misc    (author?, title?,
+               howpublished?, month?, year?, note?,
+               %n.common;)
+&gt;
+
+&lt;!-- [phdthesis] A PhD thesis.  
+  -  Required fields: author, title, school, year.
+  -  Optional fields: type, address, month, note. --&gt;
+&lt;!ELEMENT   phdthesis      (%n.PHDThesis;)
+&gt;
+
+&lt;!-- [proceedings] The proceedings of a conference.  
+  -  Required fields: title, year.
+  -  Optional fields: editor, volume or number, series,
+  -     address, month, organization, publisher, note. --&gt;
+&lt;!ELEMENT   proceedings    (editor?, title, year,
+               (volume | number)?, series?, 
+               address?, month?, organization?, 
+               publisher?, note?, %n.common;)
+&gt;
+
+&lt;!-- [techreport] A report published by a school or other institution,
+  -  usually numbered within a series.  
+  -  Required fields: author, title, institution, year.
+  -  Optional fields: type, number, address, month, note. --&gt;
+&lt;!ELEMENT   techreport    (author, title,
+               institution, year, type?, number?,
+               address?, month?, note?, %n.common;)
+&gt;
+
+&lt;!-- [unpublished] A document having an author and title, but not
+  -  formally published.  
+  -  Required fields: author, title, note.
+  -  Optional fields: month, year. --&gt;
+&lt;!ELEMENT   unpublished    (author, title, note,
+               month?, year?, %n.common;)
+&gt;
+
+&lt;!-- ..................................................................... --&gt;
+&lt;!-- Fields from the standard bibliography styles --&gt;
+
+&lt;!--
+  - Below is a description of all fields recognized by the standard
+  - bibliography styles.  An entry can also contain other fields, which
+  - are ignored by those styles.
+  - 
+  - [address] Usually the address of the publisher or other type of
+  - institution  For major publishing houses, van~Leunen recommends
+  - omitting the information entirely.  For small publishers, on the other
+  - hand, you can help the reader by giving the complete address.
+  - 
+  - [annote] An annotation  It is not used by the standard bibliography
+  - styles, but may be used by others that produce an annotated
+  - bibliography.
+  - 
+  - [author] The name(s) of the author(s), here *not* in the format 
+  - described in the LaTeX book. Contains elements &lt;name&gt; which in turn
+  - contains elements &lt;first&gt;, &lt;last&gt; for the first name (or first names,
+  - fully written or as initials, and including middle initials) and
+  - the last name.
+  - 
+  - [booktitle] Title of a book, part of which is being cited.  See the
+  - LaTeX book for how to type titles.  For book entries, use the title
+  - field instead.
+  - 
+  - [chapter] A chapter (or section or whatever) number.
+  - 
+  - [crossref] The database key of the entry being cross referenced.
+  - 
+  - [edition] The edition of a book-for example, ``Second''.  This
+  - should be an ordinal, and should have the first letter capitalized, as
+  - shown here; the standard styles convert to lower case when necessary.
+  - 
+  - [editor] Name(s) of editor(s), typed as indicated in the LaTeX book.
+  - If there is also an author field, then the editor field gives the
+  - editor of the book or collection in which the reference appears.
+  - 
+  - [howpublished] How something strange has been published.  The first
+  - word should be capitalized.
+  - 
+  - [institution] The sponsoring institution of a technical report.
+  - 
+  - [journal] A journal name.  Abbreviations are provided for many
+  - journals; see the Local Guide.
+  - 
+  - [key] Used for alphabetizing, cross referencing, and creating a label
+  - when the ``author'' information (described in Section [ref: ] is
+  - missing. This field should not be confused with the key that appears
+  - in the \cite command and at the beginning of the database entry.
+  - 
+  - [month] The month in which the work was published or, for an
+  - unpublished work, in which it was written. You should use the
+  - standard three-letter abbreviation, as described in Appendix B.1.3 of
+  - the LaTeX book.
+  - 
+  - [note] Any additional information that can help the reader.  The first
+  - word should be capitalized.
+  - 
+  - [number] The number of a journal, magazine, technical report, or of a
+  - work in a series.  An issue of a journal or magazine is usually
+  - identified by its volume and number; the organization that issues a
+  - technical report usually gives it a number; and sometimes books are
+  - given numbers in a named series.
+  - 
+  - [organization] The organization that sponsors a conference or that
+  - publishes a manual.
+  - 
+  - [pages] One or more page numbers or range of numbers, such as 42-111
+  - or 7,41,73-97 or 43+ (the `+' in this last example indicates pages
+  - following that don't form a simple range).  To make it easier to
+  - maintain Scribe-compatible databases, the standard styles convert a
+  - single dash (as in 7-33) to the double dash used in TeX to denote
+  - number ranges (as in 7-33). Here, we suggest to use the entity
+  - &amp;ndash; for a dash in page ranges.
+  - 
+  - [publisher] The publisher's name.
+  - 
+  - [school] The name of the school where a thesis was written.
+  - 
+  - [series] The name of a series or set of books.  When citing an entire
+  - book, the the title field gives its title and an optional series field
+  - gives the name of a series or multi-volume set in which the book is
+  - published.
+  - 
+  - [title] The work's title. For mathematical formulae use the &lt;M&gt; or
+  - &lt;Math&gt; elements explained below (and LaTeX code in the content, without
+  - surrounding '$').
+  - 
+  - [type] The type of a technical report-for example, ``Research
+  - Note''.
+  - 
+  - [volume] The volume of a journal or multivolume book.
+  - 
+  - [year] The year of publication or, for an unpublished work, the year
+  - it was written.  Generally it should consist of four numerals, such as
+  - 1984, although the standard styles can handle any year whose last four
+  - nonpunctuation characters are numerals, such as `(about 1984)'.
+--&gt;
+
+&lt;!-- Here is the main extension compared to the original BibXML definition
+     from which is DTD is derived: We want to allow more markup in some 
+     elements such that we can use the bibliography for high quality 
+     output in other formats than LaTeX. 
+     
+     - &lt;M&gt; and &lt;Math&gt;, mathematical formulae: Specify LaTeX code for "simple" 
+       formulae as content of &lt;M&gt; elements; "simple" means that they can be
+       translated to a fairly readable ASCII representation as explained in
+       the GAPDoc documentation on "&lt;M&gt;". 
+       More complicated formulae are given as content of &lt;Math&gt; elements.
+       (Think about an &lt;Alt&gt; alternative for text or HTML representations.)
+     
+     - &lt;URL&gt;: use these elements to specify URLs, they can be properly
+       converted to links if possible in an output format (in that case 
+       the Text attribute is used for the visible text).
+
+     - &lt;value key="..."/&gt;:  substituted by the value-attribute specified
+       in a &lt;string key="..." value="..."/&gt; element. Can be used anywhere,
+       not only for complete fields as in BibTeX.
+
+     - &lt;C&gt; protect case changes: should be used instead of {}'s which are
+       used in BibTeX title fields to protect the case of letters from
+       changes. 
+
+     - &lt;Alt Only="..."&gt;, &lt;Alt Not="..."&gt;, alternatives for different 
+       output formats:  Use this to specify alternatives, the GAPDoc
+       utilities will do some special handling for "Text", "HTML",
+       and "BibTeX" as output type.
+
+     - &lt;Wrap Name="..."&gt;, generic wrapper for other markup:
+       Use this for any other type of markup you are interested in. The
+       GAPDoc utilities will ignore the markup, but provide a hook
+       to do install handler functions for them.
+--&gt;
+&lt;!ELEMENT   M               (#PCDATA | Alt)* &gt; &lt;!-- math with simple text
+                                             representation, in LaTeX --&gt;
+&lt;!ELEMENT   Math            (#PCDATA | Alt)* &gt; &lt;!-- other math in LaTeX --&gt;
+&lt;!ELEMENT   URL             (#PCDATA | Alt | Link | LinkText)* &gt; &lt;!-- an URL --&gt;
+&lt;!ATTLIST   URL Text CDATA #IMPLIED&gt;    &lt;!-- text to be printed 
+                                             (default is content) --&gt;
+&lt;!ELEMENT   value             EMPTY   &gt; &lt;!-- placeholder for value given .. --&gt;
+&lt;!ATTLIST   value key CDATA #REQUIRED &gt; &lt;!-- .. by key, defined in a string
+                                             element --&gt;
+&lt;!ELEMENT   C    (#PCDATA | value | Alt |
+                  M | Math | Wrap | URL)* &gt;  &lt;!-- protect from case changes --&gt;
+&lt;!ELEMENT   Alt  (#PCDATA | value | C | Alt |    
+                  M | Math | Wrap | URL)* &gt; &lt;!-- specify alternatives for 
+                                             various types of output --&gt;
+&lt;!ATTLIST   Alt  Only CDATA #IMPLIED
+                 Not  CDATA #IMPLIED  &gt; &lt;!-- specify output types in comma and 
+                  whitespace separated list (use exactly one of Only or Not) --&gt;
+
+&lt;!ENTITY % withMURL "(#PCDATA | value | M | Math | Wrap | URL | C | Alt )*" &gt;
+
+&lt;!ELEMENT   Wrap           %withMURL; &gt; &lt;!-- a generic wrapper  --&gt;
+&lt;!ATTLIST   Wrap Name CDATA #REQUIRED &gt; &lt;!-- needs a 'Name' attribute  --&gt;
+
+&lt;!ELEMENT   address         %withMURL; &gt;
+&lt;!-- here we don't want the complicated definition from the LaTeX book,
+     use markup for first/last name(s): a &lt;name&gt; element for each
+     author which contains &lt;first&gt; (optional), &lt;last&gt; elements:  --&gt;
+&lt;!ELEMENT   author          (name)* &gt;
+&lt;!ELEMENT   name            (first?, last) &gt;
+&lt;!ELEMENT   first           (#PCDATA) &gt;
+&lt;!ELEMENT   last            (#PCDATA) &gt;
+
+&lt;!ELEMENT   booktitle       %withMURL; &gt;
+&lt;!ELEMENT   chapter         %withMURL; &gt;
+&lt;!ELEMENT   edition         %withMURL; &gt;
+&lt;!-- same as for author field --&gt;
+&lt;!ELEMENT   editor          (name)* &gt;
+&lt;!ELEMENT   howpublished    %withMURL; &gt;
+&lt;!ELEMENT   institution     %withMURL; &gt;
+&lt;!ELEMENT   journal         %withMURL; &gt;
+&lt;!ELEMENT   month           %withMURL; &gt;
+&lt;!ELEMENT   note            %withMURL; &gt;
+&lt;!ELEMENT   number          %withMURL; &gt;
+&lt;!ELEMENT   organization    %withMURL; &gt;
+&lt;!ELEMENT   pages           %withMURL; &gt;
+&lt;!ELEMENT   publisher       %withMURL; &gt;
+&lt;!ELEMENT   school          %withMURL; &gt;
+&lt;!ELEMENT   series          %withMURL; &gt;
+&lt;!ELEMENT   title           %withMURL; &gt;
+&lt;!ELEMENT   type            %withMURL; &gt;
+&lt;!ELEMENT   volume          %withMURL; &gt;
+&lt;!ELEMENT   year            (#PCDATA) &gt;
+
+&lt;!-- These were not listed in the documentation for entry content, but
+  -  appeared in the list of fields in the BibTeX documentation --&gt;
+
+&lt;!ELEMENT   annotate        %withMURL; &gt;
+&lt;!ELEMENT   crossref        %withMURL; &gt;
+&lt;!ELEMENT   key             (#PCDATA) &gt;
+
+
+&lt;!-- ..................................................................... --&gt;
+&lt;!-- Other popular fields
+  - 
+  - From: http://www.ecst.csuchico.edu/~jacobsd/bib/formats/bibtex.html
+  - BibTeX is extremely popular, and many people have used it to store
+  - information. Here is a list of some of the more common fields:
+  - 
+  - [affiliation]  The authors affiliation. 
+  - [abstract]  An abstract of the work. 
+  - [contents]  A Table of Contents 
+  - [copyright]  Copyright information. 
+  - [ISBN]  The International Standard Book Number. 
+  - [ISSN]  The International Standard Serial Number. 
+  -         Used to identify a journal. 
+  - [keywords]  Key words used for searching or possibly for annotation. 
+  - [language]  The language the document is in. 
+  - [location]  A location associated with the entry,
+  -             such as the city in which a conference took place.
+  - [LCCN]  The Library of Congress Call Number.
+  -         I've also seen this as lib-congress. 
+  - [mrnumber]  The Mathematical Reviews number. 
+  - [mrclass]  The Mathematical Reviews class. 
+  - [mrreviewer]  The Mathematical Reviews reviewer. 
+  - [price]  The price of the document. 
+  - [size]  The physical dimensions of a work. 
+  - [URL] The WWW Universal Resource Locator that points to the item being
+  -       referenced. This often is used for technical reports to point to the
+  -       ftp site where the postscript source of the report is located.
+  - 
+  - When using BibTeX with LaTeX you need
+  - BibTeX style files to print these data.
+--&gt;
+
+&lt;!ELEMENT   abstract        %withMURL; &gt;
+&lt;!ELEMENT   affiliation     %withMURL; &gt;
+&lt;!ELEMENT   contents        %withMURL; &gt;
+&lt;!ELEMENT   copyright       %withMURL; &gt;
+&lt;!ELEMENT   isbn            (#PCDATA) &gt;
+&lt;!ELEMENT   issn            (#PCDATA) &gt;
+&lt;!ELEMENT   keywords        %withMURL; &gt;
+&lt;!ELEMENT   language        %withMURL; &gt;
+&lt;!ELEMENT   lccn            (#PCDATA) &gt;
+&lt;!ELEMENT   location        %withMURL; &gt;
+&lt;!ELEMENT   mrnumber        %withMURL; &gt;
+&lt;!ELEMENT   mrclass         %withMURL; &gt;
+&lt;!ELEMENT   mrreviewer      %withMURL; &gt;
+&lt;!ELEMENT   price           %withMURL; &gt;
+&lt;!ELEMENT   size            %withMURL; &gt;
+&lt;!ELEMENT   url             %withMURL; &gt;
+
+
+&lt;!-- Added by Zeger W. Hendrikse
+  - [category]  Category of this bibitem
+--&gt;
+&lt;!ELEMENT   category      %withMURL; &gt;
+
+&lt;!-- A container element [other] for any further information, a description 
+   - of the type of data must be given in the attribute 'type' 
+--&gt;
+&lt;!ELEMENT   other      %withMURL; &gt;
+&lt;!ATTLIST   other
+    type      CDATA   #REQUIRED &gt;
+
+
+&lt;!-- ..................................................................... --&gt;
+&lt;!-- Predefined/reserved character entities --&gt;
+
+&lt;!ENTITY amp    "&amp;#38;#38;"&gt;
+&lt;!ENTITY lt     "&amp;#38;#60;"&gt;
+&lt;!ENTITY gt     "&amp;#62;"&gt;
+&lt;!ENTITY apos   "&amp;#39;"&gt;
+&lt;!ENTITY quot   "&amp;#34;"&gt;
+
+
+&lt;!-- Some more generally useful entities --&gt;
+&lt;!ENTITY nbsp "&amp;#160;"&gt;
+&lt;!ENTITY copyright "&amp;#169;"&gt;
+&lt;!ENTITY ndash "&amp;#x2013;"&gt;
+ 
+
+&lt;!-- ..................................................................... --&gt;
+&lt;!-- End of BibXMLext dtd --&gt;
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapB.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

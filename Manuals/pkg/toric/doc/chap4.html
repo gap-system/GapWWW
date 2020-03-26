@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (toric) - Chapter 4: Toric varieties X(∆) </title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X807434BE8602C8A5" name="X807434BE8602C8A5"></a></p>
+<div class="ChapSects"><a href="chap4.html#X807434BE8602C8A5">4 <span class="Heading">Toric varieties <span class="SimpleMath">X(∆)</span> </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7E9ACBE683770EAE">4.1 <span class="Heading">Riemann-Roch spaces</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X802CEF058114DF72">4.1-1 DivisorPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82A512AB7E8F897A">4.1-2 DivisorPolytopeLatticePoints</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F7ECE28858FE070">4.1-3 RiemannRochBasis</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7EE437E17C7331B7">4.2 <span class="Heading">Topological invariants</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8307F8DB85F145AE">4.2-1 EulerCharacteristic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87FB8EBC7FBD8B95">4.2-2 BettiNumberToric</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X80D0D8F07CF1BE07">4.3 <span class="Heading">Points over a finite field</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8289500778E8DE0E">4.3-1 CardinalityOfToricVariety</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Toric varieties <span class="SimpleMath">X(∆)</span> </span></h3>
+
+<p>This chapter concerns <strong class="pkg">toric</strong> commands which deal with certain objects associated to the (non-affine) toric varieties <span class="SimpleMath">X(∆)</span>.</p>
+
+<p><a id="X7E9ACBE683770EAE" name="X7E9ACBE683770EAE"></a></p>
+
+<h4>4.1 <span class="Heading">Riemann-Roch spaces</span></h4>
+
+<p>Let <span class="SimpleMath">∆</span> denote a complete nonsingular fan.</p>
+
+<p><a id="X802CEF058114DF72" name="X802CEF058114DF72"></a></p>
+
+<h5>4.1-1 DivisorPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DivisorPolytope</code>( <var class="Arg">D</var>, <var class="Arg">Rays</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><em>Input</em>: <var class="Arg">Rays</var> is the list of smallest integer vectors in the rays for the fan <span class="SimpleMath">∆</span> which determine the Weil divisors of <span class="SimpleMath">X(∆)</span>. <br /> <var class="Arg">D</var> is the list of coefficients for the a Weil divisor. <br /> <em>Output</em>: the linear expressions in the affine coordinates of the space of the cone which must be positive for a point to be in the desired polytope.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DivisorPolytope([6,6,0],[[2,-1],[-1,2],[-1,-1]]);</span>
+[ 2*x_1-x_2+6, -x_1+2*x_2+6, -x_1-x_2 ]
+</pre></div>
+
+<p>See also Example 6.13 in <a href="chapBib.html#biBJV02">[JV02]</a>.</p>
+
+<p><a id="X82A512AB7E8F897A" name="X82A512AB7E8F897A"></a></p>
+
+<h5>4.1-2 DivisorPolytopeLatticePoints</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DivisorPolytopeLatticePoints</code>( <var class="Arg">D</var>, <var class="Arg">Delta</var>, <var class="Arg">Rays</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><em>Input</em>: <var class="Arg">Delta</var> is the fan <br /> <var class="Arg">Rays</var> is the <em>ordered</em> list of rays for <var class="Arg">Delta</var> <br /> <var class="Arg">D</var> is the list of coefficients for a Weil divisor. <br /> <em>Output</em>: the list of points in <span class="SimpleMath">P_D ∩ L_0^*</span> which parameterize the elements in the Riemann-Roch space <span class="SimpleMath">L(D)</span>, where <span class="SimpleMath">P_D</span> is the polytope associated to the divisor <span class="SimpleMath">D</span> (see <code class="code">DivisorPolytope</code>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Div:=[6,6,0];; Rays:=[[2,-1],[-1,2],[-1,-1]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Delta0:=[[[2,-1],[-1,2]],[[-1,2],[-1,-1]],[[-1,-1],[2,-1]]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P_Div:=DivisorPolytopeLatticePoints(Div,Delta0,Rays);</span>
+[ [ -6, -6 ], [ -5, -5 ], [ -5, -4 ], [ -4, -5 ], [ -4, -4 ], [ -4, -3 ],
+  [ -4, -2 ], [ -3, -4 ], [ -3, -3 ], [ -3, -2 ], [ -3, -1 ], [ -3, 0 ],
+  [ -2, -4 ], [ -2, -3 ], [ -2, -2 ], [ -2, -1 ], [ -2, 0 ], [ -2, 1 ],
+  [ -2, 2 ], [ -1, -3 ], [ -1, -2 ], [ -1, -1 ], [ -1, 0 ], [ -1, 1 ],
+  [ 0, -3 ], [ 0, -2 ], [ 0, -1 ], [ 0, 0 ], [ 1, -2 ], [ 1, -1 ], [ 2, -2 ] ]
+</pre></div>
+
+<p><a id="X7F7ECE28858FE070" name="X7F7ECE28858FE070"></a></p>
+
+<h5>4.1-3 RiemannRochBasis</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RiemannRochBasis</code>( <var class="Arg">D</var>, <var class="Arg">Delta</var>, <var class="Arg">Rays</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><em>Input</em>: <var class="Arg">Delta</var> is a complete and nonsingular fan <br /> <var class="Arg">D</var> is the list of coefficients for the Weil divisor<br /> <var class="Arg">Rays</var> is a list of rays for the fan used to describe the Weil divisors. <br /> <em>Output</em>: A basis (a list of monomials) for the Riemann-Roch space of the divisor represented by <var class="Arg">D</var>.</p>
+
+<p>For details on how the Weil divisors can be expressed in terms of the rays of the fan, please see section 3.3 in <a href="chapBib.html#biBF93">[Ful93]</a>. This procedure does not check if the fan is complete and nonsingular.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Div:=[6,6,0];; Rays:=[[2,-1],[-1,2],[-1,-1]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Delta0:=[[[2,-1],[-1,2]],[[-1,2],[-1,-1]],[[-1,-1],[2,-1]]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RiemannRochBasis(Div,Delta0,Rays);</span>
+[ 1/(x_1^6*x_2^6), 1/(x_1^5*x_2^5), 1/(x_1^5*x_2^4), 1/(x_1^4*x_2^5),
+  1/(x_1^4*x_2^4), 1/(x_1^4*x_2^3), 1/(x_1^4*x_2^2), 1/(x_1^3*x_2^4),
+  1/(x_1^3*x_2^3), 1/(x_1^3*x_2^2), 1/(x_1^3*x_2), 1/x_1^3, 1/(x_1^2*x_2^4),
+  1/(x_1^2*x_2^3), 1/(x_1^2*x_2^2), 1/(x_1^2*x_2), 1/x_1^2, x_2/x_1^2,
+  x_2^2/x_1^2, 1/(x_1*x_2^3), 1/(x_1*x_2^2), 1/(x_1*x_2), 1/x_1, x_2/x_1,
+  1/x_2^3, 1/x_2^2, 1/x_2, 1, x_1/x_2^2, x_1/x_2, x_1^2/x_2^2 ]
+</pre></div>
+
+<p><a id="X7EE437E17C7331B7" name="X7EE437E17C7331B7"></a></p>
+
+<h4>4.2 <span class="Heading">Topological invariants</span></h4>
+
+<p>Throughout this section, <span class="SimpleMath">X(∆)</span> <em>must be non-singular</em>.</p>
+
+<p><a id="X8307F8DB85F145AE" name="X8307F8DB85F145AE"></a></p>
+
+<h5>4.2-1 EulerCharacteristic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EulerCharacteristic</code>( <var class="Arg">Delta</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><em>Input</em>: <var class="Arg">Delta</var> is a nonsingular fan of cones, represented by its list of maximal cones. <br /> <em>Output</em>: the Euler characteristic of the toric variety <span class="SimpleMath">X(∆)</span>, where <span class="SimpleMath">∆</span> is a fan determined by <var class="Arg">Delta</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cones:=[[[2,-1],[-1,2]],[[-1,2],[-1,-1]],[[-1,-1],[2,-1]]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EulerCharacteristic(Cones);</span>
+3
+</pre></div>
+
+<p>Note: <span class="SimpleMath">X(∆)</span> <em>must be non-singular</em> here.</p>
+
+<p><a id="X87FB8EBC7FBD8B95" name="X87FB8EBC7FBD8B95"></a></p>
+
+<h5>4.2-2 BettiNumberToric</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BettiNumberToric</code>( <var class="Arg">Delta</var>, <var class="Arg">k</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><em>Input</em>: <var class="Arg">Delta</var> represents a nonsingular fan <span class="SimpleMath">∆</span> (represented by maximal cones), <br /> <var class="Arg">k</var> is an integer. <br /> <em>Output</em>: the <var class="Arg">k</var>-th Betti number of the toric variety <span class="SimpleMath">X(∆)</span>.</p>
+
+<p>The <code class="code">BettiNumberToric</code> procedure does not check if <var class="Arg">Delta</var> is nonsingular. It is possible that this procedure outputs nonsense when <var class="Arg">Delta</var> is not represented by maximal cones or is nonsingular.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cones:=[[[2,-1],[-1,2]],[[-1,2],[-1,-1]],[[-1,-1],[2,-1]]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BettiNumberToric(Cones,1);</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BettiNumberToric(Cones,2);</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cones:=[[[2,-1],[-1,1]],[[-1,1],[-1,0]],[[-1,0],[2,-1]]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BettiNumberToric(Cones,1);</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BettiNumberToric(Cones,2);</span>
+1
+</pre></div>
+
+<p>Not to be confused with the Betti number of a polycyclically presented torsion free group, already available in <strong class="pkg">GAP</strong>.</p>
+
+<p><a id="X80D0D8F07CF1BE07" name="X80D0D8F07CF1BE07"></a></p>
+
+<h4>4.3 <span class="Heading">Points over a finite field</span></h4>
+
+<p><a id="X8289500778E8DE0E" name="X8289500778E8DE0E"></a></p>
+
+<h5>4.3-1 CardinalityOfToricVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CardinalityOfToricVariety</code>( <var class="Arg">Cones</var>, <var class="Arg">q</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><em>Input</em>: <var class="Arg">Cones</var> is the list of maximal cones of a fan <span class="SimpleMath">∆</span>, <var class="Arg">q</var> is a prime power. <br /> <em>Output</em>: The size of the set of <span class="SimpleMath">GF(q)</span>-rational points of the toric variety <span class="SimpleMath">X(∆)</span>.</p>
+
+<p>Note: <span class="SimpleMath">X(∆)</span> <em>must be non-singular</em> here.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cones:=[[[2,-1],[-1,2]],[[-1,2],[-1,-1]],[[-1,-1],[2,-1]]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CardinalityOfToricVariety(Cones,3);</span>
+13
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CardinalityOfToricVariety(Cones,4);</span>
+21
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CardinalityOfToricVariety(Cones,5);</span>
+31
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CardinalityOfToricVariety(Cones,7);</span>
+57
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

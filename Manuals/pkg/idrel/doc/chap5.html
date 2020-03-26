@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (IdRel) - Chapter 5: Module Polynomials</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X7B5CEEDF82747121" name="X7B5CEEDF82747121"></a></p>
+<div class="ChapSects"><a href="chap5.html#X7B5CEEDF82747121">5 <span class="Heading">Module Polynomials</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X86625AB980F24AA5">5.1 <span class="Heading">Construction of module polynomials</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7A03D1D881B9976E">5.1-1 ModulePoly</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X83ECC2D5781DE850">5.2 <span class="Heading">Components of a module polynomial</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X79E2DD9879D9182C">5.2-1 Terms</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7E57DFF4791C4CAA">5.3 <span class="Heading">Module Polynomial Operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X811C7964873E4062">5.3-1 AddTermModulePoly</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Module Polynomials</span></h3>
+
+<p>In this chapter we consider finitely generated modules over the monoid rings considered previously. We call an element of this module a <em>module polynomial</em>, and we describe functions to construct module polynomials and the standard algebraic operations for such polynomials.</p>
+
+<p>A module polynomial <code class="code">modpoly</code> is recorded as a list of pairs, <code class="code">[ gen, monpoly ]</code>, where <code class="code">gen</code> is a module generator (basis element), and <code class="code">monpoly</code> is a monoid polynomial. The module polynomial is printed as the formal sum of monoid polynomial multiples of the generators. Note that the monoid polynomials are the coefficients of the module polynomials and appear to the right of the generator, as we choose to work with right modules.</p>
+
+<p>The examples we are aiming for are the identities among the relators of a finitely presented group (see section <strong class="button">5.4</strong>).</p>
+
+<p><a id="X86625AB980F24AA5" name="X86625AB980F24AA5"></a></p>
+
+<h4>5.1 <span class="Heading">Construction of module polynomials</span></h4>
+
+<p><a id="X7A03D1D881B9976E" name="X7A03D1D881B9976E"></a></p>
+
+<h5>5.1-1 ModulePoly</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ModulePoly</code>( <var class="Arg">gens</var>, <var class="Arg">monpolys</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ModulePoly</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroModulePoly</code>( <var class="Arg">Fgens</var>, <var class="Arg">Fmon</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ModulePoly</code> returns a module polynomial. The terms of the polynomial may be input as a list of generators followed by a list of monoid polynomials or as one list of <code class="code">[generator, monoid polynomial]</code> pairs.</p>
+
+<p>Assuming that <code class="code">Fgens</code> is the free group on the module generators and <code class="code">Fmon</code> is the free group on the monoid generators, the function <code class="code">ZeroModulePoly</code> returns the zero module polynomial, which has no terms, and is an element of the module.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">frq8 := FreeRelatorGroup( q8 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">genfrq8 := GeneratorsOfGroup( frq8 ); </span>
+[ q8_R1, q8_R2, q8_R3, q8_R4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( rmp1, "\n" );      ## defined in section 4.4.1 </span>
+ - 7*q8_M4 + 5*q8_M1 + 9*&lt;identity ...&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mp2 := MonoidPolyFromCoeffsWords( [4,-5], [ M[4], M[1] ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( mp2, "\n" ); </span>
+4*q8_M4 - 5*q8_M1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s1 := ModulePoly( [ genfrq8[4], genfrq8[1] ], [ rmp1, mp2 ] );</span>
+q8_R1*(4*q8_M4 - 5*q8_M1) + q8_R4*( - 7*q8_M4 + 5*q8_M1 + 9*&lt;identity ...&gt;)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s2 := ModulePoly( [ genfrq8[3], genfrq8[2], genfrq8[1] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      [ -1*rmp1, 3*mp2, (rmp1+mp2) ] );</span>
+q8_R1*( - 3*q8_M4 + 9*&lt;identity ...&gt;) + q8_R2*(12*q8_M4 - 15*q8_M1) + q8_R3*(
+7*q8_M4 - 5*q8_M1 - 9*&lt;identity ...&gt;)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zeromp := ZeroModulePoly( frq8, freeq8 );</span>
+zero modpoly
+
+</pre></div>
+
+<p><a id="X83ECC2D5781DE850" name="X83ECC2D5781DE850"></a></p>
+
+<h4>5.2 <span class="Heading">Components of a module polynomial</span></h4>
+
+<p><a id="X79E2DD9879D9182C" name="X79E2DD9879D9182C"></a></p>
+
+<h5>5.2-1 Terms</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Terms</code>( <var class="Arg">modpoly</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeadTerm</code>( <var class="Arg">modpoly</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeadMonoidPoly</code>( <var class="Arg">modpoly</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Length</code>( <var class="Arg">modpoly</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; One</code>( <var class="Arg">modpoly</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">Terms</code> returns the terms of a module polynomial as a list of pairs. In <code class="code">LeadTerm</code>, the generators are ordered, and the term of <code class="code">modpoly</code> with the highest value generator is defined to be the leading term. The monoid polynomial (coefficient) part of the leading term is returned by the function <code class="code">LeadMonoidPoly</code>.</p>
+
+<p>The function <code class="code">Length</code> counts the number of module generators which occur in <code class="code">modpoly</code> (a generator occurs in a polynomial if it has nonzero coefficient). The function <code class="code">One</code> returns the identity in the free group on the generators.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Length(s1), Length(s2) ];</span>
+[ 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">One( s1 );</span>
+&lt;identity ...&gt; 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Terms( s1 );</span>
+[ [ q8_R1, 4*q8_M4 - 5*q8_M1 ], 
+  [ q8_R4,  - 7*q8_M4 + 5*q8_M1 + 9*&lt;identity ...&gt; ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( LeadTerm( s1 ), "\n" );</span>
+[ q8_R4,  - 7*q8_M4 + 5*q8_M1 + 9*&lt;identity ...&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( LeadTerm( s2 ), "\n" );</span>
+[ q8_R3, 7*q8_M4 - 5*q8_M1 - 9*&lt;identity ...&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( LeadMonoidPoly( s1 ), "\n" );</span>
+ - 7*q8_M4 + 5*q8_M1 + 9*&lt;identity ...&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( LeadMonoidPoly( s2 ), "\n" );</span>
+7*q8_M4 - 5*q8_M1 - 9*&lt;identity ...&gt;
+
+</pre></div>
+
+<p><a id="X7E57DFF4791C4CAA" name="X7E57DFF4791C4CAA"></a></p>
+
+<h4>5.3 <span class="Heading">Module Polynomial Operations</span></h4>
+
+<p><a id="X811C7964873E4062" name="X811C7964873E4062"></a></p>
+
+<h5>5.3-1 AddTermModulePoly</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddTermModulePoly</code>( <var class="Arg">modpoly</var>, <var class="Arg">gen</var>, <var class="Arg">monpoly</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AddTermModulePoly</code> adds a term <code class="code">[gen, monpoly]</code> to a module polynomial <code class="code">modpoly</code>.</p>
+
+<p>Tests for equality and arithmetic operations are performed in the usual way. Module polynomials may be added or subtracted. A module polynomial can also be multiplied on the right by a word or by a scalar. The effect of this is to multiply the monoid polynomial parts of each term by the word or scalar. This is made clearer in the example.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mp0 := MonoidPolyFromCoeffsWords( [6], [ M[2] ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( mp0, "\n" );</span>
+6*q8_M2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s0 := AddTermModulePoly( s1, genfrq8[3], mp0 ); </span>
+q8_R1*(4*q8_M4 - 5*q8_M1) + q8_R3*(6*q8_M2) + q8_R4*( - 7*q8_M4 + 5*q8_M1 +
+9*&lt;identity ...&gt;)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( s1 + s2, "\n" );</span>
+q8_R1*( q8_M4 - 5*q8_M1 + 9*&lt;identity ...&gt;) + q8_R2*(12*q8_M4 -
+15*q8_M1) + q8_R3*(7*q8_M4 - 5*q8_M1 - 9*&lt;identity ...&gt;) + q8_R4*( -
+7*q8_M4 + 5*q8_M1 + 9*&lt;identity ...&gt;)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( s1 - s0, "\n" );</span>
+q8_R3*( - 6*q8_M2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( s1 * 1/2, "\n" );</span>
+q8_R1*(2*q8_M4 - 5/2*q8_M1) + q8_R4*( - 7/2*q8_M4 + 5/2*q8_M1 + 9/
+2*&lt;identity ...&gt;)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( s1 * M[1], "\n" );</span>
+q8_R1*(4*q8_M4*q8_M1 - 5*q8_M1^2) + q8_R4*( - 7*q8_M4*q8_M1 + 5*q8_M1^2 +
+9*q8_M1)
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

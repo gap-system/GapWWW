@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Utils) - Chapter 8: Various other functions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap8"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap8.html">[MathJax off]</a></p>
+<p><a id="X83EFC3178180D918" name="X83EFC3178180D918"></a></p>
+<div class="ChapSects"><a href="chap8_mj.html#X83EFC3178180D918">8 <span class="Heading">Various other functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X81A0A4FF842B039B">8.1 <span class="Heading">File operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7B7ECADF85F748BE">8.1-1 Log2HTML</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X84D2922D87EDE9E9">8.2 <span class="Heading">LaTeX strings</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X87DEB2B58266F858">8.2-1 IntOrOnfinityToLaTeX</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7DC642B97CD02F4E">8.2-2 LaTeXStringFactorsInt</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X7BDFFBC379DE83E6">8.3 <span class="Heading">Conversion to <span class="SimpleMath">\({\sf Magma}\)</span> string</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X8768D7707B4CBBD4">8.3-1 ConvertToMagmaInputString</a></span>
+</div></div>
+</div>
+
+<h3>8 <span class="Heading">Various other functions</span></h3>
+
+<p><a id="X81A0A4FF842B039B" name="X81A0A4FF842B039B"></a></p>
+
+<h4>8.1 <span class="Heading">File operations</span></h4>
+
+<p><a id="X7B7ECADF85F748BE" name="X7B7ECADF85F748BE"></a></p>
+
+<h5>8.1-1 Log2HTML</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Log2HTML</code>( <var class="Arg">filename</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function has been transferred from package <strong class="pkg">RCWA</strong>.</p>
+
+<p>This function converts the <strong class="pkg">GAP</strong> logfile <code class="file">filename</code> to HTML. It appears that the logfile should be in your current directory. The extension of the input file must be <code class="file">*.log</code>. The name of the output file is the same as the one of the input file except that the extension <code class="file">*.log</code> is replaced by <code class="file">*.html</code>. There is a sample CSS file in <code class="file">utils/doc/gaplog.css</code>, which you can adjust to your taste.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LogTo( "triv.log" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := 33^5;</span>
+39135393
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LogTo(); </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Log2HTML( "triv.log" );     </span>
+
+</pre></div>
+
+<p><a id="X84D2922D87EDE9E9" name="X84D2922D87EDE9E9"></a></p>
+
+<h4>8.2 <span class="Heading">LaTeX strings</span></h4>
+
+<p><a id="X87DEB2B58266F858" name="X87DEB2B58266F858"></a></p>
+
+<h5>8.2-1 IntOrOnfinityToLaTeX</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntOrOnfinityToLaTeX</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function has been transferred from package <strong class="pkg">ResClasses</strong>.</p>
+
+<p><code class="code">IntOrInfinityToLaTeX(n)</code> returns the LaTeX string for <var class="Arg">n</var>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IntOrInfinityToLaTeX( 10^3 );</span>
+"1000"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IntOrInfinityToLaTeX( infinity );</span>
+"\\infty"
+
+</pre></div>
+
+<p><a id="X7DC642B97CD02F4E" name="X7DC642B97CD02F4E"></a></p>
+
+<h5>8.2-2 LaTeXStringFactorsInt</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LaTeXStringFactorsInt</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function has been transferred from package <strong class="pkg">RCWA</strong>.</p>
+
+<p>It returns the prime factorization of the integer <span class="SimpleMath">\(n\)</span> as a string in LaTeX format.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LaTeXStringFactorsInt( Factorial(12) );</span>
+"2^{10} \\cdot 3^5 \\cdot 5^2 \\cdot 7 \\cdot 11"
+
+</pre></div>
+
+<p><a id="X7BDFFBC379DE83E6" name="X7BDFFBC379DE83E6"></a></p>
+
+<h4>8.3 <span class="Heading">Conversion to <span class="SimpleMath">\({\sf Magma}\)</span> string</span></h4>
+
+<p><a id="X8768D7707B4CBBD4" name="X8768D7707B4CBBD4"></a></p>
+
+<h5>8.3-1 ConvertToMagmaInputString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConvertToMagmaInputString</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ConvertToMagmaInputString( obj [, str] )</code> attempts to output a string <code class="code">s</code> which can be read into <span class="SimpleMath">\({\sf Magma}\)</span> <a href="chapBib_mj.html#biBMAGMA">[BCP97]</a> so as to produce the same group in that computer algebra system. In the second form the user specifies the name of the resulting object, so that the output string has the form <code class="code">"str := ..."</code>. When <code class="code">obj</code> is a permutation group, the operation <code class="code">PermGroupToMagmaFormat(obj)</code> is called. This function has been taken from <code class="file">other.gi</code> in the main library where it was called <code class="code">MagmaInputString</code>. When <code class="code">obj</code> is a pc-group, the operation <code class="code">PcGroupToMagmaFormat(obj)</code> is called. This function was private code of Max Horn. When <code class="code">obj</code> is a matrix group over a finite field, the operation <code class="code">MatrixGroupToMagmaFormat(obj)</code> is called. This function is a modification of private code of Frank Lübeck.</p>
+
+<p>Hopefully code for other types of group will be added in due course.</p>
+
+<p>These functions should be considered <em>experimental</em>, and more testing is desirable.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ConvertToMagmaInputString( Group( (1,2,3,4,5), (3,4,5) ) );</span>
+"PermutationGroup&lt;5|(1,2,3,4,5),\n(3,4,5)&gt;;\n"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ConvertToMagmaInputString( Group( (1,2,3,4,5) ), "c5" );        </span>
+"c5:=PermutationGroup&lt;5|(1,2,3,4,5)&gt;;\n"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ConvertToMagmaInputString( DihedralGroup( IsPcGroup, 10 ) );</span>
+"PolycyclicGroup&lt; f1,f2 |\nf1^2,\nf2^5,\nf2^f1 = f2^4\n&gt;;\n"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := GL(2,5);;  Size(M); </span>
+480
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s1 := ConvertToMagmaInputString( M );</span>
+"F := GF(5);\nP := GL(2,F);\ngens := [\nP![2,0,0,1],\nP![4,1,4,0]\n];\nsub&lt;P |\
+ gens&gt;;\n"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( s1 );</span>
+F := GF(5);
+P := GL(2,F);
+gens := [
+P![2,0,0,1],
+P![4,1,4,0]
+];
+sub&lt;P | gens&gt;;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n1 := [ [ Z(9)^0, Z(9)^0 ], [ Z(9)^0, Z(9) ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n2 := [ [ Z(9)^0, Z(9)^3 ], [ Z(9)^4, Z(9)^2 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := Group( n1, n2 );;  Size( N );</span>
+5760
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s2 := ConvertToMagmaInputString( N, "gpN" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( s2 );</span>
+F := GF(3^2);
+P := GL(2,F);
+w := PrimitiveElement(F);
+gens := [
+P![ 1, 1, 1,w^1],
+P![ 1,w^3, 2,w^2]
+];
+gpN := sub&lt;P | gens&gt;;
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

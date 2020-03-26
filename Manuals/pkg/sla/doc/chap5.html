@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (SLA) - Chapter 5: Semisimple Subalgebras of Semisimple Lie Algebras</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X7FF8A8057E0BFAFD" name="X7FF8A8057E0BFAFD"></a></p>
+<div class="ChapSects"><a href="chap5.html#X7FF8A8057E0BFAFD">5 <span class="Heading">Semisimple Subalgebras of Semisimple Lie Algebras</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X806713FE83F21540">5.1 <span class="Heading"> Branching </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8147807D7B92C613">5.1-1 ProjectionMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X806713FE83F21540">5.1-2 Branching</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7CC8010B7F31B486">5.2 <span class="Heading"> Constructing Semisimple Subalgebras </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E95AD2C79B19D15">5.2-1 RegularSemisimpleSubalgebras</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X857808A77C13E46C">5.2-2 SSSTypes</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X832B17BA819FB057">5.2-3 LieAlgebraAndSubalgebras</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82ECC8237E213AAB">5.2-4 InclusionsGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C81C2B57D94EC2B">5.2-5 SubalgebrasInclusion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82458B807A8D77F6">5.2-6 DynkinIndex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7AAE2B317A4B7D9F">5.2-7 AreLinearlyEquivalentSubalgebras</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B1A01FE86A7718F">5.2-8 MakeDatabaseEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85A6B70B83A36495">5.2-9 ClosedSubsets</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7A3EAA637F94D973">5.2-10 DecompositionOfClosedSet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X798DF4D67DE56EB1">5.2-11 IsSpecialClosedSet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D31AA9780B054C1">5.2-12 LieAlgebraOfClosedSet</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Semisimple Subalgebras of Semisimple Lie Algebras</span></h3>
+
+<p>This chapter contains functions for dealing with semisimple subalgebras of semisimple Lie algebras. There are functions for computing branching rules, for computing the regular subalgebras, and for working with the database of semisimple subalgebras of the simple Lie algebras. This last database contains the semisimple subalgebras of the simple Lie algebras of ranks up to 8. The semisimple subalgebras are classified up to linear equivalence. (Two subalgebras are called linearly equivalent if for every representation of the big algebra in the space <span class="SimpleMath">V</span> the images of the subalgebras are conjugate under <span class="SimpleMath">GL(V)</span>.)</p>
+
+<p><a id="X806713FE83F21540" name="X806713FE83F21540"></a></p>
+
+<h4>5.1 <span class="Heading"> Branching </span></h4>
+
+<p><a id="X8147807D7B92C613" name="X8147807D7B92C613"></a></p>
+
+<h5>5.1-1 ProjectionMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProjectionMatrix</code>( <var class="Arg">L</var>, <var class="Arg">K</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> and <var class="Arg">K</var> are semisimple Lie algebras with the following properties: <var class="Arg">K</var> is contained in <var class="Arg">L</var>, the Cartan subalgebra of <var class="Arg">L</var>, as returned by <var class="Arg">CartanSubalgebra(L)</var> is split (this is automatic if <var class="Arg">L</var> is created by the built in <strong class="pkg">GAP</strong> function) and <var class="Arg">K</var> has a Cartan subalgebra that is a subalgebra of the Cartan subalgebra of <var class="Arg">L</var>. We note that the function checks only the last property. The function returns a matrix <var class="Arg">P</var> such that if <var class="Arg">u</var> is a weight of a <var class="Arg">L</var>-module <span class="SimpleMath">V</span>, then <var class="Arg">P*u</var> is a weight of <var class="Arg">V</var>, when considered as a <var class="Arg">K</var>-module.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",7,Rationals);;                </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:= Subalgebra( L, [ L.1,L.3,L.4,L.5,L.6,L.7,L.63,               </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">L.64,L.66,L.67,L.68,L.69,L.70,L.126] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension(K);</span>
+63
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SemiSimpleType(K);</span>
+"A7"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProjectionMatrix( L, K );</span>
+[ [ 2, 2, 3, 4, 3, 2, 1 ], [ 0, 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, -1, 0, 0, 0 ],
+  [ 0, 0, 0, 0, -1, 0, 0 ], [ 0, 0, 0, 0, 0, -1, 0 ], 
+  [ 0, 0, 0, 0, 0, 0, -1 ], [ -1, -2, -2, -3, -2, -1, 0 ] ]
+</pre></div>
+
+<p><a id="X806713FE83F21540" name="X806713FE83F21540"></a></p>
+
+<h5>5.1-2 Branching</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Branching</code>( <var class="Arg">L</var>, <var class="Arg">K</var>, <var class="Arg">hw</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Branching</code>( <var class="Arg">L</var>, <var class="Arg">K</var>, <var class="Arg">cc</var>, <var class="Arg">hw</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> and <var class="Arg">K</var> are as in the previous function, and <var class="Arg">hw</var> is the highest weight of an irreducible <var class="Arg">L</var>-module. This function computes the splitting of the module when seen as a <var class="Arg">K</var>-module. Returned is a list of two lists: the first list contains the highest weights of the modules involved, the second list contains their multiplicities. In the second form the subalgebra is reductive rather than semisimple. Here <var class="Arg">K</var> is again a semisimple subalgebra, and <var class="Arg">cc</var> is a list of toral elements centralizing <var class="Arg">K</var>. These toral elements must lie in the given Cartan subalgebra of <var class="Arg">L</var>. The reductive subalgebra is the direct sum of <var class="Arg">K</var> and the subalgebra spanned by the elements of <var class="Arg">cc</var>. The output is the same as in the first form. However, the last <span class="SimpleMath">t</span> coordinates of the weights give the eigenvalues of the toral elements in <var class="Arg">cc</var> on the irreducible modules.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",7,Rationals);;                </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:= Subalgebra( L, [ L.1,L.3,L.4,L.5,L.6,L.7,L.63,               </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">L.64,L.66,L.67,L.68,L.69,L.70,L.126] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Branching( L, K, [1,0,0,0,0,0,1] );</span>
+[ [ [ 1, 1, 0, 0, 0, 0, 1 ], [ 1, 1, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 0, 1 ],
+      [ 0, 0, 1, 0, 1, 0, 0 ], [ 1, 0, 0, 1, 0, 0, 0 ], 
+      [ 0, 1, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 1 ], 
+      [ 0, 0, 1, 0, 0, 0, 0 ] ], [ 1, 1, 1, 1, 1, 1, 1, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",7,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:= RegularSemisimpleSubalgebras(L);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:= Filtered( r, M -&gt; SemiSimpleType(M)="E6" )[1];</span>
+&lt;Lie algebra of dimension 78 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cc:= BasisVectors( Basis( LieCentralizer( L, K ) ) );</span>
+[ v.127+(3/2)*v.128+(2)*v.129+(3)*v.130+(5/2)*v.131+(2)*v.132+(3/2)*v.133 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Branching( L, K, cc, [1,0,0,0,0,0,1] );</span>
+[ [ [ 0, 0, 0, 0, 0, 2, -1/2 ], [ 1, 1, 0, 0, 0, 0, -1/2 ], 
+      [ 0, 0, 0, 0, 1, 0, -1/2 ], [ 1, 0, 0, 0, 0, 0, 5/2 ], 
+      [ 0, 1, 0, 0, 0, 1, 1/2 ], [ 2, 0, 0, 0, 0, 0, 1/2 ], 
+      [ 0, 0, 1, 0, 0, 0, 1/2 ], [ 0, 0, 0, 0, 0, 1, -5/2 ], 
+      [ 1, 0, 0, 0, 0, 1, -3/2 ], [ 1, 0, 0, 0, 0, 1, 3/2 ], 
+      [ 0, 1, 0, 0, 0, 0, 3/2 ], [ 0, 1, 0, 0, 0, 0, -3/2 ], 
+      [ 0, 0, 0, 0, 0, 0, 3/2 ], [ 0, 0, 0, 0, 0, 0, -3/2 ], 
+      [ 0, 0, 0, 0, 0, 1, 1/2 ], [ 1, 0, 0, 0, 0, 0, -1/2 ] ], 
+  [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2 ] ]      
+</pre></div>
+
+<p><a id="X7CC8010B7F31B486" name="X7CC8010B7F31B486"></a></p>
+
+<h4>5.2 <span class="Heading"> Constructing Semisimple Subalgebras </span></h4>
+
+<p><a id="X7E95AD2C79B19D15" name="X7E95AD2C79B19D15"></a></p>
+
+<h5>5.2-1 RegularSemisimpleSubalgebras</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RegularSemisimpleSubalgebras</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a <em>simple</em> Lie algebra. This function returns a list of its conjugacy classes of semisimple subalgebras (conjugacy under the adjoint group).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",6,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:= RegularSemisimpleSubalgebras( L );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(K);</span>
+19
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K[5];</span>
+&lt;Lie algebra of dimension 45 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SemiSimpleType( K[5] ); </span>
+"D5"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Branching( L, K[5], [1,0,0,0,0,1] );     </span>
+[ [ [ 1, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 1 ], [ 1, 0, 0, 1, 0 ], 
+      [ 1, 0, 0, 0, 1 ], [ 2, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0 ], 
+      [ 0, 0, 0, 0, 1 ], [ 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], 
+  [ 2, 1, 1, 1, 1, 1, 1, 1, 1 ] ]
+</pre></div>
+
+<p><a id="X857808A77C13E46C" name="X857808A77C13E46C"></a></p>
+
+<h5>5.2-2 SSSTypes</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SSSTypes</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This returns a list of the types of the semisimple Lie algebras of which the database contains the classification of the semisimple subalgebras, up to linear equivalence. (The three letters S stand for SemiSimple Subalgebras.)</p>
+
+<p><a id="X832B17BA819FB057" name="X832B17BA819FB057"></a></p>
+
+<h5>5.2-3 LieAlgebraAndSubalgebras</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LieAlgebraAndSubalgebras</code>( <var class="Arg">type</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">type</var> is a string describing the type of a semisimple Lie algebra. A simple type is a capital letter (A, B, C, D, E, F, or G) followed by a positive integer. Example: <var class="Arg">"D5"</var>. In general a type is a sequence of simple types separated by spaces. Example: <var class="Arg">"A2 C3 E6"</var>. This function is appliccable if each simple type that occurs in <var class="Arg">type</var> has rank less than or equal to 8. In that case a record is returned with two components: <var class="Arg">liealg</var>, which is a semisimple Lie algebra of type <var class="Arg">type</var>, and <var class="Arg">subalgs</var> which is the list of its semisimple subalgebras up to linear equivalence. If <var class="Arg">type</var> is a simple type then the list will be simply fetched from the database. Otherwise a computation will be triggered, and afterwards the database will be bigger. (One can check this with a call to <var class="Arg">SSSTypes()</var>). Also we remark that for non-simple types of not so small rank this computation can be difficult.</p>
+
+<p><a id="X82ECC8237E213AAB" name="X82ECC8237E213AAB"></a></p>
+
+<h5>5.2-4 InclusionsGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InclusionsGraph</code>( <var class="Arg">type</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">type</var> is a string describing the type of a semisimple Lie algebra. This is the same as in the previous function. This function returns a list containing the edges of the inclusion graph of the semisimple subalgebras returned by the previous function. An edge is represented by a list of two integers. If the edge <var class="Arg">[ i, j ]</var> occurs, then this means that the subalgebra on position <var class="Arg">j</var> in the list is linearly equivalent to a subalgebra of the subalgebra in position <var class="Arg">i</var>. Only the maximal subalgebras are considered; so if we have edges <var class="Arg">[ i, j ]</var> and <var class="Arg">[ j, k ]</var> then there will be no edge <var class="Arg">[ i, k ]</var>. (Otherwise this list can become huge.) Edges of the form <var class="Arg">[ 0, j ]</var> express that the subalgebra on position <var class="Arg">j</var> is a maximal semisimple subalgebra of the Lie algebra of type <var class="Arg">type</var>.</p>
+
+
+<div class="example"><pre>
+# Semisimple subalgebras of the Lie algebra of type D4:
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:= LieAlgebraAndSubalgebras( "D4" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= s.liealg;</span>
+&lt;Lie algebra of dimension 28 over CF(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sub:= s.subalgs;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(sub);</span>
+44
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= InclusionsGraph( "D4" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g[1];</span>
+[ 12, 1 ]
+
+# Find the maximal semisimple subalgebras:
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:= Filtered( g, x -&gt; x[1]=0 );; i:= List( m, x -&gt; x[2] );</span>
+[ 13, 35, 36, 37, 41, 42, 43, 44 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( sub{i}, SemiSimpleType );                </span>
+[ "A2", "A1 B2", "A1 B2", "A1 B2", "B3", "B3", "B3", "A1 A1 A1 A1" ]
+
+# We see that the subalgebras on positions 35 and 36 are isomorphic;
+# however they are not linearly equivalent:
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Branching( L, sub[35], [0,0,1,0] );</span>
+[ [ [ 1, 0, 1 ] ], [ 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Branching( L, sub[36], [0,0,1,0] );</span>
+[ [ [ 0, 1, 0 ], [ 2, 0, 0 ] ], [ 1, 1 ] ]
+</pre></div>
+
+<p><a id="X7C81C2B57D94EC2B" name="X7C81C2B57D94EC2B"></a></p>
+
+<h5>5.2-5 SubalgebrasInclusion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubalgebrasInclusion</code>( <var class="Arg">L</var>, <var class="Arg">K1</var>, <var class="Arg">K2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">K1</var>, <var class="Arg">K2</var>, are two subalgebras of the semisimple Lie algebra <var class="Arg">L</var>, constructed using the database. If <var class="Arg">K2</var> contains a subalgebra that is linearly equivalent to <var class="Arg">K1</var> then such a subalgebra is returned. Otherwise the result is <var class="Arg">fail</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:= LieAlgebraAndSubalgebras( "C3" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= InclusionsGraph( "C3" );</span>
+[ [ 10, 1 ], [ 11, 1 ], [ 12, 1 ], [ 8, 2 ], [ 10, 2 ], [ 11, 2 ], [ 11, 3 ], 
+  [ 13, 3 ], [ 8, 4 ], [ 13, 4 ], [ 9, 5 ], [ 12, 5 ], [ 12, 6 ], [ 13, 6 ], 
+  [ 0, 7 ], [ 0, 8 ], [ 15, 9 ], [ 9, 10 ], [ 14, 10 ], [ 14, 11 ], 
+  [ 15, 12 ], [ 0, 13 ], [ 15, 14 ], [ 0, 15 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># there are the edges [ 14, 10] and [ 10, 2 ]; hence a conjugate of the</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># second algebra is contained in the 14-th.</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= s.liealg;</span>
+&lt;Lie algebra of dimension 21 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sub:= s.subalgs;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:=SubalgebrasInclusion( L, sub[2], sub[14] );</span>
+&lt;Lie algebra of dimension 3 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Basis(K)[1] in sub[14];</span>
+true
+</pre></div>
+
+<p><a id="X82458B807A8D77F6" name="X82458B807A8D77F6"></a></p>
+
+<h5>5.2-6 DynkinIndex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DynkinIndex</code>( <var class="Arg">K</var>, <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">K</var> is a semisimple subalgebra of the <em>simple</em> Lie algebra <var class="Arg">L</var>. This function returns a list of integers, containing the Dynkin indices of the simple components of <var class="Arg">K</var>. If the input Lie algebra <var class="Arg">L</var> is not simple, then still a list of rationals is returned, but they may have no meaning. The Dynkin index is defined as follows. Consider a simple component in <var class="Arg">K</var> and let <span class="SimpleMath">h</span> be the coroot of the shortest root of <var class="Arg">K</var>. Let <span class="SimpleMath">k</span> denote the Killing form of <var class="Arg">L</var>, normalised so that the coroot of the shortest root of <var class="Arg">L</var> has squared length 2. Then the Dynkin index is <span class="SimpleMath">k(h,h)/2</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:= LieAlgebraAndSubalgebras( "C7" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= InclusionsGraph( "C7" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:= Filtered( g, x -&gt; x[1]=0 );; i:= List( m, x -&gt; x[2] );</span>
+[ 63, 498, 665, 804, 819, 821, 822 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= s.liealg;</span>
+&lt;Lie algebra of dimension 105 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sub:= s.subalgs;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( sub{i}, SemiSimpleType );   </span>
+[ "A1", "C3", "A1 B3", "A6", "C3 C4", "B2 C5", "A1 C6" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DynkinIndex( sub[665], L );   </span>
+[ 7, 4 ]
+</pre></div>
+
+<p><a id="X7AAE2B317A4B7D9F" name="X7AAE2B317A4B7D9F"></a></p>
+
+<h5>5.2-7 AreLinearlyEquivalentSubalgebras</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AreLinearlyEquivalentSubalgebras</code>( <var class="Arg">L</var>, <var class="Arg">K1</var>, <var class="Arg">K2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a semisimple Lie algebra, and <var class="Arg">K1</var>, <var class="Arg">K2</var> are subalgebras. It is assumed that the Cartan subalgebras (as returned by <var class="Arg">CartanSubalgebra</var>) of <var class="Arg">K1</var>, <var class="Arg">K2</var> are contained in the Cartan subalgebra of <var class="Arg">L</var> (otherwise <var class="Arg">fail</var> is returned). This function returns <var class="Arg">true</var> if <var class="Arg">K1</var>, <var class="Arg">K2</var> are linearly equivalent, <var class="Arg">false </var> otherwise.</p>
+
+
+<div class="example"><pre>
+# Lets find the subalgebras in the database for C5 that are linearly
+# equivalent to regular subalgebras:
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:= LieAlgebraAndSubalgebras("C5");; L:= s.liealg; sub:= s.subalgs;;</span>
+&lt;Lie algebra of dimension 55 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">reg:= RegularSemisimpleSubalgebras( L );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">posn:= [];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for K in reg do  </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">Add(posn,PositionProperty(sub,M -&gt; AreLinearlyEquivalentSubalgebras(L,M,K)));</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">posn;</span>
+[ 2, 24, 93, 111, 105, 82, 106, 81, 41, 109, 70, 85, 29, 112, 94, 25, 1, 118, 
+  100, 102, 64, 108, 84, 28, 117, 107, 116, 96, 101, 63, 115, 114, 95, 113 ]
+</pre></div>
+
+<p><a id="X7B1A01FE86A7718F" name="X7B1A01FE86A7718F"></a></p>
+
+<h5>5.2-8 MakeDatabaseEntry</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeDatabaseEntry</code>( <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddToDatabase</code>( <var class="Arg">d</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>These are functions that help to save a computed list of subalgebras of a semisimple Lie algebra in a file, and in a new session, read it again. In the first function <var class="Arg">r</var> is a record as produced by <code class="func">LieAlgebraAndSubalgebras</code> (<a href="chap5.html#X832B17BA819FB057"><span class="RefLink">5.2-3</span></a>). It returns a record that can be saved in a file. (It is not advisable to print it on the screen.) In the second function <var class="Arg">d</var> is a record that is output by <code class="func">MakeDatabaseEntry</code>. This function adds this entry to the database.</p>
+
+<p>We give two examples; in the first one we create a new database entry, and save it to a file. In the second example we read it and add it to the database.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:= LieAlgebraAndSubalgebras( "A2 B2" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d:= MakeDatabaseEntry( r );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PrintTo( "A2B2", "d:= ",d,";\n");</span>
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Read("A2B2");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddToDatabase( d );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SSSTypes();</span>
+[ "A1", "A2", "B2", "G2", "A3", "B3", "C3", "A4", "B4", "C4", "D4", "F4", 
+  "A5", "B5", "C5", "D5", "A6", "B6", "C6", "D6", "E6", "A7", "B7", "C7", 
+  "D7", "E7", "A8", "B8", "C8", "D8", "E8", "A2 B2" ]
+</pre></div>
+
+<p><a id="X85A6B70B83A36495" name="X85A6B70B83A36495"></a></p>
+
+<h5>5.2-9 ClosedSubsets</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClosedSubsets</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">R</var> is a root system. A subset <span class="SimpleMath">S</span> of the roots of <var class="Arg">R</var> is said to be closed if for all <span class="SimpleMath">a,b∈ S</span> we have that <span class="SimpleMath">a+b</span> lies in <span class="SimpleMath">S</span> whenever <span class="SimpleMath">a+b</span> is a root. This function computes the list of the closed subsets of <var class="Arg">R</var> up to conjugacy by the Weyl group. In other words, each closed subset of <var class="Arg">R</var> is conjugate under the Weyl group to exactly one element of the output of this function. The output is a list of which each element is a list of roots. A root in such a list, or its negative, lies in the attribute <var class="Arg">PositiveRootsNF( R )</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem("F",4);</span>
+&lt;root system of type F4&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c:= ClosedSubsets(R);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(c);</span>
+4844
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c[1005];</span>
+[ [ 1, 1, 0, 0 ], [ 0, 0, 1, 1 ], [ 0, 1, 2, 0 ], [ 0, 1, 1, 1 ], 
+  [ 1, 1, 1, 1 ], [ 1, 2, 2, 0 ], [ 1, 1, 2, 1 ], [ 0, 1, 2, 2 ], 
+  [ 1, 1, 2, 2 ], [ 1, 2, 3, 1 ], [ 1, 2, 2, 2 ], [ 1, 2, 3, 2 ], 
+  [ 1, 2, 4, 2 ], [ 1, 3, 4, 2 ], [ 2, 3, 4, 2 ], [ 0, -1, -2, 0 ] ]
+</pre></div>
+
+<p><a id="X7A3EAA637F94D973" name="X7A3EAA637F94D973"></a></p>
+
+<h5>5.2-10 DecompositionOfClosedSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecompositionOfClosedSet</code>( <var class="Arg">c</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">c</var> is a closed set of roots of some root system. We have that <var class="Arg">c</var> is the disjoint union of its symmetric part (consisting of all roots <span class="SimpleMath">a</span> in <var class="Arg">c</var> such that <span class="SimpleMath">-a</span> also lies in <var class="Arg">c</var>) and its special part (consisting of all roots <span class="SimpleMath">a</span> in <var class="Arg">c</var> such that <span class="SimpleMath">-a</span> does not lie in <var class="Arg">c</var>). This function returns a list of two entries. The first is the symmetric part of <var class="Arg">c</var>, the second is the special part of <var class="Arg">c</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem("F",4);</span>
+&lt;root system of type F4&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c:= ClosedSubsets(R);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DecompositionOfClosedSet( c[1005] );</span>
+[ [ [ 0, 1, 2, 0 ], [ 0, -1, -2, 0 ] ], 
+  [ [ 1, 1, 0, 0 ], [ 0, 0, 1, 1 ], [ 0, 1, 1, 1 ], [ 1, 1, 1, 1 ], 
+      [ 1, 2, 2, 0 ], [ 1, 1, 2, 1 ], [ 0, 1, 2, 2 ], [ 1, 1, 2, 2 ], 
+      [ 1, 2, 3, 1 ], [ 1, 2, 2, 2 ], [ 1, 2, 3, 2 ], [ 1, 2, 4, 2 ], 
+      [ 1, 3, 4, 2 ], [ 2, 3, 4, 2 ] ] ]
+</pre></div>
+
+<p><a id="X798DF4D67DE56EB1" name="X798DF4D67DE56EB1"></a></p>
+
+<h5>5.2-11 IsSpecialClosedSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSpecialClosedSet</code>( <var class="Arg">c</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">c</var> is a closed set of roots of some root system. This function returns <var class="Arg">true</var> is <var class="Arg">c</var> is special (that is, for all <span class="SimpleMath">a</span> in <var class="Arg">c</var> we have that <span class="SimpleMath">-a</span> does not lie in <var class="Arg">c</var>), otherwise it returns <var class="Arg">false</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem("F",4);</span>
+&lt;root system of type F4&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c:= ClosedSubsets(R);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSpecialClosedSet( c[1005] );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSpecialClosedSet( c[1006] );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( Filtered( c, IsSpecialClosedSet ) );</span>
+3579
+</pre></div>
+
+<p><a id="X7D31AA9780B054C1" name="X7D31AA9780B054C1"></a></p>
+
+<h5>5.2-12 LieAlgebraOfClosedSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LieAlgebraOfClosedSet</code>( <var class="Arg">L</var>, <var class="Arg">c</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a semisimple Lie algebra and <var class="Arg">c</var> is a closed set of roots of its root system. This function returns the subalgebra of <var class="Arg">L</var> spanned a the Cartan subalgebra of <var class="Arg">L</var> (the one relative to which the root system is taken) along with the root vectors corresponding to the roots in <var class="Arg">c</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("F",4,Rationals);</span>
+&lt;Lie algebra of dimension 52 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R:= RootSystem( L );</span>
+&lt;root system of rank 4&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c:= ClosedSubsets(R);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c[1005];</span>
+[ [ 1, 0, 1, 0 ], [ 0, 1, 0, 1 ], [ 1, 0, 1, 1 ], [ 0, 0, 2, 1 ], 
+  [ 1, 1, 1, 1 ], [ 1, 1, 2, 1 ], [ 2, 0, 2, 1 ], [ 0, 1, 2, 2 ], 
+  [ 2, 1, 2, 1 ], [ 1, 1, 3, 2 ], [ 2, 1, 2, 2 ], [ 2, 1, 3, 2 ], 
+  [ 2, 1, 4, 2 ], [ 2, 1, 4, 3 ], [ 2, 2, 4, 3 ], [ 0, 0, -2, -1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:= SubalgebraOfClosedSet( L, c[1005] );</span>
+&lt;Lie algebra of dimension 20 over Rationals&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeviMalcevDecomposition(K);</span>
+[ &lt;Lie algebra of dimension 3 over Rationals&gt;, 
+  &lt;two-sided ideal in &lt;Lie algebra of dimension 20 over Rationals&gt;, 
+      (dimension 17)&gt; ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

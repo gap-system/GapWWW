@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (SLA) - Chapter 3: Nilpotent Orbits</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X8295733081A2BFF8" name="X8295733081A2BFF8"></a></p>
+<div class="ChapSects"><a href="chap3.html#X8295733081A2BFF8">3 <span class="Heading">Nilpotent Orbits</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8173135A7D187358">3.1 <span class="Heading"> The functions </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A074A557A7347D2">3.1-1 NilpotentOrbit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D5C0354810069A8">3.1-2 NilpotentOrbits</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X804830757E5971E9">3.1-3 WeightedDynkinDiagram</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X804830757E5971E9">3.1-4 WeightedDynkinDiagram</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F2B6308785707B9">3.1-5 AmbientLieAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8401CDC2859F8A85">3.1-6 SemiSimpleType</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84E78DA17D8C7F74">3.1-7 SL2Triple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X832FB68587166C4F">3.1-8 RandomSL2Triple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8029297A7C3372E9">3.1-9 SL2Grading</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84E78DA17D8C7F74">3.1-10 SL2Triple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X830C432A838875A0">3.1-11 InducedNilpotentOrbits</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78795C607C2343C3">3.1-12 RigidNilpotentOrbits</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Nilpotent Orbits</span></h3>
+
+<p>This chapter contains functions for dealing with the nilpotent orbits of a semisimple Lie algebra <span class="SimpleMath">K</span> under its adjoint group <span class="SimpleMath">G</span>. We refer to the book by Collingwood and McGovern, <a href="chapBib.html#biBcolmcgov">[CM93]</a> (and the references therein) for an account of the theory of nilpotent orbits. A nilpotent orbit has two important attributes: the weighted Dynkin diagram, and an <span class="SimpleMath">sl_2</span>-triple. The weighted Dynkin diagram is represented by a list of integers in {0,1,2} of length equal to the rank of the Lie algebra. The i-th position in this list correponds to the i-th node of the Dynkin diagram of the root system. The Dynkin diagram of the root system is described by the Cartan matrix of the root system. Now in GAP this Cartan matrix can be somewhat different from the more usual forms. This holds most particularly for type F4, where the enumeration of the simple roots is rather different from the one usually found. So when using the functions in this chapter one should keep this in mind.</p>
+
+<p>Every nilpotent orbit has an <span class="SimpleMath">sl_2</span>-triple, that is a triple <span class="SimpleMath">(y,h,x)</span> of elements of the simple Lie algebra with <span class="SimpleMath">[x,y]=h</span>, <span class="SimpleMath">[h,x]=2x</span>, <span class="SimpleMath">[h,y]=-2y</span>. The nilpotent orbit corresponding to this is the orbit of the element x under the action of the adjoint group.</p>
+
+<p>Let <span class="SimpleMath">P</span> be a parabolic subalgebra of <span class="SimpleMath">K</span> (i.e., generated by the Cartan subalgebra of <span class="SimpleMath">K</span>, all positive root vectors, along with the negative simple root vectors corresponding to a given subset of the basis of simple roots), <span class="SimpleMath">L</span> the corresponding Levi subalgebra (i.e., the reductive part of <span class="SimpleMath">P</span>), and <span class="SimpleMath">N</span> the nilradical of <span class="SimpleMath">P</span>. Let <span class="SimpleMath">O_L</span> be a nilpotent orbit in <span class="SimpleMath">L</span>. There exists a unique nilpotent orbit <span class="SimpleMath">O_K</span> in <span class="SimpleMath">K</span> such that the intersection of <span class="SimpleMath">O_K</span> and <span class="SimpleMath">O_L + N</span> is dense in the latter. In this situation <span class="SimpleMath">O_K</span> is said to be <em>induced</em> from <span class="SimpleMath">O_L</span>. Nilpotent orbits in <span class="SimpleMath">K</span> which are not induced are said to be <em>rigid</em>.</p>
+
+<p>Now consider the variety of all <span class="SimpleMath">G</span>-orbits in <span class="SimpleMath">K</span> of a given dimension <span class="SimpleMath">d</span>. The irreducible components of this variety are called the <em>sheets</em> of <span class="SimpleMath">K</span>. Every sheet has a unique nilpotent orbit. Moreover this nilpotent orbit is induced from an orbit <span class="SimpleMath">O_L</span>, and <span class="SimpleMath">O_L</span> is rigid in <span class="SimpleMath">L</span>. So the sheets are parametrised by pairs <span class="SimpleMath">(L,O_L)</span>, where <span class="SimpleMath">L</span> is a Levi subalgebra, and <span class="SimpleMath">O_L</span> a rigid nilpotent orbit in it. This data can conveniently be given by a <em>sheet diagram</em>: this is the Dynkin diagram of <span class="SimpleMath">K</span>, were the nodes that do <em>not</em> correspond to simple roots of <span class="SimpleMath">L</span> have label 2. So, leaving out the nodes with label 2, one obtains the Dynkin diagram of <span class="SimpleMath">L</span>. The remaining labels in the sheet diagram then correspond to the weighted Dynkin diagram of the nilpotent orbit <span class="SimpleMath">O_L</span>. Since this orbit is rigid, its weighted Dynki diagram has labels 0 or 1. From that it follows that one can recover <span class="SimpleMath">L</span> and <span class="SimpleMath">O_L</span> from the sheet diagram. The <em>rank</em> of a sheet is defined as the dimension of the centre of <span class="SimpleMath">L</span>, obviously that is equal to the number of 2's in the sheet diagram.</p>
+
+<p><a id="X8173135A7D187358" name="X8173135A7D187358"></a></p>
+
+<h4>3.1 <span class="Heading"> The functions </span></h4>
+
+<p><a id="X7A074A557A7347D2" name="X7A074A557A7347D2"></a></p>
+
+<h5>3.1-1 NilpotentOrbit</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NilpotentOrbit</code>( <var class="Arg">L</var>, <var class="Arg">wd</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a simple Lie algebra and <var class="Arg">wd</var> a weighted Dynkin diagram (i.e., a list containing the weights of the weighted Dynkin diagram, in the same order as the nodes of the Dynkin diagram of the root system of <var class="Arg">L</var>; that order can be deduced from the Cartan matrix of the same root system). The corresponding nilpotent orbit is returned. It is the responsibility of the user to make sure that the weighted Dynkin diagram corresponds to a nilpotent orbit.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",6,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o:= NilpotentOrbit( L, [1,2,0,0,0,1] );</span>
+&lt;nilpotent orbit in Lie algebra of type E6&gt;
+</pre></div>
+
+<p><a id="X7D5C0354810069A8" name="X7D5C0354810069A8"></a></p>
+
+<h5>3.1-2 NilpotentOrbits</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NilpotentOrbits</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a semisimple Lie algebra. This function returns the list of all nilpotent orbits of <var class="Arg">L</var>. If <var class="Arg">L</var> is simple of classical type, then the nilpotent orbits correpond to partitions (of <span class="SimpleMath">n+1</span> for type <span class="SimpleMath">A_n</span>, of <span class="SimpleMath">2n+1</span> for type <span class="SimpleMath">B_n</span>, of <span class="SimpleMath">2n</span> for type <span class="SimpleMath">C_n</span> and of <span class="SimpleMath">2n</span> for type <span class="SimpleMath">D_n</span>, see <a href="chapBib.html#biBcolmcgov">[CM93]</a>). If <var class="Arg">L</var> is of one of these types then the orbits returned by this function have the attribute <var class="Arg">OrbitPartition</var> set, which returns the corresponding partition.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",6,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbs:= NilpotentOrbits(L);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbs[10];</span>
+&lt;nilpotent orbit in Lie algebra of type E6&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(orbs);</span>
+20
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("B",4,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbs:= NilpotentOrbits(L);;            </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OrbitPartition( orbs[10] );</span>
+[ 5, 3, 1 ]
+</pre></div>
+
+<p><a id="X804830757E5971E9" name="X804830757E5971E9"></a></p>
+
+<h5>3.1-3 WeightedDynkinDiagram</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeightedDynkinDiagram</code>( <var class="Arg">o</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">o</var> is a nilpotent orbit; this function returns its weighted Dynkin diagram.</p>
+
+<p><a id="X804830757E5971E9" name="X804830757E5971E9"></a></p>
+
+<h5>3.1-4 WeightedDynkinDiagram</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeightedDynkinDiagram</code>( <var class="Arg">L</var>, <var class="Arg">x</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a semisimple Lie algebra, and <var class="Arg">x</var> a nilpotent element. This function returns the weighted Dynkin diagram of the orbit containing <var class="Arg">x</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("B",3,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WeightedDynkinDiagram( L, L.1+L.9 ); </span>
+[ 2, 0, 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",6,Rationals );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WeightedDynkinDiagram(L, L.1+L.6+L.20+2*L.32 : table:= true );</span>
+[ 0, 0, 0, 1, 0, 0 ]
+</pre></div>
+
+<p><a id="X7F2B6308785707B9" name="X7F2B6308785707B9"></a></p>
+
+<h5>3.1-5 AmbientLieAlgebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AmbientLieAlgebra</code>( <var class="Arg">o</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">o</var> is a nilpotent orbit; this function returns the Lie algebra it lives in.</p>
+
+<p><a id="X8401CDC2859F8A85" name="X8401CDC2859F8A85"></a></p>
+
+<h5>3.1-6 SemiSimpleType</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SemiSimpleType</code>( <var class="Arg">o</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">o</var> is a nilpotent orbit; this function returns the type of the Lie algebra it lives in.</p>
+
+<p><a id="X84E78DA17D8C7F74" name="X84E78DA17D8C7F74"></a></p>
+
+<h5>3.1-7 SL2Triple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SL2Triple</code>( <var class="Arg">o</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">o</var> is a nilpotent orbit; this function returns an sl_2-triple <span class="SimpleMath">(y,h,x)</span> corresponding to <var class="Arg">o</var>. For the exceptional types the <span class="SimpleMath">x</span> is as in the paper <a href="chapBib.html#biBwdg08">[Gra08]</a>. For the classical types the <span class="SimpleMath">x</span> is computed on the fly.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",6,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbs:= NilpotentOrbits(L);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SL2Triple( orbs[10] );</span>
+[ (4)*v.51+(3)*v.53+(3)*v.56+v.59, (4)*v.73+(6)*v.74+(8)*v.75+(11)*v.76+(
+    8)*v.77+(4)*v.78, v.15+v.17+v.20+v.23 ]
+</pre></div>
+
+<p><a id="X832FB68587166C4F" name="X832FB68587166C4F"></a></p>
+
+<h5>3.1-8 RandomSL2Triple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomSL2Triple</code>( <var class="Arg">o</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">o</var> is a nilpotent orbit; this function returns a random sl_2-triple <span class="SimpleMath">(x,h,y)</span> corresponding to <var class="Arg">o</var>. This means that every call (potentially) returns a different sl_2-triple.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",6,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbs:= NilpotentOrbits(L);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSL2Triple( orbs[10] );</span>
+[ (3)*v.49+(3)*v.50+v.51+(4)*v.59, (4)*v.73+(6)*v.74+(8)*v.75+(11)*v.76+(
+    8)*v.77+(4)*v.78, v.13+v.14+v.15+v.23 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomSL2Triple( orbs[10] );</span>
+[ (3)*v.49+(4)*v.54+(3)*v.56+v.57, (4)*v.73+(6)*v.74+(8)*v.75+(11)*v.76+(
+    8)*v.77+(4)*v.78, v.13+v.18+v.20+v.21 ]
+</pre></div>
+
+<p><a id="X8029297A7C3372E9" name="X8029297A7C3372E9"></a></p>
+
+<h5>3.1-9 SL2Grading</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SL2Grading</code>( <var class="Arg">L</var>, <var class="Arg">h</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a Lie algebra, and <var class="Arg">h</var> is an element of it, such that there is an sl_2 triple of which it is the Cartan element (the system does not check that). This function returns the grading of <var class="Arg">L</var> in eigenspaces of <var class="Arg">h</var>. A list containing three lists is returned: the first list contains bases of the components with degrees 1,2,3,... the second list has bases of the components with degrees -1,-2,-3,..., the last list contains a basis of the zero component.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("F",4,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbs:= NilpotentOrbits(L);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sl2:= RandomSL2Triple( orbs[6] );</span>
+[ (2)*v.37+(2)*v.39+v.41, (3)*v.49+(4)*v.50+(6)*v.51+(8)*v.52, v.13+v.15+v.17 
+ ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SL2Grading( L, sl2[2] );</span>
+[ [ [ v.3, v.5, v.7, v.8, v.9, v.11 ], 
+      [ v.10, v.12, v.13, v.14, v.15, v.16, v.17, v.18, v.20 ], 
+      [ v.19, v.21 ], [ v.22, v.23, v.24 ] ], 
+  [ [ v.27, v.29, v.31, v.32, v.33, v.35 ], 
+      [ v.34, v.36, v.37, v.38, v.39, v.40, v.41, v.42, v.44 ], 
+      [ v.43, v.45 ], [ v.46, v.47, v.48 ] ], 
+  [ v.1, v.2, v.4, v.6, v.25, v.26, v.28, v.30, v.49, v.50, v.51, v.52 ] ]
+</pre></div>
+
+<p><a id="X84E78DA17D8C7F74" name="X84E78DA17D8C7F74"></a></p>
+
+<h5>3.1-10 SL2Triple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SL2Triple</code>( <var class="Arg">L</var>, <var class="Arg">x</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a simple Lie algebra, and <var class="Arg">x</var> is a nilpotent element of it. A list of three elements is returned, forming an sl_2-triple, the last of which is equal to <var class="Arg">x</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("F",4,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SL2Triple( L, L.1+L.20 );</span>
+[ v.16+v.25, v.49, v.1+v.20 ]
+</pre></div>
+
+<p><a id="X830C432A838875A0" name="X830C432A838875A0"></a></p>
+
+<h5>3.1-11 InducedNilpotentOrbits</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InducedNilpotentOrbits</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a simple Lie algebra. This function returns the list of all induced nilpotent orbits of <var class="Arg">L</var>. An induced orbit is given by a record containing two fields: <var class="Arg">sheetdiag</var>, which is a diagram describing the Levi subalgebra and the rigid nilpotent orbit in it from which the nilpotent orbit is induced, and <var class="Arg">norbit</var>, which is the induced nilpotent orbit in <var class="Arg">L</var>. The sheet diagram is a labeled Dynkin diagram, and the labels are 0, 1 or 2. If we take the Dynkin diagram and erase the nodes which have label 2 then we obtain the Dynkin diagram of the Levi subalgebra. Moreover, the labels 0 and 1 on that diagram give the rigid nilpotent orbit in the Levi subalgebra. From this pair the nilpotent orbit <var class="Arg">norbit</var> is induced. It may happen that the same nilpotent orbit is induced from more pairs consisting of a Levi subalgebra and a rigid nilpotent orbit in it. In that case the same nilpotent orbit appears more than once in the list, each time with a different sheet diagram attached. This function works for the Lie algebras of exceptional type and for the Lie algebras of type <span class="SimpleMath">A</span> regardless of the rank. It works for the Lie algebras of the other types up to rank 10.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",6,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:= InducedNilpotentOrbits(L);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s[19];</span>
+rec( norbit := &lt;nilpotent orbit in Lie algebra of type E6&gt;, 
+  sheetdiag := [ 2, 0, 0, 1, 0, 2 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WeightedDynkinDiagram( s[19].norbit );</span>
+[ 0, 0, 0, 2, 0, 0 ]
+</pre></div>
+
+<p><a id="X78795C607C2343C3" name="X78795C607C2343C3"></a></p>
+
+<h5>3.1-12 RigidNilpotentOrbits</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RigidNilpotentOrbits</code>( <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">L</var> is a simple Lie algebra. This function returns the list of all rigid nilpotent orbits of <var class="Arg">L</var>, <em>except</em> the zero orbit (which is always rigid).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",6,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RigidNilpotentOrbits(L);</span>
+[ &lt;nilpotent orbit in Lie algebra of type E6&gt;, 
+  &lt;nilpotent orbit in Lie algebra of type E6&gt;, 
+  &lt;nilpotent orbit in Lie algebra of type E6&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( last, WeightedDynkinDiagram );</span>
+[ [ 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 1, 0, 0, 1, 0, 1 ] ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

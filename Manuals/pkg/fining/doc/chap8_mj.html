@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (FinInG) - Chapter 8: Orbits, stabilisers and actions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap8"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap8.html">[MathJax off]</a></p>
+<p><a id="X87A0A15D8588D62F" name="X87A0A15D8588D62F"></a></p>
+<div class="ChapSects"><a href="chap8_mj.html#X87A0A15D8588D62F">8 <span class="Heading">Orbits, stabilisers and actions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X81E0FF0587C54543">8.1 <span class="Heading">Orbits</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7CF168A0818C553D">8.1-1 FiningOrbit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X827CD5727A7DA4A3">8.1-2 FiningOrbits</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X822D1CFF7DDC11D7">8.1-3 FiningOrbitsDomain</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X7EAB52F67B3A0003">8.2 <span class="Heading">Stabilisers</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X83B7F30F81A0BCE3">8.2-1 FiningStabiliser</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X854826AC7DA9FB6B">8.2-2 FiningStabiliserOrb</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7929900F79B6000C">8.2-3 FiningSetwiseStabiliser</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7A625B4D7992EEBC">8.2-4 StabiliserGroupOfSubspace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7F50965D7B9C1BC5">8.2-5 ProjectiveStabiliserGroupOfSubspace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X81B7F825830CD669">8.2-6 SpecialProjectiveStabiliserGroupOfSubspace</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X7B449F3B7F23A30A">8.3 <span class="Heading">Actions and nice monomorphisms revisited</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X86A646FF8668D82E">8.3-1 <span class="Heading">Action functions</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X8474367181BB501E">8.3-2 <span class="Heading">Generic GAP functions</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7965086E82ABCF41">8.3-3 NiceMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7B47BE0983E93A83">8.3-4 NiceObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X86AC831981D89DF1">8.3-5 <span class="Heading">Different behaviour for different collineation groups</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X80F4EDD487059D70">8.3-6 SetParent</a></span>
+</div></div>
+</div>
+
+<h3>8 <span class="Heading">Orbits, stabilisers and actions</span></h3>
+
+<p><a id="X81E0FF0587C54543" name="X81E0FF0587C54543"></a></p>
+
+<h4>8.1 <span class="Heading">Orbits</span></h4>
+
+<p>GAP provides generic functionality to compute orbits. These functions are, generally spoken, applicable to the groups implemented in <strong class="pkg">FinInG</strong>, combined with the appropriate action functions. However, the generic functions applied in such situations are rather time comsuming. <strong class="pkg">FinInG</strong> therefore provides alternative functions to compute orbits.</p>
+
+<p><a id="X7CF168A0818C553D" name="X7CF168A0818C553D"></a></p>
+
+<h5>8.1-1 FiningOrbit</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiningOrbit</code>( <var class="Arg">g</var>, <var class="Arg">obj</var>, <var class="Arg">act</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The orbit of the object <var class="Arg">obj</var> under the action <var class="Arg">act</var> of the group <var class="Arg">g</var>.</p>
+
+<p>The argument <var class="Arg">obj</var> is either a subspace of a projective space, then combined with the action function <code class="file">OnProjSubspaces</code>, or a set of elements of a projective space, then combined with the action function <code class="file">OnSetsProjSubspaces</code>. The group <var class="Arg">g</var> is a subgroup of a collineation group of a projective space. In both cases the action function computes the action of <var class="Arg">el</var> under the group element <var class="Arg">g</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ParabolicQuadric(6,3);</span>
+Q(6, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(ps);</span>
+PGammaO(7,3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(6,3);</span>
+ProjectiveSpace(6, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := First(Solids(pg),t -&gt; TypeOfSubspace(ps,t) = "elliptic" );</span>
+&lt;a solid in ProjectiveSpace(6, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbit := FiningOrbit(g,s,OnProjSubspaces);</span>
+&lt;closed orbit, 265356 points&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+33555
+ 
+</pre></div>
+
+<p>The second example shows the possible use of <code class="file">FiningOrbit</code> in combination with the action function <code class="file">OnSetsProjSubspaces</code>. Please note that this variant is probably not the most efficient way to compute all elliptic quadrics contained in the parabolic quadric <span class="SimpleMath">\(ps\)</span>. Experiments show that for <span class="SimpleMath">\(q=5\)</span> the second variant takes an unreasonable amount of time. Also note that the second argument <var class="Arg">el</var> must be a set (and therefore it might be necessary to apply <code class="file">Set</code> on a collection of elements).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ParabolicQuadric(4,3);</span>
+Q(4, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(ps);</span>
+PGammaO(5,3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(4,3);</span>
+ProjectiveSpace(4, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := First(Solids(pg),t -&gt; TypeOfSubspace(ps,t) = "elliptic" );</span>
+&lt;a solid in ProjectiveSpace(4, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbit1 := FiningOrbit(g,s,OnProjSubspaces);</span>
+&lt;closed orbit, 36 points&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+9
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">spts := Filtered(Points(s),s-&gt;s in ps);</span>
+[ &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt;, 
+  &lt;a point in ProjectiveSpace(4, 3)&gt;, &lt;a point in ProjectiveSpace(4, 3)&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbit2 := FiningOrbit(g,Set(spts),OnSetsProjSubspaces);</span>
+&lt;closed orbit, 36 points&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+18
+ 
+</pre></div>
+
+<p><a id="X827CD5727A7DA4A3" name="X827CD5727A7DA4A3"></a></p>
+
+<h5>8.1-2 FiningOrbits</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiningOrbits</code>( <var class="Arg">g</var>, <var class="Arg">set</var>, <var class="Arg">act</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiningOrbits</code>( <var class="Arg">g</var>, <var class="Arg">coll</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The orbits of the group <var class="Arg">g</var> on <var class="Arg">set</var> under the action of <var class="Arg">act</var>.</p>
+
+<p>The set is a set of elements of a projective space, the group <var class="Arg">g</var> is a subgroup of the collineation group of a projective space, and <var class="Arg">act</var> is the function <code class="file">OnProjSubspaces</code>. If <var class="Arg">coll</var> is a collection of elements of a projective space (i.e. not a list or set, but and object representing the collection of elements of a given type, such as <code class="file">Lines(PG(3,4))</code>), then the second versions returns the orbits of <var class="Arg">g</var> on the elements of <var class="Arg">coll</var> under the action <code class="file">OnProjSubspaces</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := HermitianPolarSpace(3,9);</span>
+H(3, 3^2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(ps);</span>
+PGammaU(4,3^2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningOrbits(g,Lines(PG(3,9)));</span>
+75%..98%..100%..[ &lt;closed orbit, 5670 points&gt;, &lt;closed orbit, 1680 points&gt;, 
+  &lt;closed orbit, 112 points&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningOrbits(g,Planes(PG(3,9)));</span>
+65%..100%..[ &lt;closed orbit, 540 points&gt;, &lt;closed orbit, 280 points&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ParabolicQuadric(2,5);</span>
+Q(2, 5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(ps);</span>
+PGammaO(3,5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pts := Filtered(Points(PG(2,5)),x-&gt;not x in ps);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(pts);</span>
+25
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningOrbits(g,Points(PG(2,5)));</span>
+48%..67%..100%..[ &lt;closed orbit, 15 points&gt;, &lt;closed orbit, 6 points&gt;, 
+  &lt;closed orbit, 10 points&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningOrbits(g,pts,OnProjSubspaces);</span>
+60%..100%..[ &lt;closed orbit, 15 points&gt;, &lt;closed orbit, 10 points&gt; ]
+ 
+</pre></div>
+
+<p><a id="X822D1CFF7DDC11D7" name="X822D1CFF7DDC11D7"></a></p>
+
+<h5>8.1-3 FiningOrbitsDomain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiningOrbitsDomain</code>( <var class="Arg">g</var>, <var class="Arg">coll</var>, <var class="Arg">act</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The orbits of the group <var class="Arg">g</var> on a collection <var class="Arg">coll</var> under the action of <var class="Arg">act</var>.</p>
+
+<p>The argument <var class="Arg">coll</var> must be an object in the category <code class="code">IsElementsOfIncidenceGeometry</code>, the argument <var class="Arg">g</var> can be any group, acting on the elements of <var class="Arg">coll</var> through a suitable action function <var class="Arg">act</var>. This operation is inspired by the GAP operation <code class="file">OrbitsDomain</code>. It computes the orbits of the group <var class="Arg">g</var> on the set of elements in <var class="Arg">coll</var> <em>assuming</em> that the set of elements of <var class="Arg">coll</var> is closed under that action of <var class="Arg">g</var>. There is no check whether the assumption is correct, so this operation should typically be used when it is known that the assumption is correct. The operation is generic in the sense that it can be used for different types of incidence geometries as long as the triple arguments consist of a suitable action of <var class="Arg">g</var> on the elements of <var class="Arg">coll</var>. In general, if the assumption is correct, this operation will be faster than <code class="file">FiningOrbits</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(7,2);</span>
+ProjectiveSpace(7, 2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group:=CollineationGroup(pg);</span>
+The FinInG collineation group PGL(8,2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">syl127:=SylowSubgroup(group,127);</span>
+&lt;projective collineation group of size 127&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbits := FiningOrbits(syl127,AsList(Solids(pg)));;</span>
+1%..2%..3%..4%..5%..6%..7%..8%..9%..10%..11%..12%..13%..14%..15%..16%..17%..18%..19%..20%..21%..
+22%..23%..24%..25%..26%..27%..28%..29%..30%..31%..32%..33%..34%..35%..36%..37%..38%..39%..40%..41%
+..42%..43%..44%..45%..46%..47%..48%..49%..50%..51%..52%..53%..54%..55%..56%..57%..58%..59%..60%..
+61%..62%..63%..64%..65%..66%..67%..68%..69%..70%..71%..72%..73%..74%..75%..76%..77%..78%..79%..
+80%..81%..82%..83%..84%..85%..86%..87%..88%..89%..90%..91%..92%..93%..94%..95%..96%
+..97%..98%..99%..100%..
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+212661
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Collected(List(orbits,x-&gt;Length(x)));</span>
+[ [ 127, 1581 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbits := FiningOrbitsDomain(syl127,Solids(pg),OnProjSubspaces);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+26529
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Collected(List(orbits,x-&gt;Length(x)));</span>
+[ [ 127, 1581 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbits := OrbitsDomain(syl127,Solids(pg),OnProjSubspaces);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+35506
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Collected(List(orbits,x-&gt;Length(x)));</span>
+[ [ 127, 1581 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ag := AG(4,5);</span>
+AG(4, 5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := Random(CollineationGroup(ag));</span>
+&lt; a collineation: &lt;cmat 5x5 over GF(5,1)&gt;, F^0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := Group(h);</span>
+&lt;projective collineation group with 1 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orbits := FiningOrbitsDomain(group,Points(ag),OnAffineSubspaces);</span>
+[ &lt;closed orbit, 624 points&gt;, &lt;closed orbit, 1 points&gt; ]
+ 
+</pre></div>
+
+<p><a id="X7EAB52F67B3A0003" name="X7EAB52F67B3A0003"></a></p>
+
+<h4>8.2 <span class="Heading">Stabilisers</span></h4>
+
+<p>The GAP function <code class="file">Stabilizer</code> is a generic function to compute stabilisers of one object (or sets or tuples etc. of objects) under a group, using a specified action function. This generic function can be used together with the in <strong class="pkg">FinInG</strong> implemented groups and elements of geometries. However, computing time can be very long, already in small geometries.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(3,8);</span>
+ProjectiveSpace(3, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(ps);</span>
+The FinInG collineation group PGammaL(4,8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(ps));</span>
+&lt;a point in ProjectiveSpace(3, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Stabilizer(g,p,OnProjSubspaces);</span>
+&lt;projective collineation group of size 177223237632 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+10026
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := Random(Lines(ps));</span>
+&lt;a line in ProjectiveSpace(3, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Stabilizer(g,line,OnProjSubspaces);</span>
+&lt;projective collineation group of size 21849440256 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+78126
+ 
+</pre></div>
+
+<p>The packages <strong class="pkg">GenSS</strong> and <strong class="pkg">orb</strong> required by <strong class="pkg">FinInG</strong> provide efficient operations to compute stabilisers, and <strong class="pkg">FinInG</strong> provides functionality to use these operations for the particular groups and (elements) of geometries.</p>
+
+<p><a id="X83B7F30F81A0BCE3" name="X83B7F30F81A0BCE3"></a></p>
+
+<h5>8.2-1 FiningStabiliser</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiningStabiliser</code>( <var class="Arg">g</var>, <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The subgroup of <var class="Arg">g</var> stabilising the element <var class="Arg">el</var></p>
+
+<p>The argument <var class="Arg">g</var> is a group of collineations acting on the element <var class="Arg">el</var>, being a subspace of a projective space (and hence, all elements of a Lie geometry are allowed as second argument). This operation relies on the <strong class="pkg">GenSS</strong> operation <code class="file">Stab</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(5,4);</span>
+ProjectiveSpace(5, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := SpecialHomographyGroup(ps);</span>
+The FinInG PSL group PSL(6,4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(ps));</span>
+&lt;a point in ProjectiveSpace(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliser(g,p);</span>
+&lt;projective collineation group of size 264696069567283200 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := Random(Lines(ps));</span>
+&lt;a line in ProjectiveSpace(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliser(g,line);</span>
+&lt;projective collineation group of size 3881174040576000 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane := Random(Planes(ps));</span>
+&lt;a plane in ProjectiveSpace(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliser(g,plane);</span>
+#I  Have 106048 points.
+#I  Have 158748 points.
+&lt;projective collineation group of size 958878292377600 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := HyperbolicQuadric(5,5);</span>
+Q+(5, 5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := IsometryGroup(ps);</span>
+PGO(1,6,5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(ps));</span>
+&lt;a point in Q+(5, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliser(g,p);</span>
+&lt;projective collineation group of size 36000000 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := Random(Lines(ps));</span>
+&lt;a line in Q+(5, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliser(g,line);</span>
+&lt;projective collineation group of size 6000000 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane := Random(Planes(ps));</span>
+&lt;a plane in Q+(5, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliser(g,plane);</span>
+&lt;projective collineation group of size 93000000 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := SplitCayleyHexagon(3);</span>
+H(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(h);</span>
+#I  for Split Cayley Hexagon
+#I  Computing nice monomorphism...
+#I  Found permutation domain...
+G_2(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(h));</span>
+&lt;a point in H(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliser(g,p);</span>
+&lt;projective collineation group of size 11664 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := Random(Lines(h));</span>
+&lt;a line in H(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliser(g,line);</span>
+&lt;projective collineation group of size 11664 with 2 generators&gt;
+ 
+</pre></div>
+
+<p><a id="X854826AC7DA9FB6B" name="X854826AC7DA9FB6B"></a></p>
+
+<h5>8.2-2 FiningStabiliserOrb</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiningStabiliserOrb</code>( <var class="Arg">g</var>, <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The subgroup of <var class="Arg">g</var> stabilising the element <var class="Arg">el</var></p>
+
+<p>The argument <var class="Arg">g</var> is a group of collineations acting on the element <var class="Arg">el</var>, being a subspace of a projective space (and hence, all elements of a Lie geometry are allowed as second argument). This operation relies on some particular <strong class="pkg">orb</strong> functionality.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(5,4);</span>
+ProjectiveSpace(5, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := SpecialHomographyGroup(ps);</span>
+The FinInG PSL group PSL(6,4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(ps));</span>
+&lt;a point in ProjectiveSpace(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliserOrb(g,p);</span>
+&lt;projective collineation group with 15 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := Random(Lines(ps));</span>
+&lt;a line in ProjectiveSpace(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliserOrb(g,line);</span>
+&lt;projective collineation group with 15 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane := Random(Planes(ps));</span>
+&lt;a plane in ProjectiveSpace(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliserOrb(g,plane);</span>
+&lt;projective collineation group with 15 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := HyperbolicQuadric(5,5);</span>
+Q+(5, 5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := IsometryGroup(ps);</span>
+PGO(1,6,5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(ps));</span>
+&lt;a point in Q+(5, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliserOrb(g,p);</span>
+&lt;projective collineation group with 15 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := Random(Lines(ps));</span>
+&lt;a line in Q+(5, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliserOrb(g,line);</span>
+&lt;projective collineation group with 15 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane := Random(Planes(ps));</span>
+&lt;a plane in Q+(5, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliserOrb(g,plane);</span>
+&lt;projective collineation group with 15 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := SplitCayleyHexagon(3);</span>
+H(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(h);</span>
+#I  for Split Cayley Hexagon
+#I  Computing nice monomorphism...
+#I  Found permutation domain...
+G_2(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(h));</span>
+&lt;a point in H(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliserOrb(g,p);</span>
+&lt;projective collineation group with 15 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := Random(Lines(h));</span>
+&lt;a line in H(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliserOrb(g,line);</span>
+&lt;projective collineation group with 15 generators&gt;
+ 
+</pre></div>
+
+<p>A small example shows the difference in computing time. Clearly the <code class="file">FiningStabiliserOrb</code> is the fastest way to compute stabilizers of one element.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(3,8);</span>
+ProjectiveSpace(3, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(ps);</span>
+The FinInG collineation group PGammaL(4,8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(ps));</span>
+&lt;a point in ProjectiveSpace(3, 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g1 := Stabilizer(g,p);</span>
+&lt;projective collineation group of size 177223237632 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+9576
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g2 := FiningStabiliser(g,p);</span>
+&lt;projective collineation group of size 177223237632 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+244
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g3 := FiningStabiliserOrb(g,p);</span>
+&lt;projective collineation group with 15 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+46
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g1=g2;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g2=g3;</span>
+true
+ 
+</pre></div>
+
+<p><a id="X7929900F79B6000C" name="X7929900F79B6000C"></a></p>
+
+<h5>8.2-3 FiningSetwiseStabiliser</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiningSetwiseStabiliser</code>( <var class="Arg">g</var>, <var class="Arg">els</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The subgroup of <var class="Arg">g</var> stabilising the set <var class="Arg">els</var></p>
+
+<p>The argument <var class="Arg">g</var> is a group of collineations acting on the element <var class="Arg">el</var>, being a subspace of a projective space (and hence, all elements of a Lie geometry are allowed as second argument). The argument <var class="Arg">els</var> is a set of elements of the same type of the same Lie geometry, the elements are all in the category <code class="code">IsSubspaceOfProjectiveSpace</code>. The underlying action function is assumed to be <code class="file">OnProjSubspaces</code></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := HyperbolicQuadric(5,5);                   </span>
+Q+(5, 5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := IsometryGroup(ps);</span>
+PGO(1,6,5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane1 := Random(Planes(ps));</span>
+&lt;a plane in Q+(5, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane2 := Random(Planes(ps));</span>
+&lt;a plane in Q+(5, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningSetwiseStabiliser(g,Set([plane1,plane2]));</span>
+#I  Computing adjusted stabilizer chain...
+&lt;projective collineation group with 4 generators&gt;
+ 
+</pre></div>
+
+<p>Computing the setwise stabiliser under a group is also possible using <code class="file">Stabilizer</code>. But, not suprisingly, the computing time can be very long.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := PG(3,4);</span>
+ProjectiveSpace(3, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(ps));</span>
+&lt;a point in ProjectiveSpace(3, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q := Random(Points(ps));</span>
+&lt;a point in ProjectiveSpace(3, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(ps);</span>
+The FinInG collineation group PGammaL(4,4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Stabilizer(g,Set([p,q]),OnSets);</span>
+&lt;projective collineation group of size 552960 with 5 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+10440
+ 
+</pre></div>
+
+<p>The package <strong class="pkg">GenSS</strong> provides an efficient operations to compute setwise stabilisers. This is why <strong class="pkg">FinInG</strong> provides functionality, such as <code class="file">FiningSetwiseStabiliser</code>, to use these <strong class="pkg">GenSS</strong> operations for the particular groups and (elements) of geometries. A small example shows the difference in computing time.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := ParabolicQuadric(4,4);</span>
+Q(4, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(ps);</span>
+PGammaO(5,4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l1 := Random(Lines(ps));</span>
+&lt;a line in Q(4, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l2 := Random(Lines(ps));</span>
+&lt;a line in Q(4, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g1 := Stabilizer(g,Set([l1,l2]),OnSets);</span>
+&lt;projective collineation group of size 2304 with 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+2633
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g2 := FiningSetwiseStabiliser(g,Set([l1,l2]));</span>
+#I  Computing adjusted stabilizer chain...
+&lt;projective collineation group with 5 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+70
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g1=g2;</span>
+true
+ 
+</pre></div>
+
+<p>For subspaces of projective spaces we can be even more efficient by writing down generators of the stabiliser and then return the generated subgroup.</p>
+
+<p><a id="X7A625B4D7992EEBC" name="X7A625B4D7992EEBC"></a></p>
+
+<h5>8.2-4 StabiliserGroupOfSubspace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StabiliserGroupOfSubspace</code>( <var class="Arg">sub</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The subgroup of the collineation group of <var class="Arg">AmbientSpace(sub)</var> stabilising the subspace <var class="Arg">sub</var></p>
+
+<p>The argument <var class="Arg">sub</var> is a subspace of a projective space.</p>
+
+<p><a id="X7F50965D7B9C1BC5" name="X7F50965D7B9C1BC5"></a></p>
+
+<h5>8.2-5 ProjectiveStabiliserGroupOfSubspace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProjectiveStabiliserGroupOfSubspace</code>( <var class="Arg">sub</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The subgroup of the projectivity group of <var class="Arg">AmbientSpace(sub)</var> stabilising the subspace <var class="Arg">sub</var></p>
+
+<p>The argument <var class="Arg">sub</var> is a subspace of a projective space.</p>
+
+<p><a id="X81B7F825830CD669" name="X81B7F825830CD669"></a></p>
+
+<h5>8.2-6 SpecialProjectiveStabiliserGroupOfSubspace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SpecialProjectiveStabiliserGroupOfSubspace</code>( <var class="Arg">sub</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The subgroup of the special projectivity group of <var class="Arg">AmbientSpace(sub)</var> stabilising the subspace <var class="Arg">sub</var></p>
+
+<p>The argument <var class="Arg">sub</var> is a subspace of a projective space.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg:=ProjectiveSpace(5,9);            </span>
+ProjectiveSpace(5, 9)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sub:=RandomSubspace(pg,2);     </span>
+&lt;a plane in ProjectiveSpace(5, 9)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coll:=StabiliserGroupOfSubspace(sub); time;                                </span>
+&lt;projective collineation group of size 11173786189009966655078400 with 
+6 generators&gt;
+10
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">computed:=FiningStabiliserOrb(CollineationGroup(pg),sub); </span>
+&lt;projective collineation group with 15 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+34923
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coll = computed;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">proj:=ProjectiveStabiliserGroupOfSubspace(sub); </span>
+&lt;projective collineation group of size 5586893094504983327539200 with 
+5 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FiningStabiliserOrb(ProjectivityGroup(pg),sub)=proj; </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;      </span>
+116113
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">specproj:=SpecialProjectiveStabiliserGroupOfSubspace(sub); </span>
+&lt;projective collineation group of size 2793446547252491663769600 with 
+5 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">specproj = FiningStabiliserOrb(SpecialProjectivityGroup(pg),sub); </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+65564
+ 
+</pre></div>
+
+<p><a id="X7B449F3B7F23A30A" name="X7B449F3B7F23A30A"></a></p>
+
+<h4>8.3 <span class="Heading">Actions and nice monomorphisms revisited</span></h4>
+
+<p>GAP provides generic functions to compute action homomorphisms and their images for arbitrary groups. These functions are applicable on the projective groups implemented in <strong class="pkg">FinInG</strong>.</p>
+
+<p><a id="X86A646FF8668D82E" name="X86A646FF8668D82E"></a></p>
+
+<h5>8.3-1 <span class="Heading">Action functions</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OnProjSubspaces</code>( <var class="Arg">el</var>, <var class="Arg">g</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OnProjSubspacesExtended</code>( <var class="Arg">el</var>, <var class="Arg">g</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OnSetsProjSubspaces</code>( <var class="Arg">set</var>, <var class="Arg">g</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a element of a Lie geometry</p>
+
+<p>Let <var class="Arg">el</var> be an element of any Lie geometry, and <var class="Arg">g</var> an element of a projective group acting on the elements of the ambient Lie geometry of <var class="Arg">el</var>. Then then <code class="file">OnProjSubspaces</code> will return simply the image of <var class="Arg">el</var> under <var class="Arg">g</var>. When <var class="Arg">g</var> is an element of the correlationcollineation group of a projective space, <code class="file">OnProjSubspacesExtended</code> returns the image of <var class="Arg">el</var> under <var class="Arg">g</var>. Finally, when <var class="Arg">set</var> is a set of elements of a Lie geometry, <code class="file">OnSetsProjSubspaces</code> returns the set of images under <var class="Arg">g</var>. <code class="file">OnProjSubspaces</code> is also explained in <a href="chap5_mj.html#X84A3D5357872EC3B"><span class="RefLink">5.8-1</span></a>, <code class="file">OnProjSubspacesExtended</code> is also explained in <a href="chap5_mj.html#X86B4C03E85ADD0C2"><span class="RefLink">5.8-3</span></a>.</p>
+
+<p><a id="X8474367181BB501E" name="X8474367181BB501E"></a></p>
+
+<h5>8.3-2 <span class="Heading">Generic GAP functions</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActionHomomorphism</code>( <var class="Arg">g</var>, <var class="Arg">S</var>, <var class="Arg">act</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Action</code>( <var class="Arg">g</var>, <var class="Arg">S</var>, <var class="Arg">act</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p><var class="Arg">g</var> is a projective group, <var class="Arg">S</var> is a set or a collection of elements, <var class="Arg">act</var> is an action function. <code class="file">Action</code> simply returns <code class="file">Image(hom)</code>, if <var class="Arg">hom</var> is the result of <code class="file">ActionHomomorphism</code>. The examples are self-explanatory.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pg := PG(2,3);</span>
+ProjectiveSpace(2, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">conic := Set(Points(ParabolicQuadric(2,3)));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coll := CollineationGroup(pg);</span>
+The FinInG collineation group PGL(3,3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">orb := Orbit(coll,conic,OnSetsProjSubspaces);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(orb);</span>
+234
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom := ActionHomomorphism(coll,orb,OnSetsProjSubspaces);</span>
+&lt;action homomorphism&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">perm := Image(hom);</span>
+&lt;permutation group with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(perm);</span>
+5616
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NrMovedPoints(perm);</span>
+234
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := SymplecticSpace(5,2);</span>
+W(5, 2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coll := CollineationGroup(ps);</span>
+PGammaSp(6,2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">perm := Action(coll,Lines(ps),OnProjSubspaces);</span>
+&lt;permutation group with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NrMovedPoints(perm);</span>
+315
+
+</pre></div>
+
+<p>A nice monomorphism of a group <span class="SimpleMath">\(G\)</span> is roughly just a permutation representation of <span class="SimpleMath">\(G\)</span> on a suitable action domain. An easy example is the permutation action of the full collineation group of a projective space on its points.</p>
+
+<p><a id="X7965086E82ABCF41" name="X7965086E82ABCF41"></a></p>
+
+<h5>8.3-3 NiceMonomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NiceMonomorphism</code>( <var class="Arg">group</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: A group homomorphism</p>
+
+<p>This is a generic GAP function, and returns a homorphism to a "better" representation.</p>
+
+<p><a id="X7B47BE0983E93A83" name="X7B47BE0983E93A83"></a></p>
+
+<h5>8.3-4 NiceObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NiceObject</code>( <var class="Arg">group</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: A permutation group</p>
+
+<p><var class="Arg">group</var> is a projective group. The object this operation returns is actually equivalent with <code class="file">Image(NiceMonomorphism(group))</code>.</p>
+
+<p><a id="X86AC831981D89DF1" name="X86AC831981D89DF1"></a></p>
+
+<h5>8.3-5 <span class="Heading">Different behaviour for different collineation groups</span></h5>
+
+<p>For the different Lie geometries implemented in <strong class="pkg">FinInG</strong>, nicemonomorphisms are (necessarily) treated in a different way. As the aim of a nicemonomorphism of group <span class="SimpleMath">\(G\)</span> is to provide a permutation representation, such that efficient algorithms for permutation groups become available for certain operations applicable on <span class="SimpleMath">\(G\)</span>, clearly the efficiency will be increased if the degree of the permutation representation is as small as possible.</p>
+
+<p>For the collineation group, projectivity group and special projectivity group of a projective space, it is clear that the smallest degree permutation representation is the action of the group on the projective points. In principle, one could also consider the action on the hyerplanes. For the collineation group, similarity group and isometry group of a classical polar space, in most cases, the smallest degree permutation representation is the action on the points. A notorious exception to this is the hermitian polar space in three dimensions, of which the number of lines is smaller than the number of points, and hence of which the smallest degree permutation representation is the action of the group on the lines. When constructing a collineation group (or (special) projectiviity group) of a projective space, the nicemonomorphism is not computed. It is only computed when needed. The reason is that from the underlying field and dimension, the underlying projective space can be determined at any time, and hence the smallest degree representation can be computed. For the collineation groups (and similarity and isometry groups) of classical polar spaces, this behaviour is different. Indeed, given a group of collineations, from the underlying field and dimension, the original polar space can not be determined. Of course one could consider the action on the points of the underlying projective space, but typically the number of points of a classical polar space is much smaller than the number points of the underlying projective space. This explains why, currently, a nice monomorphism is computed at the moment a collineation group of a classical polar space is computed. As a consequence, just asking the collineation group of a polar space can be time consuming.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(PG(5,9));</span>
+The FinInG collineation group PGammaL(6,9)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+28
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasNiceMonomorphism(g);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := CollineationGroup(EllipticQuadric(5,9));</span>
+PGammaO-(6,9)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+1584
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasNiceMonomorphism(h);</span>
+true
+
+</pre></div>
+
+<p><a id="X80F4EDD487059D70" name="X80F4EDD487059D70"></a></p>
+
+<h5>8.3-6 SetParent</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetParent</code>( <var class="Arg">group</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Assume that <span class="SimpleMath">\(G\)</span> is a group of collineations. As mentioned already, from the underlying field and dimension, only the underlying projective space can be determined. An operation like <code class="file">Order</code> requires a nice monomorphism, so for an arbitrary group <span class="SimpleMath">\(G\)</span>, the action on the points of the underlying projective space will be computed, which can be time consuming for large projective spaces. However, if it is known that <span class="SimpleMath">\(G\)</span> is a subgroup of another collineation group <span class="SimpleMath">\(H\)</span>, this group <span class="SimpleMath">\(H\)</span> can be set as a parent group for <span class="SimpleMath">\(G\)</span>. If a nice monomorphism is available for <span class="SimpleMath">\(H\)</span>, it will become available for <span class="SimpleMath">\(G\)</span>. In the example we construct the collineation group of the hermtian polar space <span class="SimpleMath">\(H(3,81)\)</span>. As explained, a nice monomorphism is computed upon construction. Then construct a group generated by two random elements of this collineation group of <span class="SimpleMath">\(H(3,81)\)</span>, and compute its order. Without further information, it will be assumed by the system that this new group is a subgroup of the collineation group of <span class="SimpleMath">\(PG(3,81)\)</span>, and a nice monomorphism will be computed through this group. In the second part we set the parent group as the collineation group of <span class="SimpleMath">\(H(3,81)\)</span>, and compute the order again. Compare the different timings.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ps := HermitianPolarSpace(3,81);</span>
+H(3, 9^2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group := CollineationGroup(ps);</span>
+PGammaU(4,9^2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+2219
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := Random(group);</span>
+&lt; a collineation: &lt;cmat 4x4 over GF(3,4)&gt;, F^27&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := Random(group);</span>
+&lt; a collineation: &lt;cmat 4x4 over GF(3,4)&gt;, F^3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group2 := Group([g,h]);</span>
+&lt;projective collineation group with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasNiceMonomorphism(group2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(group2);</span>
+407194345728000
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+371559
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasNiceMonomorphism(group2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NrMovedPoints(NiceObject(group2));</span>
+538084
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(Points(PG(3,81)));</span>
+538084
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">group2 := Group([g,h]);</span>
+&lt;projective collineation group with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetParent(group2,group);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasNiceMonomorphism(group2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasNiceObject(group2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Order(group2);</span>
+407194345728000
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
+888
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasNiceObject(group2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NrMovedPoints(NiceObject(group2));</span>
+7300
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(Lines(ps));</span>
+7300
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

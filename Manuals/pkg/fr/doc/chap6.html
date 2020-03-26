@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (FR) - Chapter 6: Linear machines and elements</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X84AD415C872BFB91" name="X84AD415C872BFB91"></a></p>
+<div class="ChapSects"><a href="chap6.html#X84AD415C872BFB91">6 <span class="Heading">Linear machines and elements</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X812C0F7B7A31FCEF">6.1 <span class="Heading">Methods and operations for <code class="code">LinearFRMachine</code>s and <code class="code">LinearFRElement</code>s</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7F1EB8CB87229764">6.1-1 VectorMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X825CA46481197C7A">6.1-2 AssociativeObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7F65118683209DC5">6.1-3 AlgebraMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7A19036B828BBA0C">6.1-4 Transition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X846683198081BA82">6.1-5 Transitions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X80F694298399E78D">6.1-6 NestedMatrixState</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7FCEE3BF86B02CC6">6.1-7 ActivitySparse</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8436BEA67F1C3C27">6.1-8 Activities</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7EF5B7417AE6B3F8">6.1-9 IsConvergent</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8136C21885019A4A">6.1-10 TransposedFRElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X796B736286CACF85">6.1-11 LDUDecompositionFRElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X783E8F427A23EAD1">6.1-12 GuessVectorElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X865EE2E887ECC079">6.1-13 AsLinearMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X82586DFB8458EF05">6.1-14 AsVectorMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7818245A7DABB311">6.1-15 AsAlgebraMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7BDD40B27F7541B2">6.1-16 AsVectorMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8120605981DDE434">6.1-17 AsAlgebraMachine</a></span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">Linear machines and elements</span></h3>
+
+<p><em>Linear</em> machines are a special class of FR machines, in which the stateset <span class="SimpleMath">Q</span> and the alphabet <span class="SimpleMath">X</span> are vector spaces over a field <span class="SimpleMath">Bbbk</span>, and the transition map <span class="SimpleMath">ϕ: Q⊗ X-&gt; X⊗ Q</span> is a linear map; furthermore, there is a functional <span class="SimpleMath">π:Q-&gt;Bbbk</span> called the <em>output</em>.</p>
+
+<p>As before, a choice of initial state <span class="SimpleMath">q∈ Q</span> induces a linear map <span class="SimpleMath">q:T(X)-&gt; T(X)</span>, where <span class="SimpleMath">T(X)=⨁ X^⊗ n</span> is the tensor algebra generated by <span class="SimpleMath">X</span>. This map is defined as follows: given <span class="SimpleMath">x=x_1⊗dots⊗ x_n∈ T(X)</span>, rewrite <span class="SimpleMath">q⊗ x</span> as a sum of expressions of the form <span class="SimpleMath">y⊗ r</span> with <span class="SimpleMath">y∈ T(X)</span> and <span class="SimpleMath">r∈ Q</span>; then <span class="SimpleMath">q</span>, by definition, maps <span class="SimpleMath">x</span> to the sum of the <span class="SimpleMath">π(r)y</span>.</p>
+
+<p>There are two sorts of linear machines: <em>vector machines</em>, for which the state space is a finite-dimensional vector space over a field; and <em>algebra machines</em>, for which the state space is a free algebra in a finite set of variables.</p>
+
+<p>In a vector machine, the transition and output maps are stored as a matrix and a vector respectively. Minimization algorithms are implemented, as for Mealy machines.</p>
+
+<p>In an algebra machine, the transition and output maps are stored as words in the algebra. These machines are natural extensions of group/monoid/semigroup machines.</p>
+
+<p>Linear elements are given by a linear machine and an initial state. They can be added and multiplied, and act on the tensor algebra of the alphabet, admitting natural representations as matrices.</p>
+
+<p><a id="X812C0F7B7A31FCEF" name="X812C0F7B7A31FCEF"></a></p>
+
+<h4>6.1 <span class="Heading">Methods and operations for <code class="code">LinearFRMachine</code>s and <code class="code">LinearFRElement</code>s</span></h4>
+
+<p><a id="X7F1EB8CB87229764" name="X7F1EB8CB87229764"></a></p>
+
+<h5>6.1-1 VectorMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VectorMachine</code>( <var class="Arg">domain</var>, <var class="Arg">transitions</var>, <var class="Arg">output</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VectorElement</code>( <var class="Arg">domain</var>, <var class="Arg">transitions</var>, <var class="Arg">output</var>, <var class="Arg">init</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VectorMachineNC</code>( <var class="Arg">fam</var>, <var class="Arg">transitions</var>, <var class="Arg">output</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VectorElementNC</code>( <var class="Arg">fam</var>, <var class="Arg">transitions</var>, <var class="Arg">output</var>, <var class="Arg">init</var>, <var class="Arg">category</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A new vector machine/element.</p>
+
+<p>This function constructs a new linear machine or element, of vector type.</p>
+
+<p><var class="Arg">transitions</var> is a matrix of matrices; for <code class="code">a,b</code> indices of basis vectors of the alphabet, <code class="code">transitions[a][b]</code> is a square matrix indexed by the stateset, which is the transition to be effected on the stateset upon the output <span class="SimpleMath">a-&gt; b</span>.</p>
+
+<p>The optional last argument <var class="Arg">category</var> specifies a category (<code class="func">IsAssociativeElement</code> (<a href="../../../doc/ref/chap31.html#X7979AFAA80FF795A"><span class="RefLink">Reference: IsAssociativeElement</span></a>), <code class="func">IsJacobianElement</code> (<a href="../../../doc/ref/chap31.html#X796957D0805A0221"><span class="RefLink">Reference: IsJacobianElement</span></a>),...) to which the new element should belong.</p>
+
+<p><var class="Arg">output</var> and <var class="Arg">init</var> are vectors in the stateset.</p>
+
+<p>In the "NC" version, no tests are performed to check that the arguments contain values within bounds, or even of the right type (beyond the simple checking performed by <strong class="pkg">GAP</strong>'s method selection algorithms). The first argument should be the family of the resulting object. These "NC" methods are mainly used internally by the package.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := VectorMachine(Rationals,[[[[1]],[[2]]],[[[3]],[[4]]]],[1]);</span>
+&lt;Linear machine on alphabet Rationals^2 with 1-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+ Rationals | 1 | 2 |
+-----------+---+---+
+         1 | 1 | 2 |
+-----------+---+---+
+         2 | 3 | 4 |
+-----------+---+---+
+Output: 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := VectorElement(Rationals,[[[[1]],[[2]]],[[[3]],[[4]]]],[1],[1]);</span>
+&lt;Linear element on alphabet Rationals^2 with 1-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Activity(A,2));</span>
+[ [   1,   2,   2,   4 ],
+  [   3,   4,   6,   8 ],
+  [   3,   6,   4,   8 ],
+  [   9,  12,  12,  16 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DecompositionOfFRElement(A);</span>
+[ [ &lt;Linear element on alphabet Rationals^2 with 1-dimensional stateset&gt;,
+      &lt;Linear element on alphabet Rationals^2 with 1-dimensional stateset&gt; ],
+  [ &lt;Linear element on alphabet Rationals^2 with 1-dimensional stateset&gt;,
+      &lt;Linear element on alphabet Rationals^2 with 1-dimensional stateset&gt; ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">last=[[A,2*A],[3*A,4*A]];</span>
+true
+</pre></div>
+
+<p><a id="X825CA46481197C7A" name="X825CA46481197C7A"></a></p>
+
+<h5>6.1-2 AssociativeObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AssociativeObject</code>( <var class="Arg">x</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An associative object related to <var class="Arg">x</var>.</p>
+
+<p>If <var class="Arg">x</var> belongs to a family that admits a non-associative and an associative product, and the product of <var class="Arg">x</var> is non-associative, this function returns the object corresponding to <var class="Arg">x</var>, but with associative product.</p>
+
+<p>A typical example is that <var class="Arg">x</var> is a derivation of a vector space. The product of derivations is <span class="SimpleMath">a∘ b-b∘ a</span>, and is not associative; but derivations are endomorphisms of the vector space, and as such can be composed associatively.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := VectorElement(Rationals,[[[[0]],[[1]]],[[[1]],[[0]]]],[1],[1],IsJacobianElement);</span>
+&lt;Linear element on alphabet Rationals^2 with 1-dimensional stateset-&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A^2;</span>
+&lt;Zero linear element on alphabet Rationals^2-&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AssociativeObject(A)^2;</span>
+&lt;Identity linear element on alphabet Rationals^2&gt;
+</pre></div>
+
+<p><a id="X7F65118683209DC5" name="X7F65118683209DC5"></a></p>
+
+<h5>6.1-3 AlgebraMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlgebraMachine</code>( [<var class="Arg">domain</var>, ]<var class="Arg">ring</var>, <var class="Arg">transitions</var>, <var class="Arg">output</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlgebraElement</code>( [<var class="Arg">domain</var>, ]<var class="Arg">ring</var>, <var class="Arg">transitions</var>, <var class="Arg">output</var>, <var class="Arg">init</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlgebraMachineNC</code>( <var class="Arg">fam</var>, <var class="Arg">ring</var>, <var class="Arg">transitions</var>, <var class="Arg">output</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlgebraElementNC</code>( <var class="Arg">fam</var>, <var class="Arg">ring</var>, <var class="Arg">transitions</var>, <var class="Arg">output</var>, <var class="Arg">init</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A new algebra machine/element.</p>
+
+<p>This function constructs a new linear machine or element, of algebra type.</p>
+
+<p><var class="Arg">ring</var> is a free associative algebra, optionally with one. <var class="Arg">domain</var> is the vector space on which the alphabet is defined. If absent, this argument defaults to the <code class="func">LeftActingDomain</code> (<a href="../../../doc/ref/chap57.html#X86F070E0807DC34E"><span class="RefLink">Reference: LeftActingDomain</span></a>) of <var class="Arg">ring</var>.</p>
+
+<p><var class="Arg">transitions</var> is a list of matrices; for each generator number <span class="SimpleMath">i</span> of <var class="Arg">ring</var>, the matrix <code class="code">transitions[i]</code>, with entries in <var class="Arg">ring</var>, describes the decomposition of generator <span class="SimpleMath">i</span> as a matrix.</p>
+
+<p><var class="Arg">output</var> is a vector over <var class="Arg">domain</var>, and <var class="Arg">init</var> is a vector over <var class="Arg">ring</var>.</p>
+
+<p>In the "NC" version, no tests are performed to check that the arguments contain values within bounds, or even of the right type (beyond the simple checking performed by <strong class="pkg">GAP</strong>'s method selection algorithms). The first argument should be the family of the resulting object. These "NC" methods are mainly used internally by the package.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeAssociativeAlgebraWithOne(Rationals,1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AlgebraMachine(F,[[[F.1,F.1^2+F.1],[One(F),Zero(F)]]],[1]);</span>
+&lt;Linear machine on alphabet Rationals^2 with generators [ (1)*x.1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(A);</span>
+ Rationals |     1     |     2     |
+-----------+-----------+-----------+
+         1 |       x.1 | x.1+x.1^2 |
+-----------+-----------+-----------+
+         2 |         1 |         0 |
+-----------+-----------+-----------+
+Output: 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := AlgebraElement(F,[[[F.1,F.1^2+F.1],[One(F),Zero(F)]]],[1],F.1);</span>
+&lt;Rationals^2|(1)*x.1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Activity(M,2));</span>
+[ [  1,  2,  4,  4 ],
+  [  1,  0,  2,  2 ],
+  [  1,  0,  0,  0 ],
+  [  0,  1,  0,  0 ] ]
+</pre></div>
+
+<p><a id="X7A19036B828BBA0C" name="X7A19036B828BBA0C"></a></p>
+
+<h5>6.1-4 Transition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Transition</code>( <var class="Arg">m</var>, <var class="Arg">s</var>, <var class="Arg">a</var>, <var class="Arg">b</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An element of <var class="Arg">m</var>'s stateset.</p>
+
+<p>This function returns the state reached by <var class="Arg">m</var> when started in state <var class="Arg">s</var> and performing output <span class="SimpleMath">a-&gt; b</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := AsVectorMachine(Rationals,FRMachine(GuptaSidkiGroup.2));</span>
+&lt;Linear machine on alphabet Rationals^3 with 4-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transition(M,[1,0,0,0],[1,0,0],[1,0,0]);</span>
+[ 0, 1, 0, 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transition(M,[1,0,0,0],[0,1,0],[0,1,0]);</span>
+[ 0, 0, 1, 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transition(M,[1,0,0,0],[0,0,1],[0,0,1]);</span>
+[ 1, 0, 0, 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AsVectorElement(Rationals,GuptaSidkiGroup.2);</span>
+&lt;Linear element on alphabet Rationals^3 with 4-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transition(A,[1,0,0],[1,0,0]);</span>
+[ 0, 1, 0, 0 ]
+</pre></div>
+
+<p><a id="X846683198081BA82" name="X846683198081BA82"></a></p>
+
+<h5>6.1-5 Transitions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Transitions</code>( <var class="Arg">m</var>, <var class="Arg">s</var>, <var class="Arg">a</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An vector of elements of <var class="Arg">m</var>'s stateset.</p>
+
+<p>This function returns the state reached by <var class="Arg">m</var> when started in state <var class="Arg">s</var> and receiving input <var class="Arg">a</var>. The output is a vector, indexed by the alphabet's basis, of output states.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := AsVectorMachine(Rationals,FRMachine(GuptaSidkiGroup.2));</span>
+&lt;Linear machine on alphabet Rationals^3 with 4-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transitions(M,[1,0,0,0],[1,0,0]);</span>
+[ [ 0, 1, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AsVectorElement(Rationals,GuptaSidkiGroup.2);</span>
+&lt;Linear element on alphabet Rationals^3 with 4-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transitions(A,[1,0,0]);</span>
+[ [ 0, 1, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
+</pre></div>
+
+<p><a id="X80F694298399E78D" name="X80F694298399E78D"></a></p>
+
+<h5>6.1-6 NestedMatrixState</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NestedMatrixState</code>( <var class="Arg">e</var>, <var class="Arg">i</var>, <var class="Arg">j</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NestedMatrixCoefficient</code>( <var class="Arg">e</var>, <var class="Arg">i</var>, <var class="Arg">j</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A coefficent of an iterated decomposition of <var class="Arg">e</var>.</p>
+
+<p>The first form returns the entry at position <span class="SimpleMath">(i,j)</span> of <var class="Arg">e</var>'s decomposition. Both of <var class="Arg">i,j</var> are lists. The second form returns the output of the state.</p>
+
+<p>In particular, <code class="code">e=NestedMatrixState(e,[],[])</code>, and <br /> <code class="code">Activity(e,1)[i][j]=NestedMatrixCoefficient(e,[i],[j])</code>, and <br /> <code class="code">DecompositionOfFRElement(e,1)[i][j]=NestedMatrixState(e,[i],[j])</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AsVectorElement(Rationals,GuptaSidkiGroup.2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A=NestedMatrixState(A,[3,3],[3,3]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOne(NestedMatrixState(A,[3,3,3,3,1,1],[3,3,3,3,1,2]));</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List([1..3],i-&gt;List([1..3],j-&gt;NestedMatrixCoefficient(A,[i],[j])))=Activity(A,1);</span>
+true
+</pre></div>
+
+<p><a id="X7FCEE3BF86B02CC6" name="X7FCEE3BF86B02CC6"></a></p>
+
+<h5>6.1-7 ActivitySparse</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivitySparse</code>( <var class="Arg">m</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A sparse matrix.</p>
+
+<p><code class="code">Activity(m,i)</code> returns an <span class="SimpleMath">n^i× n^i</span> matrix describing the action on the <span class="SimpleMath">i</span>-fold tensor power of the alphabet. This matrix can also be returned as a sparse matrix, and this is performed by this command. A sparse matrix is described as a list of expressions of the form <code class="code">[[i,j],c]</code>, representing the elementary matrix with entry <span class="SimpleMath">c</span> at position <span class="SimpleMath">(i,j)</span>. The activity matrix is then the sum of these elementary matrices.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AsVectorElement(Rationals,GuptaSidkiGroup.2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Activity(A,2));</span>
+[ [  0,  1,  0,  0,  0,  0,  0,  0,  0 ],
+  [  0,  0,  1,  0,  0,  0,  0,  0,  0 ],
+  [  1,  0,  0,  0,  0,  0,  0,  0,  0 ],
+  [  0,  0,  0,  0,  0,  1,  0,  0,  0 ],
+  [  0,  0,  0,  1,  0,  0,  0,  0,  0 ],
+  [  0,  0,  0,  0,  1,  0,  0,  0,  0 ],
+  [  0,  0,  0,  0,  0,  0,  1,  0,  0 ],
+  [  0,  0,  0,  0,  0,  0,  0,  1,  0 ],
+  [  0,  0,  0,  0,  0,  0,  0,  0,  1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ActivitySparse(A,2);</span>
+[ [ [ 1, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 3, 1 ], 1 ], [ [ 4, 6 ], 1 ],
+[ [ 5, 4 ], 1 ], [ [ 6, 5 ], 1 ], [ [ 7, 7 ], 1 ], [ [ 8, 8 ], 1 ],
+[ [ 9, 9 ], 1 ] ]
+</pre></div>
+
+<p><a id="X8436BEA67F1C3C27" name="X8436BEA67F1C3C27"></a></p>
+
+<h5>6.1-8 Activities</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Activities</code>( <var class="Arg">m</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: Activities of <var class="Arg">m</var> on the first <var class="Arg">i</var> levels.</p>
+
+<p><code class="code">Activity(m,i)</code> returns an <span class="SimpleMath">n^i× n^i</span> matrix describing the action on the <span class="SimpleMath">i</span>-fold tensor power of the alphabet. This command returns <code class="code">List([0..i-1],j-&gt;Activity(m,j))</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AsVectorElement(Rationals,GrigorchukGroup.2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Activities(A,3);</span>
+[ [ [ 1 ] ],
+  [ [ 1, 0 ], [ 0, 1 ] ],
+  [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ] ]
+</pre></div>
+
+<p><a id="X7EF5B7417AE6B3F8" name="X7EF5B7417AE6B3F8"></a></p>
+
+<h5>6.1-9 IsConvergent</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsConvergent</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: Whether the linear element <var class="Arg">e</var> is convergent.</p>
+
+<p>A linear element is <em>convergent</em> if its state at position <span class="SimpleMath">(1,1)</span> is equal to itself.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := 3;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">shift := VectorElement(CyclotomicField(n), [[[[1,0],[0,0]],</span>
+     [[0,0],[0,1]]],[[[0,1],[0,0]],[[1,0],[0,0]]]],[1,E(n)],[1,0]);
+&lt;Linear element on alphabet CF(3)^2 with 2-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsConvergent(shift);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Activity(shift,2));</span>
+[ [     1,     0,     0,     0 ],
+  [  E(3),     1,     0,     0 ],
+  [     0,  E(3),     1,     0 ],
+  [     0,     0,  E(3),     1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Activity(shift,3));</span>
+[ [     1,     0,     0,     0,     0,     0,     0,     0 ],
+  [  E(3),     1,     0,     0,     0,     0,     0,     0 ],
+  [     0,  E(3),     1,     0,     0,     0,     0,     0 ],
+  [     0,     0,  E(3),     1,     0,     0,     0,     0 ],
+  [     0,     0,     0,  E(3),     1,     0,     0,     0 ],
+  [     0,     0,     0,     0,  E(3),     1,     0,     0 ],
+  [     0,     0,     0,     0,     0,  E(3),     1,     0 ],
+  [     0,     0,     0,     0,     0,     0,  E(3),     1 ] ]
+</pre></div>
+
+<p><a id="X8136C21885019A4A" name="X8136C21885019A4A"></a></p>
+
+<h5>6.1-10 TransposedFRElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TransposedFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSymmetricFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAntisymmetricFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLowerTriangularFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsUpperTriangularFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagonalFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Returns: The elementary matrix operation/property.</p>
+
+<p>Since linear FR elements may be interpreted as infinite matrices, it makes sense to transpose them, test whether they're symmetric, antisymmetric, diagonal, or triangular.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := 3;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">shift := VectorElement(CyclotomicField(n), [[[[1,0],[0,0]],</span>
+     [[0,0],[0,1]]],[[[0,1],[0,0]],[[1,0],[0,0]]]],[1,E(n)],[1,0]);
+&lt;Linear element on alphabet CF(3)^2 with 2-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Activity(shift,2));</span>
+[ [     1,     0,     0,     0 ],
+  [  E(3),     1,     0,     0 ],
+  [     0,  E(3),     1,     0 ],
+  [     0,     0,  E(3),     1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Activity(TransposedFRElement(shift),2));</span>
+[ [     1,  E(3),     0,     0 ],
+  [     0,     1,  E(3),     0 ],
+  [     0,     0,     1,  E(3) ],
+  [     0,     0,     0,     1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSymmetricFRElement(shift);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSymmetricFRElement(shift+TransposedFRElement(shift));</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLowerTriangularFRElement(shift);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsUpperTriangularFRElement(shift);</span>
+false
+</pre></div>
+
+<p><a id="X796B736286CACF85" name="X796B736286CACF85"></a></p>
+
+<h5>6.1-11 LDUDecompositionFRElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LDUDecompositionFRElement</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A factorization <span class="SimpleMath">e=LDU</span>.</p>
+
+<p>Given a linear element <var class="Arg">e</var>, this command attempts to find a decomposition of the form <span class="SimpleMath">e=LDU</span>, where <span class="SimpleMath">L</span> is lower triangular, <span class="SimpleMath">D</span> is diagonal, and <span class="SimpleMath">U</span> is upper triangular (see <code class="func">IsLowerTriangularFRElement</code> (<a href="chap6.html#X8136C21885019A4A"><span class="RefLink">6.1-10</span></a>) etc.).</p>
+
+<p>The result is returned thas a list with entries <span class="SimpleMath">L,D,U</span>. Note that it is not guaranteed to succeed. For more examples, see Section <a href="chap9.html#X7989134C83AF38AE"><span class="RefLink">9.4</span></a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List([0..7],s-&gt;List([0..7],t-&gt;E(4)^ValuationInt(Binomial(s+t,s),2)));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := GuessVectorElement(last);</span>
+&lt;Linear element on alphabet GaussianRationals^2 with 2-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LDU := LDUDecompositionFRElement(A);</span>
+[ &lt;Linear element on alphabet GaussianRationals^2 with 4-dimensional stateset&gt;,
+  &lt;Linear element on alphabet GaussianRationals^2 with 3-dimensional stateset&gt;,
+  &lt;Linear element on alphabet GaussianRationals^2 with 4-dimensional stateset&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLowerTriangularFRElement(LDU[1]); IsDiagonalFRElement(LDU[2]);</span>
+true
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TransposedFRElement(LDU[1])=LDU[3];</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Product(LDU)=A;</span>
+true
+</pre></div>
+
+<p><a id="X783E8F427A23EAD1" name="X783E8F427A23EAD1"></a></p>
+
+<h5>6.1-12 GuessVectorElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GuessVectorElement</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A vector element that acts like <var class="Arg">m</var>.</p>
+
+<p>The arguments to this function include a matrix or list of matrices, and an optional ring. The return value is a vector element, over the ring if it was specified, that acts like the sequence of matrices.</p>
+
+<p>If a single matrix is specified, then it is assumed to represent a convergent element (see <code class="func">IsConvergent</code> (<a href="chap6.html#X7EF5B7417AE6B3F8"><span class="RefLink">6.1-9</span></a>)).</p>
+
+<p>This function returns <code class="keyw">fail</code> if it believes that it does not have enough information to make a reasonable guess.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := 3;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">shift := VectorElement(CyclotomicField(n), [[[[1,0],[0,0]],</span>
+     [[0,0],[0,1]]],[[[0,1],[0,0]],,[[1,0],[0,0]]]],[1,E(n)],[1,0]);;
+&lt;Linear element on alphabet CF(3)^2 with 2-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GuessVectorElement(Activity(shift,3)); last=shift;</span>
+&lt;Linear element on alphabet CF(3)^2 with 2-dimensional stateset&gt;
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GuessVectorElement(Inverse(Activity(shift,4)));</span>
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GuessVectorElement(Inverse(Activity(shift,5)));</span>
+&lt;Linear element on alphabet CF(3)^2 with 4-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOne(last*shift);</span>
+true
+</pre></div>
+
+<p><a id="X865EE2E887ECC079" name="X865EE2E887ECC079"></a></p>
+
+<h5>6.1-13 AsLinearMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsLinearMachine</code>( <var class="Arg">r</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsLinearElement</code>( <var class="Arg">r</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The linear machine/element associated with <var class="Arg">m</var>.</p>
+
+<p>This command accepts a domain and an ordinary machine/element, and constructs the corresponding linear machine/element, defined by extending linearly the action on <span class="SimpleMath">[1..d]</span> to an action on <span class="SimpleMath">r^d</span>.</p>
+
+<p>If <var class="Arg">m</var> is a Mealy machine/element, the result is a vector machine/element. If <var class="Arg">m</var> is a group/monoid/semigroup machine/element, the result is an algebra machine/element. To obtain explicitly a vector or algebra machine/element, see <code class="func">AsVectorMachine</code> (<a href="chap6.html#X82586DFB8458EF05"><span class="RefLink">6.1-14</span></a>) and <code class="func">AsAlgebraMachine</code> (<a href="chap6.html#X7818245A7DABB311"><span class="RefLink">6.1-15</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(I4Machine);</span>
+   |  1     2
+---+-----+-----+
+ a | c,2   c,1
+ b | a,1   b,1
+ c | c,1   c,2
+---+-----+-----+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AsLinearMachine(Rationals,I4Machine);</span>
+&lt;Linear machine on alphabet Rationals^2 with 3-dimensional stateset&gt;
+Correspondence(A);
+[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(A);</span>
+ Rationals |   1   |   2   |
+-----------+-------+-------+
+         1 | 0 0 0 | 0 0 1 |
+           | 1 0 0 | 0 0 0 |
+           | 0 0 1 | 0 0 0 |
+-----------+-------+-------+
+         2 | 0 0 1 | 0 0 0 |
+           | 0 1 0 | 0 0 0 |
+           | 0 0 0 | 0 0 1 |
+-----------+-------+-------+
+Output: 1 1 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := AsLinearMachine(Rationals,AsMonoidFRMachine(I4Machine));</span>
+&lt;Linear machine on alphabet Rationals^2 with generators [ (1)*m1, (1)*m2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Correspondence(B);</span>
+MappingByFunction( &lt;free monoid on the generators [ m1, m2 ]&gt;,
+&lt;algebra-with-one over Rationals, with 2 generators&gt;, function( w ) ... end )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(B);</span>
+ Rationals | 1  | 2  |
+-----------+----+----+
+         1 |  0 |  1 |
+           | m1 |  0 |
+-----------+----+----+
+         2 |  1 |  0 |
+           | m2 |  0 |
+-----------+----+----+
+Output: 1 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsLinearElement(Rationals,I4Monoid.1)*AsLinearElement(Rationals,I4Monoid.2);</span>
+&lt;Linear element on alphabet Rationals^2 with 4-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">last=AsLinearElement(Rationals,I4Monoid.1*I4Monoid.2);</span>
+true
+</pre></div>
+
+<p><a id="X82586DFB8458EF05" name="X82586DFB8458EF05"></a></p>
+
+<h5>6.1-14 AsVectorMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsVectorMachine</code>( <var class="Arg">r</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsVectorElement</code>( <var class="Arg">r</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The vector machine/element associated with <var class="Arg">m</var>.</p>
+
+<p>This command accepts a domain and an ordinary machine/element, and constructs the corresponding linear machine/element, defined by extending linearly the action on <span class="SimpleMath">[1..d]</span> to an action on <span class="SimpleMath">r^d</span>. For this command to succeed, the machine/element <var class="Arg">m</var> must be finite state. For examples see <code class="func">AsLinearMachine</code> (<a href="chap6.html#X865EE2E887ECC079"><span class="RefLink">6.1-13</span></a>).</p>
+
+<p><a id="X7818245A7DABB311" name="X7818245A7DABB311"></a></p>
+
+<h5>6.1-15 AsAlgebraMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsAlgebraMachine</code>( <var class="Arg">r</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsAlgebraElement</code>( <var class="Arg">r</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The algebra machine/element associated with <var class="Arg">m</var>.</p>
+
+<p>This command accepts a domain and an ordinary machine/element, and constructs the corresponding linear machine/element, defined by extending linearly the action on <span class="SimpleMath">[1..d]</span> to an action on <span class="SimpleMath">r^d</span>. For examples see <code class="func">AsLinearMachine</code> (<a href="chap6.html#X865EE2E887ECC079"><span class="RefLink">6.1-13</span></a>).</p>
+
+<p><a id="X7BDD40B27F7541B2" name="X7BDD40B27F7541B2"></a></p>
+
+<h5>6.1-16 AsVectorMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsVectorMachine</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsVectorElement</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The machine/element <var class="Arg">m</var> in vector form.</p>
+
+<p>This command accepts a linear machine, and converts it to vector form. This command is not guaranteed to terminate.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AsLinearElement(Rationals,I4Monoid.1);</span>
+&lt;Linear element on alphabet Rationals^2 with 2-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := AsAlgebraElement(A);</span>
+&lt;Rationals^2|(1)*x.1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := AsVectorElement(B);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A=B; B=C;</span>
+true
+true
+</pre></div>
+
+<p><a id="X8120605981DDE434" name="X8120605981DDE434"></a></p>
+
+<h5>6.1-17 AsAlgebraMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsAlgebraMachine</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsAlgebraElement</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: The machine/element <var class="Arg">m</var> in algebra form.</p>
+
+<p>This command accepts a linear machine, and converts it to algebra form.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AsLinearElement(Rationals,I4Monoid.1);</span>
+&lt;Linear element on alphabet Rationals^2 with 2-dimensional stateset&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsAlgebraElement(A)=AsAlgebraElement(Rationals,I4Monoid.1);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A=AsAlgebraElement(A);</span>
+true
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

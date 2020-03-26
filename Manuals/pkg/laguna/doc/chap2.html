@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (LAGUNA) - Chapter 2: A sample calculation with LAGUNA</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X7AAB1F18838B1DAB" name="X7AAB1F18838B1DAB"></a></p>
+<div class="ChapSects"><a href="chap2.html#X7AAB1F18838B1DAB">2 <span class="Heading">A sample calculation with <strong class="pkg">LAGUNA</strong></span></a>
+</div>
+
+<h3>2 <span class="Heading">A sample calculation with <strong class="pkg">LAGUNA</strong></span></h3>
+
+<p>Before explaining the theory behind the <strong class="pkg">LAGUNA</strong> package we present a sample calculation to show the reader what <strong class="pkg">LAGUNA</strong> is able to compute. We will carry out some calculations in the group algebra of the dihedral group of order 16 over the field of two elements. First we create this modular group algebra.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K := GF( 2 );</span>
+GF(2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := DihedralGroup( 16 );</span>
+&lt;pc group of size 16 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KG := GroupRing( K, G );</span>
+&lt;algebra-with-one over GF(2), with 4 generators&gt;
+
+</pre></div>
+
+<p>The group algebra <code class="code">KG</code> has some properties and attributes that are direct consequences of its definition. These can be checked very quickly.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsGroupAlgebra( KG ); </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPModularGroupAlgebra( KG );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsFModularGroupAlgebra( KG );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingGroup( KG );</span>
+&lt;pc group of size 16 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftActingDomain( KG );</span>
+GF(2)
+
+</pre></div>
+
+<p>Since <code class="code">KG</code> is naturally a group algebra, the information provided by <code class="code">LeftActingDomain</code> can also be obtained using two other functions as follows.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingRing( KG );</span>
+GF(2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingField( KG );</span>
+GF(2)
+
+</pre></div>
+
+<p>Let us construct a certain element of the group algebra. For example, we take a minimal generating system of the group <code class="code">G</code> and find the corresponding elements in <code class="code">KG</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MinimalGeneratingSet( G );</span>
+[ f1, f2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := List( last, g -&gt; g^Embedding( G, KG ) );</span>
+[ (Z(2)^0)*f1, (Z(2)^0)*f2 ]
+
+</pre></div>
+
+<p>Now we construct an element <code class="code">x</code> as follows.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a :=l[1]; b:=l[2]; # a and b are images of group generators in KG</span>
+(Z(2)^0)*f1
+(Z(2)^0)*f2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e := One( KG );    # for convenience, we denote the identity by e</span>
+(Z(2)^0)*&lt;identity&gt; of ...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := ( e + a ) * ( e + b ); </span>
+(Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2  
+
+</pre></div>
+
+<p>We may investigate some of the basic properties of our element.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Support( x );</span>
+[ &lt;identity&gt; of ..., f1, f2, f1*f2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoefficientsBySupport( x );</span>
+[ Z(2)^0, Z(2)^0, Z(2)^0, Z(2)^0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( x );</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TraceOfMagmaRingElement( x );</span>
+Z(2)^0
+
+</pre></div>
+
+<p>We can also calculate the augmentation of <code class="code">x</code>, which is defined as the sum of its coefficients.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Augmentation( x );</span>
+0*Z(2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsUnit( KG, x );</span>
+false
+
+</pre></div>
+
+<p>Since the augmentation of <code class="code">x</code> is zero, <code class="code">x</code> is not invertible, but <code class="code">1+x</code> is. This is again very easy to check.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y := e + x;</span>
+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f1*f2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsUnit( KG, y );</span>
+true  
+
+</pre></div>
+
+<p><strong class="pkg">LAGUNA</strong> can calculate the inverse of <code class="code">1+x</code> very quickly.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y^-1;</span>
+(Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f3+(Z(2)^0)*f4+(Z(2)^0)*f1*f2+(Z(2)^
+0)*f1*f3+(Z(2)^0)*f1*f4+(Z(2)^0)*f2*f4+(Z(2)^0)*f1*f2*f4+(Z(2)^0)*f2*f3*f4+(
+Z(2)^0)*f1*f2*f3*f4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y * y^-1;</span>
+(Z(2)^0)*&lt;identity&gt; of ... 
+
+</pre></div>
+
+<p>We may also want to check whether <code class="code">y</code> is symmetric, that is, whether it is invariant under the classical involution; or whether it is unitary, that is, whether the classical involution inverts <code class="code">y</code>. We find that <code class="code">y</code> is neither.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Involution( y );</span>
+(Z(2)^0)*f1+(Z(2)^0)*f1*f2+(Z(2)^0)*f2*f3*f4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y = Involution( y );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSymmetric( y );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y * Involution( y );</span>
+(Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f2+(Z(2)^0)*f2*f3*f4  
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsUnitary( y );</span>
+false
+
+</pre></div>
+
+<p>Now we calculate some important ideals of <code class="code">KG</code>. First we obtain the augmentation ideal which is the set of elements with augmentation zero. In our case the augmentation ideal of <code class="code">KG</code> coincides with the radical of <code class="code">KG</code>, and this is taken into account in <strong class="pkg">LAGUNA</strong>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AugmentationIdeal( KG );</span>
+&lt;two-sided ideal in &lt;algebra-with-one over GF(2), with 4 generators&gt;,
+  (dimension 15)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RadicalOfAlgebra( KG ) = AugmentationIdeal( KG );</span>
+true
+
+</pre></div>
+
+<p>It is well-known that the augmentation ideal of <code class="code">KG</code> is a nilpotent ideal. Using Jennings' theory on dimension subgroups, we can obtain its nilpotency index without immediate calculation of its powers. This is implemented in <strong class="pkg">LAGUNA</strong>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AugmentationIdealNilpotencyIndex( KG );</span>
+9
+
+</pre></div>
+
+<p>On the other hand, we can also calculate the powers of the augmentation ideal.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := AugmentationIdealPowerSeries( KG );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s[2];</span>
+&lt;algebra of dimension 13 over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(s,Dimension);</span>
+[ 15, 13, 11, 9, 7, 5, 3, 1, 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(s);</span>
+9
+
+</pre></div>
+
+<p>We see that the length of this list is exactly the nilpotency index of the augmentation ideal of <code class="code">KG</code>.</p>
+
+<p>Now let's work with the unit group of <code class="code">KG</code>. First we calculate the normalized unit group, which is the set of elements with augmentation one. The generators of the unit group are obtained as explained in Chapter <a href="chap3.html#X7D9FCE3A8526ACBE"><span class="RefLink">3</span></a>. This can be computed very quickly, but further computation with this group is very inefficient.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V := NormalizedUnitGroup( KG );</span>
+&lt;group of size 32768 with 15 generators&gt;   
+
+</pre></div>
+
+<p>In order to make our computation in the normalised unit group efficient, we calculate a power-commutator presentation for this group.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">W := PcNormalizedUnitGroup( KG );</span>
+&lt;pc group of size 32768 with 15 generators&gt;
+
+</pre></div>
+
+<p><strong class="pkg">GAP</strong> has many efficient and practical algorithms for groups given by a power-commutator presentation. In order to use these algorithms to carry out computation in the normalised unit group, we need to set up isomorphisms between the outputs of <code class="code">NormalizedUnitGroup</code> and <code class="code">PcNormalizedUnitGroup</code>.</p>
+
+<p>The first isomorphism maps <code class="code">NormalizedUnitGroup(KG)</code> onto the polycyclically presented <code class="code">PcNormalizedUnitGroup(PC)</code>. Let's find the images of the elements of the group <code class="code">G</code> in <code class="code">W</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t := NaturalBijectionToPcNormalizedUnitGroup( KG );</span>
+MappingByFunction( &lt;group of size 32768 with 15 generators&gt;, &lt;pc group of size\
+ 32768 with 15 generators&gt;, function( x ) ... end )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Image(t) = W;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( AsList( G ), x -&gt; ( x^Embedding( G, KG ) )^t );</span>
+[ &lt;identity&gt; of ..., f1, f2, f4, f8, f1*f2, f1*f4, f1*f8, f2*f4, f2*f8, 
+  f4*f8, f1*f2*f4, f1*f2*f8, f1*f4*f8, f2*f4*f8, f1*f2*f4*f8 ]
+
+</pre></div>
+
+<p>The second isomorphism is the inverse of the first.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := NaturalBijectionToNormalizedUnitGroup( KG );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Image(f) = V;</span>
+true
+
+</pre></div>
+
+<p>For example, we may calculate the conjugacy classes of the group <code class="code">W</code>, and then map their representatives back into the group algebra.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cc := ConjugacyClasses( W );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( cc );</span>
+848
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Representative( cc[ Length( cc ) ] );</span>
+f1*f2*f3*f6*f10*f13
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">last^f;</span>
+(Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f1*f2+(Z(2)^0)*f1*f3+(Z(2)^0)*f1*f4+(Z(2)^
+0)*f2*f3+(Z(2)^0)*f1*f2*f3+(Z(2)^0)*f1*f3*f4
+
+</pre></div>
+
+<p>Having a power-commutator presentation of the normalised unit group, we may use the full power of the <strong class="pkg">GAP</strong> functionality for such groups. For example, the lower central series can be calculated very quickly.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LowerCentralSeries( W );</span>
+[ &lt;pc group of size 32768 with 15 generators&gt;, 
+  Group([ f4*f8, f5*f7*f11*f13*f15, f6*f7*f9*f11*f13*f14*f15, f8, f9*f13, 
+      f10*f11, f12*f13, f13*f15, f14*f15 ]), 
+  Group([ f8, f9*f15, f10*f11, f12*f15, f13*f15, f14*f15 ]), 
+  Group([ f12*f15, f13*f15, f14*f15 ]), Group([ &lt;identity&gt; of ... ]) ]
+
+</pre></div>
+
+<p>Let's now compute, for instance, a minimal system of generators of the centre of the normalised unit group. First we carry out the computation in the group which is determined by the power-commutator presentation, then we map the result into our group algebra.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Centre( W );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := MinimalGeneratingSet( C );</span>
+[ f8*f13*f14*f15, f13*f14*f15, f8*f12*f14*f15, f15, f4*f6*f8*f13 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List( m, g -&gt; g^f );</span>
+[ (Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^0)*f3+(Z(2)^0)*f1*f2+(Z(2)^0)*f3*f4+(Z(2)^
+    0)*f1*f2*f3+(Z(2)^0)*f1*f2*f4+(Z(2)^0)*f1*f2*f3*f4, 
+  (Z(2)^0)*f3+(Z(2)^0)*f4+(Z(2)^0)*f1*f2+(Z(2)^0)*f3*f4+(Z(2)^0)*f1*f2*f3+(
+    Z(2)^0)*f1*f2*f4+(Z(2)^0)*f1*f2*f3*f4, (Z(2)^0)*&lt;identity&gt; of ...+(Z(2)^
+    0)*f1+(Z(2)^0)*f3+(Z(2)^0)*f1*f2+(Z(2)^0)*f1*f3+(Z(2)^0)*f1*f4+(Z(2)^
+    0)*f3*f4+(Z(2)^0)*f1*f2*f3+(Z(2)^0)*f1*f2*f4+(Z(2)^0)*f1*f3*f4+(Z(2)^
+    0)*f1*f2*f3*f4, (Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f3+(Z(2)^0)*f4+(Z(2)^
+    0)*f1*f2+(Z(2)^0)*f1*f3+(Z(2)^0)*f1*f4+(Z(2)^0)*f2*f3+(Z(2)^0)*f2*f4+(
+    Z(2)^0)*f3*f4+(Z(2)^0)*f1*f2*f3+(Z(2)^0)*f1*f2*f4+(Z(2)^0)*f1*f3*f4+(Z(2)^
+    0)*f2*f3*f4+(Z(2)^0)*f1*f2*f3*f4, (Z(2)^0)*f1+(Z(2)^0)*f2+(Z(2)^0)*f3+(
+    Z(2)^0)*f4+(Z(2)^0)*f1*f3+(Z(2)^0)*f1*f4+(Z(2)^0)*f3*f4+(Z(2)^
+    0)*f1*f3*f4+(Z(2)^0)*f2*f3*f4 ]
+
+</pre></div>
+
+<p>We finish our example by calculating some properties of the Lie algebra associated with <code class="code">KG</code>. This example needs no further explanation.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := LieAlgebra( KG );</span>
+#I  LAGUNA package: Constructing Lie algebra ...
+&lt;Lie algebra of dimension 16 over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := LieDerivedSubalgebra( L );</span>
+#I  LAGUNA package: Computing the Lie derived subalgebra ...
+&lt;Lie algebra of dimension 9 over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LC := LieCentre( L );</span>
+&lt;Lie algebra of dimension 7 over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LieLowerNilpotencyIndex( KG );</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LieUpperNilpotencyIndex( KG );</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLieAbelian( L );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLieSolvable( L );</span>
+#I  LAGUNA package: Checking Lie solvability ...
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLieMetabelian( L );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLieCentreByMetabelian( L );</span>
+true
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (recog) - Chapter 6: Methods for recognition</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6_mj.html">[MathJax on]</a></p>
+<p><a id="X78C5295B86AD0C66" name="X78C5295B86AD0C66"></a></p>
+<div class="ChapSects"><a href="chap6.html#X78C5295B86AD0C66">6 <span class="Heading">Methods for recognition</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X829A2F96860513F2">6.1 <span class="Heading">Methods for permutation groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8188D7BF85B56F10">6.1-1 <span class="Heading"><code class="code">TrivialPermGroup</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8236A4817FA037E2">6.1-2 <span class="Heading"><code class="code">ThrowAwayFixedPoints</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X84C3750C7A4EEC34">6.1-3 <span class="Heading"><code class="code">Pcgs</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7866E53B82FDB348">6.1-4 <span class="Heading"><code class="code">VeryFewPoints</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X83C651E58239EEAF">6.1-5 <span class="Heading"><code class="code">Nontransitive</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7F46D8727850585D">6.1-6 <span class="Heading"><code class="code">Giant</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8757E1C37F03A49D">6.1-7 <span class="Heading"><code class="code">Imprimitive</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X80564C3B86DC3740">6.1-8 <span class="Heading"><code class="code">SnkSetswrSr</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X834E9DFF7DC949DE">6.1-9 <span class="Heading"><code class="code">StabChain</code></span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X829BA50B82FEC109">6.2 <span class="Heading">Methods for matrix groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8205711B8077D1D6">6.2-1 <span class="Heading"><code class="code">TrivialMatrixGroup</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7B2C182B7898BC45">6.2-2 <span class="Heading"><code class="code">KnownStabilizerChain</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7A9F8CA181F6412D">6.2-3 <span class="Heading"><code class="code">DiagonalMatrices</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X78797CF584658CEC">6.2-4 <span class="Heading"><code class="code">FewGensAbelian</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X811FC944788D9839">6.2-5 <span class="Heading"><code class="code">ReducibleIso</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X81F74235823352B5">6.2-6 <span class="Heading"><code class="code">BlockLowerTriangular</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X857BF1317CAAF260">6.2-7 <span class="Heading"><code class="code">BlockDiagonal</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7A1D99F67E62B1D7">6.2-8 <span class="Heading"><code class="code">GoProjective</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8795A42285A332BB">6.2-9 <span class="Heading"><code class="code">BlockScalar</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X84E09FCF8527D74A">6.2-10 <span class="Heading"><code class="code">LowerLeftPGroup</code></span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X867550F684F795AE">6.3 <span class="Heading">Methods for projective groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X817D05EB7A8764E3">6.3-1 <span class="Heading"><code class="code">TrivialProjectiveGroup</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X850864887D7F193E">6.3-2 <span class="Heading"><code class="code">ProjDeterminant</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X811FC944788D9839">6.3-3 <span class="Heading"><code class="code">ReducibleIso</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8605DA5E85DFACDC">6.3-4 <span class="Heading"><code class="code">BlocksModScalars</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X83E6AD6583DB7080">6.3-5 <span class="Heading"><code class="code">NotAbsolutelyIrred</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7FE1FA217A08DCE5">6.3-6 <span class="Heading"><code class="code">Subfield</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X84B342787B9BD299">6.3-7 <span class="Heading"><code class="code">Derived</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X810B7F36818D626B">6.3-8 <span class="Heading"><code class="code">LowIndex</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7E484B8F83849B49">6.3-9 <span class="Heading"><code class="code">C6</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X820882B88196022E">6.3-10 <span class="Heading"><code class="code">Tensor</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X80EBB72481FCA144">6.3-11 <span class="Heading"><code class="code">TwoLargeElOrders</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X80747C9A7FEB36BE">6.3-12 <span class="Heading"><code class="code">StabilizerChain</code></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X863E0A1D7D7FEE04">6.3-13 <span class="Heading"><code class="code">BlockScalarProj</code></span></a>
+</span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">Methods for recognition</span></h3>
+
+<p><a id="X829A2F96860513F2" name="X829A2F96860513F2"></a></p>
+
+<h4>6.1 <span class="Heading">Methods for permutation groups</span></h4>
+
+<p>The following table gives an overview over the installed methods and their rank (higher rank means higher priority, the method is tried earlier, see Chapter <a href="chap4.html#X8058CC8187162644"><span class="RefLink">4</span></a>).</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b>Permutation group find homomorphism methods</caption>
+<tr>
+<td class="tdleft">300</td>
+<td class="tdleft"><code class="code">TrivialPermGroup</code></td>
+<td class="tdleft">just go through generators and compare to the identity</td>
+<td class="tdleft"><a href="chap6.html#X8188D7BF85B56F10"><span class="RefLink">6.1-1</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">100</td>
+<td class="tdleft"><code class="code">ThrowAwayFixedPoints</code></td>
+<td class="tdleft">try to find a huge amount of (possible internal) fixed points</td>
+<td class="tdleft"><a href="chap6.html#X8236A4817FA037E2"><span class="RefLink">6.1-2</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">99</td>
+<td class="tdleft"><code class="code">FewGensAbelian</code></td>
+<td class="tdleft">if very few generators, check IsAbelian and if yes, do KnownNilpotent</td>
+<td class="tdleft"><a href="chap6.html#X78797CF584658CEC"><span class="RefLink">6.2-4</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">97</td>
+<td class="tdleft"><code class="code">Pcgs</code></td>
+<td class="tdleft">use a Pcgs to calculate a StabChain</td>
+<td class="tdleft"><a href="chap6.html#X84C3750C7A4EEC34"><span class="RefLink">6.1-3</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">95</td>
+<td class="tdleft"><code class="code">VeryFewPoints</code></td>
+<td class="tdleft">calculate a stabchain if we act on very few points</td>
+<td class="tdleft"><a href="chap6.html#X7866E53B82FDB348"><span class="RefLink">6.1-4</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">90</td>
+<td class="tdleft"><code class="code">NonTransitive</code></td>
+<td class="tdleft">try to find non-transitivity and restrict to orbit</td>
+<td class="tdleft"><a href="chap6.html#X83C651E58239EEAF"><span class="RefLink">6.1-5</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">80</td>
+<td class="tdleft"><code class="code">Giant</code></td>
+<td class="tdleft">tries to find Sn and An</td>
+<td class="tdleft"><a href="chap6.html#X7F46D8727850585D"><span class="RefLink">6.1-6</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">70</td>
+<td class="tdleft"><code class="code">Imprimitive</code></td>
+<td class="tdleft">for a imprimitive permutation group, restricts to block system</td>
+<td class="tdleft"><a href="chap6.html#X8757E1C37F03A49D"><span class="RefLink">6.1-7</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">60</td>
+<td class="tdleft"><code class="code">SnkSetswrSr</code></td>
+<td class="tdleft">tries to find jellyfish</td>
+<td class="tdleft"><a href="chap6.html#X80564C3B86DC3740"><span class="RefLink">6.1-8</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">55</td>
+<td class="tdleft"><code class="code">StabilizerChain</code></td>
+<td class="tdleft">for a permutation group using a stabilizer chain (genss)</td>
+<td class="tdleft"><a href="chap6.html#X80747C9A7FEB36BE"><span class="RefLink">6.3-12</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">50</td>
+<td class="tdleft"><code class="code">StabChain</code></td>
+<td class="tdleft">for a permutation group using a stabilizer chain</td>
+<td class="tdleft"><a href="chap6.html#X834E9DFF7DC949DE"><span class="RefLink">6.1-9</span></a></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X8188D7BF85B56F10" name="X8188D7BF85B56F10"></a></p>
+
+<h5>6.1-1 <span class="Heading"><code class="code">TrivialPermGroup</code></span></h5>
+
+<p>This method is successful if and only if all generators of the permutation group <var class="Arg">G</var> are equal to the identity. Otherwise it returns <code class="keyw">false</code> indicating that it will never succeed. This method is only installed to handle the trivial case such that we do not have to take this case into account in the other methods.</p>
+
+<p><a id="X8236A4817FA037E2" name="X8236A4817FA037E2"></a></p>
+
+<h5>6.1-2 <span class="Heading"><code class="code">ThrowAwayFixedPoints</code></span></h5>
+
+<p>This method defines a homomorphism of a permutation group <var class="Arg">G</var> to the action on the moved points of <var class="Arg">G</var> if <var class="Arg">G</var> does not have too many moved points. In the current setup, the homomorphism is defined if the number <span class="SimpleMath">k</span> of moved points is at most <span class="SimpleMath">1/3</span> of the largest moved point of <var class="Arg">G</var>, or <span class="SimpleMath">k</span> is at most half of the number of points on which <var class="Arg">G</var> is stored internally by <strong class="pkg">GAP</strong>. The method returns <code class="keyw">false</code> if it does not define a homomorphism indicating that it will never succeed.</p>
+
+<p><a id="X84C3750C7A4EEC34" name="X84C3750C7A4EEC34"></a></p>
+
+<h5>6.1-3 <span class="Heading"><code class="code">Pcgs</code></span></h5>
+
+<p>This is the <strong class="pkg">GAP</strong> library function to compute a stabiliser chain for a solvable permutation group. If the method is successful then the calling node becomes a leaf node in the recursive scheme. If the input group is not solvable then the method returns <code class="keyw">false</code>.</p>
+
+<p><a id="X7866E53B82FDB348" name="X7866E53B82FDB348"></a></p>
+
+<h5>6.1-4 <span class="Heading"><code class="code">VeryFewPoints</code></span></h5>
+
+<p>If a permutation group acts only on a few points (the current limit is at most 10 points) then a stabiliser chain is computed by the randomized <strong class="pkg">GAP</strong> library function for that purpose. If the method is successful then the calling node becomes a leaf node in the recursive scheme. If the input group acts on more than 10 points then the method returns <code class="keyw">false</code>.</p>
+
+<p><a id="X83C651E58239EEAF" name="X83C651E58239EEAF"></a></p>
+
+<h5>6.1-5 <span class="Heading"><code class="code">Nontransitive</code></span></h5>
+
+<p>If a permutation group <var class="Arg">G</var> acts nontransitively then this method computes a homomorphism to the action of <var class="Arg">G</var> on the orbit of the largest moved point. If <var class="Arg">G</var> is transitive then the method returns <code class="keyw">false</code>.</p>
+
+<p><a id="X7F46D8727850585D" name="X7F46D8727850585D"></a></p>
+
+<h5>6.1-6 <span class="Heading"><code class="code">Giant</code></span></h5>
+
+<p>The method tries to determine whether the input group <var class="Arg">G</var> is a giant (that is, <span class="SimpleMath">A_n</span> or <span class="SimpleMath">S_n</span> in its natural action on <span class="SimpleMath">n</span> points). The output is either a data structure <span class="SimpleMath">D</span> containing nice generators for <var class="Arg">G</var> and a procedure to write an SLP for arbitrary elements of <var class="Arg">G</var> from the nice generators; or <code class="keyw">false</code> if <var class="Arg">G</var> is not transitive; or <code class="keyw">fail</code>, in the case that no evidence was found that <var class="Arg">G</var> is a giant, or evidence was found, but the construction of <span class="SimpleMath">D</span> was unsuccessful. If the method constructs <span class="SimpleMath">D</span> then the calling node becomes a leaf.</p>
+
+<p><a id="X8757E1C37F03A49D" name="X8757E1C37F03A49D"></a></p>
+
+<h5>6.1-7 <span class="Heading"><code class="code">Imprimitive</code></span></h5>
+
+<p>If the input group is not known to be transitive then this method returns <code class="keyw">NotEnoughInformation</code>. If the input group is known to be transitive and primitive then the method returns <code class="keyw">false</code>; otherwise, the method tries to compute a nontrivial block system. If successful then a homomorphism to the action on the blocks is defined; otherwise, the method returns <code class="keyw">false</code>. If the method is successful then it also gives a hint for the children of the node by determining whether the kernel of the action on the block system is solvable. If the answer is yes then the default value 20 for the number of random generators in the kernel construction is increased by the number of blocks.</p>
+
+<p><a id="X80564C3B86DC3740" name="X80564C3B86DC3740"></a></p>
+
+<h5>6.1-8 <span class="Heading"><code class="code">SnkSetswrSr</code></span></h5>
+
+<p>This method tries to determine whether the input group <var class="Arg">G</var> is acting primitively on <span class="SimpleMath">N</span> points, and is isomorphic to a large subgroup of <span class="SimpleMath">H ≀ S_r</span> where <span class="SimpleMath">H</span> is <span class="SimpleMath">S_n</span> acting on <span class="SimpleMath">k</span>-sets and <span class="SimpleMath">N = {n choose k}^r</span> and <span class="SimpleMath">kr &gt; 1</span>. "Large" means that <var class="Arg">G</var> contains a subgroup isomorphic to <span class="SimpleMath">A_n^r</span>. If <var class="Arg">G</var> is imprimitive then the output is <code class="keyw">false</code>. If <var class="Arg">G</var> is primitive then the output is either a homomorphism into the natural imprimitive action of <var class="Arg">G</var> on <span class="SimpleMath">nr</span> points with <span class="SimpleMath">r</span> blocks of size <span class="SimpleMath">n</span>, or <code class="keyw">fail</code>.</p>
+
+<p><a id="X834E9DFF7DC949DE" name="X834E9DFF7DC949DE"></a></p>
+
+<h5>6.1-9 <span class="Heading"><code class="code">StabChain</code></span></h5>
+
+<p>This is the randomized <strong class="pkg">GAP</strong> library function for computing a stabiliser chain. The method selection process ensures that this function is called only with small-base inputs, where the method works efficiently.</p>
+
+<p><a id="X829BA50B82FEC109" name="X829BA50B82FEC109"></a></p>
+
+<h4>6.2 <span class="Heading">Methods for matrix groups</span></h4>
+
+<p>The following table gives an overview over the installed methods and their rank (higher rank means higher priority, the method is tried earlier, see Chapter <a href="chap4.html#X8058CC8187162644"><span class="RefLink">4</span></a>). Note that there are not that many methods for matrix groups since the system can switch to projective groups by dividing out the subgroup of scalar matrices. The bulk of the recognition methods are then installed es methods for projective groups.</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b>Matrix group find homomorphism methods</caption>
+<tr>
+<td class="tdleft">3100</td>
+<td class="tdleft"><code class="code">TrivialMatrixGroup</code></td>
+<td class="tdleft">check whether all generators are equal to the identity matrix</td>
+<td class="tdleft"><a href="chap6.html#X8205711B8077D1D6"><span class="RefLink">6.2-1</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">1175</td>
+<td class="tdleft"><code class="code">KnownStabilizerChain</code></td>
+<td class="tdleft">use an already known stabilizer chain for this group</td>
+<td class="tdleft"><a href="chap6.html#X7B2C182B7898BC45"><span class="RefLink">6.2-2</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">1100</td>
+<td class="tdleft"><code class="code">DiagonalMatrices</code></td>
+<td class="tdleft">check whether all generators are multiples of the identity</td>
+<td class="tdleft"><a href="chap6.html#X7A9F8CA181F6412D"><span class="RefLink">6.2-3</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">1050</td>
+<td class="tdleft"><code class="code">FewGensAbelian</code></td>
+<td class="tdleft">if very few generators, check IsAbelian and if yes, do KnownNilpotent</td>
+<td class="tdleft"><a href="chap6.html#X78797CF584658CEC"><span class="RefLink">6.2-4</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">1000</td>
+<td class="tdleft"><code class="code">ReducibleIso</code></td>
+<td class="tdleft">use the MeatAxe to find invariant subspaces</td>
+<td class="tdleft"><a href="chap6.html#X811FC944788D9839"><span class="RefLink">6.2-5</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">900</td>
+<td class="tdleft"><code class="code">GoProjective</code></td>
+<td class="tdleft">divide out scalars and recognise projectively</td>
+<td class="tdleft"><a href="chap6.html#X7A1D99F67E62B1D7"><span class="RefLink">6.2-8</span></a></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X8205711B8077D1D6" name="X8205711B8077D1D6"></a></p>
+
+<h5>6.2-1 <span class="Heading"><code class="code">TrivialMatrixGroup</code></span></h5>
+
+<p>This method is successful if and only if all generators of a matrix group <var class="Arg">G</var> are equal to the identity. Otherwise, it returns <code class="keyw">false</code>.</p>
+
+<p><a id="X7B2C182B7898BC45" name="X7B2C182B7898BC45"></a></p>
+
+<h5>6.2-2 <span class="Heading"><code class="code">KnownStabilizerChain</code></span></h5>
+
+<p>TODO. use an already known stabilizer chain for this group</p>
+
+<p><a id="X7A9F8CA181F6412D" name="X7A9F8CA181F6412D"></a></p>
+
+<h5>6.2-3 <span class="Heading"><code class="code">DiagonalMatrices</code></span></h5>
+
+<p>This method is successful if and only if all generators of a matrix group <var class="Arg">G</var> are diagonal matrices. Otherwise, it returns <code class="keyw">false</code>.</p>
+
+<p><a id="X78797CF584658CEC" name="X78797CF584658CEC"></a></p>
+
+<h5>6.2-4 <span class="Heading"><code class="code">FewGensAbelian</code></span></h5>
+
+<p>TODO. if very few generators, check IsAbelian and if yes, do KnownNilpotent</p>
+
+<p><a id="X811FC944788D9839" name="X811FC944788D9839"></a></p>
+
+<h5>6.2-5 <span class="Heading"><code class="code">ReducibleIso</code></span></h5>
+
+<p>This method determines whether a matrix group <var class="Arg">G</var> acts irreducibly. If yes, then it returns <code class="keyw">false</code>. If <var class="Arg">G</var> acts reducibly then a composition series of the underlying module is computed and a base change is performed to write <var class="Arg">G</var> in a block lower triangular form. Also, the method passes a hint to the image group that it is in block lower triangular form, so the image immediately can make recursive calls for the actions on the diagonal blocks, and then to the lower <span class="SimpleMath">p</span>-part. For the image the method <code class="code">BlockLowerTriangular</code> (see <a href="chap6.html#X81F74235823352B5"><span class="RefLink">6.2-6</span></a>) is used.</p>
+
+<p>Note that this method is implemented in a way such that it can also be used as a method for a projective group <var class="Arg">G</var>. In that case the recognition info record has the <code class="code">!.projective</code> component bound to <code class="keyw">true</code> and this information is passed down to image and kernel.</p>
+
+<p><a id="X81F74235823352B5" name="X81F74235823352B5"></a></p>
+
+<h5>6.2-6 <span class="Heading"><code class="code">BlockLowerTriangular</code></span></h5>
+
+<p>This method is only called when a hint was passed down from the method <code class="code">ReducibleIso</code> (see <a href="chap6.html#X811FC944788D9839"><span class="RefLink">6.2-5</span></a>). In that case, it knows that a base change to block lower triangular form has been performed. The method can then immediately find a homomorphism by mapping to the diagonal blocks. It sets up this homomorphism and gives hints to image and kernel. For the image, the method <code class="code">BlockDiagonal</code> (see <a href="chap6.html#X857BF1317CAAF260"><span class="RefLink">6.2-7</span></a>) is used and for the kernel, the method <code class="code">LowerLeftPGroup</code> (see <a href="chap6.html#X84E09FCF8527D74A"><span class="RefLink">6.2-10</span></a>) is used.</p>
+
+<p>Note that this method is implemented in a way such that it can also be used as a method for a projective group <var class="Arg">G</var>. In that case the recognition info record has the <code class="code">!.projective</code> component bound to <code class="keyw">true</code> and this information is passed down to image and kernel.</p>
+
+<p><a id="X857BF1317CAAF260" name="X857BF1317CAAF260"></a></p>
+
+<h5>6.2-7 <span class="Heading"><code class="code">BlockDiagonal</code></span></h5>
+
+<p>This method is only called when a hint was passed down from the method <code class="code">BlockLowerTriangular</code> (see <a href="chap6.html#X81F74235823352B5"><span class="RefLink">6.2-6</span></a>). In that case, it knows that the group is in block diagonal form. The method is used both in the matrix- and the projective case.</p>
+
+<p>The method immediately delegates to projective methods handling all the diagonal blocks projectively. This is done by giving a hint to the factor to use the method <code class="code">BlocksModScalars</code> (see <a href="chap6.html#X8605DA5E85DFACDC"><span class="RefLink">6.3-4</span></a>) is given. The method for the kernel then has to deal with only scalar blocks, either projectively or with scalars, which is again done by giving a hint to either use <code class="code">BlockScalar</code> (see <a href="chap6.html#X8795A42285A332BB"><span class="RefLink">6.2-9</span></a>) or <code class="code">BlockScalarProj</code> (see <a href="chap6.html#X863E0A1D7D7FEE04"><span class="RefLink">6.3-13</span></a>) respectively.</p>
+
+<p>Note that this method is implemented in a way such that it can also be used as a method for a projective group <var class="Arg">G</var>. In that case the recognition info record has the <code class="code">!.projective</code> component bound to <code class="keyw">true</code> and this information is passed down to image and kernel.</p>
+
+<p><a id="X7A1D99F67E62B1D7" name="X7A1D99F67E62B1D7"></a></p>
+
+<h5>6.2-8 <span class="Heading"><code class="code">GoProjective</code></span></h5>
+
+<p>This method defines a homomorphism from a matrix group <var class="Arg">G</var> into the projective group <var class="Arg">G</var> modulo scalar matrices. In fact, since projective groups in <strong class="pkg">GAP</strong> are represented as matrix groups, the homomorphism is the identity mapping and the only difference is that in the image the projective group methods can be applied. The bulk of the work in matrix recognition is done in the projective group setting.</p>
+
+<p><a id="X8795A42285A332BB" name="X8795A42285A332BB"></a></p>
+
+<h5>6.2-9 <span class="Heading"><code class="code">BlockScalar</code></span></h5>
+
+<p>This method is only called by a hint. Alongside with the hint it gets a block decomposition respected by the matrix group <var class="Arg">G</var> to be recognised and the promise that all diagonal blocks of all group elements will only be scalar matrices. This method recursively builds a balanced tree and does scalar recognition in each leaf.</p>
+
+<p><a id="X84E09FCF8527D74A" name="X84E09FCF8527D74A"></a></p>
+
+<h5>6.2-10 <span class="Heading"><code class="code">LowerLeftPGroup</code></span></h5>
+
+<p>This method is only called by a hint from <code class="code">BlockLowerTriangular</code> as the kernel of the homomorphism mapping to the diagonal blocks. The method uses the fact the this kernel is a <span class="SimpleMath">p</span>-group where <span class="SimpleMath">p</span> is the characteristic of the underlying field. It exploits this fact and uses this special structure to find nice generators and a method to express group elements in terms of these.</p>
+
+<p><a id="X867550F684F795AE" name="X867550F684F795AE"></a></p>
+
+<h4>6.3 <span class="Heading">Methods for projective groups</span></h4>
+
+<p>The following table gives an overview over the installed methods and their rank (higher rank means higher priority, the method is tried earlier, see Chapter <a href="chap4.html#X8058CC8187162644"><span class="RefLink">4</span></a>). Note that the recognition for matrix group switches to projective recognition rather soon in the recognition process such that most recognition methods in fact are installed as methods for projective groups.</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b>Projective group find homomorphism methods</caption>
+<tr>
+<td class="tdleft">3000</td>
+<td class="tdleft"><code class="code">TrivialProjectiveGroup</code></td>
+<td class="tdleft">check if all generators are scalar multiples of the identity matrix</td>
+<td class="tdleft"><a href="chap6.html#X817D05EB7A8764E3"><span class="RefLink">6.3-1</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">1300</td>
+<td class="tdleft"><code class="code">ProjDeterminant</code></td>
+<td class="tdleft">find homomorphism to non-zero scalars mod d-th powers</td>
+<td class="tdleft"><a href="chap6.html#X850864887D7F193E"><span class="RefLink">6.3-2</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">1250</td>
+<td class="tdleft"><code class="code">FewGensAbelian</code></td>
+<td class="tdleft">if very few generators, check IsAbelian and if yes, do KnownNilpotent</td>
+<td class="tdleft"><a href="chap6.html#X78797CF584658CEC"><span class="RefLink">6.2-4</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">1200</td>
+<td class="tdleft"><code class="code">ReducibleIso</code></td>
+<td class="tdleft">use MeatAxe to find a composition series, do base change</td>
+<td class="tdleft"><a href="chap6.html#X811FC944788D9839"><span class="RefLink">6.2-5</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">1100</td>
+<td class="tdleft"><code class="code">NotAbsolutelyIrred</code></td>
+<td class="tdleft">write over a bigger field with smaller degree</td>
+<td class="tdleft"><a href="chap6.html#X83E6AD6583DB7080"><span class="RefLink">6.3-5</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">1050</td>
+<td class="tdleft"><code class="code">ClassicalNatural</code></td>
+<td class="tdleft">check whether it is a classical group in its natural representation</td>
+<td class="tdleft"><span class="RefLink">???</span></td>
+</tr>
+<tr>
+<td class="tdleft">1000</td>
+<td class="tdleft"><code class="code">Subfield</code></td>
+<td class="tdleft">write over a smaller field with same degree</td>
+<td class="tdleft"><a href="chap6.html#X7FE1FA217A08DCE5"><span class="RefLink">6.3-6</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">900</td>
+<td class="tdleft"><code class="code">C3C5</code></td>
+<td class="tdleft">compute a normal subgroup of derived and resolve C3 and C5</td>
+<td class="tdleft"><span class="RefLink">???</span></td>
+</tr>
+<tr>
+<td class="tdleft">850</td>
+<td class="tdleft"><code class="code">C6</code></td>
+<td class="tdleft">find either an (imprimitive) action or a symplectic one</td>
+<td class="tdleft"><a href="chap6.html#X7E484B8F83849B49"><span class="RefLink">6.3-9</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">840</td>
+<td class="tdleft"><code class="code">D247</code></td>
+<td class="tdleft">play games to find a normal subgroup</td>
+<td class="tdleft"><span class="RefLink">???</span></td>
+</tr>
+<tr>
+<td class="tdleft">820</td>
+<td class="tdleft"><code class="code">SporadicsByOrders</code></td>
+<td class="tdleft">generate a few random elements and compute the proj. orders</td>
+<td class="tdleft"><span class="RefLink">???</span></td>
+</tr>
+<tr>
+<td class="tdleft">810</td>
+<td class="tdleft"><code class="code">AltSymBBByDegree</code></td>
+<td class="tdleft">try BB recognition for dim+1 and/or dim+2 if sensible</td>
+<td class="tdleft"><span class="RefLink">???</span></td>
+</tr>
+<tr>
+<td class="tdleft">800</td>
+<td class="tdleft"><code class="code">Tensor</code></td>
+<td class="tdleft">find a tensor decomposition</td>
+<td class="tdleft"><a href="chap6.html#X820882B88196022E"><span class="RefLink">6.3-10</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">700</td>
+<td class="tdleft"><code class="code">FindElmOfEvenNormal</code></td>
+<td class="tdleft">find D2, D4 or D7 by finding an element of an even normal subgroup</td>
+<td class="tdleft"><span class="RefLink">???</span></td>
+</tr>
+<tr>
+<td class="tdleft">600</td>
+<td class="tdleft"><code class="code">LowIndex</code></td>
+<td class="tdleft">find an (imprimitive) action on subspaces</td>
+<td class="tdleft"><a href="chap6.html#X810B7F36818D626B"><span class="RefLink">6.3-8</span></a></td>
+</tr>
+<tr>
+<td class="tdleft">550</td>
+<td class="tdleft"><code class="code">ComputeSimpleSocle</code></td>
+<td class="tdleft">compute simple socle of almost simple group</td>
+<td class="tdleft"><span class="RefLink">???</span></td>
+</tr>
+<tr>
+<td class="tdleft">500</td>
+<td class="tdleft"><code class="code">ThreeLargeElOrders</code></td>
+<td class="tdleft">look at three large element orders</td>
+<td class="tdleft"><span class="RefLink">???</span></td>
+</tr>
+<tr>
+<td class="tdleft">400</td>
+<td class="tdleft"><code class="code">LieTypeNonConstr</code></td>
+<td class="tdleft">do non-constructive recognition of Lie type groups</td>
+<td class="tdleft"><span class="RefLink">???</span></td>
+</tr>
+<tr>
+<td class="tdleft">100</td>
+<td class="tdleft"><code class="code">StabilizerChain</code></td>
+<td class="tdleft">last resort: compute a stabilizer chain (projectively)</td>
+<td class="tdleft"><a href="chap6.html#X80747C9A7FEB36BE"><span class="RefLink">6.3-12</span></a></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X817D05EB7A8764E3" name="X817D05EB7A8764E3"></a></p>
+
+<h5>6.3-1 <span class="Heading"><code class="code">TrivialProjectiveGroup</code></span></h5>
+
+<p>This method is successful if and only if all generators of a projective group <var class="Arg">G</var> are equal to the identity (that is, in the matrix representation of <var class="Arg">G</var>, all matrices are scalars). Otherwise, it returns <code class="keyw">false</code>.</p>
+
+<p><a id="X850864887D7F193E" name="X850864887D7F193E"></a></p>
+
+<h5>6.3-2 <span class="Heading"><code class="code">ProjDeterminant</code></span></h5>
+
+<p>The method defines a homomorphism from a projective group <var class="Arg">G</var><span class="SimpleMath">le PGL(d,q)</span> to the cyclic group <span class="SimpleMath">GF(q)^*/D</span>, where <span class="SimpleMath">D</span> is the set of <span class="SimpleMath">d</span>th powers in <span class="SimpleMath">GF(q)^*</span>. The image of a group element <span class="SimpleMath">g ∈ <var class="Arg">G</var></span> is the determinant of a matrix representative of <span class="SimpleMath">g</span>, modulo <span class="SimpleMath">D</span>.</p>
+
+<p><a id="X811FC944788D9839" name="X811FC944788D9839"></a></p>
+
+<h5>6.3-3 <span class="Heading"><code class="code">ReducibleIso</code></span></h5>
+
+<p>This method is the same as the matrix group method with the same name (see <a href="chap6.html#X811FC944788D9839"><span class="RefLink">6.2-5</span></a>), which is able to take into account the projective mode.</p>
+
+<p><a id="X8605DA5E85DFACDC" name="X8605DA5E85DFACDC"></a></p>
+
+<h5>6.3-4 <span class="Heading"><code class="code">BlocksModScalars</code></span></h5>
+
+<p>This method is only called when hinted from above. In this method it is understood that G should <em>neither</em> be recognised as a matrix group <em>nor</em> as a projective group. Rather, it treats all diagonal blocks modulo scalars which means that two matrices are considered to be equal, if they differ only by a scalar factor in <em>corresponding</em> diagonal blocks, and this scalar can be different for each diagonal block. This means that the kernel of the homomorphism mapping to a node which is recognised using this method will have only scalar matrices in all diagonal blocks.</p>
+
+<p>This method does the balanced tree approach mapping to subsets of the diagonal blocks and finally using projective recognition to recognise single diagonal block groups.</p>
+
+<p><a id="X83E6AD6583DB7080" name="X83E6AD6583DB7080"></a></p>
+
+<h5>6.3-5 <span class="Heading"><code class="code">NotAbsolutelyIrred</code></span></h5>
+
+<p>If an irreducible projective group <var class="Arg">G</var> acts absolutely irreducibly then this method returns <code class="keyw">false</code>. If <var class="Arg">G</var> is not absolutely irreducible then a homomorphism into a smaller dimensional representation over an extension field is defined. A hint is handed down to the image that no test for absolute irreducibility has to be done any more. Another hint is handed down to the kernel indicating that the only possible kernel elements can be elements in the centraliser of <var class="Arg">G</var> in <span class="SimpleMath">PGL(d,q)</span> that come from scalar matrices in the extension field.</p>
+
+<p><a id="X7FE1FA217A08DCE5" name="X7FE1FA217A08DCE5"></a></p>
+
+<h5>6.3-6 <span class="Heading"><code class="code">Subfield</code></span></h5>
+
+<p>When this method runs it knows that the projective group <var class="Arg">G</var> acts absolutely irreducibly. It then tries to realise this group over a smaller field. The algorithm used is the one using the "standard basis approach" known from isomorphism testing of absolutely irreducible modules. It finds a base change to write the projective group over the smallest field possible. Since the group is projective, it may choose to multiply generators with arbitrary scalars to write them over a smaller field.</p>
+
+<p>However, sometimes the correct scalar can not be guessed. Therefore, if the first approach does not work, the method computes the derived subgroup. If the group can be written over a smaller field, then taking commutators loses the scalars preventing a direct base change to work. Therefore, if the derived subgroup still acts irreducibly, the standard basis approach can find the right base change that could also do the job for the whole group. If it acts reducibly, the method <code class="code">Derived</code> (see <a href="chap6.html#X84B342787B9BD299"><span class="RefLink">6.3-7</span></a>) which is run next already has the computed derived subgroup and can try different things to find a reduction.</p>
+
+<p><a id="X84B342787B9BD299" name="X84B342787B9BD299"></a></p>
+
+<h5>6.3-7 <span class="Heading"><code class="code">Derived</code></span></h5>
+
+<p>This method computes the derived subgroup, if this has not yet been done by other methods. It then uses the MeatAxe to decide whether the derived subgroup acts irreducibly or not. If it acts reducibly, then we can apply Clifford theory to the natural module. The natural module restricted to the derived subgroup is a direct sum of simple modules. If all the summands are isomorphic, we immediately get either an action of <var class="Arg">G</var> on blocks or a tensor decomposition. Otherwise, we get an action of <var class="Arg">G</var> on the isotypic components. Either way, we find a reduction.</p>
+
+<p>If the derived group acts irreducibly, we return <code class="keyw">false</code> in the current implementation.</p>
+
+<p><a id="X810B7F36818D626B" name="X810B7F36818D626B"></a></p>
+
+<h5>6.3-8 <span class="Heading"><code class="code">LowIndex</code></span></h5>
+
+<p>This method is designed for the handling of the Aschbacher class C2 (stabiliser of a decomposition of the underlying vector space), but may succeed on other types of input as well. Given <var class="Arg">G</var> <span class="SimpleMath">le PGL(d,q)</span>, the output is either the permutation action of <var class="Arg">G</var> on a short orbit of subspaces or <code class="keyw">fail</code>. In the current setup, "short orbit" is defined to have length at most <span class="SimpleMath">4d</span>.</p>
+
+<p><a id="X7E484B8F83849B49" name="X7E484B8F83849B49"></a></p>
+
+<h5>6.3-9 <span class="Heading"><code class="code">C6</code></span></h5>
+
+<p>This method is designed for the handling of the Aschbacher class C6 (normaliser of an extraspecial group). If the input <var class="Arg">G</var><span class="SimpleMath">le PGL(d,q)</span> does not satisfy <span class="SimpleMath">d=r^n</span> and <span class="SimpleMath">r|q-1</span> for some prime <span class="SimpleMath">r</span> and integer <span class="SimpleMath">n</span> then the method returns <code class="keyw">false</code>. Otherwise, it returns either a homomorphism of <var class="Arg">G</var> into <span class="SimpleMath">Sp(2n,r)</span>, or a homomorphism into the C2 permutation action of <var class="Arg">G</var> on a decomposition of <span class="SimpleMath">GF(q)^d</span>, or <code class="keyw">fail</code>.</p>
+
+<p><a id="X820882B88196022E" name="X820882B88196022E"></a></p>
+
+<h5>6.3-10 <span class="Heading"><code class="code">Tensor</code></span></h5>
+
+<p>This method currently tries to find one tensor factor by powering up commutators of random elements to elements of prime order. This seems to work quite well provided that the two tensor factors are not "linked" too much such that there exist enough elements that act with different orders on both tensor factors.</p>
+
+<p>This method and its description needs some improvement.</p>
+
+<p><a id="X80EBB72481FCA144" name="X80EBB72481FCA144"></a></p>
+
+<h5>6.3-11 <span class="Heading"><code class="code">TwoLargeElOrders</code></span></h5>
+
+<p>In the case when the input group <var class="Arg">G</var><span class="SimpleMath">le PGL(d,p^e)</span> is suspected to be simple but not alternating, this method takes the two largest element orders from a sample of pseudorandom elements of <var class="Arg">G</var>. From these element orders, it tries to determine whether <var class="Arg">G</var> is of Lie type or sporadic, and the characteristic of <var class="Arg">G</var> if it is of Lie type. In the case when <var class="Arg">G</var> is of Lie type of characteristic different from <span class="SimpleMath">p</span> or <var class="Arg">G</var> is sporadic, the method also provides a short list of the possible isomorphism types of <var class="Arg">G</var>.</p>
+
+<p><a id="X80747C9A7FEB36BE" name="X80747C9A7FEB36BE"></a></p>
+
+<h5>6.3-12 <span class="Heading"><code class="code">StabilizerChain</code></span></h5>
+
+<p>This method computes a stabiliser chain and a base and strong generating set using projective actions. This is a last resort method since for bigger examples no short orbits can be found in the natural action. The strong generators are the nice generator in this case and expressing group elements in terms of the nice generators ist just sifting along the stabiliser chain.</p>
+
+<p><a id="X863E0A1D7D7FEE04" name="X863E0A1D7D7FEE04"></a></p>
+
+<h5>6.3-13 <span class="Heading"><code class="code">BlockScalarProj</code></span></h5>
+
+<p>This method is only called by a hint. Alongside with the hint it gets a block decomposition respected by the matrix group <var class="Arg">G</var> to be recognised and the promise that all diagonal blocks of all group elements will only be scalar matrices. This method simply norms the last diagonal block in all generators by multiplying with a scalar and then delegates to <code class="code">BlockScalar</code> (see <a href="chap6.html#X8795A42285A332BB"><span class="RefLink">6.2-9</span></a>) and matrix group mode to do the recognition.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

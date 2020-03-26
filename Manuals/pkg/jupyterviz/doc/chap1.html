@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (JupyterViz) - Chapter 1: Introduction</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X78E0A9867DABCE86">1.1 <span class="Heading">Purpose</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X8376A2517DEBB867">1.2 <span class="Heading">Terminology (What is a Graph?)</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X83000C697990B06C">1.2-1 <span class="Heading">Toolkits for drawing charts and plots</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7C46B954786E37AE">1.2-2 <span class="Heading">Toolkits for drawing graphs</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7F2C8A0B7E3BB3F1">1.2-3 <span class="Heading">General purpose tools with which you can define custom visualizations</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X856998F578ABF3A1">1.3 <span class="Heading">The high-level API and the low-level API</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7FA0757281D33109">1.4 <span class="Heading">Loading the package (in Jupyter or otherwise)</span></a>
+</span>
+</div>
+</div>
+
+<h3>1 <span class="Heading">Introduction</span></h3>
+
+<p><a id="X78E0A9867DABCE86" name="X78E0A9867DABCE86"></a></p>
+
+<h4>1.1 <span class="Heading">Purpose</span></h4>
+
+<p>Since 2017, it has been possible to use <strong class="pkg">GAP</strong> in <span class="URL"><a href="http://jupyter.org/">Jupyter</a></span> through the <strong class="pkg">JupyterKernel</strong> package. Output was limited to the ordinary text output <strong class="pkg">GAP</strong> produces; charts and graphs were not possible.</p>
+
+<p>In 2018, Martins and Pfeiffer released <strong class="pkg">francy</strong> (<span class="URL"><a href="https://github.com/mcmartins/francy">repository</a></span>, <span class="URL"><a href="https://arxiv.org/abs/1806.08648">article</a></span>), which lets users create graphs of a few types (vertices and edges, line chart, bar chart, scatter chart) in a Jupyter notebook. It also allows the user to attach actions to the elements of these charts, which result in callbacks to <strong class="pkg">GAP</strong> that can update the visualization.</p>
+
+<p>This visualization package has different aims in three ways. First, it can function either in a Jupyter notebook or directly from the <strong class="pkg">GAP</strong> REPL on the command line. Second, it aims to make a wider variety of visualizations accessible to <strong class="pkg">GAP</strong> users. Third, it does not provide tools for conveniently making such visualizations interactive. Where the <strong class="pkg">francy</strong> package excels at interactive visualizations, this package instead gives a broader scope of visualization tools and does not require Jupyter.</p>
+
+<p>These goals are achieved by importing several existing JavaScript visualization toolkits and exposing them to <strong class="pkg">GAP</strong> code, as described later in this manual.</p>
+
+<p><a id="X8376A2517DEBB867" name="X8376A2517DEBB867"></a></p>
+
+<h4>1.2 <span class="Heading">Terminology (What is a Graph?)</span></h4>
+
+<p>There is an unfortunate ambiguity about the word "graph" in mathematics. It is used to mean both "the graph of a function drawn on coordinate axes" and "a collection of vertices with edges connecting them." This is particularly troublesome in a package like this one, where we will provide tools for drawing both of these things! Consequently, we remove the ambiguity as follows.</p>
+
+<p>We will say "charts and plots" to refer to the first concept (lines, curves, bars, dots, etc. on coordinate axes) and "graphs" (or sometimes "graph drawing") to refer only to the second concept (vertices and edges). This convention holds throughout this entire document.</p>
+
+<p><table align="center" border=0><tr><td><img height="200" src="squared-ints.png"/></td><td><img height="200" src="random-graph-10.png"/></td></tr><tr><td>A plot or chart</td><td>A graph</td></tr></table></p>
+
+<p>To support both of these types of visualizations, this package imports a breadth of JavaScript visualization libraries (and you can extend it with more, as in Chapter <a href="chap5.html#X81249ADA79916213"><span class="RefLink">5</span></a>). We split them into the categories defined above.</p>
+
+<p><a id="X83000C697990B06C" name="X83000C697990B06C"></a></p>
+
+<h5>1.2-1 <span class="Heading">Toolkits for drawing charts and plots</span></h5>
+
+
+<ul>
+<li><p><span class="URL"><a href="https://www.anychart.com/">AnyChart</a></span></p>
+
+</li>
+<li><p><span class="URL"><a href="https://canvasjs.com/">CanvasJS</a></span></p>
+
+</li>
+<li><p><span class="URL"><a href="https://www.chartjs.org/">ChartJS</a></span></p>
+
+</li>
+<li><p><span class="URL"><a href="https://plot.ly/">Plotly</a></span> (the default tool used when you call <code class="func">Plot</code> (<a href="chap7.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>))</p>
+
+</li>
+</ul>
+<p><a id="X7C46B954786E37AE" name="X7C46B954786E37AE"></a></p>
+
+<h5>1.2-2 <span class="Heading">Toolkits for drawing graphs</span></h5>
+
+
+<ul>
+<li><p><span class="URL"><a href="http://www.cytoscape.org/">Cytoscape</a></span> (the default tool used when you call <code class="func">PlotGraph</code> (<a href="chap7.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>))</p>
+
+</li>
+</ul>
+<p><a id="X7F2C8A0B7E3BB3F1" name="X7F2C8A0B7E3BB3F1"></a></p>
+
+<h5>1.2-3 <span class="Heading">General purpose tools with which you can define custom visualizations</span></h5>
+
+
+<ul>
+<li><p><span class="URL"><a href="https://d3js.org/">D3</a></span></p>
+
+</li>
+<li><p>Native HTML <code class="code">canvas</code> element</p>
+
+</li>
+<li><p>Plain HTML</p>
+
+</li>
+</ul>
+<p><a id="X856998F578ABF3A1" name="X856998F578ABF3A1"></a></p>
+
+<h4>1.3 <span class="Heading">The high-level API and the low-level API</span></h4>
+
+<p>This package exposes the JavaScript tools to the <strong class="pkg">GAP</strong> user in two ways.</p>
+
+<p>Foundationally, a low-level API gives direct access to the JSON passed to those tools and to JavaScript code for manipulating the visualizations the tools create. This is powerful but not convenient to use.</p>
+
+<p>More conveniently, a high-level API gives two functions, one for creating plots and charts (<code class="func">Plot</code> (<a href="chap7.html#X811D60857B0B2B68"><span class="RefLink">7.1-1</span></a>)) and one for creating graphs (<code class="func">PlotGraph</code> (<a href="chap7.html#X79FCD4E67FF49A5F"><span class="RefLink">7.1-3</span></a>)). The high-level API should handle the vast majority of use cases, but if an option you need is not supported by it, there is still the low-level API on which you can fall back.</p>
+
+<p><a id="X7FA0757281D33109" name="X7FA0757281D33109"></a></p>
+
+<h4>1.4 <span class="Heading">Loading the package (in Jupyter or otherwise)</span></h4>
+
+<p>To import this package, use the following <strong class="pkg">GAP</strong> command from the command line or from a cell in a Jupyter notebook running a <strong class="pkg">GAP</strong> kernel.</p>
+
+
+<div class="example"><pre>
+LoadPackage( "jupyterviz" );
+</pre></div>
+
+<p>To see how to use the package, we recommend next reading Chapter <a href="chap2.html#X83888F2D8472E029"><span class="RefLink">2</span></a> on the high-level API, and if you find it necessary, also Chapter <a href="chap3.html#X8363BC74806376BE"><span class="RefLink">3</span></a> on the low-level API. Each chapter contains numerous examples of how to use the package.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

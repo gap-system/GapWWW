@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (RepnDecomp) - Chapter 5: Computing decompositions of representations</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5.html">[MathJax off]</a></p>
+<p><a id="X7F968DF987DE4A6E" name="X7F968DF987DE4A6E"></a></p>
+<div class="ChapSects"><a href="chap5_mj.html#X7F968DF987DE4A6E">5 <span class="Heading">Computing decompositions of representations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7E29883984400D2C">5.1 <span class="Heading">Block diagonalizing</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8361AD057AD282AC">5.1-1 BlockDiagonalBasisOfRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86EB837579C1416D">5.1-2 BlockDiagonalRepresentation</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X863A16A179A7486B">5.2 <span class="Heading">Algorithms due to the authors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X831574AD864C94A8">5.2-1 REPN_ComputeUsingMyMethod</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7DB659DB7E48D502">5.2-2 REPN_ComputeUsingMyMethodCanonical</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7C22F13E80A74438">5.3 <span class="Heading">Algorithms due to Serre</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7E95B0367992BEC4">5.3-1 CanonicalDecomposition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X795C63F386C45308">5.3-2 IrreducibleDecomposition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X87E91CBE7992D126">5.3-3 IrreducibleDecompositionCollected</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7C1CF0547D72D354">5.3-4 REPN_ComputeUsingSerre</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Computing decompositions of representations</span></h3>
+
+<p><a id="X7E29883984400D2C" name="X7E29883984400D2C"></a></p>
+
+<h4>5.1 <span class="Heading">Block diagonalizing</span></h4>
+
+<p>Given a representation <span class="SimpleMath">\(\rho : G \to GL(V)\)</span>, it is often desirable to find a basis for <span class="SimpleMath">\(V\)</span> that block diagonalizes each <span class="SimpleMath">\(\rho(g)\)</span> with the block sizes being as small as possible. This speeds up matrix algebra operations, since they can now be done block-wise.</p>
+
+<p><a id="X8361AD057AD282AC" name="X8361AD057AD282AC"></a></p>
+
+<h5>5.1-1 BlockDiagonalBasisOfRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BlockDiagonalBasisOfRepresentation</code>( <var class="Arg">rho</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: Basis for <span class="SimpleMath">\(V\)</span> that block diagonalizes <span class="SimpleMath">\(\rho\)</span>.</p>
+
+<p>Let <span class="SimpleMath">\(G\)</span> have irreducible representations <span class="SimpleMath">\(\rho_i\)</span>, with dimension <span class="SimpleMath">\(d_i\)</span> and multiplicity <span class="SimpleMath">\(m_i\)</span>. The basis returned by this operation gives each <span class="SimpleMath">\(\rho(g)\)</span> as a block diagonal matrix which has <span class="SimpleMath">\(m_i\)</span> blocks of size <span class="SimpleMath">\(d_i \times d_i\)</span> for each <span class="SimpleMath">\(i\)</span>.</p>
+
+<p><a id="X86EB837579C1416D" name="X86EB837579C1416D"></a></p>
+
+<h5>5.1-2 BlockDiagonalRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BlockDiagonalRepresentation</code>( <var class="Arg">rho</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: Representation of <span class="SimpleMath">\(G\)</span> isomorphic to <span class="SimpleMath">\(\rho\)</span> where the images <span class="SimpleMath">\(\rho(g)\)</span> are block diagonalized.</p>
+
+<p>This is just a convenience operation that uses <code class="func">BlockDiagonalBasisOfRepresentation</code> (<a href="chap5_mj.html#X8361AD057AD282AC"><span class="RefLink">5.1-1</span></a>) to calculate the basis change matrix and applies it to put <span class="SimpleMath">\(\rho\)</span> into the block diagonalised form.</p>
+
+<p><a id="X863A16A179A7486B" name="X863A16A179A7486B"></a></p>
+
+<h4>5.2 <span class="Heading">Algorithms due to the authors</span></h4>
+
+<p><a id="X831574AD864C94A8" name="X831574AD864C94A8"></a></p>
+
+<h5>5.2-1 REPN_ComputeUsingMyMethod</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; REPN_ComputeUsingMyMethod</code>( <var class="Arg">rho</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A record in the same format as <code class="func">REPN_ComputeUsingSerre</code> (<a href="chap5_mj.html#X7C1CF0547D72D354"><span class="RefLink">5.3-4</span></a>)</p>
+
+<p>Computes the same values as <code class="func">REPN_ComputeUsingSerre</code> (<a href="chap5_mj.html#X7C1CF0547D72D354"><span class="RefLink">5.3-4</span></a>), taking the same options. The heavy lifting of this method is done by <code class="func">LinearRepresentationIsomorphism</code> (<a href="chap2_mj.html#X7F0D3CFB7800149A"><span class="RefLink">2.1-1</span></a>), where there are some further options that can be passed to influence algorithms used.</p>
+
+<p><a id="X7DB659DB7E48D502" name="X7DB659DB7E48D502"></a></p>
+
+<h5>5.2-2 REPN_ComputeUsingMyMethodCanonical</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; REPN_ComputeUsingMyMethodCanonical</code>( <var class="Arg">rho</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A record in the same format as <code class="func">REPN_ComputeUsingMyMethod</code> (<a href="chap5_mj.html#X831574AD864C94A8"><span class="RefLink">5.2-1</span></a>).</p>
+
+<p>Performs the same computation as <code class="func">REPN_ComputeUsingMyMethod</code> (<a href="chap5_mj.html#X831574AD864C94A8"><span class="RefLink">5.2-1</span></a>), but first splits the representation into canonical summands using <code class="func">CanonicalDecomposition</code> (<a href="chap5_mj.html#X7E95B0367992BEC4"><span class="RefLink">5.3-1</span></a>). This might reduce the size of the matrices we need to work with significantly, so could be much faster.</p>
+
+<p>If the option <code class="code">parallel</code> is given, the decomposition of canonical summands into irreps is done in parallel, which could be much faster.</p>
+
+<p><a id="X7C22F13E80A74438" name="X7C22F13E80A74438"></a></p>
+
+<h4>5.3 <span class="Heading">Algorithms due to Serre</span></h4>
+
+<p>Note: all computation in this section is actually done in the function <code class="func">REPN_ComputeUsingSerre</code> (<a href="chap5_mj.html#X7C1CF0547D72D354"><span class="RefLink">5.3-4</span></a>), the other functions are wrappers around it.</p>
+
+<p><a id="X7E95B0367992BEC4" name="X7E95B0367992BEC4"></a></p>
+
+<h5>5.3-1 CanonicalDecomposition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CanonicalDecomposition</code>( <var class="Arg">rho</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: List of vector spaces <span class="SimpleMath">\(V_i\)</span>, each <span class="SimpleMath">\(G\)</span>-invariant and a direct sum of isomorphic irreducibles. That is, for each <span class="SimpleMath">\(i\)</span>, <span class="SimpleMath">\(V_i \cong \oplus_j W_i\)</span> (as representations) where <span class="SimpleMath">\(W_i\)</span> is an irreducible <span class="SimpleMath">\(G\)</span>-invariant vector space.</p>
+
+<p>Computes the canonical decomposition of <span class="SimpleMath">\(V\)</span> into <span class="SimpleMath">\(\oplus_i\;V_i\)</span> using the formulas for projections <span class="SimpleMath">\(V \to V_i\)</span> due to Serre. You can pass in the option <code class="code">irreps</code> with a list of irreps of <span class="SimpleMath">\(G\)</span>, and this will be used instead of computing a complete list ourselves. If you already know which irreps will appear in <span class="SimpleMath">\(\rho\)</span>, for instance, this will save time.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># This is the trivial group</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">G := Group(());;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># The trivial group has only one representation per degree, so a</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># degree d representation decomposes into a single canonical summand</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># containing the whole space</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">rho := FuncToHom@RepnDecomp(G, g -&gt; IdentityMat(3));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">canonical_summands_G := CanonicalDecomposition(rho);</span>
+[ ( Cyclotomics^3 ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># More interesting example, S_3</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">H := SymmetricGroup(3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># The standard representation: a permutation to the corresponding</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># permutation matrix.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">tau := FuncToHom@RepnDecomp(H, h -&gt; PermutationMat(h, 3));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Two canonical summands corresponding to the degree 2 and</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># trivial irreps (in that order)</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">canonical_summands_H := CanonicalDecomposition(tau);</span>
+[ &lt;vector space over Cyclotomics, with 2 generators&gt;,
+  &lt;vector space over Cyclotomics, with 1 generators&gt; ]
+</pre></div>
+
+<p><a id="X795C63F386C45308" name="X795C63F386C45308"></a></p>
+
+<h5>5.3-2 IrreducibleDecomposition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IrreducibleDecomposition</code>( <var class="Arg">rho</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: List of vector spaces <span class="SimpleMath">\(W_j\)</span> such that <span class="SimpleMath">\(V = \oplus_j W_j\)</span> and each <span class="SimpleMath">\(W_j\)</span> is an irreducible <span class="SimpleMath">\(G\)</span>-invariant vector space.</p>
+
+<p>Computes the decomposition of <span class="SimpleMath">\(V\)</span> into irreducible subprepresentations.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># The trivial group has 1 irrep of degree 1, so rho decomposes into 3</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># lines.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">irred_decomp_G := IrreducibleDecomposition(rho);</span>
+[ rec( basis := [ [ 1, 0, 0 ] ] ), rec( basis := [ [ 0, 1, 0 ] ] ),
+  rec( basis := [ [ 0, 0, 1 ] ] ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># The spaces are returned in this format - explicitly keeping the</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># basis - since this basis block diagonalises rho into the irreps,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># which are the smallest possible blocks. This is more obvious with</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># H.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">irred_decomp_H := IrreducibleDecomposition(tau);</span>
+[ rec( basis := [ [ 1, 1, 1 ] ] ),
+  rec( basis := [ [ 1, E(3), E(3)^2 ], [ 1, E(3)^2, E(3) ] ] ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Using the basis vectors given there block diagonalises tau into</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># the two blocks corresponding to the two irreps:</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">nice_basis := [ [ 1, 1, 1 ], [ 1, E(3), E(3)^2 ], [ 1, E(3)^2, E(3) ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau_diag := ComposeHomFunction(tau, X -&gt; nice_basis^-1 * X * nice_basis);</span>
+[ (1,2,3), (1,2) ] -&gt; [ [ [ 1, 0, 0 ], [ 0, E(3), 0 ], [ 0, 0, E(3)^2 ] ],
+  [ [ 1, 0, 0 ], [ 0, 0, E(3)^2 ], [ 0, E(3), 0 ] ] ]
+</pre></div>
+
+<p><a id="X87E91CBE7992D126" name="X87E91CBE7992D126"></a></p>
+
+<h5>5.3-3 IrreducibleDecompositionCollected</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IrreducibleDecompositionCollected</code>( <var class="Arg">rho</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: List of lists <span class="SimpleMath">\(V_i\)</span> of vector spaces <span class="SimpleMath">\(V_{ij}\)</span> such that <span class="SimpleMath">\(V = \oplus_i \oplus_j V_{ij}\)</span> and <span class="SimpleMath">\(V_{ik} \cong V_{il}\)</span> for all <span class="SimpleMath">\(i\)</span>, <span class="SimpleMath">\(k\)</span> and <span class="SimpleMath">\(l\)</span> (as representations).</p>
+
+<p>Computes the decomposition of <span class="SimpleMath">\(V\)</span> into irreducible subrepresentations, grouping together the isomorphic subrepresentations.</p>
+
+<p><a id="X7C1CF0547D72D354" name="X7C1CF0547D72D354"></a></p>
+
+<h5>5.3-4 REPN_ComputeUsingSerre</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; REPN_ComputeUsingSerre</code>( <var class="Arg">rho</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A record, in the format described below</p>
+
+<p>This function does all of the computation and (since it is an attribute) saves the results. Doing all of the calculations at the same time ensures consistency when it comes to irrep ordering, block ordering and basis ordering. There is no canonical ordering of irreps, so this is crucial.</p>
+
+<p><var class="Arg">irreps</var> is the complete list of irreps involved in the direct sum decomposition of <var class="Arg">rho</var>, this can be given in case the default (running Dixon's algorithm) is too expensive, or e.g. you don't want representations over Cyclotomics.</p>
+
+<p>The return value of this function is a record with fields:</p>
+
+
+<ul>
+<li><p><code class="code">basis</code>: The basis that block diagonalises <span class="SimpleMath">\(\rho\)</span>, see <code class="func">BlockDiagonalBasisOfRepresentation</code> (<a href="chap5_mj.html#X8361AD057AD282AC"><span class="RefLink">5.1-1</span></a>).</p>
+
+</li>
+</ul>
+
+<ul>
+<li><p><code class="code">diagonal_rep</code>: <span class="SimpleMath">\(\rho\)</span>, block diagonalised with the basis above. See <code class="func">BlockDiagonalRepresentation</code> (<a href="chap5_mj.html#X86EB837579C1416D"><span class="RefLink">5.1-2</span></a>)</p>
+
+</li>
+</ul>
+
+<ul>
+<li><p><code class="code">decomposition</code>: The irreducible <span class="SimpleMath">\(G\)</span>-invariant subspaces, collected according to isomorphism, see <code class="func">IrreducibleDecompositionCollected</code> (<a href="chap5_mj.html#X87E91CBE7992D126"><span class="RefLink">5.3-3</span></a>)</p>
+
+</li>
+</ul>
+
+<ul>
+<li><p><code class="code">centralizer_basis</code>: An orthonormal basis for the centralizer ring of <span class="SimpleMath">\(\rho\)</span>, written in block form. See <code class="func">CentralizerBlocksOfRepresentation</code> (<a href="chap6_mj.html#X7901B6A7860D35C3"><span class="RefLink">6.1-1</span></a>)</p>
+
+</li>
+</ul>
+<p>Pass the option <code class="code">parallel</code> for the computations per-irrep to be done in parallel.</p>
+
+<p>Pass the option <code class="code">irreps</code> with the complete list of irreps of <span class="SimpleMath">\(\rho\)</span> to avoid recomputing this list (could be very expensive)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Does the same thing we have done in the examples above, but all in</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># one step, with as many subcomputations reused as possible</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">REPN_ComputeUsingSerre(tau);</span>
+rec( basis := [ [ 1, 1, 1 ], [ 1, E(3), E(3)^2 ], [ 1, E(3)^2, E(3) ] ],
+  centralizer_basis := [ [ [ [ 1 ] ], [ [ 0, 0 ], [ 0, 0 ] ] ],
+      [ [ [ 0 ] ], [ [ 1, 0 ], [ 0, 1 ] ] ] ],
+  decomposition := [ [ rec( basis := [ [ 1, 1, 1 ] ] ) ], [  ],
+      [ rec( basis := [ [ 1, E(3), E(3)^2 ], [ 1, E(3)^2, E(3) ] ] ) ] ],
+  diagonal_rep := [ (1,2,3), (1,2) ] -&gt;
+    [ [ [ 1, 0, 0 ], [ 0, E(3), 0 ], [ 0, 0, E(3)^2 ] ],
+      [ [ 1, 0, 0 ], [ 0, 0, E(3)^2 ], [ 0, E(3), 0 ] ] ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># You can also do the computation in parallel:</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">REPN_ComputeUsingSerre(tau : parallel);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Or specify the irreps if you have already computed them:</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">irreps_H := IrreducibleRepresentations(H);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">REPN_ComputeUsingSerre(tau : irreps := irreps_H);;</span>
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

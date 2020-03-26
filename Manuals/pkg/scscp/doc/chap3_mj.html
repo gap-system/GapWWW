@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (scscp) - Chapter 3: Using streams</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X7CB06121820FD0DD" name="X7CB06121820FD0DD"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X7CB06121820FD0DD">3 <span class="Heading">Using streams</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X79EB93A27D9AC115">3.1 <span class="Heading">Input-output TCP streams</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X805BB9468642A787">3.1-1 IsInputOutputTCPStream</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X817A945B83659813">3.1-2 IsInputOutputTCPStreamRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E3D43CF7B049F04">3.1-3 InputOutputTCPStream</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X86CA5D6C79B32600">3.2 <span class="Heading">Example of client-server communication via input-output TCP streams</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">Using streams</span></h3>
+
+<p>The package implements new kind of <strong class="pkg">GAP</strong> input-output streams, called input-output TCP streams. Such streams are based on the functionality for the TCP/IP protocol usage provided by the <strong class="pkg">GAP</strong> package <strong class="pkg">IO</strong>, and may constitute an independent interest for <strong class="pkg">GAP</strong> users.</p>
+
+<p>Input-output TCP streams are intended to support all operations, implemented for streams in <strong class="pkg">GAP</strong>. It is assumed that all existing code using streams should work with this kind of streams as well (please let us know, if you will notice that this is not the case!). We installed methods for input-output TCP streams to support the following operations: <code class="func">ViewObj</code> (<a href="../../../doc/ref/chap6_mj.html#X815BF22186FD43C9"><span class="RefLink">Reference: ViewObj</span></a>), <code class="func">PrintObj</code> (<a href="../../../doc/ref/chap6_mj.html#X815BF22186FD43C9"><span class="RefLink">Reference: PrintObj</span></a>), <code class="func">ReadByte</code> (<a href="../../../doc/ref/chap10_mj.html#X79E1E6A57AE58BB8"><span class="RefLink">Reference: ReadByte</span></a>), <code class="func">ReadLine</code> (<a href="../../../doc/ref/chap10_mj.html#X7D2CA44C7D110C4F"><span class="RefLink">Reference: ReadLine</span></a>), <code class="func">ReadAll</code> (<a href="../../../doc/ref/chap10_mj.html#X85C603D7867430D0"><span class="RefLink">Reference: ReadAll</span></a>), <code class="func">WriteByte</code> (<a href="../../../doc/ref/chap10_mj.html#X7D37C7A07E9C319C"><span class="RefLink">Reference: WriteByte</span></a>), <code class="func">WriteLine</code> (<a href="../../../doc/ref/chap10_mj.html#X79FA85498596CC99"><span class="RefLink">Reference: WriteLine</span></a>), <code class="func">WriteAll</code> (<a href="../../../doc/ref/chap10_mj.html#X78C113917936058D"><span class="RefLink">Reference: WriteAll</span></a>), <code class="func">IsEndOfStream</code> (<a href="../../../doc/ref/chap10_mj.html#X81D4FB097F631A79"><span class="RefLink">Reference: IsEndOfStream</span></a>), <code class="func">CloseStream</code> (<a href="../../../doc/ref/chap10_mj.html#X786E5520803FDE00"><span class="RefLink">Reference: CloseStream</span></a>), <code class="func">FileDescriptorOfStream</code> (<a href="../../../doc/ref/chap10_mj.html#X7F0459287E717456"><span class="RefLink">Reference: FileDescriptorOfStream</span></a>), <code class="func">UNIXSelect</code> (<a href="../../../doc/ref/chap10_mj.html#X87BC257A78F96828"><span class="RefLink">Reference: UNIXSelect</span></a>).</p>
+
+<p><a id="X79EB93A27D9AC115" name="X79EB93A27D9AC115"></a></p>
+
+<h4>3.1 <span class="Heading">Input-output TCP streams</span></h4>
+
+<p><a id="X805BB9468642A787" name="X805BB9468642A787"></a></p>
+
+<h5>3.1-1 IsInputOutputTCPStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInputOutputTCPStream</code></td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p><code class="func">IsInputOutputTCPStream</code> is a subcategory of <code class="func">IsInputOutputStream</code> (<a href="../../../doc/ref/chap10_mj.html#X82822D3D8339F635"><span class="RefLink">Reference: IsInputOutputStream</span></a>). Streams in the category <code class="func">IsInputOutputTCPStream</code> are created with the help of the function <code class="func">InputOutputTCPStream</code> (<a href="chap3_mj.html#X7E3D43CF7B049F04"><span class="RefLink">3.1-3</span></a>) with one or two arguments dependently on whether they will be used in the client or server mode. Examples of their creation and usage will be given in subsequent sections.</p>
+
+<p><a id="X817A945B83659813" name="X817A945B83659813"></a></p>
+
+<h5>3.1-2 IsInputOutputTCPStreamRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInputOutputTCPStreamRep</code></td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>This is the representation used for streams in the category <code class="func">IsInputOutputTCPStream</code> (<a href="chap3_mj.html#X805BB9468642A787"><span class="RefLink">3.1-1</span></a>).</p>
+
+<p><a id="X7E3D43CF7B049F04" name="X7E3D43CF7B049F04"></a></p>
+
+<h5>3.1-3 InputOutputTCPStream</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InputOutputTCPStream</code>( <var class="Arg">desc</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InputOutputTCPStream</code>( <var class="Arg">host</var>, <var class="Arg">port</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: stream</p>
+
+<p>The one-argument version must be called from the <strong class="pkg">SCSCP</strong> server. Its argument <var class="Arg">desc</var> must be a socket descriptor obtained using <code class="func">IO_accept</code> (<a href="../../../pkg/io-4.6.0/doc/chap3_mj.html#X7E474E9787012FE4"><span class="RefLink">IO: IO_accept</span></a>) function from the <strong class="pkg">IO</strong> package (see the example below). It returns a stream in the category <code class="func">IsInputOutputTCPStream</code> (<a href="chap3_mj.html#X805BB9468642A787"><span class="RefLink">3.1-1</span></a>) which will use this socket to accept incoming connections. In most cases, the one-argument version is called automatically from <code class="func">RunSCSCPserver</code> (<a href="chap5_mj.html#X831C84577884215E"><span class="RefLink">5.2-1</span></a>) rather then manually.</p>
+
+<p>The version with two arguments, a string <var class="Arg">host</var> and an integer <var class="Arg">port</var>, must be called from the <strong class="pkg">SCSCP</strong> client. It returns a stream in the category <code class="func">IsInputOutputTCPStream</code> (<a href="chap3_mj.html#X805BB9468642A787"><span class="RefLink">3.1-1</span></a>) which will be used by the client for communication with the <strong class="pkg">SCSCP</strong> server running at hostname <var class="Arg">host</var> on port <var class="Arg">port</var>. In most cases, the two-argument version is called automatically from the higher level functions, for example, <code class="func">EvaluateBySCSCP</code> (<a href="chap6_mj.html#X7C745B2878E0AC41"><span class="RefLink">6.3-1</span></a>).</p>
+
+<p><a id="X86CA5D6C79B32600" name="X86CA5D6C79B32600"></a></p>
+
+<h4>3.2 <span class="Heading">Example of client-server communication via input-output TCP streams</span></h4>
+
+<p>The following example demonstrates the low-level interaction between client and server using input-output TCP stream, and shows how such streams are created in the function <code class="func">RunSCSCPserver</code> (<a href="chap5_mj.html#X831C84577884215E"><span class="RefLink">5.2-1</span></a>). It uses some functions from the <strong class="pkg">IO</strong> package (see the <strong class="pkg">IO</strong> manual for their description). We will show step by step what is happens on server and client (of course, if you will try this example, the numbers denoting descriptors may be different).</p>
+
+<p>Firts, we will start two <strong class="pkg">GAP</strong> sessions, one for the server, another one for the client. Now we enter the following commands on the server's side:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sock := IO_socket( IO.PF_INET, IO.SOCK_STREAM, "tcp" );</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lookup := IO_gethostbyname( "localhost" );</span>
+rec( name := "localhost", aliases := [  ], addrtype := 2, length := 4, 
+  addr := [ "\177\000\000\&gt;" ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">port:=26133;</span>
+26133
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">res := IO_bind( sock, IO_make_sockaddr_in( lookup.addr[1], port ) );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IO_listen( sock, 5 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">socket_descriptor := IO_accept( sock, IO_MakeIPAddressPort("0.0.0.0",0) );</span>
+
+</pre></div>
+
+<p>After the last command you will not see the <strong class="pkg">GAP</strong> prompt because the server starts to wait for an incoming connection. Now we go to the client's side and create an input-output TCP stream to the server. Here it can be created in one step:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clientstream:=InputOutputTCPStream( "localhost", 26133 );</span>
+Creating a socket...
+Connecting to a remote socket via TCP/IP...
+
+</pre></div>
+
+<p>Now we are trying to connect to the server, and as soon as the connection will be established, the stream will be created at the client side, and we will see the output and the new <strong class="pkg">GAP</strong> prompt:</p>
+
+
+<div class="example"><pre>
+
+&lt; input/output TCP stream to localhost &gt;
+gap&gt;
+
+</pre></div>
+
+<p>On the server you will get the socket descriptor and then you will be able to create a stream from it:</p>
+
+
+<div class="example"><pre>
+
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">serverstream := InputOutputTCPStream( socket_descriptor );</span>
+&lt; input/output TCP stream to socket &gt;
+
+</pre></div>
+
+<p>Now we can write to this stream on the client side and then read from it on the server side and backwards. First, write on the client:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WriteLine( clientstream, "12345" );</span>
+true
+
+</pre></div>
+
+<p>Now read and write on the server:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadLine( serverstream );</span>
+"12345\n"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WriteLine( serverstream, "54321" );</span>
+true
+
+</pre></div>
+
+<p>And finally we read on the client and close the stream:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReadLine( clientstream );</span>
+"54321\n"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream( clientstream );</span>
+
+</pre></div>
+
+<p>and similarly close the stream on the server:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream( serverstream );</span>
+
+</pre></div>
+
+<p>In this way one can organise remote communication between two copies of <strong class="pkg">GAP</strong> in various ways. In subsequent chapters we explain how it is implemented using <strong class="pkg">SCSCP</strong> to ensure compatibility not only with <strong class="pkg">GAP</strong> but with any other <strong class="pkg">SCSCP</strong>-compliant system.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

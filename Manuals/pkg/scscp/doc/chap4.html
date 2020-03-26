@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (scscp) - Chapter 4: Message exchange by SCSCP</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X7E9C5A238661FE15" name="X7E9C5A238661FE15"></a></p>
+<div class="ChapSects"><a href="chap4.html#X7E9C5A238661FE15">4 <span class="Heading">Message exchange by <strong class="pkg">SCSCP</strong></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7A1EC5EC813292B3">4.1 <span class="Heading">Communication with the <strong class="pkg">SCSCP</strong> server</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86D913277AFF2366">4.1-1 StartSCSCPsession</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81EC8AAA78F62CB7">4.1-2 OMPutProcedureCall</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7ABD2EA6792279CF">4.1-3 SCSCPwait</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E0FE0CF7DD2E00F">4.1-4 OMGetObjectWithAttributes</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X83CC58F67F1A15F1">4.2 <span class="Heading">Communication with the <strong class="pkg">SCSCP</strong> client</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C5C23A47A86EAEC">4.2-1 OMPutProcedureCompleted</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7FB47E3E86C7C9F9">4.2-2 OMPutProcedureTerminated</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X791818FB7F5F6801">4.3 <span class="Heading">Example: <strong class="pkg">SCSCP</strong> session</span></a>
+</span>
+</div>
+</div>
+
+<h3>4 <span class="Heading">Message exchange by <strong class="pkg">SCSCP</strong></span></h3>
+
+<p>To ensure the message exchange as required by <strong class="pkg">SCSCP</strong> specification, the <strong class="pkg">SCSCP</strong> package extends the global record <code class="code">OMsymRecord</code> from the <strong class="pkg">OpenMath</strong> package with new entries to support <strong class="pkg">scscp1</strong> and <strong class="pkg">scscp2</strong> content dictionaries (<a href="chapBib.html#biBscscp1cd">[FHK+a]</a>, <a href="chapBib.html#biBscscp2cd">[FHK+c]</a>), and also service-dependent transient private content dictionaries (see Chapter <a href="chap5.html#X7DEE95317812A998"><span class="RefLink">5</span></a> for details about transient content dictionaries). It also overwrites some <strong class="pkg">OpenMath</strong> functions by their extended (but backwards compatible) versions, and adds some new <strong class="pkg">OpenMath</strong>-related functions to send and receive <strong class="pkg">SCSCP</strong> messages, documented below.</p>
+
+<p>Note that functions documented in this chapter belong to the middle-level interface, and the user may find it more convenient to use functions developed on top of them and explained in next chapters.</p>
+
+<p><a id="X7A1EC5EC813292B3" name="X7A1EC5EC813292B3"></a></p>
+
+<h4>4.1 <span class="Heading">Communication with the <strong class="pkg">SCSCP</strong> server</span></h4>
+
+<p><a id="X86D913277AFF2366" name="X86D913277AFF2366"></a></p>
+
+<h5>4.1-1 StartSCSCPsession</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StartSCSCPsession</code>( <var class="Arg">stream</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: string</p>
+
+<p>Initialises <strong class="pkg">SCSCP</strong> session and negotiates with the server about the version of the protocol. Returns the string with the <code class="code">service_id</code> (which may be used later as a part of the call identifier) or causes an error message if can not perform these tasks.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := InputOutputTCPStream("localhost",26133);</span>
+&lt; input/output TCP stream to localhost:26133 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StartSCSCPsession(s);</span>
+"localhost:26133:5541"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream( s );</span>
+
+</pre></div>
+
+<p>After the call to <code class="func">StartSCSCPsession</code> the <strong class="pkg">SCSCP</strong> server is ready to accept procedure calls.</p>
+
+<p><a id="X81EC8AAA78F62CB7" name="X81EC8AAA78F62CB7"></a></p>
+
+<h5>4.1-2 OMPutProcedureCall</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPutProcedureCall</code>( <var class="Arg">stream</var>, <var class="Arg">proc_name</var>, <var class="Arg">objrec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Takes a stream <var class="Arg">stream</var>, the string <var class="Arg">proc_name</var> and a record <var class="Arg">objrec</var>, and writes to <var class="Arg">stream</var> an <strong class="pkg">OpenMath</strong> object <code class="code">procedure_call</code> for the procedure <var class="Arg">proc_name</var> with arguments given by the list <code class="code">objrec.object</code> and procedure call options (which should be encoded as <strong class="pkg">OpenMath</strong> attributes) given in the list <code class="code">objrec.attributes</code>.</p>
+
+<p>This function accepts options <code class="code">cd</code> and <code class="code">debuglevel</code>.</p>
+
+<p><code class="code">cd:="cdname"</code> may be used to specify the name of the content dictionary if the procedure is actually a standard <strong class="pkg">OpenMath</strong> symbol. Note that the server may reject such a call if it accepts only calls of procedures from the transient content dictionary, see <code class="func">InstallSCSCPprocedure</code> (<a href="chap5.html#X8031C2F4787E0C1A"><span class="RefLink">5.1-1</span></a>) for explanation). If the <code class="code">cdname</code> is not specified, <code class="code">scscp_transient_1</code> content dictionary will be assumed by default. The value of the <code class="code">debuglevel</code> option is an integer. If it is non-zero, the <code class="code">procedure_completed</code> message will carry on also some additional information about the call, for example, runtime and memory used.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:="";; stream:=OutputTextString(t,true);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OMPutProcedureCall( stream, "WS_Factorial", rec( object:= [ 5 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     attributes:=[ [ "call_id", "user007" ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   ["option_runtime",1000],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   ["option_min_memory",1024], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   ["option_max_memory",2048],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   ["option_debuglevel",1], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                   ["option_return_object"] ] ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(t);</span>
+&lt;?scscp start ?&gt;
+&lt;OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0"&gt;
+	&lt;OMATTR&gt;
+		&lt;OMATP&gt;
+			&lt;OMS cd="scscp1" name="call_id"/&gt;
+			&lt;OMSTR&gt;user007&lt;/OMSTR&gt;
+			&lt;OMS cd="scscp1" name="option_runtime"/&gt;
+			&lt;OMI&gt;1000&lt;/OMI&gt;
+			&lt;OMS cd="scscp1" name="option_min_memory"/&gt;
+			&lt;OMI&gt;1024&lt;/OMI&gt;
+			&lt;OMS cd="scscp1" name="option_max_memory"/&gt;
+			&lt;OMI&gt;2048&lt;/OMI&gt;
+			&lt;OMS cd="scscp1" name="option_debuglevel"/&gt;
+			&lt;OMI&gt;1&lt;/OMI&gt;
+			&lt;OMS cd="scscp1" name="option_return_object"/&gt;
+			&lt;OMSTR&gt;&lt;/OMSTR&gt;
+		&lt;/OMATP&gt;
+		&lt;OMA&gt;
+			&lt;OMS cd="scscp1" name="procedure_call"/&gt;
+			&lt;OMA&gt;
+				&lt;OMS cd="scscp_transient_1" name="WS_Factorial"/&gt;
+				&lt;OMI&gt;5&lt;/OMI&gt;
+			&lt;/OMA&gt;
+		&lt;/OMA&gt;
+	&lt;/OMATTR&gt;
+&lt;/OMOBJ&gt;
+&lt;?scscp end ?&gt;
+
+</pre></div>
+
+<p><a id="X7ABD2EA6792279CF" name="X7ABD2EA6792279CF"></a></p>
+
+<h5>4.1-3 SCSCPwait</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCSCPwait</code>( <var class="Arg">stream</var>[, <var class="Arg">timeout</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This function may be used by the <strong class="pkg">SCSCP</strong> client to wait (using <code class="func">IO_select</code> (<a href="../../../pkg/io-4.6.0/doc/chap3.html#X81CA6EE88062010E"><span class="RefLink">IO: IO_select</span></a>)) until the result of the procedure call will be available from <var class="Arg">stream</var>. By default the timeout is one hour, to specify another value give it as the optional second argument in seconds. See the end of this chapter for the example.</p>
+
+<p><a id="X7E0FE0CF7DD2E00F" name="X7E0FE0CF7DD2E00F"></a></p>
+
+<h5>4.1-4 OMGetObjectWithAttributes</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMGetObjectWithAttributes</code>( <var class="Arg">stream</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: record with components <code class="code">object</code> and <code class="code">attributes</code>, or <code class="keyw">fail</code></p>
+
+<p>This function is similar to the function <code class="code">OMGetObject</code> from the <strong class="pkg">OpenMath</strong> package, and the main difference is that it is able to understand <strong class="pkg">OpenMath</strong> attribution pairs. It retrieves exactly one <strong class="pkg">OpenMath</strong> object from the stream <var class="Arg">stream</var>, and stores it in the <code class="code">object</code> component of the returned record. If the <strong class="pkg">OpenMath</strong> object has no attributes, the <code class="code">attributes</code> component of the returned record will be an empty list, otherwise it will contain pairs <code class="code">[attribute_name,attribute_value]</code>, where <code class="code">attribute_name</code> is a string, and <code class="code">attribute_value</code> is a <strong class="pkg">GAP</strong> object, whose type is determined by the kind of an attribute. Only attributes, defined by the SCSCP are allowed, otherwise an error message will be displayed.</p>
+
+<p>If the procedure was not successful, the function returns <code class="keyw">fail</code> instead of an error message like the function <code class="func">OMGetObject</code> (<a href="../../../pkg/OpenMath-11.4.2/doc/chap2.html#X7FBDCB3C83BBB115"><span class="RefLink">OpenMath: OMGetObject</span></a>) does. Returning <code class="keyw">fail</code> is useful when <code class="code">OMGetObjectWithAttributes</code> is used inside accept-evaluate-return loop.</p>
+
+<p>As an example, the file <code class="file">scscp/tst/omdemo.om</code> contains some <strong class="pkg">OpenMath</strong> objects, including those from the SCSCP Specification <a href="chapBib.html#biBSCSCP">[FHK+b]</a>. We can retrieve them from this file, preliminary installing some SCSCP procedures using the function <code class="func">InstallSCSCPprocedure</code> (<a href="chap5.html#X8031C2F4787E0C1A"><span class="RefLink">5.1-1</span></a>):</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallSCSCPprocedure("WS_Factorial", Factorial );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallSCSCPprocedure("GroupIdentificationService", IdGroup );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallSCSCPprocedure("GroupByIdNumber", SmallGroup );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallSCSCPprocedure( "Length", Length, 1, 1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">test:=Filename( Directory( Concatenation(</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        GAPInfo.PackagesInfo.("scscp")[1].InstallationPath,"/tst/" ) ), </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        "omdemo.om" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">stream:=InputTextFile(test);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OMGetObjectWithAttributes(stream); </span>
+rec( 
+  attributes := [ [ "option_return_object", "" ], [ "call_id", "5rc6rtG62" ] ]
+    , object := 6 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OMGetObjectWithAttributes(stream);</span>
+rec( attributes := [  ], object := 1 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OMGetObjectWithAttributes(stream);</span>
+rec( attributes := [  ], object := 120 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OMGetObjectWithAttributes(stream);</span>
+rec( 
+  attributes := [ [ "call_id", "alexk_9053" ], [ "option_runtime", 300000 ], 
+      [ "option_min_memory", 40964 ], [ "option_max_memory", 134217728 ], 
+      [ "option_debuglevel", 2 ], [ "option_return_object", "" ] ],
+  object := [ 24, 12 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OMGetObjectWithAttributes(stream);</span>
+rec( 
+  attributes := [ [ "call_id", "alexk_9053" ], [ "option_return_cookie", "" ] 
+     ], object := &lt;pc group of size 24 with 4 generators&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OMGetObjectWithAttributes(stream);</span>
+rec( attributes := [ [ "call_id", "alexk_9053" ], [ "info_runtime", 1234 ], 
+      [ "info_memory", 134217728 ] ], object := [ 24, 12 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream( stream );</span>
+
+</pre></div>
+
+<p><a id="X83CC58F67F1A15F1" name="X83CC58F67F1A15F1"></a></p>
+
+<h4>4.2 <span class="Heading">Communication with the <strong class="pkg">SCSCP</strong> client</span></h4>
+
+<p><a id="X7C5C23A47A86EAEC" name="X7C5C23A47A86EAEC"></a></p>
+
+<h5>4.2-1 OMPutProcedureCompleted</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPutProcedureCompleted</code>( <var class="Arg">stream</var>, <var class="Arg">objrec</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code></p>
+
+<p>Takes a stream <var class="Arg">stream</var>, and a record <var class="Arg">objrec</var>, and writes to <var class="Arg">stream</var> an <strong class="pkg">OpenMath</strong> object <code class="code">procedure_completed</code> with the result being <code class="code">objrec.object</code> and information messages (as <strong class="pkg">OpenMath</strong> attributes) given in the list <code class="code">objrec.attributes</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:="";; stream:=OutputTextString(t,true);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OMPutProcedureCompleted( stream, </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     rec(object:=120, </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     attributes:=[ [ "call_id", "user007" ] ] ) );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(t);</span>
+&lt;?scscp start ?&gt;
+&lt;OMOBJ xmlns="http://www.openmath.org/OpenMath" version="2.0"&gt;
+	&lt;OMATTR&gt;
+		&lt;OMATP&gt;
+			&lt;OMS cd="scscp1" name="call_id"/&gt;
+			&lt;OMSTR&gt;user007&lt;/OMSTR&gt;
+		&lt;/OMATP&gt;
+		&lt;OMA&gt;
+			&lt;OMS cd="scscp1" name="procedure_completed"/&gt;
+			&lt;OMI&gt;120&lt;/OMI&gt;
+		&lt;/OMA&gt;
+	&lt;/OMATTR&gt;
+&lt;/OMOBJ&gt;
+&lt;?scscp end ?&gt;
+
+</pre></div>
+
+<p><a id="X7FB47E3E86C7C9F9" name="X7FB47E3E86C7C9F9"></a></p>
+
+<h5>4.2-2 OMPutProcedureTerminated</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OMPutProcedureTerminated</code>( <var class="Arg">stream</var>, <var class="Arg">objrec</var>, <var class="Arg">error_cd</var>, <var class="Arg">error_type</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Takes a stream <var class="Arg">stream</var>, and a record with an error message <var class="Arg">objrec</var> (for example <code class="code">rec( attributes := [ [ "call_id", "localhost:26133:87643:gcX33cCf" ] ],</code> <code class="code">object := "localhost:26133 reports : Rational operations: &lt;divisor&gt; must not be zero")</code> and writes to the <var class="Arg">stream</var> an <strong class="pkg">OpenMath</strong> object <code class="code">procedure_terminated</code> containing an error determined by the symbol <var class="Arg">error_type</var> from the content dictionary <var class="Arg">error_cd</var> (for example, <code class="code">error_memory</code>, <code class="code">error_runtime</code> or <code class="code">error_system_specific</code> from the <strong class="pkg">scscp1</strong> content dictionary (<a href="chapBib.html#biBscscp1cd">[FHK+a]</a>).</p>
+
+<p>This is the internal function of the package which is used only in the code for the <strong class="pkg">SCSCP</strong> server to return the error message to the client.</p>
+
+<p><a id="X791818FB7F5F6801" name="X791818FB7F5F6801"></a></p>
+
+<h4>4.3 <span class="Heading">Example: <strong class="pkg">SCSCP</strong> session</span></h4>
+
+<p>In the following example we start an <strong class="pkg">SCSCP</strong> session and perform ten procedure calls in a loop before closing that session. Note that we demonstrate the usage of the session ID <code class="code">sid</code> and the function <code class="code">RandomString</code> from the <strong class="pkg">OpenMath</strong> package to produce some unique call identifier. The call ID is a mandatory attribute for any procedure call, however, it is not nesessarily random; for example, it may be just a string with the number of the procedure call.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">stream:=InputOutputTCPStream( "localhost", 26133 );</span>
+&lt; input/output TCP stream to localhost:26133 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sid := StartSCSCPsession( stream );</span>
+"localhost:26133:5541"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">res:=[];</span>
+[  ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">for i in [1..10] do</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    OMPutProcedureCall( stream, "WS_Factorial", </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      rec( object := [ i ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       attributes := [ [ "call_id", </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         Concatenation( sid, ":", RandomString(8) ) ] ] ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    SCSCPwait( stream );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    res[i]:=OMGetObjectWithAttributes( stream ).object;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">od;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CloseStream(stream);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">res;</span>
+[ 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800 ]
+
+</pre></div>
+
+<p>Also note the usage of <code class="func">SCSCPwait</code> (<a href="chap4.html#X7ABD2EA6792279CF"><span class="RefLink">4.1-3</span></a>) to wait until the result of the computation will be available from <code class="code">stream</code>.</p>
+
+<p>In this example we assumed that there is an <strong class="pkg">SCSCP</strong> server running at <code class="code">localhost</code>, port 26133. In the next chapter we will explain how to configure and run a <strong class="pkg">GAP</strong> <strong class="pkg">SCSCP</strong> server and how to interrogate it from a <strong class="pkg">GAP</strong> client to learn about its functionality. After that, we will proceed with the <strong class="pkg">SCSCP</strong> client functionality for the end-user.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

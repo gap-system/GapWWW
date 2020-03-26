@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (XMod) - Chapter 6: Actors of 2d-groups</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6.html">[MathJax off]</a></p>
+<p><a id="X84C872BB7F1E5F25" name="X84C872BB7F1E5F25"></a></p>
+<div class="ChapSects"><a href="chap6_mj.html#X84C872BB7F1E5F25">6 <span class="Heading">Actors of 2d-groups</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7B853602873FC7AB">6.1 <span class="Heading">Actor of a crossed module</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X80F121357F06E72D">6.1-1 AutomorphismPermGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X790EBC7C7D320C03">6.1-2 WhiteheadXMod</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X85CF21F57F0F1329">6.1-3 XModCentre</a></span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">Actors of 2d-groups</span></h3>
+
+<p><a id="X7B853602873FC7AB" name="X7B853602873FC7AB"></a></p>
+
+<h4>6.1 <span class="Heading">Actor of a crossed module</span></h4>
+
+<p>The <em>actor</em> of <span class="SimpleMath">\(\calX\)</span> is a crossed module <span class="SimpleMath">\(\Act(\calX) = (\Delta : \calW(\calX) \to \Aut(\calX))\)</span> which was shown by Lue and Norrie, in <a href="chapBib_mj.html#biBN2">[Nor87]</a> and <a href="chapBib_mj.html#biBN1">[Nor90]</a> to give the automorphism object of a crossed module <span class="SimpleMath">\(\calX\)</span>. In this implementation, the source of the actor is a permutation representation <span class="SimpleMath">\(W\)</span> of the Whitehead group of regular derivations, and the range of the actor is a permutation representation <span class="SimpleMath">\(A\)</span> of the automorphism group <span class="SimpleMath">\(\Aut(\calX)\)</span> of <span class="SimpleMath">\(\calX\)</span>.</p>
+
+<p><a id="X80F121357F06E72D" name="X80F121357F06E72D"></a></p>
+
+<h5>6.1-1 AutomorphismPermGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutomorphismPermGroup</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneratingAutomorphisms</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PermAutomorphismAsXModMorphism</code>( <var class="Arg">xmod</var>, <var class="Arg">perm</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The automorphisms <span class="SimpleMath">\(( \sigma, \rho )\)</span> of <span class="SimpleMath">\(\calX\)</span> form a group <span class="SimpleMath">\(\Aut(\calX)\)</span> of crossed module isomorphisms. The function <code class="func">AutomorphismPermGroup</code> finds a set of <code class="func">GeneratingAutomorphisms</code> for <span class="SimpleMath">\(\Aut(\calX)\)</span>, and then constructs a permutation representation of this group, which is used as the range of the actor crossed module of <span class="SimpleMath">\(\calX\)</span>. The individual automorphisms can be constructed from the permutation group using the function <code class="func">PermAutomorphismAsXModMorphism</code>. The example below uses the crossed module <code class="code">X3=[c3-&gt;s3]</code> constructed in section <a href="chap5_mj.html#X7C01AE7783898705"><span class="RefLink">5.1</span></a>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">APX3 := AutomorphismPermGroup( X3 );</span>
+Group([ (5,7,6), (1,2)(3,4)(6,7) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( APX3 );</span>
+6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">genX3 := GeneratingAutomorphisms( X3 );    </span>
+[ [[c3-&gt;s3] =&gt; [c3-&gt;s3]], [[c3-&gt;s3] =&gt; [c3-&gt;s3]] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">e6 := Elements( APX3 )[6];</span>
+(1,2)(3,4)(5,7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m6 := PermAutomorphismAsXModMorphism( X3, e6 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m6 );</span>
+Morphism of crossed modules :- 
+: Source = [c3-&gt;s3] with generating sets:
+  [ (1,2,3)(4,6,5) ]
+  [ (4,5,6), (2,3)(5,6) ]
+: Range = Source
+: Source Homomorphism maps source generators to:
+  [ (1,3,2)(4,5,6) ]
+: Range Homomorphism maps range generators to:
+  [ (4,6,5), (2,3)(4,5) ]
+
+</pre></div>
+
+<p><a id="X790EBC7C7D320C03" name="X790EBC7C7D320C03"></a></p>
+
+<h5>6.1-2 WhiteheadXMod</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WhiteheadXMod</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LueXMod</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NorrieXMod</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActorXMod</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>An automorphism <span class="SimpleMath">\(( \sigma, \rho )\)</span> of <code class="code">X</code> acts on the Whitehead monoid by <span class="SimpleMath">\(\chi^{(\sigma,\rho)} = \sigma \circ \chi \circ \rho^{-1}\)</span>, and this determines the action for the actor. In fact the four groups <span class="SimpleMath">\(S, W, R, A\)</span>, the homomorphisms between them, and the various actions, give five crossed modules forming a <em>crossed square</em> (see <code class="func">ActorCrossedSquare</code> (<a href="chap8_mj.html#X833362FE87ED3C48"><span class="RefLink">8.2-4</span></a>)).</p>
+
+
+<ul>
+<li><p><span class="SimpleMath">\(\calW(\calX) = (\eta : S \to W),~\)</span> the Whitehead crossed module of <span class="SimpleMath">\(\calX\)</span>, at the top,</p>
+
+</li>
+<li><p><span class="SimpleMath">\(\calX = (\partial : S \to R),~\)</span> the initial crossed module, on the left,</p>
+
+</li>
+<li><p><span class="SimpleMath">\(\Act(\calX) = ( \Delta : W \to A),~\)</span> the actor crossed module of <span class="SimpleMath">\(\calX\)</span>, on the right,</p>
+
+</li>
+<li><p><span class="SimpleMath">\(\calN(X) = (\alpha : R \to A),~\)</span> the Norrie crossed module of <span class="SimpleMath">\(\calX\)</span>, on the bottom, and</p>
+
+</li>
+<li><p><span class="SimpleMath">\(\calL(\calX) = (\Delta\circ\eta = \alpha\circ\partial : S \to A),~\)</span> the Lue crossed module of <span class="SimpleMath">\(\calX\)</span>, along the top-left to bottom-right diagonal.</p>
+
+</li>
+</ul>
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WGX3 := WhiteheadPermGroup( X3 );</span>
+Group([ (1,2,3)(4,5,6), (1,4)(2,6)(3,5) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WX3 := WhiteheadXMod( X3 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( WX3 );</span>
+Crossed module Whitehead[c3-&gt;s3] :- 
+: Source group has generators:
+  [ (1,2,3)(4,6,5) ]
+: Range group has generators:
+  [ (1,2,3)(4,5,6), (1,4)(2,6)(3,5) ]
+: Boundary homomorphism maps source generators to:
+  [ (1,2,3)(4,5,6) ]
+: Action homomorphism maps range generators to automorphisms:
+  (1,2,3)(4,5,6) --&gt; { source gens --&gt; [ (1,2,3)(4,6,5) ] }
+  (1,4)(2,6)(3,5) --&gt; { source gens --&gt; [ (1,3,2)(4,5,6) ] }
+  These 2 automorphisms generate the group of automorphisms.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LX3 := LueXMod( X3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( LX3 );</span>
+Crossed module Lue[c3-&gt;s3] :- 
+: Source group has generators:
+  [ (1,2,3)(4,6,5) ]
+: Range group has generators:
+  [ (5,7,6), (1,2)(3,4)(6,7) ]
+: Boundary homomorphism maps source generators to:
+  [ (5,7,6) ]
+: Action homomorphism maps range generators to automorphisms:
+  (5,7,6) --&gt; { source gens --&gt; [ (1,2,3)(4,6,5) ] }
+  (1,2)(3,4)(6,7) --&gt; { source gens --&gt; [ (1,3,2)(4,5,6) ] }
+  These 2 automorphisms generate the group of automorphisms.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NX3 := NorrieXMod( X3 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( NX3 );</span>
+Crossed module Norrie[c3-&gt;s3] :- 
+: Source group has generators:
+  [ (4,5,6), (2,3)(5,6) ]
+: Range group has generators:
+  [ (5,7,6), (1,2)(3,4)(6,7) ]
+: Boundary homomorphism maps source generators to:
+  [ (5,6,7), (1,2)(3,4)(6,7) ]
+: Action homomorphism maps range generators to automorphisms:
+  (5,7,6) --&gt; { source gens --&gt; [ (4,5,6), (2,3)(4,5) ] }
+  (1,2)(3,4)(6,7) --&gt; { source gens --&gt; [ (4,6,5), (2,3)(5,6) ] }
+  These 2 automorphisms generate the group of automorphisms.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AX3 := ActorXMod( X3 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( AX3);</span>
+Crossed module Actor[c3-&gt;s3] :- 
+: Source group has generators:
+  [ (1,2,3)(4,5,6), (1,4)(2,6)(3,5) ]
+: Range group has generators:
+  [ (5,7,6), (1,2)(3,4)(6,7) ]
+: Boundary homomorphism maps source generators to:
+  [ (5,7,6), (1,2)(3,4)(6,7) ]
+: Action homomorphism maps range generators to automorphisms:
+  (5,7,6) --&gt; { source gens --&gt; [ (1,2,3)(4,5,6), (1,6)(2,5)(3,4) ] }
+  (1,2)(3,4)(6,7) --&gt; { source gens --&gt; [ (1,3,2)(4,6,5), (1,4)(2,6)(3,5) ] }
+  These 2 automorphisms generate the group of automorphisms.
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IAX3 := InnerActorXMod( X3 );;  </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( IAX3 );</span>
+Crossed module InnerActor[c3-&gt;s3] :- 
+: Source group has generators:
+  [ (1,2,3)(4,5,6) ]
+: Range group has generators:
+  [ (5,6,7), (1,2)(3,4)(6,7) ]
+: Boundary homomorphism maps source generators to:
+  [ (5,7,6) ]
+: Action homomorphism maps range generators to automorphisms:
+  (5,6,7) --&gt; { source gens --&gt; [ (1,2,3)(4,5,6) ] }
+  (1,2)(3,4)(6,7) --&gt; { source gens --&gt; [ (1,3,2)(4,6,5) ] }
+  These 2 automorphisms generate the group of automorphisms.
+
+</pre></div>
+
+<p><a id="X85CF21F57F0F1329" name="X85CF21F57F0F1329"></a></p>
+
+<h5>6.1-3 XModCentre</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModCentre</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InnerActorXMod</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InnerMorphism</code>( <var class="Arg">xmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Pairs of boundaries or identity mappings provide six morphisms of crossed modules. In particular, the boundaries of <span class="SimpleMath">\(\calW(\calX)\)</span> and <span class="SimpleMath">\(\calN(\calX)\)</span> form the <em>inner morphism</em> of <span class="SimpleMath">\(\calX\)</span>, mapping source elements to principal derivations and range elements to inner automorphisms. The image of <span class="SimpleMath">\(\calX\)</span> under this morphism is the <em>inner actor</em> of <span class="SimpleMath">\(\calX\)</span>, while the kernel is the <em>centre</em> of <span class="SimpleMath">\(\calX\)</span>. In the example which follows, the inner morphism of <code class="code">X3=(c3-&gt;s3)</code>, from Chapter <a href="chap5_mj.html#X85CD9A43847AE1B8"><span class="RefLink">5</span></a>, is an inclusion of crossed modules.</p>
+
+<p>Note that we appear to have defined <em>two</em> sorts of <em>centre</em> for a crossed module: <code class="func">XModCentre</code> here, and <code class="func">CentreXMod</code> (<a href="chap4_mj.html#X7B57446086BA1BF0"><span class="RefLink">4.1-7</span></a>) in the chapter on isoclinism. We suspect that these two definitions give the same answer, but this remains to be resolved.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IMX3 := InnerMorphism( X3 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( IMX3 );</span>
+Morphism of crossed modules :- 
+: Source = [c3-&gt;s3] with generating sets:
+  [ (1,2,3)(4,6,5) ]
+  [ (4,5,6), (2,3)(5,6) ]
+:  Range = Actor[c3-&gt;s3] with generating sets:
+  [ (1,2,3)(4,5,6), (1,4)(2,6)(3,5) ]
+  [ (5,7,6), (1,2)(3,4)(6,7) ]
+: Source Homomorphism maps source generators to:
+  [ (1,2,3)(4,5,6) ]
+: Range Homomorphism maps range generators to:
+  [ (5,6,7), (1,2)(3,4)(6,7) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsInjective( IMX3 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZX3 := XModCentre( X3 ); </span>
+[Group( () )-&gt;Group( () )]
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

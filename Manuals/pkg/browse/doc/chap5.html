@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Browse) - Chapter 5: Browsing Tables in GAP using ncurses
+–The Programming Interface</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X82DDDC1783B4CA30" name="X82DDDC1783B4CA30"></a></p>
+<div class="ChapSects"><a href="chap5.html#X82DDDC1783B4CA30">5 <span class="Heading">Browsing Tables in <strong class="pkg">GAP</strong> using <code class="code">ncurses</code>
+–The Programming Interface</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X853E01C778A73ECB">5.1 <span class="Heading">Navigation Steps in Browse Tables</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X83290BB6864B2DD0">5.2 <span class="Heading">Modes in Browse Tables</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7A4014DB84D16406">5.3 <span class="Heading">Browse Applications</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X831DD0D58052AD57">5.4 <span class="Heading">Predefined Browse Functionalities</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X86E80E578085F137">5.4-1 BrowseData</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X791FB5BA7A9951F4">5.4-2 BrowseData.SetReplay</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7DAB32B785E59350">5.4-3 BrowseData.AlertWithReplay</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82A4238B79F06271">5.4-4 BrowseData.actions.ShowHelp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X872AE7387885B0AD">5.4-5 BrowseData.actions.SaveWindow</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X860DA4007E23716E">5.4-6 BrowseData.actions.QuitMode</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8728E4B6856EAEC0">5.4-7 BrowseData.actions.Error</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Browsing Tables in <strong class="pkg">GAP</strong> using <code class="code">ncurses</code>
+–The Programming Interface</span></h3>
+
+<p>This chapter describes some aspects of the internals of the browse table handling. The relevant objects are <em>action functions</em> that implement the individual navigation steps (see Section <a href="chap5.html#X853E01C778A73ECB"><span class="RefLink">5.1</span></a>), <em>modes</em> that describe the sets of available navigation steps in given situations (see Section <a href="chap5.html#X83290BB6864B2DD0"><span class="RefLink">5.2</span></a>), and <em>browse applications</em> that are given by the combination of several modes (see Section <a href="chap5.html#X7A4014DB84D16406"><span class="RefLink">5.3</span></a>). Most of the related data is stored in the global variable <code class="func">BrowseData</code> (<a href="chap5.html#X86E80E578085F137"><span class="RefLink">5.4-1</span></a>). For more details, one should look directly at the code in the file <code class="file">lib/browse.gi</code> of the <strong class="pkg">Browse</strong> package.</p>
+
+<p><a id="X853E01C778A73ECB" name="X853E01C778A73ECB"></a></p>
+
+<h4>5.1 <span class="Heading">Navigation Steps in Browse Tables</span></h4>
+
+<p>Navigating in a browse table means that after entering visual mode by calling <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>), the user hits one or several keys, or uses a mouse button, and if this input is in a given set of admissible inputs then a corresponding function is executed with argument the browse table (plus additional information in the case of mouse events). The function call then may change components in this table (recommended: components in its <code class="code">dynamic</code> component), such that the appearance in the window may be different afterwards, and also the admissible inputs and their effects may have changed.</p>
+
+<p>The relation between the admissible inputs and the corresponding functions is application dependent. However, it is recommended to associate the same input to the same function in different situations; for example, the <strong class="button">?</strong> key and the <strong class="button">F1</strong> key should belong to a function that shows a help window (see Section <a href="chap5.html#X82A4238B79F06271"><span class="RefLink">5.4-4</span></a>), the <strong class="button">q</strong> key and the <strong class="button">Esc</strong> key should belong to a function that exits the current mode (Note that the <strong class="button">Esc</strong> key may be recognized as input only after a delay of about a second.), the <strong class="button">Q</strong> key should belong to a function that exits the browse application (see Section <a href="chap5.html#X860DA4007E23716E"><span class="RefLink">5.4-6</span></a>), the <strong class="button">F2</strong> key should belong to a function that saves the current window contents in a global variable (see Section <a href="chap5.html#X872AE7387885B0AD"><span class="RefLink">5.4-5</span></a>), and the <strong class="button">E</strong> key should belong to a function that enters a break loop (see Section <a href="chap5.html#X8728E4B6856EAEC0"><span class="RefLink">5.4-7</span></a>). The <strong class="button">Enter</strong> and <strong class="button">Return</strong> keys should belong to a "click" on a selected table entry, and if a category row is selected then they should expand/collapse this category. The <strong class="button">M</strong> key should toggle enabling and disabling mouse events. Mouse events on a cell or on a category row of a browse table should move the selected entry to this position; it is recommended that no functionality is lost if no mouse events are used, although the number of steps might be reduced when the mouse is used.</p>
+
+<p>Each such function is wrapped into a record with the components <code class="code">action</code> (the function itself) and <code class="code">helplines</code> (a list of attribute lines that describes what the function does). The help lines are used by the help feature of <code class="code">NCurses.BrowseGeneric</code>, see Section <a href="chap5.html#X82A4238B79F06271"><span class="RefLink">5.4-4</span></a>.</p>
+
+<p>The action functions need not return anything. Whenever the shown screen shall be recomputed after the function call, the component <code class="code">dynamic.changed</code> of the browse table must be set to <code class="keyw">true</code> by the action functions.</p>
+
+<p>After entering the first characters of an admissible input that consists of more characters, the last line of the window with the browse table shows these characters behind the prefix "partial input:". One can delete the last entered character of a partial input via the <strong class="button">Delete</strong> and <strong class="button">Backspace</strong> keys. It is not possible to make these keys part of an admissible input. When a partial input is given, only those user inputs have an effect that extend the partial input to (a prefix of) an admissible input. For example, asking for help by hitting the <strong class="button">?</strong> key will in general not work if a partial input had been entered before.</p>
+
+<p><a id="X83290BB6864B2DD0" name="X83290BB6864B2DD0"></a></p>
+
+<h4>5.2 <span class="Heading">Modes in Browse Tables</span></h4>
+
+<p>In different situations, different inputs may be admissible for the same browse table, and different functions may belong to the same input. For example, the meaning of "moving down" can be different depending on whether a cell is selected or not.</p>
+
+<p>The set of admissible user inputs and corresponding functions for a particular situation is collected in a <em>mode</em> of the browse table. (There should be no danger to mix up this notion of mode with the "visual mode" introduced in Section <a href="chap1.html#X7DFB63A97E67C0A1"><span class="RefLink">1.1</span></a>.) A mode is represented by a record with the components <code class="code">name</code> (a string used to associate the mode with the components of <code class="code">header</code>, <code class="code">headerLength</code>, <code class="code">footer</code>, <code class="code">footerLength</code>, <code class="code">Click</code>, and for the help screen), <code class="code">flag</code> (a string that describes properties of the mode but that can be equal for different modes), <code class="code">actions</code> (a list of records describing the navigation steps that are admissible in the mode, see Section <a href="chap5.html#X853E01C778A73ECB"><span class="RefLink">5.1</span></a>), and <code class="code">ShowTables</code> (the function used to eventually print the current window contents, the default is <code class="code">BrowseData.ShowTables</code>). Due to the requirement that each admissible user input uniquely determines a corresponding function, no admissible user input can be a prefix of another admissible input, for the same mode.</p>
+
+<p>Navigation steps (see Section <a href="chap5.html#X853E01C778A73ECB"><span class="RefLink">5.1</span></a>) can change the current mode or keep the mode. It is recommended that each mode has an action to leave this mode; also an action to leave the browse table application is advisable.</p>
+
+<p>In a browse table, all available modes are stored in the component <code class="code">work.availableModes</code>, whose value is a list of mode records. The value of the component <code class="code">dynamic.activeModes</code> is a list of mode records that is used as a stack: The <em>current mode</em> is the last entry in this list, changing the current mode is achieved by unbinding the last entry (so one returns to the mode from which the current mode had been entered by adding it to the list), by adding a new mode record (so one can later return to the current mode), or by replacing the last entry by another mode record. As soon as the <code class="code">dynamic.activeModes</code> list becomes empty, the browse table application is left. (In this situation, if the browse table had been entered from the <strong class="pkg">GAP</strong> prompt then visual mode is left, and one returns to the <strong class="pkg">GAP</strong> prompt.)</p>
+
+<p>The following modes are predefined by the <strong class="pkg">Browse</strong> package. Each of these modes admits the user inputs <strong class="button">?</strong>, <strong class="button">F1</strong>, <strong class="button">q</strong>, <strong class="button">Esc</strong>, <strong class="button">Q</strong>, <strong class="button">F2</strong>, <strong class="button">E</strong>, and <strong class="button">M</strong> that have been mentioned in Section <a href="chap5.html#X853E01C778A73ECB"><span class="RefLink">5.1</span></a>.</p>
+
+
+<dl>
+<dt><strong class="Mark">browse</strong></dt>
+<dd><p>This mode admits scrolling of the browse table by a cell or by a screen, searching for a string, selecting a row, a column, or an entry, and expanding or collapsing all category rows.</p>
+
+</dd>
+<dt><strong class="Mark">help</strong></dt>
+<dd><p>This mode is entered by calling <code class="code">BrowseData.ShowHelpTable</code>; it shows a help window concerning the actions available in the mode from which the <code class="code">help</code> mode was entered. The <code class="code">help</code> mode admits scrolling in the help table by a cell or by a screen. See Section <a href="chap5.html#X82A4238B79F06271"><span class="RefLink">5.4-4</span></a> for details.</p>
+
+</dd>
+<dt><strong class="Mark">select_entry</strong></dt>
+<dd><p>In this mode, one table cell is regarded as selected; this cell is highlighted using the attribute in the component <code class="code">work.startSelect</code> as a prefix of each attribute line, see the remark in Section <a href="chap2.html#X81D1FC927C455AEB"><span class="RefLink">2.2-3</span></a>. The mode admits moving the selection by one cell in the four directions, searching for a string and for further occurrences of this string, expanding or collapsing the current category row or all category rows, and executing the "click" function of this mode, provided that the component <code class="code">work.Click.( "select_entry" )</code> of the browse table is bound.</p>
+
+</dd>
+<dt><strong class="Mark">select_row</strong></dt>
+<dd><p>This is like the <code class="code">select_entry</code> mode, except that a whole row of the browse table is highlighted. Searching is restricted to the selected row, and "click" refers to the function <code class="code">work.Click.( "select_row" )</code>.</p>
+
+</dd>
+<dt><strong class="Mark">select_row_and_entry</strong></dt>
+<dd><p>This is a combination of the <code class="code">select_entry</code> mode and the <code class="code">select_row</code> mode.</p>
+
+</dd>
+<dt><strong class="Mark">select_column</strong></dt>
+<dd><p>This is like the <code class="code">select_row</code> mode, just a column is selected not a row.</p>
+
+</dd>
+<dt><strong class="Mark">select_column_and_entry</strong></dt>
+<dd><p>This is like the <code class="code">select_row_and_entry</code> mode, just a column is selected not a row.</p>
+
+</dd>
+</dl>
+<p><a id="X7A4014DB84D16406" name="X7A4014DB84D16406"></a></p>
+
+<h4>5.3 <span class="Heading">Browse Applications</span></h4>
+
+<p>The data in a browse table together with the set of its available modes and the stack of active modes forms a browse application. So the part of or all functionality of the <strong class="pkg">Browse</strong> package can be available ("standard application"), or additional functionality can be provided by extending available modes or adding new modes.</p>
+
+<p>When <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) has been called with the browse table <var class="Arg">t</var>, say, the following loop is executed.</p>
+
+<ol>
+<li><p>If the list <var class="Arg">t</var><code class="code">.dynamic.activeModes</code> is empty then exit the browse table, and if the component <var class="Arg">t</var><code class="code">.dynamic.Return</code> is bound then return its value. Otherwise proceed with step 2.</p>
+
+</li>
+<li><p>If <var class="Arg">t</var><code class="code">.dynamic.changed</code> is <code class="keyw">true</code> then call the <code class="code">ShowTables</code> function of the current mode; this causes a redraw of the window that shows the browse table. Then go to step 3.</p>
+
+</li>
+<li><p>Get one character of user input. If then the current user input string is the name of an action of the current mode then call the corresponding action function and go to step 1; if the current user input string is just a prefix of the name of some actions of the current mode then go to step 3; if the current user input string is not a prefix of any name of an action of the current mode then discard the last read character and go to step 3.</p>
+
+</li>
+</ol>
+<p>When one designs a new application, it may be not obvious whether some functionality shall be implemented via one mode or via several modes. As a rule of thumb, introducing a new mode is recommended when one needs a new set of admissible actions in a given situation, and also if one wants to allow the user to perform some actions and then to return to the previous status.</p>
+
+<p><a id="X831DD0D58052AD57" name="X831DD0D58052AD57"></a></p>
+
+<h4>5.4 <span class="Heading">Predefined Browse Functionalities</span></h4>
+
+<p><a id="X86E80E578085F137" name="X86E80E578085F137"></a></p>
+
+<h5>5.4-1 BrowseData</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BrowseData</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>This is the record that contains the global data used by the function <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>). The components are <code class="code">actions</code>, <code class="code">defaults</code>, and several capitalized names for which the values are functions.</p>
+
+<p><code class="code">BrowseData.actions</code> is a record containing the action records that are provided by the package, see Section <a href="chap5.html#X853E01C778A73ECB"><span class="RefLink">5.1</span></a>. These actions are used in standard applications of <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>). Of course there is no problem with using actions that are not stored in <code class="code">BrowseData.actions</code>.</p>
+
+<p><code class="code">BrowseData.defaults</code> is a record that contains the defaults for the browse table used as the first argument of <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>). Important components have been described above, see <code class="func">BrowseData.IsBrowseTable</code> (<a href="chap4.html#X81007E2F8552523B"><span class="RefLink">4.2-3</span></a>), in the sense that these components provide default values of <code class="code">work</code> components in browse tables. Here is a list of further interesting components.</p>
+
+<p>The following components are provided in <code class="code">BrowseData.defaults.work</code>.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">windowParameters</code></strong></dt>
+<dd><p>is a list of four nonnegative integers, denoting the arguments of <code class="code">NCurses.newwin</code> for the window in which the browse table shall be shown. The default is <code class="code">[ 0, 0, 0, 0 ]</code>, i. e., the window for the browse table is the full screen.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">minyx</code></strong></dt>
+<dd><p>is a list of length two, the entries must be either nonnegative integers, denoting the minimal number of rows and columns that are required by the browse table, or unary functions that return these values when they are applied to the browse table; this is interesting for applications that do not support scrolling, or for applications that may have large row or column labels tables. The default is a list with two functions, the return value of the first function is the sum of the heights of the table header, the column labels table, the first table row, and the table footer, and the return value of the second function is the sum of widths of the row labels table and the width of the first column. (If the header/footer is given by a function then this part of the table is ignored in the <code class="code">minyx</code> default.) Note that the conditions are checked only when <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) is called, not after later changes of the screen size in a running browse table application.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">align</code></strong></dt>
+<dd><p>is a substring of <code class="code">"bclt"</code>, which describes the alignment of the browse table in the window. The meaning and the default are the same as for <code class="func">BrowseData.IsBrowseTableCellData</code> (<a href="chap4.html#X82157A2684969A5F"><span class="RefLink">4.2-1</span></a>). (Of course this is relevant only if the table is smaller than the window.)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">headerLength</code></strong></dt>
+<dd><p>describes the lengths of the headers in the modes for which <code class="code">header</code> functions are provided. The value is a record whose component names are names of modes and the corresponding components are nonnegative integers. This component is ignored if the <code class="code">header</code> component is unbound or bound to a list, missing values are computed by calls to the corresponding <code class="code">header</code> function as soon as they are needed.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">footerLength</code></strong></dt>
+<dd><p>corresponds to <code class="code">footer</code> in the same way as <code class="code">headerLength</code> to <code class="code">header</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Main</code></strong></dt>
+<dd><p>if bound to a function then this function can be used to compute missing values for the component <code class="code">main</code>; this way one can avoid computing/storing all <code class="code">main</code> values at the same time. The access to the entries of the main matrix is defined as follows: If <code class="code">mainFormatted[i][j]</code> is bound then take it, if <code class="code">main[i][j]</code> is bound then take it and compute the formatted version, if <code class="code">Main</code> is a function then call it with arguments the browse table, <code class="code">i</code>, and <code class="code">j</code>, and compute the formatted version, otherwise compute the formatted version of <code class="code">work.emptyCell</code>. (For the condition whether entries in <code class="code">mainFormatted</code> can be bound, see below in the description of the component <code class="code">cacheEntries</code>.)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">cacheEntries</code></strong></dt>
+<dd><p>describes whether formatted values of the entries in the matrices given by the components <code class="code">corner</code>, <code class="code">labelsCol</code>, <code class="code">labelsRow</code>, <code class="code">main</code>, and of the corresponding row and column separators shall be stored in the components <code class="code">cornerFormatted</code>, <code class="code">labelsColFormatted</code>, <code class="code">labelsRowFormatted</code>, and <code class="code">mainFormatted</code>. The value must be a Boolean, the default is <code class="keyw">false</code>; it should be set to <code class="keyw">true</code> only if the tables are reasonably small.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">cornerFormatted</code></strong></dt>
+<dd><p>is a list of lists of formatted entries corresponding to the <code class="code">corner</code> component. Each entry is either an attribute line or a list of attribute lines (with the same number of displayed characters), the values can be computed from the input format with <code class="code">BrowseData.FormattedEntry</code>. The entries are stored in this component only if the component <code class="code">cacheEntries</code> has the value <code class="keyw">true</code>. The default is an empty list.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">labelsColFormatted</code></strong></dt>
+<dd><p>corresponds to <code class="code">labelsCol</code> in the same way as <code class="code">cornerFormatted</code> to <code class="code">corner</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">labelsRowFormatted</code></strong></dt>
+<dd><p>corresponds to <code class="code">labelsRow</code> in the same way as <code class="code">cornerFormatted</code> to <code class="code">corner</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">mainFormatted</code></strong></dt>
+<dd><p>corresponds to <code class="code">main</code> in the same way as <code class="code">cornerFormatted</code> to <code class="code">corner</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">m0</code></strong></dt>
+<dd><p>is the maximal number of rows in the column labels table. If this value is not bound then it is computed from the components <code class="code">corner</code> and <code class="code">labelsCol</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">n0</code></strong></dt>
+<dd><p>is the maximal number of columns in <code class="code">corner</code> and <code class="code">labelsRow</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">m</code></strong></dt>
+<dd><p>is the maximal number of rows in <code class="code">labelsRow</code> and <code class="code">main</code>. This value <em>must</em> be set in advance if the values of <code class="code">main</code> are computed using a <code class="code">Main</code> function, and if the number of rows in <code class="code">main</code> is larger than that in <code class="code">labelsRow</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">n</code></strong></dt>
+<dd><p>is the maximal number of columns in <code class="code">labelsCol</code> and <code class="code">main</code>. This value <em>must</em> be set in advance if the values of <code class="code">main</code> are computed using a <code class="code">Main</code> function, and if the number of columns in <code class="code">main</code> is larger than that in <code class="code">labelsCol</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">heightLabelsCol</code></strong></dt>
+<dd><p>is a list of <span class="SimpleMath">2</span> <code class="code">m0</code><span class="SimpleMath">+ 1</span> nonnegative integers, the entry at position <span class="SimpleMath">i</span> is the maximal height of the entries in the <span class="SimpleMath">i</span>-th row of <code class="code">cornerFormatted</code> and <code class="code">labelsColFormatted</code>. Values that are not bound are computed on demand from the table entries, with the function <code class="code">BrowseData.HeightLabelsCol</code>. (So if one knows the needed heights in advance, it is advisable to set the values, in order to avoid that formatted table entries are computed just for computing their size.) The default is an empty list.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">widthLabelsRow</code></strong></dt>
+<dd><p>is the corresponding list of <span class="SimpleMath">2</span> <code class="code">n0</code><span class="SimpleMath">+ 1</span> maximal widths of entries in <code class="code">cornerFormatted</code> and <code class="code">labelsRowFormatted</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">heightRow</code></strong></dt>
+<dd><p>is the corresponding list of <span class="SimpleMath">2</span> <code class="code">m</code><span class="SimpleMath">+ 1</span> maximal heights of entries in <code class="code">labelsRowFormatted</code> and <code class="code">mainFormatted</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">widthCol</code></strong></dt>
+<dd><p>is the corresponding list of <span class="SimpleMath">2</span> <code class="code">n</code><span class="SimpleMath">+ 1</span> maximal widths of entries in <code class="code">labelsColFormatted</code> and <code class="code">mainFormatted</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">emptyCell</code></strong></dt>
+<dd><p>is a table cell data object to be used as the default for unbound positions in the four matrices. The default is the empty list.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sepCategories</code></strong></dt>
+<dd><p>is an attribute line to be used repeatedly as a separator below expanded category rows. The default is the string <code class="code">"-"</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">startCollapsedCategory</code></strong></dt>
+<dd><p>is a list of attribute lines to be used as prefixes of unhidden but collapsed category rows. For category rows of level <span class="SimpleMath">i</span>, the last bound entry before the <span class="SimpleMath">(i+1)</span>-th position is used. The default is a list of length one, the entry is the boldface variant of the string <code class="code">"&gt; "</code>, so collapsed category rows on different levels are treated equally.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">startExpandedCategory</code></strong></dt>
+<dd><p>is a list of attribute lines to be used as prefixes of expanded category rows, analogously to <code class="code">startCollapsedCategory</code>. The default is a list of length one, the entry is the boldface variant of the string <code class="code">"* "</code>, so expanded category rows on different levels are treated equally.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">startSelect</code></strong></dt>
+<dd><p>is an attribute line to be used as a prefix of each attribute line that belongs to a selected cell. The default is to switch the attribute <code class="code">NCurses.attrs.STANDOUT</code> on, see Section <a href="chap2.html#X793D897483674294"><span class="RefLink">2.1-7</span></a>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">Click</code></strong></dt>
+<dd><p>is a record whose component names are names of available modes of the browse table. The values are unary functions that take the browse table as their argument. If the action <code class="code">Click</code> is available in the current mode and the corresponding input is entered then the function in the relevant component of the <code class="code">Click</code> record is called.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">availableModes</code></strong></dt>
+<dd><p>is a list whose entries are the mode records that can be used when one navigates through the browse table, see Section <a href="chap5.html#X83290BB6864B2DD0"><span class="RefLink">5.2</span></a>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">SpecialGrid</code></strong></dt>
+<dd><p>is a function that takes a browse table and a record as its arguments. It is called by <code class="code">BrowseData.ShowTables</code> after the current contents of the window has been computed, and it is intended to draw an individual grid into the table that fits better than anything that can be specified in terms of row and column separators. (If other functions than <code class="code">BrowseData.ShowTables</code> are used in some modes of the browse table, these functions must deal with this aspect themselves.) The default is to do nothing.</p>
+
+</dd>
+</dl>
+<p>The following components are provided in <code class="code">BrowseData.defaults.dynamic</code>.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">changed</code></strong></dt>
+<dd><p>is a Boolean that must be set to <code class="keyw">true</code> by action functions whenever a refresh of the window is necessary; it is automatically reset to <code class="keyw">false</code> after the refresh.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">indexRow</code></strong></dt>
+<dd><p>is a list of positive integers. The entry <span class="SimpleMath">k</span> at position <span class="SimpleMath">i</span> means that the <span class="SimpleMath">k</span>-th row in the <code class="code">mainFormatted</code> table is shown as the <span class="SimpleMath">i</span>-th row. Note that depending on the current status of the browse table, the rows of <code class="code">mainFormatted</code> (and of <code class="code">main</code>) may be permuted, or it may even happen that a row in <code class="code">mainFormatted</code> is shown several times, for example under different category rows. It is assumed (as a "sort convention") that the <em>even</em> positions in <code class="code">indexRow</code> point to <em>even</em> numbers, and that the subsequent <em>odd</em> positions (corresponding to the following separators) point to the subsequent <em>odd</em> numbers. The default value is the list <span class="SimpleMath">[ 1, 2, ..., m ]</span>, where <span class="SimpleMath">m</span> is the number of rows in <code class="code">mainFormatted</code> (including the separator rows, so <span class="SimpleMath">m</span> is always odd).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">indexCol</code></strong></dt>
+<dd><p>is the analogous list of positive integers that refers to columns.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">topleft</code></strong></dt>
+<dd><p>is a list of four positive integers denoting the current topleft position of the main table. The value <span class="SimpleMath">[ i, j, k, l ]</span> means that the topleft entry is indexed by the <span class="SimpleMath">i</span>-th entry in <code class="code">indexRow</code>, the <span class="SimpleMath">j</span>-th entry in <code class="code">indexCol</code>, and the <span class="SimpleMath">k</span>-th row and <span class="SimpleMath">l</span>-th column inside the corresponding cell. The default is <span class="SimpleMath">[ 1, 1, 1, 1 ]</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">isCollapsedRow</code></strong></dt>
+<dd><p>is a list of Booleans, of the same length as the <code class="code">indexRow</code> value. If the entry at position <span class="SimpleMath">i</span> is <code class="keyw">true</code> then the <span class="SimpleMath">i</span>-th row is currently not shown because it belongs to a collapsed category row. It is assumed (as a "hide convention") that the value at any even position equals the value at the subsequent odd position. The default is that all entries are <code class="keyw">false</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">isCollapsedCol</code></strong></dt>
+<dd><p>is the corresponding list for <code class="code">indexCol</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">isRejectedRow</code></strong></dt>
+<dd><p>is a list of Booleans. If the entry at position <span class="SimpleMath">i</span> is <code class="keyw">true</code> then the <span class="SimpleMath">i</span>-th row is currently not shown because it does not match the current filtering of the table. Defaults, length, and hide convention are as for <code class="code">isCollapsedRow</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">isRejectedCol</code></strong></dt>
+<dd><p>is the corresponding list for <code class="code">indexCol</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">isRejectedLabelsRow</code></strong></dt>
+<dd><p>is a list of Booleans. If the entry at position <span class="SimpleMath">i</span> is <code class="keyw">true</code> then the <span class="SimpleMath">i</span>-th column of row labels is currently not shown.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">isRejectedLabelsCol</code></strong></dt>
+<dd><p>is the corresponding list for the column labels.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">activeModes</code></strong></dt>
+<dd><p>is a list of mode records that are contained in the <code class="code">availableModes</code> list of the <code class="code">work</code> component of the browse table. The current mode is the last entry in this list. The default depends on the application, <code class="code">BrowseData.defaults</code> prescribes the list containing only the mode with <code class="code">name</code> component <code class="code">"browse"</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">selectedEntry</code></strong></dt>
+<dd><p>is a list <span class="SimpleMath">[ i, j ]</span>. If <span class="SimpleMath">i = j = 0</span> then no table cell is selected, otherwise <span class="SimpleMath">i</span> and <span class="SimpleMath">j</span> are the row and column index of the selected cell. (Note that <span class="SimpleMath">i</span> and <span class="SimpleMath">j</span> are always even.) The default is <span class="SimpleMath">[ 0, 0 ]</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">selectedCategory</code></strong></dt>
+<dd><p>is a list <span class="SimpleMath">[ i, l ]</span>. If <span class="SimpleMath">i = l = 0</span> then no category row is selected, otherwise <span class="SimpleMath">i</span> and <span class="SimpleMath">l</span> are the row index and the level of the selected category row. (Note that <span class="SimpleMath">i</span> is always even.) The default is <span class="SimpleMath">[ 0, 0 ]</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">searchString</code></strong></dt>
+<dd><p>is the last string for which the user has searched in the table. The default is the empty string.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">searchParameters</code></strong></dt>
+<dd><p>is a list of parameters that are modified by the function <code class="code">BrowseData.SearchStringWithStartParameters</code>. If one sets these parameters in a search then these values hold also for subsequent searches. So it may make sense to set the parameters to personally preferred ones.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sortFunctionForColumnsDefault</code></strong></dt>
+<dd><p>is a function with two arguments used to compare two entries in the same column of the main table (or two category row values). The default is the operation <code class="code">\&lt;</code>. (Note that this default may be not meaningful if some of the rows or columns contain strings representing numbers.)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sortFunctionForRowsDefault</code></strong></dt>
+<dd><p>is the analogous function for comparing two entries in the same row of the main table.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sortFunctionsForRows</code></strong></dt>
+<dd><p>is a list of comparison functions, if the <span class="SimpleMath">i</span>-th entry is bound then it replaces the <code class="code">sortFunctionForRowsDefault</code> value when the table is sorted w.r.t. the <span class="SimpleMath">i</span>-th row.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sortFunctionsForColumns</code></strong></dt>
+<dd><p>is the analogous list of functions for the case that the table is sorted w.r.t. columns.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sortParametersForRowsDefault</code></strong></dt>
+<dd><p>is a list of parameters for sorting the main table w.r.t. entries in given rows, e. g., whether one wants to sort ascending or descending.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sortParametersForColumnsDefault</code></strong></dt>
+<dd><p>is the analogous list of parameters for sorting w.r.t. given columns. In addition to the parameters for rows, also parameters concerning category rows are available, e. g., whether the data columns that are transformed into category rows shall be hidden afterwards or not.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sortParametersForRows</code></strong></dt>
+<dd><p>is a list that contains ar position <span class="SimpleMath">i</span>, if bound, a list of parameters that shall replace those in <code class="code">sortParametersForRowsDefault</code> when the table is sorted w.r.t. the <span class="SimpleMath">i</span>-th row.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">sortParametersForColumns</code></strong></dt>
+<dd><p>is the analogous list of parameters lists for sorting w.r.t. columns.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">categories</code></strong></dt>
+<dd><p>describes the current category rows. The value is a list <span class="SimpleMath">[ l_1, l_2, l_3 ]</span> where <span class="SimpleMath">l_1</span> is a <em>sorted</em> list <span class="SimpleMath">[ i_1, i_2, ..., i_k ]</span> of positive integers, <span class="SimpleMath">l_2</span> is a list of length <span class="SimpleMath">k</span> where the <span class="SimpleMath">j</span>-th entry is a record with the components <code class="code">pos</code> (with value <span class="SimpleMath">i_j</span>), <code class="code">level</code> (the level of the category row), <code class="code">value</code> (an attribute line to be shown), <code class="code">separator</code> (the separator below this category row is a repetition of this string), <code class="code">isUnderCollapsedCategory</code> (<code class="keyw">true</code> if the category row is hidden because a category row of an outer level is collapsed; note that in the <code class="keyw">false</code> case, the category row itself can be collapsed), <code class="code">isRejectedCategory</code> (<code class="keyw">true</code> if the category row is hidden because none of th edata rows below this category match the current filtering of the table); the list <span class="SimpleMath">l_3</span> contains the levels for which the category rows shall include the numbers of data rows under these category rows. The default value is <code class="code">[ [], [], [] ]</code>. (Note that this "hide convention" makes sense mainly if together with a hidden category row, also the category rows on higher levels and the corresponding data rows are hidden –but this property is <em>not</em> checked.) Category rows are computed with the <code class="code">CategoryValues</code> function in the <code class="code">work</code> component of the browse table.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">log</code></strong></dt>
+<dd><p>describes the session log which is currently written. The value is a list of positive integers, representing the user inputs in the current session. When <strong class="pkg">GAP</strong> returns from a call to <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>), one can access the log list of the user interactions in the browse table as the value of its component <code class="code">dynamic.log</code>.</p>
+
+<p>If <code class="code">BrowseData.logStore</code> had been set to <code class="keyw">true</code> before <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) had been called then the list can also be accessed as the value of <code class="code">BrowseData.log</code>. If <code class="code">BrowseData.logStore</code> is unbound or has a value different from <code class="keyw">true</code> then <code class="code">BrowseData.log</code> is not written. (This can be interesting in the case of browse table applications where the user does not get access to the browse table itself.)</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">replay</code></strong></dt>
+<dd><p>describes the non-interactive input for the current browse table. The value is a record with the components <code class="code">logs</code> (a dense list of records, the default is an empty list) and <code class="code">pointer</code> (a positive integer, the default is <span class="SimpleMath">1</span>). If <code class="code">pointer</code> is a position in <code class="code">logs</code> then currently the <code class="code">pointer</code>-th record is processed, otherwise the browse table has exhausted its non-interactive part, and requires interactive input. The records in <code class="code">log</code> have the components <code class="code">steps</code> (a list of user inputs, the default is an empty list), <code class="code">position</code> (a positive integer denoting the current position in the <code class="code">steps</code> list if the log is currently processed, the default is <span class="SimpleMath">1</span>), <code class="code">replayInterval</code> (the timeout between two steps in milliseconds if the log is processed, the default is <span class="SimpleMath">0</span>), and <code class="code">quiet</code> (a Boolean, <code class="keyw">true</code> if the steps shall not be shown on the screen until the end of the log is reached, the default is <code class="keyw">false</code>).</p>
+
+</dd>
+</dl>
+<p><a id="X791FB5BA7A9951F4" name="X791FB5BA7A9951F4"></a></p>
+
+<h5>5.4-2 BrowseData.SetReplay</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BrowseData.SetReplay</code>( <var class="Arg">data</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This function sets and resets the value of <code class="code">BrowseData.defaults.dynamic.replay</code>.</p>
+
+<p>When <code class="func">BrowseData.SetReplay</code> is called with a list <var class="Arg">data</var> as its argument then the entries are assumed to describe user inputs for a browse table for which <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) will be called afterwards, such that replay of the inputs runs. (Valid input lists can be obtained from the component <code class="code">dynamic.log</code> of the browse table in question.)</p>
+
+<p>When <code class="func">BrowseData.SetReplay</code> is called with the only argument <code class="keyw">false</code>, the component is unbound (so replay is disabled, and thus calls to <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) will require interactive user input).</p>
+
+<p>The replay feature should be used by initially setting the input list, then running the replay (perhaps several times), and finally unbinding the inputs, such that subsequent uses of other browse tables do not erroneously expect their input in <code class="code">BrowseData.defaults.dynamic.replay</code>.</p>
+
+<p>Note that the value of <code class="code">BrowseData.defaults.dynamic.replay</code> is used in a call to <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) only if the browse table in question does not have a component <code class="code">dynamic.replay</code> before the call.</p>
+
+<p><a id="X7DAB32B785E59350" name="X7DAB32B785E59350"></a></p>
+
+<h5>5.4-3 BrowseData.AlertWithReplay</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BrowseData.AlertWithReplay</code>( <var class="Arg">t</var>, <var class="Arg">messages</var>[, <var class="Arg">attrs</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an integer representing a (simulated) user input.</p>
+
+<p>The function <code class="func">BrowseData.AlertWithReplay</code> is a variant of <code class="func">NCurses.Alert</code> (<a href="chap3.html#X83E95B4A83BC473E"><span class="RefLink">3.1-1</span></a>) that is adapted for the replay feature of the browse table <var class="Arg">t</var>, see Section <a href="chap4.html#X869EDB308717F199"><span class="RefLink">4.1</span></a>. The arguments <var class="Arg">messages</var> and <var class="Arg">attrs</var> are the same as the corresponding arguments of <code class="func">NCurses.Alert</code> (<a href="chap3.html#X83E95B4A83BC473E"><span class="RefLink">3.1-1</span></a>), the argument <code class="code">timeout</code> of <code class="func">NCurses.Alert</code> (<a href="chap3.html#X83E95B4A83BC473E"><span class="RefLink">3.1-1</span></a>) is taken from the browse table <var class="Arg">t</var>, as follows. If <code class="code">BrowseData.IsDoneReplay</code> returns <code class="keyw">true</code> for <code class="code">t</code> then <code class="code">timeout</code> is zero, so a user input is requested for closing the alert box; otherwise the requested input character is fetched from <code class="code">t.dynamic.replay</code>.</p>
+
+<p>If <code class="code">timeout</code> is zero and mouse events are enabled (see <code class="func">NCurses.UseMouse</code> (<a href="chap2.html#X799C033A7AB582D7"><span class="RefLink">2.2-10</span></a>)) then the box can be moved inside the window via mouse events.</p>
+
+<p>No alert box is shown if <code class="code">BrowseData.IsQuietSession</code> returns <code class="keyw">true</code> when called with <var class="Arg">t</var><code class="code">.dynamic.replay</code>, otherwise the alert box is closed after the time (in milliseconds) that is given by the <code class="code">replayInterval</code> value of the current entry in <var class="Arg">t</var><code class="code">.dynamic.replay.logs</code>.</p>
+
+<p>The function returns either the return value of the call to <code class="func">NCurses.Alert</code> (<a href="chap3.html#X83E95B4A83BC473E"><span class="RefLink">3.1-1</span></a>) (in the interactive case) or the value that was fetched from the current replay record (in the replay case).</p>
+
+<p><a id="X82A4238B79F06271" name="X82A4238B79F06271"></a></p>
+
+<h5>5.4-4 BrowseData.actions.ShowHelp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BrowseData.actions.ShowHelp</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>There are two predefined ways for showing an overview of the admissible inputs and their meaning in the current mode of a browse table. The function <code class="code">BrowseData.ShowHelpTable</code> displays this overview in a browse table (using the <code class="code">help</code> mode), and <code class="code">BrowseData.ShowHelpPager</code> uses <code class="code">NCurses.Pager</code>.</p>
+
+<p>Technically, the only difference between these two functions is that <code class="code">BrowseData.ShowHelpTable</code> supports the replay feature of <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>), whereas <code class="code">BrowseData.ShowHelpPager</code> simply does not call the pager in replay situations.</p>
+
+<p>The action record <code class="code">BrowseData.actions.ShowHelp</code> is associated with the user inputs <strong class="button">?</strong> or <strong class="button">F1</strong> in standard <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) applications, and it is recommended to do the same in other <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) applications. This action calls the function stored in the component <code class="code">work.ShowHelp</code> of the browse table, the default (i. e., the value of <code class="code">BrowseData.defaults.work.ShowHelp</code>) is <code class="code">BrowseData.ShowHelpTable</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">xpl1.work.ShowHelp:= BrowseData.ShowHelpPager;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( "?Q" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Unbind( xpl1.dynamic );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.BrowseGeneric( xpl1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">xpl1.work.ShowHelp:= BrowseData.ShowHelpTable;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( "?dQQ" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Unbind( xpl1.dynamic );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NCurses.BrowseGeneric( xpl1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BrowseData.SetReplay( false );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Unbind( xpl1.dynamic );</span>
+</pre></div>
+
+<p><a id="X872AE7387885B0AD" name="X872AE7387885B0AD"></a></p>
+
+<h5>5.4-5 BrowseData.actions.SaveWindow</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BrowseData.actions.SaveWindow</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">BrowseData.actions.SaveWindow.action</code> asks the user to enter the name of a global <strong class="pkg">GAP</strong> variable, using <code class="func">NCurses.GetLineFromUser</code> (<a href="chap3.html#X837EFD8A842257EA"><span class="RefLink">3.1-3</span></a>). If this variable name is valid and if no value is bound to this variable yet then the current contents of the window of the browse table that is given as the argument is saved in this variable, using <code class="func">NCurses.SaveWin</code> (<a href="chap2.html#X85FB1D7878A322EB"><span class="RefLink">2.2-11</span></a>).</p>
+
+<p><a id="X860DA4007E23716E" name="X860DA4007E23716E"></a></p>
+
+<h5>5.4-6 BrowseData.actions.QuitMode</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BrowseData.actions.QuitMode</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BrowseData.actions.QuitTable</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">BrowseData.actions.QuitMode.action</code> unbinds the current mode in the browse table that is given as its argument (see Section <a href="chap5.html#X83290BB6864B2DD0"><span class="RefLink">5.2</span></a>), so the browse table returns to the mode from which this mode had been called. If the current mode is the only one, first the user is asked for confirmation whether she really wants to quit the table; only if the <strong class="button">y</strong> key is hit, the last mode is unbound.</p>
+
+<p>The function <code class="code">BrowseData.actions.QuitTable.action</code> unbinds all modes in the browse table that is given as its argument, without asking for confirmation; the effect is to exit the browse application (see Section <a href="chap5.html#X7A4014DB84D16406"><span class="RefLink">5.3</span></a>).</p>
+
+<p><a id="X8728E4B6856EAEC0" name="X8728E4B6856EAEC0"></a></p>
+
+<h5>5.4-7 BrowseData.actions.Error</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BrowseData.actions.Error</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>After <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) has been called, interrupting by hitting the <strong class="button">Ctrl-C</strong> keys is not possible. It is recommended to provide the action <code class="func">BrowseData.actions.Error</code> for each mode of a <code class="func">NCurses.BrowseGeneric</code> (<a href="chap4.html#X85FC163D87FAFD12"><span class="RefLink">4.3-1</span></a>) application, which enters a break loop and admits returning to the application. The recommended user input for this action is the <strong class="button">E</strong> key.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

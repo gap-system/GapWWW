@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (orb) - Chapter 4: Hashing techniques</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X8705763D8698C0B7" name="X8705763D8698C0B7"></a></p>
+<div class="ChapSects"><a href="chap4.html#X8705763D8698C0B7">4 <span class="Heading">Hashing techniques</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X814DE39B7C1B1554">4.1 <span class="Heading">The idea of hashing</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7AE36B967EB1382B">4.2 <span class="Heading">Hash functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7ACED4FB7C971A5A">4.2-1 ChooseHashFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X803D35D97B6E7CC5">4.2-2 ChooseHashFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B04C17D7DC6E277">4.2-3 ChooseHashFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F41F51C83E88759">4.2-4 ChooseHashFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X847801B87A03AA77">4.2-5 ChooseHashFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X819264A980D873EE">4.2-6 ChooseHashFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7BAD070A79E54131">4.2-7 ChooseHashFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C7C0CDB7DCE95B4">4.2-8 ChooseHashFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80C0C39080BFAA8F">4.2-9 ChooseHashFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87C1B2F7871B7EA4">4.2-10 ChooseHashFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80E195168734F8E3">4.2-11 ChooseHashFunction</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8424E70E78FAA203">4.3 <span class="Heading">Using hash tables</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X79F46D9982BB0E12">4.3-1 HTCreate</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X833166757E58B83B">4.3-2 HTAdd</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8585E1687AE9E409">4.3-3 HTValue</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X788B50C17A472DFD">4.3-4 HTUpdate</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82A8245E875B0B8E">4.3-5 HTDelete</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X805BC8667B91890E">4.3-6 HTGrow</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X87A0A459856A1FFB">4.4 <span class="Heading">Using hash tables (legacy code)</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7FD5A22A86DACF26">4.4-1 NewHT</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D9D6CF37FA68C39">4.4-2 AddHT</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X853825AB7DE1F99C">4.4-3 ValueHT</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D6AA1618657386C">4.4-4 InitHT</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86E9DEC68728425C">4.4-5 GrowHT</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8069137484662072">4.5 <span class="Heading"> The data structures for hash tables </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81BD00DE877E2C0D">4.5-1 <span class="Heading"> Memory requirements </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8238A6C0834A48F4">4.5-2 <span class="Heading"> Handling of collisions </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X836F7C2C7932FEAE">4.5-3 <span class="Heading"> Efficiency </span></a>
+</span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Hashing techniques</span></h3>
+
+<p><a id="X814DE39B7C1B1554" name="X814DE39B7C1B1554"></a></p>
+
+<h4>4.1 <span class="Heading">The idea of hashing</span></h4>
+
+<p>If one wants to store a certain set of similar objects and wants to quickly access a given one (or come back with the result that it is unknown), the first idea would be to store them in a list, possibly sorted for faster access. This however still would need <span class="SimpleMath">log(n)</span> comparisons to find a given element or to decide that it is not yet stored.</p>
+
+<p>Therefore one uses a much bigger array and uses a function on the space of possible objects with integer values to decide, where in the array to store a certain object. If this so called hash function distributes the actually stored objects well enough over the array, the access time is constant in average. Of course, a hash function will usually not be injective, so one needs a strategy what to do in case of a so-called "collision", that is, if more than one object with the same hash value has to be stored. This package provides two ways to deal with collisions, one is implemented in the so called "HashTabs" and another in the "TreeHashTabs". The former simply uses other parts of the array to store the data involved in the collisions and the latter uses an AVL tree (see Chapter <a href="chap8.html#X7F2630FB7AA3C73D"><span class="RefLink">8</span></a>) to store all data objects with the same hash value. Both are used basically in the same way but sometimes behave a bit differently.</p>
+
+<p>The basic functions to work with hash tables are <code class="func">HTCreate</code> (<a href="chap4.html#X79F46D9982BB0E12"><span class="RefLink">4.3-1</span></a>), <code class="func">HTAdd</code> (<a href="chap4.html#X833166757E58B83B"><span class="RefLink">4.3-2</span></a>), <code class="func">HTValue</code> (<a href="chap4.html#X8585E1687AE9E409"><span class="RefLink">4.3-3</span></a>), <code class="func">HTDelete</code> (<a href="chap4.html#X82A8245E875B0B8E"><span class="RefLink">4.3-5</span></a>) and <code class="func">HTUpdate</code> (<a href="chap4.html#X788B50C17A472DFD"><span class="RefLink">4.3-4</span></a>). They are described in Section <a href="chap4.html#X8424E70E78FAA203"><span class="RefLink">4.3</span></a>.</p>
+
+<p>The legacy functions from older versions of this package to work with hash tables are <code class="func">NewHT</code> (<a href="chap4.html#X7FD5A22A86DACF26"><span class="RefLink">4.4-1</span></a>), <code class="func">AddHT</code> (<a href="chap4.html#X7D9D6CF37FA68C39"><span class="RefLink">4.4-2</span></a>), and <code class="func">ValueHT</code> (<a href="chap4.html#X853825AB7DE1F99C"><span class="RefLink">4.4-3</span></a>). They are described in Section <a href="chap4.html#X87A0A459856A1FFB"><span class="RefLink">4.4</span></a>. In the next section, we first describe the infrastructure for hash functions.</p>
+
+<p><a id="X7AE36B967EB1382B" name="X7AE36B967EB1382B"></a></p>
+
+<h4>4.2 <span class="Heading">Hash functions</span></h4>
+
+<p>In the <strong class="pkg">orb</strong> package hash functions are chosen automatically by giving a sample object together with the length of the hash table. This is done with the following operation:</p>
+
+<p><a id="X7ACED4FB7C971A5A" name="X7ACED4FB7C971A5A"></a></p>
+
+<h5>4.2-1 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>The first argument <var class="Arg">ob</var> must be a sample object, that is, an object like those we want to store in the hash table later on. The argument <var class="Arg">len</var> is an integer that gives the length of the hash table. Note that this might be called later on automatically, when a hash table is increased in size. The operation returns a record with two components. The component <code class="code">func</code> is a <strong class="pkg">GAP</strong> function taking two arguments, see below. The component <code class="code">data</code> is some <strong class="pkg">GAP</strong> object. Later on, the hash function will be called with two arguments, the first is the object for which it should call the hash value and the second argument must be the data stored in the <code class="code">data</code> component.</p>
+
+<p>The hash function has to return values between <span class="SimpleMath">1</span> and the hash length <var class="Arg">len</var> inclusively.</p>
+
+<p>This setup is chosen such that the hash functions can be global objects that are not created during the execution of <code class="func">ChooseHashFunction</code> but still can change their behaviour depending on the data.</p>
+
+<p>In the following we just document, for which types of objects there are hash functions that can be found using <code class="func">ChooseHashFunction</code>.</p>
+
+<p><a id="X803D35D97B6E7CC5" name="X803D35D97B6E7CC5"></a></p>
+
+<h5>4.2-2 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method is for compressed vectors over the field <code class="code">GF(2)</code> of two elements. Note that there is no hash function for non-compressed vectors over <code class="code">GF(2)</code> because those objects cannot efficiently be recognised from their type.</p>
+
+<p>Note that you can only use the resulting hash functions for vectors of the same length.</p>
+
+<p><a id="X7B04C17D7DC6E277" name="X7B04C17D7DC6E277"></a></p>
+
+<h5>4.2-3 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method is for compressed vectors over a finite field with up to <span class="SimpleMath">256</span> elements. Note that there is no hash function for non-compressed such vectors because those objects cannot efficiently be recognised from their type.</p>
+
+<p>Note that you can only use the resulting hash functions for vectors of the same length.</p>
+
+<p><a id="X7F41F51C83E88759" name="X7F41F51C83E88759"></a></p>
+
+<h5>4.2-4 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method is for compressed matrices over the field <code class="code">GF(2)</code> of two elements. Note that there is no hash function for non-compressed matrices over <code class="code">GF(2)</code> because those objects cannot efficiently be recognised from their type.</p>
+
+<p>Note that you can only use the resulting hash functions for matrices of the same size.</p>
+
+<p><a id="X847801B87A03AA77" name="X847801B87A03AA77"></a></p>
+
+<h5>4.2-5 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method is for compressed matrices over a finite field with up to <span class="SimpleMath">256</span> elements. Note that there is no hash function for non-compressed such vectors because those objects cannot efficiently be recognised from their type.</p>
+
+<p>Note that you can only use the resulting hash functions for matrices of the same size.</p>
+
+<p><a id="X819264A980D873EE" name="X819264A980D873EE"></a></p>
+
+<h5>4.2-6 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method is for integers.</p>
+
+<p><a id="X7BAD070A79E54131" name="X7BAD070A79E54131"></a></p>
+
+<h5>4.2-7 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method is for permutations.</p>
+
+<p><a id="X7C7C0CDB7DCE95B4" name="X7C7C0CDB7DCE95B4"></a></p>
+
+<h5>4.2-8 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method is for lists of integers.</p>
+
+<p><a id="X80C0C39080BFAA8F" name="X80C0C39080BFAA8F"></a></p>
+
+<h5>4.2-9 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method is for kernel Pc words.</p>
+
+<p><a id="X87C1B2F7871B7EA4" name="X87C1B2F7871B7EA4"></a></p>
+
+<h5>4.2-10 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method is for lists of integers.</p>
+
+<p><a id="X80E195168734F8E3" name="X80E195168734F8E3"></a></p>
+
+<h5>4.2-11 ChooseHashFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChooseHashFunction</code>( <var class="Arg">ob</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a record</p>
+
+<p>This method is for lists of matrices.</p>
+
+<p><a id="X8424E70E78FAA203" name="X8424E70E78FAA203"></a></p>
+
+<h4>4.3 <span class="Heading">Using hash tables</span></h4>
+
+<p><a id="X79F46D9982BB0E12" name="X79F46D9982BB0E12"></a></p>
+
+<h5>4.3-1 HTCreate</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HTCreate</code>( <var class="Arg">sample</var>[, <var class="Arg">opt</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a new hash table object</p>
+
+<p>A new hash table for objects like <var class="Arg">sample</var> is created. The second argument <var class="Arg">opt</var> is an optional options record, which will supplied in most cases, if only to specify the length and type of the hash table to be used. The following components in this record can be bound:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">treehashsize</code></strong></dt>
+<dd><p>If this component is bound the type of the hash table is a TreeHashTab. The value must be a positive integer and will be the size of the hash table. Note that for this type of hash table the keys to be stored in the hash must be comparable using <span class="SimpleMath">&lt;</span>. A three-way comparison function can be supplied using the component <code class="code">cmpfunc</code> (see below).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">treehashtab</code></strong></dt>
+<dd><p>If this component is bound the type of the hash table is a TreeHashTab. This option is superfluous if <code class="code">treehashsize</code> is used.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">forflatplainlists</code></strong></dt>
+<dd><p>If this component is set to <code class="keyw">true</code> then the user guarantees that all the elements in the hash will be flat plain lists, that is, plain lists with no subobjects. For example lists of immediate integers will fulfill this requirement, but ranges don't. In this case, a particularly good and efficient hash function will automatically be taken and the components <code class="code">hashfunc</code>, <code class="code">hfbig</code> and <code class="code">hfdbig</code> are ignored. Note that this cannot be automatically detected because it depends not only on the sample point but also potentially on all the other points to be stored in the hash table.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hf</code> and <code class="code">hfd</code></strong></dt>
+<dd><p>If these components are bound, they are used as the hash function. The value of <code class="code">hf</code> must be a function taking two arguments, the first being the object for which the hash function shall be computed and the second being the value of <code class="code">hfd</code>. The returned value must be an integer in the range from <span class="SimpleMath">1</span> to the length of the hash. If either of these components is not bound, an automatic choice for the hash function is done using <code class="func">ChooseHashFunction</code> (<a href="chap4.html#X7ACED4FB7C971A5A"><span class="RefLink">4.2-1</span></a>) and the supplied sample object <var class="Arg">sample</var>.</p>
+
+<p>Note that if you specify these two components and are using a HashTab table then this table cannot grow unless you also bind the components <code class="code">hfbig</code>, <code class="code">hfdbig</code> and <code class="code">cangrow</code>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">cmpfunc</code></strong></dt>
+<dd><p>This component can be bound to a three-way comparison function taking two arguments <var class="Arg">a</var> and <var class="Arg">b</var> (which will be keys for the TreeHashTab) and returns <span class="SimpleMath">-1</span> if <span class="SimpleMath"><var class="Arg">a</var>&lt;<var class="Arg">b</var></span>, <span class="SimpleMath">0</span> if <span class="SimpleMath"><var class="Arg">a</var> = <var class="Arg">b</var></span> and <span class="SimpleMath">1</span> if <span class="SimpleMath"><var class="Arg">a</var> &gt; <var class="Arg">b</var></span>. If this component is not bound the function <code class="func">AVLCmp</code> (<a href="chap8.html#X83EC43DA871C7F60"><span class="RefLink">8.2-2</span></a>) is taken, which simply calls the generic operations <code class="code">&lt;</code> and <code class="code">=</code> to do the job.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hashlen</code></strong></dt>
+<dd><p>If this component is bound the type of the hash table is a standard HashTab table. That is, collisions are dealt with by storing additional entries in other slots. This is the traditional way to implement a hash table. Note that currently deleting entries in such a hash table is not implemented, since it could only be done by leaving a "deleted" mark which could pollute that hash table. Use TreeHashTabs instead if you need deletion. The value bound to <code class="code">hashlen</code> must be a positive integer and will be the initial length of the hash table.</p>
+
+<p>Note that it is a good idea to choose a prime number as the hash length due to the algorithm for collision handling which works particularly well in that case. The hash function is chosen automatically.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hashtab</code></strong></dt>
+<dd><p>If this component is bound the type of the hash table is a standard HashTab table. This component is superfluous if <code class="code">hashlen</code> is bound.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">eqf</code></strong></dt>
+<dd><p>For HashTab tables the function taking two arguments bound to this component is used to compare keys in the hash table. If this component is not bound the usual <code class="code">=</code> operation is taken.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hfbig</code> and <code class="code">hfdbig</code> and <code class="code">cangrow</code></strong></dt>
+<dd><p>If you have used the components <code class="code">hf</code> and <code class="code">hfd</code> then your hash table cannot automatically grow when it fills up. This is because the length of the table is built into the hash function. If you still want your hash table to be able to grow automatically, then bind a hash function returning arbitrary integers to <code class="code">hfbig</code>, the corresponding data for the second argument to <code class="code">hfdbig</code> and bind <code class="code">cangrow</code> to <code class="keyw">true</code>. Then the hash table will automatically grow and take this new hash function modulo the new length of the hash table as hash function.</p>
+
+</dd>
+</dl>
+<p><a id="X833166757E58B83B" name="X833166757E58B83B"></a></p>
+
+<h5>4.3-2 HTAdd</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HTAdd</code>( <var class="Arg">ht</var>, <var class="Arg">key</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a hash value</p>
+
+<p>Stores the object <var class="Arg">key</var> into the hash table <var class="Arg">ht</var> and stores the value <var class="Arg">val</var> together with <var class="Arg">ob</var>. The result is <code class="keyw">fail</code> if an error occurred, which can be that an object equal to <var class="Arg">key</var> is already stored in the hash table or that the hash table is already full. The latter can only happen, if the hash table is no TreeHashTab and cannot grow automatically.</p>
+
+<p>If no error occurs, the result is an integer indicating the place in the hash table where the object is stored. Note that once the hash table grows automatically this number is no longer the same!</p>
+
+<p>If the value <var class="Arg">val</var> is <code class="keyw">true</code> for all objects in the hash, no extra memory is used for the values. All other values are stored in the hash. The value <code class="keyw">fail</code> cannot be stored as it indicates that the object is not found in the hash.</p>
+
+<p>See Section <a href="chap4.html#X8069137484662072"><span class="RefLink">4.5</span></a> for details on the data structures and especially about memory requirements.</p>
+
+<p><a id="X8585E1687AE9E409" name="X8585E1687AE9E409"></a></p>
+
+<h5>4.3-3 HTValue</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HTValue</code>( <var class="Arg">ht</var>, <var class="Arg">key</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">fail</code> or <code class="keyw">true</code> or a value</p>
+
+<p>Looks up the object <var class="Arg">key</var> in the hash table <var class="Arg">ht</var>. If the object is not found, <code class="keyw">fail</code> is returned. Otherwise, the value stored with the object is returned. Note that if this value was <code class="keyw">true</code> no extra memory is used for this.</p>
+
+<p><a id="X788B50C17A472DFD" name="X788B50C17A472DFD"></a></p>
+
+<h5>4.3-4 HTUpdate</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HTUpdate</code>( <var class="Arg">ht</var>, <var class="Arg">key</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">fail</code> or <code class="keyw">true</code> or a value</p>
+
+<p>The object <var class="Arg">key</var> must already be stored in the hash table <var class="Arg">ht</var>, otherwise this operation returns <code class="keyw">fail</code>. The value stored with <var class="Arg">key</var> in the hash is replaced by <var class="Arg">value</var> and the previously stored value is returned.</p>
+
+<p><a id="X82A8245E875B0B8E" name="X82A8245E875B0B8E"></a></p>
+
+<h5>4.3-5 HTDelete</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HTDelete</code>( <var class="Arg">ht</var>, <var class="Arg">key</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">fail</code> or <code class="keyw">true</code> or a value</p>
+
+<p>The object <var class="Arg">key</var> along with its stored value is removed from the hash table <var class="Arg">ht</var>. Note that this currently only works for TreeHashTabs and not for HashTab tables. It is an error if <var class="Arg">key</var> is not found in the hash table and <code class="keyw">fail</code> is returned in this case.</p>
+
+<p><a id="X805BC8667B91890E" name="X805BC8667B91890E"></a></p>
+
+<h5>4.3-6 HTGrow</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HTGrow</code>( <var class="Arg">ht</var>, <var class="Arg">ob</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This is a more or less internal operation. It is called when the space in a hash table becomes scarce. The first argument <var class="Arg">ht</var> must be a hash table object, the second a sample point. The function increases the hash size by a factor of 2. This makes it necessary to choose a new hash function. Usually this is done with the usual <code class="code">ChooseHashFunction</code> method. However, one can bind the two components <code class="code">hfbig</code> and <code class="code">hfdbig</code> in the options record of <code class="func">HTCreate</code> (<a href="chap4.html#X79F46D9982BB0E12"><span class="RefLink">4.3-1</span></a>) to a function and a record respectively and bind <code class="code">cangrow</code> to <code class="keyw">true</code>. In that case, upon growing the hash, a new hash function is created by taking the function <code class="code">hfbig</code> together with <code class="code">hfdbig</code> as second data argument and reducing the resulting integer modulo the hash length. In this way one can specify a hash function suitable for all hash sizes by simply producing big enough hash values.</p>
+
+<p><a id="X87A0A459856A1FFB" name="X87A0A459856A1FFB"></a></p>
+
+<h4>4.4 <span class="Heading">Using hash tables (legacy code)</span></h4>
+
+<p>Note that the functions described in this section are obsolete since version 3.0 of <strong class="pkg">orb</strong> and are only kept for backward compatibility. Please use the functions in Section <a href="chap4.html#X8424E70E78FAA203"><span class="RefLink">4.3</span></a> in new code.</p>
+
+<p>The following functions are needed to use hash tables. For details about the data structures see Section <a href="chap4.html#X8069137484662072"><span class="RefLink">4.5</span></a>.</p>
+
+<p><a id="X7FD5A22A86DACF26" name="X7FD5A22A86DACF26"></a></p>
+
+<h5>4.4-1 NewHT</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewHT</code>( <var class="Arg">sample</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a new hash table object</p>
+
+<p>A new hash table for objects like <var class="Arg">sample</var> of length <var class="Arg">len</var> is created. Note that it is a good idea to choose a prime number as the hash length due to the algorithm for collision handling which works particularly well in that case. The hash function is chosen automatically. The resulting object can be used with the functions <code class="func">AddHT</code> (<a href="chap4.html#X7D9D6CF37FA68C39"><span class="RefLink">4.4-2</span></a>) and <code class="func">ValueHT</code> (<a href="chap4.html#X853825AB7DE1F99C"><span class="RefLink">4.4-3</span></a>). It will start with length <var class="Arg">len</var> but will grow as necessary.</p>
+
+<p><a id="X7D9D6CF37FA68C39" name="X7D9D6CF37FA68C39"></a></p>
+
+<h5>4.4-2 AddHT</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddHT</code>( <var class="Arg">ht</var>, <var class="Arg">ob</var>, <var class="Arg">val</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: an integer or fail</p>
+
+<p>Stores the object <var class="Arg">ob</var> into the hash table <var class="Arg">ht</var> and stores the value <var class="Arg">val</var> together with <var class="Arg">ob</var>. The result is <code class="keyw">fail</code> if an error occurred, which can only be that the hash table is already full. This can only happen, if the hash table cannot grow automatically.</p>
+
+<p>If no error occurs, the result is an integer indicating the place in the hash table where the object is stored. Note that once the hash table grows automatically this number is no longer the same!</p>
+
+<p>If the value <var class="Arg">val</var> is <code class="keyw">true</code> for all objects in the hash, no extra memory is used for the values. All other values are stored in the hash. The value <code class="keyw">fail</code> cannot be stored as it indicates that the object is not found in the hash.</p>
+
+<p>See Section <a href="chap4.html#X8069137484662072"><span class="RefLink">4.5</span></a> for details on the data structures and especially about memory requirements.</p>
+
+<p><a id="X853825AB7DE1F99C" name="X853825AB7DE1F99C"></a></p>
+
+<h5>4.4-3 ValueHT</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ValueHT</code>( <var class="Arg">ht</var>, <var class="Arg">ob</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the stored value, <code class="keyw">true</code>, or <code class="keyw">fail</code></p>
+
+<p>Looks up the object <var class="Arg">ob</var> in the hash table <var class="Arg">ht</var>. If the object is not found, <code class="keyw">fail</code> is returned. Otherwise, the value stored with the object is returned. Note that if this value was <code class="keyw">true</code> no extra memory is used for this.</p>
+
+<p>The following function is only documented for the sake of completeness and for emergency situations, where <code class="func">NewHT</code> (<a href="chap4.html#X7FD5A22A86DACF26"><span class="RefLink">4.4-1</span></a>) tries to be too intelligent.</p>
+
+<p><a id="X7D6AA1618657386C" name="X7D6AA1618657386C"></a></p>
+
+<h5>4.4-4 InitHT</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InitHT</code>( <var class="Arg">len</var>, <var class="Arg">hfun</var>, <var class="Arg">eqfun</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a new hash table object</p>
+
+<p>This is usually only an internal function. It is called from <code class="func">NewHT</code> (<a href="chap4.html#X7FD5A22A86DACF26"><span class="RefLink">4.4-1</span></a>). The argument <var class="Arg">len</var> is the length of the hash table, <var class="Arg">hfun</var> is the hash function record as returned by <code class="func">ChooseHashFunction</code> (<a href="chap4.html#X7ACED4FB7C971A5A"><span class="RefLink">4.2-1</span></a>) and <var class="Arg">eqfun</var> is a comparison function taking two arguments and returning <code class="keyw">true</code> or <code class="keyw">false</code>.</p>
+
+<p>Note that automatic growing is switched on for the new hash table which means that if the hash table grows, a new hash function is chosen using <code class="func">ChooseHashFunction</code> (<a href="chap4.html#X7ACED4FB7C971A5A"><span class="RefLink">4.2-1</span></a>). If you do not want this, change the component <code class="code">cangrow</code> to <code class="keyw">false</code> after creating the hash table.</p>
+
+<p><a id="X86E9DEC68728425C" name="X86E9DEC68728425C"></a></p>
+
+<h5>4.4-5 GrowHT</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GrowHT</code>( <var class="Arg">ht</var>, <var class="Arg">ob</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This is a more or less internal function. It is called when the space in a hash table becomes scarce. The first argument <var class="Arg">ht</var> must be a hash table object, the second a sample point. The function increases the hash size by a factor of 2 for hash tables and 20 for tree hash tables. This makes it necessary to choose a new hash function. Usually this is done with the usual <code class="code">ChooseHashFunction</code> method. However, one can assign the two components <code class="code">hfbig</code> and <code class="code">hfdbig</code> to a function and a record respectively. In that case, upon growing the hash, a new hash function is created by taking the function <code class="code">hfbig</code> together with <code class="code">hfdbig</code> as second data argument and reducing the resulting integer modulo the hash length. In this way one can specify a hash function suitable for all hash sizes by simply producing big enough hash values.</p>
+
+<p><a id="X8069137484662072" name="X8069137484662072"></a></p>
+
+<h4>4.5 <span class="Heading"> The data structures for hash tables </span></h4>
+
+<p>A legacy hash table object is just a record with the following components:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">els</code></strong></dt>
+<dd><p>A <strong class="pkg">GAP</strong> list storing the elements. Its length can be as long as the component <code class="code">len</code> indicates but will only grow as necessary when elements are stored in the hash.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">vals</code></strong></dt>
+<dd><p>A <strong class="pkg">GAP</strong> list storing the corresponding values. If a value is <code class="keyw">true</code> nothing is stored here to save memory.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">len</code></strong></dt>
+<dd><p>Length of the hash table.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">nr</code></strong></dt>
+<dd><p>Number of elements stored in the hash table.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hf</code></strong></dt>
+<dd><p>The hash function (value of the <code class="code">func</code> component in the record returned by <code class="func">ChooseHashFunction</code> (<a href="chap4.html#X7ACED4FB7C971A5A"><span class="RefLink">4.2-1</span></a>)).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hfd</code></strong></dt>
+<dd><p>The data for the second argument of the hash function (value of the <code class="code">data</code> component in the record returned by <code class="func">ChooseHashFunction</code> (<a href="chap4.html#X7ACED4FB7C971A5A"><span class="RefLink">4.2-1</span></a>)).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">eqf</code></strong></dt>
+<dd><p>A comparison function taking two arguments and returning <code class="keyw">true</code> for equality or <code class="keyw">false</code> otherwise.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">collisions</code></strong></dt>
+<dd><p>Number of collisions (see below).</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">accesses</code></strong></dt>
+<dd><p>Number of lookup or store accesses to the hash.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">cangrow</code></strong></dt>
+<dd><p>A boolean value indicating whether the hash can grow automatically or not.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ishash</code></strong></dt>
+<dd><p>Is <code class="keyw">true</code> to indicate that this is a hash table record.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">hfbig</code> and <code class="code">hfdbig</code></strong></dt>
+<dd><p>Used for hash tables which need to be able to grow but where the user supplied the hash function. See Section <code class="func">HTCreate</code> (<a href="chap4.html#X79F46D9982BB0E12"><span class="RefLink">4.3-1</span></a>) for more details.</p>
+
+</dd>
+</dl>
+<p>A new style HashTab objects are component objects with the same components except that there is no component <code class="code">ishash</code> since these objects are recognised by their type.</p>
+
+<p>A TreeHashTab is very similar. It is a positional object with basically the same components, except that <code class="code">eqf</code> is replaced by the three-way comparison function <code class="code">cmpfunc</code>. Since TreeHashTabs do not grow, the components <code class="code">hfbig</code>, <code class="code">hfdbig</code> and <code class="code">cangrow</code> are never bound. Each slot in the <code class="code">els</code> component is either unbound (empty), or bound to the only key stored in the hash which has this hash value or, if there is more than one key for that hash value, the slot is bound to an AVL tree containing all such keys (and values).</p>
+
+<p><a id="X81BD00DE877E2C0D" name="X81BD00DE877E2C0D"></a></p>
+
+<h5>4.5-1 <span class="Heading"> Memory requirements </span></h5>
+
+<p>Due to the data structure defined above the hash table will need one machine word (<span class="SimpleMath">4</span> bytes on 32bit machines and <span class="SimpleMath">8</span> bytes on 64bit machines) per possible entry in the hash if all values corresponding to objects in the hash are <code class="keyw">true</code> and two machine words otherwise. This means that the memory requirement for the hash itself is proportional to the hash table length and not to the number of objects actually stored in the hash!</p>
+
+<p>In addition one of course needs the memory to store the objects themselves.</p>
+
+<p>For TreeHashTabs there are additional memory requirements. As soon as there are more than one key hashing to the same value, the memory for an AVL tree object is needed in addition. An AVL tree objects needs about 10 machine words for the tree object and then another 4 machine words for each entry stored in the tree. Note that for many collisions this can be significantly more than for HashTab tables. However, the advantage of TreeHashTabs is that even for a bad hash function the performance is never worse than <span class="SimpleMath">log(n)</span> for each operation where <span class="SimpleMath">n</span> is the number of keys in the hash with the same hash value.</p>
+
+<p><a id="X8238A6C0834A48F4" name="X8238A6C0834A48F4"></a></p>
+
+<h5>4.5-2 <span class="Heading"> Handling of collisions </span></h5>
+
+<p>This section is only relevant for HashTab objects.</p>
+
+<p>If two or more objects have the same hash value, the following is done: If the hash value is coprime to the hash length, the hash value is taken as "the increment", otherwise <span class="SimpleMath">1</span> is taken. The code to find the proper place for an object just repeatedly adds the increment to the current position modulo the hash length. Due to the choice of the increment this will eventually try all places in the hash table. Every such increment step is counted as a collision in the <code class="code">collisions</code> component in the hash table. This algorithm explains why it is sensible to choose a prime number as the length of a hash table.</p>
+
+<p><a id="X836F7C2C7932FEAE" name="X836F7C2C7932FEAE"></a></p>
+
+<h5>4.5-3 <span class="Heading"> Efficiency </span></h5>
+
+<p>Hashing is efficient as long as there are not too many collisions. It is not a problem if the number of collisions (counted in the <code class="code">collisions</code> component) is smaller than the number of accesses (counted in the <code class="code">accesses</code> component).</p>
+
+<p>A high number of collisions can be caused by a bad hash function, because the hash table is too small (do not fill a hash table to more than about 80%), or because the objects to store are just not well enough distributed. Hash tables will grow automatically if too many collisions are detected or if they are filled to 80%.</p>
+
+<p>The advantage of TreeHashTabs is that even for a bad hash function the performance is never worse than <span class="SimpleMath">log(n)</span> for each operation where <span class="SimpleMath">n</span> is the number of keys in the hash with the same hash value. However, they need a bit more memory.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

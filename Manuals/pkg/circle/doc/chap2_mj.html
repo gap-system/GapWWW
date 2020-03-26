@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Circle) - Chapter 2: Implementing circle objects</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X8404D6997A466953" name="X8404D6997A466953"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X8404D6997A466953">2 <span class="Heading">Implementing circle objects</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X86492955868108EC">2.1 <span class="Heading">First attempts</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X852C1F3281137DD6">2.2 <span class="Heading">Defining circle objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X85B1413E7FBC8ACB">2.3 <span class="Heading">Installing operations for circle objects</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">Implementing circle objects</span></h3>
+
+<p>In this chapter we explain how the <strong class="pkg">GAP</strong> system may be extended with new objects using the circle multiplication as an example. We follow the guidelines given in the <strong class="pkg">GAP</strong> Reference Manual (see <a href="../../../doc/ref/chap79_mj.html#X83548994805AD1C9"><span class="RefLink">Reference: Creating New Objects</span></a> and subsequent chapters), to which we refer for more details.</p>
+
+<p><a id="X86492955868108EC" name="X86492955868108EC"></a></p>
+
+<h4>2.1 <span class="Heading">First attempts</span></h4>
+
+<p>Of course, having two ring elements, you can straightforwardly compute their circle product defined as <span class="SimpleMath">\( r \cdot s = r + s + rs \)</span>. You can do this in a command line, and it is a trivial task to write a simplest function of two arguments that will do this:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CircleMultiplication := function(a,b)</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     return a+b+a*b;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">   end;</span>
+function( a, b ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CircleMultiplication(2,3); </span>
+11
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CircleMultiplication( ZmodnZObj(2,8), ZmodnZObj(5,8) );      </span>
+ZmodnZObj( 1, 8 )
+
+</pre></div>
+
+<p>However, there is no check whether both arguments belong to the same ring and whether they are ring elements at all, so it is easy to obtain some meaningless results:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CircleMultiplication( 3, ZmodnZObj(3,8) );</span>
+ZmodnZObj( 7, 8 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CircleMultiplication( [1], [2,3] );</span>
+[ 5, 5 ]
+
+</pre></div>
+
+<p>You can include some tests for arguments, and maybe the best way of doing this would be declaring a new operation for two ring elements, and installing the previous function as a method for this operation. This will check automatically if the arguments are ring elements from the common ring:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareOperation( "BetterCircleMultiplication",                             </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     [IsRingElement,IsRingElement] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( BetterCircleMultiplication,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     [IsRingElement,IsRingElement],  </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     CircleMultiplication );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BetterCircleMultiplication(2,3);</span>
+11
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BetterCircleMultiplication( ZmodnZObj(2,8), ZmodnZObj(5,8) );</span>
+ZmodnZObj( 1, 8 )
+
+</pre></div>
+
+<p>Nevertheless, the functionality gained from such operation would be rather limited. You will not be able to compute circle product via the infix operator <code class="code">*</code>, and, moreover, you will not be able to create higher level objects such as semigroups and groups with respect to the circle multiplication.</p>
+
+<p>In order to "integrate" the circle multiplication into the <strong class="pkg">GAP</strong> library properly, instead of defining <em>new</em> operations for existing objects, we should define <em>new</em> objects for which the infix operator <code class="code">*</code> will perform the circle multiplication. This approach is explained in the next two sections.</p>
+
+<p><a id="X852C1F3281137DD6" name="X852C1F3281137DD6"></a></p>
+
+<h4>2.2 <span class="Heading">Defining circle objects</span></h4>
+
+<p>Thus, we are going to implement <em>circle objects</em>, for which we can envisage the following functionality:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CircleObject( 2 ) * CircleObject( 3 );                       </span>
+CircleObject( 11 )
+
+</pre></div>
+
+<p>First we need to distinguish these new objects from other <strong class="pkg">GAP</strong> objects. This is done via the <em>type</em> of the objects, that is mainly determined by their <em>category</em>, <em>representation</em> and <em>family</em>.</p>
+
+<p>We start with declaring the category <code class="code">IsCircleObject</code> as a subcategory of <code class="code">IsAssociativeElement&gt;</code> and <code class="code">IsMultiplicativeElementWithInverse</code>. Thus, each circle object will "know" that it is <code class="code">IsAssociativeElement</code> and <code class="code">IsMultiplicativeElementWithInverse</code>, and this will make it possible to apply to circle objects such operations as <code class="code">One</code> and <code class="code">Inverse</code> (the latter is allowed to return <code class="keyw">fail</code> for a given circle object), and construct semigroups generated by circle objects.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareCategory( "IsMyCircleObject", </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">IsAssociativeElement and IsMultiplicativeElementWithInverse );</span>
+
+</pre></div>
+
+<p>Further we would like to create semigroups and groups generated by circle objects. Such structures will be <em>collections</em> of circle objects, so they will be in the category <code class="code">CategoryCollections( IsCircleObject )</code>. This is why immediately after we declare the underlying category of circle objects, we need also to declare the category of their collections:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareCategoryCollections( "IsMyCircleObject" );</span>
+
+</pre></div>
+
+<p>On the next step we should think about the internal representation of circle objects. A natural way would be to store the underlying ring element in a list-like structure at its first position. We do not foresee any other data that we need to store internally in the circle object. This is quite common situation, so we may define first <code class="code">IsPositionalObjectOneSlotRep</code> that is the list-like representation with only one position in the list, and then declare a synonym <code class="code">IsDefaultCircleObject</code> that means that we are dealing with a circle object in one-slot representation:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareRepresentation( "IsMyPositionalObjectOneSlotRep",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    IsPositionalObjectRep, [ 1 ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareSynonym( "IsMyDefaultCircleObject",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    IsMyCircleObject and IsMyPositionalObjectOneSlotRep );</span>
+
+</pre></div>
+
+<p>Until now we are still unable to create circle objects, because we did not specify to which family they will belong. Naturally, having a ring, we want to have all circle objects for elements of this ring in the same family to be able to multiply them, and we expect circle objects for elements of different rings to be placed in different families. Thus, it would be nice to establish one-to-one correspondence between the family of ring elements and a family of circle elements for this ring. We can store the corresponding circle family as an attribute of the ring elements family. To do this first we declare an attribute <code class="code">CircleFamily</code> for families:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareAttribute( "MyCircleFamily", IsFamily );</span>
+
+</pre></div>
+
+<p>Now we install the method that stores the corresponding circle family in this attribute:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( MyCircleFamily,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "for a family",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ IsFamily ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    function( Fam )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    local F;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  # create the family of circle elements</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  F:= NewFamily( "MyCircleFamily(...)", IsMyCircleObject );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  if HasCharacteristic( Fam ) then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    SetCharacteristic( F, Characteristic( Fam ) );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  # store the type of objects in the output</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  F!.MyCircleType:= NewType( F, IsMyDefaultCircleObject );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  # Return the circle family</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  return F;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">end );</span>
+
+</pre></div>
+
+<p>Similarly, we want one-to-one correspondence between circle elements and underlying ring elements. We declare an attribute <code class="code">CircleObject</code> for a ring element, and then install the method to create new circle object from the ring element. This method takes the family of the ring element, finds corresponding circle family, extracts from it the type of circle objects and finally creates the new circle object of that type:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareAttribute( "MyCircleObject", IsRingElement );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( MyCircleObject,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "for a ring element",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ IsRingElement ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    obj -&gt; Objectify( MyCircleFamily( FamilyObj( obj ) )!.MyCircleType,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                      [ Immutable( obj ) ] ) );</span>
+
+</pre></div>
+
+<p>Only after entering all code above we are able to create some circle object. However, it is displayed just as <code class="code">&lt;object&gt;</code>, though we can get the underlying ring element using the "!" operator:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=MyCircleObject(2);</span>
+&lt;object&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a![1];</span>
+2
+
+</pre></div>
+
+<p>We can check that the intended relation between families holds:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FamilyObj( MyCircleObject ( 2 ) ) = MyCircleFamily( FamilyObj( 2 ) );</span>
+true
+
+</pre></div>
+
+<p>We can not multiply circle objects yet. But before implementing this, first let us improve the output by installing the method for <code class="code">PrintObj</code>:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( PrintObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "for object in `IsMyCircleObject'",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ IsMyDefaultCircleObject ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    function( obj )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    Print( "MyCircleObject( ", obj![1], " )" );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    end );</span>
+
+</pre></div>
+
+<p>This method will be used by <code class="code">Print</code> function, and also by <code class="code">View</code>, since we did not install special method for <code class="code">ViewObj</code> for circle objects. As a result of this installation, the output became more meaningful:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a;</span>
+MyCircleObject( 2 )
+
+</pre></div>
+
+<p>We need to avoid the usage of "!" operator, which, in general, is not recommended to the user (for example, if <strong class="pkg">GAP</strong> developers will change the internal representation of some object, all <strong class="pkg">GAP</strong> functions that deal with it must be adjusted appropriately, while if the user's code had direct access to that representation via "!", an error may occur). To do this, we wrap getting the first component of a circle object in the following operation:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeclareAttribute("UnderlyingRingElement", IsMyCircleObject );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( UnderlyingRingElement,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "for a circle object", </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ IsMyCircleObject],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    obj -&gt; obj![1] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingRingElement(a);</span>
+2
+
+</pre></div>
+
+<p><a id="X85B1413E7FBC8ACB" name="X85B1413E7FBC8ACB"></a></p>
+
+<h4>2.3 <span class="Heading">Installing operations for circle objects</span></h4>
+
+<p>Now we are finally able to install circle multiplication as a default method for the multiplication of circle objects, and perform the computation that we envisaged in the beginning:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \*,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "for two objects in `IsMyCircleObject'",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ IsMyDefaultCircleObject, IsMyDefaultCircleObject ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    function( a, b )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    return MyCircleObject( a![1] + b![1] + a![1]*b![1] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MyCircleObject(2)*MyCircleObject(3);</span>
+MyCircleObject( 11 )
+
+</pre></div>
+
+<p>However, this functionality is not enough to form semigroups or groups generated by circle elements. We need to be able to check whether two circle objects are equal, and we need to define ordering for them (for example, to be able to form sets of circle elements). Since we already have both operations for underlying ring elements, this can be implemented in a straightforward way:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \=,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "for two objects in `IsMyCircleObject'",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ IsMyDefaultCircleObject, IsMyDefaultCircleObject ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    function( a, b )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    return a![1] = b![1];</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( \&lt;,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "for two objects in `IsMyCircleObject'",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    IsIdenticalObj,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ IsMyDefaultCircleObject, IsMyDefaultCircleObject ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    function( a, b )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    return a![1] &lt; b![1];</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    end );</span>
+
+</pre></div>
+
+<p>Further, zero element of the ring plays a role of the neutral element for the circle multiplication, and we add this knowledge to our code in a form of a method for <code class="code">OneOp</code> that returns circle object for the corresponding zero object:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( OneOp,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "for an object in `IsMyCircleObject'",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ IsMyDefaultCircleObject ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    a -&gt; MyCircleObject( Zero( a![1] ) ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">One(a);</span>
+MyCircleObject( 0 )
+
+</pre></div>
+
+<p>Now we are already able to create monoids generated by circle objects:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=Monoid(a);</span>
+&lt;commutative monoid with 1 generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">One(S);</span>
+MyCircleObject( 0 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=Monoid( MyCircleObject( ZmodnZObj( 2,8) ) );</span>
+&lt;commutative monoid with 1 generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(S);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsList(S);</span>
+[ MyCircleObject( ZmodnZObj( 0, 8 ) ), MyCircleObject( ZmodnZObj( 2, 8 ) ) ]
+
+</pre></div>
+
+<p>Finally, to generate groups using circle objects, we need to add a method for the <code class="code">InverseOp</code>. In our implementation we will assume that the underlying ring is a subring of the ring with one, thus, if the circle inverse for an element <span class="SimpleMath">\(x\)</span> exists, than it can be computed as <span class="SimpleMath">\(-x(1+x)^{-1}\)</span>:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InstallMethod( InverseOp,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    "for an object in `IsMyCircleObject'",</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    [ IsMyDefaultCircleObject ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    function( a )</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    local x;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    x := Inverse( One( a![1] ) + a![1] );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    if x = fail then</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      return fail;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    else</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">      return MyCircleObject( -a![1] * x );</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    fi;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">    end );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MyCircleObject(-2)^-1;                </span>
+MyCircleObject( -2 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MyCircleObject(2)^-1; </span>
+MyCircleObject( -2/3 )
+
+</pre></div>
+
+<p>The last method already makes it possible to create groups generated by circle objects (the warning may be ignored):</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Group( MyCircleObject(2) );  </span>
+#I  default `IsGeneratorsOfMagmaWithInverses' method returns `true' for
+[ MyCircleObject( 2 ) ]
+&lt;group with 1 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=Group( [MyCircleObject( ZmodnZObj( 2,8 ) )  ]);</span>
+#I  default `IsGeneratorsOfMagmaWithInverses' method returns `true' for
+[ MyCircleObject( ZmodnZObj( 2, 8 ) ) ]
+&lt;group with 1 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(G);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsList(G);</span>
+[ MyCircleObject( ZmodnZObj( 0, 8 ) ), MyCircleObject( ZmodnZObj( 2, 8 ) ) ]
+
+</pre></div>
+
+<p>The <strong class="pkg">GAP</strong> code used in this Chapter, is contained in the files <code class="file">circle/lib/circle.gd</code> and <code class="file">circle/lib/circle.gi</code> (without <code class="code">My</code> in identifiers). For more examples of implementing new <strong class="pkg">GAP</strong> objects and further details see <a href="../../../doc/ref/chap79_mj.html#X83548994805AD1C9"><span class="RefLink">Reference: Creating New Objects</span></a> and subsequent chapters in the <strong class="pkg">GAP</strong> Reference Manual.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

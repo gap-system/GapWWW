@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ANUPQ) - Chapter 4: Non-interactive ANUPQ functions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X7C51F26D839279FF" name="X7C51F26D839279FF"></a></p>
+<div class="ChapSects"><a href="chap4.html#X7C51F26D839279FF">4 <span class="Heading">Non-interactive ANUPQ functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X80406BD47EB186E9">4.1 <span class="Heading">Computing p-Quotients</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86DD32D5803CF2C8">4.1-1 Pq</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7ADE5DDB87B99CC0">4.1-2 PqEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81C3CE1E850DA252">4.1-3 PqPCover</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7F05F8DC79733A8E">4.2 <span class="Heading">Computing Standard Presentations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86C9575D7CB65FBB">4.2-1 PqStandardPresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X828C06D083C0D089">4.2-2 EpimorphismPqStandardPresentation</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8030FAE586423615">4.3 <span class="Heading">Testing p-Groups for Isomorphism</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X854389FC780BB178">4.3-1 IsPqIsomorphicPGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8450C72580D91245">4.4 <span class="Heading">Computing Descendants of a p-Group</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80985CC479CD9FA3">4.4-1 PqDescendants</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8364566A80A8C24B">4.4-2 PqSupplementInnerAutomorphisms</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X79AD54E987FCACBA">4.4-3 PqList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85ADB9E6870EC3D1">4.4-4 SavePqList</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Non-interactive ANUPQ functions</span></h3>
+
+<p>Here we describe all the non-interactive functions of the <strong class="pkg">ANUPQ</strong> package; i.e. "one-shot" functions that invoke the <code class="code">pq</code> program in such a way that once <strong class="pkg">GAP</strong> has got what it needs, the <code class="code">pq</code> program is allowed to exit. It is expected that most of the time users will only need these functions. The functions interface with three of the four algorithms (see Chapter <a href="chap1.html#X7DFB63A97E67C0A1"><span class="RefLink"><span class="Heading">Introduction</span></span></a>) provided by the ANU <code class="code">pq</code> C program, and are mainly grouped according to the algorithm of the <code class="code">pq</code> program they relate to.</p>
+
+<p>In Section <a href="chap4.html#X80406BD47EB186E9"><span class="RefLink"><span class="Heading">Computing p-Quotients</span></span></a>, we describe the functions that give access to the <span class="SimpleMath">p</span>-quotient algorithm.</p>
+
+<p>Section <a href="chap4.html#X7F05F8DC79733A8E"><span class="RefLink"><span class="Heading">Computing Standard Presentations</span></span></a> describe functions that give access to the standard presentation algorithm.</p>
+
+<p>Section <a href="chap4.html#X8030FAE586423615"><span class="RefLink"><span class="Heading">Testing p-Groups for Isomorphism</span></span></a> describe functions that implement an isomorphism test for <span class="SimpleMath">p</span>-groups using the standard presentation algorithm.</p>
+
+<p>In Section <a href="chap4.html#X8450C72580D91245"><span class="RefLink"><span class="Heading">Computing Descendants of a p-Group</span></span></a>, we describe functions that give access to the <span class="SimpleMath">p</span>-group generation algorithm.</p>
+
+<p>To use any of the functions one must have at some stage previously typed:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("anupq");</span>
+</pre></div>
+
+<p>(the response of which we have omitted; see <a href="chap3.html#X833D58248067E13B"><span class="RefLink"><span class="Heading">Loading the ANUPQ Package</span></span></a>).</p>
+
+<p>It is strongly recommended that the user try the examples provided. To save typing there is a <code class="code">PqExample</code> equivalent for each manual example. We also suggest that to start with you may find the examples more instructive if you set the <code class="code">InfoANUPQ</code> level to 2 (see <code class="func">InfoANUPQ</code> (<a href="chap3.html#X7CBC9B458497BFF1"><span class="RefLink">3.3-1</span></a>)).</p>
+
+<p><a id="X80406BD47EB186E9" name="X80406BD47EB186E9"></a></p>
+
+<h4>4.1 <span class="Heading">Computing p-Quotients</span></h4>
+
+<p><a id="X86DD32D5803CF2C8" name="X86DD32D5803CF2C8"></a></p>
+
+<h5>4.1-1 Pq</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Pq</code>( <var class="Arg">F:</var> <var class="Arg">options</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns for the fp or pc group <var class="Arg">F</var>, the <span class="SimpleMath">p</span>-quotient of <var class="Arg">F</var> specified by <var class="Arg">options</var>, as a pc group. Following the colon, <var class="Arg">options</var> is a selection of the options from the following list, separated by commas like record components (see Section <a href="../../../doc/ref/chap4_mj.html#X867D54987EF86D1D"><span class="RefLink">Reference: Function Call With Options</span></a> in the <strong class="pkg">GAP</strong> Reference Manual). As a minimum the user <em>must</em> supply a value for the <code class="code">Prime</code> option. Below we list the options recognised by <code class="code">Pq</code> (see Chapter <a href="chap6.html#X7B0946E97E7EB359"><span class="RefLink"><span class="Heading">ANUPQ Options</span></span></a> for detailed descriptions).</p>
+
+
+<ul>
+<li><p><code class="code">Prime := <var class="Arg">p</var></code></p>
+
+</li>
+<li><p><code class="code">ClassBound := <var class="Arg">n</var></code></p>
+
+</li>
+<li><p><code class="code">Exponent := <var class="Arg">n</var></code></p>
+
+</li>
+<li><p><code class="code">Relators := <var class="Arg">rels</var></code></p>
+
+</li>
+<li><p><code class="code">Metabelian</code></p>
+
+</li>
+<li><p><code class="code">Identities := <var class="Arg">funcs</var></code></p>
+
+</li>
+<li><p><code class="code">GroupName := <var class="Arg">name</var></code></p>
+
+</li>
+<li><p><code class="code">OutputLevel := <var class="Arg">n</var></code></p>
+
+</li>
+<li><p><code class="code">SetupFile := <var class="Arg">filename</var></code></p>
+
+</li>
+<li><p><code class="code">PqWorkspace := <var class="Arg">workspace</var></code></p>
+
+</li>
+</ul>
+<p><em>Notes:</em> <code class="code">Pq</code> may also be called with no arguments or one integer argument, in which case it is being used interactively (see <code class="func">Pq</code> (<a href="chap5.html#X85408C4C790439E7"><span class="RefLink">5.3-1</span></a>)); the same options may be used, except that <code class="code">SetupFile</code> and <code class="code">PqWorkspace</code> are ignored by the interactive <code class="code">Pq</code> function.</p>
+
+<p>See Section <a href="chap3.html#X818175EF85CAA807"><span class="RefLink"><span class="Heading">Attributes and a Property for fp and pc p-groups</span></span></a> for the attributes and property <code class="code">NuclearRank</code>, <code class="code">MultiplicatorRank</code> and <code class="code">IsCapable</code> which may be applied to the group returned by <code class="code">Pq</code>.</p>
+
+<p>See also <code class="code">PqEpimorphism</code> (<code class="func">PqEpimorphism</code> (<a href="chap4.html#X7ADE5DDB87B99CC0"><span class="RefLink">4.1-2</span></a>)).</p>
+
+<p>We now give a few examples of the use of <code class="code">Pq</code>. Except for the addition of a few comments and the non-suppression of output (by not using duplicated semicolons) the next 3 examples may be run by typing: <code class="code">PqExample( "Pq" );</code> (see <code class="func">PqExample</code> (<a href="chap3.html#X7BB0EB607F337265"><span class="RefLink">3.4-4</span></a>)).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("anupq");; # does nothing if ANUPQ is already loaded</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># First we get a p-quotient of a free group of rank 2</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup("a", "b");; a := F.1;; b := F.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( F : Prime := 2, ClassBound := 3 ); </span>
+&lt;pc group of size 1024 with 10 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Now let us get a p-quotient of an fp group</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := F / [a^4, b^4];</span>
+&lt;fp group on the generators [ a, b ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( G : Prime := 2, ClassBound := 3 ); </span>
+&lt;pc group of size 256 with 8 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Now let's get a different p-quotient of the same group</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( G : Prime := 2, ClassBound := 3, Exponent := 4 ); </span>
+&lt;pc group of size 128 with 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Now we'll get a p-quotient of another fp group</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># which we will redo using the `Relators' option</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := [ a^25, Comm(Comm(b, a), a), b^5 ];</span>
+[ a^25, a^-1*b^-1*a*b*a^-1*b^-1*a^-1*b*a^2, b^5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := F / R;</span>
+&lt;fp group on the generators [ a, b ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( H : Prime := 5, ClassBound := 5, Metabelian );</span>
+&lt;pc group of size 78125 with 7 generators&gt;
+</pre></div>
+
+<p>Now we redo the last example to show how one may use the <code class="code">Relators</code> option. Observe that <code class="code">Comm(Comm(b, a), a)</code> is a left normed commutator which must be written in square bracket notation for the <code class="code">pq</code> program and embedded in a pair of double quotes. The function <code class="code">PqGAPRelators</code> (see <code class="func">PqGAPRelators</code> (<a href="chap3.html#X7A567432879510A6"><span class="RefLink">3.4-2</span></a>)) can be used to translate a list of strings prepared for the <code class="code">Relators</code> option into <strong class="pkg">GAP</strong> format. Below we use it. Observe that the value of <code class="code">R</code> is the same as before.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup("a", "b");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># `F' was defined for `Relators'. We use the same strings that GAP uses</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># for printing the free group generators. It is *not* necessary to</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># predefine: a := F.1; etc. (as it was above).</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rels := [ "a^25", "[b, a, a]", "b^5" ];</span>
+[ "a^25", "[b, a, a]", "b^5" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := PqGAPRelators(F, rels);</span>
+[ a^25, a^-1*b^-1*a*b*a^-1*b^-1*a^-1*b*a^2, b^5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := F / R;</span>
+&lt;fp group on the generators [ a, b ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( H : Prime := 5, ClassBound := 5, Metabelian, </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           Relators := rels );</span>
+&lt;pc group of size 78125 with 7 generators&gt;
+</pre></div>
+
+<p>In fact, above we could have just passed <code class="code">F</code> (rather than <code class="code">H</code>), i.e. we could have done:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup("a", "b");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rels := [ "a^25", "[b, a, a]", "b^5" ];</span>
+[ "a^25", "[b, a, a]", "b^5" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( F : Prime := 5, ClassBound := 5, Metabelian, </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           Relators := rels );</span>
+&lt;pc group of size 78125 with 7 generators&gt;
+</pre></div>
+
+<p>The non-interactive <code class="code">Pq</code> function also allows the options to be passed in two other ways; these alternatives have been included for those familiar with the <strong class="pkg">GAP</strong> 3 version of the <strong class="pkg">ANUPQ</strong> package; the preferred method of passing options is the one already described. Firstly, they may be passed in a record as a second argument; note that any boolean options must be set explicitly e.g.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( H, rec( Prime := 5, ClassBound := 5, Metabelian := true ) );</span>
+&lt;pc group of size 78125 with 7 generators&gt;
+</pre></div>
+
+<p>It is also possible to pass them as extra arguments, where each option name appears as a string followed immediately by its value (if not a boolean option) e.g.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( H, "Prime", 5, "ClassBound", 5, "Metabelian" );</span>
+&lt;pc group of size 78125 with 7 generators&gt;
+</pre></div>
+
+<p>The preceding two examples can be run from <strong class="pkg">GAP</strong> via <code class="code">PqExample( "Pq-ni" );</code> (see <code class="func">PqExample</code> (<a href="chap3.html#X7BB0EB607F337265"><span class="RefLink">3.4-4</span></a>)).</p>
+
+<p>This method of passing options permits abbreviation; the only restriction is that the abbreviation must be unique. So <code class="code">"Pr"</code> may be used for <code class="code">"Prime"</code>, <code class="code">"Class"</code> or even just <code class="code">"C"</code> for <code class="code">"ClassBound"</code>, etc.</p>
+
+<p>The following example illustrates the use of the option <code class="code">Identities</code>. We compute the largest finite Burnside group of exponent <span class="SimpleMath">5</span> that also satisfies the <span class="SimpleMath">3</span>-Engel identity. Each identity is defined by a function whose arguments correspond to the variables of the identity. The return value of each of those functions is the identity evaluated on the arguments of the function.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup(2);</span>
+&lt;free group on the generators [ f1, f2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Burnside5 := x-&gt;x^5;</span>
+function( x ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Engel3 := function( x,y ) return PqLeftNormComm( [x,y,y,y] ); end;</span>
+function( x, y ) ... end
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pq( F : Prime := 5, Identities := [ Burnside5, Engel3 ] );</span>
+#I  Class 1 with 2 generators.
+#I  Class 2 with 3 generators.
+#I  Class 3 with 5 generators.
+#I  Class 3 with 5 generators.
+&lt;pc group of size 3125 with 5 generators&gt;
+</pre></div>
+
+<p>The above example can be run from <strong class="pkg">GAP</strong> via <code class="code">PqExample( "B5-5-Engel3-Id" );</code> (see <code class="func">PqExample</code> (<a href="chap3.html#X7BB0EB607F337265"><span class="RefLink">3.4-4</span></a>)).</p>
+
+<p><a id="X7ADE5DDB87B99CC0" name="X7ADE5DDB87B99CC0"></a></p>
+
+<h5>4.1-2 PqEpimorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqEpimorphism</code>( <var class="Arg">F:</var> <var class="Arg">options</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns for the fp or pc group <var class="Arg">F</var> an epimorphism from <var class="Arg">F</var> onto the <span class="SimpleMath">p</span>-quotient of <var class="Arg">F</var> specified by <var class="Arg">options</var>; the possible options <var class="Arg">options</var> and <em>required</em> option (<code class="code">"Prime"</code>) are as for <code class="code">Pq</code> (see <code class="func">Pq</code> (<a href="chap4.html#X86DD32D5803CF2C8"><span class="RefLink">4.1-1</span></a>)). <code class="code">PqEpimorphism</code> only differs from <code class="code">Pq</code> in what it outputs; everything about what must/may be passed as input to <code class="code">PqEpimorphism</code> is the same as for <code class="code">Pq</code>. The same alternative methods of passing options to the non-interactive <code class="code">Pq</code> function are available to the non-interactive version of <code class="code">PqEpimorphism</code>.</p>
+
+<p><em>Notes:</em> <code class="code">PqEpimorphism</code> may also be called with no arguments or one integer argument, in which case it is being used interactively (see <code class="func">PqEpimorphism</code> (<a href="chap5.html#X839E6F578227A8EA"><span class="RefLink">5.3-2</span></a>)), and the options <code class="code">SetupFile</code> and <code class="code">PqWorkspace</code> are ignored by the interactive <code class="code">PqEpimorphism</code> function.</p>
+
+<p>See Section <a href="chap3.html#X818175EF85CAA807"><span class="RefLink"><span class="Heading">Attributes and a Property for fp and pc p-groups</span></span></a> for the attributes and property <code class="code">NuclearRank</code>, <code class="code">MultiplicatorRank</code> and <code class="code">IsCapable</code> which may be applied to the image group of the epimorphism returned by <code class="code">PqEpimorphism</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup (2, "F");</span>
+&lt;free group on the generators [ F1, F2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := PqEpimorphism( F : Prime := 5, ClassBound := 2 );</span>
+[ F1, F2 ] -&gt; [ f1, f2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Image( phi );</span>
+&lt;pc group of size 3125 with 5 generators&gt;
+</pre></div>
+
+<p>Typing: <code class="code">PqExample( "PqEpimorphism" );</code> runs the above example in <strong class="pkg">GAP</strong> (see <code class="func">PqExample</code> (<a href="chap3.html#X7BB0EB607F337265"><span class="RefLink">3.4-4</span></a>)).</p>
+
+<p><a id="X81C3CE1E850DA252" name="X81C3CE1E850DA252"></a></p>
+
+<h5>4.1-3 PqPCover</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqPCover</code>( <var class="Arg">F:</var> <var class="Arg">options</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns for the fp or pc group <var class="Arg">F</var>, the <span class="SimpleMath">p</span>-covering group of the <span class="SimpleMath">p</span>-quotient of <var class="Arg">F</var> specified by <var class="Arg">options</var>, as a pc group, i.e. the <span class="SimpleMath">p</span>-covering group of the <span class="SimpleMath">p</span>-quotient <code class="code">Pq( <var class="Arg">F</var> : <var class="Arg">options</var> )</code>. Thus the options that <code class="code">PqPCover</code> accepts are exactly those expected for <code class="code">Pq</code> (and hence as a minimum the user <em>must</em> supply a value for the <code class="code">Prime</code> option; see <code class="func">Pq</code> (<a href="chap4.html#X86DD32D5803CF2C8"><span class="RefLink">4.1-1</span></a>) for more details), except in the following special case.</p>
+
+<p>If <var class="Arg">F</var> is already a <span class="SimpleMath">p</span>-group, in the sense that <code class="code">IsPGroup(<var class="Arg">F</var>)</code> is <code class="keyw">true</code>, then</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">Prime</code></strong></dt>
+<dd><p>defaults to <code class="code">PrimePGroup(<var class="Arg">F</var>)</code>, if not supplied and <code class="code">HasPrimePGroup(<var class="Arg">F</var>) = true</code>; and</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">ClassBound</code></strong></dt>
+<dd><p>defaults to <code class="code">PClassPGroup(<var class="Arg">F</var>)</code> if <code class="code">HasPClassPGroup(<var class="Arg">F</var>) = true</code> if not supplied, or to the usual default of 63, otherwise.</p>
+
+</dd>
+</dl>
+<p>The same alternative methods of passing options to the non-interactive <code class="code">Pq</code> function are available to the non-interactive version of <code class="code">PqPCover</code>.</p>
+
+<p>We now give a few examples of the use of <code class="code">PqPCover</code>. These examples are just a subset of the ones we gave for <code class="code">Pq</code> (see <code class="func">Pq</code> (<a href="chap4.html#X86DD32D5803CF2C8"><span class="RefLink">4.1-1</span></a>)), except that in each instance the command <code class="code">Pq</code> has been replaced with <code class="code">PqPCover</code>. Essentially the same examples may be run by typing: <code class="code">PqExample( "PqPCover" );</code> (see <code class="func">PqExample</code> (<a href="chap3.html#X7BB0EB607F337265"><span class="RefLink">3.4-4</span></a>)).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup("a", "b");; a := F.1;; b := F.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PqPCover( F : Prime := 2, ClassBound := 3 );</span>
+&lt;pc group of size 262144 with 18 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Now let's get a p-cover of a p-quotient of an fp group</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := F / [a^4, b^4];</span>
+&lt;fp group on the generators [ a, b ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PqPCover( G : Prime := 2, ClassBound := 3 );</span>
+&lt;pc group of size 16384 with 14 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Now let's get a p-cover of a different p-quotient of the same group</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PqPCover( G : Prime := 2, ClassBound := 3, Exponent := 4 );</span>
+&lt;pc group of size 8192 with 13 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Now we'll get a p-cover of a p-quotient of another fp group</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># which we will redo using the `Relators' option</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := [ a^25, Comm(Comm(b, a), a), b^5 ];</span>
+[ a^25, a^-1*b^-1*a*b*a^-1*b^-1*a^-1*b*a^2, b^5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := F / R;</span>
+&lt;fp group on the generators [ a, b ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PqPCover( H : Prime := 5, ClassBound := 5, Metabelian );</span>
+&lt;pc group of size 48828125 with 11 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Now we redo the previous example using the `Relators' option</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup("a", "b");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rels := [ "a^25", "[b, a, a]", "b^5" ];</span>
+[ "a^25", "[b, a, a]", "b^5" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PqPCover( F : Prime := 5, ClassBound := 5, Metabelian, </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                 Relators := rels );</span>
+&lt;pc group of size 48828125 with 11 generators&gt;
+</pre></div>
+
+<p><a id="X7F05F8DC79733A8E" name="X7F05F8DC79733A8E"></a></p>
+
+<h4>4.2 <span class="Heading">Computing Standard Presentations</span></h4>
+
+<p><a id="X86C9575D7CB65FBB" name="X86C9575D7CB65FBB"></a></p>
+
+<h5>4.2-1 PqStandardPresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqStandardPresentation</code>( <var class="Arg">F:</var> <var class="Arg">options</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StandardPresentation</code>( <var class="Arg">F:</var> <var class="Arg">options</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>return the <var class="Arg">p</var>-quotient specified by <var class="Arg">options</var> of the fp or pc <span class="SimpleMath">p</span>-group <var class="Arg">F</var>, as an <em>fp group</em> which has a standard presentation. Here <var class="Arg">options</var> is a selection of the options from the following list (see Chapter <a href="chap6.html#X7B0946E97E7EB359"><span class="RefLink"><span class="Heading">ANUPQ Options</span></span></a> for detailed descriptions). Section <a href="chap3.html#X7BA20FA07B166B37"><span class="RefLink"><span class="Heading">Hints and Warnings regarding the use of Options</span></span></a> gives some important hints and warnings regarding option usage, and Section <a href="../../../doc/ref/chap4_mj.html#X867D54987EF86D1D"><span class="RefLink">Reference: Function Call With Options</span></a> in the <strong class="pkg">GAP</strong> Reference Manual describes their "record"-like syntax.</p>
+
+
+<ul>
+<li><p><code class="code">Prime := <var class="Arg">p</var></code></p>
+
+</li>
+<li><p><code class="code">pQuotient := <var class="Arg">Q</var></code></p>
+
+</li>
+<li><p><code class="code">ClassBound := <var class="Arg">n</var></code></p>
+
+</li>
+<li><p><code class="code">Exponent := <var class="Arg">n</var></code></p>
+
+</li>
+<li><p><code class="code">Metabelian</code></p>
+
+</li>
+<li><p><code class="code">GroupName := <var class="Arg">name</var></code></p>
+
+</li>
+<li><p><code class="code">OutputLevel := <var class="Arg">n</var></code></p>
+
+</li>
+<li><p><code class="code">StandardPresentationFile := <var class="Arg">filename</var></code></p>
+
+</li>
+<li><p><code class="code">SetupFile := <var class="Arg">filename</var></code></p>
+
+</li>
+<li><p><code class="code">PqWorkspace := <var class="Arg">workspace</var></code></p>
+
+</li>
+</ul>
+<p>Unless <var class="Arg">F</var> is a pc <var class="Arg">p</var>-group, the user <em>must</em> supply either the option <code class="code">Prime</code> or the option <code class="code">pQuotient</code> (if both <code class="code">Prime</code> and <code class="code">pQuotient</code> are supplied, the prime <var class="Arg">p</var> is determined by applying <code class="code">PrimePGroup</code> (see <code class="func">PrimePGroup</code> (<a href="../../../doc/ref/chap39_mj.html#X87356BAA7E9E2142"><span class="RefLink">Reference: PrimePGroup</span></a>) in the Reference Manual) to the value of <code class="code">pQuotient</code>).</p>
+
+<p>The options for <code class="code">PqStandardPresentation</code> may also be passed in the two other alternative ways described for <code class="code">Pq</code> (see <code class="func">Pq</code> (<a href="chap4.html#X86DD32D5803CF2C8"><span class="RefLink">4.1-1</span></a>)). <code class="code">StandardPresentation</code> does not provide these alternative ways of passing options.</p>
+
+<p><em>Notes:</em> In contrast to the function <code class="code">Pq</code> (see <code class="func">Pq</code> (<a href="chap4.html#X86DD32D5803CF2C8"><span class="RefLink">4.1-1</span></a>)) which returns a pc group, <code class="code">PqStandardPresentation</code> or <code class="code">StandardPresentation</code> returns an fp group. This is because the output is mainly used for isomorphism testing for which an fp group is enough. However, the presentation is a polycyclic presentation and if you need to do any further computation with this group (e.g. to find the order) you can use the function <code class="code">PcGroupFpGroup</code> (see <code class="func">PcGroupFpGroup</code> (<a href="../../../doc/ref/chap46_mj.html#X84C10D1F7CB5274F"><span class="RefLink">Reference: PcGroupFpGroup</span></a>) in the <strong class="pkg">GAP</strong> Reference Manual) to form a pc group.</p>
+
+<p>If the user does not supply a <var class="Arg">p</var>-quotient <var class="Arg">Q</var> via the <code class="code">pQuotient</code> option and the prime <var class="Arg">p</var> is either supplied or <var class="Arg">F</var> is a pc <var class="Arg">p</var>-group, then a <var class="Arg">p</var>-quotient <var class="Arg">Q</var> is computed. If the user does supply a <var class="Arg">p</var>-quotient <var class="Arg">Q</var> via the <code class="code">pQuotient</code> option, the package <strong class="pkg">AutPGrp</strong> is called to compute the automorphism group of <var class="Arg">Q</var>; an error will occur that asks the user to install the package <strong class="pkg">AutPGrp</strong> if the automorphism group cannot be computed.</p>
+
+<p>The attributes and property <code class="code">NuclearRank</code>, <code class="code">MultiplicatorRank</code> and <code class="code">IsCapable</code> are set for the group returned by <code class="code">PqStandardPresentation</code> or <code class="code">StandardPresentation</code> (see Section <a href="chap3.html#X818175EF85CAA807"><span class="RefLink"><span class="Heading">Attributes and a Property for fp and pc p-groups</span></span></a>).</p>
+
+<p>We illustrate the method with the following examples.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup( "a", "b" );; a := F.1;; b := F.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := F / [a^25, Comm(Comm(b, a), a), b^5];</span>
+&lt;fp group on the generators [ a, b ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := StandardPresentation( G : Prime := 5, ClassBound := 10 );</span>
+&lt;fp group on the generators [ f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, 
+  f12, f13, f14, f15, f16, f17, f18, f19, f20, f21, f22, f23, f24, f25, f26 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPcGroup( S );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># if we need to compute with S we should convert it to a pc group</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Spc := PcGroupFpGroup( S );</span>
+&lt;pc group of size 1490116119384765625 with 26 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := F / [ a^625, Comm(Comm(Comm(Comm(b, a), a), a), a)/Comm(b, a)^5,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">              Comm(Comm(b, a), b), b^625 ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StandardPresentation( H : Prime := 5, ClassBound := 15, Metabelian );</span>
+&lt;fp group on the generators [ f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, 
+  f12, f13, f14, f15, f16, f17, f18, f19, f20 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F4 := FreeGroup( "a", "b", "c", "d" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := F4.1;; b := F4.2;; c := F4.3;; d := F4.4;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G4 := F4 / [ b^4, b^2 / Comm(Comm (b, a), a), d^16,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                a^16 / (c * d), b^8 / (d * c^4) ];</span>
+&lt;fp group on the generators [ a, b, c, d ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K := Pq( G4 : Prime := 2, ClassBound := 1 );</span>
+&lt;pc group of size 4 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StandardPresentation( G4 : pQuotient := K, ClassBound := 14 );</span>
+&lt;fp group with 53 generators&gt;
+</pre></div>
+
+<p>Typing: <code class="code">PqExample( "StandardPresentation" );</code> runs the above example in <strong class="pkg">GAP</strong> (see <code class="func">PqExample</code> (<a href="chap3.html#X7BB0EB607F337265"><span class="RefLink">3.4-4</span></a>)).</p>
+
+<p><a id="X828C06D083C0D089" name="X828C06D083C0D089"></a></p>
+
+<h5>4.2-2 EpimorphismPqStandardPresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EpimorphismPqStandardPresentation</code>( <var class="Arg">F:</var> <var class="Arg">options</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EpimorphismStandardPresentation</code>( <var class="Arg">F:</var> <var class="Arg">options</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Each of the above functions accepts the same arguments and options as the function <code class="code">StandardPresentation</code> (see <code class="func">StandardPresentation</code> (<a href="chap4.html#X86C9575D7CB65FBB"><span class="RefLink">4.2-1</span></a>)) and returns an epimorphism from the fp or pc group <var class="Arg">F</var> onto the finitely presented group given by a standard presentation, i.e. if <var class="Arg">S</var> is the standard presentation computed for the <span class="SimpleMath">p</span>-quotient of <var class="Arg">F</var> by <code class="code">StandardPresentation</code> then <code class="code">EpimorphismStandardPresentation</code> returns the epimorphism from <var class="Arg">F</var> to the group with presentation <var class="Arg">S</var>.</p>
+
+<p><em>Note:</em> The attributes and property <code class="code">NuclearRank</code>, <code class="code">MultiplicatorRank</code> and <code class="code">IsCapable</code> are set for the image group of the epimorphism returned by <code class="code">EpimorphismPqStandardPresentation</code> or <code class="code">EpimorphismStandardPresentation</code> (see Section <a href="chap3.html#X818175EF85CAA807"><span class="RefLink"><span class="Heading">Attributes and a Property for fp and pc p-groups</span></span></a>).</p>
+
+<p>We illustrate the function with the following example.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup(6, "F");</span>
+&lt;free group on the generators [ F1, F2, F3, F4, F5, F6 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># For printing GAP uses the symbols F1, ... for the generators of F</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := F.1;; y := F.2;; z := F.3;; w := F.4;; a := F.5;; b := F.6;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := [x^3 / w, y^3 / w * a^2 * b^2, w^3 / b,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         Comm (y, x) / z, Comm (z, x), Comm (z, y) / a, z^3 ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := F / R;</span>
+&lt;fp group on the generators [ F1, F2, F3, F4, F5, F6 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># For printing GAP also uses the symbols F1, ... for the generators of Q</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># (the same as used for F) ... but the gen'rs of Q and F are different:</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfGroup(F) = GeneratorsOfGroup(Q);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := Pq( Q : Prime := 3, ClassBound := 3 );</span>
+&lt;pc group of size 729 with 6 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := EpimorphismStandardPresentation( Q : Prime := 3,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                                               ClassBound := 3 );</span>
+[ F1, F2, F3, F4, F5, F6 ] -&gt; [ f1*f2^2*f3*f4^2*f5^2, f1*f2*f3*f5, f3^2, 
+  f4*f6^2, f5, f6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Source(phi); # This is the group Q (GAP uses F1, ... for gen'r symbols)</span>
+&lt;fp group of size infinity on the generators [ F1, F2, F3, F4, F5, F6 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Range(phi);  # This is the group G (GAP uses f1, ... for gen'r symbols)</span>
+&lt;fp group on the generators [ f1, f2, f3, f4, f5, f6 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AssignGeneratorVariables(G);</span>
+#I  Assigned the global variables [ f1, f2, f3, f4, f5, f6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Just to see that the images of [F1, ..., F6] do generate G</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Group([ f1*f2^2*f3, f1*f2*f3*f4*f5^2*f6^2, f3^2, f4, f5, f6 ]) = G;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( Image(phi) );</span>
+729
+</pre></div>
+
+<p>Typing: <code class="code">PqExample( "EpimorphismStandardPresentation" );</code> runs the above example in <strong class="pkg">GAP</strong> (see <code class="func">PqExample</code> (<a href="chap3.html#X7BB0EB607F337265"><span class="RefLink">3.4-4</span></a>)). Note that <code class="code">AssignGeneratorVariables</code> (see <code class="func">AssignGeneratorVariables</code> (<a href="../../../doc/ref/chap37_mj.html#X814203E281F3272E"><span class="RefLink">Reference: AssignGeneratorVariables</span></a>)) has only been available since <strong class="pkg">GAP</strong> 4.3.</p>
+
+<p><a id="X8030FAE586423615" name="X8030FAE586423615"></a></p>
+
+<h4>4.3 <span class="Heading">Testing p-Groups for Isomorphism</span></h4>
+
+<p><a id="X854389FC780BB178" name="X854389FC780BB178"></a></p>
+
+<h5>4.3-1 IsPqIsomorphicPGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPqIsomorphicPGroup</code>( <var class="Arg">G</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIsomorphicPGroup</code>( <var class="Arg">G</var>, <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>each return true if <var class="Arg">G</var> is isomorphic to <var class="Arg">H</var>, where both <var class="Arg">G</var> and <var class="Arg">H</var> must be pc groups of prime power order. These functions compute and compare in <strong class="pkg">GAP</strong> the fp groups given by standard presentations for <var class="Arg">G</var> and <var class="Arg">H</var> (see <code class="func">StandardPresentation</code> (<a href="chap4.html#X86C9575D7CB65FBB"><span class="RefLink">4.2-1</span></a>)).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := Group( (1,2,3,4), (1,3) );</span>
+Group([ (1,2,3,4), (1,3) ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1 := Image( IsomorphismPcGroup( G ) );</span>
+Group([ f1, f2, f3 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2 := SmallGroup( 8, 5 );</span>
+&lt;pc group of size 8 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIsomorphicPGroup( P1, P2 );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P3 := SmallGroup( 8, 4 );</span>
+&lt;pc group of size 8 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIsomorphicPGroup( P1, P3 );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P4 := SmallGroup( 8, 3 );</span>
+&lt;pc group of size 8 with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIsomorphicPGroup( P1, P4 );</span>
+true
+</pre></div>
+
+<p>Typing: <code class="code">PqExample( "IsIsomorphicPGroup" );</code> runs the above example in <strong class="pkg">GAP</strong> (see <code class="func">PqExample</code> (<a href="chap3.html#X7BB0EB607F337265"><span class="RefLink">3.4-4</span></a>)).</p>
+
+<p><a id="X8450C72580D91245" name="X8450C72580D91245"></a></p>
+
+<h4>4.4 <span class="Heading">Computing Descendants of a p-Group</span></h4>
+
+<p><a id="X80985CC479CD9FA3" name="X80985CC479CD9FA3"></a></p>
+
+<h5>4.4-1 PqDescendants</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqDescendants</code>( <var class="Arg">G:</var> <var class="Arg">options</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns, for the pc group <var class="Arg">G</var> which must be of prime power order with a confluent pc presentation (see <code class="func">IsConfluent</code> (<a href="../../../doc/ref/chap46_mj.html#X7DF4835F79667099"><span class="RefLink">Reference: IsConfluent for pc groups</span></a>) in the <strong class="pkg">GAP</strong> Reference Manual), a list of descendants (pc groups) of <var class="Arg">G</var>. Following the colon <var class="Arg">options</var> a selection of the options listed below should be given, separated by commas like record components (see Section <a href="../../../doc/ref/chap4_mj.html#X867D54987EF86D1D"><span class="RefLink">Reference: Function Call With Options</span></a> in the <strong class="pkg">GAP</strong> Reference Manual). See Chapter <a href="chap6.html#X7B0946E97E7EB359"><span class="RefLink"><span class="Heading">ANUPQ Options</span></span></a> for detailed descriptions of the options.</p>
+
+<p>The automorphism group of each descendant <var class="Arg">D</var> is also computed via a call to the <code class="code">AutomorphismGroupPGroup</code> function of the <strong class="pkg">AutPGrp</strong> package.</p>
+
+
+<ul>
+<li><p><code class="code">ClassBound := <var class="Arg">n</var></code></p>
+
+</li>
+<li><p><code class="code">Relators := <var class="Arg">rels</var></code></p>
+
+</li>
+<li><p><code class="code">OrderBound := <var class="Arg">n</var></code></p>
+
+</li>
+<li><p><code class="code">StepSize := <var class="Arg">n</var></code>, <code class="code">StepSize := <var class="Arg">list</var></code></p>
+
+</li>
+<li><p><code class="code">RankInitialSegmentSubgroups := <var class="Arg">n</var></code></p>
+
+</li>
+<li><p><code class="code">SpaceEfficient</code></p>
+
+</li>
+<li><p><code class="code">CapableDescendants</code></p>
+
+</li>
+<li><p><code class="code">AllDescendants := false</code></p>
+
+</li>
+<li><p><code class="code">Exponent := <var class="Arg">n</var></code></p>
+
+</li>
+<li><p><code class="code">Metabelian</code></p>
+
+</li>
+<li><p><code class="code">GroupName := <var class="Arg">name</var></code></p>
+
+</li>
+<li><p><code class="code">SubList := <var class="Arg">sub</var></code></p>
+
+</li>
+<li><p><code class="code">BasicAlgorithm</code></p>
+
+</li>
+<li><p><code class="code">CustomiseOutput := <var class="Arg">rec</var></code></p>
+
+</li>
+<li><p><code class="code">SetupFile := <var class="Arg">filename</var></code></p>
+
+</li>
+<li><p><code class="code">PqWorkspace := <var class="Arg">workspace</var></code></p>
+
+</li>
+</ul>
+<p><em>Notes:</em> The function <code class="code">PqDescendants</code> uses the automorphism group of <var class="Arg">G</var> which it computes via the package <strong class="pkg">AutPGrp</strong>. If this package is not installed an error may be raised. If the automorphism group of <var class="Arg">G</var> is insoluble, the <code class="code">pq</code> program will call <strong class="pkg">GAP</strong> together with the <strong class="pkg">AutPGrp</strong> package for certain orbit-stabilizer calculations. (So, in any case, one should ensure the <strong class="pkg">AutPGrp</strong> package is installed.)</p>
+
+<p>The attributes and property <code class="code">NuclearRank</code>, <code class="code">MultiplicatorRank</code> and <code class="code">IsCapable</code> are set for each group of the list returned by <code class="code">PqDescendants</code> (see Section <a href="chap3.html#X818175EF85CAA807"><span class="RefLink"><span class="Heading">Attributes and a Property for fp and pc p-groups</span></span></a>).</p>
+
+<p>The options <var class="Arg">options</var> for <code class="code">PqDescendants</code> may be passed in an alternative manner to that already described, namely you can pass <code class="code">PqDescendants</code> a record as an argument, which contains as entries some (or all) of the above mentioned. Those parameters which do not occur in the record are set to their default values.</p>
+
+<p>Note that you cannot set both <code class="code">OrderBound</code> and <code class="code">StepSize</code>.</p>
+
+<p>In the first example we compute all descendants of the Klein four group which have exponent-2 class at most 5 and order at most <span class="SimpleMath">2^6</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup( "a", "b" );; a := F.1;; b := F.2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := PcGroupFpGroup( F / [ a^2, b^2, Comm(b, a) ] );</span>
+&lt;pc group of size 4 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">des := PqDescendants( G : OrderBound := 6, ClassBound := 5 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(des);</span>
+83
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(des, Size); </span>
+[ 8, 8, 8, 16, 16, 16, 32, 16, 16, 16, 16, 16, 32, 32, 64, 64, 32, 32, 32, 
+  32, 32, 32, 32, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 32, 32, 32, 32, 
+  64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 32, 32, 32, 32, 32, 64, 64, 64, 
+  64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 
+  64, 64, 64, 64, 64, 64, 64 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(des, d -&gt; Length( PCentralSeries( d, 2 ) ) - 1 );</span>
+[ 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
+  3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 
+  4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+  4, 4, 4, 5, 5, 5, 5, 5 ]
+</pre></div>
+
+<p>Below, we compute all capable descendants of order 27 of the elementary abelian group of order 9.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup( 2, "g" );</span>
+&lt;free group on the generators [ g1, g2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := PcGroupFpGroup( F / [ F.1^3, F.2^3, Comm(F.1, F.2) ] );</span>
+&lt;pc group of size 9 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">des := PqDescendants( G : OrderBound := 3, ClassBound := 2,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                             CapableDescendants );</span>
+[ &lt;pc group of size 27 with 3 generators&gt;, 
+  &lt;pc group of size 27 with 3 generators&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(des, d -&gt; Length( PCentralSeries( d, 3 ) ) - 1 );</span>
+[ 2, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># For comparison let us now compute all descendants</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PqDescendants( G : OrderBound := 3, ClassBound := 2);</span>
+[ &lt;pc group of size 27 with 3 generators&gt;, 
+  &lt;pc group of size 27 with 3 generators&gt;, 
+  &lt;pc group of size 27 with 3 generators&gt; ]
+</pre></div>
+
+<p>In the third example, we compute all capable descendants of the elementary abelian group of order <span class="SimpleMath">5^2</span> which have exponent-<span class="SimpleMath">5</span> class at most <span class="SimpleMath">3</span>, exponent <span class="SimpleMath">5</span>, and are metabelian.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FreeGroup( 2, "g" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := PcGroupFpGroup( F / [ F.1^5, F.2^5, Comm(F.2, F.1) ] );</span>
+&lt;pc group of size 25 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">des := PqDescendants( G : Metabelian, ClassBound := 3,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                             Exponent := 5, CapableDescendants );</span>
+[ &lt;pc group of size 125 with 3 generators&gt;, 
+  &lt;pc group of size 625 with 4 generators&gt;, 
+  &lt;pc group of size 3125 with 5 generators&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(des, d -&gt; Length( PCentralSeries( d, 5 ) ) - 1 );</span>
+[ 2, 3, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(des, d -&gt; Length( DerivedSeries( d ) ) );</span>
+[ 3, 3, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(des, d -&gt; Maximum( List( d, Order ) ) );</span>
+[ 5, 5, 5 ]
+</pre></div>
+
+<p>The examples <code class="code">"PqDescendants-1"</code>, <code class="code">"PqDescendants-2"</code> and <code class="code">"PqDescendants-3"</code> (in order) are essentially the same as the above three examples (see <code class="func">PqExample</code> (<a href="chap3.html#X7BB0EB607F337265"><span class="RefLink">3.4-4</span></a>)).</p>
+
+<p><a id="X8364566A80A8C24B" name="X8364566A80A8C24B"></a></p>
+
+<h5>4.4-2 PqSupplementInnerAutomorphisms</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqSupplementInnerAutomorphisms</code>( <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>returns a generating set for a supplement to the inner automorphisms of <var class="Arg">D</var>, in the form of a record with fields <code class="code">agAutos</code>, <code class="code">agOrder</code> and <code class="code">glAutos</code>, as provided by the <code class="code">pq</code> program. One should be very careful in using these automorphisms for a descendant calculation.</p>
+
+<p><em>Note:</em> In principle there must be a way to use those automorphisms in order to compute descendants but there does not seem to be a way to hand back these automorphisms properly to the <code class="code">pq</code> program.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q := Pq( FreeGroup(2) : Prime := 3, ClassBound := 1 );</span>
+&lt;pc group of size 9 with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">des := PqDescendants( Q : StepSize := 1 );</span>
+[ &lt;pc group of size 27 with 3 generators&gt;, 
+  &lt;pc group of size 27 with 3 generators&gt;, 
+  &lt;pc group of size 27 with 3 generators&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := PqSupplementInnerAutomorphisms( des[3] );</span>
+rec( agAutos := [  ], agOrder := [ 3, 2, 2, 2 ], 
+  glAutos := [ Pcgs([ f1, f2, f3 ]) -&gt; [ f1*f2^2, f2, f3 ], 
+      Pcgs([ f1, f2, f3 ]) -&gt; [ f1^2, f2, f3^2 ], 
+      Pcgs([ f1, f2, f3 ]) -&gt; [ f1^2, f2, f3^2 ] ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := AutomorphismGroupPGroup( des[3] );</span>
+rec( 
+  agAutos := [ Pcgs([ f1, f2, f3 ]) -&gt; [ f1^2, f2, f3^2 ], 
+      Pcgs([ f1, f2, f3 ]) -&gt; [ f1*f2^2, f2, f3 ], 
+      Pcgs([ f1, f2, f3 ]) -&gt; [ f1*f3, f2, f3 ], 
+      Pcgs([ f1, f2, f3 ]) -&gt; [ f1, f2*f3, f3 ] ], agOrder := [ 2, 3, 3, 3 ], 
+  glAutos := [  ], glOper := [  ], glOrder := 1, 
+  group := &lt;pc group of size 27 with 3 generators&gt;, 
+  one := IdentityMapping( &lt;pc group of size 27 with 3 generators&gt; ), 
+  size := 54 )
+</pre></div>
+
+<p>Typing: <code class="code">PqExample( "PqSupplementInnerAutomorphisms" );</code> runs the above example in <strong class="pkg">GAP</strong> (see <code class="func">PqExample</code> (<a href="chap3.html#X7BB0EB607F337265"><span class="RefLink">3.4-4</span></a>)).</p>
+
+<p>Note that by also including <code class="code">PqStart</code> as a second argument to <code class="code">PqExample</code> one can see how it is possible, with the aid of <code class="code">PqSetPQuotientToGroup</code> (see <code class="func">PqSetPQuotientToGroup</code> (<a href="chap5.html#X80CCF6D379E5A3B4"><span class="RefLink">5.3-7</span></a>)), to do the equivalent computations with the interactive versions of <code class="code">Pq</code> and <code class="code">PqDescendants</code> and a single <code class="code">pq</code> process (recall <code class="code">pq</code> is the name of the external C program).</p>
+
+<p><a id="X79AD54E987FCACBA" name="X79AD54E987FCACBA"></a></p>
+
+<h5>4.4-3 PqList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PqList</code>( <var class="Arg">filename:</var> [<var class="Arg">SubList</var> <var class="Arg">:=</var> <var class="Arg">sub</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>reads a file with name <var class="Arg">filename</var> (a string) and returns the list <var class="Arg">L</var> of pc groups (or with option <code class="code">SubList</code> a sublist of <var class="Arg">L</var> or a single pc group in <var class="Arg">L</var>) defined in that file. If the option <code class="code">SubList</code> is passed and has the value <var class="Arg">sub</var>, then it has the same meaning as for <code class="code">PqDescendants</code>, i.e. if <var class="Arg">sub</var> is an integer then <code class="code">PqList</code> returns <code class="code"><var class="Arg">L</var>[<var class="Arg">sub</var>]</code>; otherwise, if <var class="Arg">sub</var> is a list of integers <code class="code">PqList</code> returns <code class="code">Sublist(<var class="Arg">L</var>, <var class="Arg">sub</var> )</code>.</p>
+
+<p>Both <code class="code">PqList</code> and <code class="code">SavePqList</code> (see <code class="func">SavePqList</code> (<a href="chap4.html#X85ADB9E6870EC3D1"><span class="RefLink">4.4-4</span></a>)) can be used to save and restore a list of descendants (see <code class="func">PqDescendants</code> (<a href="chap4.html#X80985CC479CD9FA3"><span class="RefLink">4.4-1</span></a>)).</p>
+
+<p><a id="X85ADB9E6870EC3D1" name="X85ADB9E6870EC3D1"></a></p>
+
+<h5>4.4-4 SavePqList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SavePqList</code>( <var class="Arg">filename</var>, <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>writes a list of descendants <var class="Arg">list</var> to a file with name <var class="Arg">filename</var> (a string).</p>
+
+<p><code class="code">SavePqList</code> and <code class="code">PqList</code> (see <code class="func">PqList</code> (<a href="chap4.html#X79AD54E987FCACBA"><span class="RefLink">4.4-3</span></a>)) can be used to save and restore, respectively, the results of <code class="code">PqDescendants</code> (see <code class="func">PqDescendants</code> (<a href="chap4.html#X80985CC479CD9FA3"><span class="RefLink">4.4-1</span></a>)).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

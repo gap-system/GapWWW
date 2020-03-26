@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (SLA) - Chapter 4: Finite Order Automorphisms and \(\theta\)-Groups</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
+<p><a id="X80D10A5D7D73D871" name="X80D10A5D7D73D871"></a></p>
+<div class="ChapSects"><a href="chap4_mj.html#X80D10A5D7D73D871">4 <span class="Heading">Finite Order Automorphisms and <span class="SimpleMath">\(\theta\)</span>-Groups</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X8173135A7D187358">4.1 <span class="Heading"> The functions </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X856FF71D8565C1E5">4.1-1 FiniteOrderInnerAutomorphisms</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E8CCC4885E2A443">4.1-2 FiniteOrderOuterAutomorphisms</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X84F59A2687C62763">4.1-3 Order</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8635ABCD7D5ACED8">4.1-4 KacDiagram</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7DCA2568870A2D34">4.1-5 Grading</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7D9BDD03811B3C98">4.1-6 NilpotentOrbitsOfThetaRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7D4106C37DBD0943">4.1-7 ClosureDiagram</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8108B6487A3A363B">4.1-8 CarrierAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7A8D86667BC7C033">4.1-9 CartanSubspace</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Finite Order Automorphisms and <span class="SimpleMath">\(\theta\)</span>-Groups</span></h3>
+
+<p>This chapter contains functions for creating and working with finite order automorphisms of simple Lie algebras (or, more precisely, representatives of the conjugacy classes of such automorphisms).</p>
+
+<p>NB: such automorphisms are not created for a given Lie algebra, but the Lie algebra is constructed at the same time as the automorphism. This because the base field may need extending (it needs enough roots of unity).</p>
+
+<p>As noted above the functions give representatives of the conjugacy classes, in the automorphism group of the underlying Lie algebra, of finite order automorphisms. Such conjugacy classes are classified in terms of Kac diagrams. Roughly, this works as follows. A finite order automorphism <span class="SimpleMath">\(f\)</span> corresponds to a diagram automorphism of order <span class="SimpleMath">\(d=1,2,3\)</span>. The inner automorphisms correspond to a diagram automorphism of order 1, the outer automorphisms to a diagram automorphism of order 2 or 3. Let <span class="SimpleMath">\(L_0, L_1\)</span> denote the eigenspaces of the underlying Lie algebra <span class="SimpleMath">\(L\)</span>, with respect to the diagram automorphism, respectively corresponding to the eigenvalues 1 and <span class="SimpleMath">\(w\)</span> (where <span class="SimpleMath">\(w\)</span> is a primitive <span class="SimpleMath">\(d\)</span>-th root of unity). (In case of <span class="SimpleMath">\(d=1\)</span>, we have <span class="SimpleMath">\(L_0=L\)</span>, <span class="SimpleMath">\(L_1=0\)</span>.) Then <span class="SimpleMath">\(L_0\)</span> is semisimple and we choose a set of canonical generators of <span class="SimpleMath">\(L_0\)</span>, denoted <span class="SimpleMath">\(x_i\)</span>, <span class="SimpleMath">\(y_i\)</span>, <span class="SimpleMath">\(h_i\)</span>, for <span class="SimpleMath">\(i=1,\ldots,s\)</span>. Moreover, <span class="SimpleMath">\(L_1\)</span> is an <span class="SimpleMath">\(L_0\)</span>-module. Let <span class="SimpleMath">\(x_0\)</span> be the lowest weight vector in <span class="SimpleMath">\(L_1\)</span>. (If <span class="SimpleMath">\(d=1\)</span> then <span class="SimpleMath">\(x_0\)</span> will be the lowest (negative) root vector.) Let <span class="SimpleMath">\(\alpha_i\)</span> for <span class="SimpleMath">\(i=0,\ldots,s\)</span> be the roots corresponding to <span class="SimpleMath">\(x_i\)</span>, with respect to the subalgebra spanned by the <span class="SimpleMath">\(h_i\)</span>. Let <span class="SimpleMath">\(C\)</span> be the Cartan matrix of these roots. The rows of <span class="SimpleMath">\(C\)</span> are linearly dependent. The Dynkin diagram of <span class="SimpleMath">\(C\)</span> is labeled with integers <span class="SimpleMath">\(a_i\)</span> with greatest common divisor 1, that form the coefficients of a linear dependency of the rows of <span class="SimpleMath">\(C\)</span>. Furthermore, the <span class="SimpleMath">\(x_i\)</span> generate <span class="SimpleMath">\(L\)</span> and the automorphism <span class="SimpleMath">\(f\)</span> is described by <span class="SimpleMath">\(f(x_i) = v^{s_i} x_i \)</span>, where the non-negative integers <span class="SimpleMath">\(s_i\)</span> have greatest common divisor 1, and are such that <span class="SimpleMath">\(m=d\sum a_i s_i\)</span> is the order of <span class="SimpleMath">\(f\)</span>, and where <span class="SimpleMath">\(v\)</span> is a primitive <span class="SimpleMath">\(m\)</span>-th order root of unity. Now the Kac diagram of the automorphism <span class="SimpleMath">\(f\)</span> is the Dynkin diagram of <span class="SimpleMath">\(C\)</span>, labelled with the labels <span class="SimpleMath">\(s_i\)</span>.</p>
+
+<p><a id="X8173135A7D187358" name="X8173135A7D187358"></a></p>
+
+<h4>4.1 <span class="Heading"> The functions </span></h4>
+
+<p><a id="X856FF71D8565C1E5" name="X856FF71D8565C1E5"></a></p>
+
+<h5>4.1-1 FiniteOrderInnerAutomorphisms</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiniteOrderInnerAutomorphisms</code>( <var class="Arg">type</var>, <var class="Arg">rank</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">\(L\)</span> be the simple Lie algebra of type <var class="Arg">type</var> and rank <var class="Arg">rank</var>. The function returns representatives of the conjugacy classes of inner automorphisms of <span class="SimpleMath">\(L\)</span> of order <var class="Arg">m</var>. As noted also in the introduction to this chapter, this function constructs the Lie algebra as well as the automorphisms (and the Lie algebra is accessible through the source of these automorphisms). The reason for this is that depending on the order of the automorphisms, the base field needs certain roots of unity.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= FiniteOrderInnerAutomorphisms("E",6,3);</span>
+[ [ v.72, v.1, v.2, v.3, v.4, v.5, v.6 ] -&gt; [ (E(3))*v.72, (E(3)^2)*v.1, v.2, 
+      v.3, v.4, v.5, v.6 ], [ v.72, v.1, v.2, v.3, v.4, v.5, v.6 ] -&gt; 
+    [ v.72, (E(3))*v.1, (E(3))*v.2, v.3, v.4, v.5, v.6 ], 
+  [ v.72, v.1, v.2, v.3, v.4, v.5, v.6 ] -&gt; [ (E(3))*v.72, v.1, (E(3))*v.2, 
+      v.3, v.4, v.5, v.6 ], [ v.72, v.1, v.2, v.3, v.4, v.5, v.6 ] -&gt; 
+    [ v.72, v.1, v.2, v.3, (E(3))*v.4, v.5, v.6 ], 
+  [ v.72, v.1, v.2, v.3, v.4, v.5, v.6 ] -&gt; [ (E(3))*v.72, (E(3))*v.1, v.2, 
+      v.3, v.4, v.5, (E(3))*v.6 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Source(f[1]);</span>
+&lt;Lie algebra of dimension 78 over CF(3)&gt;
+</pre></div>
+
+<p><a id="X7E8CCC4885E2A443" name="X7E8CCC4885E2A443"></a></p>
+
+<h5>4.1-2 FiniteOrderOuterAutomorphisms</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FiniteOrderOuterAutomorphisms</code>( <var class="Arg">type</var>, <var class="Arg">rank</var>, <var class="Arg">m</var>, <var class="Arg">d</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">\(L\)</span> be the simple Lie algebra of type <var class="Arg">type</var> and rank <var class="Arg">rank</var>. The function returns representatives of the conjugacy classes of outer automorphisms of <span class="SimpleMath">\(L\)</span> of order <var class="Arg">m</var>, corresponding to a diagram automorphism of order <var class="Arg">d</var>.</p>
+
+<p><a id="X84F59A2687C62763" name="X84F59A2687C62763"></a></p>
+
+<h5>4.1-3 Order</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Order</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">f</var> is a finite order automorphism. This returns its order.</p>
+
+<p><a id="X8635ABCD7D5ACED8" name="X8635ABCD7D5ACED8"></a></p>
+
+<h5>4.1-4 KacDiagram</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KacDiagram</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">f</var> is a finite order automorphism. This returns its Kac diagram. This is a record with three components: <var class="Arg">CM</var>, which is the Cartan matrix of the Dynkin diagram, <var class="Arg">labels</var> the integers with gcd equal to 1 that are the coefficients of a linear dependency of the rows of <var class="Arg">CM</var>, and <var class="Arg">weights</var> that are the integers <span class="SimpleMath">\(s_i\)</span> that define the automorphism.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= FiniteOrderOuterAutomorphisms( "A", 5, 4, 2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:= KacDiagram( f[1] );</span>
+rec( 
+  CM := [ [ 2, 0, -1, 0 ], [ 0, 2, -1, 0 ], [ -1, -1, 2, -1 ], 
+      [ 0, 0, -2, 2 ] ], labels := [ 1, 1, 2, 1 ], weights := [ 1, 1, 0, 0 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.labels*r.CM;      </span>
+[ 0, 0, 0, 0 ]
+</pre></div>
+
+<p><a id="X7DCA2568870A2D34" name="X7DCA2568870A2D34"></a></p>
+
+<h5>4.1-5 Grading</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Grading</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">f</var> is a finite order automorphism of order <span class="SimpleMath">\(m\)</span>. This returns a list of length <span class="SimpleMath">\(m\)</span>. The <span class="SimpleMath">\(i\)</span>-th element contains a basis of the eigenspace of <var class="Arg">f</var> with eigenvalue <span class="SimpleMath">\(v^i\)</span>, where <span class="SimpleMath">\(v\)</span> is a primitive <span class="SimpleMath">\(m\)</span>-th root of unity (i.e., <var class="Arg">v=E(m)</var>).</p>
+
+<p><a id="X7D9BDD03811B3C98" name="X7D9BDD03811B3C98"></a></p>
+
+<h5>4.1-6 NilpotentOrbitsOfThetaRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NilpotentOrbitsOfThetaRepresentation</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NilpotentOrbitsOfThetaRepresentation</code>( <var class="Arg">L</var>, <var class="Arg">d</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">f</var> is an automorphism of a simple Lie algebra <span class="SimpleMath">\(L\)</span> of order <span class="SimpleMath">\(m\)</span>. Then <var class="Arg">f</var> defines a grading on <span class="SimpleMath">\(L\)</span>. Let the homogeneous components of this grading be denoted <span class="SimpleMath">\(L_i\)</span> for <span class="SimpleMath">\(i=0,...,m-1\)</span>. Let <span class="SimpleMath">\(G_0\)</span> be the group corresponding to <span class="SimpleMath">\(L_0\)</span> (i.e., the connected subgroup of the adjoint group of <span class="SimpleMath">\(L\)</span> with Lie algebra <span class="SimpleMath">\(L_0\)</span>). This function computes representatives for the nilpotent orbits of <span class="SimpleMath">\(G_0\)</span> acting on <span class="SimpleMath">\(L_1\)</span>. The output is a list of triples. Each triple is an <span class="SimpleMath">\(sl_2\)</span>-triple <span class="SimpleMath">\((y,h,x)\)</span>, with <span class="SimpleMath">\(h\in L_0\)</span>, <span class="SimpleMath">\(x\in L_1\)</span> (the representative of the orbit), and <span class="SimpleMath">\(y\in L_{m-1}\)</span>. The element <span class="SimpleMath">\(h\)</span> also lies in the dominant Weyl chamber of a Cartan subalgebra of <span class="SimpleMath">\(L_0\)</span>. Finally we note that all elements lie in <var class="Arg">Source( f )</var>.</p>
+
+<p>It is possible to add an extra optional argument: <var class="Arg">method:= "Carrier"</var>, or <var class="Arg">method:= "WeylOrbit"</var>. Then a method based on finding carrier algebras (respectively, computing orbits under the Weyl group) is chosen. If no optional argument is chosen, then the system will make its own choice. (In the case of outer automorphisms, currently the only available method is the one based on orbits of the Weyl group.) The method based on carrier algebras tends to work better for the higher order automorphisms.</p>
+
+<p>This function prints some information on what it is doing to the info class <var class="Arg">InfoSLA</var>. In order to suppress these messages one can do <var class="Arg">SetInfoLevel( InfoSLA, 1 );</var>.</p>
+
+<p>In the two-argument version, the first argument <var class="Arg">L</var> has to be a semisimple Lie algebra, and the second argument <var class="Arg">d</var> a list of non-negative integers. Then <var class="Arg">L</var> is <span class="SimpleMath">\(Z\)</span>-graded by giving the root space corresponding to the <span class="SimpleMath">\(i\)</span>-th simple root the degree <var class="Arg">d[i]</var>. Apart from this the function works the same in this case as in the one-argument version.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># reset random state to ensure the output of this example match</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Reset(GlobalMersenneTwister, 1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= FiniteOrderInnerAutomorphisms( "D", 5, 3 );;   </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:= NilpotentOrbitsOfThetaRepresentation( f[2] : method:= "Carrier" );;</span>
+#I  Selected carrier algebra method.
+#I  Constructed 123 root bases of possible flat subalgebras, now checking them...
+#I  Obtained 30 Cartan elements, weeding out equivalent copies...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(s);</span>
+10
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s[4];</span>
+[ v.14+v.15+v.38, (-2)*v.41+(-1)*v.42, v.18+v.34+v.35 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("E",6,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NilpotentOrbitsOfThetaRepresentation( L, [0,1,0,0,0,0] );</span>
+#I  Selected Weyl orbit method.
+#I  Constructed a Weyl transversal of 72 elements.
+#I  Obtained 5 Cartan elements, weeding out equivalent copies...
+[ [ v.65+v.66+v.67, (2)*v.73+(3)*v.74+(4)*v.75+(6)*v.76+(4)*v.77+(2)*v.78, 
+      v.29+v.30+v.31 ], 
+  [ (2)*v.55+(2)*v.66, (2)*v.73+(4)*v.74+(4)*v.75+(6)*v.76+(4)*v.77+(2)*v.78, 
+      v.19+v.30 ],
+  [ v.66+v.70, (2)*v.73+(2)*v.74+(3)*v.75+(4)*v.76+(3)*v.77+(2)*v.78, 
+      v.30+v.34 ], [ v.71, v.73+v.74+(2)*v.75+(3)*v.76+(2)*v.77+v.78, v.35 ] ]
+</pre></div>
+
+<p><a id="X7D4106C37DBD0943" name="X7D4106C37DBD0943"></a></p>
+
+<h5>4.1-7 ClosureDiagram</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClosureDiagram</code>( <var class="Arg">L</var>, <var class="Arg">f</var>, <var class="Arg">s</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClosureDiagram</code>( <var class="Arg">L</var>, <var class="Arg">d</var>, <var class="Arg">s</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">f</var> is an automorphism of a simple Lie algebra <span class="SimpleMath">\(L\)</span> of order <span class="SimpleMath">\(m\)</span>, and <var class="Arg">s</var> a list of <span class="SimpleMath">\(sl_2\)</span>-triples <span class="SimpleMath">\((y,h,x)\)</span>, with <span class="SimpleMath">\(h\in L_0\)</span>, <span class="SimpleMath">\(x\in L_1\)</span> (for instance as computed by the previous function), corresponding to nilpotent orbits in <span class="SimpleMath">\(L_1\)</span>.</p>
+
+<p>This function computes the Hasse diagram of the closures of the nilpotent orbits. The output is a record with two components: <var class="Arg">diag</var> (which is a list of 2-tuples; a tuple <var class="Arg">[ i, j ]</var> means that orbit number <var class="Arg">i</var> is contained in the closure of orbit number <var class="Arg">j</var>), and <var class="Arg">sl2</var> (the same list of <span class="SimpleMath">\(sl_2\)</span>-triples, but sorted according to decreasing dimension, i.e., the highest dimensional orbit comes first). The numbering used in the tuples in <var class="Arg">diag</var> corresponds to the order in which the orbits appear in the component <var class="Arg">sl2</var>.</p>
+
+<p>During the execution of the program a message is printed. This message either states that all inclusions have been proved, or lists a number of possible inclusions, for which it could not be proved with absolute certainty that these do not occur. This is due to the randomised nature of the algorithm: if the algorithm finds an inclusion, then this inclusion is certain. However, sometimes a non-inclusion can only be estabished by random methods, which means that it is possible that there is an inclusion without the program finding it. (This however, is very unlikely, and in practice almost never happens.) Now showing that a non-inclusion really is a non-inclusion can be done by computing the ranks of certain matrices with polynomial entries. In principle <strong class="pkg">GAP</strong> can do this; however, the system certainly is not very strong at it. Therefore, as optional argument a filename can be given, by <var class="Arg">filenm:= "file.m"</var>. If this argument is present the program prints a Magma script in the file, which can be loaded directly into the computer algebra system Magma. If the output is always true, then all non-inclusions are proved. If there are non non-inclusions to be proved, then the file is not written.</p>
+
+<p>In the second version, the second argument <var class="Arg">d</var> is a list of non-negative integers. Then <var class="Arg">L</var> is <span class="SimpleMath">\(Z\)</span>-graded by giving the root space corresponding to the <span class="SimpleMath">\(i\)</span>-th simple root the degree <var class="Arg">d[i]</var>. Apart from this the function works in the same way.</p>
+
+<p>We note that the adjoint representation can be obtained by giving a <var class="Arg">d</var> that eintirely consists of zeros.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= FiniteOrderInnerAutomorphisms( "E", 8, 8 );;  </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h:= f[8];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sl2:= NilpotentOrbitsOfThetaRepresentation(h);;  </span>
+#I  Selected carrier algebra method.
+#I  Constructed 2782 root bases of possible flat subalgebras, now checking them...
+#I  Obtained 58 Cartan elements, weeding out equivalent copies...
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length(sl2);</span>
+27
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= Source(h);;                    </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:= ClosureDiagram( L, h, sl2 );;  </span>
+#I  All (non-) inclusions proved!
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.diag;</span>
+[ [ 2, 1 ], [ 3, 1 ], [ 4, 2 ], [ 4, 3 ], [ 5, 1 ], [ 6, 5 ], [ 7, 2 ], 
+  [ 7, 5 ], [ 8, 4 ], [ 9, 4 ], [ 9, 7 ], [ 10, 6 ], [ 10, 7 ], [ 11, 3 ], 
+  [ 11, 6 ], [ 12, 7 ], [ 13, 9 ], [ 13, 10 ], [ 13, 11 ], [ 14, 9 ], 
+  [ 14, 12 ], [ 15, 8 ], [ 15, 9 ], [ 16, 6 ], [ 17, 10 ], [ 17, 12 ], 
+  [ 17, 16 ], [ 18, 13 ], [ 18, 16 ], [ 19, 13 ], [ 19, 15 ], [ 20, 11 ], 
+  [ 20, 16 ], [ 21, 14 ], [ 21, 17 ], [ 21, 18 ], [ 22, 14 ], [ 22, 15 ], 
+  [ 23, 18 ], [ 23, 20 ], [ 24, 18 ], [ 24, 19 ], [ 25, 21 ], [ 25, 22 ], 
+  [ 25, 24 ], [ 26, 23 ], [ 26, 24 ], [ 27, 21 ], [ 27, 23 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Now we do the adjoint representation of the Lie algebra of type F4:</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= SimpleLieAlgebra("F",4,Rationals);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">o:= NilpotentOrbits(L);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sl2:= List( o, SL2Triple );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:= ClosureDiagram( L, [0,0,0,0], sl2 );;      </span>
+#I  All (non-) inclusions proved!
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.diag;</span>
+[ [ 2, 1 ], [ 3, 2 ], [ 4, 3 ], [ 5, 3 ], [ 6, 4 ], [ 6, 5 ], [ 7, 6 ], 
+  [ 8, 7 ], [ 9, 7 ], [ 10, 8 ], [ 10, 9 ], [ 11, 8 ], [ 12, 10 ], 
+  [ 13, 11 ], [ 13, 12 ], [ 14, 13 ], [ 15, 14 ] ]
+</pre></div>
+
+<p><a id="X8108B6487A3A363B" name="X8108B6487A3A363B"></a></p>
+
+<h5>4.1-8 CarrierAlgebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CarrierAlgebra</code>( <var class="Arg">L</var>, <var class="Arg">f</var>, <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CarrierAlgebra</code>( <var class="Arg">L</var>, <var class="Arg">d</var>, <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">f</var> is an automorphism of a simple Lie algebra <span class="SimpleMath">\(L\)</span> of order <span class="SimpleMath">\(m\)</span>, and <var class="Arg">e</var> a nilpotent element of <span class="SimpleMath">\(L_1\)</span>. This function returns the carrier algebra of <var class="Arg">e</var>. This is a <span class="SimpleMath">\(\mathbb{Z}\)</span>-graded semisimple subalgebra <span class="SimpleMath">\(K\)</span> of <span class="SimpleMath">\(L\)</span>, such that <var class="Arg">e</var> lies in <span class="SimpleMath">\(K_1\)</span>. For the precise definition we refer to <a href="chapBib_mj.html#biBvinberg2">[Vin79]</a>, <a href="chapBib_mj.html#biBvinberg3">[Vin75]</a>. The output is given in the form of a record, with three components: <var class="Arg">g0</var>, a basis of <span class="SimpleMath">\(K_0\)</span>, <var class="Arg">gp</var> a list containing bases of <span class="SimpleMath">\(K_1\)</span>, <span class="SimpleMath">\(K_2\)</span> and so on, and <var class="Arg">gn</var> a list containing bases of <span class="SimpleMath">\(K_{-1}\)</span>, <span class="SimpleMath">\(K_{-2}\)</span> and so on.</p>
+
+<p>In the second version, the second argument <var class="Arg">d</var> is a list of non-negative integers. Then <var class="Arg">L</var> is <span class="SimpleMath">\(Z\)</span>-graded by giving the root space corresponding to the <span class="SimpleMath">\(i\)</span>-th simple root the degree <var class="Arg">d[i]</var>. Apart from this the function works in the same way.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= FiniteOrderInnerAutomorphisms( "F", 4, 5 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h:= f[4];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sl2:= NilpotentOrbitsOfThetaRepresentation( h );;  </span>
+#I  Selected Weyl orbit method.
+#I  Constructed a Weyl transversal of 144 elements.
+#I  Constructed 621 Cartan elements to be checked.
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L:= Source(h);   </span>
+&lt;Lie algebra of dimension 52 over CF(5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=CarrierAlgebra( L, h, sl2[1][3] );   </span>
+rec( g0 := [ v.49+(2)*v.50+(2)*v.51+(3)*v.52, v.50+(1/2)*v.51+v.52 ], 
+  gn := [ [ v.24, v.33 ], [ v.21 ], [ v.15 ] ], 
+  gp := [ [ v.9, v.48 ], [ v.45 ], [ v.39 ] ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K:= Subalgebra( L, Concatenation( r.g0, Flat(r.gp), Flat(r.gn) ) );</span>
+&lt;Lie algebra over CF(5), with 10 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SemiSimpleType( K );</span>
+"B2"
+</pre></div>
+
+<p><a id="X7A8D86667BC7C033" name="X7A8D86667BC7C033"></a></p>
+
+<h5>4.1-9 CartanSubspace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CartanSubspace</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Here <var class="Arg">f</var> is an automorphism of a simple Lie algebra <span class="SimpleMath">\(L\)</span> of order <span class="SimpleMath">\(m\)</span>. Then <var class="Arg">f</var> defines a grading on <span class="SimpleMath">\(L\)</span>. Let the homogeneous components of this grading be denoted <span class="SimpleMath">\(L_i\)</span> for <span class="SimpleMath">\(i=0,...,m-1\)</span>. Let <span class="SimpleMath">\(G_0\)</span> be the group corresponding to <span class="SimpleMath">\(L_0\)</span> (i.e., the connected subgroup of the adjoint group of <span class="SimpleMath">\(L\)</span> with Lie algebra <span class="SimpleMath">\(L_0\)</span>). This function computes a maximal subspace of <span class="SimpleMath">\(L_1\)</span> consisting of commuting semisimple elements. (Such a subspace is called a <em>Cartan subspace</em>.)</p>
+
+<p>Every semisimple orbit of <span class="SimpleMath">\(G_0\)</span> in <span class="SimpleMath">\(L_1\)</span> contains an element of a fixed Cartan subspace.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:= FiniteOrderInnerAutomorphisms( "A", 3, 3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c:= CartanSubspace( f[3] ); </span>
+&lt;vector space of dimension 1 over CF(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BasisVectors( Basis( c ) );</span>
+[ v.1+v.5+v.12 ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

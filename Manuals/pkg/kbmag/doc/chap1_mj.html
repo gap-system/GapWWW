@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (kbmag) - Chapter 1: Introduction</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1.html">[MathJax off]</a></p>
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+<div class="ChapSects"><a href="chap1_mj.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+</div>
+
+<h3>1 <span class="Heading">Introduction</span></h3>
+
+<p><strong class="pkg">KBMag</strong> (pronounced ``Kay-bee-mag'') stands for <em>Knuth--Bendix on Monoids, and Automatic Groups</em>. It is a stand-alone package written in `C', for use under UNIX, with an interface to <strong class="pkg">GAP</strong>. Chapters <a href="chap2_mj.html#X86F080117DE22242"><span class="RefLink">2</span></a> and <a href="chap3_mj.html#X7828AE2881251C6A"><span class="RefLink">3</span></a> describe its use as an external library from within <strong class="pkg">GAP</strong>. There are interfaces for the use of <strong class="pkg">KBMag</strong> with finitely presented groups, monoids and semigroups defined within <strong class="pkg">GAP</strong>. The package also contains a collection of routines for manipulating finite state automata, which can be accessed via the <strong class="pkg">GAP</strong> interface. Chapter <a href="chap4_mj.html#X7E2A9D617D06547C"><span class="RefLink">4</span></a> lists the functions in the stand-alone package.</p>
+
+<p>To use this package effectively, some knowledge of the underlying theory and algorithms is advisable. The Knuth-Bendix algorithm is described in various places in the literature. Good general references that deal with the applications to groups and monoids are <a href="chapBib_mj.html#biBLeC86">[LeC86]</a> and the first few chapters of <a href="chapBib_mj.html#biBSims94">[Sim94]</a>. For the theory of automatic groups see the multi-author book <a href="chapBib_mj.html#biBECHLPT92">[ECH+92]</a>. The algorithms employed by <strong class="pkg">KBMag</strong> are described more specifically in <a href="chapBib_mj.html#biBEHR91">[HER91]</a> and <a href="chapBib_mj.html#biBHolt94">[Holar]</a>.</p>
+
+<p>The manual for the stand-alone <strong class="pkg">KBMag</strong> package (which can be found in the <code class="file">standalone/doc</code> directory of the package) provides more detailed information on the external `C' programs that are called from <strong class="pkg">GAP</strong>.</p>
+
+<p>Suppose that <span class="SimpleMath">\(G\)</span> is a finitely presented semigroup, monoid or group defined as a quotient of the free structure <span class="SimpleMath">\(F\)</span>. The overall objective of <strong class="pkg">KBMag</strong> is to construct a normal form for the elements of <span class="SimpleMath">\(G\)</span> in terms of the generators of <span class="SimpleMath">\(F\)</span>, together with a word reduction algorithm for calculating the normal form representative of an element in <span class="SimpleMath">\(G\)</span>, given by a word in the generators of <span class="SimpleMath">\(F\)</span>. If this can be achieved, then it is also possible to enumerate the words in normal form up to a given length, and to determine the order of <span class="SimpleMath">\(G\)</span>, by counting the number of words in normal form. In most serious applications, this will be infinite, since (for example) finite groups are (with some exceptions) usually handled better by Todd-Coxeter related methods. In fact a finite state automaton <span class="SimpleMath">\(W\)</span> is calculated that accepts precisely the language of words in the monoid generators of <span class="SimpleMath">\(F\)</span> that are in normal form, and <span class="SimpleMath">\(W\)</span> is used for the enumeration and counting functions.</p>
+
+<p>The normal form of an element <span class="SimpleMath">\(g \in G\)</span> is defined to be the least word in the generators of <span class="SimpleMath">\(F\)</span> (and their inverses) that represents <span class="SimpleMath">\(g\)</span>, with respect to a specified ordering on the set of all words in the generators of <span class="SimpleMath">\(F\)</span>. The available orderings are described in section <a href="chap2_mj.html#X7BDD01C183CD3234"><span class="RefLink">2.3</span></a>.</p>
+
+<p><strong class="pkg">KBMag</strong> offers two possible means of achieving these objectives. The first is to apply the Knuth-Bendix algorithm to the presentation, with one of the available orderings on words, and hope that the algorithm will complete with a finite confluent presentation. (If <span class="SimpleMath">\(G\)</span> is finite, then it is guaranteed to complete eventually but, like the Todd-Coxeter procedure, it may take a long time, or require more space than is available.) The second is to use the automatic group program, which is only applicable to groups (not to monoids or semigroups). This also uses the Knuth-Bendix procedure as one component of the algorithm, but it aims to compute certain finite state automata rather than to obtain a finite confluent rewriting system, and it completes successfully on many examples for which such a finite system does not exist. In the current stand-alone implementation, its use is restricted to the <strong class="button">shortlex</strong> ordering on words. That is, words are ordered first by increasing length, and then words of equal length are ordered lexicographically, using the specified ordering of the generators. However, there are now some <strong class="pkg">GAP</strong> procedures available in the package written by Sarah Rees that enable it be used also for the <strong class="button">wtlex</strong> ordering, and the <strong class="button">wreathprod</strong> ordering. See section <a href="chap2_mj.html#X7BDD01C183CD3234"><span class="RefLink">2.3</span></a> for further details of these orderings.</p>
+
+<p>For both of the above procedures, the first step is to create a <strong class="pkg">GAP</strong> object known as a <em>Knuth-Bendix rewriting system</em> <span class="SimpleMath">\(R\)</span> from the finitely presented structure <span class="SimpleMath">\(G\)</span>. There are functions available that can be used to specify the input parameters for the external programs, such as the ordering on words to be used by the Knuth-Bendix procedure. One of the two external programs is then run on <span class="SimpleMath">\(R\)</span>. If successful, it updates <span class="SimpleMath">\(R\)</span>, which can then be used to reduce words in the generators of <span class="SimpleMath">\(F\)</span> to normal form, and to count and enumerate the words in normal form.</p>
+
+<p>There are also now some routines available for performing corresponding operations with the cosets of a specified subgroup <span class="SimpleMath">\(H\)</span> of the group <span class="SimpleMath">\(G\)</span>. (These are not currently available for semigroups or monoids.) The words in normal form then correspond to minimal representatives under the ordering of the system of the right cosets of <span class="SimpleMath">\(H\)</span> in <span class="SimpleMath">\(G\)</span>. If successful, the index of <span class="SimpleMath">\(H\)</span> in <span class="SimpleMath">\(G\)</span> can be determined. The Knuth-Bendix routines also allow a confluent rewriting system for <span class="SimpleMath">\(H\)</span> to be computed, whereas the automatic groups routines allow a presentation of <span class="SimpleMath">\(H\)</span> to be computed (although not yet on a user-specified generating set).</p>
+
+<p>In the descriptions of the functions that follow, it is important to distinguish between irreducible words, and words in normal form. As already stated, a word is in normal form if it is the least word under the ordering of the rewriting system that defines a particular group element or coset. So there is always a unique word in normal form for each group element or coset, and it is determined by the group generators and the ordering on words in the group generators. A word in a rewriting system is said to be <em>irreducible</em> if it does not contain the left hand side of any of the reduction rules in the system as a subword. Words in normal form are always irreducible, but the converse is true if and only if the rewriting system is confluent. The automatic groups programs provide a method of reducing words to normal form without obtaining a finite confluent rewriting system (which may not even exist).</p>
+
+<p>Various levels of diagnostic output from the <strong class="pkg">GAP</strong> procedures can be turned on by setting the Info variable <code class="code">InfoRWS</code> to <span class="SimpleMath">\(1, 2\)</span> or <span class="SimpleMath">\(3\)</span>.</p>
+
+<p>In the descriptions that follow functions declared in the main <strong class="pkg">GAP</strong> library, for which additional methods are implemented, are referred to as <em>library functions</em>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

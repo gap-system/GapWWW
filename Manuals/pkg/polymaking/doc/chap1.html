@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (polymaking) - Chapter 1: Installation and Preface</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X8794FBB27B46C08E" name="X8794FBB27B46C08E"></a></p>
+<div class="ChapSects"><a href="chap1.html#X8794FBB27B46C08E">1 <span class="Heading">Installation and Preface</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7A02C64B7A3777FF">1.1 <span class="Heading">A few words about the installation of polymake</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X851C596486F918F0">1.2 <span class="Heading">Setting variables for external programs</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X794A38E981F9E76F">1.2-1 SetPolymakeDataDirectory</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X854645287BC9303E">1.2-2 SetPolymakeCommand</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7943B579846BDB76">1.2-3 <span class="Heading">Setting variables permanently</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>1 <span class="Heading">Installation and Preface</span></h3>
+
+<p>To install the package, just unpack it in your packages directory (usually <code class="code">~/gap/pkg</code> for local installation). To use <strong class="pkg">polymaking</strong>, you need a working installation of the program polymake <span class="URL"><a href="https://polymake.org">https://polymake.org</a></span>. The package has been tested on linux and Mac OS X (10.4, 10.5 and 10.6). But it should be as platform independent as <strong class="pkg">GAP</strong> and polymake.</p>
+
+<p>The interaction with polymake is restricted to writing files and carrying out simple operations looking like <br /> <code class="code">polymake file KEYWORD1 KEYWORD2 KEYWORD3</code> <br /> on the command line. Scripts are not supported. Every call to polymake will re-start the program anew. This causes considerable overhead. The number of calls to polymake is reduced by caching the results in the so-called <code class="keyw">PolymakeObject</code> in GAP. As of polymaking version 0.8.0, old versions of polymake (i.e. versions before 2.7.9) are not supported anymore.</p>
+
+<p><a id="X7A02C64B7A3777FF" name="X7A02C64B7A3777FF"></a></p>
+
+<h4>1.1 <span class="Heading">A few words about the installation of polymake</span></h4>
+
+<p><strong class="pkg">polymaking</strong> will try to guess the location of polymake. If this fails, a warning is issued at load time (<code class="keyw">InfoWarning</code> level 1). Note that the guessing procedure is suppressed when <code class="func">POLYMAKE_COMMAND</code> (<a href="chap3.html#X7B35A5217C8C7B04"><span class="RefLink">3.2-1</span></a>) is set manually (see <a href="chap1.html#X7943B579846BDB76"><span class="RefLink">1.2-3</span></a>). <br /> <code class="code">setenv PATH ${PATH}:&lt;your polymakepath&gt;</code> <br /> The general rule is: If <strong class="pkg">polymaking</strong> finds polymake by itself, there is nothing to worry about.</p>
+
+<p><a id="X851C596486F918F0" name="X851C596486F918F0"></a></p>
+
+<h4>1.2 <span class="Heading">Setting variables for external programs</span></h4>
+
+<p>As <strong class="pkg">polymaking</strong> uses the program polymake, it needs to know where this program lives. The communication with polymake is done by writing files for polymake and reading its output (as returned to standard output "the prompt"). Note that the interface does not read any polymake file.</p>
+
+<p><a id="X794A38E981F9E76F" name="X794A38E981F9E76F"></a></p>
+
+<h5>1.2-1 SetPolymakeDataDirectory</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetPolymakeDataDirectory</code>( <var class="Arg">dir</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Sets the directory in which all polymake files are created to <var class="Arg">dir</var>. The standard place for these files is a temporary directory generated when the package is loaded. This manipulates <code class="func">POLYMAKE_DATA_DIR</code> (<a href="chap3.html#X7C07B16B873BA46D"><span class="RefLink">3.2-2</span></a>).</p>
+
+<p><a id="X854645287BC9303E" name="X854645287BC9303E"></a></p>
+
+<h5>1.2-2 SetPolymakeCommand</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetPolymakeCommand</code>( <var class="Arg">command</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Sets the name for the polymake program to <var class="Arg">command</var>. This manipulates <code class="func">POLYMAKE_COMMAND</code> (<a href="chap3.html#X7B35A5217C8C7B04"><span class="RefLink">3.2-1</span></a>).</p>
+
+<p><a id="X7943B579846BDB76" name="X7943B579846BDB76"></a></p>
+
+<h5>1.2-3 <span class="Heading">Setting variables permanently</span></h5>
+
+<p>To permanently set the values of <code class="func">POLYMAKE_COMMAND</code> (<a href="chap3.html#X7B35A5217C8C7B04"><span class="RefLink">3.2-1</span></a>), and <code class="func">POLYMAKE_DATA_DIR</code> (<a href="chap3.html#X7C07B16B873BA46D"><span class="RefLink">3.2-2</span></a>), add the lines</p>
+
+
+<div class="example"><pre>
+POLYMAKE_DATA_DIR:=Directory("/home/mypolymakedatadir");
+POLYMAKE_COMMAND:=Filename(Directory("/home/mypolymakebindir/"),"polymake");
+</pre></div>
+
+<p>to your <code class="file">.gaprc</code> file (see <span class="RefLink">???</span>). Note that these have to be <em>before</em> the <code class="code">LoadPackage("polymaking");</code> line. Or you can change the values of the above variables by editing <code class="file">lib/environment.gi</code></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

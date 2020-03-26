@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (simpcomp) - Chapter 5: The GAP object types SCSimplicialComplex and SCNormalSurface</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X78B454D3799549A9" name="X78B454D3799549A9"></a></p>
+<div class="ChapSects"><a href="chap5.html#X78B454D3799549A9">5 <span class="Heading">The GAP object types <code class="code">SCSimplicialComplex</code> and <code class="code">SCNormalSurface</code></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7E7034FC82152AE6">5.1 <span class="Heading">The object type <code class="code">SCSimplicialComplex</code></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82E3D6D97951997D">5.1-1 SCIsSimplicialComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X80F13BB484B3E9B2">5.1-2 SCCopy</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7AAEB857865D9B4A">5.1-3 ShallowCopy (SCSimplicialComplex)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8155B18D7EEF06DE">5.1-4 SCPropertiesDropped</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X790E779979A985FF">5.2 <span class="Heading">Overloaded operators of <code class="code">SCSimplicialComplex</code></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D932F3C7F853443">5.2-1 Operation + (SCSimplicialComplex, Integer)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X84853235810E68E7">5.2-2 Operation - (SCSimplicialComplex, Integer)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X78329E8F7999F2F3">5.2-3 Operation mod (SCSimplicialComplex, Integer)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CBC2E7A87726BA8">5.2-4 Operation ^ (SCSimplicialComplex, Integer)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E49B2337FCCD890">5.2-5 Operation + (SCSimplicialComplex, SCSimplicialComplex)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F9794A381478434">5.2-6 Operation - (SCSimplicialComplex, SCSimplicialComplex)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X80C8CB3983D4356C">5.2-7 Operation * (SCSimplicialComplex, SCSimplicialComplex)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7A3887227BA8E878">5.2-8 Operation = (SCSimplicialComplex, SCSimplicialComplex)</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7CB571C97C426BE2">5.3 <span class="Heading"><code class="code">SCSimplicialComplex</code> as a subtype of <code class="code">Set</code></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82C94EE47E339DD8">5.3-1 Operation Union (SCSimplicialComplex, SCSimplicialComplex)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X80CFABE083100541">5.3-2 Operation Difference (SCSimplicialComplex, SCSimplicialComplex)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X851CE49F7F7437C3">5.3-3 Operation Intersection (SCSimplicialComplex, SCSimplicialComplex)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B3E2F12853D4303">5.3-4 Size (SCSimplicialComplex)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X86F0D20F8529E0DB">5.3-5 Length (SCSimplicialComplex)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85B5C18F7EFB94A4">5.3-6 Operation [] (SCSimplicialComplex)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F8511457D591474">5.3-7 Iterator (SCSimplicialComplex)</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X80F19FA07C71EDDC">5.4 <span class="Heading">The object type <code class="code">SCNormalSurface</code></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X874D22B47BCD48D4">5.5 <span class="Heading">Overloaded operators of <code class="code">SCNormalSurface</code></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8295612F7BF5B611">5.5-1 Operation + (SCNormalSurface, Integer)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8428D7E5857EEAB5">5.5-2 Operation - (SCNormalSurface, Integer)</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8596775A7EBAAD7D">5.5-3 Operation mod (SCNormalSurface, Integer)</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X84C01E097C009E76">5.6 <span class="Heading"><code class="code">SCNormalSurface</code> as a subtype of <code class="code">Set</code></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8462E960847F8B83">5.6-1 Operation Union (SCNormalSurface, SCNormalSurface)</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">The GAP object types <code class="code">SCSimplicialComplex</code> and <code class="code">SCNormalSurface</code></span></h3>
+
+<p>Currently, the <strong class="pkg">GAP</strong> package <strong class="pkg">simpcomp</strong> supports data structures for two different kinds of geometric objects, namely simplicial complexes (<code class="code">SCSimplicialComplex</code>) and discrete normal surfaces (<code class="code">SCNormalSurface</code>) which are both subtypes of the <strong class="pkg">GAP</strong> object type <code class="code">SCPolyhedralComplex</code></p>
+
+<p><a id="X7E7034FC82152AE6" name="X7E7034FC82152AE6"></a></p>
+
+<h4>5.1 <span class="Heading">The object type <code class="code">SCSimplicialComplex</code></span></h4>
+
+<p>A major part of <strong class="pkg">simpcomp</strong> deals with the object type <code class="code">SCSimplicialComplex</code>. For a complete list of properties that <code class="code">SCSimplicialComplex</code> handles, see Chapter <a href="chap6.html#X82BDBFFC81D080D1"><span class="RefLink">6</span></a>. For a few fundamental methods and functions (such as checking the object class, copying objects of this type, etc.) for <code class="code">SCSimplicialComplex</code> see below.</p>
+
+<p><a id="X82E3D6D97951997D" name="X82E3D6D97951997D"></a></p>
+
+<h5>5.1-1 SCIsSimplicialComplex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCIsSimplicialComplex</code>( <var class="Arg">object</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Checks if <var class="Arg">object</var> is of type <code class="code">SCSimplicialComplex</code>. The object type <code class="code">SCSimplicialComplex</code> is derived from the object type <code class="code">SCPropertyObject</code>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCEmpty();;
+ gap&gt; SCIsSimplicialComplex(c);
+ true
+ </pre></div>
+
+<p><a id="X80F13BB484B3E9B2" name="X80F13BB484B3E9B2"></a></p>
+
+<h5>5.1-2 SCCopy</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCCopy</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a copy of <var class="Arg">complex</var> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Makes a ``deep copy'' of <var class="Arg">complex</var> -- this is a copy such that all properties of the copy can be altered without changing the original complex.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(4);;
+ gap&gt; d:=SCCopy(c)-1;;
+ gap&gt; c.Facets=d.Facets;
+ false
+ </pre></div>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(4);;
+ gap&gt; d:=SCCopy(c);;
+ gap&gt; IsIdenticalObj(c,d);
+ false
+ </pre></div>
+
+<p><a id="X7AAEB857865D9B4A" name="X7AAEB857865D9B4A"></a></p>
+
+<h5>5.1-3 ShallowCopy (SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShallowCopy (SCSimplicialComplex)</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a copy of <var class="Arg">complex</var> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Makes a copy of <var class="Arg">complex</var>. This is actually a ``deep copy'' such that all properties of the copy can be altered without changing the original complex. Internally calls <code class="func">SCCopy</code> (<a href="chap5.html#X80F13BB484B3E9B2"><span class="RefLink">5.1-2</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdCrossPolytope(7);;
+ gap&gt; d:=ShallowCopy(c)+10;;
+ gap&gt; c.Facets=d.Facets;
+ false
+ </pre></div>
+
+<p><a id="X8155B18D7EEF06DE" name="X8155B18D7EEF06DE"></a></p>
+
+<h5>5.1-4 SCPropertiesDropped</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCPropertiesDropped</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a object of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>An object of the type <code class="code">SCSimplicialComplex</code> caches its previously calculated properties such that each property only has to be calculated once. This function returns a copy of <var class="Arg">complex</var> with all properties (apart from Facets, Dim and Name) dropped, clearing all previously computed properties. See also <code class="func">SCPropertyDrop</code> (<a href="chap18.html#X8304C9BC7E8CF4F8"><span class="RefLink">18.1-8</span></a>) and <code class="func">SCPropertyTmpDrop</code> (<a href="chap18.html#X836F936B7E09E5F1"><span class="RefLink">18.1-13</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SC(SCFacets(SCBdCyclicPolytope(10,12)));
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="unnamed complex 27"
+  Dim=9
+ 
+ /SimplicialComplex]
+ gap&gt; c.F; time;                                 
+ [ 12, 66, 220, 495, 792, 922, 780, 465, 180, 36 ]
+ 27
+ gap&gt; c.F; time;                                 
+ [ 12, 66, 220, 495, 792, 922, 780, 465, 180, 36 ]
+ 0
+ gap&gt; c:=SCPropertiesDropped(c);                 
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="unnamed complex 27"
+  Dim=9
+ 
+ /SimplicialComplex]
+ gap&gt; c.F; time;                                 
+ [ 12, 66, 220, 495, 792, 922, 780, 465, 180, 36 ]
+ 30
+ </pre></div>
+
+<p><a id="X790E779979A985FF" name="X790E779979A985FF"></a></p>
+
+<h4>5.2 <span class="Heading">Overloaded operators of <code class="code">SCSimplicialComplex</code></span></h4>
+
+<p><strong class="pkg">simpcomp</strong> overloads some standard operations for the object type <code class="code">SCSimplicialComplex</code> if this definition is intuitive and mathematically sound. See a list of overloaded operators below.</p>
+
+<p><a id="X7D932F3C7F853443" name="X7D932F3C7F853443"></a></p>
+
+<h5>5.2-1 Operation + (SCSimplicialComplex, Integer)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation + (SCSimplicialComplex, Integer)</code>( <var class="Arg">complex</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the simplicial complex passed as argument upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Positively shifts the vertex labels of <var class="Arg">complex</var> (provided that all labels satisfy the property <code class="code">IsAdditiveElement</code>) by the amount specified in <var class="Arg">value</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3)+10;;
+ gap&gt; c.Facets;
+ [ [ 11, 12, 13 ], [ 11, 12, 14 ], [ 11, 13, 14 ], [ 12, 13, 14 ] ]
+ </pre></div>
+
+<p><a id="X84853235810E68E7" name="X84853235810E68E7"></a></p>
+
+<h5>5.2-2 Operation - (SCSimplicialComplex, Integer)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation - (SCSimplicialComplex, Integer)</code>( <var class="Arg">complex</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the simplicial complex passed as argument upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Negatively shifts the vertex labels of <var class="Arg">complex</var> (provided that all labels satisfy the property <code class="code">IsAdditiveElement</code>) by the amount specified in <var class="Arg">value</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3)-1;;
+ gap&gt; c.Facets;
+ [ [ 0, 1, 2 ], [ 0, 1, 3 ], [ 0, 2, 3 ], [ 1, 2, 3 ] ]
+ </pre></div>
+
+<p><a id="X78329E8F7999F2F3" name="X78329E8F7999F2F3"></a></p>
+
+<h5>5.2-3 Operation mod (SCSimplicialComplex, Integer)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation mod (SCSimplicialComplex, Integer)</code>( <var class="Arg">complex</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the simplicial complex passed as argument upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Takes all vertex labels of <var class="Arg">complex</var> modulo the value specified in <var class="Arg">value</var> (provided that all labels satisfy the property <code class="code">IsAdditiveElement</code>). Warning: this might result in different vertices being assigned the same label or even in invalid facet lists, so be careful.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=(SCBdSimplex(3)*10) mod 7;;
+ gap&gt; c.Facets;
+ [ [ 2, 3, 5 ], [ 2, 3, 6 ], [ 2, 5, 6 ], [ 3, 5, 6 ] ]
+ </pre></div>
+
+<p><a id="X7CBC2E7A87726BA8" name="X7CBC2E7A87726BA8"></a></p>
+
+<h5>5.2-4 Operation ^ (SCSimplicialComplex, Integer)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation ^ (SCSimplicialComplex, Integer)</code>( <var class="Arg">complex</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Forms the <var class="Arg">value</var>-th simplicial cartesian power of <var class="Arg">complex</var>, i.e. the <var class="Arg">value</var>-fold cartesian product of copies of <var class="Arg">complex</var>. The complex passed as argument is not altered. Internally calls <code class="func">SCCartesianPower</code> (<a href="chap6.html#X8255A2F97A7432F9"><span class="RefLink">6.6-1</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(2)^2; #a torus
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, TopologicalType, Vertices.
+ 
+  Name="(S^1_3)^2"
+  Dim=2
+  TopologicalType="(S^1)^2"
+ 
+ /SimplicialComplex]
+ </pre></div>
+
+<p><a id="X7E49B2337FCCD890" name="X7E49B2337FCCD890"></a></p>
+
+<h5>5.2-5 Operation + (SCSimplicialComplex, SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation + (SCSimplicialComplex, SCSimplicialComplex)</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Forms the connected sum of <var class="Arg">complex1</var> and <var class="Arg">complex2</var>. Uses the lexicographically first facets of both complexes to do the gluing. The complexes passed as arguments are not altered. Internally calls <code class="func">SCConnectedSum</code> (<a href="chap6.html#X81338CE18195607C"><span class="RefLink">6.6-5</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("RP^3");
+ [ [ 45, "RP^3" ], [ 111, "RP^3=L(2,1) (VT)" ], [ 589, "(S^2~S^1)#RP^3" ], 
+   [ 590, "(S^2xS^1)#RP^3" ], [ 644, "(S^2~S^1)#2#RP^3" ], 
+   [ 646, "(S^2xS^1)#2#RP^3" ], [ 2414, "RP^3#RP^3" ], 
+   [ 2428, "RP^3=L(2,1) (VT)" ], [ 2488, "(S^2~S^1)#3#RP^3" ], 
+   [ 2489, "(S^2xS^1)#3#RP^3" ], [ 2503, "RP^3=L(2,1) (VT)" ], 
+   [ 7473, "(S^2xS^1)#4#RP^3" ], [ 7474, "(S^2~S^1)#4#RP^3" ], 
+   [ 7505, "(S^2xS^1)#5#RP^3" ], [ 7507, "(S^2~S^1)#5#RP^3" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; SCLib.SearchByName("S^2~S^1"){[1..3]};
+ [ [ 12, "S^2~S^1 (VT)" ], [ 26, "S^2~S^1 (VT)" ], [ 30, "S^2~S^1 (VT)" ] ]
+ gap&gt; d:=SCLib.Load(last[1][1]);;
+ gap&gt; c:=c+d; #form RP^3#(S^2~S^1)
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="RP^3#+-S^2~S^1 (VT)"
+  Dim=3
+ 
+ /SimplicialComplex]
+ </pre></div>
+
+<p><a id="X7F9794A381478434" name="X7F9794A381478434"></a></p>
+
+<h5>5.2-6 Operation - (SCSimplicialComplex, SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation - (SCSimplicialComplex, SCSimplicialComplex)</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Calls <code class="func">SCDifference</code> (<a href="chap6.html#X7FB3D29178076EB4"><span class="RefLink">6.10-5</span></a>)(<var class="Arg">complex1</var>, <var class="Arg">complex2</var>)</p>
+
+<p><a id="X80C8CB3983D4356C" name="X80C8CB3983D4356C"></a></p>
+
+<h5>5.2-7 Operation * (SCSimplicialComplex, SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation * (SCSimplicialComplex, SCSimplicialComplex)</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Forms the simplicial cartesian product of <var class="Arg">complex1</var> and <var class="Arg">complex2</var>. Internally calls <code class="func">SCCartesianProduct</code> (<a href="chap6.html#X859DA29B83BDE35E"><span class="RefLink">6.6-2</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("RP^2");
+ [ [ 3, "RP^2 (VT)" ], [ 645, "RP^2xS^1" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1])*SCBdSimplex(3); #form RP^2 x S^2
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="RP^2 (VT)xS^2_4"
+  Dim=4
+ 
+ /SimplicialComplex]
+ </pre></div>
+
+<p><a id="X7A3887227BA8E878" name="X7A3887227BA8E878"></a></p>
+
+<h5>5.2-8 Operation = (SCSimplicialComplex, SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation = (SCSimplicialComplex, SCSimplicialComplex)</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> or <code class="keyw">false</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Calculates whether two simplicial complexes are isomorphic, i.e. are equal up to a relabeling of the vertices.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; c=c+10;
+ true
+ gap&gt; c=SCBdCrossPolytope(4);
+ false
+ </pre></div>
+
+<p><a id="X7CB571C97C426BE2" name="X7CB571C97C426BE2"></a></p>
+
+<h4>5.3 <span class="Heading"><code class="code">SCSimplicialComplex</code> as a subtype of <code class="code">Set</code></span></h4>
+
+<p>Apart from being a subtype of <code class="code">SCPropertyObject</code>, an object of type <code class="code">SCSimplicialComplex</code> also behaves like a <strong class="pkg">GAP</strong> <code class="code">Set</code> type. The elements of the set are given by the facets of the simplical complex, grouped by their dimensionality, i.e. if <code class="code">complex</code> is an object of type <code class="code">SCSimplicialComplex</code>, <code class="code">c[1]</code> refers to the 0-faces of <code class="code">complex</code>, <code class="code">c[2]</code> to the 1-faces, etc.</p>
+
+<p><a id="X82C94EE47E339DD8" name="X82C94EE47E339DD8"></a></p>
+
+<h5>5.3-1 Operation Union (SCSimplicialComplex, SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation Union (SCSimplicialComplex, SCSimplicialComplex)</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the union of two simplicial complexes by calling <code class="func">SCUnion</code> (<a href="chap7.html#X81DA367A813F7599"><span class="RefLink">7.3-16</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=Union(SCBdSimplex(3),SCBdSimplex(3)+3); #a wedge of two 2-spheres
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="S^2_4 cup S^2_4"
+  Dim=2
+ 
+ /SimplicialComplex]
+ </pre></div>
+
+<p><a id="X80CFABE083100541" name="X80CFABE083100541"></a></p>
+
+<h5>5.3-2 Operation Difference (SCSimplicialComplex, SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation Difference (SCSimplicialComplex, SCSimplicialComplex)</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the ``difference'' of two simplicial complexes by calling <code class="func">SCDifference</code> (<a href="chap6.html#X7FB3D29178076EB4"><span class="RefLink">6.10-5</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;
+ gap&gt; d:=SC([[1,2,3]]);;
+ gap&gt; disc:=Difference(c,d);;
+ gap&gt; disc.Facets;
+ [ [ 1, 2, 4 ], [ 1, 3, 4 ], [ 2, 3, 4 ] ]
+ gap&gt; empty:=Difference(d,c);;
+ gap&gt; empty.Dim;
+ -1
+ </pre></div>
+
+<p><a id="X851CE49F7F7437C3" name="X851CE49F7F7437C3"></a></p>
+
+<h5>5.3-3 Operation Intersection (SCSimplicialComplex, SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation Intersection (SCSimplicialComplex, SCSimplicialComplex)</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: simplicial complex of type <code class="code">SCSimplicialComplex</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the ``intersection'' of two simplicial complexes by calling <code class="func">SCIntersection</code> (<a href="chap6.html#X7B4BE2C783E6D0BF"><span class="RefLink">6.10-8</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdSimplex(3);;        
+ gap&gt; d:=SCBdSimplex(3);;        
+ gap&gt; d:=SCMove(d,[[1,2,3],[]]);;
+ gap&gt; d:=d+1;;                   
+ gap&gt; s1:=SCIntersection(c,d);   
+ [SimplicialComplex
+ 
+  Properties known: Dim, FacetsEx, Name, Vertices.
+ 
+  Name="S^2_4 cap unnamed complex 20"
+  Dim=1
+ 
+ /SimplicialComplex]
+ gap&gt; s1.Facets;                 
+ [ [ 2, 3 ], [ 2, 4 ], [ 3, 4 ] ]
+ </pre></div>
+
+<p><a id="X7B3E2F12853D4303" name="X7B3E2F12853D4303"></a></p>
+
+<h5>5.3-4 Size (SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Size (SCSimplicialComplex)</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an integer upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns the ``size'' of a simplicial complex. This is <span class="SimpleMath">d+1</span>, where <span class="SimpleMath">d</span> is the dimension of the complex. <span class="SimpleMath">d+1</span> is returned instead of <span class="SimpleMath">d</span>, as all lists in <strong class="pkg">GAP</strong> are indexed beginning with 1 -- thus this also holds for all the face lattice related properties of the complex.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByAttribute("F=[12,66,108,54]");
+ [ [ 139, "S^2xS^1 (VT)" ], [ 140, "S^2~S^1 (VT)" ], [ 141, "S^2xS^1 (VT)" ], 
+   [ 142, "S^2xS^1 (VT)" ], [ 143, "(S^2xS^1)#(S^2xS^1) (VT)" ], 
+   [ 144, "(S^2xS^1)#(S^2xS^1) (VT)" ], [ 145, "S^2xS^1 (VT)" ], 
+   [ 146, "S^2xS^1 (VT)" ], [ 147, "S^2xS^1 (VT)" ], [ 148, "S^2~S^1 (VT)" ], 
+   [ 149, "(S^2xS^1)#(S^2xS^1) (VT)" ], [ 150, "S^2~S^1 (VT)" ], 
+   [ 151, "S^2~S^1 (VT)" ], [ 152, "S^2~S^1 (VT)" ], [ 153, "S^2~S^1 (VT)" ], 
+   [ 154, "S^2~S^1 (VT)" ], [ 155, "S^2xS^1 (VT)" ], [ 156, "S^2xS^1 (VT)" ], 
+   [ 157, "(S^2xS^1)#(S^2xS^1) (VT)" ], [ 158, "S^2~S^1 (VT)" ], 
+   [ 159, "S^2xS^1 (VT)" ], [ 160, "(S^2xS^1)#(S^2xS^1) (VT)" ], 
+   [ 161, "L_3_1" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; for i in [1..Size(c)] do Print(c.F[i],"\n"); od;
+ 12
+ 66
+ 108
+ 54
+ </pre></div>
+
+<p><a id="X86F0D20F8529E0DB" name="X86F0D20F8529E0DB"></a></p>
+
+<h5>5.3-5 Length (SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Length (SCSimplicialComplex)</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an integer upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns the ``size'' of a simplicial complex by calling <code class="code">Size(</code><var class="Arg">complex</var><code class="code">)</code>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByAttribute("F=[12,66,108,54]");
+ [ [ 139, "S^2xS^1 (VT)" ], [ 140, "S^2~S^1 (VT)" ], [ 141, "S^2xS^1 (VT)" ], 
+   [ 142, "S^2xS^1 (VT)" ], [ 143, "(S^2xS^1)#(S^2xS^1) (VT)" ], 
+   [ 144, "(S^2xS^1)#(S^2xS^1) (VT)" ], [ 145, "S^2xS^1 (VT)" ], 
+   [ 146, "S^2xS^1 (VT)" ], [ 147, "S^2xS^1 (VT)" ], [ 148, "S^2~S^1 (VT)" ], 
+   [ 149, "(S^2xS^1)#(S^2xS^1) (VT)" ], [ 150, "S^2~S^1 (VT)" ], 
+   [ 151, "S^2~S^1 (VT)" ], [ 152, "S^2~S^1 (VT)" ], [ 153, "S^2~S^1 (VT)" ], 
+   [ 154, "S^2~S^1 (VT)" ], [ 155, "S^2xS^1 (VT)" ], [ 156, "S^2xS^1 (VT)" ], 
+   [ 157, "(S^2xS^1)#(S^2xS^1) (VT)" ], [ 158, "S^2~S^1 (VT)" ], 
+   [ 159, "S^2xS^1 (VT)" ], [ 160, "(S^2xS^1)#(S^2xS^1) (VT)" ], 
+   [ 161, "L_3_1" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; for i in [1..Length(c)] do Print(c.F[i],"\n"); od;
+ 12
+ 66
+ 108
+ 54
+ </pre></div>
+
+<p><a id="X85B5C18F7EFB94A4" name="X85B5C18F7EFB94A4"></a></p>
+
+<h5>5.3-6 Operation [] (SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation [] (SCSimplicialComplex)</code>( <var class="Arg">complex</var>, <var class="Arg">pos</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: a list of faces upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Returns the <span class="SimpleMath">(pos-1)</span>-dimensional faces of <var class="Arg">complex</var> as a list. If <span class="SimpleMath">pos ≥ d+2</span>, where <span class="SimpleMath">d</span> is the dimension of <var class="Arg">complex</var>, the empty set is returned. Note that <var class="Arg">pos</var> must be <span class="SimpleMath">≥ 1</span>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByName("K^2");
+ [ [ 17, "K^2 (VT)" ], [ 571, "K^2 (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; c[2];
+ [ [ 1, 2 ], [ 1, 3 ], [ 1, 5 ], [ 1, 7 ], [ 1, 9 ], [ 1, 10 ], [ 2, 3 ], 
+   [ 2, 4 ], [ 2, 6 ], [ 2, 8 ], [ 2, 10 ], [ 3, 4 ], [ 3, 5 ], [ 3, 7 ], 
+   [ 3, 9 ], [ 4, 5 ], [ 4, 6 ], [ 4, 8 ], [ 4, 10 ], [ 5, 6 ], [ 5, 7 ], 
+   [ 5, 9 ], [ 6, 7 ], [ 6, 8 ], [ 6, 10 ], [ 7, 8 ], [ 7, 9 ], [ 8, 9 ], 
+   [ 8, 10 ], [ 9, 10 ] ]
+ gap&gt; c[4];
+ [  ]
+ </pre></div>
+
+<p><a id="X7F8511457D591474" name="X7F8511457D591474"></a></p>
+
+<h5>5.3-7 Iterator (SCSimplicialComplex)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Iterator (SCSimplicialComplex)</code>( <var class="Arg">complex</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: an iterator on the face lattice of <var class="Arg">complex</var> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Provides an iterator object for the face lattice of a simplicial complex.</p>
+
+
+<div class="example"><pre>
+ gap&gt; c:=SCBdCrossPolytope(4);;
+ gap&gt; for faces in c do Print(Length(faces),"\n"); od;
+ 8
+ 24
+ 32
+ 16
+ </pre></div>
+
+<p><a id="X80F19FA07C71EDDC" name="X80F19FA07C71EDDC"></a></p>
+
+<h4>5.4 <span class="Heading">The object type <code class="code">SCNormalSurface</code></span></h4>
+
+<p>The <strong class="pkg">GAP</strong> object type <code class="code">SCNormalSurface</code> is designed to describe slicings (level sets of discrete Morse functions) of combinatorial <span class="SimpleMath">3</span>-manifolds, i. e. discrete normal surfaces. Internally <code class="code">SCNormalSurface</code> is a subtype of <code class="code">SCPolyhedralComplex</code> and, thus, mostly behaves like a <code class="code">SCSimplicialComplex</code> object (see Section <a href="chap5.html#X7E7034FC82152AE6"><span class="RefLink">5.1</span></a>). For a very short introduction to normal surfaces see <a href="chap2.html#X7BE7221B7C38B27D"><span class="RefLink">2.4</span></a>, for a more thorough introduction to the field see <a href="chapBib.html#biBSpreer10NormSurfsCombSlic">[Spr11b]</a>. For some fundamental methods and functions for <code class="code">SCNormalSurface</code> see below. For more functions related to the <code class="code">SCNormalSurface</code> object type see Chapter <a href="chap7.html#X8071FAE8806ACAA2"><span class="RefLink">7</span></a>.</p>
+
+<p><a id="X874D22B47BCD48D4" name="X874D22B47BCD48D4"></a></p>
+
+<h4>5.5 <span class="Heading">Overloaded operators of <code class="code">SCNormalSurface</code></span></h4>
+
+<p>As with the object type <code class="code">SCSimplicialComplex</code>, <strong class="pkg">simpcomp</strong> overloads some standard operations for the object type <code class="code">SCNormalSurface</code>. See a list of overloaded operators below.</p>
+
+<p><a id="X8295612F7BF5B611" name="X8295612F7BF5B611"></a></p>
+
+<h5>5.5-1 Operation + (SCNormalSurface, Integer)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation + (SCNormalSurface, Integer)</code>( <var class="Arg">complex</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the discrete normal surface passed as argument upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Positively shifts the vertex labels of <var class="Arg">complex</var> (provided that all labels satisfy the property <code class="code">IsAdditiveElement</code>) by the amount specified in <var class="Arg">value</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; sl:=SCNSSlicing(SCBdSimplex(4),[[1],[2..5]]);;
+ gap&gt; sl.Facets;                                    
+ [ [ [ 1, 2 ], [ 1, 3 ], [ 1, 4 ] ], [ [ 1, 2 ], [ 1, 3 ], [ 1, 5 ] ], 
+   [ [ 1, 2 ], [ 1, 4 ], [ 1, 5 ] ], [ [ 1, 3 ], [ 1, 4 ], [ 1, 5 ] ] ]
+ gap&gt; sl:=sl + 2;;                                  
+ gap&gt; sl.Facets;  
+ [ [ [ 3, 4 ], [ 3, 5 ], [ 3, 6 ] ], [ [ 3, 4 ], [ 3, 5 ], [ 3, 7 ] ], 
+   [ [ 3, 4 ], [ 3, 6 ], [ 3, 7 ] ], [ [ 3, 5 ], [ 3, 6 ], [ 3, 7 ] ] ]
+ </pre></div>
+
+<p><a id="X8428D7E5857EEAB5" name="X8428D7E5857EEAB5"></a></p>
+
+<h5>5.5-2 Operation - (SCNormalSurface, Integer)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation - (SCNormalSurface, Integer)</code>( <var class="Arg">complex</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the discrete normal surface passed as argument upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Negatively shifts the vertex labels of <var class="Arg">complex</var> (provided that all labels satisfy the property <code class="code">IsAdditiveElement</code>) by the amount specified in <var class="Arg">value</var>.</p>
+
+
+<div class="example"><pre>
+ gap&gt; sl:=SCNSSlicing(SCBdSimplex(4),[[1],[2..5]]);;
+ gap&gt; sl.Facets;                                    
+ [ [ [ 1, 2 ], [ 1, 3 ], [ 1, 4 ] ], [ [ 1, 2 ], [ 1, 3 ], [ 1, 5 ] ], 
+   [ [ 1, 2 ], [ 1, 4 ], [ 1, 5 ] ], [ [ 1, 3 ], [ 1, 4 ], [ 1, 5 ] ] ]
+ gap&gt; sl:=sl - 2;;                                  
+ gap&gt; sl.Facets;  
+ [ [ [ -1, 0 ], [ -1, 1 ], [ -1, 2 ] ], [ [ -1, 0 ], [ -1, 1 ], [ -1, 3 ] ], 
+   [ [ -1, 0 ], [ -1, 2 ], [ -1, 3 ] ], [ [ -1, 1 ], [ -1, 2 ], [ -1, 3 ] ] ]
+ </pre></div>
+
+<p><a id="X8596775A7EBAAD7D" name="X8596775A7EBAAD7D"></a></p>
+
+<h5>5.5-3 Operation mod (SCNormalSurface, Integer)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation mod (SCNormalSurface, Integer)</code>( <var class="Arg">complex</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: the discrete normal surface passed as argument upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Takes all vertex labels of <var class="Arg">complex</var> modulo the value specified in <var class="Arg">value</var> (provided that all labels satisfy the property <code class="code">IsAdditiveElement</code>). Warning: this might result in different vertices being assigned the same label or even invalid facet lists, so be careful.</p>
+
+
+<div class="example"><pre>
+ gap&gt; sl:=SCNSSlicing(SCBdSimplex(4),[[1],[2..5]]);;    
+ gap&gt; sl.Facets;
+ [ [ [ 1, 2 ], [ 1, 3 ], [ 1, 4 ] ], [ [ 1, 2 ], [ 1, 3 ], [ 1, 5 ] ], 
+   [ [ 1, 2 ], [ 1, 4 ], [ 1, 5 ] ], [ [ 1, 3 ], [ 1, 4 ], [ 1, 5 ] ] ]
+ gap&gt; sl:=sl mod 2;;
+ gap&gt; sl.Facets;    
+ [ [ [ 1, 0 ], [ 1, 0 ], [ 1, 1 ] ], [ [ 1, 0 ], [ 1, 0 ], [ 1, 1 ] ], 
+   [ [ 1, 0 ], [ 1, 1 ], [ 1, 1 ] ], [ [ 1, 0 ], [ 1, 1 ], [ 1, 1 ] ] ]
+ </pre></div>
+
+<p><a id="X84C01E097C009E76" name="X84C01E097C009E76"></a></p>
+
+<h4>5.6 <span class="Heading"><code class="code">SCNormalSurface</code> as a subtype of <code class="code">Set</code></span></h4>
+
+<p>Like objects of type <code class="code">SCSimplicialComplex</code>, an object of type <code class="code">SCNormalSurface</code> behaves like a <strong class="pkg">GAP</strong> <code class="code">Set</code> type. The elements of the set are given by the facets of the normal surface, grouped by their dimensionality and type, i.e. if <code class="code">complex</code> is an object of type <code class="code">SCNormalSurface</code>, <code class="code">c[1]</code> refers to the 0-faces of <code class="code">complex</code>, <code class="code">c[2]</code> to the 1-faces, <code class="code">c[3]</code> to the triangles and <code class="code">c[4]</code> to the quadrilaterals. See below for some examples and Section <a href="chap5.html#X7CB571C97C426BE2"><span class="RefLink">5.3</span></a> for details.</p>
+
+<p><a id="X8462E960847F8B83" name="X8462E960847F8B83"></a></p>
+
+<h5>5.6-1 Operation Union (SCNormalSurface, SCNormalSurface)</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Operation Union (SCNormalSurface, SCNormalSurface)</code>( <var class="Arg">complex1</var>, <var class="Arg">complex2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: discrete normal surface of type <code class="code">SCNormalSurface</code> upon success, <code class="keyw">fail</code> otherwise.</p>
+
+<p>Computes the union of two discrete normal surfaces by calling <code class="func">SCUnion</code> (<a href="chap7.html#X81DA367A813F7599"><span class="RefLink">7.3-16</span></a>).</p>
+
+
+<div class="example"><pre>
+ gap&gt; SCLib.SearchByAttribute("F = [ 10, 35, 50, 25 ]");
+ [ [ 19, "S^3 (VT)" ] ]
+ gap&gt; c:=SCLib.Load(last[1][1]);;
+ gap&gt; sl1:=SCNSSlicing(c,[[1,3,5,7,9],[2,4,6,8,10]]);;
+ gap&gt; sl2:=sl1+10;;
+ gap&gt; SCTopologicalType(sl1);
+ "T^2"
+ gap&gt; sl3:=Union(sl1,sl2);;
+ gap&gt; SCTopologicalType(sl3);
+ "T^2 U T^2"
+ </pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

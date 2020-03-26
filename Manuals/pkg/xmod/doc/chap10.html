@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (XMod) - Chapter 10: Crossed modules of groupoids</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap10"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap10_mj.html">[MathJax on]</a></p>
+<p><a id="X80B3A81B7E5CA3A9" name="X80B3A81B7E5CA3A9"></a></p>
+<div class="ChapSects"><a href="chap10.html#X80B3A81B7E5CA3A9">10 <span class="Heading">Crossed modules of groupoids</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X847F4ED77F50528C">10.1 <span class="Heading">Constructions for crossed modules of groupoids</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X86CD034F82F5F029">10.1-1 SinglePiecePreXModWithObjects</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7B76F2BF82E075FF">10.1-2 IsXModWithObjects</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X858EB4F97D04D012">10.1-3 IsPermPreXModWithObjects</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X797B1CD07C3682EE">10.1-4 Root2dGroup</a></span>
+</div></div>
+</div>
+
+<h3>10 <span class="Heading">Crossed modules of groupoids</span></h3>
+
+<p>The material documented in this chapter is experimental, and is likely to be changed very soon.</p>
+
+<p><a id="X847F4ED77F50528C" name="X847F4ED77F50528C"></a></p>
+
+<h4>10.1 <span class="Heading">Constructions for crossed modules of groupoids</span></h4>
+
+<p>A typical example of a crossed module <span class="SimpleMath">calX</span> over a groupoid has for its range a connected groupoid. This is a direct product of a group with a complete graph, and we call the vertices of the graph the <em>objects</em> of the crossed module. The source of <span class="SimpleMath">calX</span> is a groupoid, with the same objects, which is either discrete or connected. The boundary morphism is constant on objects. For details and other references see <a href="chapBib.html#biBAW2">[AW10]</a>.</p>
+
+<p><a id="X86CD034F82F5F029" name="X86CD034F82F5F029"></a></p>
+
+<h5>10.1-1 SinglePiecePreXModWithObjects</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SinglePiecePreXModWithObjects</code>( <var class="Arg">pxmod</var>, <var class="Arg">obs</var>, <var class="Arg">isdisc</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>At present the experimental operation <code class="code">SinglePiecePreXModWithObjects</code> accepts a precrossed module <code class="code">pxmod</code>, a set of objects <code class="code">obs</code>, and a boolean <code class="code">isdisc</code> which is <code class="keyw">true</code> when the source groupoid is homogeneous and discrete and <code class="keyw">false</code> when the source groupoid is connected. Other operations will be added as time permits.</p>
+
+<p>In the example the crossed module <code class="code">DX4</code> has discrete source, while the crossed module <code class="code">CX4</code> has connected source. These are groupoid equivalents of <code class="func">XModByNormalSubgroup</code> (<a href="chap2.html#X83050ED686776933"><span class="RefLink">2.1-2</span></a>).</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s4 := Group( (1,2,3,4), (3,4) );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( s4, "s4" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a4 := Subgroup( s4, [ (1,2,3), (2,3,4) ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetName( a4, "a4" );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X4 := XModByNormalSubgroup( s4, a4 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DX4 := SinglePiecePreXModWithObjects( X4, [-9,-8,-7], true );</span>
+precrossed module with source groupoid:
+homogeneous, discrete groupoid: &lt; a4, [ -9, -8, -7 ] &gt;
+and range groupoid:
+single piece groupoid: &lt; s4, [ -9, -8, -7 ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Da4 := Source( DX4 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Ds4 := Range( DX4 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CX4 := SinglePiecePreXModWithObjects( X4, [-9,-8,-7], false );</span>
+precrossed module with source groupoid:
+single piece groupoid: &lt; a4, [ -9, -8, -7 ] &gt;
+and range groupoid:
+single piece groupoid: &lt; s4, [ -9, -8, -7 ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Ca4 := Source( CX4 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cs4 := Range( CX4 );;</span>
+
+</pre></div>
+
+<p><a id="X7B76F2BF82E075FF" name="X7B76F2BF82E075FF"></a></p>
+
+<h5>10.1-2 IsXModWithObjects</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsXModWithObjects</code>( <var class="Arg">pxmod</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPreXModWithObjects</code>( <var class="Arg">pxmod</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDirectProductWithCompleteDigraphDomain</code>( <var class="Arg">pxmod</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>The precrossed module <code class="code">DX4</code> belongs to the category <code class="code">Is2DimensionalGroupWithObjects</code> and is, of course, a crossed module.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsXModWithObjects( DX4 ); </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KnownPropertiesOfObject( DX4 ); </span>
+[ "CanEasilyCompareElements", "CanEasilySortElements", "IsDuplicateFree", 
+  "IsGeneratorsOfSemigroup", "IsSinglePieceDomain", 
+  "IsDirectProductWithCompleteDigraphDomain", "IsPreXModWithObjects", 
+  "IsXModWithObjects" ]
+
+</pre></div>
+
+<p><a id="X858EB4F97D04D012" name="X858EB4F97D04D012"></a></p>
+
+<h5>10.1-3 IsPermPreXModWithObjects</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPermPreXModWithObjects</code>( <var class="Arg">pxmod</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPcPreXModWithObjects</code>( <var class="Arg">pxmod</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFpPreXModWithObjects</code>( <var class="Arg">pxmod</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>To test these properties we test the precrossed modules from which they were constructed.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPermPreXModWithObjects( CX4 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPcPreXModWithObjects( CX4 );  </span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsFpPreXModWithObjects( CX4 );</span>
+false
+
+</pre></div>
+
+<p><a id="X797B1CD07C3682EE" name="X797B1CD07C3682EE"></a></p>
+
+<h5>10.1-4 Root2dGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Root2dGroup</code>( <var class="Arg">pxmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAction</code>( <var class="Arg">pxmod</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The attributes of a precrossed module with objects include the standard <code class="code">Source</code>; <code class="code">Range</code>; <code class="func">Boundary</code> (<a href="chap2.html#X790248A67CB9C33A"><span class="RefLink">2.1-9</span></a>); and <code class="func">XModAction</code> (<a href="chap2.html#X790248A67CB9C33A"><span class="RefLink">2.1-9</span></a>) as with precrossed modules of groups. There is also <code class="code">ObjectList</code>, as in the <strong class="pkg">groupoids</strong> package. Additionally there is <code class="code">Root2dGroup</code> which is the underlying precrossed module used in the construction.</p>
+
+<p>Note that <code class="code">XModAction</code> is now a groupoid homomorphism from the source groupoid to a one-object groupoid (with object <code class="code">0</code>) where the group is the automorphism group of the range groupoid.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Set( KnownAttributesOfObject( CX4 ) );</span>
+[ "Boundary", "ObjectList", "Range", "Root2dGroup", "Source", "XModAction" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Root2dGroup( CX4 ); </span>
+[a4-&gt;s4]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">act := XModAction( CX4 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := Arrow( Cs4, (1,2,3,4), -7, -8 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ImageElm( act, r );            </span>
+[groupoid homomorphism : 
+[ [ [(1,2,3) : -9 -&gt; -9], [(2,3,4) : -9 -&gt; -9], [() : -9 -&gt; -8], 
+      [() : -9 -&gt; -7] ], 
+  [ [(2,3,4) : -9 -&gt; -9], [(1,3,4) : -9 -&gt; -9], [() : -9 -&gt; -7], 
+      [() : -9 -&gt; -8] ] ] : 0 -&gt; 0]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := Arrow( Ca4, (1,2,4), -8, -8 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">##  calculate s^r </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ims := ImageElmXModAction( CX4, s, r );</span>
+[(1,2,3) : -7 -&gt; -7]
+
+</pre></div>
+
+<p>There is much more to be done with these constructions.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

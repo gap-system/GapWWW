@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (tut) - Chapter 7: Domains</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap7.html">[MathJax off]</a></p>
+<p><a id="X7BAF69417BB925F6" name="X7BAF69417BB925F6"></a></p>
+<div class="ChapSects"><a href="chap7_mj.html#X7BAF69417BB925F6">7 <span class="Heading">Domains</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X7D94C6F07ACEA397">7.1 <span class="Heading">Domains as Sets</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X81F376D67BA4F5EB">7.2 <span class="Heading">Algebraic Structure</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X7E8D59018638925F">7.3 <span class="Heading">Notions of Generation</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X85AB533B7DE21C8B">7.4 <span class="Heading">Domain Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X849B1C5F8136F3A9">7.5 <span class="Heading">Forming Closures of Domains</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X7EA77DE17DD8A231">7.6 <span class="Heading">Changing the Structure</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X8318352D7B5F19BA">7.7 <span class="Heading">Subdomains</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X7C83996381F67238">7.8 <span class="Heading">Further Information about Domains</span></a>
+</span>
+</div>
+</div>
+
+<h3>7 <span class="Heading">Domains</span></h3>
+
+<p><em>Domain</em> is <strong class="pkg">GAP</strong>'s name for structured sets. We already saw examples of domains in Chapters <a href="chap5_mj.html#X8171DAF2833FF728"><span class="RefLink">5</span></a> and <a href="chap6_mj.html#X853484B982F1DF96"><span class="RefLink">6</span></a>: the groups <code class="code">s8</code> and <code class="code">a8</code> in Section <a href="chap5_mj.html#X85ED46007CED6191"><span class="RefLink">5.1</span></a> are domains, likewise the field <code class="code">f</code> and the vector space <code class="code">v</code> in Section <a href="chap6_mj.html#X7DAD6700787EC845"><span class="RefLink">6.1</span></a> are domains. They were constructed by functions such as <code class="func">Group</code> (<span class="RefLink">Reference: Group Libraries</span>) and <code class="func">GF</code> (<span class="RefLink">Reference: GF for field size</span>), and they could be passed as arguments to other functions such as <code class="func">DerivedSubgroup</code> (<span class="RefLink">Reference: DerivedSubgroup</span>) and <code class="func">Dimension</code> (<span class="RefLink">Reference: Dimension</span>).</p>
+
+<p><a id="X7D94C6F07ACEA397" name="X7D94C6F07ACEA397"></a></p>
+
+<h4>7.1 <span class="Heading">Domains as Sets</span></h4>
+
+<p>First of all, a domain <span class="SimpleMath">\(D\)</span> is a set. If <span class="SimpleMath">\(D\)</span> is finite then a list with the elements of this set can be computed with the functions <code class="func">AsList</code> (<span class="RefLink">Reference: AsList</span>) and <code class="func">AsSortedList</code> (<span class="RefLink">Reference: AsSortedList</span>). For infinite <span class="SimpleMath">\(D\)</span>, <code class="func">Enumerator</code> (<span class="RefLink">Reference: Enumerator</span>) and <code class="func">EnumeratorSorted</code> (<span class="RefLink">Reference: EnumeratorSorted</span>) may work, but it is also possible that one gets an error message.</p>
+
+<p>Domains can be used as arguments of set functions such as <code class="func">Intersection</code> (<span class="RefLink">Reference: Intersection</span>) and <code class="func">Union</code> (<span class="RefLink">Reference: Union</span>). <strong class="pkg">GAP</strong> tries to return a domain in these cases, moreover it tries to return a domain with as much structure as possible. For example, the intersection of two groups is (either empty or) again a group, and <strong class="pkg">GAP</strong> will try to return it as a group. For <code class="func">Union</code> (<span class="RefLink">Reference: Union</span>), the situation is different because the union of two groups is in general not a group.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= Group( (1,2), (3,4) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h:= Group( (3,4), (5,6) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Intersection( g, h );</span>
+Group([ (3,4) ])
+</pre></div>
+
+<p>Two domains are regarded as equal w.r.t. the operator "<code class="code">=</code>" if and only if they are equal <em>as sets</em>, regardless of the additional structure of the domains.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mats:= [ [ [ 0*Z(2), Z(2)^0 ], [ Z(2)^0, 0*Z(2) ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            [ [ Z(2)^0, 0*Z(2) ], [ 0*Z(2), Z(2)^0 ] ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Ring( mats ) = VectorSpace( GF(2), mats );</span>
+true
+</pre></div>
+
+<p>Additionally, a domain is regarded as equal to the sorted list of its elements.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= Group( (1,2) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l:= AsSortedList( g );</span>
+[ (), (1,2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g = l;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsGroup( l ); IsList( g );</span>
+false
+false
+</pre></div>
+
+<p><a id="X81F376D67BA4F5EB" name="X81F376D67BA4F5EB"></a></p>
+
+<h4>7.2 <span class="Heading">Algebraic Structure</span></h4>
+
+<p>The additional structure of <span class="SimpleMath">\(D\)</span> is constituted by the facts that <span class="SimpleMath">\(D\)</span> is known to be closed under certain operations such as addition or multiplication, and that these operations have additional properties. For example, if <span class="SimpleMath">\(D\)</span> is a group then it is closed under multiplication (<span class="SimpleMath">\(D \times D \rightarrow D\)</span>, <span class="SimpleMath">\((g,h) \mapsto g * h\)</span>), under taking inverses (<span class="SimpleMath">\(D \rightarrow D\)</span>, <span class="SimpleMath">\(g \mapsto g^{-1}\)</span>) and under taking the identity <span class="SimpleMath">\(g\)</span><code class="code">^0</code> of each element <span class="SimpleMath">\(g\)</span> in <span class="SimpleMath">\(D\)</span>; additionally, the multiplication in <span class="SimpleMath">\(D\)</span> is associative.</p>
+
+<p>The same set of elements can carry different algebraic structures. For example, a semigroup is defined as being closed under an associative multiplication, so each group is also a semigroup. Likewise, a monoid is defined as a semigroup <span class="SimpleMath">\(D\)</span> in which the identity <span class="SimpleMath">\(g\)</span><code class="code">^0</code> is defined for every element <span class="SimpleMath">\(g\)</span>, so each group is a monoid, and each monoid is a semigroup.</p>
+
+<p>Other examples of domains are vector spaces, which are defined as additive groups that are closed under (left) multiplication with elements in a certain domain of scalars. Also conjugacy classes in a group <span class="SimpleMath">\(D\)</span> are domains, they are closed under the conjugation action of <span class="SimpleMath">\(D\)</span>.</p>
+
+<p><a id="X7E8D59018638925F" name="X7E8D59018638925F"></a></p>
+
+<h4>7.3 <span class="Heading">Notions of Generation</span></h4>
+
+<p>We have seen that a domain is closed under certain operations. Usually a domain is constructed as the closure of some elements under these operations. In this situation, we say that the elements <em>generate</em> the domain.</p>
+
+<p>For example, a list of matrices of the same shape over a common field can be used to generate an additive group or a vector space over a suitable field; if the matrices are square then we can also use the matrices as generators of a semigroup, a ring, or an algebra. We illustrate some of these possibilities:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mats:= [ [ [ 0*Z(2), Z(2)^0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">              [ Z(2)^0, 0*Z(2) ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            [ [ Z(2)^0, 0*Z(2) ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">              [ 0*Z(2), Z(2)^0 ] ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( AdditiveMagma( mats ) );</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( VectorSpace( GF(8), mats ) );</span>
+64
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( Algebra( GF(2), mats ) );    </span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( Group( mats ) );         </span>
+2
+</pre></div>
+
+<p>Each combination of operations under which a domain could be closed gives a notion of generation. So each group has group generators, and since it is a monoid, one can also ask for monoid generators of a group.</p>
+
+<p>Note that one cannot simply ask for "the generators of a domain", it is always necessary to specify what notion of generation is meant. Access to the different generators is provided by functions with names of the form <code class="code">GeneratorsOfSomething</code>. For example, <code class="func">GeneratorsOfGroup</code> (<span class="RefLink">Reference: GeneratorsOfGroup</span>) denotes group generators, <code class="func">GeneratorsOfMonoid</code> (<span class="RefLink">Reference: GeneratorsOfMonoid</span>) denotes monoid generators, and so on. The result of <code class="func">GeneratorsOfVectorSpace</code> (<span class="RefLink">Reference: GeneratorsOfVectorSpace</span>) is of course to be understood relative to the field of scalars of the vector space in question.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfVectorSpace( GF(4)^2 );</span>
+[ [ Z(2)^0, 0*Z(2) ], [ 0*Z(2), Z(2)^0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v:= AsVectorSpace( GF(2), GF(4)^2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfVectorSpace( v );</span>
+[ [ Z(2)^0, 0*Z(2) ], [ 0*Z(2), Z(2)^0 ], [ Z(2^2), 0*Z(2) ], 
+  [ 0*Z(2), Z(2^2) ] ]
+</pre></div>
+
+<p><a id="X85AB533B7DE21C8B" name="X85AB533B7DE21C8B"></a></p>
+
+<h4>7.4 <span class="Heading">Domain Constructors</span></h4>
+
+<p>A group can be constructed from a list of group generators <var class="Arg">gens</var> by <code class="code">Group( <var class="Arg">gens</var> )</code>, likewise one can construct rings and algebras with the functions <code class="func">Ring</code> (<span class="RefLink">Reference: Ring</span>) and <code class="func">Algebra</code> (<span class="RefLink">Reference: Algebra</span>).</p>
+
+<p>Note that it is not always or completely checked that <var class="Arg">gens</var> is in fact a valid list of group generators, for example whether the elements of <var class="Arg">gens</var> can be multiplied or whether they are invertible. This means that <strong class="pkg">GAP</strong> trusts you, at least to some extent, that the desired domain <code class="code">Something( <var class="Arg">gens</var> )</code> does exist.</p>
+
+<p><a id="X849B1C5F8136F3A9" name="X849B1C5F8136F3A9"></a></p>
+
+<h4>7.5 <span class="Heading">Forming Closures of Domains</span></h4>
+
+<p>Besides constructing domains from generators, one can also form the closure of a given domain with an element or another domain. There are different notions of closure, one has to specify one according to the desired result and the structure of the given domain. The functions to compute closures have names such as <code class="code">ClosureSomething</code>. For example, if <var class="Arg">D</var> is a group and one wants to construct the group generated by <var class="Arg">D</var> and an element <var class="Arg">g</var> then one can use <code class="code">ClosureGroup( <var class="Arg">D</var>, <var class="Arg">g</var> )</code>.</p>
+
+<p><a id="X7EA77DE17DD8A231" name="X7EA77DE17DD8A231"></a></p>
+
+<h4>7.6 <span class="Heading">Changing the Structure</span></h4>
+
+<p>The same set of elements can have different algebraic structures. For example, it may happen that a monoid <span class="SimpleMath">\(M\)</span> does in fact contain the inverses of all of its elements, and thus <span class="SimpleMath">\(M\)</span> is equal to the group formed by the elements of <span class="SimpleMath">\(M\)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m:= Monoid( mats );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m = Group( mats );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsGroup( m );</span>
+false
+</pre></div>
+
+<p>The last result in the above example may be surprising. But the monoid <code class="code">m</code> is not regarded as a group in <strong class="pkg">GAP</strong>, and moreover there is no way to turn <code class="code">m</code> into a group. Let us formulate this as a rule:</p>
+
+<p><em>The set of operations under which the domain is closed is fixed in the construction of a domain, and cannot be changed later.</em></p>
+
+<p>(Contrary to this, a domain <em>can</em> acquire knowledge about properties such as whether the multiplication is associative or commutative.)</p>
+
+<p>If one needs a domain with a different structure than the given one, one can construct a new domain with the required structure. The functions that do these constructions have names such as <code class="code">AsSomething</code>, they return a domain that has the same elements as the argument in question but the structure <code class="code">Something</code>. In the above situation, one can use <code class="func">AsGroup</code> (<span class="RefLink">Reference: AsGroup</span>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= AsGroup( m );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m = g;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsGroup( g );</span>
+true
+</pre></div>
+
+<p>If it is impossible to construct the desired domain, the <code class="code">AsSomething</code> functions return <code class="keyw">fail</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsVectorSpace( GF(4), GF(2)^2 );</span>
+fail
+</pre></div>
+
+<p>The functions <code class="func">AsList</code> (<span class="RefLink">Reference: AsList</span>) and <code class="func">AsSortedList</code> (<span class="RefLink">Reference: AsSortedList</span>) mentioned above do not return domains, but they fit into the general pattern in the sense that they forget all the structure of the argument, including the fact that it is a domain, and return a list with the same elements as the argument has.</p>
+
+<p><a id="X8318352D7B5F19BA" name="X8318352D7B5F19BA"></a></p>
+
+<h4>7.7 <span class="Heading">Subdomains</span></h4>
+
+<p>It is possible to construct a domain as a subset of an existing domain. The respective functions have names such as <code class="code">Subsomething</code>, they return domains with the structure <code class="code">Something</code>. (Note that the second <code class="code">s</code> in <code class="code">Subsomething</code> is not capitalized.) For example, if one wants to deal with the subgroup of the domain <var class="Arg">D</var> that is generated by the elements in the list <var class="Arg">gens</var>, one can use <code class="code">Subgroup( <var class="Arg">D</var>, <var class="Arg">gens</var> )</code>. It is not required that <var class="Arg">D</var> is itself a group, only that the group generated by <var class="Arg">gens</var> must be a subset of <var class="Arg">D</var>.</p>
+
+<p>The superset of a domain <var class="Arg">S</var> that was constructed by a <code class="code">Subsomething</code> function can be accessed as <code class="code">Parent( <var class="Arg">S</var> )</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:= SymmetricGroup( 5 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens:= [ (1,2), (1,2,3,4) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:= Subgroup( g, gens );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h:= Group( gens );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s = h;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Parent( s ) = g;</span>
+true
+</pre></div>
+
+<p>Many functions return subdomains of their arguments, for example the result of <code class="code">SylowSubgroup( <var class="Arg">G</var> )</code> is a group with parent group <var class="Arg">G</var>.</p>
+
+<p>If you are sure that the domain <code class="code">Something( <var class="Arg">gens</var> )</code> is contained in the domain <var class="Arg">D</var> then you can also call <code class="code">SubsomethingNC( <var class="Arg">D</var>, <var class="Arg">gens</var> )</code> instead of <code class="code">Subsomething( <var class="Arg">D</var>, <var class="Arg">gens</var> )</code>. The <code class="code">NC</code> stands for "no check", and the functions whose names end with <code class="code">NC</code> omit the check of containment.</p>
+
+<p><a id="X7C83996381F67238" name="X7C83996381F67238"></a></p>
+
+<h4>7.8 <span class="Heading">Further Information about Domains</span></h4>
+
+<p>More information about domains can be found in Chapter <span class="RefLink">Reference: Domains</span>. Many other other chapters deal with specific types of domain such as groups, vector spaces or algebras.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

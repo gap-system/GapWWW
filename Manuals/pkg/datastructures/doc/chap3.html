@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (datastructures) - Chapter 3: Heaps</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X876CE0537BBE92BF" name="X876CE0537BBE92BF"></a></p>
+<div class="ChapSects"><a href="chap3.html#X876CE0537BBE92BF">3 <span class="Heading">Heaps</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7DFB63A97E67C0A1">3.1 <span class="Heading">Introduction</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7C5F33687C53BEF0">3.2 <span class="Heading">API</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85D1DDCF86FD53EB">3.2-1 IsHeap</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81244A537F7E02FC">3.2-2 Heap</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84E3B88F7FD83B3C">3.2-3 NewHeap</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X812240D187506B40">3.2-4 Push</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78052DBE7B563C2C">3.2-5 Peek</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X783D92BE8344CBD3">3.2-6 Pop</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84E27F257EA4556A">3.2-7 Merge</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7A01096286198C96">3.3 <span class="Heading">Binary Heaps</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F627E817F17CD8A">3.3-1 BinaryHeap</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X82EFFA948516AD5C">3.4 <span class="Heading">Pairing Heaps</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F8B54F282A4B1A7">3.4-1 PairingHeap</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X844A8A1F85E6E038">3.5 <span class="Heading">Declarations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BDAA17C7A89C7C7">3.5-1 IsBinaryHeapFlatRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X78289A737AF28B39">3.6 <span class="Heading">Implementation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D2529247BC9A1A5">3.6-1 IsPairingHeapFlatRep</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Heaps</span></h3>
+
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+
+<h4>3.1 <span class="Heading">Introduction</span></h4>
+
+<p>A <em>heap</em> is a tree datastructure such that for any child <span class="Math">C</span> of a node <span class="Math">N</span> it holds that <span class="Math">C \leq N</span>, according to some ordering relation <span class="Math">\leq</span>.</p>
+
+<p>The fundamental operations for heaps are Construction, <code class="code">Push</code>ing data onto the heap, <code class="code">Peek</code>ing at the topmost item, and <code class="code">Pop</code>ping the topmost item off of the heap.</p>
+
+<p>For a good heap implementation these basic operations should not exceed <span class="Math">O(\log n)</span> in runtime where <span class="Math">n</span> is the number of items on the heap.</p>
+
+<p>We currently provide two types of heaps: Binary Heaps <a href="chap3.html#X7A01096286198C96"><span class="RefLink">3.3</span></a> and Pairing Heaps <a href="chap3.html#X82EFFA948516AD5C"><span class="RefLink">3.4</span></a>.</p>
+
+<p>The following code shows how to use a binary heap.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := BinaryHeap();</span>
+&lt;binary heap with 0 entries&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Push(h, 5);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Push(h, -10);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Peek(h);</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pop(h);</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Peek(h);</span>
+-10
+</pre></div>
+
+<p>The following code shows how to use a pairing heap.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := PairingHeap( {x,y} -&gt; x.rank &gt; y.rank );</span>
+&lt;pairing heap with 0 entries&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Push(h, rec( rank  := 5 ));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Push(h, rec( rank  := 7 ));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Push(h, rec( rank  := -15 ));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h;</span>
+&lt;pairing heap with 3 entries&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Peek(h);</span>
+rec( rank := -15 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Pop(h);</span>
+rec( rank := -15 )
+</pre></div>
+
+<p><a id="X7C5F33687C53BEF0" name="X7C5F33687C53BEF0"></a></p>
+
+<h4>3.2 <span class="Heading">API</span></h4>
+
+<p>For the purposes of the <strong class="pkg">datastructures</strong>, we provide a category <code class="func">IsHeap</code> (<span class="RefLink">???</span>) . Every implementation of a heap in the category <code class="func">IsHeap</code> (<span class="RefLink">???</span>) must follow the API described in this section.</p>
+
+<p><a id="X85D1DDCF86FD53EB" name="X85D1DDCF86FD53EB"></a></p>
+
+<h5>3.2-1 IsHeap</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHeap</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The category of heaps. Every object in this category promises to support the API described in this section.</p>
+
+<p><a id="X81244A537F7E02FC" name="X81244A537F7E02FC"></a></p>
+
+<h5>3.2-2 Heap</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Heap</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Wrapper function around constructors</p>
+
+<p><a id="X84E3B88F7FD83B3C" name="X84E3B88F7FD83B3C"></a></p>
+
+<h5>3.2-3 NewHeap</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewHeap</code>( [<var class="Arg">filter</var>, <var class="Arg">func</var>, <var class="Arg">data</var>] )</td><td class="tdright">(&nbsp;constructor&nbsp;)</td></tr></table></div>
+<p>Returns: a heap</p>
+
+<p>Construct a new heap</p>
+
+<p><a id="X812240D187506B40" name="X812240D187506B40"></a></p>
+
+<h5>3.2-4 Push</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Push</code>( <var class="Arg">heap</var>, <var class="Arg">object</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Puts the object <var class="Arg">object</var> a new object onto <var class="Arg">heap</var>.</p>
+
+<p><a id="X78052DBE7B563C2C" name="X78052DBE7B563C2C"></a></p>
+
+<h5>3.2-5 Peek</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Peek</code>( <var class="Arg">heap</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Inspect the item at the top of <var class="Arg">heap</var>.</p>
+
+<p><a id="X783D92BE8344CBD3" name="X783D92BE8344CBD3"></a></p>
+
+<h5>3.2-6 Pop</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Pop</code>( <var class="Arg">heap</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: an object</p>
+
+<p>Remove the top item from <var class="Arg">heap</var> and return it.</p>
+
+<p><a id="X84E27F257EA4556A" name="X84E27F257EA4556A"></a></p>
+
+<h5>3.2-7 Merge</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Merge</code>( <var class="Arg">heap1</var>, <var class="Arg">heap2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Merge two heaps (of the same type)</p>
+
+<p>Heaps also support <code class="func">IsEmpty</code> (<a href="../../../doc/ref/chap30_mj.html#X7969C48780C5C1BC"><span class="RefLink">Reference: IsEmpty</span></a>) and <code class="func">Size</code> (<a href="../../../doc/ref/chap30_mj.html#X858ADA3B7A684421"><span class="RefLink">Reference: Size</span></a>)</p>
+
+<p><a id="X7A01096286198C96" name="X7A01096286198C96"></a></p>
+
+<h4>3.3 <span class="Heading">Binary Heaps</span></h4>
+
+<p>A binary heap employs a binary tree as its underlying tree datastructure. The implemenataion of binary heaps in <strong class="pkg">datastructures</strong> stores this tree in a flat array which makes it a very good and fast default choice for general purpose use. In particular, even though other heap implementations have better theoretical runtime bounds, well-tuned binary heaps outperform them in many applications.</p>
+
+<p>For some reference see <span class="URL"><a href="http://stackoverflow.com/questions/6531543">http://stackoverflow.com/questions/6531543</a></span></p>
+
+<p><a id="X7F627E817F17CD8A" name="X7F627E817F17CD8A"></a></p>
+
+<h5>3.3-1 BinaryHeap</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BinaryHeap</code>( [<var class="Arg">isLess</var>[, <var class="Arg">data</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A binary heap</p>
+
+<p>Constructor for binary heaps. The optinal argument <var class="Arg">isLess</var> must be a binary function that performs comparison between two elements on the heap, and returns <code class="keyw">true</code> if the first argument is less than the second, and <code class="keyw">false</code> otherwise. Using the optional argument <var class="Arg">data</var> the user can give a collection of initial values that are pushed on the stack after construction.</p>
+
+<p><a id="X82EFFA948516AD5C" name="X82EFFA948516AD5C"></a></p>
+
+<h4>3.4 <span class="Heading">Pairing Heaps</span></h4>
+
+<p>A pairing heap is a heap datastructure with a very simple implementation in terms of <strong class="pkg">GAP</strong> lists. <code class="code">Push</code> and <code class="code">Peek</code> have <span class="SimpleMath">O(1)</span> complexity, and <code class="code">Pop</code> has an amortized amortised O(log n), where <span class="SimpleMath">n</span> is the number of items on the heap.</p>
+
+<p>For a reference see <a href="chapBib.html#biBFredman1986">[FSST86]</a>.</p>
+
+<p><a id="X7F8B54F282A4B1A7" name="X7F8B54F282A4B1A7"></a></p>
+
+<h5>3.4-1 PairingHeap</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PairingHeap</code>( [<var class="Arg">isLess</var>[, <var class="Arg">data</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A pairing heap</p>
+
+<p>Constructor for pairing heaps. The optional argument <var class="Arg">isLess</var> must be a binary function that performs comparison between two elements on the heap, and returns <code class="keyw">true</code> if the first argument is less than the second, and <code class="keyw">false</code> otherwise. Using the optional argument <var class="Arg">data</var> the user can give a collection of initial values that are pushed on the stack after construction.</p>
+
+<p><a id="X844A8A1F85E6E038" name="X844A8A1F85E6E038"></a></p>
+
+<h4>3.5 <span class="Heading">Declarations</span></h4>
+
+<p><a id="X7BDAA17C7A89C7C7" name="X7BDAA17C7A89C7C7"></a></p>
+
+<h5>3.5-1 IsBinaryHeapFlatRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBinaryHeapFlatRep</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><a id="X78289A737AF28B39" name="X78289A737AF28B39"></a></p>
+
+<h4>3.6 <span class="Heading">Implementation</span></h4>
+
+<p><a id="X7D2529247BC9A1A5" name="X7D2529247BC9A1A5"></a></p>
+
+<h5>3.6-1 IsPairingHeapFlatRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPairingHeapFlatRep</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

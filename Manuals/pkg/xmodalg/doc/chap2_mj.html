@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (XModAlg) - Chapter 2: Cat1-algebras</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X85527BA8786CB7FC" name="X85527BA8786CB7FC"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X85527BA8786CB7FC">2 <span class="Heading">Cat1-algebras</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X811B6B0F8203F972">2.1 <span class="Heading">Definitions and examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7B761CD9812972F6">2.1-1 Cat1Algebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F9561168414C58F">2.1-2 Source</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82EC94BA7E7F8DEA">2.1-3 Cat1AlgebraSelect</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86E99B197E920C21">2.1-4 SubCat1Algebra</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7DA775CA8296A7D8">2.2 <span class="Heading">Cat<span class="SimpleMath">\(^{1}-\)</span>algebra morphisms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X860E29147DA143B5">2.2-1 Cat1AlgebraMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7A218A0C7DBA8B63">2.2-2 Source</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X8617844F86989A78">2.3 <span class="Heading">Equivalent Categories</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7AA150628786FF01">2.3-1 PreCat1ByPreXMod</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Cat1-algebras</span></h3>
+
+<p><a id="X811B6B0F8203F972" name="X811B6B0F8203F972"></a></p>
+
+<h4>2.1 <span class="Heading">Definitions and examples</span></h4>
+
+<p>Algebraic structures which are equivalent to crossed modules of algebras include :</p>
+
+
+<ul>
+<li><p>cat<span class="SimpleMath">\(^{1}\)</span>-algebras, (Ellis, <a href="chapBib_mj.html#biBellis1">[Ell88]</a>);</p>
+
+</li>
+<li><p>simplicial algebras with Moore complex of length 1, (Z. Arvasi and T.Porter, <a href="chapBib_mj.html#biBarvasi2">[AP96]</a>);</p>
+
+</li>
+<li><p>algebra-algebroids, (Gaffar Musa's Ph.D. thesis, <a href="chapBib_mj.html#biBmosa">[Mos86]</a>).</p>
+
+</li>
+</ul>
+<p>In this section we describe an implementation of cat<span class="SimpleMath">\(^{1}\)</span>-algebras and their morphisms.</p>
+
+<p>The notion of cat<span class="SimpleMath">\(^{1}\)</span>-groups was defined as an algebraic model of <span class="SimpleMath">\(2\)</span>-types by Loday in <a href="chapBib_mj.html#biBloday">[Lod82]</a>. Then Ellis defined the cat<span class="SimpleMath">\(^{1}\)</span>-algebras in <a href="chapBib_mj.html#biBellis1">[Ell88]</a>.</p>
+
+<p>Let <span class="SimpleMath">\(A\)</span> and <span class="SimpleMath">\(R\)</span> be <span class="SimpleMath">\(k\)</span>-algebras, let <span class="SimpleMath">\(t,h:A\rightarrow R\)</span> be surjections, and let <span class="SimpleMath">\(e:R\rightarrow A\)</span> be an inclusion.</p>
+
+<p class="center">\[
+\xymatrix@R=50pt@C=50pt{ A \ar@{-&gt;}@&lt;-1.5pt&gt;[d]_{t} 
+\ar@{-&gt;}@&lt;1.5pt&gt;[d]^{h} \\ R \ar@/^1.5pc/[u]^{e} 
+}
+\]</p>
+
+<p>If the conditions,</p>
+
+<p class="center">\[
+\mathbf{Cat1Alg1:} \quad te = id_{R} = he, 
+\qquad  
+\mathbf{Cat1Alg2:} \quad (\ker t)(\ker h) = \{0_{A}\} 
+\]</p>
+
+<p>are satisfied, then the algebraic system <span class="SimpleMath">\(\mathcal{C} := (e;t,h : A \rightarrow R)\)</span> is called a <em>cat<span class="SimpleMath">\(^{1}\)</span>-algebra</em>. A system which satisfies the condition <span class="SimpleMath">\(\mathbf{Cat1Alg1}\)</span> is called a <em>precat<span class="SimpleMath">\(^{1}\)</span>-algebra</em>. The homomorphisms <span class="SimpleMath">\(t,h\)</span> and <span class="SimpleMath">\(e\)</span> are called the <em>tail map</em>, <em>head map</em> and <em>range embedding</em> homomorphisms, respectively.</p>
+
+<p><a id="X7B761CD9812972F6" name="X7B761CD9812972F6"></a></p>
+
+<h5>2.1-1 Cat1Algebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1Algebra</code>( <var class="Arg">args</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1Obj</code>( <var class="Arg">t</var>, <var class="Arg">h</var>, <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraByEndomorphisms</code>( <var class="Arg">t</var>, <var class="Arg">h</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraObj</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIdentityCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPreCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>The operations listed above are used for construction of precat<span class="SimpleMath">\(^{1}\)</span> and cat<span class="SimpleMath">\(^{1}\)</span>-algebra structures. The function <code class="code">Cat1Algebra</code> selects the operation from the above implementations up to user's input. The operation <code class="code">PreCat1AlgebraObj</code> is used for preserving the implementations,</p>
+
+<p><a id="X7F9561168414C58F" name="X7F9561168414C58F"></a></p>
+
+<h5>2.1-2 Source</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Source</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Range</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TailMap</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HeadMap</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RangeEmbedding</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Kernel</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Boundary</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>These are the seven main attributes of a pre-cat<span class="SimpleMath">\(^{1}\)</span>-algebra.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Ac6 := GroupRing( GF(2), Group( (1,2,3)(4,5) ) );</span>
+&lt;algebra-with-one over GF(2), with 1 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Rc3 := GroupRing( GF(2), Group( (1,2,3) ) );</span>
+&lt;algebra-with-one over GF(2), with 1 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homAR := AllHomsOfAlgebras( Ac6, Rc3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mgiAR := List( homAR, h -&gt; MappingGeneratorsImages(h) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( mgiAR, "\n" );</span>
+[ [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ &lt;zero&gt; of ... ] ], 
+  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*() ] ], 
+  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3) ] ], 
+  [ [ (Z(2)^0)*(1,3,2)(4,5) ], 
+      [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ], 
+  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,3,2) ] ], 
+  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*(1,2,3) ] ], 
+  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ], 
+  [ [ (Z(2)^0)*(1,3,2)(4,5) ], [ (Z(2)^0)*(1,3,2) ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homRA := AllHomsOfAlgebras( Rc3, Ac6 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mgiRA := List( homRA, h -&gt; MappingGeneratorsImages(h) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( mgiRA, "\n" );</span>
+[ [ [ (Z(2)^0)*(1,2,3) ], [ &lt;zero&gt; of ... ] ], 
+  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*() ] ], 
+  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3) ] ], 
+  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ],
+  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*()+(Z(2)^0)*(1,3,2) ] ], 
+  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3) ] ], 
+  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,3,2) ] ], 
+  [ [ (Z(2)^0)*(1,2,3) ], [ (Z(2)^0)*(1,3,2) ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C4 := PreCat1Obj( homAR[6], homAR[6], homRA[8] );</span>
+[AlgebraWithOne( GF(2), [ (Z(2)^0)*(1,2,3)(4,5) ] ) -&gt; AlgebraWithOne( GF(2), 
+[ (Z(2)^0)*(1,2,3) ] )]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCat1Algebra( C4 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( C4 );</span>
+[ 64, 8 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C4 );</span>
+
+Cat1-algebra [..=&gt;..] :- 
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
+:  range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3) ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,3,2) ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,3,2) ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,3,2) ]
+: kernel has generators:
+  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+: boundary homomorphism maps generators of kernel to:
+  [ &lt;zero&gt; of ..., &lt;zero&gt; of ..., &lt;zero&gt; of ... ]
+: kernel embedding maps generators of kernel to:
+  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+
+</pre></div>
+
+<p><a id="X82EC94BA7E7F8DEA" name="X82EC94BA7E7F8DEA"></a></p>
+
+<h5>2.1-3 Cat1AlgebraSelect</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraSelect</code>( <var class="Arg">gf</var>, <var class="Arg">gpsize</var>, <var class="Arg">gpnum</var>, <var class="Arg">num</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>The <code class="func">Cat1Algebra</code> (<a href="chap2_mj.html#X7B761CD9812972F6"><span class="RefLink">2.1-1</span></a>) function may also be used to select a cat<span class="SimpleMath">\(^{1}\)</span>-algebra from a data file. All cat<span class="SimpleMath">\(^{1}\)</span>-structures on commutative algebras are stored in a list in file cat1algdata.g. The data is read into the list CAT1ALG_LIST only when this function is called.</p>
+
+<p>The function <code class="code">Cat1AlgebraSelect</code> may be used in four ways:</p>
+
+
+<ul>
+<li><p><code class="code">Cat1AlgebraSelect( gf )</code> returns the list of possible size of Galois field or the list of possible size of groups with given Galois field.</p>
+
+</li>
+<li><p><code class="code">Cat1AlgebraSelect( gf, gpsize )</code> returns the list of possible sizes of a group with given Galois field, or the list of possible number of groups with given Galois field and size of group.</p>
+
+</li>
+<li><p><code class="code">Cat1AlgebraSelect( gf, gpsize, gpnum )</code> returns the list of possible number of group with given Galois field and size of group or the list of possible cat<span class="SimpleMath">\(^{1}\)</span>-structures with given Galois field and group.</p>
+
+</li>
+<li><p><code class="code">Cat1AlgebraSelect( gf, gpsize, gpnum, num )</code> (or just <code class="code">Cat1Algebra( gf, gpsize, gpnum, num )</code>) returns the chosen cat<span class="SimpleMath">\(^{1}\)</span>-algebra.</p>
+
+</li>
+</ul>
+<p>Now, we will give an example for the usage of this function.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cat1AlgebraSelect( 11 );</span>
+|--------------------------------------------------------|
+| 11 is invalid number for Galois Field (gf)             |
+| Possible numbers for the gf in the Data :              |
+|--------------------------------------------------------|
+ [ 2, 3, 4, 5, 7 ]
+Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cat1AlgebraSelect( 4, 12 );</span>
+|--------------------------------------------------------|
+| 12 is invalid number for size of group (gpsize)        |
+| Possible numbers for the gpsize for GF(4) in the Data: |
+|--------------------------------------------------------|
+ [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cat1AlgebraSelect( 2, 6, 3 );</span>
+|--------------------------------------------------------|
+| 3 is invalid number for group of order 6               |
+| Possible numbers for the gpnum in the Data :           |
+|--------------------------------------------------------|
+ [ 1, 2 ]
+Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+fail
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cat1AlgebraSelect( 2, 6, 2 );</span>
+There are 4 cat1-structures for the algebra GF(2)_c6.
+ Range Alg      Tail                    Head
+|--------------------------------------------------------|
+| GF(2)_c6      identity map            identity map     |
+| -----         [ 2, 10 ]               [ 2, 10 ]        |
+| -----         [ 2, 14 ]               [ 2, 14 ]        |
+| -----         [ 2, 50 ]               [ 2, 50 ]        |
+|--------------------------------------------------------|
+Usage: Cat1Algebra( gf, gpsize, gpnum, num );
+Algebra has generators [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3)(4,5) ]
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C0 := Cat1AlgebraSelect( 4, 6, 2, 2 );</span>
+[GF(2^2)_c6 -&gt; Algebra( GF(2^2), 
+[ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)(3,6)+(
+    Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ] )]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size( C0 ); </span>
+[ 4096, 1024 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C0 ); </span>
+
+Cat1-algebra [GF(2^2)_c6=&gt;..] :- 
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2,3,4,5,6) ]
+:  range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)
+    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)
+    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)
+    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)(2,5)
+    (3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+: kernel has generators:
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)
+    (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+: boundary homomorphism maps generators of kernel to:
+  [ &lt;zero&gt; of ... ]
+: kernel embedding maps generators of kernel to:
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,2,3,4,5,6)+(Z(2)^0)*(1,3,5)(2,4,6)+(Z(2)^0)*(1,4)
+    (2,5)(3,6)+(Z(2)^0)*(1,5,3)(2,6,4)+(Z(2)^0)*(1,6,5,4,3,2) ]
+
+</pre></div>
+
+<p><a id="X86E99B197E920C21" name="X86E99B197E920C21"></a></p>
+
+<h5>2.1-4 SubCat1Algebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubCat1Algebra</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubPreCat1Algebra</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubCat1Algebra</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubPreCat1Algebra</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">\(\mathcal{C} = (e;t,h:A\rightarrow R)\)</span> be a cat<span class="SimpleMath">\(^{1}\)</span>-algebra, and let <span class="SimpleMath">\(A^{\prime}\)</span>, <span class="SimpleMath">\(R^{\prime}\)</span> be subalgebras of <span class="SimpleMath">\(A\)</span> and <span class="SimpleMath">\(R\)</span> respectively. If the restriction morphisms</p>
+
+<p class="center">\[
+t^{\prime} = t|_{A^{\prime}} : A^{\prime}\rightarrow R^{\prime}, 
+\qquad  
+h^{\prime} = h|_{A^{\prime}} : A^{\prime}\rightarrow R^{\prime}, 
+\qquad 
+e^{\prime} = e|_{R^{\prime}} : R^{\prime}\rightarrow A^{\prime}
+\]</p>
+
+<p>satisfy the <span class="SimpleMath">\(\mathbf{Cat1Alg1}\)</span> and <span class="SimpleMath">\(\mathbf{Cat1Alg2}\)</span> conditions, then the system <span class="SimpleMath">\(\mathcal{C}^{\prime } = (e^{\prime};t^{\prime},h^{\prime} : A^{\prime} \rightarrow R^{\prime})\)</span> is called a <em>subcat<span class="SimpleMath">\(^{1}\)</span>-algebra</em> of <span class="SimpleMath">\(\mathcal{C} = (e;t,h:A\rightarrow R)\)</span>.</p>
+
+<p>If the morphisms satisfy only the <span class="SimpleMath">\(\mathbf{Cat1Alg1}\)</span> condition then <span class="SimpleMath">\(\mathcal{C}^{\prime }\)</span> is called a <em>sub-precat<span class="SimpleMath">\(^{1}\)</span>-algebra</em> of <span class="SimpleMath">\(\mathcal{C}\)</span>.</p>
+
+<p>The operations in this subsection are used for constructing subcat<span class="SimpleMath">\(^{1}\)</span>-algebras of a given cat<span class="SimpleMath">\(^{1}\)</span>-algebra.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C3 := Cat1AlgebraSelect( 2, 6, 2, 4 );; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A3 := Source( C3 );</span>
+GF(2)_c6
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B3 := Range( C3 ); </span>
+GF(2)_c3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">eA3 := Elements( A3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">eB3 := Elements( B3 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AA3 := Subalgebra( A3, [ eA3[1], eA3[2], eA3[3] ] );</span>
+&lt;algebra over GF(2), with 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Size(A3), Size(AA3) ]; </span>
+[ 64, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BB3 := Subalgebra( B3, [ eB3[1], eB3[2] ] ); </span>
+&lt;algebra over GF(2), with 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Size(B3), Size(BB3) ]; </span>
+[ 8, 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CC3 := SubCat1Algebra( C3, AA3, BB3 );</span>
+[Algebra( GF(2), [ &lt;zero&gt; of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) 
+ ] ) -&gt; Algebra( GF(2), [ &lt;zero&gt; of ..., (Z(2)^0)*() ] )]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( CC3 );</span>
+
+Cat1-algebra [..=&gt;..] :-
+: source algebra has generators:
+  [ &lt;zero&gt; of ..., (Z(2)^0)*(), (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
+:  range algebra has generators:
+  [ &lt;zero&gt; of ..., (Z(2)^0)*() ]
+: tail homomorphism maps source generators to:
+  [ &lt;zero&gt; of ..., (Z(2)^0)*(), &lt;zero&gt; of ... ]
+: head homomorphism maps source generators to:
+  [ &lt;zero&gt; of ..., (Z(2)^0)*(), &lt;zero&gt; of ... ]
+: range embedding maps range generators to:
+  [ &lt;zero&gt; of ..., (Z(2)^0)*() ]
+: kernel has generators:
+  [ &lt;zero&gt; of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
+: boundary homomorphism maps generators of kernel to:
+  [ &lt;zero&gt; of ..., &lt;zero&gt; of ... ]
+: kernel embedding maps generators of kernel to:
+  [ &lt;zero&gt; of ..., (Z(2)^0)*()+(Z(2)^0)*(4,5) ]
+
+</pre></div>
+
+<p><a id="X7DA775CA8296A7D8" name="X7DA775CA8296A7D8"></a></p>
+
+<h4>2.2 <span class="Heading">Cat<span class="SimpleMath">\(^{1}-\)</span>algebra morphisms</span></h4>
+
+<p>Let <span class="SimpleMath">\(\mathcal{C} = (e;t,h:A\rightarrow R)\)</span>, <span class="SimpleMath">\(\mathcal{C}^{\prime } = (e^{\prime}; t^{\prime }, h^{\prime } : A^{\prime} \rightarrow R^{\prime})\)</span> be cat<span class="SimpleMath">\(^{1}\)</span>-algebras, and let <span class="SimpleMath">\(\phi : A\rightarrow A^{\prime}\)</span> and <span class="SimpleMath">\(\varphi : R \rightarrow R^{\prime}\)</span> be algebra homomorphisms. If the diagram</p>
+
+<p class="center">\[
+\xymatrix@R=50pt@C=50pt{ A \ar@{-&gt;}@&lt;-1.5pt&gt;[d]_{t} 
+\ar@{-&gt;}@&lt;1.5pt&gt;[d]^{h} \ar@{-&gt;}[r]^{\phi} &amp; A' \ar@{-&gt;}@&lt;-1.5pt&gt;[d]_{t'} 
+\ar@{-&gt;}@&lt;1.5pt&gt;[d]^{h'} \\ R \ar@/^1.5pc/[u]^{e} \ar@{-&gt;}[r]_{\varphi} &amp; R' \ar@/_1.5pc/[u]_{e'}
+}
+\]</p>
+
+<p>commutes, (i.e. <span class="SimpleMath">\(t^{\prime} \circ \phi = \varphi \circ t\)</span>, <span class="SimpleMath">\(h^{\prime} \circ \phi = \varphi \circ h\)</span> and <span class="SimpleMath">\(e^{\prime } \circ \varphi = \phi \circ e\)</span>), then the pair <span class="SimpleMath">\((\phi ,\varphi )\)</span> is called a cat<span class="SimpleMath">\(^{1}\)</span>-algebra morphism.</p>
+
+<p><a id="X860E29147DA143B5" name="X860E29147DA143B5"></a></p>
+
+<h5>2.2-1 Cat1AlgebraMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityMapping</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1AlgebraMorphismByHoms</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraMorphismByHoms</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPreCat1AlgebraMorphism</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCat1AlgebraMorphism</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>These operations are used for constructing cat<span class="SimpleMath">\(^{1}\)</span>-algebra morphisms. Details of the implementations can be found in <a href="chapBib_mj.html#biBaodabas1">[Oda09]</a>.</p>
+
+<p><a id="X7A218A0C7DBA8B63" name="X7A218A0C7DBA8B63"></a></p>
+
+<h5>2.2-2 Source</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Source</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Range</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTotal</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSingleValued</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Name</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Boundary</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>These are the six main attributes of a cat<span class="SimpleMath">\(^{1}\)</span>-algebra morphism.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C1 := Cat1Algebra( 2, 1, 1, 1 );</span>
+[GF(2)_triv -&gt; GF(2)_triv]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C1 );</span>
+
+Cat1-algebra [GF(2)_triv=&gt;GF(2)_triv] :-
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+:  range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: the kernel is trivial.
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C2 := Cat1Algebra( 2, 2, 1, 2 );</span>
+[GF(2)_c2 -&gt; GF(2)_triv]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C2 );</span>
+
+Cat1-algebra [GF(2)_c2=&gt;GF(2)_triv] :-
+: source algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
+:  range algebra has generators:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: tail homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: head homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: range embedding maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: kernel has generators:
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ]
+: boundary homomorphism maps generators of kernel to:
+  [ &lt;zero&gt; of ... ]
+: kernel embedding maps generators of kernel to:
+  [ (Z(2)^0)*()+(Z(2)^0)*(1,2) ]
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C1 = C2;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R1 := Source( C1 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R2 := Source( C2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S1 := Range( C1 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S2 := Range( C2 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gR1 := GeneratorsOfAlgebra( R1 );</span>
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gR2 := GeneratorsOfAlgebra( R2 );</span>
+[ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gS1 := GeneratorsOfAlgebra( S1 );</span>
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gS2 := GeneratorsOfAlgebra( S2 );</span>
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">im1 := [ gR2[1], gR2[1] ];</span>
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f1 := AlgebraHomomorphismByImages( R1, R2, gR1, im1 );</span>
+[ (Z(2)^0)*(), (Z(2)^0)*() ] -&gt; [ (Z(2)^0)*(), (Z(2)^0)*() ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">im2 := [ gS2[1], gS2[1] ];</span>
+[ (Z(2)^0)*(), (Z(2)^0)*() ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f2 := AlgebraHomomorphismByImages( S1, S2, gS1, im2 );</span>
+[ (Z(2)^0)*(), (Z(2)^0)*() ] -&gt; [ (Z(2)^0)*(), (Z(2)^0)*() ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := Cat1AlgebraMorphism( C1, C2, f1, f2 );</span>
+[[GF(2)_triv=&gt;GF(2)_triv] =&gt; [GF(2)_c2=&gt;GF(2)_triv]]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
+Morphism of cat1-algebras :-
+: Source = [GF(2)_triv=&gt;GF(2)_triv] with generating sets:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+:  Range = [GF(2)_c2=&gt;GF(2)_triv] with generating sets:
+  [ (Z(2)^0)*(), (Z(2)^0)*(1,2) ]
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: Source Homomorphism maps source generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+: Range Homomorphism maps range generators to:
+  [ (Z(2)^0)*(), (Z(2)^0)*() ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSurjective( m );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsInjective( m );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsBijective( m );</span>
+false
+
+
+</pre></div>
+
+<p><a id="X8617844F86989A78" name="X8617844F86989A78"></a></p>
+
+<h4>2.3 <span class="Heading">Equivalent Categories</span></h4>
+
+<p>The categories <span class="SimpleMath">\(\mathbf{Cat1Alg}\)</span> (cat<span class="SimpleMath">\(^{1}\)</span>-algebras) and <span class="SimpleMath">\(\mathbf{XModAlg}\)</span> (crossed modules) are naturally equivalent <a href="chapBib_mj.html#biBellis1">[Ell88]</a>. This equivalence is outlined in what follows. For a given crossed module <span class="SimpleMath">\((\partial : A \rightarrow R)\)</span> we can construct the semidirect product <span class="SimpleMath">\(R\ltimes A\)</span> thanks to the action of <span class="SimpleMath">\(R\)</span> on <span class="SimpleMath">\(A\)</span>. If we define <span class="SimpleMath">\(t,h : R\ltimes A \rightarrow R\)</span> and <span class="SimpleMath">\(e : R \rightarrow R \ltimes A\)</span> by</p>
+
+<p class="center">\[
+t(r,a) = r, \qquad 
+h(r,a) = r+\partial(a), \qquad 
+e(r) = (r,0), 
+\]</p>
+
+<p>respectively, then <span class="SimpleMath">\(\mathcal{C} = (e;t,h : R \ltimes A \rightarrow R)\)</span> is a cat<span class="SimpleMath">\(^{1}-\)</span>algebra.</p>
+
+<p>Conversely, for a given cat<span class="SimpleMath">\(^{1}\)</span>-algebra <span class="SimpleMath">\(\mathcal{C}=(e;t,h : A \rightarrow R)\)</span>, the map <span class="SimpleMath">\(\partial : \ker t \rightarrow R\)</span> is a crossed module, where the action is multiplication action and <span class="SimpleMath">\(\partial\)</span> is the restriction of <span class="SimpleMath">\(h\)</span> to <span class="SimpleMath">\(\ker t\)</span>.</p>
+
+<p><a id="X7AA150628786FF01" name="X7AA150628786FF01"></a></p>
+
+<h5>2.3-1 PreCat1ByPreXMod</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreCat1ByPreXMod</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreXModAlgebraByPreCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cat1AlgebraByXModAlgebra</code>( <var class="Arg">X0</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; XModAlgebraByCat1Algebra</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>These operations are used for constructing a cat<span class="SimpleMath">\(^{1}\)</span>-algebra from a given crossed module, and conversely.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CXM := Cat1AlgebraByXModAlgebra( XM );</span>
+[GF(2^2)[k4] IX &lt;e5&gt; -&gt; GF(2^2)[k4]]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">X3 := XModAlgebraByCat1Algebra( C3 ); </span>
+[Algebra( GF(2), [ &lt;zero&gt; of ..., &lt;zero&gt; of ..., &lt;zero&gt; of ... 
+ ] )-&gt;Algebra( GF(2), 
+[ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ] )]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( X3 ); </span>
+
+Crossed module [..-&gt;..] :- 
+: Source algebra has generators:
+  [ &lt;zero&gt; of ..., &lt;zero&gt; of ..., &lt;zero&gt; of ... ]
+: Range algebra has generators:
+  [ (Z(2)^0)*()+(Z(2)^0)*(4,5), (Z(2)^0)*(1,2,3)+(Z(2)^0)*(1,2,3)(4,5), 
+  (Z(2)^0)*(1,3,2)+(Z(2)^0)*(1,3,2)(4,5) ]
+: Boundary homomorphism maps source generators to:
+  [ &lt;zero&gt; of ..., &lt;zero&gt; of ..., &lt;zero&gt; of ... ]
+
+</pre></div>
+
+<p>Since all these operations are linked to the functions <code class="func">Cat1Algebra</code> (<a href="chap2_mj.html#X7B761CD9812972F6"><span class="RefLink">2.1-1</span></a>) and <code class="func">XModAlgebra</code> (<a href="chap3_mj.html#X813D94F97D8E71A8"><span class="RefLink">3.1-1</span></a>), all of them can be done by using these two functions. We may also use the function <code class="func">Cat1Algebra</code> (<a href="chap2_mj.html#X7B761CD9812972F6"><span class="RefLink">2.1-1</span></a>) instead of the operation <code class="func">Cat1AlgebraSelect</code> (<a href="chap2_mj.html#X82EC94BA7E7F8DEA"><span class="RefLink">2.1-3</span></a>).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

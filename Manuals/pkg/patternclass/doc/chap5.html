@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (PatternClass) - Chapter 5: From Automata to Networks</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X78223796785BC628" name="X78223796785BC628"></a></p>
+<div class="ChapSects"><a href="chap5.html#X78223796785BC628">5 <span class="Heading">From Automata to Networks</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X86FA580F8055B274">5.1 <span class="Heading">Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E1DAEB979824B68">5.1-1 IsStarClosed</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X873324D67DC9DC41">5.1-2 Is2StarReplaceable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7FF528F784C9020B">5.1-3 IsStratified</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C3B9EB080F72043">5.1-4 IsPossibleGraphAut</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">From Automata to Networks</span></h3>
+
+<p>It is not only important to see how a TPN can be interpreted as a finite state automaton. But also if an arbitrary automaton could represent the language of rank encoded permutations of a TPN. Currently within <code class="code">PatternClass</code> it is only possible to check whether deterministic automata are possible representatives of a TPN.</p>
+
+<p><a id="X86FA580F8055B274" name="X86FA580F8055B274"></a></p>
+
+<h4>5.1 <span class="Heading">Functions</span></h4>
+
+<p><a id="X7E1DAEB979824B68" name="X7E1DAEB979824B68"></a></p>
+
+<h5>5.1-1 IsStarClosed</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStarClosed</code>( <var class="Arg">aut</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if the start and accept states in <code class="code">aut</code> are one and the same state.</p>
+
+<p>This has the consequence that the whole rational expression accepted by <code class="code">aut</code> is always enclosed by the Kleene star.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",4,2,[[3,4,2,4],[2,2,2,4]],[1],[2]);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsStarClosed(x);                                      </span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AutToRatExp(x);        </span>
+(a(aUb)Ub)b*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("det",3,2,[[3,2,1],[2,3,1]],[1],[1]);</span>
+&lt; deterministic automaton on 2 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsStarClosed(y);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AutToRatExp(y);</span>
+((ba*bUa)(aUb))*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><a id="X873324D67DC9DC41" name="X873324D67DC9DC41"></a></p>
+
+<h5>5.1-2 Is2StarReplaceable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Is2StarReplaceable</code>( <var class="Arg">aut</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if none of the states in the automaton <code class="code">aut</code>, which are not the initial state, have a transition to the initial state labelled with the first letter of the alphabet. It also returns <code class="code">true</code> if there is at least one state <span class="SimpleMath">i ∈ Q</span> with the first two transitions from <span class="SimpleMath">i</span> being <span class="SimpleMath">f(i,1)=1</span> and <span class="SimpleMath">f(i,2)=x</span>, where <span class="SimpleMath">x ∈ Q∖{1}</span> and <span class="SimpleMath">f(x,1)=1</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",3,2,[[1,2,3],[2,2,3]],[1],[2]);</span>
+&lt; deterministic automaton on 2 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Is2StarReplaceable(x);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("det",4,2,[[4,1,1,2],[1,3,3,2]],[1],[1]);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Is2StarReplaceable(y);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">z:=Automaton("det",4,2,[[4,1,1,2],[1,4,2,2]],[1],[4]);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Is2StarReplaceable(z);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><a id="X7FF528F784C9020B" name="X7FF528F784C9020B"></a></p>
+
+<h5>5.1-3 IsStratified</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStratified</code>( <var class="Arg">aut</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <code class="code">aut</code> has a specific "layered" form.</p>
+
+<p>A formal description of the most basic stratified automaton is:</p>
+
+<p><span class="SimpleMath">(S,Q,f,q_0,A)</span> with <span class="SimpleMath">S:={1,...,n}, Q:={1,...,m}, n&lt;m, q_0:=1, A:=Q∖ {n+1}, f: Q × S → Q</span> and <span class="SimpleMath">n+1</span> is a sink state.</p>
+
+<p>If <span class="SimpleMath">i,j ∈ Q ∖ { n+1 }</span>,with <span class="SimpleMath">i &lt; j</span>, and <span class="SimpleMath">i',j' ∈ S</span>, <span class="SimpleMath">i=i', j=j'</span> then</p>
+
+<p class="pcenter">f(i,i')=i, f(i,j')=j, f(j,j')=j, f(j,i')=j-1 or n+1.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",4,2,[[1,3,1,4],[2,2,4,4]],[1],[2]);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsStratified(x);                                      </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("det",4,2,[[1,3,2,4],[2,4,1,4]],[1],[2]);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsStratified(y);                                      </span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+<p><a id="X7C3B9EB080F72043" name="X7C3B9EB080F72043"></a></p>
+
+<h5>5.1-4 IsPossibleGraphAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPossibleGraphAut</code>( <var class="Arg">aut</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: <code class="keyw">true</code> if <code class="code">aut</code> returns <code class="code">true</code> in <code class="code">IsStratified</code>, <code class="code">Is2StarReplaceable</code> and <code class="code">IsStarClosed</code>.</p>
+
+<p>An automaton that fulfils the three functions above has the right form to be an automaton representing rank encoded permutations, which are output from a TPN.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Automaton("det",2,2,[[1,2],[2,2]],[1],[1]);</span>
+&lt; deterministic automaton on 2 letters with 2 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPossibleGraphAut(x);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">y:=Automaton("det",2,2,[[1,2],[1,2]],[1],[1]);</span>
+&lt; deterministic automaton on 2 letters with 2 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPossibleGraphAut(y);                        </span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsStarClosed(y);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Is2StarReplaceable(y);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsStratified(y);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"></span></pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

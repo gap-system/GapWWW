@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (hpc) - Chapter 10: Serialization support</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap10"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap10_mj.html">[MathJax on]</a></p>
+<p><a id="X806C386986781A27" name="X806C386986781A27"></a></p>
+<div class="ChapSects"><a href="chap10.html#X806C386986781A27">10 <span class="Heading">Serialization support</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X806C386986781A27">10.1 <span class="Heading">Serialization support</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X787953287A989F91">10.1-1 SerializeToNativeString</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X80FCBCCF785AA385">10.1-2 DeserializeNativeString</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7E8286777A438AB5">10.1-3 InstallTypeSerializationTag</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X84E98E728481BE0F">10.1-4 InstallSerializer</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7A9117BE7BE87CD6">10.1-5 InstallDeserializer</a></span>
+</div></div>
+</div>
+
+<h3>10 <span class="Heading">Serialization support</span></h3>
+
+<p><a id="X806C386986781A27" name="X806C386986781A27"></a></p>
+
+<h4>10.1 <span class="Heading">Serialization support</span></h4>
+
+<p>HPC-GAP has support to serialize most GAP data. While functions in particular cannot be serialized, it is possible to serialize all primitive types (booleans, integers, cyclotomics, permutations, floats, etc.) as well as all lists and records.</p>
+
+<p>Custom serialization support can be written for data objects, positional objects, and component objects; serialization of compressed vectors is already supported by the standard library.</p>
+
+<p><a id="X787953287A989F91" name="X787953287A989F91"></a></p>
+
+<h5>10.1-1 SerializeToNativeString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SerializeToNativeString</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">SerializeToNativeString</code> takes the object passed as an argument and turns it into a string, from which a copy of the original can be extracted using <code class="func">DeserializeNativeString</code> (<a href="chap10.html#X80FCBCCF785AA385"><span class="RefLink">10.1-2</span></a>).</p>
+
+<p><a id="X80FCBCCF785AA385" name="X80FCBCCF785AA385"></a></p>
+
+<h5>10.1-2 DeserializeNativeString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeserializeNativeString</code>( <var class="Arg">str</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">DeserializeNativeString</code> reverts the serialization process.</p>
+
+<p>Example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DeserializeNativeString(SerializeToNativeString([1,2,3]));</span>
+[ 1, 2, 3 ]
+</pre></div>
+
+<p><a id="X7E8286777A438AB5" name="X7E8286777A438AB5"></a></p>
+
+<h5>10.1-3 InstallTypeSerializationTag</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallTypeSerializationTag</code>( <var class="Arg">type</var>, <var class="Arg">tag</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">InstallTypeSerializationTag</code> allows the serialization of data objects, positional objects, and component objects. The value of <var class="Arg">tag</var> must be unique for each type; it can be a string or integer. Non-negative integers are reserved for use by the standard library; users should use negative integers or strings instead.</p>
+
+<p>Objects of such a type are serialized in a straightforward way: During serialization, data objects are converted into byte streams, positional objects into lists, and component objects into records. These objects are then serialized along with their tags; deserialization uses the type corresponding to the tag in conjunction with <code class="func">Objectify</code> (<span class="RefLink">Reference: Objectify</span>) to reconstruct a copy of the original object.</p>
+
+<p>Note that this functionality may be inadequate for objects that have complex data structures attached that are not meant to be replicated. The following alternative is meant for such objects.</p>
+
+<p><a id="X84E98E728481BE0F" name="X84E98E728481BE0F"></a></p>
+
+<h5>10.1-4 InstallSerializer</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallSerializer</code>( <var class="Arg">description</var>, <var class="Arg">filters</var>, <var class="Arg">method</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The more general <code class="func">InstallSerializer</code> allows for arbitarily complex serialization code. It installs <var class="Arg">method</var> as the method to serialize objects matching <var class="Arg">filters</var>; <var class="Arg">description</var> has the same role as for <code class="func">InstallMethod</code> (<span class="RefLink">Reference: InstallMethod</span>).</p>
+
+<p>The method must return a plain list matching a specific format. The first element must be a non-negative integer, the second must be a string descriptor that is unique to the serializer; these can then be followed by an arbitrary number of arguments.</p>
+
+<p>As many of the arguments (starting with the third element of the list) as specified by the first element of the list will be converted from their object representation into a serializable representation. Data objects will be converted into untyped data objects, positional objects will be converted into plain lists, and component objects into records. Conversion will not modify the objects in place, but work on copies. The remaining arguments will remain untouched.</p>
+
+<p>Upon deserialization, these arguments will be passed to a function specified by the second element of the list.</p>
+
+<p>Example:</p>
+
+
+<div class="example"><pre>
+InstallSerializer("8-bit vectors", [ Is8BitVectorRep ], function(obj)
+  return [1, "Vec8Bit", obj, Q_VEC8BIT(obj), IS_MUTABLE_OBJ(obj)];
+end);
+</pre></div>
+
+<p>Here, <code class="code">obj</code> will be converted into its underlying representation, while the remaining arguments are left alone. <code class="code">"Vec8Bit"</code> is the name that is used to look up the deserializer function.</p>
+
+<p><a id="X7A9117BE7BE87CD6" name="X7A9117BE7BE87CD6"></a></p>
+
+<h5>10.1-5 InstallDeserializer</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallDeserializer</code>( <var class="Arg">descriptor</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The <var class="Arg">descriptor</var> value must be the same as the second element of the list returned by the serializer; <var class="Arg">func</var> must be a function that takes as many arguments as there were arguments after the second element of that list. For deserialization, this function is invoked and needs to return the deserialized object constructed from the arguments.</p>
+
+<p>Example:</p>
+
+
+<div class="example"><pre>
+InstallDeserializer("Vec8Bit", function(obj, q, mut)
+  SET_TYPE_OBJ(obj, TYPE_VEC8BIT(q, mut));
+  return obj;
+end);
+</pre></div>
+
+<p>Here, the untyped <code class="code">obj</code> that was passed to the deserializer needs to be given the correct type, which is calculated from <code class="code">q</code> and <code class="code">mut</code>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

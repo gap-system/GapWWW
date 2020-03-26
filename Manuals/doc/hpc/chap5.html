@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (hpc) - Chapter 5: Atomic objects</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap5_mj.html">[MathJax on]</a></p>
+<p><a id="X7A5E986A790A5A18" name="X7A5E986A790A5A18"></a></p>
+<div class="ChapSects"><a href="chap5.html#X7A5E986A790A5A18">5 <span class="Heading">Atomic objects</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X79DFD10A80868799">5.1 <span class="Heading">Atomic lists</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F1353B58414D4C3">5.1-1 AtomicList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8279EC4483E0562C">5.1-2 FixedAtomicList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X807687A579422D3B">5.1-3 MakeFixedAtomicList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X81AF8061871DA27C">5.1-4 FromAtomicList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X795EE57983074ADF">5.1-5 ATOMIC_ADDITION</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7847EAA284A02AEE">5.1-6 COMPARE_AND_SWAP</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X823767367D6CF4FD">5.2 <span class="Heading">Atomic records and component objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X87EA343179BE4BFE">5.2-1 AtomicRecord</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X81E6B21C7A1AC7FE">5.2-2 FromAtomicRecord</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X78EDB1DB79473F53">5.3 <span class="Heading">Replacement policy functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B76F2AD818492BC">5.3-1 MakeWriteOnceAtomic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X806C3F0681B847A0">5.3-2 MakeStrictWriteOnceAtomic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E7591EC780F3988">5.3-3 MakeReadWriteAtomic</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7DCE3B4D7D26407F">5.4 <span class="Heading">Thread-local records</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7BE7D67586FC91E6">5.4-1 ThreadLocalRecord</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X788AF1CC8111798C">5.4-2 SetTLDefault</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X853A898384888B85">5.4-3 SetTLConstructor</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Atomic objects</span></h3>
+
+<p>HPC-GAP provides a number of atomic object types. These can be accessed by multiple threads concurrently without requiring explicit synchronization, but can have non-deterministic behavior for complex operations. Atomic lists are fixed-size lists; they can be assigned to and read from like normal plain lists. Atomic records are atomic versions of plain records. Unlike plain records, though, it is not possible to delete elements from an atomic record. The primary use of atomic lists and records is to facilitate storing the result of idempotent operations and to support certain low-level operations. Atomic lists and records can have three different replacement policies: write-once, strict write-once, and rewritable. The replacement policy determines whether an already assigned element can be changed. The write-once policy allows elements to be assigned only once, with subsequent assignments being ignored; the strict write-once policy allows elements also to be assigned only once, but subsequent assignments will raise an error; the rewritable policy allows elements to be assigned different values repeatedly. The default for new atomic objects is to be rewritable. Thread-local records are variants of plain records that are replicated on a per-thread basis.</p>
+
+<p><a id="X79DFD10A80868799" name="X79DFD10A80868799"></a></p>
+
+<h4>5.1 <span class="Heading">Atomic lists</span></h4>
+
+<p>Atomic lists are created using the <code class="code">AtomicList</code> or <code class="code">FixedAtomicList</code> functions. After creation, they can be used exactly like any other list, except that atomic lists created with <code class="code">FixedAtomicList</code> cannot be resized. Their contents can also be read as normal plain lists using <code class="code">FromAtomicList</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := AtomicList([1,2,4]);</span>
+&lt;atomic list of size 3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WaitTask(RunTask(function() a[1] := a[1] + a[2]; end));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a[1];</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FromAtomicList(a);</span>
+[ 3, 2, 4 ]
+</pre></div>
+
+<p>Because multiple threads can read and write the list concurrently without synchronization, the results of modifying the list may be non-deterministic. It is faster to write to fixed atomic lists than to a resizable atomic list.</p>
+
+<p><a id="X7F1353B58414D4C3" name="X7F1353B58414D4C3"></a></p>
+
+<h5>5.1-1 AtomicList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AtomicList</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AtomicList</code>( <var class="Arg">count</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">AtomicList</code> is used to create a new atomic list. It takes either a plain list as an argument, in which case it will create a new atomic list of the same size, populated by the same elements; or it takes a count and an object argument. In that case, it creates an atomic list with <var class="Arg">count</var> elements, each set to the value of <var class="Arg">obj</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">al := AtomicList([3, 1, 4]);</span>
+&lt;atomic list of size 3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">al[3];</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">al := AtomicList(10, `"alpha");</span>
+&lt;atomic list of size 10&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">al[3];</span>
+"alpha"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WaitTask(RunTask(function() al[3] := `"beta"; end));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">al[3];</span>
+"beta"
+</pre></div>
+
+<p><a id="X8279EC4483E0562C" name="X8279EC4483E0562C"></a></p>
+
+<h5>5.1-2 FixedAtomicList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FixedAtomicList</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FixedAtomicList</code>( <var class="Arg">count</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">FixedAtomicList</code> works like <code class="func">AtomicList</code> (<a href="chap5.html#X7F1353B58414D4C3"><span class="RefLink">5.1-1</span></a>) except that the resulting list cannot be resized.</p>
+
+<p><a id="X807687A579422D3B" name="X807687A579422D3B"></a></p>
+
+<h5>5.1-3 MakeFixedAtomicList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeFixedAtomicList</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">MakeFixedAtomicList</code> turns a resizable atomic list into a fixed atomic list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := AtomicList([99]);</span>
+&lt;atomic list of size 1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a[2] := 100;</span>
+100
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MakeFixedAtomicList(a);</span>
+&lt;fixed atomic list of size 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a[3] := 101;</span>
+Error, Atomic List Element: &lt;pos&gt;=3 is an invalid index for &lt;list&gt;
+</pre></div>
+
+<p><a id="X81AF8061871DA27C" name="X81AF8061871DA27C"></a></p>
+
+<h5>5.1-4 FromAtomicList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FromAtomicList</code>( <var class="Arg">atomic_list</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">FromAtomicList</code> returns a plain list containing the same elements as <var class="Arg">atomic_list</var> at the time of the call. Because other threads can write concurrently to that list, the result is not guaranteed to be deterministic.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">al := AtomicList([10, 20, 30]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WaitTask(RunTask(function() al[2] := 40; end));</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FromAtomicList(al);</span>
+[ 10, 40, 30 ]
+</pre></div>
+
+<p><a id="X795EE57983074ADF" name="X795EE57983074ADF"></a></p>
+
+<h5>5.1-5 ATOMIC_ADDITION</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ATOMIC_ADDITION</code>( <var class="Arg">atomic_list</var>, <var class="Arg">index</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ATOMIC_ADDITION</code> is a low-level operation that atomically adds <var class="Arg">value</var> to <var class="Arg">atomic_list[index]</var>. It returns the value of <var class="Arg">atomic_list[index]</var> after the addition has been performed.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">al := FixedAtomicList([4,5,6]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ATOMIC_ADDITION(al, 2, 7);</span>
+12
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FromAtomicList(al);</span>
+[ 4, 12, 6 ]
+</pre></div>
+
+<p><a id="X7847EAA284A02AEE" name="X7847EAA284A02AEE"></a></p>
+
+<h5>5.1-6 COMPARE_AND_SWAP</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; COMPARE_AND_SWAP</code>( <var class="Arg">atomic_list</var>, <var class="Arg">index</var>, <var class="Arg">old</var>, <var class="Arg">new</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">COMPARE_AND_SWAP</code> is an atomic operation. It atomically compares <var class="Arg">atomic_list[index]</var> to <var class="Arg">old</var> and, if they are identical, replaces the value (in the same atomic step) with <var class="Arg">new</var>. It returns true if the replacement took place, false otherwise.</p>
+
+<p>The primary use of <code class="func">COMPARE_AND_SWAP</code> is to implement certain concurrency primitives; most programmers will not need to use it.</p>
+
+<p><a id="X823767367D6CF4FD" name="X823767367D6CF4FD"></a></p>
+
+<h4>5.2 <span class="Heading">Atomic records and component objects</span></h4>
+
+<p>Atomic records are atomic counterparts to plain records. They support assignment to individual record fields, and conversion to and from plain records.</p>
+
+<p>Assignment semantics can be specified on a per-record basis if the assigned record field is already populated, allowing either an overwrite, keeping the existing value, or raising an error.</p>
+
+<p>It is not possible to unbind atomic record elements.</p>
+
+<p>Like plain records, atomic records can be converted to component objects using <code class="code">Objectify</code>.</p>
+
+<p><a id="X87EA343179BE4BFE" name="X87EA343179BE4BFE"></a></p>
+
+<h5>5.2-1 AtomicRecord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AtomicRecord</code>( <var class="Arg">capacity</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AtomicRecord</code>( <var class="Arg">record</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">AtomicRecord</code> is used to create a new atomic record. Its single optional argument is either a positive integer, denoting the intended capacity (i.e., number of elements to be held) of the record, in which case a new empty atomic record with that initial capacity will be created. Alternatively, the caller can provide a plain record with which to initially populate the atomic record.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := AtomicRecord(rec( x := 2 ));</span>
+&lt;atomic record 1/2 full&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.y := 3;</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TaskResult(RunTask(function() return r.x + r.y; end));</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ r.x, r.y ];</span>
+[ 2, 3 ]
+</pre></div>
+
+<p>Any atomic record can later grow beyond its initial capacity. There is no limit to the number of elements it can hold other than available memory.</p>
+
+<p><a id="X81E6B21C7A1AC7FE" name="X81E6B21C7A1AC7FE"></a></p>
+
+<h5>5.2-2 FromAtomicRecord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FromAtomicRecord</code>( <var class="Arg">record</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">FromAtomicRecord</code> returns a plain record copy of the atomic record <var class="Arg">record</var>. This copy is shallow; elements of <var class="Arg">record</var> will not also be copied.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := AtomicRecord();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.x := 1;; r.y := 2;; r.z := 3;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FromAtomicRecord(r);</span>
+rec( x := 1, y := 2, z := 3 )
+</pre></div>
+
+<p><a id="X78EDB1DB79473F53" name="X78EDB1DB79473F53"></a></p>
+
+<h4>5.3 <span class="Heading">Replacement policy functions</span></h4>
+
+<p>There are three functions that set the replacement policy of an atomic object. All three can also be used with plain lists and records, in which case an atomic version of the list or record is first created. This allows programmers to elide <code class="func">AtomicList</code> (<a href="chap5.html#X7F1353B58414D4C3"><span class="RefLink">5.1-1</span></a>) and <code class="func">AtomicRecord</code> (<a href="chap5.html#X87EA343179BE4BFE"><span class="RefLink">5.2-1</span></a>) calls when the next step is to change their policy.</p>
+
+<p><a id="X7B76F2AD818492BC" name="X7B76F2AD818492BC"></a></p>
+
+<h5>5.3-1 MakeWriteOnceAtomic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeWriteOnceAtomic</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">MakeWriteOnceAtomic</code> takes a list, record, atomic list, atomic record, atomic positional object, or atomic component object as its argument. If the argument is a non-atomic list or record, then the function first creates an atomic copy of the argument. The function then changes the replacement policy of the object to write-once: if an element of the object is already bound, then further attempts to assign to it will be ignored.</p>
+
+<p><a id="X806C3F0681B847A0" name="X806C3F0681B847A0"></a></p>
+
+<h5>5.3-2 MakeStrictWriteOnceAtomic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeStrictWriteOnceAtomic</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">MakeStrictWriteOnceAtomic</code> works like <code class="func">MakeWriteOnceAtomic</code> (<a href="chap5.html#X7B76F2AD818492BC"><span class="RefLink">5.3-1</span></a>), except that the replacement policy is being changed to being strict write-once: if an element is already bound, then further attempts to assign to it will raise an error.</p>
+
+<p><a id="X7E7591EC780F3988" name="X7E7591EC780F3988"></a></p>
+
+<h5>5.3-3 MakeReadWriteAtomic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeReadWriteAtomic</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">MakeReadWriteAtomic</code> is the inverse of <code class="func">MakeWriteOnceAtomic</code> (<a href="chap5.html#X7B76F2AD818492BC"><span class="RefLink">5.3-1</span></a>) and <code class="func">MakeStrictWriteOnceAtomic</code> (<a href="chap5.html#X806C3F0681B847A0"><span class="RefLink">5.3-2</span></a>) in that the replacement policy is being changed to being rewritable: Elements can be replaced even if they are already bound.</p>
+
+<p><a id="X7DCE3B4D7D26407F" name="X7DCE3B4D7D26407F"></a></p>
+
+<h4>5.4 <span class="Heading">Thread-local records</span></h4>
+
+<p>Thread-local records allow an easy way to have a separate copy of a record for each indvidual thread that is accessed by the same name in each thread.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := ThreadLocalRecord();; # create new thread-local record</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.x := 99;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WaitThread( CreateThread( function()</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                             r.x := 100;</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                             Display(r.x);</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">                             end ) );</span>
+100
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.x;</span>
+99
+</pre></div>
+
+<p>As can be seen above, even though <code class="code">r.x</code> is overwritten in the second thread, it does not affect the value of <code class="code">r.x| in the first thread</code></p>
+
+<p><a id="X7BE7D67586FC91E6" name="X7BE7D67586FC91E6"></a></p>
+
+<h5>5.4-1 ThreadLocalRecord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ThreadLocalRecord</code>( [<var class="Arg">defaults</var>[, <var class="Arg">constructors</var>]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">ThreadLocalRecord</code> creates a new thread-local record. It accepts up to two initial arguments. The <var class="Arg">defaults</var> argument is a record of default values with which each thread-local copy is initially populated (this happens on demand, so values are not actually read until needed). The second argument is a record of constructors; parameterless functions that return an initial value for the respective element. Constructors are evaluated only once per thread and only if the respective element is accessed without having previously been assigned a value.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := ThreadLocalRecord( rec(x := 99),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">     rec(y := function() return 101; end));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.x;</span>
+99
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.y;</span>
+101
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TaskResult(RunTask(function() return r.x; end));</span>
+99
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TaskResult(RunTask(function() return r.y; end));</span>
+101
+</pre></div>
+
+<p><a id="X788AF1CC8111798C" name="X788AF1CC8111798C"></a></p>
+
+<h5>5.4-2 SetTLDefault</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetTLDefault</code>( <var class="Arg">record</var>, <var class="Arg">name</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">SetTLDefault</code> can be used to set the default value of a record field after its creation. Here, <var class="Arg">record</var> is a thread-local record, <var class="Arg">name</var> is the string of the field name, and <var class="Arg">value</var> is the value.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := ThreadLocalRecord();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetTLDefault(r, "x", 314);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.x;</span>
+314
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TaskResult(RunTask(function() return r.x; end));</span>
+314
+</pre></div>
+
+<p><a id="X853A898384888B85" name="X853A898384888B85"></a></p>
+
+<h5>5.4-3 SetTLConstructor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetTLConstructor</code>( <var class="Arg">record</var>, <var class="Arg">name</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><code class="func">SetTLConstructor</code> can be used to set the constructor of a thread-local record field after its creation, similar to <code class="func">SetTLDefault</code> (<a href="chap5.html#X788AF1CC8111798C"><span class="RefLink">5.4-2</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := ThreadLocalRecord();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetTLConstructor(r, "x", function() return 2718; end);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r.x;</span>
+2718
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TaskResult(RunTask(function() return r.x; end));</span>
+2718
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

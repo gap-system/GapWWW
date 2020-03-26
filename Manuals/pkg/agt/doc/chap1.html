@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (AGT) - Chapter 1: The AGT package</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X7BCEAE02860D32E2" name="X7BCEAE02860D32E2"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7BCEAE02860D32E2">1 <span class="Heading">The <strong class="pkg">AGT</strong> package</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7CA5AC377A6724DB">1.1 <span class="Heading">Installing <strong class="pkg">AGT</strong></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X84B0208B7C1FBB9D">1.2 <span class="Heading">Loading <strong class="pkg">AGT</strong></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X8642BB03847ED130">1.3 <span class="Heading">Citing <strong class="pkg">AGT</strong></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X80A66A0D808582A3">1.4 <span class="Heading">Examples of the use of <strong class="pkg">AGT</strong></span></a>
+</span>
+</div>
+</div>
+
+<h3>1 <span class="Heading">The <strong class="pkg">AGT</strong> package</span></h3>
+
+<p>This is the manual for the <strong class="pkg">AGT</strong> package version 0.1, developed at Queen Mary University of London by Rhys J. Evans.</p>
+
+<p>The <strong class="pkg">AGT</strong> package contains a methods used for the determination of various algebraic and regularity properties of graphs, as well as certain substructures of graphs. The package also contains a library of strongly regular graphs, intended to be a useful resource for computational experiments.</p>
+
+<p>All of the functions in this package deal with finite simple graphs in <strong class="pkg">Grape</strong> format <a href="chapBib.html#biBGRAPE_2018">[Soi18]</a>. Behind the scenes, we also use the <strong class="pkg">Digraphs</strong> package <a href="chapBib.html#biBDIGRAPHS_2019">[DBJM+19]</a> to format and efficiently store and access the graphs in the strongly regular graph library.</p>
+
+<p><a id="X7CA5AC377A6724DB" name="X7CA5AC377A6724DB"></a></p>
+
+<h4>1.1 <span class="Heading">Installing <strong class="pkg">AGT</strong></span></h4>
+
+<p>To install the <strong class="pkg">AGT</strong> package, you will need to download the most recent <code class="code">tar.gz</code> file, found at https://github.com/rhysje00/agt. Once downloaded, you can install the package by following the instructions found in the <strong class="pkg">GAP</strong> reference manual, <span class="URL"><a href="https://www.gap-system.org/Manuals/doc/ref/chap76.html">chapter 76</a></span>.</p>
+
+<p>The <strong class="pkg">AGT</strong> package requires the following <strong class="pkg">GAP</strong> packages:</p>
+
+
+<ul>
+<li><p><strong class="pkg">GAPDoc</strong> <a href="chapBib.html#biBGAPDOC_2019">[LN19]</a>, version 1.6 or higher;</p>
+
+</li>
+<li><p><strong class="pkg">DESIGN</strong> <a href="chapBib.html#biBDESIGN_2019">[Soi19]</a>, version 1.7 or higher;</p>
+
+</li>
+<li><p><strong class="pkg">GRAPE</strong> <a href="chapBib.html#biBGRAPE_2018">[Soi18]</a>, version 4.8 or higher;</p>
+
+</li>
+<li><p><strong class="pkg">Digraphs</strong> <a href="chapBib.html#biBDIGRAPHS_2019">[DBJM+19]</a>, version 0.12.2 or higher.</p>
+
+</li>
+</ul>
+<p>Each of the above packages are part of the standard <strong class="pkg">GAP</strong> distribution.</p>
+
+<p><a id="X84B0208B7C1FBB9D" name="X84B0208B7C1FBB9D"></a></p>
+
+<h4>1.2 <span class="Heading">Loading <strong class="pkg">AGT</strong></span></h4>
+
+<p>Once correctly installed, you can load the <strong class="pkg">AGT</strong> package at the <strong class="pkg">GAP</strong> prompt by typing the following.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("agt");</span>
+true
+</pre></div>
+
+<p><a id="X8642BB03847ED130" name="X8642BB03847ED130"></a></p>
+
+<h4>1.3 <span class="Heading">Citing <strong class="pkg">AGT</strong></span></h4>
+
+<p>If you use the <strong class="pkg">AGT</strong> package in your research, please tell us about it by emailing <span class="URL"><a href="mailto:r.evans@qmul.ac.uk">r.evans@qmul.ac.uk</a></span>. We are interested in any research involving the use of the <strong class="pkg">AGT</strong> package and might refer to your work in the future. If you wish to refer to the <strong class="pkg">AGT</strong> package in a published work, please cite <strong class="pkg">AGT</strong> like a journal article. The following is a BibTeX entry for the current <strong class="pkg">AGT</strong> version:</p>
+
+
+<div class="example"><pre>
+@Manual{agt,
+        author = {Evans, Rhys J.},
+        key = {agt},
+        title = {{AGT -- Algebraic Graph Theory package for GAP, Version 0.1}},
+        url = {\verb+(https://github.com/rhysje00/agt)+},
+        year = {2019}
+</pre></div>
+
+<p><a id="X80A66A0D808582A3" name="X80A66A0D808582A3"></a></p>
+
+<h4>1.4 <span class="Heading">Examples of the use of <strong class="pkg">AGT</strong></span></h4>
+
+<p>We will give a simple example of how to use the <strong class="pkg">AGT</strong> package here. Further applications of the package can be found in <a href="chapBib.html#biBE_2020">[Eva20]</a>. In this example, we will examine the properties and subgraphs of the strongly regular graphs with parameters <span class="SimpleMath">(16,6,2,2)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("agt");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsFeasibleSRGParameters([16,6,2,2]); </span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NrSRGs([16,6,2,2]);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsEnumeratedSRGParameterTuple([16,6,2,2]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">graphs:=AllSRGs([16,6,2,2]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeastEigenvalueFromSRGParameters([16,6,2,2]);</span>
+-2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeastEigenvalueInterval(graphs[1],1/10);</span>
+[ -2, -2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HoffmanCliqueBound([16,6,2,2]);  </span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CliqueAdjacencyBound([16,6,2]);</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=[1,2,3,4];</span>
+[ 1, 2, 3, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Nexus(graphs[1],S);</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RegularSetParameters(graphs[1],S);</span>
+[ 3, 1 ]
+
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

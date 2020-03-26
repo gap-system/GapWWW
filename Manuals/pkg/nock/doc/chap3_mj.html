@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (NoCK) - Chapter 3: Algorithm example</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X7F57F15D7A4099A1" name="X7F57F15D7A4099A1"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X7F57F15D7A4099A1">3 <span class="Heading">Algorithm example</span></a>
+</div>
+
+<h3>3 <span class="Heading">Algorithm example</span></h3>
+
+<p>In this chapter we use additionaly functions from the following packages: CoReLG <a href="chapBib_mj.html#biBCoReLG">[DFdG14]</a> and SLA <a href="chapBib_mj.html#biBSLA">[dG]</a>. We will show in detail the split case (for a non-split case you should use algoritm to generate regular subalgebras from <a href="chapBib_mj.html#biBDFG">[DFdG15]</a>). For example, we take <span class="SimpleMath">\(G=\mathfrak{e}_{6(6)}\)</span> (tuple "E",6,2 in CoReLG notation). We calculate <var class="Arg">AllZeroDH</var> on it.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllZeroDH("E",6,2);</span>
+[ 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 18, 19, 20, 21, 22, 23, 24, 27, 
+ 28, 29, 30, 31, 32, 35, 36, 37, 38, 39, 40, 41 ]
+</pre></div>
+
+<p>We generate all regular subalgebras of complexification.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GC:=SimpleLieAlgebra("E",6,Rationals);;  </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">REG:=RegularSemisimpleSubalgebras(GC);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L0:=List( REG, SemiSimpleType );   </span>
+[ "A1", "A1 A1", "A2 A1", "A4", "D5", "A4 A1", "A2 A1 A1", "A2 A1 A2", "A3 A1", 
+ "A1 A1 A1", "A2", "A3", "A5", "A2 A2", "D4", "A5 A1", "A3 A1 A1", "A1 A1 A1 A1", 
+ "A2 A2 A2" ]
+</pre></div>
+
+<p>For each subalgebras we take the split real form and calculate its non-compact dimension.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L0[4]; </span>
+"A4"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RealFormsInformation( "A", 4 ); </span>
+
+  There are 4 simple real forms with complexification A4
+    1 is of type su(5), compact form
+    2 - 3 are of type su(p,5-p) with 1 &lt;= p &lt;= 2
+    4 is of type sl(5,R)
+  Index '0' returns the realification of A4
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=RealFormById("A",4,4);;     </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NonCompactDimension( G );      </span>
+14
+</pre></div>
+
+<p>Number 14 is in output of <var class="Arg">AllZeroDH</var> function, so for <span class="SimpleMath">\(\mathfrak{g}=e_{6(6)}\)</span> and <span class="SimpleMath">\(\mathfrak{h}=\mathfrak{sl}(5,\mathbb{R})\)</span> corresponding homogeneous spaces <span class="SimpleMath">\(G/H\)</span> do not have compact Clifford–Klein forms.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L0[5];                                                          </span>
+"D5"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RealFormsInformation( "D", 5 ); </span>
+
+  There are 7 simple real forms with complexification D5
+    1 is of type so(10), compact form
+    2 - 3 are of type so(2p,10-2p) with 1 &lt;= p &lt;= 2
+    4 is of type so*(10)
+    5 is of type so(9,1)
+    6 - 7 are of type so(2p+1,10-2p-1) with 1 &lt;= p &lt;= 2
+  Index '0' returns the realification of D5
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G:=RealFormById("D",5,7);; </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NonCompactDimension( G );                                       </span>
+25
+</pre></div>
+
+<p>Number 25 is not in output of <var class="Arg">AllZeroDH</var> function, so for <span class="SimpleMath">\(\mathfrak{g}=e_{6(6)}\)</span> and <span class="SimpleMath">\(\mathfrak{h}=\mathfrak{so}(5,5)\)</span> our algoritm does not provide a solution to the problem.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

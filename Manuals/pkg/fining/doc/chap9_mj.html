@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (FinInG) - Chapter 9: Affine Spaces</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap9"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap9.html">[MathJax off]</a></p>
+<p><a id="X7A63E8817A819046" name="X7A63E8817A819046"></a></p>
+<div class="ChapSects"><a href="chap9_mj.html#X7A63E8817A819046">9 <span class="Heading">Affine Spaces</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X7ADF809E85917970">9.1 <span class="Heading">Affine spaces and basic operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X793755BF8775B629">9.1-1 IsAffineSpace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X87C360337E16E6CC">9.1-2 AffineSpace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7E6926C6850E7C4E">9.1-3 Dimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7BCBA564829D9E89">9.1-4 BaseField</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7D544D7985A4572D">9.1-5 UnderlyingVectorSpace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X8606750A8586DF8D">9.1-6 AmbientSpace</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X7AC346337E23D34F">9.2 <span class="Heading">Subspaces of affine spaces</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X82DE73E884CF8172">9.2-1 AffineSubspace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X87657AEF7E2C50F9">9.2-2 ElementsOfIncidenceStructure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X87E64DA67C3D6661">9.2-3 <span class="Heading">Short names for ElementsOfIncidenceStructure</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7904128479BDFCC9">9.2-4 <span class="Heading">Incidence and containment</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X8606750A8586DF8D">9.2-5 AmbientSpace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7BCBA564829D9E89">9.2-6 BaseField</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X875BE2957FAF6209">9.2-7 Span</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X8469B54180FE1E4C">9.2-8 Meet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7FE5611C7A4C0FA2">9.2-9 IsParallel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7A9F3647866EEEE3">9.2-10 ParallelClass</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X835B9A1F7EFE4640">9.3 <span class="Heading">Shadows of Affine Subspaces</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7FFA08DA85C5251C">9.3-1 ShadowOfElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7E86E6417871730C">9.3-2 ShadowOfFlag</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X7836304580E12428">9.4 <span class="Heading">Iterators and enumerators</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X83ADF8287ED0668E">9.4-1 Iterator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7EF8910F82B45EC7">9.4-2 Enumerator</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X78B78D517B22FB7E">9.5 <span class="Heading">Affine groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X8388486C80D0991D">9.5-1 AffineGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X83FF6FA0790D5747">9.5-2 CollineationGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7E819F357EEEF31C">9.5-3 OnAffineSpaces</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X8769AA7080854675">9.6 <span class="Heading">Low level operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X85C1B3067C6014D2">9.6-1 IsVectorSpaceTransversal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X8210A9FA7F9FA6DF">9.6-2 VectorSpaceTransversal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7B2163767BCA3CC6">9.6-3 VectorSpaceTransversalElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X8292D00E82069C27">9.6-4 ComplementSpace</a></span>
+</div></div>
+</div>
+
+<h3>9 <span class="Heading">Affine Spaces</span></h3>
+
+<p>In this chapter we show how one can work with finite affine spaces in <strong class="pkg">FinInG</strong>.</p>
+
+<p><a id="X7ADF809E85917970" name="X7ADF809E85917970"></a></p>
+
+<h4>9.1 <span class="Heading">Affine spaces and basic operations</span></h4>
+
+<p>An <em>affine space</em> is a point-line incidence geometry, satisfying few well known axioms. An axiomatic treatment can e.g. be found in <a href="chapBib_mj.html#biBVY65a">[VY65a]</a> and <a href="chapBib_mj.html#biBVY65b">[VY65b]</a>. As is the case with projective spaces, affine spaces are axiomatically point-line geometries, but may contain higher dimensional affine subspaces too. An affine space can also be described as the "geometry you get" when you remove a hyperplane from a projective space. Conversely, each affine space can be extended to a projective space in a unique way (by "adding its hyperplane at infinity"). In <strong class="pkg">FinInG</strong>, we deal with <em>finite Desarguesian affine spaces</em>, i.e. an affine space, such that its projective completion is Desarguesian. Other concepts can be easily defined using this projective completion. E.g. lines of the projective space which are concurrent in a point of the hyperplane at infinity, become now <em>parallel</em> in the affine space. In order to implement (Desarguesian) affine spaces in <strong class="pkg">FinInG</strong>, we have to represent the elements of the affine space (the affine subspaces), in a standard way. By definition, the points (i.e. the elements of type 1) of the <span class="SimpleMath">\(n\)</span>-dimensional affine space <span class="SimpleMath">\(\mathrm{AG}(n,q)\)</span> are the vectors of the underlying <span class="SimpleMath">\(n\)</span>-dimensional vector space over the finite field <span class="SimpleMath">\(\mathrm{GF}(q)\)</span>. The <span class="SimpleMath">\(i\)</span>-dimensional subspaces of <span class="SimpleMath">\(\mathrm{AG}(n,q)\)</span> (i.e. the elements of type <span class="SimpleMath">\(i-1\)</span>) are defined as the cosets of the <span class="SimpleMath">\(i\)</span>-dimensional subspaces of the underlying vector space. Hence, the common representation of such a subspace is</p>
+
+<p class="center">\[v+S,\]</p>
+
+<p>where v is a vector and S is a subspace of a vector space. Equivalently one can also think of a subspace of an affine space as consisting of: (i) an affine point, representing the coset, and and (ii) a "direction", which is an element of an <span class="SimpleMath">\(n-1\)</span>-dimensional projective space, representing the hyperplane at infinity. In <strong class="pkg">FinInG</strong>, we represent an <span class="SimpleMath">\(i\)</span>-dimensional subspace, <span class="SimpleMath">\(1 \leq i \leq n-1\)</span> as</p>
+
+<p class="center">\[[v, mat]\]</p>
+
+<p>where <var class="Arg">v</var> is a row vector and <var class="Arg">mat</var> is a matrix (representing a basis of the projective element representing the direction at infinity). For affine points, we simply use vectors.</p>
+
+<p><a id="X793755BF8775B629" name="X793755BF8775B629"></a></p>
+
+<h5>9.1-1 IsAffineSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAffineSpace</code></td><td class="tdright">( category )</td></tr></table></div>
+<p>This category is a subcategory of <code class="code">IsIncidenceGeometry</code>, and contains all finite Desarguesian affine spaces.</p>
+
+<p><a id="X87C360337E16E6CC" name="X87C360337E16E6CC"></a></p>
+
+<h5>9.1-2 AffineSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineSpace</code>( <var class="Arg">d</var>, <var class="Arg">F</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineSpace</code>( <var class="Arg">d</var>, <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AG</code>( <var class="Arg">d</var>, <var class="Arg">F</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AG</code>( <var class="Arg">d</var>, <var class="Arg">q</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an affine space</p>
+
+<p><var class="Arg">d</var> must be a positive integer. In the first form, <var class="Arg">F</var> is a field and the function returns the affine space of dimension <var class="Arg">d</var> over <var class="Arg">F</var>. In the second form, <var class="Arg">q</var> is a prime power specifying the size of the field. The user may also use an alias, namely, the common abbreviation <code class="code">AG(d, q)</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AffineSpace(3,GF(4));</span>
+AG(3, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AffineSpace(3,4);</span>
+AG(3, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AG(3,GF(4));</span>
+AG(3, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AG(3,4);</span>
+AG(3, 4)
+ 
+</pre></div>
+
+<p><a id="X7E6926C6850E7C4E" name="X7E6926C6850E7C4E"></a></p>
+
+<h5>9.1-3 Dimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Dimension</code>( <var class="Arg">as</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Rank</code>( <var class="Arg">as</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: the dimension of the affine space <var class="Arg">as</var> (which is equal to its rank)</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension(AG(5,7));</span>
+5
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Rank(AG(5,7));</span>
+5
+ 
+</pre></div>
+
+<p><a id="X7BCBA564829D9E89" name="X7BCBA564829D9E89"></a></p>
+
+<h5>9.1-4 BaseField</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BaseField</code>( <var class="Arg">as</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: returns the base field for the affine space <var class="Arg">as</var></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BaseField(AG(6,49));</span>
+GF(7^2)
+ 
+</pre></div>
+
+<p><a id="X7D544D7985A4572D" name="X7D544D7985A4572D"></a></p>
+
+<h5>9.1-5 UnderlyingVectorSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingVectorSpace</code>( <var class="Arg">as</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a vector space</p>
+
+<p>The underlying vectorspace of <span class="SimpleMath">\(\mathrm{AG}(n,q)\)</span> is simply <span class="SimpleMath">\(V(n,q)\)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingVectorSpace(AG(4,5));</span>
+( GF(5)^4 )
+ 
+</pre></div>
+
+<p><a id="X8606750A8586DF8D" name="X8606750A8586DF8D"></a></p>
+
+<h5>9.1-6 AmbientSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AmbientSpace</code>( <var class="Arg">as</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an affine space</p>
+
+<p>The ambient space of an affine space <var class="Arg">as</var> is the affine space itself. Hence, simply <var class="Arg">as</var> will be returned.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AmbientSpace(AG(4,7));</span>
+AG(4, 7)
+ 
+</pre></div>
+
+<p><a id="X7AC346337E23D34F" name="X7AC346337E23D34F"></a></p>
+
+<h4>9.2 <span class="Heading">Subspaces of affine spaces</span></h4>
+
+<p><a id="X82DE73E884CF8172" name="X82DE73E884CF8172"></a></p>
+
+<h5>9.2-1 AffineSubspace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineSubspace</code>( <var class="Arg">geo</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineSubspace</code>( <var class="Arg">geo</var>, <var class="Arg">v</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a subspace of an affine space</p>
+
+<p><var class="Arg">geo</var> is an affine space, <var class="Arg">v</var> is a row vector, and <var class="Arg">M</var> is a matrix. There are two representations necessary for affine subspaces in <strong class="pkg">FinInG</strong>: (i) points represented as vectors and (ii) subspaces of dimension at least 1 represented as a coset of a vector subspace:</p>
+
+<p class="center">\[v+S.\]</p>
+
+<p>For the former, the underlying object is just a vector, whereas the second is a pair <span class="SimpleMath">\([v, M]\)</span> where <span class="SimpleMath">\(v\)</span> is a vector and <span class="SimpleMath">\(M\)</span> is a matrix representing the basis of <span class="SimpleMath">\(S\)</span>. Now there is a canonical representative for the coset <span class="SimpleMath">\(v+ S\)</span>, and the matrix <span class="SimpleMath">\(M\)</span> is in semi-echelon form, therefore we can easily compare two affine subspaces. If no matrix is given in the arguments, then it is assumed that the user is constructing an affine point.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ag := AffineSpace(3, 3);</span>
+AG(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := [[1,1,0]]*Z(3)^0;</span>
+[ [ Z(3)^0, Z(3)^0, 0*Z(3) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">v := [0,-1,1] * Z(3)^0;</span>
+[ 0*Z(3), Z(3), Z(3)^0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">line := AffineSubspace(ag, v, x);</span>
+&lt;a line in AG(3, 3)&gt;
+ 
+</pre></div>
+
+<p><a id="X87657AEF7E2C50F9" name="X87657AEF7E2C50F9"></a></p>
+
+<h5>9.2-2 ElementsOfIncidenceStructure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElementsOfIncidenceStructure</code>( <var class="Arg">as</var>, <var class="Arg">j</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the collection of elements of the affine space <var class="Arg">as</var> of type <var class="Arg">j</var></p>
+
+<p>For the affine space <var class="Arg">as</var> of dimension <span class="SimpleMath">\(d\)</span> and the type <var class="Arg">j</var>, <span class="SimpleMath">\(1 \leq j \leq d\)</span> this operation returns the collection of <span class="SimpleMath">\(j-1\)</span> dimensional subspaces. An error message is produced when the projective space <var class="Arg">ps</var> has no elements of a required type.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ag := AffineSpace(9, 64);</span>
+AG(9, 64)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ag,1);</span>
+&lt;points of AG(9, 64)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ag,2);</span>
+&lt;lines of AG(9, 64)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ag,3);</span>
+&lt;planes of AG(9, 64)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ag,4);</span>
+&lt;solids of AG(9, 64)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ag,6);</span>
+&lt;affine. subspaces of dim. 5 of AG(9, 64)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ag,9);</span>
+&lt;affine. subspaces of dim. 8 of AG(9, 64)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementsOfIncidenceStructure(ag,10);</span>
+Error, &lt;as&gt; has no elements of type &lt;j&gt; called from
+&lt;function "unknown"&gt;( &lt;arguments&gt; )
+ called from read-eval loop at line 15 of *stdin*
+you can 'quit;' to quit to outer loop, or
+you can 'return;' to continue
+<span class="GAPbrkprompt">brk&gt;</span> <span class="GAPinput">quit;</span>
+ 
+</pre></div>
+
+<p><a id="X87E64DA67C3D6661" name="X87E64DA67C3D6661"></a></p>
+
+<h5>9.2-3 <span class="Heading">Short names for ElementsOfIncidenceStructure</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Points</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Lines</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Planes</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Solids</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Hyperplanes</code>( <var class="Arg">ps</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: The elements of <var class="Arg">ps</var> of respective type 1, 2, 3, 4, and the hyperplanes</p>
+
+<p>An error message is produced when the projective space <var class="Arg">ps</var> has no elements of a required type.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AG(5,4);</span>
+AG(5, 4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Points(as);</span>
+&lt;points of AG(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Lines(as);</span>
+&lt;lines of AG(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Planes(as);</span>
+&lt;planes of AG(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Solids(as);</span>
+&lt;solids of AG(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Hyperplanes(as);</span>
+&lt;affine. subspaces of dim. 4 of AG(5, 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AG(2,8);</span>
+AG(2, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Hyperplanes(as);</span>
+&lt;lines of AG(2, 8)&gt;
+ 
+</pre></div>
+
+<p><a id="X7904128479BDFCC9" name="X7904128479BDFCC9"></a></p>
+
+<h5>9.2-4 <span class="Heading">Incidence and containment</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIncident</code>( <var class="Arg">el1</var>, <var class="Arg">el2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">el1</var>, <var class="Arg">el2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \in</code>( <var class="Arg">el1</var>, <var class="Arg">el2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>Recall that for affine spaces, incidence is symmetrized containment, where the whole affine space is excluded as one of the arguments for the operation <code class="file">IsIncident</code>, since they it is not considered as an element of the geometry, but the whole affine space is allowed as one of the arguments for <code class="file">\in</code>. The method for <code class="file">\*</code> is using <code class="file">IsIncident</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AG(3,16);</span>
+AG(3, 16)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := AffineSubspace(as,[1,0,0]*Z(16)^0);</span>
+&lt;a point in AG(3, 16)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := AffineSubspace(as,[1,0,0]*Z(16),[[0,1,1]]*Z(16)^0);</span>
+&lt;a line in AG(3, 16)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane := AffineSubspace(as,[1,0,0]*Z(16)^0,[[1,0,0],[0,1,1]]*Z(16)^0);</span>
+&lt;a plane in AG(3, 16)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p in p;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p in l;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l in p;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l in plane;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane in l;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p in plane;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p in as;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l in as;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">plane in as;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as in p;</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIncident(p,l);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIncident(l,p);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIncident(l,plane);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIncident(plane,l);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIncident(p,plane);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIncident(plane,p);</span>
+true
+ 
+</pre></div>
+
+<p><a id="X8606750A8586DF8D" name="X8606750A8586DF8D"></a></p>
+
+<h5>9.2-5 AmbientSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AmbientSpace</code>( <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: returns the ambient space of an element <var class="Arg">el</var> of an affine space</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AG(5,7);</span>
+AG(5, 7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">solid := AffineSubspace(as,[1,0,0,1,0]*Z(7)^3,[[1,0,0,0,0],[0,1,1,1,0]]*Z(7)^0);</span>
+&lt;a plane in AG(5, 7)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AmbientSpace(solid);</span>
+AG(5, 7)
+ 
+</pre></div>
+
+<p><a id="X7BCBA564829D9E89" name="X7BCBA564829D9E89"></a></p>
+
+<h5>9.2-6 BaseField</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BaseField</code>( <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: returns the base field of an element <var class="Arg">el</var> of an affine space</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AG(5,11);</span>
+AG(5, 11)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sub := AffineSubspace(as,[1,4,3,1,0]*Z(11)^5,[[1,0,0,0,0],[0,1,1,1,0],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[0,0,0,0,1]]*Z(11)^0);</span>
+&lt;a solid in AG(5, 11)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BaseField(sub);</span>
+GF(11)
+ 
+</pre></div>
+
+<p><a id="X875BE2957FAF6209" name="X875BE2957FAF6209"></a></p>
+
+<h5>9.2-7 Span</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Span</code>( <var class="Arg">u</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a subspace</p>
+
+<p><var class="Arg">u</var> and <var class="Arg">v</var> are subspaces of an affine space. This function returns the span of the two subspaces.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ag := AffineSpace(4,5);</span>
+AG(4, 5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := AffineSubspace(ag, [1,0,0,0] * One(GF(5)) );</span>
+&lt;a point in AG(4, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := AffineSubspace(ag, [0,1,0,0] * One(GF(5)) );</span>
+&lt;a point in AG(4, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Span(p, r);</span>
+&lt;a line in AG(4, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l^_;</span>
+[ [ 0*Z(5), Z(5)^0, 0*Z(5), 0*Z(5) ], [ [ Z(5)^0, Z(5)^2, 0*Z(5), 0*Z(5) ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(l);</span>
+Affine line:
+Coset representative: [ 0*Z(5), Z(5)^0, 0*Z(5), 0*Z(5) ]
+Coset (direction): [ [ Z(5)^0, Z(5)^2, 0*Z(5), 0*Z(5) ] ]
+ 
+</pre></div>
+
+<p><a id="X8469B54180FE1E4C" name="X8469B54180FE1E4C"></a></p>
+
+<h5>9.2-8 Meet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Meet</code>( <var class="Arg">u</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an affine subspace or the empty list</p>
+
+<p><var class="Arg">u</var> and <var class="Arg">v</var> are subspaces of an affine space. This function returns the meet of the two subspaces. If the two subspaces are disjoint, then Meet returns the empty list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ag := AffineSpace(4,5);</span>
+AG(4, 5)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := AffineSubspace(ag, [1,0,0,0] * One(GF(5)), </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">       [[1,0,0,-1], [0,1,0,0],[0,0,1,3]] * One(GF(5)));</span>
+&lt;a solid in AG(4, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := AffineSubspace(ag, [0,0,0,0] * One(GF(5)), [[1,1,0,0]] * One(GF(5)) );</span>
+&lt;a line in AG(4, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Meet(p, l);</span>
+&lt;a point in AG(4, 5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x^_;</span>
+[ Z(5)^0, Z(5)^0, 0*Z(5), 0*Z(5) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(x);</span>
+Affine point:  1 1 . .
+ 
+</pre></div>
+
+<p><a id="X7FE5611C7A4C0FA2" name="X7FE5611C7A4C0FA2"></a></p>
+
+<h5>9.2-9 IsParallel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsParallel</code>( <var class="Arg">u</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>The arguments <var class="Arg">u</var> and <var class="Arg">v</var> must be affine subspaces of a common affine space. Two subspaces are parallel if and only if the direction space of the first is contained in the direction space of the second or viceversa.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AffineSpace(3, 3);</span>
+AG(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := AffineSubspace(as,[0,0,0]*Z(3)^0,[[1,0,0]]*Z(3)^0);</span>
+&lt;a line in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := AffineSubspace(as,[1,0,0]*Z(3)^0,[[1,0,0]]*Z(3)^0);</span>
+&lt;a line in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := AffineSubspace(as,[1,0,0]*Z(3)^0,[[0,1,0]]*Z(3)^0);</span>
+&lt;a line in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsParallel(l,m);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsParallel(m,n);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsParallel(l,n);</span>
+false
+ 
+</pre></div>
+
+<p><a id="X7A9F3647866EEEE3" name="X7A9F3647866EEEE3"></a></p>
+
+<h5>9.2-10 ParallelClass</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParallelClass</code>( <var class="Arg">as</var>, <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParallelClass</code>( <var class="Arg">v</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a collection of affine subspaces</p>
+
+<p>The argument <var class="Arg">v</var> is an affine subspace of <var class="Arg">as</var>. This operation returns a collection for which an iterator is installed. The collection represents the set of elements of <var class="Arg">as</var> of the same type as <var class="Arg">v</var> which are parallel to <var class="Arg">v</var>; they have the same direction. If <var class="Arg">v</var> is a point, then this operation returns the collection of all points of <var class="Arg">as</var>. If one argument is given, then it is assumed that the affine space which we are working with is the ambient space of <var class="Arg">v</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AffineSpace(3, 3);</span>
+AG(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random( Lines( as ) );</span>
+&lt;a line in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pclass := ParallelClass( l );</span>
+&lt;parallel class of lines in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsList(pclass);</span>
+[ &lt;a line in AG(3, 3)&gt;, &lt;a line in AG(3, 3)&gt;, &lt;a line in AG(3, 3)&gt;, 
+  &lt;a line in AG(3, 3)&gt;, &lt;a line in AG(3, 3)&gt;, &lt;a line in AG(3, 3)&gt;, 
+  &lt;a line in AG(3, 3)&gt;, &lt;a line in AG(3, 3)&gt;, &lt;a line in AG(3, 3)&gt; ]
+ 
+</pre></div>
+
+<p><a id="X835B9A1F7EFE4640" name="X835B9A1F7EFE4640"></a></p>
+
+<h4>9.3 <span class="Heading">Shadows of Affine Subspaces</span></h4>
+
+<p><a id="X7FFA08DA85C5251C" name="X7FFA08DA85C5251C"></a></p>
+
+<h5>9.3-1 ShadowOfElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShadowOfElement</code>( <var class="Arg">as</var>, <var class="Arg">v</var>, <var class="Arg">type</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the subspaces of the affine space <var class="Arg">as</var> of dimension <var class="Arg">type</var> which are incident with <var class="Arg">v</var></p>
+
+<p><var class="Arg">as</var> is an affine space and <var class="Arg">v</var> is an element of <var class="Arg">as</var>. This operation computes and returns the subspaces of dimension <var class="Arg">type</var> which are incident with <var class="Arg">v</var>. In fact, this operation returns a collection which is only computed when iterated (e.g. when applying <code class="code">AsList</code> to the collection). Some shorthand notation for <code class="code">ShadowOfElement</code> is available for affine spaces: <code class="code">Points(as,v)</code>, <code class="code">Points(v)</code>, <code class="code">Lines(v)</code>, etc.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AffineSpace(3, 3);</span>
+AG(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random( Lines( as ) );</span>
+&lt;a line in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">planesonl := Planes(l);</span>
+&lt;shadow planes in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsList(planesonl);</span>
+[ &lt;a plane in AG(3, 3)&gt;, &lt;a plane in AG(3, 3)&gt;, &lt;a plane in AG(3, 3)&gt;, 
+  &lt;a plane in AG(3, 3)&gt; ]
+ 
+</pre></div>
+
+<p><a id="X7E86E6417871730C" name="X7E86E6417871730C"></a></p>
+
+<h5>9.3-2 ShadowOfFlag</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ShadowOfFlag</code>( <var class="Arg">as</var>, <var class="Arg">list</var>, <var class="Arg">type</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: the subspaces of the affine space <var class="Arg">as</var> of dimension <var class="Arg">type</var> which are incident with each element of <var class="Arg">list</var></p>
+
+<p><var class="Arg">as</var> is an affine space and <var class="Arg">list</var> is a list of pairwise incident elements of <var class="Arg">as</var>. This operation computes and returns the subspaces of dimension <var class="Arg">type</var> which are incident with every element of <var class="Arg">list</var>. In fact, this operation returns a collection which is only computed when iterated (e.g. when applying <code class="code">AsList</code> to the collection).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AffineSpace(3, 3);</span>
+AG(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random( Lines( as ) );</span>
+&lt;a line in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Random( Points( l ) );</span>
+&lt;a point in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">flag := FlagOfIncidenceStructure(as,[x,l]);</span>
+&lt;a flag of AffineSpace(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">shadow := ShadowOfFlag( as, flag, 3 );</span>
+&lt;shadow planes in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsList(shadow);</span>
+Iterators of shadows of flags in affine spaces are not complete in this versio
+n
+[ &lt;a plane in AG(3, 3)&gt;, &lt;a plane in AG(3, 3)&gt;, &lt;a plane in AG(3, 3)&gt;, 
+  &lt;a plane in AG(3, 3)&gt; ]
+ 
+</pre></div>
+
+<p><a id="X7836304580E12428" name="X7836304580E12428"></a></p>
+
+<h4>9.4 <span class="Heading">Iterators and enumerators</span></h4>
+
+<p>Recall from Section <a href="chap4_mj.html#X799F3A2A86F82E5B"><span class="RefLink">4.4</span></a> ("Enumerating subspaces of a projective space", Chapter <a href="chap4_mj.html#X83BBAA668672A76D"><span class="RefLink">4</span></a>), that an iterator allows us to obtain elements from a collection one at a time in sequence, whereas an enumerator for a collection give us a way of picking out the i-th element. In <strong class="pkg">FinInG</strong> we have enumerators and iterators for subspace collections of affine spaces.</p>
+
+<p><a id="X83ADF8287ED0668E" name="X83ADF8287ED0668E"></a></p>
+
+<h5>9.4-1 Iterator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Iterator</code>( <var class="Arg">subs</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an iterator for the given subspaces collection</p>
+
+<p><var class="Arg">subs</var> is a collection of subspaces of an affine space, such as <code class="file">Points( AffineSpace(3, 3) )</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ag := AffineSpace(3, 3);</span>
+AG(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := Lines( ag );</span>
+&lt;lines of AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iter := Iterator( lines );</span>
+&lt;iterator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := NextIterator( iter );</span>
+&lt;a line in AG(3, 3)&gt;
+ 
+</pre></div>
+
+<p><a id="X7EF8910F82B45EC7" name="X7EF8910F82B45EC7"></a></p>
+
+<h5>9.4-2 Enumerator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Enumerator</code>( <var class="Arg">subs</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an enumerator for the given subspaces collection</p>
+
+<p><var class="Arg">subs</var> is a collection of subspaces of an affine space, such as <code class="file">Points( AffineSpace(3, 3) )</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ag := AffineSpace(3, 3);</span>
+AG(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">lines := Lines( ag );</span>
+&lt;lines of AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">enum := Enumerator( lines );</span>
+&lt;enumerator of &lt;lines of AG(3, 3)&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := enum[20];</span>
+&lt;a line in AG(3, 3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(l);</span>
+Affine line:
+Coset representative: [ 0*Z(3), 0*Z(3), Z(3)^0 ]
+Coset (direction): [ [ Z(3)^0, 0*Z(3), Z(3) ] ]
+ 
+</pre></div>
+
+<p><a id="X78B78D517B22FB7E" name="X78B78D517B22FB7E"></a></p>
+
+<h4>9.5 <span class="Heading">Affine groups</span></h4>
+
+<p>A <em>collineation</em> of an affine space is a permutation of the points which preserves the relation of collinearity within the affine space. The fundamental theorem of affine geometry states that the group <span class="SimpleMath">\(\mathrm{A}\Gamma\mathrm{L}(n,q)\)</span> of collineations of an affine space <span class="SimpleMath">\(\mathrm{AG}(n,q)\)</span> is generated by the translations <span class="SimpleMath">\(T\)</span>, the matrices of <span class="SimpleMath">\(\mathrm{GL}(n,q)\)</span> and the automorphisms of the field <span class="SimpleMath">\(\mathrm{GF}(q)\)</span>. The translations <span class="SimpleMath">\(T\)</span> form a normal subgroup of <span class="SimpleMath">\(\mathrm{A}\Gamma\mathrm{L}(n,q)\)</span>, and <span class="SimpleMath">\(\mathrm{A}\Gamma\mathrm{L}(n,q)\)</span> is the semidirect product of <span class="SimpleMath">\(T\)</span> and <span class="SimpleMath">\(\Gamma\mathrm{L}(n,q)\)</span>.</p>
+
+<p>Suppose we have an affine transformation of the form <span class="SimpleMath">\(x+A\)</span> where <span class="SimpleMath">\(x\)</span> is a vector representing a translation, and <span class="SimpleMath">\(A\)</span> is a matrix in <span class="SimpleMath">\(\mathrm{GL}(n,q)\)</span> Then by using the natural embedding of <span class="SimpleMath">\(\mathrm{AGL}(n,q)\)</span> in <span class="SimpleMath">\(\mathrm{PGL}(n+1,q)\)</span>, we can write this collineation as a matrix:</p>
+
+<p class="center">\[
+\left(\begin{array}{ccccc|c}
+& & & & & 0\\
+& & A & & & 0\\
+& & & & & 0\\
+\hline
+& & x & & & 1
+\end{array}\right).
+\]</p>
+
+<p>We can extend this idea to the full affine collineation group by adjoining the field automorphisms as we would for projective collineations. Here is an example:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ag := AffineSpace(3,3);</span>
+AG(3, 3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := AffineGroup(ag);</span>
+AGL(3,3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x:=Random(g);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(x);</span>
+&lt;a collineation , underlying matrix:
+ . 1 1 .
+ 2 2 . .
+ 2 1 . .
+ 1 2 1 1
+, F^0&gt;
+ 
+</pre></div>
+
+<p>Here we see that this affine transformation is</p>
+
+<p class="center">\[(1,2,1) + \left(
+\begin{array}{ccc}
+0& 1& 1\\
+2& 2& 0\\
+2& 1& 1
+\end{array}\right).
+\]</p>
+
+<p>As we have seen, in <strong class="pkg">FinInG</strong>, we represent an element of an affine collineation group as a projective semilinear element, i.e. as an object in the category <code class="code">ProjElsWithFrob</code>, so that we can use all the functionality that exists for such objects. However, an affine collineation group (i.e. a group of collineations of the affine space <span class="SimpleMath">\(\mathrm{AG}(n,q)\)</span> is not by default constructed as a subgroup of <span class="SimpleMath">\(\mathrm{P}\Gamma\mathrm{L}(n+1,q)\)</span>, but the compatibility between the elements of both groups enables testing for such relations.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := CollineationGroup(AG(3,27));</span>
+AGammaL(3,27)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := CollineationGroup(PG(3,27));</span>
+The FinInG collineation group PGammaL(4,27)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := Random(G);</span>
+&lt; a collineation: [ [ Z(3^3)^25, Z(3^3)^11, Z(3^3)^23, 0*Z(3) ], 
+  [ Z(3^3)^20, 0*Z(3), Z(3^3), 0*Z(3) ], 
+  [ Z(3^3)^16, Z(3^3)^15, Z(3^3)^21, 0*Z(3) ], 
+  [ Z(3^3)^20, Z(3^3)^4, 0*Z(3), Z(3)^0 ] ], F^3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g in H;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubgroup(H,G);</span>
+true
+ 
+</pre></div>
+
+<p><a id="X8388486C80D0991D" name="X8388486C80D0991D"></a></p>
+
+<h5>9.5-1 AffineGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineGroup</code>( <var class="Arg">as</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a group</p>
+
+<p>If <var class="Arg">as</var> is the affine space <span class="SimpleMath">\(\mathrm{AG}(n,q)\)</span> This operation returnes the affine linear group <span class="SimpleMath">\(\mathrm{AGL}(n,q)\)</span> acting on <var class="Arg">as</var>. The elements of this group are projectivities of the associated projective space. In order to get the full group of collineations of the affine space, one needs to use the operation <code class="code">CollineationGroup</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AffineSpace(4,7);</span>
+AG(4, 7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := AffineGroup(as);</span>
+AGL(4,7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AffineSpace(4,8);</span>
+AG(4, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := AffineGroup(as);</span>
+AGL(4,8)
+ 
+</pre></div>
+
+<p><a id="X83FF6FA0790D5747" name="X83FF6FA0790D5747"></a></p>
+
+<h5>9.5-2 CollineationGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollineationGroup</code>( <var class="Arg">as</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a group</p>
+
+<p>If <var class="Arg">as</var> is the affine space <span class="SimpleMath">\(\mathrm{AG}(n,q)\)</span>, then this operation returns the affine semilinear group <span class="SimpleMath">\(\mathrm{A}\Gamma\mathrm{L}(n,q)\)</span>. The elements of this group are collineations of the associated projective space. Note that if the defining field has prime order, then the groups <span class="SimpleMath">\(\mathrm{A}\Gamma\mathrm{L}(n,q)\)</span> and <span class="SimpleMath">\(\mathrm{AGL}(n,q)\)</span> coincide.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AffineSpace(4,8);</span>
+AG(4, 8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(as);</span>
+AGammaL(4,8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := AffineGroup(as);</span>
+AGL(4,8)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubgroup(g,h);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AffineSpace(4,7);</span>
+AG(4, 7)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := CollineationGroup(as);</span>
+AGL(4,7)
+ 
+</pre></div>
+
+<p><a id="X7E819F357EEEF31C" name="X7E819F357EEEF31C"></a></p>
+
+<h5>9.5-3 OnAffineSpaces</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OnAffineSpaces</code>( <var class="Arg">subspace</var>, <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \^</code>( <var class="Arg">subspace</var>, <var class="Arg">el</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: an element of an affine space</p>
+
+<p><var class="Arg">subspace</var> must be an element of an affine space and <var class="Arg">el</var> a collineation of an affine space (which is in fact also a collineation of an associated projective space). This is the action one should use for collineations of affine spaces, and it acts on subspaces of all types of affine spaces: points, lines, planes, etc.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">as := AG(3,27);</span>
+AG(3, 27)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := Random(Points(as));</span>
+&lt;a point in AG(3, 27)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := Random(CollineationGroup(as));</span>
+&lt; a collineation: [ [ Z(3^3)^25, Z(3^3)^11, Z(3^3)^23, 0*Z(3) ], 
+  [ Z(3^3)^20, 0*Z(3), Z(3^3), 0*Z(3) ], 
+  [ Z(3^3)^16, Z(3^3)^15, Z(3^3)^21, 0*Z(3) ], 
+  [ Z(3^3)^20, Z(3^3)^4, 0*Z(3), Z(3)^0 ] ], F^3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OnAffineSubspaces(p,g);</span>
+&lt;a point in AG(3, 27)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p^g;</span>
+&lt;a point in AG(3, 27)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l := Random(Lines(as));</span>
+&lt;a line in AG(3, 27)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OnAffineSubspaces(l,g);</span>
+&lt;a line in AG(3, 27)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">l^g;</span>
+&lt;a line in AG(3, 27)&gt;
+ 
+</pre></div>
+
+<p><a id="X8769AA7080854675" name="X8769AA7080854675"></a></p>
+
+<h4>9.6 <span class="Heading">Low level operations</span></h4>
+
+<p>One technical aspect of the design behind affine spaces in <strong class="pkg">FinInG</strong> is having canonical transversals for subspaces of vector spaces. We provide some documentation below for the interested user.</p>
+
+<p><a id="X85C1B3067C6014D2" name="X85C1B3067C6014D2"></a></p>
+
+<h5>9.6-1 IsVectorSpaceTransversal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsVectorSpaceTransversal</code></td><td class="tdright">( filter )</td></tr></table></div>
+<p>The category <code class="code">IsVectorSpaceTransversal</code> represents a special object in <strong class="pkg">FinInG</strong> which carries a record with two components: <var class="Arg">space</var> and <var class="Arg">subspace</var>. This category is a subcategory of <code class="code">IsSubspacesOfVectorSpace</code>, however, we do not recommend the user to apply methods to objects in <code class="code">IsVectorSpaceTransversal</code>, which are normally used for the category <code class="code">IsSubspacesOfVectorSpace</code> (they won't work!). The objects in <code class="code">IsVectorSpaceTransversal</code> are only used in order to facilitate computing enumerators of subspace collections.</p>
+
+<p><a id="X8210A9FA7F9FA6DF" name="X8210A9FA7F9FA6DF"></a></p>
+
+<h5>9.6-2 VectorSpaceTransversal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VectorSpaceTransversal</code>( <var class="Arg">space</var>, <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a collection for representing a transversal of a subspaces of a vector space</p>
+
+<p><var class="Arg">space</var> is a vector space <span class="SimpleMath">\(V\)</span> and <var class="Arg">mat</var> is a matrix whose rows are a basis for a subspace <span class="SimpleMath">\(U\)</span> of <span class="SimpleMath">\(V\)</span>. A transversal for <span class="SimpleMath">\(U\)</span> in <span class="SimpleMath">\(V\)</span> is a set of coset representatives for the quotient <span class="SimpleMath">\(V/U\)</span>. This collection comes equipped with an enumerator operation.</p>
+
+<p><a id="X7B2163767BCA3CC6" name="X7B2163767BCA3CC6"></a></p>
+
+<h5>9.6-3 VectorSpaceTransversalElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VectorSpaceTransversalElement</code>( <var class="Arg">space</var>, <var class="Arg">mat</var>, <var class="Arg">vector</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a canonical coset representative</p>
+
+<p><var class="Arg">space</var> is a vector space <span class="SimpleMath">\(V\)</span>, <var class="Arg">mat</var> is a matrix whose rows are a basis for a subspace <span class="SimpleMath">\(U\)</span> of <span class="SimpleMath">\(V\)</span>, and <var class="Arg">vector</var> is a vector <span class="SimpleMath">\(v\)</span> of <span class="SimpleMath">\(V\)</span>. A canonical representative <span class="SimpleMath">\(v'\)</span> is returned for the coset <span class="SimpleMath">\(U+v\)</span>.</p>
+
+<p><a id="X8292D00E82069C27" name="X8292D00E82069C27"></a></p>
+
+<h5>9.6-4 ComplementSpace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ComplementSpace</code>( <var class="Arg">space</var>, <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a collection for representing a transversal of a subspaces of a vector space</p>
+
+<p><var class="Arg">space</var> is a vector space <span class="SimpleMath">\(V\)</span> and <var class="Arg">mat</var> is a matrix whose rows are a basis for a subspace <span class="SimpleMath">\(U\)</span> of <span class="SimpleMath">\(V\)</span>. The operation is almost a complete copy of the function <code class="code">BaseSteinitzVector</code> except that just a basis for the complement of <span class="SimpleMath">\(U\)</span> is returned instead of a full record.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chap13_mj.html">13</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

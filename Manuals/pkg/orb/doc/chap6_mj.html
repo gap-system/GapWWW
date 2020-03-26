@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (orb) - Chapter 6: Random elements</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6.html">[MathJax off]</a></p>
+<p><a id="X8151A51884B7EE2C" name="X8151A51884B7EE2C"></a></p>
+<div class="ChapSects"><a href="chap6_mj.html#X8151A51884B7EE2C">6 <span class="Heading">Random elements</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X83F87C898304A0C8">6.1 <span class="Heading">Randomizing mutable objects</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X83DD8B39864A2C94">6.1-1 Randomize</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7BBA80B882867C36">6.1-2 MakeRandomVectors</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7DF0A6E885A4EE42">6.1-3 MakeRandomLines</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7B46C06479401BED">6.2 <span class="Heading">Product replacement</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8290E4C57DE25CD4">6.2-1 ProductReplacer</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7AB4297E78216855">6.2-2 Next</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7EAED8EB78CCEDE2">6.2-3 Reset</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8227729983A3B366">6.2-4 AddGeneratorToProductReplacer</a></span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">Random elements</span></h3>
+
+<p>In this chapter we describe some fundamental mechanisms to produce (pseudo-) random elements that are used later in Chapter <a href="chap7_mj.html#X7DF379C283FE23EF"><span class="RefLink">7</span></a> about searching in groups and orbits.</p>
+
+<p><a id="X83F87C898304A0C8" name="X83F87C898304A0C8"></a></p>
+
+<h4>6.1 <span class="Heading">Randomizing mutable objects</span></h4>
+
+<p>For certain types of mutable objects one can get a "random one" by calling the following operation:</p>
+
+<p><a id="X83DD8B39864A2C94" name="X83DD8B39864A2C94"></a></p>
+
+<h5>6.1-1 Randomize</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Randomize</code>( <var class="Arg">ob</var>[, <var class="Arg">rs</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>The mutable object <var class="Arg">ob</var> is changed in place. The value afterwards is random. The optional second argument <var class="Arg">rs</var> must be a random source and the random numbers used to randomize <var class="Arg">ob</var> are created using the random source <var class="Arg">rs</var> (see <a href="../../../doc/ref/chap14_mj.html#X85361FAE8088C006"><span class="RefLink">Reference: Random Sources</span></a>). If <var class="Arg">rs</var> is not given, then the global <strong class="pkg">GAP</strong> random number generator is used.</p>
+
+<p>Currently, there are <code class="func">Randomize</code> methods for compressed vectors and compressed matrices over finite fields. See also the <strong class="pkg">cvec</strong> package for methods for <code class="code">cvec</code>s and <code class="code">cmat</code>s.</p>
+
+<p>For vectors and one-dimensional subspaces there are two special functions to create a list of random objects:</p>
+
+<p><a id="X7BBA80B882867C36" name="X7BBA80B882867C36"></a></p>
+
+<h5>6.1-2 MakeRandomVectors</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeRandomVectors</code>( <var class="Arg">sample</var>, <var class="Arg">number</var>[, <var class="Arg">rs</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of random vectors</p>
+
+<p><var class="Arg">sample</var> must be a vector for the mutable copies of which <code class="func">Randomize</code> (<a href="chap6_mj.html#X83DD8B39864A2C94"><span class="RefLink">6.1-1</span></a>) is applicable and <var class="Arg">number</var> must be a positive integer. If given, <var class="Arg">rs</var> must be a random source. This function creates a list of <var class="Arg">number</var> random vectors with the same type as <var class="Arg">sample</var> using <code class="func">Randomize</code> (<a href="chap6_mj.html#X83DD8B39864A2C94"><span class="RefLink">6.1-1</span></a>). For the creation of random numbers the random source <var class="Arg">rs</var> is used or, if not given, the global <strong class="pkg">GAP</strong> random number generator.</p>
+
+<p><a id="X7DF0A6E885A4EE42" name="X7DF0A6E885A4EE42"></a></p>
+
+<h5>6.1-3 MakeRandomLines</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MakeRandomLines</code>( <var class="Arg">sample</var>, <var class="Arg">number</var>[, <var class="Arg">rs</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of normalised random vectors</p>
+
+<p><var class="Arg">sample</var> must be a vector for the mutable copies of which <code class="func">Randomize</code> (<a href="chap6_mj.html#X83DD8B39864A2C94"><span class="RefLink">6.1-1</span></a>) is applicable and <var class="Arg">number</var> must be a positive integer. If given, <var class="Arg">rs</var> must be a random source. This function creates a list of <var class="Arg">number</var> normalised random vectors with the same type as <var class="Arg">sample</var> using <code class="func">Randomize</code> (<a href="chap6_mj.html#X83DD8B39864A2C94"><span class="RefLink">6.1-1</span></a>). "Normalised" here means that the first non-zero entry in the vector is equal to <span class="SimpleMath">\(1\)</span>. For the creation of random numbers the random source <var class="Arg">rs</var> is used or, if not given, the global <strong class="pkg">GAP</strong> random number generator.</p>
+
+<p><a id="X7B46C06479401BED" name="X7B46C06479401BED"></a></p>
+
+<h4>6.2 <span class="Heading">Product replacement</span></h4>
+
+<p>For computations in finite groups product replacement algorithms are a viable method of generating pseudo-random elements. This section describes a framework and an object type to provide these algorithms. Roughly speaking a "product replacer object" is something that is created with a list of group generators and produces a sequence of pseudo random group elements using some random source for random numbers.</p>
+
+<p><a id="X8290E4C57DE25CD4" name="X8290E4C57DE25CD4"></a></p>
+
+<h5>6.2-1 ProductReplacer</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProductReplacer</code>( <var class="Arg">gens</var>[, <var class="Arg">opt</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a new product replacer object</p>
+
+<p><var class="Arg">gens</var> must be a list of group generators. If given, <var class="Arg">opt</var> is a <strong class="pkg">GAP</strong> record with options. The operation creates a new product replacer object producing pseudo random elements in the group generated by the generators <var class="Arg">gens</var>.</p>
+
+<p>The exact algorithm used is explained below after the description of the options.</p>
+
+<p>The following components in the options record have a defined meaning:</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">randomsource</code></strong></dt>
+<dd><p>A random source object that is used to generate the random numbers used. If none is specified the global <strong class="pkg">GAP</strong> random number generator is used.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">scramble</code></strong></dt>
+<dd><p>The <code class="code">scramble</code> value in the algorithm described below can be set using this option. The default value is <span class="SimpleMath">\(30\)</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">scramblefactor</code></strong></dt>
+<dd><p>The <code class="code">scramblefactor</code> value in the algorithm described below can be set using this option. The default value is <span class="SimpleMath">\(4\)</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">addslots</code></strong></dt>
+<dd><p>The <code class="code">addslots</code> value in the algorithm described below can be set using this option. The default value is <span class="SimpleMath">\(5\)</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">maxdepth</code></strong></dt>
+<dd><p>If <code class="code">maxdepth</code> is set, then the production of pseudo random elements starts all over whenever <code class="code">maxdepth</code> product replacements have been performed. The rationale behind this is that the elements created should be evenly distributed but that the expressions in the generators should not be too long. A good compromise is usually to set <code class="code">maxdepth</code> to <span class="SimpleMath">\(300\)</span> or <span class="SimpleMath">\(400\)</span>.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">noaccu</code></strong></dt>
+<dd><p>Without this option set to <code class="keyw">true</code> the "rattle" version of product replacement is used which involves an accumulator and uses two or three products per random element. To use the "shake" version with only one or two product replacement per random element set this component to <code class="keyw">true</code>. The exact number of multiplications per random element also depends on the value of the <code class="code">accelerator</code> component.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">normalin</code></strong></dt>
+<dd><p>There is a variant of the product replacement algorithm that produces elements in the normal closure of the group generated by a list of elements. It needs random elements in the ambient group in which the normal closure is defined. This is implemented here by setting the <code class="code">normalin</code> component to a product replacer object working in the ambient group. In every step two elements <span class="SimpleMath">\(a\)</span> and <span class="SimpleMath">\(b\)</span> are picked and then <span class="SimpleMath">\(a\)</span> is either replaced by <span class="SimpleMath">\(a*b^c\)</span> or <span class="SimpleMath">\(b^c*a\)</span> (with equal probability), where <span class="SimpleMath">\(c\)</span> is a random element from the ambient group produced by the product replacer in the <code class="code">normalin</code> component. It is recommended to switch off the accumulator and accelerator in the product replacer object for the ambient group. Then to produce one random element in the normal closure needs four multiplications.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">accelerator</code></strong></dt>
+<dd><p>If this option is set to <code class="keyw">true</code> (which is the default), then the accelerator is used. This means that in each step two product replacement steps are performed, where both involve one distinguished slot called the "captain". The idea is that the current "team" of random elements uses one amongst them more often to increase the length of the words produced. See below for details of the algorithm with and without accelerator.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">retirecaptain</code></strong></dt>
+<dd><p>If this component is bound to a positive integer then the captain retires after so many steps of the algorithm. This is to use only two multiplications for each random element in the long run after proper mixing. The default value for <code class="code">retirecaptain</code> is twice the scrambling time.</p>
+
+</dd>
+<dt><strong class="Mark"><code class="code">accus</code></strong></dt>
+<dd><p>This component (default is 5) is the number of accumulators to use in the rattle variant. All accus are used in a round robin fashion. The purpose of multiple accus is to have a greater stochastical independence of adjacent random elements in the sequence.</p>
+
+</dd>
+</dl>
+<p>The algorithm used does the following: A list of <code class="code">Length(</code><var class="Arg">gens</var><code class="code">)+addslots</code> elements is created that starts with the elements <var class="Arg">gens</var> and is filled up with random generators from <var class="Arg">gens</var>. This element is called the "team". A product replacement without accelerator randomly chooses two elements in the list and replaces one of them by the product of the two. If an accelerator is used, then one product replacement step randomly chooses two slots <span class="SimpleMath">\(i\)</span> and <span class="SimpleMath">\(j\)</span> where <span class="SimpleMath">\(i,j &gt; 1\)</span> but <span class="SimpleMath">\(i=j\)</span> is possible. Then first <span class="SimpleMath">\(l[1]\)</span> is replaced by <span class="SimpleMath">\(l[1]*l[i]\)</span> and after that <span class="SimpleMath">\(l[j]\)</span> is replaced by <span class="SimpleMath">\(l[j]*l[1]\)</span>. The first team member is called the "captain", so the captain is involved in every product replacement.</p>
+
+<p>One step in the algorithm is to do one product replacement followed by post-multiplying the result to the accumulator if one (or more) is used. Multiple accus (see the <code class="code">accus</code> component) are used in a round robin fashion.</p>
+
+<p>First <code class="code">Maximum(Length(</code><var class="Arg">gens</var><code class="code">)*scramblefactor,scramble)</code> steps are performed. After this initialisation for every random element requested one step is done and the resulting element returned.</p>
+
+<p><a id="X7AB4297E78216855" name="X7AB4297E78216855"></a></p>
+
+<h5>6.2-2 Next</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Next</code>( <var class="Arg">pr</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a (pseudo-) random group element g</p>
+
+<p><var class="Arg">pr</var> must be a product replacer object. This operation makes the object generate the next random element and return it.</p>
+
+<p><a id="X7EAED8EB78CCEDE2" name="X7EAED8EB78CCEDE2"></a></p>
+
+<h5>6.2-3 Reset</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Reset</code>( <var class="Arg">pr</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p><var class="Arg">pr</var> must be a product replacer object. This operation resets the object in the sense that it resets the product replacement back to the state it had after scrambling. Note that since the random source is not reset, the product replacer object will return another sequence of random elements than before.</p>
+
+<p><a id="X8227729983A3B366" name="X8227729983A3B366"></a></p>
+
+<h5>6.2-4 AddGeneratorToProductReplacer</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddGeneratorToProductReplacer</code>( <var class="Arg">pr</var>, <var class="Arg">el</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p><var class="Arg">pr</var> must be a product replacer object. This operation adds the new generator <var class="Arg">el</var> to the product replacer without needing a completely new initialisation phase. From after this call on the product replacer will generate random elements in the group generated by the old generators and the new element <var class="Arg">el</var>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (toric) - Chapter 1: Introduction</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7A77DB9F7E392A98">1.1 <span class="Heading">Introduction to the <strong class="pkg">toric</strong> package</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7C4637B9828E445B">1.2 <span class="Heading">Introduction to constructing toric varieties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7AF8D94A7E56C049">1.2-1 <span class="Heading">Generalities</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7A87B1F97D958BA9">1.2-2 <span class="Heading">Basic combinatorial geometry constructions</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X857707BA7D2336A0">1.2-3 <span class="Heading">Basic affine toric variety constructions</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X86627F4181E72808">1.2-4 <span class="Heading">Riemann-Roch spaces and related constructions</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>1 <span class="Heading">Introduction</span></h3>
+
+<p><a id="X7A77DB9F7E392A98" name="X7A77DB9F7E392A98"></a></p>
+
+<h4>1.1 <span class="Heading">Introduction to the <strong class="pkg">toric</strong> package</span></h4>
+
+<p>This manual describes the <strong class="pkg">toric</strong> package for working with toric varieties in <strong class="pkg">GAP</strong>. Toric varieties can be dealt with more easily than general varieties since often times questions about a toric variety can be reformulated in terms of combinatorial geometry. Some coding theory commands related to toric varieties are contained in the error-correcting codes <strong class="pkg">GUAVA</strong> package (for example, the command <code class="code">ToricCode</code>). We refer to the <strong class="pkg">GUAVA</strong> manual <a href="chapBib.html#biBGua05">[JFDJCTRMTBRBJCM09]</a> and the expository paper <a href="chapBib.html#biBJV02">[JV02]</a> for more details.</p>
+
+<p>The <strong class="pkg">toric</strong> package also contains several commands unrelated to toric varieties (mostly for list manipulations). These will not be described in this documention but they are briefly documented in the <code class="code">lib/util.gd</code> file.</p>
+
+<p><strong class="pkg">toric</strong> is implemented in the <strong class="pkg">GAP</strong> language, and runs on any system supporting <strong class="pkg">GAP</strong>4.3 and above. The <strong class="pkg">toric</strong> package is loaded with the command</p>
+
+
+<pre class="normal">
+ gap&gt; LoadPackage( "toric" ); 
+</pre>
+
+<p>Please send bug reports, suggestions and other comments about <strong class="pkg">toric</strong> to <span class="URL"><a href="mailto:support@gap-system.org">support@gap-system.org</a></span>.</p>
+
+<p><a id="X7C4637B9828E445B" name="X7C4637B9828E445B"></a></p>
+
+<h4>1.2 <span class="Heading">Introduction to constructing toric varieties</span></h4>
+
+<p>Rather than sketch the theory of toric varieties, we refer to <a href="chapBib.html#biBJV02">[JV02]</a> and <a href="chapBib.html#biBF93">[Ful93]</a> for details. However, we briefly describe some terminology and notation.</p>
+
+<p><a id="X7AF8D94A7E56C049" name="X7AF8D94A7E56C049"></a></p>
+
+<h5>1.2-1 <span class="Heading">Generalities</span></h5>
+
+<p>Let <span class="SimpleMath">F</span> denote a field and <span class="SimpleMath">R=F [x_1,...,x_n]</span> be a ring in <span class="SimpleMath">n</span> variables. A <strong class="button">binomial equation</strong> in <span class="SimpleMath">R</span> is one of the form</p>
+
+<p class="pcenter">
+x_1^{k_1}...x_n^{k_n}=x_1^{\ell_1}...x_n^{\ell_n},
+</p>
+
+<p>where <span class="SimpleMath">k_i ≥ 0, ℓ_j ≥ 0</span> are integers. A binomial variety is a subvariety of affine <span class="SimpleMath">n</span>-space <span class="SimpleMath">A_F^n</span> defined by a finite set of binomial equations (such a variety need not be normal). A typical ``toric variety'' is binomial, though they will be introduced via an <em>a priori</em> independent construction. The basic idea of the construction is to replace each such binomial equation as above by a relation in a semigroup contained in a lattice and replace <span class="SimpleMath">R</span> by the ``group algebra'' of this semigroup. By the way, a toric variety is always normal (see for example, <a href="chapBib.html#biBF93">[Ful93]</a>, page 29).</p>
+
+<p><a id="X7A87B1F97D958BA9" name="X7A87B1F97D958BA9"></a></p>
+
+<h5>1.2-2 <span class="Heading">Basic combinatorial geometry constructions</span></h5>
+
+<p>Let <span class="SimpleMath">Q</span> denote the field of rational numbers and <span class="SimpleMath">Z</span> denote the set of integers. Let <span class="SimpleMath">n&gt;1</span> denote an integer.</p>
+
+<p>Let <span class="Math">V=Q^n</span> having basis <span class="SimpleMath">f_1=(1,0,...,0)</span>, ..., <span class="SimpleMath">f_n=(0,...,0,1)</span>. Let <span class="SimpleMath">L_0=Z^n⊂ V</span> be the standard lattice in <span class="SimpleMath">V</span>. We identify <span class="SimpleMath">V</span> and <span class="SimpleMath">L_0⊗_Z Q</span>. We use <span class="SimpleMath">⟨ , ⟩</span> to denote the (standard) inner product on <span class="SimpleMath">V</span>. Let</p>
+
+<p class="pcenter">
+L_0^*={\rm Hom}(L_0,Z)=\{ v\in V\ |\ \langle v,w \rangle \in Z,
+\ \forall w\in L_0\}
+</p>
+
+<p>denote the <strong class="button">dual lattice</strong>, so (fixing the standard basis <span class="SimpleMath">e_1^*</span>,...,<span class="SimpleMath">e_n^*</span> dual to the <span class="SimpleMath">f_1</span>,...,<span class="SimpleMath">f_n</span>) <span class="SimpleMath">L_0^*</span> may be identified with <span class="SimpleMath">Z^n</span>.</p>
+
+<p>A <strong class="button">cone</strong> in <span class="SimpleMath">V</span> is a set <span class="SimpleMath">σ</span> of the form</p>
+
+<p class="pcenter">
+\sigma=\{a_1v_1+...+a_mv_m\ |\ a_i\geq 0\}\subset V,
+</p>
+
+<p>where <span class="SimpleMath">v_1,...,v_m ∈ V</span> is a given collection of vectors, called (semigroup) <strong class="button">generators</strong> of <span class="SimpleMath">σ</span>. A <strong class="button">rational cone</strong> is one where <span class="SimpleMath">v_1,...,v_m ∈ L_0</span>. A <strong class="button">strongly convex</strong> cone is one which contains no lines through the origin.</p>
+
+<p><em> By abuse of terminology, from now on a <strong class="button">cone</strong> of <span class="SimpleMath">L_0</span> is a strongly convex rational cone. </em></p>
+
+<p>A <strong class="button">face</strong> of a cone <span class="SimpleMath">σ</span> is either <span class="SimpleMath">σ</span> itself or a subset of the form <span class="SimpleMath">H∩ σ</span>, where <span class="SimpleMath">H</span> is a codimension one subspace of <span class="SimpleMath">V</span> which intersects the cone non-trivially and such that the cone is contained in exactly one of the two half-spaces determined by <span class="SimpleMath">H</span>. A <strong class="button">ray</strong> (or edge) of a cone is a one-dimensional face. Typically, cones are represented in <strong class="pkg">toric</strong> by the list of vectors defining their rays. The <strong class="button">dimension</strong> of a cone is the dimension of the vector space it spans. The <strong class="pkg">toric</strong> package can test if a given vector is in a given cone (see <code class="code">InsideCone</code>).</p>
+
+<p>If <span class="SimpleMath">σ</span> is a cone then the <strong class="button">dual cone</strong> is defined by</p>
+
+<p class="pcenter">
+\sigma^* =\{w \in L_0^*\otimes Q
+\ |\ \langle v,w \rangle \geq 0,\ \forall v\in \sigma\}.
+</p>
+
+<p>The <strong class="pkg">toric</strong> package can test if a vector is in the dual of a given cone (see <code class="code">InDualCone</code>).</p>
+
+<p>Associate to the dual cone <span class="SimpleMath">σ^*</span> is the semigroup</p>
+
+<p class="pcenter">
+S_\sigma =\sigma^*\cap L_0^*
+=\{w\in L_0^*
+\ |\ \langle v,w\rangle \geq 0,\ 
+\forall v\in \sigma\}.
+</p>
+
+<p>Though <span class="SimpleMath">L_0^*</span> has $n$ generators <em>as a lattice</em>, typically <span class="SimpleMath">S_σ</span> will have more than <span class="SimpleMath">n</span> generators <em>as a semigroup</em>. The <strong class="pkg">toric</strong> package can compute a minimal list of semigroup generators of <span class="SimpleMath">S_σ</span> (see <code class="code">DualSemigroupGenerators</code>).</p>
+
+<p>A fan is a collection of cones which ``fit together'' well. A <strong class="button">fan</strong> in <span class="SimpleMath">L_0</span> is a set <span class="SimpleMath">∆={σ }</span> of rational strongly convex cones in <span class="SimpleMath">V= L_0 ⊗ Q</span> such that</p>
+
+
+<ul>
+<li><p>if <span class="SimpleMath">σ ∈ ∆</span> and <span class="SimpleMath">τ ⊂ σ</span> is a face of <span class="SimpleMath">σ</span> then <span class="SimpleMath">τ ∈ ∆</span>,</p>
+
+</li>
+<li><p>if <span class="SimpleMath">σ_1, σ_2 ∈ ∆</span> then the intersection <span class="SimpleMath">σ_1 ∩ σ_2</span> is a face of both <span class="SimpleMath">σ_1</span> and <span class="SimpleMath">σ_2</span> (and hence belongs to <span class="SimpleMath">∆</span>).</p>
+
+</li>
+</ul>
+<p>In particular, the face of a cone in a fan is a cone is the fan.</p>
+
+<p>If <span class="SimpleMath">V</span> is the (set-theoretic) union of the cones in <span class="SimpleMath">∆</span> then we call the fan <strong class="button">complete</strong>. We shall assume that all fans are finite. A fan is determined by its list of maximal cones.</p>
+
+<p><em>Notation</em>: A fan <span class="SimpleMath">∆</span> is represented in <strong class="pkg">toric</strong> as a set of maximal cones. For example, if <span class="SimpleMath">∆</span> is the fan with maximal cones <span class="SimpleMath">σ_1=Q_+⋅ f_1+Q_+⋅ (-f_1+f_2)</span>, <span class="SimpleMath">σ_2=Q_+⋅ (-f_1+f_2)+Q_+⋅ (-f_1-f_2)</span>, <span class="SimpleMath">σ_3=Q_+⋅ (-f_1-f_2)+Q_+⋅ f_1</span>, then <span class="SimpleMath">∆</span> is represented by <span class="SimpleMath">[[[1,0],[-1,1]],[[-1,1],[-1,-1]],[[-1,-1],[1,0]]]</span>.</p>
+
+<p>The <strong class="pkg">toric</strong> package can compute all cones in a fan of a given dimension (see <code class="code">ConesOfFan</code>). Moreover, <strong class="pkg">toric</strong> can compute the set of all normal vectors to the faces (i.e., hyperplanes) of a cone (see <code class="code">Faces</code>).</p>
+
+<p>The <strong class="button">star</strong> of a cone <span class="SimpleMath">σ</span> in a fan <span class="SimpleMath">∆</span> is the set <span class="SimpleMath">∆_σ</span> of cones in <span class="SimpleMath">∆</span> containing <span class="SimpleMath">σ</span> as a face. The <strong class="pkg">toric</strong> package can compute stars (see <code class="code">ToricStar</code>).</p>
+
+<p><a id="X857707BA7D2336A0" name="X857707BA7D2336A0"></a></p>
+
+<h5>1.2-3 <span class="Heading">Basic affine toric variety constructions</span></h5>
+
+<p>Let</p>
+
+<p class="pcenter">
+R_\sigma = F [S_\sigma]
+</p>
+
+<p>denote the ``group algebra'' of this semigroup. It is a finitely generated commutative F-algebra. It is in fact integrally closed (<a href="chapBib.html#biBF93">[Ful93]</a>, page 29). We may interprete <span class="SimpleMath">R_σ</span> as a subring of <span class="SimpleMath">R=F [x_1,...,x_n]</span> as follows: First, identify each <span class="SimpleMath">e_i^*</span> with the variable <span class="SimpleMath">x_i</span>. If <span class="SimpleMath">S_σ</span> is generated as a semigroup by vectors of the form <span class="SimpleMath">ℓ_1 e_1^*+...+ℓ_n e_n^*</span>, where <span class="SimpleMath">ℓ_i</span> is an integer, then its image in <span class="SimpleMath">R</span> is generated by monomials of the form <span class="SimpleMath">x_1^ℓ_1dots x_n^ℓ_n</span>. The <strong class="pkg">toric</strong> package can compute these generating monomials (see <code class="code">EmbeddingAffineToricVariety</code>). See Lemma 2.14 in <a href="chapBib.html#biBJV02">[JV02]</a> for more details. This embedding can also be used to resolve singularities - see section 5 of <a href="chapBib.html#biBJV02">[JV02]</a> for more details.</p>
+
+<p>Let</p>
+
+<p class="pcenter">
+U_\sigma={\rm Spec}\ R_\sigma.
+</p>
+
+<p>This defines an <strong class="button">affine toric variety</strong> (associated to <span class="SimpleMath">σ</span>). It is known that the coordinate ring <span class="SimpleMath">R_σ</span> of the affine toric variety <span class="SimpleMath">U_σ</span> has the form <span class="SimpleMath">R_σ = F[x_1,...,x_n]/J</span>, where <span class="SimpleMath">J</span> is an ideal. The <strong class="pkg">toric</strong> package can compute generators of this ideal by using the <code class="code">DualSemigroupGenerators</code> and the <code class="code">EmbeddingAffineToricVariety</code> commands.</p>
+
+<p>Roughly speaking, the toric variety <span class="SimpleMath">X(∆)</span> associated to the fan <span class="SimpleMath">∆</span> is given by a collection of affine pieces $U_{\sigma_1},U_{\sigma_2},\dots,U_{\sigma_d}$ which ``glue'' together (where <span class="SimpleMath">∆ = {σ_i}</span>). The affine pieces are given by the zero sets of polynomial equations in some affine spaces and the gluings are given by maps <span class="SimpleMath">ϕ_i,j : U_σ_i → U_σ_j</span> which are defined by ratios of polynomials on open subsets of the $U_{\sigma_i}$. The <strong class="pkg">toric</strong> package does <em>not</em> compute these gluings or work directly with these (non-affine) varieties <span class="SimpleMath">X(∆)</span>.</p>
+
+<p>A cone <span class="SimpleMath">σ ⊂ V</span> is said to be <strong class="button">nonsingular</strong> if it is generated by part of a basis for the lattice <span class="SimpleMath">L_0</span>. A fan <span class="SimpleMath">∆</span> of cones is said to be <strong class="button">nonsingular</strong> if all its cones are nonsingular. It is known that <span class="SimpleMath">U_σ</span> is nonsingular if and only if <span class="SimpleMath">σ</span> is nonsingular (Proposition 2.1 in <a href="chapBib.html#biBF93">[Ful93]</a>).</p>
+
+<p><strong class="button">Example:</strong> In three dimensions, consider the cones <span class="SimpleMath">σ_ϵ_1,ϵ_2,ϵ_3,i,j</span> generated by <span class="SimpleMath">(ϵ_1⋅ 1,ϵ_2⋅ 1,ϵ_3⋅ 1)</span> and the standard basis vectors <span class="SimpleMath">f_i,f_j</span>, where <span class="SimpleMath">ϵ_i=± 1</span> and <span class="SimpleMath">1≤ inot= j≤ 3</span>. There are 8 cones per octant, for a total of 64 cones. Let <span class="SimpleMath">∆</span> denote the fan in <span class="SimpleMath">V=Q^3</span> determined by these maximal cones. The toric variety <span class="SimpleMath">X(∆)</span> is nonsingular.</p>
+
+<p><a id="X86627F4181E72808" name="X86627F4181E72808"></a></p>
+
+<h5>1.2-4 <span class="Heading">Riemann-Roch spaces and related constructions</span></h5>
+
+<p>Although the <strong class="pkg">toric</strong> package does not work directly with the toric varieties <span class="SimpleMath">X(∆)</span>, it can compute objects associated with it. For example, it can compute the Euler characteristic (see <code class="code">EulerCharacteristic</code>), Betti numbers (see <code class="code">BettiNumberToric</code>), and the number of GF(q)-rational points (see <code class="code">CardinalityOfToricVariety</code>) of <span class="SimpleMath">X(∆)</span>, <em> provided <span class="SimpleMath">∆</span> is nonsingular.</em></p>
+
+<p>For an algebraic variety <span class="SimpleMath">X</span> the group of <strong class="button">Weil divisors</strong> on <span class="SimpleMath">X</span> is the abelian group <span class="SimpleMath">Div(X)</span> generated (additively) by the irreducible subvarieties of X of codimension <span class="SimpleMath">1</span>. For a toric variety <span class="SimpleMath">X(∆)</span> with dense open torus <span class="SimpleMath">T</span>, a Weil divisor D is <strong class="button">T-invariant</strong> if <span class="SimpleMath">D=T⋅ D</span>. The group of <span class="SimpleMath">T</span>-invariant Weil divisors is denoted <span class="SimpleMath">TDiv(X)</span>. This is finitely generated by an explicitly given finite set of divisors <span class="SimpleMath">{D_1,...,D_r}</span> which correspond naturally to certain cones in <span class="SimpleMath">∆</span> (see <a href="chapBib.html#biBF93">[Ful93]</a> for details). In particular, we may represent such a divisor <span class="SimpleMath">D</span> in <span class="SimpleMath">TDiv(X)</span> by an <span class="SimpleMath">k</span>-tuple <span class="SimpleMath">(d_1,...,d_k)</span> of integers.</p>
+
+<p>Let <span class="SimpleMath">∆</span> denote a fan in <span class="SimpleMath">V=Q^n</span> with rays (or edges) <span class="SimpleMath">τ_i</span>, <span class="SimpleMath">1≤ i≤ k</span>, and let <span class="SimpleMath">v_i</span> denote the first lattice point on <span class="SimpleMath">τ_i</span>. Associated to the T-invariant Weil divisor <span class="SimpleMath">D=d_1D_1+...+d_kD_k</span>, is the <strong class="button">polytope</strong></p>
+
+<p class="pcenter">
+P_D = \{ x=(x_1,...,x_n)\ |\ \langle x,v_i \rangle \geq -d_i, 
+\ \forall 1 \leq i \leq k\}.
+</p>
+
+<p>The <strong class="pkg">toric</strong> package can compute <span class="SimpleMath">P_D</span> (see <code class="code">DivisorPolytope</code>), as well as the set of all lattice points contained in this polytope (see <code class="code">DivisorPolytopeLatticePoints</code>). Also associated to the <span class="SimpleMath">T</span>-invariant Weil divisor <span class="SimpleMath">D=d_1D_1+...+d_kD_k</span>, is the Riemann-Roch space, <span class="SimpleMath">L(D)</span>. This is a space of functions on <span class="SimpleMath">X(∆)</span> whose zeros and poles are ``controlled'' by <span class="SimpleMath">D</span> (for a more precise definition, see <a href="chapBib.html#biBF93">[Ful93]</a>). The <strong class="pkg">toric</strong> package can compute a basis for <span class="SimpleMath">L(D)</span> (see <code class="code">RiemannRochBasis</code>), <em> provided <span class="SimpleMath">∆</span> is complete and nonsingular.</em></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

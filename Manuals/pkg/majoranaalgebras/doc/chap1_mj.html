@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (MajoranaAlgebras) - Chapter 1: Introduction</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1.html">[MathJax off]</a></p>
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+<div class="ChapSects"><a href="chap1_mj.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X840C49F287F4C385">1.1 <span class="Heading">A quick guide</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X81C7E9D57969211C">1.2 <span class="Heading">Understanding the output</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X79EF8C857EA0E22B">1.3 <span class="Heading">Info levels</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X824D39948644EB03">1.3-1 InfoMajorana</a></span>
+</div></div>
+</div>
+
+<h3>1 <span class="Heading">Introduction</span></h3>
+
+<p><a id="X840C49F287F4C385" name="X840C49F287F4C385"></a></p>
+
+<h4>1.1 <span class="Heading">A quick guide</span></h4>
+
+<p>In order to construct the Majorana representation of a group <var class="Arg">G</var> with respect to a set of involutions <var class="Arg">T</var>, you must first call <code class="func">ShapesOfMajoranaRepresentation</code> (<a href="chap2_mj.html#X7AEAA41E813BB13C"><span class="RefLink">2.1-1</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := AlternatingGroup(5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T := AsList( ConjugacyClass(G, (1,2)(3,4)));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">input := ShapesOfMajoranaRepresentation(G,T);;</span>
+</pre></div>
+
+<p>This function outputs a record. One component of this record is labelled <var class="Arg">shapes</var> and contains the possible shapes of a Majorana representation of the form <span class="SimpleMath">\((G,T,V)\)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">input.shapes;</span>
+[ [ "1A", "2B", "5A", "3C", "5A" ], [ "1A", "2B", "5A", "3A", "5A" ],
+  [ "1A", "2A", "5A", "3C", "5A" ], [ "1A", "2A", "5A", "3A", "5A" ] ]
+</pre></div>
+
+<p>To construct the Majorana representation with shape at position <var class="Arg">i</var> of this list, call the function <code class="func">MajoranaRepresentation</code> (<a href="chap3_mj.html#X7F601CB47EBEAA6A"><span class="RefLink">3.1-1</span></a>) with <var class="Arg">input</var> as its first argument and <var class="Arg">i</var> as its second.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rep := MajoranaRepresentation(input, 1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rep.shape;</span>
+[ "1A", "2B", "5A", "3C", "5A" ]
+</pre></div>
+
+<p>There are then a number of functions (see <a href="chap4_mj.html#X7A7065EB795C13B3"><span class="RefLink">4</span></a>) that one case use on the (potentially incomplete) Majorana representation that this function has outputted.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MAJORANA_IsComplete(rep);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MAJORANA_Dimension(rep);</span>
+21
+</pre></div>
+
+<p>If an incomplete algebra is returned then the function <code class="func">NClosedMajoranaRepresentation</code> (<a href="chap3_mj.html#X8155D0F98405BD1E"><span class="RefLink">3.2-1</span></a>) can be used to attempt to find the 3-closed part of the algebra.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := AlternatingGroup(5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T := AsList( ConjugacyClass(G, (1,2)(3,4)));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">input := ShapesOfMajoranaRepresentation(G,T);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">input.shapes;</span>
+[ [ "1A", "2B", "5A", "3C", "5A" ], [ "1A", "2B", "5A", "3A", "5A" ],
+  [ "1A", "2A", "5A", "3C", "5A" ], [ "1A", "2A", "5A", "3A", "5A" ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rep := MajoranaRepresentation(input, 2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MAJORANA_IsComplete(rep);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NClosedMajoranaRepresentation(rep);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MAJORANA_IsComplete(rep);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MAJORANA_Dimension(rep);</span>
+46
+</pre></div>
+
+<p><a id="X81C7E9D57969211C" name="X81C7E9D57969211C"></a></p>
+
+<h4>1.2 <span class="Heading">Understanding the output</span></h4>
+
+<p><em>Note that all vectors and matrices are given in sparse matrix format, as provided by the GAP package <var class="Arg">Gauss</var>. If <var class="Arg">mat</var> is such a matrix then the integers in <var class="Arg">mat!.indices</var> refer to a spanning set of the algebra indexed by the list <var class="Arg">rep.setup.coords</var>. The list <var class="Arg">mat!.entries</var> give their corresponding coefficients.</em></p>
+
+<p>The function <code class="func">MajoranaRepresentation</code> (<a href="chap3_mj.html#X7F601CB47EBEAA6A"><span class="RefLink">3.1-1</span></a>) outputs a record that encodes the information required to perform calculations in the Majorana representation that has been calculated. The record contains the following components.</p>
+
+
+<dl>
+<dt><strong class="Mark"> <code class="code">group</code></strong></dt>
+<dd><p>The group <var class="Arg">G</var>, as inputted by the user.</p>
+
+</dd>
+<dt><strong class="Mark"> <code class="code">involutions</code></strong></dt>
+<dd><p>The set <var class="Arg">T</var>, as inputted by the user.</p>
+
+</dd>
+<dt><strong class="Mark"> <code class="code">shape</code></strong></dt>
+<dd><p>The shape of the representation, as chosen by the user in the input of <code class="func">MajoranaRepresentation</code> (<a href="chap3_mj.html#X7F601CB47EBEAA6A"><span class="RefLink">3.1-1</span></a>).</p>
+
+</dd>
+<dt><strong class="Mark"> <code class="code">eigenvalues</code></strong></dt>
+<dd><p>A list whose values give the eigenvalues of the adjoint action of the axes of the algebra. In this case, it must be equal to (or a subset of) <var class="Arg">[0, 1/4, 1/32]</var>. Note that we omit the eigenvalue 1 as we assume the algebra to be primitive.</p>
+
+</dd>
+<dt><strong class="Mark"> <code class="code">axioms</code></strong></dt>
+<dd><p>A string representing the axiomatic setting of the algebra's construction, potentially chosen by the user with the <var class="Arg">options</var> record in the input of <code class="func">MajoranaRepresentation</code> (<a href="chap3_mj.html#X7F601CB47EBEAA6A"><span class="RefLink">3.1-1</span></a>).</p>
+
+</dd>
+<dt><strong class="Mark"> <code class="code">setup</code></strong></dt>
+<dd><p>Is itself a record, containing (among others) the following components.</p>
+
+
+<dl>
+<dt><strong class="Mark"> <code class="code">coords</code></strong></dt>
+<dd><p>A list whose elements index a spanning set of the algebra.</p>
+
+</dd>
+<dt><strong class="Mark"> <code class="code">nullspace</code></strong></dt>
+<dd><p>Again a record such that <var class="Arg">nullspace.vectors</var> gives a basis of the nullspace of the algebra (as the elements <var class="Arg">rep.setup.coords</var> are not necessarily linearly independent).</p>
+
+</dd>
+<dt><strong class="Mark"> <code class="code">orbitreps</code></strong></dt>
+<dd><p>A list of indices giving the representatives of the orbits of the action of the group <var class="Arg">G</var> on <var class="Arg">T</var>.</p>
+
+</dd>
+<dt><strong class="Mark"> <code class="code">pairreps</code></strong></dt>
+<dd><p>A list of pairs of indices giving representatives of the orbitals of the action of the group <var class="Arg">G</var> on <var class="Arg">rep.setup.coords</var>.</p>
+
+</dd>
+</dl>
+</dd>
+<dt><strong class="Mark"> <code class="code">algebraproducts</code></strong></dt>
+<dd><p>A list where the vector at position <var class="Arg">i</var> denotes the algebra product of the two spanning set vectors whose indices (in <var class="Arg">rep.setup.coords</var>) are given by <var class="Arg">rep.setup.pairreps[i]</var>. If the <var class="Arg">i</var>th entry is set to <var class="Arg">false</var> then this algebra product has not yet been found and the algebra is incomplete.</p>
+
+</dd>
+<dt><strong class="Mark"> <code class="code">innerproducts</code></strong></dt>
+<dd><p>Performs the same role as <var class="Arg">algebraproducts</var> except that, instead of vectors, the entries are rational numbers denoting the inner product between two spanning set vectors.</p>
+
+</dd>
+<dt><strong class="Mark"> <code class="code">evecs</code></strong></dt>
+<dd><p>A list where if <var class="Arg">i</var> is contained in <var class="Arg">rep.setup.orbitreps</var> then <var class="Arg">rep.evecs[i]</var> is bound to a record. This record has components <var class="Arg">"ev"</var> where <var class="Arg">ev</var> is an eigenvalue contained in <var class="Arg">rep.eigenvalues</var>. This component gives a basis for the eigenspace of the axis corresponding to <var class="Arg">rep.involutions[i]</var> with eigenvalue <var class="Arg">ev</var>.</p>
+
+</dd>
+</dl>
+<p><a id="X79EF8C857EA0E22B" name="X79EF8C857EA0E22B"></a></p>
+
+<h4>1.3 <span class="Heading">Info levels</span></h4>
+
+<p><a id="X824D39948644EB03" name="X824D39948644EB03"></a></p>
+
+<h5>1.3-1 InfoMajorana</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoMajorana</code></td><td class="tdright">(&nbsp;info class&nbsp;)</td></tr></table></div>
+<p>The default info level of <var class="Arg">InfoMajorana</var> is 0. No information is printed at this level. If the info level is at least 10 then <var class="Arg">Success</var> is printed if the algorithm has produced a complete Majorana algebra, otherwise <var class="Arg">Fail</var> is printed. If the info level is at least 20 then more information is printed about the progress of the algorithm, up to a maximum info level of 100.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

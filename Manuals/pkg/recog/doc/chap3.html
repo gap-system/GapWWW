@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (recog) - Chapter 3: Group Recognition</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X7F73983582251807" name="X7F73983582251807"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7F73983582251807">3 <span class="Heading">Group Recognition</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X81E31E377B16CF39">3.1 <span class="Heading">The recursive procedure</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BFEB34483548A89">3.1-1 RecogniseGeneric</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84338F037B91CDD0">3.1-2 RecognisePermGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X788DCF6A7D9E80BD">3.1-3 RecogniseMatrixGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X841176DD7BA1CAA0">3.1-4 RecogniseProjectiveGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X853B4EE27AF57CD3">3.1-5 RecogniseGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X836B50947A46B1A5">3.1-6 FindHomDbPerm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A94720080D344DA">3.1-7 FindHomMethodsPerm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B5561D187242287">3.1-8 SLPforElementFuncsPerm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CA5F5FA7E850885">3.1-9 FindHomDbMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79B60CEF8292F142">3.1-10 FindHomMethodsMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A2E7DF67F4949C8">3.1-11 SLPforElementFuncsMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A4F8342854507E3">3.1-12 FindHomDbProjective</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D796A2179E9026A">3.1-13 FindHomMethodsProjective</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F6FCC4F81ACF20F">3.1-14 SLPforElementFuncsProjective</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AD4A7168016DF8F">3.1-15 TryFindHomMethod</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7D7B4A3D81878179">3.2 <span class="Heading">Recognition info records</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X820267927AB548EC">3.2-1 RecognitionInfoFamily</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X836958B87C783165">3.2-2 IsRecognitionInfo</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8469BB658377FD92">3.2-3 IsLeaf</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D6CEF0178ED73A7">3.2-4 IsReady</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7972380780D99B04">3.2-5 Grp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8273C2FC79FB6543">3.2-6 Homom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X864194958685AAD7">3.2-7 NiceGens</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X808A01AA869115EC">3.2-8 pregensfac</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85D69105867342C7">3.2-9 RIFac</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85B6D66F7BD0E964">3.2-10 RIKer</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C66C89C84F9C6AA">3.2-11 RIParent</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7ACD6B4C7982B1E3">3.2-12 fhmethsel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83167779869A3BF5">3.2-13 slpforelement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83167779869A3BF5">3.2-14 SLPforElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FBE4706828964EB">3.2-15 StdPresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X826BC2BB7D7AD6A9">3.2-16 methodsforfactor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7EFA298E7E4760A0">3.2-17 calcnicegens</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78B05A1E78564BBF">3.2-18 CalcNiceGensGeneric</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80444E4E8501D0B0">3.2-19 CalcNiceGensHomNode</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7EFA298E7E4760A0">3.2-20 CalcNiceGens</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80C2451F805CA06D">3.2-21 slptonice</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B7E9EAC7AACF8D8">3.2-22 gensN</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81644C3A8064063F">3.2-23 findgensNmeth</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DC1D16F807D6895">3.2-24 FindKernelRandom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8244F0DE86C23ECA">3.2-25 FindKernelDoNothing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X87E8AB1B78F60112">3.2-26 FindKernelFastNormalClosure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X82154EA88011654F">3.2-27 gensNslp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86A101E17F87F01F">3.2-28 immediateverification</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X87B550967D90B794">3.2-29 forkernel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CBBF7FC8200790C">3.2-30 forfactor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X814D78347858EC13">3.2-31 isone</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D0F06047B88E5CD">3.2-32 isequal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X800B9BBE82F24C49">3.2-33 <span class="Heading">Other components of recognition info records</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8577717D85D631C2">3.3 <span class="Heading">Methods to find homomorphisms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FCBB7C686D0B1DF">3.3-1 FindHomomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F299344834AAB6E">3.3-2 SLPforElementGeneric</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7B2941D57B361990">3.4 <span class="Heading">Conventions for the recognition of permutation groups</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8676A21280D842DB">3.5 <span class="Heading">Conventions for the recognition of matrix groups</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X835738DA86087BB3">3.6 <span class="Heading">Conventions for the recognition of projective groups</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">Group Recognition</span></h3>
+
+<p>This chapter describes a generic framework for group recognition. The basic problem is, we want to solve the constructive membership problem: given any <span class="SimpleMath">g ∈ G</span>, <span class="SimpleMath">G = ⟨ X ⟩</span>, write a straight line program (SLP) from <span class="SimpleMath">X</span> to <span class="SimpleMath">g</span>, for <span class="SimpleMath">g ∉ G</span> (in the situation that <span class="SimpleMath">G</span> is naturally embedded into some bigger group), the algorithm should fail. This is usually done by constructing some nice generators (and then writing an SLP from the nice generators to <span class="SimpleMath">g</span> and concatenating with an SLP from <span class="SimpleMath">X</span> to the nice generators). Often, for efficiency reasons, we will just store the nice generators and then only be interested in the SLP from those to <span class="SimpleMath">g</span>. The framework presented here deals with exactly this process.</p>
+
+<p>The generic framework was designed having three situations in mind: permutation groups, matrix groups and projective groups. Although the methods used are quite different for those cases, there is a common pattern in the procedure of recognition. Namely, first we have to find a homomorphism, solve the constructive membership problem recursively in image and kernel, then put it together. The recursion ends in groups where we can solve the constructive membership problem directly. The general framework reflects this idea and separates it from the rest of the recognition methods.</p>
+
+<p>Solution of the constructive membership problem comes in two stages: first a "recognition phase" and then a "verification phase". The recognition phase usually consists of randomised algorithms with certain error or failure probabilities. The result is some kind of "recognition information" that will describe the group already very well, but which is not yet proven to be correct. However, one can already write arbitrary elements in the group as product of the given generators. In the verification phase a presentation of the group is calculated, thereby proving that the group generated by the given generators is in fact isomorphic to the group described by the recognition information. In many cases the verification phase will be much more expensive than the recognition phase.</p>
+
+<p>In the following sections, we describe the generic framework. We begin with a technical description of the recursive procedure and describe then the way methods to find homomorphism have to be implemented. Finally, we have four sections in which we collect conventions for the recognition of different types of groups.</p>
+
+<p>No actual recognition methods are implemented in this package. See the <strong class="pkg">recog</strong> package for an implementation and description of them.</p>
+
+<p><a id="X81E31E377B16CF39" name="X81E31E377B16CF39"></a></p>
+
+<h4>3.1 <span class="Heading">The recursive procedure</span></h4>
+
+<p>As explained at the beginning of this section, the heart of the recognition procedure is a function called <code class="func">RecogniseGeneric</code> (<a href="chap3.html#X7BFEB34483548A89"><span class="RefLink">3.1-1</span></a>) which gets a <strong class="pkg">GAP</strong> group object and returns a so-called "recognition info record" (see Subsection <a href="chap3.html#X7D7B4A3D81878179"><span class="RefLink">3.2</span></a> for details). Success or failure will be indicated by this record being in the filter <code class="func">IsReady</code> (<a href="chap3.html#X7D6CEF0178ED73A7"><span class="RefLink">3.2-4</span></a>) or not.</p>
+
+<p>To know how to find homomorphisms the function gets as another argument a database of methods (see Section <a href="chap3.html#X8577717D85D631C2"><span class="RefLink">3.3</span></a> for a description of the setup for methods for finding homomorphisms and Section <a href="chap4.html#X7F89FF55818F1139"><span class="RefLink">4.1</span></a> in Chapter <a href="chap4.html#X8058CC8187162644"><span class="RefLink">4</span></a> for details about method databases). This database will be different according to the type of group in question.</p>
+
+<p>To describe the algorithm executed by <code class="func">RecogniseGeneric</code> (<a href="chap3.html#X7BFEB34483548A89"><span class="RefLink">3.1-1</span></a>) we first summarise it in steps:</p>
+
+<ol>
+<li><p>Create a new, empty recognition info record.</p>
+
+</li>
+<li><p>Use the database of <code class="code">FindHomomorphism</code> methods and the method selection procedure described in Chapter <a href="chap4.html#X8058CC8187162644"><span class="RefLink">4</span></a> to try to find a homomorphism onto a smaller group or an isomorphism onto another known group. Terminate with failure if this does not work.</p>
+
+</li>
+<li><p>If an isomorphism is found or a method somehow else recognises the group in question, such that we can write elements as straight line programs in the generators from now on, then make the recognition info record a leaf of the recognition tree and return success.</p>
+
+</li>
+<li><p>Otherwise the function sets up all the data for the homomorphism and calls itself with the image of the homomorphism. Note that this might use another database of recognition methods because the homomorphism might change the representation of the group.</p>
+
+</li>
+<li><p>After successful recognition of the factor group the procedure has to recognise the kernel of the homomorphism. The first step for this is to find generators. If they are not already known from the <code class="code">FindHomomorphism</code> method, they are created by producing random elements in the group, mapping them through the homomorphism, writing them as a straight line program in the images of the generators and applying this straight line program to the original generators. The quotient of the random element and the result of the straight line program lies in the kernel of the homomorphism. After creating 20 (FIXME: is 20 correct?) random generators of the kernel we assume for the moment that they generate the kernel.</p>
+
+</li>
+<li><p>The function <code class="func">RecogniseGeneric</code> (<a href="chap3.html#X7BFEB34483548A89"><span class="RefLink">3.1-1</span></a>) can now call itself for the kernel. After successful recognition of the kernel all the data for the node is completed and success is returned.</p>
+
+</li>
+<li><p>The function <code class="func">RecogniseGeneric</code> (<a href="chap3.html#X7BFEB34483548A89"><span class="RefLink">3.1-1</span></a>) now acquires preimages of the nice generators behind the homomorphism and appends the nice generators of the kernel. This list of generators is now the list of nice generators for the current node.</p>
+
+</li>
+</ol>
+<p>Note that with the collected data one can write arbitrary elements of the group as a straight line program in the generators as follows:</p>
+
+<ol>
+<li><p>Map the element through the homomorphism.</p>
+
+</li>
+<li><p>Write the element in the factor group as a product of the nice generators in the factor group.</p>
+
+</li>
+<li><p>Apply the resulting straight line program to the preimages of those nice generators and calculate the quotient, which will now lie in the kernel.</p>
+
+</li>
+<li><p>Write the kernel element as a straight line program in the kernel generators.</p>
+
+</li>
+<li><p>Assemble both straight line programs to one bigger straight line program (which is now in terms of our own nice generators) and return it.</p>
+
+</li>
+</ol>
+<p>If this procedure fails in the fourth step, this indicates that our random generators for the kernel did not yet generate the full kernel and makes further recognition steps necessary. This will not happen after a successful verification phase.</p>
+
+<p>The latter procedure to write elements as straight line programs in the generators is implemented in the function <code class="func">SLPforElementGeneric</code> (<a href="chap3.html#X7F299344834AAB6E"><span class="RefLink">3.3-2</span></a>) which will be called automatically if one calls the <code class="func">SLPforElement</code> (<a href="chap3.html#X83167779869A3BF5"><span class="RefLink">3.2-14</span></a>) function of the resulting recognition info record (see <code class="func">slpforelement</code> (<a href="chap3.html#X83167779869A3BF5"><span class="RefLink">3.2-13</span></a>)).</p>
+
+<p>It is now high time to give you the calling details of the main recursive recognition function:</p>
+
+<p><a id="X7BFEB34483548A89" name="X7BFEB34483548A89"></a></p>
+
+<h5>3.1-1 RecogniseGeneric</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecogniseGeneric</code>( <var class="Arg">H</var>, <var class="Arg">methoddb</var>, <var class="Arg">depth</var>[, <var class="Arg">knowledge</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecognizeGeneric</code>( <var class="Arg">H</var>, <var class="Arg">methoddb</var>, <var class="Arg">depth</var>[, <var class="Arg">knowledge</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">fail</code> for failure or a recognition info record.</p>
+
+<p><var class="Arg">H</var> must be a <strong class="pkg">GAP</strong> group object, <var class="Arg">methoddb</var> must be a method database in the sense of Section <a href="chap4.html#X7F89FF55818F1139"><span class="RefLink">4.1</span></a> containing <code class="code">FindHomomorphism</code> methods in the sense of Section <a href="chap3.html#X8577717D85D631C2"><span class="RefLink">3.3</span></a>. <var class="Arg">depth</var> is an integer which measures the depth in the recognition tree. It will be increased by one for each step we go into the tree. The top level has depth 0. <var class="Arg">knowledge</var> is an optional record the components of which are copied into the new recognition info record which is created for the group <var class="Arg">H</var>. Especially the component <code class="code">hints</code> can contain a list of additional find homomorphism methods (described by records as in Section <a href="chap4.html#X7F89FF55818F1139"><span class="RefLink">4.1</span></a>) which is prepended to the method database in <var class="Arg">methoddb</var> before the recognition starts. This feature is intended to give hints about prior knowledge about which find homomorphism method might succeed.</p>
+
+<p>The function performs the algorithm described above and returns either <code class="code">fail</code> in case of failure or a recognition info record in case of success. For the content and definition of recognition info records see Section <a href="chap3.html#X7D7B4A3D81878179"><span class="RefLink">3.2</span></a>.</p>
+
+<p>The user will usually not call this function directly, but will use the following convenience functions:</p>
+
+<p><a id="X84338F037B91CDD0" name="X84338F037B91CDD0"></a></p>
+
+<h5>3.1-2 RecognisePermGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecognisePermGroup</code>( <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecognizePermGroup</code>( <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">fail</code> for failure or a recognition info record.</p>
+
+<p><var class="Arg">H</var> must be a <strong class="pkg">GAP</strong> permutation group object. This function calls <code class="func">RecogniseGeneric</code> (<a href="chap3.html#X7BFEB34483548A89"><span class="RefLink">3.1-1</span></a>) with the method database used for permutation groups, which is stored in the global variable <code class="func">FindHomDbPerm</code> (<a href="chap3.html#X836B50947A46B1A5"><span class="RefLink">3.1-6</span></a>), and no prior knowledge.</p>
+
+<p><a id="X788DCF6A7D9E80BD" name="X788DCF6A7D9E80BD"></a></p>
+
+<h5>3.1-3 RecogniseMatrixGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecogniseMatrixGroup</code>( <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecognizeMatrixGroup</code>( <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">fail</code> for failure or a recognition info record.</p>
+
+<p><var class="Arg">H</var> must be a <strong class="pkg">GAP</strong> matrix group object. This function calls <code class="func">RecogniseGeneric</code> (<a href="chap3.html#X7BFEB34483548A89"><span class="RefLink">3.1-1</span></a>) with the method database used for matrix groups, which is stored in the global variable <code class="func">FindHomDbMatrix</code> (<a href="chap3.html#X7CA5F5FA7E850885"><span class="RefLink">3.1-9</span></a>), and no prior knowledge.</p>
+
+<p><a id="X841176DD7BA1CAA0" name="X841176DD7BA1CAA0"></a></p>
+
+<h5>3.1-4 RecogniseProjectiveGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecogniseProjectiveGroup</code>( <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecognizeProjectiveGroup</code>( <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">fail</code> for failure or a recognition info record.</p>
+
+<p><var class="Arg">H</var> must be a <strong class="pkg">GAP</strong> matrix group object. Since as of now no actual projective groups are implemented in the <strong class="pkg">GAP</strong> library we use matrix groups instead. The recognition will however view the group as the projective group, i.e. the matrix group modulo its scalar matrices. This function calls <code class="func">RecogniseGeneric</code> (<a href="chap3.html#X7BFEB34483548A89"><span class="RefLink">3.1-1</span></a>) with the method database used for projective groups, which is stored in the global variable <code class="func">FindHomDbProjective</code> (<a href="chap3.html#X7A4F8342854507E3"><span class="RefLink">3.1-12</span></a>), and no prior knowledge.</p>
+
+<p><a id="X853B4EE27AF57CD3" name="X853B4EE27AF57CD3"></a></p>
+
+<h5>3.1-5 RecogniseGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecogniseGroup</code>( <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecognizeGroup</code>( <var class="Arg">H</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">fail</code> for failure or a recognition info record.</p>
+
+<p><var class="Arg">H</var> must be a <strong class="pkg">GAP</strong> group object. This function automatically dispatches to one of the two previous functions <code class="func">RecognisePermGroup</code> (<a href="chap3.html#X84338F037B91CDD0"><span class="RefLink">3.1-2</span></a>), or <code class="func">RecogniseMatrixGroup</code> (<a href="chap3.html#X788DCF6A7D9E80BD"><span class="RefLink">3.1-3</span></a>), according to the type of the group <var class="Arg">H</var>. Note that since currently there is no implementation of projective groups in the <strong class="pkg">GAP</strong> library, one cannot recognise a matrix group <var class="Arg">H</var> as a projective group using this function.</p>
+
+<p><a id="X836B50947A46B1A5" name="X836B50947A46B1A5"></a></p>
+
+<h5>3.1-6 FindHomDbPerm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindHomDbPerm</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>This list contains the methods for finding homomorphisms for permutation group recognition that are stored in the record <code class="func">FindHomMethodsPerm</code> (<a href="chap3.html#X7A94720080D344DA"><span class="RefLink">3.1-7</span></a>). As described in Section <a href="chap4.html#X7F89FF55818F1139"><span class="RefLink">4.1</span></a> each method is described by a record. The list is always sorted with respect to decreasing ranks. The order in this list tells in which order the methods should be applied. Use <code class="func">AddMethod</code> (<a href="chap4.html#X845DB71C806CADDC"><span class="RefLink">4.1-1</span></a>) to add methods to this database.</p>
+
+<p><a id="X7A94720080D344DA" name="X7A94720080D344DA"></a></p>
+
+<h5>3.1-7 FindHomMethodsPerm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindHomMethodsPerm</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>In this global record the functions that are methods for finding homomorphisms for permutation group recognition are stored. We collect them all in this record such that we do not use up too many global variable names.</p>
+
+<p><a id="X7B5561D187242287" name="X7B5561D187242287"></a></p>
+
+<h5>3.1-8 SLPforElementFuncsPerm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SLPforElementFuncsPerm</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>This global record holds the functions that are methods for writing group elements as straight line programs (SLPs) in terms of the generators after successful permutation group recognition. We collect them all in this record such that we do not use up too many global variable names.</p>
+
+<p><a id="X7CA5F5FA7E850885" name="X7CA5F5FA7E850885"></a></p>
+
+<h5>3.1-9 FindHomDbMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindHomDbMatrix</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>This list contains the methods for finding homomorphisms for matrix group recognition that are stored in the record <code class="func">FindHomMethodsMatrix</code> (<a href="chap3.html#X79B60CEF8292F142"><span class="RefLink">3.1-10</span></a>). As described in Section <a href="chap4.html#X7F89FF55818F1139"><span class="RefLink">4.1</span></a> each method is described by a record. The list is always sorted with respect to decreasing ranks. The order in this list tells in which order the methods should be applied. Use <code class="func">AddMethod</code> (<a href="chap4.html#X845DB71C806CADDC"><span class="RefLink">4.1-1</span></a>) to add methods to this database.</p>
+
+<p><a id="X79B60CEF8292F142" name="X79B60CEF8292F142"></a></p>
+
+<h5>3.1-10 FindHomMethodsMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindHomMethodsMatrix</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>In this global record the functions that are methods for finding homomorphisms for matrix group recognition are stored. We collect them all in this record such that we do not use up too many global variable names.</p>
+
+<p><a id="X7A2E7DF67F4949C8" name="X7A2E7DF67F4949C8"></a></p>
+
+<h5>3.1-11 SLPforElementFuncsMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SLPforElementFuncsMatrix</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>This global record holds the functions that are methods for writing group elements as straight line programs (SLPs) in terms of the generators after successful matrix group recognition. We collect them all in this record such that we do not use up too many global variable names.</p>
+
+<p><a id="X7A4F8342854507E3" name="X7A4F8342854507E3"></a></p>
+
+<h5>3.1-12 FindHomDbProjective</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindHomDbProjective</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>This list contains the methods for finding homomorphisms for projective group recognition that are stored in the record <code class="func">FindHomMethodsProjective</code> (<a href="chap3.html#X7D796A2179E9026A"><span class="RefLink">3.1-13</span></a>). As described in Section <a href="chap4.html#X7F89FF55818F1139"><span class="RefLink">4.1</span></a> each method is described by a record. The list is always sorted with respect to decreasing ranks. The order in this list tells in which order the methods should be applied. Use <code class="func">AddMethod</code> (<a href="chap4.html#X845DB71C806CADDC"><span class="RefLink">4.1-1</span></a>) to add methods to this database.</p>
+
+<p><a id="X7D796A2179E9026A" name="X7D796A2179E9026A"></a></p>
+
+<h5>3.1-13 FindHomMethodsProjective</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindHomMethodsProjective</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>In this global record the functions that are methods for finding homomorphisms for projective group recognition are stored. We collect them all in this record such that we do not use up too many global variable names.</p>
+
+<p><a id="X7F6FCC4F81ACF20F" name="X7F6FCC4F81ACF20F"></a></p>
+
+<h5>3.1-14 SLPforElementFuncsProjective</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SLPforElementFuncsProjective</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>This global record holds the functions that are methods for writing group elements as straight line programs (SLPs) in terms of the generators after successful projective group recognition. We collect them all in this record such that we do not use up too many global variable names.</p>
+
+<p><a id="X7AD4A7168016DF8F" name="X7AD4A7168016DF8F"></a></p>
+
+<h5>3.1-15 TryFindHomMethod</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TryFindHomMethod</code>( <var class="Arg">H</var>, <var class="Arg">method</var>, <var class="Arg">projective</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">fail</code> or <code class="code">false</code> or a recognition info record.</p>
+
+<p>Use this function to try to run a given find homomorphism method <var class="Arg">method</var> on a group <var class="Arg">H</var>. Indicate by the boolean <var class="Arg">projective</var> whether or not the method works in projective mode. For permutation groups, set this to <code class="code">false</code>. The result is either <code class="code">fail</code> or <code class="code">false</code> if the method fails or a recognition info record <code class="code">ri</code>. If the method created a leaf then <code class="code">ri</code> will be a leaf, otherwise it will have the attribute <code class="func">Homom</code> (<a href="chap3.html#X8273C2FC79FB6543"><span class="RefLink">3.2-6</span></a>) set, but no factor or kernel have been created or recognised yet. You can use for example the methods in <code class="func">FindHomMethodsPerm</code> (<a href="chap3.html#X7A94720080D344DA"><span class="RefLink">3.1-7</span></a>) or <code class="func">FindHomMethodsMatrix</code> (<a href="chap3.html#X79B60CEF8292F142"><span class="RefLink">3.1-10</span></a>) or <code class="func">FindHomMethodsProjective</code> (<a href="chap3.html#X7D796A2179E9026A"><span class="RefLink">3.1-13</span></a>) as the <var class="Arg">method</var> argument.</p>
+
+<p><a id="X7D7B4A3D81878179" name="X7D7B4A3D81878179"></a></p>
+
+<h4>3.2 <span class="Heading">Recognition info records</span></h4>
+
+<p>A recognition info record is a <strong class="pkg">GAP</strong> positional object. It is a member of the family</p>
+
+<p><a id="X820267927AB548EC" name="X820267927AB548EC"></a></p>
+
+<h5>3.2-1 RecognitionInfoFamily</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RecognitionInfoFamily</code></td><td class="tdright">(&nbsp;family&nbsp;)</td></tr></table></div>
+<p>and is in the category</p>
+
+<p><a id="X836958B87C783165" name="X836958B87C783165"></a></p>
+
+<h5>3.2-2 IsRecognitionInfo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRecognitionInfo</code></td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
+<p>and is <code class="func">IsAttributeStoringRep</code> (<a href="../../../doc/ref/chap80_mj.html#X874AF11D864AEC1B"><span class="RefLink">Reference: IsAttributeStoringRep</span></a>), such that we can define attributes for it, the values of which are stored once they are known. A recognition info record always represents a whole binary tree of such records, see the attributes <code class="func">RIFac</code> (<a href="chap3.html#X85D69105867342C7"><span class="RefLink">3.2-9</span></a>) and <code class="func">RIKer</code> (<a href="chap3.html#X85B6D66F7BD0E964"><span class="RefLink">3.2-10</span></a>) below.</p>
+
+<p>The following filters are defined for recognition info records:</p>
+
+<p><a id="X8469BB658377FD92" name="X8469BB658377FD92"></a></p>
+
+<h5>3.2-3 IsLeaf</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeaf</code></td><td class="tdright">(&nbsp;flag&nbsp;)</td></tr></table></div>
+<p>This flag indicates, whether or not a recognition info record represents a leaf in the recognition tree. If it is not set, one finds at least one of the attributes <code class="func">RIFac</code> (<a href="chap3.html#X85D69105867342C7"><span class="RefLink">3.2-9</span></a>) and <code class="func">RIKer</code> (<a href="chap3.html#X85B6D66F7BD0E964"><span class="RefLink">3.2-10</span></a>) set for the corresponding node. This flag is normally reset and has to be set by a find homomorphism method to indicate a leaf.</p>
+
+<p><a id="X7D6CEF0178ED73A7" name="X7D6CEF0178ED73A7"></a></p>
+
+<h5>3.2-4 IsReady</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReady</code></td><td class="tdright">(&nbsp;flag&nbsp;)</td></tr></table></div>
+<p>This flag indicates during the recognition procedure, whether a node in the recognition tree is already completed or not. It is mainly set for debugging purposes during the recognition. However, if the recognition fails somewhere in a leaf, this flag is not set and all nodes above will also not have this flag set. In this way one can see whether the recognition failed and where the problem was.</p>
+
+<p>The following attributes are defined for recognition info records:</p>
+
+<p><a id="X7972380780D99B04" name="X7972380780D99B04"></a></p>
+
+<h5>3.2-5 Grp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Grp</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The value of this attribute is the group that is to be recognised by this recognition info record <var class="Arg">ri</var>. This attribute is always present during recognition and after completion. Note that the generators of the group object stored here always have a memory attached to them, such that elements that are generated from them remember, how they were acquired.</p>
+
+<p><a id="X8273C2FC79FB6543" name="X8273C2FC79FB6543"></a></p>
+
+<h5>3.2-6 Homom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Homom</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The value of this attribute is the homomorphism that was found from the group described by the recognition info record <var class="Arg">ri</var> as a <strong class="pkg">GAP</strong> object. It is set by a find homomorphism method that succeeded to find a homomorphism (or isomorphism). It does not have to be set in leaf nodes of the recognition tree.</p>
+
+<p><a id="X864194958685AAD7" name="X864194958685AAD7"></a></p>
+
+<h5>3.2-7 NiceGens</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NiceGens</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The value of this attribute must be set for all nodes and contains the nice generators. The <code class="func">SLPforElement</code> (<a href="chap3.html#X83167779869A3BF5"><span class="RefLink">3.2-14</span></a>) function of the node will write its straight line program in terms of these nice generators. For leaf nodes, the find homomorphism method is responsible to set the value of <code class="func">NiceGens</code>. By default, the original generators of the group at this node are taken. For a homomorphism (or isomorphism), the <code class="func">NiceGens</code> will be the concatenation of preimages of the <code class="func">NiceGens</code> of the factor group (see <code class="func">pregensfac</code> (<a href="chap3.html#X808A01AA869115EC"><span class="RefLink">3.2-8</span></a>)) and the <code class="func">NiceGens</code> of the kernel. A find homomorphism method does not have to set <code class="func">NiceGens</code> if it finds a homomorphism. Note however, that such a find homomorphism method has to ensure somehow, that preimages of the <code class="func">NiceGens</code> of the factor group can be acquired. See <code class="func">calcnicegens</code> (<a href="chap3.html#X7EFA298E7E4760A0"><span class="RefLink">3.2-17</span></a>), <code class="func">CalcNiceGens</code> (<a href="chap3.html#X7EFA298E7E4760A0"><span class="RefLink">3.2-20</span></a>) and <code class="func">slptonice</code> (<a href="chap3.html#X80C2451F805CA06D"><span class="RefLink">3.2-21</span></a>) for instructions.</p>
+
+<p><a id="X808A01AA869115EC" name="X808A01AA869115EC"></a></p>
+
+<h5>3.2-8 pregensfac</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; pregensfac</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The value of this attribute is only set for homomorphism nodes. In that case it contains preimages of the nice generators in the factor group. This attribute is set automatically by the generic recursive recognition function using the mechanism described with the attribute <code class="func">calcnicegens</code> (<a href="chap3.html#X7EFA298E7E4760A0"><span class="RefLink">3.2-17</span></a>) below. A find homomorphism does not have to touch this attribute.</p>
+
+<p><a id="X85D69105867342C7" name="X85D69105867342C7"></a></p>
+
+<h5>3.2-9 RIFac</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RIFac</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The value of this attribute is the recognition info record of the image of the homomorphism that was found from the group described by the recognition info record <var class="Arg">ri</var>. It is set by the generic recursive procedure after a find homomorphism method has succeeded to find a homomorphism (or isomorphism). It does not have to be set in leaf nodes of the recognition tree. This attribute value provides the link to the "factor" subtree of the recognition tree.</p>
+
+<p><a id="X85B6D66F7BD0E964" name="X85B6D66F7BD0E964"></a></p>
+
+<h5>3.2-10 RIKer</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RIKer</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The value of this attribute is the recognition info record of the kernel of the homomorphism that was found from the group described by the recognition info record <var class="Arg">ri</var>. It is set by the generic recursive procedure after a find homomorphism method has succeeded to find a homomorphism (or isomorphism). It does not have to be set in leaf nodes of the recognition tree or if the homomorphism is known to be an isomorphism. In the latter case the value of the attribute is set to <code class="code">fail</code>. This attribute value provides the link to the "kernel" subtree of the recognition tree.</p>
+
+<p><a id="X7C66C89C84F9C6AA" name="X7C66C89C84F9C6AA"></a></p>
+
+<h5>3.2-11 RIParent</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RIParent</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The value of this attribute is the recognition info record of the parent of this node in the recognition tree. The top node does not have this attribute set.</p>
+
+<p><a id="X7ACD6B4C7982B1E3" name="X7ACD6B4C7982B1E3"></a></p>
+
+<h5>3.2-12 fhmethsel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; fhmethsel</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The value of this attribute is the record returned by the method selection (see Section <a href="chap4.html#X83FCCBCA78F608E1"><span class="RefLink">4.2</span></a>) after it ran to find a homomorphism (or isomorphism). It is there to be able to see which methods were tried until the recognition of the node was completed.</p>
+
+<p><a id="X83167779869A3BF5" name="X83167779869A3BF5"></a></p>
+
+<h5>3.2-13 slpforelement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; slpforelement</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>After the recognition phase is completed for the node <var class="Arg">ri</var>, we are by definition able to write arbitrary elements in the group described by this node as a straight line program (SLP) in terms of the nice generators stored in <code class="func">NiceGens</code> (<a href="chap3.html#X864194958685AAD7"><span class="RefLink">3.2-7</span></a>). This attribute value is a function taking the node <var class="Arg">ri</var> and a group element as its arguments and returning the above mentioned straight line program. For the case that a find homomorphism method succeeds in finding a homomorphism, the generic recursive function sets this attribute to the function <code class="func">SLPforElementGeneric</code> (<a href="chap3.html#X7F299344834AAB6E"><span class="RefLink">3.3-2</span></a>) which does the job for the generic homomorphism situation. In all other cases the successful find homomorphism method has to set this attribute to a function doing the job. The find homomorphism method is free to store additional data in the recognition info record or the group object such that the <code class="func">SLPforElement</code> (<a href="chap3.html#X83167779869A3BF5"><span class="RefLink">3.2-14</span></a>) function can work.</p>
+
+<p><a id="X83167779869A3BF5" name="X83167779869A3BF5"></a></p>
+
+<h5>3.2-14 SLPforElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SLPforElement</code>( <var class="Arg">ri</var>, <var class="Arg">x</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a straight line program expressing <var class="Arg">x</var> in the nice generators.</p>
+
+<p>This is a wrapper function which extracts the value of the attribute <code class="func">slpforelement</code> (<a href="chap3.html#X83167779869A3BF5"><span class="RefLink">3.2-13</span></a>) and calls that function with the arguments <var class="Arg">ri</var> and <var class="Arg">x</var>.</p>
+
+<p><a id="X7FBE4706828964EB" name="X7FBE4706828964EB"></a></p>
+
+<h5>3.2-15 StdPresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StdPresentation</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>After the verification phase, the presentation is stored here. Details have still to be decided upon.</p>
+
+<p><a id="X826BC2BB7D7AD6A9" name="X826BC2BB7D7AD6A9"></a></p>
+
+<h5>3.2-16 methodsforfactor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; methodsforfactor</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This attribute is initialised at the beginning of the recursive recognition function with the database of find homomorphism methods that was used to recognise the group corresponding to the recognition info record <var class="Arg">ri</var>. If the found homomorphism changes the representation of the group (going for example from a matrix group to a permutation group), the find homomorphism method can report this by exchanging the database of find homomorphism methods to be used in the recognition of the image of the homomorphism by setting the value of this attribute to something different. It lies in the responsibility of the find homomorphism method to do so, if the representation changes through the homomorphism.</p>
+
+<p>The following two attributes are concerned with the relation between the original generators and the nice generators for a node. They are used to transport this information from a successful find homomorphism method up to the recursive recognition function:</p>
+
+<p><a id="X7EFA298E7E4760A0" name="X7EFA298E7E4760A0"></a></p>
+
+<h5>3.2-17 calcnicegens</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; calcnicegens</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>To make the recursion work, we have to acquire preimages of the nice generators in factor groups under the homomorphism found. But we want to keep the information, how the nice generators were found, locally at the node where they were found. This attribute solves this problem of acquiring preimages in the following way: Its value must be a function, taking the recognition info record <var class="Arg">ri</var> as first argument, and a list <var class="Arg">origgens</var> of preimages of the original generators of the current node, and has to return corresponding preimages of the nice generators. Usually this task can be done by storing a straight line program writing the nice generators in terms of the original generators and executing this with inputs <var class="Arg">origgens</var>. Therefore the default value of this attribute is the function <code class="func">CalcNiceGensGeneric</code> (<a href="chap3.html#X78B05A1E78564BBF"><span class="RefLink">3.2-18</span></a>) described below.</p>
+
+<p><a id="X78B05A1E78564BBF" name="X78B05A1E78564BBF"></a></p>
+
+<h5>3.2-18 CalcNiceGensGeneric</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CalcNiceGensGeneric</code>( <var class="Arg">ri</var>, <var class="Arg">origgens</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of preimages of the nice generators</p>
+
+<p>This is the default function for leaf nodes for the attribute <code class="func">calcnicegens</code> (<a href="chap3.html#X7EFA298E7E4760A0"><span class="RefLink">3.2-17</span></a>) described above. It does the following: If the value of the attribute <code class="func">slptonice</code> (<a href="chap3.html#X80C2451F805CA06D"><span class="RefLink">3.2-21</span></a>) is set, then it must be a straight line program expressing the nice generators in terms of the original generators of this node. In that case, this straight line program is executed with <var class="Arg">origgens</var> as inputs and the result is returned. Otherwise, <var class="Arg">origgens</var> is returned as is. Therefore a leaf node just has to do nothing if the nice generators are equal to the original generators, or can simply store the right straight line program into the attribute <code class="func">slptonice</code> (<a href="chap3.html#X80C2451F805CA06D"><span class="RefLink">3.2-21</span></a>) to fulfill its duties.</p>
+
+<p><a id="X80444E4E8501D0B0" name="X80444E4E8501D0B0"></a></p>
+
+<h5>3.2-19 CalcNiceGensHomNode</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CalcNiceGensHomNode</code>( <var class="Arg">ri</var>, <var class="Arg">origgens</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of preimages of the nice generators</p>
+
+<p>This is the default function for homomorphism node for the attribute <code class="func">calcnicegens</code> (<a href="chap3.html#X7EFA298E7E4760A0"><span class="RefLink">3.2-17</span></a>). It just delegates to factor and kernel of the homomorphism, as the nice generators of a homomorphism (or isomorphism) node are just the concatenation of the nice generators of the factor and the kernel. A find homomorphism method finding a homomorphism or isomorphism does not have to do anything with respect to nice generators.</p>
+
+<p><a id="X7EFA298E7E4760A0" name="X7EFA298E7E4760A0"></a></p>
+
+<h5>3.2-20 CalcNiceGens</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CalcNiceGens</code>( <var class="Arg">ri</var>, <var class="Arg">origgens</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a list of preimages of the nice generators</p>
+
+<p>This is a wrapper function which extracts the value of the attribute <code class="func">calcnicegens</code> (<a href="chap3.html#X7EFA298E7E4760A0"><span class="RefLink">3.2-17</span></a>) and calls that function with the arguments <var class="Arg">ri</var> and <var class="Arg">origgens</var>.</p>
+
+<p><a id="X80C2451F805CA06D" name="X80C2451F805CA06D"></a></p>
+
+<h5>3.2-21 slptonice</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; slptonice</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>As described above, the value, if set, must be a straight line program expressing the nice generators at this node in terms of the original generators. This is for leaf nodes, that choose to use the default function <code class="func">CalcNiceGensGeneric</code> (<a href="chap3.html#X78B05A1E78564BBF"><span class="RefLink">3.2-18</span></a>) installed in the <code class="func">calcnicegens</code> (<a href="chap3.html#X7EFA298E7E4760A0"><span class="RefLink">3.2-17</span></a>) attribute.</p>
+
+<p>The following three attributes are concerned with the administration of the kernel of a found homomorphism. Find homomorphism methods use them to report to the main recursive recognition function their knowledge about the kernel:</p>
+
+<p><a id="X7B7E9EAC7AACF8D8" name="X7B7E9EAC7AACF8D8"></a></p>
+
+<h5>3.2-22 gensN</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; gensN</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The value of this mutable attribute is a list of generators of the kernel of the homomorphism found at the node <var class="Arg">ri</var>. It is initialised as an empty list when the recursive recognition function starts. Successful find homomorphism methods may append generators of the kernel to this list if they happen to stumble on them. After successful recognition of the image of the homomorphism the main recursive recognition function will try to create a few more generators of the kernel and append them to the list which is the value of the attribute <code class="func">gensN</code>. The exact behaviour depends on the value of the attribute <code class="func">findgensNmeth</code> (<a href="chap3.html#X81644C3A8064063F"><span class="RefLink">3.2-23</span></a>) below. The list of generators after that step is used to recognise the kernel. Note that the generators in <code class="func">gensN</code> have a memory attached to them, how they were obtained in terms of the original generators of the current node.</p>
+
+<p><a id="X81644C3A8064063F" name="X81644C3A8064063F"></a></p>
+
+<h5>3.2-23 findgensNmeth</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; findgensNmeth</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This attribute decides about how generators of the kernel of a found homomorphism are produced. Its value has to be a record with at least two components bound. The first is <code class="code">method</code> which holds a function taking at least one argument <var class="Arg">ri</var> and possibly more, and does not return anything. The second is <code class="code">args</code> which holds a list of arguments for the above mentioned function. The real list of arguments is derived by prepending the recognition info record to the list of arguments in <code class="code">args</code>. That is, the following code is used to call the method:</p>
+
+
+<div class="example"><pre>
+    methgensN := findmethgensN(ri);
+    CallFuncList(methgensN(ri).method,Concatenation([ri],methgensN.args));
+</pre></div>
+
+<p>The record is initialised upon creation of the recognition info record to calling <code class="func">FindKernelRandom</code> (<a href="chap3.html#X7DC1D16F807D6895"><span class="RefLink">3.2-24</span></a>) with one argument of 20 (FIXME: is 20 correct?) (in addition to the first argument <var class="Arg">ri</var>). See below for a choice of possible find kernel methods.</p>
+
+<p><a id="X7DC1D16F807D6895" name="X7DC1D16F807D6895"></a></p>
+
+<h5>3.2-24 FindKernelRandom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindKernelRandom</code>( <var class="Arg">ri</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p><var class="Arg">n</var> random elements are generated, mapped through the homomorphism, written as a straight line program in the generators. Then the straight line program is executed with the original generators thereby producing elements in the same coset. The quotients are then elements of the kernel. The kernel elements created are stored in the attribute <code class="func">gensN</code> (<a href="chap3.html#X7B7E9EAC7AACF8D8"><span class="RefLink">3.2-22</span></a>).</p>
+
+<p><a id="X8244F0DE86C23ECA" name="X8244F0DE86C23ECA"></a></p>
+
+<h5>3.2-25 FindKernelDoNothing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindKernelDoNothing</code>( <var class="Arg">ri</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>Does nothing. This function is intended to be set as method for producing kernel elements if the kernel is known to be trivial or if one knows, that the attribute <code class="func">gensN</code> (<a href="chap3.html#X7B7E9EAC7AACF8D8"><span class="RefLink">3.2-22</span></a>) already contains a complete set of generators for the kernel.</p>
+
+<p><a id="X87E8AB1B78F60112" name="X87E8AB1B78F60112"></a></p>
+
+<h5>3.2-26 FindKernelFastNormalClosure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindKernelFastNormalClosure</code>( <var class="Arg">ri</var>, <var class="Arg">nr</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a probable generating set for the normal closure</p>
+
+<p>This function takes the group <span class="SimpleMath">G</span> in the <code class="func">Grp</code> (<a href="chap3.html#X7972380780D99B04"><span class="RefLink">3.2-5</span></a>) attribute in <var class="Arg">ri</var> and the list of generators <span class="SimpleMath">gens</span> of the kernel in <code class="func">gensN</code> (<a href="chap3.html#X7B7E9EAC7AACF8D8"><span class="RefLink">3.2-22</span></a>) and the positive integer <var class="Arg">nr</var>. This function computes a probable generating set of the normal closure in <var class="Arg">G</var> of the group generated by the generators in <var class="Arg">gens</var>. The integer <var class="Arg">nr</var> indicates how hard it should try.</p>
+
+<p><a id="X82154EA88011654F" name="X82154EA88011654F"></a></p>
+
+<h5>3.2-27 gensNslp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; gensNslp</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>The recursive recognition function calculates a straight line program that computes the generators of the kernel stored in <code class="func">gensN</code> (<a href="chap3.html#X7B7E9EAC7AACF8D8"><span class="RefLink">3.2-22</span></a>) in terms of the generators of the group recognised by <var class="Arg">ri</var>. This straight line program is stored in the value of this mutable attribute. It is used by the generic function <code class="func">SLPforElementGeneric</code> (<a href="chap3.html#X7F299344834AAB6E"><span class="RefLink">3.3-2</span></a>).</p>
+
+<p><a id="X86A101E17F87F01F" name="X86A101E17F87F01F"></a></p>
+
+<h5>3.2-28 immediateverification</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; immediateverification</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Sometimes a find homomorphism has information that it will be difficult to create generators for the kernel, for example if it is known that the kernel will need lots of generators. In that case this attribute with the default boolean value <code class="code">false</code> can be set to <code class="code">true</code>. In that case, the generic recursive recognition function will perform an immediate verification phase after the kernel has been recognised. This is done as follows: A few random elements are created, mapped through the homomorphism and written as an SLP in the nice generators there. Then this SLP is executed with preimages of those nice generators. The quotient lies then in the kernel and is written as an SLP in terms of the nice generators of the would be kernel. If this is not possible, then probably the creation of kernel generators was not complete and a few more kernel elements are produced and recognition in the kernel starts all over again. This is for example done in case of the "Imprimitive" method which maps onto the action on a block system. In that case, the kernel often needs lots of generators.</p>
+
+<p>The following attributes are used to give a successful find homomorphism method further possibilities to transport knowledge about the group recognised by the current recognition info record to the factor or kernel of the found homomorphism:</p>
+
+<p><a id="X87B550967D90B794" name="X87B550967D90B794"></a></p>
+
+<h5>3.2-29 forkernel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; forkernel</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This attribute is initialised to a record with only the component <code class="code">hints</code> bound to an empty list at the beginning of the recursive recognition function. Find homomorphism methods can put acquired knowledge about the group to be recognised (like for example an invariant subspace of a matrix group) into this record. When a homomorphism is found and recognition goes on in its kernel, the value of this attribute is taken as initialisation data for the newly created recognition info record for the kernel. Thus, information is transported down to the recognition process for the kernel. The component <code class="code">hints</code> is special insofar as it has to contain records describing find homomorphism methods which might be particularly successful. They are prepended to the find homomorphism method database such that they are called before any other methods. This is a means to give hints to the recognition procedure in the kernel, because often during the finding of a homomorphism knowledge is acquired which might help the recognition of the kernel.</p>
+
+<p><a id="X7CBBF7FC8200790C" name="X7CBBF7FC8200790C"></a></p>
+
+<h5>3.2-30 forfactor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; forfactor</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This attribute is initialised to a record with only the component <code class="code">hints</code> bound to an empty list at the beginning of the recursive recognition function. Find homomorphism methods can put acquired knowledge about the group to be recognised (like for example an invariant subspace of a matrix group) into this record. When a homomorphism is found and recognition goes on in its image, the value of this attribute is taken as initialisation data for the newly created recognition info record for the factor. Thus, information is transported down to the recognition process for the factor. The component <code class="code">hints</code> is special insofar as it has to contain records describing find homomorphism methods which might be particularly successful. They are prepended to the find homomorphism method database such that they are called before any other methods. This is a means to give hints to the recognition procedure in the factor, because often during the finding of a homomorphism knowledge is acquired which might help the recognition of the factor.</p>
+
+<p><a id="X814D78347858EC13" name="X814D78347858EC13"></a></p>
+
+<h5>3.2-31 isone</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; isone</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This attribute returns a function that tests, whether or not an element of the group is equal to the identity or not. Usually this is just the operation <code class="func">IsOne</code> (<a href="../../../doc/ref/chap31_mj.html#X814D78347858EC13"><span class="RefLink">Reference: IsOne</span></a>) but for projective groups it is a special function returning <code class="code">true</code> for scalar matrices. In generic code, one should always use the result of this attribute to compare an element to the identity such that the code works also for projective groups. Find homomorphism methods usually do not have to set this attribute.</p>
+
+<p><a id="X7D0F06047B88E5CD" name="X7D0F06047B88E5CD"></a></p>
+
+<h5>3.2-32 isequal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; isequal</code>( <var class="Arg">ri</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>This attribute returns a function that compares two elements of the group being recognised. Usually this is just the operation <code class="func">EQ</code> (<a href="../../../doc/ref/chap29_mj.html#X83A7E6607B1D63BC"><span class="RefLink">Reference: equality of records</span></a>) but for projective groups it is a special function checking for equality up to a scalar factor. In generic code, one should always use the result of this attribute to compare two elements such that the code works also for projective groups. Find homomorphism methods usually do not have to set this attribute.</p>
+
+<p><a id="X800B9BBE82F24C49" name="X800B9BBE82F24C49"></a></p>
+
+<h5>3.2-33 <span class="Heading">Other components of recognition info records</span></h5>
+
+<p>In this subsection we describe a few more components of recognition info records that can be queried or set by find homomorphism methods. Not all of these components are bound in all cases. See the individual descriptions about the conventions. Remember to use the <code class="code">!.</code> notation to access these components of a recognition info record.</p>
+
+
+<dl>
+<dt><strong class="Mark"><code class="code">leavegensNuntouched</code></strong></dt>
+<dd><p>If this component is bound to <code class="code">true</code> by a find homomorphism method or a find kernel generators method, the generic mechanism to remove duplicates and identities in the generator for the kernel is not used. This is important if your methods rely on the generating set of the kernel being exactly as it was when found.</p>
+
+</dd>
+</dl>
+<p><a id="X8577717D85D631C2" name="X8577717D85D631C2"></a></p>
+
+<h4>3.3 <span class="Heading">Methods to find homomorphisms</span></h4>
+
+<p>A "find homomorphism method" has the objective to, given a group <span class="SimpleMath">G</span>, either find a homomorphism from <span class="SimpleMath">G</span> onto a group, or to find an isomorphism, or to solve the constructive membership problem directly for <span class="SimpleMath">G</span>, or to fail.</p>
+
+<p>In case a homomorphism is found, it has to report that homomorphism back to the calling recursive recognition function together with as much information about the kernel as possible.</p>
+
+<p>If a find homomorphism method determines that the node is a leaf in the recognition tree (by solving the constructive membership problem directly), then it has to ensure, that arbitrary elements can be written in terms of the nice generators of <span class="SimpleMath">G</span>. It does so by returning a function together with possible extra data, that can perform this job.</p>
+
+<p>Of course, the find homomorphism method also has to report, how the nice generators were acquired in terms of the original generators.</p>
+
+<p>If the find homomorphism method fails, it has to report, whether it has failed forever or if it possibly makes sense to try to call this method again later.</p>
+
+<p>Find homomorphism methods have to fit into the framework for method selection described in Chapter <a href="chap4.html#X8058CC8187162644"><span class="RefLink">4</span></a>. We now begin to describe the technical details of how a find homomorphism method has to look like and what it has to do and what it is not allowed to do. We first explain the calling convention by means of a hypothetical function:</p>
+
+<p><a id="X7FCBB7C686D0B1DF" name="X7FCBB7C686D0B1DF"></a></p>
+
+<h5>3.3-1 FindHomomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindHomomorphism</code>( <var class="Arg">ri</var>, <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: One of the values <code class="code">Success</code>, <code class="code">NeverApplicable</code>, <code class="code">TemporaryFailure</code>, or <code class="code">NotEnoughInformation</code>.</p>
+
+<p>Find homomorphism methods take two arguments <var class="Arg">ri</var> and <var class="Arg">G</var>, of which <var class="Arg">ri</var> is a recognition info record and <var class="Arg">G</var> is a <strong class="pkg">GAP</strong> group object. The return value is one of the four possible values in the framework for method selection described in Chapter <a href="chap4.html#X8058CC8187162644"><span class="RefLink">4</span></a> indicating success, failure, or (temporary) non-applicability. The above mentioned additional information in case of success are all returned by changing the recognition info record <var class="Arg">ri</var>. For the conventions about what a find homomorphism method has to do and return see below.</p>
+
+<p>A failed or not applicable find homomorphism method does not have to report or do anything in the recognition info record <var class="Arg">ri</var>. However, it can collect information and store it either in the group object or in the recognition info record. Note that for example it might be that a failed find homomorphism method acquires additional information that allows another find homomorphism method to become applicable.</p>
+
+<p>A not applicable find homomorphism method should find out so relatively quickly, because otherwise the whole process might be slowed down, because a find homomorphism method repeatedly ponders about its applicability. Usually no big calculations should be triggered just to decide applicability.</p>
+
+<p>A successful find homomorphism method has the following duties:</p>
+
+
+<dl>
+<dt><strong class="Mark">for leaves:</strong></dt>
+<dd><p>First it has to report whether the current node is a leaf or not in the recognition tree. That is, in case a leaf was found the method has to do <code class="code">SetFilterObj(ri,IsLeaf);</code> thereby setting the <code class="func">IsLeaf</code> (<a href="chap3.html#X8469BB658377FD92"><span class="RefLink">3.2-3</span></a>) flag.</p>
+
+<p>A method finding a homomorphism which is not an isomorphism indicates so by not touching the flags. <em>FIXME: What does that mean? Which flags? The IsLeaf filter? But then this sounds as if isomorphisms require settings some flag.. but which?!? perhaps remove that sentence?</em></p>
+
+</dd>
+<dt><strong class="Mark">for leaves: <code class="func">SLPforElement</code> (<a href="chap3.html#X83167779869A3BF5"><span class="RefLink">3.2-14</span></a>) function</strong></dt>
+<dd><p>If a find homomorphism method has produced a leaf in the recognition tree, then it has to set the attribute <code class="func">slpforelement</code> (<a href="chap3.html#X83167779869A3BF5"><span class="RefLink">3.2-13</span></a>) to a function like <code class="func">SLPforElementGeneric</code> (<a href="chap3.html#X7F299344834AAB6E"><span class="RefLink">3.3-2</span></a>) that can write an arbitrary element in <var class="Arg">G</var> as a straight line program in the nice generators of <var class="Arg">G</var>. The method may store additional data into the recognition info record for this to work. It does not have to set any other value in <var class="Arg">ri</var>.</p>
+
+</dd>
+<dt><strong class="Mark">for leaves: information about nice generators</strong></dt>
+<dd><p>If a find homomorphism method has produced a leaf in the recognition tree, then it has to report what are the nice generators of the group described by the leaf. To this end, it has three possibilities: Firstly to do nothing, which means, that the original generators are the nice generators. Secondly to store a straight line program expressing the nice generators in terms of the original generators into the attribute <code class="func">slptonice</code> (<a href="chap3.html#X80C2451F805CA06D"><span class="RefLink">3.2-21</span></a>). In that case, the generic frame work takes care of the rest. The third possibility is to store a function into the value of the attribute <code class="func">calcnicegens</code> (<a href="chap3.html#X7EFA298E7E4760A0"><span class="RefLink">3.2-17</span></a>) which can calculate preimages of the nice generators in terms of preimages of the original generators. See the function <code class="func">CalcNiceGensGeneric</code> (<a href="chap3.html#X78B05A1E78564BBF"><span class="RefLink">3.2-18</span></a>) for an example of such a function.</p>
+
+</dd>
+<dt><strong class="Mark">for non-leaves: the homomorphism itself</strong></dt>
+<dd><p>If a find homomorphism method has found a homomorphism, it has to store it as a <strong class="pkg">GAP</strong> homomorphism object from <var class="Arg">G</var> to the image group in the attribute <code class="func">Homom</code> (<a href="chap3.html#X8273C2FC79FB6543"><span class="RefLink">3.2-6</span></a>). Note that if your homomorphism changes the representation (for example going from matrix groups to permutation groups), you will have to set the attribute <code class="func">methodsforfactor</code> (<a href="chap3.html#X826BC2BB7D7AD6A9"><span class="RefLink">3.2-16</span></a>) accordingly.</p>
+
+</dd>
+<dt><strong class="Mark">for non-leaves: kernel generators</strong></dt>
+<dd><p>If a find homomorphism method has found a homomorphism, it has to provide information about already known generators of the kernel. This is done firstly by appending known generators of the kernel to the attribute value of <code class="func">gensN</code> (<a href="chap3.html#X7B7E9EAC7AACF8D8"><span class="RefLink">3.2-22</span></a>) and secondly by leaving or changing the attribute <code class="func">findgensNmeth</code> (<a href="chap3.html#X81644C3A8064063F"><span class="RefLink">3.2-23</span></a>) to a record describing the method that should be used (for details see <code class="func">findgensNmeth</code> (<a href="chap3.html#X81644C3A8064063F"><span class="RefLink">3.2-23</span></a>)). If one does not change the default value, the recursive recognition function will generate 20 (FIXME: is 20 correct?) random elements in <var class="Arg">G</var> and produce random generators of the kernel by dividing by a preimage of an image under the homomorphism. Note that generators in <code class="func">gensN</code> (<a href="chap3.html#X7B7E9EAC7AACF8D8"><span class="RefLink">3.2-22</span></a>) have to have a memory attached to them that stores, how they were acquired from the generators of <var class="Arg">G</var>.</p>
+
+</dd>
+<dt><strong class="Mark">additional information</strong></dt>
+<dd><p>A find homomorphism method may store any data into the attributes <code class="func">forkernel</code> (<a href="chap3.html#X87B550967D90B794"><span class="RefLink">3.2-29</span></a>) and <code class="func">forfactor</code> (<a href="chap3.html#X7CBBF7FC8200790C"><span class="RefLink">3.2-30</span></a>), which both are records. Components in these record that are bound during the recognition will be copied into the recognition info record of the kernel and factor respectively of a found homomorphism upon creation and thus are available to all find homomorphism methods called for the kernel and factor. This feature might be interesting to transport information that is relevant for the recognition of the kernel or factor and was acquired during the recognition of <var class="Arg">G</var> itself.</p>
+
+<p>A special role is played by the component <code class="code">hints</code> in both of the above records, which can hold a list of records describing find homomorphism methods that shall be tried first when recognising the kernel or factor.</p>
+
+<p>In addition, a find homomorphism method might set the attribute <code class="func">immediateverification</code> (<a href="chap3.html#X86A101E17F87F01F"><span class="RefLink">3.2-28</span></a>) to true, if it considers the problem of finding kernel generators particularly difficult.</p>
+
+</dd>
+</dl>
+<p>To explain the calling conventions for <code class="func">SLPforElement</code> (<a href="chap3.html#X83167779869A3BF5"><span class="RefLink">3.2-14</span></a>) functions and for the sake of completeness we present now the function <code class="func">SLPforElementGeneric</code> (<a href="chap3.html#X7F299344834AAB6E"><span class="RefLink">3.3-2</span></a>) which is used for the case of a "homomorphism node":</p>
+
+<p><a id="X7F299344834AAB6E" name="X7F299344834AAB6E"></a></p>
+
+<h5>3.3-2 SLPforElementGeneric</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SLPforElementGeneric</code>( <var class="Arg">ri</var>, <var class="Arg">x</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a <strong class="pkg">GAP</strong> straight line program</p>
+
+<p>This function takes as arguments a recognition info record <var class="Arg">ri</var> and a group element <var class="Arg">x</var>. It returns a <strong class="pkg">GAP</strong> straight line program that expresses the element <var class="Arg">x</var> in terms of the nice generators of the group <span class="SimpleMath">G</span> recognised by <var class="Arg">ri</var>.</p>
+
+<p>This generic function here does exactly this job for the generic situation that we found a homomorphism from <span class="SimpleMath">G</span> to some other group say <span class="SimpleMath">H</span> with kernel <span class="SimpleMath">N</span>. It first maps <var class="Arg">x</var> via the homomorphism to <span class="SimpleMath">H</span> and uses the recognition information there to write it as a straight line program in terms of the nice generators of <span class="SimpleMath">H</span>. Then it applies this straight line program to the preimages of those nice generators (see <code class="func">pregensfac</code> (<a href="chap3.html#X808A01AA869115EC"><span class="RefLink">3.2-8</span></a>)) thereby finding an element <span class="SimpleMath">y</span> of <span class="SimpleMath">G</span> with <span class="SimpleMath">x ⋅ y^-1</span> lying in the kernel <span class="SimpleMath">N</span>.</p>
+
+<p>Then the function writes this element as a straight line program in the nice generators of <span class="SimpleMath">N</span> again using the recursively acquired recognition info about <span class="SimpleMath">N</span>. In the end a concatenated straight line program for <span class="SimpleMath">x</span> is built, which is in terms of the nice generators of the current node.</p>
+
+<p><a id="X7B2941D57B361990" name="X7B2941D57B361990"></a></p>
+
+<h4>3.4 <span class="Heading">Conventions for the recognition of permutation groups</span></h4>
+
+<p>No conventions so far.</p>
+
+<p><a id="X8676A21280D842DB" name="X8676A21280D842DB"></a></p>
+
+<h4>3.5 <span class="Heading">Conventions for the recognition of matrix groups</span></h4>
+
+<p>We are considering only the case of matrix groups over finite fields.</p>
+
+<p>No conventions so far.</p>
+
+<p><a id="X835738DA86087BB3" name="X835738DA86087BB3"></a></p>
+
+<h4>3.6 <span class="Heading">Conventions for the recognition of projective groups</span></h4>
+
+<p>We are considering only the case of projective groups over finite fields.</p>
+
+<p>No conventions so far.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

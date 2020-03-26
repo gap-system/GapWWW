@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (RepnDecomp) - Chapter 2: Isomorphisms between representations</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X7D9B253E794EF912" name="X7D9B253E794EF912"></a></p>
+<div class="ChapSects"><a href="chap2.html#X7D9B253E794EF912">2 <span class="Heading">Isomorphisms between representations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7AEE81C2809E0B98">2.1 <span class="Heading">Finding explicit isomorphisms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7F0D3CFB7800149A">2.1-1 LinearRepresentationIsomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X841DE7D08491325F">2.1-2 LinearRepresentationIsomorphismSlow</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X85DAC9E583D8EFB9">2.2 <span class="Heading">Testing isomorphisms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X86EB9DD586958473">2.2-1 AreRepsIsomorphic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81080E1B7917B361">2.2-2 IsLinearRepresentationIsomorphism</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Isomorphisms between representations</span></h3>
+
+<p><a id="X7AEE81C2809E0B98" name="X7AEE81C2809E0B98"></a></p>
+
+<h4>2.1 <span class="Heading">Finding explicit isomorphisms</span></h4>
+
+<p><a id="X7F0D3CFB7800149A" name="X7F0D3CFB7800149A"></a></p>
+
+<h5>2.1-1 LinearRepresentationIsomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LinearRepresentationIsomorphism</code>( <var class="Arg">rho</var>, <var class="Arg">tau</var>[, <var class="Arg">rho_cent_basis</var>, <var class="Arg">tau_cent_basis</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A matrix <span class="Math">A</span> or fail</p>
+
+<p>Let <span class="Math">\rho : G \to GL(V)</span> and <span class="Math">\tau : G \to GL(W)</span>. If there exists a linear map <span class="Math">A : V \to W</span> such that for all <span class="Math">g \in G</span>, <span class="Math">\tau(g)A = A\rho(g)</span>, this function returns one such <span class="Math">A</span>. <span class="Math">A</span> is the isomorphism between the representations. If the representations are not isomorphic, then fail is returned.</p>
+
+<p>There are three methods that we can use to compute an isomorphism of linear representations, you can select one by passing options to the function.</p>
+
+
+<ul>
+<li><p><code class="code">use_kronecker</code>: Assumes the matrices are small enough that their Kronecker products can fit into memory. Uses <code class="func">GroupSumBSGS</code> (<a href="chap4.html#X85E8A5FC844DC09A"><span class="RefLink">4.2-1</span></a>) and <code class="code">KroneckerProduct</code> to compute an element of the fixed subspace of <span class="Math">\rho \otimes \tau^*</span>.</p>
+
+</li>
+</ul>
+
+<ul>
+<li><p><code class="code">use_orbit_sum</code>: Finds an isomorphism by summing orbits of the the action of <span class="Math">\rho \otimes \tau^*</span> on matrices. Note that orbits could be very large, so this could be as bad as summing over the whole group.</p>
+
+</li>
+</ul>
+
+<ul>
+<li><p>The default, sums over the whole group to compute the projection onto the fixed subspace.</p>
+
+</li>
+</ul>
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := SymmetricGroup(4);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">irreps := IrreducibleRepresentations(G);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># rho and tau are isomorphic - they just have a different block order</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">rho := DirectSumOfRepresentations([irreps[1], irreps[3], irreps[3]]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := DirectSumOfRepresentations([irreps[3], irreps[1], irreps[3]]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># tau2 is just tau with a basis change - still isomorphic</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">B := RandomInvertibleMat(5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau2 := ComposeHomFunction(tau, x -&gt; B^-1 * x * B);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># using the default implementation</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">M := LinearRepresentationIsomorphism(rho, tau);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLinearRepresentationIsomorphism(M, rho, tau);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LinearRepresentationIsomorphism(tau, tau2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLinearRepresentationIsomorphism(M, tau, tau2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># using the kronecker sum implementation</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">M := LinearRepresentationIsomorphism(tau, tau2 : use_kronecker);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLinearRepresentationIsomorphism(M, tau, tau2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># using the orbit sum implementation</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">M := LinearRepresentationIsomorphism(tau, tau2 : use_orbit_sum);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLinearRepresentationIsomorphism(M, tau, tau2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># two distinct irreps are not isomorphic</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">M := LinearRepresentationIsomorphism(irreps[1], irreps[2]);</span>
+fail
+</pre></div>
+
+<p><a id="X841DE7D08491325F" name="X841DE7D08491325F"></a></p>
+
+<h5>2.1-2 LinearRepresentationIsomorphismSlow</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LinearRepresentationIsomorphismSlow</code>( <var class="Arg">rho</var>, <var class="Arg">tau</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: A matrix <span class="Math">A</span> or fail</p>
+
+<p>Gives the same result as <code class="func">LinearRepresentationIsomorphism</code> (<a href="chap2.html#X7F0D3CFB7800149A"><span class="RefLink">2.1-1</span></a>), but this function uses a simpler method which always involves summing over <span class="Math">G</span>, without using <code class="func">GroupSumBSGS</code> (<a href="chap4.html#X85E8A5FC844DC09A"><span class="RefLink">4.2-1</span></a>). This might be useful in some cases if computing a good BSGS is difficult. However, for all cases that have been tested, it is slow (as the name suggests).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Following on from the previous example</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">M := LinearRepresentationIsomorphismSlow(rho, tau);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsLinearRepresentationIsomorphism(M, rho, tau);</span>
+true
+</pre></div>
+
+<p><a id="X85DAC9E583D8EFB9" name="X85DAC9E583D8EFB9"></a></p>
+
+<h4>2.2 <span class="Heading">Testing isomorphisms</span></h4>
+
+<p><a id="X86EB9DD586958473" name="X86EB9DD586958473"></a></p>
+
+<h5>2.2-1 AreRepsIsomorphic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AreRepsIsomorphic</code>( <var class="Arg">rho</var>, <var class="Arg">tau</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: true if <var class="Arg">rho</var> and <var class="Arg">tau</var> are isomorphic as representations, false otherwise.</p>
+
+<p>Since representations of finite groups over <span class="Math">\mathbb{C}</span> are determined by their characters, it is easy to check whether two representations are isomorphic by checking if they have the same character. We try to use characters wherever possible.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Following on from the previous examples</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># Some isomorphic representations</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">AreRepsIsomorphic(rho, tau);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AreRepsIsomorphic(rho, tau2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># rho isn't iso to irreps[1] since rho is irreps[1] plus some other stuff</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">AreRepsIsomorphic(rho, irreps[1]);</span>
+false
+</pre></div>
+
+<p><a id="X81080E1B7917B361" name="X81080E1B7917B361"></a></p>
+
+<h5>2.2-2 IsLinearRepresentationIsomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLinearRepresentationIsomorphism</code>( <var class="Arg">A</var>, <var class="Arg">rho</var>, <var class="Arg">tau</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: true if <var class="Arg">rho</var> and <var class="Arg">tau</var> are isomorphic as as representations with the isomorphism given by the linear map <var class="Arg">A</var></p>
+
+<p>This function tests if, for all <span class="Math">g \in G</span>, <span class="Math">A \rho(g) = \tau(g) A</span>. That is, true is returned iff <span class="Math">A</span> is the intertwining operator taking <span class="Math">\rho</span> to <span class="Math">\tau</span>. that:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># We have already seen this function used heavily in previous examples.</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"># If two representations are isomorphic, the following is always true:</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">IsLinearRepresentationIsomorphism(LinearRepresentationIsomorphism(rho, tau), rho, tau);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Note: this test is sensitive to ordering:</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">IsLinearRepresentationIsomorphism(LinearRepresentationIsomorphism(rho, tau), tau, rho);</span>
+false
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

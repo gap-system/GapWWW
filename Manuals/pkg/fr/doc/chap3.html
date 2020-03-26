@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (FR) - Chapter 3: Functionally recursive machines</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X7D65CA8B876E514C" name="X7D65CA8B876E514C"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7D65CA8B876E514C">3 <span class="Heading">Functionally recursive machines</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7D52F7ED83E2D153">3.1 <span class="Heading">Types of machines</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7EB36FBB78F4F26A">3.2 <span class="Heading">Products of machines</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X828640667D2E5280">3.3 <span class="Heading">Creators for <code class="code">FRMachine</code>s</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80D310EF7FD5EA44">3.3-1 FRMachineNC</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X808F3BD97EDA8CE8">3.3-2 FRMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C383F4383D22BFC">3.3-3 UnderlyingFRMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BF186227C0ABE8D">3.3-4 AsGroupFRMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78130FC97C58AFC4">3.3-5 AsGroupFRMachine</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8753FA157B2AD6DC">3.4 <span class="Heading">Attributes for <code class="code">FRMachine</code>s</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8000470D7DA7FFBD">3.4-1 StateSet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F77F5DD789FA2F4">3.4-2 GeneratorsOfFRMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DBC41D4808979BC">3.4-3 Output</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AEE87BC8393FA54">3.4-4 Transition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X82B3A8AB80B5E181">3.4-5 Transitions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D95D1498586E5D0">3.4-6 WreathRecursion</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8158A8307CA98A3D">3.5 <span class="Heading">Operations for <code class="code">FRMachine</code>s</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8289C2F77D67EDC3">3.5-1 StructuralGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F2703417F270341"><code>3.5-2 \+</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7857704878577048"><code>3.5-3 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C0677148107F7FE">3.5-4 TensorSumOp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8077C8A47E22FCB5">3.5-5 TensorProductOp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D248C737D29A7CC">3.5-6 DirectSumOp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81456F10820CAC87">3.5-7 DirectProductOp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A0858097AA3FBDA">3.5-8 TreeWreathProduct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X811B5BF17A3FE577">3.5-9 SubFRMachine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X814F53B97C3F43F5">3.5-10 ChangeFRMachineBasis</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81B382BD81B2BD34">3.5-11 Minimized</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C107A42815F91DA">3.5-12 Correspondence</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Functionally recursive machines</span></h3>
+
+<p>At the core of this package are <em>functionally recursive machines</em>. The internals of specific machines will be described later, but each machine <span class="SimpleMath">M</span> has an associated <em>alphabet</em> <span class="SimpleMath">X</span>, a <em>set of states</em> <span class="SimpleMath">Q</span>, and a <em>transition function</em> <span class="SimpleMath">ϕ:Q × X -&gt; X × Q</span>. An <em>element</em>, as we will see in Section <a href="chap4.html#X863D82207A1320F1"><span class="RefLink">4</span></a>, is given by a machine and an initial state <span class="SimpleMath">q∈ Q</span>.</p>
+
+<p>The element <span class="SimpleMath">(M,q)</span> defines a transformation on the set <span class="SimpleMath">X^*</span> of strings (finite or infinite) over the alphabet <span class="SimpleMath">X</span>, as follows: the empty string is always fixed. Given a string <span class="SimpleMath">x_1x_2... x_n</span> with <span class="SimpleMath">nge0</span>, compute <span class="SimpleMath">ϕ(q,x_1)=(y_1,r)</span>; then compute the action of <span class="SimpleMath">(M,r)</span> on the string <span class="SimpleMath">x_2... x_n</span>, and call the result <span class="SimpleMath">y_2... y_n</span>. Then the action of <span class="SimpleMath">(M,q)</span> on <span class="SimpleMath">x_1x_2... x_n</span> yields <span class="SimpleMath">y_1y_2... y_n</span>.</p>
+
+<p>This can be understood more formally as follows. The transition function <span class="SimpleMath">ϕ</span> induces a map <span class="SimpleMath">ϕ^n:Q× X^n -&gt; X^n × Q</span>, defined by successively applying <span class="SimpleMath">ϕ</span> to move the <span class="SimpleMath">Q</span> from the left to the right. Similarly, <span class="SimpleMath">ϕ</span> can be extended to a map <span class="SimpleMath">Q^m× X^n -&gt; X^n × Q^m</span>.</p>
+
+<p>We see that the action on finite strings preserves their length, and also preserves prefixes: if <span class="SimpleMath">(M,q)</span> maps <span class="SimpleMath">x_1... x_n</span> to <span class="SimpleMath">y_1... y_m</span>, then necessarily <span class="SimpleMath">m=n</span>; and if <span class="SimpleMath">k&lt;n</span> then <span class="SimpleMath">T</span> maps <span class="SimpleMath">x_1... x_k</span> to <span class="SimpleMath">y_1... y_k</span>.</p>
+
+<p>The strings over the alphabet <span class="SimpleMath">X</span> can be naturally organised into a rooted tree. The root represents the empty string, and the strings <span class="SimpleMath">x_1... x_n</span> and <span class="SimpleMath">x_1... x_n+1</span> are connected by an edge, for all <span class="SimpleMath">x_i∈ X</span>.</p>
+
+<p><a id="X7D52F7ED83E2D153" name="X7D52F7ED83E2D153"></a></p>
+
+<h4>3.1 <span class="Heading">Types of machines</span></h4>
+
+<p>Machines must be accessible to computation; therefore it is reasonable to assume that their alphabet <span class="SimpleMath">X</span> is finite.</p>
+
+<p>If the stateset <span class="SimpleMath">Q</span> is also finite, the machine is called a <em>Mealy machine</em>, and its transition function <span class="SimpleMath">ϕ</span> can be stored as a table.</p>
+
+<p>More general machines are obtained if one allows the stateset <span class="SimpleMath">Q</span> to be a free group/semigroup/monoid generated by a finite set <span class="SimpleMath">S</span>, and the transition function <span class="SimpleMath">ϕ</span> to be specified on <span class="SimpleMath">S× X</span>. Its values are then extended naturally by composition.</p>
+
+<p>Machines store their transitions (second coordinate of <span class="SimpleMath">ϕ</span>), and their output, (first coordinate of <span class="SimpleMath">ϕ</span>) in a matrix indexed by state and letter. In particular, <code class="code">PermList(output[state])</code> gives the action on the first level.</p>
+
+<p>Because of the way <strong class="pkg">GAP</strong> handles permutations and transformations, a permutation is never equal to a transformation, even though both can answer <code class="keyw">true</code> to <span class="SimpleMath">IsOne</span>. Therefore, <strong class="pkg">FR</strong> stores the output as a list, which can be then accessed (e.g. in commands such as <code class="code">ActivityPerm</code> and <code class="code">ActivityTransformation</code> either as a permutation or as a transformation. The command <code class="code">Activity</code> itself will return a permutation if possible, and otherwise a transformation.</p>
+
+<p><a id="X7EB36FBB78F4F26A" name="X7EB36FBB78F4F26A"></a></p>
+
+<h4>3.2 <span class="Heading">Products of machines</span></h4>
+
+<p>Machines can be combined in different manners. If two machines act on the same alphabet, then their <em>sum</em> and <em>product</em> are defined as machines acting again on the same alphabet; the statesets are the free products (which is also their sum, in the category of semigroups) of the respective statesets. The sum or product of machines has a stateset of highest possible category, i.e. is a group unless some argument is a monoid, and a monoid unless some argument is a semigroup. The transition and output functions are the union of the respective functions of their arguments.</p>
+
+<p>If a non-empty collection of machines have same stateset, then their <em>tensor sum</em> and <em>tensor product</em> are machines again with same stateset; the alphabets on which the machines act are the disjoint union, respectively cartesian product, of the arguments' alphabets. The transition and output functions are again the union or composition of the respective functions of their arguments.</p>
+
+<p>The <em>direct sum</em> and <em>direct product</em> of a collection of machines are always defined. Its stateset is generated by the union of the arguments' statesets, as for a sum or a product; its alphabet is the disjoint union, respectively cartesian product of its arguments' alphabets, as for a tensor sum or product. The transition and output functions are again the union of the respective functions of their arguments.</p>
+
+<p><a id="X828640667D2E5280" name="X828640667D2E5280"></a></p>
+
+<h4>3.3 <span class="Heading">Creators for <code class="code">FRMachine</code>s</span></h4>
+
+<p><a id="X80D310EF7FD5EA44" name="X80D310EF7FD5EA44"></a></p>
+
+<h5>3.3-1 FRMachineNC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRMachineNC</code>( <var class="Arg">fam</var>, <var class="Arg">free</var>, <var class="Arg">transitions</var>, <var class="Arg">outputs</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR machine.</p>
+
+<p>This function constructs a new FR machine, belonging to family <var class="Arg">fam</var>. It has stateset the free group/semigroup/monoid <var class="Arg">free</var>, and transitions described by <var class="Arg">states</var> and <var class="Arg">outputs</var>.</p>
+
+<p><var class="Arg">transitions</var> is a list of lists; <var class="Arg">transitions</var>[<var class="Arg">s</var>][<var class="Arg">x</var>] is a word in <var class="Arg">free</var>, which is the state reached by the machine when started in state <var class="Arg">s</var> and fed input <var class="Arg">x</var>.</p>
+
+<p><var class="Arg">outputs</var> is also a list of lists; <var class="Arg">outputs</var>[<var class="Arg">s</var>][<var class="Arg">x</var>] is the output produced by the machine is in state <var class="Arg">s</var> and inputs <var class="Arg">x</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := FreeGroup(2);</span>
+&lt;free group on the generators [ f1, f2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachineNC(FRMFamily([1,2]),f,[[One(f),f.1],[One(f),f.2^-1]],</span>
+                      [[2,1],[1,2]]);
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1, f2 ] )&gt;
+</pre></div>
+
+<p><a id="X808F3BD97EDA8CE8" name="X808F3BD97EDA8CE8"></a></p>
+
+<h5>3.3-2 FRMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRMachine</code>( [<var class="Arg">names</var>, ]<var class="Arg">transitions</var>, <var class="Arg">outputs</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FRMachine</code>( <var class="Arg">free</var>, <var class="Arg">transitions</var>, <var class="Arg">outputs</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR machine.</p>
+
+<p>This function constructs a new FR machine. It has stateset a free group/semigroup/monoid, and structure described by <var class="Arg">transitions</var> and <var class="Arg">outputs</var>.</p>
+
+<p>If there is an argument <var class="Arg">free</var>, it is the free group/monoid/semigroup to be used as stateset. Otherwise, the stateset will be guessed from the <var class="Arg">transitions</var> and <var class="Arg">outputs</var>; it will be a free group if all states are invertible, and a monoid otherwise. <var class="Arg">names</var> is then an optional list, with at position <var class="Arg">s</var> a string naming generator <var class="Arg">s</var> of the stateset. If <var class="Arg">names</var> contains too few entries, they are completed by the names <var class="Arg">__1,__2,...</var>.</p>
+
+<p><var class="Arg">transitions</var> is a list of lists; <code class="code">transitions[s][x]</code> is either an associative word, or a list of integers describing the state reached by the machine when started in state <var class="Arg">s</var> and fed input <var class="Arg">x</var>. Positive integers indicate a generator index, negative integers its inverse, the empty list in the identity state, and lists of length greater than one indicate a product of states. If an entry is an FR element, then its machine is incorporated into the newly constructed one.</p>
+
+<p><var class="Arg">outputs</var> is a list; at position <var class="Arg">s</var> it contains a permutation, a transformation, or a list of integers (the images of a transformation), describing the activity of state <var class="Arg">s</var>. If all states are invertible, the outputs are all converted to permutations, while if there is a non-invertible state then the outputs are all converted to transformations.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["tau","mu"],[[[],[1]],[[],[-2]]],[(1,2),(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ tau, mu ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m=n;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(n);</span>
+     |     1         2
+-----+--------+---------+
+ tau | &lt;id&gt;,2     tau,1
+  mu | &lt;id&gt;,2   mu^-1,1
+-----+--------+---------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine([[[],[FRElement(n,1)]]],[()]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1, f2, f3 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(m);</span>
+    |     1         2
+----+--------+---------+
+ f1 | &lt;id&gt;,1      f2,2
+ f2 | &lt;id&gt;,2      f2,1
+ f3 | &lt;id&gt;,2   f1^-1,1
+----+--------+---------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := FreeGroup(2);</span>
+&lt;free group on the generators [ f1, f2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p := FRMachine(f,[[One(f),f.1],[One(f),f.2^-1],[(1,2),(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1, f2 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n=p;</span>
+true
+</pre></div>
+
+<p><a id="X7C383F4383D22BFC" name="X7C383F4383D22BFC"></a></p>
+
+<h5>3.3-3 UnderlyingFRMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingFRMachine</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: An FR machine underlying <var class="Arg">obj</var>.</p>
+
+<p>FR elements, FR groups etc. often have an underlying FR machine, which is returned by this command.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ a, b ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := FRElement(m,1); b := FRElement(m,2);</span>
+&lt;2|a&gt;
+&lt;2|b&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">UnderlyingFRMachine(a)=m;</span>
+true
+</pre></div>
+
+<p><a id="X7BF186227C0ABE8D" name="X7BF186227C0ABE8D"></a></p>
+
+<h5>3.3-4 AsGroupFRMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsGroupFRMachine</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsMonoidFRMachine</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsSemigroupFRMachine</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: An FR machine isomorphic to <var class="Arg">m</var>, on a free group/monoid/semigroup.</p>
+
+<p>This function constructs, from the FR machine <var class="Arg">m</var>, an isomorphic FR machine <code class="code">n</code> with a free group/monoid/semigroup as stateset. The attribute <code class="code">Correspondence(n)</code> is a mapping (homomorphism or list) from the stateset of <var class="Arg">m</var> to the stateset of <code class="code">n</code>.</p>
+
+<p><var class="Arg">m</var> can be an arbitrary FR machine, or can be an free group/monoid/semigroup endomorphism. It is then converted to an FR machine on a 1-letter alphabet.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := FreeSemigroup(1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sm := FRMachine(s,[[GeneratorsOfSemigroup(s)[1],</span>
+                         GeneratorsOfSemigroup(s)[1]^2]],[(1,2)]);
+&lt;FR machine with alphabet [ 1, 2 ] on Semigroup( [ s1 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FreeMonoid(1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mm := FRMachine(m,[[One(m),GeneratorsOfMonoid(m)[1]^2]],[(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Monoid( [ m1 ], ... )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g := FreeGroup(1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gm := FRMachine(g,[[One(g),GeneratorsOfGroup(g)[1]^-2]],[(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsGroupFRMachine(sm); Display(last);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1 ] )&gt;
+    |   1        2
+----+------+--------+
+ f1 | f1,2   f1^2,1
+----+------+--------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Correspondence(last);</span>
+MappingByFunction( &lt;free semigroup on the generators
+[ s1 ]&gt;, &lt;free group on the generators [ f1 ]&gt;, function( w ) ... end )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsGroupFRMachine(mm); Display(last);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1 ] )&gt;
+    |     1        2
+----+--------+--------+
+ f1 | &lt;id&gt;,2   f1^2,1
+----+--------+--------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsGroupFRMachine(gm); Display(last);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1 ] )&gt;
+    |     1         2
+----+--------+---------+
+ f1 | &lt;id&gt;,2   f1^-2,1
+----+--------+---------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsMonoidFRMachine(sm); Display(last);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Monoid( [ m1 ], ... )&gt;
+    |   1        2
+----+------+--------+
+ m1 | m1,2   m1^2,1
+  ----+------+--------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsMonoidFRMachine(mm); Display(last);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Monoid( [ m1 ], ... )&gt;
+    |     1        2
+----+--------+--------+
+ m1 | &lt;id&gt;,2   m1^2,1
+----+--------+--------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsMonoidFRMachine(gm); Display(last);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Monoid( [ m1, m2 ], ... )&gt;
+    |     1        2
+----+--------+--------+
+ m1 | &lt;id&gt;,2   m2^2,1
+ m2 | m1^2,2   &lt;id&gt;,1
+----+--------+--------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsSemigroupFRMachine(sm); Display(last);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Semigroup( [ s1 ] )&gt;
+    |   1        2
+----+------+--------+
+ s1 | s1,2   s1^2,1
+----+------+--------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsSemigroupFRMachine(mm); Display(last);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Semigroup( [ s1, s2 ] )&gt;
+    |   1        2
+----+------+--------+
+ s1 | s2,2   s1^2,1
+ s2 | s2,1     s2,2
+----+------+--------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsSemigroupFRMachine(gm); Display(last);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Semigroup( [ s1, s2, s3 ] )&gt;
+    |     1        2
+----+--------+--------+
+ s1 |   s3,2   s2^2,1
+ s2 | s1^2,2     s3,1
+ s3 |   s3,1     s3,2
+----+--------+--------+
+gap&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(GuptaSidkiMachines(3));</span>
+   |  1     2     3
+---+-----+-----+-----+
+ a | a,1   a,2   a,3
+ b | a,2   a,3   a,1
+ c | a,3   a,1   a,2
+ d | b,1   c,2   d,3
+---+-----+-----+-----+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsGroupFRMachine(GuptaSidkiMachines(3));</span>
+&lt;FR machine with alphabet [ 1 .. 3 ] on Group( [ f1, f2 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+    |     1         2        3
+----+--------+---------+--------+
+ f1 | &lt;id&gt;,2    &lt;id&gt;,3   &lt;id&gt;,1
+ f2 |   f1,1   f1^-1,2     f2,3
+----+--------+---------+--------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Correspondence(last);</span>
+[ &lt;identity ...&gt;, f1, f1^-1, f2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsGroupFRMachine(GroupHomomorphism(g,g,[g.1],[g.1^3]));</span>
+&lt;FR machine with alphabet [ 1 ] on Group( [ f1 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+ G  |     1
+----+--------+
+ f1 | f1^3,1
+----+--------+
+</pre></div>
+
+<p><a id="X78130FC97C58AFC4" name="X78130FC97C58AFC4"></a></p>
+
+<h5>3.3-5 AsGroupFRMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsGroupFRMachine</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsMonoidFRMachine</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsSemigroupFRMachine</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: An FR machine.</p>
+
+<p>This function creates an FR machine on a 1-letter alphabet, that represents the endomorphism <var class="Arg">f</var>. It is specially useful when combined with products of machines; indeed the usual product of machines corresponds to composition of endomorphisms.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f := FreeGroup(2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">h := GroupHomomorphismByImages(f,f,[f.1,f.2],[f.2,f.1*f.2]);</span>
+[ f1, f2 ] -&gt; [ f2, f1*f2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := AsGroupFRMachine(h);</span>
+&lt;FR machine with alphabet [ 1 ] on Group( [ f1, f2 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mm := TensorProduct(m,m);</span>
+&lt;FR machine with alphabet [ 1 ] on Group( [ f1, f2 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(mm);</span>
+ G  |         1
+----+------------+
+ f1 |    f1*f2,1
+ f2 | f2*f1*f2,1
+----+------------+
+</pre></div>
+
+<p><a id="X8753FA157B2AD6DC" name="X8753FA157B2AD6DC"></a></p>
+
+<h4>3.4 <span class="Heading">Attributes for <code class="code">FRMachine</code>s</span></h4>
+
+<p><a id="X8000470D7DA7FFBD" name="X8000470D7DA7FFBD"></a></p>
+
+<h5>3.4-1 StateSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StateSet</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: The set of states associated with <var class="Arg">m</var>.</p>
+
+<p>This function returns the stateset of <var class="Arg">m</var>. It can be either a list (if the machine is of Mealy type), or a free group/semigroup/monoid (in all other cases).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["tau","mu"],[[[],[1]],[[],[-2]]],[(1,2),(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ tau, mu ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StateSet(n);</span>
+&lt;free group on the generators [ tau, mu ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StateSet(AsMealyMachine(n));</span>
+[ 1 .. 4 ]
+</pre></div>
+
+<p><a id="X7F77F5DD789FA2F4" name="X7F77F5DD789FA2F4"></a></p>
+
+<h5>3.4-2 GeneratorsOfFRMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneratorsOfFRMachine</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: The generating set of the stateset of <var class="Arg">m</var>.</p>
+
+<p>This function returns the generating set of the stateset of <var class="Arg">m</var>. If <var class="Arg">m</var> is a Mealy machine, it returs the stateset.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["tau","mu"],[[[],[1]],[[],[-2]]],[(1,2),(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ tau, mu ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfFRMachine(n);</span>
+[ tau, mu ]
+</pre></div>
+
+<p><a id="X7DBC41D4808979BC" name="X7DBC41D4808979BC"></a></p>
+
+<h5>3.4-3 Output</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Output</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Output</code>( <var class="Arg">m</var>, <var class="Arg">s</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Output</code>( <var class="Arg">m</var>, <var class="Arg">s</var>, <var class="Arg">x</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A transformation of <var class="Arg">m</var>'s alphabet.</p>
+
+<p>In the first form, this function returns the output of <var class="Arg">m</var>.</p>
+
+<p>In the second form, this function returns the transformation of <var class="Arg">m</var>'s alphabet associated with state <var class="Arg">s</var>. This transformation is returned as a list of images.</p>
+
+<p><var class="Arg">s</var> is also allowed to be a list, in which case it is interpreted as the corresponding product of states.</p>
+
+<p>In the third form, the result is actually the image of <var class="Arg">x</var> under <code class="code">Output(m,s)</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ a, b ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Output(n,[1,2]);</span>
+[2,1]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Output(n,Product(GeneratorsOfFRMachine(n)));</span>
+[2,1]
+</pre></div>
+
+<p><a id="X7AEE87BC8393FA54" name="X7AEE87BC8393FA54"></a></p>
+
+<h5>3.4-4 Transition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Transition</code>( <var class="Arg">m</var>, <var class="Arg">s</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: An element of <var class="Arg">m</var>'s stateset.</p>
+
+<p>This function returns the state reached by <var class="Arg">m</var> when started in state <var class="Arg">s</var> and fed input <var class="Arg">i</var>. This input may be an alphabet letter or a sequence of alphabet letters.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ a, b ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transition(n,[2,1],2);</span>
+a*b
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transition(n,Product(GeneratorsOfFRMachine(n))^2,1);</span>
+a*b
+</pre></div>
+
+<p><a id="X82B3A8AB80B5E181" name="X82B3A8AB80B5E181"></a></p>
+
+<h5>3.4-5 Transitions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Transitions</code>( <var class="Arg">m</var>, <var class="Arg">s</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A list of elements of <var class="Arg">m</var>'s stateset.</p>
+
+<p>This function returns the states reached by <var class="Arg">m</var> when started in state <var class="Arg">s</var> and fed inputs from the alphabet. The state may be expressed as a word or as a list of states.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ a, b ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transitions(n,[2,1]);</span>
+[ &lt;identity ...&gt;, a*b ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Transitions(n,Product(GeneratorsOfFRMachine(n))^2);</span>
+[ a*b, b*a ]
+</pre></div>
+
+<p><a id="X7D95D1498586E5D0" name="X7D95D1498586E5D0"></a></p>
+
+<h5>3.4-6 WreathRecursion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WreathRecursion</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A function on the stateset of <var class="Arg">m</var>.</p>
+
+<p>This function returns a function on <var class="Arg">m</var>'s stateset. This function, on receiving state <var class="Arg">q</var> as input, returns a list. Its first entry is a list indexed by <var class="Arg">m</var>'s alphabet, with in position <var class="Arg">x</var> the state <var class="Arg">m</var> would be in if it received input <var class="Arg">x</var> when in state <var class="Arg">q</var>. The second entry is the list of the permutation of <var class="Arg">m</var>'s alphabet induced by <var class="Arg">q</var>.</p>
+
+<p><var class="Arg">WreathRecursion(machine)(q)[1][a]</var> is equal to <var class="Arg">Transition(machine,q,a)</var> and <var class="Arg">WreathRecursion(machine)(q)[2]</var> is equal to <var class="Arg">Output(machine,q)</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["a","b"],[[[],[2]],[[],[1]]],[(1,2),()]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ a, b ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WreathRecursion(n)(GeneratorsOfFRMachine(n)[1]);</span>
+[ [ &lt;identity ...&gt;, b ], [2,1] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WreathRecursion(n)(GeneratorsOfFRMachine(n)[2]);</span>
+[ [ &lt;identity ...&gt;, a ], [1,2] ]
+</pre></div>
+
+<p><a id="X8158A8307CA98A3D" name="X8158A8307CA98A3D"></a></p>
+
+<h4>3.5 <span class="Heading">Operations for <code class="code">FRMachine</code>s</span></h4>
+
+<p><a id="X8289C2F77D67EDC3" name="X8289C2F77D67EDC3"></a></p>
+
+<h5>3.5-1 StructuralGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StructuralGroup</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StructuralMonoid</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StructuralSemigroup</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A finitely presented group/monoid/semigroup capturing the structure of <var class="Arg">m</var>.</p>
+
+<p>This function returns a finitely presented group/monoid/semigroup, with generators the union of the <code class="func">AlphabetOfFRObject</code> (<a href="chap10.html#X7BC9CD3685C26823"><span class="RefLink">10.1-3</span></a>) and <code class="func">GeneratorsOfFRMachine</code> (<a href="chap3.html#X7F77F5DD789FA2F4"><span class="RefLink">3.4-2</span></a>) of <var class="Arg">m</var>, and relations all <span class="SimpleMath">qa'=aq'</span> whenever <span class="SimpleMath">ϕ(q,a)=(a',q')</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["a","b","c"],[[[2],[3]],[[3],[2]],[[1],[1]]],[(1,2),(1,2),()]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ a, b, c ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StructuralGroup(n);</span>
+&lt;fp group on the generators [ a, b, c, 1, 2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RelatorsOfFpGroup(last);</span>
+[ a*2*b^-1*1^-1, a*1*c^-1*2^-1, b*2*c^-1*1^-1,
+  b*1*b^-1*2^-1, c*1*a^-1*1^-1, c*2*a^-1*2^-1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimplifiedFpGroup(last2);</span>
+&lt;fp group on the generators [ a, 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RelatorsOfFpGroup(last);</span>
+[ 1^-1*a^2*1^4*a^-2*1^-1*a*1^-2*a^-1, 1*a*1^-1*a*1^2*a^-1*1*a^-2*1^-3*a,
+  1^-1*a^2*1^2*a^-1*1^-1*a*1^2*a^-2*1^-2 ]
+</pre></div>
+
+<p><a id="X7F2703417F270341" name="X7F2703417F270341"></a></p>
+
+<h5><code>3.5-2 \+</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \+</code>( <var class="Arg">m1</var>, <var class="Arg">m2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR machine, in the same family as its arguments.</p>
+
+<p>This function returns a new FR machine <code class="code">r</code>, with stateset generated by the union of the statesets of its arguments. The arguments <var class="Arg">m1</var> and <var class="Arg">m2</var> must operate on the same alphabet. If the stateset of <var class="Arg">m1</var> is free on <span class="SimpleMath">n_1</span> letters and the stateset of <var class="Arg">m2</var> is free on <span class="SimpleMath">n_2</span> letters, then the stateset of their sum is free on <span class="SimpleMath">n_1+n_2</span> letters, with the first <span class="SimpleMath">n_1</span> identified with <var class="Arg">m1</var>'s states and the next <span class="SimpleMath">n_2</span> with <var class="Arg">m2</var>'s.</p>
+
+<p>The transition and output functions are naturally extended to the sum.</p>
+
+<p>The arguments may be free group, semigroup or monoid machines. The sum is in the weakest containing category: it is a group machine if both arguments are group machines; a monoid if both are either group of monoid machines; and a semigroup machine otherwise.</p>
+
+<p>The maps from the stateset of <var class="Arg">m1</var> and <var class="Arg">m2</var> to the stateset of <code class="code">r</code> can be recovered as <code class="code">Correspondence(r)[1]</code> and <code class="code">Correspondence(r)[2]</code>; see <code class="func">Correspondence</code> (<a href="chap3.html#X7C107A42815F91DA"><span class="RefLink">3.5-12</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tau := FRMachine([[[],[1]]],[(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mu := FRMachine([[[],[-1]]],[(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sum := tau+mu;; Display(sum);</span>
+     |     1          2
+-----+--------+----------+
+ f11 | &lt;id&gt;,2      f11,1
+ f12 | &lt;id&gt;,2   f12^-1,1
+-----+--------+----------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Correspondence(sum)[1];</span>
+[ f1 ] -&gt; [ f11 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfFRMachine(tau)[1]^last;</span>
+f11
+</pre></div>
+
+<p><a id="X7857704878577048" name="X7857704878577048"></a></p>
+
+<h5><code>3.5-3 \*</code></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">machine1</var>, <var class="Arg">machine2</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR machine, in the same family as its arguments.</p>
+
+<p>The product of two FR machines coincides with their sum, since the natural free object mapping to the product of the statesets is generated by the union of the statesets. See therefore <code class="func">\+</code> (<a href="chap3.html#X7F2703417F270341"><span class="RefLink">3.5-2</span></a>).</p>
+
+<p><a id="X7C0677148107F7FE" name="X7C0677148107F7FE"></a></p>
+
+<h5>3.5-4 TensorSumOp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TensorSumOp</code>( <var class="Arg">FR_machines</var>, <var class="Arg">machine</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR machine on the disjoint union of the arguments' alphabets.</p>
+
+<p>The tensor sum of FR machines with same stateset is defined as the FR machine acting on the disjoint union of the alphabets; if these alphabets are <code class="code">[1..n1]</code> up to <code class="code">[1..nk]</code>, then the alphabet of their sum is <code class="code">[1..n1+...+nk]</code> and the transition functions are similarly concatenated.</p>
+
+<p>The first argument is a list; the second argument is any element of that list, and is used only to improve the method selection algorithm.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := TensorSum(AddingMachine(2),AddingMachine(3),AddingMachine(4));</span>
+AddingMachine(2)(+)AddingMachine(3)(+)AddingMachine(4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(m);</span>
+   |  1     2     3     4     5     6     7     8     9
+---+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+ a | a,1   a,2   a,3   a,4   a,5   a,6   a,7   a,8   a,9
+ b | a,2   b,1   a,4   a,5   b,3   a,7   a,8   a,9   b,6
+---+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+</pre></div>
+
+<p><a id="X8077C8A47E22FCB5" name="X8077C8A47E22FCB5"></a></p>
+
+<h5>3.5-5 TensorProductOp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TensorProductOp</code>( <var class="Arg">FR</var>, <var class="Arg">machines</var>, <var class="Arg">machine</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR machine on the cartesian product of the arguments' alphabets.</p>
+
+<p>The tensor product of FR machines with same stateset is defined as the FR machine acting on the cartesian product of the alphabets. The transition function and output function behave as if a single letter, in the tensor product's alphabet, were a word (read from left to right) in the machines' alphabets.</p>
+
+<p>The first argument is a list; the second argument is any element of that list, and is used only to improve the method selection algorithm.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := TensorProduct(AddingMachine(2),AddingMachine(3));</span>
+AddingMachine(2)(*)AddingMachine(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+   |  1     2     3     4     5     6
+---+-----+-----+-----+-----+-----+-----+
+ a | a,1   a,2   a,3   a,4   a,5   a,6
+ b | a,4   a,5   a,6   a,2   a,3   b,1
+---+-----+-----+-----+-----+-----+-----+
+</pre></div>
+
+<p><a id="X7D248C737D29A7CC" name="X7D248C737D29A7CC"></a></p>
+
+<h5>3.5-6 DirectSumOp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DirectSumOp</code>( <var class="Arg">FR</var>, <var class="Arg">machines</var>, <var class="Arg">machine</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR machine on the disjoint union of the arguments' alphabets.</p>
+
+<p>The direct sum of FR machines is defined as the FR machine with stateset generated by the disjoint union of the statesets, acting on the disjoint union of the alphabets; if these alphabets are <code class="code">[1..n1]</code> up to <code class="code">[1..nk]</code>, then the alphabet of their sum is <code class="code">[1..n1+...+nk]</code> and the output and transition functions are similarly concatenated.</p>
+
+<p>The first argument is a list; the second argument is any element of that list, and is used only to improve the method selection algorithm.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := DirectSum(AddingMachine(2),AddingMachine(3),AddingMachine(4));</span>
+AddingMachine(2)#AddingMachine(3)#AddingMachine(4)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(m);</span>
+   |  1     2     3     4     5     6     7     8     9
+---+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+ a | a,1   a,2   a,3   a,4   a,5   a,6   a,7   a,8   a,9
+ b | a,2   b,1   b,3   b,4   b,5   b,6   b,7   b,8   b,9
+ c | c,1   c,2   a,3   a,4   a,5   c,6   c,7   c,8   c,9
+ d | d,1   d,2   a,4   a,5   b,3   d,6   d,7   d,8   d,9
+ e | e,1   e,2   e,3   e,4   e,5   a,6   a,7   a,8   a,9
+ f | f,1   f,2   f,3   f,4   f,5   a,7   a,8   a,9   b,6
+---+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+</pre></div>
+
+<p><a id="X81456F10820CAC87" name="X81456F10820CAC87"></a></p>
+
+<h5>3.5-7 DirectProductOp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DirectProductOp</code>( <var class="Arg">FR</var>, <var class="Arg">machines</var>, <var class="Arg">machine</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR machine on the cartesian product of the arguments' alphabets.</p>
+
+<p>The direct product of FR machines is defined as the FR machine with stateset generated by the product of the statesets, acting on the product of the alphabets; if these alphabets are <code class="code">[1..n1]</code> up to <code class="code">[1..nk]</code>, then the alphabet of their product is <code class="code">[1..n1*...*nk]</code> and the output and transition functions act component-wise.</p>
+
+<p>The first argument is a list; the second argument is any element of that list, and is used only to improve the method selection algorithm.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := DirectProduct(AddingMachine(2),AddingMachine(3));</span>
+AddingMachine(2)xAddingMachine(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+   |  1     2     3     4     5     6
+---+-----+-----+-----+-----+-----+-----+
+ a | a,1   a,2   a,3   a,4   a,5   a,6
+ b | a,2   a,3   b,1   a,5   a,6   b,4
+ c | a,4   a,5   a,6   c,1   c,2   c,3
+ d | a,5   a,6   b,4   c,2   c,3   d,1
+---+-----+-----+-----+-----+-----+-----+
+</pre></div>
+
+<p><a id="X7A0858097AA3FBDA" name="X7A0858097AA3FBDA"></a></p>
+
+<h5>3.5-8 TreeWreathProduct</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TreeWreathProduct</code>( <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">x0</var>, <var class="Arg">y0</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: A new FR machine on the cartesian product of the arguments' alphabets.</p>
+
+<p>The <em>tree-wreath product</em> of two FR machines is a machine acting on the product of its arguments' alphabets <span class="SimpleMath">X,Y</span>, in such a way that many images of the first machine's states under conjugation by the second commute.</p>
+
+<p>It is introduced (in lesser generality, and with small variations) in <a href="chapBib.html#biBMR2197828">[Sid05]</a>, and may be described as follows: one takes two copies of the stateset of <var class="Arg">m</var>, one copy of the stateset of <var class="Arg">n</var>, and, if necessary, an extra identity state.</p>
+
+<p>The first copy of <var class="Arg">m</var> fixes the alphabet <span class="SimpleMath">X× Y</span>; its state <span class="SimpleMath">tilde s</span> has transitions to the identity except <span class="SimpleMath">tilde s</span> at <span class="SimpleMath">(x0,y0)</span> and <span class="SimpleMath">s</span> at <span class="SimpleMath">(*,y0)</span> for any other <span class="SimpleMath">*</span>. The second copy of <var class="Arg">m</var> is also trivial except that, on input <span class="SimpleMath">(x,y0)</span>, its state <span class="SimpleMath">s</span> goes to state <span class="SimpleMath">s'</span> with output <span class="SimpleMath">(x',y0)</span> whenever <span class="SimpleMath">s</span> originally went, on input <span class="SimpleMath">x</span>, to state <span class="SimpleMath">s'</span> with output <span class="SimpleMath">x'</span>. This copy of <var class="Arg">m</var> therefore acts only in the <span class="SimpleMath">X</span> direction, on the subtree <span class="SimpleMath">(X×{y0})^∞</span>, on subtrees below vertices of the form <span class="SimpleMath">(x0,y0)^t(x,y0)</span>.</p>
+
+<p>A state <span class="SimpleMath">t</span> in the copy of <var class="Arg">n</var> maps the input <span class="SimpleMath">(x,y)</span> to <span class="SimpleMath">(x,y')</span> and proceeds to state <span class="SimpleMath">t'</span> if <span class="SimpleMath">y=y0</span>, and to the identity state otherwise, when on input <span class="SimpleMath">y</span> the original machine mapped state <span class="SimpleMath">t</span> to output <span class="SimpleMath">t'</span> and output <span class="SimpleMath">y'</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := TreeWreathProduct(AddingMachine(2),AddingMachine(3),1,1);</span>
+AddingMachine(2)~AddingMachine(3)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+   |  1     2     3     4     5     6
+---+-----+-----+-----+-----+-----+-----+
+ a | c,2   c,3   a,1   c,5   c,6   c,4
+ b | c,4   c,2   c,3   b,1   c,5   c,6
+ c | c,1   c,2   c,3   c,4   c,5   c,6
+ d | d,1   c,2   c,3   b,4   c,5   c,6
+---+-----+-----+-----+-----+-----+-----+
+</pre></div>
+
+<p><a id="X811B5BF17A3FE577" name="X811B5BF17A3FE577"></a></p>
+
+<h5>3.5-9 SubFRMachine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubFRMachine</code>( <var class="Arg">machine1</var>, <var class="Arg">machine2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubFRMachine</code>( <var class="Arg">machine1</var>, <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: Either <code class="keyw">fail</code> or an embedding of the states of <var class="Arg">machine2</var> in the states of <var class="Arg">machine1</var>.</p>
+
+<p>In its first form, this function attempts to locate a copy of <var class="Arg">machine2</var> in <var class="Arg">machine1</var>. If is succeeds, it returns a homomorphism from the stateset of <var class="Arg">machine2</var> into the stateset of <var class="Arg">machine1</var>; otherwise it returns <code class="keyw">fail</code>.</p>
+
+<p>In its second form, this function attempts to construct a machine with stateset the source of <var class="Arg">f</var>, that could be identified as a submachine of <var class="Arg">machine1</var> via <var class="Arg">f</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["tau","mu"],[[[],[1]],[[],[-2]]],[(1,2),(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ tau, mu ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tauinv := FRMachine([[[1],[]]],[(1,2)]);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SubFRMachine(n,tauinv);</span>
+[ f1 ] -&gt; [ tau^-1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SubFRMachine(n,last);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ f1 ] )&gt;
+</pre></div>
+
+<p><a id="X814F53B97C3F43F5" name="X814F53B97C3F43F5"></a></p>
+
+<h5>3.5-10 ChangeFRMachineBasis</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChangeFRMachineBasis</code>( <var class="Arg">m</var>[, <var class="Arg">l</var>][, <var class="Arg">p</var>] )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: An equivalent FR machine, in a new basis.</p>
+
+<p>This function constructs a new group FR machine, given a group FR machine <var class="Arg">m</var> and, optionally, a list of states <var class="Arg">l</var> (as elements of the free object <code class="code">StateSet(m)</code>) and a permutation <var class="Arg">p</var>, which defaults to the identity permutation.</p>
+
+<p>The new machine has the following transitions: if alphabet letter <code class="code">a</code> is mapped to <code class="code">b</code> by state <code class="code">s</code> in <var class="Arg">m</var>, leading to state <code class="code">t</code>, then, in the new machine, the input letter <code class="code">a^p</code> is mapped to <code class="code">b^p</code> by state <code class="code">s</code>, leading to state <code class="code">l[a]^-1*t*l[b]</code>.</p>
+
+<p>The group generated by the new machine is isomorphic to the group generated by <var class="Arg">m</var>. This command amounts to a change of basis of the associated bimodule (see <a href="chapBib.html#biBMR2162164">[Nek05, Section 2.2]</a>). It amounts to conjugation by the automorphism <code class="code">c=FRElement("c",[l[1]*c,...,l[n]*c],[()],1)</code>.</p>
+
+<p>If the second argument is absent, this command attempts to choose a list that makes many entries of the recursion trivial.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["tau","mu"],[[[],[1]],[[],[-2]]],[(1,2),(1,2)]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(n);</span>
+ G   |     1         2
+-----+--------+---------+
+ tau | &lt;id&gt;,2     tau,1
+  mu | &lt;id&gt;,2   mu^-1,1
+-----+--------+---------+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nt := ChangeFRMachineBasis(n,GeneratorsOfFRMachine(n){[1,1]});;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(nt);</span>
+ G   |     1                    2
+-----+--------+--------------------+
+ tau | &lt;id&gt;,2                tau,1
+  mu | &lt;id&gt;,2   tau^-1*mu^-1*tau,1
+-----+--------+--------------------+
+</pre></div>
+
+<p><a id="X81B382BD81B2BD34" name="X81B382BD81B2BD34"></a></p>
+
+<h5>3.5-11 Minimized</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Minimized</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: A minimized machine equivalent to <var class="Arg">m</var>.</p>
+
+<p>This function attempts to construct a machine equivalent to <var class="Arg">m</var>, but with a stateset of smaller rank. Identical generators are collapsed to a single generator of the stateset; if <var class="Arg">m</var> is a group or monoid machine then trivial generators are removed; if <var class="Arg">m</var> is a group machine then mutually inverse generators are grouped. This function sets as <code class="code">Correspondence(result)</code> a mapping between the stateset of <var class="Arg">m</var> and the stateset of the result; see <code class="func">Correspondence</code> (<a href="chap3.html#X7C107A42815F91DA"><span class="RefLink">3.5-12</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := FRMachine(["tau","mu"],[[[],[1]],[[],[-2]]],[(1,2),(1,2)]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := FRMachine(["tauinv"],[[[1],[]]],[(1,2)]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">sum := n+m+n;</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ tau1, mu1, tauinv1, tau2, mu2 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">min := Minimized(sum);</span>
+&lt;FR machine with alphabet [ 1, 2 ] on Group( [ tau1, mu1 ] )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Correspondence(min);</span>
+[ tau1, mu1, tauinv1, tau2, mu2 ] -&gt; [ tau1, mu1, tau1^-1, tau1, mu1 ]
+</pre></div>
+
+<p><a id="X7C107A42815F91DA" name="X7C107A42815F91DA"></a></p>
+
+<h5>3.5-12 Correspondence</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Correspondence</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns: A mapping between statesets of FR machines.</p>
+
+<p>If a machine <var class="Arg">m</var> was created as a minimized group/monoid/semigroup machine, then <code class="code">Correspondence(m)</code> is a mapping between the stateset of the original machine and the stateset of <var class="Arg">m</var>. See <code class="func">Minimized</code> (<a href="chap3.html#X81B382BD81B2BD34"><span class="RefLink">3.5-11</span></a>) for an example.</p>
+
+<p>If <var class="Arg">m</var> was created as a minimized Mealy machine, then <code class="code">Correspondence(m)</code> is a list identifying, for each state of the original machine, a state of the new machine. If the original state is inaccessible, the corresponding list entry is unbound. See <code class="func">Minimized</code> (<a href="chap5.html#X8395542D846FA2B9"><span class="RefLink">5.2-2</span></a>) for an example.</p>
+
+<p>If <var class="Arg">m</var> was created using <code class="func">AsGroupFRMachine</code> (<a href="chap3.html#X7BF186227C0ABE8D"><span class="RefLink">3.3-4</span></a>), <code class="func">AsMonoidFRMachine</code> (<a href="chap3.html#X7BF186227C0ABE8D"><span class="RefLink">3.3-4</span></a>), <code class="func">AsSemigroupFRMachine</code> (<a href="chap3.html#X7BF186227C0ABE8D"><span class="RefLink">3.3-4</span></a>), or <code class="func">AsMealyMachine</code> (<a href="chap5.html#X79EFE2C97D2CCEEC"><span class="RefLink">5.2-18</span></a>), then <code class="code">Correspondence(m)</code> is a list or a homomorphism identifying for each generator of the original machine a generator, or word in the generators, of the new machine. It is a list if either the original or the final machine is a Mealy machine, and a homomorphism in other cases.</p>
+
+<p>If <var class="Arg">m</var> was created as a sum of two machines, then <var class="Arg">m</var> has a mapping <code class="code">Correspondence(m)[i]</code> between the stateset of machine <code class="code">i=1,2</code> and its own stateset. See <code class="func">\+</code> (<a href="chap3.html#X7F2703417F270341"><span class="RefLink">3.5-2</span></a>) for an example.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ResClasses) - Chapter 1: Set-Theoretic Unions of Residue Classes</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap1_mj.html">[MathJax on]</a></p>
+<p><a id="X815A3DDE7C0BC44A" name="X815A3DDE7C0BC44A"></a></p>
+<div class="ChapSects"><a href="chap1.html#X815A3DDE7C0BC44A">1 <span class="Heading">Set-Theoretic Unions of Residue Classes</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7E16A64485A7AB79">1.1 <span class="Heading">Entering residue classes and set-theoretic unions thereof</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X8753CC098447BE0D">1.1-1 ResidueClass</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X85327C777F32DA8F">1.1-2 ResidueClassUnion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X8326D6F285081E0F">1.1-3 AllResidueClassesModulo</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7A3FA13187CEADED">1.2 <span class="Heading">Methods for residue class unions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X854315A2877B69A7">1.2-1 SplittedClass</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X87C166FE7FA17325">1.2-2 AsUnionOfFewClasses</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X8079E174813646DA">1.2-3 PartitionsIntoResidueClasses</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X8653860F7ADA4D38">1.2-4 RandomPartitionIntoResidueClasses</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7BAF36BF7A276D46">1.2-5 CoverByResidueClasses</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X791C16E77BE97FE3">1.2-6 Density</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7921D4368632E15C">1.3 <span class="Heading">On residue class unions of <span class="SimpleMath">ℤ^2</span></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7B26BB1C7C8495A5">1.4 <span class="Heading">The categories and families of residue class unions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7EA29BBD82552352">1.4-1 IsResidueClassUnion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7F9BCB1A797F8F48">1.4-2 ResidueClassUnionsFamily</a></span>
+</div></div>
+</div>
+
+<h3>1 <span class="Heading">Set-Theoretic Unions of Residue Classes</span></h3>
+
+<p><a id="X7E16A64485A7AB79" name="X7E16A64485A7AB79"></a></p>
+
+<h4>1.1 <span class="Heading">Entering residue classes and set-theoretic unions thereof</span></h4>
+
+<p><a id="X8753CC098447BE0D" name="X8753CC098447BE0D"></a></p>
+
+<h5>1.1-1 ResidueClass</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResidueClass</code>( <var class="Arg">R</var>, <var class="Arg">m</var>, <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResidueClass</code>( <var class="Arg">m</var>, <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResidueClass</code>( <var class="Arg">r</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: in the three-argument form the residue class <var class="Arg">r</var> mod <var class="Arg">m</var> of the ring <var class="Arg">R</var>, and in the two-argument form the residue class <var class="Arg">r</var> mod <var class="Arg">m</var> of the "default ring" (<span class="SimpleMath">→</span> <code class="code">DefaultRing</code> in the <strong class="pkg">GAP</strong> Reference Manual) of the arguments.</p>
+
+<p>In the two-argument case, <var class="Arg">m</var> is taken to be the larger and <var class="Arg">r</var> is taken to be the smaller of the arguments. For convenience, it is permitted to enclose the argument list in list brackets.</p>
+
+<p>Residue classes have the property <code class="code">IsResidueClass</code>. Rings are regarded as residue class 0 (mod 1), and therefore have this property. There are operations <code class="code">Modulus</code> and <code class="code">Residue</code> to retrieve the modulus <var class="Arg">m</var> resp. residue <var class="Arg">r</var> of a residue class.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClass(2,3);</span>
+The residue class 2(3) of Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClass(Z_pi([2,5]),2,1);</span>
+The residue class 1(2) of Z_( 2, 5 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := PolynomialRing(GF(2),1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Indeterminate(GF(2),1);; SetName(x,"x");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClass(R,x+One(R),Zero(R));</span>
+The residue class 0 ( mod x+1 ) of GF(2)[x]
+
+</pre></div>
+
+<p><a id="X85327C777F32DA8F" name="X85327C777F32DA8F"></a></p>
+
+<h5>1.1-2 ResidueClassUnion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResidueClassUnion</code>( <var class="Arg">R</var>, <var class="Arg">m</var>, <var class="Arg">r</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResidueClassUnion</code>( <var class="Arg">R</var>, <var class="Arg">m</var>, <var class="Arg">r</var>, <var class="Arg">included</var>, <var class="Arg">excluded</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResidueClassUnion</code>( <var class="Arg">R</var>, <var class="Arg">cls</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResidueClassUnion</code>( <var class="Arg">R</var>, <var class="Arg">cls</var>, <var class="Arg">included</var>, <var class="Arg">excluded</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: in the first two cases, the union of the residue classes <var class="Arg">r</var>[<span class="SimpleMath">i</span>] mod <var class="Arg">m</var> of the ring <var class="Arg">R</var>, plus / minus finite sets <var class="Arg">included</var> and <var class="Arg">excluded</var> of elements of <var class="Arg">R</var>. In the last two cases, the union of the residue classes <var class="Arg">cls</var>[<span class="SimpleMath">i</span>][1] mod <var class="Arg">cls</var>[<span class="SimpleMath">i</span>][2] of the ring <var class="Arg">R</var>=ℤ, plus / minus finite sets <var class="Arg">included</var> and <var class="Arg">excluded</var> of integers.</p>
+
+<p>For unions of residue classes of the integers, two distinct representations are implemented: in the first representation, a union of residue classes is represented by its modulus <var class="Arg">m</var> and the list of residues <var class="Arg">r</var>; this is called the "standard" representation. In the second ("sparse") representation, a union of residue classes <span class="SimpleMath">r_1(m_1) ∪ dots ∪ r_k(m_k)</span> is represented by the list <var class="Arg">cls</var> of the pairs <code class="code">[r_i,m_i]</code>. One can switch between the two representations by using the operations <code class="code">StandardRep</code> and <code class="code">SparseRep</code>, respectively. The sparse representation allows more efficient computation in terms of time- and memory requirements when computing with unions of "relatively few" residue classes where the lcm of the moduli is "large"; otherwise the standard representation is advantageous. For rings other than ℤ, presently only the standard representation is available.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClassUnion(Integers,5,[1,2],[3,8],[-4,1]);</span>
+(Union of the residue classes 1(5) and 2(5) of Z) U [ 3, 8 ] \ [ -4, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClassUnion(Integers,[[1,2],[0,40],[2,1200]]);</span>
+Union of the residue classes 1(2), 0(40) and 2(1200) of Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClassUnion(Z_pi([2,3]),8,[3,5]);</span>
+Union of the residue classes 3(8) and 5(8) of Z_( 2, 3 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClassUnion(R,x^2,[One(R),x],[],[One(R)]);</span>
+&lt;union of 2 residue classes (mod x^2) of GF(2)[x]&gt; \ [ 1 ]
+
+</pre></div>
+
+<p>When talking about a <em>residue class union</em> in this chapter, we always mean an object as it is returned by this function.</p>
+
+<p>There are operations <code class="code">Modulus</code>, <code class="code">Residues</code>, <code class="code">IncludedElements</code> and <code class="code">ExcludedElements</code> to retrieve the components of a residue class union as they have originally been passed as arguments to <code class="func">ResidueClassUnion</code>.</p>
+
+<p>The user has the choice between a longer and more descriptive and a shorter and less bulky output format for residue classes and unions thereof:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClassUnionViewingFormat("short");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClassUnion(Integers,12,[0,1,4,7,8]);</span>
+0(4) U 1(6)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClassUnionViewingFormat("long");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClassUnion(Integers,12,[0,1,4,7,8]);</span>
+Union of the residue classes 0(4) and 1(6) of Z
+
+</pre></div>
+
+<p><a id="X8326D6F285081E0F" name="X8326D6F285081E0F"></a></p>
+
+<h5>1.1-3 AllResidueClassesModulo</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllResidueClassesModulo</code>( <var class="Arg">R</var>, <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AllResidueClassesModulo</code>( <var class="Arg">m</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a sorted list of all residue classes (mod <var class="Arg">m</var>) of the ring <var class="Arg">R</var>.</p>
+
+<p>If the argument <var class="Arg">R</var> is omitted it defaults to the default ring of <var class="Arg">m</var> -- cf. the documentation of <code class="code">DefaultRing</code> in the <strong class="pkg">GAP</strong> reference manual. A transversal for the residue classes (mod <var class="Arg">m</var>) can be obtained by the operation <code class="code">AllResidues(<var class="Arg">R</var>,<var class="Arg">m</var>)</code>, and their number can be determined by the operation <code class="code">NumberOfResidues(<var class="Arg">R</var>,<var class="Arg">m</var>)</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllResidueClassesModulo(Integers,2);</span>
+[ The residue class 0(2) of Z, The residue class 1(2) of Z ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllResidueClassesModulo(Z_pi(2),2);</span>
+[ The residue class 0(2) of Z_( 2 ), The residue class 1(2) of Z_( 2 ) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllResidueClassesModulo(R,x);</span>
+[ The residue class 0 ( mod x ) of GF(2)[x], 
+  The residue class 1 ( mod x ) of GF(2)[x] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllResidues(R,x^3);</span>
+[ 0, 1, x, x+1, x^2, x^2+1, x^2+x, x^2+x+1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberOfResidues(Z_pi([2,3]),360);</span>
+72
+
+</pre></div>
+
+<p><a id="X7A3FA13187CEADED" name="X7A3FA13187CEADED"></a></p>
+
+<h4>1.2 <span class="Heading">Methods for residue class unions</span></h4>
+
+<p>There are methods for <code class="code">Print</code>, <code class="code">String</code> and <code class="code">Display</code> which are applicable to residue class unions. There is a method for <code class="code">in</code> which tests whether some ring element lies in a given residue class union.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(ResidueClass(1,2),"\n");</span>
+ResidueClassUnion( Integers, 2, [ 1 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1 in ResidueClass(1,2);</span>
+true
+
+</pre></div>
+
+<p>There are methods for <code class="code">Union</code>, <code class="code">Intersection</code>, <code class="code">Difference</code> and <code class="code">IsSubset</code> available for residue class unions. They also accept finite subsets of the base ring as arguments.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := Union(ResidueClass(0,2),ResidueClass(0,3));</span>
+Z \ Union of the residue classes 1(6) and 5(6) of Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Intersection(S,ResidueClass(0,7));</span>
+Union of the residue classes 0(14) and 21(42) of Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Difference(S,ResidueClass(2,4));</span>
+Union of the residue classes 0(4) and 3(6) of Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubset(ResidueClass(0,2),ResidueClass(4,8));</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Union(S,[1..10]);</span>
+(Union of the residue classes 0(2) and 3(6) of Z) U [ 1, 5, 7 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Intersection(S,[1..6]);</span>
+[ 2, 3, 4, 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Difference(S,[1..6]);</span>
+(Union of the residue classes 0(2) and 3(6) of Z) \ [ 2, 3, 4, 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Difference(Integers,[1..10]);</span>
+Z \ &lt;set of cardinality 10&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSubset(S,[1..10]);</span>
+false
+
+</pre></div>
+
+<p>If the underlying ring has a residue class ring of a given cardinality <span class="SimpleMath">t</span>, then a residue class can be written as a disjoint union of <span class="SimpleMath">t</span> residue classes with equal moduli:</p>
+
+<p><a id="X854315A2877B69A7" name="X854315A2877B69A7"></a></p>
+
+<h5>1.2-1 SplittedClass</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SplittedClass</code>( <var class="Arg">cl</var>, <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a partition of the residue class <var class="Arg">cl</var> into <var class="Arg">t</var> residue classes with equal moduli, provided that such a partition exists. Otherwise <code class="code">fail</code>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SplittedClass(ResidueClass(1,2),2);</span>
+[ The residue class 1(4) of Z, The residue class 3(4) of Z ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SplittedClass(ResidueClass(Z_pi(3),3,0),2);</span>
+fail
+
+</pre></div>
+
+<p>Often one needs a partition of a given residue class union into "few" residue classes. The following operation takes care of this:</p>
+
+<p><a id="X87C166FE7FA17325" name="X87C166FE7FA17325"></a></p>
+
+<h5>1.2-2 AsUnionOfFewClasses</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsUnionOfFewClasses</code>( <var class="Arg">U</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a set of disjoint residue classes whose union is equal to <var class="Arg">U</var>, up to the finite sets <code class="code">IncludedElements(<var class="Arg">U</var>)</code> and <code class="code">ExcludedElements(<var class="Arg">U</var>)</code>.</p>
+
+<p>As the name of the operation suggests, it is taken care that the number of residue classes in the returned list is kept "reasonably small". It is not guaranteed that it is minimal.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClassUnionViewingFormat("short");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsUnionOfFewClasses(Difference(Integers,ResidueClass(0,30)));</span>
+[ 1(2), 2(6), 4(6), 6(30), 12(30), 18(30), 24(30) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Union(last);</span>
+Z \ 0(30)
+
+</pre></div>
+
+<p>One can compute the sets of sums, differences, products and quotients of the elements of a residue class union and an element of the base ring:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClass(0,2) + 1;</span>
+1(2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClass(0,2) - 2 = ResidueClass(0,2);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">3 * ResidueClass(0,2);</span>
+0(6)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ResidueClass(0,2)/2;</span>
+Integers
+
+</pre></div>
+
+<p><a id="X8079E174813646DA" name="X8079E174813646DA"></a></p>
+
+<h5>1.2-3 PartitionsIntoResidueClasses</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PartitionsIntoResidueClasses</code>( <var class="Arg">R</var>, <var class="Arg">length</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PartitionsIntoResidueClasses</code>( <var class="Arg">R</var>, <var class="Arg">length</var>, <var class="Arg">primes</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: in the 2-argument version a sorted list of all partitions of the ring <var class="Arg">R</var> into <var class="Arg">length</var> residue classes. In the 3-argument version a sorted list of all partitions of the ring <var class="Arg">R</var> into <var class="Arg">length</var> residue classes whose moduli have only prime factors in the list <var class="Arg">primes</var>.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PartitionsIntoResidueClasses(Integers,4);</span>
+[ [ 0(2), 1(4), 3(8), 7(8) ], [ 0(2), 3(4), 1(8), 5(8) ], 
+  [ 0(2), 1(6), 3(6), 5(6) ], [ 1(2), 0(4), 2(8), 6(8) ], 
+  [ 1(2), 2(4), 0(8), 4(8) ], [ 1(2), 0(6), 2(6), 4(6) ], 
+  [ 0(3), 1(3), 2(6), 5(6) ], [ 0(3), 2(3), 1(6), 4(6) ], 
+  [ 1(3), 2(3), 0(6), 3(6) ], [ 0(4), 1(4), 2(4), 3(4) ] ]
+
+</pre></div>
+
+<p><a id="X8653860F7ADA4D38" name="X8653860F7ADA4D38"></a></p>
+
+<h5>1.2-4 RandomPartitionIntoResidueClasses</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomPartitionIntoResidueClasses</code>( <var class="Arg">R</var>, <var class="Arg">length</var>, <var class="Arg">primes</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: a "random" partition of the ring <var class="Arg">R</var> into <var class="Arg">length</var> residue classes whose moduli have only prime factors in <var class="Arg">primes</var>, respectively <code class="code">fail</code> if no such partition exists.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RandomPartitionIntoResidueClasses(Integers,30,[2,3,5,7]);</span>
+[ 0(7), 2(7), 5(7), 3(14), 10(14), 1(21), 8(21), 15(21), 18(21), 20(21), 
+  6(63), 13(63), 25(63), 27(63), 32(63), 34(63), 46(63), 48(63), 53(63), 
+  55(63), 4(126), 67(126), 137(189), 74(567), 200(567), 263(567), 
+  389(567), 452(567), 11(1134), 578(1134) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Union(last);</span>
+Integers
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Sum(List(last2,Density));</span>
+1
+
+</pre></div>
+
+<p><a id="X7BAF36BF7A276D46" name="X7BAF36BF7A276D46"></a></p>
+
+<h5>1.2-5 CoverByResidueClasses</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoverByResidueClasses</code>( <var class="Arg">Integers</var>, <var class="Arg">moduli</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoversByResidueClasses</code>( <var class="Arg">Integers</var>, <var class="Arg">moduli</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns: in the first form a cover of the integers by residue classes with moduli <var class="Arg">moduli</var> if such cover exists, and <code class="code">fail</code> otherwise; in the second form a list of all covers of the integers by residue classes with moduli <var class="Arg">moduli</var>.</p>
+
+<p>Since there are often very many such covers, computing all of them can take a lot of time and memory.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoverByResidueClasses(Integers,[2,3,4,6,8,12]);</span>
+[ 0(2), 0(3), 1(4), 1(6), 3(8), 11(12) ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Union(last);</span>
+Integers
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoversByResidueClasses(Integers,[2,3,3,6]);</span>
+[ [ 0(2), 0(3), 1(3), 5(6) ], [ 0(2), 0(3), 2(3), 1(6) ], 
+  [ 0(2), 1(3), 2(3), 3(6) ], [ 1(2), 0(3), 1(3), 2(6) ], 
+  [ 1(2), 0(3), 2(3), 4(6) ], [ 1(2), 1(3), 2(3), 0(6) ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">List(last,Union);</span>
+[ Integers, Integers, Integers, Integers, Integers, Integers ]
+
+</pre></div>
+
+<p><a id="X791C16E77BE97FE3" name="X791C16E77BE97FE3"></a></p>
+
+<h5>1.2-6 Density</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Density</code>( <var class="Arg">U</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: the natural density of <var class="Arg">U</var> as a subset of the underlying ring.</p>
+
+<p>The <em>natural density</em> of a residue class <span class="SimpleMath">r(m)</span> of a ring <span class="SimpleMath">R</span> is defined by <span class="SimpleMath">1/|R/mR|</span>, and the <em>natural density</em> of a union <span class="SimpleMath">U</span> of finitely many residue classes is defined by the sum of the densities of the elements of a partition of <span class="SimpleMath">U</span> into finitely many residue classes.</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Density(ResidueClass(0,2));</span>
+1/2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Density(Difference(Integers,ResidueClass(0,5)));</span>
+4/5
+
+</pre></div>
+
+<p>For looping over residue class unions of the integers, there are methods for the operations <code class="code">Iterator</code> and <code class="code">NextIterator</code>.</p>
+
+<p><a id="X7921D4368632E15C" name="X7921D4368632E15C"></a></p>
+
+<h4>1.3 <span class="Heading">On residue class unions of <span class="SimpleMath">ℤ^2</span></span></h4>
+
+<p>Residue class unions of <span class="SimpleMath">ℤ^2</span> are treated similar as those of any other ring. Also there is roughly the same functionality available for them. However there are some differences and a few additional features, which are described in this section.</p>
+
+<p>The elements of <span class="SimpleMath">ℤ^2</span> are represented as lists of length 2 with integer entries. The modulus of a residue class union of <span class="SimpleMath">ℤ^2</span> is a lattice. This lattice is stored as a <span class="SimpleMath">2 × 2</span> integer matrix of full rank in Hermite normal form, whose rows are the spanning vectors. Residue classes of <span class="SimpleMath">ℤ^2</span> modulo principal ideals are presently not implemented. Residue class unions of <span class="SimpleMath">ℤ^2</span> can be multiplied by matrices of full rank from the right. A snippet of a residue class union of <span class="SimpleMath">ℤ^2</span> is shown in "ASCII art" when one <code class="code">Display</code>'s it with option <code class="code">AsGrid</code>. We give some illustrative examples:</p>
+
+
+<div class="example"><pre>
+
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := Integers^2;</span>
+( Integers^2 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">5*R+[2,3];</span>
+(2,3)+(5,0)Z+(0,5)Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Difference(R,last);</span>
+Z^2 \ (2,3)+(5,0)Z+(0,5)Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Density(last);</span>
+24/25
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L1 := [[2,1],[-1,2]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L2 := [[6,2],[0,6]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AllResidueClassesModulo(R,L1); # The modulus is transformed to HNF.</span>
+[ (0,0)+(1,3)Z+(0,5)Z, (0,1)+(1,3)Z+(0,5)Z, (0,2)+(1,3)Z+(0,5)Z,
+  (0,3)+(1,3)Z+(0,5)Z, (0,4)+(1,3)Z+(0,5)Z ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cl1 := ResidueClass(R,L1,[0,0]);</span>
+(0,0)+(1,3)Z+(0,5)Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cl2 := ResidueClass(R,L2,[0,0]);</span>
+(0,0)+(6,2)Z+(0,6)Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cl3 := Intersection(cl1,cl2);</span>
+(0,0)+(6,8)Z+(0,30)Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S1 := Difference(cl1,cl2);</span>
+&lt;union of 35 residue classes (mod (6,8)Z+(0,30)Z)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S2 := Difference(cl2,cl1);</span>
+&lt;union of 4 residue classes (mod (6,8)Z+(0,30)Z)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(S1); # The set is written as union of "few" residue classes:</span>
+(0,5)+(1,3)Z+(0,10)Z U (1,3)+(2,6)Z+(0,10)Z U (2,6)+(6,8)Z+(0,10)Z U
+(4,2)+(6,8)Z+(0,10)Z U (0,10)+(6,8)Z+(0,30)Z U (0,20)+(6,8)Z+(0,30)Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(S2);</span>
+(0,6)+(6,8)Z+(0,30)Z U (0,12)+(6,8)Z+(0,30)Z U (0,18)+(6,8)Z+(0,30)Z
+ U (0,24)+(6,8)Z+(0,30)Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">cls := AsUnionOfFewClasses(S1);</span>
+[ (0,5)+(1,3)Z+(0,10)Z, (1,3)+(2,6)Z+(0,10)Z, (2,6)+(6,8)Z+(0,10)Z,
+  (4,2)+(6,8)Z+(0,10)Z, (0,10)+(6,8)Z+(0,30)Z, (0,20)+(6,8)Z+(0,30)Z ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Union(cls) = S1;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S3 := S1*[[3,5],[2,4]];</span>
+&lt;union of 35 residue classes (mod (2,46)Z+(0,180)Z)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(S1:AsGrid);</span>
+    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+ *    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+   *    *    *    *    *    *    *    *    *    *    *    *    *    *
+*    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+    *    *    *    *         *    *    *    *    *         *    *    *
+ *    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+   *    *    *    *    *    *    *    *    *    *    *    *    *    *
+*    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+ *    *    *         *    *    *    *    *         *    *    *    *    *
+   *    *    *    *    *    *    *    *    *    *    *    *    *    *
+*    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+ *    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+   *         *    *    *    *    *         *    *    *    *    *
+*    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+  *    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+ *    *    *    *    *    *    *    *    *    *    *    *    *    *    *
+   *    *    *    *    *    *    *    *    *    *    *    *    *    *
+     *    *    *    *    *         *    *    *    *    *         *    *
+
+</pre></div>
+
+<p>Note that in <strong class="pkg">GAP</strong> multiplying lists of integers means computing their scalar product as vectors. The consequence is that technically the free module <span class="SimpleMath">ℤ^2</span> is not a ring in <strong class="pkg">GAP</strong>.</p>
+
+<p><a id="X7B26BB1C7C8495A5" name="X7B26BB1C7C8495A5"></a></p>
+
+<h4>1.4 <span class="Heading">The categories and families of residue class unions</span></h4>
+
+<p><a id="X7EA29BBD82552352" name="X7EA29BBD82552352"></a></p>
+
+<h5>1.4-1 IsResidueClassUnion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsResidueClassUnion</code>( <var class="Arg">U</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsResidueClassUnionOfZ</code>( <var class="Arg">U</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsResidueClassUnionOfZxZ</code>( <var class="Arg">U</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsResidueClassUnionOfZ_pi</code>( <var class="Arg">U</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsResidueClassUnionOfGFqx</code>( <var class="Arg">U</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> if <var class="Arg">U</var> is a residue class union, a residue class union of ℤ, a residue class union of <span class="SimpleMath">ℤ^2</span>, a residue class union of a semilocalization of ℤ or a residue class union of a polynomial ring in one variable over a finite field, respectively, and <code class="code">false</code> otherwise.</p>
+
+<p>Often the same methods can be used for residue class unions of the ring of integers and of its semilocalizations. For this reason, there is a category <code class="code">IsResidueClassUnionOfZorZ_pi</code> which is the union of <code class="code">IsResidueClassUnionOfZ</code> and <code class="code">IsResidueClassUnionOfZ_pi</code>. The internal representation of residue class unions is called <code class="code">IsResidueClassUnionResidueListRep</code>. There are methods available for <code class="code">ExtRepOfObj</code> and <code class="code">ObjByExtRep</code>.</p>
+
+<p><a id="X7F9BCB1A797F8F48" name="X7F9BCB1A797F8F48"></a></p>
+
+<h5>1.4-2 ResidueClassUnionsFamily</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResidueClassUnionsFamily</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResidueClassUnionsFamily</code>( <var class="Arg">R</var>, <var class="Arg">fixedreps</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the family of residue class unions or the family of unions of residue classes with fixed representatives of the ring <var class="Arg">R</var>, depending on whether <var class="Arg">fixedreps</var> is present and <code class="code">true</code> or not.</p>
+
+<p>The ring <var class="Arg">R</var> can be retrieved as <code class="code">UnderlyingRing(ResidueClassUnionsFamily(<var class="Arg">R</var>))</code>. There is no coercion between residue class unions or unions of residue classes with fixed representatives which belong to different families. Unions of residue classes with fixed representatives are described in the next chapter.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (simpcomp) - Chapter 3: The new GAP object types of simpcomp</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"></p>
+<p><a id="X83DEEDF8835622AD" name="X83DEEDF8835622AD"></a></p>
+<div class="ChapSects"><a href="chap3.html#X83DEEDF8835622AD">3 <span class="Heading">The new GAP object types of <strong class="pkg">simpcomp</strong></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X82FAB51B7C625240">3.1 <span class="Heading">Accessing properties of a <code class="code">SCPolyhedralComplex</code> 
+object</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">The new GAP object types of <strong class="pkg">simpcomp</strong></span></h3>
+
+<p>In order to meet the particular requirements of piecewise linear geometric objects and their invariants, <strong class="pkg">simpcomp</strong> defines a number of new <strong class="pkg">GAP</strong> object types.</p>
+
+<p>All new object types are derived from the object type <code class="code">SCPropertyObject</code> which is a subtype of <code class="code">Record</code>. It is a <strong class="pkg">GAP</strong> object consisting of permanent and temporary attributes. While <strong class="pkg">simpcomp</strong> makes use of <strong class="pkg">GAP</strong>'s internal attribute caching mechanism for permanent attributes (see below), this is not the case for temporary ones.</p>
+
+<p>The temporary properties of a <code class="code">SCPropertyObject</code> can be accessed directly with the functions <code class="code">SCPropertyTmpByName</code> and changed with <code class="code">SCPropertyTmpSet</code>. But this direct access to property objects is discouraged when working with <strong class="pkg">simpcomp</strong>, as the internal consistency of the objects cannot be guaranteed when the properties of the objects are modified in this way.</p>
+
+<p>Important note: The temporary properties of <code class="code">SCPropertyObject</code> are not used to hold properties (in the <strong class="pkg">GAP</strong> sense) of simplicial complexes or other geometric objects. This is done by the GAP4 type system <a href="chapBib.html#biBBreuer98GAP4TypeSystem">[BL98]</a>. Instead, the properties handled by <strong class="pkg">simpcomp</strong>'s own caching mechanism are used to store changing information, e.g. the complex library (see Section <a href="chap13.html#X82F59668851B5E80"><span class="RefLink">13</span></a>) of the package or any other data which possibly is subject to changes (and thus not suited to be stored by the <strong class="pkg">GAP</strong> type system).</p>
+
+<p>To realize its complex library (see Section <a href="chap13.html#X82F59668851B5E80"><span class="RefLink">13</span></a>), <strong class="pkg">simpcomp</strong> defines a <strong class="pkg">GAP</strong> object type <code class="code">SCLibRepository</code> which provides the possibility to store, load, etc. any defined geometric object to and from the build-in complex library as well as customized user libraries. In addition, a searching mechanism is provided.</p>
+
+<p>Geometric objects are represented by the <strong class="pkg">GAP</strong> object type <code class="code">SCPolyhedralComplex</code>, which as well is a subtype of <code class="code">SCPropertyObject</code>. <code class="code">SCPolyhedralComplex</code> is designed to represent any kind of piecewise linear geometric object given by a certain cell decomposition. Here, as already mentioned, the GAP4 type system <a href="chapBib.html#biBBreuer98GAP4TypeSystem">[BL98]</a> is used to cache properties of the object. In this way, a property is not calculated multiple times in case the object is not altered (see <code class="func">SCPropertiesDropped</code> (<a href="chap5.html#X8155B18D7EEF06DE"><span class="RefLink">5.1-4</span></a>) for a way of dropping previously calculated properties).</p>
+
+<p>As of Version 1.4, <strong class="pkg">simpcomp</strong> makes use of two different subtypes of <code class="code">SCPolyhedralComplex</code>: <code class="code">SCSimplicialComplex</code> to handle simplicial complexes and <code class="code">SCNormalSurface</code> to deal with discrete normal surfaces (slicings of dimension 2). Whenever possible, only one method per operations is implemented to deal with all subtypes of <code class="code">SCPolyhedralComplex</code>, these functions are described in Chapter <a href="chap4.html#X840691C285AB3AAD"><span class="RefLink">4</span></a>. For all other operations, the different methods for <code class="code">SCSimplicialComplex</code> and <code class="code">SCNormalSurface</code> are documented separately.</p>
+
+<p><a id="X82FAB51B7C625240" name="X82FAB51B7C625240"></a></p>
+
+<h4>3.1 <span class="Heading">Accessing properties of a <code class="code">SCPolyhedralComplex</code> 
+object</span></h4>
+
+<p>As described above the object type <code class="code">SCPolyhedralComplex</code> (and thus also the <strong class="pkg">GAP</strong> object types <code class="code">SCSimplicialComplex</code> and <code class="code">SCNormalSurface</code>) has properties that are handled by the GAP4 type system. Hence, GAP takes care of the internal consistency of objects of type <code class="code">SCSimplicialComplex</code>.</p>
+
+<p>There are two ways of accessing properties of a <code class="code">SCPolyhedralComplex</code> object. The first is to call a property handler function of the property one wishes to calculate. The first argument of such a property handler function is always the simplicial complex for which the property should be calculated, in some cases followed by further arguments of the property handler function. An example would be:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c:=SCBdSimplex(3);; # create a SCSimplicialComplex object</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SCFVector(c);</span>
+[ 4, 6, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SCSkel(c,0);</span>
+[ [ 1 ], [ 2 ], [ 3 ], [ 4 ] ]
+</pre></div>
+
+<p>Here the functions <code class="code">SCFVector</code> and <code class="code">SCSkel</code> are the property handler functions, see Chapter <a href="chap16.html#X79E5133F86718164"><span class="RefLink">16</span></a> for a list of all property handlers of a <code class="code">SCPolyhedralComplex</code>, <code class="code">SCSimplicialComplex</code> or <code class="code">SCNormalSurface</code> object. Apart from this (standard) method of calling the property handlers directly with a <code class="code">SCPolyhedralComplex</code> object, <strong class="pkg">simpcomp</strong> provides the user with another more object oriented method which calls property handlers of a <code class="code">SCPolyhedralComplex</code> object indirectly and more conveniently:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c:=SCBdSimplex(3);; # create a SCSimplicialComplex object</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c.F;</span>
+[ 4, 6, 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c.Skel(0);</span>
+[ [ 1 ], [ 2 ], [ 3 ], [ 4 ] ]
+</pre></div>
+
+<p>Note that the code in this example calculates the same properties as in the first example above, but the properties of a <code class="code">SCPolyhedralComplex</code> object are accessed via the <code class="code">.</code> operator (the record access operator).</p>
+
+<p>For each property handler of a <code class="code">SCPolyhedralComplex</code> object the object oriented form of this property handler equals the name of the corresponding operation. However, in most cases abbreviations are available: Usually the prefix ``<code class="code">SC</code>'' can be dropped, in other cases even shorter names are available. See Chapter <a href="chap16.html#X79E5133F86718164"><span class="RefLink">16</span></a> for a complete list of all abbreviations available.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chap14.html">14</a>  <a href="chap15.html">15</a>  <a href="chap16.html">16</a>  <a href="chap17.html">17</a>  <a href="chap18.html">18</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>
