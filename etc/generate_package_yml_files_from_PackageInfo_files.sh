@@ -20,6 +20,6 @@ if [ -e ${pathToListOfPaths} ]; then
     exit 1
 fi
 
-find ${1}/pkg/ -name 'PackageInfo.g' > ${pathToListOfPaths}
+find ${1}/pkg/ -maxdepth 2 -name 'PackageInfo.g' > ${pathToListOfPaths}
 gap -q -c "path := \"${pathToListOfPaths}\";" etc/generate_package_yml_files_from_PackageInfo_files.g
 rm ${pathToListOfPaths}
