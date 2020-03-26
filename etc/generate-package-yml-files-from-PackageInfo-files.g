@@ -183,6 +183,29 @@ GeneratePackageYML:=function(path)
     AppendTo(stream, "\n");
 
     AppendTo(stream, "status: ", pkg.Status, "\n");
+    
+    if IsBound(pkg.CommunicatedBy) then
+        AppendTo(stream, "communicated-by: \"", pkg.CommunicatedBy, "\"\n\n");
+    fi;
+
+    if IsBound(pkg.AcceptDate) then
+        AppendTo(stream, "accept-date: \"", pkg.AcceptDate, "\"\n\n");
+    fi;
+
+    if IsBound(pkg.SourceRepository) then
+        AppendTo(stream, "source-repo:\n");
+        AppendTo(stream, "    - type: ", pkg.SourceRepository.Type, "\n");
+        AppendTo(stream, "      url: ", pkg.SourceRepository.URL, "\n");
+    fi;
+
+    if IsBound(pkg.IssueTrackerURL) then
+        AppendTo(stream, "issue-url: \"", pkg.IssueTrackerURL, "\"\n\n");
+    fi;
+
+    if IsBound(pkg.SupportEmail) then
+        AppendTo(stream, "support-email: \"", pkg.SupportEmail, "\"\n\n");
+    fi;
+
     if IsRecord(pkg.PackageDoc) then
         AppendTo(stream, "doc-html: ", pkg.PackageDoc.HTMLStart, "\n");
         AppendTo(stream, "doc-pdf: ", pkg.PackageDoc.PDFFile, "\n");
