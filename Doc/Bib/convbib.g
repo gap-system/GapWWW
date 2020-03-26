@@ -190,6 +190,9 @@ bib2niceandhtml := function(name, header, subheader)
        " pdflatex FLtmpTeX; mv FLtmpTeX.pdf ",name,".pdf; rm -f FLtmpTeX.* ",name,"nicertmp.bib"));
 end;
 
+# set fixed screen size to avoid formatting changes in fh()  output
+SizeScreen([139,]);
+
 # Add further lists here.
 bib2niceandhtml("gap-published", "Published work which cites GAP",
 Concatenation( "The GAP bibliography was partially obtained using the ",
