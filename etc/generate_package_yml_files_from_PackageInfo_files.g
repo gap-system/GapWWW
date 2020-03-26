@@ -20,6 +20,19 @@
 
 # Parse PackageInfo.g and regenerate _data/package.yml from it.
 
+Basename := function(str)
+  local len;
+  len := Length(str);
+  while len > 0 and str[len] <> '/' do
+    len := len - 1;
+  od;
+  if len = 0 then
+    return str;
+  else
+    return str{[len+1..Length(str)]};
+  fi;
+end;
+
 PrintPeopleList := function(stream, people)
     local p;
     for p in people do
@@ -46,6 +59,15 @@ PrintPackageList := function(stream, pkgs)
     AppendTo(stream, "\n");
 end;
 
+PrintExternalConditionsList := function(stream, ext)
+    local e;
+    for e in ext do
+        AppendTo(stream, "    - name: \"", e[1], "\"\n");
+        AppendTo(stream, "      url: \"", e[2], "\"\n");
+    od;
+    AppendTo(stream, "\n");
+end;
+
 # verify date is of the form YYYY-MM-DD
 IsValidISO8601Date := function(date)
     local day, month, year;
@@ -64,7 +86,7 @@ end;
 # path must be of the form "*dirname/PackageInfo.g"
 GeneratePackageYML:=function(path)
     local pkg, dirname, streamFilename, stream, date, authors, maintainers,
-        contributors, formats, f, tmp;
+        contributors, formats, f, tmp, bnam;
 
     Read(path);
     pkg := GAPInfo.PackageInfoCurrent;
@@ -152,6 +174,12 @@ GeneratePackageYML:=function(path)
         PrintPackageList(stream, pkg.Dependencies.SuggestedOtherPackages);
     fi;
 
+    if IsBound(pkg.Dependencies.ExternalConditions) and
+        Length(pkg.Dependencies.ExternalConditions) > 0 then
+        AppendTo(stream, "external:\n");
+        PrintExternalConditionsList(stream, pkg.Dependencies.ExternalConditions);
+    fi;
+
     AppendTo(stream, "www: ", pkg.PackageWWWHome, "\n");
     # Workaround for Issue ..
     # If README_URL is the empty string, then tmp will be an empty list.
@@ -175,6 +203,15 @@ GeneratePackageYML:=function(path)
         od;
         AppendTo(stream, "\n");
     fi;
+
+    # directory name of unpacked archive
+    bnam := Basename(pkg.ArchiveURL);
+    # if the package provides archives named 'version.format',
+    # we rename them to 'packagename-version.format'
+    if bnam[1] in "0123456789" then
+        bnam:=Concatenation( pkg.PackageName, "-", bnam );
+    fi;  
+    AppendTo(stream, "base-archive-name: ", bnam, "\n");
 
     AppendTo(stream, "abstract: |\n");
     for tmp in SplitString(pkg.AbstractHTML,"\n") do
