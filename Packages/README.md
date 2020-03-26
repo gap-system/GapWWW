@@ -10,3 +10,4 @@ The `undep.html` site lists all undeposited packages.
 
 This contains a script `packages_list.g` that generates package lists in `Packages/PackagesList/*`.
 
+The other .html files here are packages that either got renamed or are broken.
