@@ -17,7 +17,7 @@ layout: start
 {% endif %}
 {% assign persons = "" %}
 {% for person in page.authors %}
-    {% if person contains "url" %}
+    {% if person.url %}
         {% capture persons %}{{ persons }}<a href="{{ person.url }}">{{ person.name }}</a>|{% endcapture %}
     {% else %}
         {% capture persons %}{{ persons }}{{person.name}}|{% endcapture %}
@@ -32,7 +32,7 @@ layout: start
 {% endif %}
 {% assign persons = "" %}
 {% for person in page.maintainers %}
-    {% if person contains "url" %}
+    {% if person.url %}
         {% capture persons %}{{ persons }}<a href="{{ person.url }}">{{ person.name }}</a>|{% endcapture %}
     {% else %}
         {% capture persons %}{{ persons }}{{person.name}}|{% endcapture %}
@@ -46,44 +46,45 @@ layout: start
 <h4>Version</h4>
 <p> Current version shipped with GAP: {{ page.version }} &nbsp;&nbsp;(Released  {{ page.date | date: "%d/%m/%Y" }})</p>
 
-{% if page contains "license" %}
+{% if page.license %}
 <h4>License</h4>
 <p>{{ page.license }}</p>
 {% endif %}
 
 <h4>Status</h4>
 <p> {{ page.status }}
-    {% if page contains "communicatedBy" and page contains "acceptData" %}
+    {% if page.communicatedBy and page.acceptData %}
         &nbsp;&nbsp; (communicated by {{page.communicatedBy}}, accepted {{ page.acceptData | date: "%d/%m/%Y" }})
-    {% elsif page contains "communicatedBy" %}
+    {% elsif page.communicatedBy %}
         &nbsp;&nbsp; (communicated by {{page.communicatedBy}})
-    {% elsif page contains "acceptData" %}
+    {% elsif page.acceptData %}
         &nbsp;&nbsp; (accepted {{ page.acceptData | date: "%d/%m/%Y" }})
     {% endif %}
 </p>
 
 <h4>Dependencies</h4>
-<p> GAP version: {{ page.GAP }}</p>
+<p> GAP version: {{ page.GAP }} </br>
 
-{% if page contains "needed-pkgs" %}
-<p> Needed other packages:
+{% if page.needed-pkgs %}
+    Needed other packages:
 {% assign pkgs = "" %}
 {% for pkg in page.needed-pkgs %}
     {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
 {% endfor %}
 {{ pkgs | split: "|" | join: ", " }}
-</p>
+</br>
 {% endif %}
 
-{% if page contains "suggested-pkgs" %}
-<p> Suggested other packages:
+{% if page.suggested-pkgs %}
+    Suggested other packages:
 {% assign pkgs = "" %}
 {% for pkg in page.suggested-pkgs %}
-    {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")" | append: "|" %}
+    {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
 {% endfor %}
 {{ pkgs | split: "|" | join: ", " }}
-</p>
+</br>
 {% endif %}
+</p>
 
 <h4>Online documentation</h4>
 <p>{{ page.name }}:  [<a href="{{ manual }}/{{ page.doc-html }}"> HTML</a>] version&nbsp;&nbsp; [<a href="{{ manual }}/{{ page.doc-pdf }}"> PDF</a>] version&nbsp;&nbsp;</p>
@@ -97,17 +98,17 @@ layout: start
     [<a href="{{ site.data.gap.gap4dist }}zip/packages/{{ page.dirname }}.zip">.zip&nbsp; </a>]&nbsp;&nbsp;
 </p>
 
-{% if page contains "sourceRepository" %}
+{% if page.sourceRepository %}
 <h4>Source code repository</h4>
 <p>{{page.sourceRepository.type}} : <a href="{{ page.sourceRepository.url }}">{{ page.sourceRepository.url }}</a></p>
 {% endif %}
 
-{% if page contains "issueTrackerUrl" %}
+{% if page.issueTrackerUrl %}
 <h4>Issue tracker</h4>
 <p><a href="{{ page.issueTrackerUrl }}">{{ page.issueTrackerUrl }}</a></p>
 {% endif %}
 
-{% if page contains "supportemail" %}
+{% if page.supportemail %}
 <h4>Support email address</h4>
 <p><a href="{{ mailto | append: page.supportemail }}">{{ page.supportemail }}</a></p>
 {% endif %}
