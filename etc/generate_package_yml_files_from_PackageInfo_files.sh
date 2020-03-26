@@ -8,9 +8,18 @@ if [ "$#" != "1" ]; then
     exit 1
 fi;
 
+if [ ! -d ${1}/pkg ]; then
+    echo "Directory not found: "${1}/pkg
+    exit 1
+fi
+
 collectionDir='_Packages'
-pathToListOfPaths=${collectionDir}'/tmp/__TMP__list_of_paths_to_packageinfo_files.txt'
-mkdir -p ${collectionDir}/tmp/
+pathToListOfPaths=${collectionDir}'/__tmp__list_of_paths_to_packageinfo_files.txt'
+if [ -e ${pathToListOfPaths} ]; then
+    echo "File or directory already exists: "${pathToListOfPaths}
+    exit 1
+fi
+
 find ${1}/pkg/ -name 'PackageInfo.g' > ${pathToListOfPaths}
 gap -q -c "path := \"${pathToListOfPaths}\";" etc/generate_package_yml_files_from_PackageInfo_files.g
 rm ${pathToListOfPaths}
