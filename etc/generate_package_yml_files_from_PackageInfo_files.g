@@ -62,8 +62,12 @@ end;
 PrintExternalConditionsList := function(stream, ext)
     local e;
     for e in ext do
-        AppendTo(stream, "    - name: \"", e[1], "\"\n");
-        AppendTo(stream, "      url: \"", e[2], "\"\n");
+        if IsString(e) then
+            AppendTo(stream, "    - name: \"", e, "\"\n");
+        else
+            AppendTo(stream, "    - name: \"", e[1], "\"\n");
+            AppendTo(stream, "      url: \"", e[2], "\"\n");
+        fi;
     od;
     AppendTo(stream, "\n");
 end;

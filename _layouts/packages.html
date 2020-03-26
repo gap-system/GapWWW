@@ -89,7 +89,11 @@ layout: start
     External needs:
 {% assign ext = "" %}
 {% for e in page.external %}
-    {% capture ext %}{{ ext }}<a href="{{ e.url }}">{{ e.name }}</a>|{% endcapture %}
+    {% if e.url %}
+        {% capture ext %}{{ ext }}<a href="{{ e.url }}">{{ e.name }}</a>|{% endcapture %}
+    {% else %}
+        {% capture ext %}{{ ext }}{{ e.name }}|{% endcapture %}
+    {% endif %}
 {% endfor %}
 {{ ext | split: "|" | join: ", " }}
 </br>
