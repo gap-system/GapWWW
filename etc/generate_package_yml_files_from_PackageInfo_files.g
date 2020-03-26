@@ -239,7 +239,7 @@ GeneratePackageYML:=function(path)
     CloseStream(stream);
 end;
 
-inputStream := InputTextFile("_Packages/tmp/list-of-paths-to-packageinfo-files.txt");
+inputStream := InputTextFile(path);
 pathsToPackageInfoFile := ReadAll(inputStream);
 pathsToPackageInfoFile := SplitString(pathsToPackageInfoFile, "\n");
 Print("\n");
