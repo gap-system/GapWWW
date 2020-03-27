@@ -1,8 +1,3 @@
-{% for pkg in site.Packages %}
-    {% if pkg.name-lowercase == include.name %}
-        {% assign index = forloop.index | minus: 1%}
-    {% break %}
-    {% endif %}
-{% endfor %}
-
-{% include packagelink_generate.html pkg-index=index%}
+{% assign pkg = site.Packages | where: "name-lowercase", include.name %}
+{% assign pkg = pkg[0] %}
+{% include packagelink_generate.html pkg=pkg %}
