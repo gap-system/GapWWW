@@ -93,7 +93,7 @@ end;
 # path must be of the form "*dirname/PackageInfo.g"
 GeneratePackageYML:=function(path)
     local pkg, dirname, streamFilename, stream, date, authors, maintainers,
-        contributors, formats, f, tmp, bnam;
+        contributors, formats, f, tmp, bnam, authorsMaintainersUnion;
 
     Read(path);
     pkg := GAPInfo.PackageInfoCurrent;
@@ -113,6 +113,7 @@ GeneratePackageYML:=function(path)
 
     AppendTo(stream, "---\n");
     AppendTo(stream, "name: ", pkg.PackageName, "\n");
+    AppendTo(stream, "name-lowercase: ", LowercaseString(pkg.PackageName), "\n");
     AppendTo(stream, "dirname: ", dirname, "\n");
     AppendTo(stream, "version: \"", pkg.Version, "\"\n");
     if IsBound(pkg.License) then
@@ -165,6 +166,11 @@ GeneratePackageYML:=function(path)
     if Length(contributors) > 0 then
         AppendTo(stream, "contributors:\n");
         PrintPeopleList(stream, contributors);
+    fi;
+
+    if Length(pkg.Persons) > 0 then
+        AppendTo(stream, "all-people:\n");
+        PrintPeopleList(stream, pkg.Persons);
     fi;
 
     if IsBound(pkg.Dependencies.GAP) then
