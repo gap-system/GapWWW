@@ -41,6 +41,8 @@ PrintPeopleList := function(stream, people)
             AppendTo(stream, "      url: ", p.WWWHome, "\n");
         elif IsBound(p.Email) then
             AppendTo(stream, "      url: mailto:", p.Email, "\n");
+        else
+            AppendTo(stream, "      url: \n");
         fi;
     od;
     AppendTo(stream, "\n");
@@ -64,6 +66,7 @@ PrintExternalConditionsList := function(stream, ext)
     for e in ext do
         if IsString(e) then
             AppendTo(stream, "    - name: \"", e, "\"\n");
+            AppendTo(stream, "      url: \n");
         else
             AppendTo(stream, "    - name: \"", e[1], "\"\n");
             AppendTo(stream, "      url: \"", e[2], "\"\n");
@@ -114,6 +117,8 @@ GeneratePackageYML:=function(path)
     AppendTo(stream, "version: \"", pkg.Version, "\"\n");
     if IsBound(pkg.License) then
         AppendTo(stream, "license: \"", pkg.License, "\"\n");
+    else
+        AppendTo(stream, "license: \n");
     fi;
 
     # convert date from DD/MM/YYYY to ISO 8601, i.e. YYYY-MM-DD
@@ -164,24 +169,32 @@ GeneratePackageYML:=function(path)
 
     if IsBound(pkg.Dependencies.GAP) then
         AppendTo(stream, "GAP: \"", pkg.Dependencies.GAP, "\"\n\n");
+    else
+        AppendTo(stream, "GAP: \n");
     fi;
 
     if IsBound(pkg.Dependencies.NeededOtherPackages) and
         Length(pkg.Dependencies.NeededOtherPackages) > 0 then
         AppendTo(stream, "needed-pkgs:\n");
         PrintPackageList(stream, pkg.Dependencies.NeededOtherPackages);
+    else
+        AppendTo(stream, "needed-pkgs: \n");
     fi;
 
     if IsBound(pkg.Dependencies.SuggestedOtherPackages) and
         Length(pkg.Dependencies.SuggestedOtherPackages) > 0 then
         AppendTo(stream, "suggested-pkgs:\n");
         PrintPackageList(stream, pkg.Dependencies.SuggestedOtherPackages);
+    else
+        AppendTo(stream, "suggested-pkgs: \n");
     fi;
 
     if IsBound(pkg.Dependencies.ExternalConditions) and
         Length(pkg.Dependencies.ExternalConditions) > 0 then
         AppendTo(stream, "external:\n");
         PrintExternalConditionsList(stream, pkg.Dependencies.ExternalConditions);
+    else
+        AppendTo(stream, "external: \n");
     fi;
 
     AppendTo(stream, "www: ", pkg.PackageWWWHome, "\n");
@@ -195,6 +208,8 @@ GeneratePackageYML:=function(path)
     AppendTo(stream, "packageinfo: ", pkg.PackageInfoURL, "\n");
     if IsBound(pkg.GithubWWW) then
         AppendTo(stream, "github: ", pkg.GithubWWW, "\n");
+    else
+        AppendTo(stream, "github: \n");
     fi;
     AppendTo(stream, "\n");
     
@@ -227,24 +242,34 @@ GeneratePackageYML:=function(path)
     
     if IsBound(pkg.CommunicatedBy) then
         AppendTo(stream, "communicated-by: \"", pkg.CommunicatedBy, "\"\n\n");
+    else
+        AppendTo(stream, "communicated-by: \n");
     fi;
 
     if IsBound(pkg.AcceptDate) then
         AppendTo(stream, "accept-date: \"", pkg.AcceptDate, "\"\n\n");
+    else
+        AppendTo(stream, "accept-date: \n");
     fi;
 
     if IsBound(pkg.SourceRepository) then
         AppendTo(stream, "source-repo:\n");
         AppendTo(stream, "    type: ", pkg.SourceRepository.Type, "\n");
         AppendTo(stream, "    url: ", pkg.SourceRepository.URL, "\n");
+    else
+        AppendTo(stream, "source-repo: \n");
     fi;
 
     if IsBound(pkg.IssueTrackerURL) then
         AppendTo(stream, "issue-url: \"", pkg.IssueTrackerURL, "\"\n\n");
+    else
+        AppendTo(stream, "issue-url: \n");
     fi;
 
     if IsBound(pkg.SupportEmail) then
         AppendTo(stream, "support-email: \"", pkg.SupportEmail, "\"\n\n");
+    else
+        AppendTo(stream, "support-email: \n");
     fi;
 
     if IsRecord(pkg.PackageDoc) then
@@ -263,6 +288,8 @@ GeneratePackageYML:=function(path)
         Length(pkg.Keywords) > 0 then
         AppendTo(stream, "keywords: |\n");
         AppendTo(stream, "    ", JoinStringsWithSeparator(pkg.Keywords,", "),".\n");
+    else
+        AppendTo(stream, "keywords: \n");
     fi;
 
     AppendTo(stream, "citeas: |\n");
