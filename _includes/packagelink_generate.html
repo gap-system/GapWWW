@@ -1,0 +1,22 @@
+{% assign pkg = site.Packages[include.pkg-index] %}
+{% assign persons = "" %}
+{% for person in pkg.all-people %}
+    {% assign name-array = person.name | split: " " %}
+    {% assign name-string = "" %}
+    {% if person.name == "The GAP Team" %}
+        {% assign name-string = person.name %}
+    {% else %}
+        {% for iterator in name-array %}
+            {% assign name-part = iterator %}
+            {% if forloop.last == false %}
+                {% assign name-part = name-part | slice: 0 | append: ". " %}
+            {% endif %}
+            {% assign name-string = name-string | append: name-part %}
+        {% endfor %}
+    {% endif %}
+    {% assign persons = persons | append: name-string | append : "|" %}
+{% endfor %}
+{% assign persons = persons | split: "|" | join: ", " %}
+
+<a href="/Packages/{{ pkg.name | downcase }}.html">{{ pkg.name }}</a>&nbsp;&nbsp;{{ pkg.version }} ({{ pkg.date | date: "%d/%m/%Y" }}) by {{ persons }}
+    <br />{{ pkg.description }}
