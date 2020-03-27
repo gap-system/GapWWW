@@ -1,3 +1,5 @@
+# Checking MathSciNet for new GAP citations
+
 Read("GapIgnore.MR");
 
 SEARCHMRHOST := "www.ams.org";

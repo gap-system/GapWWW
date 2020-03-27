@@ -1,3 +1,7 @@
+# This script produces files in directories `Doc/Bib/Year` and
+# `Doc/Bib/MSC` with lists of papers by the year of publication
+# and by MSC category.
+
 years:=[1987..2020];
 
 bib := ParseBibFiles("gap-publishednicer.bib")[1];;
