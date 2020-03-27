@@ -9,7 +9,11 @@
         {% for iterator in name-array %}
             {% assign name-part = iterator %}
             {% if forloop.last == false %}
-                {% assign name-part = name-part | slice: 0 | append: ". " %}
+                {% if name-part.size > 2 %}
+                    {% assign name-part = name-part | slice: 0 | append: ". " %}
+                {% else %}
+                    {% assign name-part = name-part | append: " " %}
+                {% endif %}
             {% endif %}
             {% assign name-string = name-string | append: name-part %}
         {% endfor %}
