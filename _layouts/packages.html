@@ -1,0 +1,128 @@
+---
+layout: start
+---
+
+{% capture manual %}{{site.data.gap.GAPManualLink | append: "/pkg/" | append: page.dirname}}{% endcapture %}
+
+<h2>GAP package {{ page.name }}</h2>
+
+<h2>{{ page.description }}</h2>
+
+<p class="homelink">[<a href="{{ page.www }}">WWW homepage</a>]</p>
+
+{% if page.authors.size > 1 %}
+    <h4>Authors</h4>
+{% else %}
+    <h4>Author</h4>
+{% endif %}
+{% assign persons = "" %}
+{% for person in page.authors %}
+    {% if person.url %}
+        {% capture persons %}{{ persons }}<a href="{{ person.url }}">{{ person.name }}</a>|{% endcapture %}
+    {% else %}
+        {% capture persons %}{{ persons }}{{person.name}}|{% endcapture %}
+    {% endif %}
+{% endfor %}
+<p>{{ persons | split: "|" | join: ", " }}</p>
+
+{% if page.maintainers.size > 1 %}
+    <h4>Maintainers</h4>
+{% else %}
+    <h4>Maintainer</h4>
+{% endif %}
+{% assign persons = "" %}
+{% for person in page.maintainers %}
+    {% if person.url %}
+        {% capture persons %}{{ persons }}<a href="{{ person.url }}">{{ person.name }}</a>|{% endcapture %}
+    {% else %}
+        {% capture persons %}{{ persons }}{{person.name}}|{% endcapture %}
+    {% endif %}
+{% endfor %}
+<p>{{ persons | split: "|" | join: ", " }}</p>
+
+<h4>Short Description</h4>
+<p>{{ page.abstract }}</p>
+
+<h4>Version</h4>
+<p> Current version shipped with GAP: {{ page.version }} &nbsp;&nbsp;(Released  {{ page.date | date: "%d/%m/%Y" }})</p>
+
+{% if page.license %}
+<h4>License</h4>
+<p>{{ page.license }}</p>
+{% endif %}
+
+<h4>Status</h4>
+<p> {{ page.status }}
+    {% if page.communicated-by and page.accept-date %}
+        &nbsp;&nbsp; (communicated by {{page.communicated-by}}, accepted {{ page.accept-date | date: "%d/%m/%Y" }})
+    {% elsif page.communicated-by %}
+        &nbsp;&nbsp; (communicated by {{page.communicated-by}})
+    {% elsif page.accept-date %}
+        &nbsp;&nbsp; (accepted {{ page.accept-date | date: "%d/%m/%Y" }})
+    {% endif %}
+</p>
+
+<h4>Dependencies</h4>
+<p> GAP version: {{ page.GAP }} </br>
+
+{% if page.needed-pkgs %}
+    Needed other packages:
+{% assign pkgs = "" %}
+{% for pkg in page.needed-pkgs %}
+    {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
+{% endfor %}
+{{ pkgs | split: "|" | join: ", " }}
+</br>
+{% endif %}
+
+{% if page.suggested-pkgs %}
+    Suggested other packages:
+{% assign pkgs = "" %}
+{% for pkg in page.suggested-pkgs %}
+    {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
+{% endfor %}
+{{ pkgs | split: "|" | join: ", " }}
+</br>
+{% endif %}
+
+{% if page.external %}
+    External needs:
+{% assign ext = "" %}
+{% for e in page.external %}
+    {% if e.url %}
+        {% capture ext %}{{ ext }}<a href="{{ e.url }}">{{ e.name }}</a>|{% endcapture %}
+    {% else %}
+        {% capture ext %}{{ ext }}{{ e.name }}|{% endcapture %}
+    {% endif %}
+{% endfor %}
+{{ ext | split: "|" | join: ", " }}
+</br>
+{% endif %}
+</p>
+
+<h4>Online documentation</h4>
+<p>{{ page.name }}:  [<a href="{{ manual }}/{{ page.doc-html }}"> HTML</a>] version&nbsp;&nbsp; [<a href="{{ manual }}/{{ page.doc-pdf }}"> PDF</a>] version&nbsp;&nbsp;</p>
+
+<h4>Download</h4>
+<p>
+    [<a href="{{ manual }}/README.{{ page.name | downcase }}">README</a>]&nbsp;&nbsp;&nbsp;&nbsp;{{ page.base-archive-name }}
+    [<a href='{{ site.data.gap.gap4dist }}tar.gz/packages/{{ page.base-archive-name }}.tar.gz'>.tar.gz&nbsp; </a>]&nbsp;&nbsp;
+    [<a href="{{ site.data.gap.gap4dist }}tar.bz2/packages/{{ page.base-archive-name }}.tar.bz2">.tar.bz2&nbsp; </a>]&nbsp;&nbsp;
+    [<a href="{{ site.data.gap.gap4dist }}win.zip/packages/{{ page.base-archive-name }}-win.zip">-win.zip&nbsp; </a>]&nbsp;&nbsp;
+    [<a href="{{ site.data.gap.gap4dist }}zip/packages/{{ page.base-archive-name }}.zip">.zip&nbsp; </a>]&nbsp;&nbsp;
+</p>
+
+{% if page.source-repo %}
+<h4>Source code repository</h4>
+<p>{{ page.source-repo.type }} : <a href="{{ page.source-repo.url }}">{{ page.source-repo.url }}</a></p>
+{% endif %}
+
+{% if page.issue-url %}
+<h4>Issue tracker</h4>
+<p><a href="{{ page.issue-url }}">{{ page.issue-url }}</a></p>
+{% endif %}
+
+{% if page.support-email %}
+<h4>Support email address</h4>
+<p><a href="mailto:{{ page.support-email }}">{{ page.support-email }}</a></p>
+{% endif %}
