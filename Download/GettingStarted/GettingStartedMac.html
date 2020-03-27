@@ -48,6 +48,62 @@ pre > code {
   font-family:calibri,arial,sans-serif;
 }
 
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
 </style>
 
 
@@ -67,7 +123,7 @@ pre > code {
 
 <p> <a href="/Download/GettingStarted/GettingStartedMacHomebrew.html"><button class="button button3">Homebrew</button></a>
 
-<a href="/Download/GettingStarted/GettingStartedMacGapApp.html"><button class="button button4">Gap.app</button></a>
+<a href="https://cocoagap.sourceforge.io"><button class="button button4">Gap.app</button></a>
 
 <a href="/Download/GettingStarted/GettingStartedMacDocker.html"><button class="button button4">Docker</button></a>
 
@@ -90,12 +146,22 @@ pre > code {
   <td align="left"><a href="https://www.gap-system.org/pub/gap/gap-4.11/zip/gap-4.11.0.zip">gap-4.11.0.zip</a></td>
   <td align="left">458 MB</td>
   <td align="left">sha256: 6f8e3fb16ae1d8e91fe6c850c3d82f6fe7950213a9aae99bd927d1ea0dd8ad07</td>
-  <td align="left">I</td>
+  <td align="left"><div class="popup" onclick="myFunction()">I
+    <span class="popuptext" id="myPopup">Here text</span>
+  </div></td>
   <td align="left"><a href="/Releases/4.11.0.html"><font color="#B6B2AF"> more</font></a></td>
 </tr>
 </table>
 
-<p> Copy the file to where you want the folder containing to be. For example you can use </p>
+<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+
+<p> Copy the file to where you want the folder containing GAP to be. For example you can use </p>
 <pre class="my-pre"><code> cp Downloads/gap-4.11.0.zip Projects/</code></pre>
 <p>if you downloaded to your Downloads folder and want GAP in your Projects folder.</p>
 <p>Then run</p>
@@ -111,4 +177,8 @@ pre > code {
 make</code></pre>
 <p>Both will produce a lot of text output. You should end up with a shell script bin/gap.sh which you can use to start GAP. If you want, you can copy this script later to a directory that is listed in your search path.</p>
 
+<pre class="my-pre"><code>bin/gap.sh</code></pre>
+
 <p>Please note that this script must be started from within the Terminal Application. It is not possible to start GAP by clicking this script. </p>
+
+{% include gettingstartedincludetest.html %}
