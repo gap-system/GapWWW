@@ -1,7 +1,9 @@
 <ul>
 {% for pkg in site.Packages %}
     {% if pkg.status == "accepted" %}
-        <li>{% include packagelink_generate.html pkg=pkg %}</li>
+        {% unless site.data.data_libs contains pkg.name-lowercase %}
+            <li>{% include packagelink_generate.html pkg=pkg %}</li>
+        {% endunless %}
     {% endif %}
 {% endfor %}
 </ul>
