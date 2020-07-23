@@ -63,6 +63,11 @@ StatisticsByMSC:=function()
   return tab;
 end;
 
+string_for_sorting := function(str)
+    str := SIMPLE_STRING(LowerASCIIString(str));
+    RemoveCharacters(str, "{}");
+    return str;
+end;
 
 bib2niceandhtml := function(name, header, subheader)
   local i, ii, bib, fh, out, a, b, years, counts, pos, flag, 
@@ -92,9 +97,7 @@ bib2niceandhtml := function(name, header, subheader)
     fi;
     Unbind(a.authororig); Unbind(a.editororig); Unbind(a.keylong);
   od;
-  Sort(bib[1], function(a,b) 
-    return SIMPLE_STRING(a.author)<SIMPLE_STRING(b.author);
-  end);
+  StableSortBy(bib[1], a -> [string_for_sorting(a.author), a.year, string_for_sorting(a.title)]);
   Print("Sorted ", Length(bib[1]), " records \n");
   WriteBibFile(Concatenation(name, "nicer.bib"),[bib[1],[],[]]);
   # now we produce a temporary version were we substitute back
