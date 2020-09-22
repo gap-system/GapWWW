@@ -1,6 +1,6 @@
 # GapWWW
 
-[![Build Status](https://travis-ci.org/gap-system/GapWWW.svg?branch=master)](https://travis-ci.org/gap-system/GapWWW)
+[![Build Status](https://travis-ci.com/gap-system/GapWWW.svg?branch=master)](https://travis-ci.com/gap-system/GapWWW)
 
 This is the source repository for the GAP website <https://www.gap-system.org>.
 
