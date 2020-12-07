@@ -2,7 +2,7 @@
 # `Doc/Bib/MSC` with lists of papers by the year of publication
 # and by MSC category.
 
-years:=[1987..2020];
+years:=[1987..2021];
 
 bib := ParseBibFiles("gap-publishednicer.bib")[1];;
 Print( "Loaded ", Length(bib), " records\n");
