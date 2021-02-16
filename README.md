@@ -21,3 +21,51 @@ will be able to advise on further steps.
 
 For larger changes, it will be useful to build a local version of the GAP
 website first. This requires use of [Jekyll](https://jekyllrb.com).
+
+
+## Actually publishing changes to the website
+
+After a change has been committed this repository, currently one needs to
+manually get the change onto the website. This can be done as follows:
+
+1. ssh into `gap-web.host.cs.st-andrews.ac.uk` (requires an account in St Andrews)
+
+2. for a test deployment (recommended), first `cd test.gap-system.org`
+  (then the update will be published on <https://test.gap-system.org>),
+  otherwise `cd www.gap-system.org`
+
+3. run `git up` (an alias we configured there for `git pull --ff-only`)
+
+4. run `jekyll build`
+
+That's it.
+
+
+## Warning about package manuals
+
+Note that `Manuals` directory is not in this git repository, as it is too
+large (about XXX GB of data). This is why they are only on the
+server, in the directory `~/www.gap-system.org/Manuals` (so be very careful
+never to delete that!). To get them to appear in the right place on the
+website (they don't automatically, as they are not in the `~/www.gap-system.org/_site`
+directory), we configured nginx to put them there, via
+`/host/gap-web/nginx.d/www.gap-system.org/_global.conf`
+
+
+## Tweaking the server config
+
+In general, config files for the nging web server are in `/host/gap-web/nginx.d/`
+E.g. in `/host/gap-web/nginx.d/www.gap-system.org`.
+
+You need to read up about nginx config syntax if you want to fully master
+these, but for basic things it usually suffices to look at the existing config
+files and one can often guess what they do.
+
+After you make a config change it won't have any effect immediately. You need
+to tell nginx to reload its config. But first, validate it for syntax errors:
+
+    nginx -c /host/gap-web/nginx.conf -t
+
+If that worked, reload the config:
+
+    nginx -c /host/gap-web/nginx.conf -s reload
