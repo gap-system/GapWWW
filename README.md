@@ -43,7 +43,7 @@ That's it.
 
 ## Warning about package manuals
 
-Note that `Manuals` directory is not in this git repository, as it is too
+Note that the `Manuals` directory is not in this git repository, as it is too
 large (about XXX GB of data). This is why they are only on the
 server, in the directory `~/www.gap-system.org/Manuals` (so be very careful
 never to delete that!). To get them to appear in the right place on the
@@ -54,7 +54,7 @@ directory), we configured nginx to put them there, via
 
 ## Tweaking the server config
 
-In general, config files for the nging web server are in `/host/gap-web/nginx.d/`
+In general, config files for the nginx web server are in `/host/gap-web/nginx.d/`
 E.g. in `/host/gap-web/nginx.d/www.gap-system.org`.
 
 You need to read up about nginx config syntax if you want to fully master
