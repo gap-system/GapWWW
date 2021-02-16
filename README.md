@@ -14,7 +14,7 @@ For small improvements (e.g. correcting details and fixing typos), the
 procedure is as simple as just submitting an issue or pull request here.
 Please take into account that some files, in particular package YAML
 files `Packages/<pkgname>.html` are generated automatically from the
-meta-date in `PackageInfo.g` files. Incorrect information there should 
+metadata in `PackageInfo.g` files. Incorrect information there should 
 not be changed via pull requests, but reported to package authors instead.
 In doubt, please submit an issue before making a pull request, and we 
 will be able to advise on further steps.
