@@ -10,7 +10,7 @@
 WriteAllLinksOfAllHelpSections := function()
   local all, res, rootpath, entries, entry, path, book, a;
 
-  LoadAllPackages();
+  #LoadAllPackages();
   
   all := [];
 
@@ -33,6 +33,7 @@ WriteAllLinksOfAllHelpSections := function()
         path := "FAIL";
       fi;
       entry[1] := StripEscapeSequences(entry[1]);
+      entry[1] := ReplacedString(entry[1], " (not loaded)", "");
       NormalizeWhitespace(entry[1]);
       path := ReplacedString( path, "_mj.html", ".html" );
       Add(all, [entry[1], path]);
@@ -58,3 +59,4 @@ WriteAllLinksOfAllHelpSections := function()
 end;
 
 WriteAllLinksOfAllHelpSections();
+QUIT_GAP(0);
