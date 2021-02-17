@@ -316,7 +316,6 @@ end;
 inputStream := InputTextFile(path);
 pathsToPackageInfoFile := ReadAll(inputStream);
 pathsToPackageInfoFile := SplitString(pathsToPackageInfoFile, "\n");
-Print("\n");
 for path in pathsToPackageInfoFile do
     NormalizeWhitespace(path);
     GeneratePackageYML(path);
