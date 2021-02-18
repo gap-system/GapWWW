@@ -21,7 +21,9 @@ WriteAllLinksOfAllHelpSections := function()
     Add(rootpath, '/');
   fi;
   # load all books
-  HELP(":?");
+  #HELP(":?");
+  # The following line does this without prompting the user for input
+  Perform(HELP_KNOWN_BOOKS[1], HELP_BOOK_INFO);;
   for a in SortedList(NamesOfComponents(HELP_BOOKS_INFO)) do
     book := HELP_BOOKS_INFO.(a);
     entries := List([1..Length(book.entries)], x -> HELP_BOOK_HANDLER.HelpDataRef(book, x));

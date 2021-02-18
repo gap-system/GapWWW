@@ -32,7 +32,7 @@ PACKAGEINFO_PATHS="${TMPDIR}/_tmp_packageinfo_paths.tmp"
 
 # We use '-maxdepth 2' since e.g. some packages contain others (e.g. hap)
 find ${PKG_DIR} -maxdepth 2 -name 'PackageInfo.g' > ${PACKAGEINFO_PATHS}
-${GAP_EXE} -A -r -q <<GAPInput
+${GAP_EXE} -A -r -q -x 163 <<GAPInput
 path := "${PACKAGEINFO_PATHS}";;
 Read("etc/${SCRIPT}.g");
 GAPInput
