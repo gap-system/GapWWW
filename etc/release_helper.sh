@@ -15,12 +15,12 @@ PACKAGEINFO_PATHS="${TMPDIR}/_tmp_packageinfo_paths.tmp"
 find ${1}/pkg -maxdepth 2 -name 'PackageInfo.g' > ${PACKAGEINFO_PATHS}
 ${1}/bin/gap.sh -A -r -q -x 163 <<GAPInput
 path := "${PACKAGEINFO_PATHS}";;
-inputStream := InputTextFile(path);
-pathsToPackageInfoFile := ReadAll(inputStream);
-pathsToPackageInfoFile := SplitString(pathsToPackageInfoFile, "\n");
+inputStream := InputTextFile(path);;
+pathsToPackageInfoFile := ReadAll(inputStream);;
+pathsToPackageInfoFile := SplitString(pathsToPackageInfoFile, "\n");;
 SortBy(pathsToPackageInfoFile, LowercaseString);
-streamFilename := "${2}";
-stream := OutputTextFile(streamFilename, true);
+streamFilename := "${2}";;
+stream := OutputTextFile(streamFilename, true);;
 SetPrintFormattingStatus(stream, false);
 for path in pathsToPackageInfoFile do
   NormalizeWhitespace(path);
