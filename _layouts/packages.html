@@ -4,16 +4,20 @@ layout: start
 
 {% capture manual %}{{ site.baseurl }}/Manuals/pkg/{{ page.dirname }}{% endcapture %}
 
-<h2>GAP package {{ page.name }}</h2>
+<h1>GAP package {{ page.name }}</h1>
 
 <h2>{{ page.description }}</h2>
 
+<h4>Short Description</h4>
+<p>{{ page.abstract }}</p>
+
 <p class="homelink">[<a href="{{ page.www }}">WWW homepage</a>]</p>
 
+<p>
 {% if page.authors.size > 1 %}
-    <h4>Authors</h4>
+    <b>Authors</b> &nbsp;
 {% else %}
-    <h4>Author</h4>
+    <b>Author</b> &nbsp;
 {% endif %}
 {% assign persons = "" %}
 {% for person in page.authors %}
@@ -23,12 +27,13 @@ layout: start
         {% capture persons %}{{ persons }}{{person.name}}|{% endcapture %}
     {% endif %}
 {% endfor %}
-<p>{{ persons | split: "|" | join: ", " }}</p>
+{{ persons | split: "|" | join: ", " }}</p>
 
+<p>
 {% if page.maintainers.size > 1 %}
-    <h4>Maintainers</h4>
+    <b>Maintainers</b> &nbsp;
 {% else %}
-    <h4>Maintainer</h4>
+    <b>Maintainer</b> &nbsp;
 {% endif %}
 {% assign persons = "" %}
 {% for person in page.maintainers %}
@@ -38,21 +43,18 @@ layout: start
         {% capture persons %}{{ persons }}{{person.name}}|{% endcapture %}
     {% endif %}
 {% endfor %}
-<p>{{ persons | split: "|" | join: ", " }}</p>
+{{ persons | split: "|" | join: ", " }}</p>
 
-<h4>Short Description</h4>
-<p>{{ page.abstract }}</p>
 
-<h4>Version</h4>
-<p> Current version shipped with GAP: {{ page.version }} &nbsp;&nbsp;(Released  {{ page.date | date: "%d/%m/%Y" }})</p>
+
+<p><b> Version shipped with GAP</b>  &nbsp; {{ page.version }} &nbsp;&nbsp;&nbsp;(Released  {{ page.date | date: "%d/%m/%Y" }})</p>
 
 {% if page.license %}
-<h4>License</h4>
-<p>{{ page.license }}</p>
+<p><b>License</b> &nbsp; {{ page.license }}</p>
 {% endif %}
 
-<h4>Status</h4>
-<p> {{ page.status }}
+<p> <b>Status</b> &nbsp;
+    {{ page.status }}
     {% if page.communicated-by and page.accept-date %}
         &nbsp;&nbsp; (communicated by {{page.communicated-by}}, accepted {{ page.accept-date | date: "%d/%m/%Y" }})
     {% elsif page.communicated-by %}
@@ -62,8 +64,7 @@ layout: start
     {% endif %}
 </p>
 
-<h4>Dependencies</h4>
-<p> GAP version: {{ page.GAP }} </br>
+<p> <b>Dependencies</b> &nbsp; GAP version: {{ page.GAP }} </br>
 
 {% if page.needed-pkgs %}
     Needed other packages:
@@ -100,29 +101,38 @@ layout: start
 {% endif %}
 </p>
 
-<h4>Online documentation</h4>
-<p>{{ page.name }}:  [<a href="{{ manual }}/{{ page.doc-html }}"> HTML</a>] version&nbsp;&nbsp; [<a href="{{ manual }}/{{ page.doc-pdf }}"> PDF</a>] version&nbsp;&nbsp;</p>
+<p><b>Online documentation</b> &nbsp;
+{{ page.name }}:  [<a href="{{ manual }}/{{ page.doc-html }}">HTML</a>] version&nbsp;&nbsp; [<a href="{{ manual }}/{{ page.doc-pdf }}">PDF</a>] version&nbsp;&nbsp;</p>
+
+
+
+<p> 
+{% if page.source-repo %}
+<b>Source code repository</b> &nbsp;
+{{ page.source-repo.type }} : <a href="{{ page.source-repo.url }}">{{ page.source-repo.url }}</a>
+{% endif %}
+</p>
+
+<p>
+{% if page.issue-url %}
+<b>Issue tracker</b> &nbsp;
+<a href="{{ page.issue-url }}">{{ page.issue-url }}</a>
+{% endif %}
+</p>
+
+<p>
+{% if page.support-email %}
+<b>Support email address</b> &nbsp;
+<a href="mailto:{{ page.support-email }}">{{ page.support-email }}</a>
+{% endif %}
+</p>
+
 
 <h4>Download</h4>
 <p>
     [<a href="{{ manual }}/README.{{ page.name | downcase }}">README</a>]&nbsp;&nbsp;&nbsp;&nbsp;{{ page.base-archive-name }}
-    [<a href='{{ site.data.gap.gap4dist }}tar.gz/packages/{{ page.base-archive-name }}.tar.gz'>.tar.gz&nbsp; </a>]&nbsp;&nbsp;
-    [<a href="{{ site.data.gap.gap4dist }}tar.bz2/packages/{{ page.base-archive-name }}.tar.bz2">.tar.bz2&nbsp; </a>]&nbsp;&nbsp;
-    [<a href="{{ site.data.gap.gap4dist }}win.zip/packages/{{ page.base-archive-name }}-win.zip">-win.zip&nbsp; </a>]&nbsp;&nbsp;
-    [<a href="{{ site.data.gap.gap4dist }}zip/packages/{{ page.base-archive-name }}.zip">.zip&nbsp; </a>]&nbsp;&nbsp;
+    [<a href='{{ site.data.gap.gap4dist }}tar.gz/packages/{{ page.base-archive-name }}.tar.gz'>.tar.gz</a>]&nbsp;&nbsp;&nbsp;
+    [<a href="{{ site.data.gap.gap4dist }}tar.bz2/packages/{{ page.base-archive-name }}.tar.bz2">.tar.bz2</a>]&nbsp;&nbsp;&nbsp;
+    [<a href="{{ site.data.gap.gap4dist }}win.zip/packages/{{ page.base-archive-name }}-win.zip">-win.zip</a>]&nbsp;&nbsp;&nbsp;
+    [<a href="{{ site.data.gap.gap4dist }}zip/packages/{{ page.base-archive-name }}.zip">.zip</a>]&nbsp;&nbsp;&nbsp;
 </p>
-
-{% if page.source-repo %}
-<h4>Source code repository</h4>
-<p>{{ page.source-repo.type }} : <a href="{{ page.source-repo.url }}">{{ page.source-repo.url }}</a></p>
-{% endif %}
-
-{% if page.issue-url %}
-<h4>Issue tracker</h4>
-<p><a href="{{ page.issue-url }}">{{ page.issue-url }}</a></p>
-{% endif %}
-
-{% if page.support-email %}
-<h4>Support email address</h4>
-<p><a href="mailto:{{ page.support-email }}">{{ page.support-email }}</a></p>
-{% endif %}
