@@ -17,12 +17,14 @@ layout: start
     {% if page.issue-url %} [<a href="{{ page.issue-url }}">Issue tracker</a>] {% endif %}
 
 </p>
-<p>
+
+<dl>
 {% if page.authors.size > 1 %}
-    <b>Authors</b> &nbsp;
+    <dt>Authors</dt>
 {% else %}
-    <b>Author</b> &nbsp;
+    <dt>Author</dt>
 {% endif %}
+<dd>
 {% assign persons = "" %}
 {% for person in page.authors %}
     {% if person.url %}
@@ -31,14 +33,15 @@ layout: start
         {% capture persons %}{{ persons }}{{person.name}}|{% endcapture %}
     {% endif %}
 {% endfor %}
-{{ persons | split: "|" | join: ", " }}</p>
+{{ persons | split: "|" | join: ", " }}
+</dd>
 
-<p>
 {% if page.maintainers.size > 1 %}
-    <b>Maintainers</b> &nbsp;
+    <dt>Maintainers</dt>
 {% else %}
-    <b>Maintainer</b> &nbsp;
+    <dt>Maintainer</dt>
 {% endif %}
+<dd>
 {% assign persons = "" %}
 {% for person in page.maintainers %}
     {% if person.url %}
@@ -47,17 +50,23 @@ layout: start
         {% capture persons %}{{ persons }}{{person.name}}|{% endcapture %}
     {% endif %}
 {% endfor %}
-{{ persons | split: "|" | join: ", " }}</p>
+{{ persons | split: "|" | join: ", " }}
+</dd>
 
-
-
-<p><b> Version shipped with GAP</b>  &nbsp; {{ page.version }} &nbsp;&nbsp;&nbsp;(Released  {{ page.date | date: "%d/%m/%Y" }})</p>
+<dt> Version shipped with GAP</dt>  
+<dd> 
+    {{ page.version }} &nbsp;&nbsp;&nbsp;(Released  {{ page.date | date: "%d/%m/%Y" }})
+</dd>
 
 {% if page.license %}
-<p><b>License</b> &nbsp; {{ page.license }}</p>
+<dt>License</dt> 
+<dd>
+    {{ page.license }}
+</dd>
 {% endif %}
 
-<p> <b>Status</b> &nbsp;
+<dt>Status</dt> 
+<dd>
     {{ page.status }}
     {% if page.communicated-by and page.accept-date %}
         &nbsp;&nbsp; (communicated by {{page.communicated-by}}, accepted {{ page.accept-date | date: "%d/%m/%Y" }})
@@ -66,53 +75,58 @@ layout: start
     {% elsif page.accept-date %}
         &nbsp;&nbsp; (accepted {{ page.accept-date | date: "%d/%m/%Y" }})
     {% endif %}
-</p>
+</dd>
 
-<p> <b>Dependencies</b> &nbsp; GAP version: {{ page.GAP }} </br>
+<dt>Dependencies</dt>
+<dd>
+    GAP version: {{ page.GAP }} </br>
 
-{% if page.needed-pkgs %}
-    Needed other packages:
-{% assign pkgs = "" %}
-{% for pkg in page.needed-pkgs %}
-    {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
-{% endfor %}
-{{ pkgs | split: "|" | join: ", " }}
-</br>
-{% endif %}
-
-{% if page.suggested-pkgs %}
-    Suggested other packages:
-{% assign pkgs = "" %}
-{% for pkg in page.suggested-pkgs %}
-    {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
-{% endfor %}
-{{ pkgs | split: "|" | join: ", " }}
-</br>
-{% endif %}
-
-{% if page.external %}
-    External needs:
-{% assign ext = "" %}
-{% for e in page.external %}
-    {% if e.url %}
-        {% capture ext %}{{ ext }}<a href="{{ e.url }}">{{ e.name }}</a>|{% endcapture %}
-    {% else %}
-        {% capture ext %}{{ ext }}{{ e.name }}|{% endcapture %}
+    {% if page.needed-pkgs %}
+        Needed other packages:
+    {% assign pkgs = "" %}
+    {% for pkg in page.needed-pkgs %}
+        {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
+    {% endfor %}
+    {{ pkgs | split: "|" | join: ", " }}
+    </br>
     {% endif %}
-{% endfor %}
-{{ ext | split: "|" | join: ", " }}
-</br>
-{% endif %}
-</p>
 
-<p><b>Documentation</b> &nbsp; [<a href="{{ manual }}/{{ page.doc-html }}">HTML</a>] &nbsp;&nbsp;&nbsp; [<a href="{{ manual }}/{{ page.doc-pdf }}">PDF</a>]</p>
+    {% if page.suggested-pkgs %}
+        Suggested other packages:
+    {% assign pkgs = "" %}
+    {% for pkg in page.suggested-pkgs %}
+        {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
+    {% endfor %}
+    {{ pkgs | split: "|" | join: ", " }}
+    </br>
+    {% endif %}
+
+    {% if page.external %}
+        External needs:
+    {% assign ext = "" %}
+    {% for e in page.external %}
+        {% if e.url %}
+            {% capture ext %}{{ ext }}<a href="{{ e.url }}">{{ e.name }}</a>|{% endcapture %}
+        {% else %}
+            {% capture ext %}{{ ext }}{{ e.name }}|{% endcapture %}
+        {% endif %}
+    {% endfor %}
+    {{ ext | split: "|" | join: ", " }}
+    </br>
+    {% endif %}
+</dd>
+
+<dt>Documentation</dt> 
+<dd>
+[<a href="{{ manual }}/{{ page.doc-html }}">HTML</a>] &nbsp;&nbsp;&nbsp; [<a href="{{ manual }}/{{ page.doc-pdf }}">PDF</a>]
+</dd>
 
 <p>
 {% if page.support-email %}
-<b>Support email address</b> &nbsp;
+<dt>Support email address</dt> &nbsp;
 <a href="mailto:{{ page.support-email }}">{{ page.support-email }}</a>
 {% endif %}
-</p>
+</dl>
 
 
 <h4>Download</h4>
