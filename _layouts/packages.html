@@ -126,4 +126,16 @@ layout: start
 <a href="mailto:{{ page.support-email }}">{{ page.support-email }}</a>
 </dd>
 {% endif %}
+
+{% if page.downloads.size >= 1 %}
+<dt>Download</dt>
+<dd>
+{{ page.base-archive-name }} &nbsp;
+{% assign downloads = "" %}
+{% for download in page.downloads %}
+    {% capture downloads %}{{ downloads }}[<a href="{{ download.url }}">{{ download.name }}</a>]|{% endcapture %}
+{% endfor %}
+{{ downloads | split: "|" | join: "&nbsp;&nbsp;&nbsp;" }}
+</dd>
+{% endif %}
 </dl>
