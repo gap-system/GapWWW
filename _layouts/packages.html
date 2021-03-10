@@ -82,21 +82,17 @@ layout: start
 
     {% if page.needed-pkgs %}
         Needed other packages:
-    {% assign pkgs = "" %}
-    {% for pkg in page.needed-pkgs %}
-        {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
-    {% endfor %}
-    {{ pkgs | split: "|" | join: ", " }}
+        {% for pkg in page.needed-pkgs %}
+            {{ pkg.name }} ({{ pkg.version }}){% if forloop.last != true %}, {% endif %}
+        {% endfor %}
     </br>
     {% endif %}
 
     {% if page.suggested-pkgs %}
         Suggested other packages:
-    {% assign pkgs = "" %}
-    {% for pkg in page.suggested-pkgs %}
-        {% assign pkgs = pkgs | append: pkg.name | append: "(" | append: pkg.version | append : ")|" %}
-    {% endfor %}
-    {{ pkgs | split: "|" | join: ", " }}
+        {% for pkg in page.suggested-pkgs %}
+            {{ pkg.name }} ({{ pkg.version }}){% if forloop.last != true %}, {% endif %}
+        {% endfor %}
     </br>
     {% endif %}
 
