@@ -1,0 +1,46 @@
+name: "Sync"
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every day at 2:15 AM UTC
+    - cron: '15 2 * * *'
+
+jobs:
+  sync:
+    name: "Get new GitHub release data"
+    if: ${{ github.repository == 'gap-system/gap' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Check out the GapWWW repository in order to make changes to it"
+        uses: actions/checkout@v2
+      - name: "Clone GAP for its most up-to-date release scripts"
+        uses: actions/checkout@v2
+        with:
+          # TODO stop using wilfwilson/gap@website-scripts once it is merged
+          #repository: gap-system/gap
+          #ref: master
+          repository: wilfwilson/gap
+          ref: ww/website-scripts
+          path: tmp/gap/
+          fetch-depth: 1
+      - uses: actions/setup-python@v2
+      - name: "Install the required Python modules"
+        run: pip3 install PyGithub requests python-dateutil
+      - name: "Run the GAP dev release script for updating the website"
+        run: python -u ./tmp/gap/dev/releases/update_website.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Make a pull request to the master branch of this repository"
+        uses: peter-evans/create-pull-request@v3
+        with:
+          base: master
+          branch: auto/sync-with-github-releases
+          commit-message: Sync data from GAP's GitHub release system
+          title: Sync data from GAP's GitHub release system
+          body: >-
+            Automatically created by a GitHub Actions workflow, using with the
+            GAP release script `dev/release/update_website.py`.
+
+            You may wish to squash and merge this pull request, in order
+            to give it a more descriptive commit message.
