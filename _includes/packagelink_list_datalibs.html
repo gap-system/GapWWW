@@ -1,7 +1,9 @@
 <ul>
-{% for pkg in site.Packages %}
-    {% if site.data.data_libs contains pkg.name-lowercase %}
-        <li>{% include packagelink_generate.html pkg=pkg %}</li>
+{% assign pkgs = site.data.package-infos[site.data.release.version-safe] | sort %}
+{% for pkg in pkgs %}
+    {% assign name=pkg[0] %}
+    {% if site.data.data_libs contains name %}
+        <li>{% include packagelink_generate.html pkg=name %}</li>
     {% endif %}
 {% endfor %}
 </ul>

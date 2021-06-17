@@ -1,26 +1,32 @@
-{% assign pkg = include.pkg %}
+{% capture version %}{{ site.data.release.version | replace: ".", "-" }}{% endcapture %}
+{% assign pkginfo = site.data.package-infos[version][include.pkg] %}
+
 {% assign persons = "" %}
-{% for person in pkg.all-people %}
-    {% assign name-array = person.name | split: " " %}
-    {% assign name-string = "" %}
-    {% if person.name == "The GAP Team" %}
-        {% assign name-string = person.name %}
+{% for person in pkginfo.Persons %}
+    {% if person.FirstNames == "The" and person.LastName == "GAP Team" %}
+        {% assign name-string = "The GAP Team" %}
     {% else %}
+        {% assign name-string = "" %}
+        {% assign name-array = person.FirstNames | split: " " %}
         {% for iterator in name-array %}
             {% assign name-part = iterator %}
-            {% if forloop.last == false %}
-                {% if name-part.size > 2 %}
-                    {% assign name-part = name-part | slice: 0 | append: ". " %}
-                {% else %}
-                    {% assign name-part = name-part | append: " " %}
-                {% endif %}
+            {% if name-part.size > 2 %}
+                {% assign name-part = name-part | slice: 0 | append: ". " %}
+            {% else %}
+                {% assign name-part = name-part | append: " " %}
             {% endif %}
             {% assign name-string = name-string | append: name-part %}
         {% endfor %}
+        {% assign name-string = name-string | append: person.LastName %}
     {% endif %}
     {% assign persons = persons | append: name-string | append : "|" %}
 {% endfor %}
 {% assign persons = persons | split: "|" | join: ", " %}
 
-<a href="{{ site.baseurl }}/Packages/{{ pkg.name | downcase }}.html">{{ pkg.name }}</a>&nbsp;&nbsp;{{ pkg.version }} ({{ pkg.date | date: "%d/%m/%Y" }}) by {{ persons }}
-    <br />{{ pkg.description }}
+<a href="{{ site.baseurl }}/Packages/{{ include.pkg }}.html">
+  {{ pkginfo.PackageName }}</a>
+{{ pkginfo.Version }}
+({{ pkginfo.Date | date: "%d/%m/%Y" }})
+by {{ persons }}.
+<br />
+{{ pkginfo.Subtitle }}

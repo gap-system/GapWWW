@@ -1,5 +1,24 @@
 <table class="par">
-{% for p in include.packages %}
-<tr><td><a href="{{ site.baseurl }}/Packages/{{p[1].filename}}.html">{{p[0]}}</a>&nbsp;</td><td>{{p[1].version}}&nbsp;</td><td>&nbsp;{{p[1].date}}&nbsp;&nbsp;</td><td>{{p[1].description}}</td></tr>
+  {% capture version %}{{ include.version | replace: ".", "-" }}{% endcapture %}
+  {% assign pkgs = site.data.package-infos[version] | sort %}
+  {% for pkg in pkgs %}
+  <tr>
+    <td>
+      <a href="{{ site.baseurl }}/Packages/{{ pkg[0] }}.html">
+        {{pkg[1].PackageName}}</a>
+      &nbsp;
+    </td>
+    <td>{{pkg[1].Version}}
+      &nbsp;
+    </td>
+    <td>
+      &nbsp;
+      {{pkg[1].Date}}
+      &nbsp;&nbsp;
+    </td>
+    <td>
+      {{pkg[1].Subtitle}}
+    </td>
+  </tr>
 {% endfor %}
 </table>
