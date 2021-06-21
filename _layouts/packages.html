@@ -80,7 +80,9 @@ layout: start
     {% if pkginfo.Dependencies contains "NeededOtherPackages" and pkginfo.Dependencies.NeededOtherPackages.size > 0 %}
         Needed other packages:
         {% for pkg in pkginfo.Dependencies.NeededOtherPackages %}
-            {{ pkg[0] }} ({{ pkg[1] }}){% if forloop.last != true %}, {% endif %}
+            {% assign name = pkg[0] %}
+            {% include packagename_to_html.html pkg=name %}
+            ({{ pkg[1] }}){% if forloop.last != true %}, {% endif %}
         {% endfor %}
     </br>
     {% endif %}
@@ -88,7 +90,9 @@ layout: start
     {% if pkginfo.Dependencies contains "SuggestedOtherPackages" and pkginfo.Dependencies.SuggestedOtherPackages.size > 0 %}
         Suggested other packages:
         {% for pkg in pkginfo.Dependencies.SuggestedOtherPackages %}
-            {{ pkg[0] }} ({{ pkg[1] }}){% if forloop.last != true %}, {% endif %}
+            {% assign name = pkg[0] %}
+            {% include packagename_to_html.html pkg=name %}
+            ({{ pkg[1] }}){% if forloop.last != true %}, {% endif %}
         {% endfor %}
     </br>
     {% endif %}
