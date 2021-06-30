@@ -84,15 +84,24 @@ For users of Windows 10, we strongly recommend using GAP via the
 </p>
 
 <p>
-Otherwise, we recommend the use of the following <code>.exe</code> installer,
-which contains 64-bit binaries for GAP (compiled with the support of GMP and
+Otherwise, we recommend the use of the following <code>.exe</code>
+installer{% if windows_assets.size > 1 %}s{% endif %},
+which contains {% if windows_assets.size == 1 %}64-bit{% endif %}
+binaries for GAP (compiled with the support of GMP and
 readline libraries) and for selected GAP packages, and provides the standard
 installation procedure.
+{% if windows_assets.size > 1 %}
+<!-- Should apply to GAP 4.12+ -->
+Both 32-bit (<code>x86</code>) and 64-bit (<code>x86_64</code>) versions are
+available. For almost all users, 64-bit GAP is by far the better choice.
+Please note that the provision of 32-bit Windows installers is likely to be
+dropped from GAP releases in the near future.
 </p>
+{% endif %}
 
 <p>
 Note that the path to the GAP directory should not contain spaces. For example,
-you may install it in <code>C:\gap-{{page.version}}</code> (default),
+you may install GAP in <code>C:\gap-{{page.version}}</code> (default),
 <code>D:\gap-{{page.version}}</code> or
 <code>C:\Math\GAP\gap-{{page.version}}</code>, but you must not install it in a
 directory named like <code>C:\Program files\gap-{{page.version}}</code> or
