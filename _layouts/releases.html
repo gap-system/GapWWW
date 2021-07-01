@@ -22,8 +22,8 @@ see <a href="https://github.com/gap-system/gap/blob/master/CHANGES.md#{{anchor}}
 {% for asset in site.data.assets[version-safe] %}
   {% assign asset_prefix = asset.name | slice: 0, len %}
   {% if asset_prefix == gap_prefix %}{% unless asset.name contains "-core" %}
-    {% assign is_windows = asset.name | endswith: ".exe" %}
-    {% if is_windows %}
+    {% assign asset_suffix = asset.name | split: "" | reverse | join: "" | slice: 0, 4 %}
+    {% if asset_suffix == "exe." %}
       {% assign windows_assets = windows_assets | push: asset %}
     {% else %}
       {% assign unix_assets = unix_assets | push: asset %}
