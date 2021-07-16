@@ -8,7 +8,7 @@
 ##  
 LoadPackage("GAPDoc");
 
-Read("MSC2010.g");
+Read("MSC2020.g");
 
 StatisticsByMSC:=function()
   local ourbib, duplicates, q, w, tab, msccodes, mscnames, 
@@ -23,8 +23,8 @@ StatisticsByMSC:=function()
   fi;
   Print( "Loaded ", Length(ourbib), " records from GAP bibliography\n");
   tab:=[];
-  msccodes:=List(MSC2010, w -> w[1]);
-  mscnames:=List(MSC2010, w -> w[2]);
+  msccodes:=List(MSC2020, w -> w[1]);
+  mscnames:=List(MSC2020, w -> w[2]);
   SortParallel( msccodes, mscnames);
   posnomsc := Position( msccodes, "XX" );
   for i in [1..Length(msccodes)] do

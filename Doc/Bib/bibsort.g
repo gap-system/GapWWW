@@ -70,9 +70,9 @@ for y in Concatenation(years,["noyear"]) do
   od; 
 od;
 
-Read("MSC2010.g");
-msccodes:=List(MSC2010, w -> w[1]);
-mscnames:=List(MSC2010, w -> w[2]);
+Read("MSC2020.g");
+msccodes:=List(MSC2020, w -> w[1]);
+mscnames:=List(MSC2020, w -> w[2]);
 SortParallel( msccodes, mscnames);
 posnomsc := Position( msccodes, "XX" );
 
