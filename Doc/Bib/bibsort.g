@@ -42,6 +42,10 @@ for x in bib do
       newyear := x.year{[1,2,6,7]};
       Print(x.Label, " : Year ", x.year, " --> ", newyear, "\n");
       Add( sortedbyyears.(Int(newyear)), x );
+    elif x.year = "[2018] \\copyright 2018" then
+      Add( sortedbyyears.(2018), x );
+    elif x.year = "[2019] \\copyright 2019" then
+      Add( sortedbyyears.(2019), x );
     else
       Print("WARNING: Unrecognised year in ", x, "\n");
       Add( sortedbyyears.noyear, x );
