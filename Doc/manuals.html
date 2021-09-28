@@ -11,12 +11,12 @@ Here are HTML and PDF versions of the manuals of the
 GAP&nbsp;{{site.data.release.version}} core system.
 </p>
 <table class="par">
-<tr><th>Book name</th><th>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</th><th>Description</th></tr>
-<tr><td><a href="{{ site.baseurl }}/Manuals/doc/tut/chap0.html">Tutorial</a></td><td>[<a href="{{ site.baseurl }}/Manuals/doc/tut/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Tutorial, getting started with GAP</td></tr>
-<tr><td><a href="{{ site.baseurl }}/Manuals/doc/ref/chap0.html">Reference</a></td><td>[<a href="{{ site.baseurl }}/Manuals/doc/ref/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>The GAP reference manual</td></tr>
-<tr><td><a href="{{ site.baseurl }}/Manuals/doc/hpc/chap0.html">HPC-GAP</a></td><td>[<a href="{{ site.baseurl }}/Manuals/doc/hpc/manual.pdf">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>HPC-GAP Reference Manual</td></tr>
+<thead><tr><th style="width:30ex;">Book name</th><th style="width:6ex; padding: 0.8ex"></th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><a href="{{ site.baseurl }}/Manuals/doc/tut/chap0.html">Tutorial</a></td><td>[<a href="{{ site.baseurl }}/Manuals/doc/tut/manual.pdf">PDF</a>]</td><td>Tutorial, getting started with GAP</td></tr>
+<tr><td><a href="{{ site.baseurl }}/Manuals/doc/ref/chap0.html">Reference</a></td><td>[<a href="{{ site.baseurl }}/Manuals/doc/ref/manual.pdf">PDF</a>]</td><td>The GAP reference manual</td></tr>
+<tr><td><a href="{{ site.baseurl }}/Manuals/doc/hpc/chap0.html">HPC-GAP</a></td><td>[<a href="{{ site.baseurl }}/Manuals/doc/hpc/manual.pdf">PDF</a>]</td><td>HPC-GAP Reference Manual</td></tr>
+</tbody>
 </table>
 
 <p>There is also a {% include ref.html label="Preface" text="common&nbsp;preface" %} 
@@ -32,25 +32,26 @@ available.
 </p>
 
 <table class="par">
-<tr><th>Book name</th><th>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</th><th>Description</th></tr>
-
+<thead><tr><th style="width:30ex;">Book name</th><th style="width:6ex; padding: 0.8ex"></th><th>Description</th></tr></thead>
+<tbody>
 {% assign pkgs = site.data.package-infos[site.data.release.version-safe] | sort %}
 {% for pkg in pkgs %}
+  {% assign pkginfo = pkg[1] %}
+  {% assign path = pkginfo.InstallationPath | split: "-" | slice: 0 %}
+  {% capture manual %}{{ site.baseurl }}/Manuals/{{ path }}{% endcapture %}
   <tr>
     <td>
-      <a href="../Manuals/{{ pkg[1].InstallationPath }}/{{ pkg[1].PackageDoc[0].HTMLStart }}">
-        {{ pkg[1].PackageName }}</a>
+      <a href="{{ manual }}/{{ pkginfo.PackageDoc[0].HTMLStart }}">
+        {{ pkginfo.PackageName }}</a>
     </td>
     <td>
-      [<a href="../Manuals/{{ pkg[1].InstallationPath }}/{{ pkg[1].PackageDoc[0].PDFFile }}">PDF</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      [<a href="{{ manual }}/{{ pkginfo.PackageDoc[0].PDFFile }}">PDF</a>]
     </td>
     <td>
-      {{ pkg[1].Subtitle }}
+      {{ pkginfo.Subtitle }}
     </td>
   </tr>
 {% endfor %}
-
+</tbody>
 </table>
 
