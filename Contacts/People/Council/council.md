@@ -27,7 +27,7 @@ with any of the Council members if you have information that we can use.
 
 In its role as editorial board, the GAP Council
 coordinates the process by which submitted GAP packages
-are refereed. In that sense, the Council chairman acts as editor in
+are refereed. In that sense, the Council Chair acts as editor in
 chief, and the other members function as "associate editors," after the
 fashion of some journals. It is appropriate to obtain advice on submitting
 a package from any of the Council members. To submit a package, the Chair
@@ -39,7 +39,6 @@ The present ({{site.data.release.date | date: "%Y" }}) members of the GAP Counci
 
 - Laurent Bartholdi (since August 2011)
 - Anton Betten (since August 2011)
-- Gene Cooperman (since June 1995)
 - Bettina Eick (since July 2001)
 - Graham Ellis (since September 2007)
 - Gerhard Hiss (since November 1996)
@@ -54,25 +53,27 @@ The present ({{site.data.release.date | date: "%Y" }}) members of the GAP Counci
 - Max Neunhöffer (since August 2011)
 - Alice Niemeyer (since August 2011)
 - Götz Pfeiffer (since September 2007)
-- Edmund Robertson (since June 1995)
 - Leonard Soicher (since June 1997)
 
-Chair: Leonard Soicher (since March 2009)
+Chair: Bettina Eick (since October 2021)
 
 Former members of the GAP Council are:
 
 - Mike Atkinson (from June 1995 to June 2001)
 - Andrea Caranti (from June 1995 to June 2001)
+- Gene Cooperman (from June 1995 to September 2021)
 - Mike F. Newman (from June 1995 to November 2011)
-- Joachim Neubueser (from June 1999 to March 2006)
+- Joachim Neubüser (from June 1999 to March 2006)
 - Eamonn O'Brien (from June 1997 to February 2003)
 - Herbert Pahlings (from June 1995 to September 2007)
 - Cheryl Praeger (from June 1995 to August 2016)
 - Sarah Rees (from August 1999 to June 2001)
+- Edmund Robertson (from June 1995 to September 2021)
 - Ákos Seress (from June 1995 to February 2013)
 - Charles Wright (from June 1995 to September 2007)
 
-Former chairmen:
+Former chairs:
 
 - Charles Wright (from June 1995 to October 2003)
 - Edmund Robertson (from October 2003 to March 2009)
+- Leonard Soicher (from March 2009 to September 2021)
