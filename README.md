@@ -47,10 +47,17 @@ Note that the `Manuals` directory is not in this git repository, as it is too
 large (about XXX GB of data). This is why they are only on the
 server, in the directory `~/www.gap-system.org/Manuals` (so be very careful
 never to delete that!). To get them to appear in the right place on the
-website (they don't automatically, as they are not in the `~/www.gap-system.org/_site`
+website (they don't automatically, as they are not in the 
+`~/www.gap-system.org/_site`
 directory), we configured nginx to put them there, via
 `/host/gap-web/nginx.d/www.gap-system.org/_global.conf`
 
+The `Manuals` directory can be regenerated from a GAP installation and the
+corresponding `.json` file in `_data/package-infos/`. For example:
+
+```
+  etc/extract_manuals.py /usr/local/gap-4.11.1  _data/package-infos/4-11-1.json
+```
 
 ## Tweaking the server config
 
