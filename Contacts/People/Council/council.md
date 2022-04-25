@@ -45,7 +45,7 @@ The present ({{site.data.release.date | date: "%Y" }}) members of the GAP Counci
 - Max Horn (since August 2016)
 - Alexander Hulpke (since July 2001)
 - Chris Jefferson (since April 2020)
-- Alexander Konovalov (since July 2003)
+- Olexandr Konovalov (since July 2003)
 - Steve Linton (since June 1995)
 - Frank Lübeck (since July 2001)
 - Alice Niemeyer (since August 2011)
