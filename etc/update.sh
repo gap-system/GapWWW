@@ -4,8 +4,8 @@ set -e
 # fetch latest changes
 cd $HOME/GapWWW
 git fetch --all --prune
-git checkout gh-pages
-git reset --hard origin/gh-pages
+git checkout master
+git reset --hard origin/master
 
 # install prerequisites if necessary
 bundle config set --local path 'vendor/bundle'
