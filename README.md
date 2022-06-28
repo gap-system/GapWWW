@@ -25,18 +25,12 @@ website first. This requires use of [Jekyll](https://jekyllrb.com).
 
 ## Actually publishing changes to the website
 
-After a change has been committed this repository, currently one needs to
-manually get the change onto the website. This can be done as follows:
+After a change has been committed this repository, it should automatically
+appear a short time later on the live website.
 
-1. ssh into `gap-web.host.cs.st-andrews.ac.uk` (requires an account in St Andrews)
-
-2. for a test deployment (recommended), first `cd test.gap-system.org`
-  (then the update will be published on <https://test.gap-system.org>),
-  otherwise `cd www.gap-system.org`
-
-3. run `git up` (an alias we configured there for `git pull --ff-only`)
-
-4. run `jekyll build`
+If this does not work, please submit an issue. Or, if you have SSH access
+to the webserver, you can try to debug the issue; please consult
+`etc/README.server.md` for more information.
 
 That's it.
 
@@ -44,13 +38,13 @@ That's it.
 ## Warning about package manuals
 
 Note that the `Manuals` directory is not in this git repository, as it is too
-large (about XXX GB of data). This is why they are only on the
-server, in the directory `~/www.gap-system.org/Manuals` (so be very careful
-never to delete that!). To get them to appear in the right place on the
-website (they don't automatically, as they are not in the 
-`~/www.gap-system.org/_site`
-directory), we configured nginx to put them there, via
-`/host/gap-web/nginx.d/www.gap-system.org/_global.conf`
+large. This is why they are only on the server, in the directory
+`/srv/www/docs.gap-system.org`, where they are also used to serve the
+<https://docs.gap-system.org> subdomain. As a consequence, please be very
+careful about modifying its content!). To get them to appear in the right
+place on the website, we configured the Apache webserver to put them there,
+via a suitable directive in
+`/etc/apache2/sites-available/www.gap-system.org-le-ssl.conf`.
 
 The `Manuals` directory can be regenerated from a GAP installation and the
 corresponding `.json` file in `_data/package-infos/`. For example:
@@ -67,18 +61,11 @@ be fixed for almost all of them with the following script (inside the
 
 ## Tweaking the server config
 
-In general, config files for the nginx web server are in `/host/gap-web/nginx.d/`
-E.g. in `/host/gap-web/nginx.d/www.gap-system.org`.
+The config files for the Apache web server are in `/etc/apache2/sites-available/`
+while the actual website data is in `/srv/www/`. Consult `etc/README.server.md`
+for further details.
 
-You need to read up about nginx config syntax if you want to fully master
-these, but for basic things it usually suffices to look at the existing config
-files and one can often guess what they do.
+After modifying the Apache configuration, don't forget to ask it to reload
+the configuration, via
 
-After you make a config change it won't have any effect immediately. You need
-to tell nginx to reload its config. But first, validate it for syntax errors:
-
-    nginx -c /host/gap-web/nginx.conf -t
-
-If that worked, reload the config:
-
-    nginx -c /host/gap-web/nginx.conf -s reload
+    apachectl graceful

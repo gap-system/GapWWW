@@ -2,32 +2,31 @@
 
 /*
 GitHub webhook handler template based on code by Miloslav Hůla (https://github.com/milo)
-and extended for the GAP website by Max Horn.
+and modified by Max Horn.
 
 Here is how it works:
 
-Any push to the GapWWW repository triggers this PHP script as a
-webhook; this can be configured at
-<https://github.com/gap-system/GapWWW/settings/hooks>.
+Any push to the website repository triggers this PHP script as a webook.
+See `etc/README.server.md` for details on how to set up the webhook on GitHub.
 
 The crucial bit is at the end of this .php file, where an empty file
-`/home/gap-www/gap-website.trigger` is created. This is detected by a systemd unit
+$triggerfile is created. This is detected by a systemd unit
 /etc/systemd/system/gap-website.path (a copy of this file is in the
-`etc` directory of the GapWWW repo).
+`etc` directory).
 
 This then triggers /etc/systemd/system/gap-website.service
-(a copy of this file is in the `etc` directory of the GapWWW repo).
+(a copy of this file is in the `etc` directory).
 
 This finally executes `etc/update.sh`, which runs jekyll.
 */
-
+$triggerfile = "/home/gap-www/gap-website.trigger";
 
 /*
-We set a secret token in /etc/apache2/sites-enabled/gap.conf
-via this line: SetEnv GITHUB_WEBHOOK_SECRET "MY_SECRET"
+We set a secret token by adding a line of the form
+    SetEnv GITHUB_WEBHOOK_SECRET "MY_SECRET"
+to the corresponding *.conf file in /etc/apache2/sites-enabled/
 with the actual secret key taking the place of MY_SECRET.
-The same value must be entered in the GitHub settings at
-<https://github.com/gap-system/GapWWW/settings/hooks>.
+The same value must be entered in the GitHub webhook settings.
 */
 $hookSecret = getenv('GITHUB_WEBHOOK_SECRET');
 
@@ -85,10 +84,11 @@ switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
         break;
     case 'push':
         // create file to trigger systemd unit which regenerates the website
-        exec("echo 'Running gap-website webhook' | logger");
-        $status = touch("/home/gap-www/gap-website.trigger");
-        exec("echo '   touched /home/gap-www/gap-website.trigger, result $status' | logger");
-        echo "touched /home/gap-www/gap-website.trigger, result $status";
+        exec("echo 'Running webhook' | logger");
+        echo "about to touch $triggerfile";
+        $status = touch($triggerfile);
+        exec("echo '   touched $triggerfile, result $status' | logger");
+        echo "touched $triggerfile, result $status";
         break;
     default:
         header('HTTP/1.0 404 Not Found');
