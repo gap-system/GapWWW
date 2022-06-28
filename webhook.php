@@ -85,7 +85,7 @@ switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
     case 'push':
         // create file to trigger systemd unit which regenerates the website
         exec("echo 'Running webhook' | logger");
-        echo "about to touch $triggerfile";
+        echo "about to touch $triggerfile\n";
         $status = touch($triggerfile);
         exec("echo '   touched $triggerfile, result $status' | logger");
         echo "touched $triggerfile, result $status";
