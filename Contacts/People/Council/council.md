@@ -37,10 +37,10 @@ the page on [submission&nbsp;procedures]({{ site.baseurl }}/Contacts/submit.html
 
 The present ({{site.data.release.date | date: "%Y" }}) members of the GAP Council are:
 
-- Bill Allombert (since May 2022)
+- Bill Allombert (since June 2022)
 - Laurent Bartholdi (since August 2011)
 - Anton Betten (since August 2011)
-- Willem A. de Graaf (since May 2022)
+- Willem A. de Graaf (since June 2022)
 - Bettina Eick (since July 2001)
 - Graham Ellis (since September 2007)
 - Derek Holt (since June 1995)
@@ -50,10 +50,10 @@ The present ({{site.data.release.date | date: "%Y" }}) members of the GAP Counci
 - Olexandr Konovalov (since July 2003)
 - Steve Linton (since June 1995)
 - Frank Lübeck (since July 2001)
-- James Mitchell (since May 2022)
+- James Mitchell (since June 2022)
 - Alice Niemeyer (since August 2011)
 - Götz Pfeiffer (since September 2007)
-- Colva Roney-Dougal (since May 2022)
+- Colva Roney-Dougal (since June 2022)
 - Leonard Soicher (since June 1997)
 
 Chair: Bettina Eick (since October 2021)
