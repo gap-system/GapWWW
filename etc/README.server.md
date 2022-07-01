@@ -111,10 +111,11 @@ following as root:
    elsewhere in this file, and enable PHP.
    Of course also set up SSL/TLS and a scheme to update the certificates.
 
-4. Install the systemd units
+4. Install and activate the systemd units
 
         cp /home/gap-www/GapWWW/etc/gap-website.* /etc/systemd/system/
         systemctl enable gap-website.service gap-website.path
+        systemctl start gap-website.service gap-website.path
 
 
 ## Further steps as `gap-www`
