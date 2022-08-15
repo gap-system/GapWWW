@@ -28,8 +28,10 @@ jobs:
         run: python -u ./tmp/gap/dev/releases/update_website.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Remove GAP clone"
+        run: rm -rf ./tmp/gap
       - name: "Make a pull request to the master branch of this repository"
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           base: master
           branch: auto/sync-with-github-releases
