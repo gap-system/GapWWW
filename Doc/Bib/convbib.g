@@ -199,8 +199,8 @@ SizeScreen([139,]);
 # Add further lists here.
 bib2niceandhtml("gap-published", "Published work which cites GAP",
 Concatenation( "The GAP bibliography was partially obtained using the ",
-"<a href=\"http://www.ams.org/mathscinet/\">MathSciNet</a> database. ",
-"We acknowledge the <a href=\"http://www.ams.org/\">American Mathematical Society</a> ",
+"<a href=\"https://www.ams.org/mathscinet/\">MathSciNet</a> database. ",
+"We acknowledge the <a href=\"https://www.ams.org/\">American Mathematical Society</a> ",
 "for giving us such opportunity.") );
 # GapNonMR is joined in gap-published - no need to duplicate (AH, 9/4/01)
 #bib2niceandhtml("GapNonMR", "Work not in MR which cites GAP");
