@@ -122,17 +122,11 @@ following as root:
 
 As `gap-www:gap-www`  (`sudo -u gap-www -g gap-www bash`):
 
-1. In the `gap-www` home directory add a clone of the `GapWWW` git repository, i.e.,
-   in `/home/gap-www/GapWWW` (otherwise adjust `gap-website.service`). Also do
+In the `gap-www` home directory add a clone of the `GapWWW` git repository, i.e.,
+in `/home/gap-www/GapWWW` (otherwise adjust `gap-website.service`). Also do
 
-        touch /home/gap-www/gap-website.trigger
-        chmod 0664 /home/gap-www/gap-website.trigger
-
-2. To ensure all the relevant ruby gems are installed, do this:
-
-        cd /home/gap-www/GapWWW
-        bundle config set --local path 'vendor/bundle'
-        bundle install
+    touch /home/gap-www/gap-website.trigger
+    chmod 0664 /home/gap-www/gap-website.trigger
 
 
 ## On GitHub
