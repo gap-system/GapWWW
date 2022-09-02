@@ -6,23 +6,21 @@ toc: Installation
 
 Installing the GAP distribution with all the packages and full data
 libraries from source code (as opposed to via e.g. the Windows
-binary installed for GAP) requires a working C and C++ development
+binary installer for GAP) requires a working C and C++ development
 environment on your system as well as GNU make. You will also need
-either the GMP library or the m4 macro processor; most, but not all
+the [GMP library](https://gmplib.org); most, but not all
 standard development environments include this. Furthermore, if the
 GNU readline library is detected on your system at compile time, it
 will be used for command line editing.
 
-On Mac OS X, you need to install the Apple developer tools.
-These can be obtained as part of Apple's "Xcode" application, free of 
-charge via the Mac App Store or via <https://developer.apple.com/xcode/>.
-If you are on Mac OS X 10.7 or later, then after downloading and installing 
-Xcode, you need to perform one extra step: launch Xcode, then open its 
-Preferences dialog, and go to the "Downloads" pane. You will be presented 
-with an optional list of extra components. From there, install the 
-"Command Line tools" component. For Mac OS X 10.6 or earlier, some
-(possibly already outdated) version of Xcode may be contained on 
-your Mac OS X Installer DVD.
+On macOS, you need to install the Apple developer tools. If you are on
+macOS 10.11 or newer, this can be achieved by opening a terminal window
+and entering the command `xcode-select --install`. A window will appear
+asking you whether you would like to install the command line developer
+tools. Confirm this by clicking the “Install” button. After this
+completed, you can verify that it worked by verifying that the directory
+`/Library/Developer/CommandLineTools/usr/bin/` exists and contains executables
+such as `clang` and `clang++`.
 
 Since Windows binaries for GAP and some packages are contained in the GAP
 installer for Windows, you do not need to install any additional 
