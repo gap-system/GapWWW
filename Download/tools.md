@@ -4,7 +4,6 @@ layout: default
 toc: Installation
 ---
 
-<p>
 Installing the GAP distribution with all the packages and full data
 libraries from source code (as opposed to via e.g. the Windows
 binary installed for GAP) requires a working C and C++ development
@@ -13,13 +12,10 @@ either the GMP library or the m4 macro processor; most, but not all
 standard development environments include this. Furthermore, if the
 GNU readline library is detected on your system at compile time, it
 will be used for command line editing.
-</p>
 
-<p>
 On Mac OS X, you need to install the Apple developer tools.
 These can be obtained as part of Apple's "Xcode" application, free of 
-charge via the Mac App Store or via 
-<a href="http://developer.apple.com/xcode/">http://developer.apple.com/xcode/</a>.
+charge via the Mac App Store or via <https://developer.apple.com/xcode/>.
 If you are on Mac OS X 10.7 or later, then after downloading and installing 
 Xcode, you need to perform one extra step: launch Xcode, then open its 
 Preferences dialog, and go to the "Downloads" pane. You will be presented 
@@ -27,32 +23,27 @@ with an optional list of extra components. From there, install the
 "Command Line tools" component. For Mac OS X 10.6 or earlier, some
 (possibly already outdated) version of Xcode may be contained on 
 your Mac OS X Installer DVD.
-</p>
 
-<p>
 Since Windows binaries for GAP and some packages are contained in the GAP
 installer for Windows, you do not need to install any additional 
 tools for Windows. However, if you want to try to build binaries 
-for more packages, you may install  <a href="http://www.cygwin.com/">Cygwin</a>
+for more packages, you may install [Cygwin](https://www.cygwin.com)
 to get a UNIX environment for Windows, selecting all needed tools 
 during Cygwin installation.
-</p>
 
-<p>
 To install development tools on a Linux system, use your preferred package 
 manager (e.g. apt-get or aptitude or Synaptic etc.). For example, on Ubuntu
 or Debian we suggest that you call
-<pre>
-  sudo apt-get install build-essential autoconf libtool libgmp-dev libreadline-dev zlib1g-dev
-</pre>
-before calling <code>>configure</code> in the GAP root directory.
-</p>
 
-<p>
+      sudo apt-get install build-essential autoconf libtool libgmp-dev libreadline-dev zlib1g-dev
+
+before calling `configure` in the GAP root directory.
+
 To get maximum benefit from GAP and from various packages it may be useful 
 to install a number of other free software libraries (and their associated 
 development tools) although they are not required for basic operation. 
 For example, 
+
 <dl>
 <dt><a href="../Packages/browse.html">Browse</a></dt>
 	<dd>needs the ncurses library
@@ -67,12 +58,7 @@ For example,
 	libXext, libX11, libSM, and libICE
 	(e.g. libx11-dev, libxaw7-dev, libxt-dev which possibly aready install
 	the other four libxmu-dev, libxext-dev, libsm-dev, libice-dev);</dd>
-<!--
-<dt><a href="../Packages/pargap.html">ParGAP</a></dt>
-	<dd> needs an MPI implementation such as OpenMPI or MPICH2
-	but optionally may use the MPINU library supplied with the package.</dd>
--->	
 </dl>
+
 Other packages not listed here may have additional requirements listed in their documentation.
-</p>
 
