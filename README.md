@@ -49,15 +49,9 @@ via a suitable directive in
 The `Manuals` directory can be regenerated from a GAP installation and the
 corresponding `.json` file in `_data/package-infos/`. For example:
 
-    etc/extract_manuals.py /usr/local/gap-4.11.1  _data/package-infos/4-11-1.json
-
-Now almost all cross HTML-links into package manuals do not work. This can
-be fixed for almost all of them with the following script (inside the
-`Manuals` directory:
-
-    etc/pkglinks.py
-
-(Remove generated soft links with `cd pkg; ./RemoveTemporarySymLinks`.)
+```
+  etc/extract_manuals.py /usr/local/gap-4.11.1  _data/package-infos/4-11-1.json
+```
 
 ## Tweaking the server config
 
