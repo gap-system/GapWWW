@@ -34,22 +34,27 @@ be recorded and might help others in the future.
 
 The present members of the Support Group are:
 
+- Bill Allombert
 - Laurent Bartholdi
+- Dominik Bernhardt
 - Thomas Breuer
 - Bettina Eick
 - Franz Gähler
-- Greg Gamble
 - Willem de Graaf
 - Burkhard Höfling
 - Max Horn
+- Gábor Horváth
 - Alexander Hulpke
 - David Joyner
 - Stefan Kohl
 - Olexandr Konovalov
-- Steve Linton
 - Frank Lübeck
-- John McDermott
-- James Mitchell
-- Max Neunhöffer
+- Robert F Morse
+- Jürgen Müller
+- Mike Newman
+- Alice Niemeyer
 - Dmitrii Pasechnik
-- Jack Schmidt
+- Martin Schönert
+- Andrew Solomon
+- Chris Wensley
+- Charles Wright
