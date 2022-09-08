@@ -2,8 +2,6 @@
 
 Read("GapIgnore.MR");
 
-SEARCHMRHOST := "www.ams.org";
-
 EntryForGapCiteMR:=function( bib )
 #
 # This function takes the string 'bib' representing a bibtex record retrieved
