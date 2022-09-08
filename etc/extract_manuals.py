@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #
-# This script takes the path of a GAP directory conaining a pkg subdirectory
-# from which to extact packages; and a json file which contains metadata for
+# This script takes the path of a GAP directory containing a pkg subdirectory
+# from which to extract packages; and a json file which contains metadata for
 # all packages in the given GAP directory (i.e., a package-info.json, as
 # shipped with GAP releases starting with GAP 4.11.1)
 #
