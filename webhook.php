@@ -11,20 +11,20 @@ See `etc/README.server.md` for details on how to set up the webhook on GitHub.
 
 The crucial bit is at the end of this .php file, where an empty file
 $triggerfile is created. This is detected by a systemd unit
-/etc/systemd/system/gap-website.path (a copy of this file is in the
+~/.config/systemd/user/gap-website.path (a copy of this file is in the
 `etc` directory).
 
-This then triggers /etc/systemd/system/gap-website.service
+This then triggers ~/.config/systemd/user/gap-website.service
 (a copy of this file is in the `etc` directory).
 
 This finally executes `etc/update.sh`, which runs jekyll.
 */
-$triggerfile = "/home/gap-www/gap-website.trigger";
+$triggerfile = "/srv/www/www-gap-systems/data/gap-website.trigger";
 
 /*
 We set a secret token by adding a line of the form
     SetEnv GITHUB_WEBHOOK_SECRET "MY_SECRET"
-to the corresponding *.conf file in /etc/apache2/sites-enabled/
+to the file /srv/www/www-gap-systems/data/webhook.secret
 with the actual secret key taking the place of MY_SECRET.
 The same value must be entered in the GitHub webhook settings.
 */

@@ -17,15 +17,15 @@ The server can be reached via SSH:
 
     ssh www.gap-system.org
 
-There is a dedicated user `gap-www` who owns a clone of the GapWWW
+There is a dedicated user `www-gap-systems` who owns a clone of the GapWWW
 repository at
 
-    /home/gap-www/GapWWW
+    /srv/www/www-gap-systems/data/GapWWW
 
-This clone is owned by use `gap-www` and group `gap-www`. If anything goes
+This clone is owned by use `www-gap-systems` and group `www-gap-systems`. If anything goes
 wrong with these permissions, they can be fixed via
 
-    chown -R gap-www:gap-www /home/gap-www/GapWWW
+    chown -R www-gap-systems:www-gap-systems /srv/www/www-gap-systems/data/GapWWW
 
 ## Automatic updates via webhook
 
@@ -34,17 +34,17 @@ repository, GitHub activates a webhook we provide via `webhook.php` at
 <https://www.gap-system.org/webhook.php>.
 
 The crucial bit is at the end of this .php file, where an empty file
-`/home/gap-www/gap-website.trigger` is created. This is detected by a
-systemd unit `/etc/systemd/system/gap-website.path` (a copy of this file is
+`/srv/www/www-gap-systems/data/gap-website.trigger` is created. This is detected by a
+systemd unit `~/.config/systemd/user/gap-website.path` (a copy of this file is
 in the `etc` directory of the GapWWW repository).
 
-This then triggers `/etc/systemd/system/gap-website.service`
+This then triggers `~/.config/systemd/user/gap-website.service`
 (a copy of this file is in the `etc` directory of the GapWWW repository).
 
 This finally executes `etc/update.sh`, which runs jekyll.
 
 
-For authentication, we set a secret token in `/etc/apache2/sites-enabled/www.gap-system.org*`
+For authentication, we set a secret token in `/srv/www/www-gap-systems/data/webhook.secret`
 which looks like this:
 
     SetEnv GITHUB_WEBHOOK_SECRET "MY_SECRET"
@@ -61,30 +61,30 @@ on the webserver.
 
 If updates stop working, a good first place to look at is this output of this:
 
-    systemctl status gap-website.service
+    systemctl --user status gap-website.service gap-website.path
 
 This prints a log with extra info. However, it might also say "service not
 found". In that case, make sure that `gap-website.service` and
 `gap-website.path` are installed and enabled:
 
-    cp /home/gap-www/GapWWW/etc/gap-website.* /etc/systemd/system/
-    systemctl enable gap-website.service gap-website.path
+    cp /srv/www/www-gap-systems/data/GapWWW/etc/gap-website.* ~/.config/systemd/user
+    systemctl --user enable gap-website.service gap-website.path
 
 Also helpful is to study the log for the relevant systemd units
 
-    journalctl -f -u "gap-website.*"
+    journalctl --user -f -u "gap-website.*"
 
 A problem that sometimes happens (e.g. if one directly pokes into the git
 clone) are broken file permissions which can impede further operations, such
 as git pulling updates or jekyll updating the website. To fix these, run the
 following as root:
 
-    chown -R gap-www:gap-www /home/gap-www/GapWWW
-    chown -R gap-www:gap-www /srv/www/www.gap-system.org
+    chown -R www-gap-systems:www-gap-systems /srv/www/www-gap-systems/data/GapWWW
+    chown -R www-gap-systems:www-gap-systems /srv/www/www-gap-systems/data/http
 
-    touch /home/gap-www/gap-website.trigger
-    chown gap-www:www-data /home/gap-www/gap-website.trigger
-    chmod 0664 /home/gap-www/gap-website.trigger
+    touch /srv/www/www-gap-systems/data/gap-website.trigger
+    chown www-gap-systems:www-gap-systems /srv/www/www-gap-systems/data/gap-website.trigger
+    chmod 0664 /srv/www/www-gap-systems/data/gap-website.trigger
 
 
 ## Initial setup / what if the server VM is upgraded
@@ -93,40 +93,41 @@ following as root:
 
 - Ubuntu or Debian VM
 - Apache 2 (`apt install apache2`)
-- Ruby 2.7 or newer, including development headers (`apt-get install ruby-dev`)
+- Ruby 2.7 or newer, including development headers, and bundler (`apt-get install bundler`)
 - PHP (only for the webhook) (`apt install libapache2-mod-php ; a2enmod php7.4`)
 - Jekyll (installed via `gem` and `bundler`, see below)
 
 
 ## Further steps as `root`
 
-1. Set up a user `gap-www` in group `gap-www`
+1. Set up a user `www-gap-systems` in group `www-gap-systems`
 
-2. Set up an Apache2 site with data in `/srv/www/www.gap-system.org/` (or modify the units
-   here for alternate locations); ensure `gap-www` owns it, i.e.
+2. Set up an Apache2 site with data in `/srv/www/www-gap-systems/data/http/` (or modify the units
+   here for alternate locations); ensure `www-gap-systems` owns it, i.e.
 
-        chown -R gap-www:gap-www /srv/www/www.gap-system.org
+        chown -R www-gap-systems:www-gap-systems /srv/www/www-gap-systems/data/http
 
    In the config for that site, make sure to set `GITHUB_WEBHOOK_SECRET` as described
    elsewhere in this file, and enable PHP.
    Of course also set up SSL/TLS and a scheme to update the certificates.
 
-4. Install and activate the systemd units
 
-        cp /home/gap-www/GapWWW/etc/gap-website.* /etc/systemd/system/
-        systemctl enable gap-website.service gap-website.path
-        systemctl start gap-website.service gap-website.path
+## Further steps as `www-gap-systems`
 
+As `www-gap-systems:www-gap-systems`  (`sudo -u www-gap-systems -g www-gap-systems bash`):
 
-## Further steps as `gap-www`
+In the `www-gap-systems` home directory add a clone of the `GapWWW` git repository, i.e.,
+in `/srv/www/www-gap-systems/data/GapWWW` (otherwise adjust `gap-website.service`). Also do
 
-As `gap-www:gap-www`  (`sudo -u gap-www -g gap-www bash`):
+    touch /srv/www/www-gap-systems/data/gap-website.trigger
+    chown www-gap-systems:www-gap-systems /srv/www/www-gap-systems/data/gap-website.trigger
+    chmod 0644 /srv/www/www-gap-systems/data/gap-website.trigger
 
-In the `gap-www` home directory add a clone of the `GapWWW` git repository, i.e.,
-in `/home/gap-www/GapWWW` (otherwise adjust `gap-website.service`). Also do
+Next install and activate the systemd units:
 
-    touch /home/gap-www/gap-website.trigger
-    chmod 0664 /home/gap-www/gap-website.trigger
+        cp /srv/www/www-gap-systems/data/GapWWW/etc/gap-website.* ~/.config/systemd/user/
+        systemctl --user enable gap-website.service gap-website.path
+        systemctl --user start gap-website.service gap-website.path
 
 
 ## On GitHub
