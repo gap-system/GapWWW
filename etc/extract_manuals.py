@@ -39,10 +39,10 @@ shutil.copytree(os.path.join(gaproot, "doc"), os.path.join(dstdir, "doc"))
 for k, v in pkgs.items():
     # extract the name of package directory
     notice("processing " + v["PackageName"])
-    pkgsrcdir = os.path.join(gaproot, v["InstallationPath"])
+    pkgsrcdir = os.path.join(gaproot, "pkg", v["PackageName"].lower())
     if not os.path.isdir(pkgsrcdir):
         error(f"{pkgsrcdir} is not a directory")
-    pkgdstdir = os.path.join(dstdir, re.sub(r"pkg/([^-]+)-[^/]+", r"pkg/\1", v["InstallationPath"]))
+    pkgdstdir = os.path.join(dstdir, "pkg", v["PackageName"].lower())
     os.makedirs(pkgdstdir, exist_ok = True)
     docpaths = set()
     for b in v["PackageDoc"]:
