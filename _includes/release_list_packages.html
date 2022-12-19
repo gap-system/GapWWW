@@ -1,4 +1,13 @@
 <table class="par">
+<thead>
+<tr>
+  <th>Package name</th>
+  <th style="width:6em;">Version</th>
+  <th style="width:6em;">Release date</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
   {% capture version %}{{ include.version | replace: ".", "-" }}{% endcapture %}
   {% assign pkgs = site.data.package-infos[version] | sort %}
   {% for pkg in pkgs %}
@@ -6,19 +15,16 @@
     <td>
       <a href="{{ site.baseurl }}/Packages/{{ pkg[0] }}.html">
         {{pkg[1].PackageName}}</a>
-      &nbsp;
     </td>
     <td>{{pkg[1].Version}}
-      &nbsp;
     </td>
     <td>
-      &nbsp;
       {{pkg[1].Date}}
-      &nbsp;&nbsp;
     </td>
     <td>
       {{pkg[1].Subtitle}}
     </td>
   </tr>
 {% endfor %}
+</tbody>
 </table>
