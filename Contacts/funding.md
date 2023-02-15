@@ -6,6 +6,8 @@ toc: Contacts
 
 We acknowledge with gratitude the support of the development of
 GAP ...
+-   by the German Research Council (DFG) Collaborative Research Center TRR 195
+    "Symbolic Tools in Mathematics and their Application",
 -   by the EU Horizon 2020 European Research Infrastructure project
     676541 "OpenDreamKit: Open Digital Research Environment Toolkit
     for the Advancement of Mathematics",
