@@ -35,7 +35,7 @@ We hope for feedback in particular in the following instances.
     information about your work again by an email letter to the address
     <support@gap-system.org>, see also the page on
     [Feedback on Use](publicationfeedback.html).
-     
+
 -   **When publishing results.**  Finally, when you publish results
     obtained in part by using GAP we ask that you quote GAP (see
     recommended
@@ -45,7 +45,7 @@ We hope for feedback in particular in the following instances.
     to your publication into the
     [Bibliography]({{ site.baseurl }}/Doc/Bib/bib.html)
     about use of GAP.
-     
+
 -   **When encountering bugs.**  We would extremely appreciate if in
     case of encountering any bugs in GAP you could inform us as soon as
     possible. Reporting a bug, please follow [these
@@ -69,7 +69,6 @@ different categories.
     most of the other GAP users by direct correspondence with you.
     Please send letters about such **local** problems and questions also
     to the address <support@gap-system.org>.
-     
 
 -   **GAP Forum.**  On the other hand, the
     [GAP Forum]({{ site.baseurl }}/Contacts/Forum/forum.html)
