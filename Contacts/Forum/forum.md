@@ -67,7 +67,3 @@ to point to the
 [Group-Pub-forum](http://www.bath.ac.uk/~masgcs/gpf.html) in which
 such questions are answered and discussed by a large community of
 experts.
-
-We provide links to **further mathematical fora** and to other addresses
-that we hope to be useful for mathematicians on the page
-['To Outside World']({{ site.baseurl }}/Contacts/outside.html).

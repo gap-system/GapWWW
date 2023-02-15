@@ -84,10 +84,7 @@ different categories.
     like to point to the
     [Group-Pub-forum](http://www.bath.ac.uk/~masgcs/gpf.html) in
     which such questions are answered and discussed by a large community
-    of experts.\
-    We provide links to further mathematical fora and to other addresses
-    that we hope to be useful for mathematicians on the page
-    ['To Outside World']({{ site.baseurl }}/Contacts/outside.html).
+    of experts.
 
 ### Cooperation
 
@@ -114,9 +111,3 @@ about the process of [submitting contributions](submit.html).
 
 We acknowledge with gratitude the financial support of the development
 of GAP by various [Funding Bodies](funding.html).
-
-Finally, **[To Outside World](outside.html)** gives a number of links
-that we hope to be occasionally useful to have at hand for users of GAP,
-although they have nothing directly to do with the system. Most of the
-links go to web sites with lots of information that we believe to be
-kept reasonably up to date for their respective purpose.
