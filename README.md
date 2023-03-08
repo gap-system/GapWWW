@@ -53,8 +53,8 @@ to the webserver, you can try to debug the issue.
 
 ## SSH access to the web servers
 
-The GAP web server is hosted at the TU Kaiserslautern. Primary admin
-for this web server is Max Horn <horn@mathematik.uni-kl.de>. If you
+The GAP web server is hosted at the RPTU Kaiserslautern-Landau. Primary admin
+for this web server is Max Horn <mhorn@rptu.de>. If you
 feel you have need to directly access the server via SSH, contact him.
 
 - SSH hostname: `www-admin11.uni-kl.de`
