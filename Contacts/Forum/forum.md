@@ -64,7 +64,7 @@ GAP Forum.
 
 For **theoretical questions** on groups and related structures we like
 to point to the
-[Group-Pub-forum](http://www.bath.ac.uk/~masgcs/gpf.html) in which
+[Group-Pub-forum](https://people.bath.ac.uk/masgcs/gpf.html) in which
 such questions are answered and discussed by a large community of
 experts.
 

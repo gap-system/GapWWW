@@ -81,7 +81,7 @@ different categories.
 
     For **theoretical** questions on groups and related structures we
     like to point to the
-    [Group-Pub-forum](http://www.bath.ac.uk/~masgcs/gpf.html) in
+    [Group-Pub-forum](https://people.bath.ac.uk/masgcs/gpf.html) in
     which such questions are answered and discussed by a large community
     of experts.\
     We provide links to further mathematical fora and to other addresses
