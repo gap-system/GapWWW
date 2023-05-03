@@ -10,7 +10,8 @@ A separate page
 [People]({{ site.baseurl }}/Contacts/People/people.html)
 acknowledges the help given to the GAP project in different ways by many
 colleagues. All of these are refered to as the **"GAP Group"**. To
-contact the GAP Group by email, please use the address
+contact the GAP Group by email regarding matters concerning the
+GAP computer algebra system, please use the address
 <support@gap-system.org>.
 
 The GAP Group is most interested in close contact to the users of GAP.
