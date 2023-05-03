@@ -21,42 +21,30 @@ reacting to feedback and giving support, users are kindly asked to
 understand that all this is done by colleagues who provide such service
 in addition to the work for their regular job.
 
-### Centres
-
-In March 2005 the GAP Council and the GAP developers have agreed that
-status and responsibilities of "GAP Headquarters" should be passed to
-an equal collaboration of a number of
-"[GAP Centers]({{ site.baseurl }}/Contacts/centres.html)".
-
 ### Feedback
 
 We hope for feedback in particular in the following instances.
 
 -   **When using GAP.**  If you have used GAP we would appreciate some
-    information about your work again by an email letter to the address
+    information about your work via an email to the address
     <support@gap-system.org>, see also the page on
     [Feedback on Use](publicationfeedback.html).
 
--   **When publishing results.**  Finally, when you publish results
+-   **When publishing results.**  When you publish results
     obtained in part by using GAP we ask that you quote GAP (see
-    recommended
-    [citation]({{ site.baseurl }}/Contacts/cite.html)) and
+    recommended [citation]({{ site.baseurl }}/Contacts/cite.html)) and
     tell us about your publication again by email to
     <support@gap-system.org> since we would like to include a reference
     to your publication into the
     [Bibliography]({{ site.baseurl }}/Doc/Bib/bib.html)
     about use of GAP.
 
--   **When encountering bugs.**  We would extremely appreciate if in
-    case of encountering any bugs in GAP you could inform us as soon as
-    possible. Reporting a bug, please follow [these
-    guidelines](trouble.html). The preferred way to submit bug reports
-    is to use the [GAP issue
+-   **When encountering bugs.**  We strongly appreciate timely reports
+    about any bugs in GAP you may encounter. When reporting a bug,
+    please follow [these guidelines](trouble.html).
+    The preferred way to submit bug reports is to use the [GAP issue
     tracker](https://github.com/gap-system/gap/issues) on GitHub.
-    Alternatively, you may send them to <support@gap-system.org>. When
-    using email, please don't attach any log files, suggested patches
-    etc. because this mailing list blocks attachments - put all the text
-    into the body of email instead.
+    Alternatively, you may send them to <support@gap-system.org>.
 
 ### User Support
 
@@ -106,8 +94,3 @@ As explained on the respective page we have established a procedure for
 formally 'accepting' some packages which we hope will give them a
 status comparable to a published paper. On a separate page we inform
 about the process of [submitting contributions](submit.html).
-
-### Funding
-
-We acknowledge with gratitude the financial support of the development
-of GAP by various [Funding Bodies](funding.html).

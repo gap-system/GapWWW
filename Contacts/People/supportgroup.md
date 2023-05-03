@@ -12,10 +12,7 @@ This is the web page for the Support Group of the mathematical software package 
 The preferred way to submit bug reports is to use the
 [GAP issue tracker](https://github.com/gap-system/gap/issues)
 on GitHub. Alternatively, you may send them to <support@gap-system.org>. 
-When using email, please mention the version of GAP and the
-operating system you are using. Also, please don't attach any log files,
-suggested patches etc. because this mailing list blocks attachments - put all
-the text into the body of email instead.
+When reporting a bug, please follow [these guidelines](trouble.html).
 
 If you don't find instructions helping you do the computation you wish to do 
 in the [examples](../../Doc/Examples/examples.html) or 
