@@ -4,6 +4,7 @@ layout: start
 
 {% assign namelowercase = page.title | downcase %}
 {% assign pkginfo = site.data.package-infos[site.data.release.version-safe][namelowercase] %}
+{% assign pkgstatus = site.data.package_status[namelowercase] %}
 {% capture manual %}{{ site.docsurl }}/pkg/{{ namelowercase }}{% endcapture %}
 
 <h1>GAP package {{ pkginfo.PackageName }}</h1>
@@ -63,13 +64,13 @@ layout: start
 
 <dt>Status</dt> 
 <dd>
-    {{ pkginfo.Status }}
-    {% if pkginfo contains "CommunicatedBy" and pkginfo contains "AcceptDate" %}
-        &nbsp;&nbsp; (communicated by {{pkginfo.CommunicatedBy}}, accepted {{ pkginfo.AcceptDate | date: "%d/%m/%Y" }})
-    {% elsif pkginfo contains "CommunicatedBy" %}
-        &nbsp;&nbsp; (communicated by {{pkginfo.CommunicatedBy}})
-    {% elsif pkginfo contains "AcceptDate" %}
-        &nbsp;&nbsp; (accepted {{ pkginfo.AcceptDate | date: "%d/%m/%Y" }})
+    {{ pkgstatus.Status }}
+    {% if pkgstatus contains "CommunicatedBy" and pkgstatus contains "AcceptDate" %}
+        &nbsp;&nbsp; (communicated by {{pkgstatus.CommunicatedBy}}, accepted {{ pkgstatus.AcceptDate | date: "%d/%m/%Y" }})
+    {% elsif pkgstatus contains "CommunicatedBy" %}
+        &nbsp;&nbsp; (communicated by {{pkgstatus.CommunicatedBy}})
+    {% elsif pkgstatus contains "AcceptDate" %}
+        &nbsp;&nbsp; (accepted {{ pkgstatus.AcceptDate | date: "%d/%m/%Y" }})
     {% endif %}
 </dd>
 

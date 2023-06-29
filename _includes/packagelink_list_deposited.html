@@ -1,8 +1,9 @@
 <ul>
 {% assign pkgs = site.data.package-infos[site.data.release.version-safe] | sort %}
 {% for pkg in pkgs %}
-    {% if pkg[1].Status != "accepted" %}
-        {% assign name=pkg[0] %}
+    {% assign name=pkg[0] %}
+    {% assign pkgstatus = site.data.package_status[name] %}
+    {% if pkgstatus.Status != "accepted" %}
         {% unless site.data.data_libs contains name %}
             <li>{% include packagelink_generate.html pkg=name %}</li>
         {% endunless %}
