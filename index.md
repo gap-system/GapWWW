@@ -82,7 +82,6 @@ suggest you to
 [subscribe](https://mail.gap-system.org/mailman/listinfo/forum) to the
 email-based
 [GAP Forum]({{ site.baseurl }}/Contacts/Forum/forum.html).
-You may also follow GAP on [Twitter](https://twitter.com/gap_system).
 
 Please
 [tell us]({{ site.baseurl }}/Contacts/publicationfeedback.html)
