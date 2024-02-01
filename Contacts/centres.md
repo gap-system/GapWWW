@@ -27,7 +27,7 @@ have agreed to cooperate in this way:
 - [Aachen](http://www.math.rwth-aachen.de/LDFM/),
 - [Braunschweig](https://www.tu-braunschweig.de/iaa/),
 - [Fort Collins](https://www.math.colostate.edu/~hulpke/CGT/CGT.html),
-- [Kaiserslautern](https://www.mathematik.uni-kl.de/agag/), and
+- [Kaiserslautern](https://math.rptu.de/ags/agag/), and
 - [St Andrews](https://www-circa.mcs.st-and.ac.uk/).
 
 This list may change, if new Centres emerge, or existing ones withdraw.

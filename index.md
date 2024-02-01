@@ -114,7 +114,7 @@ Andrews](https://www-circa.mcs.st-and.ac.uk/). Since March 2005, the
 [Braunschweig](https://www.tu-braunschweig.de/iaa/),
 [Fort Collins](https://www.math.colostate.edu/~hulpke/CGT/CGT.html/),
 and [St Andrews](https://www-circa.mcs.st-and.ac.uk/) took over coordination.
-They were joined by [Kaiserslautern](https://www.mathematik.uni-kl.de/agag/)
+They were joined by [Kaiserslautern](https://math.rptu.de/ags/agag/)
 as fifth GAP center in 2020.
 Since July 2022, the GAP center in Kaiserslautern is coordinating the
 further development and maintenance of GAP.
