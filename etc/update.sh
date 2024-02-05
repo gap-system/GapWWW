@@ -4,7 +4,7 @@ set -e
 # fetch latest changes
 cd /srv/www/www-gap-systems/data/GapWWW
 git fetch --all --prune
-git checkout master
+git checkout --force master
 git reset --hard origin/master
 
 # add webhook secret
