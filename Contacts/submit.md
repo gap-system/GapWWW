@@ -30,7 +30,7 @@ Things we will check include technical aspects such as:
 
 - Does the package pass validation via `ValidatePackageInfo`?
 - Is it clearly distributed under a license compatible with GAP's license (GPL 2)?
-- Does it have a proper website which is set up so that automatic updates
+- Does it have an appropriate website which is set up so that automatic updates
   are possible (i.e. are `PackageInfoURL` and `ArchiveURL` in `PackageInfo.g` valid)?
 - Does it specify a non-empty `TestFile` in its `PackageInfo.g` that can be used
   to verify that basic functionality of the package works?
