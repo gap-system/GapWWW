@@ -8,8 +8,8 @@ subtoc: People
 The GAP Council, consisting of a number of senior
 mathematicians and computer scientists engaged in a broad spectrum of
 areas in computational group theory, was formed in 1995 to provide broad
-policy advice for the future development of GAP. It serves
-as an editorial board, but its interests extend more broadly, to include
+policy advice for the future development of GAP. It served as an editorial
+board for GAP packages until 2024, but its interests extend more broadly, to include
 enhancing recognition not only of GAP itself but also of
 the whole field of computational group theory. This larger role means,
 in particular, that if you become aware of ways in which the Council can
@@ -25,15 +25,14 @@ GAP, and since we may not be aware of your interests,
 we encourage you not to wait to be contacted but to correspond directly
 with any of the Council members if you have information that we can use.
 
-In its role as editorial board, the GAP Council
-coordinates the process by which submitted GAP packages
-are refereed. In that sense, the Council Chair acts as editor in
-chief, and the other members function as "associate editors," after the
-fashion of some journals. It is appropriate to obtain advice on submitting
-a package from any of the Council members. To submit a package, the Chair
-of the Council should be informed (by emailing
-<council@gap-system.org>). For more details, see
-the page on [submission&nbsp;procedures]({{ site.baseurl }}/Contacts/submit.html).
+In its former role as editorial board, the GAP Council used to
+coordinate the process by which submitted GAP packages
+were refereed. This process has been abolished by unanimous agreement of
+the Council in February 2024. There are other venues for this today
+which did not exist back then, such as the
+[Journal of Open Source Software (JOSS)](https://joss.theoj.org)
+or the
+[Journal of Software for Algebra and Geometry (JSAG)](https://msp.org/jsag/).
 
 The present ({{site.data.release.date | date: "%Y" }}) members of the GAP Council are:
 
