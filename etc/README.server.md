@@ -15,31 +15,30 @@ To ensure the required software is installed on the server, run this
 
 The server can be reached via SSH:
 
-    ssh www.gap-system.org
+    ssh www-gap-systems@www-admin11.uni-kl.de
 
-There is a dedicated user `www-gap-systems` who owns a clone of the GapWWW
-repository at
+The website is update from a git clone of the website repository at
 
     /srv/www/www-gap-systems/data/GapWWW
 
-This clone is owned by use `www-gap-systems` and group `www-gap-systems`. If anything goes
+This clone is owned by user `www-gap-systems` and group `www-gap-systems`. If anything goes
 wrong with these permissions, they can be fixed via
 
     chown -R www-gap-systems:www-gap-systems /srv/www/www-gap-systems/data/GapWWW
 
 ## Automatic updates via webhook
 
-Whenever a change is pushed to the master branch of the GapWWW
+Whenever a change is pushed to the `master` branch of the website
 repository, GitHub activates a webhook we provide via `webhook.php` at
 <https://www.gap-system.org/webhook.php>.
 
 The crucial bit is at the end of this .php file, where an empty file
 `/srv/www/www-gap-systems/data/gap-website.trigger` is created. This is detected by a
 systemd unit `~/.config/systemd/user/gap-website.path` (a copy of this file is
-in the `etc` directory of the GapWWW repository).
+in the `etc` directory of the website repository).
 
 This then triggers `~/.config/systemd/user/gap-website.service`
-(a copy of this file is in the `etc` directory of the GapWWW repository).
+(a copy of this file is in the `etc` directory of the website repository).
 
 This finally executes `etc/update.sh`, which runs jekyll.
 
@@ -111,6 +110,9 @@ following as root:
    elsewhere in this file, and enable PHP.
    Of course also set up SSL/TLS and a scheme to update the certificates.
 
+3. Activate systemd user units:
+
+        loginctl enable-linger www-gap-systems
 
 ## Further steps as `www-gap-systems`
 
