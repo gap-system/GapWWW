@@ -46,7 +46,5 @@ most involved in this help.
 
 Since 1995 a number of senior mathematicians and computer scientists,
 engaged in a broad spectrum of areas in computational group theory have
-agreed to form a '[GAP Council](Council/council.html)' that in
-particular functions as an editorial board for external contributions to
-GAP and will advise on broad policy issues in the continued development
-of GAP.
+agreed to form a '[GAP Council](Council/council.html)' that advises on
+broad policy issues in the continued development of GAP.
