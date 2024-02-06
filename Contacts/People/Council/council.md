@@ -29,7 +29,7 @@ In its former role as editorial board, the GAP Council used to
 coordinate the process by which submitted GAP packages
 were refereed. This process has been abolished by unanimous agreement of
 the Council in February 2024. There are other venues for this today
-which did not exist back then, such as the
+which did not exist when the GAP Council was founded, such as the
 [Journal of Open Source Software (JOSS)](https://joss.theoj.org)
 or the
 [Journal of Software for Algebra and Geometry (JSAG)](https://msp.org/jsag/).
