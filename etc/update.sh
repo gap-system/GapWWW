@@ -4,8 +4,8 @@ set -e
 # fetch latest changes
 cd /srv/www/www-gap-systems/data/GapWWW
 git fetch --all --prune
-git checkout --force master
-git reset --hard origin/master
+git checkout --force dev
+git reset --hard origin/dev
 
 # add webhook secret
 cat /srv/www/www-gap-systems/data/webhook.secret >> .htaccess
