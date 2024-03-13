@@ -1,17 +1,12 @@
 ---
-title: "Contacts: People, Feedback, User Support, and Cooperation"
-layout: default
-toc: Contacts
+title: Contacts
+layout: start
+has_children: true
 ---
 
 ### People
-
-A separate page
-[People]({{ site.baseurl }}/Contacts/People/people.html)
-acknowledges the help given to the GAP project in different ways by many
-colleagues. All of these are refered to as the **"GAP Group"**.
-
-The GAP Group is most interested in close contact to the users of GAP.
+The GAP Group consists of many different people and
+is most interested in close contact to the users of GAP.
 On one hand we hope for feedback from users, on the other hand we are
 offering to give support to users as well as we can. However with both,
 reacting to feedback and giving support, users are kindly asked to
@@ -24,12 +19,11 @@ We hope for feedback in particular in the following instances.
 
 -   **When using GAP.**  If you have used GAP we would appreciate some
     information about your work via an email to the address
-    <support@gap-system.org>, see also the page on
-    [Feedback on Use](publicationfeedback.html).
+    <support@gap-system.org>.
 
 -   **When publishing results.**  When you publish results
     obtained in part by using GAP we ask that you quote GAP (see
-    recommended [citation]({{ site.baseurl }}/Contacts/cite.html)) and
+    recommended [citation]({{ site.baseurl }}/Cite/cite.html)) and
     tell us about your publication again by email to
     <support@gap-system.org> since we would like to include a reference
     to your publication into the
@@ -63,7 +57,7 @@ different categories.
     could occasionally tell other users in the GAP Forum about
     interesting applications you have made of GAP. All correspondence in
     the Forum is kept in the
-    [Forum Archive]({{ site.baseurl }}/Doc/forumarchive.html).
+    [Forum Archive]({{ site.baseurl }}/Contacts/Forum/forumarchive.html).
 
     For **theoretical** questions on groups and related structures we
     like to point to the

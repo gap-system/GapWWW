@@ -1,7 +1,7 @@
 ---
 title: GAP Trouble
-layout: default
-toc: Contacts
+layout: start
+parent: Contacts
 ---
 
 While we try to check the GAP system as rigorously as we can, such a
@@ -41,3 +41,36 @@ Alternatively, you may send them to <support@gap-system.org>. When using
 email, please don't attach any log files, suggested patches etc.
 because this mailing list blocks attachments - put all the text into the
 body of email instead.
+
+### Support Group
+Please do not normally write to the individual members of the Support Group.
+Each of them will see all questions sent to <support@gap-system.org>,
+but they will be also seen by a broader pool of people, and the answers will
+be recorded and might help others in the future.
+
+The present members of the Support Group are:
+
+- Bill Allombert
+- Laurent Bartholdi
+- Dominik Bernhardt
+- Thomas Breuer
+- Bettina Eick
+- Franz Gähler
+- Willem de Graaf
+- Burkhard Höfling
+- Max Horn
+- Gábor Horváth
+- Alexander Hulpke
+- David Joyner
+- Stefan Kohl
+- Olexandr Konovalov
+- Frank Lübeck
+- Robert F Morse
+- Jürgen Müller
+- Mike Newman
+- Alice Niemeyer
+- Dmitrii Pasechnik
+- Martin Schönert
+- Andrew Solomon
+- Chris Wensley
+- Charles Wright

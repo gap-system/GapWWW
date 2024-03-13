@@ -1,6 +1,7 @@
 ---
 title: GAP System for Computational Discrete Algebra
 layout: start
+nav_order: 1
 ---
 
 <p class="big">
@@ -28,28 +29,21 @@ text="programming language" %}, a library of thousands of functions
 implementing algebraic algorithms written in the GAP language as well as
 large
 [data libraries]({{ site.baseurl }}/Datalib/datalib.html) of
-algebraic objects. See also the
-[overview]({{ site.baseurl }}/Overview/overview.html) and
-the description of the
-[mathematical capabilities]({{ site.baseurl }}/Overview/Capabilities/capabilities.html).
-GAP is used in research and teaching for studying groups and their
-representations, rings, vector spaces, algebras, combinatorial
-structures, and more. The system, including source, is distributed
+algebraic objects. See
+[here]({{ site.baseurl }}/Overview/overview.html) for details of the mathematical capabilities.
+The system, including source, is distributed
 [freely]({{ site.baseurl }}/Download/copyright.html#free).
 You can study and easily modify or extend it for your special use.
-
-In July 2008, GAP was awarded the *ACM/SIGSAM Richard Dimick [Jenks
-Memorial Prize](https://www.sigsam.org/awards/jenks/index.html) for
-Excellence in Software Engineering applied to Computer Algebra*.
 
 
 ### How to obtain GAP?
 
+How to install GAP is described in [Installation]({{ site.baseurl }}/Download/index.html).
 The current release is GAP {{site.data.release.version}} and it can be
 obtained from our [downloads
 page]({{ site.baseurl }}/Releases/{{site.data.release.version}}.html).
-This website describes this release if not stated otherwise. Changes
-from earlier versions are described in the
+This website describes this release if not stated otherwise. 
+Changes from earlier versions are described in the
 [Release history](https://github.com/gap-system/gap/blob/master/CHANGES.md).
 
 
@@ -63,7 +57,6 @@ If you have any questions, or suggestions for GAP, the repository, or
 documentation, feel free to contact us via the [open GAP development
 mailing list](https://mail.gap-system.org/mailman/listinfo/gap) or
 submit an issue or a pull request on GitHub.
-
 There is an [extensive documentation](Doc/doc.html) advising how to
 write a GAP code. Also there is a
 [guidance]({{ site.baseurl }}/Packages/example.html) on
@@ -72,6 +65,7 @@ package]({{ site.baseurl }}/Packages/packages.html) and its
 [submission]({{ site.baseurl }}/Contacts/submit.html) to
 GAP.
 
+<!---
 The
 [GAP Group]({{ site.baseurl }}/Contacts/People/people.html)
 welcomes
@@ -92,7 +86,7 @@ journal article or book. We maintain a
 [Bibliography]({{ site.baseurl }}/Doc/Bib/bib.html) of
 publications citing GAP. Please
 [help us]({{ site.baseurl }}/Contacts/publicationfeedback.html)
-keeping it up to date.
+keeping it up to date. --->
 
 
 ### Acknowledgements
@@ -105,16 +99,19 @@ well as some
 started at [Lehrstuhl D für
 Mathematik](https://www.math.rwth-aachen.de/LDFM/), RWTH Aachen in
 [1986]({{ site.baseurl }}/Doc/History/preface_2.4.html).
-After
-[1997]({{ site.baseurl }}/ForumArchive/Neubuese.1/Joachim.1/GAP,_199.1/1.html)
+After 1997
 the development of GAP was coordinated in [St
 Andrews](https://www-circa.mcs.st-and.ac.uk/). Since March 2005, the
 [GAP Centers]({{ site.baseurl }}/Contacts/centres.html) in
 [Aachen](https://www.math.rwth-aachen.de/LDFM/),
 [Braunschweig](https://www.tu-braunschweig.de/iaa/),
-[Fort Collins](https://www.math.colostate.edu/~hulpke/CGT/CGT.html/),
+Fort Collins,
 and [St Andrews](https://www-circa.mcs.st-and.ac.uk/) took over coordination.
 They were joined by [Kaiserslautern](https://math.rptu.de/ags/agag/)
 as fifth GAP center in 2020.
 Since July 2022, the GAP center in Kaiserslautern is coordinating the
 further development and maintenance of GAP.
+
+In July 2008, GAP was awarded the *ACM/SIGSAM Richard Dimick [Jenks
+Memorial Prize](https://www.sigsam.org/awards/jenks/index.html) for
+Excellence in Software Engineering applied to Computer Algebra*.
