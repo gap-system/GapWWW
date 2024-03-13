@@ -1,7 +1,7 @@
 ---
-title: GAP Data Library "Perfect Groups"
-layout: default
-toc: Data Libraries
+title: Perfect Groups
+layout: core
+parent: Data Libraries
 ---
 
 ### Contents

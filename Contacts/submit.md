@@ -1,7 +1,7 @@
 ---
 title: Submitting Contributions to GAP
-layout: default
-toc: Contacts
+layout: start
+parent: Contacts
 ---
 
 The GAP group encourages users to make their GAP related work available

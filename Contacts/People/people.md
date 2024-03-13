@@ -1,8 +1,8 @@
 ---
 title: People
-layout: default
-toc: Contacts
-subtoc: People
+layout: start
+parent: Contacts
+has_children: true
 ---
 
 ### The GAP Group

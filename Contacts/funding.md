@@ -1,7 +1,7 @@
 ---
 title: Funding Bodies
-layout: default
-toc: Contacts
+layout: start
+parent: Contacts
 ---
 
 We acknowledge with gratitude the support of the development of

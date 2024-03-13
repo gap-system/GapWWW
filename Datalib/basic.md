@@ -1,7 +1,7 @@
 ---
-title: GAP Data Library "Basic Groups"
-layout: default
-toc: Data Libraries
+title: Basic Groups
+layout: core
+parent: Data Libraries
 ---
 
 This library is part of the core GAP system.
