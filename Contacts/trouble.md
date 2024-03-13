@@ -1,7 +1,7 @@
 ---
 title: GAP Trouble
-layout: default
-toc: Contacts
+layout: start
+parent: Contacts
 ---
 
 While we try to check the GAP system as rigorously as we can, such a

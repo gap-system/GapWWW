@@ -1,7 +1,7 @@
 ---
 title: How to cite GAP
-layout: default
-toc: Contacts
+layout: start
+parent: Contacts
 ---
 
 If you have used GAP 4 in the preparation of a paper please cite it as

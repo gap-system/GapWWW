@@ -1,7 +1,7 @@
 ---
 title: The GAP Forum
-layout: default
-toc: Contacts
+layout: start
+parent: Contacts
 ---
 
 We have established a GAP Forum, where interested users can discuss GAP

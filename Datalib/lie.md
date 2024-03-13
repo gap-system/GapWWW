@@ -1,7 +1,7 @@
 ---
-title: GAP Data Library "Lie Algebras"
-layout: default
-toc: Data Libraries
+title: Lie Algebras
+layout: core
+parent: Data Libraries
 ---
 
 This library is part of the core GAP system.

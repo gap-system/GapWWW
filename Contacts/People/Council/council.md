@@ -1,8 +1,8 @@
 ---
 title: The GAP Council
-layout: default
-toc: Contacts
-subtoc: People
+layout: start
+parent: People
+grand_parent: Contacts
 ---
 
 The GAP Council, consisting of a number of senior

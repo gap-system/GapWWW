@@ -1,7 +1,7 @@
 ---
 title: Tools needed to install GAP from source
-layout: default
-toc: Installation
+layout: core
+parent: Download and Install
 ---
 
 Installing the GAP distribution with all the packages and full data

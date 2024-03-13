@@ -1,13 +1,13 @@
 ---
 title: The Computational Algebra System GAP Support Group
-layout: default
-toc: Contacts
-subtoc: People
+layout: start
+parent: People
+grand_parent: Contacts
 ---
 
-<h3>
+<h2>
 This is the web page for the Support Group of the mathematical software package GAP.
-</h3> 
+</h2> 
 
 The preferred way to submit bug reports is to use the
 [GAP issue tracker](https://github.com/gap-system/gap/issues)

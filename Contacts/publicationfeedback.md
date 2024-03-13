@@ -1,7 +1,7 @@
 ---
 title:  Feedback on the use of GAP 
-layout: default
-toc: Contacts
+layout: start
+parent: Contacts
 ---
 
 If you use the Computer Algebra System GAP in your research or teaching,

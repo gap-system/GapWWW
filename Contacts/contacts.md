@@ -1,7 +1,7 @@
 ---
-title: "Contacts: People, Feedback, User Support, and Cooperation"
-layout: default
-toc: Contacts
+title: Contacts
+layout: start
+has_children: true
 ---
 
 ### People
