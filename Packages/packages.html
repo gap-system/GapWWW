@@ -7,13 +7,20 @@ toc: Packages
 <!-- List of deposited packages -->
 These are the packages that are shipped with GAP {{site.data.release.version}}. Note, that newer versions might be available on the package websites.
 
+<!-- load jQuery, as it is needed for datatables -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  
+
+<!-- load moment.js for date formatting and sorting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+
+<!-- load datatables itself -->
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 
-<script type="module">
-	function format(d) {
 
+
+<script type="module">
+  // function to format the data for the hidden menu that drops down with click
+	function format(d) {
 		// create string with all involved persons that is nicely formatted
 		const nPersons = d.Persons.length;
 		var namesPersons = "";
@@ -28,7 +35,7 @@ These are the packages that are shipped with GAP {{site.data.release.version}}. 
 			}
 		}
 
-		// create string of neccessary other packages
+		// create string of necessary other packages
 		if(d.Dependencies.NeededOtherPackages != [] && typeof(d.Dependencies.NeededOtherPackages) != "undefined"){
 			const nNeccPack = d.Dependencies.NeededOtherPackages.length;
 			var neccPack = "";
@@ -67,6 +74,7 @@ These are the packages that are shipped with GAP {{site.data.release.version}}. 
 		}
 
 
+    // combine everything into a single string
 		var resString = "";
 
 		// add person list
@@ -149,21 +157,24 @@ These are the packages that are shipped with GAP {{site.data.release.version}}. 
 		resString += d.License;
 		resString += '<br>';
 
-	    return resString;
+    return resString;
 	}
 
-	let table = new DataTable('#example', {
+  // define a table
+	let table = new DataTable('#packageList', {
+      // get the json file
 	    "ajax" : { 	
-	     	"url": "https://raw.githubusercontent.com/gap-system/GapWWW/master/_data/package-infos/4-12-2.json",
+	     	"url": "https://raw.githubusercontent.com/gap-system/GapWWW/master/_data/package-infos/{{site.data.release.version-safe}}.json",
             "dataSrc": function(dictData){
+              // as the json file is a dict for every package it is necessary it put all values into an array for Datatables to understand it
             	var arr = [];
             	for(var key in dictData){
             		arr.push(dictData[key]);
             	}
-            	// console.log(arr);
             	return arr;
         	}
         },
+      // define the columns shown in the table
 	    columns : [
 	    	{
 	            class: 'dt-control',
@@ -172,18 +183,21 @@ These are the packages that are shipped with GAP {{site.data.release.version}}. 
 	            defaultContent: ''
 	        },
 		    { "data" : "PackageName"},
-		    { "data" : "Version"},
+		    { "data" : "Version", width: '7em'},
 		    { "data" : "Date"},
+        // the following row is set to invisible and only there so the search picks up the additional text as well
 		    { data: null, render: (data, type, row) => format(data), visible: false},
-		    { "data" : "Subtitle"},
-		    // { "data" : 'Persons.0.Email', defaultContent: '[not provided]'},
-		    
+		    { "data" : "Subtitle"},		    
 	    ],
+      // change the text for the search function to make it distinct to the page search function
 	    language: {
     		search: 'Search table:'
 		},
+    // set default number of packages shown
 		pageLength: 25
 	});
+
+  DataTable.datetime('DD/MM/YYYY');
 
 
 	// Add event listener for opening and closing details
@@ -202,7 +216,8 @@ These are the packages that are shipped with GAP {{site.data.release.version}}. 
 	});
 </script>
 
-<table id="example" class="display" style="width:100%">
+<!-- Create a table so it can be filled by Datatables -->
+<table id="packageList" class="display" style="width:100%">
   <thead>
       <tr>
         <th></th>
@@ -222,3 +237,6 @@ These are the packages that are shipped with GAP {{site.data.release.version}}. 
       </tr>
   </tfoot>
 </table>
+
+The table above is generated using the open source software <a href="https://datatables.net/" target="_blank">Datatables</a>.
+
