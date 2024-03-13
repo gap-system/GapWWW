@@ -1,5 +1,5 @@
 ---
 title: Empty document to protect directory
-layout: default
-toc: Contacts
+layout: core
+nav_exclude: true
 ---

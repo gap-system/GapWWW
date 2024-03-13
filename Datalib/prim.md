@@ -1,6 +1,7 @@
 ---
 title: GAP Data Library "Primitive Groups"
-layout: default
+layout: core
+nav_exclude: true
 ---
 
 This is now in the GAP package

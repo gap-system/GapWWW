@@ -1,8 +1,8 @@
 ---
 title: GAP Authors
-layout: default
-toc: Contacts
-subtoc: People
+layout: start
+parent: People
+grand_parent: Contacts
 ---
 
 The following list gives names and, where known, email addresses of

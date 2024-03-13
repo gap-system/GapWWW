@@ -1,7 +1,7 @@
 ---
-title: GAP Data Library "Integral Matrix Groups"
-layout: default
-toc: Data Libraries
+title: Integral Matrix Groups
+layout: core
+parent: Data Libraries
 ---
 
 ### Contents

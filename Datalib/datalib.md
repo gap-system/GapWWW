@@ -1,7 +1,7 @@
 ---
 title: Data Libraries
-layout: default
-toc: Data Libraries
+layout: core
+has_children: true
 ---
 
 GAP contains several data libraries. Some of these are parts of the core
