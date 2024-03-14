@@ -1,5 +1,5 @@
 ---
-title: GAP System for Computational Discrete Algebra
+title: Start
 layout: start
 nav_order: 1
 ---

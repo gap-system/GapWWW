@@ -1,8 +1,8 @@
 ---
-title: Submitting Contributions to GAP
+title: Submitting Contributions
 layout: core
 grand_parent: GAP Packages
-parent: For Package Authors
+parent: For Authors
 ---
 
 The GAP group encourages users to make their GAP related work available
