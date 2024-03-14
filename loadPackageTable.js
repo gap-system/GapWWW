@@ -88,17 +88,15 @@ function format(d) {
     resString += d.PackageDoc[0].PDFFile;
     resString += '\" target=\"_blank\">[PDF]</a><br>';
 
-    // abstract 
+    // abstract
     resString += 'Abstract: <br>';
     if(d.AbstractHTML != ""){
         resString += d.AbstractHTML ;
-        
     } else {
         resString += 'No abstract provided'
     }
     resString += '<br><br>';
 
-    
     // archives
     resString += 'Archives: <a href=\"' ;
     resString += d.ArchiveURL ;
@@ -135,15 +133,15 @@ function format(d) {
     resString += d.License;
     resString += '<br>';
 
-return resString;
+    return resString;
 }
 
 
 // define a table
 let table = new DataTable('#packageList', {
   // get the json file
-    "ajax" : { 	
-         "url": "latest.json",
+    "ajax" : {
+        "url": "latest.json",
         "dataSrc": function(dictData){
           // as the json file is a dict for every package it is necessary it put all values into an array for Datatables to understand it
             var arr = [];
@@ -166,7 +164,7 @@ let table = new DataTable('#packageList', {
         { "data" : "Date"},
     // the following row is set to invisible and only there so the search picks up the additional text as well
         { data: null, render: (data, type, row) => format(data), visible: false},
-        { "data" : "Subtitle"},		    
+        { "data" : "Subtitle"},
     ],
   // change the text for the search function to make it distinct to the page search function
     language: {
@@ -183,7 +181,7 @@ DataTable.datetime('DD/MM/YYYY');
 table.on('click', 'td.dt-control', function (e) {
     let tr = e.target.closest('tr');
     let row = table.row(tr);
- 
+
     if (row.child.isShown()) {
         // This row is already open - close it
         row.child.hide();
