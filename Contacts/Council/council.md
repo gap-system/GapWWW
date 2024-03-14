@@ -1,8 +1,7 @@
 ---
 title: The GAP Council
 layout: core
-parent: People
-grand_parent: Contacts
+parent: Contacts
 ---
 
 The GAP Council, consisting of a number of senior
@@ -33,7 +32,7 @@ that did not exist in the past, such as specialist journals for research
 software packages. We still continue the list of deposited packages and
 encourage all users to submit their GAP packages to this list.
 
-The present ({{site.data.release.date | date: "%Y" }}) members of the GAP Council are:
+The present (March 2024) members of the GAP Council are:
 
 - Bill Allombert, Bordeaux (since June 2022)
 - Laurent Bartholdi, Saarbrücken (since August 2011)
