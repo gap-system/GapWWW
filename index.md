@@ -4,9 +4,6 @@ layout: start
 nav_order: 1
 ---
 
-<p class="big">
-  <strong><em>Welcome to</em></strong>
-</p>
 <p class="bigcenter">
   <strong>GAP - Groups, Algorithms, Programming -<br />
   a System for Computational Discrete Algebra</strong>
