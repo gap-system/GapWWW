@@ -1,0 +1,149 @@
+---
+layout: start
+---
+<h2>GAP {{ page.version }}</h2>
+
+{% capture anchor %}gap-{{page.version | replace: ".", ""}}-{{ page.date | date: "%B %Y" | downcase | replace: " ","-" }}{% endcapture %}
+{% assign version-safe = page.version | replace: ".", "-" %}
+
+<p>
+For an overview of changes in GAP {{page.version}}
+see <a href="https://github.com/gap-system/gap/blob/master/CHANGES.md#{{anchor}}">CHANGES.md</a> file.
+</p>
+
+{% if site.data.assets contains version-safe %}
+
+{% assign unix_assets    = "" | split: ',' %}
+{% assign windows_assets = "" | split: ',' %}
+
+{% capture gap_prefix %}gap-{{ page.version }}{% endcapture %}
+{% assign len = gap_prefix | size %}
+
+{% for asset in site.data.assets[version-safe] %}
+  {% assign asset_prefix = asset.name | slice: 0, len %}
+  {% if asset_prefix == gap_prefix %}{% unless asset.name contains "-core" %}
+    {% assign asset_suffix = asset.name | split: "" | reverse | join: "" | slice: 0, 4 %}
+    {% if asset_suffix == "exe." %}
+      {% assign windows_assets = windows_assets | push: asset %}
+    {% else %}
+      {% assign unix_assets = unix_assets | push: asset %}
+    {% endif %}
+    {% endunless %}{% endif %}
+{% endfor %}
+
+
+{% if unix_assets.size > 0 %}
+<h2>Linux and macOS</h2>
+
+<p>
+Download one of the <code>gap-{{page.version}}.*</code> archives below, unpack
+it and run <code>./configure &amp;&amp; make</code> in the unpacked directory.
+Then change to the <code>pkg</code> subdirectory and call
+<code>../bin/BuildPackages.sh</code> to run the script which will build most of
+the packages that require compilation (provided sufficiently many libraries,
+headers and tools are available). For further details, see <a
+href="../Download/index.html">here</a>.  Expert users can find the description
+of all installation options in the
+<a href="https://github.com/gap-system/gap/blob/v{{page.version}}/INSTALL.md">
+  INSTALL.md</a> file.
+</p>
+ 
+<table>
+ <colgroup>
+  <col width="30%">
+  <col width="20%">
+  <col width="50%">
+ </colgroup>
+{% for asset in unix_assets %}
+<tr>
+  <td>
+    <a href="{{ asset.url }}">{{ asset.name }}</a>
+  </td>
+  <td>{{ asset.bytes | divided_by: 1048576 }} MB</td>
+  <td>sha256: <code>{{ asset.sha256 }}</code></td>
+</tr>
+{% endfor %}
+</table>
+
+<p>
+You may also consider one of the
+<a href="../Download/alternatives.html">alternative distributions</a>.
+Note, however, that these are updated independently and may not yet
+provide the latest GAP release.
+</p>
+{% endif %}
+
+
+{% if windows_assets.size > 0 %}
+<h2>Windows</h2>
+
+<p>
+For users of Windows 10, we strongly recommend using GAP via the
+<a href="https://docs.microsoft.com/en-us/windows/wsl/about">Windows Subsystem
+  for Linux</a>.
+</p>
+
+<p>
+Otherwise, we recommend the use of the following <code>.exe</code>
+installer{% if windows_assets.size > 1 %}s{% endif %},
+which contains {% if windows_assets.size == 1 %}64-bit{% endif %}
+binaries for GAP (compiled with the support of GMP and
+readline libraries) and for selected GAP packages, and provides the standard
+installation procedure.
+{% if windows_assets.size > 1 %}
+<!-- Should apply to GAP 4.12+ -->
+Both 32-bit (<code>x86</code>) and 64-bit (<code>x86_64</code>) versions are
+available. For almost all users, 64-bit GAP is by far the better choice.
+Please note that the provision of 32-bit Windows installers is likely to be
+dropped from GAP releases in the near future.
+</p>
+{% else %}
+<!-- Only for GAP before 4.12 -->
+<p>
+Note that the path to the GAP directory should not contain spaces. For example,
+you may install GAP in <code>C:\gap-{{page.version}}</code> (default),
+<code>D:\gap-{{page.version}}</code> or
+<code>C:\Math\GAP\gap-{{page.version}}</code>, but you must not install it in a
+directory named like <code>C:\Program files\gap-{{page.version}}</code> or
+<code>C:\Users\alice\My Documents\gap-{{page.version}}</code> etc.
+</p>
+{% endif %}
+
+
+<table>
+ <colgroup>
+  <col width="30%">
+  <col width="20%">
+  <col width="50%">
+ </colgroup>
+{% for asset in windows_assets %}
+<tr>
+  <td>
+    <a href="{{ asset.url }}">{{ asset.name }}</a>
+  </td>
+  <td>{{ asset.bytes | divided_by: 1048576 }} MB</td>
+  <td>sha256: <code>{{ asset.sha256 }}</code></td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+
+{% endif %}
+
+
+{{ content }}
+
+
+{% unless page.version == "4.5.6" or page.version == "4.5.4" %}
+<h2>Packages included in this release</h2>
+
+<p>
+Each of the GAP {{page.version}} archives contains 
+the core GAP system (the source code,
+<a href="../Datalib/datalib.html">data libraries</a>, regression tests and 
+<a href="../Doc/manuals.html">documentation</a>), and the following selection of
+<a href="../Packages/packages.html">packages</a>:
+</p>
+{% endunless %}
+
+{% include release_list_packages.html version=page.version %}
