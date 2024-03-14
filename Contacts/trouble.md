@@ -1,6 +1,6 @@
 ---
 title: Trouble
-layout: core
+layout: default_with_title
 parent: Contacts
 ---
 

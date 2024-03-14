@@ -1,6 +1,6 @@
 ---
 title: Council
-layout: core
+layout: default_with_title
 parent: Contacts
 ---
 

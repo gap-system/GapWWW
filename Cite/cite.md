@@ -1,6 +1,6 @@
 ---
 title: How to cite GAP
-layout: core
+layout: default_with_title
 nav_order: 6
 ---
 GAP is written and developed by many people. A list of authors can be found [here](https://github.com/gap-system/gap/blob/master/COPYRIGHT).

@@ -1,6 +1,6 @@
 ---
 title: Submitting Contributions
-layout: core
+layout: default_with_title
 grand_parent: GAP Packages
 parent: For Authors
 ---

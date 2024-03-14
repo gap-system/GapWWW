@@ -1,5 +1,5 @@
 ---
 title: Empty document to protect directory
-layout: core
+layout: default_with_title
 nav_exclude: true
 ---

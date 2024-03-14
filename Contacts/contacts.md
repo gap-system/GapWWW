@@ -1,6 +1,6 @@
 ---
 title: Contacts
-layout: start
+layout: default
 has_children: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Start
-layout: start
+layout: default
 nav_order: 1
 nav_exclude: true
 ---
