@@ -1,6 +1,5 @@
 ---
 title: Council
-layout: default_with_title
 parent: Contacts
 permalink: /council/
 ---

@@ -1,6 +1,5 @@
 ---
 title: Forum
-layout: default_with_title
 parent: Contacts
 has_children: true
 permalink: /forum/

@@ -1,6 +1,5 @@
 ---
 title: Reporting issues
-layout: default_with_title
 parent: Contacts
 permalink: /issues/
 nav_order: 1
