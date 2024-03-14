@@ -30,7 +30,7 @@ large data libraries of
 algebraic objects. See
 [here]({{ site.baseurl }}/Overview/overview.html) for details of the mathematical capabilities.
 The system, including source, is distributed
-[freely]({{ site.baseurl }}/Download/copyright.html#free).
+[freely]({{ site.baseurl }}/copyright.html).
 You can study and easily modify or extend it for your special use.
 
 
