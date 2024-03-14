@@ -1,5 +1,5 @@
 ---
-title: GAP Trouble
+title: Trouble
 layout: core
 parent: Contacts
 ---

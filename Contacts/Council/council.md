@@ -1,5 +1,5 @@
 ---
-title: The GAP Council
+title: Council
 layout: core
 parent: Contacts
 ---

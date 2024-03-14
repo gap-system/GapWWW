@@ -1,5 +1,5 @@
 ---
-title: GAP Centres
+title: Centres
 layout: core
 parent: Contacts
 ---
