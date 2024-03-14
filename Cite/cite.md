@@ -1,6 +1,6 @@
 ---
 title: How to cite GAP
-layout: start
+layout: core
 parent: Cite
 ---
 GAP is written and developed by many people. A list of authors can be found [here](https://github.com/gap-system/gap/blob/master/COPYRIGHT).

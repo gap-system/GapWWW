@@ -1,6 +1,6 @@
 ---
 title: The GAP Council
-layout: start
+layout: core
 parent: People
 grand_parent: Contacts
 ---

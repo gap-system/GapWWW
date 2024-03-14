@@ -1,6 +1,6 @@
 ---
 title: GAP Trouble
-layout: start
+layout: core
 parent: Contacts
 ---
 
