@@ -34,10 +34,9 @@ You can study and easily modify or extend it for your special use.
 
 ### How to obtain GAP?
 
-How to install GAP is described in [Installation]({{ site.baseurl }}/Download/).
+How to install GAP is described in [Installation]({{ site.baseurl }}/Install/).
 The current release is GAP {{site.data.release.version}} and it can be
-obtained from our [downloads
-page]({{ site.baseurl }}/Releases/{{site.data.release.version}}.html).
+obtained from our [release page]({{ site.baseurl }}/Releases/{{site.data.release.version}}.html).
 This website describes this release if not stated otherwise. 
 Changes from earlier versions are described in the
 [Release history](https://github.com/gap-system/gap/blob/master/CHANGES.md).
