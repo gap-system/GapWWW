@@ -2,6 +2,7 @@
 title: Start
 layout: start
 nav_order: 1
+nav_exclude: true
 ---
 
 <p class="bigcenter">
