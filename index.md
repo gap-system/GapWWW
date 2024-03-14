@@ -36,7 +36,7 @@ You can study and easily modify or extend it for your special use.
 
 ### How to obtain GAP?
 
-How to install GAP is described in [Installation]({{ site.baseurl }}/Download/index.html).
+How to install GAP is described in [Installation]({{ site.baseurl }}/Download/).
 The current release is GAP {{site.data.release.version}} and it can be
 obtained from our [downloads
 page]({{ site.baseurl }}/Releases/{{site.data.release.version}}.html).
@@ -57,10 +57,10 @@ mailing list](https://mail.gap-system.org/mailman/listinfo/gap) or
 submit an issue or a pull request on GitHub.
 There is an [extensive documentation](Doc/doc.html) advising how to
 write a GAP code. Also there is a
-[guidance]({{ site.baseurl }}/Packages/example.html) on
+[guidance](https://gap-packages.github.io/example/) on
 developing a [GAP
 package]({{ site.baseurl }}/Packages/packages.html) and its
-[submission]({{ site.baseurl }}/Contacts/submit.html) to
+[submission]({{ site.baseurl }}/Packages/Authors/submit.html) to
 GAP.
 
 <!---
@@ -89,14 +89,13 @@ keeping it up to date. --->
 
 ### Acknowledgements
 
-GAP has been and is developed by international cooperation of many
-[people]({{ site.baseurl }}/Contacts/People/people.html),
+GAP has been and is developed by international cooperation of many people,
 including user contributions. We gratefully acknowledge all this help as
 well as some
-[funding]({{ site.baseurl }}/Contacts/funding.html). GAP was
+[funding]({{ site.baseurl }}/Contacts/History/history.html#funding). GAP was
 started at [Lehrstuhl D für
 Mathematik](https://www.math.rwth-aachen.de/LDFM/), RWTH Aachen in
-[1986]({{ site.baseurl }}/Doc/History/preface_2.4.html).
+[1986]({{ site.baseurl }}/Contacts/History/preface_2.4.html).
 After 1997
 the development of GAP was coordinated in [St
 Andrews](https://www-circa.mcs.st-and.ac.uk/). Since March 2005, the
