@@ -22,8 +22,7 @@ released on {{site.data.release.date}}.
 ### What is GAP?
 
 GAP is a system for computational discrete algebra, with particular
-emphasis on
-[Computational Group Theory]({{ site.baseurl }}/Doc/references.html).
+emphasis on Computational Group Theory.
 GAP provides a {% include ref.html label="The Programming Language"
 text="programming language" %}, a library of thousands of functions
 implementing algebraic algorithms written in the GAP language as well as
