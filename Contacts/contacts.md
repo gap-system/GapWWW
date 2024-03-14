@@ -71,17 +71,13 @@ The functionality of GAP has been widely enlarged by pieces of code and
 data collections that have been developed by users of GAP and have been
 provided to be used with the main GAP library. We distribute these in
 the form of
-[Packages]({{ site.baseurl }}/Packages/packages.html),
-[Data Libraries]({{ site.baseurl }}/Datalib/datalib.html),
-and
-[Deposited Contributions]({{ site.baseurl }}/Packages/Contrib/contrib.html).
+[Packages]({{ site.baseurl }}/Packages/packages.html) and
+Data Libraries.
 We welcome obtaining any further such contributions as well as
 references to GAP implementations in the course of your research
-projects that you want to keep with you but that you will allow to be
-listed on the page
-[Undeposited Implementations]({{ site.baseurl }}/Packages/undep.html).
+projects.
 
 As explained on the respective page we have established a procedure for
 formally 'accepting' some packages which we hope will give them a
 status comparable to a published paper. On a separate page we inform
-about the process of [submitting contributions](submit.html).
+about the process of [submitting contributions]({{ site.baseurl }}/Packages/Authors/submit.html).

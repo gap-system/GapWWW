@@ -127,6 +127,7 @@ in `/srv/www/www-gap-dev/data/GapWWW` (otherwise adjust `gap-website.service`). 
 
 Next install and activate the systemd units:
 
+    mkdir ~/.config/systemd/user/
     cp /srv/www/www-gap-dev/data/GapWWW/etc/gap-website.* ~/.config/systemd/user/
     systemctl --user enable gap-website.service gap-website.path
     systemctl --user start gap-website.service gap-website.path
