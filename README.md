@@ -62,6 +62,9 @@ feel you have need to directly access the server via SSH, contact him.
   - `www-gap-systems` → `www.gap-system.org`
   - `www-gap-docs` → `docs.gap-system.org`
   - `www-gap-files` → `files.gap-system.org`
+- SSH hostname: `www-admin12.rz.rptu.de`
+- Login:
+  - `www-gap-dev` → `dev.gap-system.org`
 
 Please consult `etc/README.server.md` for more information.
 

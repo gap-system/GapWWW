@@ -27,8 +27,7 @@ emphasis on
 GAP provides a {% include ref.html label="The Programming Language"
 text="programming language" %}, a library of thousands of functions
 implementing algebraic algorithms written in the GAP language as well as
-large
-[data libraries]({{ site.baseurl }}/Datalib/datalib.html) of
+large data libraries of
 algebraic objects. See
 [here]({{ site.baseurl }}/Overview/overview.html) for details of the mathematical capabilities.
 The system, including source, is distributed
