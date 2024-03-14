@@ -19,12 +19,12 @@ This then triggers ~/.config/systemd/user/gap-website.service
 
 This finally executes `etc/update.sh`, which runs jekyll.
 */
-$triggerfile = "/srv/www/www-gap-systems/data/gap-website.trigger";
+$triggerfile = "/srv/www/www-gap-dev/data/gap-website.trigger";
 
 /*
 We set a secret token by adding a line of the form
     SetEnv GITHUB_WEBHOOK_SECRET "MY_SECRET"
-to the file /srv/www/www-gap-systems/data/webhook.secret
+to the file /srv/www/www-gap-dev/data/webhook.secret
 with the actual secret key taking the place of MY_SECRET.
 The same value must be entered in the GitHub webhook settings.
 */
