@@ -3,6 +3,8 @@ title: Forum
 layout: default_with_title
 parent: Contacts
 has_children: true
+permalink: /forum/
+nav_order: 2
 ---
 
 We have established a GAP Forum, where interested users can discuss GAP
@@ -43,7 +45,7 @@ and resubscribe from the new address.
 ### The Forum Archive
 
 All correspondence in the Forum is kept in the GAP
-[Forum Archive]({{ site.baseurl }}/Contacts/Forum/forumarchive.html).
+[Forum Archive]({{ site.baseurl }}/Contacts/Forum/archive.html).
 
 ### GAP Support
 
@@ -52,7 +54,7 @@ interest to most other Forum members, please do not write to the GAP
 Forum, but send mail to <support@gap-system.org>.
 
 Also if you believe you have noticed a bug, please send a
-[bug report]({{ site.baseurl }}/Contacts/trouble.html) to
+[bug report]({{ site.baseurl }}/issues/) to
 <support@gap-system.org>. We will read your report, investigate the
 supposed bug, and inform you of the result of the investigation. If it
 turns out that indeed you noticed a bug it will be fixed and, if it

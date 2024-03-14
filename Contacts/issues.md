@@ -1,7 +1,9 @@
 ---
-title: Trouble
+title: Reporting issues
 layout: default_with_title
 parent: Contacts
+permalink: /issues/
+nav_order: 1
 ---
 
 While we try to check the GAP system as rigorously as we can, such a

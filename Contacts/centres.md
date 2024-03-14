@@ -2,6 +2,7 @@
 title: Centres
 layout: default_with_title
 parent: Contacts
+permalink: /centres/
 ---
 
 In March 2005 the GAP Council and the GAP developers have agreed that

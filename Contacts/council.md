@@ -2,6 +2,7 @@
 title: Council
 layout: default_with_title
 parent: Contacts
+permalink: /council/
 ---
 
 The GAP Council, consisting of a number of senior
