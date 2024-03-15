@@ -1,5 +1,6 @@
 ---
 title: Centres
+layout: default_with_title
 parent: Contacts
 permalink: /centres/
 ---
