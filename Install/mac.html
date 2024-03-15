@@ -3,6 +3,28 @@ title: MacOS
 parent: Installation
 nav_order: 3
 ---
+
+
+{% capture anchor %}gap-{{site.data.release.version | replace: ".", ""}}-{{ site.data.release.version | date: "%B %Y" | downcase | replace: " ","-" }}{% endcapture %}
+{% assign version-safe = site.data.release.version | replace: ".", "-" %}
+
+{% assign unix_assets    = "" | split: ',' %}
+
+{% capture gap_prefix %}gap-{{ site.data.release.version }}{% endcapture %}
+{% assign len = gap_prefix | size %}
+
+{% for asset in site.data.assets[version-safe] %}
+  {% assign asset_prefix = asset.name | slice: 0, len %}
+  {% if asset_prefix == gap_prefix %}{% unless asset.name contains "-core" %}
+    {% assign asset_suffix = asset.name | split: "" | reverse | join: "" | slice: 0, 4 %}
+    {% if asset_suffix == "exe." %}
+      {% assign windows_assets = windows_assets | push: asset %}
+    {% else %}
+      {% assign unix_assets = unix_assets | push: asset %}
+    {% endif %}
+    {% endunless %}{% endif %}
+{% endfor %}
+
 <p>
 Installing the GAP distribution with all the packages and full data
 libraries from source code requires a working C and C++ development
@@ -35,8 +57,24 @@ environment on your system as well as GNU <code>make</code>.
     <ol>
     <li>Verify that all required tools are installed (see above and also get <code>gmp</code> and <code>readline</code>).
     Use your package manager (e.g. <code>brew, port</code> or <code>fink</code>) for that.</li>
-    <li>Choose your preferred archive format and <a href="{{ site.baseurl }}/Releases/{{site.data.release.version}}.html">download</a> 
-    the corresponding archive.</li>
+    <li>Choose your preferred archive format and download the corresponding archive.
+    <table>
+    <colgroup>
+     <col width="15%">
+     <col width="5%">
+     <col>
+    </colgroup>
+    {% for asset in unix_assets %}
+    <tr>
+      <td>
+        <a href="{{ asset.url }}">{{ asset.name }}</a>
+      </td>
+      <td>{{ asset.bytes | divided_by: 1048576 }} MB</td>
+      <td>sha256: <code>{{ asset.sha256 }}</code> </td>
+    </tr>
+    {% endfor %}
+    </table>
+  </li>
     <li>Unpack the archive.</li>
     <li>Compile the GAP core system
     by running 

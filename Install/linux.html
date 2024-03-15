@@ -3,6 +3,28 @@ title: Linux
 parent: Installation
 nav_order: 2
 ---
+
+{% capture anchor %}gap-{{site.data.release.version | replace: ".", ""}}-{{ site.data.release.version | date: "%B %Y" | downcase | replace: " ","-" }}{% endcapture %}
+{% assign version-safe = site.data.release.version | replace: ".", "-" %}
+
+{% assign unix_assets    = "" | split: ',' %}
+
+{% capture gap_prefix %}gap-{{ site.data.release.version }}{% endcapture %}
+{% assign len = gap_prefix | size %}
+
+{% for asset in site.data.assets[version-safe] %}
+  {% assign asset_prefix = asset.name | slice: 0, len %}
+  {% if asset_prefix == gap_prefix %}{% unless asset.name contains "-core" %}
+    {% assign asset_suffix = asset.name | split: "" | reverse | join: "" | slice: 0, 4 %}
+    {% if asset_suffix == "exe." %}
+      {% assign windows_assets = windows_assets | push: asset %}
+    {% else %}
+      {% assign unix_assets = unix_assets | push: asset %}
+    {% endif %}
+    {% endunless %}{% endif %}
+{% endfor %}
+
+
 <p>
 To install development tools on a Linux system, use your preferred package 
 manager (e.g. apt-get or aptitude or Synaptic etc.). 
@@ -20,8 +42,24 @@ GAP using the source distribution, perform the following steps:
     <code>sudo apt-get install build-essential autoconf libtool libgmp-dev libreadline-dev zlib1g-dev</code>
     </p>
 </li>
-<li>Choose your preferred archive format and <a href="{{ site.baseurl }}/Releases/{{site.data.release.version}}.html">download</a> 
+<li>Choose your preferred archive format and download 
 the corresponding archive.</li>
+<table>
+<colgroup>
+ <col width="15%">
+ <col width="5%">
+ <col>
+</colgroup>
+{% for asset in unix_assets %}
+<tr>
+  <td>
+    <a href="{{ asset.url }}">{{ asset.name }}</a>
+  </td>
+  <td>{{ asset.bytes | divided_by: 1048576 }} MB</td>
+  <td>sha256: <code>{{ asset.sha256 }}</code> </td>
+</tr>
+{% endfor %}
+</table>
 <li>Unpack the archive.</li>
 <li>Compile the GAP core system by running 
     <p>
