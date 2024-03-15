@@ -45,7 +45,7 @@ and resubscribe from the new address.
 ### The Forum Archive
 
 All correspondence in the Forum is kept in the GAP
-[Forum Archive]({{ site.baseurl }}/Contacts/Forum/archive.html).
+[Forum Archive]({{ site.baseurl }}/forum/archive.html).
 
 ### GAP Support
 
