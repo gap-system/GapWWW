@@ -15,11 +15,11 @@ permalink: /faq/
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-### Obtaining GAP
+## Obtaining GAP
 
 <!-- ================================================================================== -->
 
-#### Can I obtain the algorithm and/or code for some function of GAP?
+### Can I obtain the algorithm and/or code for some function of GAP?
 <p>
 The brief answer is: "Yes, GAP is open source."
 </p>
@@ -32,7 +32,7 @@ Also the <a href="#2.6">answer&nbsp;to&nbsp;FAQ&nbsp;2.6</a> may be helpful.
 
 <!-- ================================================================================== -->
 
-#### How do I find my way through the GAP Library?
+### How do I find my way through the GAP Library?
 <p>
 <a href="{{ site.baseurl }}/Doc/Talks/linz99.html#Library">The following text</a>, adapted from  a
 <a href="{{ site.baseurl }}/Doc/Talks/l_ah_lib.pdf">talk</a>
@@ -41,10 +41,10 @@ by Alexander Hulpke at a Summer School at Linz in 1999, may be helpful.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-### Usage hints
+## Usage hints
 <!-- ================================================================================== -->
 
-#### How can I customise GAP?
+### How can I customise GAP?
 
 <p>
 When you start GAP, it looks for files with the names
@@ -74,7 +74,7 @@ from the GAP Reference Manual for the transitional arrangements.
 
 <!-- ================================================================================== -->
 
-#### How can I avoid excessive output?
+### How can I avoid excessive output?
 
 <p>
 If  you  expect  that  the output will have too many lines, typing a
@@ -90,7 +90,7 @@ from overloading.
 
 <!-- ================================================================================== -->
 
-#### How can I stop excessive output?
+### How can I stop excessive output?
 
 <p>
 In case you did not type the double semicolon ";;", and GAP started
@@ -105,7 +105,7 @@ further output, so you should use this measure carefully.
 
 <!-- ================================================================================== -->
 
-#### How can I save my GAP input and output?
+### How can I save my GAP input and output?
 
 <p>
 The  command  <tt>LogTo(  name-file  )</tt>  causes  the  subsequent
@@ -140,7 +140,7 @@ information on this and related commands.
 
 <!-- ================================================================================== -->
 
-#### Can I run GAP remotely?
+### Can I run GAP remotely?
 
 <p>
    It is possible to run GAP remotely. Usually this can be done via an
@@ -154,7 +154,7 @@ information on this and related commands.
 
 <!-- ================================================================================== -->
 
-#### Why should I use the "screen" program?
+### Why should I use the "screen" program?
 
 <p>
  If the remote server is operated by a UNIX operating system, it is very
@@ -185,7 +185,7 @@ example, type 'man screen').
 
 <!-- ================================================================================== -->
 
-#### Can I convert a file obtained from the GAP LogTo command into a Latex file?
+### Can I convert a file obtained from the GAP LogTo command into a Latex file?
 
 <p>  David Joyner ( wdj@usna.edu) announced in the  GAP
 Forum that he ...
@@ -205,7 +205,7 @@ if you are interested.
 
 <!-- ================================================================================== -->
 
-#### When I use time or Runtime() or the profiler to determine how long a piece of GAP code takes, the answers can vary significantly. Why is this?
+### When I use time or Runtime() or the profiler to determine how long a piece of GAP code takes, the answers can vary significantly. Why is this?
 
 <p>
 There are a number of possible reasons for this:
@@ -257,10 +257,10 @@ operations which are too fast for the built-in methods of measurement.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-### Complaints
+## Complaints
 <!-- ================================================================================== -->
 
-#### I think I found a bug.
+### I think I found a bug.
 <p>
   While we try to check the GAP system as rigorously as we
   can, such a large system  will inevitably contain bugs. We welcome bug
@@ -275,7 +275,7 @@ operations which are too fast for the built-in methods of measurement.
 
 <!-- ================================================================================== -->
 
-#### My calculation does not finish (or GAP runs out of memory).
+### My calculation does not finish (or GAP runs out of memory).
 <p>
   Depending on the size or representation of objects, some harmless-looking
   commands can involve very expensive (in terms of runtime and of memory use)
@@ -421,7 +421,7 @@ subject appears in the Forum thread starting in
 
 <!-- ================================================================================== -->
 
-#### My calculation with matrix groups is slow/runs out of memory.
+### My calculation with matrix groups is slow/runs out of memory.
 <p>
 GAP currently translates essentially every calculation with matrix
 groups to an isomorphic permutation group. Two possible bottlenecks are:
@@ -457,7 +457,7 @@ of the GAP reference manual) to build the permutation representation.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-### Computing with GAP
+## Computing with GAP
 <!-- ================================================================================== -->
 
   In addition to the list of frequently asked questions on computing with GAP given below,</p>
@@ -481,7 +481,7 @@ of the GAP reference manual) to build the permutation representation.
     </li>
   </ul>
 
-#### How do I perform binary operations on the elements of a group?
+### How do I perform binary operations on the elements of a group?
 <p>
 The group  operation in  GAP is  always multiplication,
 written with *.
@@ -509,7 +509,7 @@ symbol * for the group multiplication.
 
 <!-- ================================================================================== -->
 
-#### How do I represent my group in GAP?
+### How do I represent my group in GAP?
 <p>
   If you can write down permutations or matrix generators, you can use them
   directly. (Note, however, that GAP will internally compute
@@ -599,7 +599,7 @@ back into the group <tt>n</tt>, using the function
 
 <!-- ================================================================================== -->
 
-#### Does GAP support additive groups?
+### Does GAP support additive groups?
 <p>
 The answer is a clear 'no  and yes'! To understand this 'clear answer'
 let  us consider  the integers  mod  15. (See  section
@@ -700,7 +700,7 @@ gap&gt; Size(s);
 
 <!-- ================================================================================== -->
 
-#### In many algebra books the quaternion group is a group on 8 distinct symbols {i,j,k,1,-1,-i,-j,-k}. How can I make GAP use these elements?
+### In many algebra books the quaternion group is a group on 8 distinct symbols {i,j,k,1,-1,-i,-j,-k}. How can I make GAP use these elements?
 <p>
 GAP's group  constructors will generally, and by  default, construct a
 group  of the  specified isomorphism  type, in  whatever form  is most
@@ -785,7 +785,7 @@ constructing the group.
 
 <!-- ================================================================================== -->
 
-#### I have a finite presentation for a finite polycyclic group. When I tried to use <tt>PcGroupFpGroup()</tt> to convert it to a pc-group, I received an error message.
+### I have a finite presentation for a finite polycyclic group. When I tried to use <tt>PcGroupFpGroup()</tt> to convert it to a pc-group, I received an error message.
 
 <p>
   <tt>PcGroupFpGroup()</tt> is mainly a conversion routine. The given finite
@@ -970,7 +970,7 @@ gap&gt;  DisplayPcpGroup( PcGroupToPcpGroup(h) );
 
 <!-- ================================================================================== -->
 
-#### How do I get the elements of my group?
+### How do I get the elements of my group?
 <p>
   There are functions <tt>AsList</tt> and <tt>AsSSortedList</tt> that
   return a (sorted) list of all the group elements. However for bigger
@@ -980,7 +980,7 @@ gap&gt;  DisplayPcpGroup( PcGroupToPcpGroup(h) );
 
 <!-- ================================================================================== -->
 
-#### How do I get the subgroups of my group?
+### How do I get the subgroups of my group?
 <p>
   Everything said for elements holds even more so for subgroups: You
   probably want only representatives of the conjugacy classes or even just
@@ -1020,7 +1020,7 @@ or pc group (using {% include ref.html label="IsomorphismPcGroup" text="<tt>Isom
 
 <!-- ================================================================================== -->
 
-#### Is GAP suited for studying combinatorial structures and finite permutation groups?
+### Is GAP suited for studying combinatorial structures and finite permutation groups?
 <p>
 GAP  is suited very well for computing in
 combinatorial structures and permutation groups. A small but
@@ -1159,7 +1159,7 @@ gap&gt; phi := IsomorphismGroups(G,W);   # A concrete isomorphism.
 
 <!-- ================================================================================== -->
 
-#### How can one compute the Schur Multiplier of a finite group by GAP?
+### How can one compute the Schur Multiplier of a finite group by GAP?
 <p>
 Derek Holt answered:
 </p>
@@ -1246,7 +1246,7 @@ corresponding times were 6 and 80 seconds respectively).
 
 <!-- ================================================================================== -->
 
-#### Is it possible using GAP to check that a given presentation defines a nilpotent group of class 2 or not?
+### Is it possible using GAP to check that a given presentation defines a nilpotent group of class 2 or not?
 
 For example $G=\langle  a,b,c| a^{p^5}, b^{p^3}, c^{p^2},
 [a,b]=a^{p^3}, [a,c]=c^p, [b,c]=b^{p^2} \rangle $ where $p$ is a
@@ -1460,7 +1460,7 @@ the reader.
 
 <!-- ================================================================================== -->
 
-#### How do I use GAP to "identify" a given group?
+### How do I use GAP to "identify" a given group?
 
 <p>
 </p>
@@ -1642,7 +1642,7 @@ S (1 gens, size 3)
 
 <!-- ================================================================================== -->
 
-#### Can non-isomorphic groups have equal structure descriptions?
+### Can non-isomorphic groups have equal structure descriptions?
 <p>
 Yes, indeed, this can happen.
 {% include ref.html label="StructureDescription" text="The manual entry for \"StructureDescription\"" %}
@@ -1665,10 +1665,10 @@ each of which is described in the appropriate manual.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-### Programming GAP
+## Programming GAP
 <!-- ================================================================================== -->
 
-#### Can I call GAP functions from another programme?
+### Can I call GAP functions from another programme?
 
 <p>
 What you can do is to run  GAP in a child process and communicate with
@@ -1691,7 +1691,7 @@ There are several C and C++ libraries that implement the client side.
 
 <!-- ================================================================================== -->
 
-#### Where is the GAP file editor? How do I save GAP programs?
+### Where is the GAP file editor? How do I save GAP programs?
 
 GAP programs are simple text files, and you can edit them with
 any text editor. Some editors may support GAP syntax highlighting and have 
