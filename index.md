@@ -60,29 +60,6 @@ package]({{ site.baseurl }}/Packages/packages.html) and its
 [submission]({{ site.baseurl }}/Packages/Authors/submit.html) to
 GAP.
 
-<!---
-The
-[GAP Group]({{ site.baseurl }}/Contacts/People/people.html)
-welcomes
-[contacts]({{ site.baseurl }}/Contacts/contacts.html) with
-the GAP users and offers support for them. To keep up to date on GAP
-news (discussion of problems, release announcements, bug fixes), we
-suggest you to
-[subscribe](https://mail.gap-system.org/mailman/listinfo/forum) to the
-email-based
-[GAP Forum]({{ site.baseurl }}/Contacts/Forum/forum.html).
-
-Please
-[tell us]({{ site.baseurl }}/Contacts/publicationfeedback.html)
-about your use of GAP in research or teaching. We may well want to
-provide a link to your work. If your work is published then we ask you
-to [cite]({{ site.baseurl }}/Contacts/cite.html) GAP like a
-journal article or book. We maintain a
-[Bibliography]({{ site.baseurl }}/Doc/Bib/bib.html) of
-publications citing GAP. Please
-[help us]({{ site.baseurl }}/Contacts/publicationfeedback.html)
-keeping it up to date. --->
-
 
 ### Acknowledgements
 
