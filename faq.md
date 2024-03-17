@@ -1,239 +1,24 @@
 ---
 title: FAQ
-layout: default_with_title
+layout: faq
 nav_order: 7
 permalink: /faq/
 ---
 
-<ol>
-  <li>
-    <h3><a href="#1">General Questions</a></h3>
+## Table of contents
+{: .no_toc .text-delta }
 
-    <ul>
-      <li>
-        <a href="#1.1">1.1: What is GAP?</a>
-      </li>
-      <li>
-        <a href="#1.2">1.2: What are the requirements for running GAP?</a>
-      </li>
-      <li>
-        <a href="#1.3">1.3: Which skills do I need to use GAP?</a>
-      </li>
-      <li>
-        <a href="#1.4">1.4: Who wrote GAP?</a>
-      </li>
-      <li>
-        <a href="#1.5">1.5: (obsolete question, removed)</a>
-      </li>
-      <li>
-        <a href="#1.6">1.6: Where do I get your clothes, your Genome analysis software,
-        your diving software, information about your irrigation projects?</a>
-      </li>
-      <li>
-        <a href="#1.7">1.7: I wrote to you two days ago and I still have not got an answer.</a>
-      </li>
-      <li>
-        <a href="#1.8">1.8: How do I cite GAP?</a>
-      </li>
-      <li>
-        <a href="#1.9">1.9: What does all this information GAP prints at startup mean?</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <h3><a href="#2">Obtaining GAP.</a></h3>
-    <ul>
-      <li>
-        <a href="#2.1">2.1: Where can I download GAP</a>?
-      </li>
-      <li>
-        <a href="#2.2">2.2: (obsolete question, removed)</a>
-      </li>
-      <li>
-        <a href="#2.3">2.3: Are there RPMS or DEB files for Linux?</a>
-      </li>
-      <li>
-        <a href="#2.4">2.4: The files do not load properly in my browser.</a>
-      </li>
-      <li>
-        <a href="#2.5">2.5: Can I obtain the algorithm and/or code for some function of GAP?</a>
-      </li>
-       <li>
-        <a href="#2.6">2.6: How do I find my way through the GAP Library?</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <h3><a href="#3">Installation</a></h3>
-    <ul>
-      <li>
-        <a href="#3.1">3.1: How do I install GAP?</a>
-      </li>
-      <li>
-        <a href="#3.2">3.2: Where do I find a manual?</a>
-      </li>
-      <li>
-        <a href="#3.3">3.3: The HTML manual does not display properly in my browser.</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <h3>(obsolete section, removed)</h3>
-  </li>
-  <li>
-    <h3><a href="#5">Usage hints</a></h3>
-    <ul>
-     <li>
-       <a href="#5.1">5.1: How can I customize GAP ?
-       </a>
-     </li>
-     <li>
-       <a href="#5.2">5.2: How can I avoid excessive output?</a>
-     </li>
-     <li>
-       <a href="#5.3">5.3: How can I stop excessive output?</a>
-     </li>
-     <li>
-        <a href="#5.4">5.4: How can I save my GAP input and output?</a>
-     </li>
-     <li>
-       <a href="#5.5">5.5: Can I run GAP remotely?</a>
-     </li>
-     <li>
-       <a href="#5.6">5.6: Why should I use the "screen" program?</a>
-     </li>
-     <li>
-       <a href="#5.7">5.7: Can I convert a file obtained from the
-       GAP LogTo command into a Latex file?</a>
-     </li>
-     <li>
-       <a href="#5.8">5.8: When I use time or Runtime() or
-       the profiler to determine how long a piece of GAP
-       code takes, the answers can vary significantly. Why is this?</a>
-     </li>
-    </ul>
-  </li>
-  <li>
-    <h3><a href="#6">Complaints</a></h3>
-    <ul>
-      <li>
-        <a href="#6.1">6.1: I think I found a bug.</a>
-      </li>
-      <li>
-        <a href="#6.2">6.2: My calculation does not finish (or GAP runs out of memory).</a>
-      </li>
-      <li>
-        <a href="#6.3">6.3: My calculation with matrix groups is slow/runs out of memory.</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <h3><a href="#7">Computing with GAP</a></h3>
-
-<p>
-  In addition to the list of frequently asked questions on computing with GAP given below,</p>
-
-  <ul>
-    <li>
-    David Joyner is collecting a list of frequently asked questions
-    about
-    <a href="https://yetanothermathblog.com/the-toric-package-for-gap/how-do-i-construct-in-gap/">
-    Constructions</a> of various mathematical objects in GAP
-    with fully worked out GAP code answering them. This
-    collection is specially recommended for newcomers to the system .
-    </li>
-    <li>
-    {% include namelink.html name="Alexander Hulpke" %}
-    has collected user questions (mostly from the GAP
-    Forum) about mathematical applications of
-    GAP together with the corresponding answers. See
-    <a href="https://www.math.colostate.edu/~hulpke/GAPQA/">
-    Some&nbsp;GAP&nbsp;Questions</a> on his home page.
-    </li>
-  </ul>
-  <p>
-  </p>
-    <ul>
-      <li>
-        <a href="#7.1">7.1: How do I perform binary operations on the elements of a group?</a>
-      </li>
-      <li>
-        <a href="#7.2">7.2: How do I represent my group in GAP?</a>
-      </li>
-      <li>
-        <a href="#7.3">7.3: Does GAP support additive groups?</a>
-      </li>
-      <li>
-        <a href="#7.4">7.4: In many algebra books the quaternion
-                             group is a group on 8 distinct symbols
-                             {i,j,k,1,-1,-i,-j,-k}. How can I make
-                             GAP use these elements?</a>
-      </li>
-      <li>
-        <a href="#7.5">7.5: I have a finite presentation for a
-                             finite polycyclic group. When I tried to use
-                             <tt>PcGroupFpGroup()</tt> to convert it to a
-                             pc-group, I received an error message.</a>
-      </li>
-      <li>
-        <a href="#7.6">7.6: How do I get the elements of my group?</a>
-      </li>
-      <li>
-        <a href="#7.7">7.7: How do I get the subgroups of my group?</a>
-      </li>
-      <li>
-        <a href="#7.8">7.8: Is GAP suited for studying
-        combinatorial structures and finite permutation groups?</a>
-      </li>
-      <li>
-        <a href="#7.9">7.9: How can one compute the Schur
-        Multiplier of a finite group by GAP?</a>
-      </li>
-      <li>
-        <a href="#7.10">7.10: How can one use GAP to
-check that given presentation is a nilpotent group of class 2 or not?</a>
-      </li>
-      <li>
-        <a href="#7.11">7.11: How can one use GAP to "identify" a group?</a>
-      </li>
-      <li>
-        <a href="#7.12">7.12: Can non-isomorphic groups have equal structure descriptions?</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <h3><a href="#8"> Programming GAP</a></h3>
-    <ul>
-      <li>
-        <a href="#8.1">8.1: Can I call GAP
-                                     functions from another programme</a>?
-      </li>
-      <li>
-        <a href="#8.2">8.2: (obsolete question, removed)</a>
-      </li>
-      <li>
-        <a href="#8.3">8.3: Where is the  GAP
-                                     file editor? How do I save
-                                     GAP programs</a>?
-      </li>
-    </ul>
-  </li>
-</ol>
+1. TOC
+{:toc}
 
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-<a name="1"></a>
-<h3>
-  1. General Questions
-</h3>
+### General Questions
 
 <!-- ================================================================================== -->
 
-<a name="1.1"></a>
-<h4>
-  1.1: What is GAP?
-</h4>
+#### What is GAP?
 <p>
   GAP is a free system for computational discrete mathematics,
   in particular group theory.
@@ -248,10 +33,7 @@ Mathematical&nbsp;Capabilities</a>.
 
 <!-- ================================================================================== -->
 
-<a name="1.2"></a>
-<h4>
-  1.2: What are the requirements for running GAP?
-</h4>
+#### What are the requirements for running GAP?
 <p>
   GAP runs on (almost) any flavour of Unix, on Macintoshes
   and on Windows (&gt;94) machines.
@@ -261,10 +43,7 @@ Mathematical&nbsp;Capabilities</a>.
 
 <!-- ================================================================================== -->
 
-<a name="1.3"></a>
-<h4>
-  1.3: Which skills do I need to use GAP?
-</h4>
+#### Which skills do I need to use GAP?
 <p>
 You basically need:
 </p>
@@ -315,10 +94,7 @@ You basically need:
 
 <!-- ================================================================================== -->
 
-<a name="1.4"></a>
-<h4>
-  1.4: Who wrote GAP?
-</h4>
+#### Who wrote GAP?
 <p>
   You can find an overview on all
   <a href="{{ site.baseurl }}/Contacts/People/people.html">
@@ -333,11 +109,7 @@ You basically need:
 
 <!-- ================================================================================== -->
 
-<a name="1.6"></a>
-<h4>
-  1.6: Where do I get your clothes, your Genome analysis software, your
-  diving software, information about your irrigation project?
-</h4>
+#### Where do I get your clothes, your Genome analysis software, your diving software, information about your irrigation project?
 <p>
   We are a group of researchers in computational group theory, a branch of
   mathematics and for us 'GAP' stands for 'Groups, Algorithms
@@ -355,10 +127,7 @@ You basically need:
 
 <!-- ================================================================================== -->
 
-<a name="1.7"></a>
-<h4>
-  1.7: I wrote to you two days ago and I still have not got an answer.
-</h4>
+#### I wrote to you two days ago and I still have not got an answer.
 <p>
   Please bear with us. GAP is distributed freely and all
   user support is done by the program authors in addition to their usual
@@ -369,20 +138,14 @@ You basically need:
 
 <!-- ================================================================================== -->
 
-<a name="1.8"></a>
-<h4>
-  1.8: How do I cite GAP ?
-</h4>
+#### How do I cite GAP ?
 <p>
   To cite GAP, please see the <a href="{{ site.baseurl }}/Contacts/cite.html">Citing GAP</a> webpage.
 </p>
 
 <!-- ================================================================================== -->
 
-<a name="1.9"></a>
-<h4>
-  1.9: What does all this information GAP prints at startup mean?
-</h4>
+#### What does all this information GAP prints at startup mean?
 <p>
 For example, in one particular GAP 4.11.1 installation, we have
 </p>
@@ -426,17 +189,10 @@ the <a href="{{ site.baseurl }}/Install/"> Installation Instructions</a>.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-<a name="2"></a>
-<h3>
-  2. Obtaining GAP
-</h3>
-
+### Obtaining GAP
 <!-- ================================================================================== -->
 
-<a name="2.1"></a>
-<h4>
-  2.1: Where can I download GAP?
-</h4>
+#### Where can I download GAP?
 <p>
   You can download GAP as described on the page
   <a href="{{ site.baseurl }}/Install/index.html">Download&nbsp;GAP</a>.
@@ -444,17 +200,7 @@ the <a href="{{ site.baseurl }}/Install/"> Installation Instructions</a>.
 
 <!-- ================================================================================== -->
 
-<a name="2.2"></a>
-<h4>
-  2.2: (obsolete question, removed)
-</h4>
-
-<!-- ================================================================================== -->
-
-<a name="2.3"></a>
-<h4>
-  2.3: Are there RPM or DEB files for Linux?
-</h4>
+#### Are there RPM or DEB files for Linux?
 <p>
   We would be happy to offer source and binary distributions packaged
   for the popular Linux package formats but for this we need volunteers
@@ -467,10 +213,7 @@ the <a href="{{ site.baseurl }}/Install/"> Installation Instructions</a>.
 
 <!-- ================================================================================== -->
 
-<a name="2.4"></a>
-<h4>
-  2.4: The files do not load properly in my browser.
-</h4>
+#### The files do not load properly in my browser.
 <p>
   Most likely the browser loads the files as text files (and probably
   displays the content on the screen as garbage). Use the <b>right</b> mouse
@@ -479,11 +222,7 @@ the <a href="{{ site.baseurl }}/Install/"> Installation Instructions</a>.
 
 <!-- ================================================================================== -->
 
-<a name="2.5"></a>
-<h4>
-  2.5: Can I obtain the algorithm and/or code for some function of
-  GAP?
-</h4>
+#### Can I obtain the algorithm and/or code for some function of GAP?
 <p>
 The brief answer is: "Yes, GAP is open source."
 </p>
@@ -496,10 +235,7 @@ Also the <a href="#2.6">answer&nbsp;to&nbsp;FAQ&nbsp;2.6</a> may be helpful.
 
 <!-- ================================================================================== -->
 
-<a name="2.6"></a>
-<h4>
-  2.6: How do I find my way through the GAP Library?
-</h4>
+#### How do I find my way through the GAP Library?
 <p>
 <a href="{{ site.baseurl }}/Doc/Talks/linz99.html#Library">The following text</a>, adapted from  a
 <a href="{{ site.baseurl }}/Doc/Talks/l_ah_lib.pdf">talk</a>
@@ -509,17 +245,10 @@ by Alexander Hulpke at a Summer School at Linz in 1999, may be helpful.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-<a name="3"></a>
-<h3>
-  3. Installation
-</h3>
-
+### Installation
 <!-- ================================================================================== -->
 
-<a name="3.1"></a>
-<h4>
-  3.1: How do I install GAP?
-</h4>
+#### How do I install GAP?
 <p>
   See the
   <a href="{{ site.baseurl }}/Install/">download&nbsp;pages</a>.
@@ -527,10 +256,7 @@ by Alexander Hulpke at a Summer School at Linz in 1999, may be helpful.
 
 <!-- ================================================================================== -->
 
-<a name="3.2"></a>
-<h4>
-  3.2: Where do I find a manual?
-</h4>
+#### Where do I find a manual?
 <p>
   The best way to access the GAP documentation is to use
   the online help from within GAP using the <tt>?</tt>
@@ -555,10 +281,7 @@ by Alexander Hulpke at a Summer School at Linz in 1999, may be helpful.
 
 <!-- ================================================================================== -->
 
-<a name="3.3"></a>
-<h4>
-  3.3: The HTML manual does not display properly in my browser.
-</h4>
+#### The HTML manual does not display properly in my browser.
 <p>
   Unfortunately, there is no standard for displaying mathematical formulae on
   Web pages. The current version of the HTML manual uses unicode characters.
@@ -569,17 +292,10 @@ by Alexander Hulpke at a Summer School at Linz in 1999, may be helpful.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-<a name="5"></a>
-<h3>
-  5. Usage hints
-</h3>
-
+### Usage hints
 <!-- ================================================================================== -->
 
-<a name="5.1"></a>
-<h4>
-  5.1: How can I customise GAP?
-</h4>
+#### How can I customise GAP?
 
 <p>
 When you start GAP, it looks for files with the names
@@ -609,10 +325,7 @@ from the GAP Reference Manual for the transitional arrangements.
 
 <!-- ================================================================================== -->
 
-<a name="5.2"></a>
-<h4>
-  5.2: How can I avoid excessive output?
-</h4>
+#### How can I avoid excessive output?
 
 <p>
 If  you  expect  that  the output will have too many lines, typing a
@@ -628,10 +341,7 @@ from overloading.
 
 <!-- ================================================================================== -->
 
-<a name="5.3"></a>
-<h4>
-  5.3: How can I stop excessive output?
-</h4>
+#### How can I stop excessive output?
 
 <p>
 In case you did not type the double semicolon ";;", and GAP started
@@ -646,10 +356,7 @@ further output, so you should use this measure carefully.
 
 <!-- ================================================================================== -->
 
-<a name="5.4"></a>
-<h4>
-  5.4: How can I save my GAP input and output?
-</h4>
+#### How can I save my GAP input and output?
 
 <p>
 The  command  <tt>LogTo(  name-file  )</tt>  causes  the  subsequent
@@ -684,10 +391,7 @@ information on this and related commands.
 
 <!-- ================================================================================== -->
 
-<a name="5.5"></a>
-<h4>
-  5.5: Can I run GAP remotely?
-</h4>
+#### Can I run GAP remotely?
 
 <p>
    It is possible to run GAP remotely. Usually this can be done via an
@@ -701,10 +405,7 @@ information on this and related commands.
 
 <!-- ================================================================================== -->
 
-<a name="5.6"></a>
-<h4>
-  5.6: Why should I use the "screen" program?
-</h4>
+#### Why should I use the "screen" program?
 
 <p>
  If the remote server is operated by a UNIX operating system, it is very
@@ -735,11 +436,7 @@ example, type 'man screen').
 
 <!-- ================================================================================== -->
 
-<a name="5.7"></a>
-<h4>
-  5.7: Can I convert a file obtained from the GAP LogTo
-  command into a Latex file?
-</h4>
+#### Can I convert a file obtained from the GAP LogTo command into a Latex file?
 
 <p>  David Joyner ( wdj@usna.edu) announced in the  GAP
 Forum that he ...
@@ -759,12 +456,7 @@ if you are interested.
 
 <!-- ================================================================================== -->
 
-<a name="5.8"></a>
-<h4>
-  5.8: When I use time or Runtime() or the profiler to determine how long
-  a piece of GAP code takes, the answers
-  can vary significantly. Why is this?
-</h4>
+#### When I use time or Runtime() or the profiler to determine how long a piece of GAP code takes, the answers can vary significantly. Why is this?
 
 <p>
 There are a number of possible reasons for this:
@@ -816,17 +508,10 @@ operations which are too fast for the built-in methods of measurement.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-<a name="6"></a>
-<h3>
-  6. Complaints
-</h3>
-
+### Complaints
 <!-- ================================================================================== -->
 
-<a name="6.1"></a>
-<h4>
-  6.1: I think I found a bug.
-</h4>
+#### I think I found a bug.
 <p>
   While we try to check the GAP system as rigorously as we
   can, such a large system  will inevitably contain bugs. We welcome bug
@@ -841,11 +526,7 @@ operations which are too fast for the built-in methods of measurement.
 
 <!-- ================================================================================== -->
 
-<a name="6.2"></a>
-<h4>
-  6.2: My calculation does not finish (or GAP runs out of
-  memory).
-</h4>
+#### My calculation does not finish (or GAP runs out of memory).
 <p>
   Depending on the size or representation of objects, some harmless-looking
   commands can involve very expensive (in terms of runtime and of memory use)
@@ -991,10 +672,7 @@ subject appears in the Forum thread starting in
 
 <!-- ================================================================================== -->
 
-<a name="6.3"></a>
-<h4>
-  6.3: My calculation with matrix groups is slow/runs out of memory.
-</h4>
+#### My calculation with matrix groups is slow/runs out of memory.
 <p>
 GAP currently translates essentially every calculation with matrix
 groups to an isomorphic permutation group. Two possible bottlenecks are:
@@ -1030,17 +708,31 @@ of the GAP reference manual) to build the permutation representation.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-<a name="7"></a>
-<h3>
-  7. Computing with GAP
-</h3>
-
+### Computing with GAP
 <!-- ================================================================================== -->
 
-<a name="7.1"></a>
-<h4>
-  7.1: How do I perform binary operations on the elements of a group?
-</h4>
+  In addition to the list of frequently asked questions on computing with GAP given below,</p>
+
+  <ul>
+    <li>
+    David Joyner is collecting a list of frequently asked questions
+    about
+    <a href="https://yetanothermathblog.com/the-toric-package-for-gap/how-do-i-construct-in-gap/">
+    Constructions</a> of various mathematical objects in GAP
+    with fully worked out GAP code answering them. This
+    collection is specially recommended for newcomers to the system .
+    </li>
+    <li>
+    {% include namelink.html name="Alexander Hulpke" %}
+    has collected user questions (mostly from the GAP
+    Forum) about mathematical applications of
+    GAP together with the corresponding answers. See
+    <a href="https://www.math.colostate.edu/~hulpke/GAPQA/">
+    Some&nbsp;GAP&nbsp;Questions</a> on his home page.
+    </li>
+  </ul>
+
+#### How do I perform binary operations on the elements of a group?
 <p>
 The group  operation in  GAP is  always multiplication,
 written with *.
@@ -1068,10 +760,7 @@ symbol * for the group multiplication.
 
 <!-- ================================================================================== -->
 
-<a name="7.2"></a>
-<h4>
-  7.2: How do I represent my group in GAP?
-</h4>
+#### How do I represent my group in GAP?
 <p>
   If you can write down permutations or matrix generators, you can use them
   directly. (Note, however, that GAP will internally compute
@@ -1161,10 +850,7 @@ back into the group <tt>n</tt>, using the function
 
 <!-- ================================================================================== -->
 
-<a name="7.3"></a>
-<h4>
-  7.3:  Does GAP support  additive groups?
-</h4>
+#### Does GAP support additive groups?
 <p>
 The answer is a clear 'no  and yes'! To understand this 'clear answer'
 let  us consider  the integers  mod  15. (See  section
@@ -1265,12 +951,7 @@ gap&gt; Size(s);
 
 <!-- ================================================================================== -->
 
-<a name="7.4"></a>
-<h4>
-  7.4: In many algebra books the quaternion group is  a group on
-  8 distinct symbols {i,j,k,1,-1,-i,-j,-k}. How can I make
-  GAP use these elements?
-</h4>
+#### In many algebra books the quaternion group is a group on 8 distinct symbols {i,j,k,1,-1,-i,-j,-k}. How can I make GAP use these elements?
 <p>
 GAP's group  constructors will generally, and by  default, construct a
 group  of the  specified isomorphism  type, in  whatever form  is most
@@ -1355,12 +1036,8 @@ constructing the group.
 
 <!-- ================================================================================== -->
 
-<a name="7.5"></a>
-<h4>
-  7.5:  I have a finite presentation for a finite polycyclic group. When
-  I tried to use <tt>PcGroupFpGroup()</tt> to convert it to a pc-group,
-  I received an error message.
-</h4>
+#### I have a finite presentation for a finite polycyclic group. When I tried to use <tt>PcGroupFpGroup()</tt> to convert it to a pc-group, I received an error message.
+
 <p>
   <tt>PcGroupFpGroup()</tt> is mainly a conversion routine. The given finite
   presentation must be a polycyclic presentation for
@@ -1544,10 +1221,7 @@ gap&gt;  DisplayPcpGroup( PcGroupToPcpGroup(h) );
 
 <!-- ================================================================================== -->
 
-<a name="7.6"></a>
-<h4>
-  7.6: How do I get the elements of my group?
-</h4>
+#### How do I get the elements of my group?
 <p>
   There are functions <tt>AsList</tt> and <tt>AsSSortedList</tt> that
   return a (sorted) list of all the group elements. However for bigger
@@ -1557,10 +1231,7 @@ gap&gt;  DisplayPcpGroup( PcGroupToPcpGroup(h) );
 
 <!-- ================================================================================== -->
 
-<a name="7.7"></a>
-<h4>
-  7.7: How do I get the subgroups of my group?
-</h4>
+#### How do I get the subgroups of my group?
 <p>
   Everything said for elements holds even more so for subgroups: You
   probably want only representatives of the conjugacy classes or even just
@@ -1600,11 +1271,7 @@ or pc group (using {% include ref.html label="IsomorphismPcGroup" text="<tt>Isom
 
 <!-- ================================================================================== -->
 
-<a name="7.8"></a>
-<h4>
-  7.8: Is GAP suited for studying combinatorial structures
-  and finite permutation groups?
-</h4>
+#### Is GAP suited for studying combinatorial structures and finite permutation groups?
 <p>
 GAP  is suited very well for computing in
 combinatorial structures and permutation groups. A small but
@@ -1743,11 +1410,7 @@ gap&gt; phi := IsomorphismGroups(G,W);   # A concrete isomorphism.
 
 <!-- ================================================================================== -->
 
-<a name="7.9"></a>
-<h4>
-  7.9: How can one compute the Schur Multiplier of a finite group by
-  GAP?
-</h4>
+#### How can one compute the Schur Multiplier of a finite group by GAP?
 <p>
 Derek Holt answered:
 </p>
@@ -1834,11 +1497,8 @@ corresponding times were 6 and 80 seconds respectively).
 
 <!-- ================================================================================== -->
 
-<a name="7.10"></a>
-<h4>
-  7.10: "Is it possible using GAP to check that a given presentation defines a
-nilpotent group of class 2 or not?"
-<br/>
+#### Is it possible using GAP to check that a given presentation defines a nilpotent group of class 2 or not?
+
 For example $G=\langle  a,b,c| a^{p^5}, b^{p^3}, c^{p^2},
 [a,b]=a^{p^3}, [a,c]=c^p, [b,c]=b^{p^2} \rangle $ where $p$ is a
 prime.
@@ -2051,10 +1711,7 @@ the reader.
 
 <!-- ================================================================================== -->
 
-<a name="7.11"></a>
-<h4>
-  7.11: How do I use GAP to "identify" a given group?
-</h4>
+#### How do I use GAP to "identify" a given group?
 
 <p>
 </p>
@@ -2236,10 +1893,7 @@ S (1 gens, size 3)
 
 <!-- ================================================================================== -->
 
-<a name="7.12"></a>
-<h4>
-  7.12: Can non-isomorphic groups have equal structure descriptions?
-</h4>
+#### Can non-isomorphic groups have equal structure descriptions?
 <p>
 Yes, indeed, this can happen.
 {% include ref.html label="StructureDescription" text="The manual entry for \"StructureDescription\"" %}
@@ -2262,17 +1916,10 @@ each of which is described in the appropriate manual.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
-<a name="8"></a>
-<h3>
-  8. Programming GAP
-</h3>
-
+### Programming GAP
 <!-- ================================================================================== -->
 
-<a name="8.1"></a>
-<h4>
-  8.1: Can I call GAP functions from another programme?
-</h4>
+#### Can I call GAP functions from another programme?
 
 <p>
 What you can do is to run  GAP in a child process and communicate with
@@ -2295,11 +1942,7 @@ There are several C and C++ libraries that implement the client side.
 
 <!-- ================================================================================== -->
 
-<a name="8.3"></a>
-<h4>
-  8.3:  Where is the  GAP file editor? How do I save
-  GAP programs?
-</h4>
+#### Where is the GAP file editor? How do I save GAP programs?
 
 GAP programs are simple text files, and you can edit them with
 any text editor. Some editors may support GAP syntax highlighting and have 
