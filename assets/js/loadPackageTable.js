@@ -14,124 +14,65 @@ function format(d) {
         }
     }
 
-    // create string of necessary other packages
-    if(d.Dependencies.NeededOtherPackages != [] && typeof(d.Dependencies.NeededOtherPackages) != "undefined"){
-        const nNeccPack = d.Dependencies.NeededOtherPackages.length;
-        var neccPack = "";
-        for(let i=0; i < nNeccPack; i++ ){
-            neccPack += d.Dependencies.NeededOtherPackages[i][0];
-            neccPack += ' (';
-            neccPack += d.Dependencies.NeededOtherPackages[i][1];
-            neccPack += ')'
-            if(i==nNeccPack-2 && nNeccPack>=1){
-                neccPack += " and ";
-            } else if(i!=nNeccPack-1){
-                neccPack += ", ";
-            }
-        }
-    } else {
-        neccPack = "";
-    }
-
-    // create string of recommended other packages
-    if(d.Dependencies.SuggestedOtherPackages != [] && typeof(d.Dependencies.SuggestedOtherPackages) != "undefined"){
-        const nRecPack = d.Dependencies.SuggestedOtherPackages.length;
-        var recPack = "";
-        for(let i=0; i < nRecPack; i++ ){
-            recPack += d.Dependencies.SuggestedOtherPackages[i][0];
-            recPack += ' (';
-            recPack += d.Dependencies.SuggestedOtherPackages[i][1];
-            recPack += ')'
-            if(i==nRecPack-2 && nRecPack>=1){
-                recPack += " and ";
-            } else if(i!=nRecPack-1){
-                recPack += ", ";
-            }
-        }
-    } else {
-        recPack = "";
-    }
-
-// combine everything into a single string
+    // combine everything into a single string
     var resString = "";
 
-    // add person list
-    resString += "By: " ;
-    resString += namesPersons;
-    resString += "<br>";
+    // abstract
+    if(d.AbstractHTML != ""){
+        resString += d.AbstractHTML;
+    }
+
+    // the remaining data is grouped in a description list
+    resString += `<dl id="packages">`;
+
+    resString += `<dt>Links</dt>`;
+    resString += `<dd>`;
 
     // package website
-    resString += 'Package Website: <a href=\"' ;
-    resString += d.PackageWWWHome ;
-    resString += '\" target=\"_blank\">' ;
-    resString += d.PackageWWWHome;
-    resString += '</a><br>';
+    resString += `[<a href="${d.PackageWWWHome}" target="_blank">Homepage</a>] `;
 
-    // issue tracker
-    resString += 'Issue Tracker: <a href=\"' ;
-    resString += d.IssueTrackerURL ;
-    resString += '\" target=\"_blank\">' ;
-    resString += d.IssueTrackerURL ;
-    resString += '</a>';
-    resString += '<br>';
+    if (d.IssueTrackerURL != "") {
+        resString += `[<a href="${d.IssueTrackerURL}" target="_blank">Issue Tracker</a>] `;
+    }
+
+    if (d.SourceRepository !== undefined) {
+        resString += `[<a href="${d.SourceRepository.URL}" target="_blank">Source code repository</a>] `;
+    }
+    resString += `</dd>`;
+
+
+    // add person list
+    resString += `<dt>By</dt>`;
+    resString += `<dd>${namesPersons}</dd>`;
 
     // manuals in html and pdf format
-    resString += 'Manuals: ' ;
-    resString += '<a href=\"https://docs.gap-system.org/pkg/';
-    resString += d.PackageName.toLowerCase() ;
-    resString += '/';
-    resString += d.PackageDoc[0].HTMLStart ;
-    resString += '\" target=\"_blank\">[HTML]</a> ';
-    resString += '<a href=\"https://docs.gap-system.org/pkg/';
-    resString += d.PackageName.toLowerCase() ;
-    resString += '/' ;
-    resString += d.PackageDoc[0].PDFFile;
-    resString += '\" target=\"_blank\">[PDF]</a><br>';
-
-    // abstract
-    resString += 'Abstract: <br>';
-    if(d.AbstractHTML != ""){
-        resString += d.AbstractHTML ;
-    } else {
-        resString += 'No abstract provided'
+    resString += `<dt>Documentation</dt>`;
+    resString += `<dd>`;
+    const docsurl = "https://docs.gap-system.org/pkg/";
+    const pkgname = d.PackageName.toLowerCase();
+    for (var i = 0; i < d.PackageDoc.length; i++) {
+        var book = d.PackageDoc[i];
+        resString += book.BookName + " ";
+        resString += `<a href="${docsurl}${pkgname}/${book.HTMLStart}" target="_blank">[HTML]</a> `;
+        resString += `<a href="${docsurl}${pkgname}/${book.PDFFile}" target="_blank">[PDF]</a> `;
+        resString += '<br>';
     }
-    resString += '<br><br>';
+    resString += `</dd>`;
 
     // archives
-    resString += 'Archives: <a href=\"' ;
-    resString += d.ArchiveURL ;
-    resString += '\" target=\"_blank\">' ;
-    resString += d.ArchiveURL ;
-    resString += '</a><br>';
-
-    // GAP version
-    resString += 'GAP Version: ';
-    resString += d.Dependencies.GAP;
-    resString += '<br>';
-
-    // neccessary packages
-    if(neccPack != ""){
-        resString += 'Neccessary other Packages: ';
-        resString += neccPack;
-    } else {
-        resString += 'Neccessary other Packages: None';
+    resString += `<dt>Download</dt>`;
+    resString += `<dd>`;
+    var formats = d.ArchiveFormats.split(" ");
+    for (var i = 0; i < formats.length; i++) {
+        resString += `[<a href="${d.ArchiveURL}${formats[i]}">${formats[i]}</a>] `;
     }
-    resString += '<br>';
-
-    // recommended packages
-    if(recPack != ""){
-        resString += 'Recommended other Packages: ';
-        resString += recPack;
-
-    } else {
-        resString += 'Recommended other Packages: None';
-    }
-    resString += '<br>';
+    resString += `</dd>`;
 
     // license
-    resString += 'License: ';
-    resString += d.License;
-    resString += '<br>';
+    resString += `<dt>License</dt>`;
+    resString += `<dd>${d.License}</dd>`;
+
+    resString += `</dl>`;
 
     return resString;
 }
