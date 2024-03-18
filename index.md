@@ -55,7 +55,7 @@ submit an issue or a pull request on GitHub.
 There is an [extensive documentation](Doc/doc.html) advising how to
 write a GAP code. Also there is a
 [guidance](https://gap-packages.github.io/example/) on
-developing a [GAP package](Packages/packages.html) and its
+developing a [GAP package](packages) and its
 [submission](Packages/Authors/submit.html) to GAP.
 
 

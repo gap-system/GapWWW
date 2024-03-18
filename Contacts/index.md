@@ -1,7 +1,8 @@
 ---
-title: Contacts
+title: Contact
 layout: default
 has_children: true
+permalink: /contact/
 ---
 
 ### People
@@ -71,7 +72,7 @@ The functionality of GAP has been widely enlarged by pieces of code and
 data collections that have been developed by users of GAP and have been
 provided to be used with the main GAP library. We distribute these in
 the form of
-[Packages]({{ site.baseurl }}/Packages/packages.html) and
+[Packages]({{ site.baseurl }}/packages) and
 Data Libraries.
 We welcome obtaining any further such contributions as well as
 references to GAP implementations in the course of your research

@@ -1,7 +1,7 @@
 ---
 title: Forum
 layout: default_with_title
-parent: Contacts
+parent: Contact
 has_children: true
 permalink: /forum/
 nav_order: 2

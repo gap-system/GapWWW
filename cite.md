@@ -2,6 +2,7 @@
 title: How to cite GAP
 layout: default_with_title
 nav_order: 6
+permalink: /cite/
 ---
 GAP is written and developed by many people. A list of authors can be found [here](https://github.com/gap-system/gap/blob/master/COPYRIGHT).
 
@@ -23,7 +24,7 @@ like:
     version\>, \<package date\>, \<package web address\>
 
 You find the necessary information for each package from the [package
-overview]({{ site.baseurl }}/Packages/packages.html) page.)
+overview]({{ site.baseurl }}/packages) page.)
 
 If you are using BibTeX, you can use the following BibTeX entry for the
 current GAP version, making sure you have `\usepackage{url}` (or

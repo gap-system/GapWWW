@@ -82,7 +82,7 @@ function format(d) {
 let table = new DataTable('#packageList', {
   // get the json file
     "ajax" : {
-        "url": "latest.json",
+        "url": "../assets/package-infos.json",
         "dataSrc": function(dictData){
           // as the json file is a dict for every package it is necessary it put all values into an array for Datatables to understand it
             var arr = [];
