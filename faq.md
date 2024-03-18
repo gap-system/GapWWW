@@ -1491,9 +1491,9 @@ other useful features:
 
 - [BBEdit](https://www.barebones.com/products/bbedit/index.shtml) for macOS,
   using this
-  <a href="https://dev.quendi.de/gap/GAPLanguageModule.plist">syntax highlighting module</a>
+  <a href="http://dev.quendi.de/gap/GAPLanguageModule.plist">syntax highlighting module</a>
   by {% include namelink.html name="Max Horn" %}. To install it for BBEdit,
-  download the file [GAPLanguageModule.plist](https://dev.quendi.de/gap/GAPLanguageModule.plist)
+  download the file [GAPLanguageModule.plist](http://dev.quendi.de/gap/GAPLanguageModule.plist)
   and place it in the directory `~/Library/Application Support/BBEdit/Language Modules`.
   You may have to create this directory if it does not exist.
   Then restart BBEdit for it to become available.
