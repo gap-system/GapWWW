@@ -52,13 +52,13 @@ different categories.
     to the address <support@gap-system.org>.
 
 -   **GAP Forum.**  On the other hand, the
-    [GAP Forum]({{ site.baseurl }}/Contacts/Forum/forum.html)
+    [GAP Forum]({{ site.baseurl }}/forum/)
     should be reserved for discussions about problems that are likely to
     interest many of the GAP users. It would also be welcome if you
     could occasionally tell other users in the GAP Forum about
     interesting applications you have made of GAP. All correspondence in
     the Forum is kept in the
-    [Forum Archive]({{ site.baseurl }}/Contacts/Forum/forumarchive.html).
+    [Forum Archive]({{ site.baseurl }}/forum/archive/).
 
     For **theoretical** questions on groups and related structures we
     like to point to the
