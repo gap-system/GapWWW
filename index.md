@@ -50,7 +50,7 @@ guidance on contributing via GitHub
 [here](https://github.com/gap-system/gap/blob/master/CONTRIBUTING.md).
 If you have any questions, or suggestions for GAP, the repository, or
 documentation, feel free to contact us via the [open GAP development
-mailing list](https://mail.gap-system.org/mailman/listinfo/gap) or
+mailing list](https://lists.uni-kl.de/gap/info/gap) or
 submit an issue or a pull request on GitHub.
 There is an [extensive documentation](Doc/doc.html) advising how to
 write a GAP code. Also there is a
