@@ -20,24 +20,20 @@ permalink: /faq/
 <!-- ================================================================================== -->
 
 ### Can I obtain the algorithm and/or code for some function of GAP?
-<p>
+
 The brief answer is: "Yes, GAP is open source."
-</p>
-<p>
+
 You can use tools such as 'grep' to search for the code.
-</p>
-<p>
+
 Also the <a href="#2.6">answer&nbsp;to&nbsp;FAQ&nbsp;2.6</a> may be helpful.
-</p>
 
 <!-- ================================================================================== -->
 
 ### How do I find my way through the GAP Library?
-<p>
+
 <a href="{{ site.baseurl }}/Doc/Talks/linz99.html#Library">The following text</a>, adapted from  a
 <a href="{{ site.baseurl }}/Doc/Talks/l_ah_lib.pdf">talk</a>
 by Alexander Hulpke at a Summer School at Linz in 1999, may be helpful.
-</p>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
@@ -46,7 +42,6 @@ by Alexander Hulpke at a Summer School at Linz in 1999, may be helpful.
 
 ### How can I customise GAP?
 
-<p>
 When you start GAP, it looks for files with the names
 <code>gap.ini</code> and <code>gaprc</code> in its root directories
 (see {% include ref.html label="GAP Root Directories" %}),
@@ -56,58 +51,46 @@ read a file containing  functions or data that you always need,
 to set your personal preferences, to load certain packages, or to define your
 personal  abbreviations for some names in the library, which seems to
 be  too  long for you.
-</p>
 
-<p>
 For more details about <code>gap.ini</code> and <code>gaprc</code> files see the section
 {% include ref.html label="The gap.ini and gaprc files" text="The&nbsp;gap.ini&nbsp;and&nbsp;gaprc&nbsp;files" %}
 from the GAP Reference Manual.
-</p>
 
-<p>
 In former GAP releases prior to GAP 4.5
 a filed called <code>.gaprc</code> was used for customisations. If you
 have used the <code>.gaprc</code> file, see the section
 {% include ref.html label="The former .gaprc file" text="The&nbsp;former&nbsp;.gaprc&nbsp;file" %}.
 from the GAP Reference Manual for the transitional arrangements.
-</p>
 
 <!-- ================================================================================== -->
 
 ### How can I avoid excessive output?
 
-<p>
 If  you  expect  that  the output will have too many lines, typing a
 double  semicolon  ";;"  at  the end of the command line will suppress
 displaying  output  on  the  screen.  This  will allow you to see more
 history of your session, and also will prevent your network connection
 from overloading.
-</p>
-<p>
- Sometimes a strange indentation behaviour can be repaired by issuing one
- or several times the command '<code>Print("\&lt;\&lt;\&lt;\&lt;\&lt;\&lt;\&lt;");</code>'.
-</p>
+
+Sometimes a strange indentation behaviour can be repaired by issuing one
+or several times the command '<code>Print("\&lt;\&lt;\&lt;\&lt;\&lt;\&lt;\&lt;");</code>'.
 
 <!-- ================================================================================== -->
 
 ### How can I stop excessive output?
 
-<p>
 In case you did not type the double semicolon ";;", and GAP started
 to  print  too  many  lines  on the screen, sometimes Ctrl-C may break
 printing.  But  this  may  cause some side effects on the style of the
 further output, so you should use this measure carefully.
-</p>
-<p>
- Sometimes a strange indentation behaviour can be repaired by issuing one
- or several times the command '<code>Print("\&lt;\&lt;\&lt;\&lt;\&lt;\&lt;\&lt;");</code>'.
-</p>
+
+Sometimes a strange indentation behaviour can be repaired by issuing one
+or several times the command '<code>Print("\&lt;\&lt;\&lt;\&lt;\&lt;\&lt;\&lt;");</code>'.
 
 <!-- ================================================================================== -->
 
 ### How can I save my GAP input and output?
 
-<p>
 The  command  <tt>LogTo(  name-file  )</tt>  causes  the  subsequent
 interaction   to    be   logged   to   the   file    with   the   name
 <tt>name-file</tt>, i.e.,  everything you see on  your terminal will
@@ -116,56 +99,45 @@ a stream (see <tt>LogTo</tt> for streams). This file must of course
 be  writable by  GAP,  otherwise  an error  is  signalled.  Note  that
 <tt>LogTo</tt> will overwrite the  previous contents of this file if
 it  already   existed.
-</p>
 
-<p>
 The most convenient way of creating larger pieces of GAP
 code is to write them to some text file. For this purpose you can simply use
 your favorite text editor. You can load such a file into GAP
 using the command <tt>Read( name-file )</tt>. See the reference manual section
 {% include ref.html label="Read" text="File&nbsp;Operations" %} for information
 on these and related commands.
-</p>
 
-<p>
 The   command   <tt>SaveWorkspace( filename )</tt>   will  save   a
-``snapshot''  image   of  the  current  GAP  workspace   in  the  file
+"snapshot"  image   of  the  current  GAP  workspace   in  the  file
 <tt>filename</tt>.  This image  then can be loaded by  another copy of
 GAP  which then will  behave as  at the  point when <tt>SaveWorkspace</tt>
 was called.
 See the section
 {% include ref.html label="SaveWorkspace" text="Saving&nbsp;and&nbsp;Loading&nbsp;a&nbsp;Workspace" %} for
 information on this and related commands.
-</p>
 
 <!-- ================================================================================== -->
 
 ### Can I run GAP remotely?
 
-<p>
-   It is possible to run GAP remotely. Usually this can be done via an
-   <code>ssh</code> connection. (On Windows one can use, e.g., <a
-   href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a>.)
-</p>
-<p>
-   Since GAP uses standard text terminals as user interface, the remote usage
-   is very similar to the usage on a local machine.
-</p>
+It is possible to run GAP remotely. Usually this can be done via an
+<code>ssh</code> connection. (On Windows one can use, e.g., <a
+href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a>.)
+
+Since GAP uses standard text terminals as user interface, the remote usage
+is very similar to the usage on a local machine.
 
 <!-- ================================================================================== -->
 
 ### Why should I use the "screen" program?
 
-<p>
- If the remote server is operated by a UNIX operating system, it is very
-   convenient to use the 'screen' program - a screen manager with VT100/ANSI
-   terminal emulation. The advantage is that your GAP session will not be
-   lost in case of (unintended) interrupts of your network connection, and
-   that you can close the network connection while GAP is busy with long
-   computations.
-</p>
+If the remote server is operated by a UNIX operating system, it is very
+convenient to use the 'screen' program - a screen manager with VT100/ANSI
+terminal emulation. The advantage is that your GAP session will not be
+lost in case of (unintended) interrupts of your network connection, and
+that you can close the network connection while GAP is busy with long
+computations.
 
-<p>
 It  is  likely  that screen is already installed on your server - just
 type  'screen'  to check this.
 (Otherwise look
@@ -181,35 +153,28 @@ into  background) press Ctrl-A and then D (and you will see the normal
 command  line  prompt  of  your  UNIX  system)  or  simply  close the
 connection.  For more details about screen, see its documentation (for
 example, type 'man screen').
-</p>
 
 <!-- ================================================================================== -->
 
 ### Can I convert a file obtained from the GAP LogTo command into a Latex file?
 
-<p>  David Joyner ( wdj@usna.edu) announced in the  GAP
+David Joyner ( wdj@usna.edu) announced in the  GAP
 Forum that he ...
-<blockquote>
-... has  written a very simple python program which takes a file
-obtained from the GAP LogTo command and converts into a
-Latex file.
-You must have the python binary installed in /usr/bin
-(on a linux/unix setup). However, if you have the windows version
-of python then it presumably works with some editing. The file
-with an example in on David Joyner's webpage
-<a href="https://web.archive.org/web/20110709161231/http://www.usna.edu/Users/math/wdj/gap/">GAP&nbsp;Stuff</a>,
-if you are interested.
-</blockquote>
-
-</p>
+> ... has  written a very simple python program which takes a file
+> obtained from the GAP LogTo command and converts into a
+> Latex file.
+> You must have the python binary installed in /usr/bin
+> (on a linux/unix setup). However, if you have the windows version
+> of python then it presumably works with some editing. The file
+> with an example in on David Joyner's webpage
+> <a href="https://web.archive.org/web/20110709161231/http://www.usna.edu/Users/math/wdj/gap/">GAP&nbsp;Stuff</a>,
+> if you are interested.
 
 <!-- ================================================================================== -->
 
 ### When I use time or Runtime() or the profiler to determine how long a piece of GAP code takes, the answers can vary significantly. Why is this?
 
-<p>
 There are a number of possible reasons for this:
-</p>
 <ol>
 <li>
 For some calculations, GAP actually uses randomized algorithms (although,
@@ -239,11 +204,10 @@ The CPU cache. If the relevant parts of the GAP interpreter and/or of the
 workspace are in CPU cache when the test starts, this will save some time.
 </li>
 </ol>
-<p>
+
 Also note that accessing, especially updating, global
 variables is significantly slower than local ones.
-</p>
-<p>
+
 As described on the page
 <a href="{{ site.baseurl }}/Packages/Contrib/contrib.html">Packages/Contrib/contrib.html</a>
 there are links
@@ -252,7 +216,6 @@ there are links
 to files containing and describing simple GAP
 routines useful for measuring the run-time of GAP
 operations which are too fast for the built-in methods of measurement.
-</p>
 
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
@@ -261,40 +224,36 @@ operations which are too fast for the built-in methods of measurement.
 <!-- ================================================================================== -->
 
 ### I think I found a bug.
-<p>
-  While we try to check the GAP system as rigorously as we
-  can, such a large system  will inevitably contain bugs. We welcome bug
-  reports and regularly issue updates. However since GAP is
-  available free and the GAP authors work on the system as
-  part of their research, we would like to ask you to make sure that the
-  problem that you encountered really is a bug and that you are giving us
-  sufficient information to deal with it: please read the page
-  <a href="{{ site.baseurl }}/issues/">GAP&nbsp;Trouble</a>
-  before sending us a bug report.
-</p>
+
+While we try to check the GAP system as rigorously as we
+can, such a large system  will inevitably contain bugs. We welcome bug
+reports and regularly issue updates. However since GAP is
+available free and the GAP authors work on the system as
+part of their research, we would like to ask you to make sure that the
+problem that you encountered really is a bug and that you are giving us
+sufficient information to deal with it: please read the page
+<a href="{{ site.baseurl }}/issues/">GAP&nbsp;Trouble</a>
+before sending us a bug report.
 
 <!-- ================================================================================== -->
 
 ### My calculation does not finish (or GAP runs out of memory).
-<p>
-  Depending on the size or representation of objects, some harmless-looking
-  commands can involve very expensive (in terms of runtime and of memory use)
-  routines. Typical examples are (without any claim towards completeness):
-</p>
-<ul>
-  <li> Isomorphism tests, </li>
-  <li> Calculation of all subgroups, </li>
-  <li> Calculations with finitely presented structures. </li>
-</ul>
-<p>
-  In these cases the calculation might seemingly run forever or terminate
-  after a while with an error message that GAP could not get
-  more memory.
-</p>
-<p>
+
+Depending on the size or representation of objects, some harmless-looking
+commands can involve very expensive (in terms of runtime and of memory use)
+routines. Typical examples are (without any claim towards completeness):
+
+- Isomorphism tests,
+- Calculation of all subgroups,
+- Calculations with finitely presented structures.
+
+In these cases the calculation might seemingly run forever or terminate
+after a while with an error message that GAP could not get
+more memory.
+
 The first thing to check is the error message you got, as there are two
 variants:
-</p>
+
 <dl>
 <dt><tt>cannot extend the workspace any more</tt></dt>
 <dd>
@@ -325,89 +284,73 @@ See the section
 detail.
 </dd>
 </dl>
-<p>
+
 Assuming that neither of these fixes is available (your job is using all the
 physical memory you can have), it often is possible to recast the task in
 a different way to get the result more efficiently:
 A few approaches for this are:
-</p>
-<ul>
-  <li>
-    Is there a better representation? Typically PcGroups (only possible for
+
+  - Is there a better representation? Typically PcGroups (only possible for
     solvable groups) are more efficient than permutation groups are more
     efficient than matrix groups are more efficient than Fp groups. Use
     <tt>IsomorphismPermGroup</tt> (or similar) to transfer the calculation
     into a group in a better representation.
-  </li>
-  <li>
-    Is there another operation (probably not as general as the one you are
+  - Is there another operation (probably not as general as the one you are
     using) whose result would be sufficient? (For example it is sufficient
     to search for <i>p</i>-subgroups inside a Sylow subgroup.)
-  </li>
-  <li>
-    Is there information you have about the object that GAP
+  - Is there information you have about the object that GAP
     will have to find out? Good candidates are the size of a group (use
     <tt>SetSize</tt>) or solvability (use <tt>SetIsSolvableGroup</tt>).
-  </li>
-  <li>
-    Is the amount of data produced by the calculation feasible for the
+  - Is the amount of data produced by the calculation feasible for the
     machine you are using?
-  </li>
-  <li>
-   Does your computation use mutable lists when
-<a name="immutable">immutable</a> lists might be better?
-   <p>
-     In some cases, this can slow down your computation so much
-     that it doesn't finish. Using immutable lists allows
-computed properties to be cached, so
-that further checking of the property is instantaneous.  In the
-example below, the comments were introduced after the
-interaction.
-</p>
+  - Does your computation use mutable lists when
+    <a name="immutable">immutable</a> lists might be better?
 
-# create a mutable, sorted list
-<pre>
-gap> a:=List([0..20000],i->WordAlp("a",i));;
-gap> IsSortedList(a);
-true
-gap> time;
-256
-gap> IsSortedList(a);
-true
-gap> time;
-260
-</pre>
-# Time to check if it is sorted is about the same every occasion
-<pre>
-gap> KnownPropertiesOfObject(a);
-[ "IsFinite", "IsSmallList" ]
-</pre>
-# not much is known about a
-<pre>
-gap> b:=Immutable(a);;
-gap> KnownPropertiesOfObject(b);
-[ "IsFinite", "IsSmallList" ]
-</pre>
-# also not much is known about b
-# check sortedness for the first time
-<pre>
-gap> IsSortedList(b);
-true
-gap> time;
-284
-</pre>
-# about the same time it took for a. now, check again
-<pre>
-gap> IsSortedList(b);
-true
-gap> time;
-0
-</pre>
-# caching miracle! In this process, a lot was learned about b:
-<pre>
-gap> KnownPropertiesOfObject(b);
-[ "IS_SSORT_LIST", "IsFinite", "IsSmallList", "IsSortedList", "IsDuplicateFree" ]
-</pre>
+    In some cases, this can slow down your computation so much
+    that it doesn't finish. Using immutable lists allows
+    computed properties to be cached, so
+    that further checking of the property is instantaneous.  In the
+    example below, the comments were introduced after the
+    interaction.
+
+    ```gap
+    # create a mutable, sorted list
+    gap> a:=List([0..20000],i->WordAlp("a",i));;
+    gap> IsSortedList(a);
+    true
+    gap> time;
+    256
+    gap> IsSortedList(a);
+    true
+    gap> time;
+    260
+
+    # Time to check if it is sorted is about the same every occasion
+    gap> KnownPropertiesOfObject(a);
+    [ "IsFinite", "IsSmallList" ]
+
+    # not much is known about a
+    gap> b:=Immutable(a);;
+    gap> KnownPropertiesOfObject(b);
+    [ "IsFinite", "IsSmallList" ]
+
+    # also not much is known about b
+    # check sortedness for the first time
+    gap> IsSortedList(b);
+    true
+    gap> time;
+    284
+
+    # about the same time it took for a. now, check again
+    gap> IsSortedList(b);
+    true
+    gap> time;
+    0
+
+    # caching miracle! In this process, a lot was learned about b:
+    gap> KnownPropertiesOfObject(b);
+    [ "IS_SSORT_LIST", "IsFinite", "IsSmallList", "IsSortedList", "IsDuplicateFree" ]
+    ```
 
 <p>
 This example point to an important consequence: lookup in b is much faster
