@@ -24,7 +24,7 @@ like:
     version\>, \<package date\>, \<package web address\>
 
 You find the necessary information for each package from the [package
-overview]({{ site.baseurl }}/packages) page.)
+overview]({{ site.baseurl }}/packages/) page.)
 
 If you are using BibTeX, you can use the following BibTeX entry for the
 current GAP version, making sure you have `\usepackage{url}` (or
