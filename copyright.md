@@ -2,6 +2,7 @@
 title: GAP Copyright
 layout: default
 nav_exclude: true
+permalink: /copyright/
 ---
 
 ## {{ page.title }}
