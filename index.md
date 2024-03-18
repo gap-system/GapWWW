@@ -12,7 +12,7 @@ nav_exclude: true
 
 <p class="center">
 The current version is 
-<a href="Releases/{{site.data.release.version}}.html">GAP&nbsp;{{site.data.release.version}}</a> 
+<a href="Install/release.html">GAP&nbsp;{{site.data.release.version}}</a> 
 released on {{site.data.release.date}}.
 </p>
 
@@ -36,7 +36,7 @@ You can study and easily modify or extend it for your special use.
 
 How to install GAP is described in [Installation]({{ site.baseurl }}/Install/).
 The current release is GAP {{site.data.release.version}} and it can be
-obtained from our [release page]({{ site.baseurl }}/Releases/{{site.data.release.version}}.html).
+obtained from our [release page](Install/release.html).
 This website describes this release if not stated otherwise. 
 Changes from earlier versions are described in the
 [Release history](https://github.com/gap-system/gap/blob/master/CHANGES.md).
@@ -55,10 +55,8 @@ submit an issue or a pull request on GitHub.
 There is an [extensive documentation](Doc/doc.html) advising how to
 write a GAP code. Also there is a
 [guidance](https://gap-packages.github.io/example/) on
-developing a [GAP
-package]({{ site.baseurl }}/Packages/packages.html) and its
-[submission]({{ site.baseurl }}/Packages/Authors/submit.html) to
-GAP.
+developing a [GAP package](Packages/packages.html) and its
+[submission](Packages/Authors/submit.html) to GAP.
 
 
 ### Acknowledgements
