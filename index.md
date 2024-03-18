@@ -28,7 +28,7 @@ large data libraries of
 algebraic objects. See
 [here]({{ site.baseurl }}/About/overview.html) for details of the mathematical capabilities.
 The system, including source, is distributed
-[freely]({{ site.baseurl }}/copyright.html).
+[freely]({{ site.baseurl }}/copyright/).
 You can study and easily modify or extend it for your special use.
 
 
@@ -64,7 +64,7 @@ developing a [GAP package](packages) and its
 GAP has been and is developed by international cooperation of many people,
 including user contributions. We gratefully acknowledge all this help as
 well as some
-[funding]({{ site.baseurl }}/about#funding). GAP was
+[funding]({{ site.baseurl }}/About#funding). GAP was
 started at [Lehrstuhl D für
 Mathematik](https://www.math.rwth-aachen.de/LDFM/), RWTH Aachen in
 [1986]({{ site.baseurl }}/About/History/preface_2.4.html).
