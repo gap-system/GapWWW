@@ -208,15 +208,6 @@ workspace are in CPU cache when the test starts, this will save some time.
 Also note that accessing, especially updating, global
 variables is significantly slower than local ones.
 
-As described on the page
-<a href="{{ site.baseurl }}/Packages/Contrib/contrib.html">Packages/Contrib/contrib.html</a>
-there are links
-<a href="{{site.data.gap.deposit4dir}}gap/timers.g">timers.g</a> and
-<a href="{{site.data.gap.deposit4dir}}gap/README.timers">README.timers</a>
-to files containing and describing simple GAP
-routines useful for measuring the run-time of GAP
-operations which are too fast for the built-in methods of measurement.
-
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
