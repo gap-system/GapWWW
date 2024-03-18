@@ -352,15 +352,11 @@ A few approaches for this are:
     [ "IS_SSORT_LIST", "IsFinite", "IsSmallList", "IsSortedList", "IsDuplicateFree" ]
     ```
 
-<p>
-This example point to an important consequence: lookup in b is much faster
-than searching in a, since, as b is known to be sorted, binary search is used
-for the lookup.  An amusing instance of a painful learning experience in the
-subject appears in the Forum thread starting in
-<a href="https://mail.gap-system.org/pipermail/forum/2008/002169.html">https://mail.gap-system.org/pipermail/forum/2008/002169.html</a>.
-</p>
-</li>
-</ul>
+    This example point to an important consequence: lookup in b is much faster
+    than searching in a, since, as b is known to be sorted, binary search is used
+    for the lookup.  An amusing instance of a painful learning experience in the
+    subject appears in the Forum thread starting in
+    <https://www.gap-system.org/ForumArchive2/2008/002169.html>.
 
 <!-- ================================================================================== -->
 
@@ -1149,7 +1145,7 @@ external C programs, and it is only possible to use it under Unix or Linux."
 </p>
 <p>
 However in a further
-<a href="https://mail.gap-system.org/pipermail/forum/2004/000926.html">
+<a href="https://www.gap-system.org/ForumArchive2/2004/000926.html">
 letter</a>   Dima Pasechnik added:
 </p>
 <p>
