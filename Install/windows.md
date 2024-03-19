@@ -26,23 +26,25 @@ nav_order: 4
 {% endfor %}
 
 
-<p>
 Installing the GAP distribution with all the packages and full data
 libraries from source code requires a working C and C++ development
 environment on your system as well as GNU make.
-</p>
 
-<p>
 For users of Windows 10, we strongly recommend using GAP via the
 <a href="https://learn.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux</a>.
-</p>
-<p>
+
 Otherwise, we recommend the use of <code>.exe</code> installer which is available in the table below.
 It contains binaries for GAP (compiled with the support of GMP and readline libraries) and for selected
 GAP packages, and provides the standard installation procedure.
 No compilation is needed, since compiled executables for GAP
 and some packages are already provided by the <code>.exe</code> installer.
-</p>
+
+Note that the path to the GAP directory should not contain spaces. For example,
+you may install GAP in <code>C:\gap-{{site.data.release.version}}</code> (default),
+<code>D:\gap-{{site.data.release.version}}</code> or
+<code>C:\Math\GAP\gap-{{site.data.release.version}}</code>, but you must not install it in a
+directory named like <code>C:\Program files\gap-{{site.data.release.version}}</code> or
+<code>C:\Users\alice\My Documents\gap-{{site.data.release.version}}</code> etc.
 
 <table>
     <colgroup>
@@ -62,9 +64,7 @@ and some packages are already provided by the <code>.exe</code> installer.
   </table>
 
 
-<p>
 If you want to try to build binaries
 for more packages, you may install <a href="https://www.cygwin.com">Cygwin</a>
 to get a UNIX environment for Windows, selecting all needed tools
 during Cygwin installation.
-</p>
