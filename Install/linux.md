@@ -26,69 +26,60 @@ nav_order: 2
 {% endfor %}
 
 
-<p>
-To install development tools on a Linux system, use your preferred package 
-manager (e.g. apt-get or aptitude or Synaptic etc.). 
-You need a working C and C++ development environment on your system as well as GNU <code>make</code>.
-</p>
-<p>
-Note that to obtain a fully functional GAP installation you need not only to 
-compile the core system, but also some of its packages. To install 
-GAP using the source distribution, perform the following steps:
-</p>
+To install development tools on a Linux system, use your preferred package
+manager (e.g. apt-get or aptitude or Synaptic etc.).
+You need a working C and C++ development environment on your system as well as GNU `make`.
 
-<ol>
-<li>Verify that all required tools are installed. For example, on Ubuntu or Debian do this by calling
+Note that to obtain a fully functional GAP installation you need not only to
+compile the core system, but also some of its packages. To install
+GAP using the source distribution, perform the following steps:
+
+1. Verify that all required tools are installed. For example, on Ubuntu or Debian do this by calling
     <p>
     <code>sudo apt-get install build-essential autoconf libtool libgmp-dev libreadline-dev zlib1g-dev</code>
     </p>
-</li>
-<li>Choose your preferred archive format and download 
-the corresponding archive.</li>
-<table>
-<colgroup>
- <col width="15%">
- <col width="5%">
- <col>
-</colgroup>
-{% for asset in unix_assets %}
-<tr>
-  <td>
-    <a href="{{ asset.url }}">{{ asset.name }}</a>
-  </td>
-  <td>{{ asset.bytes | divided_by: 1048576 }} MB</td>
-  <td>sha256: <code>{{ asset.sha256 }}</code> </td>
-</tr>
-{% endfor %}
-</table>
-<li>Unpack the archive.</li>
-<li>Compile the GAP core system by running 
-    <p>
-    <code>./configure; make</code> 
-    </p>
-in the unpacked directory.</li>
-<li>Change to the <code>pkg</code> subdirectory and call
-<p>
-<code>../bin/BuildPackages.sh</code> 
-</p>
-to run the script which will build most of
-the packages that require compilation (provided sufficiently many libraries, headers
-and tools are available). If something doesn't work on your system, please
-refer to the <code>README</code> file provided with the corresponding package. 
-</li>
-<li>Adjust some links/scripts/icons etc., to make the new version of GAP available to the users of your machine.</li>
-<li>Optional: run a few tests.</li>
-</ol>
 
-<h4>Alternatives</h4>
+1. Choose your preferred archive format and download
+   the corresponding archive.
+   <table>
+   <colgroup>
+    <col width="15%">
+    <col width="5%">
+    <col>
+   </colgroup>
+   {% for asset in unix_assets %}
+   <tr>
+     <td>
+       <a href="{{ asset.url }}">{{ asset.name }}</a>
+     </td>
+     <td>{{ asset.bytes | divided_by: 1048576 }} MB</td>
+     <td>sha256: <code>{{ asset.sha256 }}</code> </td>
+   </tr>
+   {% endfor %}
+   </table>
+1. Unpack the archive.
+1. Compile the GAP core system by running
+   ```
+   ./configure && make
+   ```
+   in the unpacked directory.
+1. Change to the `pkg` subdirectory and call
+   ```
+   ../bin/BuildPackages.sh
+   ```
+   to run the script which will build most of the packages that require
+   compilation (provided sufficiently many libraries, headers and tools are
+   available). If something doesn't work on your system, please refer to the
+   `README` file provided with the corresponding package.
+1. Adjust some links/scripts/icons etc., to make the new version of GAP available to the users of your machine.
+1. Optional: run a few tests.
 
-<p>
+#### Alternatives
+
 {% include namelink.html name="Frank Lübeck" %} offers a
 <a href="https://www.math.rwth-aachen.de/~Frank.Luebeck/GAPrsync/">Linux
 binary distribution</a> via remote syncronization with a reference
 installation which includes all packages and some optimisations.
-</p>
-<p>
+
 GAP is available for installation in several package managers. A good overview
 of available GAP packages is available on <a href="https://repology.org/project/gap/versions">this repology project page</a>.
-</p>

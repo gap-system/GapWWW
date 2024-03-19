@@ -12,7 +12,7 @@ nav_exclude: true
 
 <p class="center">
 The current version is 
-<a href="Install/release.html">GAP&nbsp;{{site.data.release.version}}</a> 
+<a href="Install/">GAP&nbsp;{{site.data.release.version}}</a>
 released on {{site.data.release.date}}.
 </p>
 
@@ -34,10 +34,8 @@ You can study and easily modify or extend it for your special use.
 
 ### How to obtain GAP?
 
-How to install GAP is described in [Installation]({{ site.baseurl }}/Install/).
 The current release is GAP {{site.data.release.version}} and it can be
-obtained from our [release page](Install/release.html).
-This website describes this release if not stated otherwise. 
+obtained from our [install page](Install/).
 Changes from earlier versions are described in the
 [Release history](https://github.com/gap-system/gap/blob/master/CHANGES.md).
 

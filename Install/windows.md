@@ -33,14 +33,14 @@ environment on your system as well as GNU make.
 </p>
 
 <p>
-For users of Windows 10, we strongly recommend using GAP via the 
+For users of Windows 10, we strongly recommend using GAP via the
 <a href="https://learn.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux</a>.
 </p>
 <p>
-Otherwise, we recommend the use of <code>.exe</code> installer which is available in the table below. 
-It contains binaries for GAP(compiled with the support of GMP and readline libraries) and for selected
-GAP packages, and provides the standard installation procedure. 
-No compilation is needed, since compiled executables for GAP 
+Otherwise, we recommend the use of <code>.exe</code> installer which is available in the table below.
+It contains binaries for GAP (compiled with the support of GMP and readline libraries) and for selected
+GAP packages, and provides the standard installation procedure.
+No compilation is needed, since compiled executables for GAP
 and some packages are already provided by the <code>.exe</code> installer.
 </p>
 
@@ -63,8 +63,8 @@ and some packages are already provided by the <code>.exe</code> installer.
 
 
 <p>
-If you want to try to build binaries 
+If you want to try to build binaries
 for more packages, you may install <a href="https://www.cygwin.com">Cygwin</a>
-to get a UNIX environment for Windows, selecting all needed tools 
+to get a UNIX environment for Windows, selecting all needed tools
 during Cygwin installation.
 </p>
