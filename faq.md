@@ -67,7 +67,7 @@ from the GAP Reference Manual for the transitional arrangements.
 ### How can I avoid excessive output?
 
 If  you  expect  that  the output will have too many lines, typing a
-double  semicolon  ";;"  at  the end of the command line will suppress
+double  semicolon  `;;`  at  the end of the command line will suppress
 displaying  output  on  the  screen.  This  will allow you to see more
 history of your session, and also will prevent your network connection
 from overloading.
@@ -79,7 +79,7 @@ or several times the command `Print("\<\<\<\<\<\<\<");`.
 
 ### How can I stop excessive output?
 
-In case you did not type the double semicolon ";;", and GAP started
+In case you did not type the double semicolon `;;`, and GAP started
 to  print  too  many  lines  on the screen, sometimes Ctrl-C may break
 printing.  But  this  may  cause some side effects on the style of the
 further output, so you should use this measure carefully.
@@ -139,7 +139,7 @@ that you can close the network connection while GAP is busy with long
 computations.
 
 It  is  likely  that screen is already installed on your server - just
-type  'screen'  to check this.
+type  `screen`  to check this.
 (Otherwise look
 <a href="https://www.gnu.org/software/screen/screen.html">here</a> to get
 it, or on Linux install the 'screen' package from your distribution.)
@@ -147,12 +147,12 @@ If so, it will be launched and you will
 see its welcome message. Now you are able to work just as usual, but
 in case of a broken connection your session will not be closed, and your
 computations  will  be  continued while you are not connected.
-When you will connect to the server next time, enter 'screen -r'
+When you will connect to the server next time, enter `screen -r`
 to  restore  your  session. To detach your session again (i.e. move it
 into  background) press Ctrl-A and then D (and you will see the normal
 command  line  prompt  of  your  UNIX  system)  or  simply  close the
 connection.  For more details about screen, see its documentation (for
-example, type 'man screen').
+example, type `man screen`).
 
 <!-- ================================================================================== -->
 
@@ -161,9 +161,9 @@ example, type 'man screen').
 David Joyner ( wdj@usna.edu) announced in the  GAP
 Forum that he ...
 > ... has  written a very simple python program which takes a file
-> obtained from the GAP LogTo command and converts into a
+> obtained from the GAP `LogTo` command and converts into a
 > Latex file.
-> You must have the python binary installed in /usr/bin
+> You must have the python binary installed in `/usr/bin`
 > (on a linux/unix setup). However, if you have the windows version
 > of python then it presumably works with some editing. The file
 > with an example in on David Joyner's webpage
@@ -172,38 +172,27 @@ Forum that he ...
 
 <!-- ================================================================================== -->
 
-### When I use time or Runtime() or the profiler to determine how long a piece of GAP code takes, the answers can vary significantly. Why is this?
+### When I use `time` or `Runtime()` or the profiler to determine how long a piece of GAP code takes, the answers can vary significantly. Why is this?
 
 There are a number of possible reasons for this:
-<ol>
-<li>
-For some calculations, GAP actually uses randomized algorithms (although,
+
+1. For some calculations, GAP actually uses randomized algorithms (although,
 unless you choose otherwise, the results produced are always checked). In
 these cases, the algorithm may be more or less "lucky" and take a shorter
 or longer time accordingly. You can usually avoid this  variation by setting
-the random seed to a standard value before each test, using RANDOM_SEED(1).
-</li>
-<li>
-Garbage collection. The GAP memory manager runs when the system runs out of
+the random seed to a standard value before each test, using `RANDOM_SEED(1)`.
+2. Garbage collection. The GAP memory manager runs when the system runs out of
 free memory and can take significant time. To standardise when this happens,
-run GASMAN("collect") before each test.
-</li>
-<li>
-The granularity of the underlying OS timing function being used is at
+run ```GASMAN("collect")``` before each test.
+3. The granularity of the underlying OS timing function being used is at
 best 1ms, sometimes courser,  so a test which takes 0,1 or 2 ms per run could
 represent a calculation that takes about 1ms and may cross anywhere between 0
 and 2 clock ticks without more than a small variation in how long it takes.
-</li>
-<li>
-The method cache. The GAP method selection system caches the last few
+3. The method cache. The GAP method selection system caches the last few
 methods that were used for each operation. The cost of a cache miss is
 considerable.
-</li>
-<li>
-The CPU cache. If the relevant parts of the GAP interpreter and/or of the
+4. The CPU cache. If the relevant parts of the GAP interpreter and/or of the
 workspace are in CPU cache when the test starts, this will save some time.
-</li>
-</ol>
 
 Also note that accessing, especially updating, global
 variables is significantly slower than local ones.
@@ -295,7 +284,7 @@ A few approaches for this are:
   - Is the amount of data produced by the calculation feasible for the
     machine you are using?
   - Does your computation use mutable lists when
-    <a name="immutable">immutable</a> lists might be better?
+    immutable lists might be better?
 
     In some cases, this can slow down your computation so much
     that it doesn't finish. Using immutable lists allows
