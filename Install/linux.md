@@ -82,4 +82,4 @@ binary distribution</a> via remote syncronization with a reference
 installation which includes all packages and some optimisations.
 
 GAP is available for installation in several package managers. A good overview
-of available GAP packages is available on <a href="https://repology.org/project/gap/versions">this repology project page</a>.
+of available GAP packages is available on [this repology project page](https://repology.org/project/gap/versions).

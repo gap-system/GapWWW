@@ -35,7 +35,7 @@ License as published by the Free Software Foundation; either version 2 of
 the License, or (at your option) any later version.
 
 The <em>MS Windows</em> binary for
-GAP uses <a href="https://cygwin.com/">cygwin</a>
+GAP uses [cygwin](https://cygwin.com/)
 and therefore is licensed under GPL version3 or (at your option) any later version.
 For details, see
 the file `LICENSE` in the GAP distribution or see

@@ -31,7 +31,7 @@ libraries from source code requires a working C and C++ development
 environment on your system as well as GNU make.
 
 For users of Windows 10, we strongly recommend using GAP via the
-<a href="https://learn.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux</a>.
+[Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/about).
 
 Otherwise, we recommend the use of <code>.exe</code> installer which is available in the table below.
 It contains binaries for GAP (compiled with the support of GMP and readline libraries) and for selected
@@ -65,6 +65,6 @@ directory named like <code>C:\Program files\gap-{{site.data.release.version}}</c
 
 
 If you want to try to build binaries
-for more packages, you may install <a href="https://www.cygwin.com">Cygwin</a>
+for more packages, you may install [Cygwin](https://www.cygwin.com)
 to get a UNIX environment for Windows, selecting all needed tools
 during Cygwin installation.

@@ -7,7 +7,7 @@ nav_order: 2
 
 The latest version of GAP is {{site.data.release.version}} released on {{site.data.release.date}}.
 For an overview of changes see the
-<a href="https://github.com/gap-system/gap/blob/master/CHANGES.md#{{anchor}}">CHANGES.md</a> file.
+[CHANGES.md](https://github.com/gap-system/gap/blob/master/CHANGES.md#{{anchor}}) file.
 
 There are several ways to install GAP:
 
@@ -15,14 +15,14 @@ There are several ways to install GAP:
 - <a href="mac.html">MacOS</a>
 - <a href="windows.html">Windows</a>
 
-More detailed instructions can be found in <a href="https://github.com/gap-system/gap/blob/v{{site.data.release.version}}/INSTALL.md">INSTALL.md</a>.
+More detailed instructions can be found in [INSTALL.md](https://github.com/gap-system/gap/blob/v{{site.data.release.version}}/INSTALL.md).
 
 
 GAP may compile and work for you on other systems, and if so we would 
 be interested to know about it.
 <!-- 
-You can also try GAP online in a <a href="https://jupyter.org/">Jupyter</a>
-notebook running on <a href="https://mybinder.org/">Binder</a>, following
+You can also try GAP online in a [Jupyter](https://jupyter.org/)
+notebook running on [Binder](https://mybinder.org/), following
 instructions from the README file in <a
 href="https://github.com/gap-system/try-gap-in-jupyter">this repository</a>.
  -->

@@ -92,13 +92,13 @@ make the new version of GAP available to the users of your machine.
 
 #### Homebrew
 
-<a href="http://brew.sh/">Homebrew</a> is a package manager for macOS.
+[Homebrew](http://brew.sh/) is a package manager for macOS.
 If you use Homebrew, you can install GAP using the
-<a href="https://github.com/gap-system/homebrew-gap">GAP Homebrew tap</a>.
+[GAP Homebrew tap](https://github.com/gap-system/homebrew-gap).
 
 #### Gap.app
 
-<a href="https://cocoagap.sourceforge.io/">Gap.app</a> is a native macOS frontend
+[Gap.app](https://cocoagap.sourceforge.io/) is a native macOS frontend
 and distribution of GAP, developed by Russ Woodroofe.  The "Gap.app + GAP" edition
 includes a fairly complete copy of GAP, and can be installed by simply downloading a
 disk image and dragging Gap.app to the Applications folder.  You can also install the built-in
@@ -107,8 +107,8 @@ GAP for use from your usual terminal via the Install GAP Command For Shell menu 
 
 The included GAP comes with working copies of most of the packages in the
 standard GAP distribution.  Gap.app is compatible with
-<a href="https://gap-packages.github.io/xgap/">XGAP</a>, and allows interactive display
+[XGAP](https://gap-packages.github.io/xgap/), and allows interactive display
 of subgroup lattices with the `GraphicSubgroupLattice` command.
 The version of GAP that comes with Gap.app may lag slightly behind the very latest.
 Full details on the currently included GAP may be found in the
-<a href="https://cocoagap.sourceforge.io/faq.html#gapversioninfo">Gap.app FAQ</a>.
+[Gap.app FAQ](https://cocoagap.sourceforge.io/faq.html#gapversioninfo).
