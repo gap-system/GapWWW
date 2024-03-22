@@ -141,7 +141,7 @@ computations.
 It  is  likely  that screen is already installed on your server - just
 type  `screen`  to check this.
 (Otherwise look
-<a href="https://www.gnu.org/software/screen/screen.html">here</a> to get
+[here](https://www.gnu.org/software/screen/screen.html) to get
 it, or on Linux install the 'screen' package from your distribution.)
 If so, it will be launched and you will
 see its welcome message. Now you are able to work just as usual, but
@@ -273,14 +273,14 @@ A few approaches for this are:
   - Is there a better representation? Typically PcGroups (only possible for
     solvable groups) are more efficient than permutation groups are more
     efficient than matrix groups are more efficient than Fp groups. Use
-    <tt>IsomorphismPermGroup</tt> (or similar) to transfer the calculation
+    `IsomorphismPermGroup` (or similar) to transfer the calculation
     into a group in a better representation.
   - Is there another operation (probably not as general as the one you are
     using) whose result would be sufficient? (For example it is sufficient
-    to search for <i>p</i>-subgroups inside a Sylow subgroup.)
+    to search for *p*-subgroups inside a Sylow subgroup.)
   - Is there information you have about the object that GAP
     will have to find out? Good candidates are the size of a group (use
-    <tt>SetSize</tt>) or solvability (use <tt>SetIsSolvableGroup</tt>).
+    `SetSize` or solvability (use `SetIsSolvableGroup`).
   - Is the amount of data produced by the calculation feasible for the
     machine you are using?
   - Does your computation use mutable lists when
@@ -345,18 +345,14 @@ A few approaches for this are:
 GAP currently translates essentially every calculation with matrix
 groups to an isomorphic permutation group. Two possible bottlenecks are:
 
-<ol>
-<li>
-Intermediate results might get transferred back to matrix form and
+1. Intermediate results might get transferred back to matrix form and
 are immediately converted again in a permutation: Because of this it
 is often quicker to work in the isomorphic permutation group  (obtained
 via `IsomorphismPermGroup`, see the section
 '{%- include ref.html label="Computing a Permutation Representation" %}'
 of the  GAP reference manual) and only to translate the final
 result back to matrix form, using the same homomorphism.
-</li>
-<li>
-GAP finds a permutation representation by acting on a set of  vectors.
+2. GAP finds a permutation representation by acting on a set of  vectors.
 There is no optimal heuristics for choosing these vectors (a
 necessary condition for faithfulness is that the vectors comprise a
 basis, but there are many choices).
@@ -369,8 +365,6 @@ can be rather beneficial to try to choose such a set of vectors yourself and
 use `ActionHomomorphism` (see the section
 '{%- include ref.html label="The Permutation Image of an Action" %}'
 of the GAP reference manual) to build the permutation representation.
-</li>
-</ol>
 
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
@@ -381,37 +375,34 @@ of the GAP reference manual) to build the permutation representation.
 In addition to the list of frequently asked questions on computing with GAP given below,
 
 - David Joyner is collecting a list of frequently asked questions about
-  <a href="https://yetanothermathblog.com/the-toric-package-for-gap/how-do-i-construct-in-gap/">
-  Constructions</a> of various mathematical objects in GAP
+  [Constructions](https://yetanothermathblog.com/the-toric-package-for-gap/how-do-i-construct-in-gap/) of various mathematical objects in GAP
   with fully worked out GAP code answering them. This
   collection is specially recommended for newcomers to the system .
 - {% include namelink.html name="Alexander Hulpke" %} has collected user
   questions (mostly from the GAP Forum) about mathematical applications of GAP
-  together with the corresponding answers. See <a
-  href="https://www.math.colostate.edu/~hulpke/GAPQA/">
-  Some&nbsp;GAP&nbsp;Questions</a> on his home page.
+  together with the corresponding answers. See [Some GAP Questions](https://www.math.colostate.edu/~hulpke/GAPQA/) on his home page.
 
 ### How do I perform binary operations on the elements of a group?
 
 The group  operation in  GAP is  always multiplication,
-written with *.
-This  works e.g.  for groups  of  permutations, of  matrices, and  for
+written with `*`.
+This  works e.g. for groups  of  permutations, of  matrices, and  for
 abstract groups given by generators and relations.
 
-While you can  construct a number of groups  of permutations, they all
-have the same multiplication, in the sense that if two permutations p1
-and p2 are both in two permutation groups, their product in each group
-will be the permutation p1*p2 given by applying p1 followed by p2.
+While you can  construct a number of groups of permutations, they all
+have the same multiplication, in the sense that if two permutations `p1`
+and `p2` are both in two permutation groups, their product in each group
+will be the permutation `p1*p2` given by applying `p1` followed by `p2`.
 
 In fact, this essentially works the other way round. GAP first defines
-elements,  such  as  permutations,   matrices  or  words  in  abstract
-generators, with their operations  such as multiplication and inverse,
+elements, such as permutations, matrices or words in abstract
+generators, with their operations such as multiplication and inverse,
 then it allows you to define groups of such objects, using the objects
 multiplication as the group operation.
 
-All  the many algorithms,  implemented in  GAP  for the
-investigation  of the  structure of  a group,  are written  using this
-symbol * for the group multiplication.
+All the many algorithms, implemented in GAP for the
+investigation of the structure of a group, are written  using this
+symbol `*` for the group multiplication.
 
 <!-- ================================================================================== -->
 
@@ -421,23 +412,23 @@ If you can write down permutations or matrix generators, you can use them
 directly. (Note, however, that GAP will internally compute
 a faithful permutation representation to work with matrix groups anyhow.
 However, see below for an example that you should be aware of this,
-because it can be <b>dangerous</b>.)
+because it can be **dangerous**.)
 
 A group given by a finite presentation can be input as a quotient of a
 free group. If larger calculations are to be done, it is worthwhile (if it
 is possible) to either convert it to a PC group (using for example
-<tt>SolvableQuotient</tt> --
-Note that even if the presentation is polycyclic, GAP will
+`SolvableQuotient` --
+Note, that even if the presentation is polycyclic, GAP will
 not use methods for polycyclic groups, unless the group is also represented
 as a PC group) or to a permutation group.
 
 For groups given by structural information, the construction can be much
 harder. There are a few general product constructions (direct and
 semidirect product for example). The
-<a href="{{ site.baseurl }}/Doc/Talks/talks.html">Issac&nbsp;2000</a>
+[Issac 2000]({{ site.baseurl }}/Doc/Talks/talks.html)
 tutorial gives some examples of constructing groups.
 
-Here then is the <b>example</b> to which the first paragraph referred:
+Here then is the **example** to which the first paragraph referred:
 
 A user had sent the following program run, asking for help:
 
@@ -461,7 +452,7 @@ brk> quit;
 
 Frank  Lübeck explained  what  happened: First  you  can get  the
 number characters of given degree  much easier, using that the group
-<tt>n</tt> is solvable, its order being divisible by only two primes.
+`n` is solvable, its order being divisible by only two primes.
 
 ```gap
 gap> IsSolvable(n);
@@ -475,10 +466,10 @@ gap> NrMovedPoints(Image(h1));
 ```
 
 So the user was asking to compute the 2366 irreducible characters of a
-permutation group  of order 5408 of  degree 19682 and  this would have
-had to be done by  the Dixon/Schneider method using the 2366 conjugacy
-classes of  that group! In such  a case one  can either try to  find a
-much smaller permutation  representation of that group or  work with a
+permutation group of order 5408 of degree 19682 and  this would have
+had to be done by the Dixon/Schneider method using the 2366 conjugacy
+classes of that group! In such a case one can either try to find a
+much smaller permutation representation of that group or work with a
 pc group presentation:
 
 ```gap
@@ -495,8 +486,8 @@ gap> Size(last);
 ```
 
 Results of computations in these image groups can then be translated
-back into the group <tt>n</tt>, using the function
-<tt>PreImage</tt>.
+back into the group `n`, using the function
+`PreImage`.
 
 <!-- ================================================================================== -->
 
@@ -588,9 +579,9 @@ gap> Size(s);
 
 ### In many algebra books the quaternion group is a group on 8 distinct symbols {i,j,k,1,-1,-i,-j,-k}. How can I make GAP use these elements?
 
-GAP's group  constructors will generally, and by  default, construct a
-group  of the  specified isomorphism  type, in  whatever form  is most
-efficient for  computation. No specific nomenclature  for the elements
+GAP's group constructors will generally, and by default, construct a
+group of the specified isomorphism  type, in  whatever form  is most
+efficient for computation. No specific nomenclature  for the elements
 if guaranteed.
 
 So
@@ -664,13 +655,13 @@ constructing the group.
 
 <!-- ================================================================================== -->
 
-### I have a finite presentation for a finite polycyclic group. When I tried to use <tt>PcGroupFpGroup()</tt> to convert it to a pc-group, I received an error message.
+### I have a finite presentation for a finite polycyclic group. When I tried to use `PcGroupFpGroup()` to convert it to a pc-group, I received an error message.
 
-<tt>PcGroupFpGroup()</tt> is mainly a conversion routine. The given finite
+`PcGroupFpGroup()` is mainly a conversion routine. The given finite
 presentation must be a polycyclic presentation for
-<tt>PcGroupFpGroup()</tt> to work. <tt>PcGroupFpGroup()</tt> does
-<b>not</b> compute a polycyclic presentation for a finite soluble
-group given  by an <b>arbitrary</b> finite presentation. See
+`PcGroupFpGroup()` to work. `PcGroupFpGroup()` does
+**not** compute a polycyclic presentation for a finite soluble
+group given  by an **arbitrary** finite presentation. See
 {%- include ref.html label="Constructing Pc Groups" text="Constructing Pc Groups" %}.
 
 In a
@@ -689,7 +680,7 @@ C<sub>i</sub> = &lt;C<sub>i+1</sub>, g<sub>i</sub>> for
 1 &le; i &le; n.
 
 Now for the given presentation the order of the generators is defined
-by the order in which the generators occur in the <tt>FreeGroup()</tt>
+by the order in which the generators occur in the `FreeGroup()`
 command.  This is important  because it fixes the way in which commutator
 or conjugate relations have to be defined.
 
@@ -700,17 +691,17 @@ Relations have to be of the form
                   h^g / w
 </pre>
 where
-- <tt>m</tt> is a positive integer,
-- <tt>h</tt> and <tt>g</tt> are generators,
-- <tt>h</tt> occurs after <tt>g</tt> and
-- <tt>w</tt> is a word in generators coming after <tt>g</tt>.
+- `m` is a positive integer,
+- `h` and `g` are generators,
+- `h` occurs after `g` and
+- `w` is a word in generators coming after `g`.
 
-Note that you may have to use brackets around <tt>w</tt> if it is a
+Note that you may have to use brackets around `w` if it is a
 product of several generators because GAP  evaluates
 the expressions above from left to right.
 
-Changing the order of the generators or interchanging <tt>g</tt> and
-<tt>h</tt> in the left hand side of a commutator or conjugate  relation
+Changing the order of the generators or interchanging `g` and
+`h` in the left hand side of a commutator or conjugate  relation
 can produce an error message as shown by the following three examples
 of presentations for the symmetric group S<sub>3</sub>.
 
@@ -748,7 +739,7 @@ Error, illegal relator a^-1*b*a*b^-2 called from
 brk>
 ```
 Here we have just interchanged the sequence of the generators, thus
-breaking the rules, so that <tt>PcGroupFpGroup()</tt> does not work.
+breaking the rules, so that `PcGroupFpGroup()` does not work.
 
 ##### Example 3
 ```gap
@@ -772,11 +763,11 @@ in the prescribed form.
 ##### Some remarks
 1. If we want to get a pc group from a finitely presented group,
    the presentation of which is not in the prescribed form, we can
-   use the composite function <tt>Image(IsomorphismPcGroup(g))</tt>.
+   use the composite function `Image(IsomorphismPcGroup(g))`.
    Note, however, that this function does not work for finitely presented
-   groups <tt>g</tt>, so that one first has e.g. to find a faithful
-   permutation representation. In Example 3 this has implicitely already been
-   done by calling  the function <tt>Size(g)</tt>. So we can continue
+   groups `g`, so that one first has e.g. to find a faithful
+   permutation representation. In Example 3 this has implicitly already been
+   done by calling  the function `Size(g)`. So we can continue
    Example 3:
    ```gap
    gap> phi:=IsomorphismPcGroup(g);
@@ -791,7 +782,7 @@ in the prescribed form.
 2.  For many algorithms working with pc groups it is  additionally
    necessary that the above mentioned cyclic factors of the subnormal
    series are in fact of prime order. The function
-   <tt>IsomorphismRefinedPcGroup(G)</tt> returns an isomorphism from G onto
+   `IsomorphismRefinedPcGroup(G)` returns an isomorphism from G onto
    an isomorphic pc group with that property.
 3. At present in order to print out a pc presentation you can
    best use a function from the package 'Polycyclic', as we demonstrate,
@@ -812,10 +803,10 @@ in the prescribed form.
 
 ### How do I get the elements of my group?
 
-There are functions <tt>AsList</tt> and <tt>AsSSortedList</tt> that
+There are functions `AsList` and `AsSSortedList` that
 return a (sorted) list of all the group elements. However for bigger
 groups such lists can take an enormous amount of memory. You might be
-better off just looking at the <tt>ConjugacyClasses</tt>.
+better off just looking at the `ConjugacyClasses`.
 
 <!-- ================================================================================== -->
 
@@ -827,32 +818,32 @@ of subgroups of a given size.
 
 For groups of moderate size (up to 10<sup>4</sup>/10<sup>5</sup>,
 this depends a bit on the group structure) the commands
-{%- include ref.html label="LatticeSubgroups" text="<tt>LatticeSubgroups</tt>" %} or
-{%- include ref.html label="ConjugacyClassesSubgroups" text="<tt>ConjugacyClassesSubgroups</tt>" %}
+{%- include ref.html label="LatticeSubgroups" text="`LatticeSubgroups`" %} or
+{%- include ref.html label="ConjugacyClassesSubgroups" text="`ConjugacyClassesSubgroups`" %}
 will compute representatives of all subgroups up to conjugacy. If the group
 gets bigger, however, this will either run out of space or take too long
 to be feasible.
 
 In this case it is likely that you are only interested in certain types of
 subgroups. Try to use the restricting conditions to reduce the calculation
-(for example <i>p</i>-subgroups can be found inside a Sylow subgroup).
+(for example *p*-subgroups can be found inside a Sylow subgroup).
 GAP commands that might come useful to obtain specific
 subgroups are for example
-{%- include ref.html label="NormalSubgroups" text="<tt>NormalSubgroups</tt>" %},
-{%- include ref.html label="SylowSubgroup" text="<tt>SylowSubgroup</tt>" %},
-{%- include ref.html label="HallSubgroup" text="<tt>HallSubgroup</tt>" %},
+{%- include ref.html label="NormalSubgroups" text="`NormalSubgroups`" %},
+{%- include ref.html label="SylowSubgroup" text="`SylowSubgroup`" %},
+{%- include ref.html label="HallSubgroup" text="`HallSubgroup`" %},
 or
-{%- include ref.html label="MaximalSubgroupClassReps" text="<tt>MaximalSubgroupClassReps</tt>" %}.
+{%- include ref.html label="MaximalSubgroupClassReps" text="`MaximalSubgroupClassReps`" %}.
 
 Furthermore, if you actually want to know if the group has a subgroup of a
 particular isomorphism type, the command you want is
-{%- include ref.html label="IsomorphicSubgroups" text="<tt>IsomorphicSubgroups</tt>" %}.
+{%- include ref.html label="IsomorphicSubgroups" text="`IsomorphicSubgroups`" %}.
 This is enormously more efficient than simply listing all [conjugacy classes of] subgroups of
 the group in most cases.
 
 It might also be helpful to first replace the group by an isomorphic permutation group
-(using {%- include ref.html label="IsomorphismPermGroup" text="<tt>IsomorphismPermGroup</tt>" %})
-or pc group (using {%- include ref.html label="IsomorphismPcGroup" text="<tt>IsomorphismPcGroup</tt>" %}).
+(using {%- include ref.html label="IsomorphismPermGroup" text="`IsomorphismPermGroup`" %})
+or pc group (using {%- include ref.html label="IsomorphismPcGroup" text="`IsomorphismPcGroup`" %}).
 
 <!-- ================================================================================== -->
 
@@ -865,8 +856,7 @@ nevertheless illustrative example given by
 in an answer to a letter to 'gap-support'
 is the investigation of the automorphism group of a graph whose
 vertices are the cards of a card game called
-<a href="http://www.ehow.com/way_5207905_directions-duo-card-game.html">
-Duo</a> with edges between any two cards that 'fit together'.
+[Duo](http://www.ehow.com/way_5207905_directions-duo-card-game.html) with edges between any two cards that 'fit together'.
 
 The game "Duo" consists of 4^3 = 64 "normal" cards each showing a
 triple (colour, shape, number), where there are four possible colours,
@@ -882,7 +872,7 @@ with (blue, triangle, 4). Two jokers never fit together.
 Although this may look a bit complicate, formulating it in the
 GAP language is quite easy. For constructing the graph
 we use the GAP package
-<a href="https://gap-packages.github.io/grape">GRAPE</a> by Leonard Soicher:
+[GRAPE](https://gap-packages.github.io/grape) by Leonard Soicher:
 
 ```gap
 gap> LoadPackage("grape"); # Construct the Duo graph with 4^3 + 12 = 76 vertices:
@@ -946,7 +936,7 @@ gap> List([G1,G2],Size);
 [ 82944, 82944 ]
 ```
 
-The automorphim group is solvable, but not nilpotent:
+The automorphism group is solvable, but not nilpotent:
 
 ```gap
 gap> Factors(Size(G));
@@ -998,7 +988,7 @@ gap> phi := IsomorphismGroups(G,W);   # A concrete isomorphism.
 Derek Holt answered:
 
 One possibility is to use the package
-<a href="https://gap-packages.github.io/cohomolo">cohomolo</a>.
+[cohomolo](https://gap-packages.github.io/cohomolo).
 You first have to follow the instructions in the package directory to
 compile the external programs.
 
@@ -1034,12 +1024,10 @@ It is also possible to compute finite presentations of covering groups.
 Derek Holt gave the warning: "But this package involves
 external C programs, and it is only possible to use it under Unix or Linux."
 
-However in a further
-<a href="https://www.gap-system.org/ForumArchive2/2004/000926.html">
-letter</a>   Dima Pasechnik added:
+However in a further [letter](https://www.gap-system.org/ForumArchive2/2004/000926.html) Dima Pasechnik added:
 
 > In Fact  "cohomolo" also runs seemingly OK on Windows with Cygwin
-(<a href="https://www.cygwin.com">https://www.cygwin.com</a>).
+([https://www.cygwin.com](https://www.cygwin.com)).
 Note however that there are a couple of very minor changes in the installation
 procedure of the package.
 
@@ -1076,9 +1064,7 @@ corresponding times were 6 and 80 seconds respectively).
 
 Is it possible using GAP to check that a given presentation defines a nilpotent group of class 2 or not?
 
-For example $G=\langle  a,b,c| a^{p^5}, b^{p^3}, c^{p^2},
-[a,b]=a^{p^3}, [a,c]=c^p, [b,c]=b^{p^2} \rangle $ where $p$ is a
-prime.
+For example $G= \langle a,b,c \mid a^{p^5}, b^{p^3}, c^{p^2},[a,b]=a^{p^3}, [a,c]=c^p, [b,c]=b^{p^2} \rangle $ where $p$ is a prime.
 
 Also how can we determine its automorphism group using GAP?
 
@@ -1092,7 +1078,7 @@ First  please note that the 'example' really is not a presentation of a
 single group, but a family of presentations parametrized by the primes p.
 GAP has no methods for handling such a family of presentations in one step.
 However GAP has methods to investigate  each such presentation   for any
-given (not too big) prime p.   In her reply Bettina Eick recommends:
+given (not too big) prime $p$. In her reply Bettina Eick recommends:
 
 > you can use GAP to investigate your question for any fixed prime p.
 > 
@@ -1102,10 +1088,10 @@ given (not too big) prime p.   In her reply Bettina Eick recommends:
 > largest nilpotent quotient (if this exists).
 > 
 > Further, there are methods available in GAP to determine the automorphism
-> group of a finite p-group. Check the AutPGrp package for this purpose.
+> group of a finite $p$-group. Check the AutPGrp package for this purpose.
 > 
-> In your given example, you can implement your considered group G in GAP
-> as function in p:
+> In your given example, you can implement your considered group $G$ in GAP
+> as function in $p$:
 > 
 > ```gap
 > G := function(p)
@@ -1127,7 +1113,7 @@ given (not too big) prime p.   In her reply Bettina Eick recommends:
 > LoadPackage("autpgrp");
 > ```
 > 
-> And then you can do the following (for example for p=3):
+> And then you can do the following (for example for $p=3$):
 > 
 > ```gap
 > gap> H := G(3);
@@ -1141,12 +1127,12 @@ given (not too big) prime p.   In her reply Bettina Eick recommends:
 > 14348907
 > ```
 > 
-> Hence for p=3 your group has class 2 and you can see the size
+> Hence for $p=3$ your group has class $2$ and you can see the size
 > of its automorphism group. Generators and further information on
 > the automorphisms is also stored in A, but is perhaps too long to
 > be displayed here.
 
-In a second letter Derek Holt  recommends:
+In a second letter Derek Holt recommends:
 
 > You can use  the GAP package KBMAG to prove nilpotency of finitely presented
 > groups, using the method described by Charles Sims in his book of computing
@@ -1155,14 +1141,14 @@ In a second letter Derek Holt  recommends:
 > 
 > This process is described and illustrated in Example 4 (p. 13) of the KBMAG
 > manual. I have successfully verifed that your group below is nilpotent of
-> order p^10 for p=2,3,5,7,11,13,17, and I am trying to do 19.
+> order $p^{10}$ for $p=2,3,5,7,11,13,17,$ and I am trying to do $19$.
 > 
 > Of course, since these groups are (apparently) finite, you could try
-> use coset enumeration. This will work for small primes such as 2 and 3, but
+> use coset enumeration. This will work for small primes such as $2$ and $3$, but
 > for larger primes the group order will probably be too large, and I think
 > the Sims algorithm will work better.
 > 
-> You first run NilpotentQuotient (as described in Bettina Eick's reply) to
+> You first run `NilpotentQuotient` (as described in Bettina Eick's reply) to
 > find the maximal nilpotent quotient of your group. The aim is then to
 > prove that the group is actually isomorphic to this quotient.
 > You do this by introducing new generators in the presentation which
@@ -1193,12 +1179,12 @@ In a second letter Derek Holt  recommends:
 > nilpotent quotient. You have then proved that these relations hold in
 > the group itself (not just in the nilptent quotient), so you have proved
 > that the group is nilpotent.  This consists of 65 reduction equations
-> (or 62 when p=2).
+> (or $62$ when $p=2$).
 > 
-> The above works quickly for p=2,3,5,7. For larger primes, it helps to
+> The above works quickly for $p=2,3,5,7$. For larger primes, it helps to
 > restrict the length of the stored reduction relations, and then re-run
 > after completion. You have to experiment to find the optimal maximal
-> length to store.  So, for example, the following works fast for p=17:
+> length to store.  So, for example, the following works fast for $p=17$:
 > 
 > ```gap
 > p:=17;;
@@ -1215,35 +1201,35 @@ In a second letter Derek Holt  recommends:
 > ```
 
 In a final letter  Charles Wright  gave  an elegant proof  'by hand' that in
-fact all the groups for arbitrary primes  are of nilpotency class 2 and order at
-most p^10, a proof, the clues for which can perhaps be obtained from the
+fact all the groups for arbitrary primes  are of nilpotency class $2$ and order at
+most $p^10$, a proof, the clues for which can perhaps be obtained from the
 results of the GAP computations (which of course can be applied in
 similar form also to other presentations). He writes:
 
 <blockquote>
-If all you want to show is that this particular example is class 2 of
-order (at most) p^10, though, it's easy to do it by hand.
+If all you want to show is that this particular example is class $2$ of
+order (at most) $p^{10}$, though, it's easy to do it by hand.
 
-We're given that a^b = a^(1+p^3), c^a = c^(1-p) and b^c = b^(1+p^2).
+We're given that $a^b = a^{1+p^3}$,$ c^a = c^{1-p}$ and $b^c = b^{1+p^2}$.
 
-Hence, (a^(p^3))^b = (a^b)^(p^3) = a^((1+p^3)p^3) = a^(p^3) and
+Hence, $(a^{p^3})^b = (a^b)^{p^3} = a^{(1+p^3)p^3} = a^{p^3}$ and
 
-c^(a^(p^3)) = c^((1-p)^(p^3)) = c  [what a mess of superscripts!],
+$c^{a^{p^3}} = c^{(1-p)^{p^3}} = c$  [what a mess of superscripts!],
 
-so a^(p^3) (i.e., [a,b]) is in Z(G).
+so $a^{p^3}$ (i.e., $[a,b]$) is in $Z(G)$.
 
-Similarly, a^(b^(p^2)) = a^((1+p^3)^(p^2)) = a and
+Similarly, $a^{b^{p^2}} = a^{(1+p^3)^{p^2}} = a$ and
 
-(b^(p^2))^c = (b^c)^(p^2) = b^((1+p^2)p^2) = b^(p^2), so
+$(b^{p^2})^c = (b^c)^{p^2} = b^{(1+p^2)p^2} = b^{p^2}$, so
 
-b^(p^2) (i.e., [b,c]) is central.
+$b^{p^2}$ (i.e., $[b,c]$) is central.
 
-Finally, (c^p)^a = c^((1-p)p) = c^p and b^(c^p) = b^((1+p^2)^p) = b, so
+Finally, $(c^p)^a = c^{(1-p)p} = c^p$ and $b^{c^p} = b^{(1+p^2)^p} = b$, so
 
-c^p (i.e., [a,c]) is central.
+$c^p$ (i.e., $[a,c]$) is central.
 
-Thus G/Z(G) is abelian. Since G' has order (at most) p^4 and G/G' has
-order (at most) p^6, G has order (at most) p^10.
+Thus $G/Z(G)$ is abelian. Since $G'$ has order (at most) $p^4$ and $G/G'$ has
+order (at most) $p^6$, $G$ has order (at most) $p^{10}$.
 
 In the spirit of Burnside, I'll leave the elimination of "(at most)" to
 the reader.
@@ -1258,59 +1244,44 @@ One of the most frequent requests that comes up is for  to
 problem is basically what "identify" means, or what a user expects from
 identification:
 
-<ul>
-<li>For tiny orders (say up to 15), there are few groups up to isomorphism, and
+1. For tiny orders (say up to 15), there are few groups up to isomorphism, and
 each of the groups has a "natural" name. Furthermore many these names belong
 into series (symmetric groups, dihedral groups, cyclic groups) and the
 remaining groups are in obvious ways (direct product or possibly semidirect
 product) composed from groups named this way.
-</li>
-
-<li>
-This clean situation breaks down quickly once the order increases: for
+2. This clean situation breaks down quickly once the order increases: for
 example there are
 - up to isomorphism - 14 groups of order 16, 231 of order 96 and over 10
 million of order 512. This rapid growth goes beyond any general "naming"
 or "composition" scheme.
-</li>
-
-<li>
-A decomposition as semidirect, subdirect or central product is not uniquely
+3. A decomposition as semidirect, subdirect or central product is not uniquely
 defined without some further information, which can be rather extensive to
 write down.
-</li>
-
-<li>
-Even if one might hope that a particular group would be composable in a nice
+4. Even if one might hope that a particular group would be composable in a nice
 way, this does not lead to an "obvious" description, for example the same
 group of order 16 could be described for example as a semidirekt product of
-D<sub>8</sub> with a cyclic group of order 2 (i.e.
-D<sub>8</sub>:C<sub>2</sub>), or as semidirect product of Q<sub>8</sub> with
-a cyclic group of order 2 (Q<sub>8</sub>:C<sub>2</sub>), or as
-(C<sub>2</sub>&times;C<sub>4</sub>):C<sub>2</sub> (and - vice versa -
+$D_8$ with a cyclic group of order 2 (i.e.
+$D_8:C_2$), or as semidirect product of $Q_8$ with
+a cyclic group of order 2 ($Q_8:C_2$), or as
+($C_2 \times C_4):C_2$ (and - vice versa -
 the last name could be given to 4 nonisomorphic groups). In the context of
-matrix groups in characteristic 2, S<sub>3</sub> is better called
-SL<sub>2</sub>(2), and so on.
-</li>
-
-<li>
-There are libraries of different classes of groups (e.g. small order up to
-isomorphism, or transitive subgroup of S<sub>n</sub> (for small n) up to
+matrix groups in characteristic 2, $S_3$ is better called
+$SL_2(2)$, and so on.
+5. There are libraries of different classes of groups (e.g. small order up to
+isomorphism, or transitive subgroup of $S_n$ (for small n) up to
 conjugacy); these libraries typically allow to identify a given group, but
 the identification is just like the library call number of a book and gives
 little information about the group, it is mainly of use to allow recreation
 of the group with the identification number given as only information.
-</li>
-</ul>
 
 With these caveats, the following functions exist to identify groups and
 give them a name:
 
-<tt>StructureDescription</tt>
+`StructureDescription`
 returns a string describing the
 isomorphism type of a group . This string is produced recursively,
 trying to decompose groups as direct or semidirect products. The resulting
-string does <b>not</b> identify isomorphism types, nor is it neccessarily
+string does **not** identify isomorphism types, nor is it necessarily
 the most "natural" description of a group.
 
 ```gap
@@ -1319,16 +1290,16 @@ gap> StructureDescription(g);
 "A4"
 ```
 
-<h3>Group Libraries</h3>
+### Group Libraries
  contains extensive libraries of "small" groups and many of these
 libraries allow identificatuion of a group therein. The associated library
 group then often comes with a name that might be appropriate.
 
-<h4>Small Groups</h4>
+#### Small Groups
 The small groups library contains - amongst others - all groups of order
- up to 1000, except 512. For such a group <tt>IdGroup</tt> returns a list
+ up to 1000, except 512. For such a group `IdGroup` returns a list
  such that the group is isomorphic to
-<tt>SmallGroup()</tt>.
+`SmallGroup()`.
 
 ```gap
 gap> g:=Group((1,2,3),(2,3,4));;
@@ -1338,11 +1309,11 @@ gap> SmallGroup(12,3);
 <pc group of size 12 with 3 generators>
 ```
 
-<h4>Transitive Groups</h4>
- The transitive groups library contains transitive subgroups of S<sub>n</sub> of
-degree  at most 31 up to S<sub>n</sub> conjugacy. For such a group of degree n,
-<tt>TransitiveIdentification</tt> returns a number , such that the
-group is conjugate in S<sub>n</sub> to <tt>TransitiveGroup()</tt>.
+#### Transitive Groups
+ The transitive groups library contains transitive subgroups of $S_n$ of
+degree  at most 31 up to $S_n$ conjugacy. For such a group of degree n,
+`TransitiveIdentification` returns a number , such that the
+group is conjugate in $S_n$ to `TransitiveGroup()`.
 
 ```gap
 gap> g:=Group((1,2,3),(2,3,4));;
@@ -1352,13 +1323,13 @@ gap> TransitiveGroup(NrMovedPoints(g),4);
 A4
 ```
 
-<h4>Primitive Groups</h4>
- The primitive groups library contains primitive subgroups of S<sub>n</sub> (i.e. the
+#### Primitive Groups
+ The primitive groups library contains primitive subgroups of $S_n$ (i.e. the
 group is transitive and affords no nontrivial G-invariant partition of
 the points) of
-degree  at most 1000 up to S<sub>n</sub> conjugacy. For such a group of degree n,
-<tt>PrimitiveIdentification</tt> returns a number , such that the
-group is conjugate in S<sub>n</sub> to <tt>PrimitiveGroup()</tt>.
+degree  at most 1000 up to $S_n$ conjugacy. For such a group of degree n,
+`PrimitiveIdentification` returns a number , such that the
+group is conjugate in $S_n$ to `PrimitiveGroup()`.
 
 ```gap
 gap> g:=Group((1,2,3),(2,3,4));;
@@ -1370,7 +1341,7 @@ gap> PrimitiveGroup(NrMovedPoints(g),1);
 A(4)
 ```
 
-<h4>Simple groups and Composition Series</h4>
+#### Simple groups and Composition Series
 The one class of groups for which it is unambiguous, and comparatively easy
 to assign names to is finite simple groups (assuming the classification of
 finite simple groups). A consequence of the classification is that
@@ -1379,7 +1350,7 @@ exception of two infinite series (which can be distinguished easily
 otherwise).
 
 In GAP, this is achieved by the command
-<tt>IsomorphismTypeInfoFiniteSimpleGroup</tt>: For a finite simple group, it
+`IsomorphismTypeInfoFiniteSimpleGroup`: For a finite simple group, it
 returns a record, containing information about the groups structure, as well
 as some name.
 
@@ -1394,7 +1365,7 @@ Clearly, this can be applied to the composition series of a finite group,
 identifying the isomorphism types of all composition factors. (Of course,
 this information does not identify the isomorphism type of the group, and -
 in particular for solvable groups - can be rather uninformative.)
-The command <tt>DisplayCompositionSeries</tt>
+The command `DisplayCompositionSeries`
  will print information about the composition factors of a finite group.
 
 ```gap
@@ -1443,8 +1414,8 @@ strings."
 provides an "informal" overview of the structure of a group, which is a useful
 first view for small groups. More sophisticated functions in the same area include:
 {%- include ref.html book="smallgrp" label="IdGroup" text="IdGroup" %}; the
-<tt>StandardPresentation</tt>
-function of the <a href="https://gap-packages.github.io/anupq/">ANUPQ package</a> and
+`StandardPresentation`
+function of the [ANUPQ package](https://gap-packages.github.io/anupq/) and
 {%- include ref.html label="IsomorphismGroups" text="IsomorphismGroups" %},
 each of which is described in the appropriate manual.
 
@@ -1480,49 +1451,49 @@ other useful features:
 
 - [BBEdit](https://www.barebones.com/products/bbedit/index.shtml) for macOS,
   using this
-  <a href="http://dev.quendi.de/gap/GAPLanguageModule.plist">syntax highlighting module</a>
+  [syntax highlighting module](http://dev.quendi.de/gap/GAPLanguageModule.plist)
   by {% include namelink.html name="Max Horn" %}. To install it for BBEdit,
   download the file [GAPLanguageModule.plist](http://dev.quendi.de/gap/GAPLanguageModule.plist)
   and place it in the directory `~/Library/Application Support/BBEdit/Language Modules`.
   You may have to create this directory if it does not exist.
   Then restart BBEdit for it to become available.
-- <a href="https://www.gnu.org/software/emacs/">emacs</a>, with the
-  <a href="https://melpa.org/#/gap-mode">major-mode for editing GAP files</a> by Ivan Andrus.
+- [emacs](https://www.gnu.org/software/emacs/), with the
+  [major-mode for editing GAP files](https://melpa.org/#/gap-mode) by Ivan Andrus.
 
-- <a href="http://www.jedit.org/">jEdit</a> (exact configuration to be documented soon)
+- [jEdit](http://www.jedit.org/) (exact configuration to be documented soon)
 
-- <a href="https://kate-editor.org/">Kate</a> (out-of-box)
+- [Kate](https://kate-editor.org/) (out-of-box)
 
-- <a href="https://notepad-plus-plus.org/">Notepad++</a> for Windows, using
-  <a href="http://dev.quendi.de/gap/gap.xml">syntax highlighting module</a>
+- [Notepad++](https://notepad-plus-plus.org/) for Windows, using
+  [syntax highlighting module](http://dev.quendi.de/gap/gap.xml)
   by {% include namelink.html name="Max Horn" %}). To install, download the
-  <a href="http://dev.quendi.de/gap/gap.xml">gap.xml</a>, then select
+  [gap.xml](http://dev.quendi.de/gap/gap.xml), then select
   "Define your language..." from the "Language" menu in Notepad++.
   In the resulting dialog, click the "Import..." button.
   This opens a file selector dialog, with which you should point to
   the gap.xml file. After that close the "User Defined Language" dialog.
 
-- <a href="https://www.pspad.com/">PsPAD</a> for Windows (out-of-box; see also the alternative
-  <a href="https://gist.github.com/olexandr-konovalov/68cea8bd9332a06e08b1#file-gap-ini">GAP.INI</a>
+- [PsPAD](https://www.pspad.com/) for Windows (out-of-box; see also the alternative
+  [GAP.INI](https://gist.github.com/olexandr-konovalov/68cea8bd9332a06e08b1#file-gap-ini)
   file by {% include namelink.html name="Olexandr Konovalov" %})
 
-- <a href="https://www.peterborgapps.com/smultron/">Smultron</a> for macOS, using
-  <a href="https://gist.github.com/olexandr-konovalov/9a71271870728a448982#file-gap-plist">syntax highlighting module</a>
+- [Smultron](https://www.peterborgapps.com/smultron/) for macOS, using
+  [syntax highlighting module](https://gist.github.com/olexandr-konovalov/9a71271870728a448982#file-gap-plist)
   by {% include namelink.html name="Olexandr Konovalov" %})
 
-- <a href="https://www.vim.org/">vim</a>
+- [vim](https://www.vim.org/)
   (see {%- include ref.html label="Editor Support" %}
   and the 'etc' directory of the GAP installation)
 
-- <a href="https://code.visualstudio.com/">Visual Studio Code</a> for Linux, Windows, macOS,
-  using the <a href="https://marketplace.visualstudio.com/items?itemName=gap.gap">GAP syntax highlighting extension</a>
+- [Visual Studio Code](https://code.visualstudio.com/) for Linux, Windows, macOS,
+  using the [GAP syntax highlighting extension](https://marketplace.visualstudio.com/items?itemName=gap.gap)
   by {% include namelink.html name="Chris Jefferson" %})
 
 
 You can call  GAP files anything you  like, although we
-generally use names  ending .g, .gap, .gd or .gi. It may help Windows
-users  to give them  names ending  .txt.  Once  you have  written your
-program,  you  can execute  it  using  the  Read() command  in
+generally use names  ending `.g`, `.gap`, `.gd` or `.gi`. It may help Windows
+users  to give them  names ending  `.txt`.  Once  you have  written your
+program,  you  can execute  it  using  the  `Read()` command  in
 GAP. Note  that within  GAP the  path
 separator character is always '/', so you might say:
 
