@@ -77,10 +77,12 @@ function format(d) {
     return resString;
 }
 
+// should sort date column, does not work
+DataTable.render.datetime('YYYY-MM-DD');
 
 // define a table
 let table = new DataTable('#packageList', {
-  // get the json file
+    // get the json file
     "ajax" : {
         "url": "../assets/package-infos.json",
         "dataSrc": function(dictData){
@@ -92,7 +94,7 @@ let table = new DataTable('#packageList', {
             return arr;
         }
     },
-  // define the columns shown in the table
+    // define the columns shown in the table
     columns : [
         {
             class: 'dt-control',
@@ -103,20 +105,33 @@ let table = new DataTable('#packageList', {
         { "data" : "PackageName"},
         { "data" : "Version", width: '7em'},
         { "data" : "Date"},
-    // the following row is set to invisible and only there so the search picks up the additional text as well
+        // the following row is set to invisible and only there so the search picks up the additional text as well
         { data: null, render: (data, type, row) => format(data), visible: false},
         { "data" : "Subtitle"},
     ],
-  // change the text for the search function to make it distinct to the page search function
+    // change the text for the search function to make it distinct to the page search function
     language: {
         search: 'Search table:'
     },
-// set default number of packages shown
-    pageLength: 25
+    // set default number of packages shown
+    pageLength: 25,
+    // convert dates in format YYYY-MM-DD to DD/MM/YYYY
+    columnDefs:
+    [
+    {
+        targets: 3,
+        render: function (data, type, row) {
+        if (type === 'display') {
+            if(isNaN(data) && moment(data, 'DD/MM/YYYY', true).isValid())
+            {
+                return moment(data, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            }
+        }
+        return moment(data, 'YYYY-MM-DD').format('YYYY-MM-DD');
+        }
+    }
+    ],
 });
-
-DataTable.datetime('DD/MM/YYYY');
-
 
 // Add event listener for opening and closing details
 table.on('click', 'td.dt-control', function (e) {
