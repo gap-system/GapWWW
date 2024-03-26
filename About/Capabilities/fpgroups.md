@@ -6,7 +6,6 @@ layout: default_with_title
 nav_order: 5
 ---
 
-<p>
   It follows from the well known theorems on the algorithmic unsolvability
   of the word problem and related problems that there are no deterministic
   methods to answer most questions about the structure of finitely
@@ -16,55 +15,28 @@ nav_order: 5
   groups of described structure, most of which are based on the idea of
   'collection'. For theoretical background of the implemented methods see
   the book "Computation with finitely presented groups" of Charles Sims.
-</p>
-<p>
+
   The main GAP library provides methods for handling
-  {% include ref.html label="Finitely Presented Groups" text="finitely&nbsp;presented&nbsp;groups" %} such as
-</p>
-<ul>
-  <li>
-    Todd-Coxeter,
-  </li>
-  <li>
-    Reidemeister-Schreier,
-  </li>
-  <li>
-    Low Index Subgroups, as well as
-  </li>
-  <li>
-    certain quotient methods.
-  </li>
-</ul>
-<p>
+  {%- include ref.html label="Finitely Presented Groups" text="finitely&nbsp;presented&nbsp;groups" %} such as
+  - Todd-Coxeter,
+  - Reidemeister-Schreier,
+  - Low Index Subgroups, as well as
+  - certain quotient methods.
+
   Also there are functions to handle
-  {% include ref.html label="Presentations and Tietze Transformations" text="Tietze&nbsp;transformations" %}.
-</p>
-<p>
+  {%- include ref.html label="Presentations and Tietze Transformations" text="Tietze&nbsp;transformations" %}.
+
   In addition there are packages 
-</p>
-<ul>
-  <li>
-    [FGA](http://www.icm.tu-bs.de/ag_algebra/software/FGA/) providing algorithms for
+
+  - [FGA](http://www.icm.tu-bs.de/ag_algebra/software/FGA/) providing algorithms for
     free groups,
-  </li>
-  <li>
-    [ACE](https://gap-packages.github.io/ace) linking to a particular
+  - [ACE](https://gap-packages.github.io/ace) linking to a particular
     powerful implementation of the Todd-Coxeter method,
-  </li>
-  <li>
-    [ITC](https://gap-packages.github.io/itc/) providing an interactive
+  - [ITC](https://gap-packages.github.io/itc/) providing an interactive
     Todd-Coxeter mainly for teaching and learning,
-  </li>
-  <li>
-    [ANUPQ](https://gap-packages.github.io/anupq/) for finding
+  - [ANUPQ](https://gap-packages.github.io/anupq/) for finding
     p-quotients, standard presentations, and descendants,
-  </li>
-  <li>
-    [NQ](https://gap-packages.github.io/nq/) for finding infinite
+  - [NQ](https://gap-packages.github.io/nq/) for finding infinite
     nilpotent quotients, and
-  </li>
-  <li>
-    [KBMAG](https://gap-packages.github.io/kbmag) with Knuth-Bendix
+  - [KBMAG](https://gap-packages.github.io/kbmag) with Knuth-Bendix
     and automatic groups methods. 
-  </li>
-</ul>
