@@ -18,7 +18,7 @@ permalink: /packages/
 <script type="module" src="{{ site.baseurl }}/assets/js/loadPackageTable.js?version=1"></script>
 
 <!-- List of deposited packages -->
-These are the packages that are shipped with GAP {{site.data.release.version}}.
+There are {{ site.data.package-infos | size }} packages that are shipped with GAP {{site.data.release.version}}.
 Note that newer versions might be available on the package websites.
 
 <!-- Create a table so it can be filled by Datatables -->
