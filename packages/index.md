@@ -22,26 +22,13 @@ There are {{ site.data.package-infos | size }} packages that are shipped with GA
 Note that newer versions might be available on the package websites.
 
 <!-- Create a table so it can be filled by Datatables -->
-<table id="packageList" class="display" style="width:100%">
-  <thead>
-      <tr>
-        <th></th>
-          <th>Name</th>
-          <th>Version</th>
-          <th>Date<th>
-          <th>Subtitle</th>
-      </tr>
-  </thead>
-  <tfoot>
-      <tr>
-        <th></th>
-          <th>Name</th>
-          <th>Version</th>
-          <th>Date<th>
-          <th>Subtitle</th>
-      </tr>
-  </tfoot>
-</table>
+
+|   | Name | Version | Date | | Subtitle |
+|-
+| 
+|=
+|   | Name | Version | Date | | Subtitle |
+{: id="packageList" class="display"}
 
 The table above is generated using the open source software [Datatables](https://datatables.net/" target="_blank).
 

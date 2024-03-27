@@ -105,7 +105,7 @@ let table = new DataTable('#packageList', {
         { "data" : "PackageName"},
         { "data" : "Version", width: '7em'},
         { "data" : "Date"},
-        // the following row is set to invisible and only there so the search picks up the additional text as well
+        // the following column is set to invisible and only there so the search picks up the additional text as well
         { data: null, render: (data, type, row) => format(data), visible: false},
         { "data" : "Subtitle"},
     ],
