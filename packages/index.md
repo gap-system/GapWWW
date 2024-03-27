@@ -6,10 +6,6 @@ nav_order: 5
 permalink: /packages/
 ---
 
-<!-- List of deposited packages -->
-These are the packages that are shipped with GAP {{site.data.release.version}}.
-Note that newer versions might be available on the package websites.
-
 <!-- load jQuery, as it is needed for datatables -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
@@ -20,6 +16,10 @@ Note that newer versions might be available on the package websites.
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 
 <script type="module" src="{{ site.baseurl }}/assets/js/loadPackageTable.js?version=1"></script>
+
+<!-- List of deposited packages -->
+These are the packages that are shipped with GAP {{site.data.release.version}}.
+Note that newer versions might be available on the package websites.
 
 <!-- Create a table so it can be filled by Datatables -->
 <table id="packageList" class="display" style="width:100%">
