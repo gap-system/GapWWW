@@ -35,9 +35,9 @@ compile the core system, but also some of its packages. To install
 GAP using the source distribution, perform the following steps:
 
 1. Verify that all required tools are installed. For example, on Ubuntu or Debian do this by calling
-    <p>
-    <code>sudo apt-get install build-essential autoconf libtool libgmp-dev libreadline-dev zlib1g-dev</code>
-    </p>
+    ```
+    sudo apt-get install build-essential autoconf libtool libgmp-dev libreadline-dev zlib1g-dev
+    ```
 
 1. Choose your preferred archive format and download
    the corresponding archive.
