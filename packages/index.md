@@ -15,7 +15,7 @@ permalink: /packages/
 <!-- load datatables itself -->
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 
-<script type="module" src="{{ site.baseurl }}/assets/js/loadPackageTable.js?version=1"></script>
+<script type="module" src="{{ site.baseurl }}/assets/js/loadPackageTable.js?version=2"></script>
 
 <!-- List of deposited packages -->
 There are {{ site.data.package-infos | size }} packages that are shipped with GAP {{site.data.release.version}}.

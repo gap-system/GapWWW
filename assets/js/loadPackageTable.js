@@ -104,7 +104,15 @@ let table = new DataTable('#packageList', {
         },
         { "data" : "PackageName"},
         { "data" : "Version", width: '7em'},
-        { "data" : "Date"},
+        { "data" : "Date",
+           render: function (data, type, row) {
+                       // convert dates in format YYYY-MM-DD to DD/MM/YYYY
+                       if (isNaN(data) && moment(data, 'DD/MM/YYYY', true).isValid()) {
+                           return moment(data, 'DD/MM/YYYY').format('YYYY-MM-DD');
+                       }
+                       return moment(data, 'YYYY-MM-DD').format('YYYY-MM-DD');
+                   }
+        },
         // the following column is set to invisible and only there so the search picks up the additional text as well
         { data: null, render: (data, type, row) => format(data), visible: false},
         { "data" : "Subtitle"},
@@ -115,22 +123,6 @@ let table = new DataTable('#packageList', {
     },
     // set default number of packages shown
     pageLength: 25,
-    // convert dates in format YYYY-MM-DD to DD/MM/YYYY
-    columnDefs:
-    [
-    {
-        targets: 3,
-        render: function (data, type, row) {
-        if (type === 'display') {
-            if(isNaN(data) && moment(data, 'DD/MM/YYYY', true).isValid())
-            {
-                return moment(data, 'DD/MM/YYYY').format('YYYY-MM-DD');
-            }
-        }
-        return moment(data, 'YYYY-MM-DD').format('YYYY-MM-DD');
-        }
-    }
-    ],
 });
 
 // Add event listener for opening and closing details
