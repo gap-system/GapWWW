@@ -1,7 +1,8 @@
 ---
-title: GAP Centres
-layout: default
-toc: Contacts
+title: Centres
+layout: default_with_title
+parent: Contact
+permalink: /centres/
 ---
 
 In March 2005 the GAP Council and the GAP developers have agreed that
