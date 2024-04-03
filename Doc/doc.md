@@ -5,54 +5,36 @@ has_children: true
 nav_order: 4
 ---
 
-<p>
   There is a lot of written material telling about the functionality
   and use of GAP, providing information about algorithmic
   background and giving hints for writing own GAP code.
-</p>
 
-<ul>
-<li>
-<h3>
-  Manuals
-</h3>
-<p>
+- ### Manuals
   For the users of GAP we provide a
-  <a href="{{ site.docsurl }}/doc/tut/chap0_mj.html">Tutorial</a>
+  [Tutorial]({{ site.docsurl }}/doc/tut/chap0_mj.html)
   giving a first introduction to the system and a
   <a href="{{ site.docsurl }}/doc/ref/chap0_mj.html">
-  Reference&nbsp;Manual</a>
+  Reference Manual</a>
   with complete descriptions of all library functions and examples of
   their use. Most essential changes from previous GAP 
   releases are described in the
   [CHANGES.md](https://github.com/gap-system/gap/blob/master/CHANGES.md) file. 
   There is also an 
-  <a href="{{ site.docsurl }}/doc/hpc/chap0_mj.html">HPC-GAP</a> version.
+  [HPC-GAP]({{ site.docsurl }}/doc/hpc/chap0_mj.html) version.
   Each GAP package has its individual manual which you can
-  access through the list of <a href="{{ site.baseurl }}/packages/">Packages</a>.
-</p>
-</li>
+  access through the list of [Packages]({{ site.baseurl }}/packages/).
 
-<li>
-<h3>
-  <a href="{{ site.baseurl }}/Doc/Learning/learning.html">Learning&nbsp;GAP</a>
-</h3>
-<p>
+- ### <a href="{{ site.baseurl }}/Doc/Learning/learning.html">Learning GAP</a>
   In addition to the
-  <a href="{{ site.docsurl }}/doc/tut/chap0_mj.html">Tutorial</a>
+  [Tutorial]({{ site.docsurl }}/doc/tut/chap0_mj.html)
   mentioned above there is a variety of material intended to help people
   to learn on their own the GAP language and the use of
   the GAP system. We have tried to organize links to such
   material somewhat according to the level and intended audience on the
   page quoted in the heading.
-</p>
-</li>
 
-<li>
-<h3>
-  <a href="{{ site.baseurl }}/Doc/Teaching/teaching.html">Teaching&nbsp;Material</a>
-</h3>
-<p>
+
+- ### <a href="{{ site.baseurl }}/Doc/Teaching/teaching.html">Teaching Material</a>
   GAP has been used in several places to support the
   teaching of a variety of courses. We are grateful to the colleagues
   who allowed us to point to some course material of such courses and
@@ -60,14 +42,8 @@ nav_order: 4
   We hope that this can be helpful to colleagues intending a
   similar use of GAP, but it may also be used by
   students studying the topics of such courses.
-</p>
-</li>
 
-<li>
-<h3>
-  The GAP <a href="{{ site.baseurl }}/Doc/Bib/bib.html">Bibliography</a>
-</h3>
-<p>
+- ### The GAP [Bibliography]({{ site.baseurl }}/Doc/Bib/bib.html)
   We maintain a bibliography of papers citing GAP. Some of
   these papers describe applications of GAP, others
   algorithmic methods that are implemented in GAP. We hope
@@ -75,9 +51,4 @@ nav_order: 4
   you help us to keep this bibliography up to date by sending us the
   bibliographical data of your own publications citing GAP.
   Note that some of the listed papers may still refer to use of
-  GAP&nbsp;3 rather than GAP&nbsp;4.
-</p>
-</li>
-
-</ul>
-
+  GAP 3 rather than GAP 4.
