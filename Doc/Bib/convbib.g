@@ -102,7 +102,8 @@ bib2niceandhtml := function(name, header, subheader)
   WriteBibFile(Concatenation(name, "nicer.bib"),[bib[1],[],[]]);
   # now we produce a temporary version were we substitute back
   # some unicode characters currently not handled by pdflatex
-  bad := [["ʹ","{\\cprime}"], ["ą","{\\k a}"],["Ð","{\\Dbar}"]];
+  bad := [["ʹ","{\\cprime}"], ["ą","{\\k a}"],["Ð","{\\Dbar}"],
+          ["Ṗ","\.{P}"], ["ọ","\d{o}"] ];
   str := StringFile(Concatenation(name, "nicer.bib"));
   for a in bad do
     str := SubstitutionSublist(str, a[1], a[2]);
