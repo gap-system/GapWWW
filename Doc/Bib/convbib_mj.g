@@ -110,19 +110,32 @@ bib2niceandhtml := function(name, header, subheader)
   od;
   FileString(Concatenation(name, "nicertmp.bib"), str);
   fh := function() 
-    local a, str; 
-    Print("<html>\n",
+    local a, str, strxml, strrec; 
+    Print("<html>\n<head>\n",
     "<meta http-equiv=\"Content-Type\" content=\"text/html;", 
     " charset=utf-8\">\n\n",
+    "<script type=\"text/javascript\"\n",
+    "src=\"https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML\">\n",
+    "</script>\n</head>\n",
     "<body bgcolor=\"#FFFFFF\">\n<br>\n<h1 align=\"center\">",
     header,
     "</h1>",
     subheader,
     "\n\n");
     for a in bib[1] do 
-      b := ShallowCopy(a);
-      b.title:=Filtered(b.title,x-> not x in "{}");
-      PrintBibAsHTML(b); 
+      strxml := StringBibAsXMLext(a, "UTF-8");
+      # some entries are not valid BibTeX
+      if strxml = fail then
+        # fallback
+        b := ShallowCopy(a);
+        b.title:=Filtered(b.title,x-> not x in "{}");
+        PrintBibAsHTML(b); 
+      else
+        strrec := ParseBibXMLextString(strxml);
+        str := StringBibXMLEntry(strrec.entries[1], "HTML", 
+                                 strrec.strings, rec(MathJax := true));
+        Print(str,"\n");
+      fi;
       Print("<pre>\n");
       str := StringBibAsBib(a);
       # escape HTML chars
