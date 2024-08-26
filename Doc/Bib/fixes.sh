@@ -27,3 +27,6 @@ sed -i '' -e 's/{\\cyr Sh}/{Sh}/' gap-published.bib
 sed -i '' -e 's/Erd\\H{o}s/Erd{\\H{o}}s/' gap-published.bib
 sed -i '' -e 's/{E}rd\\H{o}s/{E}rd{\\H{o}}s/' gap-published.bib
 sed -i '' -e 's/G\\polhk asior/G\\polhk{a}sior/' gap-published.bib
+
+sed -i '' -e 's/{\[2019\] \\copyright 2019}/{2019}/' gap-published.bib
+sed -i '' -e 's/{\[2018\] \\copyright 2018}/{2018}/' gap-published.bib
