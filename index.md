@@ -5,17 +5,9 @@ nav_order: 1
 nav_exclude: true
 ---
 
-<p class="bigcenter">
-  <strong>GAP - Groups, Algorithms, Programming -<br />
-  a System for Computational Discrete Algebra</strong>
-</p>
+<h1 style="text-align:center;">GAP - Groups, Algorithms, Programming</h1>
 
-<p class="center">
-The current version is 
-<a href="Install/">GAP&nbsp;{{site.data.release.version}}</a>
-released on {{site.data.release.date}}.
-</p>
-
+<h2 style="text-align:center;">A System for Computational Discrete Algebra</h2>
 
 ### What is GAP?
 
@@ -34,8 +26,9 @@ You can study and easily modify or extend it for your special use.
 
 ### How to obtain GAP?
 
-The current release is GAP {{site.data.release.version}} and it can be
-obtained from our [install page](Install/).
+The current version is
+[GAP {{site.data.release.version}}](Install/) released on {{site.data.release.date}}
+and it can be obtained from our [install page](Install/).
 Changes from earlier versions are described in the
 [Release history](https://github.com/gap-system/gap/blob/master/CHANGES.md).
 
