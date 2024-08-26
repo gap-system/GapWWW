@@ -73,7 +73,7 @@ bib2niceandhtml := function(name, header, subheader)
   local i, ii, bib, fh, out, a, b, years, counts, pos, flag, 
         mscreport, bstr, str, bad, citations_by_year_outfile,
         citations_by_msc_outfile;
-  years:=[1987..2023];
+  years:=[1987..2021];
   bstr := StringFile(Concatenation(name, ".bib"));
   bstr := HeuristicTranslationsLaTeX2XML.Apply(bstr);
   bib := ParseBibStrings(StringFile("gap-head.bib"), bstr);
