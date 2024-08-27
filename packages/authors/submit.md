@@ -14,7 +14,7 @@ only accept new deposited packages.
 
 Irrespective of this, you may consider organizing and maybe
 distributing your code in the form of a GAP package. The page
-[Information for GAP Package Authors]({{ site.baseurl }}/Packages/Authors/authors.html)
+[Information for GAP Package Authors]({{ site.baseurl }}/packages/authors/authors.html)
 give detailed advice how to do this.
 
 ### Submitting Deposited Contributions
