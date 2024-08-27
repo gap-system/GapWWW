@@ -8,7 +8,7 @@ parent: Documentation
   We have collected here links to a variety of materials intended to help
   people learn the language and get what they want from GAP.
   See also the page on
-  [Teaching Material]({{ site.baseurl }}/doc/teach/teaching.html),
+  [Teaching Material]({{ site.baseurl }}/doc/teach/),
   which refers to material accompanying courses given at various places. 
 
   Some of these materials have been written as stand-alone introductions to

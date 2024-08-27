@@ -5,7 +5,7 @@ parent: Documentation
 ---
 
  See also the page on
- [Learning GAP]({{ site.baseurl }}/doc/learn/learning.html),
+ [Learning GAP]({{ site.baseurl }}/doc/learn/),
  which refers to material that may help you if you want to learn 
  GAP on your own or to teach it.
 

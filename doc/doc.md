@@ -24,7 +24,7 @@ nav_order: 4
   Each GAP package has its individual manual which you can
   access through the list of [Packages]({{ site.baseurl }}/packages/).
 
-- ### [Learning GAP]({{ site.baseurl }}/doc/learn/learning.html)
+- ### [Learning GAP]({{ site.baseurl }}/doc/learn)
   In addition to the
   [Tutorial]({{ site.docsurl }}/doc/tut/chap0_mj.html)
   mentioned above there is a variety of material intended to help people
@@ -34,7 +34,7 @@ nav_order: 4
   page quoted in the heading.
 
 
-- ### [Teaching Material]({{ site.baseurl }}/doc/teach/teaching.html)
+- ### [Teaching Material]({{ site.baseurl }}/doc/teach/)
   GAP has been used in several places to support the
   teaching of a variety of courses. We are grateful to the colleagues
   who allowed us to point to some course material of such courses and
