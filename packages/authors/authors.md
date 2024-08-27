@@ -43,7 +43,7 @@ There are different ways to create a new package.
 As the number of packages and library modules in GAP grows, it is important to
 try to avoid clashes where two independently developed pieces of code use the
 same global  variable names in inconsistent ways.  See the page
-[Use of Global Variable Names]({{ site.baseurl }}/Packages/Authors/variablenames.html)
+[Use of Global Variable Names]({{ site.baseurl }}/packages/authors/variablenames.html)
 as well as the subsection
 {%- include ref.html label="Functions and Variables and Choices of Their Names" text="Functions and Variables and Choices of Their Names" %}
 of the GAP Reference Manual
