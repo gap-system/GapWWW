@@ -57,7 +57,7 @@ GAP can compute with
   {%- include ref.html label="Words" text="abstract words" %}.
 
 One can work with many algebracic structures. In addition to those listed under
-[Mathematical Capabilities]({{ site.baseurl }}/About/overview.html#mathematical-capabilities), there are e. g.
+[Mathematical Capabilities]({{ site.baseurl }}/about/overview.html#mathematical-capabilities), there are e. g.
 
 - {% include ref.html label="Finite Fields" text="finite fields" %},
 - {% include ref.html label="Residue Class Rings" text="residue class rings" %} of integers (see also the package

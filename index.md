@@ -12,7 +12,7 @@ nav_exclude: true
 
 <p class="center">
 The current version is 
-<a href="Install/">GAP&nbsp;{{site.data.release.version}}</a>
+<a href="install/">GAP&nbsp;{{site.data.release.version}}</a>
 released on {{site.data.release.date}}.
 </p>
 
@@ -26,7 +26,7 @@ text="programming language" %}, a library of thousands of functions
 implementing algebraic algorithms written in the GAP language as well as
 large data libraries of
 algebraic objects. See
-[here]({{ site.baseurl }}/About/overview.html) for details of the mathematical capabilities.
+[here]({{ site.baseurl }}/about/overview.html) for details of the mathematical capabilities.
 The system, including source, is distributed
 [freely]({{ site.baseurl }}/copyright/).
 You can study and easily modify or extend it for your special use.
@@ -35,7 +35,7 @@ You can study and easily modify or extend it for your special use.
 ### How to obtain GAP?
 
 The current release is GAP {{site.data.release.version}} and it can be
-obtained from our [install page](Install/).
+obtained from our [install page](install/).
 Changes from earlier versions are described in the
 [Release history](https://github.com/gap-system/gap/blob/master/CHANGES.md).
 
@@ -65,7 +65,7 @@ well as some
 [funding]({{ site.baseurl }}/About#funding). GAP was
 started at [Lehrstuhl D für
 Mathematik](https://www.math.rwth-aachen.de/LDFM/), RWTH Aachen in
-[1986]({{ site.baseurl }}/About/History/preface_2.4.html).
+[1986]({{ site.baseurl }}/about/history/preface_2.4.html).
 After 1997
 the development of GAP was coordinated in [St
 Andrews](https://www-circa.mcs.st-and.ac.uk/). Since March 2005, the
