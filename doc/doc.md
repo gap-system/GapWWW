@@ -24,7 +24,7 @@ nav_order: 4
   Each GAP package has its individual manual which you can
   access through the list of [Packages]({{ site.baseurl }}/packages/).
 
-- ### [Learning GAP]({{ site.baseurl }}/Doc/Learning/learning.html)
+- ### [Learning GAP]({{ site.baseurl }}/doc/learn/learning.html)
   In addition to the
   [Tutorial]({{ site.docsurl }}/doc/tut/chap0_mj.html)
   mentioned above there is a variety of material intended to help people
@@ -34,7 +34,7 @@ nav_order: 4
   page quoted in the heading.
 
 
-- ### [Teaching Material]({{ site.baseurl }}/Doc/Teaching/teaching.html)
+- ### [Teaching Material]({{ site.baseurl }}/doc/teach/teaching.html)
   GAP has been used in several places to support the
   teaching of a variety of courses. We are grateful to the colleagues
   who allowed us to point to some course material of such courses and
@@ -43,7 +43,7 @@ nav_order: 4
   similar use of GAP, but it may also be used by
   students studying the topics of such courses.
 
-- ### The GAP [Bibliography]({{ site.baseurl }}/Doc/Bib/bib.html)
+- ### The GAP [Bibliography]({{ site.baseurl }}/doc/bib/bib.html)
   We maintain a bibliography of papers citing GAP. Some of
   these papers describe applications of GAP, others
   algorithmic methods that are implemented in GAP. We hope
