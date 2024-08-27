@@ -87,7 +87,7 @@ The next steps do not require MathSciNet subscription and can be
 performed elsewhere.
 
 Running `convbib.g` in GAP produces the following files, which are
-linked from the main GAP bibliography web page `bib.html`:
+linked from the main GAP bibliography web page `doc/bib/index.md`:
 
 - `gap-published.pdf`: a nice PDF bibliography from `gap-published.bib`
 (using further helper files `gapbib.tex` and `gap-head.bib`).

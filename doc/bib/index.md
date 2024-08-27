@@ -5,7 +5,6 @@ parent: Documentation
 has_children: false
 ---
 
-<p>
   We provide a bibliography of work involving and giving acknowledgement to 
   GAP either by explicit citation in its list of references 
   or by a statement in the work. This bibliograhy is mainly based
@@ -14,30 +13,18 @@ has_children: false
   enquiry in the <a href="{{ site.baseurl }}/forum/">GAP Forum</a>, and
   previous user reports. It will be regularly further extended and we ask 
   you to support it by sending references. 
-</p>
-<p>
+
   Note that the papers quoted in the bibliography are not sorted with
   respect to using GAP&nbsp;4 or GAP&nbsp;3.
-</p>
-<p>
+
   The bibliography is available as
-</p>
-<ul>
-  <li>
-    <a href="{{ site.baseurl }}/doc/bib/gap-publishednicer.bib">
-    BibTeX</a> file,
-  </li>
-  <li>
-    <a href="{{ site.baseurl }}/doc/bib/gap-published.html">
-    Nicer readable HTML version</a>,
-  </li>
-</ul>
-<p>
+  - <a href="{{ site.baseurl }}/doc/bib/gap-publishednicer.bib">BibTeX</a> file,
+  - <a href="{{ site.baseurl }}/doc/bib/gap-published.html">Nicer readable HTML version</a>,
+
   The tables below give the number of publications per year 
   and numbers of publications by 
-  [MSC2020](https://www.ams.org/msc/) categories. .
-</p>
-<p>
+  [MSC2020](https://www.ams.org/msc/) categories.
+
 In addition to the bibliography maintained by The GAP Group, there is also a
 [Google Scholar profile](https://bit.ly/gap_citations) for the GAP
 system and some of its packages, where citations are added automatically as soon 
@@ -45,24 +32,20 @@ as they are detected by Google. Another independent source of citations for GAP
 and packages is [swMATH project](https://www.swmath.org/software/320)
 which looks for the references in the [zbMATH](https://www.zbmath.org/)
 database.
-</p>
-<p>
+
   Additions or corrections to the bibliography maintained by The GAP Group
   are requested at <a href="mailto:support@gap-system.org">support@gap-system.org</a> and are
   very much appreciated.
-</p>
-<p>
+
   For quoting the use of GAP in your publications we provide
   standard forms for
   <a href="{{ site.baseurl }}/cite/">citing&nbsp;GAP&nbsp;4</a>.
-</p>
 
 
-<h3>Statistics</h3>
-<p>
+### Statistics
+
   Click on the number of citations to see
   the list of papers for the given year.
-  </p>
   
   <table>
   <tr>
@@ -85,7 +68,6 @@ database.
   {% endfor %}
   </table>
   
-  <p>
   The next table shows the number of sources in the GAP bibliography having 
   different primary and secondary [MSC2020](https://www.ams.org/msc/) 
   codes in the appropriate categories. 
@@ -93,7 +75,6 @@ database.
   We acknowledge the [American Mathematical Society](https://www.ams.org/) 
   for the opportunity to use the [MathSciNet](httpss://www.ams.org/mathscinet/) 
   database for performing this analysis.
-  </p>
   
   <table>
   <tr>

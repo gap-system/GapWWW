@@ -28,7 +28,7 @@ We hope for feedback in particular in the following instances.
     tell us about your publication again by email to
     <support@gap-system.org> since we would like to include a reference
     to your publication into the
-    [Bibliography]({{ site.baseurl }}/doc/bib/bib.html)
+    [Bibliography]({{ site.baseurl }}/doc/bib/)
     about use of GAP.
 
 -   **When encountering bugs.**  We strongly appreciate timely reports

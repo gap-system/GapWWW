@@ -43,7 +43,7 @@ nav_order: 4
   similar use of GAP, but it may also be used by
   students studying the topics of such courses.
 
-- ### The GAP [Bibliography]({{ site.baseurl }}/doc/bib/bib.html)
+- ### The GAP [Bibliography]({{ site.baseurl }}/doc/bib/)
   We maintain a bibliography of papers citing GAP. Some of
   these papers describe applications of GAP, others
   algorithmic methods that are implemented in GAP. We hope
