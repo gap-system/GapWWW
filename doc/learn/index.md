@@ -8,7 +8,7 @@ parent: Documentation
   We have collected here links to a variety of materials intended to help
   people learn the language and get what they want from GAP.
   See also the page on
-  [Teaching Material]({{ site.baseurl }}/Doc/Teaching/teaching.html),
+  [Teaching Material]({{ site.baseurl }}/doc/teach/),
   which refers to material accompanying courses given at various places. 
 
   Some of these materials have been written as stand-alone introductions to
@@ -97,13 +97,11 @@ parent: Documentation
     (a brief introduction to GAP in Polish) by Rafał Lutowski (University of Gdańsk, Poland).
 
 ### More Specialized Materials
-- The GAP 4 Type System: Organising Algebraic Algorithms.
+- [The GAP 4 Type System: Organising Algebraic Algorithms.](https://dl.acm.org/doi/10.1145/281508.281540)
     A paper by {% include namelink.html name="Thomas Breuer" %} and
     {% include namelink.html name="Steve Linton" %}, accepted for ISSAC
     (International Symposium on Symbolic and Algebraic Computation) 1998
-    at Rostock. Available in
-    [DVI]({{ site.baseurl }}/Doc/Literature/paper.dvi) and 
-    [PostScript]({{ site.baseurl }}/Doc/Literature/paper.ps). 
+    at Rostock.
 - [Advanced&nbsp;Programming&nbsp;in&nbsp;GAP&nbsp;4]({{ site.baseurl }}/Doc/Talks/linz99.html).
     Slides of many of the talks given at the 1999 Linz Workshop.
 - Talks from the [First CoDiMa Training School in Computational Discrete Mathematics](http://www.codima.ac.uk/school2015/)

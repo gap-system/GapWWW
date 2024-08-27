@@ -28,7 +28,7 @@ We hope for feedback in particular in the following instances.
     tell us about your publication again by email to
     <support@gap-system.org> since we would like to include a reference
     to your publication into the
-    [Bibliography]({{ site.baseurl }}/Doc/Bib/bib.html)
+    [Bibliography]({{ site.baseurl }}/doc/bib/bib.html)
     about use of GAP.
 
 -   **When encountering bugs.**  We strongly appreciate timely reports
@@ -79,4 +79,4 @@ projects.
 As explained on the respective page we have established a procedure for
 formally 'accepting' some packages which we hope will give them a
 status comparable to a published paper. On a separate page we inform
-about the process of [submitting contributions]({{ site.baseurl }}/Packages/Authors/submit.html).
+about the process of [submitting contributions]({{ site.baseurl }}/packages/authors/submit.html).
