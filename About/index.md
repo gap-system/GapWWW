@@ -27,7 +27,7 @@ packages provide links to other systems.
 
 
 ### GAP provides:
-- <a href="overview.html#mathematical-capabilities">Mathematical capabilities</a>,
+- <a href="/capabilities/">Mathematical capabilities</a>,
 - A {% include ref.html label="The Programming Language" text="programming language" %},
   also called GAP,
 - An {% include ref.html label="Main Loop and Break Loop" text="interactive environment" %}.
