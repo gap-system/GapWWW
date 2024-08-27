@@ -5,16 +5,8 @@ nav_order: 1
 nav_exclude: true
 ---
 
-<p class="bigcenter">
-  <strong>GAP - Groups, Algorithms, Programming -<br />
-  a System for Computational Discrete Algebra</strong>
-</p>
 
-<p class="center">
-The current version is 
-<a href="install/">GAP&nbsp;{{site.data.release.version}}</a>
-released on {{site.data.release.date}}.
-</p>
+<h1 style="text-align:center;">GAP - Groups, Algorithms, Programming</h1>
 
 <h2 style="text-align:center;">A System for Computational Discrete Algebra</h2>
 
