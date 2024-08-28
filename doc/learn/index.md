@@ -84,12 +84,6 @@ parent: Documentation
     <br />&nbsp;
   </li> 
 -->
-- [Uma&nbsp;Introducao&nbsp;ao&nbsp;GAP](http://www.fc.up.pt/cmup/monograph/gap-notas.pdf)
-    An introduction to GAP (in Portuguese) by 
-    [Manuel&nbsp;Delgado](http://www.fc.up.pt/cmup/mdelgado),
-    University of Porto.
-    An introduction to using GAP to study automata 
-    and semigroups.
 - {% include namelink.html name="Olexandr Konovalov" %} has
     written an explanation how to create new objects in GAP using the example
     of [circle multiplication](http://www.cs.st-andrews.ac.uk/~alexk/circle/chap2.html).

@@ -19,7 +19,7 @@ text="programming language" %}, a library of thousands of functions
 implementing algebraic algorithms written in the GAP language as well as
 large data libraries of
 algebraic objects. See
-[here]({{ site.baseurl }}/about/overview.html) for details of the mathematical capabilities.
+[here]({{ site.baseurl }}capabilities/) for details of the mathematical capabilities.
 The system, including source, is distributed
 [freely]({{ site.baseurl }}/copyright/).
 You can study and easily modify or extend it for your special use.
@@ -45,10 +45,10 @@ If you have any questions, or suggestions for GAP, the repository, or
 documentation, feel free to contact us via the [open GAP development
 mailing list](https://lists.uni-kl.de/gap/info/gap) or
 submit an issue or a pull request on GitHub.
-There is an [extensive documentation](Doc/doc.html) advising how to
+There is an [extensive documentation]({{ site.baseurl }}/doc/) advising how to
 write a GAP code. Also there is a
 [guidance](https://gap-packages.github.io/example/) on
-developing a [GAP package](packages) and its
+developing a [GAP package]({{ site.baseurl }}/packages/) and its
 [submission]({{ site.baseurl }}/packages/authors/submit.html) to GAP.
 
 
@@ -63,12 +63,12 @@ Mathematik](https://www.math.rwth-aachen.de/LDFM/), RWTH Aachen in
 [1986]({{ site.baseurl }}/about/history/preface_2.4.html).
 After 1997
 the development of GAP was coordinated in [St
-Andrews](https://www-circa.mcs.st-and.ac.uk/). Since March 2005, the
+Andrews](https://circa.st-andrews.ac.uk/). Since March 2005, the
 [GAP Centers]({{ site.baseurl }}/centres/) in
 [Aachen](https://www.math.rwth-aachen.de/LDFM/),
 [Braunschweig](https://www.tu-braunschweig.de/iaa/),
 Fort Collins,
-and [St Andrews](https://www-circa.mcs.st-and.ac.uk/) took over coordination.
+and [St Andrews](https://circa.st-andrews.ac.uk/) took over coordination.
 They were joined by [Kaiserslautern](https://math.rptu.de/ags/agag/)
 as fifth GAP center in 2020.
 Since July 2022, the GAP center in Kaiserslautern is coordinating the

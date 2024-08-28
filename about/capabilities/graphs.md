@@ -14,7 +14,7 @@ to construct graphs (with or without using  groups), to determine many
 invariants of graphs, to  classify complete subgraphs with various
 properties, to determine automorphism groups of graphs, and to test
 graph isomorphism (the  last two via an interface to B.D. McKay's
-[nauty](http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml) package).
+[nauty](https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml) package).
 A special feature of this package is the use of (subgroups of) the
 automorphism group of a graph (and hence of permutation group methods)
 to reduce the store required for many graphs and to reduce the time

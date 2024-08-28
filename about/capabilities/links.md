@@ -29,18 +29,14 @@ These include:
   mathematical objects encoded in 
   [OpenMath](http://www.openmath.org/), for the purpose of 
   exchanging them with other applications which are OpenMath enabled. 
-  (If the OpenMath site don't work, try the 
-  [unofficial mirror](http://openmath.activemath.org/).)
 
 -  A GAP package 
   [SCSCP](https://gap-packages.github.io/scscp) which implements the 
-  [Symbolic Computation Software Composability Protocol](http://www.symbolic-computing.org/scscp). 
+  [Symbolic Computation Software Composability Protocol](https://openmath.org/standard/scscp/). 
   Using it, GAP can communicate locally or remotely with any other 
   OpenMath-enabled SCSCP-compliant application which may be not only another computer algebra 
   system but also another instance of the GAP system or even, for example, an external 
   Java or C/C++ application that uses SCSCP API. 
-  See the [SCIEnce project homepage]( http://www.symbolic-computing.org/)
-  for the details about computer algebra systems and other sotware supporting SCSCP.
 
 - An interface
   [DISCRETA - GAP](http://www.mathe2.uni-bayreuth.de/discreta/GAP/discreta_gap.html) to the program 

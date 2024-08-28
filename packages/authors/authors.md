@@ -188,7 +188,7 @@ updates as follows:
 - We advise package authors to maintain an update "history",
   which documents the changes from one version to another.
   A good example is contained in the
-  [README]({{ site.docsurl }}/pkg/design/README.design)
+  [README](https://github.com/gap-packages/grape/blob/master/CHANGES.md)
   file of the DESIGN package of Leonard Soicher.
 
 

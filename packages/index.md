@@ -30,5 +30,5 @@ Note that newer versions might be available on the package websites.
 |   | Name | Version | Date | | Subtitle |
 {: id="packageList" class="display"}
 
-The table above is generated using the open source software [Datatables](https://datatables.net/" target="_blank).
+The table above is generated using the open source software [Datatables](https://datatables.net/).
 
