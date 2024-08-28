@@ -3,6 +3,7 @@ title: For Authors
 layout: default_with_title
 parent: GAP Packages
 has_children: true
+permalink: /packages/authors/
 ---
 
 If you have written or are going to write programs which enhance the
