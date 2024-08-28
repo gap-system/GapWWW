@@ -86,7 +86,7 @@ parent: Documentation
 -->
 - {% include namelink.html name="Olexandr Konovalov" %} has
     written an explanation how to create new objects in GAP using the example
-    of [circle multiplication](http://www.cs.st-andrews.ac.uk/~alexk/circle/chap2.html).
+    of [circle multiplication](https://gap-packages.github.io/circle/doc/chap2_mj.html).
 - [GAP - bardzo krótkie wprowadzenie](https://mat.ug.edu.pl/~rlutowsk/pub/gap-short.pdf)
     (a brief introduction to GAP in Polish) by Rafał Lutowski (University of Gdańsk, Poland).
 
@@ -98,7 +98,7 @@ parent: Documentation
     at Rostock.
 - [Advanced&nbsp;Programming&nbsp;in&nbsp;GAP&nbsp;4]({{ site.baseurl }}/Doc/Talks/linz99.html).
     Slides of many of the talks given at the 1999 Linz Workshop.
-- Talks from the [First CoDiMa Training School in Computational Discrete Mathematics](http://www.codima.ac.uk/school2015/)
+- Talks from the [First CoDiMa Training School in Computational Discrete Mathematics](https://blogs.cs.st-andrews.ac.uk/codima/school2015/)
     (Manchester, November 2015).
-- Talks from the [Second CoDiMa Training School in Computational Discrete Mathematics](http://www.codima.ac.uk/school2016/)
+- Talks from the [Second CoDiMa Training School in Computational Discrete Mathematics](https://blogs.cs.st-andrews.ac.uk/codima/school2016/)
     (Edinburgh, October 2016).
