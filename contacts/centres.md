@@ -29,7 +29,7 @@ have agreed to cooperate in this way:
 - [Braunschweig](https://www.tu-braunschweig.de/iaa/),
 - [Fort Collins](https://www.math.colostate.edu/~hulpke/CGT/CGT.html),
 - [Kaiserslautern](https://math.rptu.de/ags/agag/), and
-- [St Andrews](https://www-circa.mcs.st-and.ac.uk/).
+- [St Andrews](https://circa.st-andrews.ac.uk/).
 
 This list may change, if new Centres emerge, or existing ones withdraw.
 

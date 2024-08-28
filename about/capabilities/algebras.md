@@ -38,7 +38,7 @@ extensions and to determine their automorphism groups.
 The package [QuaGroup](https://gap-packages.github.io/quagroup/) allows to 
 investigate quantum groups.
 
-On the home page of [Jan Draisma](https://mathsites.unibe.ch/jdraisma/) functions for working with the Weyl algebra and for the realisation of Lie algebras by means of derivations are found.
+On the home page of [Jan Draisma](https://web.archive.org/web/20240414220737/https://mathsites.unibe.ch/jdraisma/) functions for working with the Weyl algebra and for the realisation of Lie algebras by means of derivations are found.
 
 Four new packages for Lie algebras appeared in GAP 4.7 
 distribution:

@@ -41,15 +41,14 @@ parent: Documentation
     by Akihito Kikuchi (Springer, 2018) uses GAP to explain how to use computer algebra for applications in
     solid-state simulation.
   - ["Computer Algebra"](http://lib.brsu.by/sites/default/files/books/%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B0%D0%BB%D0%B3%D0%B5%D0%B1%D1%80%D0%B0_2.pdf) - teaching material in Russian by D. V. Gritsuk and A. A. Trofimuk (Brest State A. S. Pushkin University, Belarus, 2018).
-  - M. D'Anna, V. Micale and [$2]($1) gave the course
-    ["Semigruppi numerici e applicazioni"](http://www.scuolasuperiorecatania.it/it/semigruppi-numerici-e-applicazioni-0)
-    at the Scuola Superiore di Catania, during the academic year 2016-17, 
+  - M. D'Anna, V. Micale and [P. A. García Sánchez](https://www.ugr.es/~pedro) gave the course
+    "Semigruppi numerici e applicazioni" at the Scuola Superiore di Catania, during the academic year 2016-17, 
     where GAP was used. They gave an introduction to NumericalSgps and GUAVA packages.
     [This repository](https://github.com/pedritomelenas/SSC-Semigroups) contains a 
     [live tutorial of NumericalSgps](https://pedritomelenas.github.io/SSC-Semigroups/Live/gap-numericalsgps-thebelab.html)
     using [Thebe](https://github.com/executablebooks/thebe).
   - The book ["Numerical Semigroups and Applications"](https://www.springer.com/gp/book/9783319823256)
-    by Abdallah Assi and [$2]($1) (Springer, 2016) contains
+    by Abdallah Assi and [Pedro A. García Sánchez](https://www.ugr.es/~pedro) (Springer, 2016) contains
     many examples and tutorials with the NumericalsSps GAP package.
   - Teaching material in Spanish by Leandro Vendramin:
     - [Una introducción al álgebra con GAP](http://mate.dm.uba.ar/~lvendram/lectures/GAP.pdf) (2016).
@@ -66,7 +65,7 @@ parent: Documentation
     [Abstract Algebra in GAP](https://www.math.colostate.edu/%7Ehulpke/CGT/howtogap.pdf) (2011)
     by {% include namelink.html name="Alexander Hulpke" %},
     with contributions by Kenneth Monks and Ellen Ziliak.
-  - The book ["Representations of Groups: A Computational Approach"](https://www.cambridge.org/vi/academic/subjects/mathematics/algebra/representations-groups-computational-approach)
+  - The book ["Representations of Groups: A Computational Approach"](https://www.cambridge.org/vi/universitypress/subjects/mathematics/algebra/representations-groups-computational-approach)
     by Klaus Lux and Herbert Pahlings (Cambridge University Press, 2010) provides a number of computational exercises and examples using GAP.
   - The book ["Numerical Semigroups"](https://link.springer.com/book/10.1007/978-1-4419-0160-6)
     by J. C. Rosales and [P. A. García Sánchez](https://www.ugr.es/~pedro) (Springer, 2009).
@@ -86,7 +85,7 @@ parent: Documentation
     in June 2004 under the auspices of the Mathematical Association of
     America's Professional Enhancement Program.
   - A course
-    [Mathematics&nbsp;3530](http://www.ux1.eiu.edu/~cfdmb/gap/index.html) - Abstract Algebra,
+    [Mathematics&nbsp;3530](https://web.archive.org/web/20100728031334/http://www.ux1.eiu.edu/~cfdmb/gap/index.html) - Abstract Algebra,
     given in Fall 2003 at
     [ Eastern&nbsp;Illinios&nbsp;University](http://www.eiu.edu/)
     by {% include namelink.html name="Duane Broline" %}.
@@ -133,7 +132,7 @@ parent: Documentation
     [ITC&nbsp;manual]({{ site.docsurl }}/pkg/itc/htm/chapters.htm).
 
 Other examples of use of GAP in teaching include: 
-- [Material, in Portugese, for a Mini-Course about GAP](http://pet.mat.unb.br/pub/Minicurso_de_GAP.pdf),
+- [Material, in Portugese, for a Mini-Course about GAP](https://web.archive.org/web/20230204205117/http://pet.mat.unb.br/pub/Minicurso_de_GAP.pdf),
 by Ayrton Anjos Teixeira from 2022
 - [GAP exercises](https://github.com/MWhybrow92/Permutation-Groups) for the
 Theory of permutation groups course by [Madeleine Whybrow](https://madeleinewhybrow.wordpress.com/)
@@ -161,14 +160,14 @@ since 2016.
 "Análisis y diseño de algoritmos" (Analysis and Design of Algorithms),
 student research projects and doctoral studies since 2014.
 - Uygulamalı Cebir (Applied Algebra), Sembolik Hesaplama (Symbolic Computation)
-and GAP Programlama (GAP Programming) by [$2]($1) (Osmangazi University, Turkey),
+and GAP Programlama (GAP Programming) by [Alper Odabaş](http://fef.ogu.edu.tr/aodabas/) (Osmangazi University, Turkey),
 starting from 2013.
-- Use of GAP at the Universidad de Almería (Spain) in the course Software en Matemáticas (since 2018);
+<!-- - Use of GAP at the Universidad de Almería (Spain) in the course Software en Matemáticas (since 2018);
 and also the GUAVA package for Coding Theory in the course
 ["Teoría de la Información y la Codificación"](http://cms.ual.es/UAL/ht/estudios/titulaciones/titulacion/asignaturas/asignatura/TITULACION4100?id=&idTit=4100&idAss=40007321&idCaracter=O)
 in the degree of Computer Science (since 2012). GAP was also used in the course
 ["Ampliación de Matemática Discreta"](http://cms.ual.es/UAL/universidad/departamentos/matematicas/docencia/asignaturas/asignatura/index.htm?id=6250&idTit=4000&idAss=40002202&idCaracter=B)
-during several years, mainly for polynomials over finite extensions of finite fields, between 2004 and 2011.
+during several years, mainly for polynomials over finite extensions of finite fields, between 2004 and 2011. -->
 - Grupos y Anillos (Groups and Rings), Códigos Correctores y Criptografía (Error Correcting Codes and Cryptography), Teoría de Números (Number Theory)
 by [Ángel del Río](https://www.um.es/adelrio/) (Universidad de Murcia, Spain), starting circa 2010.
 - Number Theory and Applications; Semigroups, Automata and Languages (the package Automata);

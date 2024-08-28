@@ -73,7 +73,7 @@ database.
   codes in the appropriate categories. 
   Click on the name of the category to see the list of papers in this category.
   We acknowledge the [American Mathematical Society](https://www.ams.org/) 
-  for the opportunity to use the [MathSciNet](httpss://www.ams.org/mathscinet/) 
+  for the opportunity to use the [MathSciNet](https://www.ams.org/mathscinet/) 
   database for performing this analysis.
   
   <table>
