@@ -86,7 +86,7 @@ parent: Documentation
 -->
 - {% include namelink.html name="Olexandr Konovalov" %} has
     written an explanation how to create new objects in GAP using the example
-    of [circle multiplication](https://gap-packages.github.io/circle/doc/chap2_mj.html).
+    of [circle multiplication](http://www.cs.st-andrews.ac.uk/~alexk/circle/chap2.html).
 - [GAP - bardzo krótkie wprowadzenie](https://mat.ug.edu.pl/~rlutowsk/pub/gap-short.pdf)
     (a brief introduction to GAP in Polish) by Rafał Lutowski (University of Gdańsk, Poland).
 
