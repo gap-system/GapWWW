@@ -109,13 +109,13 @@ parent: Documentation
   - Teaching material in Japanese:
     The home page of 
     [Toshiaki&nbsp;Shoji](http://www.math.nagoya-u.ac.jp/~shoji/eindex.html), 
-    in its section 'Refresh Corner' provides links to PDF as well as 
-    PostScript versions of  two Japanese texts  'How to play GAP' 
+    in its section "Refresh Corner" provides links to PDF as well as 
+    PostScript versions of  two Japanese texts  "How to play GAP" 
     (dating from Oct. 2002 and Feb 2005, resp.) that contain parts 
     of the GAP tutorial with additional examples. 
   - Teaching material in French:
     Calculs en théorie des groupes et introduction au langage GAP,
-    Journées  mathématiques  X-UPS  2000,  ``groupes  finis'', 71--94,
+    Journées  mathématiques  X-UPS  2000,  "groupes  finis", 71--94,
     Éditions de l'école Polytechnique.
     [dvi](https://webusers.imj-prg.fr/~jean.michel/papiers/xups.dvi).
     by [Jean&nbsp;Michel](https://webusers.imj-prg.fr/~jean.michel/).
