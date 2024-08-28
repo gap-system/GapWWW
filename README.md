@@ -13,8 +13,8 @@ the website and its improved look.
 
 For small improvements (e.g. correcting details and fixing typos), the
 procedure is as simple as just submitting an issue or pull request here.
-Please take into account that some files, in particular package YAML
-files `Packages/<pkgname>.html` are generated automatically from the
+Please take into account that some content, in particular the packages
+list, is generated automatically from the
 metadata in `PackageInfo.g` files. Incorrect information there should
 not be changed via pull requests, but reported to package authors instead.
 If in doubt, just submit an issue before making a pull request, and we
@@ -62,6 +62,9 @@ feel you have need to directly access the server via SSH, contact him.
   - `www-gap-systems` → `www.gap-system.org`
   - `www-gap-docs` → `docs.gap-system.org`
   - `www-gap-files` → `files.gap-system.org`
+- SSH hostname: `www-admin12.rz.rptu.de`
+- Login:
+  - `www-gap-dev` → `dev.gap-system.org`
 
 Please consult `etc/README.server.md` for more information.
 
