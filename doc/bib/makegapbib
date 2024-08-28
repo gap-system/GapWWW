@@ -1,0 +1,134 @@
+#!/usr/bin/perl
+#
+# Script to fetch BibTeX data from MathSciNet
+# Author: Alan J Cain, alanc@mcs.st-and.ac.uk
+#
+
+print "This is makegapbib v0.1\n";
+
+# Parameters:
+$MRFile = "GapCite.MR";			# The main input file,
+$OutputFile = "gap-published.bib";	# The main output file.
+$CommentIndicator = '#';		# A single character to start comment lines in $MRFile.
+$MRIndicator = ' ';			# A single character to start MR number lines in $MRFile.	
+$BibTeXStartIndicator= '@';		# First character in a BibTeX entry.
+$BibTeXEndIndicator = '}';		# Last character in a BibTeX entry.
+$MaxAttempt = 5;			# Maximum number of times to try to fetch BibTeX data for a particular MR number.
+@AppendFiles = ("GapCite.notyet",
+		"GapNonMR.bib");	# Files to be appended to $OutputFile.
+
+@MRNumbers = ();
+@FailedMRNumbers = ();
+@OutputLines = ("% This file is script-generated. Do not edit it directly.\n% The GAP bibliography was partially obtained using the MathSciNet Database.\n% We acknowledge the American Mathematical Society for giving us such opportunity.\n");
+
+# Read $MRFile and extract MR Numbers.
+open MRFILE, "<$MRFile";
+@TempLines = <MRFILE>;
+close MRFILE;
+print "Read " . scalar(@TempLines) . " lines from $MRFile\n";
+
+foreach $TempLine (@TempLines) {
+	chop ($TempLine);
+	if (substr($TempLine,0,1) eq $CommentIndictor) {
+		next;
+	}
+	if (substr($TempLine,0,1) eq $MRIndicator) {
+		# Find the MRnumber
+		$TempLine =~ s/^\s*([0-9a-z:]+)\s*$/$1/;
+		push @MRNumbers, $TempLine;
+#		print "MR Number ($TempLine)\n";
+	}	
+}
+print "Found " . scalar(@MRNumbers) . " MR numbers\n";
+
+foreach $MRNumber (@MRNumbers) {
+	@TempBibTeXLines = ();
+	$BibTeXStart = -1;
+	$BibTeXEnd = -1;
+	$Attempt = 0;
+	
+	while ($Attempt < $MaxAttempt) {
+		$Attempt++;
+		print "\nFetching BibTeX data for $MRNumber\n";
+
+		$TempCommand = "wget -q -O - \"https://mathscinet.ams.org/mathscinet/search/publications.html?fmt=bibtex&pg1=MR&s1=$MRNumber\"";
+#		print "Running '$TempCommand'\n";
+	
+		open WGET,"$TempCommand |";
+		@TempLines = <WGET>;
+		close WGET;
+	
+		print "Received data. Parsing.\n";
+	
+		# Find the first and last lines of the BibTeX entry.
+		for ($i=0; $i<scalar(@TempLines); $i++) {
+#			print $TempLines[$i],"\n";
+			if (substr($TempLines[$i],0,1) eq $BibTeXStartIndicator) {
+				$BibTeXStart = $i;
+				last;
+			}
+		}
+		if ($BibTeXStart < 0) {
+			print "Failed on attempt $Attempt\n";
+			next;
+		}
+#		print "Found start of entry at line $BibTeXStart\n";
+		for ($i=scalar(@TempLines)-1; $i>=0; $i--) {
+			if (substr($TempLines[$i],0,1) eq $BibTeXEndIndicator) {
+				$BibTeXEnd = $i;
+				last;
+			}
+		}
+		if ($BibTeXEnd < $BibTeXStart) {
+			print "Failed on attempt $Attempt\n";
+			next;
+		}
+#		print "Found end of entry at line $BibTeXEnd\n";
+	
+		for ($i=$BibTeXStart; $i<=$BibTeXEnd; $i++) {
+			push @TempBibTeXLines, $TempLines[$i];
+		}
+		
+		print "Successfully fetched BibTeX data on attempt $Attempt\n";
+		
+		last;
+	}
+	
+	if (scalar(@TempBibTeXLines) > 0) {
+		print @TempBibTeXLines;
+		push @OutputLines,"\n",@TempBibTeXLines;
+	} else {
+		push @FailedMRNumbers, $MRNumber;
+		print "Failed to fetch BibTeX data for $MRNumber\n";
+	}
+}
+
+# Append files in @AppendFiles
+foreach $File (@AppendFiles) {
+	print "Appending $File\n";
+
+	open APPENDFILE, "<$File";
+	@TempLines = <APPENDFILE>;
+	close APPENDFILE;
+
+	push @OutputLines,"\n",@TempLines;
+}
+
+# Write everything to the output file
+print "\nWriting " . scalar(@OutputLines) . " lines to $OutputFile\n";
+open OUTPUTFILE,">$OutputFile";
+print OUTPUTFILE @OutputLines;
+close OUTPUTFILE;
+
+# Write diagnostic data
+if (scalar(@FailedMRNumbers) > 0) {
+	print "Failed to fetch BibTeX data for the following MR numbers:\n";
+	foreach $MRNumber (@FailedMRNumbers) {
+		print "  $MRNumber\n";
+	}
+}
+
+print "Complete.\n\n";
+
+
+end;
