@@ -32,7 +32,6 @@ current GAP version, making sure you have `\usepackage{url}` (or
 LaTeX document):
 
       @manual{GAP4,
-        key          = "GAP",
         organization = "The GAP~Group",
         title        = "{GAP -- Groups, Algorithms, and Programming,
                         Version {{site.data.release.version}}}",
@@ -49,10 +48,6 @@ bibliography environment of LaTeX.
       Version {{site.data.release.version}}}; 
       {{site.data.release.date | date: "%Y" }},
       \url{https://www.gap-system.org}.
-
-When linking to GAP from a web page you can use the link
-
-      <a href="https://www.gap-system.org/">GAP</a>.
 
 Instructions on citing GAP and its packages may be also found in the
 CITATION file in the GAP root directory or displayed in GAP using the
