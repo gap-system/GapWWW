@@ -10,16 +10,15 @@ nav_order: 4
   background and giving hints for writing own GAP code.
 
 - ### Manuals
-  For the users of GAP we provide a
-  [Tutorial]({{ site.docsurl }}/doc/tut/chap0_mj.html) ([PDF]({{ site.docsurl }}/doc/tut/manual.pdf))
-  giving a first introduction to the system and a
-  [Reference Manual]({{ site.docsurl }}/doc/ref/chap0_mj.html) ([PDF]({{ site.docsurl }}/doc/ref/manual.pdf))
-  with complete descriptions of all library functions and examples of
-  their use. Most essential changes from previous GAP 
-  releases are described in the
-  [CHANGES.md](https://github.com/gap-system/gap/blob/master/CHANGES.md) file. 
-  Each GAP package has its individual manual which you can
-  access through the list of [packages]({{ site.baseurl }}/packages/).
+  - The [Tutorial]({{ site.docsurl }}/doc/tut/chap0_mj.html) ([PDF]({{ site.docsurl }}/doc/tut/manual.pdf))
+    gives a first introduction to the system
+  - The [Reference Manual]({{ site.docsurl }}/doc/ref/chap0_mj.html) ([PDF]({{ site.docsurl }}/doc/ref/manual.pdf))
+    with complete descriptions of all library functions and examples of
+    their use.
+  - The [CHANGES.md](https://github.com/gap-system/gap/blob/master/CHANGES.md)
+    file describes most essential changes between all GAP releases.
+  - Each GAP package has its individual manual which you can
+    access through the list of [packages]({{ site.baseurl }}/packages/).
 
 - ### [Learning GAP]({{ site.baseurl }}/doc/learn)
   In addition to the
@@ -40,15 +39,13 @@ nav_order: 4
   students studying the topics of such courses.
 
 - ### Bibliographies
-  There is a [Google Scholar profile](https://scholar.google.co.uk/citations?user=B2oZOG0AAAAJ)
+  - There is a [Google Scholar profile](https://scholar.google.co.uk/citations?user=B2oZOG0AAAAJ)
   for the GAP system and some of its packages, where citations are added
   automatically as soon as they are detected by Google.
-
-  Another independent source of citations for GAP and packages is
+  - Another independent source of citations for GAP and packages is
   [zbMATH](https://www.zbmath.org/). There is a dedicated page tracking
   [GAP at zbMATH](https://zbmath.org/software/320) from which one can access
   a [list of publications citing GAP](https://zbmath.org/?q=si%3A320).
-
-  We also used to produce our own bibliography of work involving and giving
+  - We also used to produce our own bibliography of work involving and giving
   acknowledgement to GAP but this has not been maintained since 2022. You can
   still download the [old .bib file here]({{ site.baseurl }}/doc/bib/gap-publishednicer.bib).
