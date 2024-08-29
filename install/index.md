@@ -3,6 +3,7 @@ title: Installation
 layout: default_with_title
 has_children: true
 nav_order: 2
+permalink: /install/
 ---
 
 The latest version of GAP is {{site.data.release.version}} released on {{site.data.release.date}}.
