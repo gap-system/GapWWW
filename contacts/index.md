@@ -22,15 +22,6 @@ We hope for feedback in particular in the following instances.
     information about your work via an email to the address
     <support@gap-system.org>.
 
--   **When publishing results.**  When you publish results
-    obtained in part by using GAP we ask that you quote GAP (see
-    recommended [citation]({{ site.baseurl }}/cite)) and
-    tell us about your publication again by email to
-    <support@gap-system.org> since we would like to include a reference
-    to your publication into the
-    [Bibliography]({{ site.baseurl }}/doc/bib/)
-    about use of GAP.
-
 -   **When encountering bugs.**  We strongly appreciate timely reports
     about any bugs in GAP you may encounter. When reporting a bug,
     please follow [these guidelines]({{ site.baseurl }}/issues/).
