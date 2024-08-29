@@ -125,6 +125,11 @@ let table = new DataTable('#packageList', {
     pageLength: 25,
 });
 
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('q')) {
+    table.search(urlParams.get('q'));
+}
+
 // Add event listener for opening and closing details
 table.on('click', 'td.dt-control', function (e) {
     let tr = e.target.closest('tr');
