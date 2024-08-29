@@ -3,6 +3,7 @@ title: GAP Manuals Online
 parent: Documentation
 layout: default_with_title
 nav_order: 1
+permalink: /doc/manuals/
 ---
 
 
