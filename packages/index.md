@@ -6,11 +6,8 @@ nav_order: 5
 permalink: /packages/
 ---
 
-<!-- load jQuery, as it is needed for datatables -->
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
-<!-- load datatables itself -->
-<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+<!-- load datatables -->
+<script src="{{ site.baseurl }}/assets/js/datatables.min.js?version=1"></script>
 
 <script type="module" src="{{ site.baseurl }}/assets/js/loadPackageTable.js?version=3"></script>
 
