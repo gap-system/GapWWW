@@ -80,6 +80,24 @@ function format(d) {
 // should sort date column, does not work
 DataTable.render.datetime('YYYY-MM-DD');
 
+// pre-fill search field and sync with URL
+function auto_search($dt){
+    var $api = $dt.api();
+ 
+    // Set the search text in the URL hash whenever a search is executed
+    $api.on( 'search.dt', function () {
+        window.location.hash = $api.search();
+    } );
+ 
+    // See if a search string is set in the URL hash, if so, execute a DT search
+    var search_str = window.location.hash.substring(1);
+ 
+    // Filter on load if theres anything in the hash
+    if(search_str) {
+        $api.search( search_str ).draw();
+    }
+}
+
 // define a table
 let table = new DataTable('#packageList', {
     // get the json file
@@ -121,14 +139,13 @@ let table = new DataTable('#packageList', {
     language: {
         search: 'Search table:'
     },
+    searchHighlight: true,
+    initComplete: function( settings, json ) {
+        auto_search(this);
+    },
     // set default number of packages shown
     pageLength: 25,
 });
-
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('q')) {
-    table.search(urlParams.get('q'));
-}
 
 // Add event listener for opening and closing details
 table.on('click', 'td.dt-control', function (e) {
