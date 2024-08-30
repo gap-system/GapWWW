@@ -77,6 +77,27 @@ function format(d) {
     return resString;
 }
 
+function convertDateFormat(dateStr) {
+    // Regular expression to match the format DD/MM/YYYY
+    const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+
+    // Check if the input string matches the DD/MM/YYYY format
+    const match = dateStr.match(regex);
+
+    if (match) {
+        // Extract the day, month, and year from the matched groups
+        const day = match[1];
+        const month = match[2];
+        const year = match[3];
+
+        // Return the date in YYYY-MM-DD format
+        return `${year}-${month}-${day}`;
+    } else {
+        // If the input doesn't match the format, assume it was already in the right format
+        return dateStr;
+    }
+}
+
 // should sort date column, does not work
 DataTable.render.datetime('YYYY-MM-DD');
 
@@ -106,11 +127,7 @@ let table = new DataTable('#packageList', {
         { "data" : "Version", width: '7em'},
         { "data" : "Date",
            render: function (data, type, row) {
-                       // convert dates in format YYYY-MM-DD to DD/MM/YYYY
-                       if (isNaN(data) && moment(data, 'DD/MM/YYYY', true).isValid()) {
-                           return moment(data, 'DD/MM/YYYY').format('YYYY-MM-DD');
-                       }
-                       return moment(data, 'YYYY-MM-DD').format('YYYY-MM-DD');
+                       return convertDateFormat(data)
                    }
         },
         // the following column is set to invisible and only there so the search picks up the additional text as well
