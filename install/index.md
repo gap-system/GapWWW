@@ -3,6 +3,7 @@ title: Installation
 layout: default_with_title
 has_children: true
 nav_order: 2
+permalink: /install/
 ---
 
 The latest version of GAP is {{site.data.release.version}} released on {{site.data.release.date}}.
@@ -11,9 +12,9 @@ For an overview of changes see the
 
 There are several ways to install GAP:
 
-- <a href="linux.html">Linux</a> and other Unix-like operating systems
-- <a href="mac.html">MacOS</a>
-- <a href="windows.html">Windows</a>
+- <a href="linux">Linux</a> and other Unix-like operating systems
+- <a href="mac">MacOS</a>
+- <a href="windows">Windows</a>
 
 More detailed instructions can be found in [INSTALL.md](https://github.com/gap-system/gap/blob/v{{site.data.release.version}}/INSTALL.md).
 

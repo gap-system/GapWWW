@@ -3,6 +3,7 @@ title: MacOS
 layout: default_with_title
 parent: Installation
 nav_order: 3
+permalink: /install/mac/
 ---
 
 

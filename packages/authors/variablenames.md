@@ -3,6 +3,7 @@ title: Variable Names
 layout: default_with_title
 grand_parent: GAP Packages
 parent: For Authors
+permalink: /packages/authors/variablenames/
 ---
 
 As the number of packages and library modules in GAP grows,

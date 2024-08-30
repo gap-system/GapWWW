@@ -98,7 +98,7 @@ parent: Documentation
     at Rostock.
 - [Advanced&nbsp;Programming&nbsp;in&nbsp;GAP&nbsp;4]({{ site.baseurl }}/Doc/Talks/linz99.html).
     Slides of many of the talks given at the 1999 Linz Workshop.
-- Talks from the [First CoDiMa Training School in Computational Discrete Mathematics](http://www.codima.ac.uk/school2015/)
+- Talks from the [First CoDiMa Training School in Computational Discrete Mathematics](https://blogs.cs.st-andrews.ac.uk/codima/school2015/)
     (Manchester, November 2015).
-- Talks from the [Second CoDiMa Training School in Computational Discrete Mathematics](http://www.codima.ac.uk/school2016/)
+- Talks from the [Second CoDiMa Training School in Computational Discrete Mathematics](https://blogs.cs.st-andrews.ac.uk/codima/school2016/)
     (Edinburgh, October 2016).

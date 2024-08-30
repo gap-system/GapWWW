@@ -3,6 +3,7 @@ title: Submitting Contributions
 layout: default_with_title
 grand_parent: GAP Packages
 parent: For Authors
+permalink: /packages/authors/submit/
 ---
 
 The GAP group encourages users to make their GAP related work available
