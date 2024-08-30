@@ -9,13 +9,10 @@ permalink: /packages/
 <!-- load jQuery, as it is needed for datatables -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-<!-- load moment.js for date formatting and sorting -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
-
 <!-- load datatables itself -->
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 
-<script type="module" src="{{ site.baseurl }}/assets/js/loadPackageTable.js?version=2"></script>
+<script type="module" src="{{ site.baseurl }}/assets/js/loadPackageTable.js?version=3"></script>
 
 <!-- List of deposited packages -->
 There are {{ site.data.package-infos | size }} packages that are shipped with GAP {{site.data.release.version}}.
