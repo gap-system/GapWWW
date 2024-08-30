@@ -36,7 +36,7 @@ the License, or (at your option) any later version.
 
 The <em>MS Windows</em> binary for
 GAP uses [cygwin](https://cygwin.com/)
-and therefore is licensed under GPL version3 or (at your option) any later version.
+and therefore is licensed under GPL version 3 or (at your option) any later version.
 For details, see
 the file `LICENSE` in the GAP distribution or see
 [The FSF's own site](https://www.gnu.org/licenses/gpl.html).
