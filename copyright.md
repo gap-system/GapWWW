@@ -1,11 +1,9 @@
 ---
 title: GAP Copyright
-layout: default
+layout: default_with_title
 nav_exclude: true
 permalink: /copyright/
 ---
-
-## {{ page.title }}
 
 GAP is
 
