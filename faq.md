@@ -25,7 +25,7 @@ The brief answer is: "Yes, GAP is open source."
 
 You can use tools such as 'grep' to search for the code.
 
-Also the <a href="#2.6">answer&nbsp;to&nbsp;FAQ&nbsp;2.6</a> may be helpful.
+Also the <a href="#how-do-i-find-my-way-through-the-gap-library">answer&nbsp;to&nbsp;FAQ&nbsp;1.b</a> may be helpful.
 
 <!-- ================================================================================== -->
 
