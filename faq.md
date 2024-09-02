@@ -5,7 +5,7 @@ nav_order: 7
 permalink: /faq/
 ---
 
-## Table of contents
+# Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
