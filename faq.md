@@ -12,29 +12,6 @@ permalink: /faq/
 {:toc}
 
 
-
-<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-
-## Obtaining GAP
-
-<!-- ================================================================================== -->
-
-### Can I obtain the algorithm and/or code for some function of GAP?
-
-The brief answer is: "Yes, GAP is open source."
-
-You can use tools such as 'grep' to search for the code.
-
-Also the <a href="#2.6">answer&nbsp;to&nbsp;FAQ&nbsp;2.6</a> may be helpful.
-
-<!-- ================================================================================== -->
-
-### How do I find my way through the GAP Library?
-
-<a href="{{ site.baseurl }}/Doc/Talks/linz99.html#Library">The following text</a>, adapted from  a
-<a href="{{ site.baseurl }}/Doc/Talks/l_ah_lib.pdf">talk</a>
-by Alexander Hulpke at a Summer School at Linz in 1999, may be helpful.
-
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
 ## Usage hints
@@ -205,15 +182,7 @@ variables is significantly slower than local ones.
 
 ### I think I found a bug.
 
-While we try to check the GAP system as rigorously as we
-can, such a large system  will inevitably contain bugs. We welcome bug
-reports and regularly issue updates. However since GAP is
-available free and the GAP authors work on the system as
-part of their research, we would like to ask you to make sure that the
-problem that you encountered really is a bug and that you are giving us
-sufficient information to deal with it: please read the page
-<a href="{{ site.baseurl }}/issues/">GAP&nbsp;Trouble</a>
-before sending us a bug report.
+Please refer to the [reporting issues]({{ site.baseurl }}/issues/) page.
 
 <!-- ================================================================================== -->
 
@@ -332,11 +301,9 @@ A few approaches for this are:
     [ "IS_SSORT_LIST", "IsFinite", "IsSmallList", "IsSortedList", "IsDuplicateFree" ]
     ```
 
-    This example point to an important consequence: lookup in b is much faster
-    than searching in a, since, as b is known to be sorted, binary search is used
-    for the lookup.  An amusing instance of a painful learning experience in the
-    subject appears in the Forum thread starting in
-    <https://www.gap-system.org/ForumArchive2/2008/002169.html>.
+    This example point to an important consequence: lookup in `b` is much faster
+    than searching in `a`, since, as `b` is known to be sorted, binary search is used
+    for the lookup.
 
 <!-- ================================================================================== -->
 
@@ -424,9 +391,9 @@ as a PC group) or to a permutation group.
 
 For groups given by structural information, the construction can be much
 harder. There are a few general product constructions (direct and
-semidirect product for example). The
-[Issac 2000]({{ site.baseurl }}/Doc/Talks/talks.html)
-tutorial gives some examples of constructing groups.
+semidirect product for example). This
+[tutorial by Alexander Hulpke](https://www.math.colostate.edu/~hulpke/paper/gap4tut.pdf)
+gives some examples of constructing groups.
 
 Here then is the **example** to which the first paragraph referred:
 
