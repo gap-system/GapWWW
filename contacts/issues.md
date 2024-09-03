@@ -75,4 +75,3 @@ The present members of the Support Group are:
 - Martin Schönert
 - Andrew Solomon
 - Chris Wensley
-- Charles Wright
