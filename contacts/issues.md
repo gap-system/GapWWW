@@ -63,6 +63,7 @@ The present members of the Support Group are:
 - Max Horn
 - Gábor Horváth
 - Alexander Hulpke
+- Christopher Jefferson
 - David Joyner
 - Stefan Kohl
 - Olexandr Konovalov
