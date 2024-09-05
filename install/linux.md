@@ -6,7 +6,6 @@ nav_order: 2
 permalink: /install/linux/
 ---
 
-{% capture anchor %}gap-{{site.data.release.version | replace: ".", ""}}-{{ site.data.release.version | date: "%B %Y" | downcase | replace: " ","-" }}{% endcapture %}
 {% assign version-safe = site.data.release.version | replace: ".", "-" %}
 
 {% assign unix_assets    = "" | split: ',' %}

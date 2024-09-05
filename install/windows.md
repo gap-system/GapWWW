@@ -6,7 +6,6 @@ nav_order: 4
 permalink: /install/windows/
 ---
 
-{% capture anchor %}gap-{{site.data.release.version | replace: ".", ""}}-{{ site.data.release.version | date: "%B %Y" | downcase | replace: " ","-" }}{% endcapture %}
 {% assign version-safe = site.data.release.version | replace: ".", "-" %}
 
 {% assign windows_assets = "" | split: ',' %}

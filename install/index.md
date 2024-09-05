@@ -8,7 +8,7 @@ permalink: /install/
 
 The latest version of GAP is {{site.data.release.version}} released on {{site.data.release.date}}.
 For an overview of changes see the
-[CHANGES.md](https://github.com/gap-system/gap/blob/master/CHANGES.md#{{anchor}}) file.
+[CHANGES.md](https://github.com/gap-system/gap/blob/master/CHANGES.md) file.
 
 There are several ways to install GAP:
 
