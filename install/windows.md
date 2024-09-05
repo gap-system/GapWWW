@@ -6,14 +6,12 @@ nav_order: 4
 permalink: /install/windows/
 ---
 
-{% assign version-safe = site.data.release.version | replace: ".", "-" %}
-
 {% assign windows_assets = "" | split: ',' %}
 
 {% capture gap_prefix %}gap-{{ site.data.release.version }}{% endcapture %}
 {% assign len = gap_prefix | size %}
 
-{% for asset in site.data.assets[version-safe] %}
+{% for asset in site.data.assets %}
   {% assign asset_prefix = asset.name | slice: 0, len %}
   {% if asset_prefix == gap_prefix %}{% unless asset.name contains "-core" %}
     {% assign asset_suffix = asset.name | split: "" | reverse | join: "" | slice: 0, 4 %}
