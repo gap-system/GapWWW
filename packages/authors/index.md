@@ -102,7 +102,7 @@ XML-like language. This documentation can then be processed using GAPDoc to
 produce on-line help, printed manuals, and web pages.
 (To get machine independent cross-links in your documentation, copy
 your package in the standard location `pkg/<pkgname>`
-and use {%- include coderef.html book="GAPDoc" label="MakeGAPDocDoc" %}
+and use {%- include ref.html book="GAPDoc" label="MakeGAPDocDoc" %}
 with `../../..` as 5th argument.)
 
 Alternatively, you can use the "traditional" GAP4 manual format, i.e. TeX
@@ -207,4 +207,4 @@ This is used for loading the package into GAP and for a possible
 redistribution of the package via the GAP website.
 
 A basic check for such a file from within GAP is provided by the function
-{%- include coderef.html label="ValidatePackageInfo" %}.
+{%- include ref.html label="ValidatePackageInfo" %}.
