@@ -10,6 +10,11 @@ nav_exclude: true
 
 <h2 style="text-align:center;">A System for Computational Discrete Algebra</h2>
 
+### Upcoming events
+
+- [GAP Days Spring 2025, 6-11 April 2025, Vrije Universiteit Brussel, Belgium](https://www.gapdays.de/gapdays2025-spring/)
+- [GAP Logo Contest]({{ site.baseurl }}/logo/)
+
 ### What is GAP?
 
 GAP is a system for computational discrete algebra, with particular
@@ -24,9 +29,7 @@ The system, including source, is distributed
 [freely]({{ site.baseurl }}/copyright/).
 You can study and easily modify or extend it for your special use.
 
-
 ### How to obtain GAP?
-
 
 The current version is
 [GAP {{site.data.release.version}}]({{ site.baseurl }}/install/) released on {{site.data.release.date}}
