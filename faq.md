@@ -21,7 +21,7 @@ permalink: /faq/
 
 When you start GAP, it looks for files with the names
 `gap.ini` and `gaprc` in its root directories
-(see {%- include ref.html label="GAP Root Directories" %}),
+(see {% include ref.html label="GAP Root Directories" %}),
 and reads the first `gap.ini` and the first `gaprc` file it finds.
 These files may be used for certain customisations, for example, to
 read a file containing  functions or data that you always need,
@@ -30,13 +30,13 @@ personal  abbreviations for some names in the library, which seems to
 be  too  long for you.
 
 For more details about `gap.ini` and `gaprc` files see the section
-{%- include ref.html label="The gap.ini and gaprc files" text="The&nbsp;gap.ini&nbsp;and&nbsp;gaprc&nbsp;files" %}
+{% include ref.html label="The gap.ini and gaprc files" text="The&nbsp;gap.ini&nbsp;and&nbsp;gaprc&nbsp;files" %}
 from the GAP Reference Manual.
 
 In former GAP releases prior to GAP 4.5
 a filed called `.gaprc` was used for customisations. If you
 have used the `.gaprc` file, see the section
-{%- include ref.html label="The former .gaprc file" text="The&nbsp;former&nbsp;.gaprc&nbsp;file" %}.
+{% include ref.html label="The former .gaprc file" text="The&nbsp;former&nbsp;.gaprc&nbsp;file" %}.
 from the GAP Reference Manual for the transitional arrangements.
 
 <!-- ================================================================================== -->
@@ -81,7 +81,7 @@ The most convenient way of creating larger pieces of GAP
 code is to write them to some text file. For this purpose you can simply use
 your favorite text editor. You can load such a file into GAP
 using the command <tt>Read( name-file )</tt>. See the reference manual section
-{%- include ref.html label="Read" text="File&nbsp;Operations" %} for information
+{% include ref.html label="Read" text="File&nbsp;Operations" %} for information
 on these and related commands.
 
 The   command   <tt>SaveWorkspace( filename )</tt>   will  save   a
@@ -90,7 +90,7 @@ The   command   <tt>SaveWorkspace( filename )</tt>   will  save   a
 GAP  which then will  behave as  at the  point when <tt>SaveWorkspace</tt>
 was called.
 See the section
-{%- include ref.html label="SaveWorkspace" text="Saving&nbsp;and&nbsp;Loading&nbsp;a&nbsp;Workspace" %} for
+{% include ref.html label="SaveWorkspace" text="Saving&nbsp;and&nbsp;Loading&nbsp;a&nbsp;Workspace" %} for
 information on this and related commands.
 
 <!-- ================================================================================== -->
@@ -229,7 +229,7 @@ In case of running a batch job (or being irritated by this error message),
 you can use the <tt>-o</tt> command line option to set this trigger limit to
 a higher default level, e.g. the amount of physical memory your machine has.
 See the section
-{%- include ref.html label="Command Line Options" text="Command&nbsp;Line&nbsp;Options" %} in the Reference Manual for more
+{% include ref.html label="Command Line Options" text="Command&nbsp;Line&nbsp;Options" %} in the Reference Manual for more
 detail.
 </dd>
 </dl>
@@ -316,7 +316,7 @@ groups to an isomorphic permutation group. Two possible bottlenecks are:
 are immediately converted again in a permutation: Because of this it
 is often quicker to work in the isomorphic permutation group  (obtained
 via `IsomorphismPermGroup`, see the section
-'{%- include ref.html label="Computing a Permutation Representation" %}'
+'{% include ref.html label="Computing a Permutation Representation" %}'
 of the  GAP reference manual) and only to translate the final
 result back to matrix form, using the same homomorphism.
 2. GAP finds a permutation representation by acting on a set of  vectors.
@@ -324,13 +324,13 @@ There is no optimal heuristics for choosing these vectors (a
 necessary condition for faithfulness is that the vectors comprise a
 basis, but there are many choices).
 Note that `IsomorphismPermGroup`  for matrix groups internally already uses
-'{%- include ref.html label="SmallerDegreePermutationRepresentation" %}'
+'{% include ref.html label="SmallerDegreePermutationRepresentation" %}'
 (unless  the matrix  group is known  to contain SL),  thus this
 operation cannot be used to reduce the degree further.
 If the group is very large, it
 can be rather beneficial to try to choose such a set of vectors yourself and
 use `ActionHomomorphism` (see the section
-'{%- include ref.html label="The Permutation Image of an Action" %}'
+'{% include ref.html label="The Permutation Image of an Action" %}'
 of the GAP reference manual) to build the permutation representation.
 
 
@@ -462,8 +462,8 @@ back into the group `n`, using the function
 
 The answer is a clear 'no  and yes'! To understand this 'clear answer'
 let  us consider  the integers  mod  15. (See  section
-{%- include ref.html label="Residue Class Rings" text="Residue  Class Rings" %} in the chapter on
-{%- include ref.html label="Integers" text="integers" %}.)
+{% include ref.html label="Residue Class Rings" text="Residue  Class Rings" %} in the chapter on
+{% include ref.html label="Integers" text="integers" %}.)
 First  of all  you  can  simply add  and multiply integers mod 15 by
 
 ```gap
@@ -516,7 +516,7 @@ false
 
 The explanation is that  in GAP an additive group A
 (of a ring) is  just an
-{%- include ref.html label="Additive Magmas" text="additive&nbsp;magma" %}
+{% include ref.html label="Additive Magmas" text="additive&nbsp;magma" %}
 -with-zero with an operation that maps each element a of
 A to its additive inverse and  that most of the algorithms for groups
 are not available for these. So you get:
@@ -629,15 +629,15 @@ presentation must be a polycyclic presentation for
 `PcGroupFpGroup()` to work. `PcGroupFpGroup()` does
 **not** compute a polycyclic presentation for a finite soluble
 group given  by an **arbitrary** finite presentation. See
-{%- include ref.html label="Constructing Pc Groups" text="Constructing Pc Groups" %}.
+{% include ref.html label="Constructing Pc Groups" text="Constructing Pc Groups" %}.
 
 In a
-{%- include ref.html label="Pc Groups" text="polycyclic&nbsp;presentation" %}
+{% include ref.html label="Pc Groups" text="polycyclic&nbsp;presentation" %}
 the generators must occur in the  particular order of a 'polycyclic
 generating sequence':
 
 As described in the Reference Manual chapter
-{%- include ref.html label="Polycyclic Groups" text="Polycyclic&nbsp;Groups" %}
+{% include ref.html label="Polycyclic Groups" text="Polycyclic&nbsp;Groups" %}
 a group G is polycyclic if there exists a subnormal series
 G = C<sub>1</sub>> C<sub>2</sub>> ...  >  C<sub>n</sub>>
 C<sub>n+1</sub>  =  {1}  with  cyclic factors, and  a  polycyclic
@@ -785,8 +785,8 @@ of subgroups of a given size.
 
 For groups of moderate size (up to 10<sup>4</sup>/10<sup>5</sup>,
 this depends a bit on the group structure) the commands
-{%- include ref.html label="LatticeSubgroups" text="`LatticeSubgroups`" %} or
-{%- include ref.html label="ConjugacyClassesSubgroups" text="`ConjugacyClassesSubgroups`" %}
+{% include ref.html label="LatticeSubgroups" text="`LatticeSubgroups`" %} or
+{% include ref.html label="ConjugacyClassesSubgroups" text="`ConjugacyClassesSubgroups`" %}
 will compute representatives of all subgroups up to conjugacy. If the group
 gets bigger, however, this will either run out of space or take too long
 to be feasible.
@@ -796,21 +796,21 @@ subgroups. Try to use the restricting conditions to reduce the calculation
 (for example *p*-subgroups can be found inside a Sylow subgroup).
 GAP commands that might come useful to obtain specific
 subgroups are for example
-{%- include ref.html label="NormalSubgroups" text="`NormalSubgroups`" %},
-{%- include ref.html label="SylowSubgroup" text="`SylowSubgroup`" %},
-{%- include ref.html label="HallSubgroup" text="`HallSubgroup`" %},
+{% include ref.html label="NormalSubgroups" text="`NormalSubgroups`" %},
+{% include ref.html label="SylowSubgroup" text="`SylowSubgroup`" %},
+{% include ref.html label="HallSubgroup" text="`HallSubgroup`" %},
 or
-{%- include ref.html label="MaximalSubgroupClassReps" text="`MaximalSubgroupClassReps`" %}.
+{% include ref.html label="MaximalSubgroupClassReps" text="`MaximalSubgroupClassReps`" %}.
 
 Furthermore, if you actually want to know if the group has a subgroup of a
 particular isomorphism type, the command you want is
-{%- include ref.html label="IsomorphicSubgroups" text="`IsomorphicSubgroups`" %}.
+{% include ref.html label="IsomorphicSubgroups" text="`IsomorphicSubgroups`" %}.
 This is enormously more efficient than simply listing all [conjugacy classes of] subgroups of
 the group in most cases.
 
 It might also be helpful to first replace the group by an isomorphic permutation group
-(using {%- include ref.html label="IsomorphismPermGroup" text="`IsomorphismPermGroup`" %})
-or pc group (using {%- include ref.html label="IsomorphismPcGroup" text="`IsomorphismPcGroup`" %}).
+(using {% include ref.html label="IsomorphismPermGroup" text="`IsomorphismPermGroup`" %})
+or pc group (using {% include ref.html label="IsomorphismPcGroup" text="`IsomorphismPcGroup`" %}).
 
 <!-- ================================================================================== -->
 
@@ -1048,18 +1048,18 @@ However GAP has methods to investigate  each such presentation   for any
 given (not too big) prime $p$. In her reply Bettina Eick recommends:
 
 > you can use GAP to investigate your question for any fixed prime p.
-> 
+>
 > For example, the nilpotent quotient algorithm of the NQ package or the
 > NQL package of GAP allows you to determine the largest class-c quotient
 > of a finitely presented group for any positive integer c or even the
 > largest nilpotent quotient (if this exists).
-> 
+>
 > Further, there are methods available in GAP to determine the automorphism
 > group of a finite $p$-group. Check the AutPGrp package for this purpose.
-> 
+>
 > In your given example, you can implement your considered group $G$ in GAP
 > as function in $p$:
-> 
+>
 > ```gap
 > G := function(p)
 >     local F, f, r, a, b, c;
@@ -1072,16 +1072,16 @@ given (not too big) prime $p$. In her reply Bettina Eick recommends:
 >     return F/r;
 > end;
 > ```
-> 
+>
 > Then you load the relevant packages
-> 
+>
 > ```gap
 > LoadPackage("nq");
 > LoadPackage("autpgrp");
 > ```
-> 
+>
 > And then you can do the following (for example for $p=3$):
-> 
+>
 > ```gap
 > gap> H := G(3);
 > [fp group on the generators [ f1, f2, f3 ]]
@@ -1093,7 +1093,7 @@ given (not too big) prime $p$. In her reply Bettina Eick recommends:
 > gap> A.size;
 > 14348907
 > ```
-> 
+>
 > Hence for $p=3$ your group has class $2$ and you can see the size
 > of its automorphism group. Generators and further information on
 > the automorphisms is also stored in A, but is perhaps too long to
@@ -1105,16 +1105,16 @@ In a second letter Derek Holt recommends:
 > groups, using the method described by Charles Sims in his book of computing
 > in finitely presented groups. This uses the Knuth-Bendix completion
 > algorithm.
-> 
+>
 > This process is described and illustrated in Example 4 (p. 13) of the KBMAG
 > manual. I have successfully verifed that your group below is nilpotent of
 > order $p^{10}$ for $p=2,3,5,7,11,13,17,$ and I am trying to do $19$.
-> 
+>
 > Of course, since these groups are (apparently) finite, you could try
 > use coset enumeration. This will work for small primes such as $2$ and $3$, but
 > for larger primes the group order will probably be too large, and I think
 > the Sims algorithm will work better.
-> 
+>
 > You first run `NilpotentQuotient` (as described in Bettina Eick's reply) to
 > find the maximal nilpotent quotient of your group. The aim is then to
 > prove that the group is actually isomorphic to this quotient.
@@ -1123,9 +1123,9 @@ In a second letter Derek Holt recommends:
 > quotient. You order the generators so that those at the bottom of the
 > group come first and then use the so-called recursive ordering on strings
 > to run Knuth-Bendix.
-> 
+>
 > Here is the basic GAP code to do this.
-> 
+>
 > ```gap
 > LoadPackage("kbmag");
 > SetInfoLevel(InfoRWS,2);
@@ -1140,19 +1140,19 @@ In a second letter Derek Holt recommends:
 > SetOrderingOfKBMAGRewritingSystem(R, "recursive");
 > MakeConfluent(R);
 > ```
-> 
+>
 > If successful it will halt with a confluent presentation containing the
 > relations of the power-commutator presentation of the computed maximal
 > nilpotent quotient. You have then proved that these relations hold in
 > the group itself (not just in the nilptent quotient), so you have proved
 > that the group is nilpotent.  This consists of 65 reduction equations
 > (or $62$ when $p=2$).
-> 
+>
 > The above works quickly for $p=2,3,5,7$. For larger primes, it helps to
 > restrict the length of the stored reduction relations, and then re-run
 > after completion. You have to experiment to find the optimal maximal
 > length to store.  So, for example, the following works fast for $p=17$:
-> 
+>
 > ```gap
 > p:=17;;
 > rels := [a^p/e, b^p/f, c^p/d, e^p/g, f^p/h, g^p/i, i^p/j,
@@ -1371,19 +1371,19 @@ S (1 gens, size 3)
 ### Can non-isomorphic groups have equal structure descriptions?
 
 Yes, indeed, this can happen.
-{%- include ref.html label="StructureDescription" text="The manual entry for \"StructureDescription\"" %}
+{% include ref.html label="StructureDescription" text="The manual entry for \"StructureDescription\"" %}
 says: "The   string  returned  by  StructureDescription  is  NOT  an  isomorphism
 invariant:  non-isomorphic  groups  can  have the same string value, and two
 isomorphic   groups  in  different  representations  can  produce  different
 strings."
 
-{%- include ref.html label="StructureDescription" text="StructureDescription" %}
+{% include ref.html label="StructureDescription" text="StructureDescription" %}
 provides an "informal" overview of the structure of a group, which is a useful
 first view for small groups. More sophisticated functions in the same area include:
-{%- include ref.html book="smallgrp" label="IdGroup" text="IdGroup" %}; the
+{% include ref.html book="smallgrp" label="IdGroup" text="IdGroup" %}; the
 `StandardPresentation`
 function of the [ANUPQ package](https://gap-packages.github.io/anupq/) and
-{%- include ref.html label="IsomorphismGroups" text="IsomorphismGroups" %},
+{% include ref.html label="IsomorphismGroups" text="IsomorphismGroups" %},
 each of which is described in the appropriate manual.
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
@@ -1413,7 +1413,7 @@ There are several C and C++ libraries that implement the client side.
 ### Where is the GAP file editor? How do I save GAP programs?
 
 GAP programs are simple text files, and you can edit them with
-any text editor. Some editors may support GAP syntax highlighting and have 
+any text editor. Some editors may support GAP syntax highlighting and have
 other useful features:
 
 - [BBEdit](https://www.barebones.com/products/bbedit/index.shtml) for macOS,
@@ -1449,7 +1449,7 @@ other useful features:
   by {% include namelink.html name="Olexandr Konovalov" %})
 
 - [vim](https://www.vim.org/)
-  (see {%- include ref.html label="Editor Support" %}
+  (see {% include ref.html label="Editor Support" %}
   and the 'etc' directory of the GAP installation)
 
 - [Visual Studio Code](https://code.visualstudio.com/) for Linux, Windows, macOS,

@@ -19,16 +19,16 @@ groups of described structure, most of which are based on the idea of
 the book "Computation with finitely presented groups" of Charles Sims.
 
 The main GAP library provides methods for handling
-{%- include ref.html label="Finitely Presented Groups" text="finitely presented groups" %} such as
+{% include ref.html label="Finitely Presented Groups" text="finitely presented groups" %} such as
 - Todd-Coxeter,
 - Reidemeister-Schreier,
 - Low Index Subgroups, as well as
 - certain quotient methods.
 
 Also there are functions to handle
-{%- include ref.html label="Presentations and Tietze Transformations" text="Tietze transformations" %}.
+{% include ref.html label="Presentations and Tietze Transformations" text="Tietze transformations" %}.
 
-In addition there are packages 
+In addition there are packages
 
 - [FGA](http://www.icm.tu-bs.de/ag_algebra/software/FGA/) providing algorithms for
   free groups,
@@ -41,4 +41,4 @@ In addition there are packages
 - [NQ](https://gap-packages.github.io/nq/) for finding infinite
   nilpotent quotients, and
 - [KBMAG](https://gap-packages.github.io/kbmag) with Knuth-Bendix
-  and automatic groups methods. 
+  and automatic groups methods.

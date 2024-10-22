@@ -38,10 +38,10 @@ Class-Wise  Affine   mappings  of  certain  euclidian   rings  R  into
 themselves  and the  groups generated  by bijective  mappings  of this
 type.  The latter mappings form a proper subgroup of Sym(R).
 
-For {%- include ref.html label="Matrix Groups" text="matrix groups" %}
+For {% include ref.html label="Matrix Groups" text="matrix groups" %}
 there are also special methods in the GAP library
-and a private GAP4 package 
-[matrixss](http://matrixss.sourceforge.net) 
+and a private GAP4 package
+[matrixss](http://matrixss.sourceforge.net)
 implements  a
 [Schreier-Sims algorithm for matrix groups](http://henrik.baarnhielm.net/schreiersims.pdf),
 including both the standard deterministic and the standard
@@ -49,5 +49,5 @@ probabilistic approach.
 
 The package
 [Polenta](https://gap-packages.github.io/polenta/) allows to find
-{%- include ref.html label="Pc Groups" text="polycyclic presentations" %}
+{% include ref.html label="Pc Groups" text="polycyclic presentations" %}
 for matrix groups.

@@ -18,7 +18,7 @@ package authors have done.)
 ### Getting Started Writing a Package
 
 The GAP Reference Manual contains a
-{%- include ref.html label="Using and Developing GAP Packages" text="chapter on using and developing GAP packages" %},
+{% include ref.html label="Using and Developing GAP Packages" text="chapter on using and developing GAP packages" %},
 which describes the rules and conventions for the structure of a GAP package,
 and the GAP functions that deal with package administration.
 
@@ -46,7 +46,7 @@ try to avoid clashes where two independently developed pieces of code use the
 same global  variable names in inconsistent ways.  See the page
 [Use of Global Variable Names]({{ site.baseurl }}/packages/authors/variablenames.html)
 as well as the subsection
-{%- include ref.html label="Functions and Variables and Choices of Their Names" text="Functions and Variables and Choices of Their Names" %}
+{% include ref.html label="Functions and Variables and Choices of Their Names" text="Functions and Variables and Choices of Their Names" %}
 of the GAP Reference Manual
 for advice how to avoid such 'name clashes'.
 
@@ -102,7 +102,7 @@ XML-like language. This documentation can then be processed using GAPDoc to
 produce on-line help, printed manuals, and web pages.
 (To get machine independent cross-links in your documentation, copy
 your package in the standard location `pkg/<pkgname>`
-and use {%- include ref.html book="GAPDoc" label="MakeGAPDocDoc" %}
+and use {% include ref.html book="GAPDoc" label="MakeGAPDocDoc" %}
 with `../../..` as 5th argument.)
 
 Alternatively, you can use the "traditional" GAP4 manual format, i.e. TeX
@@ -121,7 +121,7 @@ version of your manual to get cross-links right.)
 
 Finally, you can develop your own solution, complying with the interfaces
 described in chapter
-{%- include ref.html label="Interface to the GAP Help System" text="Interface to the GAP Help System" %}
+{% include ref.html label="Interface to the GAP Help System" text="Interface to the GAP Help System" %}
 of the GAP Reference Manual. There are
 certain technical issues with this approach, and we would advise you to
 contact us if you are considering it.
@@ -170,7 +170,7 @@ updates as follows:
 - Create a new archive. Note that you **must** change the
   version number of your package. Don't forget to adjust the PackageInfo.g
   file and maybe other files to the new version number (the new number must be
-  higher, as explained {%- include ref.html label="Version Numbers" text="here" %}). Also the
+  higher, as explained {% include ref.html label="Version Numbers" text="here" %}). Also the
   name of the archive file must be different from previous names.
   (Just choose a name
   which contains the package name and the version number, like
@@ -194,7 +194,7 @@ updates as follows:
 
 
 You may also wish to refer to the
-{%- include ref.html label="Package release checklists" text="package release checklists" %}
+{% include ref.html label="Package release checklists" text="package release checklists" %}
 in the GAP Reference Manual.
 
 ### Validating a `PackageInfo.g` File
@@ -207,4 +207,4 @@ This is used for loading the package into GAP and for a possible
 redistribution of the package via the GAP website.
 
 A basic check for such a file from within GAP is provided by the function
-{%- include ref.html label="ValidatePackageInfo" %}.
+{% include ref.html label="ValidatePackageInfo" %}.

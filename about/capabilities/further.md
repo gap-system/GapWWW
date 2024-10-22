@@ -9,11 +9,11 @@ permalink: /capabilities/further
 
 These include
 - functions for the determination of
-  {%- include ref.html label="Galois Action" text="Galois groups" %}
+  {% include ref.html label="Galois Action" text="Galois groups" %}
   of rational polynomials,
 - packages
   [AClib](https://gap-packages.github.io/aclib/),
-  [Cryst](https://www.math.uni-bielefeld.de/~gaehler/gap/packages.php), 
+  [Cryst](https://www.math.uni-bielefeld.de/~gaehler/gap/packages.php),
   [CrystCat](https://www.math.uni-bielefeld.de/~gaehler/gap/packages.php) and
   [CaratInterface](https://www.math.uni-bielefeld.de/~gaehler/gap/packages.php) for
   crystallographic and almost crystallographic groups,

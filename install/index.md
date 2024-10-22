@@ -19,9 +19,9 @@ There are several ways to install GAP:
 More detailed instructions can be found in [INSTALL.md](https://github.com/gap-system/gap/blob/v{{site.data.release.version}}/INSTALL.md).
 
 
-GAP may compile and work for you on other systems, and if so we would 
+GAP may compile and work for you on other systems, and if so we would
 be interested to know about it.
-<!-- 
+<!--
 You can also try GAP online in a [Jupyter](https://jupyter.org/)
 notebook running on [Binder](https://mybinder.org/), following
 instructions from the README file in <a
@@ -38,7 +38,7 @@ would like to be installed or any questions you might have
 
 ### Getting Started
 
-If you followed all instruction steps you can test you installation as described below. 
+If you followed all instruction steps you can test you installation as described below.
 If it works and you are new to GAP you may try to start reading and
 trying the examples in the first chapters of the <a
 href="{{ site.docsurl }}/doc/tut/chap0_mj.html">Tutorial</a>
@@ -50,9 +50,9 @@ from inside GAP.
 ### Testing the Installation<a name="Test"></a>
 
 For a quick test of your installation you may start GAP.
-Normally, you will see a GAP&nbsp;4 banner and the information about loaded 
-components and packages. This information may vary depending 
-on  your installation.  For  example,  for  the complete installation of 
+Normally, you will see a GAP&nbsp;4 banner and the information about loaded
+components and packages. This information may vary depending
+on  your installation.  For  example,  for  the complete installation of
 latest versions of all packages you will have something like:
 
 ```
@@ -70,7 +70,7 @@ latest versions of all packages you will have something like:
              ResClasses 4.7.3, SmallGrp 1.5.3, Sophus 1.27, SpinSym 1.5.2,
              StandardFF 1.0, TomLib 1.2.11, TransGrp 3.6.5, utils 0.85
  Try '??help' for help. See also '?copyright', '?cite' and '?authors'
-gap> 
+gap>
 ```
 
 Now you may
@@ -120,11 +120,11 @@ it contains some additional remarks and troubleshooting advices.
 #### Upgrading
 
 If you have any version of GAP older than the current version, the only way to install a new version of GAP is a new installation.
-If you installed GAP from the standard distribution and have not manually installed additional or 
+If you installed GAP from the standard distribution and have not manually installed additional or
 updated packages in your GAP distribution (which is no
-longer necessary -- instead we recommend that you 
-install them in the 
-{%- include ref.html label="GAP Root Directories" text="user specific GAP root directory" %}) 
-then you can always upgrade to the latest version of GAP by moving the old version aside 
-and downloading and installing the current archives, and this is the approach we recommend 
+longer necessary -- instead we recommend that you
+install them in the
+{% include ref.html label="GAP Root Directories" text="user specific GAP root directory" %})
+then you can always upgrade to the latest version of GAP by moving the old version aside
+and downloading and installing the current archives, and this is the approach we recommend
 for most users. Make sure that you update any scripts or links to refer to the new version.

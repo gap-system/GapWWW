@@ -19,7 +19,7 @@ Firstly, new global variables should be introduced with one of the
 `DeclareGlobalVariable`, or, if this not
 suitable for some reason, set using `BindGlobal` rather than simple
 assignment. (See section
-{%- include ref.html label="Global Variables in the Library" text="Global Variables in the Library" %}
+{% include ref.html label="Global Variables in the Library" text="Global Variables in the Library" %}
 of the GAP Reference Manual for more
 information on these function)<br/>
 This will help ensure that any clashes cause error messages rather than wrong
@@ -96,15 +96,15 @@ Moving on to the documented names, the main rule here is that functions
 with "short" or "common" names, such as "Tail" or "NormalForm" should
 usually be Operations (or Attributes or Properties if appropriate). See
 chapter
-{%- include ref.html book="Tutorial" label="Operations and Methods" %}
+{% include ref.html book="Tutorial" label="Operations and Methods" %}
 of the GAP tutorial and chapter
-{%- include ref.html label="Creating New Objects" %}
+{% include ref.html label="Creating New Objects" %}
 of the GAP Reference Manual for more detail of these concepts. Even if you
 only plan one method, or you only plan to apply them to non-attribute storing
 objects, declaring them as Properties, Attributes or Operations will allow
 them to be used for unrelated purposes in other modules or packages, since
 GAP allows multiple declarations quite flexibly. Although see section
-{%- include ref.html label="Operations and Mathematical Terms" %}
+{% include ref.html label="Operations and Mathematical Terms" %}
 of the GAP Reference Manual for a discussion of the risks of overusing
 names.
 
