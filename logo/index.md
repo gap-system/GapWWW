@@ -60,7 +60,8 @@ If you have any questions about the contest please contact the GLCC by sending a
 - To be eligible to vote you must either ...
   - have contributed non-trivially to GAP itself,
   - be author or maintainer of a distributed GAP package,
-  - be an active participant of GAP Days Spring 2025.
+  - be an active participant of GAP Days Spring 2025,
+  - or otherwise establish that you have an active interest in the success of GAP.
 - The GLCC ultimately determines whether these criteria are satisfied.
 - To vote you need to first register by sending an email to <logo@gap-system.org> with subject "GAP Logo voter registration" before 7 April 2025, 16:00 (CET).
 - Registered voters will receive information on how to vote by email before the end of 7 April 2025 and will then immediately be able to vote.
