@@ -1,7 +1,7 @@
 ---
 title: Logo Contest
 layout: default
-has_children: false
+has_children: true
 permalink: /logo/
 ---
 
