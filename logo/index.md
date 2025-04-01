@@ -41,7 +41,7 @@ If you have any questions about the contest please contact the GLCC by sending a
     - 28th February 2025: Deadline for submissions (stage 1)
     - 7th March 2025: Contestants are notified about result
     - 31st March 2025: Deadline for final submissions (stage 2)
-    - 4th April 2025: Stage 2 submissions are published as JPEGs on this page to enable voting
+    - 4th April 2025: Stage 2 submissions are published as PNGs on this page to enable voting
 - The winning design will be selected during GAP Days Spring 2025 (7th-11th April 2025 at Vrije Universiteit Brussel, Belgium) by an anonymous online vote
 - Things to submit in ***stage 1***:
     - A draft logo in any standard format (JPEG, PNG, PDF, SVG, ...), 
