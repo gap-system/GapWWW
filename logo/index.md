@@ -18,7 +18,7 @@ The contest is run by the **GAP logo contest committee** (GLCC) consisting of
 
 If you have any questions about the contest please contact the GLCC by sending an email to <logo@gap-system.org>.
 
-{: .note }
+{: .highlight }
 > The finalist designs are now [online here](finalists/) -- you can view them with both dark and light background.
 > 
 > You can still [register to vote](#rules-and-conditions-for-voting) as described below.
