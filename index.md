@@ -5,6 +5,7 @@ nav_order: 1
 nav_exclude: true
 ---
 
+<img class="resp_logo" src="{{site.baseurl}}/logo/finalists/logos/E5/light/logo.png"/>
 
 <h1 style="text-align:center;">GAP - Groups, Algorithms, Programming</h1>
 
