@@ -20,8 +20,6 @@ If you have any questions about the contest please contact the GLCC by sending a
 
 {: .highlight }
 > The finalist designs are now [online here](finalists/) -- you can view them with both dark and light background.
-> 
-> You can still [register to vote](#rules-and-conditions-for-voting) as described below.
 
 
 ## Prizes
