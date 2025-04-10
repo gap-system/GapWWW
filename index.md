@@ -52,7 +52,7 @@ There is an [extensive documentation]({{ site.baseurl }}/doc/) advising how to
 write a GAP code. Also there is a
 [guidance](https://gap-packages.github.io/example/) on
 developing a [GAP package]({{ site.baseurl }}/packages/) and its
-[submission]({{ site.baseurl }}/packages/authors/submit.html) to GAP.
+[submission]({{ site.baseurl }}/packages/authors/submit/) to GAP.
 
 
 ### Acknowledgements
