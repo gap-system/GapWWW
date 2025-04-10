@@ -31,7 +31,7 @@ function format(d) {
     // package website
     resString += `[<a href="${d.PackageWWWHome}" target="_blank">Homepage</a>] `;
 
-    if (d.IssueTrackerURL != "") {
+    if (d.IssueTrackerURL !== undefined) {
         resString += `[<a href="${d.IssueTrackerURL}" target="_blank">Issue Tracker</a>] `;
     }
 
