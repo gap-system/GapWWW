@@ -5,7 +5,6 @@ nav_order: 1
 nav_exclude: true
 ---
 <div style="text-align: center;width:100%;">
-    <!-- <img id="resp_logo" src="{{site.baseurl}}/logo/finalists/logos/E5/light/logo.png"/> -->
     <img id="resp_logo" style="width:50%;" src="{{site.baseurl}}/assets/logo/light/gaplogo.svg"/>
 </div>
 
