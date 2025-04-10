@@ -4,11 +4,14 @@ layout: default
 nav_order: 1
 nav_exclude: true
 ---
+<div style="text-align: center;width:100%;">
+    <img id="resp_logo" style="width:50%;" src="{{site.baseurl}}/assets/logo/light/gaplogo.svg"/>
+</div>
 
+<div id="main-title">
+    <h1><em>GAP</em> &nbsp;–&nbsp; A System for Computational Discrete Algebra</h1>
+</div>
 
-<h1 style="text-align:center;">GAP - Groups, Algorithms, Programming</h1>
-
-<h2 style="text-align:center;">A System for Computational Discrete Algebra</h2>
 
 ### Upcoming events
 

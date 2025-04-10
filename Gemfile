@@ -7,3 +7,4 @@ gem "logger"
 gem "csv"
 
 gem "just-the-docs"
+gem "base64", "~> 0.2.0"
