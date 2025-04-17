@@ -4,16 +4,19 @@ layout: default
 nav_order: 1
 nav_exclude: true
 ---
+<div style="text-align: center;width:100%;">
+    <img id="resp_logo" style="width:50%;" src="{{site.baseurl}}/assets/logo/light/gaplogo.svg"/>
+</div>
 
+<div id="main-title">
+    <h1><em>GAP</em> &nbsp;–&nbsp; A System for Computational Discrete Algebra</h1>
+</div>
 
-<h1 style="text-align:center;">GAP - Groups, Algorithms, Programming</h1>
-
-<h2 style="text-align:center;">A System for Computational Discrete Algebra</h2>
-
+<!--
 ### Upcoming events
 
-- [GAP Days Spring 2025, 6-11 April 2025, Vrije Universiteit Brussel, Belgium](https://www.gapdays.de/gapdays2025-spring/)
-- [GAP Logo Contest]({{ site.baseurl }}/logo/)
+- [GAP Days Summer 2025, 25-29 August 2025, University of Primorska, Koper, Slovenia](https://www.gapdays.de/gapdays2025-summer/)
+-->
 
 ### What is GAP?
 
@@ -52,7 +55,7 @@ There is an [extensive documentation]({{ site.baseurl }}/doc/) advising how to
 write a GAP code. Also there is a
 [guidance](https://gap-packages.github.io/example/) on
 developing a [GAP package]({{ site.baseurl }}/packages/) and its
-[submission]({{ site.baseurl }}/packages/authors/submit/) to GAP.
+[submission]({{ site.baseurl }}/packages/authors/submit.html) to GAP.
 
 
 ### Acknowledgements
