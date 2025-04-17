@@ -11,10 +11,10 @@ On this page you can learn a bit more about the GAP Logo: how it was selected,
 what it signifies, and also where to download it for use in e.g. presentations
 or on posters.
 
-We also plan to eventually offer some merchandise (stickers, T-shirts etc.)
+Eventually, it will be possible to buy merchandise (stickers, t-shirts etc.) with the logo.
 with the logo.
 
-## GAP logo contest aftermath
+## GAP logo contest results
 
 Between GAP Days Summer 2024 (in August 2024) and GAP Days Spring 2025 (in April 2025)
 we run a contest to select the new GAP logo. You can see the result now on this
