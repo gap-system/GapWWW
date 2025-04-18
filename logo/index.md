@@ -22,7 +22,7 @@ website.
 
 We would like to thank the following people who participated and submit so many different
 and amazing designs:
-**Aron Ban Szabo, Bilal Hasanat, Claudio Piedade, Cormullion, Dario Mathiae, David Joyner, Franziska Schiessl, Istvan Szollosi, Janika Peters, Jens Bossaert, John Chakkour, Max Horn , Reinis Cirpons, Roger Vogeler**.
+**Aron Ban Szabo, Bilal Hasanat, Claudio Piedade, Cormullion, Dario Mathiae, David Joyner, Franziska Schiessl, Istvan Szollosi, Janika Peters, Jens Bossaert, John Chakkour, Max Horn, Reinis Cirpons, Roger Vogeler**.
 
 
 Some more statistics about the contest:
