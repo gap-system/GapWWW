@@ -12,15 +12,14 @@ what it signifies, and also where to download it for use in e.g. presentations
 or on posters.
 
 Eventually, it will be possible to buy merchandise (stickers, t-shirts etc.) with the logo.
-with the logo.
 
 ## GAP logo contest results
 
 Between GAP Days Summer 2024 (in August 2024) and GAP Days Spring 2025 (in April 2025)
-we run a contest to select the new GAP logo. You can see the result now on this
+we ran a contest to select the new GAP logo. You can see the result now on this
 website.
 
-We would like to thank the following people who participated and submit so many different
+We would like to thank the following people who participated and submitted so many different
 and amazing designs:
 **Aron Ban Szabo, Bilal Hasanat, Claudio Piedade, Cormullion, Dario Mathiae, David Joyner, Franziska Schiessl, Istvan Szollosi, Janika Peters, Jens Bossaert, John Chakkour, Max Horn, Reinis Cirpons, Roger Vogeler**.
 
