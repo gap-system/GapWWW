@@ -56,18 +56,18 @@ on  your installation.  For  example,  for  the complete installation of
 latest versions of all packages you will have something like:
 
 ```
- ┌───────┐   GAP 4.13.0 of 2024-03-15
+ ┌───────┐   GAP 4.14.0 of 2024-12-05
  │  GAP  │   https://www.gap-system.org
  └───────┘   Architecture: aarch64-apple-darwin21-default64-kv9
  Configuration:  gmp 6.3.0, GASMAN, readline
  Loading the library and packages ...
- Packages:   AClib 1.3.2, Alnuth 3.2.1, AtlasRep 2.1.8, AutPGrp 1.11,
-             Browse 1.8.21, CRISP 1.4.6, Cryst 4.1.27, CrystCat 1.1.10,
-             CTblLib 1.3.9, curlInterface 2.3.2, cvec 2.8.1, FactInt 1.6.3,
-             FGA 1.5.0, Forms 1.2.9, GAPDoc 1.6.7, genss 1.6.8, IO 4.8.2,
-             IRREDSOL 1.4.4, LAGUNA 3.9.6, orb 4.9.0, Polenta 1.3.10,
-             Polycyclic 2.16, PrimGrp 3.4.4, RadiRoot 2.9, recog 1.4.2,
-             ResClasses 4.7.3, SmallGrp 1.5.3, Sophus 1.27, SpinSym 1.5.2,
+ Packages:   AClib 1.3.2, Alnuth 3.2.1, AtlasRep 2.1.9, AutPGrp 1.11,
+             Browse 1.8.21, CaratInterface 2.3.7, CRISP 1.4.6, Cryst 4.1.27,
+             CrystCat 1.1.10, CTblLib 1.3.9, curlInterface 2.4.0, FactInt 1.6.3,
+             FGA 1.5.0, Forms 1.2.12, GAPDoc 1.6.7, genss 1.6.9, IO 4.9.1,
+             IRREDSOL 1.4.4, LAGUNA 3.9.7, orb 4.9.1, Polenta 1.3.10,
+             Polycyclic 2.16, PrimGrp 3.4.4, RadiRoot 2.9, recog 1.4.3,
+             ResClasses 4.7.3, SmallGrp 1.5.4, Sophus 1.27, SpinSym 1.5.2,
              StandardFF 1.0, TomLib 1.2.11, TransGrp 3.6.5, utils 0.85
  Try '??help' for help. See also '?copyright', '?cite' and '?authors'
 gap>
