@@ -45,6 +45,7 @@ The present (June 2025) members of the GAP Council are:
 - Alexander Hulpke, Fort Collins (since July 2001)
 - Chris Jefferson, St Andrews (since April 2020)
 - Olexandr Konovalov, St Andrews (since July 2003)
+- Klaus Lux, Arizona (since June 2025)
 - Steve Linton, St Andrews (since June 1995)
 - Frank Lübeck, Aachen (since July 2001)
 - James Mitchell, St Andrews (since June 2022)
