@@ -52,7 +52,3 @@ bibliography environment of LaTeX.
 Instructions on citing GAP and its packages may be also found in the
 CITATION file in the GAP root directory or displayed in GAP using the
 function {% include ref.html label="Cite" %}.
-
-We also would be indebted if you inform us about your papers citing GAP
-by sending a short note to
-[`support@gap-system.org`](mailto:support@gap-system.org).
