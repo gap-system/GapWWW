@@ -36,7 +36,7 @@ You can study and easily modify or extend it for your special use.
 
 The current version is
 [GAP {{site.data.release.version}}]({{ site.baseurl }}/install/) released on {{site.data.release.date}}
-and it can be obtained from our [install page]({{ site.baseurl }}/install/).
+and it can be obtained from our [installation page]({{ site.baseurl }}/install/).
 Changes from earlier versions are described in the
 [Release history](https://github.com/gap-system/gap/blob/master/CHANGES.md).
 
