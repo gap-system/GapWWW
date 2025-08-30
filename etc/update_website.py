@@ -66,7 +66,7 @@ def download_asset_by_name(asset_name: str, writedir: str) -> None:
         url = [x for x in assets if x.name == asset_name][0].browser_download_url
     except:
         error(
-            f"Cannot find {asset_name} in the GitHub release with tag {release.tag_name}"
+            f"Cannot find {asset_name} in the GitHub release with tag {latest_release.tag_name}"
         )
 
     with utils.working_directory(writedir):
@@ -107,24 +107,35 @@ def download_and_extract_json_gz_asset(asset_name: str, dest: str) -> None:
                 shutil.copyfileobj(file_in, file_out)
 
 
+# Extract and return the sha256 string from a url
+def extract_sha(url: str) -> str:
+    request = requests.get(url)
+    try:
+        request.raise_for_status()
+        sha256 = request.text.strip()
+    except:
+        error(f"Failed to download {url}")
+    return sha256
+
+
 ################################################################################
 # Get latest GAP release
 notice(f"Will use temporary directory: {tmpdir}")
 
 g = github.Github()  # no token required as we just read a little data
 repo = g.get_repo(f"{args.gap_fork}/gap")
-release = repo.get_latest_release()
+latest_release = repo.get_latest_release()
 
-notice(f"Latest GAP release is {release.title} at tag {release.tag_name}")
-if release.tag_name[0] != "v":
+notice(f"Latest GAP release is {latest_release.title} at tag {latest_release.tag_name}")
+if latest_release.tag_name[0] != "v":
     error("Tag name has unexpected format")
-version = release.tag_name[1:]
+version = latest_release.tag_name[1:]
 
 
 # Determine which version is currently in GapWWW
 with open("_data/release.json", "r", encoding="utf-8") as f:
-    release_json = json.load(f)
-www_release = release_json["version"]
+    latest_release_json = json.load(f)
+www_release = latest_release_json["version"]
 
 notice(f"GAP release in GapWWW is {www_release}")
 
@@ -132,18 +143,13 @@ notice(f"GAP release in GapWWW is {www_release}")
 
 
 # For all releases, record the assets (in case they were deleted/updated/added)
-notice(f"Collecting GitHub release asset data in _data/assets.json")
-assets = release.get_assets()
+notice("Collecting GitHub release asset data in _data/assets.json")
+assets = latest_release.get_assets()
 asset_data = []
 for asset in assets:
     if asset.name.endswith(".sha256") or asset.name.endswith(".json.gz"):
         continue
-    request = requests.get(f"{asset.browser_download_url}.sha256")
-    try:
-        request.raise_for_status()
-        sha256 = request.text.strip()
-    except:
-        error(f"Failed to download {asset.browser_download_url}.sha256")
+    sha256 = extract_sha(f"{asset.browser_download_url}.sha256")
     filtered_asset = {
         "bytes": asset.size,
         "name": asset.name,
@@ -166,18 +172,41 @@ with utils.working_directory(tmpdir):
 date = get_date_from_configure_ac(f"{tmpdir}/gap-{version}")
 notice(f"Using release date {date} for GAP {version}")
 
-notice(f"Writing the file assets/package-infos.json")
+notice("Writing the file assets/package-infos.json")
 download_and_extract_json_gz_asset(
     "package-infos.json.gz", f"{pwd}/assets/package-infos.json"
 )
 
 notice("Rewriting the _data/release.json file")
-release_data = {
+latest_release_data = {
     "version": version,
     "date": date,
 }
 with open(f"{pwd}/_data/release.json", "wb") as outfile:
-    outfile.write(json.dumps(release_data, indent=2).encode("utf-8"))
+    outfile.write(json.dumps(latest_release_data, indent=2).encode("utf-8"))
 
 notice("Overwriting _data/help.json with the contents of help-links.json.gz")
 download_and_extract_json_gz_asset("help-links.json.gz", f"{pwd}/_data/help.json")
+
+# Regenerate the list of releases
+notice("Regenerating _data/gap_releases.json to store data of all releases")
+
+releases = repo.get_releases()
+release_sets = []
+
+for release in releases:
+    version = release.tag_name[1:]
+    tar_url = f"https://github.com/gap-system/gap/releases/download/v{version}/gap-{version}.tar.gz"
+    release_data = {
+        "isLatest": release == latest_release,
+        "isPrerelease": release.prerelease,
+        "name": release.title,
+        "publishedAt": str(release.published_at),
+        "tagName": release.tag_name,
+        "url": tar_url,
+        "checksum": extract_sha(f"{tar_url}.sha256"),
+    }
+    release_sets.append(release_data)
+
+with open(f"{pwd}/_data/gap_releases.json", "w", encoding="utf-8") as f:
+    json.dump(release_sets, f, ensure_ascii=False, indent=2)
