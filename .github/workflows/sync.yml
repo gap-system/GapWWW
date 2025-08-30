@@ -14,24 +14,15 @@ jobs:
     steps:
       - name: "Check out the GapWWW repository in order to make changes to it"
         uses: actions/checkout@v4
-      - name: "Clone GAP for its most up-to-date release scripts"
-        uses: actions/checkout@v4
-        with:
-          repository: gap-system/gap
-          ref: master
-          path: tmp/gap/
-          fetch-depth: 1
       - uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - name: "Install the required Python modules"
         run: pip3 install PyGithub requests python-dateutil
       - name: "Run the GAP dev release script for updating the website"
-        run: python -u ./tmp/gap/dev/releases/update_website.py
+        run: python -u etc/update_website.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Remove GAP clone"
-        run: rm -rf ./tmp/gap
       - name: "Make a pull request to the master branch of this repository"
         uses: peter-evans/create-pull-request@v6
         with:
