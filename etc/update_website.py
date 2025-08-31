@@ -24,6 +24,7 @@ import tarfile
 import tempfile
 
 import github
+from github.GitRelease import GitRelease
 import requests
 import utils
 from utils import error, notice
@@ -118,6 +119,21 @@ def extract_sha(url: str) -> str:
     return sha256
 
 
+def formatted_release(release: GitRelease, is_latest: bool) -> dict:
+    version = release.tag_name[1:]
+    tar_url = f"https://github.com/gap-system/gap/releases/download/v{version}/gap-{version}.tar.gz"
+    release_data = {
+        "isLatest": is_latest,
+        "isPrerelease": release.prerelease,
+        "name": release.title,
+        "publishedAt": str(release.published_at),
+        "tagName": release.tag_name,
+        "url": tar_url,
+        "sha256": extract_sha(f"{tar_url}.sha256"),
+    }
+    return release_data
+
+
 ################################################################################
 # Get latest GAP release
 notice(f"Will use temporary directory: {tmpdir}")
@@ -188,25 +204,40 @@ with open(f"{pwd}/_data/release.json", "wb") as outfile:
 notice("Overwriting _data/help.json with the contents of help-links.json.gz")
 download_and_extract_json_gz_asset("help-links.json.gz", f"{pwd}/_data/help.json")
 
-# Regenerate the list of releases
-notice("Regenerating _data/gap_releases.json to store data of all releases")
+# Update the list of releases
+notice("Updating _data/gap_releases.json to store data of all releases")
 
-releases = repo.get_releases()
-release_sets = []
+github_releases = repo.get_releases()
 
-for release in releases:
-    version = release.tag_name[1:]
-    tar_url = f"https://github.com/gap-system/gap/releases/download/v{version}/gap-{version}.tar.gz"
-    release_data = {
-        "isLatest": release == latest_release,
-        "isPrerelease": release.prerelease,
-        "name": release.title,
-        "publishedAt": str(release.published_at),
-        "tagName": release.tag_name,
-        "url": tar_url,
-        "sha256": extract_sha(f"{tar_url}.sha256"),
-    }
-    release_sets.append(release_data)
+with open(f"{pwd}/_data/gap_releases.json", "r", encoding="utf-8") as f:
+    stored_releases = json.load(f)
 
+# Start with all of the existing local releases. If any corresponded to a
+# release on github, update its "isLatest" value. If there are any release on
+# github that are not yet stored locally, format them and store them locally.
+releases_to_store = stored_releases
+
+for github_release in github_releases:
+    tag = github_release.tag_name
+    is_latest = github_release == latest_release
+
+    try:
+        # if the github_release is already stored locally, correctly set the
+        # "isLatest" value.
+        i, release_to_store = next(
+            (i, release)
+            for i, release in enumerate(stored_releases)
+            if release["tagName"] == tag
+        )
+        releases_to_store[i]["isLatest"] = is_latest
+    except StopIteration:
+        # if the github release is not stored locally, format and store it
+        release_to_store = formatted_release(github_release, is_latest)
+        releases_to_store.append(release_to_store)
+    except KeyError as e:
+        error(f"An entry in the gap_releases.json file is missing the required key {e}")
+
+# Overwrite the whole file, because amending all of the json inplace seems
+# unnecessarily fiddly.
 with open(f"{pwd}/_data/gap_releases.json", "w", encoding="utf-8") as f:
-    json.dump(release_sets, f, ensure_ascii=False, indent=2)
+    json.dump(releases_to_store, f, ensure_ascii=False, indent=2)
