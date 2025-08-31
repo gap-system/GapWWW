@@ -119,6 +119,7 @@ def extract_sha(url: str) -> str:
     return sha256
 
 
+# Extract some data from a release and store it as a dictionary
 def formatted_release(release: GitRelease, is_latest: bool) -> dict:
     version = release.tag_name[1:]
     tar_url = f"https://github.com/gap-system/gap/releases/download/v{version}/gap-{version}.tar.gz"
@@ -207,7 +208,8 @@ download_and_extract_json_gz_asset("help-links.json.gz", f"{pwd}/_data/help.json
 # Update the list of releases
 notice("Updating _data/gap_releases.json to store data of all releases")
 
-github_releases = repo.get_releases()
+github_releases = list(repo.get_releases())
+github_releases = github_releases[::-1]
 
 with open(f"{pwd}/_data/gap_releases.json", "r", encoding="utf-8") as f:
     stored_releases = json.load(f)
