@@ -204,7 +204,7 @@ for release in releases:
         "publishedAt": str(release.published_at),
         "tagName": release.tag_name,
         "url": tar_url,
-        "checksum": extract_sha(f"{tar_url}.sha256"),
+        "sha256": extract_sha(f"{tar_url}.sha256"),
     }
     release_sets.append(release_data)
 
