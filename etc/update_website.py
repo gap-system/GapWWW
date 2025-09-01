@@ -24,9 +24,9 @@ import tarfile
 import tempfile
 
 import github
-from github.GitRelease import GitRelease
 import requests
 import utils
+from github.GitRelease import GitRelease
 from utils import error, notice
 
 if sys.version_info < (3, 6):
