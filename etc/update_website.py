@@ -206,12 +206,12 @@ notice("Overwriting _data/help.json with the contents of help-links.json.gz")
 download_and_extract_json_gz_asset("help-links.json.gz", f"{pwd}/_data/help.json")
 
 # Update the list of releases
-notice("Updating _data/gap_releases.json to store data of all releases")
+notice("Updating releases.json to store data of all releases")
 
 github_releases = list(repo.get_releases())
 github_releases = github_releases[::-1]
 
-with open(f"{pwd}/_data/gap_releases.json", "r", encoding="utf-8") as f:
+with open(f"{pwd}/releases.json", "r", encoding="utf-8") as f:
     stored_releases = json.load(f)
 
 # Start with all of the existing local releases. If any corresponded to a
@@ -241,5 +241,5 @@ for github_release in github_releases:
 
 # Overwrite the whole file, because amending all of the json inplace seems
 # unnecessarily fiddly.
-with open(f"{pwd}/_data/gap_releases.json", "w", encoding="utf-8") as f:
+with open(f"{pwd}/releases.json", "w", encoding="utf-8") as f:
     json.dump(releases_to_store, f, ensure_ascii=False, indent=2)
