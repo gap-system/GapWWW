@@ -8,15 +8,15 @@
 # It then extracts all GAP and package manuals, and copies them into a
 # directory called `Manuals` in the current working directory, for use
 # on the GAP website.
-from utils import *
-
 import json
 import os
 import re
 import shutil
 
+from utils import *
+
 if len(sys.argv) != 3:
-     error(f"usage: {sys.argv[0]} <gaproot> <json>")
+    error(f"usage: {sys.argv[0]} <gaproot> <json>")
 
 gaproot = sys.argv[1]
 jsonfile = sys.argv[2]
@@ -30,7 +30,7 @@ with open(jsonfile, "r") as f:
     pkgs = json.load(f)
 
 # create the destination director if necessary
-os.makedirs(dstdir, exist_ok = True)
+os.makedirs(dstdir, exist_ok=True)
 
 notice("copying the GAP manuals")
 shutil.copytree(os.path.join(gaproot, "doc"), os.path.join(dstdir, "doc"))
@@ -43,7 +43,7 @@ for k, v in pkgs.items():
     if not os.path.isdir(pkgsrcdir):
         error(f"{pkgsrcdir} is not a directory")
     pkgdstdir = os.path.join(dstdir, "pkg", v["PackageName"].lower())
-    os.makedirs(pkgdstdir, exist_ok = True)
+    os.makedirs(pkgdstdir, exist_ok=True)
     docpaths = set()
     for b in v["PackageDoc"]:
         docpaths = docpaths.union(b["ArchiveURLSubset"])
@@ -55,7 +55,7 @@ for k, v in pkgs.items():
             shutil.copytree(ps, pd)
         elif os.path.isfile(ps):
             print(f"  copying file {ps} to {pd}")
-            os.makedirs(os.path.dirname(pd), exist_ok = True)
+            os.makedirs(os.path.dirname(pd), exist_ok=True)
             shutil.copy(ps, pd)
         else:
             error(f"{ps} is neither a directory nor a file")
