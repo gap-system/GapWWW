@@ -27,9 +27,6 @@ A committee consisting of GAP council members will review the nominations
 and select the award winners. Each award winner will receive a certificate
 acknowledging their significant contributions to GAP.
 
-We plan to have subsequent calls regularly once per year, usually with a
-deadline in mid August.
-
 ### Winners 2025
 
 To be announced
