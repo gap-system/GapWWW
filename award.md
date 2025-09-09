@@ -1,5 +1,5 @@
 ---
-title: GAP excellence award
+title: GAP Excellence Awards
 layout: default_with_title
 #nav_order: 6
 permalink: /award/
