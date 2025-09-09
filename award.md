@@ -9,17 +9,20 @@ The GAP Council would like to reward once per year significant contributions
 to the GAP system by giving "GAP excellence awards" to our best young
 contributors.   
 
-Each year we will issue a call for nominations via this website and the
-[GAP Forum]({{ site.baseurl }}/forum/), usually with a deadline in mid
-August. Once the call is open, if you are aware of any young GAP
+To this end, each year we will issue a call for nominations via this
+website and the [GAP Forum]({{ site.baseurl }}/forum/), usually with a
+deadline in mid August.
+
+Once the call is open, if you are aware of any young GAP
 contributors, then please nominate them with an email to the
 mailing list <prize@gap-sytem.org>.
 
-Self-nominations are possible.
 Please give details of the nominees (including home institution and email
 address) and details of their GAP contribution (including a short description
-and a link to the code). It would be helpful to have the name of a potential
-supporter for the nomination.
+and a link to the code).
+
+Self-nominations are possible. It would be helpful to include the name of a
+potential supporter for the nomination.
 
 All contributors to the GAP system are eligible, including contributors to
 the main system as well as to GAP packages. The nominee should be 'young' 
@@ -28,7 +31,8 @@ do not have a permanent position yet.
 
 A committee consisting of GAP council members will review the nominations
 and select the award winners. Each award winner will receive a certificate
-acknowledging their significant contributions to GAP.
+acknowledging their significant contributions to GAP, and be listed on this
+website.
 
 ### Winners 2025
 
