@@ -9,8 +9,11 @@ The GAP Council would like to reward once per year significant contributions
 to the GAP system by giving "GAP excellence awards" to our best young
 contributors.   
 
-If you are aware of a young GAP contributor, then please nominate this person
-(or these persons) with an email to the mailing list <prize@gap-sytem.org>/
+Each year we will issue a call for nominations via this website and the
+[GAP Forum]({{ site.baseurl }}/forum/), usually with a deadline in mid
+August. Once the call is open, if you are aware of any young GAP
+contributors, then please nominate them with an email to the
+mailing list <prize@gap-sytem.org>.
 
 Self-nominations are possible.
 Please give details of the nominees (including home institution and email
