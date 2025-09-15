@@ -1,7 +1,7 @@
 ---
 title: The GAP Logo
 layout: default
-has_children: true
+has_children: false
 permalink: /logo/
 ---
 
