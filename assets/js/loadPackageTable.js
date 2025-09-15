@@ -119,62 +119,73 @@ function auto_search($dt){
     }
 }
 
-// define a table
-let table = new DataTable('#packageList', {
-    // get the json file
-    "ajax" : {
-        "url": "../assets/package-infos.json",
-        "dataSrc": function(dictData){
-          // as the json file is a dict for every package it is necessary it put all values into an array for Datatables to understand it
-            var arr = [];
-            for(var key in dictData){
-                arr.push(dictData[key]);
+// delay until page load
+$(function(){
+
+    // hide the no-javascript version of the table
+    $('#packageList-no-js').hide();
+
+    // show the javascript version of the table
+    $('#packageList').show();
+
+    // define a table
+    let table = new DataTable('#packageList', {
+        // get the json file
+        "ajax" : {
+            "url": "../assets/package-infos.json",
+            "dataSrc": function(dictData){
+              // as the json file is a dict for every package it is necessary it put all values into an array for Datatables to understand it
+                var arr = [];
+                for(var key in dictData){
+                    arr.push(dictData[key]);
+                }
+                return arr;
             }
-            return arr;
+        },
+        // define the columns shown in the table
+        columns : [
+            {
+                class: 'dt-control',
+                orderable: false,
+                data: null,
+                defaultContent: ''
+            },
+            { "data" : "PackageName"},
+            { "data" : "Version", width: '7em'},
+            { "data" : "Date",
+               render: function (data, type, row) {
+                           return convertDateFormat(data)
+                       }
+            },
+            // the following column is set to invisible and only there so the search picks up the additional text as well
+            { data: null, render: (data, type, row) => format(data), visible: false},
+            { "data" : "Subtitle"},
+        ],
+        // change the text for the search function to make it distinct to the page search function
+        language: {
+            search: 'Search table:'
+        },
+        searchHighlight: true,
+        initComplete: function( settings, json ) {
+            auto_search(this);
+        },
+        // set default number of packages shown
+        pageLength: 25,
+    });
+
+    // Add event listener for opening and closing details
+    table.on('click', 'td.dt-control', function (e) {
+        let tr = e.target.closest('tr');
+        let row = table.row(tr);
+    
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
         }
-    },
-    // define the columns shown in the table
-    columns : [
-        {
-            class: 'dt-control',
-            orderable: false,
-            data: null,
-            defaultContent: ''
-        },
-        { "data" : "PackageName"},
-        { "data" : "Version", width: '7em'},
-        { "data" : "Date",
-           render: function (data, type, row) {
-                       return convertDateFormat(data)
-                   }
-        },
-        // the following column is set to invisible and only there so the search picks up the additional text as well
-        { data: null, render: (data, type, row) => format(data), visible: false},
-        { "data" : "Subtitle"},
-    ],
-    // change the text for the search function to make it distinct to the page search function
-    language: {
-        search: 'Search table:'
-    },
-    searchHighlight: true,
-    initComplete: function( settings, json ) {
-        auto_search(this);
-    },
-    // set default number of packages shown
-    pageLength: 25,
-});
+        else {
+            // Open this row
+            row.child(format(row.data())).show();
+        }
+    });
 
-// Add event listener for opening and closing details
-table.on('click', 'td.dt-control', function (e) {
-    let tr = e.target.closest('tr');
-    let row = table.row(tr);
-
-    if (row.child.isShown()) {
-        // This row is already open - close it
-        row.child.hide();
-    }
-    else {
-        // Open this row
-        row.child(format(row.data())).show();
-    }
 });
