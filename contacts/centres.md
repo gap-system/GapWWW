@@ -25,7 +25,7 @@ perform particular tasks and reach decisions on particular questions.
 At the present time (April 2020), GAP Centres in the following places
 have agreed to cooperate in this way:
 
-- [Aachen](http://www.math.rwth-aachen.de/LDFM/),
+- [Aachen](http://www.math.rwth-aachen.de/),
 - [Braunschweig](https://www.tu-braunschweig.de/iaa/),
 - [Fort Collins](https://www.math.colostate.edu/~hulpke/CGT/CGT.html),
 - [Kaiserslautern](https://math.rptu.de/ags/agag/), and

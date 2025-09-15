@@ -65,13 +65,13 @@ including user contributions. We gratefully acknowledge all this help as
 well as some
 [funding]({{ site.baseurl }}/about/#funding). GAP was
 started at [Lehrstuhl D für
-Mathematik](https://www.math.rwth-aachen.de/LDFM/), RWTH Aachen in
+Mathematik](https://www.math.rwth-aachen.de/), RWTH Aachen in
 [1986]({{ site.baseurl }}/about/history/preface_2.4.html).
 After 1997
 the development of GAP was coordinated in [St
 Andrews](https://circa.st-andrews.ac.uk/). Since March 2005, the
 [GAP Centers]({{ site.baseurl }}/centres/) in
-[Aachen](https://www.math.rwth-aachen.de/LDFM/),
+[Aachen](https://www.math.rwth-aachen.de/),
 [Braunschweig](https://www.tu-braunschweig.de/iaa/),
 Fort Collins,
 and [St Andrews](https://circa.st-andrews.ac.uk/) took over coordination.
