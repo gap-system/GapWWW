@@ -12,11 +12,11 @@ nav_exclude: true
     <h1><em>GAP</em> &nbsp;–&nbsp; A System for Computational Discrete Algebra</h1>
 </div>
 
-<!--
-### Upcoming events
 
-- [GAP Days Spring 2026, May 4-8, 2026, University of Porto, Portugal](https://www.gapdays.de/gapdays2026-spring/)
--->
+### News and upcoming events
+
+- September 15, 2025: [GAP Excellence Awards]({{site.baseurl}}/award) winners 2025 announced
+- May 4-8, 2026: [GAP Days Spring 2026, University of Porto, Portugal](https://www.gapdays.de/gapdays2026-spring/)
 
 ### What is GAP?
 
