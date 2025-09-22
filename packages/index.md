@@ -9,7 +9,7 @@ permalink: /packages/
 <!-- load datatables -->
 <script src="{{ site.baseurl }}/assets/js/datatables.min.js?version=1"></script>
 
-<script type="module" src="{{ site.baseurl }}/assets/js/loadPackageTable.js?version=3"></script>
+<script type="module" src="{{ site.baseurl }}/assets/js/loadPackageTable.js?version=4"></script>
 
 <!-- List of deposited packages -->
 There are {{ site.data.package-infos | size }} packages that are shipped with GAP {{site.data.release.version}}.
