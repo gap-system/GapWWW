@@ -48,13 +48,13 @@ The present (June 2025) members of the GAP Council are:
 - Klaus Lux, Arizona (since June 2025)
 - Steve Linton, St Andrews (since June 1995)
 - Frank Lübeck, Aachen (since July 2001)
-- James Mitchell, St Andrews (since June 2022)
+- James D. Mitchell, St Andrews (since June 2022)
 - Alice Niemeyer, Aachen (since August 2011)
 - Götz Pfeiffer, Galway (since September 2007)
 - Colva Roney-Dougal, St Andrews (since June 2022)
 - Leonard Soicher, London (since June 1997)
 
-Chair: Bettina Eick, Braunschweig (since October 2021)
+Chair: James D. Mitchell, St Andrews (since October 2025)
 
 Former members of the GAP Council are:
 
@@ -80,3 +80,4 @@ Former chairs:
 - Charles Wright, Eugene (from June 1995 to October 2003)
 - Edmund Robertson, St Andrews (from October 2003 to March 2009)
 - Leonard Soicher, London (from March 2009 to September 2021)
+- Bettina Eick, Braunschweig (from October 2021 to September 2025)
