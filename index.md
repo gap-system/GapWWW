@@ -13,10 +13,13 @@ nav_exclude: true
 </div>
 
 
-### News and upcoming events
+### News
 
-- September 15, 2025: [GAP Excellence Awards]({{site.baseurl}}/award/) winners 2025 announced
 - September 28, 2025: [GAP 4.15.0 released]({{site.baseurl}}/install/)
+- September 15, 2025: [GAP Excellence Awards]({{site.baseurl}}/award/) winners 2025 announced
+
+### Upcoming events
+
 - May 4-8, 2026: [GAP Days Spring 2026, University of Porto, Portugal](https://www.gapdays.de/gapdays2026-spring/)
 
 ### What is GAP?
