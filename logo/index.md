@@ -7,12 +7,6 @@ permalink: /logo/
 
 # The GAP Logo
 
-On this page you can learn a bit more about the GAP Logo: how it was selected,
-what it signifies, and also where to download it for use in e.g. presentations
-or on posters.
-
-Eventually, it will be possible to buy merchandise (stickers, t-shirts etc.) with the logo.
-
 ## GAP logo contest results
 
 Between GAP Days Summer 2024 (in August 2024) and GAP Days Spring 2025 (in April 2025)
@@ -24,17 +18,6 @@ and amazing designs:
 **Aron Ban Szabo, Bilal Hasanat, Claudio Piedade, Cormullion, Dario Mathiae, David Joyner, Franziska Schiessl, Istvan Szollosi, Janika Peters, Jens Bossaert, John Chakkour, Max Horn, Reinis Cirpons, Roger Vogeler**.
 
 
-Some more statistics about the contest:
-- 24 unique designs were submitted by 14 designers for the first stage
-- 63 people registered to vote in the contest
-- 57 people actually voted
-- this resulted in the final ranking:
-  - E5: 93 points (20 first place / 12 second place / 9 third place)
-  - F6: 79 points (17/9/10)
-  - A1: 63 points (10/13/7)
-  - B2: 45 points (3/10/16)
-  - C3: 44 points (6/8/10)
-  - D4: 18 points (1/5/5)
 
 ## Download
 
