@@ -2,8 +2,24 @@
   We override favicon.html so we can add a query argument `?v=1` which
   we can increment whenever the favicon changes in any way, to force browsers
   to refresh their caches.
+  
+  The primary favicon was created by merging the light and dark gaplogo-notext.svg
+  icons with suitable CSS.
+  
+  Moreover, we use alternate icons to support older browsers that don't
+  support SVG favicons.
 {%- endcomment -%}
 {%- assign ver = 1 %}
-<link rel="icon" href="{{ site.baseurl }}/favicon.png?v={{ver}}" type="image/png">
-<link rel="icon" href="{{ site.baseurl }}/assets/logo/light/gaplogo-notext.svg?v={{ver}}" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{{ site.baseurl }}/apple-touch-icon.png?v={{ver}}">
+<!-- Default favicon (SVG) -->
+<link rel="icon" href="{{ site.baseurl }}/assets/logo/favicon.svg?v={{ver}}" type="image/svg+xml" />
+
+<!-- Light mode PNG fallbacks -->
+<link rel="alternate icon" href="{{ site.baseurl }}/assets/logo/light/gaplogo-notext32.png?v={{ver}}" media="(prefers-color-scheme: light)" sizes="32x32">
+<link rel="alternate icon" href="{{ site.baseurl }}/assets/logo/light/gaplogo-notext512.png?v={{ver}}" media="(prefers-color-scheme: light)" sizes="any">
+
+<!-- Dark mode PNG fallbacks -->
+<link rel="alternate icon" href="{{ site.baseurl }}/assets/logo/dark/gaplogo-notext32.png?v={{ver}}" media="(prefers-color-scheme: dark)" sizes="32x32">
+<link rel="alternate icon" href="{{ site.baseurl }}/assets/logo/dark/gaplogo-notext512.png?v={{ver}}" media="(prefers-color-scheme: dark)" sizes="any">
+
+<!-- Meta for color-scheme hint -->
+<meta name="color-scheme" content="light dark">
