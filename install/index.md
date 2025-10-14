@@ -56,19 +56,20 @@ on  your installation.  For  example,  for  the complete installation of
 latest versions of all packages you will have something like:
 
 ```
- ┌───────┐   GAP 4.14.0 of 2024-12-05
+ ┌───────┐   GAP 4.15.0 of 2025-09-28
  │  GAP  │   https://www.gap-system.org
- └───────┘   Architecture: aarch64-apple-darwin21-default64-kv9
+ └───────┘   Architecture: aarch64-apple-darwin24-default64-kv10
  Configuration:  gmp 6.3.0, GASMAN, readline
  Loading the library and packages ...
- Packages:   AClib 1.3.2, Alnuth 3.2.1, AtlasRep 2.1.9, AutPGrp 1.11,
-             Browse 1.8.21, CaratInterface 2.3.7, CRISP 1.4.6, Cryst 4.1.27,
-             CrystCat 1.1.10, CTblLib 1.3.9, curlInterface 2.4.0, FactInt 1.6.3,
-             FGA 1.5.0, Forms 1.2.12, GAPDoc 1.6.7, genss 1.6.9, IO 4.9.1,
-             IRREDSOL 1.4.4, LAGUNA 3.9.7, orb 4.9.1, Polenta 1.3.10,
-             Polycyclic 2.16, PrimGrp 3.4.4, RadiRoot 2.9, recog 1.4.3,
-             ResClasses 4.7.3, SmallGrp 1.5.4, Sophus 1.27, SpinSym 1.5.2,
-             StandardFF 1.0, TomLib 1.2.11, TransGrp 3.6.5, utils 0.85
+ Packages:   AClib 1.3.3, Alnuth 3.2.1, AtlasRep 2.1.9, AutoDoc 2025.05.09,
+             AutPGrp 1.11.1, Browse 1.8.21, CaratInterface 2.3.7, CRISP 1.4.8,
+             Cryst 4.1.30, CrystCat 1.1.10, CTblLib 1.3.11,
+             curlInterface 2.4.2, FactInt 1.6.3, FGA 1.5.0, Forms 1.2.13,
+             GAPDoc 1.6.7, genss 1.6.9, IO 4.9.3, IRREDSOL 1.4.4,
+             LAGUNA 3.9.7, orb 5.0.1, PackageManager 1.6.3, Polenta 1.3.11,
+             Polycyclic 2.17, PrimGrp 4.0.1, RadiRoot 2.9, recog 1.4.4,
+             ResClasses 4.7.4, SmallGrp 1.5.4, Sophus 1.27, SpinSym 1.5.2,
+             StandardFF 1.0, TomLib 1.2.11, TransGrp 3.6.5, utils 0.92
  Try '??help' for help. See also '?copyright', '?cite' and '?authors'
 gap>
 ```
