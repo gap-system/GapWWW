@@ -15,6 +15,7 @@ nav_exclude: true
 
 ### News
 
+- October 18, 2025: [GAP 4.15.1 released]({{site.baseurl}}/install/)
 - September 28, 2025: [GAP 4.15.0 released]({{site.baseurl}}/install/)
 - September 15, 2025: [GAP Excellence Awards]({{site.baseurl}}/award/) winners 2025 announced
 
