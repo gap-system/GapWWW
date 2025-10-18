@@ -56,12 +56,12 @@ on  your installation.  For  example,  for  the complete installation of
 latest versions of all packages you will have something like:
 
 ```
- ┌───────┐   GAP 4.15.0 of 2025-09-28
+ ┌───────┐   GAP 4.15.1 of 2025-10-18
  │  GAP  │   https://www.gap-system.org
- └───────┘   Architecture: aarch64-apple-darwin24-default64-kv10
+ └───────┘   Architecture: x86_64-pc-linux-gnu-default64-kv10
  Configuration:  gmp 6.3.0, GASMAN, readline
  Loading the library and packages ...
- Packages:   AClib 1.3.3, Alnuth 3.2.1, AtlasRep 2.1.9, AutoDoc 2025.05.09,
+ Packages:   AClib 1.3.3, Alnuth 3.2.1, AtlasRep 2.1.9, AutoDoc 2025.10.16,
              AutPGrp 1.11.1, Browse 1.8.21, CaratInterface 2.3.7, CRISP 1.4.8,
              Cryst 4.1.30, CrystCat 1.1.10, CTblLib 1.3.11,
              curlInterface 2.4.2, FactInt 1.6.3, FGA 1.5.0, Forms 1.2.13,
