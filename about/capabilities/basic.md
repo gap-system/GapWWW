@@ -1,12 +1,12 @@
 ---
 title: Basic
+fulltitle: Basic Capabilities
 grand_parent: About
 parent: Capabilities
-layout: default
+layout: default_with_title
 nav_order: 2
 permalink: /capabilities/basic
 ---
-## Basic Capabilities
 
 GAP provides many ways of forming ...
 

@@ -1,12 +1,12 @@
 ---
 title: Perm Groups
+fulltitle: Permutation and Matrix Groups
 grand_parent: About
 parent: Capabilities
-layout: default
+layout: default_with_title
 nav_order: 4
 permalink: /capabilities/permgroups
 ---
-## Permutation and Matrix Groups
 
 For an overview of computational methods for permutation groups see
 for example the book "Permutation Group Algorithms" of

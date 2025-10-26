@@ -1,11 +1,9 @@
 ---
 title: The GAP Logo
-layout: default
+layout: default_with_title
 has_children: false
 permalink: /logo/
 ---
-
-# The GAP Logo
 
 ## GAP logo contest results
 

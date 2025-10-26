@@ -1,12 +1,12 @@
 ---
 title: Fp Groups
+fulltitle: Finitely Presented Groups
 grand_parent: About
 parent: Capabilities
-layout: default
+layout: default_with_title
 nav_order: 5
 permalink: /capabilities/fpgroups
 ---
-## Finitely Presented Groups
 
 It follows from the well known theorems on the algorithmic unsolvability
 of the word problem and related problems that there are no deterministic

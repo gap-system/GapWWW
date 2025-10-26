@@ -1,12 +1,12 @@
 ---
 title: Words
+fulltitle: Words, Rewriting, and Automata
 grand_parent: About
 parent: Capabilities
-layout: default
+layout: default_with_title
 nav_order: 11
 permalink: /capabilities/words
 ---
-## Words, Rewriting, and Automata
 
 These include
 - functions for calculating with

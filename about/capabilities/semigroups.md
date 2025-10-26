@@ -1,12 +1,12 @@
 ---
 title: Semigroups
+fulltitle: Semigroups, Monoids, and other Generalisations of Groups
 grand_parent: About
 parent: Capabilities
-layout: default
+layout: default_with_title
 nav_order: 10
 permalink: /capabilities/semigroups
 ---
-## Semigroups, Monoids, and other Generalisations of Groups
 
 These include
 - functions for calculating with

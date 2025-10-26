@@ -1,12 +1,12 @@
 ---
 title: Representations
+fulltitle: Representations and Characters of Groups
 grand_parent: About
 parent: Capabilities
-layout: default
+layout: default_with_title
 nav_order: 7
 permalink: /capabilities/representations
 ---
-## Representations and Characters of Groups
 
 Group representations over fields of characteristic zero are mainly
 investigated via their characters. GAP provides methods

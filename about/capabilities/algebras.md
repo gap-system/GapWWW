@@ -1,12 +1,12 @@
 ---
 title: Algebras
+fulltitle: Vector Spaces, Modules and Algebras
 grand_parent: About
 parent: Capabilities
-layout: default
+layout: default_with_title
 nav_order: 8
 permalink: /capabilities/algebras
 ---
-## Vector Spaces, Modules and Algebras
 
 {% include ref.html label="Vector Spaces" %} over {% include ref.html label="Fields and Division Rings" text="fields" %} and {% include ref.html label="Modules" text="modules" %} over {% include ref.html label="Rings" text="rings" %} can be defined when the coefficient domain is available in GAP. Note, however, that the range of implemented methods will depend on the coefficient domain.
 

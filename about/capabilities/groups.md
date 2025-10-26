@@ -1,12 +1,12 @@
 ---
 title: Groups
+fulltitle: Groups and Group Elements
 grand_parent: About
 parent: Capabilities
-layout: default
+layout: default_with_title
 nav_order: 3
 permalink: /capabilities/groups
 ---
-## Groups and Group Elements
 
 Groups can be given in various forms: for example as
 {% include ref.html label="Permutation Groups" text="permutation groups" %} or

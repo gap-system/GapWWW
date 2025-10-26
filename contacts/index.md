@@ -1,6 +1,6 @@
 ---
 title: Contact
-layout: default
+layout: default_with_title
 has_children: true
 permalink: /contact/
 ---

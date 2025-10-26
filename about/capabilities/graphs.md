@@ -1,12 +1,12 @@
 ---
 title: Graphs
+fulltitle: Graphs, Codes, and Designs
 grand_parent: About
 parent: Capabilities
-layout: default
+layout: default_with_title
 nav_order: 9
 permalink: /capabilities/graphs
 ---
-## Graphs, Codes, and Designs
 
 The package
 [GRAPE](https://gap-packages.github.io/grape) allows one
