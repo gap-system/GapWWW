@@ -5,25 +5,37 @@ has_children: false
 permalink: /logo/
 ---
 
-## GAP logo contest results
+## Download & more information
 
-Between GAP Days Summer 2024 (in August 2024) and GAP Days Spring 2025 (in April 2025)
-we ran a contest to select the new GAP logo. You can see the result now on this
-website.
-
-We would like to thank the following people who participated and submitted so many different
-and amazing designs:
-**Aron Ban Szabo, Bilal Hasanat, Claudio Piedade, Cormullion, Dario Mathiae, David Joyner, Franziska Schiessl, Istvan Szollosi, Janika Peters, Jens Bossaert, John Chakkour, Max Horn, Reinis Cirpons, Roger Vogeler**.
+You can download several variants of the logo as well as sources from
+<https://github.com/gap-system/gap-logo>, and also read up on the
 
 
+## License
 
-## Download
+The GAP logo is © Max Horn and a trademark of the GAP project.
 
-We will soon make various variants of the logo available here.
+The logo is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
-## Merchandise
+### Academic & Educational Use Waiver
 
-Coming soon!
+For uses in **academic, educational, or research contexts**, attribution is **not required** if it is clear from context that the logo refers to the GAP computer algebra system. Examples include:
+
+- Scientific posters or presentations referencing GAP.
+- Slides, lectures, or demonstrations in courses at any level (high school, university, workshops).
+- Publications, articles, or tutorials discussing or teaching GAP.
+
+In these cases, **the context itself counts as sufficient attribution**. The main goal is to ensure it is clear the logo represents GAP.
+
+### General License Terms
+
+Outside of the academic/educational contexts described above, the normal **CC BY-SA 4.0** terms apply:
+
+- Attribution is required.
+- Any derivatives must be shared under the same license.
+
+For more details, see the official CC BY-SA 4.0 license: <https://creativecommons.org/licenses/by-sa/4.0/>.
+
 
 ## Origin of the Logo
 
@@ -49,3 +61,5 @@ design rationale behind it.
 > compatible with the open source spirit of the GAP project. Its design blurb
 > states that it aims to "convey a precise, reliable and free attitude", which
 > of course fits well with GAP.
+
+More information can be found at <https://github.com/gap-system/gap-logo>.
