@@ -57,14 +57,11 @@ The GAP web server is hosted at the RPTU Kaiserslautern-Landau. Primary admin
 for this web server is Max Horn <mhorn@rptu.de>. If you
 feel you have need to directly access the server via SSH, contact him.
 
-- SSH hostname: `www-admin11.uni-kl.de`
+- SSH hostname: `www-admin13.rz.rptu.de`
 - Login:
   - `www-gap-systems` → `www.gap-system.org`
   - `www-gap-docs` → `docs.gap-system.org`
   - `www-gap-files` → `files.gap-system.org`
-- SSH hostname: `www-admin12.rz.rptu.de`
-- Login:
-  - `www-gap-dev` → `dev.gap-system.org`
 
 Please consult `etc/README.server.md` for more information.
 
@@ -74,7 +71,7 @@ Please consult `etc/README.server.md` for more information.
 The manuals for GAP and packages are served from a separate subdomain,
 namely <https://docs.gap-system.org>. The files served there
 are from the directory `/srv/www/www-gap-docs/data/http` on
-`www-admin11.uni-kl.de`, username `www-gap-docs`.
+`www-admin13.rz.rptu.de`, username `www-gap-docs`.
 
 Note that this subdomain is relatively new: the manuals used to be under
 <https://www.gap-system.org/Manuals/>. To ensure URLs with this prefix
@@ -120,4 +117,4 @@ symlink suitably.
 Various archives for GAP and packages are served from a separate
 subdomain, namely <https://files.gap-system.org>. The files served there
 are from the directory `/srv/www/www-gap-docs/files/http` on
-`www-admin11.uni-kl.de`, username `www-gap-files`.
+`www-admin13.rz.rptu.de`, username `www-gap-files`.
