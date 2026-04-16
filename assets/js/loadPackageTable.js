@@ -50,8 +50,7 @@ function format(d) {
     resString += `<dd>`;
     const docsurl = "https://docs.gap-system.org/pkg/";
     const pkgname = d.PackageName.toLowerCase();
-    for (var i = 0; i < d.PackageDoc.length; i++) {
-        var book = d.PackageDoc[i];
+    for (const book of d.PackageDoc) {
         resString += book.BookName + " ";
         resString += `<a href="${docsurl}${pkgname}/${book.HTMLStart}" target="_blank">[HTML]</a> `;
         resString += `<a href="${docsurl}${pkgname}/${book.PDFFile}" target="_blank">[PDF]</a> `;
@@ -63,14 +62,36 @@ function format(d) {
     resString += `<dt>Download</dt>`;
     resString += `<dd>`;
     var formats = d.ArchiveFormats.split(" ");
-    for (var i = 0; i < formats.length; i++) {
-        resString += `[<a href="${d.ArchiveURL}${formats[i]}">${formats[i]}</a>] `;
+    for (const format of formats) {
+        resString += `[<a href="${d.ArchiveURL}${format}">${format}</a>] `;
     }
     resString += `</dd>`;
 
     // license
     resString += `<dt>License</dt>`;
     resString += `<dd>${d.License}</dd>`;
+
+    if (d.Dependencies.ExternalConditions !== undefined && d.Dependencies.ExternalConditions.length > 0) {
+        resString += `<dt>External Conditions</dt>`;
+        resString += `<dd><ul>`;
+        for (const condition of d.Dependencies.ExternalConditions) {
+            resString += `<li>`;
+            if (typeof condition === "string") {
+                resString += condition;
+            } else {
+                // should be a list of length 2, with the second element a URL
+                // but in some packages this is violated
+                var txt = condition[0];
+                var url = condition[1];
+                if (url.startsWith("http://") || url.startsWith("https://")) {
+                    url = `<a href="${url}">${url}</a>`;
+                }
+                resString += `${txt} (${url})`;
+            }
+            resString += `</li>`;
+        }
+        resString += `<ul></dd>`;
+    }
 
     resString += `</dl>`;
 
