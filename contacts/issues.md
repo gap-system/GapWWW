@@ -60,7 +60,6 @@ The present members of the Support Group are:
 - Willem de Graaf
 - Burkhard Höfling
 - Max Horn
-- Gábor Horváth
 - Alexander Hulpke
 - Christopher Jefferson
 - David Joyner
