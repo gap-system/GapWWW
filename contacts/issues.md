@@ -54,7 +54,6 @@ The present members of the Support Group are:
 
 - Bill Allombert
 - Laurent Bartholdi
-- Dominik Bernhardt
 - Thomas Breuer
 - Bettina Eick
 - Franz Gähler
