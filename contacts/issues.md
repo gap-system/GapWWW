@@ -67,6 +67,7 @@ The present members of the Support Group are:
 - Stefan Kohl
 - Olexandr Konovalov
 - Frank Lübeck
+- James Mitchell
 - Robert F Morse
 - Jürgen Müller
 - Mike Newman
