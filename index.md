@@ -24,6 +24,7 @@ nav_exclude: true
 ### Upcoming events
 
 - 28 September - 2 October, 2026: [GAP Days Fall 2026, RWTH Aachen, Germany](https://www.gapdays.de/gapdays2026-fall/)
+- 10 - 11 December, 2026: [40 years of GAP, RWTH Aachen, Germany](https://www.math.rwth-aachen.de/40YearsGAP/)
 
 ### What is GAP?
 
