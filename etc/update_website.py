@@ -222,16 +222,18 @@ releases_to_store = stored_releases
 for github_release in github_releases:
     tag = github_release.tag_name
     is_latest = github_release == latest_release
+    is_prerelease = github_release.prerelease
 
     try:
         # if the github_release is already stored locally, correctly set the
-        # "isLatest" value.
+        # "isLatest" and "isPrerelease" values.
         i, release_to_store = next(
             (i, release)
             for i, release in enumerate(stored_releases)
             if release["tagName"] == tag
         )
         releases_to_store[i]["isLatest"] = is_latest
+        releases_to_store[i]["isPrerelease"] = is_prerelease
     except StopIteration:
         # if the github release is not stored locally, format and store it
         release_to_store = formatted_release(github_release, is_latest)
