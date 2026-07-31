@@ -8,9 +8,11 @@ below.
 ## The big picture
 
 Three separate websites are hosted, each as its own Apache virtual host with its
-own Unix account, all on the same machine `www-admin13.rz.rptu.de` at the RPTU
-Kaiserslautern-Landau computing centre (RZ). The administrative contact there is
-Max Horn <mhorn@rptu.de>.
+own Unix account, all on the same machine `www-admin13.rz.rptu.de`. That machine
+is run by the central IT department of RPTU Kaiserslautern-Landau, not by us. In
+German they are the *Rechenzentrum*, usually abbreviated RZ, which is where the
+`rz` in the hostname comes from; below they are simply "the IT department". The
+administrative contact there is Max Horn <mhorn@rptu.de>.
 
 | Site | Unix account | SSH alias | Driven by | Updated by |
 | --- | --- | --- | --- | --- |
@@ -42,7 +44,7 @@ three accounts.
 directory:
 
     ~/data -> /srv/www/<account>/data          # created by us
-    ~/http -> /srv/www/<account>/data/http     # created by the RZ, root owned
+    ~/http -> /srv/www/<account>/data/http     # created for us, root owned
 
 `~/http` is the document root of that site. Everything else we keep — git
 clones, work directories, state files — lives next to it in `~/data`, outside
@@ -53,11 +55,12 @@ the machine, about 1.7 TB in total. It is not fast: reading a few gigabytes back
 is noticeably expensive, which is why the update jobs are written to avoid
 re-reading data they have already checked.
 
-**Apache** is installed and configured centrally by the RZ, one instance per
-virtual host. The vhost configuration is *not* readable or writable by our
-accounts. However, we are not boxed in by that: `.htaccess` files are honoured,
-and PHP is enabled (8.4 as of this writing), which is enough for redirect rules
-and for the webhook endpoint. Certificates and DNS are handled by the RZ.
+**Apache** is installed and configured centrally by the IT department, one
+instance per virtual host. The vhost configuration is *not* readable or writable
+by our accounts. However, we are not boxed in by that: `.htaccess` files are
+honoured, and PHP is enabled (8.4 as of this writing), which is enough for
+redirect rules and for the webhook endpoint. Certificates and DNS are handled by
+them too.
 
 **systemd user units** are how all automatic updating is driven. This works
 without an active login session only because lingering is enabled for each
@@ -77,19 +80,20 @@ list-timers` on any account is self-explanatory.
 
 Roughly in order:
 
-1. Ask the RZ for the virtual hosts and the accounts, with PHP enabled and
-   `AllowOverride` sufficient for `.htaccess`, and get `loginctl enable-linger`
-   set for each account. Everything after this can be done without root.
-2. Recreate the `~/data` symlink on each account (`~/http` comes from the RZ).
+1. Ask the IT department for the virtual hosts and the accounts, with PHP
+   enabled and `AllowOverride` sufficient for `.htaccess`, and get
+   `loginctl enable-linger` set for each account. Everything after this can be
+   done without root.
+2. Recreate the `~/data` symlink on each account (`~/http` is created for us).
 3. Set up each site following its own document, in this order: the website
    first (it is the only one with a secret to configure), then the manuals, then
    the archive server.
 4. For the archive server, note that the package archives cannot be recovered
    from anywhere else: <https://files.gap-system.org> is itself the archive of
    record for old package releases. If it is ever lost, the only copies are
-   whatever backups the RZ holds and whatever developers happen to have locally.
-   Everything else — the website, the manuals, the GAP releases — can be rebuilt
-   from GitHub.
+   whatever backups the IT department holds and whatever developers happen to
+   have locally. Everything else — the website, the manuals, the GAP releases —
+   can be rebuilt from GitHub.
 
 ## Troubleshooting anywhere
 
