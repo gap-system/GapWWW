@@ -4,35 +4,61 @@ layout: default_with_title
 parent: Documentation
 ---
 
-This is an updated GAP 4 version of a GAP 3 example by [Martin Schönert](https://www.math.rwth-aachen.de/~Martin.Schoenert/), 1993. An almost classical permutation group of small degree is examined with some elementary GAP commands.
-The output given here has been produced by GAP 4.16.0, the input is available in form of a plain GAP 4 [input file](rubik.in).<!-- TODO -->
+This is an updated GAP 4 version of a GAP 3 example by [Martin Schönert](https://www.math.rwth-aachen.de/~Martin.Schoenert/), 1993.
+An almost classical permutation group of small degree is examined with some elementary GAP commands.
+The output given here has been produced by GAP 4.16.0, the input is available in form of a plain GAP 4 [input file](rubik.in).
 
-<p style="text-align: right"><i>
-Ideal Toy Company stated on the package of<br />
-the original Rubik cube that there were more than<br />
-three billion possible states the cube could attain.<br />
-It's analogous to Mac Donald's proudly announcing<br />
-that they've sold more than 120 hamburgers.</i><br />
-(J. A. Paulos, Innumeracy)</p>
+<p style="text-align: right; padding-left: 65%; font-style: italic">
+Ideal Toy Company stated on the package of the original Rubik cube that there
+were more than three billion possible states the cube could attain. It's
+analogous to Mac Donald's proudly announcing that they've sold more than 120
+hamburgers.<br />
+<span style="font-style: normal">(J. A. Paulos, Innumeracy)</span>
+</p>
 
 We consider the group of transformations of Rubik's magic cube. If we number the faces of this cube as follows
-```
-                     +--------------+
-                     |  1    2    3 |
-                     |  4  top    5 |
-                     |  6    7    8 |
-      +--------------+--------------+--------------+--------------+
-      |  9   10   11 | 17   18   19 | 25   26   27 | 33   34   35 |
-      | 12  left  13 | 20 front  21 | 28 right  29 | 36  rear  37 |
-      | 14   15   16 | 22   23   24 | 30   31   32 | 38   39   40 |
-      +--------------+--------------+--------------+--------------+
-                     | 41   42   43 |
-                     | 44 bottom 45 |
-                     | 46   47   48 |
-                     +--------------+
-```
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="60%" role="img" aria-labelledby="cube-net-title cube-net-desc">
+  <title id="cube-net-title">Numbered faces of a Rubik's cube</title>
+  <g fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M176 24h144v144H176z M32 168h144v144H32z M176 168h144v144H176z M320 168h144v144H320z M464 168h144v144H464z M176 312h144v144H176z"/>
+  </g>
+  <g fill="none" stroke="currentColor" stroke-width="1" opacity="0.5">
+    <path d="M224 24v144 M272 24v144 M176 72h144 M176 120h144
+             M80 168v144 M128 168v144 M224 168v144 M272 168v144
+             M368 168v144 M416 168v144 M512 168v144 M560 168v144
+             M32 216h144 M32 264h144 M176 216h144 M176 264h144
+             M320 216h144 M320 264h144 M464 216h144 M464 264h144
+             M224 312v144 M272 312v144 M176 360h144 M176 408h144"/>
+  </g>
+  <g fill="currentColor" font-family="sans-serif" font-size="14" text-anchor="middle" dominant-baseline="middle">
+    <text x="200" y="48">1</text><text x="248" y="48">2</text><text x="296" y="48">3</text>
+    <text x="200" y="96">4</text><text x="248" y="96">top</text><text x="296" y="96">5</text>
+    <text x="200" y="144">6</text><text x="248" y="144">7</text><text x="296" y="144">8</text>
+
+    <text x="56" y="192">9</text><text x="104" y="192">10</text><text x="152" y="192">11</text>
+    <text x="200" y="192">17</text><text x="248" y="192">18</text><text x="296" y="192">19</text>
+    <text x="344" y="192">25</text><text x="392" y="192">26</text><text x="440" y="192">27</text>
+    <text x="488" y="192">33</text><text x="536" y="192">34</text><text x="584" y="192">35</text>
+
+    <text x="56" y="240">12</text><text x="104" y="240">left</text><text x="152" y="240">13</text>
+    <text x="200" y="240">20</text><text x="248" y="240">front</text><text x="296" y="240">21</text>
+    <text x="344" y="240">28</text><text x="392" y="240">right</text><text x="440" y="240">29</text>
+    <text x="488" y="240">36</text><text x="536" y="240">rear</text><text x="584" y="240">37</text>
+
+    <text x="56" y="288">14</text><text x="104" y="288">15</text><text x="152" y="288">16</text>
+    <text x="200" y="288">22</text><text x="248" y="288">23</text><text x="296" y="288">24</text>
+    <text x="344" y="288">30</text><text x="392" y="288">31</text><text x="440" y="288">32</text>
+    <text x="488" y="288">38</text><text x="536" y="288">39</text><text x="584" y="288">40</text>
+
+    <text x="200" y="336">41</text><text x="248" y="336">42</text><text x="296" y="336">43</text>
+    <text x="200" y="384">44</text><text x="248" y="384">bottom</text><text x="296" y="384">45</text>
+    <text x="200" y="432">46</text><text x="248" y="432">47</text><text x="296" y="432">48</text>
+  </g>
+</svg>
+
 then the group is generated by the following generators, corresponding to the six faces of the cube.
-```
+```gap-repl
 gap> cube := Group(
 > ( 1, 3, 8, 6)( 2, 5, 7, 4)( 9,33,25,17)(10,34,26,18)(11,35,27,19),
 > ( 9,11,16,14)(10,13,15,12)( 1,17,41,40)( 4,20,44,37)( 6,22,46,35),
@@ -43,20 +69,20 @@ gap> cube := Group(
 <permutation group with 6 generators>
 ```
 First we want to know the size of this group.
-```
+```gap-repl
 gap> Size( cube );
 43252003274489856000
 ```
 Since this is a little bit unhandy, let us factorize this number.
-```
+```gap-repl
 gap> Collected( Factors( last ) );
 [ [ 2, 27 ], [ 3, 14 ], [ 5, 3 ], [ 7, 2 ], [ 11, 1 ] ]
 ```
-(The result tells us that the size is 2^27 3^14 5^3 7^2 11.)
+(The result tells us that the size is
+$2^{27} \cdot 3^{14} \cdot 5^3 \cdot 7^2 \cdot 11$.)
 
-Next let us investigate the operation of the group on the 48 points (we reduce the line length to get a more appropriate output format).
-```
-gap> SizeScreen( [71, ] );;
+Next, let us investigate the operation of the group on the 48 points.
+```gap-repl
 gap> orbits := Orbits( cube, [1..48] );
 [ [ 1, 3, 17, 14, 8, 38, 9, 41, 19, 48, 22, 6, 30, 33, 43, 11, 46, 
       40, 24, 27, 25, 35, 16, 32 ], 
@@ -65,8 +91,10 @@ gap> orbits := Orbits( cube, [1..48] );
 ```
 The first orbit contains the points at the corners, the second those at the edges; clearly the group cannot move a point at a corner onto a point at an edge.
 
-So to investigate the cube group we first investigate the operation on the corner points. Note that the constructed group that describes this operation will operate on the set `[1..24]`, not on the original set `[1,3,17,14,8,38,9,41,19,48,22,6,30,33,43,11,46,40,24,27,25,35,16,32]`.
-```
+So to investigate the cube group we first investigate the operation on the corner points.
+Note that the constructed group that describes this operation will operate on the set `[1..24]`{:.language-gap-repl .language-mermaid},
+not on the original set `[1,3,17,14,8,38,9,41,19,48,22,6,30,33,43,11,46,40,24,27,25,35,16,32]`{:.language-gap-repl .language-mermaid}.
+```gap-repl
 gap> cube1 := Action( cube, orbits[1] );
 <permutation group with 6 generators>
 gap> NrMovedPoints( cube1 );
@@ -75,15 +103,17 @@ gap> Size( cube1 );
 88179840
 ```
 Now this group obviously operates transitively, but let us test whether it is also primitive.
-```
+```gap-repl
 gap> corners := Blocks( cube1, MovedPoints( cube1 ) );
 [ [ 1, 7, 22 ], [ 2, 14, 20 ], [ 3, 12, 16 ], [ 4, 17, 18 ], 
   [ 5, 9, 21 ], [ 6, 10, 24 ], [ 8, 11, 23 ], [ 13, 15, 19 ] ]
 ```
-Those eight blocks correspond to the eight corners of the cube; on the one hand the group permutes those and on the other hand it permutes the three points at each corner cyclically.
+Those eight blocks correspond to the eight corners of the cube;
+on the one hand the group permutes those and on the other hand it permutes the three points at each corner cyclically.
 
-So the obvious thing to do is to investigate the operation of the group on the eight corners. The action gives a homomorphism to a permutation group on the corners:
-```
+So the obvious thing to do is to investigate the operation of the group on the eight corners.
+The action gives a homomorphism to a permutation group on the corners:
+```gap-repl
 gap> blockhom1 := ActionHomomorphism( cube1, corners, OnSets );
 <action homomorphism>
 gap> cube1b := Image( blockhom1 );
@@ -92,44 +122,52 @@ Group([ (1,2,4,3), (1,3,6,5), (1,5,8,2), (3,4,7,6), (5,6,7,8),
 gap> Size( cube1b );
 40320
 ```
-Now a permutation group of degree 8 that has order 40320 must be the full symmetric group S(8) on eight points.
-
-The next thing then is to investigate the kernel of this operation on blocks, i.e., the subgroup of `cube1` of those elements that fix the blocks setwise.
+Now a permutation group of degree 8 that has order 40320 must be the full symmetric group $S_8$ on eight points.
+Indeed, GAP agrees:
+```gap-repl
+gap> IsNaturalSymmetricGroup(cube1b);
+true
 ```
+The next thing then is to investigate the kernel of this operation on blocks,
+i.e., the subgroup of `cube1`{:.language-gap-repl .language-mermaid} of those elements that fix the blocks setwise.
+```gap-repl
 gap> Factors( Size( Kernel( blockhom1 ) ) );
 [ 3, 3, 3, 3, 3, 3, 3 ]
 gap> IsElementaryAbelian( Kernel( blockhom1 ) );
 true
 ```
-We can show that the product of this elementary abelian group 3^7 with the S(8) is semidirect by finding a complement, i.e., a subgroup that has trivial intersection with the kernel and that generates `cube1` together with the kernel.
-```
+We can show that the product of this elementary abelian group $3^7$ with the $S_8$ is semidirect by finding a complement,
+i.e., a subgroup that has trivial intersection with the kernel and that generates `cube1`{:.language-gap-repl .language-mermaid} together with the kernel.
+```gap-repl
 gap> cmpl1 := ComplementClassesRepresentatives( cube1, Kernel( blockhom1 ) );
 [ <permutation group of size 40320 with 7 generators> ]
 ```
 We verify the complement properties:
-```
+```gap-repl
 gap> cmpl1 := cmpl1[1];;
 gap> Size( Intersection( cmpl1, Kernel( blockhom1 ) ) );
 1
 gap> ClosureGroup( cmpl1, Kernel( blockhom1 ) ) = cube1;
 true
 ```
-There is even a more elegant way to show that `cmpl1` is a complement.
-```
+There is even a more elegant way to show that `cmpl1`{:.language-gap-repl .language-mermaid} is a complement.
+```gap-repl
 gap> IsBijective( RestrictedMapping( blockhom1, cmpl1 ) );
 true
 ```
-Of course, theoretically it is clear that `cmpl1` must indeed be a complement.
+Of course, theoretically it is clear that `cmpl1`{:.language-gap-repl .language-mermaid} must indeed be a complement.
 
-In fact we know that `cube1` is a subgroup of index 3 in the wreath product of a cyclic 3 with S(8). This missing index 3 tells us that we do not have total freedom in turning the corners. The following tests show that whenever we turn one corner clockwise we must turn another corner counterclockwise.
-```
+In fact we know that `cube1`{:.language-gap-repl .language-mermaid} is a subgroup of index 3 in the wreath product of a cyclic 3 with $S_8$.
+This missing index 3 tells us that we do not have total freedom in turning the corners.
+The following tests show that whenever we turn one corner clockwise we must turn another corner counterclockwise.
+```gap-repl
 gap> (1,7,22) in cube1;
 false
 gap> (1,7,22)(2,20,14) in cube1;
 true
 ```
 More or less the same things happen when we consider the operation of the cube group on the edges.
-```
+```gap-repl
 gap> cube2 := Action( cube, orbits[2] );;
 gap> Size( cube2 );
 980995276800
@@ -151,23 +189,30 @@ gap> cmpl2 := ComplementClassesRepresentatives( cube2, Kernel( blockhom2 ) );
   <permutation group of size 479001600 with 11 generators>,
   <permutation group of size 479001600 with 11 generators> ]
 ```
-So there are even 4 classes of complements here. This time we get a semidirect product of a 2^11 with an S(12), namely a subgroup of index 2 of the wreath product of a cyclic 2 with S(12). Here the missing index 2 tells us again that we do not have total freedom in turning the edges. The following tests show that whenever we flip one edge we must also flip another edge.
-```
+So there are even 4 classes of complements here.
+This time we get a semidirect product of a $2^{11}$ with an $S_{12}$,
+namely a subgroup of index 2 of the wreath product of a cyclic 2 with $S_{12}$.
+Here the missing index 2 tells us again that we do not have total freedom in turning the edges.
+The following tests show that whenever we flip one edge we must also flip another edge.
+```gap-repl
 gap> (1,11) in cube2;
 false
 gap> (1,11)(2,17) in cube2;
 true
 ```
-Since `cube1` and `cube2` are the groups describing the actions on the two orbits of `cube`, it is clear that `cube` is a subdirect product of those groups, i.e., a subgroup of the direct product. Comparing the sizes of `cube1`, `cube2`, and `cube` we see that `cube` must be a subgroup of index 2 in the direct product of those two groups.
+Since `cube1`{:.language-gap-repl .language-mermaid} and `cube2`{:.language-gap-repl .language-mermaid} are the groups describing the actions on the two orbits of `cube`{:.language-gap-repl .language-mermaid},
+it is clear that `cube`{:.language-gap-repl .language-mermaid} is a subdirect product of those groups, i.e., a subgroup of the direct product.
+Comparing the sizes of `cube1`{:.language-gap-repl .language-mermaid}, `cube2`{:.language-gap-repl .language-mermaid}, and `cube`{:.language-gap-repl .language-mermaid} we see that `cube`{:.language-gap-repl .language-mermaid} must be a subgroup of index 2 in the direct product of those two groups.
 
-```
+```gap-repl
 gap> Size( cube );
 43252003274489856000
 gap> Size( cube1 ) * Size( cube2 );
 86504006548979712000
 ```
-This final missing index 2 tells us that we cannot operate on corners and edges totally independently. The following tests show that whenever we exchange a pair of corners we must also exchange a pair of edges (and vice versa).
-```
+This final missing index 2 tells us that we cannot operate on corners and edges totally independently.
+The following tests show that whenever we exchange a pair of corners we must also exchange a pair of edges (and vice versa).
+```gap-repl
 gap> (17,19)(11,8)(6,25) in cube;
 false
 gap> (7,28)(18,21) in cube;
@@ -175,16 +220,20 @@ false
 gap> (17,19)(11,8)(6,25)(7,28)(18,21) in cube;
 true
 ```
-As a last part of the structure analysis of the cube group let us compute the centre of the cube group, i.e., the subgroup of those operations that can be performed either before or after any other operation with the same result.
-```
+As a last part of the structure analysis of the cube group let us compute the centre of the cube group,
+i.e., the subgroup of those operations that can be performed either before or after any other operation with the same result.
+```gap-repl
 gap> z := Centre( cube );
 Group([ (2,34)(4,10)(5,26)(7,18)(12,37)(13,20)(15,44)(21,28)(23,42)
   (29,36)(31,45)(39,47) ])
 ```
 We see that the centre contains one nontrivial element, namely the operation that flips all 12 edges simultaneously.
 
-Finally we turn to the original idea connected with the cube, namely to find a sequence of turns of the faces that will transform the cube back into its original state. This amounts to a decomposition of a given element of the cube group into a product of the generators. For this purpose we introduce a free group and a homomorphism of it onto the cube group.
-```
+Finally we turn to the original idea connected with the cube,
+namely to find a sequence of turns of the faces that will transform the cube back into its original state.
+This amounts to a decomposition of a given element of the cube group into a product of the generators.
+For this purpose we introduce a free group and a homomorphism of it onto the cube group.
+```gap-repl
 gap> f := FreeGroup("t","l","f","r","e","b");
 <free group on the generators [ t, l, f, r, e, b ]>
 gap> hom := GroupHomomorphismByImages( f, cube, GeneratorsOfGroup(f),
@@ -197,10 +246,12 @@ gap> hom := GroupHomomorphismByImages( f, cube, GeneratorsOfGroup(f),
   (1,14,48,27)(2,12,47,29)(3,9,46,32)(33,35,40,38)(34,37,39,36), 
   (14,22,30,38)(15,23,31,39)(16,24,32,40)(41,43,48,46)(42,45,47,44) ]
 ```
-Using this homomorphism, we can now decompose elements into generators. The method used utilizes a stabilizer chain and does not enumerate all group elements, therefore the words obtained are not the shortest possible, though they are short enough for hand solutions.
+Using this homomorphism, we can now decompose elements into generators.
+The method used utilizes a stabilizer chain and does not enumerate all group elements,
+therefore the words obtained are not the shortest possible, though they are short enough for hand solutions.
 
 First we decompose the centre element:
-```
+```gap-repl
 gap> PreImagesRepresentative( hom, z.1 );
 l^-1*e^-1*t^-1*e*t*l*t*f*t*r*t^-1*r^-1*f^-1*t^-1*f*t*l*t*l^-1*f^-1*l*\
 t^-1*l^-1*f*r*t^-1*r^-1*f^-1*l*t*f*t^-1*f^-1*l^-2*t^-1*l^-1*e*l*e^-1*\
@@ -212,7 +263,7 @@ gap> Length( last );
 106
 ```
 Next we decompose some element arbitrarily chosen by us:
-```
+```gap-repl
 gap> PreImagesRepresentative( hom, (17,19)(11,8)(6,25)(7,28)(18,21) );
 l^-1*t^-1*l*f*r*t*r^-1*f^-1*l*t*f*t^-1*f^-1*l^-1*t^2*f*t*l*t*l^-1*f^-\
 1*l*t^-1*l^-1*f*t^-1*f^-1*l*t*l^-1*t*l*t^-2*l^-1*f*(t*r*t^-1*r^-1)^2*\
@@ -222,7 +273,7 @@ gap> Length( last );
 77
 ```
 Last we let GAP choose a random element ...
-```
+```gap-repl
 gap> r := Random( cube );
 (1,43,6,27,32,46)(2,4,13,34,10,20)(3,38,40,9,24,17)(5,15,45,23,29,47,
 26,44,31,42,36,39)(7,18)(8,22)(11,33,48,14,35,30)(12,21,37,28)(16,
@@ -237,7 +288,7 @@ gap> Length( last );
 100
 ```
 ... and we verify that the decomposition is correct:
-```
+```gap-repl
 gap> Image( hom, pre );
 (1,43,6,27,32,46)(2,4,13,34,10,20)(3,38,40,9,24,17)(5,15,45,23,29,47,
 26,44,31,42,36,39)(7,18)(8,22)(11,33,48,14,35,30)(12,21,37,28)(16,
@@ -245,4 +296,5 @@ gap> Image( hom, pre );
 gap> last = r;
 true
 ```
-This concludes our example. Of course, GAP can do much more, but demonstrating them all would take too much room.
+This concludes our example. Of course, GAP offers many more features,
+but demonstrating all of them would take too much space.
