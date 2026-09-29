@@ -8,13 +8,13 @@ This is an updated GAP 4 version of a GAP 3 example by [Martin Schönert](https:
 An almost classical permutation group of small degree is examined with some elementary GAP commands.
 The output given here has been produced by GAP 4.16.0, the input is available in form of a plain GAP 4 [input file](rubik.in).
 
-<blockquote style="text-align: right; padding-left: 65%; font-style: italic">
+<p style="text-align: right; padding-left: 65%; font-style: italic">
 Ideal Toy Company stated on the package of the original Rubik cube that there
 were more than three billion possible states the cube could attain. It's
 analogous to Mac Donald's proudly announcing that they've sold more than 120
 hamburgers.<br />
 <span style="font-style: normal">(J. A. Paulos, Innumeracy)</span>
-</blockquote>
+</p>
 
 We consider the group of transformations of Rubik's magic cube. If we number the faces of this cube as follows
 
