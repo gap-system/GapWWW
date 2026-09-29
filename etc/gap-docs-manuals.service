@@ -1,0 +1,10 @@
+[Unit]
+Description=Mirror the GAP manuals to docs.gap-system.org
+Documentation=https://github.com/gap-system/GapWWW
+After=network-online.target
+
+[Service]
+Type=oneshot
+# Update the clone first: extract_manuals.py, and this job itself, live in it.
+ExecStartPre=/usr/bin/git -C %h/data/GapWWW pull --ff-only --quiet
+ExecStart=%h/data/GapWWW/etc/mirror-manuals.py
