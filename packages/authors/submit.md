@@ -8,21 +8,27 @@ permalink: /packages/authors/submit/
 
 Packages that meet the requirements below are distributed with GAP and
 updated automatically when you release a new version. To submit one, write
-to the GAP development mailing list.
+to the GAP development mailing list or open an issue.
+
+If you do not want to submit your package, we can still list it on
+[gap-packages.github.io](https://gap-packages.github.io) among the packages
+not distributed with GAP: tell us about it on the list, or open a pull
+request there.
 
 ### How to submit
 
-Send an email to <gap@gap-system.org> containing:
+Send an email to <gap@gap-system.org>, or
+[open an issue](https://github.com/gap-system/PackageDistro/issues/new?template=new-package.yml)
+in the PackageDistro repository, giving:
 
 - the package name and a short description of what it does;
 - the URL of its `PackageInfo.g` file;
 - the URL of its source repository, if it has one;
 - how it relates to existing packages or library functionality, if it
-  overlaps with any;
-- confirmation that you ran the [checks below](#checking-your-package-locally).
+  overlaps with any.
 
 Anyone may do this on behalf of the package authors, but only with their
-consent.
+consent. We forward submissions made as issues to the list.
 
 **The list is open.** Anyone can
 [subscribe](https://lists.uni-kl.de/gap/info/gap), and subscribers can read
@@ -42,6 +48,15 @@ From then on, new versions are picked up automatically: we check the
 `PackageInfoURL` of each package every hour, so publishing a new
 `PackageInfo.g` and archive there is all a release needs. The version number
 must increase with each release.
+
+### Maintaining your package
+
+We test distributed packages against new versions of GAP and of other
+packages. When something breaks, we tell you and often send a fix; please
+review it and make a new release, or let us make releases for you, see
+[Hosting Your Package on GitHub]({{ site.baseurl }}/packages/authors/#hosting-your-package-on-github).
+If a package stays broken and we cannot reach its maintainers, we may have
+to remove it from the distribution until it is fixed.
 
 ### Requirements
 
@@ -68,17 +83,29 @@ A package must
 
 We also recommend a public source repository with an issue tracker, and
 continuous integration as set up in the
-[Example package](https://github.com/gap-packages/example).
+[Example package](https://github.com/gap-packages/example); see
+[Hosting Your Package on GitHub]({{ site.baseurl }}/packages/authors/#hosting-your-package-on-github).
 [PackageMaker](https://github.com/gap-packages/PackageMaker) creates a new
 package with all of this in place.
 
+### Getting help
+
+If you have questions about submitting a package, or need help meeting a
+requirement, ask on the list, in the [GAP Slack](https://gap-system.org/slack),
+in a [PackageDistro issue](https://github.com/gap-system/PackageDistro/issues),
+at [GAP Days](https://www.gapdays.de/), or ask anyone from the GAP team you
+know.
+
 ### Checking your package locally
+
+You do not need to run these checks: we run them on every submission and
+tell you if one fails. Running them yourself finds problems earlier.
 
 You need a GAP installation with all distributed packages installed and
 compiled; the release archive from the
 [download page]({{ site.baseurl }}/install/) has them. Put your package into
 a directory, here `DIR`, and run these commands from the GAP root directory.
-Each exits with status 0 on success.
+The first three exit with status 0 on success.
 
 Validate `PackageInfo.g` (requirement 1):
 
@@ -110,5 +137,14 @@ itself with a status reporting the result, for example by calling
 [`tst/testall.g`](https://github.com/gap-packages/example/blob/master/tst/testall.g)
 shows how.
 
+List the variables and methods your package defines (requirement 4);
+{% include ref.html label="ShowPackageVariables" %} marks with `*` those
+that the built manual does not document:
+
+```sh
+./gap -q -A --packagedirs DIR -c 'ShowPackageVariables("mypkg"); QuitGap();'
+```
+
 The continuous integration setup of the Example package runs these tests on
-every change to your repository.
+every change to your repository, and can report which parts of your code
+they exercise. High coverage is welcome but not required.

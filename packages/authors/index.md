@@ -79,6 +79,27 @@ distributed with GAP itself. For the latter, see
 [Submitting a Package]({{ site.baseurl }}/packages/authors/submit/),
 which lists the requirements a package must meet.
 
+### Hosting Your Package on GitHub
+
+You can host your package anywhere, but on GitHub you can use tools the GAP
+team maintains:
+
+- the actions in [gap-actions](https://github.com/gap-actions) run your
+  tests on every change, as set up in the
+  [Example](https://github.com/gap-packages/example) package;
+- [release-pkg](https://github.com/gap-actions/release-pkg) makes a release
+  and updates your package's website on GitHub Pages;
+- others can contribute changes and be added as maintainers, so the package
+  does not depend on a single person.
+
+You can move your package into the
+[gap-packages](https://github.com/gap-packages) organisation, and out again,
+at any time. There you can also allow the GAP team, or some of its members,
+to co-maintain it: we then take care of routine maintenance such as small
+fixes and new releases, so the package stays available if you no longer have
+time for it. We do not take over a package without its authors' consent.
+To move your package or set this up, ask on <gap@gap-system.org>.
+
 ### Writing Documentation for Your Package
 
 An  essential feature  of any GAP package is  that it
