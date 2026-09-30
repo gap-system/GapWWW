@@ -41,6 +41,17 @@ a preview of the page. For more information on using Jekyll, please
 consult the [Jekyll documentation](https://jekyllrb.com/docs/).
   
 
+## Preview of upcoming changes
+
+The `devel` branch is deployed to <https://gap-system.github.io/GapWWW/>
+by the workflow `.github/workflows/jekyll.yml`. It is built with
+`_config_preview.yml`, which adds a banner pointing to the live website
+and asks search engines not to index the preview. To build the preview
+locally, run
+
+    bundle exec jekyll serve --config _config.yml,_config_preview.yml
+
+
 ## Actually publishing changes to the website
 
 After a change has been merged into the `master` branch of the `GapWWW`
