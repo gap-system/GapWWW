@@ -3,13 +3,13 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll site to Pages
+# Builds the `devel` branch as a preview of the website and deploys it to
+# GitHub Pages. The live site is built from `master` on our own server.
+name: Deploy preview to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
+    branches: ["devel"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -33,6 +33,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          ref: devel
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -44,7 +46,7 @@ jobs:
         uses: actions/configure-pages@v6
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        run: bundle exec jekyll build --config _config.yml,_config_preview.yml --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
