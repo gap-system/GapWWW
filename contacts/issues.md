@@ -1,7 +1,7 @@
 ---
 title: Reporting issues
 layout: default_with_title
-parent: Contact
+parent: Help & Community
 permalink: /issues/
 nav_order: 1
 ---
@@ -39,39 +39,12 @@ additional advice given in
 
 The preferred way to submit bug reports is to use the [GAP issue
 tracker](https://github.com/gap-system/gap/issues) on GitHub.
-Alternatively, you may send them to <support@gap-system.org>. When using
+Alternatively, you may send them to <support@gap-system.org>, which is read
+by the [GAP Support Group]({{ site.baseurl }}/forum/#gap-support). When using
 email, please don't attach any log files, suggested patches etc.
 because this mailing list blocks attachments - put all the text into the
 body of email instead.
 
-### Support Group
-Please do not normally write to the individual members of the Support Group.
-Each of them will see all questions sent to <support@gap-system.org>,
-but they will be also seen by a broader pool of people, and the answers will
-be recorded and might help others in the future.
-
-The present members of the Support Group are:
-
-- Bill Allombert
-- Laurent Bartholdi
-- Thomas Breuer
-- Bettina Eick
-- Franz Gähler
-- Willem de Graaf
-- Burkhard Höfling
-- Max Horn
-- Alexander Hulpke
-- Christopher Jefferson
-- David Joyner
-- Stefan Kohl
-- Olexandr Konovalov
-- Frank Lübeck
-- James Mitchell
-- Robert F Morse
-- Jürgen Müller
-- Mike Newman
-- Alice Niemeyer
-- Dmitrii Pasechnik
-- Martin Schönert
-- Andrew Solomon
-- Chris Wensley
+Bugs in a GAP package are best reported to its authors, usually via the
+issue tracker linked from the package's home page; see the
+[list of packages]({{ site.baseurl }}/packages/).

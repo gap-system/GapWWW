@@ -1,7 +1,7 @@
 ---
 title: Centres
 layout: default_with_title
-parent: Contact
+parent: About
 permalink: /centres/
 ---
 

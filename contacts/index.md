@@ -1,73 +1,112 @@
 ---
-title: Contact
+title: Help & Community
 layout: default_with_title
 has_children: true
+nav_order: 3
 permalink: /contact/
 ---
 
-### People
-The GAP Group consists of many different people and
-is most interested in close contact to the users of GAP.
-On one hand we hope for feedback from users, on the other hand we are
-offering to give support to users as well as we can. However with both,
-reacting to feedback and giving support, users are kindly asked to
-understand that all this is done by colleagues who provide such service
-in addition to the work for their regular job.
+GAP is developed and supported by volunteers, most of whom do this in
+addition to their regular job. This page explains where to ask which
+question, and who will see what you write there.
 
-### Feedback
+Please do not write to individual developers directly. The channels below
+reach more people who can answer, and a public answer helps the next person
+with the same question.
 
-We hope for feedback in particular in the following instances.
+### Before you ask
 
--   **When using GAP.**  If you have used GAP we would appreciate some
-    information about your work via an email to the address
-    <support@gap-system.org>.
+- **Manuals.** The [Tutorial][tutorial] and the [Reference Manual][refman]
+  describe GAP; each [package][packages] has its own manual. Inside GAP,
+  `?Sylow` looks up a topic.
+- **[FAQ][faq]** and **[Learning GAP][learn]**.
+- **Web search.** Many questions have been answered before, in the
+  [Forum archive][forumarchive], on [Mathematics Stack Exchange][mathse] or
+  on [MathOverflow][mo].
+- **AI assistants** can help, but they often invent GAP functions or options
+  that do not exist, and produce code that looks right but computes something
+  else. Look up every function they use in the manual and test the code.
+  If you post AI-generated code in one of the channels below, say so.
 
--   **When encountering bugs.**  We strongly appreciate timely reports
-    about any bugs in GAP you may encounter. When reporting a bug,
-    please follow [these guidelines]({{ site.baseurl }}/issues/).
-    The preferred way to submit bug reports is to use the [GAP issue
-    tracker](https://github.com/gap-system/gap/issues) on GitHub.
-    Alternatively, you may send them to <support@gap-system.org>.
+### Where to ask
 
-### User Support
+| I want to …                                    | Where |
+|------------------------------------------------|-------|
+| ask how to do something with GAP               | [GAP Forum][forum], [Math Stack Exchange][mathse], [Slack][slack], [GitHub Discussions][discussions] |
+| ask a research-level question involving GAP    | [MathOverflow][mo] |
+| ask a theoretical question about groups        | [Group-Pub-Forum][gpf] |
+| report a bug in GAP or a package               | [Reporting issues][issues] |
+| ask something that concerns only me, or is private | [GAP Support][support] |
+| discuss the development of GAP or a package    | [GAP development list][devlist], [GitHub][github], [Slack][slack], [GAP Days](#gap-days) |
+| hear about new releases and serious bugs       | [GAP Forum][forum], [GAP development list][devlist], [Slack][slack] |
+| meet developers and work on code together      | [GAP Days](#gap-days) |
 
-We offer to react as well as we can to questions, requests for help with
-problems, or complaints that you may have. However, for the sake of the
-whole user community of GAP, we ask you to separate these into two
-different categories.
+### Channels compared
 
--   **GAP Support.**  We would like to deal with those topics that are
-    more or less local to you, that is, are likely not of interest to
-    most of the other GAP users by direct correspondence with you.
-    Please send letters about such **local** problems and questions also
-    to the address <support@gap-system.org>.
+| Channel | Who can post | Who can read it | Good for | Not for |
+|---------|--------------|-----------------|----------|---------|
+| [GAP Forum][forum] | subscribers | anyone: public archive since 1992 | questions and discussions of general interest; announcements | problems specific to your setup |
+| [GAP development list][devlist] | subscribers | subscribers, mostly developers | development of GAP and packages | usage questions |
+| [GAP Support][support] | anyone | the Support Group only | private or local problems; bug reports by email | questions of general interest |
+| [GAP issue tracker][gapissues] | GitHub users | anyone | bug reports and feature requests for GAP | usage questions |
+| package issue trackers | depends on the package; mostly GitHub users | anyone, usually | bugs in a package | bugs in GAP itself |
+| [GitHub Discussions][discussions] | GitHub users | anyone | questions, ideas, showing your work | bug reports |
+| [Slack][slack] | anyone who joins | members; older messages may disappear | quick questions; chat about development | anything that should be findable later |
+| [Math Stack Exchange][mathse], [MathOverflow][mo] | Stack Exchange users | anyone | self-contained questions with a definite answer | open-ended discussions |
 
--   **GAP Forum.**  On the other hand, the
-    [GAP Forum]({{ site.baseurl }}/forum/)
-    should be reserved for discussions about problems that are likely to
-    interest many of the GAP users. It would also be welcome if you
-    could occasionally tell other users in the GAP Forum about
-    interesting applications you have made of GAP. All correspondence in
-    the Forum is kept in the
-    [Forum Archive]({{ site.baseurl }}/forum/archive/).
+The [Group-Pub-Forum][gpf] is a mailing list for questions on the theory of
+groups and related structures, run by the University of Bath. To join, email
+the address given on its page with your name and affiliation.
 
-    For **theoretical** questions on groups and related structures we
-    like to point to the
-    [Group-Pub-forum](https://people.bath.ac.uk/masgcs/gpf.html) in
-    which such questions are answered and discussed by a large community
-    of experts.
+### How the GAP team uses these channels
 
-### Cooperation
+- New releases are announced on the GAP Forum, the GAP development list, and
+  Slack.
+- Bugs that can produce wrong results without an error are announced on the
+  GAP Forum.
+- Bug reports are best filed in the [issue tracker][gapissues]; reports sent
+  to any of the three mailing lists reach us too.
+- Development is discussed in GitHub issues and pull requests, on the
+  development list, and on Slack.
 
-The functionality of GAP has been widely enlarged by pieces of code and
-data collections that have been developed by users of GAP and have been
-provided to be used with the main GAP library. We distribute these in
-the form of [Packages]({{ site.baseurl }}/packages/) and Data Libraries.
-We welcome obtaining any further such contributions as well as
-references to GAP implementations in the course of your research
-projects.
+### GAP Days
 
-As explained on the respective page we have established a procedure for
-formally 'accepting' some packages which we hope will give them a
-status comparable to a published paper. On a separate page we inform
-about the process of [submitting contributions]({{ site.baseurl }}/packages/authors/submit.html).
+[GAP Days][gapdays] are week-long meetings of GAP developers and users, held
+about twice a year at changing places. Each meeting has a few main topics,
+coding sprints, and short talks about recent developments. Users with some
+programming experience are welcome, not only core developers: with many GAP
+experts in the room, it is a good opportunity to work on your own package or
+code, and to influence where GAP goes next. Upcoming meetings are listed on
+the [front page]({{ site.baseurl }}/) and at [gapdays.de][gapdays].
+
+### Feedback and contributions
+
+- **Tell us how you use GAP**, by writing to <support@gap-system.org>. If you
+  publish work that used GAP, please [cite it]({{ site.baseurl }}/cite/).
+- **Teaching material.** If you use GAP in teaching and can share your
+  material, tell us; see [Teaching Material]({{ site.baseurl }}/doc/teach/).
+- **Contributing code.** See the
+  [contribution guide](https://github.com/gap-system/gap/blob/master/CONTRIBUTING.md)
+  for GAP itself. Much of GAP's functionality comes from
+  [packages][packages] written by users; see the
+  [hints for package authors]({{ site.baseurl }}/packages/authors/) and how to
+  [submit a package]({{ site.baseurl }}/packages/authors/submit/).
+
+[tutorial]: {{ site.docsurl }}/doc/tut/chap0_mj.html
+[refman]: {{ site.docsurl }}/doc/ref/chap0_mj.html
+[packages]: {{ site.baseurl }}/packages/
+[faq]: {{ site.baseurl }}/faq/
+[learn]: {{ site.baseurl }}/doc/learn/
+[forum]: {{ site.baseurl }}/forum/#gap-forum
+[forumarchive]: {{ site.baseurl }}/forum/archive/
+[devlist]: {{ site.baseurl }}/forum/#gap-development-list
+[support]: {{ site.baseurl }}/forum/#gap-support
+[issues]: {{ site.baseurl }}/issues/
+[slack]: {{ site.baseurl }}/slack
+[github]: https://github.com/gap-system/gap
+[gapissues]: https://github.com/gap-system/gap/issues
+[discussions]: https://github.com/gap-system/gap/discussions
+[mathse]: https://math.stackexchange.com/questions/tagged/gap
+[mo]: https://mathoverflow.net/questions/tagged/gap
+[gpf]: https://www.bath.ac.uk/case-studies/group-pub-forum/
+[gapdays]: https://www.gapdays.de

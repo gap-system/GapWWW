@@ -1,7 +1,7 @@
 ---
 title: Council
 layout: default_with_title
-parent: Contact
+parent: About
 permalink: /council/
 ---
 

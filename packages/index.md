@@ -2,7 +2,7 @@
 title: GAP Packages
 layout: default_with_title
 has_children: true
-nav_order: 5
+nav_order: 6
 permalink: /packages/
 ---
 

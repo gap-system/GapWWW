@@ -2,12 +2,14 @@
 title: Documentation
 layout: default_with_title
 has_children: true
-nav_order: 4
+nav_order: 5
 ---
 
   There is a lot of written material telling about the functionality
   and use of GAP, providing information about algorithmic
   background and giving hints for writing own GAP code.
+  If it does not answer your question, see
+  [Help & Community]({{ site.baseurl }}/contact/).
 
 - ### Manuals
   - The [Tutorial]({{ site.docsurl }}/doc/tut/chap0_mj.html) ([PDF]({{ site.docsurl }}/doc/tut/manual.pdf))

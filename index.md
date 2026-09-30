@@ -26,6 +26,9 @@ nav_exclude: true
 - 28 September - 2 October, 2026: [GAP Days Fall 2026, RWTH Aachen, Germany](https://www.gapdays.de/gapdays2026-fall/)
 - 10 - 11 December, 2026: [40 years of GAP, RWTH Aachen, Germany](https://www.math.rwth-aachen.de/40YearsGAP/)
 
+[GAP Days](https://www.gapdays.de) are week-long meetings of GAP developers
+and users, held about twice a year. Everyone who writes GAP code is welcome.
+
 ### What is GAP?
 
 GAP is a system for computational discrete algebra, with particular
@@ -50,6 +53,9 @@ Changes from earlier versions are described in the
 
 
 ### We are looking forward to hearing from you!
+
+Questions about GAP? [Help & Community]({{ site.baseurl }}/contact/) explains
+where to ask.
 
 We welcome contributions to GAP. The GAP development repository is
 hosted on [GitHub](https://github.com/gap-system/gap). You may find some
