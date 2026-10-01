@@ -37,6 +37,18 @@ Before formulating a bug report it may be helpful to consult some
 additional advice given in
 [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html).
 
+### Bug in GAP or in a package?
+
+Much of GAP's functionality comes from packages. The bug is probably in a
+package if the function you called is documented in a package manual, or if
+the stack trace printed with the error names a file in a `pkg` directory.
+Report such bugs to the package authors: on the
+[list of packages]({{ site.baseurl }}/packages/), expand the package's row
+for a link to its issue tracker. If you are unsure, use the GAP issue
+tracker.
+
+### Where to report
+
 The preferred way to submit bug reports is to use the [GAP issue
 tracker](https://github.com/gap-system/gap/issues) on GitHub.
 Alternatively, you may send them to <support@gap-system.org>, which is read
@@ -44,7 +56,3 @@ by the [GAP Support Group]({{ site.baseurl }}/forum/#gap-support). When using
 email, please don't attach any log files, suggested patches etc.
 because this mailing list blocks attachments - put all the text into the
 body of email instead.
-
-Bugs in a GAP package are best reported to its authors, usually via the
-issue tracker linked from the package's home page; see the
-[list of packages]({{ site.baseurl }}/packages/).

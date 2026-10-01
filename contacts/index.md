@@ -18,7 +18,7 @@ with the same question.
 
 - **Manuals.** The [Tutorial][tutorial] and the [Reference Manual][refman]
   describe GAP; each [package][packages] has its own manual. Inside GAP,
-  `?Sylow` looks up a topic.
+  `?` followed by a topic, e.g. `?Sylow`, looks it up in the manuals.
 - **[FAQ][faq]** and **[Learning GAP][learn]**.
 - **Web search.** Many questions have been answered before, in the
   [Forum archive][forumarchive], on [Mathematics Stack Exchange][mathse] or
@@ -35,7 +35,8 @@ with the same question.
 | ask how to do something with GAP               | [GAP Forum][forum], [Math Stack Exchange][mathse], [Slack][slack], [GitHub Discussions][discussions] |
 | ask a research-level question involving GAP    | [MathOverflow][mo] |
 | ask a theoretical question about groups        | [Group-Pub-Forum][gpf] |
-| report a bug in GAP or a package               | [Reporting issues][issues] |
+| report a bug in GAP                            | [GAP issue tracker][gapissues]; see [Reporting issues][issues] |
+| report a bug in a package                      | the package's issue tracker; see [Reporting issues][pkgbugs] |
 | ask something that concerns only me, or is private | [GAP Support][support] |
 | discuss the development of GAP or a package    | [GAP development list][devlist], [GitHub][github], [Slack][slack], [GAP Days](#gap-days) |
 | hear about new releases and serious bugs       | [GAP Forum][forum], [GAP development list][devlist], [Slack][slack] |
@@ -102,6 +103,7 @@ the [front page]({{ site.baseurl }}/) and at [gapdays.de][gapdays].
 [devlist]: {{ site.baseurl }}/forum/#gap-development-list
 [support]: {{ site.baseurl }}/forum/#gap-support
 [issues]: {{ site.baseurl }}/issues/
+[pkgbugs]: {{ site.baseurl }}/issues/#bug-in-gap-or-in-a-package
 [slack]: {{ site.baseurl }}/slack
 [github]: https://github.com/gap-system/gap
 [gapissues]: https://github.com/gap-system/gap/issues
