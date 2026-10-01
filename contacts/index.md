@@ -36,7 +36,7 @@ with the same question.
 | ask a research-level question involving GAP    | [MathOverflow][mo] |
 | ask a theoretical question about groups        | [Group-Pub-Forum][gpf] |
 | report a bug in GAP                            | [GAP issue tracker][gapissues]; see [Reporting issues][issues] |
-| report a bug in a package                      | the package's issue tracker; see [Reporting issues][pkgbugs] |
+| report a bug in a package                      | [Reporting issues][pkgbugs] |
 | ask something that concerns only me, or is private | [GAP Support][support] |
 | discuss the development of GAP or a package    | [GAP development list][devlist], [GitHub][github], [Slack][slack], [GAP Days](#gap-days) |
 | hear about new releases and serious bugs       | [GAP Forum][forum], [GAP development list][devlist], [Slack][slack] |

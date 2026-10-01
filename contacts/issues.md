@@ -44,8 +44,8 @@ package if the function you called is documented in a package manual, or if
 the stack trace printed with the error names a file in a `pkg` directory.
 Report such bugs to the package authors: on the
 [list of packages]({{ site.baseurl }}/packages/), expand the package's row
-for a link to its issue tracker. If you are unsure, use the GAP issue
-tracker.
+for a link to its issue tracker, if it has one; otherwise contact its authors,
+e.g. via its home page. If you are unsure, use the GAP issue tracker.
 
 ### Where to report
 
