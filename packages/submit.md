@@ -1,9 +1,8 @@
 ---
 title: Submitting a Package
 layout: default_with_title
-grand_parent: GAP Packages
-parent: For Authors
-permalink: /packages/authors/submit/
+parent: GAP Packages
+permalink: /packages/submit/
 ---
 
 Packages that meet the requirements below are distributed with GAP and

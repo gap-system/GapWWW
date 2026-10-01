@@ -94,7 +94,7 @@ the [front page]({{ site.baseurl }}/) and at [gapdays.de][gapdays].
   for GAP itself. Much of GAP's functionality comes from
   [packages][packages] written by users; see the
   [hints for package authors]({{ site.baseurl }}/packages/authors/) and how to
-  [submit a package]({{ site.baseurl }}/packages/authors/submit/).
+  [submit a package]({{ site.baseurl }}/packages/submit/).
 
 [tutorial]: {{ site.docsurl }}/doc/tut/chap0_mj.html
 [refman]: {{ site.docsurl }}/doc/ref/chap0_mj.html
@@ -105,7 +105,7 @@ the [front page]({{ site.baseurl }}/) and at [gapdays.de][gapdays].
 [forumarchive]: {{ site.baseurl }}/forum/archive/
 [devlist]: {{ site.baseurl }}/forum/#gap-development-list
 [support]: {{ site.baseurl }}/forum/#gap-support
-[submit]: {{ site.baseurl }}/packages/authors/submit/
+[submit]: {{ site.baseurl }}/packages/submit/
 [issues]: {{ site.baseurl }}/issues/
 [pkgbugs]: {{ site.baseurl }}/issues/#bug-in-gap-or-in-a-package
 [slack]: {{ site.baseurl }}/slack
