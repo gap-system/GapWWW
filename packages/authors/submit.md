@@ -15,6 +15,29 @@ If you do not want to submit your package, we can still list it on
 not distributed with GAP: tell us about it on the list, or open a pull
 request there.
 
+### The recommended route
+
+This route sets up testing, releases and a package website for you:
+
+1. Create your package with
+   [PackageMaker](https://github.com/gap-packages/PackageMaker), and let it
+   set up a git repository and the GitHub workflows.
+2. Publish the repository on GitHub. The workflows then run your tests and
+   build your manual on every change.
+3. Write your code, its manual and its tests.
+4. Make a release with the Release workflow, as described in
+   [release-pkg](https://github.com/gap-actions/release-pkg#usage). It
+   publishes the archive and updates your package's website, which also
+   serves your `PackageInfo.g`.
+5. Submit the package as described below.
+
+Other setups work too, as long as they meet the
+[requirements](#requirements): see
+[Hosting Your Package on GitHub]({{ site.baseurl }}/packages/authors/#hosting-your-package-on-github)
+for what GitHub offers, and the
+{% include ref.html label="Using and Developing GAP Packages" text="Reference Manual" %}
+for how a package is structured.
+
 ### How to submit
 
 Send an email to <gap@gap-system.org>, or
@@ -81,13 +104,6 @@ A package must
    packages; see
    [Do Not Change GAP's Behaviour]({{ site.baseurl }}/packages/authors/#do-not-change-gaps-behaviour-in-a-package).
 
-We also recommend a public source repository with an issue tracker, and
-continuous integration as set up in the
-[Example package](https://github.com/gap-packages/example); see
-[Hosting Your Package on GitHub]({{ site.baseurl }}/packages/authors/#hosting-your-package-on-github).
-[PackageMaker](https://github.com/gap-packages/PackageMaker) creates a new
-package with all of this in place.
-
 ### Getting help
 
 If you have questions about submitting a package, or need help meeting a
@@ -146,6 +162,5 @@ that the built manual does not document:
 ./gap -q -A --packagedirs DIR -c 'ShowPackageVariables("mypkg"); QuitGap();'
 ```
 
-The continuous integration setup of the Example package runs these tests on
-every change to your repository, and can report which parts of your code
-they exercise. High coverage is welcome but not required.
+The GitHub workflows set up by PackageMaker run these tests on every change
+to your repository, and can report which parts of your code they exercise. High coverage is welcome but not required.

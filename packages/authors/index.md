@@ -17,6 +17,9 @@ package authors have done.)
 
 ### Getting Started Writing a Package
 
+For a step-by-step route from a new package to its distribution with GAP,
+see [the recommended route]({{ site.baseurl }}/packages/authors/submit/#the-recommended-route).
+
 The GAP Reference Manual contains a
 {% include ref.html label="Using and Developing GAP Packages" text="chapter on using and developing GAP packages" %},
 which describes the rules and conventions for the structure of a GAP package,
