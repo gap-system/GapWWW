@@ -91,10 +91,11 @@ package with all of this in place.
 ### Getting help
 
 If you have questions about submitting a package, or need help meeting a
-requirement, ask on the list, in the [GAP Slack](https://gap-system.org/slack),
+requirement, ask on the list, in the [GAP Slack]({{ site.baseurl }}/slack),
 in a [PackageDistro issue](https://github.com/gap-system/PackageDistro/issues),
-at [GAP Days](https://www.gapdays.de/), or ask anyone from the GAP team you
-know.
+at [GAP Days]({{ site.baseurl }}/contact/#gap-days), or ask anyone from the
+GAP team you know. [Help & Community]({{ site.baseurl }}/contact/) compares
+these channels.
 
 ### Checking your package locally
 
