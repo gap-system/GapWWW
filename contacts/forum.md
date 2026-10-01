@@ -33,10 +33,12 @@ address ('From:' field) you subscribed with. This keeps junk mail out.
 ### GAP development list
 
 <gap@gap-system.org> is for discussions about the development of GAP and its
-packages. It is open to everyone; subscribe on the
+packages, including
+[package submissions]({{ site.baseurl }}/packages/authors/submit/). It is
+open to everyone; subscribe on the
 [web page](https://lists.uni-kl.de/gap/info/gap) of the list. Its
 [archive](https://lists.uni-kl.de/gap/arc/gap) is visible to subscribers
-only.
+only. Messages from non-members are held until a moderator releases them.
 
 ### GAP Support
 

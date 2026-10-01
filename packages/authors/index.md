@@ -74,19 +74,10 @@ objects.
 
 Once a package works and has documentation of its functionality, you
 should consider to distribute it for interested GAP
-users. Of course, you can just do it on your own, say via a web page.
-In this case we would like to hear about the availability of the
-package, please write a hint to <support@gap-system.org>.
-
-Another possibility is to redistribute your package via the website
-of GAP itself. If you want that, also contact us as
-just stated. The GAP Group will check if your package
-provides some new or improved functionality which looks interesting for
-other users, if it contains  reasonable documentation, and if it seems
-to work smoothly with the GAP library and other
-distributed packages. In this case the package can take part in the
-distribution update mechanism described below. It becomes a
-<em>deposited</em> package.
+users. You can do this on your own, say via a web page, or have it
+distributed with GAP itself. For the latter, see
+[Submitting a Package]({{ site.baseurl }}/packages/authors/submit/),
+which lists the requirements a package must meet.
 
 ### Writing Documentation for Your Package
 
@@ -160,7 +151,8 @@ also explained in the `PackageInfo.g` file mentioned above:
   (containing installation instructions) and the `PackageInfo.g`
   file accessible by copying them to your website. (Your
   `PackageInfo.g`  contains the URLs of these files.)
-- Send the URL of your `PackageInfo.g` file to <support@gap-system.org>.
+- Submit your package as described in
+  [Submitting a Package]({{ site.baseurl }}/packages/authors/submit/).
 
 #### Updating a Package Distributed with GAP
 

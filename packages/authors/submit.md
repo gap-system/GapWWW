@@ -1,57 +1,114 @@
 ---
-title: Submitting Contributions
+title: Submitting a Package
 layout: default_with_title
 grand_parent: GAP Packages
 parent: For Authors
 permalink: /packages/authors/submit/
 ---
 
-The GAP group encourages users to make their GAP related work available
-to other users. There used to be two main categories of external contributions
-to GAP, those that have been formally accepted in a
-refereeing process, and those that are just deposited.
-However we stopped refereeing new packages in February 2024, and now
-only accept new deposited packages.
+Packages that meet the requirements below are distributed with GAP and
+updated automatically when you release a new version. To submit one, write
+to the GAP development mailing list.
 
-Irrespective of this, you may consider organizing and maybe
-distributing your code in the form of a GAP package. The page
-[Information for GAP Package Authors]({{ site.baseurl }}/packages/authors/)
-give detailed advice how to do this.
+### How to submit
 
-### Submitting Deposited Contributions
+Send an email to <gap@gap-system.org> containing:
 
-You are also invited to provide material that is not intended for formal
-refereeing. To tell us about such material, contact
-<support@gap-system.org>.
+- the package name and a short description of what it does;
+- the URL of its `PackageInfo.g` file;
+- the URL of its source repository, if it has one;
+- how it relates to existing packages or library functionality, if it
+  overlaps with any;
+- confirmation that you ran the [checks below](#checking-your-package-locally).
 
-We will then review your package for certain formal properties,
-and provide feedback based on that, with the expectation that
-after possibly some back and forth your contribution can be accepted.
+Anyone may do this on behalf of the package authors, but only with their
+consent.
 
-Things we will check include technical aspects such as:
+**The list is open.** Anyone can
+[subscribe](https://lists.uni-kl.de/gap/info/gap), and subscribers can read
+all messages in its [archive](https://lists.uni-kl.de/gap/arc/gap). You do not need
+to subscribe to submit: messages from non-members are held until a moderator
+releases them, which may take a day or two.
 
-- Does the package pass validation via `ValidatePackageInfo`?
-- Is it clearly distributed under a license compatible with GAP's license (GPL 2)?
-- Does it have an appropriate website which is set up so that automatic updates
-  are possible (i.e. are `PackageInfoURL` and `ArchiveURL` in `PackageInfo.g` valid)?
-- Does it specify a non-empty `TestFile` in its `PackageInfo.g` that can be used
-  to verify that basic functionality of the package works?
-- Can it be loaded together with all other distributed packages without
-  e.g. errors caused by multiple packages declaring global variables
-  or functions with identical name but different content?
+### What happens next
 
-Besides these technical aspects we *may* consider questions such as
+Your submission is discussed on the list, where anyone can comment. The GAP
+team checks the requirements and replies there, either accepting the package
+or saying what needs to change. Once it is accepted, it is added to the
+[package distribution](https://github.com/gap-system/PackageDistro) and ships
+with the next GAP release.
 
--   Does the package do what it claims to?
--   Is its functionality a significant addition to GAP?
--   Does the package interact smoothly with the existing GAP library and
-    packages?
--   Does the package employ appropriate GAP functions and data
-    structures?
--   Is the main documentation clear and complete enough?
+From then on, new versions are picked up automatically: we check the
+`PackageInfoURL` of each package every hour, so publishing a new
+`PackageInfo.g` and archive there is all a release needs. The version number
+must increase with each release.
 
-This last point is especially important. The installation of the package
-must work as described in the installation guide. The package's documentation
-should include straightforward and quick examples to help the user test the
-installation, the examples of the manual must really work the way the
-manual says, and the overall documentation should be organized sensibly.
+### Requirements
+
+A package must
+
+1. have a `PackageInfo.g` that passes
+   {% include ref.html label="ValidatePackageInfo" %};
+2. be downloadable: `PackageInfoURL`, `README_URL` and every archive given by
+   `ArchiveURL` and `ArchiveFormats` must be reachable, and each archive must
+   unpack into a single directory without symbolic links;
+3. be distributed under a license compatible with GPL version 2, named in
+   the `License` field and included as a file;
+4. have a manual that documents all functionality meant for users, built and
+   included in the archive, with examples that actually work;
+5. have a non-trivial test suite, named by `TestFile`, that exercises the
+   functionality of the package, including the manual examples; merely loading
+   the package does not count;
+6. pass its tests both with all other distributed packages loaded and with
+   only the packages it needs;
+7. load without errors or warnings, alone and together with all other
+   distributed packages, and not change the behaviour of GAP or other
+   packages; see
+   [Do Not Change GAP's Behaviour]({{ site.baseurl }}/packages/authors/#do-not-change-gaps-behaviour-in-a-package).
+
+We also recommend a public source repository with an issue tracker, and
+continuous integration as set up in the
+[Example package](https://github.com/gap-packages/example).
+[PackageMaker](https://github.com/gap-packages/PackageMaker) creates a new
+package with all of this in place.
+
+### Checking your package locally
+
+You need a GAP installation with all distributed packages installed and
+compiled; the release archive from the
+[download page]({{ site.baseurl }}/install/) has them. Put your package into
+a directory, here `DIR`, and run these commands from the GAP root directory.
+Each exits with status 0 on success.
+
+Validate `PackageInfo.g` (requirement 1):
+
+```sh
+./gap -q -c 'if ValidatePackageInfo("DIR/mypkg/PackageInfo.g") then QuitGap(0); fi; QuitGap(1);'
+```
+
+Run the tests with all packages loaded (requirements 6 and 7):
+
+```sh
+./gap -q --packagedirs DIR -c 'LoadAllPackages(); if TestPackage("mypkg") = true then QuitGap(0); fi; QuitGap(1);'
+```
+
+Run the tests with only the needed packages loaded (requirement 6):
+
+```sh
+./gap -q -A --packagedirs DIR -c 'LoadPackage("mypkg" : OnlyNeeded); if TestPackage("mypkg") = true then QuitGap(0); fi; QuitGap(1);'
+```
+
+Here `-A` stops GAP from loading its default packages, and the
+`OnlyNeeded` option stops `LoadPackage` from loading your suggested packages.
+A test that fails only in this mode uses a suggested package without
+checking whether it is loaded; see
+{% include ref.html label="Testing a GAP package" %}.
+
+If `TestFile` is a `.g` file rather than a `.tst` file, it must exit GAP
+itself with a status reporting the result, for example by calling
+`TestDirectory` with the option `exitGAP := true`. The Example package's
+[`tst/testall.g`](https://github.com/gap-packages/example/blob/master/tst/testall.g)
+shows how.
+
+The continuous integration setup of the Example package runs these tests on
+every change to your repository.
