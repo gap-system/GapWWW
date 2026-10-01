@@ -16,6 +16,64 @@
     {% include mathjax.html %}
 {% endcase %}
 
+<script>
+/* Color theme preference: "light", "dark", or "auto" (follow the OS).
+   Runs in the head so a stored choice applies before the page renders.
+   Use only block comments: the compress layout joins all lines. */
+(function () {
+  var STORAGE_KEY = 'gap-theme';
+  var THEMES = { light: 'lightgap', dark: 'darkgap' };
+  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function getPreference() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) || 'auto';
+    } catch (e) {
+      return 'auto';
+    }
+  }
+
+  function setPreference(pref) {
+    try {
+      if (pref === 'auto') {
+        localStorage.removeItem(STORAGE_KEY);
+      } else {
+        localStorage.setItem(STORAGE_KEY, pref);
+      }
+    } catch (e) {}
+  }
+
+  function apply() {
+    var pref = getPreference();
+    var mode = pref === 'auto' ? (darkQuery.matches ? 'dark' : 'light') : pref;
+
+    /* The initial stylesheet is "default", which is the light theme;
+       swapping it for an identical one would flash unstyled content. */
+    var current = jtd.getTheme() === THEMES.dark ? 'dark' : 'light';
+    if (mode !== current) {
+      jtd.setTheme(THEMES[mode]);
+    }
+
+    document.querySelectorAll('.theme-toggle button').forEach(function (button) {
+      button.setAttribute('aria-pressed', button.dataset.theme === pref);
+    });
+  }
+
+  apply();
+  darkQuery.addEventListener('change', apply);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.theme-toggle button').forEach(function (button) {
+      button.addEventListener('click', function () {
+        setPreference(button.dataset.theme);
+        apply();
+      });
+    });
+    apply();
+  });
+})();
+</script>
+
 <title>{{ page.title }}</title>
 
 {% if site.preview %}
