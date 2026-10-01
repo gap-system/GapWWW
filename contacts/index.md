@@ -92,8 +92,8 @@ the [front page]({{ site.baseurl }}/) and at [gapdays.de][gapdays].
 - **Contributing code.** See the
   [contribution guide](https://github.com/gap-system/gap/blob/master/CONTRIBUTING.md)
   for GAP itself. Much of GAP's functionality comes from
-  [packages][packages] written by users; see the
-  [hints for package authors]({{ site.baseurl }}/packages/authors/) and how to
+  [packages][packages] written by users; see
+  [how to create a package]({{ site.baseurl }}/packages/create/) and how to
   [submit a package]({{ site.baseurl }}/packages/submit/).
 
 [tutorial]: {{ site.docsurl }}/doc/tut/chap0_mj.html

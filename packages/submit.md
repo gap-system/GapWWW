@@ -7,7 +7,9 @@ permalink: /packages/submit/
 
 Packages distributed with GAP ship with it and are updated automatically
 when you release a new version. To submit a package for distribution, write
-to the GAP development mailing list or open an issue.
+to the GAP development mailing list or open an issue. If you are starting a
+new package, [Creating a Package]({{ site.baseurl }}/packages/create/)
+describes the recommended route.
 
 A package does not have to be distributed with GAP to be used:
 [PackageManager](https://github.com/gap-packages/PackageManager) installs
@@ -15,29 +17,6 @@ any package from its git repository or a release archive. We also list
 packages not distributed with GAP on
 [gap-packages.github.io](https://gap-packages.github.io); to add yours, tell
 us about it on the list or open a pull request there.
-
-### The recommended route
-
-This route sets up testing, releases and a package website for you:
-
-1. Create your package with
-   [PackageMaker](https://github.com/gap-packages/PackageMaker), and let it
-   set up a git repository and the GitHub workflows.
-2. Publish the repository on GitHub. The workflows then run your tests and
-   build your manual on every change.
-3. Write your code, its manual and its tests.
-4. Make a release with the Release workflow, as described in
-   [release-pkg](https://github.com/gap-actions/release-pkg#usage). It
-   publishes the archive and updates your package's website, which also
-   serves your `PackageInfo.g`.
-5. Submit the package as described below.
-
-Other setups work too, as long as they meet the
-[requirements](#requirements): see
-[Hosting Your Package on GitHub]({{ site.baseurl }}/packages/authors/#hosting-your-package-on-github)
-for what GitHub offers, and the
-{% include ref.html label="Using and Developing GAP Packages" text="Reference Manual" %}
-for how a package is structured.
 
 ### How to submit
 
@@ -85,7 +64,7 @@ We test distributed packages against new versions of GAP and of other
 packages. When something breaks, we tell you and usually send a fix; please
 review it and make a new release. If the GAP team co-maintains your package,
 we can make such releases ourselves; see
-[Hosting Your Package on GitHub]({{ site.baseurl }}/packages/authors/#hosting-your-package-on-github).
+[Hosting your package on GitHub]({{ site.baseurl }}/packages/create/#hosting-your-package-on-github).
 
 We may remove a package from the distribution at any time, for example if
 its maintainers do not respond to reasonable requests for releases needed to
@@ -118,7 +97,7 @@ A package must
 7. load without errors or warnings, alone and together with all other
    distributed packages, and not change the behaviour of GAP or other
    packages; see
-   [Do Not Change GAP's Behaviour]({{ site.baseurl }}/packages/authors/#do-not-change-gaps-behaviour-in-a-package).
+   [Do not change the behaviour of GAP]({{ site.baseurl }}/packages/create/#do-not-change-the-behaviour-of-gap).
 
 ### Getting help
 
