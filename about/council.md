@@ -30,9 +30,8 @@ coordinate the process by which submitted GAP packages
 were refereed. This process has been abolished by the GAP Council in
 February 2024, since there are other avenues for publishing software
 that did not exist in the past, such as specialist journals for research
-software packages. We still distribute packages that meet our
-requirements, and encourage all users to
-[submit]({{ site.baseurl }}/packages/submit/) their GAP packages.
+software packages. We still distribute packages with GAP, and encourage all
+users to [submit]({{ site.baseurl }}/packages/submit/) their GAP packages.
 
 The present (June 2025) members of the GAP Council are:
 
