@@ -115,6 +115,9 @@ in this order:
 - Look at the "If Things Go Wrong" section of the
 <a href="https://github.com/gap-system/gap/blob/master/INSTALL.md">GAP {{site.data.release.version}} Installation Instructions</a>,
 it contains some additional remarks and troubleshooting advices.
+- Ask on the [GAP Forum]({{ site.baseurl }}/forum/#gap-forum) or on
+  [Slack]({{ site.baseurl }}/slack); see
+  [Help & Community]({{ site.baseurl }}/contact/) for further options.
 - Tell us about your problem by writing an email to <support@gap-system.org>.
 
 

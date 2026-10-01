@@ -1,7 +1,7 @@
 ---
 title: Reporting issues
 layout: default_with_title
-parent: Contact
+parent: Help & Community
 permalink: /issues/
 nav_order: 1
 ---
@@ -37,41 +37,22 @@ Before formulating a bug report it may be helpful to consult some
 additional advice given in
 [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html).
 
+### Bug in GAP or in a package?
+
+Much of GAP's functionality comes from packages. The bug is probably in a
+package if the function you called is documented in a package manual, or if
+the stack trace printed with the error names a file in a `pkg` directory.
+Report such bugs to the package authors: on the
+[list of packages]({{ site.baseurl }}/packages/), expand the package's row
+for a link to its issue tracker, if it has one; otherwise contact its authors,
+e.g. via its home page. If you are unsure, use the GAP issue tracker.
+
+### Where to report
+
 The preferred way to submit bug reports is to use the [GAP issue
 tracker](https://github.com/gap-system/gap/issues) on GitHub.
-Alternatively, you may send them to <support@gap-system.org>. When using
+Alternatively, you may send them to <support@gap-system.org>, which is read
+by the [GAP Support Group]({{ site.baseurl }}/forum/#gap-support). When using
 email, please don't attach any log files, suggested patches etc.
 because this mailing list blocks attachments - put all the text into the
 body of email instead.
-
-### Support Group
-Please do not normally write to the individual members of the Support Group.
-Each of them will see all questions sent to <support@gap-system.org>,
-but they will be also seen by a broader pool of people, and the answers will
-be recorded and might help others in the future.
-
-The present members of the Support Group are:
-
-- Bill Allombert
-- Laurent Bartholdi
-- Thomas Breuer
-- Bettina Eick
-- Franz Gähler
-- Willem de Graaf
-- Burkhard Höfling
-- Max Horn
-- Alexander Hulpke
-- Christopher Jefferson
-- David Joyner
-- Stefan Kohl
-- Olexandr Konovalov
-- Frank Lübeck
-- James Mitchell
-- Robert F Morse
-- Jürgen Müller
-- Mike Newman
-- Alice Niemeyer
-- Dmitrii Pasechnik
-- Martin Schönert
-- Andrew Solomon
-- Chris Wensley

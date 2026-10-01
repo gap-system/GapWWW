@@ -2,7 +2,7 @@
 title: About
 has_children: true
 layout: default_with_title
-nav_order: 3
+nav_order: 4
 ---
 GAP is a system for computational discrete algebra, with particular
 emphasis on Computational Group Theory.
