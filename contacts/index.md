@@ -32,8 +32,8 @@ with the same question.
 
 | I want to …                                    | Where |
 |------------------------------------------------|-------|
-| ask how to do something with GAP               | [GAP Forum][forum], [Math Stack Exchange][mathse], [Slack][slack], [GitHub Discussions][discussions] |
-| ask a research-level question involving GAP    | [MathOverflow][mo] |
+| ask how to do something with GAP               | [GAP Forum][forum], [Slack][slack], [GitHub Discussions][discussions] |
+| ask a mathematical question involving GAP      | [Math Stack Exchange][mathse]; [MathOverflow][mo] if research-level |
 | ask a theoretical question about groups        | [Group-Pub-Forum][gpf] |
 | report a bug in GAP                            | [GAP issue tracker][gapissues]; see [Reporting issues][issues] |
 | report a bug in a package                      | [Reporting issues][pkgbugs] |
@@ -53,7 +53,7 @@ with the same question.
 | package issue trackers | depends on the package; mostly GitHub users | anyone, usually | bugs in a package | bugs in GAP itself |
 | [GitHub Discussions][discussions] | GitHub users | anyone | questions, ideas, showing your work | bug reports |
 | [Slack][slack] | anyone who joins | members; older messages may disappear | quick questions; chat about development | anything that should be findable later |
-| [Math Stack Exchange][mathse], [MathOverflow][mo] | Stack Exchange users | anyone | self-contained questions with a definite answer | open-ended discussions |
+| [Math Stack Exchange][mathse], [MathOverflow][mo] | Stack Exchange users | anyone | mathematical questions that GAP helps to answer | questions only about using or programming GAP |
 
 The [Group-Pub-Forum][gpf] is a mailing list for questions on the theory of
 groups and related structures, run by the University of Bath. To join, email
