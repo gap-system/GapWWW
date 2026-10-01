@@ -18,7 +18,7 @@ package authors have done.)
 ### Getting Started Writing a Package
 
 For a step-by-step route from a new package to its distribution with GAP,
-see [the recommended route]({{ site.baseurl }}/packages/authors/submit/#the-recommended-route).
+see [the recommended route]({{ site.baseurl }}/packages/submit/#the-recommended-route).
 
 The GAP Reference Manual contains a
 {% include ref.html label="Using and Developing GAP Packages" text="chapter on using and developing GAP packages" %},
@@ -79,7 +79,7 @@ Once a package works and has documentation of its functionality, you
 should consider to distribute it for interested GAP
 users. You can do this on your own, say via a web page, or have it
 distributed with GAP itself. For the latter, see
-[Submitting a Package]({{ site.baseurl }}/packages/authors/submit/),
+[Submitting a Package]({{ site.baseurl }}/packages/submit/),
 which lists the requirements a package must meet.
 
 ### Hosting Your Package on GitHub
@@ -176,7 +176,7 @@ also explained in the `PackageInfo.g` file mentioned above:
   file accessible by copying them to your website. (Your
   `PackageInfo.g`  contains the URLs of these files.)
 - Submit your package as described in
-  [Submitting a Package]({{ site.baseurl }}/packages/authors/submit/).
+  [Submitting a Package]({{ site.baseurl }}/packages/submit/).
 
 #### Updating a Package Distributed with GAP
 
