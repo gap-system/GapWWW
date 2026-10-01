@@ -5,14 +5,16 @@ parent: GAP Packages
 permalink: /packages/submit/
 ---
 
-Packages that meet the requirements below are distributed with GAP and
-updated automatically when you release a new version. To submit one, write
+Packages distributed with GAP ship with it and are updated automatically
+when you release a new version. To submit a package for distribution, write
 to the GAP development mailing list or open an issue.
 
-If you do not want to submit your package, we can still list it on
-[gap-packages.github.io](https://gap-packages.github.io) among the packages
-not distributed with GAP: tell us about it on the list, or open a pull
-request there.
+A package does not have to be distributed with GAP to be used:
+[PackageManager](https://github.com/gap-packages/PackageManager) installs
+any package from its git repository or a release archive. We also list
+packages not distributed with GAP on
+[gap-packages.github.io](https://gap-packages.github.io); to add yours, tell
+us about it on the list or open a pull request there.
 
 ### The recommended route
 
@@ -61,8 +63,14 @@ releases them, which may take a day or two.
 ### What happens next
 
 Your submission is discussed on the list, where anyone can comment. The GAP
-team checks the requirements and replies there, either accepting the package
-or saying what needs to change. Once it is accepted, it is added to the
+team checks the requirements and replies there: we accept the package, say
+what needs to change, or decline it. Meeting the requirements is not enough
+on its own. We also consider whether the package is a useful addition to
+GAP, and its size, since the distribution is downloaded with GAP: we look
+closely at any package whose archive is larger than a few MB. A package we
+decline can still be listed among the packages not distributed with GAP.
+
+Once a package is accepted, it is added to the
 [package distribution](https://github.com/gap-system/PackageDistro) and ships
 with the next GAP release.
 
@@ -74,11 +82,16 @@ must increase with each release.
 ### Maintaining your package
 
 We test distributed packages against new versions of GAP and of other
-packages. When something breaks, we tell you and often send a fix; please
-review it and make a new release, or let us make releases for you, see
+packages. When something breaks, we tell you and usually send a fix; please
+review it and make a new release. If the GAP team co-maintains your package,
+we can make such releases ourselves; see
 [Hosting Your Package on GitHub]({{ site.baseurl }}/packages/authors/#hosting-your-package-on-github).
-If a package stays broken and we cannot reach its maintainers, we may have
-to remove it from the distribution until it is fixed.
+
+We may remove a package from the distribution at any time, for example if
+its maintainers do not respond to reasonable requests for releases needed to
+keep it compatible with GAP and other packages, or if it changes in a major
+way, such as growing much larger or adding functionality outside its
+original scope. A removed package can be submitted again.
 
 ### Requirements
 
