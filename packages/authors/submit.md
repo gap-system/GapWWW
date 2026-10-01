@@ -83,6 +83,10 @@ to remove it from the distribution until it is fixed.
 
 ### Requirements
 
+You do not have to check these yourself: when you submit, our automated
+tests check requirements 1, 2, 6 and 7, we review the rest, and we tell you
+what, if anything, needs fixing.
+
 A package must
 
 1. have a `PackageInfo.g` that passes
@@ -115,8 +119,7 @@ these channels.
 
 ### Checking your package locally
 
-You do not need to run these checks: we run them on every submission and
-tell you if one fails. Running them yourself finds problems earlier.
+To find problems before you submit, you can run these checks yourself.
 
 You need a GAP installation with all distributed packages installed and
 compiled; the release archive from the
