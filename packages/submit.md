@@ -169,6 +169,12 @@ itself with a status reporting the result, for example by calling
 [`tst/testall.g`](https://github.com/gap-packages/example/blob/master/tst/testall.g)
 shows how.
 
+The CI workflow that PackageMaker sets up runs your package's tests on every
+change to your repository, with GAP's default packages and with only the
+needed packages, and can report which parts of your code the tests exercise.
+It does not run the other commands on this page. High coverage is encouraged
+but not a strict requirement.
+
 List the variables and methods your package defines (requirement 4);
 {% include ref.html label="ShowPackageVariables" %} marks with `*` those
 that the built manual does not document:
@@ -176,6 +182,3 @@ that the built manual does not document:
 ```sh
 ./gap -q -A --packagedirs DIR -c 'ShowPackageVariables("mypkg"); QuitGap();'
 ```
-
-The GitHub workflows set up by PackageMaker run these tests on every change
-to your repository, and can report which parts of your code they exercise. High coverage is welcome but not required.
