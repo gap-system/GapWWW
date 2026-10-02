@@ -23,8 +23,9 @@ nav_exclude: true
 
 ### Upcoming events
 
-- 28 September - 2 October, 2026: [GAP Days Fall 2026, RWTH Aachen, Germany](https://www.gapdays.de/gapdays2026-fall/)
 - 10 - 11 December, 2026: [40 years of GAP, RWTH Aachen, Germany](https://www.math.rwth-aachen.de/40YearsGAP/)
+- 5 - 9 April, 2027: [GAP Days Spring 2027, University of St Andrews, Scotland](https://www.gapdays.de/gapdays2027-spring/)
+- 9 - 13 August, 2027: [GAP Days Summer 2027, University of Manchester, UK](https://www.gapdays.de/gapdays2027-summer/)
 
 [GAP Days](https://www.gapdays.de) are week-long meetings of GAP developers
 and users, held about twice a year. Everyone who writes GAP code is welcome.
