@@ -28,8 +28,8 @@ This route sets up testing, releases and a package website for you:
    publishes the archive and updates your package's website, which also
    serves your `PackageInfo.g`.
 5. [Submit]({{ site.baseurl }}/packages/submit/) the package for
-   distribution with GAP, or have it listed among the packages not
-   distributed with GAP.
+   distribution with GAP, or have it listed under
+   [Other Packages]({{ site.baseurl }}/packages/other/).
 
 Other setups work too; a package distributed with GAP must meet the
 [requirements]({{ site.baseurl }}/packages/submit/#requirements). To set up
