@@ -70,6 +70,8 @@ avoid clashes:
   one place can be a local variable of the function that uses it. Give
   helpers used in several places a name that starts with the package name,
   or collect them in one record, as the GAP library does with `FFECONWAY`.
+  Such a record also shows that its contents are internal, and
+  `ShowPackageVariables` lists only the record.
 - Leave names that start with a lowercase letter, and very short names such
   as `C1`, to users.
 - Avoid names of the form `SetXXX` and `HasXXX`: attributes and properties
@@ -119,8 +121,11 @@ See
 Name a test file in the `TestFile` component of `PackageInfo.g`. It should
 exercise the functionality of the package, including the examples in its
 manual, and pass both with all other packages loaded and with only the
-packages yours needs. PackageMaker creates a `tst/testall.g` that runs all
-test files in `tst`, and a workflow that runs it on every change. See
+packages yours needs. Keep it to a few minutes: the package distribution
+stops each test run after 10 minutes and counts it as failed, so longer
+tests belong in files that the `TestFile` does not run. PackageMaker
+creates a `tst/testall.g` that runs all test files in `tst`, and a workflow
+that runs it on every change. See
 {% include ref.html label="Testing a GAP package" %} and the commands in
 [Checking your package locally]({{ site.baseurl }}/packages/submit/#checking-your-package-locally).
 
