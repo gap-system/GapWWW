@@ -12,7 +12,7 @@ not work with your version of GAP, or may not install at all.
 
 ### Installing
 
-Install a package with
+You can try to install a package with
 [PackageManager](https://github.com/gap-packages/PackageManager), from the
 URL of its `PackageInfo.g` file if the list gives one, or else from its git
 repository:
@@ -22,6 +22,10 @@ LoadPackage("PackageManager");
 InstallPackage("https://gap-packages.github.io/quickcheck/PackageInfo.g");
 InstallPackage("https://github.com/isadofschi/posets.git");
 ```
+
+We have not tried this for the packages listed here, so it may fail; then
+follow the installation instructions on the package's homepage or in its
+repository.
 
 ### The list
 
@@ -38,7 +42,7 @@ To add your package or change its entry, edit
 and open a pull request, or tell us on the
 [GAP development list]({{ site.baseurl }}/forum/#gap-development-list).
 Give the URL of your package's `PackageInfo.g` if it publishes one, so that
-PackageManager can install it. Listing a package here is also a good first
+PackageManager can find it. Listing a package here is also a good first
 step towards [submitting it]({{ site.baseurl }}/packages/submit/) for
 distribution with GAP.
 
