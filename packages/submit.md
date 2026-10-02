@@ -115,25 +115,30 @@ To find problems before you submit, you can run these checks yourself.
 You need a GAP installation with all distributed packages installed and
 compiled; the release archive from the
 [download page]({{ site.baseurl }}/install/) has them. Put your package into
-a directory, here `DIR`, and run these commands from the GAP root directory.
-The first three exit with status 0 on success.
+a directory, here `DIR`, and run the commands below. The first three exit
+with status 0 on success.
+
+**GAP 4.15 or newer.** The option `--packagedirs` used below needs GAP 4.15
+or newer. With an older GAP, put your package into the `pkg` directory of
+your GAP installation or into `~/.gap/pkg`, and leave out
+`--packagedirs DIR`.
 
 Validate `PackageInfo.g` (requirement 1):
 
 ```sh
-./gap -q -c 'if ValidatePackageInfo("DIR/mypkg/PackageInfo.g") then QuitGap(0); fi; QuitGap(1);'
+gap -q -c 'if ValidatePackageInfo("DIR/mypkg/PackageInfo.g") then QuitGap(0); fi; QuitGap(1);'
 ```
 
 Run the tests with all packages loaded (requirements 6 and 7):
 
 ```sh
-./gap -q --packagedirs DIR -c 'LoadAllPackages(); if TestPackage("mypkg") = true then QuitGap(0); fi; QuitGap(1);'
+gap -q --packagedirs DIR -c 'LoadAllPackages(); if TestPackage("mypkg") = true then QuitGap(0); fi; QuitGap(1);'
 ```
 
 Run the tests with only the needed packages loaded (requirement 6):
 
 ```sh
-./gap -q -A --packagedirs DIR -c 'LoadPackage("mypkg" : OnlyNeeded); if TestPackage("mypkg") = true then QuitGap(0); fi; QuitGap(1);'
+gap -q -A --packagedirs DIR -c 'LoadPackage("mypkg" : OnlyNeeded); if TestPackage("mypkg") = true then QuitGap(0); fi; QuitGap(1);'
 ```
 
 Here `-A` stops GAP from loading its default packages, and the
@@ -159,5 +164,5 @@ List the variables and methods your package defines (requirement 4);
 that the built manual does not document:
 
 ```sh
-./gap -q -A --packagedirs DIR -c 'ShowPackageVariables("mypkg"); QuitGap();'
+gap -q -A --packagedirs DIR -c 'ShowPackageVariables("mypkg"); QuitGap();'
 ```
