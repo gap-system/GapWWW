@@ -15,7 +15,7 @@ A package does not have to be distributed with GAP to be used:
 [PackageManager](https://github.com/gap-packages/PackageManager) installs
 any package from its git repository or a release archive, and we list
 packages not distributed with GAP under
-[Other Packages]({{ site.baseurl }}/packages/other/).
+[Undistributed Packages]({{ site.baseurl }}/packages/undistributed/).
 
 ### How to submit
 
@@ -47,7 +47,7 @@ on its own. We also consider whether the package is a useful addition to
 GAP, and its size, since the distribution is downloaded with GAP: we look
 closely at any package whose archive is larger than a few MB. A package we
 decline can still be listed under
-[Other Packages]({{ site.baseurl }}/packages/other/).
+[Undistributed Packages]({{ site.baseurl }}/packages/undistributed/).
 
 Once a package is accepted, it is added to the
 [package distribution](https://github.com/gap-system/PackageDistro) and ships
