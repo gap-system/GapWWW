@@ -17,6 +17,9 @@ package authors have done.)
 
 ### Getting Started Writing a Package
 
+For a step-by-step route from a new package to its distribution with GAP,
+see [the recommended route]({{ site.baseurl }}/packages/submit/#the-recommended-route).
+
 The GAP Reference Manual contains a
 {% include ref.html label="Using and Developing GAP Packages" text="chapter on using and developing GAP packages" %},
 which describes the rules and conventions for the structure of a GAP package,
@@ -74,19 +77,31 @@ objects.
 
 Once a package works and has documentation of its functionality, you
 should consider to distribute it for interested GAP
-users. Of course, you can just do it on your own, say via a web page.
-In this case we would like to hear about the availability of the
-package, please write a hint to <support@gap-system.org>.
+users. You can do this on your own, say via a web page, or have it
+distributed with GAP itself. For the latter, see
+[Submitting a Package]({{ site.baseurl }}/packages/submit/),
+which lists the requirements a package must meet.
 
-Another possibility is to redistribute your package via the website
-of GAP itself. If you want that, also contact us as
-just stated. The GAP Group will check if your package
-provides some new or improved functionality which looks interesting for
-other users, if it contains  reasonable documentation, and if it seems
-to work smoothly with the GAP library and other
-distributed packages. In this case the package can take part in the
-distribution update mechanism described below. It becomes a
-<em>deposited</em> package.
+### Hosting Your Package on GitHub
+
+You can host your package anywhere, but on GitHub you can use tools the GAP
+team maintains:
+
+- the actions in [gap-actions](https://github.com/gap-actions) run your
+  tests on every change, as set up in the
+  [Example](https://github.com/gap-packages/example) package;
+- [release-pkg](https://github.com/gap-actions/release-pkg) makes a release
+  and updates your package's website on GitHub Pages;
+- others can contribute changes and be added as maintainers, so the package
+  does not depend on a single person.
+
+You can move your package into the
+[gap-packages](https://github.com/gap-packages) organisation, and out again,
+at any time. There you can also allow the GAP team, or some of its members,
+to co-maintain it: we then take care of routine maintenance such as small
+fixes and new releases, so the package stays available if you no longer have
+time for it. We do not take over a package without its authors' consent.
+To move your package or set this up, ask on <gap@gap-system.org>.
 
 ### Writing Documentation for Your Package
 
@@ -160,7 +175,8 @@ also explained in the `PackageInfo.g` file mentioned above:
   (containing installation instructions) and the `PackageInfo.g`
   file accessible by copying them to your website. (Your
   `PackageInfo.g`  contains the URLs of these files.)
-- Send the URL of your `PackageInfo.g` file to <support@gap-system.org>.
+- Submit your package as described in
+  [Submitting a Package]({{ site.baseurl }}/packages/submit/).
 
 #### Updating a Package Distributed with GAP
 
