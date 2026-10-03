@@ -166,3 +166,6 @@ that the built manual does not document:
 ```sh
 gap -q -A --packagedirs DIR -c 'ShowPackageVariables("mypkg"); QuitGap();'
 ```
+
+Check that none of the marked ones is meant for users; internal ones need no
+documentation.
