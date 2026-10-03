@@ -44,13 +44,14 @@ team maintains:
 
 - the actions in [gap-actions](https://github.com/gap-actions) run your
   tests on every change, as set up in the
-  [Example](https://github.com/gap-packages/example) package;
+  [Example](https://github.com/gap-packages/example) package, so you learn
+  at once when a change breaks something, and not later from your users;
 - [release-pkg](https://github.com/gap-actions/release-pkg) makes a release
   and updates your package's website on GitHub Pages;
 - others can contribute changes and be added as maintainers, so the package
   does not depend on a single person.
 
-You can move your package into the
+In addition, you can move your package into the
 [gap-packages](https://github.com/gap-packages) organisation, and out again,
 at any time. There you can also allow the GAP team, or some of its members,
 to co-maintain it: we then take care of routine maintenance such as small
