@@ -35,6 +35,14 @@ select the award winners. Each award winner will receive a certificate
 acknowledging their significant contributions to GAP, and will be listed
 on this website.
 
+### Winners 2026
+
+- Joseph Edwards (University of St Andrews)
+- Joseph Daynger Ruiz (University of Arizona)
+- Henrik Schanze (TU Braunschweig)
+- Lukas Schnelle (RWTH Aachen University)
+- Meike Weiß (RWTH Aachen University)
+
 ### Winners 2025
 
 - Reymond Akpanya (RWTH Aachen University / University of Sydney)
