@@ -38,6 +38,7 @@ with the same question.
 | report a bug in a package                      | [Reporting issues][pkgbugs] |
 | ask something that concerns only me, or is private | [GAP Support][support] |
 | discuss the development of GAP or a package    | [GAP development list][devlist], [GitHub][github], [Slack][slack], [GAP Days](#gap-days) |
+| submit a package for distribution with GAP     | [GAP development list][devlist]; see [Submitting a Package][submit] |
 | hear about new releases and serious bugs       | [GAP Forum][forum], [GAP development list][devlist], [Slack][slack] |
 | meet developers and work on code together      | [GAP Days](#gap-days) |
 
@@ -46,7 +47,7 @@ with the same question.
 | Channel | Who can post | Who can read it | Good for | Not for |
 |---------|--------------|-----------------|----------|---------|
 | [GAP Forum][forum] | subscribers | anyone: public archive since 1992 | questions and discussions of general interest; announcements | problems specific to your setup |
-| [GAP development list][devlist] | subscribers | subscribers, mostly developers | development of GAP and packages | usage questions |
+| [GAP development list][devlist] | subscribers; others after moderation | subscribers, mostly developers | development of GAP and packages; package submissions | usage questions |
 | [GAP Support][support] | anyone | the Support Group only | private or local problems; bug reports by email | questions of general interest |
 | [GAP issue tracker][gapissues] | GitHub users | anyone | bug reports and feature requests for GAP | usage questions |
 | package issue trackers | depends on the package; mostly GitHub users | anyone, usually | bugs in a package | bugs in GAP itself |
@@ -93,7 +94,7 @@ the [front page]({{ site.baseurl }}/) and at [gapdays.de][gapdays].
   for GAP itself. Much of GAP's functionality comes from
   [packages][packages] written by users; see the
   [hints for package authors]({{ site.baseurl }}/packages/authors/) and how to
-  [submit a package]({{ site.baseurl }}/packages/authors/submit/).
+  [submit a package]({{ site.baseurl }}/packages/submit/).
 
 [tutorial]: {{ site.docsurl }}/doc/tut/chap0_mj.html
 [refman]: {{ site.docsurl }}/doc/ref/chap0_mj.html
@@ -104,6 +105,7 @@ the [front page]({{ site.baseurl }}/) and at [gapdays.de][gapdays].
 [forumarchive]: {{ site.baseurl }}/forum/archive/
 [devlist]: {{ site.baseurl }}/forum/#gap-development-list
 [support]: {{ site.baseurl }}/forum/#gap-support
+[submit]: {{ site.baseurl }}/packages/submit/
 [issues]: {{ site.baseurl }}/issues/
 [pkgbugs]: {{ site.baseurl }}/issues/#bug-in-gap-or-in-a-package
 [slack]: {{ site.baseurl }}/slack
