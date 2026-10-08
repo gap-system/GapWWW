@@ -13,10 +13,9 @@ describes the recommended route.
 
 A package does not have to be distributed with GAP to be used:
 [PackageManager](https://github.com/gap-packages/PackageManager) installs
-any package from its git repository or a release archive. We also list
-packages not distributed with GAP on
-[gap-packages.github.io](https://gap-packages.github.io); to add yours, tell
-us about it on the list or open a pull request there.
+any package from its git repository or a release archive, and we list
+packages not distributed with GAP under
+[Undistributed Packages]({{ site.baseurl }}/packages/undistributed/).
 
 ### How to submit
 
@@ -47,7 +46,8 @@ what needs to change, or decline it. Meeting the requirements is not enough
 on its own. We also consider whether the package is a useful addition to
 GAP, and its size, since the distribution is downloaded with GAP: we look
 closely at any package whose archive is larger than a few MB. A package we
-decline can still be listed among the packages not distributed with GAP.
+decline can still be listed under
+[Undistributed Packages]({{ site.baseurl }}/packages/undistributed/).
 
 Once a package is accepted, it is added to the
 [package distribution](https://github.com/gap-system/PackageDistro) and ships
