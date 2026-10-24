@@ -1,99 +1,75 @@
 ---
-title: MacOS
+title: macOS
 layout: default_with_title
 parent: Installation
 nav_order: 3
 permalink: /install/mac/
 ---
 
-{% assign unix_assets    = "" | split: ',' %}
+## Install via Homebrew
 
-{% capture gap_prefix %}gap-{{ site.data.release.version }}{% endcapture %}
-{% assign len = gap_prefix | size %}
+A relatively easy way to install GAP is via [Homebrew](https://brew.sh), a
+package manager for macOS. If you don't have it already, install it first by
+following the instructions on its website.
 
-{% for asset in site.data.assets %}
-  {% assign asset_prefix = asset.name | slice: 0, len %}
-  {% if asset_prefix == gap_prefix %}{% unless asset.name contains "-core" %}
-    {% assign asset_suffix = asset.name | split: "" | reverse | join: "" | slice: 0, 4 %}
-    {% if asset_suffix == "exe." %}
-      {% assign windows_assets = windows_assets | push: asset %}
-    {% else %}
-      {% assign unix_assets = unix_assets | push: asset %}
-    {% endif %}
-    {% endunless %}{% endif %}
-{% endfor %}
+Then enter the following command into a terminal:
 
-Installing the GAP distribution with all the packages and full data
-libraries from source code requires a working C and C++ development
-environment on your system as well as GNU `make`.
+    brew install gap-system/gap/gap
 
-You need to install the Apple developer tools. If you are on
-macOS 10.11 or newer, this can be achieved by opening a terminal window
-and entering the command
+Depending on your machine this may take a couple of minutes or longer, as it
+builds GAP and as many GAP packages as possible. Afterwards you can start GAP
+by entering
 
-    xcode-select --install
+    gap
 
-A window will appear
-asking you whether you would like to install the command line developer
-tools. Confirm this by clicking the “Install” button. After this
-completed, you can verify that it worked by verifying that the directory
-`/Library/Developer/CommandLineTools/usr/bin/` exists and contains executables
-such as `clang` and `clang++`.
+into a terminal.
 
+{: .warning }
+> The [GAP Homebrew tap](https://github.com/gap-system/homebrew-gap) is
+> unofficial: the GAP team does not support it, and it may not always provide
+> the latest GAP release. If it does not work for you, install from source.
 
-Note that to obtain a fully functional GAP installation you need not only to
-compile the core system, but also some of its packages. To install
-GAP using the source distribution, perform the following steps:
+## Install from source
 
-1. Verify that all required tools are installed (see above and also get `gmp` and `readline`).
-Use your package manager (e.g. `brew`, `port` or `fink`) for that.
-1. Choose your preferred archive format and download the corresponding archive.
-   <table>
-   <colgroup>
-    <col width="15%">
-    <col width="5%">
-    <col>
-   </colgroup>
-   {% for asset in unix_assets %}
-   <tr>
-     <td>
-       <a href="{{ asset.url }}">{{ asset.name }}</a>
-     </td>
-     <td>{{ asset.bytes | divided_by: 1048576 }} MB</td>
-     <td>sha256: <code>{{ asset.sha256 }}</code> </td>
-   </tr>
-   {% endfor %}
-   </table>
-1. Unpack the archive.
-1. Compile the GAP core system by running
-   ```
-   ./configure && make
-   ```
-   in the unpacked directory.
-1. Change to the `pkg` subdirectory and call
-   ```
-   ../bin/BuildPackages.sh
-   ```
-   to run the script which will build most of the packages that require
-   compilation (provided sufficiently many libraries, headers and tools are
-   available). If something doesn't work on your system, please refer to the
-   `README` file provided with the corresponding package.
-1. Adjust some links/scripts/icons etc., to
-make the new version of GAP available to the users of your machine.
-1. Optional: run a few tests.
+### Step 1: Install prerequisites
 
+You need the Apple command line developer tools, which provide a C and a C++
+compiler and `make`:
 
+1. Open the Terminal application (found in the Utilities folder inside the
+   Applications folder), enter the command `xcode-select --install`, then
+   press enter.
+2. If it says <q>Command line tools are already installed</q>, you are done.
+   Otherwise a window appears, asking whether you would like to install the
+   tools now. Confirm this by clicking <q>Install</q>.
+3. Wait for the download and installation to complete.
+4. Verify that the folder `/Library/Developer/CommandLineTools/usr/bin/`
+   exists and contains executables such as `clang` and `clang++`, the C and
+   C++ compilers.
 
+We also recommend installing GMP and GNU Readline; without the latter, command
+line editing in GAP is limited. With Homebrew:
 
-<h2>Alternatives</h2>
+    brew install gmp readline
 
-#### Homebrew
+With MacPorts:
 
-[Homebrew](http://brew.sh/) is a package manager for macOS.
-If you use Homebrew, you can install GAP using the
-[GAP Homebrew tap](https://github.com/gap-system/homebrew-gap).
+    sudo port install gmp readline
 
-#### Gap.app
+{: .note }
+> Several GAP packages have additional dependencies, listed in
+> [INSTALL.md](https://github.com/gap-system/gap/blob/v{{site.data.release.version}}/INSTALL.md).
+> With Homebrew, install most of them with
+>
+>     brew install autoconf automake libtool cddlib curl fplll libmpc \
+>                  libx11 mpfi mpfr nauty ncurses pari singular xorgproto \
+>                  zeromq
+
+{% include install_from_source.md %}
+
+## Alternatives
+
+### Gap.app
 
 [Gap.app](https://cocoagap.sourceforge.io/) is a native macOS frontend
 and distribution of GAP, developed by Russ Woodroofe.  The "Gap.app + GAP" edition
