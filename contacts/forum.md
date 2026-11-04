@@ -57,25 +57,17 @@ others in the future.
 The present members of the Support Group are:
 
 - Bill Allombert
-- Laurent Bartholdi
 - Thomas Breuer
-- Bettina Eick
-- Franz Gähler
 - Willem de Graaf
-- Burkhard Höfling
 - Max Horn
 - Alexander Hulpke
 - Christopher Jefferson
-- David Joyner
 - Stefan Kohl
 - Olexandr Konovalov
 - Frank Lübeck
 - James Mitchell
-- Robert F Morse
 - Jürgen Müller
 - Mike Newman
 - Alice Niemeyer
 - Dmitrii Pasechnik
-- Martin Schönert
-- Andrew Solomon
 - Chris Wensley
