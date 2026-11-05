@@ -1,7 +1,8 @@
 ---
 title: Rubik's Cube Example
 layout: default_with_title
-parent: Documentation
+parent: Tutorials
+grand_parent: Learning & Teaching
 ---
 
 This is an updated GAP 4 version of a GAP 3 example by [Martin Schönert](https://www.math.rwth-aachen.de/~Martin.Schoenert/), 1993.

@@ -88,7 +88,7 @@ the [front page]({{ site.baseurl }}/) and at [gapdays.de][gapdays].
 - **Tell us how you use GAP**, by writing to <support@gap-system.org>. If you
   publish work that used GAP, please [cite it]({{ site.baseurl }}/cite/).
 - **Teaching material.** If you use GAP in teaching and can share your
-  material, tell us; see [Teaching Material]({{ site.baseurl }}/doc/teach/).
+  material, tell us; see [Teaching Material]({{ site.baseurl }}/learn/teach/).
 - **Contributing code.** See the
   [contribution guide](https://github.com/gap-system/gap/blob/master/CONTRIBUTING.md)
   for GAP itself. Much of GAP's functionality comes from
@@ -100,7 +100,7 @@ the [front page]({{ site.baseurl }}/) and at [gapdays.de][gapdays].
 [refman]: {{ site.docsurl }}/doc/ref/chap0_mj.html
 [packages]: {{ site.baseurl }}/packages/
 [faq]: {{ site.baseurl }}/faq/
-[learn]: {{ site.baseurl }}/doc/learn/
+[learn]: {{ site.baseurl }}/learn/learning/
 [forum]: {{ site.baseurl }}/forum/#gap-forum
 [forumarchive]: {{ site.baseurl }}/forum/archive/
 [devlist]: {{ site.baseurl }}/forum/#gap-development-list
