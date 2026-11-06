@@ -55,6 +55,7 @@ components and packages. This information may vary depending
 on  your installation.  For  example,  for  the complete installation of
 latest versions of all packages you will have something like:
 
+<!-- BEGIN GAP STARTUP EXAMPLE -->
 ```
      ● G  GAP 4.16.0 of 2026-06-02
   ● ●  A  https://www.gap-system.org
@@ -73,6 +74,7 @@ latest versions of all packages you will have something like:
  Try '??help' for help. See also '?copyright', '?cite' and '?authors'
 gap>
 ```
+<!-- END GAP STARTUP EXAMPLE -->
 
 Now you may
 type  a  few  commands at the prompt and run a short test suite (which
