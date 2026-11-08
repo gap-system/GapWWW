@@ -6,78 +6,63 @@ nav_order: 2
 permalink: /install/linux/
 ---
 
-{% assign unix_assets    = "" | split: ',' %}
+## Install via your package manager
 
-{% capture gap_prefix %}gap-{{ site.data.release.version }}{% endcapture %}
-{% assign len = gap_prefix | size %}
+Many Linux distributions provide packages for GAP, usually named `gap`. For
+example:
 
-{% for asset in site.data.assets %}
-  {% assign asset_prefix = asset.name | slice: 0, len %}
-  {% if asset_prefix == gap_prefix %}{% unless asset.name contains "-core" %}
-    {% assign asset_suffix = asset.name | split: "" | reverse | join: "" | slice: 0, 4 %}
-    {% if asset_suffix == "exe." %}
-      {% assign windows_assets = windows_assets | push: asset %}
-    {% else %}
-      {% assign unix_assets = unix_assets | push: asset %}
-    {% endif %}
-    {% endunless %}{% endif %}
-{% endfor %}
+- Debian or Ubuntu: `sudo apt-get install gap`
+- Fedora: `sudo dnf install gap`
+- Arch Linux: `sudo pacman -S gap`
 
+This is the easiest way to get GAP. Its downsides are that the packaged version
+may lag behind the latest GAP release (see
+[Repology](https://repology.org/project/gap/versions) for the version each
+distribution ships), and that some distributions leave out some of the GAP
+packages bundled with the GAP distribution, or put them into separate packages.
 
-To install development tools on a Linux system, use your preferred package
-manager (e.g. apt-get or aptitude or Synaptic etc.).
-You need a working C and C++ development environment on your system as well as GNU `make`.
+## Install from source
 
-Note that to obtain a fully functional GAP installation you need not only to
-compile the core system, but also some of its packages. To install
-GAP using the source distribution, perform the following steps:
+This takes more work, but gives you the latest GAP release with all its
+packages, and is the best supported option.
 
-1. Verify that all required tools are installed. For example, on Ubuntu or Debian do this by calling
-    ```
-    sudo apt-get install build-essential autoconf libtool libgmp-dev libreadline-dev zlib1g-dev
-    ```
+### Step 1: Install prerequisites
 
-1. Choose your preferred archive format and download
-   the corresponding archive.
-   <table>
-   <colgroup>
-    <col width="15%">
-    <col width="5%">
-    <col>
-   </colgroup>
-   {% for asset in unix_assets %}
-   <tr>
-     <td>
-       <a href="{{ asset.url }}">{{ asset.name }}</a>
-     </td>
-     <td>{{ asset.bytes | divided_by: 1048576 }} MB</td>
-     <td>sha256: <code>{{ asset.sha256 }}</code> </td>
-   </tr>
-   {% endfor %}
-   </table>
-1. Unpack the archive.
-1. Compile the GAP core system by running
-   ```
-   ./configure && make
-   ```
-   in the unpacked directory.
-1. Change to the `pkg` subdirectory and call
-   ```
-   ../bin/BuildPackages.sh
-   ```
-   to run the script which will build most of the packages that require
-   compilation (provided sufficiently many libraries, headers and tools are
-   available). If something doesn't work on your system, please refer to the
-   `README` file provided with the corresponding package.
-1. Adjust some links/scripts/icons etc., to make the new version of GAP available to the users of your machine.
-1. Optional: run a few tests.
+You need a C and a C++ compiler and GNU `make`. We also recommend the
+development headers for GMP, GNU Readline and zlib. On Ubuntu or Debian,
+install all of these with
 
-#### Alternatives
+    sudo apt-get install build-essential autoconf libgmp-dev \
+                         libreadline-dev zlib1g-dev
+
+On Fedora:
+
+    sudo dnf install gcc gcc-c++ make autoconf gmp-devel readline-devel zlib-devel
+
+On Alpine:
+
+    sudo apk add build-base autoconf gmp-dev readline-dev zlib-dev
+
+{: .note }
+> Several GAP packages have additional dependencies, listed in
+> [INSTALL.md](https://github.com/gap-system/gap/blob/v{{site.data.release.version}}/INSTALL.md).
+> On Ubuntu or Debian, install most of them with
+>
+>     sudo apt-get install 4ti2 pari-gp singular libncurses-dev \
+>                          libcdd-dev libcurl4-openssl-dev libfplll-dev \
+>                          libmpc-dev libmpfi-dev libmpfr-dev libzmq3-dev
+>
+> On Fedora:
+>
+>     sudo dnf install 4ti2-devel pari-gp Singular ncurses-devel \
+>                      cddlib-devel curl-devel fplll \
+>                      libmpc-devel mpfi-devel mpfr-devel zeromq-devel
+
+{% include install_from_source.md %}
+
+## Alternatives
 
 {% include namelink.html name="Frank Lübeck" %} offers a
 <a href="https://www.math.rwth-aachen.de/~Frank.Luebeck/GAPrsync/">Linux
-binary distribution</a> via remote syncronization with a reference
+binary distribution</a> via remote synchronization with a reference
 installation which includes all packages and some optimisations.
-
-GAP is available for installation in several package managers. A good overview
-of available GAP packages is available on [this repology project page](https://repology.org/project/gap/versions).

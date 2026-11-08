@@ -13,7 +13,7 @@ For an overview of changes see the
 There are several ways to install GAP:
 
 - <a href="linux">Linux</a> and other Unix-like operating systems
-- <a href="mac">MacOS</a>
+- <a href="mac">macOS</a>
 - <a href="windows">Windows</a>
 
 More detailed instructions can be found in [INSTALL.md](https://github.com/gap-system/gap/blob/v{{site.data.release.version}}/INSTALL.md).
@@ -38,7 +38,7 @@ would like to be installed or any questions you might have
 
 ### Getting Started
 
-If you followed all instruction steps you can test you installation as described below.
+If you followed all instruction steps you can test your installation as described below.
 If it works and you are new to GAP you may try to start reading and
 trying the examples in the first chapters of the <a
 href="{{ site.docsurl }}/doc/tut/chap0_mj.html">Tutorial</a>
