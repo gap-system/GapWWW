@@ -1,11 +1,12 @@
 ---
 title: Teaching Material
 layout: default_with_title
-parent: Documentation
+parent: Learning & Teaching
+nav_order: 3
 ---
 
  See also the page on
- [Learning GAP]({{ site.baseurl }}/doc/learn/),
+ [Learning GAP]({{ site.baseurl }}/learn/learning/),
  which refers to material that may help you if you want to learn 
  GAP on your own or to teach it.
 
