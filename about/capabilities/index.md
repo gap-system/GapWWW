@@ -15,8 +15,8 @@ permalink: /capabilities/
   - separate [packages]({{ site.baseurl }}/packages/) of additional
       functions for specialized purposes which can be used like library
       functions,
-  - data libraries containing large classes of various algebraic objects that are accessible by
-      using GAP commands.
+  - [data libraries]({{ '/capabilities/datalib' | relative_url }}) containing large classes
+      of various algebraic objects that are accessible using GAP commands.
 - A {% include ref.html label="The Programming Language" text="programming language" %},
   also called GAP,
   which is interpreted and can be compiled. It can be used interactively
@@ -64,4 +64,5 @@ and the data libraries.
   - [Semigroups, Monoids, and Other Generalisations of Groups](semigroups.html),
   - [Words, Rewriting, and Automata](words.html),
   - [Further Capabilities](further.html),
-  - [Links to Other Systems](links.html).
+  - [Links to Other Systems](links.html),
+  - [Data Libraries]({{ '/capabilities/datalib' | relative_url }}).

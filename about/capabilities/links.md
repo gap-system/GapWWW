@@ -3,6 +3,7 @@ title: Links to Other Systems
 grand_parent: About
 parent: Capabilities
 layout: default_with_title
+nav_order: 13
 permalink: /capabilities/links
 ---
 
