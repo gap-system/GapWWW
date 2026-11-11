@@ -1,7 +1,6 @@
 ---
 title: Documentation
 layout: default_with_title
-has_children: true
 nav_order: 5
 ---
 
@@ -22,23 +21,9 @@ nav_order: 5
   - Each GAP package has its individual manual which you can
     access through the list of [packages]({{ site.baseurl }}/packages/).
 
-- ### [Learning GAP]({{ site.baseurl }}/doc/learn)
-  In addition to the
-  [Tutorial]({{ site.docsurl }}/doc/tut/chap0_mj.html)
-  mentioned above there is a variety of material intended to help people
-  to learn on their own the GAP language and the use of
-  the GAP system. We have tried to organize links to such
-  material somewhat according to the level and intended audience on the
-  page quoted in the heading.
-
-- ### [Teaching Material]({{ site.baseurl }}/doc/teach/)
-  GAP has been used in several places to support the
-  teaching of a variety of courses. We are grateful to the colleagues
-  who allowed us to point to some course material of such courses and
-  we would appreciate to obtain access to further such material.
-  We hope that this can be helpful to colleagues intending a
-  similar use of GAP, but it may also be used by
-  students studying the topics of such courses.
+- ### [Learning & Teaching]({{ site.baseurl }}/learn/)
+  Find introductions to GAP, step-by-step tutorials, and material for
+  using GAP in courses in the Learning & Teaching section.
 
 - ### Bibliographies
   - There is a [Google Scholar profile](https://scholar.google.co.uk/citations?user=B2oZOG0AAAAJ)

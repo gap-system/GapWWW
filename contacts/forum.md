@@ -70,4 +70,5 @@ The present members of the Support Group are:
 - Mike Newman
 - Alice Niemeyer
 - Dmitrii Pasechnik
+- Martin Schönert
 - Chris Wensley

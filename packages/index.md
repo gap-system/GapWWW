@@ -2,7 +2,7 @@
 title: GAP Packages
 layout: default_with_title
 has_children: true
-nav_order: 6
+nav_order: 7
 permalink: /packages/
 ---
 
@@ -32,7 +32,7 @@ Note that newer versions might be available on the package websites.
 | |      |         |      | |          |
 |=
 | | Name | Version | Date | | Subtitle |
-{: id="packageList" class="display" style="display:none"}
+{: id="packageList" class="display package-list" style="display:none"}
 
 The table above is generated using the open source software [Datatables](https://datatables.net/).
 It requires JavaScript to enable all features and make all data available.
