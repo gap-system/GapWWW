@@ -6,10 +6,6 @@ on:
     # Every day at 3:15 AM UTC
     - cron: '15 3 * * *'
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   sync:
     name: "Get new GitHub release data"
@@ -91,7 +87,7 @@ jobs:
           LC_ALL: C.UTF-8
         run: |
           # start and immediately quit GAP
-          gap -r -l "$GAPROOT" -c 'quit;' > "$RUNNER_TEMP/gap-startup.txt"
+          gap -c 'quit;' > "$RUNNER_TEMP/gap-startup.txt"
 
           # put output in code block and add "gap>" prompt
           # don't use same file or sed will screw up
