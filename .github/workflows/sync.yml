@@ -10,19 +10,105 @@ jobs:
   sync:
     name: "Get new GitHub release data"
     if: ${{ github.repository == 'gap-system/GapWWW' }}
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
+    env:
+      # skip packages that either build slowly, or are guaranteed to fail
+      GAP_PACKAGES_TO_SKIP: >-
+        cddinterface
+        normalizinterface
+        semigroups
+        xgap
+        zeromqinterface
+
     steps:
       - name: "Check out the GapWWW repository in order to make changes to it"
         uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
-          python-version: 3.9
+          python-version: 3.15
       - name: "Install the required Python modules"
         run: pip3 install PyGithub requests python-dateutil
       - name: "Run the GAP dev release script for updating the website"
         run: python -u etc/update_website.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Determine latest GAP version"
+        id: release
+        run: |
+          version=$(jq -er '.[] | select(.isLatest == true) | .tagName' releases.json)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if ! sed -n '/^<!-- BEGIN GAP STARTUP EXAMPLE -->$/,/^<!-- END GAP STARTUP EXAMPLE -->$/p' install/index.md |
+              grep -Fq "GAP ${version#v} of "; then
+            echo "update=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: "Setup latest GAP version"
+        if: steps.release.outputs.update == 'true'
+        uses: gap-actions/setup-gap@v3
+        with:
+          # don't use "latest" input, since that depends on releases.json
+          # having been updated on the LIVE website already
+          gap-version: ${{ steps.release.outputs.version }}
+
+      - name: "Install package dependencies"
+        if: steps.release.outputs.update == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf                                      \
+            automake                                      \
+            libcurl4-openssl-dev                          \
+            libncurses-dev                                \
+            libtool                                       \
+            pari-gp                                       \
+            pkg-config
+
+      - name: "Build packages"
+        if: steps.release.outputs.update == 'true'
+        run: |
+          cd "$GAPROOT/pkg"
+          shopt -s nullglob
+          skipped=" ${GAP_PACKAGES_TO_SKIP,,} "
+          packages=()
+          for info in */PackageInfo.g; do
+            package=${info%/*}
+            name=${package%%-*}
+            if [[ "$skipped" == *" ${name,,} "* ]]; then
+              continue
+            fi
+            packages+=("$package")
+          done
+          MAKEFLAGS="-j$(nproc)" ../bin/BuildPackages.sh "${packages[@]}"
+
+      - name: "Get startup output and update installation page"
+        if: steps.release.outputs.update == 'true'
+        env:
+          LC_ALL: C.UTF-8
+        run: |
+          # start and immediately quit GAP
+          gap -c 'quit;' > "$RUNNER_TEMP/gap-startup.txt"
+
+          # put output in code block and add "gap>" prompt
+          # don't use same file or sed will screw up
+          {
+            printf '```\n'
+            sed 's/\r//g; s/[[:blank:]]*$//' "$RUNNER_TEMP/gap-startup.txt"
+            printf 'gap>\n```\n'
+          } > "$RUNNER_TEMP/gap-startup.md"
+
+          # put output in install/index.md
+          start='^<!-- BEGIN GAP STARTUP EXAMPLE -->$'
+          end='^<!-- END GAP STARTUP EXAMPLE -->$'
+          if ! sed -n "/$start/,/$end/p" install/index.md | grep -q "$end"; then
+            echo "::error:: Cannot find where to place new GAP startup output"
+            exit 1
+          fi
+          sed -Ei "/$start/,/$end/{
+            /$start/r $RUNNER_TEMP/gap-startup.md
+            /$start|$end/!d
+          }" install/index.md
+
       - name: "Make a pull request to the master branch of this repository"
         uses: peter-evans/create-pull-request@v8
         with:
